@@ -1,6 +1,6 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
+import main.guiObjects.GuiObject;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -21,7 +21,7 @@ public class AddMoney extends Button {
         actionTime = p.frameCount + 6;
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(ArrayList<GuiObject> guiObjects, int i){
         if (active){
             hover();
             display();

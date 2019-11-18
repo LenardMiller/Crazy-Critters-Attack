@@ -1,7 +1,7 @@
 package main.gui;
 
-import main.guiObjects.Icon;
-import main.guiObjects.UpgradeIcon;
+import main.guiObjects.GuiObject;
+import main.guiObjects.UpgradeGuiObject;
 import main.guiObjects.buttons.*;
 import processing.core.PApplet;
 
@@ -23,23 +23,23 @@ public class Gui {
             repairButton.active = false;
             upgradeButtonZero.active = false;
             upgradeButtonOne.active = false;
-            upgradeIconZero.active = false;
-            upgradeIconOne.active = false;
+            upgradeGuiObjectZero.active = false;
+            upgradeGuiObjectOne.active = false;
         }
-        towerTabButton.main(icons, 0);
-        sellButton.main(icons, 0);
-        targetButton.main(icons, 0);
-        repairButton.main(icons, 0);
-        upgradeButtonZero.main(icons, 0);
-        upgradeButtonOne.main(icons, 0);
-        upgradeIconZero.main(icons, 0);
-        upgradeIconOne.main(icons, 0);
+        towerTabButton.main(guiObjects, 0);
+        sellButton.main(guiObjects, 0);
+        targetButton.main(guiObjects, 0);
+        repairButton.main(guiObjects, 0);
+        upgradeButtonZero.main(guiObjects, 0);
+        upgradeButtonOne.main(guiObjects, 0);
+        upgradeGuiObjectZero.main(guiObjects, 0);
+        upgradeGuiObjectOne.main(guiObjects, 0);
         if (towers.size() != 0){
             selection.main();
         }
-        for (int i = icons.size()-1; i >= 0; i--){
-            Icon icon = icons.get(i);
-            icon.main(icons, i);
+        for (int i = guiObjects.size()-1; i >= 0; i--){
+            GuiObject guiObject = guiObjects.get(i);
+            guiObject.main(guiObjects, i);
         }
     }
 
@@ -86,43 +86,43 @@ public class Gui {
 
     private void build() {
         //add money & add lives buttons
-        icons.add(new AddHp(p,BOARD_WIDTH + 22.5f,17.5f,"null",true));
-        icons.add(new AddMoney(p,BOARD_WIDTH + 22.5f,47.5f,"null",true));
+        guiObjects.add(new AddHp(p,BOARD_WIDTH + 22.5f,17.5f,"null",true));
+        guiObjects.add(new AddMoney(p,BOARD_WIDTH + 22.5f,47.5f,"null",true));
         //money and lives icons
-        icons.add(new Icon(p,BOARD_WIDTH + 57.5f, 17.5f,"livesIc",true));
-        icons.add(new Icon(p,BOARD_WIDTH + 57.5f, 47.5f,"moneyIc",true));
+        guiObjects.add(new GuiObject(p,BOARD_WIDTH + 57.5f, 17.5f,"livesIc",true));
+        guiObjects.add(new GuiObject(p,BOARD_WIDTH + 57.5f, 47.5f,"moneyIc",true));
         //buy tower buttons tab 1 (4-18)
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 87,"slingshot",true)); //row 1
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 87,"crossbow",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 87,"miscCannon",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 87,"energyBlaster",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 87,"magicMissleer",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 127,"null",true)); //row 2 placeholders
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 127,"null",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 127,"null",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 127,"null",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 127,"null",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 167,"null",true)); //row 3
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 167,"null",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 167,"null",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 167,"null",true));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 167,"wall",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 87,"slingshot",true)); //row 1
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 87,"crossbow",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 87,"miscCannon",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 87,"energyBlaster",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 87,"magicMissleer",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 127,"null",true)); //row 2 placeholders
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 127,"null",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 127,"null",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 127,"null",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 127,"null",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 167,"null",true)); //row 3
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 167,"null",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 167,"null",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 167,"null",true));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 167,"wall",true));
         //buy tower buttons tabp, 2 (19-33)
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 87,"null",false)); //row 1
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 87,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 87,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 87,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 87,"null",false)); //placeholders
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 127,"null",false)); //row 2
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 127,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 127,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 127,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 127,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 167,"null",false)); //row 3
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 167,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 167,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 167,"null",false));
-        icons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 167,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 87,"null",false)); //row 1
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 87,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 87,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 87,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 87,"null",false)); //placeholders
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 127,"null",false)); //row 2
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 127,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 127,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 127,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 127,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 167,"null",false)); //row 3
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 167,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 167,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 167,"null",false));
+        guiObjects.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 167,"null",false));
         //switch tower tab button
         towerTabButton = new TowerTab(p,800,198,"null",true);
         //sell tower button
@@ -136,8 +136,8 @@ public class Gui {
         //upgrade wall button one
         upgradeButtonOne = new UpgradeTower(p,800,630,"null",false, 1);
         //upgrade wall icon
-        upgradeIconZero = new UpgradeIcon(p,830,610,"null",false);
+        upgradeGuiObjectZero = new UpgradeGuiObject(p,830,610,"null",false);
         //upgrade wall icon
-        upgradeIconOne = new UpgradeIcon(p,830,610,"null",false);
+        upgradeGuiObjectOne = new UpgradeGuiObject(p,830,610,"null",false);
     }
 }

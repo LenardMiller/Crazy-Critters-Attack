@@ -8,7 +8,7 @@ import main.enemies.*;
 import main.gui.Gui;
 import main.gui.Hand;
 import main.gui.Selection;
-import main.guiObjects.Icon;
+import main.guiObjects.GuiObject;
 import main.particles.*;
 import main.pathfinding.Fuzzer;
 import main.pathfinding.HeapNode;
@@ -38,20 +38,20 @@ public class Main extends PApplet {
     public static ArrayList<Tower> towers;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles;
-    public static ArrayList<Icon> icons; //todo: rename class to GuiObject
+    public static ArrayList<GuiObject> guiObjects;
     public static ArrayList<Buff> buffs;
 
     private Gui gui;
     public static CompressArray compress;
 
-    public static Icon towerTabButton;
-    public static Icon sellButton;
-    public static Icon targetButton;
-    public static Icon repairButton;
-    public static Icon upgradeButtonZero;
-    public static Icon upgradeButtonOne;
-    public static Icon upgradeIconZero;
-    public static Icon upgradeIconOne;
+    public static GuiObject towerTabButton;
+    public static GuiObject sellButton;
+    public static GuiObject targetButton;
+    public static GuiObject repairButton;
+    public static GuiObject upgradeButtonZero;
+    public static GuiObject upgradeButtonOne;
+    public static GuiObject upgradeGuiObjectZero;
+    public static GuiObject upgradeGuiObjectOne;
 
     public static Hand hand;
     public static Selection selection;
@@ -103,7 +103,7 @@ public class Main extends PApplet {
         towers = new ArrayList<>();
         projectiles = new ArrayList<>();
         particles = new ArrayList<>();
-        icons = new ArrayList<>();
+        guiObjects = new ArrayList<>();
         buffs = new ArrayList<>();
         //loads sprites
         loadSprites(this);

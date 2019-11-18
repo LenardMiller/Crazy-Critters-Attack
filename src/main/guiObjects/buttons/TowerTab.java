@@ -1,13 +1,13 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
+import main.guiObjects.GuiObject;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
 
 import static main.Main.spritesAnimH;
-import static main.Main.icons;
+import static main.Main.guiObjects;
 
 public class TowerTab extends Button {
     public TowerTab(PApplet p, float x, float y, String type, boolean active){
@@ -20,7 +20,7 @@ public class TowerTab extends Button {
         actionTime = p.frameCount + 6;
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(ArrayList<GuiObject> guiObjects, int i){
         if (active){
             hover();
             display();
@@ -29,7 +29,7 @@ public class TowerTab extends Button {
 
     public void action(){
         for (int i = 4; i <= 33; i++){ //iterates through all tower buttons and inverts active
-            Icon button = icons.get(i);
+            GuiObject button = guiObjects.get(i);
             button.active = !button.active;
         }
         actionTime = p.frameCount + 6;

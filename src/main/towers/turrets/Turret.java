@@ -9,7 +9,6 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static main.Main.*;
 import static processing.core.PApplet.abs;
@@ -250,16 +249,16 @@ public abstract class Turret extends Tower {
         }
         if (id == 0) {
             if (nextLevelZero < upgradeNames.length / 2) {
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+                upgradeGuiObjectZero.sprite = upgradeIcons[nextLevelZero];
             } else {
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeGuiObjectZero.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1) {
             if (nextLevelOne < upgradeNames.length) {
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+                upgradeGuiObjectOne.sprite = upgradeIcons[nextLevelOne];
             } else {
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeGuiObjectOne.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         int num = (int) (p.random(30, 50)); //shower debris

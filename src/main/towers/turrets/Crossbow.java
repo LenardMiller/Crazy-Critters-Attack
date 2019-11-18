@@ -151,16 +151,16 @@ public class Crossbow extends Turret{
         }
         if (id == 0){
             if (nextLevelZero < upgradeNames.length/2){
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+                upgradeGuiObjectZero.sprite = upgradeIcons[nextLevelZero];
             } else{
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeGuiObjectZero.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1){
             if (nextLevelOne < upgradeNames.length){
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+                upgradeGuiObjectOne.sprite = upgradeIcons[nextLevelOne];
             } else{
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeGuiObjectOne.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         int num = floor(p.random(30,50)); //shower debris

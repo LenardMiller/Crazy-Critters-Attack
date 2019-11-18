@@ -1,6 +1,6 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
+import main.guiObjects.GuiObject;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -21,7 +21,7 @@ public class SellTower extends Button {
         actionTime = p.frameCount + 30;
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(ArrayList<GuiObject> guiObjects, int i){
         if (active){
             hover();
             display();
@@ -37,8 +37,8 @@ public class SellTower extends Button {
         repairButton.active = false;
         upgradeButtonZero.active = false;
         upgradeButtonOne.active = false;
-        upgradeIconZero.active = false;
-        upgradeIconOne.active = false;
+        upgradeGuiObjectZero.active = false;
+        upgradeGuiObjectOne.active = false;
         selection.name = "null";
     }
 }

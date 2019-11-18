@@ -1,6 +1,6 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
+import main.guiObjects.GuiObject;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -27,7 +27,7 @@ public class RepairWall extends Button{
         actionTime = p.frameCount + 6;
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(ArrayList<GuiObject> guiObjects, int i){
         if (active){
             Tower tower = towers.get(selection.id);
             if (tower.twHp == tower.maxHp){ //if full health, grey out

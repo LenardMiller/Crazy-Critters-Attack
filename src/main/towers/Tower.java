@@ -208,10 +208,10 @@ public abstract class Tower {
         sprite = upgradeSprites[nextLevelOne];
         nextLevelOne++;
         if (nextLevelOne < upgradeNames.length){
-            upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+            upgradeGuiObjectOne.sprite = upgradeIcons[nextLevelOne];
         }
         else{
-            upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+            upgradeGuiObjectOne.sprite = spritesAnimH.get("upgradeIC")[0];
         }
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){

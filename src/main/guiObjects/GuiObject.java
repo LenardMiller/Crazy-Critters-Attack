@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static main.Main.spritesH;
 
-public class Icon{
+public class GuiObject {
 
     public PApplet p;
 
@@ -17,7 +17,7 @@ public class Icon{
     public PImage sprite;
     public boolean active;
 
-    public Icon(PApplet p, float x, float y, String type, boolean active){
+    public GuiObject(PApplet p, float x, float y, String type, boolean active){
         this.p = p;
 
         this.active = active;
@@ -26,7 +26,7 @@ public class Icon{
         sprite = spritesH.get(type);
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(ArrayList<GuiObject> guiObjects, int i){
         if (active){
             display();
         }

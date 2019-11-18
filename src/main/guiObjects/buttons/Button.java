@@ -1,6 +1,6 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
+import main.guiObjects.GuiObject;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -8,7 +8,7 @@ import processing.core.PVector;
 import static main.Main.alive;
 import static main.Main.spritesAnimH;
 
-public abstract class Button extends Icon {
+public abstract class Button extends GuiObject {
 
     int actionTime;
     PImage spriteOne;

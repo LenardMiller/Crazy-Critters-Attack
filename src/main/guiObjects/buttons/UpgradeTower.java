@@ -1,6 +1,6 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
+import main.guiObjects.GuiObject;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -29,7 +29,7 @@ public class UpgradeTower extends Button{
         this.id = id;
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(ArrayList<GuiObject> guiObjects, int i){
         if (active){
             Tower tower = towers.get(selection.id);
             int nextLevel;

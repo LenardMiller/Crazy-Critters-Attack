@@ -1,6 +1,6 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
+import main.guiObjects.GuiObject;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -40,7 +40,7 @@ public class TowerBuy extends Button {
         }
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(ArrayList<GuiObject> guiObjects, int i){
         if (active){
             hover();
             display();
