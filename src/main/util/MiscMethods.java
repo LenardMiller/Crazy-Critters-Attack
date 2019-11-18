@@ -7,9 +7,9 @@ import static processing.core.PApplet.atan;
 import static processing.core.PConstants.HALF_PI;
 import static processing.core.PConstants.PI;
 
-public class FindAngle {
+public class MiscMethods {
 
-    public FindAngle() {}
+    public MiscMethods() {}
 
     public static float findAngle(PVector p1, PVector p2){
         PVector ratio = PVector.sub(p1,p2);
@@ -46,5 +46,14 @@ public class FindAngle {
         }
         angle -= HALF_PI;
         return angle;
+    }
+
+    public static boolean isBetween(PVector pointA, PVector pointB, PVector testPoint) {
+        //inclusive top point, exclusive bottom
+        boolean xAB = testPoint.x >= pointA.x && testPoint.x < pointB.x;
+        boolean xBA = testPoint.x >= pointB.x && testPoint.x < pointA.x;
+        boolean yAB = testPoint.y >= pointA.y && testPoint.y < pointB.y;
+        boolean yBA = testPoint.y >= pointB.y && testPoint.y < pointA.y;
+        return (xAB||xBA)&&(yAB||yBA);
     }
 }

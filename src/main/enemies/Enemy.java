@@ -15,7 +15,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.util.FindAngle.findAngle;
+import static main.util.MiscMethods.findAngle;
 
 public abstract class Enemy {
 
