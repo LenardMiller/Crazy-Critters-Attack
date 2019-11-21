@@ -29,7 +29,7 @@ public class RepairWall extends Button{
 
     public void main(ArrayList<GuiObject> guiObjects, int i){
         if (active){
-            Tower tower = towers.get(selection.id);
+            Tower tower = tiles.get(selection.id).tower;
             if (tower.twHp == tower.maxHp){ //if full health, grey out
                 sprite = spriteGrey;
                 actionTime = p.frameCount + 3;
@@ -44,7 +44,7 @@ public class RepairWall extends Button{
     }
 
     public void action(){
-        Tower tower = towers.get(selection.id);
+        Tower tower = tiles.get(selection.id).tower;
         money -= ceil((float)(tower.price) - (float)(tower.value));
         tower.twHp = tower.maxHp;
         //actionTime = frameCount + 6;

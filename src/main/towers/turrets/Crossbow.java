@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.particles.Debris;
 import main.projectiles.Bolt;
+import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -12,10 +13,9 @@ public class Crossbow extends Turret{
 
     private int pierce;
 
-    public Crossbow(PApplet p, float x, float y) {
-        super(p,x,y);
+    public Crossbow(PApplet p, Tile tile) {
+        super(p,tile);
         name = "crossbow";
-        position = new PVector(x,y);
         size = new PVector(50,50);
         maxHp = 20;
         twHp = maxHp;
@@ -48,7 +48,7 @@ public class Crossbow extends Turret{
     public void fire(){ //needed to change projectile fired
         angle += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Bolt(p,position.x-size.x/2,position.y-size.y/2, angle, damage, pierce));
+        projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, damage, pierce));
     }
 
     private void setUpgrades(){
@@ -165,15 +165,15 @@ public class Crossbow extends Turret{
         }
         int num = floor(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
 
     public void display(){
         p.tint(255,tintColor,tintColor);
-        p.image(sBase,position.x-size.x,position.y-size.y);
+        p.image(sBase,tile.position.x-size.x,tile.position.y-size.y);
         p.pushMatrix();
-        p.translate(position.x-size.x/2,position.y-size.y/2);
+        p.translate(tile.position.x-size.x/2,tile.position.y-size.y/2);
         p.rotate(angle);
         p.image(sprite,-size.x/2-2,-size.y/2-2);
         p.popMatrix();

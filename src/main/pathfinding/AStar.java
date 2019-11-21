@@ -15,7 +15,7 @@ public class AStar{
     public boolean done;
 
     public AStar(){
-        reqQ = new ArrayList<PathRequest>();
+        reqQ = new ArrayList<>();
         mpNegation = 0;
     }
 
@@ -119,20 +119,20 @@ public class AStar{
         }
     }
 
-    public void nodeCheckObs(){
-        for (Node[] nodes : nodeGrid) {
-            for (Node node : nodes) {
-                node.checkObs(false);
-            }
-        }
-        fuzz = new Fuzzer(11);
-        for (Node[] nodes : nodeGrid) {
-            for (Node node : nodes) {
-                node.checkObs(true);
-            }
-        }
-        updatePath();
-    }
+//    public void nodeCheckObs(){
+//        for (Node[] nodes : nodeGrid) {
+//            for (Node node : nodes) {
+//                node.checkObs(false);
+//            }
+//        }
+//        fuzz = new Fuzzer(11);
+//        for (Node[] nodes : nodeGrid) {
+//            for (Node node : nodes) {
+//                node.checkObs(true);
+//            }
+//        }
+//        updatePath();
+//    }
 
     public static class PathRequest{
         int i;

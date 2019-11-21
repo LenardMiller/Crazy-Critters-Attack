@@ -8,11 +8,11 @@ import static main.Main.spritesAnimH;
 import static main.Main.spritesH;
 
 public class Wall extends Tower{
-    public Wall(PApplet p, float x, float y) {
-        super(p,x,y);
+    public Wall(PApplet p, Tile tile) {
+        super(p,tile);
+
         name = "woodWall";
-        position = new PVector(x,y);
-        size = new PVector(120,37);
+        size = new PVector(50,50);
         maxHp = 50;
         twHp = maxHp;
         hit = false;

@@ -56,4 +56,8 @@ public class MiscMethods {
         boolean yBA = testPoint.y >= pointB.y && testPoint.y < pointA.y;
         return (xAB||xBA)&&(yAB||yBA);
     }
+
+    public static int roundTo(float input, int rounder) {
+        return ((int)(input/rounder)) * rounder;
+    }
 }

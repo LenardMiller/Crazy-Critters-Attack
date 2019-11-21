@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.particles.Debris;
 import main.projectiles.MiscProjectile;
+import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -11,10 +12,9 @@ import static processing.core.PConstants.HALF_PI;
 
 public class RandomCannon extends Turret{
 
-    public RandomCannon(PApplet p, float x, float y) {
-        super(p,x,y);
+    public RandomCannon(PApplet p, Tile tile) {
+        super(p,tile);
         name = "miscCannon";
-        position = new PVector(x,y);
         size = new PVector(50,50);
         maxHp = 20;
         twHp = maxHp;
@@ -47,7 +47,7 @@ public class RandomCannon extends Turret{
         angle += PApplet.radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         int spriteType = (int)(p.random(0,5.99f));
-        PVector spp = new PVector(position.x-size.x/2,position.y-size.y/2);
+        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(20);
         spp.add(spa);
@@ -175,14 +175,7 @@ public class RandomCannon extends Turret{
         }
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
-
-//    public void loadSprites(){
-//        sBase = spritesH.get("miscCannonBaseTR");
-//        sIdle = spritesH.get("miscCannonIdleTR");
-//        fireFrames = spritesAnimH.get("miscCannonFireTR");
-//        loadFrames = spritesAnimH.get("miscCannonLoadTR");
-//    }
 }

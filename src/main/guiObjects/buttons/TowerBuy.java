@@ -55,7 +55,7 @@ public class TowerBuy extends Button {
             p.rect(700,211,200,707);
             p.textAlign(CENTER);
             p.fill(0);
-            p.textFont(largeFont); //displays info about tower TODO: put more info
+            p.textFont(largeFont); //displays info about tower todo: put more info
             switch (towerType) {
                 case "slingshot":
                     p.text("Slingshot", 800, 241);

@@ -31,7 +31,7 @@ public class UpgradeTower extends Button{
 
     public void main(ArrayList<GuiObject> guiObjects, int i){
         if (active){
-            Tower tower = towers.get(selection.id);
+            Tower tower = tiles.get(selection.id).tower;
             int nextLevel;
             if (id == 0){
                 nextLevel = tower.nextLevelZero;
@@ -56,7 +56,7 @@ public class UpgradeTower extends Button{
     }
 
     public void action(){
-        Tower tower = towers.get(selection.id);
+        Tower tower = tiles.get(selection.id).tower;
         int nextLevel;
         if (id == 0){
             nextLevel = tower.nextLevelZero;

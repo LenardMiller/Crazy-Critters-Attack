@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.particles.Debris;
 import main.projectiles.EnergyBlast;
+import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -14,10 +15,9 @@ public class EnergyBlaster extends Turret{
     private int effectRadius;
     private boolean bigExplosion;
 
-    public EnergyBlaster(PApplet p, float x, float y) {
-        super(p,x,y);
+    public EnergyBlaster(PApplet p, Tile tile) {
+        super(p,tile);
         name = "energyBlaster";
-        position = new PVector(x,y);
         size = new PVector(50,50);
         maxHp = 20;
         twHp = maxHp;
@@ -49,7 +49,7 @@ public class EnergyBlaster extends Turret{
     public void fire(){ //needed to change projectile fired
         angle += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        PVector spp = new PVector(position.x-size.x/2,position.y-size.y/2);
+        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(40);
         spp.add(spa);
@@ -171,15 +171,15 @@ public class EnergyBlaster extends Turret{
         }
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
 
     public void display(){
         p.tint(255,tintColor,tintColor);
-        p.image(sBase,position.x-size.x,position.y-size.y);
+        p.image(sBase,tile.position.x-size.x,tile.position.y-size.y);
         p.pushMatrix();
-        p.translate(position.x-size.x/2,position.y-size.y/2);
+        p.translate(tile.position.x-size.x/2,tile.position.y-size.y/2);
         p.rotate(angle);
         p.image(sprite,-size.x/2-11,-size.y/2-11);
         p.popMatrix();

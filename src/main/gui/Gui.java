@@ -17,7 +17,15 @@ public class Gui {
     }
 
     public void drawIcons() {
-        if (towers.size() == 0){ //force deactivation if no towers
+        boolean isTowers = false;
+        for (int i = 0; i < tiles.size(); i++) {
+            if (tiles.get(i).tower != null) {
+                isTowers = true;
+                break;
+            }
+
+        }
+        if (!isTowers) {
             sellButton.active = false;
             targetButton.active = false;
             repairButton.active = false;
@@ -34,7 +42,7 @@ public class Gui {
         upgradeButtonOne.main(guiObjects, 0);
         upgradeGuiObjectZero.main(guiObjects, 0);
         upgradeGuiObjectOne.main(guiObjects, 0);
-        if (towers.size() != 0){
+        if (isTowers){
             selection.main();
         }
         for (int i = guiObjects.size()-1; i >= 0; i--){
@@ -49,7 +57,7 @@ public class Gui {
         p.textAlign(LEFT);
         //debug related stuff
         p.text("enemies: " + enemies.size(), x, 30);
-        p.text("towers: " + towers.size(), x, 60);
+        p.text("towers: " + "todo: list towers", x, 60); //todo: list towers
         p.text("projectiles: " + projectiles.size(), x, 90);
         p.text("particles: " + particles.size(), x, 120);
         p.text("X: " + p.mouseX + " Y: " + p.mouseY, x, BOARD_HEIGHT -x);

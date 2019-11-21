@@ -29,7 +29,7 @@ public class SellTower extends Button {
     }
 
     public void action(){ //kills tower and gives value
-        Tower tower = towers.get(selection.id);
+        Tower tower = tiles.get(selection.id).tower;
         money += (int) (tower.value * .8);
         tower.twHp = 0; //creates particles (may need to change later)
         active = false;

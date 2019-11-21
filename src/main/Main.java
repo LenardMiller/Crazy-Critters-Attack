@@ -16,6 +16,7 @@ import main.pathfinding.Node;
 import main.pathfinding.AStar;
 import main.projectiles.*;
 import main.towers.DevWall;
+import main.towers.Tile;
 import main.towers.Tower;
 import main.util.CompressArray;
 import main.util.EnemyTracker;
@@ -34,8 +35,10 @@ public class Main extends PApplet {
 
     public static EnemyTracker enemyTracker;
 
+    public static Tile.TileDS tiles;
+
     public static ArrayList<main.enemies.Enemy> enemies;
-    public static ArrayList<Tower> towers;
+//    public static ArrayList<Tower> towers;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles;
     public static ArrayList<GuiObject> guiObjects;
@@ -98,9 +101,15 @@ public class Main extends PApplet {
         largeFont = createFont("STHeitiSC-Light", 24);
         mediumFont = createFont("STHeitiSC-Light", 18);
         smallFont = createFont("STHeitiSC-Light", 12);
-        //creates ArrayLists
+        //creates object data structures
+        tiles = new Tile.TileDS();
+        for (int y = 0; y <= BOARD_HEIGHT/50; y++) {
+            for (int x = 0; x <= BOARD_WIDTH/50; x++) {
+                tiles.add(new Tile(this,new PVector(x*50,y*50),tiles.size()),x,y);
+            }
+        }
         enemies = new ArrayList<>();
-        towers = new ArrayList<>();
+//        towers = new ArrayList<>();
         projectiles = new ArrayList<>();
         particles = new ArrayList<>();
         guiObjects = new ArrayList<>();
@@ -151,7 +160,7 @@ public class Main extends PApplet {
             path.reqQ.remove(0);
         }
         //self explanitory
-        drawObjects(enemies,projectiles,towers,particles,buffs);
+        drawObjects();
         //bg part 2: red todo: this will need to be redone when bg textures are thrown in
         if (backRed < 25 ){
             backRed = 25;
@@ -167,13 +176,16 @@ public class Main extends PApplet {
         gui.drawText(this,10);
     }
 
-    private void drawObjects(ArrayList <Enemy> enemies, ArrayList<Projectile> projectiles, ArrayList<Tower> towers, ArrayList<Particle> particles, ArrayList<Buff> buffs){
+    private void drawObjects(){
         //enemy tracker
         enemyTracker.main(enemies);
         //towers
-        for (int i = towers.size()-1; i >= 0; i--){
-            Tower tower = towers.get(i);
-            tower.main(towers, i);
+//        for (int i = towers.size()-1; i >= 0; i--){
+//            Tower tower = towers.get(i);
+//            tower.main(towers, i);
+//        }
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).main();
         }
         //enemies
         for (int i = enemies.size()-1; i >= 0; i--){
@@ -206,8 +218,8 @@ public class Main extends PApplet {
     public void keyReleased() {
         //tower form: spawn x, spawn y
         if (key == 'l' && alive) { //cheaty wall
-            towers.add(new DevWall(this,10*(round(mouseX/10))+60, 10*(round(mouseY/10))));
-            path.nodeCheckObs();
+//            towers.add(new DevWall(this,10*(round(mouseX/10))+60, 10*(round(mouseY/10))));
+//            path.nodeCheckObs();
         }
         //projectile form: spawn x, spawn y, angle
         if (key == 'q' && alive) { //pebble
@@ -276,8 +288,10 @@ public class Main extends PApplet {
         }
         //kill all towers: d
         if (keyPressed && key == 'd' && alive) {
-            towers = new ArrayList <>();
-            path.nodeCheckObs();
+            for (int i = 0; i < tiles.size(); i++) {
+                tiles.get(i).tower = null;
+            }
+//            path.nodeCheckObs();
         }
         //kill all projectiles: f
         if (keyPressed && key == 'f' && alive) {

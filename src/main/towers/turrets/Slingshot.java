@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
 import main.projectiles.Pebble;
+import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -9,10 +10,9 @@ import static main.Main.*;
 
 public class Slingshot extends Turret{
 
-    public Slingshot(PApplet p, float x, float y) {
-        super(p,x,y);
+    public Slingshot(PApplet p, Tile tile) {
+        super(p,tile);
         name = "slingshot";
-        position = new PVector(x,y);
         size = new PVector(50,50);
         maxHp = 20;
         twHp = maxHp;
@@ -41,7 +41,7 @@ public class Slingshot extends Turret{
     public void fire(){ //needed to change projectile fired
         angle += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Pebble(p,position.x-size.x/2,position.y-size.y/2, angle, damage));
+        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, damage));
     }
 
     private void setUpgrades(){

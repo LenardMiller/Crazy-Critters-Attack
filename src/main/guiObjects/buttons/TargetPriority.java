@@ -7,8 +7,8 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static main.Main.towers;
 import static main.Main.selection;
+import static main.Main.tiles;
 
 public class TargetPriority extends Button {
 
@@ -31,7 +31,7 @@ public class TargetPriority extends Button {
     }
 
     public void action(){
-        Tower tower = towers.get(selection.id); //switch selected tower's priority
+        Tower tower = tiles.get(selection.id).tower; //switch selected tower's priority
         if (tower.priority < 2){
             tower.priority += 1;
         } else{ //roll over

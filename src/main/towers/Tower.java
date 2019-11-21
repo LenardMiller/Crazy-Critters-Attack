@@ -14,11 +14,12 @@ public abstract class Tower {
 
     public PApplet p;
 
+    public Tile tile;
+
     public String name;
     public float angle;
     public int delay;
     public float error;
-    public PVector position;
     public PVector size;
     public int maxHp;
     public int twHp;
@@ -51,11 +52,11 @@ public abstract class Tower {
     public PImage[] upgradeIcons;
     protected PImage[] upgradeSprites;
 
-    public Tower(PApplet p, float x, float y) {
+    public Tower(PApplet p, Tile tile) {
         this.p = p;
+        this.tile = tile;
 
         name = "null";
-        position = new PVector(x, y);
         size = new PVector(120, 37);
         delay = 0;
         error = 0;
@@ -84,91 +85,15 @@ public abstract class Tower {
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4];
-        setUpgrades();
     }
 
-    private void setUpgrades(){
-        //special
-        upgradeSpecial[0] = false;
-        upgradeSpecial[1] = false;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
-        //damage
-        upgradeDamage[0] = 0;
-        upgradeDamage[1] = 0;
-        upgradeDamage[2] = 0;
-        upgradeDamage[3] = 0;
-        //delay (firerate)
-        upgradeDelay[0] = 0;
-        upgradeDelay[1] = 0;
-        upgradeDelay[2] = 0;
-        upgradeDelay[3] = 0;
-        //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 225;
-        upgradePrices[3] = 500;
-        //heath
-        upgradeHealth[0] = 75;
-        upgradeHealth[1] = 125;
-        upgradeHealth[2] = 250;
-        upgradeHealth[3] = 500;
-        //error (accuracy)
-        upgradeError[0] = 0;
-        upgradeError[1] = 0;
-        upgradeError[2] = 0;
-        upgradeError[3] = 0;
-        //names
-        upgradeNames[0] = "stoneWall";
-        upgradeNames[1] = "metalWall";
-        upgradeNames[2] = "crystalWall";
-        upgradeNames[3] = "ultimateWall";
-        //debris
-        upgradeDebris[0] = "stone";
-        upgradeDebris[1] = "metal";
-        upgradeDebris[2] = "crystal";
-        upgradeDebris[3] = "dev";
-        //titles
-        upgradeTitles[0] = "stone";
-        upgradeTitles[1] = "metal";
-        upgradeTitles[2] = "crystal";
-        upgradeTitles[3] = "ultimate";
-        //desc line one
-        upgradeDescOne[0] = "+75 HP";
-        upgradeDescOne[1] = "+100 HP";
-        upgradeDescOne[2] = "+225 HP";
-        upgradeDescOne[3] = "+500 HP";
-        //desc line two
-        upgradeDescTwo[0] = "";
-        upgradeDescTwo[1] = "";
-        upgradeDescTwo[2] = "";
-        upgradeDescTwo[3] = "";
-        //desc line three
-        upgradeDescThree[0] = "";
-        upgradeDescThree[1] = "";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "";
-        //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[1];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[2];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[3];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[4];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("crystalWallTW");
-        upgradeSprites[3] = spritesH.get("ultimateWallTW");
-    }
-
-    public void main(ArrayList<Tower> towers, int i){
+    public void main(){
         if (twHp <= 0){
-            die(i);
-            towers.remove(i);
-            path.nodeCheckObs();
+            die();
         }
         value = (twHp / maxHp) * price;
-        if (p.mousePressed && p.mouseX < position.x && p.mouseX > position.x-size.x && p.mouseY < position.y && p.mouseY > position.y-size.y && Main.alive){ //clicked on
-            selection.swapSelected(i);
+        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x-size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y-size.y && Main.alive){ //clicked on
+            selection.swapSelected(tile.id);
         }
         display();
     }
@@ -179,7 +104,7 @@ public abstract class Tower {
             hit = false;
         }
         p.tint(255,tintColor,tintColor);
-        p.image(sprite,position.x-size.x,position.y-size.y);
+        p.image(sprite,tile.position.x-size.x,tile.position.y-size.y);
         p.tint(255);
         if (twHp > 0){ //no inverted bars
             HpBar();
@@ -195,7 +120,7 @@ public abstract class Tower {
         barTrans = 255;
         int num = (int)(p.random(1,4));
         for (int i = num; i >= 0; i--){ //spray debris
-            particles.add(new Debris(p,(position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
 
@@ -215,26 +140,28 @@ public abstract class Tower {
         }
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
-        path.nodeCheckObs();
+//        path.nodeCheckObs();
     }
 
-    protected void die(int i){
+    protected void die() {
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
-        if (selection.id > i){
+        if (selection.id > tile.id){
             selection.id--;
         }
-        if (selection.id == i){
+        if (selection.id == tile.id){
             selection.id = 0;
         }
+        tile.tower = null;
+//        path.nodeCheckObs();
     }
 
     private void HpText(){ //displays the towers health
-        p.text(twHp, position.x-size.x/2, position.y + size.y/4);
+        p.text(twHp, tile.position.x-size.x/2, tile.position.y + size.y/4);
     }
 
     protected void HpBar(){ //displays the towers health with style
@@ -243,6 +170,6 @@ public abstract class Tower {
             barTrans--;
         }
         p.noStroke();
-        p.rect(position.x-size.x, position.y + size.y/4, (size.x)*(((float) twHp)/((float) maxHp)), -6);
+        p.rect(tile.position.x-size.x, tile.position.y + size.y/4, (size.x)*(((float) twHp)/((float) maxHp)), -6);
     }
 }

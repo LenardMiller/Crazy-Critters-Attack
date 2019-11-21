@@ -8,10 +8,9 @@ import static main.Main.spritesH;
 import static main.Main.particles;
 
 public class DevWall extends Tower{
-    public DevWall(PApplet p, float x, float y) {
-        super(p,x,y);
+    public DevWall(PApplet p, Tile tile) {
+        super(p,tile);
         name = "devWall";
-        position = new PVector(x,y);
         size = new PVector(120,37);
         maxHp = 9999;
         twHp = maxHp;
@@ -25,12 +24,12 @@ public class DevWall extends Tower{
         barTrans = 255;
         int num = PApplet.round(p.random(1,3));
         for (int i = num; i >= 0; i--){
-            particles.add(new Debris(p,(position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
 
     private void HPText(){ //displays infinity
-        p.text("infinity", position.x-size.x/2, position.y + size.y/4);
+        p.text("infinity", tile.position.x-size.x/2, tile.position.y + size.y/4);
     }
 
     public void HpBar(){ //same as normal, but pink
@@ -39,6 +38,6 @@ public class DevWall extends Tower{
             barTrans--;
         }
         p.noStroke();
-        p.rect(position.x-size.x, position.y + size.y/4, (size.x)*(((float) twHp)/((float) maxHp)), -6);
+        p.rect(tile.position.x-size.x, tile.position.y + size.y/4, (size.x)*(((float) twHp)/((float) maxHp)), -6);
     }
 }
