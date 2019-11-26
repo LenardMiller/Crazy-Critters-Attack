@@ -35,6 +35,9 @@ public class Hand { //what is selected, eg: slingshot
         if (inputHandler.leftMousePressedPulse && !implacable) {
             place();
         }
+        if (inputHandler.rightMousePressedPulse) {
+            remove();
+        }
         //todo: unselect by clicking off screen
         //todo: break by right clicking
         //todo: highlight upgrades
@@ -94,6 +97,13 @@ public class Hand { //what is selected, eg: slingshot
                     break;
             }
             held = heldSet;
+        }
+    }
+
+    private void remove() {
+        Tile tile = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1);
+        if (held.equals("wall")) {
+            if (tile.tower != null && !tile.tower.turret) tile.tower.sell();
         }
     }
 
