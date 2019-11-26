@@ -31,7 +31,7 @@ public abstract class Button extends GuiObject {
             if (holdable) {
                 if (p.mousePressed && p.mouseButton == LEFT) action();
             }
-            else if (inputHandler.rightMousePressedPulse) action();
+            else if (inputHandler.leftMousePressedPulse) action();
         } else sprite = spriteOne;
     }
 

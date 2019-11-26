@@ -19,6 +19,7 @@ public class Hand { //what is selected, eg: slingshot
     private PImage heldSprite;
     private PVector offset;
     private boolean implacable;
+    private String displayInfo;
     public int price;
 
     public Hand(PApplet p) {
@@ -28,12 +29,14 @@ public class Hand { //what is selected, eg: slingshot
         offset = new PVector(0, 0);
         price = 0;
         implacable = false;
+        displayInfo = "null";
     }
 
     public void main() {
         checkPlaceable();
         checkDisplay();
         displayHeld();
+        if (!displayInfo.equals("null")) displayHeldInfo();
         if (inputHandler.leftMousePressedPulse && !implacable) place();
         if (inputHandler.rightMousePressedPulse) remove();
         if ((inputHandler.leftMousePressedPulse || inputHandler.rightMousePressedPulse) && p.mouseX > BOARD_WIDTH) {
@@ -62,8 +65,14 @@ public class Hand { //what is selected, eg: slingshot
                     heldSprite = tile.tower.upgradeSprites[tile.tower.upgradeIcons.length-1];
                     implacable = true;
                 }
-            } else heldSprite = spritesH.get("woodWallTW"); //reset wall sprite
-        } else setHeld(held); //reset sprite
+            } else {
+                heldSprite = spritesH.get("woodWallTW"); //reset wall sprite
+                displayInfo = "placeWall";
+            }
+        } else {
+            setHeld(held); //reset sprite
+            displayInfo = "null";
+        }
     }
 
     private void displayHeld() { //shows whats held at ~1/2 opacity
@@ -74,6 +83,10 @@ public class Hand { //what is selected, eg: slingshot
             p.image(heldSprite, (roundTo(p.mouseX, 50)) - (25f / 2) - offset.x + 13, roundTo(p.mouseY, 50) - (25f / 2) - offset.y + 13);
             p.tint(255);
         }
+    }
+
+    private void displayHeldInfo() {
+
     }
 
     public void setHeld(String heldSet) { //swaps whats held

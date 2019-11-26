@@ -1,11 +1,8 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.GuiObject;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
-
-import java.util.ArrayList;
 
 import static main.Main.selection;
 import static main.Main.tiles;
@@ -22,7 +19,7 @@ public class TargetPriority extends Button {
         sprite = spriteOne;
     }
 
-    public void main(ArrayList<GuiObject> guiObjects, int i){
+    public void main(){
         if (active){
             hover();
             display();

@@ -1,12 +1,9 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.GuiObject;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
-
-import java.util.ArrayList;
 
 import static main.Main.*;
 
@@ -28,7 +25,7 @@ public class UpgradeTower extends Button{
         this.id = id;
     }
 
-    public void main(ArrayList<GuiObject> guiObjects, int i){
+    public void main(){
         if (active){
             Tower tower = tiles.get(selection.id).tower;
             int nextLevel;

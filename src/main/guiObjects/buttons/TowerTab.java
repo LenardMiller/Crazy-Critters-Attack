@@ -1,10 +1,7 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.GuiObject;
 import processing.core.PApplet;
 import processing.core.PVector;
-
-import java.util.ArrayList;
 
 import static main.Main.spritesAnimH;
 import static main.Main.towerBuyButtons;
@@ -19,7 +16,7 @@ public class TowerTab extends Button {
         sprite = spriteOne;
     }
 
-    public void main(ArrayList<GuiObject> guiObjects, int i){
+    public void main(){
         if (active){
             hover();
             display();
@@ -27,6 +24,7 @@ public class TowerTab extends Button {
     }
 
     public void action(){
+        System.out.println("test");
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.active = !towerBuyButton.active;
     }
 }

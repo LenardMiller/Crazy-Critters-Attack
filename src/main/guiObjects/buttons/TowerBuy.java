@@ -1,10 +1,7 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.GuiObject;
 import processing.core.PApplet;
 import processing.core.PVector;
-
-import java.util.ArrayList;
 
 import static main.Main.*;
 import static processing.core.PConstants.CENTER;
@@ -39,7 +36,7 @@ public class TowerBuy extends Button {
         }
     }
 
-    public void main(ArrayList<GuiObject> guiObjects, int i){
+    public void main(){
         if (active){
             hover();
             display();

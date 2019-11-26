@@ -1,13 +1,10 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.GuiObject;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
-import static main.Main.spritesAnimH;
 import static main.Main.hp;
+import static main.Main.spritesAnimH;
 
 public class AddHp extends Button {
 
@@ -21,7 +18,7 @@ public class AddHp extends Button {
         holdable = true;
     }
 
-    public void main(ArrayList<GuiObject> guiObjects, int i){
+    public void main(){
         if (active){
             hover();
             display();
