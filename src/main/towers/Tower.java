@@ -124,8 +124,8 @@ public abstract class Tower {
         debrisType = upgradeDebris[nextLevelOne];
         sprite = upgradeSprites[nextLevelOne];
         nextLevelOne++;
-        if (nextLevelOne < upgradeNames.length) upgradeGuiObjectOne.sprite = upgradeIcons[nextLevelOne];
-        else upgradeGuiObjectOne.sprite = spritesAnimH.get("upgradeIC")[0];
+        if (nextLevelOne < upgradeNames.length) upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+        else upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));

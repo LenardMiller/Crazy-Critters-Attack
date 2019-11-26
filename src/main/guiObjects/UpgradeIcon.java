@@ -5,9 +5,9 @@ import processing.core.PVector;
 
 import static main.Main.spritesAnimH;
 
-public class UpgradeGuiObject extends GuiObject {
+public class UpgradeIcon extends GuiObject {
 
-    public UpgradeGuiObject(PApplet p, float x, float y, String type, boolean active){
+    public UpgradeIcon(PApplet p, float x, float y, String type, boolean active){
         super(p,x,y,type,active);
         this.active = active;
         position = new PVector(x, y);

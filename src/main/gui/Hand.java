@@ -1,5 +1,6 @@
 package main.gui;
 
+import main.guiObjects.buttons.TowerBuy;
 import main.towers.Tile;
 import main.towers.Wall;
 import main.towers.turrets.*;
@@ -8,6 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.Main.gui;
 import static main.util.MiscMethods.roundTo;
 
 public class Hand { //what is selected, eg: slingshot
@@ -36,8 +38,8 @@ public class Hand { //what is selected, eg: slingshot
         if (inputHandler.rightMousePressedPulse) remove();
         if ((inputHandler.leftMousePressedPulse || inputHandler.rightMousePressedPulse) && p.mouseX > BOARD_WIDTH) {
             held = "null";
+            for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;
         }
-        //todo: unselect by clicking off screen
         //todo: highlight upgrades
     }
 

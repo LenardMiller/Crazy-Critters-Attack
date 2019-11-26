@@ -36,44 +36,44 @@ public class Selection { //what tower is selected
             name = tower.name;
             sellButton.active = true;
             upgradeButtonOne.active = true;
-            upgradeGuiObjectOne.active = true;
+            upgradeIconOne.active = true;
             if (tower.turret) {
                 targetButton.active = true;
                 tower.visualize = true;
                 upgradeButtonZero.active = true;
                 upgradeButtonOne.position.y = 735;
                 upgradeButtonZero.position.y = 585;
-                upgradeGuiObjectZero.active = true;
-                upgradeGuiObjectZero.position.y = 565;
-                upgradeGuiObjectOne.position.y = 715;
+                upgradeIconZero.active = true;
+                upgradeIconZero.position.y = 565;
+                upgradeIconOne.position.y = 715;
                 if (tower.nextLevelZero < tower.upgradeNames.length / 2) {
-                    upgradeGuiObjectZero.sprite = tower.upgradeIcons[tower.nextLevelZero];
+                    upgradeIconZero.sprite = tower.upgradeIcons[tower.nextLevelZero];
                 } else {
-                    upgradeGuiObjectZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                    upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
                 }
                 if (tower.nextLevelOne < tower.upgradeNames.length) {
-                    upgradeGuiObjectOne.sprite = tower.upgradeIcons[tower.nextLevelOne];
+                    upgradeIconOne.sprite = tower.upgradeIcons[tower.nextLevelOne];
                 } else {
-                    upgradeGuiObjectOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                    upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
                 }
             }
             if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) {
                 targetButton.active = false;
                 upgradeButtonOne.position.y += 45;
                 upgradeButtonZero.position.y += 45;
-                upgradeGuiObjectZero.position.y += 45;
-                upgradeGuiObjectOne.position.y += 45;
+                upgradeIconZero.position.y += 45;
+                upgradeIconOne.position.y += 45;
             }
             if (!tower.turret) {
                 targetButton.active = false;
                 upgradeButtonZero.active = false;
                 upgradeButtonOne.position.y = 630;
-                upgradeGuiObjectZero.active = false;
-                upgradeGuiObjectOne.position.y = 610;
+                upgradeIconZero.active = false;
+                upgradeIconOne.position.y = 610;
                 if (tower.nextLevelOne < tower.upgradeNames.length) {
-                    upgradeGuiObjectOne.sprite = tower.upgradeIcons[tower.nextLevelOne];
+                    upgradeIconOne.sprite = tower.upgradeIcons[tower.nextLevelOne];
                 } else {
-                    upgradeGuiObjectOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                    upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
                 }
             }
         }
@@ -88,8 +88,8 @@ public class Selection { //what tower is selected
                 targetButton.active = false;
                 upgradeButtonZero.active = false;
                 upgradeButtonOne.active = false;
-                upgradeGuiObjectZero.active = false;
-                upgradeGuiObjectOne.active = false;
+                upgradeIconZero.active = false;
+                upgradeIconOne.active = false;
                 tower.visualize = false;
             }
         }

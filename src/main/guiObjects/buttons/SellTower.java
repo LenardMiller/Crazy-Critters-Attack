@@ -34,8 +34,8 @@ public class SellTower extends Button {
         targetButton.active = false;
         upgradeButtonZero.active = false;
         upgradeButtonOne.active = false;
-        upgradeGuiObjectZero.active = false;
-        upgradeGuiObjectOne.active = false;
+        upgradeIconZero.active = false;
+        upgradeIconOne.active = false;
         selection.name = "null";
     }
 }

@@ -12,7 +12,7 @@ import static processing.core.PConstants.CENTER;
 public class TowerBuy extends Button {
 
     private String towerType;
-    private boolean depressed;
+    public boolean depressed;
     public int price;
 
     public TowerBuy(PApplet p, float x, float y, String type, boolean active){

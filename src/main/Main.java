@@ -3,9 +3,11 @@ package main;
 import main.buffs.Buff;
 import main.enemies.*;
 import main.gui.Gui;
+import main.guiObjects.GuiObject;
 import main.gui.Hand;
 import main.gui.Selection;
-import main.guiObjects.GuiObject;
+import main.guiObjects.buttons.Button;
+import main.guiObjects.buttons.TowerBuy;
 import main.particles.*;
 import main.pathfinding.Fuzzer;
 import main.pathfinding.HeapNode;
@@ -36,23 +38,25 @@ public class Main extends PApplet {
     public static KeyBinds keyBinds;
 
     public static ArrayList<main.enemies.Enemy> enemies;
-    //    public static ArrayList<Tower> towers;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles;
-    public static ArrayList<GuiObject> guiObjects;
+    public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<Buff> buffs;
 
-    private Gui gui;
+    public static Gui gui;
     public static CompressArray compress;
 
-    public static GuiObject towerTabButton;
-    public static GuiObject sellButton;
-    public static GuiObject targetButton;
-    public static GuiObject repairButton;
-    public static GuiObject upgradeButtonZero;
-    public static GuiObject upgradeButtonOne;
-    public static GuiObject upgradeGuiObjectZero;
-    public static GuiObject upgradeGuiObjectOne;
+    public static Button addHp;
+    public static Button addMoney;
+    public static GuiObject hpIcon;
+    public static GuiObject moneyIcon;
+    public static Button towerTabButton;
+    public static Button sellButton;
+    public static Button targetButton;
+    public static Button upgradeButtonZero;
+    public static Button upgradeButtonOne;
+    public static GuiObject upgradeIconZero;
+    public static GuiObject upgradeIconOne;
 
     public static Hand hand;
     public static Selection selection;
@@ -112,7 +116,7 @@ public class Main extends PApplet {
 //        towers = new ArrayList<>();
         projectiles = new ArrayList<>();
         particles = new ArrayList<>();
-        guiObjects = new ArrayList<>();
+        towerBuyButtons = new ArrayList<>();
         buffs = new ArrayList<>();
         //loads sprites
         loadSprites(this);

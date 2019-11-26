@@ -4,8 +4,6 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
 import static main.Main.spritesH;
 
 public class GuiObject {
@@ -26,7 +24,7 @@ public class GuiObject {
         sprite = spritesH.get(type);
     }
 
-    public void main(ArrayList<GuiObject> guiObjects, int i){
+    public void main(){
         if (active){
             display();
         }

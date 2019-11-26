@@ -7,7 +7,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.spritesAnimH;
-import static main.Main.guiObjects;
+import static main.Main.towerBuyButtons;
 
 public class TowerTab extends Button {
     public TowerTab(PApplet p, float x, float y, String type, boolean active){
@@ -27,9 +27,6 @@ public class TowerTab extends Button {
     }
 
     public void action(){
-        for (int i = 4; i <= 33; i++){ //iterates through all tower buttons and inverts active
-            GuiObject button = guiObjects.get(i);
-            button.active = !button.active;
-        }
+        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.active = !towerBuyButton.active;
     }
 }
