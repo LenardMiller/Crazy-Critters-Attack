@@ -1,19 +1,18 @@
 package main;
 
 import main.buffs.Buff;
-import main.enemies.*;
+import main.enemies.Enemy;
 import main.gui.Gui;
-import main.guiObjects.GuiObject;
 import main.gui.Hand;
 import main.gui.Selection;
+import main.guiObjects.GuiObject;
 import main.guiObjects.buttons.Button;
 import main.guiObjects.buttons.TowerBuy;
 import main.particles.*;
-import main.pathfinding.Fuzzer;
+import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
-import main.pathfinding.AStar;
-import main.projectiles.*;
+import main.projectiles.Projectile;
 import main.towers.Tile;
 import main.util.CompressArray;
 import main.util.EnemyTracker;
@@ -87,7 +86,6 @@ public class Main extends PApplet {
     public static Node start;
     public static Node[] end;
     public static AStar path;
-    public static Fuzzer fuzz;
     public static int nSize;
     public static int numEnd;
     public static boolean pathLines = false;
