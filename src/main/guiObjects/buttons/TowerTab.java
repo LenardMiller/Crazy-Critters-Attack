@@ -17,7 +17,6 @@ public class TowerTab extends Button {
         spriteOne = spritesAnimH.get("towerTabSwitchBT")[0];
         spriteTwo = spritesAnimH.get("towerTabSwitchBT")[1];
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
     }
 
     public void main(ArrayList<GuiObject> guiObjects, int i){
@@ -32,6 +31,5 @@ public class TowerTab extends Button {
             GuiObject button = guiObjects.get(i);
             button.active = !button.active;
         }
-        actionTime = p.frameCount + 6;
     }
 }

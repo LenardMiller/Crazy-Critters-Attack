@@ -1,12 +1,9 @@
 package main.towers;
 
-import main.Main;
 import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
-
-import java.util.ArrayList;
 
 import static main.Main.*;
 
@@ -22,7 +19,7 @@ public abstract class Tower {
     public float error;
     public PVector size;
     public int maxHp;
-    public int twHp;
+    public int hp;
     public int damage;
     public boolean hit;
     public PImage sprite;
@@ -61,7 +58,7 @@ public abstract class Tower {
         delay = 0;
         error = 0;
         this.maxHp = 1;
-        twHp = maxHp;
+        hp = maxHp;
         hit = false;
         sprite = spritesH.get("nullWallTW");
         barTrans = 255;
@@ -88,11 +85,9 @@ public abstract class Tower {
     }
 
     public void main(){
-        if (twHp <= 0){
-            die();
-        }
-        value = (twHp / maxHp) * price;
-        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x-size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y-size.y && Main.alive){ //clicked on
+        if (hp <= 0) die();
+        value = (int)(((float)hp / (float)maxHp) * price);
+        if (inputHandler.leftMousePressedPulse && p.mouseX < tile.position.x && p.mouseX > tile.position.x-size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y-size.y && alive){ //clicked on
             selection.swapSelected(tile.id);
         }
         display();
@@ -106,16 +101,13 @@ public abstract class Tower {
         p.tint(255,tintColor,tintColor);
         p.image(sprite,tile.position.x-size.x,tile.position.y-size.y);
         p.tint(255);
-        if (twHp > 0){ //no inverted bars
-            HpBar();
-        }
-        if (tintColor < 255){
-            tintColor += 20;
-        }
+        //no inverted bars
+        if (hp > 0) HpBar();
+        if (tintColor < 255) tintColor += 20;
     }
 
     public void collideEN(int dangerLevel) { //if it touches an enemy, animate and loose health
-        twHp -= dangerLevel;
+        hp -= dangerLevel;
         hit = true;
         barTrans = 255;
         int num = (int)(p.random(1,4));
@@ -124,20 +116,16 @@ public abstract class Tower {
         }
     }
 
-    public void upgrade(int id) { //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    public void upgrade(int id) {
         price += upgradePrices[nextLevelOne];
         maxHp += upgradeHealth[nextLevelOne];
-        twHp += upgradeHealth[nextLevelOne];
+        hp += upgradeHealth[nextLevelOne];
         name = upgradeNames[nextLevelOne];
         debrisType = upgradeDebris[nextLevelOne];
         sprite = upgradeSprites[nextLevelOne];
         nextLevelOne++;
-        if (nextLevelOne < upgradeNames.length){
-            upgradeGuiObjectOne.sprite = upgradeIcons[nextLevelOne];
-        }
-        else{
-            upgradeGuiObjectOne.sprite = spritesAnimH.get("upgradeIC")[0];
-        }
+        if (nextLevelOne < upgradeNames.length) upgradeGuiObjectOne.sprite = upgradeIcons[nextLevelOne];
+        else upgradeGuiObjectOne.sprite = spritesAnimH.get("upgradeIC")[0];
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
@@ -145,31 +133,36 @@ public abstract class Tower {
 //        path.nodeCheckObs();
     }
 
-    protected void die() {
+    public void die() {
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
-        if (selection.id > tile.id){
-            selection.id--;
-        }
-        if (selection.id == tile.id){
-            selection.id = 0;
-        }
+        if (selection.id > tile.id) selection.id--;
+        if (selection.id == tile.id) selection.id = 0;
         tile.tower = null;
 //        path.nodeCheckObs();
     }
 
-    private void HpText(){ //displays the towers health
-        p.text(twHp, tile.position.x-size.x/2, tile.position.y + size.y/4);
+    public void repair() {
+        money -= ceil((float)(price) - (float)(value));
+        hp = maxHp;
+    }
+
+    public void sell() {
+        money += (int) (value * .8);
+        die(); //creates particles (may need to change later)
+    }
+
+    protected void HpText(){ //displays the towers health
+        p.text(hp, tile.position.x-size.x/2, tile.position.y + size.y/4);
     }
 
     protected void HpBar(){ //displays the towers health with style
         p.fill(0,255,0,barTrans);
-        if (barTrans > 0 && twHp > maxHp/2){ //after hit or if below 50%
-            barTrans--;
-        }
+        //after hit or if below 50%
+        if (barTrans > 0 && hp > maxHp/2) barTrans--;
         p.noStroke();
-        p.rect(tile.position.x-size.x, tile.position.y + size.y/4, (size.x)*(((float) twHp)/((float) maxHp)), -6);
+        p.rect(tile.position.x-size.x, tile.position.y + size.y/4, (size.x)*(((float) hp)/((float) maxHp)), -6);
     }
 }

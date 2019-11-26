@@ -13,39 +13,35 @@ public class SpriteLoader {
     public static void loadSpritesAnim(PApplet p) {
         spritesAnimH.put("upgradeIC",new PImage[15]);
         for (int i = 14; i >= 0; i--){
-            spritesAnimH.get("upgradeIC")[i] = p.loadImage("sprites/icons/upgrades/" + PApplet.nf(i,3) + ".png");
+            spritesAnimH.get("upgradeIC")[i] = p.loadImage("sprites/guiObjects/upgrades/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("livesAddBT",new PImage[2]);
         for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("livesAddBT")[i] = p.loadImage("sprites/icons/buttons/livesAdd/" + PApplet.nf(i,3) + ".png");
+            spritesAnimH.get("livesAddBT")[i] = p.loadImage("sprites/guiObjects/buttons/livesAdd/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("moneyAddBT",new PImage[2]);
         for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("moneyAddBT")[i] = p.loadImage("sprites/icons/buttons/moneyAdd/" + PApplet.nf(i,3) + ".png");
+            spritesAnimH.get("moneyAddBT")[i] = p.loadImage("sprites/guiObjects/buttons/moneyAdd/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("nullBT",new PImage[2]);
         for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("nullBT")[i] = p.loadImage("sprites/icons/buttons/null/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("repairBT",new PImage[4]);
-        for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("repairBT")[i] = p.loadImage("sprites/icons/buttons/repairButton/" + PApplet.nf(i,3) + ".png");
+            spritesAnimH.get("nullBT")[i] = p.loadImage("sprites/guiObjects/buttons/null/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("upgradeBT",new PImage[4]);
         for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("upgradeBT")[i] = p.loadImage("sprites/icons/buttons/upgradeButton/" + PApplet.nf(i,3) + ".png");
+            spritesAnimH.get("upgradeBT")[i] = p.loadImage("sprites/guiObjects/buttons/upgradeButton/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("sellTowerBT",new PImage[2]);
         for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("sellTowerBT")[i] = p.loadImage("sprites/icons/buttons/sellTower/" + PApplet.nf(i,3) + ".png");
+            spritesAnimH.get("sellTowerBT")[i] = p.loadImage("sprites/guiObjects/buttons/sellTower/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("targetPriorityBT",new PImage[2]);
         for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("targetPriorityBT")[i] = p.loadImage("sprites/icons/buttons/targetPriority/" + PApplet.nf(i,3) + ".png");
+            spritesAnimH.get("targetPriorityBT")[i] = p.loadImage("sprites/guiObjects/buttons/targetPriority/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("towerTabSwitchBT",new PImage[2]);
         for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("towerTabSwitchBT")[i] = p.loadImage("sprites/icons/buttons/towerTabSwitch/" + PApplet.nf(i,3) + ".png");
+            spritesAnimH.get("towerTabSwitchBT")[i] = p.loadImage("sprites/guiObjects/buttons/towerTabSwitch/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("energyBuffPT",new PImage[8]);
         for (int i = 7; i >= 0; i--){
@@ -195,9 +191,9 @@ public class SpriteLoader {
         spritesH.put("treeSpriteEN",p.loadImage("sprites/enemies/treeSprite/idle.png"));
         spritesH.put("midBugEN",p.loadImage("sprites/enemies/midBug/idle.png"));
         spritesH.put("bigBugEN",p.loadImage("sprites/enemies/bigBug/idle.png"));
-        spritesH.put("livesIc",p.loadImage("sprites/icons/lives.png"));
-        spritesH.put("moneyIc",p.loadImage("sprites/icons/money.png"));
-        spritesH.put("nullIc",p.loadImage("sprites/icons/null.png"));
+        spritesH.put("livesIc",p.loadImage("sprites/guiObjects/lives.png"));
+        spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
+        spritesH.put("nullIc",p.loadImage("sprites/guiObjects/null.png"));
         spritesH.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
         spritesH.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));
         spritesH.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));

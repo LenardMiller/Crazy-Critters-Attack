@@ -18,7 +18,6 @@ public class SellTower extends Button {
         spriteOne = spritesAnimH.get("sellTowerBT")[0];
         spriteTwo = spritesAnimH.get("sellTowerBT")[1];
         sprite = spriteOne;
-        actionTime = p.frameCount + 30;
     }
 
     public void main(ArrayList<GuiObject> guiObjects, int i){
@@ -30,11 +29,9 @@ public class SellTower extends Button {
 
     public void action(){ //kills tower and gives value
         Tower tower = tiles.get(selection.id).tower;
-        money += (int) (tower.value * .8);
-        tower.twHp = 0; //creates particles (may need to change later)
+        tower.sell();
         active = false;
         targetButton.active = false;
-        repairButton.active = false;
         upgradeButtonZero.active = false;
         upgradeButtonOne.active = false;
         upgradeGuiObjectZero.active = false;

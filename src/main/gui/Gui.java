@@ -28,7 +28,6 @@ public class Gui {
         if (!isTowers) {
             sellButton.active = false;
             targetButton.active = false;
-            repairButton.active = false;
             upgradeButtonZero.active = false;
             upgradeButtonOne.active = false;
             upgradeGuiObjectZero.active = false;
@@ -37,7 +36,6 @@ public class Gui {
         towerTabButton.main(guiObjects, 0);
         sellButton.main(guiObjects, 0);
         targetButton.main(guiObjects, 0);
-        repairButton.main(guiObjects, 0);
         upgradeButtonZero.main(guiObjects, 0);
         upgradeButtonOne.main(guiObjects, 0);
         upgradeGuiObjectZero.main(guiObjects, 0);
@@ -137,8 +135,6 @@ public class Gui {
         sellButton = new SellTower(p,800,877.5f,"null",false);
         //target priority button
         targetButton = new TargetPriority(p,800,832.5f,"null",false);
-        //repair wall button
-        repairButton = new RepairWall(p,800,780,"null",false);
         //upgrade wall button zero
         upgradeButtonZero = new UpgradeTower(p,800,480,"null",false, 0);
         //upgrade wall button one

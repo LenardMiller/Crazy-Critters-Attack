@@ -14,7 +14,7 @@ public class Wall extends Tower{
         name = "woodWall";
         size = new PVector(50,50);
         maxHp = 50;
-        twHp = maxHp;
+        hp = maxHp;
         hit = false;
         sprite = spritesH.get("woodWallTW");
         debrisType = "wood";

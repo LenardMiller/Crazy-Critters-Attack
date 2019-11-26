@@ -39,7 +39,7 @@ public abstract class Turret extends Tower {
         name = null;
         size = new PVector(50, 50);
         maxHp = 20;
-        twHp = maxHp;
+        hp = maxHp;
         hit = false;
         delay = 240;
         delayTime = delay;
@@ -145,7 +145,7 @@ public abstract class Turret extends Tower {
 
 
     public void main() { //need to check target
-        if (twHp <= 0) {
+        if (hp <= 0) {
             die();
             tile.tower = null;
         }
@@ -208,7 +208,7 @@ public abstract class Turret extends Tower {
             tintColor = 0;
             hit = false;
         }
-        if (twHp > 0) {
+        if (hp > 0) {
             HpBar();
         }
         display();
@@ -237,7 +237,7 @@ public abstract class Turret extends Tower {
         price += upgradePrices[nextLevel];
         value += upgradePrices[nextLevel];
         maxHp += upgradeHealth[nextLevel];
-        twHp += upgradeHealth[nextLevel];
+        hp += upgradeHealth[nextLevel];
         error += upgradeError[nextLevel];
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];

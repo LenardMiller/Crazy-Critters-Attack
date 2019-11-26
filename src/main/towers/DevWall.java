@@ -13,7 +13,7 @@ public class DevWall extends Tower{
         name = "devWall";
         size = new PVector(120,37);
         maxHp = 9999;
-        twHp = maxHp;
+        hp = maxHp;
         hit = false;
         sprite = spritesH.get("devWallTW");
         debrisType = "devWood";
@@ -34,10 +34,10 @@ public class DevWall extends Tower{
 
     public void HpBar(){ //same as normal, but pink
         p.fill(255,0,255,barTrans);
-        if (barTrans > 0 && twHp > maxHp/2){
+        if (barTrans > 0 && hp > maxHp/2){
             barTrans--;
         }
         p.noStroke();
-        p.rect(tile.position.x-size.x, tile.position.y + size.y/4, (size.x)*(((float) twHp)/((float) maxHp)), -6);
+        p.rect(tile.position.x-size.x, tile.position.y + size.y/4, (size.x)*(((float) hp)/((float) maxHp)), -6);
     }
 }

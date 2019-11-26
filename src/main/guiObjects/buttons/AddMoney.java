@@ -18,7 +18,7 @@ public class AddMoney extends Button {
         spriteOne = spritesAnimH.get("moneyAddBT")[0];
         spriteTwo = spritesAnimH.get("moneyAddBT")[1];
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
+        holdable = true;
     }
 
     public void main(ArrayList<GuiObject> guiObjects, int i){
@@ -29,6 +29,6 @@ public class AddMoney extends Button {
     }
 
     public void action(){ //give money
-        money += 10;
+        money += 1000;
     }
 }

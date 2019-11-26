@@ -18,7 +18,7 @@ public class MagicMissileer extends Turret{
         name = "magicMissleer";
         size = new PVector(50,50);
         maxHp = 20;
-        twHp = maxHp;
+        hp = maxHp;
         hit = false;
         delay = 200; //200 frames
         delay += (round(p.random(-(delay/10),delay/10))); //injects 10% randomness so all don't fire at once
@@ -144,7 +144,7 @@ public class MagicMissileer extends Turret{
         price += upgradePrices[nextLevel];
         value += upgradePrices[nextLevel];
         maxHp += upgradeHealth[nextLevel];
-        twHp += upgradeHealth[nextLevel];
+        hp += upgradeHealth[nextLevel];
         error += upgradeError[nextLevel];
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];

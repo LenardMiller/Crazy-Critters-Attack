@@ -21,11 +21,10 @@ public class TowerBuy extends Button {
         position = new PVector(x, y);
         size = new PVector(35, 35);
         towerType = type;
-        spriteLocation = "sprites/icons/buttons/towerBuy/" + towerType + "/"; //still uses old system because it is only created at beginning of game
+        spriteLocation = "sprites/guiObjects/buttons/towerBuy/" + towerType + "/"; //still uses old system because it is only created at beginning of game
         spriteOne = p.loadImage(spriteLocation + "000.png");
         spriteTwo = p.loadImage(spriteLocation + "001.png");
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
         depressed = false;
         switch (type) {
             case "slingshot":
@@ -90,13 +89,8 @@ public class TowerBuy extends Button {
                     p.text("$25", 800, 296);
                     break;
             }
-            if (p.mousePressed && p.frameCount - actionTime >= 6 && money >= price && alive){ //if pressed
-                action();
-            }
-            else if (p.mousePressed && p.frameCount - actionTime >= 6 && money < price && alive){ //if pressed but no money
-                depressed = !depressed; //invert depression
-                actionTime = p.frameCount + 6;
-            }
+            //if pressed
+            if (inputHandler.leftMousePressedPulse && alive) action();
         }
         else{
             sprite = spriteOne;
@@ -105,7 +99,6 @@ public class TowerBuy extends Button {
 
     public void action(){
         depressed = !depressed; //invert depression
-        actionTime = p.frameCount + 6;
         if (hand.held.equals(towerType)){ //if already holding, stop
             hand.setHeld("null");
         }

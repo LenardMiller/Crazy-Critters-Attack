@@ -5,15 +5,14 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import static main.Main.alive;
-import static main.Main.spritesAnimH;
+import static main.Main.*;
 
 public abstract class Button extends GuiObject {
 
-    int actionTime;
     PImage spriteOne;
     PImage spriteTwo;
     String spriteLocation;
+    boolean holdable;
 
     public Button(PApplet p, float x, float y, String type, boolean active){
         super(p,x,y,type,active);
@@ -23,23 +22,21 @@ public abstract class Button extends GuiObject {
         spriteOne = spritesAnimH.get("nullBT")[0]; //popped out
         spriteTwo = spritesAnimH.get("nullBT")[1]; //pushed in
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
+        holdable = false;
     }
 
     public void hover(){ //if mouse over, push in
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&p. mouseY > position.y-size.y/2 && alive){
             sprite = spriteTwo;
-            if (p.mousePressed && p.frameCount - actionTime >= 6){ //if hovering and click
-                action();
+            if (holdable) {
+                if (p.mousePressed && p.mouseButton == LEFT) action();
             }
-        } else{
-            sprite = spriteOne;
-        }
+            else if (inputHandler.rightMousePressedPulse) action();
+        } else sprite = spriteOne;
     }
 
     public void action(){ //prints "Boink!"
         System.out.println("Boink!");
-        actionTime = p.frameCount + 6;
     }
 
     public void main(){

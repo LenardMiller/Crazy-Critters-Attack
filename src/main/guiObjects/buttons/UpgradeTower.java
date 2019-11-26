@@ -25,7 +25,6 @@ public class UpgradeTower extends Button{
         spriteRed = spritesAnimH.get("upgradeBT")[2]; //red
         spriteGrey = spritesAnimH.get("upgradeBT")[3]; //grey
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
         this.id = id;
     }
 
@@ -41,13 +40,10 @@ public class UpgradeTower extends Button{
             //println(id + ": " + nextLevel);
             if (tower.upgradeNames.length == nextLevel && id == 1){ //if maxLevel, grey out
                 sprite = spriteGrey;
-                actionTime = p.frameCount + 3;
             } else if (tower.upgradeNames.length/2 == nextLevel && id == 0){ //if halfLevel, grey out
                 sprite = spriteGrey;
-                actionTime = p.frameCount + 3;
             } else if (tower.upgradePrices[nextLevel] > money){ //if can't afford, red out
                 sprite = spriteRed;
-                actionTime = p.frameCount + 3;
             } else{ //if neither, work fine
                 hover();
             }
@@ -65,6 +61,5 @@ public class UpgradeTower extends Button{
         }
         money -= tower.upgradePrices[nextLevel];
         tower.upgrade(id);
-        actionTime = p.frameCount + 6;
     }
 }

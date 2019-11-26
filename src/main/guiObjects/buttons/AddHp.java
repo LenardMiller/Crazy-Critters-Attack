@@ -18,7 +18,7 @@ public class AddHp extends Button {
         spriteOne = spritesAnimH.get("livesAddBT")[0];
         spriteTwo = spritesAnimH.get("livesAddBT")[1];
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
+        holdable = true;
     }
 
     public void main(ArrayList<GuiObject> guiObjects, int i){

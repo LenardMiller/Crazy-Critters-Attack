@@ -16,11 +16,10 @@ public class TargetPriority extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 45);
-        spriteLocation = "sprites/icons/buttons/targetPriority/";
+        spriteLocation = "sprites/guiObjects/buttons/targetPriority/";
         spriteOne = p.loadImage(spriteLocation + "000.png");
         spriteTwo = p.loadImage(spriteLocation + "001.png");
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
     }
 
     public void main(ArrayList<GuiObject> guiObjects, int i){
@@ -37,6 +36,5 @@ public class TargetPriority extends Button {
         } else{ //roll over
             tower.priority = 0;
         }
-        actionTime = p. frameCount + 6;
     }
 }
