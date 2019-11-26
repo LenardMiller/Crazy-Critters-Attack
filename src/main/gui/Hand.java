@@ -40,7 +40,6 @@ public class Hand { //what is selected, eg: slingshot
             held = "null";
             for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;
         }
-        //todo: highlight upgrades
     }
 
     private void checkPlaceable() {
