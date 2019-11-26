@@ -9,7 +9,6 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.Main.gui;
 import static main.util.MiscMethods.roundTo;
 
 public class Hand { //what is selected, eg: slingshot
@@ -33,6 +32,7 @@ public class Hand { //what is selected, eg: slingshot
 
     public void main() {
         checkPlaceable();
+        checkDisplay();
         displayHeld();
         if (inputHandler.leftMousePressedPulse && !implacable) place();
         if (inputHandler.rightMousePressedPulse) remove();
@@ -50,6 +50,21 @@ public class Hand { //what is selected, eg: slingshot
         else if (!held.equals("wall")) implacable = (tile.tower != null);
         else implacable = (tile.tower != null && tile.tower.turret);
         if (!implacable) implacable = (price > money);
+    }
+
+    private void checkDisplay() { //todo: wall info when highlighted
+        Tile tile = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1);
+        if (held.equals("wall")) {
+            if (tile != null && tile.tower != null && !tile.tower.turret) { //if wall
+                if (tile.tower.nextLevelOne < tile.tower.upgradeIcons.length) { //if upgradeable
+                    heldSprite = tile.tower.upgradeSprites[tile.tower.nextLevelOne];
+                    if (money < tile.tower.upgradePrices[tile.tower.nextLevelOne]) implacable = true;
+                } else {
+                    heldSprite = tile.tower.upgradeSprites[tile.tower.upgradeIcons.length-1];
+                    implacable = true;
+                }
+            } else heldSprite = spritesH.get("woodWallTW"); //reset wall sprite
+        } else setHeld(held); //reset sprite
     }
 
     private void displayHeld() { //shows whats held at ~1/2 opacity
@@ -116,9 +131,9 @@ public class Hand { //what is selected, eg: slingshot
         else if (held.equals("energyBlaster") && alive) tile.tower = new EnergyBlaster(p, tile);
         else if (held.equals("magicMissleer") && alive) tile.tower = new MagicMissileer(p, tile);
         else if (held.equals("wall") && alive) {
-            if (tile.tower != null && !tile.tower.turret) {
+            if (tile.tower != null && !tile.tower.turret) { //upgrade or repair
                 if (tile.tower.hp < tile.tower.maxHp) tile.tower.repair();
-                else if (tile.tower.nextLevelOne < tile.tower.upgradeIcons.length && money >= tile.tower.price) {
+                else if (tile.tower.nextLevelOne < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                     money -= tile.tower.price;
                     tile.tower.upgrade(0);
                 }

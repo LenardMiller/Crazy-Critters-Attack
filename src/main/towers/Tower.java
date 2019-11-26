@@ -47,7 +47,7 @@ public abstract class Tower {
     public String[] upgradeDescTwo;
     public String[] upgradeDescThree;
     public PImage[] upgradeIcons;
-    protected PImage[] upgradeSprites;
+    public PImage[] upgradeSprites;
 
     public Tower(PApplet p, Tile tile) {
         this.p = p;
