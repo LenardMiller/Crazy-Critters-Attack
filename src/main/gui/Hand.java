@@ -115,37 +115,40 @@ public class Hand {
         }
         if (displayInfo.equals("upgradeWall")) {
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
-            p.fill(235);
-            p.noStroke();
-            p.rect(700, 211, 200, 707);
-            p.textAlign(CENTER);
-            //tower info
-            p.fill(231, 232, 190);
-            p.rect(705, 247, 190, 119);
-            p.textFont(mediumLargeFont);
-            p.fill(0);
-            p.text("Selected:", 800, 241);
-            p.textFont(largeFont);
-            if (tower.nextLevelB > 0) {
-                p.text(tower.upgradeTitles[tower.nextLevelB - 1], 800, 276); //if not base level
-            } else p.text("Wooden", 800, 276);
-            p.text("Wall", 800, 301);
-            p.textFont(mediumFont);
-            p.text(tower.hp + " hp", 800, 331);
-            p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 800, 356);
-            //upgrade info
-            if (money >= tower.upgradePrices[tower.nextLevelB]) p.fill(195, 232, 188);
-            else p.fill(230, 181, 181);
-            p.rect(705, 401, 190, 119);
-            p.textFont(mediumLargeFont);
-            p.fill(0);
-            p.text("Upgrade:", 800, 395);
-            p.textFont(largeFont);
-            p.text(tower.upgradeTitles[tower.nextLevelB], 800, 430);
-            p.text("Wall", 800, 455);
-            p.textFont(mediumFont);
-            p.text("+" + tower.upgradeHealth[tower.nextLevelB] + " HP", 800, 485);
-            p.text("$" + tower.upgradePrices[tower.nextLevelB], 800, 510);
+            if (tower.nextLevelB > tower.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
+            else {
+                p.fill(235);
+                p.noStroke();
+                p.rect(700, 211, 200, 707);
+                p.textAlign(CENTER);
+                //tower info
+                p.fill(231, 232, 190);
+                p.rect(705, 247, 190, 119);
+                p.textFont(mediumLargeFont);
+                p.fill(0);
+                p.text("Selected:", 800, 241);
+                p.textFont(largeFont);
+                if (tower.nextLevelB > 0) {
+                    p.text(tower.upgradeTitles[tower.nextLevelB - 1], 800, 276); //if not base level
+                } else p.text("Wooden", 800, 276);
+                p.text("Wall", 800, 301);
+                p.textFont(mediumFont);
+                p.text(tower.hp + " hp", 800, 331);
+                p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 800, 356);
+                //upgrade info
+                if (money >= tower.upgradePrices[tower.nextLevelB]) p.fill(195, 232, 188);
+                else p.fill(230, 181, 181);
+                p.rect(705, 401, 190, 119);
+                p.textFont(mediumLargeFont);
+                p.fill(0);
+                p.text("Upgrade:", 800, 395);
+                p.textFont(largeFont);
+                p.text(tower.upgradeTitles[tower.nextLevelB], 800, 430);
+                p.text("Wall", 800, 455);
+                p.textFont(mediumFont);
+                p.text("+" + tower.upgradeHealth[tower.nextLevelB] + " HP", 800, 485);
+                p.text("$" + tower.upgradePrices[tower.nextLevelB], 800, 510);
+            }
         }
         if (displayInfo.equals("maxWallUpgrade")) {
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
@@ -262,7 +265,7 @@ public class Hand {
         else if (held.equals("magicMissleer") && alive) tile.tower = new MagicMissileer(p, tile);
         else if (held.equals("wall") && alive) {
             if (tile.tower != null && !tile.tower.turret) { //upgrade or repair
-                if (tile.tower.hp < tile.tower.maxHp && money >= ceil((float)(tile.tower.price) - (float)(tile.tower.value))) {
+                if (tile.tower.hp < tile.tower.maxHp && money >= ceil((float) (tile.tower.price) - (float) (tile.tower.value))) {
                     tile.tower.repair();
                 } else if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                     money -= tile.tower.upgradePrices[tile.tower.nextLevelB];

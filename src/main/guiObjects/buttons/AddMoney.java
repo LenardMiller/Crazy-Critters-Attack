@@ -26,6 +26,6 @@ public class AddMoney extends Button {
     }
 
     public void action(){ //give money
-        money += 10;
+        money += 1000;
     }
 }
