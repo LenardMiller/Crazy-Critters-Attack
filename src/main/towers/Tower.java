@@ -103,7 +103,7 @@ public abstract class Tower {
         p.image(sprite,tile.position.x-size.x,tile.position.y-size.y);
         p.tint(255);
         //no inverted bars
-        if (hp > 0) HpBar();
+        if (hp > 0) HpBar(); //todo: display on top of towers
         if (tintColor < 255) tintColor += 20;
     }
 
