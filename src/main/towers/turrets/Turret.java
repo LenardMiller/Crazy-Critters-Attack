@@ -66,9 +66,9 @@ public abstract class Turret extends Tower {
         upgradeNames = new String[4];
         upgradeDebris = new String[4];
         upgradeTitles = new String[4];
-        upgradeDescOne = new String[4];
-        upgradeDescTwo = new String[4];
-        upgradeDescThree = new String[4];
+        upgradeDescA = new String[4];
+        upgradeDescB = new String[4];
+        upgradeDescC = new String[4];
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4];
     }
@@ -228,9 +228,9 @@ public abstract class Turret extends Tower {
     public void upgrade(int id) {
         int nextLevel;
         if (id == 0) {
-            nextLevel = nextLevelZero;
+            nextLevel = nextLevelA;
         } else {
-            nextLevel = nextLevelOne;
+            nextLevel = nextLevelB;
         }
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
@@ -243,22 +243,22 @@ public abstract class Turret extends Tower {
         debrisType = upgradeDebris[nextLevel];
         sprite = upgradeSprites[nextLevel];
         if (id == 0) {
-            nextLevelZero++;
+            nextLevelA++;
         } else if (id == 1) {
-            nextLevelOne++;
+            nextLevelB++;
         }
         if (id == 0) {
-            if (nextLevelZero < upgradeNames.length / 2) {
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+            if (nextLevelA < upgradeNames.length / 2) {
+                upgradeIconA.sprite = upgradeIcons[nextLevelA];
             } else {
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1) {
-            if (nextLevelOne < upgradeNames.length) {
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+            if (nextLevelB < upgradeNames.length) {
+                upgradeIconB.sprite = upgradeIcons[nextLevelB];
             } else {
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         int num = (int) (p.random(30, 50)); //shower debris

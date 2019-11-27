@@ -26,6 +26,7 @@ public class Selection { //what tower is selected
 
     public void swapSelected(int id) { //switches what is selected
         Tower tower = tiles.get(id).tower;
+        hand.held = "null";
         if (tower.turret) {
             for (int i = tiles.size() - 1; i >= 0; i--) {
                 if (tiles.get(i).tower != null) {
@@ -35,45 +36,45 @@ public class Selection { //what tower is selected
             this.id = id;
             name = tower.name;
             sellButton.active = true;
-            upgradeButtonOne.active = true;
-            upgradeIconOne.active = true;
+            upgradeButtonB.active = true;
+            upgradeIconB.active = true;
             if (tower.turret) {
                 targetButton.active = true;
                 tower.visualize = true;
-                upgradeButtonZero.active = true;
-                upgradeButtonOne.position.y = 735;
-                upgradeButtonZero.position.y = 585;
-                upgradeIconZero.active = true;
-                upgradeIconZero.position.y = 565;
-                upgradeIconOne.position.y = 715;
-                if (tower.nextLevelZero < tower.upgradeNames.length / 2) {
-                    upgradeIconZero.sprite = tower.upgradeIcons[tower.nextLevelZero];
+                upgradeButtonA.active = true;
+                upgradeButtonB.position.y = 735;
+                upgradeButtonA.position.y = 585;
+                upgradeIconA.active = true;
+                upgradeIconA.position.y = 565;
+                upgradeIconB.position.y = 715;
+                if (tower.nextLevelA < tower.upgradeNames.length / 2) {
+                    upgradeIconA.sprite = tower.upgradeIcons[tower.nextLevelA];
                 } else {
-                    upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                    upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
                 }
-                if (tower.nextLevelOne < tower.upgradeNames.length) {
-                    upgradeIconOne.sprite = tower.upgradeIcons[tower.nextLevelOne];
+                if (tower.nextLevelB < tower.upgradeNames.length) {
+                    upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
                 } else {
-                    upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                    upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
                 }
             }
             if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) {
                 targetButton.active = false;
-                upgradeButtonOne.position.y += 45;
-                upgradeButtonZero.position.y += 45;
-                upgradeIconZero.position.y += 45;
-                upgradeIconOne.position.y += 45;
+                upgradeButtonB.position.y += 45;
+                upgradeButtonA.position.y += 45;
+                upgradeIconA.position.y += 45;
+                upgradeIconB.position.y += 45;
             }
             if (!tower.turret) {
                 targetButton.active = false;
-                upgradeButtonZero.active = false;
-                upgradeButtonOne.position.y = 630;
-                upgradeIconZero.active = false;
-                upgradeIconOne.position.y = 610;
-                if (tower.nextLevelOne < tower.upgradeNames.length) {
-                    upgradeIconOne.sprite = tower.upgradeIcons[tower.nextLevelOne];
+                upgradeButtonA.active = false;
+                upgradeButtonB.position.y = 630;
+                upgradeIconA.active = false;
+                upgradeIconB.position.y = 610;
+                if (tower.nextLevelB < tower.upgradeNames.length) {
+                    upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
                 } else {
-                    upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                    upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
                 }
             }
         }
@@ -86,10 +87,10 @@ public class Selection { //what tower is selected
                 name = "null";
                 sellButton.active = false;
                 targetButton.active = false;
-                upgradeButtonZero.active = false;
-                upgradeButtonOne.active = false;
-                upgradeIconZero.active = false;
-                upgradeIconOne.active = false;
+                upgradeButtonA.active = false;
+                upgradeButtonB.active = false;
+                upgradeIconA.active = false;
+                upgradeIconB.active = false;
                 tower.visualize = false;
             }
         }
@@ -200,20 +201,20 @@ public class Selection { //what tower is selected
             if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) {
                 y += 45;
             }
-            if (tower.nextLevelZero < tower.upgradeNames.length / 2) {
-                if (money >= tower.upgradePrices[tower.nextLevelZero]) {
+            if (tower.nextLevelA < tower.upgradeNames.length / 2) {
+                if (money >= tower.upgradePrices[tower.nextLevelA]) {
                     p.fill(11, 56, 0);
                 } else {
                     p.fill(75, 0, 0);
                 }
                 p.textFont(largeFont);
-                p.text(tower.upgradeTitles[tower.nextLevelZero], 800, 585 + y);
-                p.text("$" + tower.upgradePrices[tower.nextLevelZero], 800, 693 + y);
+                p.text(tower.upgradeTitles[tower.nextLevelA], 800, 585 + y);
+                p.text("$" + tower.upgradePrices[tower.nextLevelA], 800, 693 + y);
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
-                p.text(tower.upgradeDescOne[tower.nextLevelZero], 715, 615 + y);
-                p.text(tower.upgradeDescTwo[tower.nextLevelZero], 715, 635 + y);
-                p.text(tower.upgradeDescThree[tower.nextLevelZero], 715, 655 + y);
+                p.text(tower.upgradeDescA[tower.nextLevelA], 715, 615 + y);
+                p.text(tower.upgradeDescB[tower.nextLevelA], 715, 635 + y);
+                p.text(tower.upgradeDescC[tower.nextLevelA], 715, 655 + y);
             } else {
                 p.fill(15);
                 p.textFont(largeFont);
@@ -232,21 +233,21 @@ public class Selection { //what tower is selected
         if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) {
             y += 45;
         }
-        if (tower.nextLevelOne < tower.upgradeNames.length) {
-            if (money >= tower.upgradePrices[tower.nextLevelOne]) {
+        if (tower.nextLevelB < tower.upgradeNames.length) {
+            if (money >= tower.upgradePrices[tower.nextLevelB]) {
                 p.fill(11, 56, 0);
             } else {
                 p.fill(75, 0, 0);
             }
             p.textFont(largeFont);
             p.textAlign(CENTER);
-            p.text(tower.upgradeTitles[tower.nextLevelOne], 800, 585 + y);
-            p.text("$" + tower.upgradePrices[tower.nextLevelOne], 800, 693 + y);
+            p.text(tower.upgradeTitles[tower.nextLevelB], 800, 585 + y);
+            p.text("$" + tower.upgradePrices[tower.nextLevelB], 800, 693 + y);
             p.textFont(mediumFont);
             p.textAlign(LEFT);
-            p.text(tower.upgradeDescOne[tower.nextLevelOne], 715, 615 + y);
-            p.text(tower.upgradeDescTwo[tower.nextLevelOne], 715, 635 + y);
-            p.text(tower.upgradeDescThree[tower.nextLevelOne], 715, 655 + y);
+            p.text(tower.upgradeDescA[tower.nextLevelB], 715, 615 + y);
+            p.text(tower.upgradeDescB[tower.nextLevelB], 715, 635 + y);
+            p.text(tower.upgradeDescC[tower.nextLevelB], 715, 655 + y);
         } else {
             p.fill(15);
             p.textFont(largeFont);

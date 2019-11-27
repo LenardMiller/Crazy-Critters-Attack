@@ -52,10 +52,10 @@ public class Main extends PApplet {
     public static Button towerTabButton;
     public static Button sellButton;
     public static Button targetButton;
-    public static Button upgradeButtonZero;
-    public static Button upgradeButtonOne;
-    public static GuiObject upgradeIconZero;
-    public static GuiObject upgradeIconOne;
+    public static Button upgradeButtonA;
+    public static Button upgradeButtonB;
+    public static GuiObject upgradeIconA;
+    public static GuiObject upgradeIconB;
 
     public static Hand hand;
     public static Selection selection;
@@ -65,6 +65,7 @@ public class Main extends PApplet {
 
     public static PFont veryLargeFont;
     public static PFont largeFont;
+    public static PFont mediumLargeFont;
     public static PFont mediumFont;
     public static PFont smallFont;
 
@@ -101,6 +102,7 @@ public class Main extends PApplet {
     public void setup() {
         veryLargeFont = createFont("STHeitiSC-Light", 48);
         largeFont = createFont("STHeitiSC-Light", 24);
+        mediumLargeFont = createFont("STHeitiSC-Light", 21);
         mediumFont = createFont("STHeitiSC-Light", 18);
         smallFont = createFont("STHeitiSC-Light", 12);
         //creates object data structures
@@ -159,7 +161,6 @@ public class Main extends PApplet {
         //keys
         keyBinds.debugKeys();
         keyBinds.spawnKeys();
-        repeatSpawnKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
             path.reqQ.get(0).getPath();
@@ -177,6 +178,7 @@ public class Main extends PApplet {
         fill(200);
         rect(BOARD_WIDTH, 0, BOARD_WIDTH + 250, BOARD_HEIGHT);
         gui.drawIcons();
+        hand.displayHeldInfo(); //so text appears on top
         //text
         textAlign(LEFT);
         gui.drawText(this, 10);
@@ -238,48 +240,6 @@ public class Main extends PApplet {
 
     public void mouseReleased() {
         inputHandler.mouse(false);
-    }
-
-    private void repeatSpawnKeys() {
-        //particle form: spawn x, spawn y, angle
-        if (keyPressed && key == 'z' && alive) { //hurt
-            int num = round(random(0, 2));
-            String type = "redOuch";
-            if (num == 0) type = "redOuch";
-            else if (num == 1) type = "greenOuch";
-            else if (num == 2) type = "pinkOuch";
-            particles.add(new Ouch(this, mouseX, mouseY, random(0, 360), type));
-        }
-        if (keyPressed && key == 'x' && alive) { //die
-            particles.add(new Ouch(this, mouseX, mouseY, random(0, 360), "greyPuff"));
-        }
-        if (keyPressed && key == 'c' && alive) { //debris
-            int num = round(random(0, 4));
-            String type = "null";
-            if (num == 0) type = "wood";
-            else if (num == 1) type = "stone";
-            else if (num == 2) type = "metal";
-            else if (num == 3) type = "crystal";
-            else if (num == 4) type = "devWood";
-            particles.add(new Debris(this, mouseX, mouseY, random(0, 360), type));
-        }
-        if (keyPressed && key == 'v' && alive) { //buff
-            int num = floor(random(0, 4.9f));
-            String type = "poison";
-            if (num == 0) type = "poison";
-            else if (num == 1) type = "water";
-            else if (num == 2) type = "fire";
-            else if (num == 3) type = "energy";
-            else if (num == 4) type = "greenMagic";
-
-            particles.add(new BuffParticle(this, mouseX, mouseY, random(0, 360), type));
-        }
-        if (keyPressed && key == 'b' && alive) { //medium explosion
-            particles.add(new MediumExplosion(this, mouseX, mouseY, random(0, 360)));
-        }
-        if (keyPressed && key == 'n' && alive) { //large explosion
-            particles.add(new LargeExplosion(this, mouseX, mouseY, random(0, 360)));
-        }
     }
 
     public class InputHandler {

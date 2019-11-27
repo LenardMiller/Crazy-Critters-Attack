@@ -4,6 +4,7 @@ import main.buffs.Burning;
 import main.buffs.Poisoned;
 import main.buffs.Wet;
 import main.enemies.*;
+import main.particles.*;
 import main.projectiles.*;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -39,7 +40,14 @@ public class KeyBinds {
         boolean poisoned = keysPressed.get(',') && alive;
         boolean wet = keysPressed.get('.') && alive;
         boolean burning = keysPressed.get('/') && alive;
-        //projectile form: spawn x, spawn y, angle
+        //particles
+        boolean hurt = keysPressed.get('z') && alive;
+        boolean die = keysPressed.get('x') && alive;
+        boolean debris = keysPressed.get('c') && alive;
+        boolean buff = keysPressed.get('v') && alive;
+        boolean mediumExplosion = keysPressed.get('b') && alive;
+        boolean largeExplosion = keysPressed.get('n') && alive;
+        //projectiles
         if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, 10));
         if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, 20, 2));
         if (devProjectile) projectiles.add(new DevProjectile(p, p.mouseX, p.mouseY, 0));
@@ -47,7 +55,7 @@ public class KeyBinds {
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, 20, 20, false));
         if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, 20, 30, true));
         if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, 5, 0));
-        //enemy form: spawn x, spawn y
+        //enemies
         if (littleBug) {
             enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
             enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
@@ -68,10 +76,42 @@ public class KeyBinds {
             enemies.add(new TreeSpirit(p, p.mouseX, p.mouseY));
             enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
         }
-        //buff form: enemy id
+        //buffs
         if (poisoned) buffs.add(new Poisoned(p, (int) (p.random(0, enemies.size()))));
         if (wet) buffs.add(new Wet(p, (int) (p.random(0, enemies.size()))));
         if (burning) buffs.add(new Burning(p, (int) (p.random(0, enemies.size()))));
+        //particles
+        if (hurt) {
+            int num = round(p.random(0, 2));
+            String type = "redOuch";
+            if (num == 0) type = "redOuch";
+            else if (num == 1) type = "greenOuch";
+            else if (num == 2) type = "pinkOuch";
+            particles.add(new Ouch(p, p.mouseX, p.mouseY, p.random(0, 360), type));
+        }
+        if (die) particles.add(new Ouch(p, p.mouseX, p.mouseY, p.random(0, 360), "greyPuff"));
+        if (debris) {
+            int num = round(p.random(0, 4));
+            String type = "null";
+            if (num == 0) type = "wood";
+            else if (num == 1) type = "stone";
+            else if (num == 2) type = "metal";
+            else if (num == 3) type = "crystal";
+            else if (num == 4) type = "devWood";
+            particles.add(new Debris(p, p.mouseX, p.mouseY, p.random(0, 360), type));
+        }
+        if (buff) {
+            int num = floor(p.random(0, 4.9f));
+            String type = "poison";
+            if (num == 0) type = "poison";
+            else if (num == 1) type = "water";
+            else if (num == 2) type = "fire";
+            else if (num == 3) type = "energy";
+            else if (num == 4) type = "greenMagic";
+            particles.add(new BuffParticle(p, p.mouseX, p.mouseY, p.random(0, 360), type));
+        }
+        if (mediumExplosion) particles.add(new MediumExplosion(p, p.mouseX, p.mouseY, p.random(0, 360)));
+        if (largeExplosion) particles.add(new LargeExplosion(p, p.mouseX, p.mouseY, p.random(0, 360)));
     }
 
     public void debugKeys() {
@@ -98,7 +138,10 @@ public class KeyBinds {
         if (hurtTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
-                if (tower != null) tower.hp = tower.maxHp / 2;
+                if (tower != null) {
+                    tower.hp = tower.maxHp / 2;
+                    tower.barTrans = 255;
+                }
             }
 //            path.nodeCheckObs();
         }

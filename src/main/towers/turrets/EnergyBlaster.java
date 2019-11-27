@@ -41,8 +41,8 @@ public class EnergyBlaster extends Turret{
         price = 150;
         value = price;
         priority = 2; //strong
-        nextLevelZero = 0;
-        nextLevelOne = 2;
+        nextLevelA = 0;
+        nextLevelB = 2;
         setUpgrades();
     }
 
@@ -103,20 +103,20 @@ public class EnergyBlaster extends Turret{
         upgradeTitles[2] = "Faster Firing";
         upgradeTitles[3] = "Yet Faster Firing";
         //desc line one
-        upgradeDescOne[0] = "Increase";
-        upgradeDescOne[1] = "increase";
-        upgradeDescOne[2] = "Increase";
-        upgradeDescOne[3] = "further";
+        upgradeDescA[0] = "Increase";
+        upgradeDescA[1] = "increase";
+        upgradeDescA[2] = "Increase";
+        upgradeDescA[3] = "further";
         //desc line two
-        upgradeDescTwo[0] = "accuracy";
-        upgradeDescTwo[1] = "explosion";
-        upgradeDescTwo[2] = "firerate";
-        upgradeDescTwo[3] = "increase";
+        upgradeDescB[0] = "accuracy";
+        upgradeDescB[1] = "explosion";
+        upgradeDescB[2] = "firerate";
+        upgradeDescB[3] = "increase";
         //desc line three
-        upgradeDescThree[0] = "";
-        upgradeDescThree[1] = "radius";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "firerate";
+        upgradeDescC[0] = "";
+        upgradeDescC[1] = "radius";
+        upgradeDescC[2] = "";
+        upgradeDescC[3] = "firerate";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[12];
@@ -132,9 +132,9 @@ public class EnergyBlaster extends Turret{
     public void upgrade(int id){
         int nextLevel;
         if (id == 0){
-            nextLevel = nextLevelZero;
+            nextLevel = nextLevelA;
         } else{
-            nextLevel = nextLevelOne;
+            nextLevel = nextLevelB;
         }
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
@@ -151,22 +151,22 @@ public class EnergyBlaster extends Turret{
             bigExplosion = true;
         }
         if (id == 0){
-            nextLevelZero++;
+            nextLevelA++;
         } else if (id == 1){
-            nextLevelOne++;
+            nextLevelB++;
         }
         if (id == 0){
-            if (nextLevelZero < upgradeNames.length/2){
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+            if (nextLevelA < upgradeNames.length/2){
+                upgradeIconA.sprite = upgradeIcons[nextLevelA];
             } else{
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1){
-            if (nextLevelOne < upgradeNames.length){
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+            if (nextLevelB < upgradeNames.length){
+                upgradeIconB.sprite = upgradeIcons[nextLevelB];
             } else{
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         int num = (int)(p.random(30,50)); //shower debris

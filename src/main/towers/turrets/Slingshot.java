@@ -33,8 +33,8 @@ public class Slingshot extends Turret{
         price = 50;
         value = price;
         priority = 0; //first
-        nextLevelZero = 0;
-        nextLevelOne = 2;
+        nextLevelA = 0;
+        nextLevelB = 2;
         setUpgrades();
     }
 
@@ -91,20 +91,20 @@ public class Slingshot extends Turret{
         upgradeTitles[2] = "Faster Firing";
         upgradeTitles[3] = "Damage Up";
         //desc line one
-        upgradeDescOne[0] = "Increase";
-        upgradeDescOne[1] = "further";
-        upgradeDescOne[2] = "Increase";
-        upgradeDescOne[3] = "+5";
+        upgradeDescA[0] = "Increase";
+        upgradeDescA[1] = "further";
+        upgradeDescA[2] = "Increase";
+        upgradeDescA[3] = "+5";
         //desc line two
-        upgradeDescTwo[0] = "accuracy";
-        upgradeDescTwo[1] = "increase";
-        upgradeDescTwo[2] = "firerate";
-        upgradeDescTwo[3] = "damage";
+        upgradeDescB[0] = "accuracy";
+        upgradeDescB[1] = "increase";
+        upgradeDescB[2] = "firerate";
+        upgradeDescB[3] = "damage";
         //desc line three
-        upgradeDescThree[0] = "";
-        upgradeDescThree[1] = "accuracy";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "";
+        upgradeDescC[0] = "";
+        upgradeDescC[1] = "accuracy";
+        upgradeDescC[2] = "";
+        upgradeDescC[3] = "";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[6];

@@ -38,8 +38,8 @@ public class RandomCannon extends Turret{
         price = 100;
         value = price;
         priority = 2; //strong
-        nextLevelZero = 0;
-        nextLevelOne = 2;
+        nextLevelA = 0;
+        nextLevelB = 2;
         setUpgrades();
     }
 
@@ -101,20 +101,20 @@ public class RandomCannon extends Turret{
         upgradeTitles[2] = "Reduce Spread";
         upgradeTitles[3] = "Limited Spread";
         //desc line one
-        upgradeDescOne[0] = "+3";
-        upgradeDescOne[1] = "Increase";
-        upgradeDescOne[2] = "Increase";
-        upgradeDescOne[3] = "Further";
+        upgradeDescA[0] = "+3";
+        upgradeDescA[1] = "Increase";
+        upgradeDescA[2] = "Increase";
+        upgradeDescA[3] = "Further";
         //desc line two
-        upgradeDescTwo[0] = "damage";
-        upgradeDescTwo[1] = "firerate";
-        upgradeDescTwo[2] = "accuracy";
-        upgradeDescTwo[3] = "increase";
+        upgradeDescB[0] = "damage";
+        upgradeDescB[1] = "firerate";
+        upgradeDescB[2] = "accuracy";
+        upgradeDescB[3] = "increase";
         //desc line three
-        upgradeDescThree[0] = "";
-        upgradeDescThree[1] = "";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "accuracy";
+        upgradeDescC[0] = "";
+        upgradeDescC[1] = "";
+        upgradeDescC[2] = "";
+        upgradeDescC[3] = "accuracy";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[10];
@@ -130,10 +130,10 @@ public class RandomCannon extends Turret{
     public void upgrade(int id){
         int nextLevel;
         if (id == 0){
-            nextLevel = nextLevelZero;
+            nextLevel = nextLevelA;
         }
         else{
-            nextLevel = nextLevelOne;
+            nextLevel = nextLevelB;
         }
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
@@ -152,25 +152,25 @@ public class RandomCannon extends Turret{
         debrisType = upgradeDebris[nextLevel];
         sprite = upgradeSprites[nextLevel];
         if (id == 0){
-            nextLevelZero++;
+            nextLevelA++;
         }
         else if (id == 1){
-            nextLevelOne++;
+            nextLevelB++;
         }
         if (id == 0){
-            if (nextLevelZero < upgradeNames.length/2){
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+            if (nextLevelA < upgradeNames.length/2){
+                upgradeIconA.sprite = upgradeIcons[nextLevelA];
             }
             else{
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1){
-            if (nextLevelOne < upgradeNames.length){
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+            if (nextLevelB < upgradeNames.length){
+                upgradeIconB.sprite = upgradeIcons[nextLevelB];
             }
             else{
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         int num = (int)(p.random(30,50)); //shower debris

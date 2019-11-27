@@ -2,6 +2,7 @@ package main.gui;
 
 import main.guiObjects.buttons.TowerBuy;
 import main.towers.Tile;
+import main.towers.Tower;
 import main.towers.Wall;
 import main.towers.turrets.*;
 import processing.core.PApplet;
@@ -34,15 +35,14 @@ public class Hand { //what is selected, eg: slingshot
 
     public void main() {
         checkPlaceable();
-        checkDisplay();
-        displayHeld();
-        if (!displayInfo.equals("null")) displayHeldInfo();
         if (inputHandler.leftMousePressedPulse && !implacable) place();
         if (inputHandler.rightMousePressedPulse) remove();
         if ((inputHandler.leftMousePressedPulse || inputHandler.rightMousePressedPulse) && p.mouseX > BOARD_WIDTH) {
             held = "null";
             for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;
         }
+        checkDisplay();
+        displayHeld();
     }
 
     private void checkPlaceable() {
@@ -54,16 +54,23 @@ public class Hand { //what is selected, eg: slingshot
         if (!implacable) implacable = (price > money);
     }
 
-    private void checkDisplay() { //todo: wall info when highlighted
+    private void checkDisplay() {
         Tile tile = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower != null && !tile.tower.turret) { //if wall
-                if (tile.tower.nextLevelOne < tile.tower.upgradeIcons.length) { //if upgradeable
-                    heldSprite = tile.tower.upgradeSprites[tile.tower.nextLevelOne];
-                    if (money < tile.tower.upgradePrices[tile.tower.nextLevelOne]) implacable = true;
+                if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length) { //if upgradeable
+                    heldSprite = spritesH.get("upgradeTW");
+                    implacable = money < tile.tower.upgradePrices[tile.tower.nextLevelB];
+                    displayInfo = "upgradeWall";
                 } else {
-                    heldSprite = tile.tower.upgradeSprites[tile.tower.upgradeIcons.length-1];
+                    heldSprite = spritesH.get("upgradeTW");
                     implacable = true;
+                    displayInfo = "maxWallUpgrade";
+                }
+                if (tile.tower.hp < tile.tower.maxHp) { //if low hp
+                    heldSprite = spritesH.get("repairTW");
+                    implacable = money < ceil((float)(tile.tower.price) - (float)(tile.tower.value));
+                    displayInfo = "repairWall";
                 }
             } else {
                 heldSprite = spritesH.get("woodWallTW"); //reset wall sprite
@@ -85,8 +92,119 @@ public class Hand { //what is selected, eg: slingshot
         }
     }
 
-    private void displayHeldInfo() {
-
+    public void displayHeldInfo() {
+        if (tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1) != null) {
+            if (displayInfo.equals("placeWall")) {
+                p.fill(235);
+                p.noStroke();
+                p.rect(700, 211, 200, 707);
+                if (money >= 25) p.fill(195, 232, 188);
+                else p.fill(230, 181, 181);
+                p.rect(705,247,190,119);
+                p.textAlign(CENTER);
+                p.fill(0);
+                p.textFont(mediumLargeFont);
+                p.text("Placing:", 800, 241);
+                p.textFont(largeFont);
+                p.text("Wooden", 800, 276);
+                p.text("Wall", 800, 301);
+                p.textFont(mediumFont);
+                p.text("50 HP", 800, 331);
+                p.text("$25", 800, 356);
+            }
+            if (displayInfo.equals("upgradeWall")) {
+                Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+                p.fill(235);
+                p.noStroke();
+                p.rect(700, 211, 200, 707);
+                p.textAlign(CENTER);
+                //tower info
+                p.fill(231, 232, 190);
+                p.rect(705,247,190,119);
+                p.textFont(mediumLargeFont);
+                p.fill(0);
+                p.text("Selected:", 800, 241);
+                p.textFont(largeFont);
+                if (tower.nextLevelB > 0) {
+                    p.text(tower.upgradeTitles[tower.nextLevelB - 1], 800, 276); //if not base level
+                } else p.text("Wooden", 800, 276);
+                p.text("Wall", 800, 301);
+                p.textFont(mediumFont);
+                p.text(tower.hp + " hp", 800, 331);
+                p.text("Sell for: $" + (int)(0.8f*(float)tower.value),800,356);
+                //upgrade info
+                if (money >= tower.upgradePrices[tower.nextLevelB]) p.fill(195, 232, 188);
+                else p.fill(230, 181, 181);
+                p.rect(705,401,190,119);
+                p.textFont(mediumLargeFont);
+                p.fill(0);
+                p.text("Upgrade:", 800, 395);
+                p.textFont(largeFont);
+                p.text(tower.upgradeTitles[tower.nextLevelB], 800, 430);
+                p.text("Wall", 800, 455);
+                p.textFont(mediumFont);
+                p.text("+" + tower.upgradeHealth[tower.nextLevelB] + " HP", 800, 485);
+                p.text("$" + tower.upgradePrices[tower.nextLevelB], 800, 510);
+            }
+            if (displayInfo.equals("maxWallUpgrade")) {
+                Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+                p.fill(235);
+                p.noStroke();
+                p.rect(700, 211, 200, 707);
+                p.textAlign(CENTER);
+                //tower info
+                p.fill(231, 232, 190);
+                p.rect(705,247,190,119);
+                p.textFont(mediumLargeFont);
+                p.fill(0);
+                p.text("Selected:", 800, 241);
+                p.textFont(largeFont);
+                p.text(tower.upgradeTitles[tower.upgradeTitles.length-1], 800, 276);
+                p.text("Wall", 800, 301);
+                p.textFont(mediumFont);
+                p.text(tower.hp + " hp", 800, 331);
+                p.text("Sell for: $" + (int)(0.8f*(float)tower.value),800,356);
+            }
+            if (displayInfo.equals("repairWall")) {
+                Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+                p.fill(235);
+                p.noStroke();
+                p.rect(700,211,200,707);
+                p.textAlign(CENTER);
+                //tower info
+                if (money >= ceil((float)(tower.price) - (float)(tower.value))) p.fill(195, 232, 188);
+                else p.fill(230, 181, 181);
+                p.rect(705,247,190,144);
+                p.textFont(mediumLargeFont);
+                p.fill(0);
+                p.text("Selected:", 800, 241);
+                p.textFont(largeFont);
+                if (tower.nextLevelB > 0) {
+                    p.text(tower.upgradeTitles[tower.nextLevelB - 1], 800, 276); //if not base level
+                } else p.text("Wooden", 800, 276);
+                p.text("Wall", 800, 301);
+                p.textFont(mediumFont);
+                p.text(tower.hp + " hp", 800, 331);
+                p.text("Sell for: $" + (int)(0.8f*(float)tower.value),800,356);
+                p.text("Repair for: $" + ceil((float)(tower.price) - (float)(tower.value)),800,381);
+            }
+            if (!displayInfo.equals("null")) {
+                //universal info
+                p.fill(200);
+                p.rect(705,700,190,195);
+                p.fill(0);
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.text("LClick to place", 710, 720);
+                p.text("tower", 710, 740);
+                p.text("LClick on tower to", 710, 770);
+                p.text("upgrade or repair", 710, 790);
+                p.text("RClick on tower", 710, 820);
+                p.text("to Sell", 710, 840);
+                p.text("Click on sidebar", 710, 870);
+                p.text("to deselect",710,890);
+            }
+        }
     }
 
     public void setHeld(String heldSet) { //swaps whats held
@@ -144,14 +262,14 @@ public class Hand { //what is selected, eg: slingshot
         else if (held.equals("magicMissleer") && alive) tile.tower = new MagicMissileer(p, tile);
         else if (held.equals("wall") && alive) {
             if (tile.tower != null && !tile.tower.turret) { //upgrade or repair
-                if (tile.tower.hp < tile.tower.maxHp) tile.tower.repair();
-                else if (tile.tower.nextLevelOne < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
+                if (tile.tower.hp < tile.tower.maxHp && money >= ceil((float)(tile.tower.price) - (float)(tile.tower.value))) {
+                    tile.tower.repair();
+                } else if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                     money -= tile.tower.price;
                     tile.tower.upgrade(0);
                 }
                 money += price; //cancel out price change later
-            }
-            else tile.tower = new Wall(p, tile);
+            } else tile.tower = new Wall(p, tile);
             changeHeld = false;
         }
         money -= price;

@@ -32,18 +32,18 @@ public class Gui {
         if (!isTowers) {
             sellButton.active = false;
             targetButton.active = false;
-            upgradeButtonZero.active = false;
-            upgradeButtonOne.active = false;
-            upgradeIconZero.active = false;
-            upgradeIconOne.active = false;
+            upgradeButtonA.active = false;
+            upgradeButtonB.active = false;
+            upgradeIconA.active = false;
+            upgradeIconB.active = false;
         }
         towerTabButton.main();
         sellButton.main();
         targetButton.main();
-        upgradeButtonZero.main();
-        upgradeButtonOne.main();
-        upgradeIconZero.main();
-        upgradeIconOne.main();
+        upgradeButtonA.main();
+        upgradeButtonB.main();
+        upgradeIconA.main();
+        upgradeIconB.main();
         if (isTowers) selection.main();
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
     }
@@ -130,12 +130,12 @@ public class Gui {
         //target priority button
         targetButton = new TargetPriority(p,800,832.5f,"null",false);
         //upgrade wall button zero
-        upgradeButtonZero = new UpgradeTower(p,800,480,"null",false, 0);
+        upgradeButtonA = new UpgradeTower(p,800,480,"null",false, 0);
         //upgrade wall button one
-        upgradeButtonOne = new UpgradeTower(p,800,630,"null",false, 1);
+        upgradeButtonB = new UpgradeTower(p,800,630,"null",false, 1);
         //upgrade wall icon
-        upgradeIconZero = new UpgradeIcon(p,830,610,"null",false);
+        upgradeIconA = new UpgradeIcon(p,830,610,"null",false);
         //upgrade wall icon
-        upgradeIconOne = new UpgradeIcon(p,830,610,"null",false);
+        upgradeIconB = new UpgradeIcon(p,830,610,"null",false);
     }
 }

@@ -36,8 +36,8 @@ public class MagicMissileer extends Turret{
         price = 150;
         value = price;
         priority = 2; //strong
-        nextLevelZero = 0;
-        nextLevelOne = 2;
+        nextLevelA = 0;
+        nextLevelB = 2;
         four = false;
         setUpgrades();
     }
@@ -106,20 +106,20 @@ public class MagicMissileer extends Turret{
         upgradeTitles[2] = "Faster Firing";
         upgradeTitles[3] = "More Missiles";
         //desc line one
-        upgradeDescOne[0] = "+2";
-        upgradeDescOne[1] = "+2";
-        upgradeDescOne[2] = "Increase";
-        upgradeDescOne[3] = "+1 Missile";
+        upgradeDescA[0] = "+2";
+        upgradeDescA[1] = "+2";
+        upgradeDescA[2] = "Increase";
+        upgradeDescA[3] = "+1 Missile";
         //desc line two
-        upgradeDescTwo[0] = "damage";
-        upgradeDescTwo[1] = "damage";
-        upgradeDescTwo[2] = "firerate";
-        upgradeDescTwo[3] = "";
+        upgradeDescB[0] = "damage";
+        upgradeDescB[1] = "damage";
+        upgradeDescB[2] = "firerate";
+        upgradeDescB[3] = "";
         //desc line three
-        upgradeDescThree[0] = "per missile";
-        upgradeDescThree[1] = "per missile";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "";
+        upgradeDescC[0] = "per missile";
+        upgradeDescC[1] = "per missile";
+        upgradeDescC[2] = "";
+        upgradeDescC[3] = "";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[13];
@@ -135,9 +135,9 @@ public class MagicMissileer extends Turret{
     public void upgrade(int id){
         int nextLevel;
         if (id == 0){
-            nextLevel = nextLevelZero;
+            nextLevel = nextLevelA;
         } else{
-            nextLevel = nextLevelOne;
+            nextLevel = nextLevelB;
         }
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
@@ -153,22 +153,22 @@ public class MagicMissileer extends Turret{
             four = true;
         }
         if (id == 0){
-            nextLevelZero++;
+            nextLevelA++;
         } else if (id == 1){
-            nextLevelOne++;
+            nextLevelB++;
         }
         if (id == 0){
-            if (nextLevelZero < upgradeNames.length/2){
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+            if (nextLevelA < upgradeNames.length/2){
+                upgradeIconA.sprite = upgradeIcons[nextLevelA];
             } else{
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1){
-            if (nextLevelOne < upgradeNames.length){
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+            if (nextLevelB < upgradeNames.length){
+                upgradeIconB.sprite = upgradeIcons[nextLevelB];
             } else{
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         //reset names

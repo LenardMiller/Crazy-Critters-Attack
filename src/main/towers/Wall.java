@@ -7,7 +7,7 @@ import processing.core.PVector;
 import static main.Main.spritesAnimH;
 import static main.Main.spritesH;
 
-public class Wall extends Tower{
+public class Wall extends Tower {
     public Wall(PApplet p, Tile tile) {
         super(p,tile);
 
@@ -20,7 +20,7 @@ public class Wall extends Tower{
         debrisType = "wood";
         price = 25;
         value = price;
-        nextLevelOne = 0;
+        nextLevelB = 0;
 
         upgradePrices = new int[4];
         upgradeHealth = new int[4];
@@ -59,20 +59,20 @@ public class Wall extends Tower{
         upgradeTitles[2] = "Crystal";
         upgradeTitles[3] = "Titanium";
         //desc line one
-        upgradeDescOne[0] = "+75 HP";
-        upgradeDescOne[1] = "+125 HP";
-        upgradeDescOne[2] = "+250 HP";
-        upgradeDescOne[3] = "+500 HP";
+        upgradeDescA[0] = "+75 HP";
+        upgradeDescA[1] = "+125 HP";
+        upgradeDescA[2] = "+250 HP";
+        upgradeDescA[3] = "+500 HP";
         //desc line two
-        upgradeDescTwo[0] = "";
-        upgradeDescTwo[1] = "";
-        upgradeDescTwo[2] = "";
-        upgradeDescTwo[3] = "";
+        upgradeDescB[0] = "";
+        upgradeDescB[1] = "";
+        upgradeDescB[2] = "";
+        upgradeDescB[3] = "";
         //desc line three
-        upgradeDescThree[0] = "";
-        upgradeDescThree[1] = "";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "";
+        upgradeDescC[0] = "";
+        upgradeDescC[1] = "";
+        upgradeDescC[2] = "";
+        upgradeDescC[3] = "";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[1];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[2];

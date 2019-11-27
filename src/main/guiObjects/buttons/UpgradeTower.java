@@ -30,9 +30,9 @@ public class UpgradeTower extends Button{
             Tower tower = tiles.get(selection.id).tower;
             int nextLevel;
             if (id == 0){
-                nextLevel = tower.nextLevelZero;
+                nextLevel = tower.nextLevelA;
             } else{
-                nextLevel = tower.nextLevelOne;
+                nextLevel = tower.nextLevelB;
             }
             //println(id + ": " + nextLevel);
             if (tower.upgradeNames.length == nextLevel && id == 1){ //if maxLevel, grey out
@@ -52,9 +52,9 @@ public class UpgradeTower extends Button{
         Tower tower = tiles.get(selection.id).tower;
         int nextLevel;
         if (id == 0){
-            nextLevel = tower.nextLevelZero;
+            nextLevel = tower.nextLevelA;
         } else{
-            nextLevel = tower.nextLevelOne;
+            nextLevel = tower.nextLevelB;
         }
         money -= tower.upgradePrices[nextLevel];
         tower.upgrade(id);

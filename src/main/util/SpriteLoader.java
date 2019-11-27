@@ -223,11 +223,11 @@ public class SpriteLoader {
         spritesH.put("slingshotFullTR",p.loadImage("sprites/towers/turrets/slingshot/full.png"));
         spritesH.put("slingshotIdleTR",p.loadImage("sprites/towers/turrets/slingshot/idle.png"));
         spritesH.put("crystalWallTW",p.loadImage("sprites/towers/walls/crystal/base.png"));
-        spritesH.put("devWallTW",p.loadImage("sprites/towers/old walls/dev.png"));
         spritesH.put("metalWallTW",p.loadImage("sprites/towers/walls/metal/base.png"));
-        spritesH.put("nullWallTW",p.loadImage("sprites/towers/old walls/null.png"));
         spritesH.put("stoneWallTW",p.loadImage("sprites/towers/walls/stone/base.png"));
         spritesH.put("ultimateWallTW",p.loadImage("sprites/towers/walls/ultimate/base.png"));
         spritesH.put("woodWallTW",p.loadImage("sprites/towers/walls/wood/base.png"));
+        spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
+        spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
     }
 }

@@ -29,10 +29,10 @@ public class SellTower extends Button {
         tower.sell();
         active = false;
         targetButton.active = false;
-        upgradeButtonZero.active = false;
-        upgradeButtonOne.active = false;
-        upgradeIconZero.active = false;
-        upgradeIconOne.active = false;
+        upgradeButtonA.active = false;
+        upgradeButtonB.active = false;
+        upgradeIconA.active = false;
+        upgradeIconB.active = false;
         selection.name = "null";
     }
 }

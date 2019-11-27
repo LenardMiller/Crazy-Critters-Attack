@@ -23,7 +23,7 @@ public abstract class Tower {
     public int damage;
     public boolean hit;
     public PImage sprite;
-    int barTrans;
+    public int barTrans;
     protected int tintColor;
     protected String debrisType;
     public int price;
@@ -31,21 +31,21 @@ public abstract class Tower {
     public boolean turret;
     public boolean visualize;
     public int priority;
-    public int nextLevelZero;
-    public int nextLevelOne;
+    public int nextLevelA;
+    public int nextLevelB;
 
     protected boolean[] upgradeSpecial;
     public int[] upgradePrices;
-    protected int[] upgradeHealth;
+    public int[] upgradeHealth;
     protected int[] upgradeDamage;
     protected int[] upgradeDelay;
     protected float[] upgradeError;
     public String[] upgradeNames;
     protected String[] upgradeDebris;
     public String[] upgradeTitles;
-    public String[] upgradeDescOne;
-    public String[] upgradeDescTwo;
-    public String[] upgradeDescThree;
+    public String[] upgradeDescA;
+    public String[] upgradeDescB;
+    public String[] upgradeDescC;
     public PImage[] upgradeIcons;
     public PImage[] upgradeSprites;
 
@@ -60,14 +60,13 @@ public abstract class Tower {
         this.maxHp = 1;
         hp = maxHp;
         hit = false;
-        sprite = spritesH.get("nullWallTW");
         barTrans = 255;
         tintColor = 255;
         debrisType = "null";
         price = 0;
         turret = false;
         visualize = false;
-        nextLevelOne = 2;
+        nextLevelB = 2;
         upgradeSpecial = new boolean[4];
         upgradeDamage = new int[4];
         upgradeDelay = new int[4];
@@ -75,9 +74,9 @@ public abstract class Tower {
         upgradeHealth = new int[4];
         upgradeError = new float[4];
         upgradeNames = new String[4];
-        upgradeDescOne = new String[4];
-        upgradeDescTwo = new String[4];
-        upgradeDescThree = new String[4];
+        upgradeDescA = new String[4];
+        upgradeDescB = new String[4];
+        upgradeDescC = new String[4];
         upgradeDebris = new String[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
@@ -87,8 +86,10 @@ public abstract class Tower {
     public void main(){
         if (hp <= 0) die();
         value = (int)(((float)hp / (float)maxHp) * price);
-        if (inputHandler.leftMousePressedPulse && p.mouseX < tile.position.x && p.mouseX > tile.position.x-size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y-size.y && alive){ //clicked on
-            selection.swapSelected(tile.id);
+        if (turret) {
+            if (inputHandler.leftMousePressedPulse && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) { //clicked on
+                selection.swapSelected(tile.id);
+            }
         }
         display();
     }
@@ -117,15 +118,15 @@ public abstract class Tower {
     }
 
     public void upgrade(int id) {
-        price += upgradePrices[nextLevelOne];
-        maxHp += upgradeHealth[nextLevelOne];
-        hp += upgradeHealth[nextLevelOne];
-        name = upgradeNames[nextLevelOne];
-        debrisType = upgradeDebris[nextLevelOne];
-        sprite = upgradeSprites[nextLevelOne];
-        nextLevelOne++;
-        if (nextLevelOne < upgradeNames.length) upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
-        else upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+        price += upgradePrices[nextLevelB];
+        maxHp += upgradeHealth[nextLevelB];
+        hp += upgradeHealth[nextLevelB];
+        name = upgradeNames[nextLevelB];
+        debrisType = upgradeDebris[nextLevelB];
+        sprite = upgradeSprites[nextLevelB];
+        nextLevelB++;
+        if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));

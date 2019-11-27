@@ -40,8 +40,8 @@ public class Crossbow extends Turret{
         price = 100;
         value = price;
         priority = 1; //last
-        nextLevelZero = 0;
-        nextLevelOne = 2;
+        nextLevelA = 0;
+        nextLevelB = 2;
         setUpgrades();
     }
 
@@ -98,20 +98,20 @@ public class Crossbow extends Turret{
         upgradeTitles[2] = "Faster Firing";
         upgradeTitles[3] = "Yet Faster Firing";
         //desc line one
-        upgradeDescOne[0] = "+10";
-        upgradeDescOne[1] = "Increase";
-        upgradeDescOne[2] = "Increase";
-        upgradeDescOne[3] = "Further";
+        upgradeDescA[0] = "+10";
+        upgradeDescA[1] = "Increase";
+        upgradeDescA[2] = "Increase";
+        upgradeDescA[3] = "Further";
         //desc line two
-        upgradeDescTwo[0] = "Damage";
-        upgradeDescTwo[1] = "Piercing";
-        upgradeDescTwo[2] = "firerate";
-        upgradeDescTwo[3] = "Increase";
+        upgradeDescB[0] = "Damage";
+        upgradeDescB[1] = "Piercing";
+        upgradeDescB[2] = "firerate";
+        upgradeDescB[3] = "Increase";
         //desc line three
-        upgradeDescThree[0] = "";
-        upgradeDescThree[1] = "";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "firerate";
+        upgradeDescC[0] = "";
+        upgradeDescC[1] = "";
+        upgradeDescC[2] = "";
+        upgradeDescC[3] = "firerate";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[9];
@@ -127,9 +127,9 @@ public class Crossbow extends Turret{
     public void upgrade(int id){
         int nextLevel;
         if (id == 0){
-            nextLevel = nextLevelZero;
+            nextLevel = nextLevelA;
         } else{
-            nextLevel = nextLevelOne;
+            nextLevel = nextLevelB;
         }
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
@@ -145,22 +145,22 @@ public class Crossbow extends Turret{
             pierce += 2;
         }
         if (id == 0){
-            nextLevelZero++;
+            nextLevelA++;
         } else if (id == 1){
-            nextLevelOne++;
+            nextLevelB++;
         }
         if (id == 0){
-            if (nextLevelZero < upgradeNames.length/2){
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+            if (nextLevelA < upgradeNames.length/2){
+                upgradeIconA.sprite = upgradeIcons[nextLevelA];
             } else{
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1){
-            if (nextLevelOne < upgradeNames.length){
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+            if (nextLevelB < upgradeNames.length){
+                upgradeIconB.sprite = upgradeIcons[nextLevelB];
             } else{
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         int num = floor(p.random(30,50)); //shower debris
