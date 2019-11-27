@@ -3,7 +3,7 @@ package main.guiObjects.buttons;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.hp;
+import static main.Main.money;
 import static main.Main.spritesAnimH;
 
 public class AddHp extends Button {
@@ -26,6 +26,6 @@ public class AddHp extends Button {
     }
 
     public void action(){ //give lives
-        hp++;
+        money -= 1;
     }
 }

@@ -12,7 +12,7 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.util.MiscMethods.roundTo;
 
-public class Hand { //what is selected, eg: slingshot
+public class Hand {
 
     private PApplet p;
 
@@ -35,7 +35,6 @@ public class Hand { //what is selected, eg: slingshot
 
     public void main() {
         checkPlaceable();
-        if (inputHandler.leftMousePressedPulse && !implacable) place();
         if (inputHandler.rightMousePressedPulse) remove();
         if ((inputHandler.leftMousePressedPulse || inputHandler.rightMousePressedPulse) && p.mouseX > BOARD_WIDTH) {
             held = "null";
@@ -43,6 +42,9 @@ public class Hand { //what is selected, eg: slingshot
         }
         checkDisplay();
         displayHeld();
+        if (inputHandler.leftMousePressedPulse && !implacable) {
+            place();
+        }
     }
 
     private void checkPlaceable() {
@@ -260,7 +262,7 @@ public class Hand { //what is selected, eg: slingshot
         else if (held.equals("magicMissleer") && alive) tile.tower = new MagicMissileer(p, tile);
         else if (held.equals("wall") && alive) {
             if (tile.tower != null && !tile.tower.turret) { //upgrade or repair
-                if (tile.tower.hp < tile.tower.maxHp && money >= ceil((float) (tile.tower.price) - (float) (tile.tower.value))) {
+                if (tile.tower.hp < tile.tower.maxHp && money >= ceil((float)(tile.tower.price) - (float)(tile.tower.value))) {
                     tile.tower.repair();
                 } else if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                     money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
@@ -273,5 +275,6 @@ public class Hand { //what is selected, eg: slingshot
         money -= price;
         if (changeHeld) held = "null";
 //        path.nodeCheckObs();
+        updateTowerArray();
     }
 }

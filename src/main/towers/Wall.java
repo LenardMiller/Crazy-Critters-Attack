@@ -4,8 +4,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
-import static main.Main.spritesH;
+import static main.Main.*;
 
 public class Wall extends Tower {
     public Wall(PApplet p, Tile tile) {
@@ -30,6 +29,7 @@ public class Wall extends Tower {
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4];
         setUpgrades();
+        updateTowerArray();
     }
 
     private void setUpgrades(){

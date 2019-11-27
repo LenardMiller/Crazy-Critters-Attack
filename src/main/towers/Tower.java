@@ -81,6 +81,7 @@ public abstract class Tower {
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4];
+        updateTowerArray();
     }
 
     public void main(){
@@ -102,8 +103,6 @@ public abstract class Tower {
         p.tint(255,tintColor,tintColor);
         p.image(sprite,tile.position.x-size.x,tile.position.y-size.y);
         p.tint(255);
-        //no inverted bars
-        if (hp > 0) HpBar(); //todo: display on top of towers
         if (tintColor < 255) tintColor += 20;
     }
 
@@ -142,6 +141,7 @@ public abstract class Tower {
         if (selection.id > tile.id) selection.id--;
         if (selection.id == tile.id) selection.id = 0;
         tile.tower = null;
+        updateTowerArray();
 //        path.nodeCheckObs();
     }
 
@@ -155,15 +155,17 @@ public abstract class Tower {
         die(); //creates particles (may need to change later)
     }
 
-    protected void HpText(){ //displays the towers health
+    protected void hpText(){ //displays the towers health
         p.text(hp, tile.position.x-size.x/2, tile.position.y + size.y/4);
     }
 
-    protected void HpBar(){ //displays the towers health with style
-        p.fill(0,255,0,barTrans);
-        //after hit or if below 50%
-        if (barTrans > 0 && hp > maxHp/2) barTrans--;
-        p.noStroke();
-        p.rect(tile.position.x-size.x, tile.position.y + size.y/4, (size.x)*(((float) hp)/((float) maxHp)), -6);
+    public void hpBar(){ //displays the towers health with style
+        if (hp > 0) { //prevent inverted bars
+            p.fill(0, 255, 0, barTrans);
+            //after hit or if below 50%
+            if (barTrans > 0 && hp > maxHp / 2) barTrans--;
+            p.noStroke();
+            p.rect(tile.position.x - size.x, tile.position.y, (size.x) * (((float) hp) / ((float) maxHp)), -6);
+        }
     }
 }

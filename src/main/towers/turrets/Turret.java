@@ -71,6 +71,7 @@ public abstract class Turret extends Tower {
         upgradeDescC = new String[4];
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4];
+        updateTowerArray();
     }
 
     public void checkTarget() {
@@ -209,7 +210,7 @@ public abstract class Turret extends Tower {
             hit = false;
         }
         if (hp > 0) {
-            HpBar();
+            hpBar();
         }
         display();
     }

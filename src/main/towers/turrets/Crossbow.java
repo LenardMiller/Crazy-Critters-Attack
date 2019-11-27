@@ -43,6 +43,7 @@ public class Crossbow extends Turret{
         nextLevelA = 0;
         nextLevelB = 2;
         setUpgrades();
+        updateTowerArray();
     }
 
     public void fire(){ //needed to change projectile fired

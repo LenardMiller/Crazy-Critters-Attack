@@ -40,6 +40,7 @@ public class MagicMissileer extends Turret{
         nextLevelB = 2;
         four = false;
         setUpgrades();
+        updateTowerArray();
     }
 
     public void checkTarget(){

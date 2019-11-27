@@ -8,12 +8,13 @@ import main.gui.Selection;
 import main.guiObjects.GuiObject;
 import main.guiObjects.buttons.Button;
 import main.guiObjects.buttons.TowerBuy;
-import main.particles.*;
+import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
 import main.projectiles.Projectile;
 import main.towers.Tile;
+import main.towers.Tower;
 import main.util.CompressArray;
 import main.util.EnemyTracker;
 import main.util.KeyBinds;
@@ -36,6 +37,7 @@ public class Main extends PApplet {
     public static InputHandler inputHandler;
     public static KeyBinds keyBinds;
 
+    public static ArrayList<main.towers.Tower> towers;
     public static ArrayList<main.enemies.Enemy> enemies;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles;
@@ -150,6 +152,7 @@ public class Main extends PApplet {
         }
         AStar.updateNodes(start);
         path.updatePath();
+        updateTowerArray();
     }
 
     public void draw() {
@@ -193,12 +196,12 @@ public class Main extends PApplet {
         //enemy tracker
         enemyTracker.main(enemies);
         //towers
-//        for (int i = towers.size()-1; i >= 0; i--){
-//            Tower tower = towers.get(i);
-//            tower.main(towers, i);
-//        }
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).main();
+        for (Tower tower : towers) {
+            tower.main();
+        }
+        //tower hp bars
+        for (Tower tower : towers) {
+            tower.hpBar();
         }
         //enemies
         for (int i = enemies.size() - 1; i >= 0; i--) {
@@ -240,6 +243,14 @@ public class Main extends PApplet {
 
     public void mouseReleased() {
         inputHandler.mouse(false);
+    }
+
+    public static void updateTowerArray() {
+        towers = new ArrayList<>();
+        for (int i = 0; i < tiles.size(); i++) {
+            Tower tower = tiles.get(i).tower;
+            if (tower != null) towers.add(tower);
+        }
     }
 
     public class InputHandler {
