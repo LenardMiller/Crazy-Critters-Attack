@@ -54,7 +54,7 @@ public class Gui {
         p.textAlign(LEFT);
         //debug related stuff
         p.text("enemies: " + enemies.size(), x, 30);
-        p.text("towers: " + "todo: list towers", x, 60); //todo: list towers
+        p.text("towers: " + towers.size(), x, 60);
         p.text("projectiles: " + projectiles.size(), x, 90);
         p.text("particles: " + particles.size(), x, 120);
         p.text("X: " + p.mouseX + " Y: " + p.mouseY, x, BOARD_HEIGHT -x);
