@@ -24,6 +24,7 @@ public abstract class Tower {
     public boolean hit;
     public PImage sprite;
     public int barTrans;
+    public Object updateSprite;
     protected int tintColor;
     protected String debrisType;
     public int price;
@@ -96,7 +97,7 @@ public abstract class Tower {
     }
 
     private void display() {
-        if (hit){ //change to red if under attack
+        if (hit) { //change to red if under attack
             tintColor = 0;
             hit = false;
         }
@@ -168,4 +169,6 @@ public abstract class Tower {
             p.rect(tile.position.x - size.x, tile.position.y, (size.x) * (((float) hp) / ((float) maxHp)), -6);
         }
     }
+
+    public abstract void updateSprite();
 }

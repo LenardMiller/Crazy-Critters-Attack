@@ -229,5 +229,36 @@ public class SpriteLoader {
         spritesH.put("woodWallTW",p.loadImage("sprites/towers/walls/wood/base.png"));
         spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
+        spritesH.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
+        //walls
+        for (int i = 0; i < 5; i++) {
+            String name = "null";
+            if (i == 0) name = "Wood";
+            if (i == 1) name = "Stone";
+            if (i == 2) name = "Metal";
+            if (i == 3) name = "Crystal";
+            if (i == 4) name = "Ultimate";
+            String idA = "null";
+            String idB = "null";
+            String idC = "null";
+            for (int a = 0; a < 2; a++) {
+                for (int b = 0; b < 2; b++) {
+                    for (int c = 0; c < 2; c++) {
+                        if (a == 0) idA = "T";
+                        if (a == 1) idA = "B";
+                        if (b == 0) idB = "l";
+                        if (b == 1) idB = "r";
+                        if (c == 0) idC = "c";
+                        if (c == 1) idC = "v";
+                        String id = idA+idB+idC;
+                        spritesH.put(name + id + "WallTW", p.loadImage("sprites/towers/walls/" + name + "/" + id + ".png"));
+                    }
+                }
+            }
+            spritesH.put(name + "TWallTW", p.loadImage("sprites/towers/walls/" + name + "/t.png"));
+            spritesH.put(name + "BWallTW", p.loadImage("sprites/towers/walls/" + name + "/b.png"));
+            spritesH.put(name + "LWallTW", p.loadImage("sprites/towers/walls/" + name + "/l.png"));
+            spritesH.put(name + "RWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
+        }
     }
 }

@@ -186,4 +186,6 @@ public class EnergyBlaster extends Turret{
         p.popMatrix();
         p.tint(255,255,255);
     }
+
+    public void updateSprite() {}
 }

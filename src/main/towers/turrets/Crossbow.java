@@ -9,7 +9,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 
-public class Crossbow extends Turret{
+public class Crossbow extends Turret {
 
     private int pierce;
 
@@ -180,4 +180,6 @@ public class Crossbow extends Turret{
         p.popMatrix();
         p.tint(255,255,255);
     }
+
+    public void updateSprite() {};
 }

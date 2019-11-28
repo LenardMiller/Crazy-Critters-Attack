@@ -117,4 +117,6 @@ public class Slingshot extends Turret{
         upgradeSprites[2] = spritesH.get("stoneWallTW");
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
+
+    public void updateSprite() {}
 }

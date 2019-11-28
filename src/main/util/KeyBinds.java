@@ -23,30 +23,30 @@ public class KeyBinds {
 
     public void spawnKeys() {
         //projectiles
-        boolean pebble = keysPressed.get('q') && alive;
-        boolean bolt = keysPressed.get('w') && alive;
-        boolean devProjectile = keysPressed.get('e') && alive;
-        boolean miscProjectile = keysPressed.get('r') && alive;
-        boolean smallEnergyBlast = keysPressed.get('t') && alive;
-        boolean largeEnergyBlast = keysPressed.get('T') && alive;
-        boolean magicMissle = keysPressed.get('y') && alive;
+        boolean pebble = keysPressed.getPressedPulse('q') && alive;
+        boolean bolt = keysPressed.getPressedPulse('w') && alive;
+        boolean devProjectile = keysPressed.getPressedPulse('e') && alive;
+        boolean miscProjectile = keysPressed.getPressedPulse('r') && alive;
+        boolean smallEnergyBlast = keysPressed.getPressedPulse('t') && alive;
+        boolean largeEnergyBlast = keysPressed.getPressedPulse('T') && alive;
+        boolean magicMissle = keysPressed.getPressedPulse('y') && alive;
         //enemies
-        boolean littleBug = keysPressed.get('1') && alive && p.mouseX < BOARD_WIDTH;
-        boolean mediumBug = keysPressed.get('2') && alive && p.mouseX < BOARD_WIDTH;
-        boolean bigBug = keysPressed.get('3') && alive && p.mouseX < BOARD_WIDTH;
-        boolean treeSprite = keysPressed.get('4') && alive && p.mouseX < BOARD_WIDTH;
-        boolean treeSpirit = keysPressed.get('5') && alive && p.mouseX < BOARD_WIDTH;
+        boolean littleBug = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
+        boolean mediumBug = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
+        boolean bigBug = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
+        boolean treeSprite = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
+        boolean treeSpirit = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
         //buffs
-        boolean poisoned = keysPressed.get(',') && alive;
-        boolean wet = keysPressed.get('.') && alive;
-        boolean burning = keysPressed.get('/') && alive;
+        boolean poisoned = keysPressed.getPressedPulse(',') && alive;
+        boolean wet = keysPressed.getPressedPulse('.') && alive;
+        boolean burning = keysPressed.getPressedPulse('/') && alive;
         //particles
-        boolean hurt = keysPressed.get('z') && alive;
-        boolean die = keysPressed.get('x') && alive;
-        boolean debris = keysPressed.get('c') && alive;
-        boolean buff = keysPressed.get('v') && alive;
-        boolean mediumExplosion = keysPressed.get('b') && alive;
-        boolean largeExplosion = keysPressed.get('n') && alive;
+        boolean hurt = keysPressed.getPressed('z') && alive;
+        boolean die = keysPressed.getPressed('x') && alive;
+        boolean debris = keysPressed.getPressed('c') && alive;
+        boolean buff = keysPressed.getPressed('v') && alive;
+        boolean mediumExplosion = keysPressed.getPressed('b') && alive;
+        boolean largeExplosion = keysPressed.getPressed('n') && alive;
         //projectiles
         if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, 10));
         if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, 20, 2));
@@ -116,12 +116,12 @@ public class KeyBinds {
 
     public void debugKeys() {
         //entity stuff
-        boolean killEnemies = keysPressed.get('s') && alive;
-        boolean killTowers = keysPressed.get('d') && alive;
-        boolean hurtTowers = keysPressed.get('D') && alive;
-        boolean killProjectiles = keysPressed.get('f') && alive;
+        boolean killEnemies = keysPressed.getReleasedPulse('s') && alive;
+        boolean killTowers = keysPressed.getReleasedPulse('d') && alive;
+        boolean hurtTowers = keysPressed.getReleasedPulse('D') && alive;
+        boolean killProjectiles = keysPressed.getReleasedPulse('f') && alive;
         //other stuff
-        boolean displayPathLines = keysPressed.get('g');
+        boolean displayPathLines = keysPressed.getReleasedPulse('g');
         //entity stuff
         if (killEnemies) {
             enemies = new ArrayList<Enemy>();

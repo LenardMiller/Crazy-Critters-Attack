@@ -190,6 +190,10 @@ public class Main extends PApplet {
         inputHandler.leftMouseReleasedPulse = false;
         inputHandler.rightMousePressedPulse = false;
         inputHandler.leftMousePressedPulse = false;
+        for (KeyDS.KeyDSItem key : keysPressed.items) {
+            key.pressedPulse = false;
+            key.releasedPulse = false;
+        }
     }
 
     private void drawObjects() {
@@ -249,7 +253,10 @@ public class Main extends PApplet {
         towers = new ArrayList<>();
         for (int i = 0; i < tiles.size(); i++) {
             Tower tower = tiles.get(i).tower;
-            if (tower != null) towers.add(tower);
+            if (tower != null) {
+                towers.add(tower);
+                if (!tower.turret) tower.updateSprite();
+            }
         }
     }
 
@@ -293,7 +300,9 @@ public class Main extends PApplet {
         void key(boolean b) {
             for (KeyDS.KeyDSItem item : keysPressed.items) {
                 if (item.key == key) {
-                    item.isPressed = b;
+                    item.pressed = b;
+                    item.pressedPulse = b;
+                    item.releasedPulse = !b;
                 }
             }
         }
@@ -314,20 +323,34 @@ public class Main extends PApplet {
             items = newItems;
         }
 
-        public boolean get(char key) {
+        public boolean getPressed(char key) {
             boolean r = false;
-            for (KeyDSItem item : items) if (item.key == key) r = item.isPressed;
+            for (KeyDSItem item : items) if (item.key == key) r = item.pressed;
             return r;
         }
 
-        public static class KeyDSItem {
+        public boolean getPressedPulse(char key) {
+            boolean r = false;
+            for (KeyDSItem item : items) if (item.key == key) r = item.pressedPulse;
+            return r;
+        }
 
-            public char key;
-            public boolean isPressed;
+        public boolean getReleasedPulse(char key) {
+            boolean r = false;
+            for (KeyDSItem item : items) if (item.key == key) r = item.releasedPulse;
+            return r;
+        }
 
-            public KeyDSItem(char key) {
+        static class KeyDSItem {
+
+            char key;
+            boolean pressed;
+            boolean pressedPulse;
+            boolean releasedPulse;
+
+            KeyDSItem(char key) {
                 this.key = key;
-                isPressed = false;
+                pressed = false;
             }
         }
     }

@@ -37,11 +37,7 @@ public class Tile {
 
         public Tile get(int x, int y) {
             Tile r = null;
-            for (TileDSItem item : items) {
-                if (item.x == x && item.y == y) {
-                    r = item.tile;
-                }
-            }
+            for (TileDSItem item : items) if (item.x == x && item.y == y) r = item.tile;
             return r;
         }
 
@@ -60,47 +56,27 @@ public class Tile {
             TileDSItem removeItem = items[id];
             if (removeItem != null) {
                 TileDSItem[] newItems = new TileDSItem[items.length - 1];
-                for (int i = 0; i < items.length; i++) {
-                    if (items[i] != removeItem) {
-                        newItems[i] = items[i];
-                    }
-                }
+                for (int i = 0; i < items.length; i++) if (items[i] != removeItem) newItems[i] = items[i];
                 items = newItems;
             }
         }
 
         public void remove(int x, int y) {
             TileDSItem removeItem = null;
-            for (TileDSItem item : items) {
-                if (item.x == x && item.y == y) {
-                    removeItem = item;
-                }
-            }
+            for (TileDSItem item : items) if (item.x == x && item.y == y) removeItem = item;
             if (removeItem != null) {
                 TileDSItem[] newItems = new TileDSItem[items.length - 1];
-                for (int i = 0; i < items.length; i++) {
-                    if (items[i] != removeItem) {
-                        newItems[i] = items[i];
-                    }
-                }
+                for (int i = 0; i < items.length; i++) if (items[i] != removeItem) newItems[i] = items[i];
                 items = newItems;
             }
         }
 
         public void remove(Tile tile) {
             TileDSItem removeItem = null;
-            for (TileDSItem item : items) {
-                if (item.tile == tile) {
-                    removeItem = item;
-                }
-            }
+            for (TileDSItem item : items) if (item.tile == tile) removeItem = item;
             if (removeItem != null) {
                 TileDSItem[] newItems = new TileDSItem[items.length - 1];
-                for (int i = 0; i < items.length; i++) {
-                    if (items[i] != removeItem) {
-                        newItems[i] = items[i];
-                    }
-                }
+                for (int i = 0; i < items.length; i++) if (items[i] != removeItem) newItems[i] = items[i];
                 items = newItems;
             }
         }

@@ -75,7 +75,7 @@ public class Hand {
                     displayInfo = "repairWall";
                 }
             } else {
-                heldSprite = spritesH.get("woodWallTW"); //reset wall sprite
+                heldSprite = spritesH.get("placeTW"); //reset wall sprite
                 displayInfo = "placeWall";
             }
         } else {
