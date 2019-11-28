@@ -238,7 +238,7 @@ public class Main extends PApplet {
         inputHandler.key(true);
     }
 
-    public void keyReleased() { inputHandler.key(false); //todo: actually do this right
+    public void keyReleased() { inputHandler.key(false);
     }
 
     public void mousePressed() {
