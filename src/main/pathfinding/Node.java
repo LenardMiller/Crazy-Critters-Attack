@@ -115,20 +115,20 @@ public class Node{
         }
     }
 
-    void checkObs(boolean addMode){
-        if (!addMode){
-            movementPenalty = 0;
-        }
-        for (main.towers.Tower tower : towers) {
-            boolean intersecting;
-            PVector op = tower.position;
-            PVector os = tower.size;
-            intersecting = (position.x > op.x - os.x - 10 && position.x < op.x + nSize + 10) && (position.y > op.y - os.y - 10 && position.y < op.y + nSize + 10);
-            if (intersecting) {
-                movementPenalty += tower.twHp;
-            }
-        }
-    }
+//    void checkObs(boolean addMode){ //todo: redo using new tile system, thats what its for after all
+//        if (!addMode){
+//            movementPenalty = 0;
+//        }
+//        for (main.towers.Tower tower : towers) {
+//            boolean intersecting;
+//            PVector op = tower.position;
+//            PVector os = tower.size;
+//            intersecting = (position.x > op.x - os.x - 10 && position.x < op.x + nSize + 10) && (position.y > op.y - os.y - 10 && position.y < op.y + nSize + 10);
+//            if (intersecting) {
+//                movementPenalty += tower.twHp;
+//            }
+//        }
+//    }
 
     public void findGHF(){
         if (isEnd){

@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.particles.Debris;
 import main.projectiles.EnergyBlast;
+import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -14,13 +15,12 @@ public class EnergyBlaster extends Turret{
     private int effectRadius;
     private boolean bigExplosion;
 
-    public EnergyBlaster(PApplet p, float x, float y) {
-        super(p,x,y);
+    public EnergyBlaster(PApplet p, Tile tile) {
+        super(p,tile);
         name = "energyBlaster";
-        position = new PVector(x,y);
         size = new PVector(50,50);
         maxHp = 20;
-        twHp = maxHp;
+        hp = maxHp;
         hit = false;
         delay = 240; //240 frames
         delay += (round(p.random(-(delay/10),delay/10))); //injects 10% randomness so all don't fire at once
@@ -41,15 +41,16 @@ public class EnergyBlaster extends Turret{
         price = 150;
         value = price;
         priority = 2; //strong
-        nextLevelZero = 0;
-        nextLevelOne = 2;
+        nextLevelA = 0;
+        nextLevelB = 2;
         setUpgrades();
+        updateTowerArray();
     }
 
     public void fire(){ //needed to change projectile fired
         angle += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        PVector spp = new PVector(position.x-size.x/2,position.y-size.y/2);
+        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(40);
         spp.add(spa);
@@ -103,20 +104,20 @@ public class EnergyBlaster extends Turret{
         upgradeTitles[2] = "Faster Firing";
         upgradeTitles[3] = "Yet Faster Firing";
         //desc line one
-        upgradeDescOne[0] = "Increase";
-        upgradeDescOne[1] = "increase";
-        upgradeDescOne[2] = "Increase";
-        upgradeDescOne[3] = "further";
+        upgradeDescA[0] = "Increase";
+        upgradeDescA[1] = "increase";
+        upgradeDescA[2] = "Increase";
+        upgradeDescA[3] = "further";
         //desc line two
-        upgradeDescTwo[0] = "accuracy";
-        upgradeDescTwo[1] = "explosion";
-        upgradeDescTwo[2] = "firerate";
-        upgradeDescTwo[3] = "increase";
+        upgradeDescB[0] = "accuracy";
+        upgradeDescB[1] = "explosion";
+        upgradeDescB[2] = "firerate";
+        upgradeDescB[3] = "increase";
         //desc line three
-        upgradeDescThree[0] = "";
-        upgradeDescThree[1] = "radius";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "firerate";
+        upgradeDescC[0] = "";
+        upgradeDescC[1] = "radius";
+        upgradeDescC[2] = "";
+        upgradeDescC[3] = "firerate";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[12];
@@ -132,16 +133,16 @@ public class EnergyBlaster extends Turret{
     public void upgrade(int id){
         int nextLevel;
         if (id == 0){
-            nextLevel = nextLevelZero;
+            nextLevel = nextLevelA;
         } else{
-            nextLevel = nextLevelOne;
+            nextLevel = nextLevelB;
         }
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
         price += upgradePrices[nextLevel];
         value += upgradePrices[nextLevel];
         maxHp += upgradeHealth[nextLevel];
-        twHp += upgradeHealth[nextLevel];
+        hp += upgradeHealth[nextLevel];
         error += upgradeError[nextLevel];
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
@@ -151,38 +152,40 @@ public class EnergyBlaster extends Turret{
             bigExplosion = true;
         }
         if (id == 0){
-            nextLevelZero++;
+            nextLevelA++;
         } else if (id == 1){
-            nextLevelOne++;
+            nextLevelB++;
         }
         if (id == 0){
-            if (nextLevelZero < upgradeNames.length/2){
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+            if (nextLevelA < upgradeNames.length/2){
+                upgradeIconA.sprite = upgradeIcons[nextLevelA];
             } else{
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1){
-            if (nextLevelOne < upgradeNames.length){
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+            if (nextLevelB < upgradeNames.length){
+                upgradeIconB.sprite = upgradeIcons[nextLevelB];
             } else{
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
 
     public void display(){
         p.tint(255,tintColor,tintColor);
-        p.image(sBase,position.x-size.x,position.y-size.y);
+        p.image(sBase,tile.position.x-size.x,tile.position.y-size.y);
         p.pushMatrix();
-        p.translate(position.x-size.x/2,position.y-size.y/2);
+        p.translate(tile.position.x-size.x/2,tile.position.y-size.y/2);
         p.rotate(angle);
         p.image(sprite,-size.x/2-11,-size.y/2-11);
         p.popMatrix();
         p.tint(255,255,255);
     }
+
+    public void updateSprite() {}
 }

@@ -1,14 +1,11 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
-import static main.Main.towers;
 import static main.Main.selection;
+import static main.Main.tiles;
 
 public class TargetPriority extends Button {
 
@@ -16,14 +13,13 @@ public class TargetPriority extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 45);
-        spriteLocation = "sprites/icons/buttons/targetPriority/";
+        spriteLocation = "sprites/guiObjects/buttons/targetPriority/";
         spriteOne = p.loadImage(spriteLocation + "000.png");
         spriteTwo = p.loadImage(spriteLocation + "001.png");
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(){
         if (active){
             hover();
             display();
@@ -31,12 +27,11 @@ public class TargetPriority extends Button {
     }
 
     public void action(){
-        Tower tower = towers.get(selection.id); //switch selected tower's priority
+        Tower tower = tiles.get(selection.id).tower; //switch selected tower's priority
         if (tower.priority < 2){
             tower.priority += 1;
         } else{ //roll over
             tower.priority = 0;
         }
-        actionTime = p. frameCount + 6;
     }
 }

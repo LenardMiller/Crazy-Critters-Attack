@@ -1,12 +1,9 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
-
-import java.util.ArrayList;
 
 import static main.Main.*;
 
@@ -25,29 +22,25 @@ public class UpgradeTower extends Button{
         spriteRed = spritesAnimH.get("upgradeBT")[2]; //red
         spriteGrey = spritesAnimH.get("upgradeBT")[3]; //grey
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
         this.id = id;
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(){
         if (active){
-            Tower tower = towers.get(selection.id);
+            Tower tower = tiles.get(selection.id).tower;
             int nextLevel;
             if (id == 0){
-                nextLevel = tower.nextLevelZero;
+                nextLevel = tower.nextLevelA;
             } else{
-                nextLevel = tower.nextLevelOne;
+                nextLevel = tower.nextLevelB;
             }
             //println(id + ": " + nextLevel);
             if (tower.upgradeNames.length == nextLevel && id == 1){ //if maxLevel, grey out
                 sprite = spriteGrey;
-                actionTime = p.frameCount + 3;
             } else if (tower.upgradeNames.length/2 == nextLevel && id == 0){ //if halfLevel, grey out
                 sprite = spriteGrey;
-                actionTime = p.frameCount + 3;
             } else if (tower.upgradePrices[nextLevel] > money){ //if can't afford, red out
                 sprite = spriteRed;
-                actionTime = p.frameCount + 3;
             } else{ //if neither, work fine
                 hover();
             }
@@ -56,15 +49,14 @@ public class UpgradeTower extends Button{
     }
 
     public void action(){
-        Tower tower = towers.get(selection.id);
+        Tower tower = tiles.get(selection.id).tower;
         int nextLevel;
         if (id == 0){
-            nextLevel = tower.nextLevelZero;
+            nextLevel = tower.nextLevelA;
         } else{
-            nextLevel = tower.nextLevelOne;
+            nextLevel = tower.nextLevelB;
         }
         money -= tower.upgradePrices[nextLevel];
         tower.upgrade(id);
-        actionTime = p.frameCount + 6;
     }
 }

@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.particles.Debris;
+import main.towers.Tile;
 import main.towers.Tower;
 import main.util.CompressArray;
 import processing.core.PApplet;
@@ -9,7 +10,6 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static main.Main.*;
 import static processing.core.PApplet.abs;
@@ -33,14 +33,13 @@ public abstract class Turret extends Tower {
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
 
-    Turret(PApplet p, float x, float y) {
-        super(p, x, y);
+    Turret(PApplet p, Tile tile) {
+        super(p, tile);
         this.p = p;
         name = null;
-        position = new PVector(x, y);
         size = new PVector(50, 50);
         maxHp = 20;
-        twHp = maxHp;
+        hp = maxHp;
         hit = false;
         delay = 240;
         delayTime = delay;
@@ -67,22 +66,23 @@ public abstract class Turret extends Tower {
         upgradeNames = new String[4];
         upgradeDebris = new String[4];
         upgradeTitles = new String[4];
-        upgradeDescOne = new String[4];
-        upgradeDescTwo = new String[4];
-        upgradeDescThree = new String[4];
+        upgradeDescA = new String[4];
+        upgradeDescB = new String[4];
+        upgradeDescC = new String[4];
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4];
+        updateTowerArray();
     }
 
     public void checkTarget() {
         if (priority == 0) { //first
-            aim(enemyTracker.firstPos, position, enemyTracker.firstId);
+            aim(enemyTracker.firstPos, tile.position, enemyTracker.firstId);
         } else if (priority == 1) { //last
-            aim(enemyTracker.lastPos, position, enemyTracker.lastId);
+            aim(enemyTracker.lastPos, tile.position, enemyTracker.lastId);
         } else if (priority == 2) { //strong
-            aim(enemyTracker.strongPos, position, enemyTracker.strongId);
+            aim(enemyTracker.strongPos, tile.position, enemyTracker.strongId);
         } else { //first, placeholder for close
-            aim(enemyTracker.firstPos, position, enemyTracker.firstId);
+            aim(enemyTracker.firstPos, tile.position, enemyTracker.firstId);
         }
         if (frame == 0 && spriteType == 0) { //if done animating
             spriteType = 1;
@@ -145,16 +145,16 @@ public abstract class Turret extends Tower {
     }
 
 
-    public void main(ArrayList<Tower> towers, int i) { //need to check target
-        if (twHp <= 0) {
-            die(i);
-            towers.remove(i);
+    public void main() { //need to check target
+        if (hp <= 0) {
+            die();
+            tile.tower = null;
         }
         if (enemies.size() > 0 && alive) {
             checkTarget();
         }
-        if (p.mousePressed && p.mouseX < position.x && p.mouseX > position.x - size.x && p.mouseY < position.y && p.mouseY > position.y - size.y && alive) {
-            selection.swapSelected(i);
+        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) {
+            selection.swapSelected(tile.id);
         }
         preDisplay();
     }
@@ -209,17 +209,17 @@ public abstract class Turret extends Tower {
             tintColor = 0;
             hit = false;
         }
-        if (twHp > 0) {
-            HpBar();
+        if (hp > 0) {
+            hpBar();
         }
         display();
     }
 
     public void display() {
         p.tint(255, tintColor, tintColor);
-        p.image(sBase, position.x - size.x, position.y - size.y);
+        p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.pushMatrix();
-        p.translate(position.x - size.x / 2, position.y - size.y / 2);
+        p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
@@ -229,42 +229,42 @@ public abstract class Turret extends Tower {
     public void upgrade(int id) {
         int nextLevel;
         if (id == 0) {
-            nextLevel = nextLevelZero;
+            nextLevel = nextLevelA;
         } else {
-            nextLevel = nextLevelOne;
+            nextLevel = nextLevelB;
         }
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
         price += upgradePrices[nextLevel];
         value += upgradePrices[nextLevel];
         maxHp += upgradeHealth[nextLevel];
-        twHp += upgradeHealth[nextLevel];
+        hp += upgradeHealth[nextLevel];
         error += upgradeError[nextLevel];
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
         sprite = upgradeSprites[nextLevel];
         if (id == 0) {
-            nextLevelZero++;
+            nextLevelA++;
         } else if (id == 1) {
-            nextLevelOne++;
+            nextLevelB++;
         }
         if (id == 0) {
-            if (nextLevelZero < upgradeNames.length / 2) {
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+            if (nextLevelA < upgradeNames.length / 2) {
+                upgradeIconA.sprite = upgradeIcons[nextLevelA];
             } else {
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1) {
-            if (nextLevelOne < upgradeNames.length) {
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+            if (nextLevelB < upgradeNames.length) {
+                upgradeIconB.sprite = upgradeIcons[nextLevelB];
             } else {
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         int num = (int) (p.random(30, 50)); //shower debris
         for (int j = num; j >= 0; j--) {
-            particles.add(new Debris(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
+            particles.add(new Debris(p, (tile.position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (tile.position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
         }
     }
 }  

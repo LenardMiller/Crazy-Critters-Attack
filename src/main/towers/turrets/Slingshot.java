@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
 import main.projectiles.Pebble;
+import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -9,13 +10,12 @@ import static main.Main.*;
 
 public class Slingshot extends Turret{
 
-    public Slingshot(PApplet p, float x, float y) {
-        super(p,x,y);
+    public Slingshot(PApplet p, Tile tile) {
+        super(p,tile);
         name = "slingshot";
-        position = new PVector(x,y);
         size = new PVector(50,50);
         maxHp = 20;
-        twHp = maxHp;
+        hp = maxHp;
         hit = false;
         delay = 180; //default: 180 frames
         delay += (round(p.random(-(delay/10),delay/10))); //injects 10% randomness so all don't fire at once
@@ -33,15 +33,16 @@ public class Slingshot extends Turret{
         price = 50;
         value = price;
         priority = 0; //first
-        nextLevelZero = 0;
-        nextLevelOne = 2;
+        nextLevelA = 0;
+        nextLevelB = 2;
         setUpgrades();
+        updateTowerArray();
     }
 
     public void fire(){ //needed to change projectile fired
         angle += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Pebble(p,position.x-size.x/2,position.y-size.y/2, angle, damage));
+        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, damage));
     }
 
     private void setUpgrades(){
@@ -91,20 +92,20 @@ public class Slingshot extends Turret{
         upgradeTitles[2] = "Faster Firing";
         upgradeTitles[3] = "Damage Up";
         //desc line one
-        upgradeDescOne[0] = "Increase";
-        upgradeDescOne[1] = "further";
-        upgradeDescOne[2] = "Increase";
-        upgradeDescOne[3] = "+5";
+        upgradeDescA[0] = "Increase";
+        upgradeDescA[1] = "further";
+        upgradeDescA[2] = "Increase";
+        upgradeDescA[3] = "+5";
         //desc line two
-        upgradeDescTwo[0] = "accuracy";
-        upgradeDescTwo[1] = "increase";
-        upgradeDescTwo[2] = "firerate";
-        upgradeDescTwo[3] = "damage";
+        upgradeDescB[0] = "accuracy";
+        upgradeDescB[1] = "increase";
+        upgradeDescB[2] = "firerate";
+        upgradeDescB[3] = "damage";
         //desc line three
-        upgradeDescThree[0] = "";
-        upgradeDescThree[1] = "accuracy";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "";
+        upgradeDescC[0] = "";
+        upgradeDescC[1] = "accuracy";
+        upgradeDescC[2] = "";
+        upgradeDescC[3] = "";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[6];
@@ -116,4 +117,6 @@ public class Slingshot extends Turret{
         upgradeSprites[2] = spritesH.get("stoneWallTW");
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
+
+    public void updateSprite() {}
 }

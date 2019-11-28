@@ -1,13 +1,10 @@
 package main.guiObjects.buttons;
 
-import main.guiObjects.Icon;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
+import static main.Main.money;
 import static main.Main.spritesAnimH;
-import static main.Main.hp;
 
 public class AddHp extends Button {
 
@@ -18,10 +15,10 @@ public class AddHp extends Button {
         spriteOne = spritesAnimH.get("livesAddBT")[0];
         spriteTwo = spritesAnimH.get("livesAddBT")[1];
         sprite = spriteOne;
-        actionTime = p.frameCount + 6;
+        holdable = true;
     }
 
-    public void main(ArrayList<Icon> icons, int i){
+    public void main(){
         if (active){
             hover();
             display();
@@ -29,6 +26,6 @@ public class AddHp extends Button {
     }
 
     public void action(){ //give lives
-        hp++;
+        money -= 1;
     }
 }

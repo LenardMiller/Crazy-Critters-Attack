@@ -15,7 +15,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.util.FindAngle.findAngle;
+import static main.util.MiscMethods.findAngle;
 
 public abstract class Enemy {
 
@@ -182,16 +182,18 @@ public abstract class Enemy {
 
     private void collideTW(){ //when the enemy hits a tower
         boolean ak = false;
-        for (int i = towers.size()-1; i >= 0; i--){
-            Tower tower = towers.get(i);
-            float dx = (tower.position.x - tower.size.x/2) - (position.x);
-            float dy = (tower.position.y - tower.size.y/2) - (position.y);
-            if (dy <= size.y/2 + tower.size.y/2 && dy >= -(tower.size.y/2) - size.y/2 && dx <= size.x/2 + tower.size.x/2 && dx >= -(tower.size.x/2) - size.x/2){ //if touching tower
-                attacking = true;
-                ak = true;
-                moveFrame = 0;
-                if (attackFrame == numAttackFrames-1){ //enemy only attacks when punch
-                    tower.collideEN(twDamage);
+        for (int i = 0; i > tiles.size(); i++){
+            if (tiles.get(i).tower != null) {
+                Tower tower = tiles.get(i).tower;
+                float dx = (tower.tile.position.x - tower.size.x / 2) - (position.x);
+                float dy = (tower.tile.position.y - tower.size.y / 2) - (position.y);
+                if (dy <= size.y / 2 + tower.size.y / 2 && dy >= -(tower.size.y / 2) - size.y / 2 && dx <= size.x / 2 + tower.size.x / 2 && dx >= -(tower.size.x / 2) - size.x / 2) { //if touching tower
+                    attacking = true;
+                    ak = true;
+                    moveFrame = 0;
+                    if (attackFrame == numAttackFrames - 1) { //enemy only attacks when punch
+                        tower.collideEN(twDamage);
+                    }
                 }
             }
         }

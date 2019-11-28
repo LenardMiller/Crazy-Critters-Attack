@@ -2,23 +2,23 @@ package main.towers.turrets;
 
 import main.particles.Debris;
 import main.projectiles.Bolt;
+import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
 
-public class Crossbow extends Turret{
+public class Crossbow extends Turret {
 
     private int pierce;
 
-    public Crossbow(PApplet p, float x, float y) {
-        super(p,x,y);
+    public Crossbow(PApplet p, Tile tile) {
+        super(p,tile);
         name = "crossbow";
-        position = new PVector(x,y);
         size = new PVector(50,50);
         maxHp = 20;
-        twHp = maxHp;
+        hp = maxHp;
         hit = false;
         delay = 210; //default: 210 frames
         delay += (round(p.random(-(delay/10),delay/10))); //injects 10% randomness so all don't fire at once
@@ -40,15 +40,16 @@ public class Crossbow extends Turret{
         price = 100;
         value = price;
         priority = 1; //last
-        nextLevelZero = 0;
-        nextLevelOne = 2;
+        nextLevelA = 0;
+        nextLevelB = 2;
         setUpgrades();
+        updateTowerArray();
     }
 
     public void fire(){ //needed to change projectile fired
         angle += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Bolt(p,position.x-size.x/2,position.y-size.y/2, angle, damage, pierce));
+        projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, damage, pierce));
     }
 
     private void setUpgrades(){
@@ -98,20 +99,20 @@ public class Crossbow extends Turret{
         upgradeTitles[2] = "Faster Firing";
         upgradeTitles[3] = "Yet Faster Firing";
         //desc line one
-        upgradeDescOne[0] = "+10";
-        upgradeDescOne[1] = "Increase";
-        upgradeDescOne[2] = "Increase";
-        upgradeDescOne[3] = "Further";
+        upgradeDescA[0] = "+10";
+        upgradeDescA[1] = "Increase";
+        upgradeDescA[2] = "Increase";
+        upgradeDescA[3] = "Further";
         //desc line two
-        upgradeDescTwo[0] = "Damage";
-        upgradeDescTwo[1] = "Piercing";
-        upgradeDescTwo[2] = "firerate";
-        upgradeDescTwo[3] = "Increase";
+        upgradeDescB[0] = "Damage";
+        upgradeDescB[1] = "Piercing";
+        upgradeDescB[2] = "firerate";
+        upgradeDescB[3] = "Increase";
         //desc line three
-        upgradeDescThree[0] = "";
-        upgradeDescThree[1] = "";
-        upgradeDescThree[2] = "";
-        upgradeDescThree[3] = "firerate";
+        upgradeDescC[0] = "";
+        upgradeDescC[1] = "";
+        upgradeDescC[2] = "";
+        upgradeDescC[3] = "firerate";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[9];
@@ -127,16 +128,16 @@ public class Crossbow extends Turret{
     public void upgrade(int id){
         int nextLevel;
         if (id == 0){
-            nextLevel = nextLevelZero;
+            nextLevel = nextLevelA;
         } else{
-            nextLevel = nextLevelOne;
+            nextLevel = nextLevelB;
         }
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
         price += upgradePrices[nextLevel];
         value += upgradePrices[nextLevel];
         maxHp += upgradeHealth[nextLevel];
-        twHp += upgradeHealth[nextLevel];
+        hp += upgradeHealth[nextLevel];
         error += upgradeError[nextLevel];
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
@@ -145,38 +146,40 @@ public class Crossbow extends Turret{
             pierce += 2;
         }
         if (id == 0){
-            nextLevelZero++;
+            nextLevelA++;
         } else if (id == 1){
-            nextLevelOne++;
+            nextLevelB++;
         }
         if (id == 0){
-            if (nextLevelZero < upgradeNames.length/2){
-                upgradeIconZero.sprite = upgradeIcons[nextLevelZero];
+            if (nextLevelA < upgradeNames.length/2){
+                upgradeIconA.sprite = upgradeIcons[nextLevelA];
             } else{
-                upgradeIconZero.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         if (id == 1){
-            if (nextLevelOne < upgradeNames.length){
-                upgradeIconOne.sprite = upgradeIcons[nextLevelOne];
+            if (nextLevelB < upgradeNames.length){
+                upgradeIconB.sprite = upgradeIcons[nextLevelB];
             } else{
-                upgradeIconOne.sprite = spritesAnimH.get("upgradeIC")[0];
+                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
         int num = floor(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
 
     public void display(){
         p.tint(255,tintColor,tintColor);
-        p.image(sBase,position.x-size.x,position.y-size.y);
+        p.image(sBase,tile.position.x-size.x,tile.position.y-size.y);
         p.pushMatrix();
-        p.translate(position.x-size.x/2,position.y-size.y/2);
+        p.translate(tile.position.x-size.x/2,tile.position.y-size.y/2);
         p.rotate(angle);
         p.image(sprite,-size.x/2-2,-size.y/2-2);
         p.popMatrix();
         p.tint(255,255,255);
     }
+
+    public void updateSprite() {};
 }
