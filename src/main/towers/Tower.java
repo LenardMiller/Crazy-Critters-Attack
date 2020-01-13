@@ -87,7 +87,7 @@ public abstract class Tower {
         upgradeSprites = new PImage[4];
         updateTowerArray();
         updateClearance();
-        updateNodes(p,start,null);
+        updateNodes(start,null);
         updatePath(p);
     }
 
@@ -150,7 +150,7 @@ public abstract class Tower {
         tile.tower = null;
         updateTowerArray();
         updateClearance();
-        updateNodes(p,start,null);
+        updateNodes(start,null);
         updatePath(p);
     }
 

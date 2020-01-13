@@ -86,7 +86,7 @@ public class Node{
             parent.setDone();
         }
         else{
-            updateNodes(p,nodeGrid[(int) (position.x/nSize)][(int) (position.y/nSize)],request);
+            updateNodes(nodeGrid[(int)(position.x/nSize)][(int)(position.y/nSize)+25],request);
         }
         findGHF();
     }

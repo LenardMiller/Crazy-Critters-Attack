@@ -30,9 +30,9 @@ public class UpdatePath {
             }
         }
         else{
-            start.setStart((int) (start.position.x/nSize),(int) (start.position.y/nSize));
+            start.setStart((int)(start.position.x/nSize),(int)(start.position.y/nSize)+4); //idk why the 4 in needed, but it is
             start.findGHF();
-            updateNodes(p,start,null);
+            updateNodes(start,null);
             path.done = false;
             path.find(-1);
         }

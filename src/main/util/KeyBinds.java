@@ -130,7 +130,7 @@ public class KeyBinds {
             enemies = new ArrayList<>();
             buffs = new ArrayList<>();
             updateClearance();
-            updateNodes(p,start,null);
+            updateNodes(start,null);
             updatePath(p);
         }
         if (killTowers) {
@@ -151,7 +151,7 @@ public class KeyBinds {
 //            path.nodeCheckObs();
         }
         if (killProjectiles) projectiles = new ArrayList<>();
-        //other stuff;
+        //other stuff
         if (displayPathLines) pathLines = !pathLines;
     }
 

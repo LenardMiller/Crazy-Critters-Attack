@@ -2,7 +2,6 @@ package main.pathfinding;
 
 import main.Main;
 import main.enemies.Enemy;
-import processing.core.PApplet;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class PathRequest {
         this.size = enemy.pfSize;
     }
 
-    public void getPath(PApplet p){
+    public void getPath(){
         for (Node[] nodes : nodeGrid) {
             for (Node node : nodes) {
                 node.reset();
@@ -33,7 +32,7 @@ public class PathRequest {
         enemy.points = new ArrayList<>();
         nodeGrid[round((enemy.position.x-(enemy.size.x/2f))/ nSize)][round((enemy.position.y-(enemy.size.y/2f))/nSize)].setStart(round((enemy.position.x-(enemy.size.x/2f))/nSize), round((enemy.position.y-(enemy.size.y/2f))/nSize));
         Main.start.findGHF();
-        updateNodes(p,Main.start,this);
+        updateNodes(Main.start,this);
         Main.path.done = false;
         Main.path.find(id);
         enemy.swapPoints(false);

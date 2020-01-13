@@ -155,7 +155,7 @@ public class Main extends PApplet {
             end[i].findGHF();
         }
         updateClearance();
-        updateNodes(this,start,null);
+        updateNodes(start,null);
         updatePath(this);
         updateTowerArray();
     }
@@ -171,7 +171,7 @@ public class Main extends PApplet {
         keyBinds.spawnKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
-            path.reqQ.get(0).getPath(this);
+            path.reqQ.get(0).getPath();
             path.reqQ.remove(0);
         }
         //self explanitory
