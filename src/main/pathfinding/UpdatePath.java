@@ -1,7 +1,5 @@
 package main.pathfinding;
 
-import processing.core.PApplet;
-
 import static main.Main.*;
 import static main.pathfinding.UpdateNodes.updateNodes;
 
@@ -9,7 +7,7 @@ public class UpdatePath {
 
     private UpdatePath() {}
 
-    public static void updatePath(PApplet p){
+    public static void updatePath(){
         for (main.pathfinding.Node[] nodes : nodeGrid) {
             for (main.pathfinding.Node node : nodes) {
                 node.reset();
@@ -30,7 +28,7 @@ public class UpdatePath {
             }
         }
         else{
-            start.setStart((int)(start.position.x/nSize),(int)(start.position.y/nSize)+4); //idk why the 4 in needed, but it is
+            start.setStart((int)(start.position.x/nSize),(int)(start.position.y/nSize)); //issue here?
             start.findGHF();
             updateNodes(start,null);
             path.done = false;

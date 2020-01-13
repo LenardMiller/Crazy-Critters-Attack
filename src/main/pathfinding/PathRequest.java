@@ -30,12 +30,12 @@ public class PathRequest {
         }
 
         enemy.points = new ArrayList<>();
-        nodeGrid[round((enemy.position.x-(enemy.size.x/2f))/ nSize)][round((enemy.position.y-(enemy.size.y/2f))/nSize)].setStart(round((enemy.position.x-(enemy.size.x/2f))/nSize), round((enemy.position.y-(enemy.size.y/2f))/nSize));
+        nodeGrid[round((enemy.position.x-(enemy.size.x/2f))/nSize)][round((enemy.position.y-(enemy.size.y/2f))/nSize)].setStart(round((enemy.position.x-(enemy.size.x/2f))/nSize), round((enemy.position.y-(enemy.size.y/2f))/nSize));
         Main.start.findGHF();
         updateNodes(Main.start,this);
         Main.path.done = false;
-        Main.path.find(id);
+        Main.path.find(id); //points are added here
         enemy.swapPoints(false);
-        enemy.cleanTurnPoints();
+        enemy.cleanTurnPoints(); //and subtracted here
     }
 }

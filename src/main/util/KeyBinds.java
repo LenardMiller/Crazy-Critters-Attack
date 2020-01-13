@@ -125,13 +125,14 @@ public class KeyBinds {
         boolean killProjectiles = keysPressed.getReleasedPulse('f') && alive;
         //other stuff
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
+        boolean updatePaths = keysPressed.getPressedPulse(' ');
         //entity stuff
         if (killEnemies) {
             enemies = new ArrayList<>();
             buffs = new ArrayList<>();
             updateClearance();
             updateNodes(start,null);
-            updatePath(p);
+            updatePath();
         }
         if (killTowers) {
             for (int i = 0; i < tiles.size(); i++) {
@@ -152,7 +153,12 @@ public class KeyBinds {
         }
         if (killProjectiles) projectiles = new ArrayList<>();
         //other stuff
-        if (displayPathLines) pathLines = !pathLines;
+        if (displayPathLines) debugPathfinding = !debugPathfinding;
+        if (updatePaths) {
+            updateClearance();
+            updateNodes(start,null);
+            updatePath();
+        }
     }
 
     public void loadKeyBinds() {
@@ -248,5 +254,6 @@ public class KeyBinds {
         keysPressed.add('<');
         keysPressed.add('>');
         keysPressed.add('?');
+        keysPressed.add(' ');
     }
 }

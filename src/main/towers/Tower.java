@@ -88,7 +88,7 @@ public abstract class Tower {
         updateTowerArray();
         updateClearance();
         updateNodes(start,null);
-        updatePath(p);
+        updatePath();
     }
 
     public void main(){
@@ -151,7 +151,7 @@ public abstract class Tower {
         updateTowerArray();
         updateClearance();
         updateNodes(start,null);
-        updatePath(p);
+        updatePath();
     }
 
     public void repair() {

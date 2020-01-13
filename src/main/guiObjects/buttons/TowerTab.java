@@ -24,7 +24,6 @@ public class TowerTab extends Button {
     }
 
     public void action(){
-        System.out.println("test");
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.active = !towerBuyButton.active;
     }
 }

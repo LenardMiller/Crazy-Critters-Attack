@@ -15,6 +15,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static processing.core.PVector.angleBetween;
 
 public abstract class Enemy {
 
@@ -68,7 +69,7 @@ public abstract class Enemy {
         numMoveFrames = 1;
         startFrame = 0;
         loadSprites();
-        pfSize = 1; //enemies pathfinding size, multiples by twenty-five
+        pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
     }
 
     public void main(int i){
@@ -79,17 +80,12 @@ public abstract class Enemy {
             move();
         }
         display();
-        if (position.y - size.y > BOARD_HEIGHT) { //if enemy crosses edge of screen, enExit
-            enExit();
-            dead = true;
-        }
+        if (position.x >= GRID_WIDTH || position.x <= 0 || position.y >= GRID_HEIGHT || position.y <= 0) dead = true;
         if (hp <= 0){ //if health is 0, die
             Main.money += dangerLevel;
             dead = true;
         }
-        if (dead){
-            die(i);
-        }
+        if (dead) die(i);
     }
 
     private void die(int i){
@@ -113,13 +109,11 @@ public abstract class Enemy {
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
-        if (points.size() != 0){
+        if (points.size() != 0) {
             PVector p = points.get(points.size()-1).position;
             boolean intersecting;
             intersecting = (position.x > p.x && position.x < p.x+nSize+size.x) && (position.y > p.y && position.y < p.y+nSize+size.y);
-            if (intersecting){
-                swapPoints(true);
-            }
+            if (intersecting) swapPoints(true);
         }
         speed = maxSpeed;
     }
@@ -150,7 +144,7 @@ public abstract class Enemy {
 
     private void display(){
         preDisplay();
-        if (pathLines){
+        if (debugPathfinding){
             for (int i = points.size()-1; i > 0; i--){
                 points.get(i).display();
             }
@@ -232,33 +226,17 @@ public abstract class Enemy {
         }
     }
 
-    private void enExit(){ //enemy leave
-        if ((redSpeed - dangerLevel) > 1){ //red fast if room
-            redSpeed -= dangerLevel;
-        }
-        else if (redSpeed > 1){ //red slow if room, else don't red
-            redSpeed--;
-        }
-        backRed = 255; //reset red
-        Main.hp -= (dangerLevel);
-        if (Main.hp <= 0){ //player dies
-            Main.hp = 0;
-            alive = false;
-            redSpeed = 0;
-        }
-    }
-
     private void HpText(){ //displays the enemies health
         p.text(hp, position.x, position.y + size.y/2 + 12);
     }
 
-    private void HpBar(){ //pretty simple
+    private void HpBar() {
         p.fill(255,0,0,barTrans);
         p.noStroke();
         p.rect(position.x-size.x, position.y+size.y/2 + 12, (2*size.x)*(((float) hp)/((float) maxHp)), 6);
     }
 
-    public void loadSprites(){
+    public void loadSprites() {
         attackFrames = spritesAnimH.get(name+"AttackEN");
         moveFrames = spritesAnimH.get(name+"MoveEN");
     }
@@ -274,15 +252,8 @@ public abstract class Enemy {
         if (points.size() != 0){
             PVector pointPosition = points.get(points.size()-1).position;
             pointPosition = new PVector(pointPosition.x,pointPosition.y);
-            angle = findAngleBetween(pointPosition,position);
+            angle = angleBetween(pointPosition,position);
         }
-    }
-
-    private static float findAngleBetween(PVector p1, PVector p2){
-        //https://forum.processing.org/one/topic/pvector-anglebetween.html
-        float a = atan2(p1.y-p2.y, p1.x-p2.x);
-        if (a<0) { a+=TWO_PI; }
-        return a;
     }
 
     public void cleanTurnPoints() {
@@ -291,8 +262,8 @@ public abstract class Enemy {
             TurnPoint pointA = pointsD.get(i);
             TurnPoint pointB = pointsD.get(i+1);
             TurnPoint pointC = pointsD.get(i+2);
-            float angleAB = findAngleBetween(pointA.position, pointB.position);
-            float angleBC = findAngleBetween(pointB.position, pointC.position);
+            float angleAB = angleBetween(pointA.position, pointB.position);
+            float angleBC = angleBetween(pointB.position, pointC.position);
             if (angleAB == angleBC) {
                 pointsD.remove(pointB);
                 i--;
@@ -308,12 +279,12 @@ public abstract class Enemy {
         public PVector position;
         private PApplet p;
 
-        public TurnPoint(PApplet p, PVector position){
+        public TurnPoint(PApplet p, PVector position) {
             this.p = p;
             this.position = new PVector(position.x,position.y);
         }
 
-        public void display(){
+        public void display() {
             p.fill(255);
             p.ellipse(position.x+nSize/2f,position.y+nSize/2f,nSize,nSize);
         }

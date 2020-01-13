@@ -36,7 +36,18 @@ public class Node{
         this.position = position;
     }
 
-    public void setStart(int x, int y){
+    public void display() {
+        p.stroke(255);
+        p.noFill();
+        if (isOpen) p.fill(0,255,0);
+        if (isClosed) p.fill(255,125,0);
+        if (isStart) p.fill(125,125,255);
+        if (isEnd) p.fill(255,0,0);
+        if (isNotTraversable) p.fill(255);
+        p.rect(position.x,position.y,nSize,nSize);
+    }
+
+    public void setStart(int x, int y) {
         if (Main.start != null){
             Main.start.isStart = false;
         }
@@ -44,7 +55,7 @@ public class Node{
         isStart = true;
     }
 
-    public void setEnd(int x, int y){
+    public void setEnd(int x, int y) {
         if (!isEnd){
             end[numEnd] = nodeGrid[x][y];
             numEnd++;
@@ -64,12 +75,12 @@ public class Node{
             if ((isOpen || isClosed) && parent == null){
                 parent = parentNew;
                 findGHF();
-                openNodes.addItem(new HeapNode.ItemNode(nodeGrid[(int )(position.x/nSize)][(int) (position.y/nSize)]));
+                openNodes.addItem(new HeapNode.ItemNode(nodeGrid[(int)(position.x/nSize)][(int)(position.y/nSize)]));
             }
             if ((isOpen || isClosed) && parentNew.startCost < parent.startCost){ //these have to be split in two because parent might be null
                 parent = parentNew;
                 findGHF();
-                openNodes.addItem(new HeapNode.ItemNode(nodeGrid[(int) (position.x/nSize)][(int) (position.y/nSize)]));
+                openNodes.addItem(new HeapNode.ItemNode(nodeGrid[(int)(position.x/nSize)][(int)(position.y/nSize)]));
             }
         }
     }
@@ -79,19 +90,21 @@ public class Node{
         isOpen = false;
         if (isEnd){
             path.done = true;
-            if (path.index != -1 && enemies.size() > path.index){
-                enemies.get(path.index).points.add(new Enemy.TurnPoint(p,position));
-                enemies.get(path.index).points.add(new Enemy.TurnPoint(p,parent.position));
+            Enemy enemy = enemies.get(path.index);
+            if (path.index != -1) { //points added HERE
+                enemy.points.add(new Enemy.TurnPoint(p,position));
+                enemy.points.add(new Enemy.TurnPoint(p,parent.position));
             }
             parent.setDone();
         }
-        else{
-            updateNodes(nodeGrid[(int)(position.x/nSize)][(int)(position.y/nSize)+25],request);
+        else {
+            updateNodes(nodeGrid[(int)(position.x/nSize)][(int)(position.y/nSize)],request);
         }
         findGHF();
     }
 
-    private void setDone(){
+    private void setDone() {
+        System.out.println("Done!");
         if (!isStart){
             if (path.index != -1 && enemies.size() > path.index){
                 enemies.get(path.index).points.add(new Enemy.TurnPoint(p,position));

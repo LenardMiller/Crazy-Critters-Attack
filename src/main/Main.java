@@ -74,7 +74,7 @@ public class Main extends PApplet {
     public static PFont mediumFont;
     public static PFont smallFont;
 
-    public static int hp = 2000;
+    public static int hp = 2000; //todo: replace with towercount or whatever
     public static int money = 2000;
     public static boolean alive = true;
 
@@ -95,7 +95,7 @@ public class Main extends PApplet {
     public static AStar path;
     public static int nSize;
     public static int numEnd;
-    public static boolean pathLines = false;
+    public static boolean debugPathfinding = false;
 
     public static void main(String[] args) {
         PApplet.main("main.Main", args);
@@ -156,7 +156,7 @@ public class Main extends PApplet {
         }
         updateClearance();
         updateNodes(start,null);
-        updatePath(this);
+        updatePath();
         updateTowerArray();
     }
 
@@ -174,7 +174,7 @@ public class Main extends PApplet {
             path.reqQ.get(0).getPath();
             path.reqQ.remove(0);
         }
-        //self explanitory
+
         drawObjects();
         //bg part 2: red todo: this will need to be redone when bg textures are thrown in
         if (backRed < 25) {
@@ -202,6 +202,16 @@ public class Main extends PApplet {
     }
 
     private void drawObjects() {
+        //pathfinding debug
+        if (debugPathfinding) {
+            for (Node[] nodes : nodeGrid) {
+                for (Node node : nodes) {
+                    node.display();
+                }
+            }
+            fill(0,0,255);
+            rect(start.position.x,start.position.y,nSize,nSize);
+        }
         //enemy tracker
         enemyTracker.main(enemies);
         //towers
