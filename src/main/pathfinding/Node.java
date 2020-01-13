@@ -30,26 +30,15 @@ public class Node{
         this.position = position;
     }
 
-    public void setNotEnd(int x, int y){
-        if (isEnd){
-            isEnd = false;
-            int index = numEnd+1;
-            PVector p = new PVector(x*nSize,y*nSize);
-            for (int i = 0; i < numEnd; i++){
-                if (end[i].position.x == p.x && end[i].position.y == p.y){
-                    end[i] = end[i+1];
-                    index = i;
-                }
-                if (i > index && i < numEnd-1){
-                    end[i] = end[i+1];
-                }
-                if (i == numEnd-1){
-                    end[i] = null;
-                }
-            }
-            numEnd--;
-            path.updatePath();
-        }
+    public void display() {
+        p.stroke(255);
+        p.noFill();
+        if (isOpen) p.fill(0,255,0);
+        if (isClosed) p.fill(255,125,0);
+        if (isStart) p.fill(125,125,255);
+        if (isEnd) p.fill(255,0,0);
+        if (isNotTraversable) p.fill(255);
+        p.rect(position.x,position.y,nSize,nSize);
     }
 
     public void setStart(int x, int y){

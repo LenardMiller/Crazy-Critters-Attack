@@ -5,6 +5,7 @@ import main.buffs.Poisoned;
 import main.buffs.Wet;
 import main.enemies.*;
 import main.particles.*;
+import main.pathfinding.AStar;
 import main.projectiles.*;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -122,6 +123,7 @@ public class KeyBinds {
         boolean killProjectiles = keysPressed.getReleasedPulse('f') && alive;
         //other stuff
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
+        boolean reloadPathfinding = keysPressed.getReleasedPulse(' ');
         //entity stuff
         if (killEnemies) {
             enemies = new ArrayList<Enemy>();
@@ -147,7 +149,11 @@ public class KeyBinds {
         }
         if (killProjectiles) projectiles = new ArrayList<>();
         //other stuff;
-        if (displayPathLines) pathLines = !pathLines;
+        if (displayPathLines) debugPathfinding = !debugPathfinding;
+        if (reloadPathfinding) {
+            AStar.updateNodes(start);
+            path.updatePath();
+        }
     }
 
     public void loadKeyBinds() {
@@ -243,5 +249,6 @@ public class KeyBinds {
         keysPressed.add('<');
         keysPressed.add('>');
         keysPressed.add('?');
+        keysPressed.add(' ');
     }
 }
