@@ -12,6 +12,9 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.pathfinding.UpdateClearance.updateClearance;
+import static main.pathfinding.UpdateNodes.updateNodes;
+import static main.pathfinding.UpdatePath.updatePath;
 
 public class KeyBinds {
 
@@ -124,9 +127,11 @@ public class KeyBinds {
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
         //entity stuff
         if (killEnemies) {
-            enemies = new ArrayList<Enemy>();
+            enemies = new ArrayList<>();
             buffs = new ArrayList<>();
-            path.updatePath();
+            updateClearance();
+            updateNodes(p,start,null);
+            updatePath(p);
         }
         if (killTowers) {
             for (int i = 0; i < tiles.size(); i++) {

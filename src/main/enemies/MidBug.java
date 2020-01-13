@@ -7,6 +7,7 @@ public class MidBug extends Enemy{
     public MidBug(PApplet p, float x, float y){
         super(p,x,y);
         size = new PVector(25,25);
+        pfSize = 1;
         radius = 13;
         maxSpeed = .5f;
         speed = maxSpeed;

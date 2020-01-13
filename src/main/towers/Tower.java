@@ -6,6 +6,9 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.pathfinding.UpdateClearance.updateClearance;
+import static main.pathfinding.UpdateNodes.updateNodes;
+import static main.pathfinding.UpdatePath.updatePath;
 
 public abstract class Tower {
 
@@ -83,6 +86,9 @@ public abstract class Tower {
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4];
         updateTowerArray();
+        updateClearance();
+        updateNodes(p,start,null);
+        updatePath(p);
     }
 
     public void main(){
@@ -143,7 +149,9 @@ public abstract class Tower {
         if (selection.id == tile.id) selection.id = 0;
         tile.tower = null;
         updateTowerArray();
-//        path.nodeCheckObs();
+        updateClearance();
+        updateNodes(p,start,null);
+        updatePath(p);
     }
 
     public void repair() {
@@ -153,7 +161,7 @@ public abstract class Tower {
 
     public void sell() {
         money += (int) (value * .8);
-        die(); //creates particles (may need to change later)
+        die();
     }
 
     protected void hpText(){ //displays the towers health

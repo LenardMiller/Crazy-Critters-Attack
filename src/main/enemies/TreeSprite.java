@@ -8,6 +8,7 @@ public class TreeSprite extends Enemy{
     public TreeSprite(PApplet p, float x, float y){
         super(p,x,y);
         size = new PVector(25,25);
+        pfSize = 1;
         radius = 15;
         maxSpeed = .4f;
         speed = maxSpeed;

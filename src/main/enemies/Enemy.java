@@ -6,7 +6,7 @@ import main.buffs.Burning;
 import main.buffs.Poisoned;
 import main.buffs.Wet;
 import main.particles.Ouch;
-import main.pathfinding.AStar;
+import main.pathfinding.PathRequest;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -15,20 +15,19 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.util.MiscMethods.findAngle;
 
 public abstract class Enemy {
 
     private PApplet p;
 
     public ArrayList<TurnPoint> points;
+    public int pfSize;
     public PVector position;
     public PVector size;
     private float angle;
     public float radius;
     public float maxSpeed;
     public float speed;
-    public float mpNegation;
     public int dangerLevel;
     int twDamage;
     public int maxHp;
@@ -69,6 +68,7 @@ public abstract class Enemy {
         numMoveFrames = 1;
         startFrame = 0;
         loadSprites();
+        pfSize = 1; //enemies pathfinding size, multiples of twenty-five
     }
 
     public void main(int i){
@@ -122,21 +122,6 @@ public abstract class Enemy {
             }
         }
         speed = maxSpeed;
-    }
-
-    public void requestPath(int i){
-        path.reqQ.add(new AStar.PathRequest(i,enemies.get(i)));
-    }
-
-    public void swapPoints(boolean remove){
-        if (remove){
-            points.remove(points.size()-1);
-        }
-        if (points.size() != 0){
-            PVector p = points.get(points.size()-1).position;
-            p = new PVector(p.x+(nSize/2),p.y+(nSize/2));
-            angle = findAngle(p,position);
-        }
     }
 
     private void preDisplay(){
@@ -278,7 +263,47 @@ public abstract class Enemy {
         moveFrames = spritesAnimH.get(name+"MoveEN");
     }
 
-    public static class TurnPoint{ //pathfinding stuff
+    //pathfinding
+
+    public void requestPath(int i){
+        path.reqQ.add(new PathRequest(i,enemies.get(i)));
+    }
+
+    public void swapPoints(boolean remove) {
+        if (remove) points.remove(points.size() - 1);
+        if (points.size() != 0){
+            PVector pointPosition = points.get(points.size()-1).position;
+            pointPosition = new PVector(pointPosition.x,pointPosition.y);
+            angle = findAngleBetween(pointPosition,position);
+        }
+    }
+
+    private static float findAngleBetween(PVector p1, PVector p2){
+        //https://forum.processing.org/one/topic/pvector-anglebetween.html
+        float a = atan2(p1.y-p2.y, p1.x-p2.x);
+        if (a<0) { a+=TWO_PI; }
+        return a;
+    }
+
+    public void cleanTurnPoints() {
+        ArrayList<TurnPoint> pointsD = new ArrayList<>(points);
+        for (int i = 0; i < pointsD.size()-2; i++) {
+            TurnPoint pointA = pointsD.get(i);
+            TurnPoint pointB = pointsD.get(i+1);
+            TurnPoint pointC = pointsD.get(i+2);
+            float angleAB = findAngleBetween(pointA.position, pointB.position);
+            float angleBC = findAngleBetween(pointB.position, pointC.position);
+            if (angleAB == angleBC) {
+                pointsD.remove(pointB);
+                i--;
+            }
+            if (i+1 == pointsD.size()+2) break;
+        }
+        points = new ArrayList<>();
+        points.addAll(pointsD);
+    }
+
+    public static class TurnPoint {
 
         public PVector position;
         private PApplet p;
@@ -290,7 +315,7 @@ public abstract class Enemy {
 
         public void display(){
             p.fill(255);
-            p.ellipse(position.x+nSize/2,position.y+nSize/2,nSize,nSize);
+            p.ellipse(position.x+nSize/2f,position.y+nSize/2f,nSize,nSize);
         }
     }
 }

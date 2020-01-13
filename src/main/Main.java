@@ -26,6 +26,9 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static main.pathfinding.UpdateClearance.updateClearance;
+import static main.pathfinding.UpdateNodes.updateNodes;
+import static main.pathfinding.UpdatePath.updatePath;
 import static main.util.SpriteLoader.loadSprites;
 import static main.util.SpriteLoader.loadSpritesAnim;
 
@@ -84,6 +87,7 @@ public class Main extends PApplet {
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
 
     //pathfinding stuff
+    public static int defaultSize = 1;
     public static Node[][] nodeGrid;
     public static HeapNode openNodes;
     public static Node start;
@@ -132,7 +136,7 @@ public class Main extends PApplet {
         enemyTracker = new EnemyTracker(this);
         gui = new Gui(this);
         //pathfinding stuff
-        nSize = 10;
+        nSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
         for (int x = 0; x < GRID_WIDTH / nSize; x++) {
             for (int y = 0; y < GRID_HEIGHT / nSize; y++) {
@@ -140,8 +144,8 @@ public class Main extends PApplet {
             }
         }
         path = new AStar();
-        openNodes = new HeapNode((int) (sq(GRID_WIDTH / nSize)));
-        end = new Node[(int) (sq(1000 / nSize))];
+        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nSize)));
+        end = new Node[(int) (sq(1000f / nSize))];
         for (int i = (GRID_WIDTH / nSize) - 1; i >= 0; i--) {
             nodeGrid[i][(GRID_HEIGHT / nSize) - 1].setEnd(i, (GRID_HEIGHT / nSize) - 1);
         }
@@ -150,8 +154,9 @@ public class Main extends PApplet {
         for (int i = 0; i < numEnd; i++) {
             end[i].findGHF();
         }
-        AStar.updateNodes(start);
-        path.updatePath();
+        updateClearance();
+        updateNodes(this,start,null);
+        updatePath(this);
         updateTowerArray();
     }
 
@@ -166,7 +171,7 @@ public class Main extends PApplet {
         keyBinds.spawnKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
-            path.reqQ.get(0).getPath();
+            path.reqQ.get(0).getPath(this);
             path.reqQ.remove(0);
         }
         //self explanitory
