@@ -68,7 +68,7 @@ public abstract class Enemy {
         numMoveFrames = 1;
         startFrame = 0;
         loadSprites();
-        pfSize = 1; //enemies pathfinding size, multiples of twenty-five
+        pfSize = 1; //enemies pathfinding size, multiples by twenty-five
     }
 
     public void main(int i){
