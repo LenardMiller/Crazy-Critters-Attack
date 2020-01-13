@@ -165,7 +165,7 @@ public abstract class Enemy {
 
     private void display(){
         preDisplay();
-        if (pathLines){
+        if (debugPathfinding){
             for (int i = points.size()-1; i > 0; i--){
                 points.get(i).display();
             }

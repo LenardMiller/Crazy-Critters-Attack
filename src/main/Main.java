@@ -91,7 +91,7 @@ public class Main extends PApplet {
     public static AStar path;
     public static int nSize;
     public static int numEnd;
-    public static boolean pathLines = false;
+    public static boolean debugPathfinding = false;
 
     public static void main(String[] args) {
         PApplet.main("main.Main", args);
@@ -197,6 +197,16 @@ public class Main extends PApplet {
     }
 
     private void drawObjects() {
+        //pathfinding debug
+        if (debugPathfinding) {
+            for (Node[] nodes : nodeGrid) {
+                for (Node node : nodes) {
+                    node.display();
+                }
+            }
+            fill(0,0,255);
+            rect(start.position.x,start.position.y,nSize,nSize);
+        }
         //enemy tracker
         enemyTracker.main(enemies);
         //towers
