@@ -7,7 +7,6 @@ import main.buffs.Poisoned;
 import main.buffs.Wet;
 import main.particles.Ouch;
 import main.pathfinding.PathRequest;
-import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -76,7 +75,7 @@ public abstract class Enemy {
     public void main(int i) {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
-        collideTW();
+//        collideTW();
         if (!attacking) move();
         display();
         //prevent from going offscreen
@@ -106,12 +105,7 @@ public abstract class Enemy {
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
-        if (points.size() != 0) {
-            PVector p = points.get(points.size()-1).position;
-            boolean intersecting;
-            intersecting = (position.x > p.x && position.x < p.x+nSize+size.x) && (position.y > p.y && position.y < p.y+nSize+size.y);
-            if (intersecting) swapPoints(true);
-        }
+        if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         speed = maxSpeed;
     }
 
@@ -141,10 +135,8 @@ public abstract class Enemy {
 
     private void display(){
         preDisplay();
-        if (debugPathfinding){
-            for (int i = points.size()-1; i > 0; i--){
-                points.get(i).display();
-            }
+        if (debugPathfinding) for (int i = points.size() - 1; i > 0; i--) {
+            points.get(i).display();
         }
         p.pushMatrix();
         p.translate(position.x,position.y);
@@ -154,30 +146,36 @@ public abstract class Enemy {
         if (hp > 0){
             HpBar();
         }
+        if (debugPathfinding) {
+            p.stroke(0,0,255);
+            p.line(position.x-10,position.y,position.x+10,position.y);
+            p.stroke(255,0,0);
+            p.line(position.x,position.y-10,position.x,position.y+10);
+        }
     }
 
-    private void collideTW(){ //when the enemy hits a tower
-        boolean ak = false;
-        for (int i = 0; i > tiles.size(); i++){
-            if (tiles.get(i).tower != null) {
-                Tower tower = tiles.get(i).tower;
-                float dx = (tower.tile.position.x - tower.size.x / 2) - (position.x);
-                float dy = (tower.tile.position.y - tower.size.y / 2) - (position.y);
-                if (dy <= size.y / 2 + tower.size.y / 2 && dy >= -(tower.size.y / 2) - size.y / 2 && dx <= size.x / 2 + tower.size.x / 2 && dx >= -(tower.size.x / 2) - size.x / 2) { //if touching tower
-                    attacking = true;
-                    ak = true;
-                    moveFrame = 0;
-                    if (attackFrame == numAttackFrames - 1) { //enemy only attacks when punch
-                        tower.collideEN(twDamage);
-                    }
-                }
-            }
-        }
-        if (!ak && attackFrame == startFrame){
-            attacking = false;
-            attackFrame = startFrame;
-        }
-    }
+//    private void collideTW(){ //when the enemy hits a tower
+//        boolean ak = false;
+//        for (int i = 0; i > tiles.size(); i++){
+//            if (tiles.get(i).tower != null) {
+//                Tower tower = tiles.get(i).tower;
+//                float dx = (tower.tile.position.x - tower.size.x / 2) - (position.x);
+//                float dy = (tower.tile.position.y - tower.size.y / 2) - (position.y);
+//                if (dy <= size.y / 2 + tower.size.y / 2 && dy >= -(tower.size.y / 2) - size.y / 2 && dx <= size.x / 2 + tower.size.x / 2 && dx >= -(tower.size.x / 2) - size.x / 2) { //if touching tower
+//                    attacking = true;
+//                    ak = true;
+//                    moveFrame = 0;
+//                    if (attackFrame == numAttackFrames - 1) { //enemy only attacks when punch
+//                        tower.collideEN(twDamage);
+//                    }
+//                }
+//            }
+//        }
+//        if (!ak && attackFrame == startFrame){
+//            attacking = false;
+//            attackFrame = startFrame;
+//        }
+//    }
 
     public void collidePJ(int damage, String pjBuff, int i){ //when the enemy hits a projectile
         hp -= damage;
@@ -240,6 +238,14 @@ public abstract class Enemy {
 
     //pathfinding
 
+    private boolean intersectTurnPoint() {
+        PVector p = points.get(points.size()-1).position;
+        boolean intersecting;
+        float tpSize = 10; //works for now
+        intersecting = (position.x > p.x-tpSize+(nSize/2f) && position.x < p.x+tpSize+(nSize/2f)) && (position.y > p.y-tpSize+(nSize/2f) && position.y < p.y+tpSize+(nSize/2f));
+        return intersecting;
+    }
+
     public void requestPath(int i) {
         path.reqQ.add(new PathRequest(i,enemies.get(i)));
     }
@@ -253,7 +259,7 @@ public abstract class Enemy {
         }
     }
 
-    public void cleanTurnPoints() { //todo: dont remove points on towers
+    public void cleanTurnPoints() { //todo: don't remove points on towers
         ArrayList<TurnPoint> pointsD = new ArrayList<>(points);
         for (int i = 0; i < pointsD.size()-2; i++) {
             TurnPoint pointA = pointsD.get(i);
