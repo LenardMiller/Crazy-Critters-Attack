@@ -22,11 +22,11 @@ public class Node{
     float movementPenalty;
     private float startCost;
     private float endCost;
-    float totalCost;
+    public float totalCost;
     private boolean isStart;
     private boolean isEnd;
-    private boolean isOpen;
-    private boolean isClosed;
+    public boolean isOpen;
+    public boolean isClosed;
     boolean isNotTraversable;
     private PathRequest request;
 
@@ -90,8 +90,9 @@ public class Node{
         isOpen = false;
         if (isEnd){
             path.done = true;
-            Enemy enemy = enemies.get(path.index);
-            if (path.index != -1) { //points added HERE
+            Enemy enemy = null;
+            if (enemies.size()-1 > path.index) enemy = enemies.get(path.index);
+            if (path.index != -1 && enemies.size() != 0 && enemy != null) { //points added HERE
                 enemy.points.add(new Enemy.TurnPoint(p,position));
                 enemy.points.add(new Enemy.TurnPoint(p,parent.position));
             }
@@ -104,7 +105,6 @@ public class Node{
     }
 
     private void setDone() {
-        System.out.println("Done!");
         if (!isStart){
             if (path.index != -1 && enemies.size() > path.index){
                 enemies.get(path.index).points.add(new Enemy.TurnPoint(p,position));
@@ -113,11 +113,11 @@ public class Node{
         }
     }
 
-    public void findGHF(){
-        if (isEnd){
+    public void findGHF() {
+        if (isEnd) {
             endCost = 0;
         }
-        else{
+        else {
             if (numEnd > 0){
                 HeapFloat endH = new HeapFloat(numEnd);
                 for (int i = 0; i < numEnd; i++){
@@ -129,10 +129,10 @@ public class Node{
                 endCost = endH.removeFirstItem().value;
             }
         }
-        if (isStart){
+        if (isStart) {
             startCost = 0;
         }
-        else{
+        else {
             PVector offset;
             if (parent != null){
                 offset = PVector.sub(position,parent.position);
@@ -141,7 +141,7 @@ public class Node{
                 if (request != null) size = request.size;
                 float mpn = movementPenalty;
                 if (clearanceMp.size() >= size) mpn += clearanceMp.get(size-1); //mpc
-                if (mpn > 0){
+                if (mpn > 0) {
                     startCost += mpn;
                 }
                 startCost += parent.startCost;
@@ -153,12 +153,13 @@ public class Node{
     void reset(){
         isOpen = false;
         isClosed = false;
+        if (this != start) isStart = false;
         if(!isStart){
             totalCost = 0;
             endCost = 0;
             startCost = 0;
         }
-        openNodes = new HeapNode((int)(sq(1000f/nSize)));
+        openNodes = new HeapNode((int)(sq((float)GRID_HEIGHT/nSize)));
         parent = null;
     }
 }

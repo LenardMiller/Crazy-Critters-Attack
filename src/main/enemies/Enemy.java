@@ -15,7 +15,8 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static processing.core.PVector.angleBetween;
+import static main.util.MiscMethods.findAngleBetween;
+import static main.util.MiscMethods.roundTo;
 
 public abstract class Enemy {
 
@@ -51,7 +52,7 @@ public abstract class Enemy {
         this.p = p;
 
         points = new ArrayList<>();
-        position = new PVector(x, y);
+        position = new PVector(roundTo(x,25)+12.5f, roundTo(y,25)+12.5f);
         size = new PVector(20,20);
         angle = 0;
         radius = 10;
@@ -72,35 +73,31 @@ public abstract class Enemy {
         pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
     }
 
-    public void main(int i){
+    public void main(int i) {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
         collideTW();
-        if (!attacking){
-            move();
-        }
+        if (!attacking) move();
         display();
+        //prevent from going offscreen
         if (position.x >= GRID_WIDTH || position.x <= 0 || position.y >= GRID_HEIGHT || position.y <= 0) dead = true;
-        if (hp <= 0){ //if health is 0, die
-            Main.money += dangerLevel;
-            dead = true;
-        }
+        //if health is 0, die
+        if (hp <= 0) dead = true;
         if (dead) die(i);
     }
 
-    private void die(int i){
+    private void die(int i) {
+        Main.money += dangerLevel;
         int num = (int)(p.random(2,5));
-        for (int j = num; j >= 0; j--){ //creates death particles
+        for (int j = num; j >= 0; j--) { //creates death particles
             particles.add(new Ouch(p,position.x+p.random((size.x/2)*-1,size.x/2), position.y+p.random((size.y/2)*-1,size.y/2), p.random(0,360), "greyPuff"));
         }
-        for (int j = buffs.size()-1; j >= 0; j--){ //deals with buffs
+        for (int j = buffs.size()-1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
-            if (buff.enId == i){ //if attached, remove
-                buffs.remove(j);
-            }
-            else if (buff.enId > i){ //shift ids to compensate for enemy removal
-                buff.enId -= 1;
-            }
+            //if attached, remove
+            if (buff.enId == i) buffs.remove(j);
+            //shift ids to compensate for enemy removal
+            else if (buff.enId > i) buff.enId -= 1;
         }
         enemies.remove(i);
     }
@@ -243,27 +240,27 @@ public abstract class Enemy {
 
     //pathfinding
 
-    public void requestPath(int i){
+    public void requestPath(int i) {
         path.reqQ.add(new PathRequest(i,enemies.get(i)));
     }
 
     public void swapPoints(boolean remove) {
         if (remove) points.remove(points.size() - 1);
-        if (points.size() != 0){
+        if (points.size() != 0) {
             PVector pointPosition = points.get(points.size()-1).position;
-            pointPosition = new PVector(pointPosition.x,pointPosition.y);
-            angle = angleBetween(pointPosition,position);
+            pointPosition = new PVector(pointPosition.x+12.5f,pointPosition.y+12.5f);
+            angle = findAngleBetween(pointPosition,position);
         }
     }
 
-    public void cleanTurnPoints() {
+    public void cleanTurnPoints() { //todo: dont remove points on towers
         ArrayList<TurnPoint> pointsD = new ArrayList<>(points);
         for (int i = 0; i < pointsD.size()-2; i++) {
             TurnPoint pointA = pointsD.get(i);
             TurnPoint pointB = pointsD.get(i+1);
             TurnPoint pointC = pointsD.get(i+2);
-            float angleAB = angleBetween(pointA.position, pointB.position);
-            float angleBC = angleBetween(pointB.position, pointC.position);
+            float angleAB = findAngleBetween(pointA.position, pointB.position);
+            float angleBC = findAngleBetween(pointB.position, pointC.position);
             if (angleAB == angleBC) {
                 pointsD.remove(pointB);
                 i--;

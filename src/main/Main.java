@@ -29,6 +29,8 @@ import java.util.HashMap;
 import static main.pathfinding.UpdateClearance.updateClearance;
 import static main.pathfinding.UpdateNodes.updateNodes;
 import static main.pathfinding.UpdatePath.updatePath;
+import static main.util.MiscMethods.maxCost;
+import static main.util.MiscMethods.minCost;
 import static main.util.SpriteLoader.loadSprites;
 import static main.util.SpriteLoader.loadSpritesAnim;
 
@@ -46,6 +48,8 @@ public class Main extends PApplet {
     public static ArrayList<main.particles.Particle> particles;
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<Buff> buffs;
+
+    public static int var = 10;
 
     public static Gui gui;
     public static CompressArray compress;
@@ -80,8 +84,8 @@ public class Main extends PApplet {
 
     public static final int BOARD_WIDTH = 700;
     public static final int BOARD_HEIGHT = 900;
-    public static final int GRID_WIDTH = 700;
-    public static final int GRID_HEIGHT = 1100;
+    public static final int GRID_WIDTH = 700; //todo: extend outside of window
+    public static final int GRID_HEIGHT = 900;
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
@@ -95,6 +99,8 @@ public class Main extends PApplet {
     public static AStar path;
     public static int nSize;
     public static int numEnd;
+    public static float maxCost;
+    public static float minCost;
     public static boolean debugPathfinding = false;
 
     public static void main(String[] args) {
@@ -140,14 +146,14 @@ public class Main extends PApplet {
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
         for (int x = 0; x < GRID_WIDTH / nSize; x++) {
             for (int y = 0; y < GRID_HEIGHT / nSize; y++) {
-                nodeGrid[x][y] = new Node(this, new PVector(nSize * x, (nSize * y) - 100));
+                nodeGrid[x][y] = new Node(this, new PVector(nSize * x, nSize * y));
             }
         }
         path = new AStar();
         openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nSize)));
         end = new Node[(int) (sq(1000f / nSize))];
         for (int i = (GRID_WIDTH / nSize) - 1; i >= 0; i--) {
-            nodeGrid[i][(GRID_HEIGHT / nSize) - 1].setEnd(i, (GRID_HEIGHT / nSize) - 1);
+            nodeGrid[i][(GRID_HEIGHT / nSize)-1].setEnd(i, (GRID_HEIGHT / nSize)-1);
         }
         nodeGrid[1][(GRID_WIDTH / nSize) / 2].setStart(1, (GRID_HEIGHT / nSize) / 2);
         start.findGHF();
@@ -174,6 +180,8 @@ public class Main extends PApplet {
             path.reqQ.get(0).getPath();
             path.reqQ.remove(0);
         }
+        maxCost = maxCost();
+        minCost = minCost(maxCost);
 
         drawObjects();
         //bg part 2: red todo: this will need to be redone when bg textures are thrown in
