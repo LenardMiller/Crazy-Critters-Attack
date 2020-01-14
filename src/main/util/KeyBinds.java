@@ -12,9 +12,7 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.pathfinding.UpdateClearance.updateClearance;
-import static main.pathfinding.UpdateNodes.updateNodes;
-import static main.pathfinding.UpdatePath.updatePath;
+import static main.util.MiscMethods.updateNodes;
 
 public class KeyBinds {
 
@@ -132,16 +130,14 @@ public class KeyBinds {
         if (killEnemies) {
             enemies = new ArrayList<>();
             buffs = new ArrayList<>();
-            updateClearance();
-            updateNodes(start,null);
-            updatePath();
+            updateNodes();
         }
         if (killTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
                 if (tower != null) tower.die();
             }
-//            path.nodeCheckObs();
+            updateNodes();
         }
         if (hurtTowers) {
             for (int i = 0; i < tiles.size(); i++) {
@@ -151,15 +147,13 @@ public class KeyBinds {
                     tower.barTrans = 255;
                 }
             }
-//            path.nodeCheckObs();
+            updateNodes();
         }
         if (killProjectiles) projectiles = new ArrayList<>();
         //other stuff
         if (displayPathLines) debugPathfinding = !debugPathfinding;
         if (updatePaths) {
-            updateClearance();
-            updateNodes(start,null);
-            updatePath();
+            updateNodes();
         }
     }
 

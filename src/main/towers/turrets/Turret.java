@@ -12,6 +12,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.util.MiscMethods.updateTowerArray;
 
 public abstract class Turret extends Tower {
 

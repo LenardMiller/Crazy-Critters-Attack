@@ -2,11 +2,11 @@ package main.pathfinding;
 
 import static main.Main.*;
 
-public class UpdateNodes {
+public class UpdateNode {
 
-    private UpdateNodes() {}
+    private UpdateNode() {}
 
-    public static void updateNodes(Node current, PathRequest request) { //request can be null; will default to defaultSize
+    public static void updateNode(Node current, PathRequest request) { //request can be null; will default to defaultSize
         int x = (int) (current.position.x / nSize);
         int y = (int) (current.position.y / nSize);
         if (x == 0 && y == 0) {

@@ -1,7 +1,7 @@
 package main.pathfinding;
 
 import static main.Main.*;
-import static main.pathfinding.UpdateNodes.updateNodes;
+import static main.pathfinding.UpdateNode.updateNode;
 
 public class UpdatePath {
 
@@ -30,7 +30,7 @@ public class UpdatePath {
         else {
             start.setStart((int)(start.position.x/nSize),(int)(start.position.y/nSize)); //issue here?
             start.findGHF();
-            updateNodes(start,null);
+            updateNode(start,null);
             path.done = false;
             path.find(-1);
         }

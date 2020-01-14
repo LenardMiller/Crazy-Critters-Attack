@@ -2,13 +2,14 @@ package main.pathfinding;
 
 import main.Main;
 import main.enemies.Enemy;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.pathfinding.UpdateNodes.updateNodes;
+import static main.pathfinding.UpdateNode.updateNode;
 
 public class Node{
 
@@ -85,6 +86,14 @@ public class Node{
         }
     }
 
+    public void checkObs() {
+        int towerX = (int)(position.x/50)+1;
+        int towerY = (int)(position.y/50)+1;
+        Tower tower = tiles.get(towerX,towerY).tower;
+        if (tower != null) movementPenalty = tower.hp;
+        else movementPenalty = 0;
+    }
+
     void setClose(){
         isClosed = true;
         isOpen = false;
@@ -99,7 +108,7 @@ public class Node{
             parent.setDone();
         }
         else {
-            updateNodes(nodeGrid[(int)(position.x/nSize)][(int)(position.y/nSize)],request);
+            updateNode(nodeGrid[(int)(position.x/nSize)][(int)(position.y/nSize)],request);
         }
         findGHF();
     }

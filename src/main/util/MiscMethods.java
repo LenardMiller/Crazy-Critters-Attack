@@ -1,15 +1,43 @@
 package main.util;
 
 import main.pathfinding.Node;
+import main.towers.Tower;
 import processing.core.PVector;
 
-import static main.Main.nodeGrid;
+import java.util.ArrayList;
+
+import static main.Main.*;
+import static main.pathfinding.UpdateClearance.updateClearance;
+import static main.pathfinding.UpdateNode.updateNode;
+import static main.pathfinding.UpdatePath.updatePath;
 import static processing.core.PApplet.atan2;
 import static processing.core.PConstants.TWO_PI;
 
 public class MiscMethods {
 
     public MiscMethods() {}
+
+    public static void updateNodes() {
+        for (Node[] nodes : nodeGrid) {
+            for (Node node : nodes) {
+                node.checkObs();
+            }
+        }
+        updateClearance();
+        updateNode(start,null);
+        updatePath();
+    }
+
+    public static void updateTowerArray() {
+        towers = new ArrayList<>();
+        for (int i = 0; i < tiles.size(); i++) {
+            Tower tower = tiles.get(i).tower;
+            if (tower != null) {
+                towers.add(tower);
+                if (!tower.turret) tower.updateSprite();
+            }
+        }
+    }
 
     public static float findAngleBetween(PVector p1, PVector p2){
         //https://forum.processing.org/one/topic/pvector-anglebetween.html

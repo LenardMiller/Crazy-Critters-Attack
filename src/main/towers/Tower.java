@@ -6,9 +6,8 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.pathfinding.UpdateClearance.updateClearance;
-import static main.pathfinding.UpdateNodes.updateNodes;
-import static main.pathfinding.UpdatePath.updatePath;
+import static main.util.MiscMethods.updateNodes;
+import static main.util.MiscMethods.updateTowerArray;
 
 public abstract class Tower {
 
@@ -85,10 +84,8 @@ public abstract class Tower {
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4];
+        updateNodes();
         updateTowerArray();
-        updateClearance();
-        updateNodes(start,null);
-        updatePath();
     }
 
     public void main(){
@@ -137,7 +134,7 @@ public abstract class Tower {
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
-//        path.nodeCheckObs();
+        updateNodes();
     }
 
     public void die() {
@@ -149,9 +146,7 @@ public abstract class Tower {
         if (selection.id == tile.id) selection.id = 0;
         tile.tower = null;
         updateTowerArray();
-        updateClearance();
-        updateNodes(start,null);
-        updatePath();
+        updateNodes();
     }
 
     public void repair() {

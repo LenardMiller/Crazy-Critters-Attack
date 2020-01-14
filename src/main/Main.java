@@ -26,11 +26,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static main.pathfinding.UpdateClearance.updateClearance;
-import static main.pathfinding.UpdateNodes.updateNodes;
-import static main.pathfinding.UpdatePath.updatePath;
-import static main.util.MiscMethods.maxCost;
-import static main.util.MiscMethods.minCost;
+import static main.util.MiscMethods.*;
 import static main.util.SpriteLoader.loadSprites;
 import static main.util.SpriteLoader.loadSpritesAnim;
 
@@ -160,10 +156,8 @@ public class Main extends PApplet {
         for (int i = 0; i < numEnd; i++) {
             end[i].findGHF();
         }
-        updateClearance();
-        updateNodes(start,null);
-        updatePath();
         updateTowerArray();
+        updateNodes();
     }
 
     public void draw() {
@@ -270,17 +264,6 @@ public class Main extends PApplet {
 
     public void mouseReleased() {
         inputHandler.mouse(false);
-    }
-
-    public static void updateTowerArray() {
-        towers = new ArrayList<>();
-        for (int i = 0; i < tiles.size(); i++) {
-            Tower tower = tiles.get(i).tower;
-            if (tower != null) {
-                towers.add(tower);
-                if (!tower.turret) tower.updateSprite();
-            }
-        }
     }
 
     public class InputHandler {
