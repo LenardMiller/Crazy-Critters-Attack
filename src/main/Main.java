@@ -147,10 +147,12 @@ public class Main extends PApplet {
         }
         path = new AStar();
         openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nSize)));
+        //create end nodes
         end = new Node[(int) (sq(1000f / nSize))];
         for (int i = (GRID_WIDTH / nSize) - 1; i >= 0; i--) {
-            nodeGrid[i][(GRID_HEIGHT / nSize)-1].setEnd(i, (GRID_HEIGHT / nSize)-1);
+            nodeGrid[i][(GRID_HEIGHT / nSize)-2].setEnd(i, (GRID_HEIGHT / nSize)-2);
         }
+        //create start node
         nodeGrid[1][(GRID_WIDTH / nSize) / 2].setStart(1, (GRID_HEIGHT / nSize) / 2);
         start.findGHF();
         for (int i = 0; i < numEnd; i++) {

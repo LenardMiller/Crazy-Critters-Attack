@@ -147,10 +147,11 @@ public abstract class Enemy {
             HpBar();
         }
         if (debugPathfinding) {
+            PVector pfPosition = new PVector(position.x-((pfSize-1)*12.5f),position.y-((pfSize-1)*12.5f));
             p.stroke(0,0,255);
-            p.line(position.x-10,position.y,position.x+10,position.y);
+            p.line(pfPosition.x-10,pfPosition.y,pfPosition.x+10,pfPosition.y);
             p.stroke(255,0,0);
-            p.line(position.x,position.y-10,position.x,position.y+10);
+            p.line(pfPosition.x,pfPosition.y-10,pfPosition.x,pfPosition.y+10);
         }
     }
 
@@ -242,7 +243,8 @@ public abstract class Enemy {
         PVector p = points.get(points.size()-1).position;
         boolean intersecting;
         float tpSize = 10; //works for now
-        intersecting = (position.x > p.x-tpSize+(nSize/2f) && position.x < p.x+tpSize+(nSize/2f)) && (position.y > p.y-tpSize+(nSize/2f) && position.y < p.y+tpSize+(nSize/2f));
+        PVector pfPosition = new PVector(position.x-((pfSize-1)*12.5f),position.y-((pfSize-1)*12.5f));
+        intersecting = (pfPosition.x > p.x-tpSize+(nSize/2f) && pfPosition.x < p.x+tpSize+(nSize/2f)) && (pfPosition.y > p.y-tpSize+(nSize/2f) && pfPosition.y < p.y+tpSize+(nSize/2f));
         return intersecting;
     }
 
@@ -255,6 +257,7 @@ public abstract class Enemy {
         if (points.size() != 0) {
             PVector pointPosition = points.get(points.size()-1).position;
             pointPosition = new PVector(pointPosition.x+12.5f,pointPosition.y+12.5f);
+            pointPosition = new PVector(pointPosition.x+((pfSize-1)*12.5f),pointPosition.y+((pfSize-1)*12.5f));
             angle = findAngleBetween(pointPosition,position);
         }
     }
@@ -288,6 +291,7 @@ public abstract class Enemy {
         }
 
         public void display() {
+            p.noStroke();
             p.fill(255);
             p.ellipse(position.x+nSize/2f,position.y+nSize/2f,nSize,nSize);
         }
