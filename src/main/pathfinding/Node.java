@@ -30,6 +30,7 @@ public class Node{
     public boolean isClosed;
     boolean isNotTraversable;
     private PathRequest request;
+    public Tower tower;
 
     public Node(PApplet p, PVector position){
         this.p = p;
@@ -89,7 +90,7 @@ public class Node{
     public void checkObs() {
         int towerX = (int)(position.x/50)+1;
         int towerY = (int)(position.y/50)+1;
-        Tower tower = tiles.get(towerX,towerY).tower;
+        tower = tiles.get(towerX,towerY).tower;
         if (tower != null) movementPenalty = tower.hp;
         else movementPenalty = 0;
     }
@@ -102,8 +103,8 @@ public class Node{
             Enemy enemy = null;
             if (enemies.size()-1 > path.index) enemy = enemies.get(path.index);
             if (path.index != -1 && enemies.size() != 0 && enemy != null) { //points added HERE
-                enemy.points.add(new Enemy.TurnPoint(p,position));
-                enemy.points.add(new Enemy.TurnPoint(p,parent.position));
+                enemy.points.add(new Enemy.TurnPoint(p,position,tower));
+                enemy.points.add(new Enemy.TurnPoint(p,parent.position,tower));
             }
             parent.setDone();
         }
@@ -116,7 +117,7 @@ public class Node{
     private void setDone() {
         if (!isStart){
             if (path.index != -1 && enemies.size() > path.index){
-                enemies.get(path.index).points.add(new Enemy.TurnPoint(p,position));
+                enemies.get(path.index).points.add(new Enemy.TurnPoint(p,position,tower));
             }
             parent.setDone();
         }

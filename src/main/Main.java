@@ -45,8 +45,6 @@ public class Main extends PApplet {
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<Buff> buffs;
 
-    public static int var = 10;
-
     public static Gui gui;
     public static CompressArray compress;
 
@@ -64,9 +62,6 @@ public class Main extends PApplet {
 
     public static Hand hand;
     public static Selection selection;
-
-    public static int backRed = 25;
-    public static int redSpeed = 8;
 
     public static PFont veryLargeFont;
     public static PFont largeFont;
@@ -163,11 +158,10 @@ public class Main extends PApplet {
     }
 
     public void draw() {
-        //bg
+        //bg todo: make background
         noStroke();
-        fill(backRed, 25, 25);
+        fill(25, 25, 25);
         rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
-        backRed -= redSpeed;
         //keys
         keyBinds.debugKeys();
         keyBinds.spawnKeys();
@@ -180,11 +174,6 @@ public class Main extends PApplet {
         minCost = minCost(maxCost);
 
         drawObjects();
-        //bg part 2: red todo: this will need to be redone when bg textures are thrown in
-        if (backRed < 25) {
-            backRed = 25;
-            redSpeed = 8;
-        }
         //gui stuff
         noStroke();
         fill(200);

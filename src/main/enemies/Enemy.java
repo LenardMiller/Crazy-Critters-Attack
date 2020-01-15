@@ -7,6 +7,7 @@ import main.buffs.Poisoned;
 import main.buffs.Wet;
 import main.particles.Ouch;
 import main.pathfinding.PathRequest;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -46,6 +47,7 @@ public abstract class Enemy {
     public int tintColor;
     String hitParticle;
     public String name;
+    private Tower target;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -75,8 +77,9 @@ public abstract class Enemy {
     public void main(int i) {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
-//        collideTW();
         if (!attacking) move();
+        else attack();
+        if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         display();
         //prevent from going offscreen
         if (position.x >= GRID_WIDTH || position.x <= 0 || position.y >= GRID_HEIGHT || position.y <= 0) dead = true;
@@ -101,36 +104,30 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    private void move(){
+    private void move() {
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
-        if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         speed = maxSpeed;
     }
 
-    private void preDisplay(){
-        if (attacking){
+    private void attack() {
+        angle = radians(roundTo(degrees(findAngleBetween(target.tile.position,position)),90));
+    }
+
+    private void preDisplay() {
+        if (attacking) {
             sprite = attackFrames[attackFrame];
-            if (attackFrame < numAttackFrames-1){
-                attackFrame += 1;
-            }
-            else {
-                attackFrame = 0;
-            }
+            if (attackFrame < numAttackFrames-1) attackFrame += 1;
+            else attackFrame = 0;
         }
-        else{
+        else {
             sprite = moveFrames[(int)(moveFrame)];
-            if (moveFrame < numMoveFrames-1){
-                moveFrame += speed;
-            }
-            else{
-                moveFrame = 0;
-            }
+            if (moveFrame < numMoveFrames-1) moveFrame += speed;
+            else moveFrame = 0;
         }
-        if (tintColor < 255){ //shift back to normal
-            tintColor += 20;
-        }
+        //shift back to normal
+        if (tintColor < 255) tintColor += 20;
     }
 
     private void display(){
@@ -154,29 +151,6 @@ public abstract class Enemy {
             p.line(pfPosition.x,pfPosition.y-10,pfPosition.x,pfPosition.y+10);
         }
     }
-
-//    private void collideTW(){ //when the enemy hits a tower
-//        boolean ak = false;
-//        for (int i = 0; i > tiles.size(); i++){
-//            if (tiles.get(i).tower != null) {
-//                Tower tower = tiles.get(i).tower;
-//                float dx = (tower.tile.position.x - tower.size.x / 2) - (position.x);
-//                float dy = (tower.tile.position.y - tower.size.y / 2) - (position.y);
-//                if (dy <= size.y / 2 + tower.size.y / 2 && dy >= -(tower.size.y / 2) - size.y / 2 && dx <= size.x / 2 + tower.size.x / 2 && dx >= -(tower.size.x / 2) - size.x / 2) { //if touching tower
-//                    attacking = true;
-//                    ak = true;
-//                    moveFrame = 0;
-//                    if (attackFrame == numAttackFrames - 1) { //enemy only attacks when punch
-//                        tower.collideEN(twDamage);
-//                    }
-//                }
-//            }
-//        }
-//        if (!ak && attackFrame == startFrame){
-//            attacking = false;
-//            attackFrame = startFrame;
-//        }
-//    }
 
     public void collidePJ(int damage, String pjBuff, int i){ //when the enemy hits a projectile
         hp -= damage;
@@ -253,7 +227,12 @@ public abstract class Enemy {
     }
 
     public void swapPoints(boolean remove) {
-        if (remove) points.remove(points.size() - 1);
+        TurnPoint intersectingPoint = points.get(points.size()-1);
+        if (intersectingPoint.combat) {
+            attacking = true;
+            target = intersectingPoint.tower;
+        } else attacking = false;
+        if (remove) points.remove(intersectingPoint);
         if (points.size() != 0) {
             PVector pointPosition = points.get(points.size()-1).position;
             pointPosition = new PVector(pointPosition.x+12.5f,pointPosition.y+12.5f);
@@ -262,15 +241,20 @@ public abstract class Enemy {
         }
     }
 
-    public void cleanTurnPoints() { //todo: don't remove points on towers
+    public void cleanTurnPoints() {
         ArrayList<TurnPoint> pointsD = new ArrayList<>(points);
+        for (int i = 0; i < pointsD.size()-2; i++) {
+            if (pointsD.get(i).tower != null) {
+                if (pointsD.get(i+1) != null) pointsD.get(i+1).combat = true;
+            }
+        }
         for (int i = 0; i < pointsD.size()-2; i++) {
             TurnPoint pointA = pointsD.get(i);
             TurnPoint pointB = pointsD.get(i+1);
             TurnPoint pointC = pointsD.get(i+2);
             float angleAB = findAngleBetween(pointA.position, pointB.position);
             float angleBC = findAngleBetween(pointB.position, pointC.position);
-            if (angleAB == angleBC) {
+            if (angleAB == angleBC && !pointB.combat) {
                 pointsD.remove(pointB);
                 i--;
             }
@@ -282,17 +266,23 @@ public abstract class Enemy {
 
     public static class TurnPoint {
 
-        public PVector position;
         private PApplet p;
+        public Tower tower;
+        public PVector position;
+        public boolean combat;
 
-        public TurnPoint(PApplet p, PVector position) {
+        public TurnPoint(PApplet p, PVector position, Tower tower) {
             this.p = p;
             this.position = new PVector(position.x,position.y);
+            this.tower = tower;
+
+            combat = false;
         }
 
         public void display() {
             p.noStroke();
-            p.fill(255);
+            if (combat) p.fill(255,0,0);
+            else p.fill(255);
             p.ellipse(position.x+nSize/2f,position.y+nSize/2f,nSize,nSize);
         }
     }
