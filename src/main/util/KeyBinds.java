@@ -60,12 +60,10 @@ public class KeyBinds {
         if (littleBug) {
             enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
             enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-            var--;
         }
         if (mediumBug) {
             enemies.add(new MidBug(p, p.mouseX, p.mouseY));
             enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-            var++;
         }
         if (bigBug) {
             enemies.add(new BigBug(p, p.mouseX, p.mouseY));

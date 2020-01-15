@@ -91,7 +91,7 @@ public class Node{
         int towerX = (int)(position.x/50)+1;
         int towerY = (int)(position.y/50)+1;
         tower = tiles.get(towerX,towerY).tower;
-        if (tower != null) movementPenalty = tower.hp;
+        if (tower != null) movementPenalty = tower.maxHp;
         else movementPenalty = 0;
     }
 
@@ -115,22 +115,19 @@ public class Node{
     }
 
     private void setDone() {
-        if (!isStart){
-            if (path.index != -1 && enemies.size() > path.index){
-                enemies.get(path.index).points.add(new Enemy.TurnPoint(p,position,tower));
-            }
-            parent.setDone();
+        if (path.index != -1) {
+            Enemy enemy = enemies.get(path.index);
+            enemy.points.add(new Enemy.TurnPoint(p,position,tower));
         }
+        if (!isStart) parent.setDone();
     }
 
     public void findGHF() {
-        if (isEnd) {
-            endCost = 0;
-        }
+        if (isEnd) endCost = 0;
         else {
-            if (numEnd > 0){
+            if (numEnd > 0) {
                 HeapFloat endH = new HeapFloat(numEnd);
-                for (int i = 0; i < numEnd; i++){
+                for (int i = 0; i < numEnd; i++) {
                     end[i].findGHF();
                     PVector d = PVector.sub(position,end[i].position);
                     endCost = sqrt(sq(d.x)+sq(d.y));
@@ -139,32 +136,28 @@ public class Node{
                 endCost = endH.removeFirstItem().value;
             }
         }
-        if (isStart) {
-            startCost = 0;
-        }
+        if (isStart) startCost = 0;
         else {
             PVector offset;
-            if (parent != null){
+            if (parent != null) {
                 offset = PVector.sub(position,parent.position);
                 startCost = sqrt(sq(offset.x)+sq(offset.y));
                 int size = defaultSize;
                 if (request != null) size = request.size;
                 float mpn = movementPenalty;
                 if (clearanceMp.size() >= size) mpn += clearanceMp.get(size-1); //mpc
-                if (mpn > 0) {
-                    startCost += mpn;
-                }
+                if (mpn > 0) startCost += mpn;
                 startCost += parent.startCost;
             }
         }
         totalCost = startCost + endCost;
     }
 
-    void reset(){
+    void reset() {
         isOpen = false;
         isClosed = false;
         if (this != start) isStart = false;
-        if(!isStart){
+        if(!isStart) {
             totalCost = 0;
             endCost = 0;
             startCost = 0;

@@ -110,7 +110,7 @@ public abstract class Tower {
         if (tintColor < 255) tintColor += 20;
     }
 
-    public void collideEN(int dangerLevel) { //if it touches an enemy, animate and loose health
+    public void damage(int dangerLevel) { //if it touches an enemy, animate and loose health
         hp -= dangerLevel;
         hit = true;
         barTrans = 255;
@@ -163,7 +163,7 @@ public abstract class Tower {
         p.text(hp, tile.position.x-size.x/2, tile.position.y + size.y/4);
     }
 
-    public void hpBar(){ //displays the towers health with style
+    public void hpBar(){ //displays the towers health with style todo: replace with cracks
         if (hp > 0) { //prevent inverted bars
             p.fill(0, 255, 0, barTrans);
             //after hit or if below 50%

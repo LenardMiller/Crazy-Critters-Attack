@@ -39,7 +39,8 @@ public abstract class Enemy {
     private PImage[] moveFrames;
     private float moveFrame;
     int attackFrame;
-    private boolean attacking;
+    public boolean attacking;
+    private boolean attackCue;
     int numAttackFrames;
     int numMoveFrames;
     int startFrame;
@@ -104,7 +105,7 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    private void move() {
+    private void move() { //todo: add super stylish turning system
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
@@ -112,7 +113,16 @@ public abstract class Enemy {
     }
 
     private void attack() {
-        angle = radians(roundTo(degrees(findAngleBetween(target.tile.position,position)),90));
+        if (target != null) {
+//            angle = radians(roundTo(degrees(findAngleBetween(target.tile.position, position)), 90));
+//            angle = findAngleBetween(target.tile.position, position);
+            moveFrame = 0;
+            if (attackFrame == numAttackFrames - 1) target.damage(twDamage);
+        }
+        if (!attackCue && attackFrame == startFrame) {
+            attacking = false;
+            attackFrame = startFrame;
+        }
     }
 
     private void preDisplay() {
@@ -196,10 +206,6 @@ public abstract class Enemy {
         }
     }
 
-    private void HpText(){ //displays the enemies health
-        p.text(hp, position.x, position.y + size.y/2 + 12);
-    }
-
     private void HpBar() {
         p.fill(255,0,0,barTrans);
         p.noStroke();
@@ -214,9 +220,12 @@ public abstract class Enemy {
     //pathfinding
 
     private boolean intersectTurnPoint() {
-        PVector p = points.get(points.size()-1).position;
+        TurnPoint point = points.get(points.size()-1);
+        PVector p = point.position;
         boolean intersecting;
-        float tpSize = 10; //works for now
+        float tpSize;
+        if (point.combat) tpSize = speed;
+        else tpSize = 5;
         PVector pfPosition = new PVector(position.x-((pfSize-1)*12.5f),position.y-((pfSize-1)*12.5f));
         intersecting = (pfPosition.x > p.x-tpSize+(nSize/2f) && pfPosition.x < p.x+tpSize+(nSize/2f)) && (pfPosition.y > p.y-tpSize+(nSize/2f) && pfPosition.y < p.y+tpSize+(nSize/2f));
         return intersecting;
@@ -227,27 +236,39 @@ public abstract class Enemy {
     }
 
     public void swapPoints(boolean remove) {
-        TurnPoint intersectingPoint = points.get(points.size()-1);
-        if (intersectingPoint.combat) {
-            attacking = true;
-            target = intersectingPoint.tower;
-        } else attacking = false;
-        if (remove) points.remove(intersectingPoint);
         if (points.size() != 0) {
-            PVector pointPosition = points.get(points.size()-1).position;
-            pointPosition = new PVector(pointPosition.x+12.5f,pointPosition.y+12.5f);
-            pointPosition = new PVector(pointPosition.x+((pfSize-1)*12.5f),pointPosition.y+((pfSize-1)*12.5f));
-            angle = findAngleBetween(pointPosition,position);
+            TurnPoint intersectingPoint = points.get(points.size()-1);
+            if (remove) {
+                if (intersectingPoint.combat) {
+                    attacking = true;
+                    attackCue = true;
+                    target = intersectingPoint.tower;
+                } else attackCue = false;
+                points.remove(intersectingPoint);
+            }
+            if (points.size() != 0) {
+                PVector pointPosition = points.get(points.size() - 1).position;
+                pointPosition = new PVector(pointPosition.x + 12.5f, pointPosition.y + 12.5f);
+                pointPosition = new PVector(pointPosition.x + ((pfSize - 1) * 12.5f), pointPosition.y + ((pfSize - 1) * 12.5f));
+                angle = findAngleBetween(pointPosition, position);
+            }
         }
     }
 
     public void cleanTurnPoints() {
         ArrayList<TurnPoint> pointsD = new ArrayList<>(points);
-        for (int i = 0; i < pointsD.size()-2; i++) {
-            if (pointsD.get(i).tower != null) {
-                if (pointsD.get(i+1) != null) pointsD.get(i+1).combat = true;
+        for (int i = 0; i < pointsD.size()-1; i++) {
+            TurnPoint point = pointsD.get(i);
+            if (point.tower != null && !point.combat) {
+                TurnPoint backPoint = pointsD.get(i+pfSize); //todo: replace pfSize with attacking unclear tiles
+                if (backPoint != null && backPoint.tower != point.tower) {
+                    backPoint.combat = true;
+                    backPoint.tower = point.tower;
+                }
             }
         }
+        TurnPoint startpoint = pointsD.get(pointsD.size()-1);
+        if (!startpoint.combat && !attacking) pointsD.remove(startpoint);
         for (int i = 0; i < pointsD.size()-2; i++) {
             TurnPoint pointA = pointsD.get(i);
             TurnPoint pointB = pointsD.get(i+1);
@@ -269,7 +290,8 @@ public abstract class Enemy {
         private PApplet p;
         public Tower tower;
         public PVector position;
-        public boolean combat;
+        boolean combat;
+        boolean back;
 
         public TurnPoint(PApplet p, PVector position, Tower tower) {
             this.p = p;
@@ -277,6 +299,7 @@ public abstract class Enemy {
             this.tower = tower;
 
             combat = false;
+            back = false;
         }
 
         public void display() {
