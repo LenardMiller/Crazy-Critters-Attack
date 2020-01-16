@@ -2,13 +2,13 @@ package main.pathfinding;
 
 import main.Main;
 import main.enemies.Enemy;
+import processing.core.PVector;
 
 import java.util.ArrayList;
 
 import static main.Main.nSize;
 import static main.Main.nodeGrid;
 import static main.pathfinding.UpdateNode.updateNode;
-import static processing.core.PApplet.round;
 
 public class PathRequest {
 
@@ -30,8 +30,10 @@ public class PathRequest {
         }
 
         enemy.points = new ArrayList<>();
-        //issue here?
-        nodeGrid[round((enemy.position.x-(enemy.size.x/2f))/nSize)][round((enemy.position.y-(enemy.size.y/2f))/nSize)].setStart(round((enemy.position.x-(enemy.size.x/2f))/nSize), round((enemy.position.y-(enemy.size.y/2f))/nSize));
+        PVector pfPosition = new PVector(enemy.position.x-((enemy.pfSize-1)*12.5f),enemy.position.y-((enemy.pfSize-1)*12.5f));
+        int x = (int)(pfPosition.x/nSize);
+        int y = (int)(pfPosition.y/nSize);
+        nodeGrid[x][y].setStart(x,y);
         Main.start.findGHF();
         updateNode(Main.start,this);
         Main.path.done = false;

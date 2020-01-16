@@ -259,8 +259,9 @@ public abstract class Enemy {
         ArrayList<TurnPoint> pointsD = new ArrayList<>(points);
         for (int i = 0; i < pointsD.size()-1; i++) {
             TurnPoint point = pointsD.get(i);
+            if (pfSize > 2 && point.tower == null) point.tower = clearanceTower(point);
             if (point.tower != null && !point.combat) {
-                TurnPoint backPoint = pointsD.get(i+pfSize); //todo: replace pfSize with attacking unclear tiles
+                TurnPoint backPoint = pointsD.get(i+1); //todo: replace pfSize with attacking unclear tiles
                 if (backPoint != null && backPoint.tower != point.tower) {
                     backPoint.combat = true;
                     backPoint.tower = point.tower;
@@ -268,21 +269,40 @@ public abstract class Enemy {
             }
         }
         TurnPoint startpoint = pointsD.get(pointsD.size()-1);
-        if (!startpoint.combat && !attacking) pointsD.remove(startpoint);
-        for (int i = 0; i < pointsD.size()-2; i++) {
-            TurnPoint pointA = pointsD.get(i);
-            TurnPoint pointB = pointsD.get(i+1);
-            TurnPoint pointC = pointsD.get(i+2);
-            float angleAB = findAngleBetween(pointA.position, pointB.position);
-            float angleBC = findAngleBetween(pointB.position, pointC.position);
-            if (angleAB == angleBC && !pointB.combat) {
-                pointsD.remove(pointB);
-                i--;
+//        if (!startpoint.combat && !attacking) pointsD.remove(startpoint);
+//        for (int i = 0; i < pointsD.size()-2; i++) {
+//            TurnPoint pointA = pointsD.get(i);
+//            TurnPoint pointB = pointsD.get(i+1);
+//            TurnPoint pointC = pointsD.get(i+2);
+//            float angleAB = findAngleBetween(pointA.position, pointB.position);
+//            float angleBC = findAngleBetween(pointB.position, pointC.position);
+//            if (angleAB == angleBC && !pointB.combat) {
+//                pointsD.remove(pointB);
+//                i--;
+//            }
+//            if (i+1 == pointsD.size()+2) break;
+//        }
+//        points = new ArrayList<>();
+//        points.addAll(pointsD);
+    }
+
+    private Tower clearanceTower(TurnPoint point) {
+        Tower tower = null;
+        int pointX = round(point.position.x/nSize);
+        int pointY = round(point.position.y/nSize);
+        if (pointX % 2 != 0) pointX += 1;
+        if (pointY % 2 != 0) pointY += 1;
+        pointX /= 2;
+        pointY /= 2;
+        for (int i = 0; i <= ceil(pfSize/2f); i++) {
+            for (int x = 0; x <= i; x++) {
+                for (int y = 0; y <= i; y++) {
+                    Tower towerB = tiles.get(pointX+x,pointY+y).tower;
+                    if (towerB != null) tower = towerB;
+                }
             }
-            if (i+1 == pointsD.size()+2) break;
         }
-        points = new ArrayList<>();
-        points.addAll(pointsD);
+        return tower;
     }
 
     public static class TurnPoint {

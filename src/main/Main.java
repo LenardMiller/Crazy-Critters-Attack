@@ -145,7 +145,7 @@ public class Main extends PApplet {
         //create end nodes
         end = new Node[(int) (sq(1000f / nSize))];
         for (int i = (GRID_WIDTH / nSize) - 1; i >= 0; i--) {
-            nodeGrid[i][(GRID_HEIGHT / nSize)-2].setEnd(i, (GRID_HEIGHT / nSize)-2);
+            nodeGrid[i][(GRID_HEIGHT / nSize)-5].setEnd(i, (GRID_HEIGHT / nSize)-5);
         }
         //create start node
         nodeGrid[1][(GRID_WIDTH / nSize) / 2].setStart(1, (GRID_HEIGHT / nSize) / 2);
