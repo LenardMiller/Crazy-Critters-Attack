@@ -12,7 +12,6 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.util.MiscMethods.findAngleBetween;
 import static main.util.MiscMethods.updateTowerArray;
 
 public abstract class Turret extends Tower {
@@ -97,30 +96,30 @@ public abstract class Turret extends Tower {
         PVector t = PVector.div(d, pjSpeed); //finds time to hit
         target = new PVector(target.x, target.y + (t.mag() * enemy.speed)); //leads shots
         PVector ratio = PVector.sub(target, position);
-        angle = findAngleBetween(position,target);
-//        if (position.x == target.x) { //if on the same x
-//            if (position.y >= target.y) { //if below target or on same y, angle right
-//                angle = 0;
-//            } else if (position.y < target.y) { //if above target, angle left
-//                angle = PI;
-//            }
-//        } else if (position.y == target.y) { //if on same y
-//            if (position.x > target.x) { //if  right of target, angle down
-//                angle = 3 * HALF_PI;
-//            } else if (position.x < target.x) { //if left of target, angle up
-//                angle = HALF_PI;
-//            }
-//        } else {
-//            if (position.x < target.x && position.y > target.y) { //if to left and below NOT WORKING
-//                angle = (atan(abs(ratio.x + 15) / abs(ratio.y)));
-//            } else if (position.x < target.x && position.y < target.y) { //if to left and above
-//                angle = (atan(abs(ratio.y) / abs(ratio.x))) + HALF_PI;
-//            } else if (position.x > target.x && position.y < target.y) { //if to right and above NOT WORKING
-//                angle = (atan(abs(ratio.x + 15) / abs(ratio.y))) + PI;
-//            } else if (position.x > target.x && position.y > target.y) { //if to right and below
-//                angle = (atan(abs(ratio.y) / abs(ratio.x))) + 3 * HALF_PI;
-//            }
-//        }
+//        angle = findAngleBetween(position,target);
+        if (position.x == target.x) { //if on the same x
+            if (position.y >= target.y) { //if below target or on same y, angle right
+                angle = 0;
+            } else if (position.y < target.y) { //if above target, angle left
+                angle = PI;
+            }
+        } else if (position.y == target.y) { //if on same y
+            if (position.x > target.x) { //if  right of target, angle down
+                angle = 3 * HALF_PI;
+            } else if (position.x < target.x) { //if left of target, angle up
+                angle = HALF_PI;
+            }
+        } else {
+            if (position.x < target.x && position.y > target.y) { //if to left and below NOT WORKING
+                angle = (atan(abs(ratio.x + 15) / abs(ratio.y)));
+            } else if (position.x < target.x && position.y < target.y) { //if to left and above
+                angle = (atan(abs(ratio.y) / abs(ratio.x))) + HALF_PI;
+            } else if (position.x > target.x && position.y < target.y) { //if to right and above NOT WORKING
+                angle = (atan(abs(ratio.x + 15) / abs(ratio.y))) + PI;
+            } else if (position.x > target.x && position.y > target.y) { //if to right and below
+                angle = (atan(abs(ratio.y) / abs(ratio.x))) + 3 * HALF_PI;
+            }
+        }
         if (visualize) { //cool lines
             p.stroke(255);
             p.line(position.x - size.x / 2, position.y - size.y / 2, target.x - enemy.size.x / 2, target.y - enemy.size.y / 2);

@@ -172,7 +172,7 @@ public class Main extends PApplet {
         }
         maxCost = maxCost();
         minCost = minCost(maxCost);
-
+        //objects
         drawObjects();
         //gui stuff
         noStroke();
