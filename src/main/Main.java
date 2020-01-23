@@ -69,9 +69,10 @@ public class Main extends PApplet {
     public static PFont mediumFont;
     public static PFont smallFont;
 
-    public static int hp = 2000; //todo: replace with towercount or whatever
+    public static int hp = 2000; //todo: remove
     public static int money = 2000;
     public static boolean alive = true;
+    public static boolean debug = false;
 
     public static final int BOARD_WIDTH = 700;
     public static final int BOARD_HEIGHT = 900;
@@ -92,7 +93,6 @@ public class Main extends PApplet {
     public static int numEnd;
     public static float maxCost;
     public static float minCost;
-    public static boolean debugPathfinding = false;
 
     public static void main(String[] args) {
         PApplet.main("main.Main", args);
@@ -143,10 +143,11 @@ public class Main extends PApplet {
         path = new AStar();
         openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nSize)));
         //create end nodes
-        end = new Node[(int) (sq(1000f / nSize))];
-        for (int i = (GRID_WIDTH / nSize) - 1; i >= 0; i--) {
-            nodeGrid[i][(GRID_HEIGHT / nSize)-5].setEnd(i, (GRID_HEIGHT / nSize)-5);
-        }
+        end = new Node[0];
+//        end = new Node[(int) (sq(1000f / nSize))];
+//        for (int i = (GRID_WIDTH / nSize) - 1; i >= 0; i--) {
+//            nodeGrid[i][(GRID_HEIGHT / nSize)-5].setEnd(i, (GRID_HEIGHT / nSize)-5);
+//        }
         //create start node
         nodeGrid[1][(GRID_WIDTH / nSize) / 2].setStart(1, (GRID_HEIGHT / nSize) / 2);
         start.findGHF();
@@ -196,7 +197,7 @@ public class Main extends PApplet {
 
     private void drawObjects() {
         //pathfinding debug
-        if (debugPathfinding) {
+        if (debug) {
             for (Node[] nodes : nodeGrid) {
                 for (Node node : nodes) {
                     node.display();

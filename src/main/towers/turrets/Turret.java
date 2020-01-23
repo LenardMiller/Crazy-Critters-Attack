@@ -120,7 +120,7 @@ public abstract class Turret extends Tower {
                 angle = (atan(abs(ratio.y) / abs(ratio.x))) + 3 * HALF_PI;
             }
         }
-        if (visualize) { //cool lines
+        if (visualize && debug) { //cool lines
             p.stroke(255);
             p.line(position.x - size.x / 2, position.y - size.y / 2, target.x - enemy.size.x / 2, target.y - enemy.size.y / 2);
             p.stroke(255, 0, 0, 150);

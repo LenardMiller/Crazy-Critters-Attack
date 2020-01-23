@@ -39,6 +39,6 @@ public class PathRequest {
         Main.path.done = false;
         Main.path.find(id); //points are added here
         enemy.swapPoints(false);
-        enemy.cleanTurnPoints(); //and subtracted here
+        if (enemy.points.size() > 0) enemy.cleanTurnPoints(); //and subtracted here
     }
 }

@@ -24,7 +24,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    public void swapSelected(int id) { //switches what is selected
+    public void swapSelected(int id) { //switches what is selected todo: fix crash
         Tower tower = tiles.get(id).tower;
         hand.held = "null";
         if (tower.turret) {

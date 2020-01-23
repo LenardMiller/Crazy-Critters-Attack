@@ -127,6 +127,8 @@ public abstract class Enemy {
         }
     }
 
+    //todo: dance?
+
     private void preDisplay() {
         if (attacking) {
             sprite = attackFrames[attackFrame];
@@ -143,7 +145,7 @@ public abstract class Enemy {
 
     private void display() {
         preDisplay();
-        if (debugPathfinding) for (int i = points.size() - 1; i > 0; i--) {
+        if (debug) for (int i = points.size() - 1; i > 0; i--) {
             points.get(i).display();
         }
         p.pushMatrix();
@@ -154,7 +156,7 @@ public abstract class Enemy {
         if (hp > 0) {
             HpBar();
         }
-        if (debugPathfinding) {
+        if (debug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
             p.stroke(0, 0, 255);
             p.line(pfPosition.x - 10, pfPosition.y, pfPosition.x + 10, pfPosition.y);

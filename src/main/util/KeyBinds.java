@@ -149,7 +149,7 @@ public class KeyBinds {
         }
         if (killProjectiles) projectiles = new ArrayList<>();
         //other stuff
-        if (displayPathLines) debugPathfinding = !debugPathfinding;
+        if (displayPathLines) debug = !debug;
         if (updatePaths) {
             updateNodes();
         }
