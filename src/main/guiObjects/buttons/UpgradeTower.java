@@ -7,7 +7,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 
-public class UpgradeTower extends Button { //todo: fix crash
+public class UpgradeTower extends Button {
 
     private PImage spriteRed;
     private PImage spriteGrey;
@@ -27,14 +27,17 @@ public class UpgradeTower extends Button { //todo: fix crash
 
     public void main() {
         if (active) {
-            Tower tower = tiles.get(selection.id).tower;
-            int nextLevel;
-            if (id == 0) nextLevel = tower.nextLevelA;
-            else nextLevel = tower.nextLevelB;
-            if (tower.upgradeNames.length == nextLevel && id == 1 || tower.upgradeNames.length / 2 == nextLevel && id == 0) sprite = spriteGrey;
-            else if (tower.upgradePrices[nextLevel] > money) sprite = spriteRed;
-            else hover();
-            display();
+            if (towers.size() > 0) {
+                Tower tower = tiles.get(selection.id).tower;
+                int nextLevel;
+                if (id == 0) nextLevel = tower.nextLevelA;
+                else nextLevel = tower.nextLevelB;
+                if (tower.upgradeNames.length == nextLevel && id == 1 || tower.upgradeNames.length / 2 == nextLevel && id == 0)
+                    sprite = spriteGrey;
+                else if (tower.upgradePrices[nextLevel] > money) sprite = spriteRed;
+                else hover();
+                display();
+            } else active = false;
         }
     }
 
