@@ -74,9 +74,9 @@ public class Main extends PApplet {
     public static boolean alive = true;
     public static boolean debug = false;
 
-    public static final int BOARD_WIDTH = 700;
+    public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
-    public static final int GRID_WIDTH = 700; //todo: extend outside of window
+    public static final int GRID_WIDTH = 900; //todo: extend outside of window
     public static final int GRID_HEIGHT = 900;
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
@@ -99,7 +99,7 @@ public class Main extends PApplet {
     }
 
     public void settings() {
-        size(900, 900);
+        size(1100, 900);
     }
 
     public void setup() {

@@ -98,20 +98,20 @@ public class Hand {
         if (displayInfo.equals("placeWall")) {
             p.fill(235);
             p.noStroke();
-            p.rect(700, 211, 200, 707);
+            p.rect(900, 211, 200, 707);
             if (money >= 25) p.fill(195, 232, 188);
             else p.fill(230, 181, 181);
-            p.rect(705, 247, 190, 119);
+            p.rect(905, 247, 190, 119);
             p.textAlign(CENTER);
             p.fill(0);
             p.textFont(mediumLargeFont);
-            p.text("Placing:", 800, 241);
+            p.text("Placing:", 1000, 241);
             p.textFont(largeFont);
-            p.text("Wooden", 800, 276);
-            p.text("Wall", 800, 301);
+            p.text("Wooden", 1000, 276);
+            p.text("Wall", 1000, 301);
             p.textFont(mediumFont);
-            p.text("50 HP", 800, 331);
-            p.text("$25", 800, 356);
+            p.text("50 HP", 1000, 331);
+            p.text("$25", 1000, 356);
         }
         if (displayInfo.equals("upgradeWall")) {
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
@@ -119,94 +119,94 @@ public class Hand {
             else {
                 p.fill(235);
                 p.noStroke();
-                p.rect(700, 211, 200, 707);
+                p.rect(900, 211, 200, 707);
                 p.textAlign(CENTER);
                 //tower info
                 p.fill(231, 232, 190);
-                p.rect(705, 247, 190, 119);
+                p.rect(905, 247, 190, 119);
                 p.textFont(mediumLargeFont);
                 p.fill(0);
-                p.text("Selected:", 800, 241);
+                p.text("Selected:", 1000, 241);
                 p.textFont(largeFont);
                 if (tower.nextLevelB > 0) {
                     p.text(tower.upgradeTitles[tower.nextLevelB - 1], 800, 276); //if not base level
-                } else p.text("Wooden", 800, 276);
-                p.text("Wall", 800, 301);
+                } else p.text("Wooden", 1000, 276);
+                p.text("Wall", 1000, 301);
                 p.textFont(mediumFont);
-                p.text(tower.hp + " hp", 800, 331);
-                p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 800, 356);
+                p.text(tower.hp + " hp", 1000, 331);
+                p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
                 //upgrade info
                 if (money >= tower.upgradePrices[tower.nextLevelB]) p.fill(195, 232, 188);
                 else p.fill(230, 181, 181);
-                p.rect(705, 401, 190, 119);
+                p.rect(905, 401, 190, 119);
                 p.textFont(mediumLargeFont);
                 p.fill(0);
-                p.text("Upgrade:", 800, 395);
+                p.text("Upgrade:", 1000, 395);
                 p.textFont(largeFont);
-                p.text(tower.upgradeTitles[tower.nextLevelB], 800, 430);
-                p.text("Wall", 800, 455);
+                p.text(tower.upgradeTitles[tower.nextLevelB], 1000, 430);
+                p.text("Wall", 1000, 455);
                 p.textFont(mediumFont);
-                p.text("+" + tower.upgradeHealth[tower.nextLevelB] + " HP", 800, 485);
-                p.text("$" + tower.upgradePrices[tower.nextLevelB], 800, 510);
+                p.text("+" + tower.upgradeHealth[tower.nextLevelB] + " HP", 1000, 485);
+                p.text("$" + tower.upgradePrices[tower.nextLevelB], 1000, 510);
             }
         }
         if (displayInfo.equals("maxWallUpgrade")) {
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
             p.fill(235);
             p.noStroke();
-            p.rect(700, 211, 200, 707);
+            p.rect(900, 211, 200, 707);
             p.textAlign(CENTER);
             //tower info
             p.fill(231, 232, 190);
-            p.rect(705, 247, 190, 119);
+            p.rect(905, 247, 190, 119);
             p.textFont(mediumLargeFont);
             p.fill(0);
-            p.text("Selected:", 800, 241);
+            p.text("Selected:", 1000, 241);
             p.textFont(largeFont);
-            p.text(tower.upgradeTitles[tower.upgradeTitles.length - 1], 800, 276);
-            p.text("Wall", 800, 301);
+            p.text(tower.upgradeTitles[tower.upgradeTitles.length - 1], 1000, 276);
+            p.text("Wall", 1000, 301);
             p.textFont(mediumFont);
-            p.text(tower.hp + " hp", 800, 331);
-            p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 800, 356);
+            p.text(tower.hp + " hp", 1000, 331);
+            p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
         }
         if (displayInfo.equals("repairWall")) {
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
             p.fill(235);
             p.noStroke();
-            p.rect(700, 211, 200, 707);
+            p.rect(900, 211, 200, 707);
             p.textAlign(CENTER);
             //tower info
             if (money >= ceil((float) (tower.price) - (float) (tower.value))) p.fill(195, 232, 188);
             else p.fill(230, 181, 181);
-            p.rect(705, 247, 190, 144);
+            p.rect(905, 247, 190, 144);
             p.textFont(mediumLargeFont);
             p.fill(0);
-            p.text("Selected:", 800, 241);
+            p.text("Selected:", 1000, 241);
             p.textFont(largeFont);
             if (tower.nextLevelB > 0) {
-                p.text(tower.upgradeTitles[tower.nextLevelB - 1], 800, 276); //if not base level
-            } else p.text("Wooden", 800, 276);
-            p.text("Wall", 800, 301);
+                p.text(tower.upgradeTitles[tower.nextLevelB - 1], 1000, 276); //if not base level
+            } else p.text("Wooden", 1000, 276);
+            p.text("Wall", 1000, 301);
             p.textFont(mediumFont);
-            p.text(tower.hp + " hp", 800, 331);
-            p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 800, 356);
-            p.text("Repair for: $" + ceil((float) (tower.price) - (float) (tower.value)), 800, 381);
+            p.text(tower.hp + " hp", 1000, 331);
+            p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
+            p.text("Repair for: $" + ceil((float) (tower.price) - (float) (tower.value)), 1000, 381);
         }
         if (!displayInfo.equals("null")) {
             //universal info
             p.fill(200);
-            p.rect(705, 700, 190, 195);
+            p.rect(905, 700, 190, 195);
             p.fill(0);
             p.textFont(mediumFont);
             p.textAlign(LEFT);
-            p.text("LClick to place", 710, 720);
-            p.text("tower", 710, 740);
-            p.text("LClick on tower to", 710, 770);
-            p.text("upgrade or repair", 710, 790);
-            p.text("RClick on tower", 710, 820);
-            p.text("to Sell", 710, 840);
-            p.text("Click on sidebar", 710, 870);
-            p.text("to deselect", 710, 890);
+            p.text("LClick to place", 910, 720);
+            p.text("tower", 910, 740);
+            p.text("LClick on tower to", 910, 770);
+            p.text("upgrade or repair", 910, 790);
+            p.text("RClick on tower", 910, 820);
+            p.text("to Sell", 910, 840);
+            p.text("Click on sidebar", 910, 870);
+            p.text("to deselect", 910, 890);
         }
     }
 

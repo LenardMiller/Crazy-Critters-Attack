@@ -48,42 +48,43 @@ public class TowerBuy extends Button {
             sprite = spriteTwo;
             p.fill(235);
             p.noStroke();
-            p.rect(700,211,200,707);
+            p.rect(900,211,200,707);
             p.textAlign(CENTER);
             p.fill(0);
             p.textFont(largeFont); //displays info about tower todo: put more info
+            int x = 1000;
             switch (towerType) {
                 case "slingshot":
-                    p.text("Slingshot", 800, 241);
+                    p.text("Slingshot", 1000, 241);
                     p.textFont(mediumFont);
-                    p.text("$50", 800, 271);
+                    p.text("$50", x, 271);
                     break;
                 case "crossbow":
-                    p.text("Crossbow", 800, 241);
+                    p.text("Crossbow", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$100", 800, 271);
+                    p.text("$100", x, 271);
                     break;
                 case "miscCannon":
-                    p.text("Random", 800, 241);
-                    p.text("Cannon", 800, 266);
+                    p.text("Random", x, 241);
+                    p.text("Cannon", x, 266);
                     p.textFont(mediumFont);
-                    p.text("$100", 800, 296);
+                    p.text("$100", x, 296);
                     break;
                 case "energyBlaster":
-                    p.text("Energy Blaster", 800, 241);
+                    p.text("Energy Blaster", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$150", 800, 271);
+                    p.text("$150", x, 271);
                     break;
                 case "magicMissleer":
-                    p.text("Magic Missileer", 800, 241);
+                    p.text("Magic Missileer", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$150", 800, 271);
+                    p.text("$150", x, 271);
                     break;
                 case "wall":
-                    p.text("Wooden", 800, 241);
-                    p.text("Wall", 800, 266);
+                    p.text("Wooden", x, 241);
+                    p.text("Wall", x, 266);
                     p.textFont(mediumFont);
-                    p.text("$25", 800, 296);
+                    p.text("$25", x, 296);
                     break;
             }
             //if pressed
