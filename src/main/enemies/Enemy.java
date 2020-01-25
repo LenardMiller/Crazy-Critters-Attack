@@ -328,7 +328,7 @@ public abstract class Enemy {
         for (int i = points.size()-1; i >= 0; i--) {
             if (points.get(i).towers != null && points.get(i).towers.size() > 0) {
                 points.get(i).combat = true;
-                if (i > 0) bp = points.get(i + 1);
+                if (i < points.size()-1) bp = points.get(i + 1);
                 else bp = points.get(i);
                 bp.towers = points.get(i).towers;
                 bp.combat = true;
