@@ -129,7 +129,7 @@ public class Hand {
                 p.text("Selected:", 1000, 241);
                 p.textFont(largeFont);
                 if (tower.nextLevelB > 0) {
-                    p.text(tower.upgradeTitles[tower.nextLevelB - 1], 800, 276); //if not base level
+                    p.text(tower.upgradeTitles[tower.nextLevelB - 1], 1000, 276); //if not base level
                 } else p.text("Wooden", 1000, 276);
                 p.text("Wall", 1000, 301);
                 p.textFont(mediumFont);

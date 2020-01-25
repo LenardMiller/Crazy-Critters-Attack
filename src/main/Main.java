@@ -76,8 +76,8 @@ public class Main extends PApplet {
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
-    public static final int GRID_WIDTH = 900; //todo: extend outside of window
-    public static final int GRID_HEIGHT = 900;
+    public static final int GRID_WIDTH = 1100;
+    public static final int GRID_HEIGHT = 1100;
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
@@ -90,7 +90,6 @@ public class Main extends PApplet {
     public static Node[] end;
     public static AStar path;
     public static int nSize;
-    public static int numEnd;
     public static float maxCost;
     public static float minCost;
 
@@ -116,7 +115,6 @@ public class Main extends PApplet {
             }
         }
         enemies = new ArrayList<>();
-//        towers = new ArrayList<>();
         projectiles = new ArrayList<>();
         particles = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
@@ -137,23 +135,17 @@ public class Main extends PApplet {
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
         for (int x = 0; x < GRID_WIDTH / nSize; x++) {
             for (int y = 0; y < GRID_HEIGHT / nSize; y++) {
-                nodeGrid[x][y] = new Node(this, new PVector(nSize * x, nSize * y));
+                nodeGrid[x][y] = new Node(this, new PVector((nSize * x)-100, (nSize * y)-100));
             }
         }
         path = new AStar();
         openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nSize)));
         //create end nodes
         end = new Node[0];
-//        end = new Node[(int) (sq(1000f / nSize))];
-//        for (int i = (GRID_WIDTH / nSize) - 1; i >= 0; i--) {
-//            nodeGrid[i][(GRID_HEIGHT / nSize)-5].setEnd(i, (GRID_HEIGHT / nSize)-5);
-//        }
         //create start node
         nodeGrid[1][(GRID_WIDTH / nSize) / 2].setStart(1, (GRID_HEIGHT / nSize) / 2);
         start.findGHF();
-        for (int i = 0; i < numEnd; i++) {
-            end[i].findGHF();
-        }
+        for (Node node : end) node.findGHF();
         updateTowerArray();
         updateNodes();
     }

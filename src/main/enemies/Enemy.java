@@ -58,7 +58,7 @@ public abstract class Enemy {
         points = new ArrayList<>();
         position = new PVector(roundTo(x, 25) + 12.5f, roundTo(y, 25) + 12.5f);
         size = new PVector(20, 20);
-        angle = 0;
+        angle = radians(270);
         radius = 10;
         maxSpeed = 1;
         speed = maxSpeed;
@@ -85,7 +85,7 @@ public abstract class Enemy {
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         display();
         //prevent from going offscreen
-        if (position.x >= GRID_WIDTH || position.x <= 0 || position.y >= GRID_HEIGHT || position.y <= 0) dead = true;
+        if (position.x >= GRID_WIDTH-100 || position.x <= -100 || position.y >= GRID_HEIGHT-100 || position.y <= -100) dead = true;
         //if health is 0, die
         if (hp <= 0) dead = true;
         if (dead) die(i);
@@ -215,7 +215,7 @@ public abstract class Enemy {
     private void HpBar() {
         p.fill(255, 0, 0, barTrans);
         p.noStroke();
-        p.rect(position.x - size.x, position.y + size.y / 2 + 12, (2 * size.x) * (((float) hp) / ((float) maxHp)), 6);
+        p.rect(position.x - size.x/2 - 10, position.y + size.y / 2 + 6, (size.x + 20) * (((float) hp) / ((float) maxHp)), 6);
     }
 
     public void loadSprites() {
@@ -298,8 +298,8 @@ public abstract class Enemy {
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
         int kSize = 1;
-        int x = (int) point.position.x / 25;
-        int y = (int) point.position.y / 25;
+        int x = (int) (point.position.x+100) / 25;
+        int y = (int) (point.position.y+100) / 25;
         while (true) {
             for (int xn = 0; xn < kSize; xn++) {
                 for (int yn = 0; yn < kSize; yn++) {

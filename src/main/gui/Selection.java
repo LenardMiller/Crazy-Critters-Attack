@@ -19,9 +19,8 @@ public class Selection { //what tower is selected
 
     public void main() {
         clickoff();
-        if (!name.equals("null")) { //don't display if nothing held
-            display();
-        }
+        //don't display if nothing held
+        if (!name.equals("null") && tiles.get(id).tower != null) display();
     }
 
     public void swapSelected(int id) { //switches what is selected
@@ -29,9 +28,7 @@ public class Selection { //what tower is selected
         hand.held = "null";
         if (tower.turret) {
             for (int i = tiles.size() - 1; i >= 0; i--) {
-                if (tiles.get(i).tower != null) {
-                    tiles.get(i).tower.visualize = false;
-                }
+                if (tiles.get(i).tower != null) tiles.get(i).tower.visualize = false;
             }
             this.id = id;
             name = tower.name;
@@ -49,14 +46,10 @@ public class Selection { //what tower is selected
                 upgradeIconB.position.y = 715;
                 if (tower.nextLevelA < tower.upgradeNames.length / 2) {
                     upgradeIconA.sprite = tower.upgradeIcons[tower.nextLevelA];
-                } else {
-                    upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-                }
+                } else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
                 if (tower.nextLevelB < tower.upgradeNames.length) {
                     upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
-                } else {
-                    upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-                }
+                } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
             if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) {
                 targetButton.active = false;
@@ -73,9 +66,7 @@ public class Selection { //what tower is selected
                 upgradeIconB.position.y = 610;
                 if (tower.nextLevelB < tower.upgradeNames.length) {
                     upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
-                } else {
-                    upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-                }
+                } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
     }

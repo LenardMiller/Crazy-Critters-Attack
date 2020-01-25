@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static main.Main.BOARD_HEIGHT;
 import static main.Main.enemies;
 
-public class EnemyTracker { //keeps track of first last and strongest enemies, I cannot believe this works
+public class EnemyTracker { //keeps track of first last and strongest enemies, I cannot believe this works todo: replace
 
     private PApplet p;
 

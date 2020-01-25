@@ -2,6 +2,7 @@ package main.pathfinding;
 
 import main.Main;
 import main.enemies.Enemy;
+import main.towers.Tile;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -50,9 +51,11 @@ public class Node {
     }
 
     public void setStart(int x, int y) {
+        x += 4;
+        y += 4;
         if (Main.start != null) Main.start.isStart = false;
         Main.start = nodeGrid[x][y];
-        isStart = true;
+        start.isStart = true;
     }
 
     public void setEnd(int x, int y) {
@@ -61,7 +64,6 @@ public class Node {
             arrayCopy(end, end2);
             end2[end2.length - 1] = nodeGrid[x][y];
             end = end2;
-            numEnd++;
             isEnd = true;
         }
     }
@@ -69,19 +71,22 @@ public class Node {
     public void setNotEnd(int x, int y) {
         if (isEnd) {
             isEnd = false;
-            int index = numEnd + 1;
+            int index = end.length + 1;
             PVector pv = new PVector(x * nSize, y * nSize);
-            for (int i = 0; i < numEnd; i++) {
-                if (end[i] != null) {
-                    if (end[i].position.x == pv.x && end[i].position.y == pv.y) {
+            for (int i = 0; i < end.length; i++) {
+                if (end[i] != null) { //shouldn't be necessary?
+                    if (end[i].position.x == pv.x && end[i].position.y == pv.y && i < end.length - 1) {
                         end[i] = end[i + 1];
                         index = i;
                     }
-                    if (i > index && i < numEnd - 1) end[i] = end[i + 1];
-                    if (i == numEnd - 1) end[i] = null;
+                    if (i > index && i < end.length - 1) end[i] = end[i + 1];
+                    if (i == end.length - 1) {
+                        Node[] endB = new Node[end.length-1];
+                        System.arraycopy(end, 0, endB, 0, endB.length);
+                        end = endB;
+                    }
                 }
             }
-            numEnd--;
         }
     }
 
@@ -93,27 +98,22 @@ public class Node {
             isOpen = true;
             findGHF();
         }
-        if (parentNew.isClosed || parentNew.isStart) {
-            if ((isOpen || isClosed) && parent == null) {
-                parent = parentNew;
-                findGHF();
-                openNodes.addItem(new HeapNode.ItemNode(nodeGrid[(int) (position.x / nSize)][(int) (position.y / nSize)]));
-            }
-            if ((isOpen || isClosed) && parentNew.startCost < parent.startCost) { //these have to be split in two because parent might be null
-                parent = parentNew;
-                findGHF();
-                openNodes.addItem(new HeapNode.ItemNode(nodeGrid[(int) (position.x / nSize)][(int) (position.y / nSize)]));
-            }
+        if ((parentNew.isClosed || parentNew.isStart) && (isOpen || isClosed) && (parent == null || parentNew.startCost < parent.startCost)) {
+            parent = parentNew;
+            findGHF();
+            openNodes.addItem(new HeapNode.ItemNode(nodeGrid[(int) ((position.x + 100) / nSize)][(int) ((position.y + 100) / nSize)]));
         }
     }
 
     public void checkObs() {
         int towerX = (int) (position.x / 50) + 1;
         int towerY = (int) (position.y / 50) + 1;
-        tower = tiles.get(towerX, towerY).tower;
+        Tile tile = tiles.get(towerX, towerY);
+        tower = null;
+        if (tile != null) tower = tile.tower;
         if (tower != null) {
             movementPenalty = tower.maxHp;
-            if (tower.turret) setEnd((int) (position.x / nSize), (int) (position.y / nSize));
+            if (tower.turret) setEnd((int) ((position.x + 100) / nSize), (int) ((position.y + 100) / nSize));
         } else movementPenalty = 0;
     }
 
@@ -129,7 +129,7 @@ public class Node {
                 enemy.points.add(new Enemy.TurnPoint(p, parent.position, tower));
             }
             setDone();
-        } else updateNode(nodeGrid[(int) (position.x / nSize)][(int) (position.y / nSize)], request);
+        } else updateNode(nodeGrid[(int) ((position.x + 100) / nSize)][(int) ((position.y + 100) / nSize)], request);
         findGHF();
     }
 
@@ -144,17 +144,17 @@ public class Node {
     public void findGHF() {
         if (isEnd) endCost = 0;
         else if (end.length > 0) {
-            HeapFloat endH = new HeapFloat(numEnd);
-            for (int i = 0; i < numEnd; i++) {
-                if (end[i] != null) {
-                    end[i].findGHF();
-                    PVector d = PVector.sub(position, end[i].position);
+            HeapFloat endH = new HeapFloat(end.length);
+            for (Node node : end) {
+                if (node != null) {
+                    node.isEnd = true;
+                    node.findGHF();
+                    PVector d = PVector.sub(position, node.position);
                     endCost = sqrt(sq(d.x) + sq(d.y));
                     endH.addItem(new HeapFloat.ItemFloat(endCost));
                 }
             }
-            if (endH.currentCount > 0) endCost = endH.removeFirstItem().value;
-            else endCost = 0;
+            endCost = endH.removeFirstItem().value;
         }
         if (isStart) startCost = 0;
         else {

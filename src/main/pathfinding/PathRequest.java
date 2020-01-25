@@ -30,10 +30,10 @@ public class PathRequest {
         }
 
         enemy.points = new ArrayList<>();
-        PVector pfPosition = new PVector(enemy.position.x-((enemy.pfSize-1)*12.5f),enemy.position.y-((enemy.pfSize-1)*12.5f));
-        int x = (int)(pfPosition.x/nSize);
-        int y = (int)(pfPosition.y/nSize);
-        nodeGrid[x][y].setStart(x,y);
+        PVector pfPosition = new PVector(enemy.position.x-((enemy.pfSize-1)*12.5f)+100,enemy.position.y-((enemy.pfSize-1)*12.5f)+100);
+        int x = (int)((pfPosition.x)/nSize);
+        int y = (int)((pfPosition.y)/nSize);
+        nodeGrid[x][y].setStart(x-4,y-4);
         Main.start.findGHF();
         updateNode(Main.start,this);
         Main.path.done = false;

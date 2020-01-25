@@ -16,7 +16,6 @@ public class AStar {
 
     public void find(int index) {
         this.index = index;
-
         while (openNodes.currentCount > 0 && !done) {
             Node current = openNodes.removeFirstItem().node;
             current.setClose();

@@ -28,7 +28,7 @@ public class UpdatePath {
             }
         }
         else {
-            start.setStart((int)(start.position.x/nSize),(int)(start.position.y/nSize)); //issue here?
+            start.setStart((int)(start.position.x/nSize),(int)(start.position.y/nSize));
             start.findGHF();
             updateNode(start,null);
             path.done = false;
