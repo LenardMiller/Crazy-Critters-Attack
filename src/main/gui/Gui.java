@@ -25,9 +25,7 @@ public class Gui {
             }
 
         }
-        addHp.main();
         addMoney.main();
-        hpIcon.main();
         moneyIcon.main();
         if (!isTowers) {
             sellButton.active = false;
@@ -52,22 +50,23 @@ public class Gui {
         p.fill(255);
         p.textFont(largeFont);
         p.textAlign(LEFT);
-        //debug related stuff
-        p.text("enemies: " + enemies.size(), x, 30);
-        p.text("towers: " + towers.size(), x, 60);
-        p.text("projectiles: " + projectiles.size(), x, 90);
-        p.text("particles: " + particles.size(), x, 120);
-        p.text("X: " + p.mouseX + " Y: " + p.mouseY, x, BOARD_HEIGHT -x);
+        if (debug) {
+            p.text("enemies: " + enemies.size(), x, 30);
+            p.text("towers: " + towers.size(), x, 60);
+            p.text("projectiles: " + projectiles.size(), x, 90);
+            p.text("particles: " + particles.size(), x, 120);
+            p.text("X: " + p.mouseX + " Y: " + p.mouseY, x, BOARD_HEIGHT - x);
+            p.textAlign(RIGHT);
+            p.text(round(p.frameRate) + " fps", BOARD_WIDTH - x, 30);
+        }
         p.textAlign(RIGHT);
-        p.text(round(p.frameRate) + " fps", BOARD_WIDTH - x, 30);
         p.fill(0);
-        p.text(hp, p.width - x, 30);
         p.text(nfc(money), p.width - x, 60);
-        if (!alive){
+        if (!alive) {
             p.textAlign(CENTER);
             p.textFont(veryLargeFont);
             p.fill(75,0,0);
-            p.text("Game Over", p.width/2, p.height/2);
+            p.text("Game Over", p.width/2f, p.height/2f);
         }
         //textFont(TWFont); //replaced with healthbars
         //fill(255);
@@ -85,11 +84,9 @@ public class Gui {
     }
 
     private void build() {
-        //add money & add lives buttons
-        addHp = (new AddHp(p,BOARD_WIDTH + 22.5f,17.5f,"null",true));
+        //add money button
         addMoney = (new AddMoney(p,BOARD_WIDTH + 22.5f,47.5f,"null",true));
-        //money and lives icons
-        hpIcon = (new GuiObject(p,BOARD_WIDTH + 57.5f, 17.5f,"livesIc",true));
+        //money icon
         moneyIcon = (new GuiObject(p,BOARD_WIDTH + 57.5f, 47.5f,"moneyIc",true));
         //buy tower buttons tab 1 (4-18)
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 87,"slingshot",true)); //row 1
@@ -124,18 +121,18 @@ public class Gui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 167,"null",false));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 167,"null",false));
         //switch tower tab button
-        towerTabButton = new TowerTab(p,800,198,"null",true);
+        towerTabButton = new TowerTab(p,1000,198,"null",true);
         //sell tower button
-        sellButton = new SellTower(p,800,877.5f,"null",false);
+        sellButton = new SellTower(p,1000,877.5f,"null",false);
         //target priority button
-        targetButton = new TargetPriority(p,800,832.5f,"null",false);
+        targetButton = new TargetPriority(p,1000,832.5f,"null",false);
         //upgrade wall button zero
-        upgradeButtonA = new UpgradeTower(p,800,480,"null",false, 0);
+        upgradeButtonA = new UpgradeTower(p,1000,480,"null",false, 0);
         //upgrade wall button one
-        upgradeButtonB = new UpgradeTower(p,800,630,"null",false, 1);
+        upgradeButtonB = new UpgradeTower(p,1000,630,"null",false, 1);
         //upgrade wall icon
-        upgradeIconA = new UpgradeIcon(p,830,610,"null",false);
+        upgradeIconA = new UpgradeIcon(p,1030,610,"null",false);
         //upgrade wall icon
-        upgradeIconB = new UpgradeIcon(p,830,610,"null",false);
+        upgradeIconB = new UpgradeIcon(p,1030,610,"null",false);
     }
 }

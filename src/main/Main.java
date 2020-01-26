@@ -16,7 +16,6 @@ import main.projectiles.Projectile;
 import main.towers.Tile;
 import main.towers.Tower;
 import main.util.CompressArray;
-import main.util.EnemyTracker;
 import main.util.KeyBinds;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -26,12 +25,12 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static main.util.MiscMethods.*;
 import static main.util.SpriteLoader.loadSprites;
 import static main.util.SpriteLoader.loadSpritesAnim;
 
 public class Main extends PApplet {
 
-    public static EnemyTracker enemyTracker;
     public static Tile.TileDS tiles;
     public static KeyDS keysPressed = new KeyDS();
     public static InputHandler inputHandler;
@@ -62,43 +61,41 @@ public class Main extends PApplet {
     public static Hand hand;
     public static Selection selection;
 
-    public static int backRed = 25;
-    public static int redSpeed = 8;
-
     public static PFont veryLargeFont;
     public static PFont largeFont;
     public static PFont mediumLargeFont;
     public static PFont mediumFont;
     public static PFont smallFont;
 
-    public static int hp = 2000;
     public static int money = 2000;
     public static boolean alive = true;
+    public static boolean debug = false;
 
-    public static final int BOARD_WIDTH = 700;
+    public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
-    public static final int GRID_WIDTH = 700;
+    public static final int GRID_WIDTH = 1100;
     public static final int GRID_HEIGHT = 1100;
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
 
     //pathfinding stuff
+    public static int defaultSize = 1;
     public static Node[][] nodeGrid;
     public static HeapNode openNodes;
     public static Node start;
     public static Node[] end;
     public static AStar path;
     public static int nSize;
-    public static int numEnd;
-    public static boolean debugPathfinding = false;
+    public static float maxCost;
+    public static float minCost;
 
     public static void main(String[] args) {
         PApplet.main("main.Main", args);
     }
 
     public void settings() {
-        size(900, 900);
+        size(1100, 900);
     }
 
     public void setup() {
@@ -115,7 +112,6 @@ public class Main extends PApplet {
             }
         }
         enemies = new ArrayList<>();
-//        towers = new ArrayList<>();
         projectiles = new ArrayList<>();
         particles = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
@@ -129,38 +125,32 @@ public class Main extends PApplet {
         keyBinds.loadKeyBinds();
         hand = new Hand(this);
         selection = new Selection(this);
-        enemyTracker = new EnemyTracker(this);
         gui = new Gui(this);
         //pathfinding stuff
-        nSize = 10;
+        nSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
         for (int x = 0; x < GRID_WIDTH / nSize; x++) {
             for (int y = 0; y < GRID_HEIGHT / nSize; y++) {
-                nodeGrid[x][y] = new Node(this, new PVector(nSize * x, (nSize * y) - 100));
+                nodeGrid[x][y] = new Node(this, new PVector((nSize * x)-100, (nSize * y)-100));
             }
         }
         path = new AStar();
-        openNodes = new HeapNode((int) (sq(GRID_WIDTH / nSize)));
-        end = new Node[(int) (sq(1000 / nSize))];
-        for (int i = (GRID_WIDTH / nSize) - 1; i >= 0; i--) {
-            nodeGrid[i][(GRID_HEIGHT / nSize) - 1].setEnd(i, (GRID_HEIGHT / nSize) - 1);
-        }
+        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nSize)));
+        //create end nodes
+        end = new Node[0];
+        //create start node
         nodeGrid[1][(GRID_WIDTH / nSize) / 2].setStart(1, (GRID_HEIGHT / nSize) / 2);
         start.findGHF();
-        for (int i = 0; i < numEnd; i++) {
-            end[i].findGHF();
-        }
-        AStar.updateNodes(start);
-        path.updatePath();
+        for (Node node : end) node.findGHF();
         updateTowerArray();
+        updateNodes();
     }
 
     public void draw() {
-        //bg
+        //bg todo: make background
         noStroke();
-        fill(backRed, 25, 25);
+        fill(25, 25, 25);
         rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
-        backRed -= redSpeed;
         //keys
         keyBinds.debugKeys();
         keyBinds.spawnKeys();
@@ -169,13 +159,10 @@ public class Main extends PApplet {
             path.reqQ.get(0).getPath();
             path.reqQ.remove(0);
         }
-        //self explanitory
+        maxCost = maxCost();
+        minCost = minCost(maxCost);
+        //objects
         drawObjects();
-        //bg part 2: red todo: this will need to be redone when bg textures are thrown in
-        if (backRed < 25) {
-            backRed = 25;
-            redSpeed = 8;
-        }
         //gui stuff
         noStroke();
         fill(200);
@@ -198,7 +185,7 @@ public class Main extends PApplet {
 
     private void drawObjects() {
         //pathfinding debug
-        if (debugPathfinding) {
+        if (debug) {
             for (Node[] nodes : nodeGrid) {
                 for (Node node : nodes) {
                     node.display();
@@ -207,24 +194,16 @@ public class Main extends PApplet {
             fill(0,0,255);
             rect(start.position.x,start.position.y,nSize,nSize);
         }
-        //enemy tracker
-        enemyTracker.main(enemies);
         //towers
-        for (Tower tower : towers) {
-            tower.main();
-        }
+        for (Tower tower : towers) tower.main();
         //tower hp bars
-        for (Tower tower : towers) {
-            tower.hpBar();
-        }
+        for (Tower tower : towers) tower.hpBar();
         //enemies
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
             enemy.main(i);
         }
-        if (enemies.size() == 0) {
-            buffs = new ArrayList<>();
-        }
+        if (enemies.size() == 0) buffs = new ArrayList<>();
         //projectiles
         for (int i = projectiles.size() - 1; i >= 0; i--) {
             Projectile projectile = projectiles.get(i);
@@ -248,7 +227,8 @@ public class Main extends PApplet {
         inputHandler.key(true);
     }
 
-    public void keyReleased() { inputHandler.key(false);
+    public void keyReleased() {
+        inputHandler.key(false);
     }
 
     public void mousePressed() {
@@ -257,17 +237,6 @@ public class Main extends PApplet {
 
     public void mouseReleased() {
         inputHandler.mouse(false);
-    }
-
-    public static void updateTowerArray() {
-        towers = new ArrayList<>();
-        for (int i = 0; i < tiles.size(); i++) {
-            Tower tower = tiles.get(i).tower;
-            if (tower != null) {
-                towers.add(tower);
-                if (!tower.turret) tower.updateSprite();
-            }
-        }
     }
 
     public class InputHandler {

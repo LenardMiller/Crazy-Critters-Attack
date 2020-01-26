@@ -7,6 +7,7 @@ public class SmolBug extends Enemy{
     public SmolBug(PApplet p, float x, float y){
         super(p,x,y);
         size = new PVector(12,12);
+        pfSize = 1;
         radius = 6;
         maxSpeed = .4f;
         speed = maxSpeed;

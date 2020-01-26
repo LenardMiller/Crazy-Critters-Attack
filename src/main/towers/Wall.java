@@ -5,6 +5,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.util.MiscMethods.updateTowerArray;
 
 public class Wall extends Tower {
 

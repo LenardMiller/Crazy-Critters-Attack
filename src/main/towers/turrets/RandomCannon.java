@@ -8,9 +8,10 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.util.MiscMethods.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
-public class RandomCannon extends Turret{
+public class RandomCannon extends Turret {
 
     public RandomCannon(PApplet p, Tile tile) {
         super(p,tile);
@@ -19,8 +20,8 @@ public class RandomCannon extends Turret{
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 40; //default: 40 frames
-        delay += (round(p.random(-(delay/10),delay/10))); //injects 10% randomness so all don't fire at once
+        delay = 25; //default: 25 frames
+        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
         numFireFrames = 12;
@@ -44,7 +45,7 @@ public class RandomCannon extends Turret{
         updateTowerArray();
     }
 
-    public void fire(){ //needed to change projectile fired
+    public void fire() { //needed to change projectile fired
         angle += PApplet.radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         int spriteType = (int)(p.random(0,5.99f));
@@ -55,7 +56,7 @@ public class RandomCannon extends Turret{
         projectiles.add(new MiscProjectile(p,spp.x,spp.y, angle, spriteType, damage));
     }
 
-    private void setUpgrades(){
+    private void setUpgrades() {
         //special
         upgradeSpecial[0] = false;
         upgradeSpecial[1] = false;
@@ -128,14 +129,10 @@ public class RandomCannon extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgrade(int id){
+    public void upgrade(int id) {
         int nextLevel;
-        if (id == 0){
-            nextLevel = nextLevelA;
-        }
-        else{
-            nextLevel = nextLevelB;
-        }
+        if (id == 0) nextLevel = nextLevelA;
+        else nextLevel = nextLevelB;
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
         price += upgradePrices[nextLevel];
@@ -152,30 +149,15 @@ public class RandomCannon extends Turret{
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
         sprite = upgradeSprites[nextLevel];
-        if (id == 0){
+        if (id == 0) {
             nextLevelA++;
-        }
-        else if (id == 1){
-            nextLevelB++;
-        }
-        if (id == 0){
-            if (nextLevelA < upgradeNames.length/2){
-                upgradeIconA.sprite = upgradeIcons[nextLevelA];
-            }
-            else{
-                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
-        }
-        if (id == 1){
-            if (nextLevelB < upgradeNames.length){
-                upgradeIconB.sprite = upgradeIcons[nextLevelB];
-            }
-            else{
-                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
-        }
+            if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
+            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+        } else if (id == 1) nextLevelB++;
+        if (id == 1) if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
+        for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }

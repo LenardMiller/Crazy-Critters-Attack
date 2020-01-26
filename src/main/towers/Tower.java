@@ -6,6 +6,8 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.util.MiscMethods.updateNodes;
+import static main.util.MiscMethods.updateTowerArray;
 
 public abstract class Tower {
 
@@ -82,6 +84,7 @@ public abstract class Tower {
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4];
+        updateNodes();
         updateTowerArray();
     }
 
@@ -107,7 +110,7 @@ public abstract class Tower {
         if (tintColor < 255) tintColor += 20;
     }
 
-    public void collideEN(int dangerLevel) { //if it touches an enemy, animate and loose health
+    public void damage(int dangerLevel) { //if it touches an enemy, animate and loose health
         hp -= dangerLevel;
         hit = true;
         barTrans = 255;
@@ -131,7 +134,7 @@ public abstract class Tower {
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
-//        path.nodeCheckObs();
+        updateNodes();
     }
 
     public void die() {
@@ -143,7 +146,7 @@ public abstract class Tower {
         if (selection.id == tile.id) selection.id = 0;
         tile.tower = null;
         updateTowerArray();
-//        path.nodeCheckObs();
+        updateNodes();
     }
 
     public void repair() {
@@ -153,14 +156,14 @@ public abstract class Tower {
 
     public void sell() {
         money += (int) (value * .8);
-        die(); //creates particles (may need to change later)
+        die();
     }
 
     protected void hpText(){ //displays the towers health
         p.text(hp, tile.position.x-size.x/2, tile.position.y + size.y/4);
     }
 
-    public void hpBar(){ //displays the towers health with style
+    public void hpBar(){ //displays the towers health with style todo: replace with cracks
         if (hp > 0) { //prevent inverted bars
             p.fill(0, 255, 0, barTrans);
             //after hit or if below 50%

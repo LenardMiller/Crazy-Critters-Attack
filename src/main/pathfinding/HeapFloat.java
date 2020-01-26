@@ -6,19 +6,19 @@ public class HeapFloat{
     public int currentCount;
     public ItemFloat[] items;
 
-    public HeapFloat(int maxCount){
+    public HeapFloat(int maxCount) {
         this.maxCount = maxCount;
         items = new ItemFloat[maxCount];
     }
 
-    public void addItem(ItemFloat item){
+    public void addItem(ItemFloat item) {
         items[currentCount] = item;
         item.index = currentCount;
         sortUp(item);
         currentCount++;
     }
 
-    public ItemFloat removeFirstItem(){
+    public ItemFloat removeFirstItem() {
         ItemFloat first = items[0];
         currentCount--;
         items[0] = items[currentCount];
@@ -35,41 +35,29 @@ public class HeapFloat{
         return (items[item.index] == item);
     }
 
-    public void sortDown(ItemFloat item){
-        while(true){
+    public void sortDown(ItemFloat item) {
+        while(true) {
             int childIndexA = item.index*2+1;
             int childIndexB = item.index*2+2;
             int swapIndex = 0;
-            if (childIndexA < currentCount){
+            if (childIndexA < currentCount) {
                 swapIndex = childIndexA;
-                if (childIndexB < currentCount){
-                    if (items[childIndexA].value > items[childIndexB].value){
-                        swapIndex = childIndexB;
-                    }
+                if (childIndexB < currentCount) {
+                    if (items[childIndexA].value > items[childIndexB].value) swapIndex = childIndexB;
                 }
-                if (item.value > items[swapIndex].value){
-                    swap(item,items[swapIndex]);
-                }
-                else{
-                    return;
-                }
+                if (item.value > items[swapIndex].value) swap(item, items[swapIndex]);
+                else return;
             }
-            else{
-                return;
-            }
+            else return;
         }
     }
 
-    public void sortUp(ItemFloat item){
+    public void sortUp(ItemFloat item) {
         int parentIndex = (item.index-1)/2;
         while(true) {
             ItemFloat parent = items[parentIndex];
-            if (item.value < parent.value){
-                swap(item,parent);
-            }
-            else{
-                break;
-            }
+            if (item.value < parent.value) swap(item, parent);
+            else break;
             parentIndex = (item.index-1)/2;
         }
     }
@@ -88,7 +76,7 @@ public class HeapFloat{
         ItemFloat childB;
         float value;
         int index;
-        ItemFloat(float value){
+        ItemFloat(float value) {
             this.value = value;
         }
     }

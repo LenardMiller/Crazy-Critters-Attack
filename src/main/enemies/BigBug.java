@@ -5,15 +5,16 @@ import processing.core.PVector;
 
 public class BigBug extends Enemy{
 
-    public BigBug(PApplet p, float x, float y){
+    public BigBug(PApplet p, float x, float y) { //todo: redo bug walking animations
         super(p,x,y);
         size = new PVector(53,53);
+        pfSize = 2; //2
         radius = 26;
         maxSpeed = .3f;
         speed = maxSpeed;
         dangerLevel = 1;
         twDamage = 15;
-        maxHp = 80; //Hp <---------------------------
+        maxHp = 80; //80
         hp = maxHp;
         hitParticle = "redOuch";
         name = "bigBug";

@@ -9,10 +9,12 @@ import main.pathfinding.AStar;
 import main.projectiles.*;
 import main.towers.Tower;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.util.MiscMethods.updateNodes;
 
 public class KeyBinds {
 
@@ -32,6 +34,7 @@ public class KeyBinds {
         boolean largeEnergyBlast = keysPressed.getPressedPulse('T') && alive;
         boolean magicMissle = keysPressed.getPressedPulse('y') && alive;
         //enemies
+        boolean randomEnemy = keysPressed.getPressedPulse('0') && alive;
         boolean littleBug = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
         boolean mediumBug = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
         boolean bigBug = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
@@ -55,8 +58,9 @@ public class KeyBinds {
         if (miscProjectile) projectiles.add(new MiscProjectile(p, p.mouseX, p.mouseY, 0, round(p.random(0, 5)), 6));
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, 20, 20, false));
         if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, 20, 30, true));
-        if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, 5, 0));
+        if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, 5, 0, new PVector(p.mouseX,p.mouseY)));
         //enemies
+        if (randomEnemy) spawnRandom();
         if (littleBug) {
             enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
             enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
@@ -115,6 +119,47 @@ public class KeyBinds {
         if (largeExplosion) particles.add(new LargeExplosion(p, p.mouseX, p.mouseY, p.random(0, 360)));
     }
 
+    private PVector randomSpawnPosition() {
+        float x;
+        float y;
+        boolean xy = p.random(0,1) > 0.5;
+        if (xy) {
+            x = p.random(-100,0);
+            y = p.random(-100,1000);
+        } else {
+            x = p.random(-100,1000);
+            y = p.random(-100,0);
+        }
+        if (p.random(0,1) > 0.5 && xy) x += 1000;
+        if (p.random(0,1) > 0.5 && !xy) y += 1000;
+        return new PVector(x,y);
+    }
+
+    private void spawnRandom() {
+        int r = (int) p.random(0,4.99f);
+        PVector rp = randomSpawnPosition();
+        if (r == 0) {
+            enemies.add(new SmolBug(p, rp.x, rp.y));
+            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        }
+        if (r == 1) {
+            enemies.add(new MidBug(p, rp.x, rp.y));
+            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        }
+        if (r == 2) {
+            enemies.add(new BigBug(p, rp.x, rp.y));
+            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        }
+        if (r == 3) {
+            enemies.add(new TreeSprite(p, rp.x, rp.y));
+            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        }
+        if (r == 4) {
+            enemies.add(new TreeSpirit(p, rp.x, rp.y));
+            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        }
+    }
+
     public void debugKeys() {
         //entity stuff
         boolean killEnemies = keysPressed.getReleasedPulse('s') && alive;
@@ -123,19 +168,19 @@ public class KeyBinds {
         boolean killProjectiles = keysPressed.getReleasedPulse('f') && alive;
         //other stuff
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
-        boolean reloadPathfinding = keysPressed.getReleasedPulse(' ');
+        boolean updatePaths = keysPressed.getPressedPulse(' ');
         //entity stuff
         if (killEnemies) {
-            enemies = new ArrayList<Enemy>();
+            enemies = new ArrayList<>();
             buffs = new ArrayList<>();
-            path.updatePath();
+            updateNodes();
         }
         if (killTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
                 if (tower != null) tower.die();
             }
-//            path.nodeCheckObs();
+            updateNodes();
         }
         if (hurtTowers) {
             for (int i = 0; i < tiles.size(); i++) {
@@ -145,14 +190,13 @@ public class KeyBinds {
                     tower.barTrans = 255;
                 }
             }
-//            path.nodeCheckObs();
+            updateNodes();
         }
         if (killProjectiles) projectiles = new ArrayList<>();
-        //other stuff;
-        if (displayPathLines) debugPathfinding = !debugPathfinding;
-        if (reloadPathfinding) {
-            AStar.updateNodes(start);
-            path.updatePath();
+        //other stuff
+        if (displayPathLines) debug = !debug;
+        if (updatePaths) {
+            updateNodes();
         }
     }
 
