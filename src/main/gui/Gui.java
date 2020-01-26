@@ -25,9 +25,7 @@ public class Gui {
             }
 
         }
-        addHp.main();
         addMoney.main();
-        hpIcon.main();
         moneyIcon.main();
         if (!isTowers) {
             sellButton.active = false;
@@ -63,7 +61,6 @@ public class Gui {
         }
         p.textAlign(RIGHT);
         p.fill(0);
-        p.text(hp, p.width - x, 30);
         p.text(nfc(money), p.width - x, 60);
         if (!alive) {
             p.textAlign(CENTER);
@@ -87,11 +84,9 @@ public class Gui {
     }
 
     private void build() {
-        //add money & add lives buttons
-        addHp = (new AddHp(p,BOARD_WIDTH + 22.5f,17.5f,"null",true));
+        //add money button
         addMoney = (new AddMoney(p,BOARD_WIDTH + 22.5f,47.5f,"null",true));
-        //money and lives icons
-        hpIcon = (new GuiObject(p,BOARD_WIDTH + 57.5f, 17.5f,"livesIc",true));
+        //money icon
         moneyIcon = (new GuiObject(p,BOARD_WIDTH + 57.5f, 47.5f,"moneyIc",true));
         //buy tower buttons tab 1 (4-18)
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 87,"slingshot",true)); //row 1

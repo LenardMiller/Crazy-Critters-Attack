@@ -67,7 +67,6 @@ public class Main extends PApplet {
     public static PFont mediumFont;
     public static PFont smallFont;
 
-    public static int hp = 2000; //todo: remove
     public static int money = 2000;
     public static boolean alive = true;
     public static boolean debug = false;
@@ -228,7 +227,8 @@ public class Main extends PApplet {
         inputHandler.key(true);
     }
 
-    public void keyReleased() { inputHandler.key(false);
+    public void keyReleased() {
+        inputHandler.key(false);
     }
 
     public void mousePressed() {
