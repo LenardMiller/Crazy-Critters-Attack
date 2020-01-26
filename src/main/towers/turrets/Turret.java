@@ -29,6 +29,7 @@ public abstract class Turret extends Tower {
     float loadDelay;
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
+    private Enemy targetEnemy;
 
     Turret(PApplet p, Tile tile) {
         super(p, tile);
@@ -72,15 +73,8 @@ public abstract class Turret extends Tower {
     }
 
     public void checkTarget() {
-        if (priority == 0) { //first
-            aim(enemyTracker.firstPos, tile.position, enemyTracker.firstId);
-        } else if (priority == 1) { //last
-            aim(enemyTracker.lastPos, tile.position, enemyTracker.lastId);
-        } else if (priority == 2) { //strong
-            aim(enemyTracker.strongPos, tile.position, enemyTracker.strongId);
-        } else { //first, placeholder for close
-            aim(enemyTracker.firstPos, tile.position, enemyTracker.firstId);
-        }
+        getTargetEnemy();
+        if (targetEnemy != null) aim(targetEnemy);
         if (frame == 0 && spriteType == 0) { //if done animating
             spriteType = 1;
             frame = 0;
@@ -88,9 +82,40 @@ public abstract class Turret extends Tower {
         }
     }
 
-    private void aim(PVector target, PVector position, int id) {
-        Enemy enemy = enemies.get(id);
+    private void getTargetEnemy() {
+        //0: close
+        //1: far
+        //2: strong
+        float dist;
+        if (priority == 0) dist = 1000000;
+        else dist = 0;
+        float maxHp = 0;
+        Enemy e = null;
+        for (Enemy enemy : enemies) {
+            float x = abs(tile.position.x - enemy.position.x);
+            float y = abs(tile.position.y - enemy.position.y);
+            float t = sqrt(sq(x)+sq(y));
+            if (priority == 0 && t < dist) { //close
+                e = enemy;
+                dist = t;
+            } if (priority == 1 && t > dist) { //far
+                e = enemy;
+                dist = t;
+            } if (priority == 2) if (enemy.maxHp > maxHp) { //strong
+                e = enemy;
+                maxHp = enemy.maxHp;
+            } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                e = enemy;
+                dist = t;
+            }
+        }
+        targetEnemy = e;
+    }
+
+    private void aim(Enemy enemy) {
+        PVector position = tile.position;
         PVector e = PVector.div(enemy.size, 2);
+        PVector target = enemy.position;
         target = PVector.add(target, e);
         PVector d = PVector.sub(target, position); //finds distance to enemy
         PVector t = PVector.div(d, pjSpeed); //finds time to hit
