@@ -33,7 +33,7 @@ public class InGameGui {
         wallBuyButton.main();
         addMoneyButton.main();
         moneyIcon.main();
-        if (!isTowers) {
+        if (!isTowers || selection.name.equals("null")) {
             sellButton.active = false;
             targetButton.active = false;
             upgradeButtonA.active = false;
@@ -72,7 +72,7 @@ public class InGameGui {
         p.textFont(largeFont);
         p.fill(0);
         p.textAlign(RIGHT);
-        p.text(nfc(money), p.width - x, 211-4);
+        p.text(nfc(money), p.width - x, 211-5);
         if (!alive) {
             p.textAlign(CENTER);
             p.textFont(veryLargeFont);

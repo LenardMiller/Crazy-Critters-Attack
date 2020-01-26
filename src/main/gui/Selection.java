@@ -11,6 +11,7 @@ public class Selection { //what tower is selected
 
     public String name;
     public int id;
+    public Tower tower;
 
     public Selection(PApplet p) {
         this.p = p;
@@ -24,7 +25,7 @@ public class Selection { //what tower is selected
     }
 
     public void swapSelected(int id) { //switches what is selected
-        Tower tower = tiles.get(id).tower;
+        tower = tiles.get(id).tower;
         hand.held = "null";
         if (tower.turret) {
             for (int i = tiles.size() - 1; i >= 0; i--) {

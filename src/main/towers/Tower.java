@@ -142,10 +142,10 @@ public abstract class Tower {
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
-        if (selection.id > tile.id) selection.id--;
-        if (selection.id == tile.id) selection.id = 0;
         tile.tower = null;
         updateTowerArray();
+        if (selection.id == tile.id) selection.name = "null";
+        else if (!selection.name.equals("null")) selection.swapSelected(selection.tower.tile.id);
         updateNodes();
     }
 

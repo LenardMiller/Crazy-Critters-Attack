@@ -29,7 +29,7 @@ public class WallBuy extends Button {
     }
 
     public void hover(){ //below is if hovered or depressed
-        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active || depressed && alive) {
+        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active) {
             sprite = spriteTwo;
             p.fill(235);
             p.noStroke();
@@ -45,6 +45,7 @@ public class WallBuy extends Button {
 
     public void action() {
         depressed = !depressed;
+        selection.name = "null";
         //if already holding, stop
         if (hand.held.equals("wall")) hand.setHeld("null");
         //if not, do
