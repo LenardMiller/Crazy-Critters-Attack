@@ -145,7 +145,7 @@ public class Selection { //what tower is selected
             p.textAlign(LEFT);
             p.fill(100, 0, 200);
             p.text("Three homing missiles", 910, 376 + offset);
-            p.text("First, last and strong", 910, 396 + offset);
+            p.text("close, far and strong", 910, 396 + offset);
         }
         if ("magicMissleerFour".equals(tower.name)) {
             p.text("Magic Missileer", 1000, 241);
