@@ -198,6 +198,8 @@ public class SpriteLoader {
         spritesH.put("livesIc",p.loadImage("sprites/guiObjects/lives.png"));
         spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
         spritesH.put("nullIc",p.loadImage("sprites/guiObjects/null.png"));
+        spritesH.put("towerBuyBgIC",p.loadImage("sprites/guiObjects/towerBuyBg.png"));
+        spritesH.put("moneyBgIC",p.loadImage("sprites/guiObjects/moneyBg.png"));
         spritesH.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
         spritesH.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));
         spritesH.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));

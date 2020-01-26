@@ -24,10 +24,15 @@ public class InGameGui {
                 break;
             }
         }
+        p.fill(235);
+        p.rect(900,212,200,688);
         openMenuButton.main();
+        p.fill(130);
+        p.rect(900,21,200,127);
+        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
+        wallBuyButton.main();
         addMoneyButton.main();
         moneyIcon.main();
-        wallBuyButton.main();
         if (!isTowers) {
             sellButton.active = false;
             targetButton.active = false;
@@ -43,7 +48,6 @@ public class InGameGui {
         upgradeIconA.main();
         upgradeIconB.main();
         if (isTowers) selection.main();
-        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
     }
 
     public void drawText(PApplet p, int x) {
@@ -66,6 +70,7 @@ public class InGameGui {
         p.fill(0);
         p.text("Walls", 1000, 170);
         p.textFont(largeFont);
+        p.fill(0);
         p.textAlign(RIGHT);
         p.text(nfc(money), p.width - x, 211-4);
         if (!alive) {
@@ -78,24 +83,24 @@ public class InGameGui {
 
     private void build() {
         openMenuButton = new OpenMenu(p,BOARD_WIDTH+100,12,"null",true);
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 21.5f, 45.5f,"slingshot",true)); //row 1
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 60.5f, 45.5f,"crossbow",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 101.5f, 45.5f,"miscCannon",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 140.5f, 45.5f,"energyBlaster",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 179.5f, 45.5f,"magicMissleer",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 21.5f, 85.5f,"null",true)); //row 2
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 60.5f, 85.5f,"null",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 101.5f, 85.5f,"null",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 140.5f, 85.5f,"null",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 179.5f, 85.5f,"null",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 21.5f, 124.5f,"null",true)); //row 3
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 60.5f, 124.5f,"null",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 101.5f, 124.5f,"null",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 140.5f, 124.5f,"null",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 179.5f, 124.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 45.5f,"slingshot",true)); //row 1
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 45.5f,"crossbow",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 45.5f,"miscCannon",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 45.5f,"energyBlaster",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 45.5f,"magicMissleer",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 85.5f,"null",true)); //row 2
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 85.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 85.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 85.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 124.5f,"null",true)); //row 3
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 124.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 124.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 124.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 124.5f,"null",true));
         wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-12,"null",true);
         addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
-        moneyIcon = new GuiObject(p,BOARD_WIDTH + 45, 211-16.5f,"moneyIc",true);
+        moneyIcon = new GuiObject(p,BOARD_WIDTH+33, 211-29,"moneyIc",true);
         upgradeButtonA = new UpgradeTower(p,1000,480,"null",false, 0);
         upgradeButtonB = new UpgradeTower(p,1000,630,"null",false, 1);
         upgradeIconA = new UpgradeIcon(p,1030,610,"null",false);
