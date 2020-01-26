@@ -27,6 +27,7 @@ public class Gui {
         openMenuButton.main();
         addMoneyButton.main();
         moneyIcon.main();
+        wallBuyButton.main();
         if (!isTowers) {
             sellButton.active = false;
             targetButton.active = false;
@@ -70,9 +71,7 @@ public class Gui {
     }
 
     private void build() {
-        //open menu button
         openMenuButton = new OpenMenu(p,BOARD_WIDTH+100,12,"null",true);
-        //buy tower buttons
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 21.5f, 45.5f,"slingshot",true)); //row 1
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 60.5f, 45.5f,"crossbow",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 101.5f, 45.5f,"miscCannon",true));
@@ -88,21 +87,14 @@ public class Gui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 101.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 140.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 179.5f, 124.5f,"wall",true));
-        //add money button
+        wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-12,"null",true);
         addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
-        //money icon
         moneyIcon = new GuiObject(p,BOARD_WIDTH + 45, 211-16.5f,"moneyIc",true);
-        //upgrade wall button zero
         upgradeButtonA = new UpgradeTower(p,1000,480,"null",false, 0);
-        //upgrade wall button one
         upgradeButtonB = new UpgradeTower(p,1000,630,"null",false, 1);
-        //upgrade wall icon
         upgradeIconA = new UpgradeIcon(p,1030,610,"null",false);
-        //upgrade wall icon
         upgradeIconB = new UpgradeIcon(p,1030,610,"null",false);
-        //target priority button
         targetButton = new TargetPriority(p,1000,832.5f,"null",false);
-        //sell tower button
         sellButton = new SellTower(p,1000,877.5f,"null",false);
     }
 }

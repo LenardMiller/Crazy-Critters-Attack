@@ -43,6 +43,10 @@ public class SpriteLoader {
         for (int i = 1; i >= 0; i--){
             spritesAnimH.get("towerTabSwitchBT")[i] = p.loadImage("sprites/guiObjects/buttons/towerTabSwitch/" + PApplet.nf(i,3) + ".png");
         }
+        spritesAnimH.put("wallBuyBT",new PImage[2]);
+        for (int i = 1; i >= 0; i--){
+            spritesAnimH.get("wallBuyBT")[i] = p.loadImage("sprites/guiObjects/buttons/wallBuy/" + PApplet.nf(i,3) + ".png");
+        }
         spritesAnimH.put("energyBuffPT",new PImage[8]);
         for (int i = 7; i >= 0; i--){
             spritesAnimH.get("energyBuffPT")[i] = p.loadImage("sprites/particles/buff/energy/" + PApplet.nf(i,3) + ".png");
