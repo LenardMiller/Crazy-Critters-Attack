@@ -46,7 +46,7 @@ public class Main extends PApplet {
     public static Gui gui;
     public static CompressArray compress;
 
-    public static Button addMoney;
+    public static Button addMoneyButton;
     public static GuiObject moneyIcon;
     public static Button openMenuButton;
     public static Button sellButton;

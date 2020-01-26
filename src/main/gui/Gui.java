@@ -25,7 +25,7 @@ public class Gui {
             }
         }
         openMenuButton.main();
-        addMoney.main();
+        addMoneyButton.main();
         moneyIcon.main();
         if (!isTowers) {
             sellButton.active = false;
@@ -72,7 +72,7 @@ public class Gui {
     private void build() {
         //open menu button
         openMenuButton = new OpenMenu(p,BOARD_WIDTH+100,12,"null",true);
-        //buy tower buttons tab 1 (4-18)
+        //buy tower buttons
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 21.5f, 45.5f,"slingshot",true)); //row 1
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 60.5f, 45.5f,"crossbow",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 101.5f, 45.5f,"miscCannon",true));
@@ -89,7 +89,7 @@ public class Gui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 140.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 179.5f, 124.5f,"wall",true));
         //add money button
-        addMoney = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
+        addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
         //money icon
         moneyIcon = new GuiObject(p,BOARD_WIDTH + 45, 211-16.5f,"moneyIc",true);
         //upgrade wall button zero
