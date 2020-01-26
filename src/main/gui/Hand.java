@@ -42,9 +42,7 @@ public class Hand {
         }
         checkDisplay();
         displayHeld();
-        if (inputHandler.leftMousePressedPulse && !implacable) {
-            place();
-        }
+        if (inputHandler.leftMousePressedPulse && !implacable) place();
     }
 
     private void checkPlaceable() {
@@ -275,7 +273,7 @@ public class Hand {
             } else tile.tower = new Wall(p, tile);
             changeHeld = false;
         }
-        money -= price;
+        if (!held.equals("null")) money -= price;
         if (changeHeld) held = "null";
         updateNodes();
         updateTowerArray();

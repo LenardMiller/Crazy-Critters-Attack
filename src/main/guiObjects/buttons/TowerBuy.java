@@ -88,7 +88,7 @@ public class TowerBuy extends Button {
     }
 
     public void action() {
-        depressed = !depressed; //invert depression
+        depressed = !depressed;
         //if already holding, stop
         if (hand.held.equals(towerType)) hand.setHeld("null");
             //if not, do

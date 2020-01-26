@@ -8,6 +8,9 @@ import static main.Main.alive;
 import static processing.core.PConstants.CENTER;
 
 public class WallBuy extends Button {
+
+    public boolean depressed;
+
     public WallBuy(PApplet p, float x, float y, String type, boolean active) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
@@ -15,6 +18,7 @@ public class WallBuy extends Button {
         spriteOne = spritesAnimH.get("wallBuyBT")[0];
         spriteTwo = spritesAnimH.get("wallBuyBT")[1];
         sprite = spriteOne;
+        depressed = false;
     }
 
     public void main(){
@@ -25,7 +29,7 @@ public class WallBuy extends Button {
     }
 
     public void hover(){ //below is if hovered or depressed
-        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active) {
+        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active || depressed && alive) {
             sprite = spriteTwo;
             p.fill(235);
             p.noStroke();
@@ -40,6 +44,7 @@ public class WallBuy extends Button {
     }
 
     public void action() {
+        depressed = !depressed;
         //if already holding, stop
         if (hand.held.equals("wall")) hand.setHeld("null");
         //if not, do
