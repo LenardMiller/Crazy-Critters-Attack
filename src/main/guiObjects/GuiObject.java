@@ -20,7 +20,7 @@ public class GuiObject {
 
         this.active = active;
         position = new PVector(x, y);
-        size = new PVector(25, 25);
+        size = new PVector(0, 0);
         sprite = spritesH.get(type);
     }
 

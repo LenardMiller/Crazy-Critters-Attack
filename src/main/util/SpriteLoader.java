@@ -43,6 +43,10 @@ public class SpriteLoader {
         for (int i = 1; i >= 0; i--){
             spritesAnimH.get("towerTabSwitchBT")[i] = p.loadImage("sprites/guiObjects/buttons/towerTabSwitch/" + PApplet.nf(i,3) + ".png");
         }
+        spritesAnimH.put("wallBuyBT",new PImage[2]);
+        for (int i = 1; i >= 0; i--){
+            spritesAnimH.get("wallBuyBT")[i] = p.loadImage("sprites/guiObjects/buttons/wallBuy/" + PApplet.nf(i,3) + ".png");
+        }
         spritesAnimH.put("energyBuffPT",new PImage[8]);
         for (int i = 7; i >= 0; i--){
             spritesAnimH.get("energyBuffPT")[i] = p.loadImage("sprites/particles/buff/energy/" + PApplet.nf(i,3) + ".png");
@@ -194,6 +198,8 @@ public class SpriteLoader {
         spritesH.put("livesIc",p.loadImage("sprites/guiObjects/lives.png"));
         spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
         spritesH.put("nullIc",p.loadImage("sprites/guiObjects/null.png"));
+        spritesH.put("towerBuyBgIC",p.loadImage("sprites/guiObjects/towerBuyBg.png"));
+        spritesH.put("moneyBgIC",p.loadImage("sprites/guiObjects/moneyBg.png"));
         spritesH.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
         spritesH.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));
         spritesH.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));

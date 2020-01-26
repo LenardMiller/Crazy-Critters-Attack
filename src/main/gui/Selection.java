@@ -97,9 +97,9 @@ public class Selection { //what tower is selected
         p.fill(235);
         p.noStroke();
         //different size bg so buttons fit
-        if (tower.turret) p.rect(900, 210, 200, 300);
-        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) p.rect(900, 210, 200, 345);
-        if (!tower.turret) p.rect(900, 210, 200, 345);
+        if (tower.turret) p.rect(900, 212, 200, 300);
+        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) p.rect(900, 212, 200, 345);
+        if (!tower.turret) p.rect(900, 212, 200, 345);
 
         //name and special features
         p.textAlign(CENTER);
@@ -145,7 +145,7 @@ public class Selection { //what tower is selected
             p.textAlign(LEFT);
             p.fill(100, 0, 200);
             p.text("Three homing missiles", 910, 376 + offset);
-            p.text("First, last and strong", 910, 396 + offset);
+            p.text("close, far and strong", 910, 396 + offset);
         }
         if ("magicMissleerFour".equals(tower.name)) {
             p.text("Magic Missileer", 1000, 241);

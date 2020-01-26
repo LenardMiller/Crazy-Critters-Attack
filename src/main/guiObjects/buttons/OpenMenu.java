@@ -4,10 +4,9 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.spritesAnimH;
-import static main.Main.towerBuyButtons;
 
-public class TowerTab extends Button {
-    public TowerTab(PApplet p, float x, float y, String type, boolean active){
+public class OpenMenu extends Button {
+    public OpenMenu(PApplet p, float x, float y, String type, boolean active) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 24);
@@ -24,6 +23,6 @@ public class TowerTab extends Button {
     }
 
     public void action(){
-        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.active = !towerBuyButton.active;
+        System.out.println("Not yet implemented!");
     }
 }

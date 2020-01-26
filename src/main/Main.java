@@ -2,7 +2,7 @@ package main;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.gui.Gui;
+import main.gui.InGameGui;
 import main.gui.Hand;
 import main.gui.Selection;
 import main.guiObjects.GuiObject;
@@ -43,14 +43,13 @@ public class Main extends PApplet {
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<Buff> buffs;
 
-    public static Gui gui;
+    public static InGameGui inGameGui;
     public static CompressArray compress;
 
-    public static Button addHp;
-    public static Button addMoney;
-    public static GuiObject hpIcon;
+    public static Button addMoneyButton;
     public static GuiObject moneyIcon;
-    public static Button towerTabButton;
+    public static Button openMenuButton;
+    public static Button wallBuyButton;
     public static Button sellButton;
     public static Button targetButton;
     public static Button upgradeButtonA;
@@ -125,7 +124,7 @@ public class Main extends PApplet {
         keyBinds.loadKeyBinds();
         hand = new Hand(this);
         selection = new Selection(this);
-        gui = new Gui(this);
+        inGameGui = new InGameGui(this);
         //pathfinding stuff
         nSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
@@ -146,7 +145,7 @@ public class Main extends PApplet {
         updateNodes();
     }
 
-    public void draw() {
+    public void draw() { //this will need to be change when I todo: add more menu "scenes"
         //bg todo: make background
         noStroke();
         fill(25, 25, 25);
@@ -167,11 +166,11 @@ public class Main extends PApplet {
         noStroke();
         fill(200);
         rect(BOARD_WIDTH, 0, BOARD_WIDTH + 250, BOARD_HEIGHT);
-        gui.drawIcons();
+        inGameGui.display();
         hand.displayHeldInfo(); //so text appears on top
         //text
         textAlign(LEFT);
-        gui.drawText(this, 10);
+        inGameGui.drawText(this, 10);
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;
