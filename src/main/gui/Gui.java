@@ -59,8 +59,14 @@ public class Gui {
             p.textAlign(RIGHT);
             p.text(round(p.frameRate) + " fps", BOARD_WIDTH - x, 30);
         }
-        p.textAlign(RIGHT);
+        p.fill(200);
+        p.textFont(mediumFont);
+        p.textAlign(CENTER);
+        p.text("Menu", 1000, 18);
         p.fill(0);
+        p.text("Walls", 1000, 170);
+        p.textFont(largeFont);
+        p.textAlign(RIGHT);
         p.text(nfc(money), p.width - x, 211-4);
         if (!alive) {
             p.textAlign(CENTER);
@@ -86,7 +92,7 @@ public class Gui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 60.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 101.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 140.5f, 124.5f,"null",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 179.5f, 124.5f,"wall",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 179.5f, 124.5f,"null",true));
         wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-12,"null",true);
         addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
         moneyIcon = new GuiObject(p,BOARD_WIDTH + 45, 211-16.5f,"moneyIc",true);

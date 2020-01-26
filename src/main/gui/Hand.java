@@ -98,7 +98,7 @@ public class Hand {
         if (displayInfo.equals("placeWall")) {
             p.fill(235);
             p.noStroke();
-            p.rect(900, 211, 200, 707);
+            p.rect(900, 212, 200, 707);
             if (money >= 25) p.fill(195, 232, 188);
             else p.fill(230, 181, 181);
             p.rect(905, 247, 190, 119);
@@ -119,7 +119,7 @@ public class Hand {
             else {
                 p.fill(235);
                 p.noStroke();
-                p.rect(900, 211, 200, 707);
+                p.rect(900, 212, 200, 707);
                 p.textAlign(CENTER);
                 //tower info
                 p.fill(231, 232, 190);
@@ -154,7 +154,7 @@ public class Hand {
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
             p.fill(235);
             p.noStroke();
-            p.rect(900, 211, 200, 707);
+            p.rect(900, 212, 200, 707);
             p.textAlign(CENTER);
             //tower info
             p.fill(231, 232, 190);
@@ -173,7 +173,7 @@ public class Hand {
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
             p.fill(235);
             p.noStroke();
-            p.rect(900, 211, 200, 707);
+            p.rect(900, 212, 200, 707);
             p.textAlign(CENTER);
             //tower info
             if (money >= ceil((float) (tower.price) - (float) (tower.value))) p.fill(195, 232, 188);
@@ -200,10 +200,10 @@ public class Hand {
             p.textFont(mediumFont);
             p.textAlign(LEFT);
             p.text("LClick to place", 910, 720);
-            p.text("tower", 910, 740);
-            p.text("LClick on tower to", 910, 770);
+            p.text("wall", 910, 740);
+            p.text("LClick on wall to", 910, 770);
             p.text("upgrade or repair", 910, 790);
-            p.text("RClick on tower", 910, 820);
+            p.text("RClick on wall", 910, 820);
             p.text("to Sell", 910, 840);
             p.text("Click on sidebar", 910, 870);
             p.text("to deselect", 910, 890);

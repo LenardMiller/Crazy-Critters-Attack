@@ -97,9 +97,9 @@ public class Selection { //what tower is selected
         p.fill(235);
         p.noStroke();
         //different size bg so buttons fit
-        if (tower.turret) p.rect(900, 210, 200, 300);
-        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) p.rect(900, 210, 200, 345);
-        if (!tower.turret) p.rect(900, 210, 200, 345);
+        if (tower.turret) p.rect(900, 212, 200, 300);
+        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) p.rect(900, 212, 200, 345);
+        if (!tower.turret) p.rect(900, 212, 200, 345);
 
         //name and special features
         p.textAlign(CENTER);

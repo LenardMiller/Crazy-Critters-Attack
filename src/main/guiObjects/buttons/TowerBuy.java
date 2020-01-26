@@ -43,12 +43,12 @@ public class TowerBuy extends Button {
         }
     }
 
-    public void hover(){ //below is if hovered or depressed
+    public void hover() { //below is if hovered or depressed
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active || depressed && alive){
             sprite = spriteTwo;
             p.fill(235);
             p.noStroke();
-            p.rect(900,211,200,707);
+            p.rect(900,212,200,707);
             p.textAlign(CENTER);
             p.fill(0);
             p.textFont(largeFont); //displays info about tower todo: put more info
@@ -80,28 +80,18 @@ public class TowerBuy extends Button {
                     p.textFont(mediumFont);
                     p.text("$150", x, 271);
                     break;
-                case "wall":
-                    p.text("Wooden", x, 241);
-                    p.text("Wall", x, 266);
-                    p.textFont(mediumFont);
-                    p.text("$25", x, 296);
-                    break;
             }
             //if pressed
             if (inputHandler.leftMousePressedPulse && alive) action();
         }
-        else{
-            sprite = spriteOne;
-        }
+        else sprite = spriteOne;
     }
 
-    public void action(){
+    public void action() {
         depressed = !depressed; //invert depression
-        if (hand.held.equals(towerType)){ //if already holding, stop
-            hand.setHeld("null");
-        }
-        else if (depressed){ //if not, do
-            hand.setHeld(towerType);
-        }
+        //if already holding, stop
+        if (hand.held.equals(towerType)) hand.setHeld("null");
+            //if not, do
+        else if (depressed) hand.setHeld(towerType);
     }
 }
