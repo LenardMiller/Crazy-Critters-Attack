@@ -7,11 +7,11 @@ import processing.core.PApplet;
 
 import static main.Main.*;
 
-public class Gui {
+public class InGameGui {
 
     private PApplet p;
 
-    public Gui(PApplet p) {
+    public InGameGui(PApplet p) {
         this.p = p;
         build();
     }
