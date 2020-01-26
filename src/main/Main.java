@@ -16,7 +16,6 @@ import main.projectiles.Projectile;
 import main.towers.Tile;
 import main.towers.Tower;
 import main.util.CompressArray;
-import main.util.EnemyTracker;
 import main.util.KeyBinds;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -32,7 +31,6 @@ import static main.util.SpriteLoader.loadSpritesAnim;
 
 public class Main extends PApplet {
 
-    public static EnemyTracker enemyTracker;
     public static Tile.TileDS tiles;
     public static KeyDS keysPressed = new KeyDS();
     public static InputHandler inputHandler;
@@ -128,7 +126,6 @@ public class Main extends PApplet {
         keyBinds.loadKeyBinds();
         hand = new Hand(this);
         selection = new Selection(this);
-        enemyTracker = new EnemyTracker(this);
         gui = new Gui(this);
         //pathfinding stuff
         nSize = 25;
@@ -198,24 +195,16 @@ public class Main extends PApplet {
             fill(0,0,255);
             rect(start.position.x,start.position.y,nSize,nSize);
         }
-        //enemy tracker
-        enemyTracker.main(enemies);
         //towers
-        for (Tower tower : towers) {
-            tower.main();
-        }
+        for (Tower tower : towers) tower.main();
         //tower hp bars
-        for (Tower tower : towers) {
-            tower.hpBar();
-        }
+        for (Tower tower : towers) tower.hpBar();
         //enemies
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
             enemy.main(i);
         }
-        if (enemies.size() == 0) {
-            buffs = new ArrayList<>();
-        }
+        if (enemies.size() == 0) buffs = new ArrayList<>();
         //projectiles
         for (int i = projectiles.size() - 1; i >= 0; i--) {
             Projectile projectile = projectiles.get(i);

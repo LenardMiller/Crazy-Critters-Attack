@@ -53,11 +53,11 @@ public class MagicMissileer extends Turret{
 
     public void fire(){ //needed to change projectile fired
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, damage, 0));
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, damage, 1));
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, damage, 2));
+        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, damage, 0,tile.position));
+        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, damage, 1,tile.position));
+        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, damage, 2,tile.position));
         if (four){
-            projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, damage, (int)(p.random(0,2.99f))));
+            projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, damage, (int)(p.random(0,2.99f)),tile.position));
         }
     }
 

@@ -57,7 +57,7 @@ public class KeyBinds {
         if (miscProjectile) projectiles.add(new MiscProjectile(p, p.mouseX, p.mouseY, 0, round(p.random(0, 5)), 6));
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, 20, 20, false));
         if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, 20, 30, true));
-        if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, 5, 0));
+        if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, 5, 0, new PVector(p.mouseX,p.mouseY)));
         //enemies
         if (randomEnemy) spawnRandom();
         if (littleBug) {

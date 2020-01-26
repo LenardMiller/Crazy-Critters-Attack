@@ -166,10 +166,9 @@ public class Selection { //what tower is selected
         //priority
         p.textFont(largeFont);
         p.textAlign(CENTER);
-        if (tower.priority == 0) priority = "first";
-        else if (tower.priority == 1) priority = "last";
+        if (tower.priority == 0) priority = "close";
+        else if (tower.priority == 1) priority = "far";
         else if (tower.priority == 2) priority = "strong";
-        else if (tower.priority == 3) priority = "close";
         if (tower.turret && !tower.name.equals("magicMissleer") && !tower.name.equals("magicMissleerFour")) {
             p.fill(75, 45, 0);
             p.text("Priority: " + priority, 1000, 843);

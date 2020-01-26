@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.enemies.Enemy;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -9,9 +10,12 @@ import static processing.core.PConstants.HALF_PI;
 public class MagicMissile extends Projectile {
     
     public int priority;
+    private Enemy targetEnemy;
+    private PVector spawnPos;
     
-    public MagicMissile(PApplet p, float x, float y, float angle, int damage, int priority) {
+    public MagicMissile(PApplet p, float x, float y, float angle, int damage, int priority, PVector spawnPos) {
         super(p, x, y, angle);
+        this.spawnPos = spawnPos;
         position = new PVector(x, y);
         size = new PVector(6, 20);
         radius = 14;
@@ -27,18 +31,41 @@ public class MagicMissile extends Projectile {
     }
 
     private void checkTarget() {
-        if (priority == 0) { //first
-            aim(enemyTracker.firstPos,position);
-        } else if (priority == 1) { //last
-            aim(enemyTracker.lastPos,position);
-        } else if (priority == 2) { //strong
-            aim(enemyTracker.strongPos,position);
-        } else { //first, placeholder for close
-            aim(enemyTracker.firstPos,position);
-        }
+        getTargetEnemy();
+        if (targetEnemy != null) aim(targetEnemy.position);
     }
 
-    private void aim(PVector target, PVector position) { //todo: cool slow turn
+    private void getTargetEnemy() {
+        //0: close
+        //1: far
+        //2: strong
+        float dist;
+        if (priority == 0) dist = 1000000;
+        else dist = 0;
+        float maxHp = 0;
+        Enemy e = null;
+        for (Enemy enemy : enemies) {
+            float x = abs(spawnPos.x - enemy.position.x);
+            float y = abs(spawnPos.y - enemy.position.y);
+            float t = sqrt(sq(x)+sq(y));
+            if (priority == 0 && t < dist) { //close
+                e = enemy;
+                dist = t;
+            } if (priority == 1 && t > dist) { //far
+                e = enemy;
+                dist = t;
+            } if (priority == 2) if (enemy.maxHp > maxHp) { //strong
+                e = enemy;
+                maxHp = enemy.maxHp;
+            } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                e = enemy;
+                dist = t;
+            }
+        }
+        targetEnemy = e;
+    }
+
+    private void aim(PVector target) { //todo: cool slow turn
 //        angle = findAngleBetween(target,position) + QUARTER_PI;
         PVector ratio = PVector.sub(target,position);
         if (position.x == target.x){ //if on the same x
