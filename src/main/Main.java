@@ -167,7 +167,7 @@ public class Main extends PApplet {
         noStroke();
         fill(200);
         rect(BOARD_WIDTH, 0, BOARD_WIDTH + 250, BOARD_HEIGHT);
-        gui.drawIcons();
+        gui.display();
         hand.displayHeldInfo(); //so text appears on top
         //text
         textAlign(LEFT);

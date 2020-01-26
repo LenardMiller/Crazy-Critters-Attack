@@ -16,7 +16,7 @@ public class Gui {
         build();
     }
 
-    public void drawIcons() {
+    public void display() {
         boolean isTowers = false;
         for (int i = 0; i < tiles.size(); i++) {
             if (tiles.get(i).tower != null) {
@@ -35,7 +35,6 @@ public class Gui {
             upgradeIconA.active = false;
             upgradeIconB.active = false;
         }
-        towerTabButton.main();
         sellButton.main();
         targetButton.main();
         upgradeButtonA.main();
@@ -68,19 +67,6 @@ public class Gui {
             p.fill(75,0,0);
             p.text("Game Over", p.width/2f, p.height/2f);
         }
-        //textFont(TWFont); //replaced with healthbars
-        //fill(255);
-        //textAlign(CENTER);
-        ////enemy health, jump to enemy.HpText
-        //for (int i = enemies.size()-1; i >= 0; i--){
-        //  Enemy enemy = enemies.get(i);
-        //  enemy.HpText();
-        //}
-        ////tower health, jump to tower.HpText
-        //for (int i = towers.size()-1; i >= 0; i--) {
-        //  Tower tower = towers.get(i);
-        //  tower.HpText();
-        //}
     }
 
     private void build() {
@@ -104,24 +90,6 @@ public class Gui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 167,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 167,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 167,"wall",true));
-        //buy tower buttons tabp, 2 (19-33)
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 87,"null",false)); //row 1
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 87,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 87,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 87,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 87,"null",false)); //placeholders
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 127,"null",false)); //row 2
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 127,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 127,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 127,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 127,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)21.5, 167,"null",false)); //row 3
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)60.5, 167,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)101.5, 167,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)140.5, 167,"null",false));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + (float)179.5, 167,"null",false));
-        //switch tower tab button
-        towerTabButton = new TowerTab(p,1000,198,"null",true);
         //sell tower button
         sellButton = new SellTower(p,1000,877.5f,"null",false);
         //target priority button
