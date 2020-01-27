@@ -2,6 +2,7 @@ package main.projectiles;
 
 import main.enemies.Enemy;
 import main.particles.BuffParticle;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -34,10 +35,14 @@ public abstract class Projectile {
     String buff;
     int hitDelay;
     int effectRadius;
+    ArrayList<Enemy> hitEnemies;
+    Tower tower;
 
-    Projectile(PApplet p, float x, float y, float angle) {
+    Projectile(PApplet p, float x, float y, float angle, Tower tower) {
         this.p = p;
 
+        this.tower = tower;
+        hitEnemies = new ArrayList<>();
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 10;
@@ -48,7 +53,7 @@ public abstract class Projectile {
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
         sprite = spritesH.get("nullPj");
-        velocity = PVector.fromAngle(angle-HALF_PI);
+        velocity = PVector.fromAngle(angle - HALF_PI);
         hasTrail = false;
         trail = "null";
         buff = "null";
@@ -56,62 +61,67 @@ public abstract class Projectile {
         hitDelay = 6;
     }
 
-    public void main(ArrayList<Projectile> projectiles, int i){
+    public void main(ArrayList<Projectile> projectiles, int i) {
         trail();
         display();
         move();
         collideEn();
-        if (position.y - size.y > BOARD_HEIGHT || position.x - size.x > BOARD_WIDTH || position.y + size.y < 0 || position.x + size.x < 0){
-            //if crossed edge, delete
+        if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) {
             dead = true;
         }
-        if (dead){
-            projectiles.remove(i);
+        if (dead) projectiles.remove(i);
+    }
+
+    private void trail() { //leaves a trail of particles
+        if (hasTrail) {
+            int num = floor(p.random(0, 3));
+            if (num == 0) particles.add(new BuffParticle(p, position.x, position.y, p.random(0, 360), trail));
         }
     }
 
-    private void trail(){ //leaves a trail of particles
-        if (hasTrail){
-            int num = floor(p.random(0,3));
-            if (num == 0){
-                particles.add(new BuffParticle(p,position.x, position.y, p.random(0,360), trail));
-            }
-        }
-    }
-
-    private void display(){ //move and rotate whole grid before displaying, than reset
+    private void display() { //move and rotate whole grid before displaying, than reset
         angleTwo += radians(angularVelocity);
         p.pushMatrix();
-        p.translate(position.x,position.y);
+        p.translate(position.x, position.y);
         p.rotate(angleTwo);
-        p.image(sprite,-size.x/2,-size.y/2);
+        p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
     }
 
-    public void move(){
+    public void move() {
         velocity.setMag(speed);
         position.add(velocity);
     }
 
-    public void collideEn(){
-        if (p.frameCount > hitTime){
-            for (int i = enemies.size()-1; i >= 0; i--){
-                Enemy enemy = enemies.get(i);
-                if (abs(enemy.position.x-position.x) <= (radius + enemy.radius) && abs(enemy.position.y-position.y) <= (radius + enemy.radius) && pierce > 0){ //if touching enemy, and has pierce
-                    enemy.collidePJ(damage,buff,i);
-                    hitTime = p.frameCount + hitDelay; //little timer so no constant damage, NOT unneccissary
-                    pierce--;
-                    for (int j = enemies.size()-1; j >= 0; j--){
-                        Enemy erEnemy = enemies.get(j);
-                        if (abs(erEnemy.position.x-position.x) <= (effectRadius + erEnemy.radius) && abs(erEnemy.position.y-position.y) <= (effectRadius + erEnemy.radius)){ //if near enemy
-                            erEnemy.collidePJ(damage/2,buff,i);
-                        }
+    public void collideEn() {
+        for (int i = enemies.size() - 1; i >= 0; i--) {
+            Enemy enemy = enemies.get(i);
+            boolean hitAlready = false;
+            for (Enemy hitEnemy : hitEnemies)
+                if (hitEnemy == enemy) {
+                    hitAlready = true;
+                    break;
+                }
+            if (hitAlready) continue;
+            if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
+                enemy.collidePJ(damage, buff, tower, i);
+                hitEnemies.add(enemy);
+                pierce--;
+                for (int j = enemies.size() - 1; j >= 0; j--) {
+                    Enemy erEnemy = enemies.get(j);
+                    if (abs(erEnemy.position.x - position.x) <= (effectRadius + erEnemy.radius) && abs(erEnemy.position.y - position.y) <= (effectRadius + erEnemy.radius)) { //if near enemy
+                        hitAlready = false;
+                        for (Enemy hitEnemy : hitEnemies)
+                            if (hitEnemy == enemy) {
+                                hitAlready = true;
+                                break;
+                            }
+                        if (hitAlready) continue;
+                        erEnemy.collidePJ(3 * (damage / 4), buff, tower, i);
                     }
                 }
-                if (pierce == 0) {
-                    dead = true;
-                }
             }
+            if (pierce == 0) dead = true;
         }
     }
 }

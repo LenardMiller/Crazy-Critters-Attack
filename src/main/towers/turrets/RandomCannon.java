@@ -53,7 +53,7 @@ public class RandomCannon extends Turret {
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(20);
         spp.add(spa);
-        projectiles.add(new MiscProjectile(p,spp.x,spp.y, angle, spriteType, damage));
+        projectiles.add(new MiscProjectile(p,spp.x,spp.y, angle, this, spriteType, damage));
     }
 
     private void setUpgrades() {

@@ -15,6 +15,8 @@ public abstract class Tower {
 
     public Tile tile;
 
+    public int damageTotal;
+    public int killsTotal;
     public String name;
     public float angle;
     public int delay;

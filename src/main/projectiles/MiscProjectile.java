@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -10,8 +11,8 @@ public class MiscProjectile extends Projectile{
 
     public PImage[] sprites = new PImage[6]; //alternate sprites, passed in
 
-    public MiscProjectile(PApplet p, float x, float y, float angle, int spriteType, int damage) {
-        super(p, x, y, angle);
+    public MiscProjectile(PApplet p, float x, float y, float angle, Tower tower, int spriteType, int damage) {
+        super(p, x, y, angle, tower);
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 5;
