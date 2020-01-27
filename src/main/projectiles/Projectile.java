@@ -61,7 +61,7 @@ public abstract class Projectile {
         display();
         move();
         collideEn();
-        if (position.y - size.y > BOARD_HEIGHT || position.x - size.x > BOARD_WIDTH || position.y + size.y < 0 || position.x + size.x < 0){
+        if (position.y - size.y > BOARD_HEIGHT+100 || position.x - size.x > BOARD_WIDTH+100 || position.y + size.y < -100 || position.x + size.x < -100){
             //if crossed edge, delete
             dead = true;
         }
