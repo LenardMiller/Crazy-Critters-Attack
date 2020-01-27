@@ -34,10 +34,12 @@ public abstract class Projectile {
     String buff;
     int hitDelay;
     int effectRadius;
+    ArrayList<Enemy> hitEnemies;
 
     Projectile(PApplet p, float x, float y, float angle) {
         this.p = p;
 
+        hitEnemies = new ArrayList<>();
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 10;
@@ -62,20 +64,15 @@ public abstract class Projectile {
         move();
         collideEn();
         if (position.y - size.y > BOARD_HEIGHT+100 || position.x - size.x > BOARD_WIDTH+100 || position.y + size.y < -100 || position.x + size.x < -100){
-            //if crossed edge, delete
             dead = true;
         }
-        if (dead){
-            projectiles.remove(i);
-        }
+        if (dead) projectiles.remove(i);
     }
 
     private void trail(){ //leaves a trail of particles
         if (hasTrail){
             int num = floor(p.random(0,3));
-            if (num == 0){
-                particles.add(new BuffParticle(p,position.x, position.y, p.random(0,360), trail));
-            }
+            if (num == 0) particles.add(new BuffParticle(p, position.x, position.y, p.random(0, 360), trail));
         }
     }
 
@@ -97,9 +94,15 @@ public abstract class Projectile {
         if (p.frameCount > hitTime){
             for (int i = enemies.size()-1; i >= 0; i--){
                 Enemy enemy = enemies.get(i);
+                boolean hitAlready = false;
+                for (Enemy hitEnemy : hitEnemies) if (hitEnemy == enemy) {
+                    hitAlready = true;
+                    break;
+                }
+                if (hitAlready) continue;
                 if (abs(enemy.position.x-position.x) <= (radius + enemy.radius) && abs(enemy.position.y-position.y) <= (radius + enemy.radius) && pierce > 0){ //if touching enemy, and has pierce
                     enemy.collidePJ(damage,buff,i);
-                    hitTime = p.frameCount + hitDelay; //little timer so no constant damage, NOT unneccissary
+                    hitEnemies.add(enemy);
                     pierce--;
                     for (int j = enemies.size()-1; j >= 0; j--){
                         Enemy erEnemy = enemies.get(j);
@@ -108,9 +111,7 @@ public abstract class Projectile {
                         }
                     }
                 }
-                if (pierce == 0) {
-                    dead = true;
-                }
+                if (pierce == 0) dead = true;
             }
         }
     }
