@@ -54,7 +54,7 @@ public class EnergyBlaster extends Turret{
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(40);
         spp.add(spa);
-        projectiles.add(new EnergyBlast(p,spp.x,spp.y, angle, damage, effectRadius, bigExplosion));
+        projectiles.add(new EnergyBlast(p,spp.x,spp.y, angle, this, damage, effectRadius, bigExplosion));
     }
 
     private void setUpgrades(){

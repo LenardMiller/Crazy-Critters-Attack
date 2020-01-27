@@ -4,20 +4,19 @@ import main.enemies.Enemy;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.enemies;
-import static main.Main.spritesH;
+import static main.Main.*;
 import static processing.core.PApplet.abs;
-import static main.Main.particles;
 
 public class EnergyBlast extends Projectile{
 
     private boolean bigExplosion;
 
-    public EnergyBlast(PApplet p, float x, float y, float angle, int damage, int effectRadius, boolean bigExplosion) {
-        super(p, x, y, angle);
+    public EnergyBlast(PApplet p, float x, float y, float angle, Tower tower, int damage, int effectRadius, boolean bigExplosion) {
+        super(p, x, y, angle, tower);
         position = new PVector(x, y);
         size = new PVector(10, 18);
         radius = 14;
@@ -38,7 +37,7 @@ public class EnergyBlast extends Projectile{
             for (int i = enemies.size()-1; i >= 0; i--){
                 Enemy enemy = enemies.get(i);
                 if (abs(enemy.position.x-position.x) <= (radius + enemy.radius) && abs(enemy.position.y-position.y) <= (radius + enemy.radius) && pierce > 0){ //if touching enemy, and has pierce
-                    enemy.collidePJ(damage,buff,i);
+                    enemy.collidePJ(damage,buff,tower,i);
                     if (!bigExplosion){
                         int num = (int)(p.random(10,16));
                         for (int j = num; j >= 0; j--){
@@ -57,7 +56,7 @@ public class EnergyBlast extends Projectile{
                     for (int j = enemies.size()-1; j >= 0; j--){
                         Enemy erEnemy = enemies.get(j);
                         if (abs(erEnemy.position.x-position.x) <= (effectRadius + erEnemy.radius) && abs(erEnemy.position.y-position.y) <= (effectRadius + erEnemy.radius)){ //if near enemy
-                            erEnemy.collidePJ(3*(damage/4),buff,i);
+                            erEnemy.collidePJ(3*(damage/4),buff,tower,i);
                         }
                     }
                 }

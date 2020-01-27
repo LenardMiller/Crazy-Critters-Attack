@@ -2,6 +2,7 @@ package main.projectiles;
 
 import main.enemies.Enemy;
 import main.particles.BuffParticle;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -35,10 +36,12 @@ public abstract class Projectile {
     int hitDelay;
     int effectRadius;
     ArrayList<Enemy> hitEnemies;
+    Tower tower;
 
-    Projectile(PApplet p, float x, float y, float angle) {
+    Projectile(PApplet p, float x, float y, float angle, Tower tower) {
         this.p = p;
 
+        this.tower = tower;
         hitEnemies = new ArrayList<>();
         position = new PVector(x, y);
         size = new PVector(10, 10);
@@ -101,13 +104,13 @@ public abstract class Projectile {
                 }
                 if (hitAlready) continue;
                 if (abs(enemy.position.x-position.x) <= (radius + enemy.radius) && abs(enemy.position.y-position.y) <= (radius + enemy.radius) && pierce > 0){ //if touching enemy, and has pierce
-                    enemy.collidePJ(damage,buff,i);
+                    enemy.collidePJ(damage,buff,tower,i);
                     hitEnemies.add(enemy);
                     pierce--;
                     for (int j = enemies.size()-1; j >= 0; j--){
                         Enemy erEnemy = enemies.get(j);
                         if (abs(erEnemy.position.x-position.x) <= (effectRadius + erEnemy.radius) && abs(erEnemy.position.y-position.y) <= (effectRadius + erEnemy.radius)){ //if near enemy
-                            erEnemy.collidePJ(damage/2,buff,i);
+                            erEnemy.collidePJ(damage/2,buff,tower,i);
                         }
                     }
                 }

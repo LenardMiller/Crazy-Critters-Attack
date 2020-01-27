@@ -168,8 +168,17 @@ public abstract class Enemy {
         }
     }
 
-    public void collidePJ(int damage, String pjBuff, int i) { //when the enemy hits a projectile
+    public void collidePJ(int damage, String pjBuff, Tower tower, int i) { //when the enemy hits a projectile
+        System.out.println(damage);
         hp -= damage;
+        if (tower != null) {
+            tower.damageTotal += damage;
+            if (hp <= 0) {
+                tower.killsTotal++;
+//                tower.damageTotal += damage + hp;
+//            } else tower.damageTotal += damage;
+            }
+        }
         if (pjBuff.equals("poison")) { //applies buffs
             if (buffs.size() > 0) {
                 for (int j = buffs.size() - 1; j >= 0; j--) {

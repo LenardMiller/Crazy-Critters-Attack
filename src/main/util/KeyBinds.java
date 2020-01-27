@@ -5,7 +5,6 @@ import main.buffs.Poisoned;
 import main.buffs.Wet;
 import main.enemies.*;
 import main.particles.*;
-import main.pathfinding.AStar;
 import main.projectiles.*;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -28,11 +27,10 @@ public class KeyBinds {
         //projectiles
         boolean pebble = keysPressed.getPressedPulse('q') && alive;
         boolean bolt = keysPressed.getPressedPulse('w') && alive;
-        boolean devProjectile = keysPressed.getPressedPulse('e') && alive;
-        boolean miscProjectile = keysPressed.getPressedPulse('r') && alive;
-        boolean smallEnergyBlast = keysPressed.getPressedPulse('t') && alive;
-        boolean largeEnergyBlast = keysPressed.getPressedPulse('T') && alive;
-        boolean magicMissle = keysPressed.getPressedPulse('y') && alive;
+        boolean miscProjectile = keysPressed.getPressedPulse('e') && alive;
+        boolean smallEnergyBlast = keysPressed.getPressedPulse('r') && alive;
+        boolean largeEnergyBlast = keysPressed.getPressedPulse('R') && alive;
+        boolean magicMissle = keysPressed.getPressedPulse('t') && alive;
         //enemies
         boolean randomEnemy = keysPressed.getPressedPulse('0') && alive;
         boolean littleBug = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
@@ -52,13 +50,12 @@ public class KeyBinds {
         boolean mediumExplosion = keysPressed.getPressed('b') && alive;
         boolean largeExplosion = keysPressed.getPressed('n') && alive;
         //projectiles
-        if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, 10));
-        if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, 20, 2));
-        if (devProjectile) projectiles.add(new DevProjectile(p, p.mouseX, p.mouseY, 0));
-        if (miscProjectile) projectiles.add(new MiscProjectile(p, p.mouseX, p.mouseY, 0, round(p.random(0, 5)), 6));
-        if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, 20, 20, false));
-        if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, 20, 30, true));
-        if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, 5, 0, new PVector(p.mouseX,p.mouseY)));
+        if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 10));
+        if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, null, 20, 2));
+        if (miscProjectile) projectiles.add(new MiscProjectile(p, p.mouseX, p.mouseY, 0, null, round(p.random(0, 5)), 6));
+        if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 20, false));
+        if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 30, true));
+        if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
         //enemies
         if (randomEnemy) spawnRandom();
         if (littleBug) {

@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -7,8 +8,8 @@ import static main.Main.spritesH;
 
 public class Pebble extends Projectile{
 
-    public Pebble(PApplet p, float x, float y, float angle, int damage) {
-        super(p, x, y, angle);
+    public Pebble(PApplet p, float x, float y, float angle, Tower tower, int damage) {
+        super(p, x, y, angle, tower);
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 5;

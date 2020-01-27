@@ -128,32 +128,42 @@ public class Selection { //what tower is selected
                 p.textAlign(LEFT);
                 p.fill(0);
                 break;
+            case "energyBlaster":
+                p.text("Energy Blaster", 1000, 241);
+                speed = 16;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100, 0, 200);
+                p.text("Splash damage", 910, 376 + offset);
+                p.fill(0);
+                break;
+            case "magicMissleer":
+                p.text("Magic Missileer", 1000, 241);
+                speed = 5;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100, 0, 200);
+                p.text("Three homing missiles", 910, 376 + offset);
+                break;
+            case "magicMissleerFour":
+                p.text("Magic Missileer", 1000, 241);
+                speed = 5;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100, 0, 200);
+                p.text("Four homing missiles", 910, 376 + offset);
+                break;
         }
-        if (tower.name.equals("energyBlaster")) {
-            p.text("Energy Blaster", 1000, 241);
-            speed = 16;
-            p.textFont(mediumFont);
-            p.textAlign(LEFT);
-            p.fill(100, 0, 200);
-            p.text("Splash damage", 910, 376 + offset);
-            p.fill(0);
-        }
-        if (tower.name.equals("magicMissleer")) {
-            p.text("Magic Missileer", 1000, 241);
-            speed = 5;
-            p.textFont(mediumFont);
-            p.textAlign(LEFT);
-            p.fill(100, 0, 200);
-            p.text("Three homing missiles", 910, 376 + offset);
-        }
-        if ("magicMissleerFour".equals(tower.name)) {
-            p.text("Magic Missileer", 1000, 241);
-            speed = 5;
-            p.textFont(mediumFont);
-            p.textAlign(LEFT);
-            p.fill(100, 0, 200);
-            p.text("Four homing missiles", 910, 376 + offset);
-        }
+
+        //stats
+        int offsetB = 0;
+        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetB = 45;
+        p.fill(255, 0, 0);
+        p.textAlign(LEFT);
+        p.textFont(mediumFont);
+        if (tower.killsTotal != 1) p.text(tower.killsTotal + " kills", 910, 475 + offsetB);
+        else p.text(tower.killsTotal + " kill", 910, 475 + offsetB);
+        p.text(tower.damageTotal + " damage", 910, 500 + offsetB);
 
         //put box around selected
         p.fill(255, 25);
@@ -172,55 +182,55 @@ public class Selection { //what tower is selected
         }
 
         //upgrade Zero
-        int offsetB;
+        int offsetC;
         if (tower.turret) { //only display if turret
-            offsetB = -45;
-            if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetB += 45;
+            offsetC = -45;
+            if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
             if (tower.nextLevelA < tower.upgradeNames.length / 2) {
                 if (money >= tower.upgradePrices[tower.nextLevelA]) p.fill(11, 56, 0);
                 else p.fill(75, 0, 0);
                 p.textFont(largeFont);
-                p.text(tower.upgradeTitles[tower.nextLevelA], 1000, 585 + offsetB);
-                p.text("$" + tower.upgradePrices[tower.nextLevelA], 1000, 693 + offsetB);
+                p.text(tower.upgradeTitles[tower.nextLevelA], 1000, 585 + offsetC);
+                p.text("$" + tower.upgradePrices[tower.nextLevelA], 1000, 693 + offsetC);
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
-                p.text(tower.upgradeDescA[tower.nextLevelA], 915, 615 + offsetB);
-                p.text(tower.upgradeDescB[tower.nextLevelA], 915, 635 + offsetB);
-                p.text(tower.upgradeDescC[tower.nextLevelA], 915, 655 + offsetB);
+                p.text(tower.upgradeDescA[tower.nextLevelA], 915, 615 + offsetC);
+                p.text(tower.upgradeDescB[tower.nextLevelA], 915, 635 + offsetC);
+                p.text(tower.upgradeDescC[tower.nextLevelA], 915, 655 + offsetC);
             } else {
                 p.fill(15);
                 p.textFont(largeFont);
-                p.text("N/A", 1000, 585 + offsetB);
+                p.text("N/A", 1000, 585 + offsetC);
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
-                p.text("No more", 915, 615 + offsetB);
-                p.text("upgrades", 915, 635 + offsetB);
+                p.text("No more", 915, 615 + offsetC);
+                p.text("upgrades", 915, 635 + offsetC);
             }
         }
         //upgrade One
-        offsetB = 0;
-        if (tower.turret) offsetB = 105;
-        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetB += 45;
+        offsetC = 0;
+        if (tower.turret) offsetC = 105;
+        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
         if (tower.nextLevelB < tower.upgradeNames.length) {
             if (money >= tower.upgradePrices[tower.nextLevelB]) p.fill(11, 56, 0);
             else p.fill(75, 0, 0);
             p.textFont(largeFont);
             p.textAlign(CENTER);
-            p.text(tower.upgradeTitles[tower.nextLevelB], 1000, 585 + offsetB);
-            p.text("$" + tower.upgradePrices[tower.nextLevelB], 1000, 693 + offsetB);
+            p.text(tower.upgradeTitles[tower.nextLevelB], 1000, 585 + offsetC);
+            p.text("$" + tower.upgradePrices[tower.nextLevelB], 1000, 693 + offsetC);
             p.textFont(mediumFont);
             p.textAlign(LEFT);
-            p.text(tower.upgradeDescA[tower.nextLevelB], 915, 615 + offsetB);
-            p.text(tower.upgradeDescB[tower.nextLevelB], 915, 635 + offsetB);
-            p.text(tower.upgradeDescC[tower.nextLevelB], 915, 655 + offsetB);
+            p.text(tower.upgradeDescA[tower.nextLevelB], 915, 615 + offsetC);
+            p.text(tower.upgradeDescB[tower.nextLevelB], 915, 635 + offsetC);
+            p.text(tower.upgradeDescC[tower.nextLevelB], 915, 655 + offsetC);
         } else {
             p.fill(15);
             p.textFont(largeFont);
-            p.text("N/A", 1000, 585 + offsetB);
+            p.text("N/A", 1000, 585 + offsetC);
             p.textFont(mediumFont);
             p.textAlign(LEFT);
-            p.text("No more", 915, 615 + offsetB);
-            p.text("upgrades", 915, 635 + offsetB);
+            p.text("No more", 915, 615 + offsetC);
+            p.text("upgrades", 915, 635 + offsetC);
         }
 
         //sell
