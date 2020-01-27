@@ -22,9 +22,9 @@ public class MagicMissileer extends Turret{
         hp = maxHp;
         hit = false;
         delay = 200; //200 frames
-        delay += (round(p.random(-(delay/10),delay/10))); //injects 10% randomness so all don't fire at once
+        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
-        damage = 5;
+        damage = 15;
         pjSpeed = 5;
         error = 0; //0 degrees
         numFireFrames = 8; //8
@@ -68,14 +68,14 @@ public class MagicMissileer extends Turret{
         upgradeSpecial[2] = false;
         upgradeSpecial[3] = true;
         //damage
-        upgradeDamage[0] = 2;
-        upgradeDamage[1] = 2;
+        upgradeDamage[0] = 10;
+        upgradeDamage[1] = 10;
         upgradeDamage[2] = 0;
         upgradeDamage[3] = 0;
         //delay (firerate)
         upgradeDelay[0] = 0;
         upgradeDelay[1] = 0;
-        upgradeDelay[2] = -15;
+        upgradeDelay[2] = -45;
         upgradeDelay[3] = 0;
         //price
         upgradePrices[0] = 50;
@@ -108,8 +108,8 @@ public class MagicMissileer extends Turret{
         upgradeTitles[2] = "Faster Firing";
         upgradeTitles[3] = "More Missiles";
         //desc line one
-        upgradeDescA[0] = "+2";
-        upgradeDescA[1] = "+2";
+        upgradeDescA[0] = "+10";
+        upgradeDescA[1] = "+10";
         upgradeDescA[2] = "Increase";
         upgradeDescA[3] = "+1 Missile";
         //desc line two

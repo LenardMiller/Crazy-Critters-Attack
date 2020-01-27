@@ -38,7 +38,7 @@ public class RandomCannon extends Turret {
         debrisType = "metal";
         price = 100;
         value = price;
-        priority = 2; //strong
+        priority = 0; //close
         nextLevelA = 0;
         nextLevelB = 2;
         setUpgrades();

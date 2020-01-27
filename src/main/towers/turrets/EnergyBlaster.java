@@ -24,7 +24,7 @@ public class EnergyBlaster extends Turret{
         hp = maxHp;
         hit = false;
         delay = 240; //240 frames
-        delay += (round(p.random(-(delay/10),delay/10))); //injects 10% randomness so all don't fire at once
+        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         damage = 30;
         pjSpeed = 16;
@@ -34,8 +34,7 @@ public class EnergyBlaster extends Turret{
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
-        damage = 20;
-        effectRadius = 20;
+        effectRadius = 25;
         bigExplosion = false;
         loadSprites();
         debrisType = "metal";
@@ -48,7 +47,7 @@ public class EnergyBlaster extends Turret{
         updateTowerArray();
     }
 
-    public void fire(){ //needed to change projectile fired
+    public void fire() { //needed to change projectile fired
         angle += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
@@ -131,13 +130,10 @@ public class EnergyBlaster extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgrade(int id){
+    public void upgrade(int id) {
         int nextLevel;
-        if (id == 0){
-            nextLevel = nextLevelA;
-        } else{
-            nextLevel = nextLevelB;
-        }
+        if (id == 0) nextLevel = nextLevelA;
+        else nextLevel = nextLevelB;
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
         price += upgradePrices[nextLevel];
@@ -148,31 +144,22 @@ public class EnergyBlaster extends Turret{
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
         sprite = upgradeSprites[nextLevel];
-        if (upgradeSpecial[nextLevel]){
-            effectRadius += 10;
+        if (upgradeSpecial[nextLevel]) {
+            effectRadius += 20;
             bigExplosion = true;
         }
-        if (id == 0){
-            nextLevelA++;
-        } else if (id == 1){
-            nextLevelB++;
+        if (id == 0) nextLevelA++;
+        else if (id == 1) nextLevelB++;
+        if (id == 0) {
+            if (nextLevelA < upgradeNames.length/2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
+            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
         }
-        if (id == 0){
-            if (nextLevelA < upgradeNames.length/2){
-                upgradeIconA.sprite = upgradeIcons[nextLevelA];
-            } else{
-                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
-        }
-        if (id == 1){
-            if (nextLevelB < upgradeNames.length){
-                upgradeIconB.sprite = upgradeIcons[nextLevelB];
-            } else{
-                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
+        if (id == 1) {
+            if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+            else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         }
         int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
+        for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }

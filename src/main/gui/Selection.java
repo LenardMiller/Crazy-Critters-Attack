@@ -98,9 +98,8 @@ public class Selection { //what tower is selected
         p.fill(235);
         p.noStroke();
         //different size bg so buttons fit
-        if (tower.turret) p.rect(900, 212, 200, 300);
-        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) p.rect(900, 212, 200, 345);
-        if (!tower.turret) p.rect(900, 212, 200, 345);
+        p.rect(900, 212, 200, 298);
+        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) p.rect(900, 212, 200, 343);
 
         //name and special features
         p.textAlign(CENTER);
@@ -146,7 +145,6 @@ public class Selection { //what tower is selected
             p.textAlign(LEFT);
             p.fill(100, 0, 200);
             p.text("Three homing missiles", 910, 376 + offset);
-            p.text("close, far and strong", 910, 396 + offset);
         }
         if ("magicMissleerFour".equals(tower.name)) {
             p.text("Magic Missileer", 1000, 241);
@@ -155,8 +153,6 @@ public class Selection { //what tower is selected
             p.textAlign(LEFT);
             p.fill(100, 0, 200);
             p.text("Four homing missiles", 910, 376 + offset);
-            p.text("First, last, strong", 910, 396 + offset);
-            p.text("and random", 910, 416 + offset);
         }
 
         //put box around selected
@@ -247,9 +243,9 @@ public class Selection { //what tower is selected
             p.text("Load time: " + (float) (round((float) (tower.delay) / 6)) / 10 + "s", 910, 316 + offset);
             //accuracy (error)
             if (tower.error == 0) p.text("Perfect accuracy", 910, 336 + offset);
-            else if (tower.error > 0 && tower.error < 1) p.text("High accuracy", 910, 336 + offset);
-            else if (tower.error >= 1 && tower.error <= 3) p.text("Medium accuracy", 910, 336 + offset);
-            else if (tower.error > 3) p.text("Low accuracy", 910, 336 + offset);
+            else if (tower.error > 0 && tower.error <= 2) p.text("High accuracy", 910, 336 + offset);
+            else if (tower.error > 2 && tower.error <= 4) p.text("Medium accuracy", 910, 336 + offset);
+            else if (tower.error > 4) p.text("Low accuracy", 910, 336 + offset);
             //velocity
             if (speed < 8) p.text("Low velocity", 910, 356 + offset);
             else if (speed <= 18) p.text("Medium velocity", 910, 356 + offset);

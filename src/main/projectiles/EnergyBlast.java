@@ -57,7 +57,7 @@ public class EnergyBlast extends Projectile{
                     for (int j = enemies.size()-1; j >= 0; j--){
                         Enemy erEnemy = enemies.get(j);
                         if (abs(erEnemy.position.x-position.x) <= (effectRadius + erEnemy.radius) && abs(erEnemy.position.y-position.y) <= (effectRadius + erEnemy.radius)){ //if near enemy
-                            erEnemy.collidePJ(damage/2,buff,i);
+                            erEnemy.collidePJ(3*(damage/4),buff,i);
                         }
                     }
                 }
