@@ -1,10 +1,12 @@
 package main.towers;
 
+import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.util.MiscMethods.updateNodes;
 import static main.util.MiscMethods.updateTowerArray;
 
 public class Wall extends Tower {
@@ -215,6 +217,23 @@ public class Wall extends Tower {
         else blCSprite = null;
         if (brC) brCSprite = spriteDS.get(false,false,!brCcv);
         else brCSprite = null;
+    }
+
+    public void upgrade(int id) {
+        price += upgradePrices[nextLevelB];
+        maxHp += upgradeHealth[nextLevelB];
+        hp += upgradeHealth[nextLevelB];
+        name = upgradeNames[nextLevelB];
+        debrisType = upgradeDebris[nextLevelB];
+        sprite = upgradeSprites[nextLevelB];
+        nextLevelB++;
+        if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        int num = (int)(p.random(30,50)); //shower debris
+        for (int j = num; j >= 0; j--){
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+        }
+        updateNodes();
     }
 
     private void loadSprites() {
