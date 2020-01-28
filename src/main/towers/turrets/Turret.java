@@ -232,9 +232,6 @@ public abstract class Turret extends Tower {
             tintColor = 0;
             hit = false;
         }
-        if (hp > 0) {
-            hpBar();
-        }
         display();
     }
 

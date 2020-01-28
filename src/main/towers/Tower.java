@@ -161,19 +161,5 @@ public abstract class Tower {
         die();
     }
 
-    protected void hpText(){ //displays the towers health
-        p.text(hp, tile.position.x-size.x/2, tile.position.y + size.y/4);
-    }
-
-    public void hpBar(){ //displays the towers health with style todo: replace with cracks
-        if (hp > 0) { //prevent inverted bars
-            p.fill(0, 255, 0, barTrans);
-            //after hit or if below 50%
-            if (barTrans > 0 && hp > maxHp / 2) barTrans--;
-            p.noStroke();
-            p.rect(tile.position.x - size.x, tile.position.y, (size.x) * (((float) hp) / ((float) maxHp)), -6);
-        }
-    }
-
     public abstract void updateSprite();
 }

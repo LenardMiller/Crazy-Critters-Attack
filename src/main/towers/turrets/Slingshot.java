@@ -19,7 +19,7 @@ public class Slingshot extends Turret{
         hp = maxHp;
         hit = false;
         delay = 180; //default: 180 frames
-        delay += (round(p.random(-(delay/10),delay/10))); //injects 10% randomness so all don't fire at once
+        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
         error = 5; //set to 360 for a fun time. default: 5 degrees
@@ -28,7 +28,7 @@ public class Slingshot extends Turret{
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
-        damage = 10;
+        damage = 10; //10
         loadSprites();
         debrisType = "stone";
         price = 50;
