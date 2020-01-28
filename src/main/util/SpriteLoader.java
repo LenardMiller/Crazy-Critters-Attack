@@ -187,6 +187,26 @@ public class SpriteLoader {
         for (int i = 25; i >= 0; i--){
             spritesAnimH.get("magicMissleerLoadTR")[i] = p.loadImage("sprites/towers/turrets/magicMissleer/load/load" + PApplet.nf(i,3) + ".png");
         }
+        spritesAnimH.put("woodWallTW", new PImage[4]);
+        for (int i = 3; i >= 0; i--){
+            spritesAnimH.get("woodWallTW")[i] = p.loadImage("sprites/towers/walls/wood/" + PApplet.nf(i,3) + ".png");
+        }
+        spritesAnimH.put("stoneWallTW", new PImage[4]);
+        for (int i = 3; i >= 0; i--){
+            spritesAnimH.get("stoneWallTW")[i] = p.loadImage("sprites/towers/walls/stone/" + PApplet.nf(i,3) + ".png");
+        }
+        spritesAnimH.put("metalWallTW", new PImage[4]);
+        for (int i = 3; i >= 0; i--){
+            spritesAnimH.get("metalWallTW")[i] = p.loadImage("sprites/towers/walls/metal/" + PApplet.nf(i,3) + ".png");
+        }
+        spritesAnimH.put("crystalWallTW", new PImage[4]);
+        for (int i = 3; i >= 0; i--){
+            spritesAnimH.get("crystalWallTW")[i] = p.loadImage("sprites/towers/walls/crystal/" + PApplet.nf(i,3) + ".png");
+        }
+        spritesAnimH.put("ultimateWallTW", new PImage[4]);
+        for (int i = 3; i >= 0; i--){
+            spritesAnimH.get("ultimateWallTW")[i] = p.loadImage("sprites/towers/walls/ultimate/" + PApplet.nf(i,3) + ".png");
+        }
     }
 
     public static void loadSprites(PApplet p){
@@ -228,11 +248,6 @@ public class SpriteLoader {
         spritesH.put("slingshotBaseTR",p.loadImage("sprites/towers/turrets/slingshot/base.png"));
         spritesH.put("slingshotFullTR",p.loadImage("sprites/towers/turrets/slingshot/full.png"));
         spritesH.put("slingshotIdleTR",p.loadImage("sprites/towers/turrets/slingshot/idle.png"));
-        spritesH.put("crystalWallTW",p.loadImage("sprites/towers/walls/crystal/base.png"));
-        spritesH.put("metalWallTW",p.loadImage("sprites/towers/walls/metal/base.png"));
-        spritesH.put("stoneWallTW",p.loadImage("sprites/towers/walls/stone/base.png"));
-        spritesH.put("ultimateWallTW",p.loadImage("sprites/towers/walls/ultimate/base.png"));
-        spritesH.put("woodWallTW",p.loadImage("sprites/towers/walls/wood/base.png"));
         spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
         spritesH.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));

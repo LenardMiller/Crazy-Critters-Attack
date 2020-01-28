@@ -195,8 +195,6 @@ public class Main extends PApplet {
         }
         //towers
         for (Tower tower : towers) tower.main();
-        //tower hp bars
-        for (Tower tower : towers) tower.hpBar();
         //enemies
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);

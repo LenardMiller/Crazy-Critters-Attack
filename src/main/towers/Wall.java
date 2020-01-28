@@ -24,6 +24,9 @@ public class Wall extends Tower {
     private PImage lSSprite;
     private PImage rSSprite;
 
+    private PImage[][] upgradeSprites;
+    private PImage[] sprite;
+
     public Wall(PApplet p, Tile tile) {
         super(p,tile);
 
@@ -32,7 +35,7 @@ public class Wall extends Tower {
         maxHp = 50;
         hp = maxHp;
         hit = false;
-        sprite = spritesH.get("woodWallTW");
+        sprite = spritesAnimH.get("woodWallTW");
         debrisType = "wood";
         price = 25;
         value = price;
@@ -44,7 +47,7 @@ public class Wall extends Tower {
         upgradeDebris = new String[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
-        upgradeSprites = new PImage[4];
+        upgradeSprites = new PImage[4][4];
         setUpgrades();
         updateTowerArray();
 
@@ -71,7 +74,10 @@ public class Wall extends Tower {
         float y = tile.position.y-size.y;
 
         p.tint(255,tintColor,tintColor);
-        p.image(sprite,x,y);
+        float hpRatio = (float)hp/(float)maxHp;
+        int crack = abs(ceil((hpRatio*4)-1)-3);
+        if (crack != 4) p.image(sprite[crack],x,y);
+        else p.image(sprite[3],x,y);
         //sides
         if (tSSprite != null) p.image(tSSprite,x,y);
         if (rSSprite != null) p.image(rSSprite,x,y);
@@ -114,10 +120,10 @@ public class Wall extends Tower {
         upgradeTitles[2] = "Crystal";
         upgradeTitles[3] = "Titanium";
         //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("crystalWallTW");
-        upgradeSprites[3] = spritesH.get("ultimateWallTW");
+        upgradeSprites[0] = spritesAnimH.get("stoneWallTW");
+        upgradeSprites[1] = spritesAnimH.get("metalWallTW");
+        upgradeSprites[2] = spritesAnimH.get("crystalWallTW");
+        upgradeSprites[3] = spritesAnimH.get("ultimateWallTW");
     }
 
     public void updateSprite() {
@@ -149,30 +155,25 @@ public class Wall extends Tower {
         br = (searchTile != null && searchTile.tower != null && searchTile.tower.name.equals(name));
 
         //is corner
-        boolean tlC = false;
-        boolean trC = false;
-        boolean blC = false;
-        boolean brC = false;
+        boolean tlC;
+        boolean trC;
+        boolean blC;
+        boolean brC;
         //is corner concave or convex
         boolean tlCcv = false;
         boolean trCcv = false;
         boolean blCcv = false;
         boolean brCcv = false;
         //is side
-        boolean tS = false;
-        boolean bS = false;
-        boolean lS = false;
-        boolean rS = false;
+        boolean tS;
+        boolean bS;
+        boolean lS;
+        boolean rS;
 
         tS = !t;
         bS = !b;
         lS = !l;
         rS = !r;
-//        System.out.println(tile.position);
-//        System.out.print("l: " + l + " t: " + t + " tl: " + tl);
-//        System.out.print(" tlC & tlCcv: " + ((l && t) && !tl));
-//        System.out.print(" tlC & !tlCcv: " + !(t || l));
-//        System.out.println();
         if ((l && t) && !tl) {
             tlC = true;
             tlCcv = true;
