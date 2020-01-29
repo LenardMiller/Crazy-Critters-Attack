@@ -19,7 +19,8 @@ public class BigBug extends Enemy{
         hitParticle = "redOuch";
         name = "bigBug";
         numAttackFrames = 100;
-        numMoveFrames = 32;
+        numMoveFrames = 12;
+        betweenWalkFrames = 3;
         startFrame = 48; //attack start
         attackFrame = startFrame;
         loadSprites();

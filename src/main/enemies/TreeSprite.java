@@ -19,7 +19,8 @@ public class TreeSprite extends Enemy{
         hitParticle = "redOuch";
         name = "treeSprite";
         numAttackFrames = 50;
-        numMoveFrames = 58;
+        numMoveFrames = 30;
+        betweenWalkFrames = 1;
         startFrame = 28;
         attackFrame = startFrame;
         loadSprites();
