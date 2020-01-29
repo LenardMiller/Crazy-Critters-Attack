@@ -45,6 +45,8 @@ public abstract class Enemy {
     private boolean attackCue;
     int numAttackFrames;
     int numMoveFrames;
+    int betweenWalkFrames;
+    int walkIdleTime;
     int startFrame;
     public int barTrans;
     public int tintColor;
@@ -73,6 +75,7 @@ public abstract class Enemy {
         numAttackFrames = 1;
         numMoveFrames = 1;
         startFrame = 0;
+        betweenWalkFrames = 0;
         loadSprites();
         pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
     }
@@ -136,8 +139,13 @@ public abstract class Enemy {
             else attackFrame = 0;
         } else {
             sprite = moveFrames[(int) (moveFrame)];
-            if (moveFrame < numMoveFrames - 1) moveFrame += speed;
-            else moveFrame = 0;
+            walkIdleTime++;
+            if (moveFrame < numMoveFrames - 1) {
+                if (walkIdleTime >= betweenWalkFrames) {
+                    moveFrame += speed;
+                    walkIdleTime = 0;
+                }
+            } else moveFrame = 0;
         }
         //shift back to normal
         if (tintColor < 255) tintColor += 20;
@@ -153,9 +161,7 @@ public abstract class Enemy {
         p.rotate(angle);
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
-        if (hp > 0) {
-            HpBar();
-        }
+        if (hp > 0) HpBar();
         if (debug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
             p.stroke(0, 0, 255);

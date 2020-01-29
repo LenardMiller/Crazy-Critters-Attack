@@ -18,7 +18,8 @@ public class MidBug extends Enemy{
         hitParticle = "redOuch";
         name = "midBug";
         numAttackFrames = 42;
-        numMoveFrames = 32;
+        numMoveFrames = 8;
+        betweenWalkFrames = 4;
         startFrame = 34; //attack start
         attackFrame = startFrame;
         loadSprites();
