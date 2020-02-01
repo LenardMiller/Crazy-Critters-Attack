@@ -22,6 +22,7 @@ public class TreeGiant extends Enemy {
         numMoveFrames = 91;
         startFrame = 0;
         attackDmgFrames = new int[]{28};
+        betweenAttackFrames = 2;
         attackFrame = startFrame;
         loadSprites();
     }

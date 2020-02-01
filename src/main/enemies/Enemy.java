@@ -47,7 +47,8 @@ public abstract class Enemy {
     int numAttackFrames;
     int numMoveFrames;
     int betweenWalkFrames;
-    int walkIdleTime;
+    int betweenAttackFrames;
+    int idleTime;
     int startFrame;
     public int barTrans;
     public int tintColor;
@@ -144,15 +145,20 @@ public abstract class Enemy {
     private void preDisplay() {
         if (attacking) {
             sprite = attackFrames[attackFrame];
-            if (attackFrame < numAttackFrames - 1) attackFrame += 1;
-            else attackFrame = 0;
+            idleTime++;
+            if (attackFrame < numAttackFrames - 1) {
+                if (idleTime >= betweenAttackFrames) {
+                    attackFrame += 1;
+                    idleTime = 0;
+                }
+            } else attackFrame = 0;
         } else {
             sprite = moveFrames[(int) (moveFrame)];
-            walkIdleTime++;
+            idleTime++;
             if (moveFrame < numMoveFrames - 1) {
-                if (walkIdleTime >= betweenWalkFrames) {
+                if (idleTime >= betweenWalkFrames) {
                     moveFrame += speed;
-                    walkIdleTime = 0;
+                    idleTime = 0;
                 }
             } else moveFrame = 0;
         }
