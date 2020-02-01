@@ -38,6 +38,7 @@ public class KeyBinds {
         boolean bigBug = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
         boolean treeSprite = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
         boolean treeSpirit = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
+        boolean treeGiant = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
         //buffs
         boolean poisoned = keysPressed.getPressedPulse(',') && alive;
         boolean wet = keysPressed.getPressedPulse('.') && alive;
@@ -58,26 +59,13 @@ public class KeyBinds {
         if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
         //enemies
         if (randomEnemy) spawnRandom();
-        if (littleBug) {
-            enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
-        if (mediumBug) {
-            enemies.add(new MidBug(p, p.mouseX, p.mouseY));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
-        if (bigBug) {
-            enemies.add(new BigBug(p, p.mouseX, p.mouseY));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
-        if (treeSprite) {
-            enemies.add(new TreeSprite(p, p.mouseX, p.mouseY));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
-        if (treeSpirit) {
-            enemies.add(new TreeSpirit(p, p.mouseX, p.mouseY));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
+        if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
+        if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
+        if (bigBug) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
+        if (treeSprite) enemies.add(new TreeSprite(p, p.mouseX, p.mouseY));
+        if (treeSpirit) enemies.add(new TreeSpirit(p, p.mouseX, p.mouseY));
+        if (treeGiant) enemies.add(new TreeGiant(p, p.mouseX, p.mouseY));
+        if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
         //buffs
         if (poisoned) buffs.add(new Poisoned(p, (int) (p.random(0, enemies.size()))));
         if (wet) buffs.add(new Wet(p, (int) (p.random(0, enemies.size()))));
@@ -133,28 +121,29 @@ public class KeyBinds {
     }
 
     private void spawnRandom() {
-        int r = (int) p.random(0,4.99f);
+        int r = (int) p.random(0,5.99f);
         PVector rp = randomSpawnPosition();
-        if (r == 0) {
-            enemies.add(new SmolBug(p, rp.x, rp.y));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        switch (r) {
+            case 0:
+                enemies.add(new SmolBug(p, rp.x, rp.y));
+                break;
+            case 1:
+                enemies.add(new MidBug(p, rp.x, rp.y));
+                break;
+            case 2:
+                enemies.add(new BigBug(p, rp.x, rp.y));
+                break;
+            case 3:
+                enemies.add(new TreeSprite(p, rp.x, rp.y));
+                break;
+            case 4:
+                enemies.add(new TreeSpirit(p, rp.x, rp.y));
+                break;
+            case 5:
+                enemies.add(new TreeGiant(p, rp.x, rp.y));
+                break;
         }
-        if (r == 1) {
-            enemies.add(new MidBug(p, rp.x, rp.y));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
-        if (r == 2) {
-            enemies.add(new BigBug(p, rp.x, rp.y));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
-        if (r == 3) {
-            enemies.add(new TreeSprite(p, rp.x, rp.y));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
-        if (r == 4) {
-            enemies.add(new TreeSpirit(p, rp.x, rp.y));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
+        enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
     public void debugKeys() {
