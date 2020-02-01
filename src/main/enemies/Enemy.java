@@ -41,6 +41,7 @@ public abstract class Enemy {
     private PImage[] moveFrames;
     private float moveFrame;
     int attackFrame;
+    int[] attackDmgFrames;
     public boolean attacking;
     private boolean attackCue;
     int numAttackFrames;
@@ -76,6 +77,7 @@ public abstract class Enemy {
         numMoveFrames = 1;
         startFrame = 0;
         betweenWalkFrames = 0;
+        attackDmgFrames = new int[]{0};
         loadSprites();
         pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
     }
@@ -118,11 +120,18 @@ public abstract class Enemy {
     }
 
     private void attack() {
+        boolean dmg = false;
+        for (int frame : attackDmgFrames) {
+            if (attackFrame == frame) {
+                dmg = true;
+                break;
+            }
+        }
         if (target != null) {
 //            angle = radians(roundTo(degrees(findAngleBetween(target.tile.position, position)), 90));
             angle = findAngleBetween(target.tile.position, position); //todo: angle better
             moveFrame = 0;
-            if (attackFrame == numAttackFrames - 1) target.damage(twDamage);
+            if (dmg) target.damage(twDamage);
         }
         if (!attackCue && attackFrame == startFrame) {
             attacking = false;
