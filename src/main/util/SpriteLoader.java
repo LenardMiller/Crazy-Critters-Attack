@@ -163,6 +163,14 @@ public class SpriteLoader {
         for (int i = 58; i >= 0; i--){
             spritesAnimH.get("slingshotLoadTR")[i] = p.loadImage("sprites/towers/turrets/slingshot/load/load" + PApplet.nf(i,3) + ".png");
         }
+        spritesAnimH.put("teslaFireTR",new PImage[6]);
+        for (int i = 5; i >= 0; i--){
+            spritesAnimH.get("teslaFireTR")[i] = p.loadImage("sprites/towers/turrets/tesla/fire/" + PApplet.nf(i,3) + ".png");
+        }
+        spritesAnimH.put("teslaLoadTR",new PImage[5]);
+        for (int i = 6; i >= 0; i--){
+            spritesAnimH.get("teslaLoadTR")[i] = p.loadImage("sprites/towers/turrets/tesla/load/" + PApplet.nf(i,3) + ".png");
+        }
         spritesAnimH.put("crossbowFireTR",new PImage[13]);
         for (int i = 12; i >= 0; i--){
             spritesAnimH.get("crossbowFireTR")[i] = p.loadImage("sprites/towers/turrets/crossbow/fire/fire" + PApplet.nf(i,3) + ".png");
@@ -257,6 +265,8 @@ public class SpriteLoader {
         spritesH.put("slingshotBaseTR",p.loadImage("sprites/towers/turrets/slingshot/base.png"));
         spritesH.put("slingshotFullTR",p.loadImage("sprites/towers/turrets/slingshot/full.png"));
         spritesH.put("slingshotIdleTR",p.loadImage("sprites/towers/turrets/slingshot/idle.png"));
+        spritesH.put("teslaTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
+        spritesH.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));
         spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
         spritesH.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
