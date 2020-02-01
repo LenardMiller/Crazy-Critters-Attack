@@ -107,6 +107,14 @@ public class SpriteLoader {
         spritesAnimH.get("nullAttackEN")[0] = p.loadImage("sprites/enemies/null/attack/000.png");
         spritesAnimH.put("nullMoveEN", new PImage[1]);
         spritesAnimH.get("nullMoveEN")[0] = p.loadImage("sprites/enemies/null/move/000.png");
+        spritesAnimH.put("treeGiantAttackEN", new PImage[63]);
+        for (int i = 62; i >= 0; i--){
+            spritesAnimH.get("treeGiantAttackEN")[i] = p.loadImage("sprites/enemies/treeGiant/attack/" + PApplet.nf(i,3) + ".png");
+        }
+        spritesAnimH.put("treeGiantMoveEN", new PImage[91]);
+        for (int i = 90; i >= 0; i--){
+            spritesAnimH.get("treeGiantMoveEN")[i] = p.loadImage("sprites/enemies/treeGiant/move/" + PApplet.nf(i,3) + ".png");
+        }
         spritesAnimH.put("treeSpiritAttackEN", new PImage[42]);
         for (int i = 41; i >= 0; i--){
             spritesAnimH.get("treeSpiritAttackEN")[i] = p.loadImage("sprites/enemies/treeSpirit/attack/" + PApplet.nf(i,3) + ".png");
@@ -211,6 +219,7 @@ public class SpriteLoader {
 
     public static void loadSprites(PApplet p){
         spritesH.put("nullEN",p.loadImage("sprites/enemies/null/idle.png"));
+        spritesH.put("treeGiantEN",p.loadImage("sprites/enemies/treeGiant/idle.png"));
         spritesH.put("treeSpiritEN",p.loadImage("sprites/enemies/treeSpirit/idle.png"));
         spritesH.put("treeSpriteEN",p.loadImage("sprites/enemies/treeSprite/idle.png"));
         spritesH.put("midBugEN",p.loadImage("sprites/enemies/midBug/idle.png"));
