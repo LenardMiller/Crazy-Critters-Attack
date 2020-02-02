@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
 import main.particles.Debris;
+import main.projectiles.Arc;
 import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -10,6 +11,9 @@ import static main.Main.*;
 import static main.util.MiscMethods.updateTowerArray;
 
 public class TeslaTower extends Turret{
+
+    private int maxLength;
+    private int maxDistance;
 
     public TeslaTower(PApplet p, Tile tile) {
         super(p,tile);
@@ -22,6 +26,8 @@ public class TeslaTower extends Turret{
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         damage = 35;
+        maxDistance = 200;
+        maxLength = 3;
         pjSpeed = -1;
         error = 0; //0 degrees
         numFireFrames = 6;
@@ -42,6 +48,7 @@ public class TeslaTower extends Turret{
 
     public void fire(){ //needed to change projectile fired
         delayTime = p.frameCount + delay; //waits this time before firing
+        arcs.add(new Arc(p, tile.position.x - 25, tile.position.y - 25, this, damage, maxLength, maxDistance, priority));
     }
 
     public void display() {
