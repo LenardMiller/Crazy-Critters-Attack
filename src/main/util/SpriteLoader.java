@@ -171,6 +171,10 @@ public class SpriteLoader {
         for (int i = 4; i >= 0; i--){
             spritesAnimH.get("teslaLoadTR")[i] = p.loadImage("sprites/towers/turrets/tesla/load/" + PApplet.nf(i,3) + ".png");
         }
+        spritesAnimH.put("teslaIdleTR",new PImage[18]);
+        for (int i = 17; i >= 0; i--){
+            spritesAnimH.get("teslaIdleTR")[i] = p.loadImage("sprites/towers/turrets/tesla/idle/" + PApplet.nf(i,3) + ".png");
+        }
         spritesAnimH.put("crossbowFireTR",new PImage[13]);
         for (int i = 12; i >= 0; i--){
             spritesAnimH.get("crossbowFireTR")[i] = p.loadImage("sprites/towers/turrets/crossbow/fire/fire" + PApplet.nf(i,3) + ".png");

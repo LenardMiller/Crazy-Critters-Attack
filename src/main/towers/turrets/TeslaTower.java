@@ -32,8 +32,12 @@ public class TeslaTower extends Turret{
         error = 0; //0 degrees
         numFireFrames = 6;
         numLoadFrames = 5;
+        numIdleFrames = 18;
+        animatedIdle = true;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
+        idleFrames = new PImage[numIdleFrames];
+        betweenIdleFrames = 3;
         spriteType = 0;
         loadSprites();
         debrisType = "metal";

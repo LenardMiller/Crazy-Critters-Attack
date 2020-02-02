@@ -22,10 +22,15 @@ public abstract class Turret extends Tower {
     int pjSpeed;
     int numFireFrames;
     int numLoadFrames;
+    int numIdleFrames;
     PImage[] fireFrames;
     PImage[] loadFrames;
+    PImage[] idleFrames;
+    boolean animatedIdle;
     int spriteType;
     int frame;
+    int frameTimer;
+    int betweenIdleFrames;
     float loadDelay;
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
@@ -45,13 +50,17 @@ public abstract class Turret extends Tower {
         error = 0;
         numFireFrames = 1;
         numLoadFrames = 1;
+        numIdleFrames = 1;
         debrisType = null;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
+        idleFrames = new PImage[numIdleFrames];
         spriteArray = new ArrayList<>();
+        animatedIdle = false;
         spriteType = 0;
         frame = 0;
         loadDelay = 0;
+        betweenIdleFrames = 0;
         loadDelayTime = 0;
         turret = true;
         loadSprites();
@@ -165,6 +174,7 @@ public abstract class Turret extends Tower {
         sIdle = spritesH.get(name + "IdleTR");
         fireFrames = spritesAnimH.get(name + "FireTR");
         loadFrames = spritesAnimH.get(name + "LoadTR");
+        if (animatedIdle) idleFrames = spritesAnimH.get(name + "IdleTR");
     }
 
     public void main() { //need to check target
@@ -182,8 +192,21 @@ public abstract class Turret extends Tower {
     private void preDisplay() {
         if (tintColor < 255) tintColor += 20;
         //idle
-        if (spriteType == 0) sprite = sIdle;
-        else if (spriteType == 1) { //fire
+        if (spriteType == 0) {
+            sprite = sIdle;
+            if (animatedIdle) {
+                if (frame < numIdleFrames - 1) {
+                    sprite = idleFrames[frame];
+                    if (frameTimer >= betweenIdleFrames) {
+                        frame++;
+                        frameTimer = 0;
+                    } else frameTimer++;
+                } else {
+                    frame = 0;
+                    sprite = idleFrames[frame];
+                }
+            }
+        } else if (spriteType == 1) { //fire
             if (frame < numFireFrames - 1) { //if not done, keep going
                 frame++;
                 sprite = fireFrames[frame];
