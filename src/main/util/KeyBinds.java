@@ -123,29 +123,31 @@ public class KeyBinds {
     }
 
     private void spawnRandom() {
-        int r = (int) p.random(0,5.99f);
-        PVector rp = randomSpawnPosition();
-        switch (r) {
-            case 0:
-                enemies.add(new SmolBug(p, rp.x, rp.y));
-                break;
-            case 1:
-                enemies.add(new MidBug(p, rp.x, rp.y));
-                break;
-            case 2:
-                enemies.add(new BigBug(p, rp.x, rp.y));
-                break;
-            case 3:
-                enemies.add(new TreeSprite(p, rp.x, rp.y));
-                break;
-            case 4:
-                enemies.add(new TreeSpirit(p, rp.x, rp.y));
-                break;
-            case 5:
-                enemies.add(new TreeGiant(p, rp.x, rp.y));
-                break;
+        for (int i = 0; i < 5; i++) {
+            int r = (int) p.random(0, 4.99f);
+            PVector rp = randomSpawnPosition();
+            switch (r) {
+                case 0:
+                    enemies.add(new SmolBug(p, rp.x, rp.y));
+                    break;
+                case 1:
+                    enemies.add(new MidBug(p, rp.x, rp.y));
+                    break;
+                case 2:
+                    enemies.add(new BigBug(p, rp.x, rp.y));
+                    break;
+                case 3:
+                    enemies.add(new TreeSprite(p, rp.x, rp.y));
+                    break;
+                case 4:
+                    enemies.add(new TreeSpirit(p, rp.x, rp.y));
+                    break;
+                case 5:
+                    enemies.add(new TreeGiant(p, rp.x, rp.y));
+                    break;
+            }
+            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
         }
-        enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
     public void debugKeys() {
