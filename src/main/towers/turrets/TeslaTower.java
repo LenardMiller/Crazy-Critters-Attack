@@ -12,8 +12,8 @@ import static main.util.MiscMethods.updateTowerArray;
 
 public class TeslaTower extends Turret{
 
-    private int maxLength;
-    private int maxDistance;
+    private int arcLength;
+    private int arcDistance;
 
     public TeslaTower(PApplet p, Tile tile) {
         super(p,tile);
@@ -26,8 +26,8 @@ public class TeslaTower extends Turret{
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         damage = 35;
-        maxDistance = 200;
-        maxLength = 3;
+        arcDistance = 200;
+        arcLength = 3;
         pjSpeed = -1;
         error = 0; //0 degrees
         numFireFrames = 6;
@@ -48,7 +48,7 @@ public class TeslaTower extends Turret{
 
     public void fire(){ //needed to change projectile fired
         delayTime = p.frameCount + delay; //waits this time before firing
-        arcs.add(new Arc(p, tile.position.x - 25, tile.position.y - 25, this, damage, maxLength, maxDistance, priority));
+        arcs.add(new Arc(p, tile.position.x - 25, tile.position.y - 25, this, damage, arcLength, arcDistance, priority));
     }
 
     public void display() {
