@@ -44,7 +44,7 @@ public class Arc {
     public void main() {
         for (int k = 0; k < bigPoints.size()-1; k++) {
 //            bigPoints.get(k).getPoints(bigPoints.get(k+1).position);
-            p.stroke(255, alpha);
+            p.stroke(215,242,248, alpha);
             p.fill(255);
             PVector pointB = bigPoints.get(k).position;
             PVector pointA = bigPoints.get(k+1).position;
@@ -70,7 +70,7 @@ public class Arc {
         hitEnemies.add(enemy);
         bigPoints.add(new BigPoint(p,enemy.position));
         int x = 2;
-        for (int i = 1; i <= maxLength; i++) {
+        for (int i = 1; i < maxLength; i++) {
             Enemy enemyJ = getTargetEnemy(bigPoints.get(x-1).position, 0, true, hitEnemies);
             if (enemyJ != null) {
                 bigPoints.add(new BigPoint(p, enemyJ.position));
