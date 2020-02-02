@@ -1,7 +1,6 @@
 package main.towers.turrets;
 
 import main.particles.Debris;
-import main.projectiles.Pebble;
 import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -23,7 +22,7 @@ public class TeslaTower extends Turret{
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         damage = 35;
-        pjSpeed = 5;
+        pjSpeed = -1;
         error = 0; //0 degrees
         numFireFrames = 6;
         numLoadFrames = 5;
@@ -41,16 +40,18 @@ public class TeslaTower extends Turret{
         updateTowerArray();
     }
 
-    public void checkTarget(){
-        if (frame == 0 && spriteType == 0){ //if done animating
-            spriteType = 1;
-            fire();
-        }
+    public void fire(){ //needed to change projectile fired
+        delayTime = p.frameCount + delay; //waits this time before firing
     }
 
-    public void fire(){ //needed to change projectile fired
-//        delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+    public void display() {
+        p.tint(255, tintColor, tintColor);
+        p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+        p.image(sprite, -size.x / 2, -size.y / 2);
+        p.popMatrix();
+        p.tint(255, 255, 255);
     }
 
     private void setUpgrades(){
@@ -126,7 +127,7 @@ public class TeslaTower extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgrade(int id){
+    public void upgrade(int id) { //todo: make
         int nextLevel;
         if (id == 0) nextLevel = nextLevelA;
         else nextLevel = nextLevelB;
@@ -145,8 +146,8 @@ public class TeslaTower extends Turret{
             nextLevelA++;
             if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
             else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-        } else if (id == 1) nextLevelB++;
-        if (id == 1) {
+        } else if (id == 1) {
+            nextLevelB++;
             if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
             else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         }

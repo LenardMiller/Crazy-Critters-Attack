@@ -44,24 +44,24 @@ public class MagicMissileer extends Turret{
         updateTowerArray();
     }
 
-    public void checkTarget(){
-        if (frame == 0 && spriteType == 0){ //if done animating
+    public void checkTarget() {
+        if (frame == 0 && spriteType == 0) { //if done animating
             spriteType = 1;
             fire();
         }
     }
 
-    public void fire(){ //needed to change projectile fired
+    public void fire() { //needed to change projectile fired
         delayTime = p.frameCount + delay; //waits this time before firing
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, this, damage, 0,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, this, damage, 1,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, this, damage, 2,tile.position));
-        if (four){
+        if (four) {
             projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, this, damage, (int)(p.random(0,2.99f)),tile.position));
         }
     }
 
-    private void setUpgrades(){
+    private void setUpgrades() {
         //special
         upgradeSpecial[0] = false;
         upgradeSpecial[1] = false;
@@ -134,13 +134,10 @@ public class MagicMissileer extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgrade(int id){
+    public void upgrade(int id) {
         int nextLevel;
-        if (id == 0){
-            nextLevel = nextLevelA;
-        } else{
-            nextLevel = nextLevelB;
-        }
+        if (id == 0) nextLevel = nextLevelA;
+        else nextLevel = nextLevelB;
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
         price += upgradePrices[nextLevel];
@@ -151,34 +148,22 @@ public class MagicMissileer extends Turret{
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
         sprite = upgradeSprites[nextLevel];
-        if (upgradeSpecial[nextLevel]){
-            four = true;
-        }
-        if (id == 0){
+        if (upgradeSpecial[nextLevel]) four = true;
+        if (id == 0) {
             nextLevelA++;
-        } else if (id == 1){
-            nextLevelB++;
-        }
-        if (id == 0){
-            if (nextLevelA < upgradeNames.length/2){
-                upgradeIconA.sprite = upgradeIcons[nextLevelA];
-            } else{
-                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
-        }
-        if (id == 1){
-            if (nextLevelB < upgradeNames.length){
-                upgradeIconB.sprite = upgradeIcons[nextLevelB];
-            } else{
-                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
+            if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
+            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+        } else if (id == 1) nextLevelB++;
+        if (id == 1) {
+            if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+            else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         }
         //reset names
         upgradeNames[0] = name;
         upgradeNames[1] = name;
         upgradeNames[2] = name;
         int num = floor(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
+        for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }

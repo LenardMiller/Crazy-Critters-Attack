@@ -39,7 +39,7 @@ public class TowerBuy extends Button {
         }
     }
 
-    public void main(){
+    public void main() {
         if (active){
             hover();
             display();
@@ -98,7 +98,7 @@ public class TowerBuy extends Button {
         depressed = !depressed;
         //if already holding, stop
         if (hand.held.equals(towerType)) hand.setHeld("null");
-            //if not, do
+        //if not, do
         else if (depressed) hand.setHeld(towerType);
     }
 }

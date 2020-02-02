@@ -235,8 +235,6 @@ public class SpriteLoader {
         spritesH.put("livesIc",p.loadImage("sprites/guiObjects/lives.png"));
         spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
         spritesH.put("nullIc",p.loadImage("sprites/guiObjects/null.png"));
-        spritesH.put("towerBuyBgIC",p.loadImage("sprites/guiObjects/towerBuyBg.png"));
-        spritesH.put("moneyBgIC",p.loadImage("sprites/guiObjects/moneyBg.png"));
         spritesH.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
         spritesH.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));
         spritesH.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));
@@ -265,7 +263,8 @@ public class SpriteLoader {
         spritesH.put("slingshotBaseTR",p.loadImage("sprites/towers/turrets/slingshot/base.png"));
         spritesH.put("slingshotFullTR",p.loadImage("sprites/towers/turrets/slingshot/full.png"));
         spritesH.put("slingshotIdleTR",p.loadImage("sprites/towers/turrets/slingshot/idle.png"));
-        spritesH.put("teslaTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
+        spritesH.put("teslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/base.png"));
+        spritesH.put("teslaFullTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
         spritesH.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));
         spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
