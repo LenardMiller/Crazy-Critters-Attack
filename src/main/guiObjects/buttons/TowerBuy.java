@@ -28,10 +28,13 @@ public class TowerBuy extends Button {
                 price = 50;
                 break;
             case "crossbow":
-                price = 100;
-                break;
             case "miscCannon":
                 price = 100;
+                break;
+            case "tesla":
+            case "energyBlaster":
+            case "magicMissleer":
+                price = 150;
                 break;
         }
     }
@@ -80,6 +83,10 @@ public class TowerBuy extends Button {
                     p.textFont(mediumFont);
                     p.text("$150", x, 271);
                     break;
+                case "tesla":
+                    p.text("Tesla Tower", x, 241);
+                    p.textFont(mediumFont);
+                    p.text("$150", x, 271);
             }
             //if pressed
             if (inputHandler.leftMousePressedPulse && alive) action();

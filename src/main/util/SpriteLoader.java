@@ -168,7 +168,7 @@ public class SpriteLoader {
             spritesAnimH.get("teslaFireTR")[i] = p.loadImage("sprites/towers/turrets/tesla/fire/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("teslaLoadTR",new PImage[5]);
-        for (int i = 6; i >= 0; i--){
+        for (int i = 4; i >= 0; i--){
             spritesAnimH.get("teslaLoadTR")[i] = p.loadImage("sprites/towers/turrets/tesla/load/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("crossbowFireTR",new PImage[13]);
