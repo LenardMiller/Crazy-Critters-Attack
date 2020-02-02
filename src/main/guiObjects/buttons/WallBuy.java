@@ -4,8 +4,6 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.Main.alive;
-import static processing.core.PConstants.CENTER;
 
 public class WallBuy extends Button {
 
@@ -31,14 +29,7 @@ public class WallBuy extends Button {
     public void hover(){ //below is if hovered or depressed
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active) {
             sprite = spriteTwo;
-            p.fill(235);
-            p.noStroke();
-            p.rect(900,211,200,707);
-            p.textAlign(CENTER);
-            p.fill(0);
-            p.textFont(largeFont); //displays info about tower todo: put more info
-            p.text("Walls", 1000, 241);
-            if (inputHandler.leftMousePressedPulse && alive) action();
+            if (inputHandler.leftMousePressedPulse) action();
         }
         else sprite = spriteOne;
     }

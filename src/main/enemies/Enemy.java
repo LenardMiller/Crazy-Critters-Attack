@@ -321,7 +321,7 @@ public abstract class Enemy {
         points.addAll(pointsD);
     }
 
-    private ArrayList<Tower> clearanceTowers(TurnPoint point) {
+    private ArrayList<Tower> clearanceTowers(TurnPoint point) { //todo: fix weird clearance around end points
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
         int kSize = 1;
