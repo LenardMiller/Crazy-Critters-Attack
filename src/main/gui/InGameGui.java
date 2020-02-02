@@ -29,7 +29,6 @@ public class InGameGui {
         openMenuButton.main();
         p.fill(130);
         p.rect(900,21,200,127);
-        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
         wallBuyButton.main();
         addMoneyButton.main();
         moneyIcon.main();
@@ -48,6 +47,7 @@ public class InGameGui {
         upgradeIconA.main();
         upgradeIconB.main();
         if (isTowers) selection.main();
+        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
     }
 
     public void drawText(PApplet p, int x) {
