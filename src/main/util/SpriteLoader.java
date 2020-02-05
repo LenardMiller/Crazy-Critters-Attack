@@ -207,6 +207,10 @@ public class SpriteLoader {
         for (int i = 25; i >= 0; i--){
             spritesAnimH.get("magicMissleerLoadTR")[i] = p.loadImage("sprites/towers/turrets/magicMissleer/load/load" + PApplet.nf(i,3) + ".png");
         }
+        spritesAnimH.put("magicMissleerIdleTR",new PImage[8]);
+        for (int i = 7; i >= 0; i--){
+            spritesAnimH.get("magicMissleerIdleTR")[i] = p.loadImage("sprites/towers/turrets/magicMissleer/idle/" + PApplet.nf(i,3) + ".png");
+        }
         spritesAnimH.put("woodWallTW", new PImage[4]);
         for (int i = 3; i >= 0; i--){
             spritesAnimH.get("woodWallTW")[i] = p.loadImage("sprites/towers/walls/wood/" + PApplet.nf(i,3) + ".png");

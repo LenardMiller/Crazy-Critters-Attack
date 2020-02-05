@@ -84,7 +84,7 @@ public abstract class Turret extends Tower {
     public void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null) aim(targetEnemy);
-        if (frame == 0 && spriteType == 0) { //if done animating
+        if (spriteType == 0) { //if done animating
             spriteType = 1;
             frame = 0;
             fire();
@@ -195,7 +195,7 @@ public abstract class Turret extends Tower {
         if (spriteType == 0) {
             sprite = sIdle;
             if (animatedIdle) {
-                if (frame < numIdleFrames - 1) {
+                if (frame < numIdleFrames) {
                     sprite = idleFrames[frame];
                     if (frameTimer >= betweenIdleFrames) {
                         frame++;

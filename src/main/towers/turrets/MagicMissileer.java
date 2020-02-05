@@ -27,10 +27,14 @@ public class MagicMissileer extends Turret{
         damage = 15;
         pjSpeed = 5;
         error = 0; //0 degrees
-        numFireFrames = 8; //8
-        numLoadFrames = 26; //26
+        numFireFrames = 8;
+        numLoadFrames = 26;
+        numIdleFrames = 8;
+        animatedIdle = true;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
+        idleFrames = new PImage[numIdleFrames];
+        betweenIdleFrames = 8;
         spriteType = 0;
         loadSprites();
         debrisType = "crystal";
@@ -45,7 +49,7 @@ public class MagicMissileer extends Turret{
     }
 
     public void checkTarget() {
-        if (frame == 0 && spriteType == 0) { //if done animating
+        if (spriteType == 0) { //if done animating
             spriteType = 1;
             fire();
         }
