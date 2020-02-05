@@ -30,7 +30,6 @@ public class MagicMissileer extends Turret{
         numFireFrames = 8;
         numLoadFrames = 26;
         numIdleFrames = 8;
-        animatedIdle = true;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         idleFrames = new PImage[numIdleFrames];

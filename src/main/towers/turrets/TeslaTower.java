@@ -33,7 +33,6 @@ public class TeslaTower extends Turret{
         numFireFrames = 6;
         numLoadFrames = 5;
         numIdleFrames = 18;
-        animatedIdle = true;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         idleFrames = new PImage[numIdleFrames];

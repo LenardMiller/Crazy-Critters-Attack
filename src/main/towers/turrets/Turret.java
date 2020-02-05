@@ -26,7 +26,6 @@ public abstract class Turret extends Tower {
     PImage[] fireFrames;
     PImage[] loadFrames;
     PImage[] idleFrames;
-    boolean animatedIdle;
     int spriteType;
     int frame;
     int frameTimer;
@@ -56,7 +55,6 @@ public abstract class Turret extends Tower {
         loadFrames = new PImage[numLoadFrames];
         idleFrames = new PImage[numIdleFrames];
         spriteArray = new ArrayList<>();
-        animatedIdle = false;
         spriteType = 0;
         frame = 0;
         loadDelay = 0;
@@ -174,7 +172,7 @@ public abstract class Turret extends Tower {
         sIdle = spritesH.get(name + "IdleTR");
         fireFrames = spritesAnimH.get(name + "FireTR");
         loadFrames = spritesAnimH.get(name + "LoadTR");
-        if (animatedIdle) idleFrames = spritesAnimH.get(name + "IdleTR");
+        if (numIdleFrames > 1) idleFrames = spritesAnimH.get(name + "IdleTR");
     }
 
     public void main() { //need to check target
@@ -194,7 +192,7 @@ public abstract class Turret extends Tower {
         //idle
         if (spriteType == 0) {
             sprite = sIdle;
-            if (animatedIdle) {
+            if (numIdleFrames > 1) {
                 if (frame < numIdleFrames) {
                     sprite = idleFrames[frame];
                     if (frameTimer >= betweenIdleFrames) {
