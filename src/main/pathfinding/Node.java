@@ -135,8 +135,10 @@ public class Node {
 
     private void setDone() {
         if (path.index != -1) {
-            Enemy enemy = enemies.get(path.index);
-            enemy.points.add(new Enemy.TurnPoint(p, position, tower));
+            if (path.index < enemies.size()) {
+                Enemy enemy = enemies.get(path.index);
+                enemy.points.add(new Enemy.TurnPoint(p, position, tower));
+            }
         }
         if (!isStart) parent.setDone();
     }

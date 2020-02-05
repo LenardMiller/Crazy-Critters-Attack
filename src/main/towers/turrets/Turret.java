@@ -22,10 +22,14 @@ public abstract class Turret extends Tower {
     int pjSpeed;
     int numFireFrames;
     int numLoadFrames;
+    int numIdleFrames;
     PImage[] fireFrames;
     PImage[] loadFrames;
+    PImage[] idleFrames;
     int spriteType;
     int frame;
+    int frameTimer;
+    int betweenIdleFrames;
     float loadDelay;
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
@@ -45,13 +49,16 @@ public abstract class Turret extends Tower {
         error = 0;
         numFireFrames = 1;
         numLoadFrames = 1;
+        numIdleFrames = 1;
         debrisType = null;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
+        idleFrames = new PImage[numIdleFrames];
         spriteArray = new ArrayList<>();
         spriteType = 0;
         frame = 0;
         loadDelay = 0;
+        betweenIdleFrames = 0;
         loadDelayTime = 0;
         turret = true;
         loadSprites();
@@ -75,7 +82,7 @@ public abstract class Turret extends Tower {
     public void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null) aim(targetEnemy);
-        if (frame == 0 && spriteType == 0) { //if done animating
+        if (spriteType == 0) { //if done animating
             spriteType = 1;
             frame = 0;
             fire();
@@ -165,17 +172,15 @@ public abstract class Turret extends Tower {
         sIdle = spritesH.get(name + "IdleTR");
         fireFrames = spritesAnimH.get(name + "FireTR");
         loadFrames = spritesAnimH.get(name + "LoadTR");
+        if (numIdleFrames > 1) idleFrames = spritesAnimH.get(name + "IdleTR");
     }
-
 
     public void main() { //need to check target
         if (hp <= 0) {
             die();
             tile.tower = null;
         }
-        if (enemies.size() > 0 && alive) {
-            checkTarget();
-        }
+        if (enemies.size() > 0 && alive) checkTarget();
         if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) {
             selection.swapSelected(tile.id);
         }
@@ -183,15 +188,25 @@ public abstract class Turret extends Tower {
     }
 
     private void preDisplay() {
-        if (tintColor < 255) {
-            tintColor += 20;
-        }
-        if (spriteType == 0) { //idle
+        if (tintColor < 255) tintColor += 20;
+        //idle
+        if (spriteType == 0) {
             sprite = sIdle;
+            if (numIdleFrames > 1) {
+                if (frame < numIdleFrames) {
+                    sprite = idleFrames[frame];
+                    if (frameTimer >= betweenIdleFrames) {
+                        frame++;
+                        frameTimer = 0;
+                    } else frameTimer++;
+                } else {
+                    frame = 0;
+                    sprite = idleFrames[frame];
+                }
+            }
         } else if (spriteType == 1) { //fire
             if (frame < numFireFrames - 1) { //if not done, keep going
                 frame++;
-
                 sprite = fireFrames[frame];
             } else { //if done, switch to load
                 if (numLoadFrames > 0) {
@@ -199,12 +214,8 @@ public abstract class Turret extends Tower {
                     int oldSize = numLoadFrames;
                     int newSize = (delayTime - p.frameCount);
                     spriteArray = new ArrayList<>();
-                    for (int i = 0; i < oldSize; i++) {
-                        oldArray.add(i);
-                    }
-                    for (int i = 0; i < oldSize; i++) {
-                        spriteArray.add(i);
-                    }
+                    for (int i = 0; i < oldSize; i++) oldArray.add(i);
+                    for (int i = 0; i < oldSize; i++) spriteArray.add(i);
                     int count = 0;
                     while (spriteArray.size() != newSize) {
                         count++;
@@ -214,15 +225,11 @@ public abstract class Turret extends Tower {
                 }
                 frame = 0;
                 spriteType = 2;
-                //println();
-                //println(spriteArray.size()+"<-"+oldSize);
             }
         } else if (spriteType == 2) { //load
             frame++;
-            if (frame < spriteArray.size()) {
-                sprite = loadFrames[spriteArray.get(frame)];
-                //print(spriteArray.get(frame)+", ");
-            } else { //if time runs out, switch to idle
+            if (frame < spriteArray.size()) sprite = loadFrames[spriteArray.get(frame)];
+            else { //if time runs out, switch to idle
                 frame = 0;
                 sprite = sIdle;
                 spriteType = 0;
@@ -248,11 +255,8 @@ public abstract class Turret extends Tower {
 
     public void upgrade(int id) {
         int nextLevel;
-        if (id == 0) {
-            nextLevel = nextLevelA;
-        } else {
-            nextLevel = nextLevelB;
-        }
+        if (id == 0) nextLevel = nextLevelA;
+        else nextLevel = nextLevelB;
         damage += upgradeDamage[nextLevel];
         delay += upgradeDelay[nextLevel];
         price += upgradePrices[nextLevel];
@@ -265,22 +269,12 @@ public abstract class Turret extends Tower {
         sprite = upgradeSprites[nextLevel];
         if (id == 0) {
             nextLevelA++;
-        } else if (id == 1) {
-            nextLevelB++;
-        }
-        if (id == 0) {
-            if (nextLevelA < upgradeNames.length / 2) {
-                upgradeIconA.sprite = upgradeIcons[nextLevelA];
-            } else {
-                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
-        }
+            if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
+            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+        } else if (id == 1) nextLevelB++;
         if (id == 1) {
-            if (nextLevelB < upgradeNames.length) {
-                upgradeIconB.sprite = upgradeIcons[nextLevelB];
-            } else {
-                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
+            if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+            else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         }
         int num = (int) (p.random(30, 50)); //shower debris
         for (int j = num; j >= 0; j--) {

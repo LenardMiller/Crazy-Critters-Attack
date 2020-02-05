@@ -2,8 +2,8 @@ package main;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.gui.InGameGui;
 import main.gui.Hand;
+import main.gui.InGameGui;
 import main.gui.Selection;
 import main.guiObjects.GuiObject;
 import main.guiObjects.buttons.Button;
@@ -12,6 +12,7 @@ import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
+import main.projectiles.Arc;
 import main.projectiles.Projectile;
 import main.towers.Tile;
 import main.towers.Tower;
@@ -40,6 +41,7 @@ public class Main extends PApplet {
     public static ArrayList<main.enemies.Enemy> enemies;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles;
+    public static ArrayList<main.projectiles.Arc> arcs;
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<Buff> buffs;
 
@@ -113,6 +115,7 @@ public class Main extends PApplet {
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         particles = new ArrayList<>();
+        arcs = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
         buffs = new ArrayList<>();
         //loads sprites
@@ -205,6 +208,12 @@ public class Main extends PApplet {
         for (int i = projectiles.size() - 1; i >= 0; i--) {
             Projectile projectile = projectiles.get(i);
             projectile.main(projectiles, i);
+        }
+        //arcs
+        for (int i = arcs.size()-1; i >= 0; i--) {
+            Arc arc = arcs.get(i);
+            arc.main();
+            if (arc.alpha <= 0) arcs.remove(i);
         }
         //particles
         for (int i = particles.size() - 1; i >= 0; i--) {

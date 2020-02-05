@@ -153,6 +153,13 @@ public class Selection { //what tower is selected
                 p.fill(100, 0, 200);
                 p.text("Four homing missiles", 910, 376 + offset);
                 break;
+            case "tesla":
+                p.text("Tesla Tower", 1000, 241);
+                speed = -1;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100,0,200);
+                p.text("Chain Lightning", 910, 376 + offset);
         }
 
         //stats
@@ -194,17 +201,17 @@ public class Selection { //what tower is selected
                 p.text("$" + tower.upgradePrices[tower.nextLevelA], 1000, 693 + offsetC);
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
-                p.text(tower.upgradeDescA[tower.nextLevelA], 915, 615 + offsetC);
-                p.text(tower.upgradeDescB[tower.nextLevelA], 915, 635 + offsetC);
-                p.text(tower.upgradeDescC[tower.nextLevelA], 915, 655 + offsetC);
+                p.text(tower.upgradeDescA[tower.nextLevelA], 910, 615 + offsetC);
+                p.text(tower.upgradeDescB[tower.nextLevelA], 910, 635 + offsetC);
+                p.text(tower.upgradeDescC[tower.nextLevelA], 910, 655 + offsetC);
             } else {
                 p.fill(15);
                 p.textFont(largeFont);
                 p.text("N/A", 1000, 585 + offsetC);
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
-                p.text("No more", 915, 615 + offsetC);
-                p.text("upgrades", 915, 635 + offsetC);
+                p.text("No more", 910, 615 + offsetC);
+                p.text("upgrades", 910, 635 + offsetC);
             }
         }
         //upgrade One
@@ -220,9 +227,9 @@ public class Selection { //what tower is selected
             p.text("$" + tower.upgradePrices[tower.nextLevelB], 1000, 693 + offsetC);
             p.textFont(mediumFont);
             p.textAlign(LEFT);
-            p.text(tower.upgradeDescA[tower.nextLevelB], 915, 615 + offsetC);
-            p.text(tower.upgradeDescB[tower.nextLevelB], 915, 635 + offsetC);
-            p.text(tower.upgradeDescC[tower.nextLevelB], 915, 655 + offsetC);
+            p.text(tower.upgradeDescA[tower.nextLevelB], 910, 615 + offsetC);
+            p.text(tower.upgradeDescB[tower.nextLevelB], 910, 635 + offsetC);
+            p.text(tower.upgradeDescC[tower.nextLevelB], 910, 655 + offsetC);
         } else {
             p.fill(15);
             p.textFont(largeFont);
@@ -257,7 +264,8 @@ public class Selection { //what tower is selected
             else if (tower.error > 2 && tower.error <= 4) p.text("Medium accuracy", 910, 336 + offset);
             else if (tower.error > 4) p.text("Low accuracy", 910, 336 + offset);
             //velocity
-            if (speed < 8) p.text("Low velocity", 910, 356 + offset);
+            if (speed < 0) p.text("Instant", 910, 356 + offset);
+            else if (speed < 8) p.text("Low velocity", 910, 356 + offset);
             else if (speed <= 18) p.text("Medium velocity", 910, 356 + offset);
             else p.text("High velocity", 910, 356 + offset);
         }

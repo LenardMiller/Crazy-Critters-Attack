@@ -236,6 +236,11 @@ public class Hand {
                     offset = new PVector(0, 0);
                     price = 150;
                     break;
+                case "tesla":
+                    heldSprite = spritesH.get("teslaFullTR");
+                    offset = new PVector(0, 0);
+                    price = 150;
+                    break;
                 case "wall":
                     heldSprite = spritesH.get("woodWallTW");
                     offset = new PVector(0, 0);
@@ -261,6 +266,7 @@ public class Hand {
         else if (held.equals("miscCannon") && alive) tile.tower = new RandomCannon(p, tile);
         else if (held.equals("energyBlaster") && alive) tile.tower = new EnergyBlaster(p, tile);
         else if (held.equals("magicMissleer") && alive) tile.tower = new MagicMissileer(p, tile);
+        else if (held.equals("tesla") && alive) tile.tower = new TeslaTower(p, tile);
         else if (held.equals("wall") && alive) {
             if (tile.tower != null && !tile.tower.turret) { //upgrade or repair
                 if (tile.tower.hp < tile.tower.maxHp && money >= ceil((float) (tile.tower.price) - (float) (tile.tower.value))) {

@@ -29,7 +29,6 @@ public class InGameGui {
         openMenuButton.main();
         p.fill(130);
         p.rect(900,21,200,127);
-        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
         wallBuyButton.main();
         addMoneyButton.main();
         moneyIcon.main();
@@ -48,6 +47,7 @@ public class InGameGui {
         upgradeIconA.main();
         upgradeIconB.main();
         if (isTowers) selection.main();
+        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
     }
 
     public void drawText(PApplet p, int x) {
@@ -88,7 +88,7 @@ public class InGameGui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 45.5f,"miscCannon",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 45.5f,"energyBlaster",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 45.5f,"magicMissleer",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 85.5f,"null",true)); //row 2
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 85.5f,"tesla",true)); //row 2
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 85.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 85.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"null",true));
