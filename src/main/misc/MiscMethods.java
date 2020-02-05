@@ -1,4 +1,4 @@
-package main.util;
+package main.misc;
 
 import main.pathfinding.Node;
 import main.towers.Tower;

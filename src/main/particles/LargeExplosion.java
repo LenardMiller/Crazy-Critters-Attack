@@ -9,7 +9,6 @@ import static processing.core.PConstants.HALF_PI;
 public class LargeExplosion extends Particle{
     public LargeExplosion(PApplet p, float x, float y, float angle) {
         super(p, x, y, angle);
-        animated = true;
         position = new PVector(x, y);
         size = new PVector(50,50);
         maxSpeed = 0;

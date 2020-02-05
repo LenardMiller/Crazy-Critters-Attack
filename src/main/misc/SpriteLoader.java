@@ -1,4 +1,4 @@
-package main.util;
+package main.misc;
 
 import processing.core.PApplet;
 import processing.core.PImage;

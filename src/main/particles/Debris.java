@@ -18,7 +18,6 @@ public class Debris extends Particle{
         lifespan = 6; //in frames, default: 6
         lifespan += (PApplet.round(p.random((-lifespan+2),lifespan))); //injects 100% randomness so all don't die at once
         numFrames = 1;
-        animated = false;
         delay = lifespan/numFrames;
         delayTime = p.frameCount + delay;
         sprite = spritesH.get(type + "Pt");

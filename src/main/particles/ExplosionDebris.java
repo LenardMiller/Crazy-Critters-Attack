@@ -9,7 +9,6 @@ import static processing.core.PConstants.HALF_PI;
 public class ExplosionDebris extends Particle{
     public ExplosionDebris(PApplet p, float x, float y, float angle, String type, float maxSpeed) {
         super(p, x, y, angle);
-        animated = true;
         position = new PVector(x, y);
         size = new PVector(9, 9);
         this.maxSpeed = maxSpeed;
@@ -17,7 +16,7 @@ public class ExplosionDebris extends Particle{
         angleTwo = angle;
         angularVelocity = 5; //degrees mode
         lifespan = 0; //in frames, default: 0
-        lifespan += (p.round(p.random((-lifespan)+2,lifespan))); //injects 25% randomness so all don't die at once
+        lifespan += (PApplet.round(p.random((-lifespan)+2,lifespan))); //injects 25% randomness so all don't die at once
         delay = lifespan/numFrames;
         delayTime = p.frameCount + delay;
         numFrames = 4;
