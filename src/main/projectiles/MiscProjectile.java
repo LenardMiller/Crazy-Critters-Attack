@@ -1,11 +1,12 @@
 package main.projectiles;
 
+import main.particles.Ouch;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
+import static main.Main.*;
 
 public class MiscProjectile extends Projectile{
 
@@ -25,5 +26,10 @@ public class MiscProjectile extends Projectile{
         angularVelocity = 15; //degrees mode
         sprites = spritesAnimH.get("miscPJ");
         sprite = sprites[spriteType];
+    }
+
+    public void die(int i) {
+        projectiles.remove(i);
+        particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greyPuff"));
     }
 }

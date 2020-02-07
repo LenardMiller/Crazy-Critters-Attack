@@ -19,9 +19,9 @@ public class Ouch extends Particle{
         lifespan += (PApplet.round(p.random(-(lifespan/4f),lifespan/4f))); //injects 25% randomness so all don't die at once
         delay = lifespan/numFrames;
         delayTime = p.frameCount + delay;
-        numFrames = 11;
         currentSprite = 0;
         sprites = spritesAnimH.get(type + "EnemyPT");
         velocity = PVector.fromAngle(angle-HALF_PI);
+        numFrames = sprites.length;
     }
 }

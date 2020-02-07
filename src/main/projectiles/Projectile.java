@@ -67,9 +67,15 @@ public abstract class Projectile {
         move();
         collideEn();
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) {
-            dead = true; //todo: death particle(s)
+            dead = true;
         }
-        if (dead) projectiles.remove(i);
+        if (dead) {
+            die(i);
+        }
+    }
+
+    public void die(int i) {
+        projectiles.remove(i);
     }
 
     private void trail() { //leaves a trail of particles
