@@ -103,6 +103,10 @@ public class SpriteLoader {
         for (int i = 7; i >= 0; i--){
             spritesAnimH.get("greenMagicBuffPT")[i] = p.loadImage("sprites/particles/buff/greenMagic/" + PApplet.nf(i,3) + ".png");
         }
+        spritesAnimH.put("boltBreakPT",new PImage[4]);
+        for (int i = 3; i >= 0; i--){
+            spritesAnimH.get("boltBreakPT")[i] = p.loadImage("sprites/particles/boltBreak/" + PApplet.nf(i,3) + ".png");
+        }
         spritesAnimH.put("miscPJ",new PImage[6]);
         for (int i = 5; i >= 0; i--){
             spritesAnimH.get("miscPJ")[i] = p.loadImage("sprites/projectiles/misc/" + PApplet.nf(i,3) + ".png");

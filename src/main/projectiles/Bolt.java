@@ -1,10 +1,11 @@
 package main.projectiles;
 
+import main.particles.BoltBreak;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesH;
+import static main.Main.*;
 
 public class Bolt extends Projectile {
 
@@ -20,5 +21,10 @@ public class Bolt extends Projectile {
         this.angle = angle;
         hitDelay = 2;
         sprite = spritesH.get("boltPj");
+    }
+
+    public void die(int i) {
+        projectiles.remove(i);
+        particles.add(new BoltBreak(p,position.x,position.y,angleTwo));
     }
 }
