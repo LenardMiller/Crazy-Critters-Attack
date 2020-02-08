@@ -7,7 +7,7 @@ public class TreeGiant extends Enemy {
 
     public TreeGiant(PApplet p, float x, float y) {
         super(p,x,y);
-        size = new PVector(60,60);
+        size = new PVector(76,76);
         pfSize = 3;
         radius = 30;
         maxSpeed = .3f;
