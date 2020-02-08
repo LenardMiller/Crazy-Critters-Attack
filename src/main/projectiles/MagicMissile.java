@@ -1,6 +1,7 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
+import main.particles.Ouch;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -96,11 +97,14 @@ public class MagicMissile extends Projectile {
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 
-    public void move(){
-        if (enemies.size() > 0){
-            checkTarget();
-        }
+    public void move() {
+        if (enemies.size() > 0) checkTarget();
         velocity.setMag(speed);
         position.add(velocity);
+    }
+
+    public void die(int i) {
+        projectiles.remove(i);
+        particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greenPuff"));
     }
 }

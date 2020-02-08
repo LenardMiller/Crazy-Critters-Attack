@@ -9,7 +9,6 @@ import static processing.core.PConstants.HALF_PI;
 public class BuffParticle extends Particle{
     public BuffParticle(PApplet p, float x, float y, float angle, String type) {
         super(p, x, y, angle);
-        animated = true;
         position = new PVector(x, y);
         size = new PVector(7, 7);
         maxSpeed = 0.25f;

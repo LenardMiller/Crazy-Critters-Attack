@@ -6,8 +6,8 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.util.MiscMethods.updateNodes;
-import static main.util.MiscMethods.updateTowerArray;
+import static main.misc.MiscMethods.updateNodes;
+import static main.misc.MiscMethods.updateTowerArray;
 
 public class Wall extends Tower {
 

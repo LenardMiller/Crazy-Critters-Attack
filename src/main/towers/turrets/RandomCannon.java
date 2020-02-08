@@ -8,7 +8,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.util.MiscMethods.updateTowerArray;
+import static main.misc.MiscMethods.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
 public class RandomCannon extends Turret {

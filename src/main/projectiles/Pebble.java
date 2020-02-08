@@ -1,10 +1,11 @@
 package main.projectiles;
 
+import main.particles.Ouch;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesH;
+import static main.Main.*;
 
 public class Pebble extends Projectile{
 
@@ -19,5 +20,10 @@ public class Pebble extends Projectile{
         pierce = 1;
         this.angle = angle;
         sprite = spritesH.get("pebblePj");
+    }
+
+    public void die(int i) {
+        projectiles.remove(i);
+        particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greyPuff"));
     }
 }

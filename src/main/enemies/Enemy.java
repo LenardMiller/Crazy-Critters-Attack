@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static main.Main.*;
-import static main.util.MiscMethods.findAngleBetween;
-import static main.util.MiscMethods.roundTo;
+import static main.misc.MiscMethods.findAngleBetween;
+import static main.misc.MiscMethods.roundTo;
 
 public abstract class Enemy {
 

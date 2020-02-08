@@ -1,4 +1,4 @@
-package main.util;
+package main.misc;
 
 import main.buffs.Burning;
 import main.buffs.Poisoned;
@@ -13,7 +13,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.util.MiscMethods.updateNodes;
+import static main.misc.MiscMethods.updateNodes;
 
 public class KeyBinds {
 

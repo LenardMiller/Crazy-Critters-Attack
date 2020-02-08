@@ -16,8 +16,8 @@ import main.projectiles.Arc;
 import main.projectiles.Projectile;
 import main.towers.Tile;
 import main.towers.Tower;
-import main.util.CompressArray;
-import main.util.KeyBinds;
+import main.misc.CompressArray;
+import main.misc.KeyBinds;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
@@ -26,9 +26,9 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static main.util.MiscMethods.*;
-import static main.util.SpriteLoader.loadSprites;
-import static main.util.SpriteLoader.loadSpritesAnim;
+import static main.misc.MiscMethods.*;
+import static main.misc.SpriteLoader.loadSprites;
+import static main.misc.SpriteLoader.loadSpritesAnim;
 
 public class Main extends PApplet {
 

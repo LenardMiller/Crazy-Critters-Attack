@@ -1,4 +1,4 @@
-package main.util;
+package main.misc;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -75,6 +75,10 @@ public class SpriteLoader {
         for (int i = 10; i >= 0; i--){
             spritesAnimH.get("greyPuffEnemyPT")[i] = p.loadImage("sprites/particles/enemy/greyPuff/" + PApplet.nf(i,3) + ".png");
         }
+        spritesAnimH.put("greenPuffEnemyPT",new PImage[10]);
+        for (int i = 9; i >= 0; i--){
+            spritesAnimH.get("greenPuffEnemyPT")[i] = p.loadImage("sprites/particles/enemy/greenPuff/" + PApplet.nf(i,3) + ".png");
+        }
         spritesAnimH.put("pinkOuchEnemyPT",new PImage[11]);
         for (int i = 10; i >= 0; i--){
             spritesAnimH.get("pinkOuchEnemyPT")[i] = p.loadImage("sprites/particles/enemy/pinkOuch/" + PApplet.nf(i,3) + ".png");
@@ -98,6 +102,10 @@ public class SpriteLoader {
         spritesAnimH.put("greenMagicBuffPT",new PImage[8]);
         for (int i = 7; i >= 0; i--){
             spritesAnimH.get("greenMagicBuffPT")[i] = p.loadImage("sprites/particles/buff/greenMagic/" + PApplet.nf(i,3) + ".png");
+        }
+        spritesAnimH.put("boltBreakPT",new PImage[4]);
+        for (int i = 3; i >= 0; i--){
+            spritesAnimH.get("boltBreakPT")[i] = p.loadImage("sprites/particles/boltBreak/" + PApplet.nf(i,3) + ".png");
         }
         spritesAnimH.put("miscPJ",new PImage[6]);
         for (int i = 5; i >= 0; i--){

@@ -4,7 +4,7 @@ import main.enemies.Enemy;
 import main.particles.Debris;
 import main.towers.Tile;
 import main.towers.Tower;
-import main.util.CompressArray;
+import main.misc.CompressArray;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -12,7 +12,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.util.MiscMethods.updateTowerArray;
+import static main.misc.MiscMethods.updateTowerArray;
 
 public abstract class Turret extends Tower {
 
