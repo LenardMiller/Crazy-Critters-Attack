@@ -73,13 +73,12 @@ public abstract class Enemy {
         barTrans = 0;
         tintColor = 255;
         hitParticle = "redOuch";
-        name = "null";
+        name = "";
         numAttackFrames = 1;
         numMoveFrames = 1;
         startFrame = 0;
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
-        loadSprites();
         pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
     }
 
