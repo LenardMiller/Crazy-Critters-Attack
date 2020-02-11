@@ -11,6 +11,7 @@ public class SpriteLoader {
     public SpriteLoader() {}
     
     public static void loadSpritesAnim(PApplet p) {
+        PImage[] image;
         //icons & buttons
         spritesAnimH.put("upgradeIC",new PImage[15]);
         for (int i = 14; i >= 0; i--){
@@ -179,6 +180,22 @@ public class SpriteLoader {
         for (int i = 9; i >= 0; i--) {
             spritesAnimH.get("snakeMoveEN")[i] = p.loadImage("sprites/enemies/snake/move/" + PApplet.nf(i, 3) + ".png");
         }
+        spritesAnimH.put("wormMoveEN", new PImage[1]);
+        for (int i = 0; i >= 0; i--) {
+            spritesAnimH.get("snakeMoveEN")[i] = p.loadImage("sprites/enemies/worm/move/" + PApplet.nf(i, 3) + ".png");
+        }
+        spritesAnimH.put("wormAttackEN", new PImage[34]);
+        for (int i = 33; i >= 0; i--){
+            spritesAnimH.get("wormAttackEN")[i] = p.loadImage("sprites/enemies/worm/attack/" + PApplet.nf(i,3) + ".png");
+        }
+        image = spritesAnimH.put("wormHideEN", new PImage[3]);
+        for (int i = image.length; i >= 0; i--) {
+            spritesAnimH.get("wormHideEN")[i] = p.loadImage("sprites/enemies/worm/hide/" + PApplet.nf(i, 3) + ".png");
+        }
+        image = spritesAnimH.put("wormAttackEN", new PImage[34]);
+        for (int i = image.length; i >= 0; i--){
+            spritesAnimH.get("wormAttackEN")[i] = p.loadImage("sprites/enemies/worm/attack/" + PApplet.nf(i,3) + ".png");
+        }
         //turrets
         spritesAnimH.put("slingshotFireTR",new PImage[34]);
         for (int i = 33; i >= 0; i--){
@@ -257,6 +274,10 @@ public class SpriteLoader {
         for (int i = 3; i >= 0; i--){
             spritesAnimH.get("ultimateWallTW")[i] = p.loadImage("sprites/towers/walls/ultimate/" + PApplet.nf(i,3) + ".png");
         }
+    }
+
+    private void LSA(PApplet p, String name, String type, String folderMiddle, int length) {
+        spritesAnimH.put(name)
     }
 
     public static void loadSprites(PApplet p) {
