@@ -22,13 +22,13 @@ import static main.misc.MiscMethods.roundTo;
 
 public abstract class Enemy {
 
-    private PApplet p;
+    PApplet p;
 
     public ArrayList<TurnPoint> points;
     public int pfSize;
     public PVector position;
     public PVector size;
-    private float angle;
+    float angle;
     public float radius;
     public float maxSpeed;
     public float speed;
@@ -55,6 +55,7 @@ public abstract class Enemy {
     String hitParticle;
     public String name;
     private Tower target;
+    public boolean stealthMode;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -80,6 +81,7 @@ public abstract class Enemy {
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
         pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
+        stealthMode = false;
     }
 
     public void main(int i) {
@@ -96,7 +98,7 @@ public abstract class Enemy {
         if (dead) die(i);
     }
 
-    private void die(int i) {
+    void die(int i) {
         Main.money += moneyDrop;
         int num = (int) (p.random(2, 5));
         for (int j = num; j >= 0; j--) { //creates death particles
@@ -112,14 +114,14 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    private void move() { //todo: add super stylish turning system
+    void move() { //todo: add super stylish turning system
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
         speed = maxSpeed;
     }
 
-    private void attack() {
+    void attack() {
         boolean dmg = false;
         for (int frame : attackDmgFrames) {
             if (attackFrame == frame) {
@@ -165,7 +167,7 @@ public abstract class Enemy {
         if (tintColor < 255) tintColor += 20;
     }
 
-    private void display() {
+    void display() {
         preDisplay();
         if (debug) for (int i = points.size() - 1; i > 0; i--) {
             points.get(i).display();
@@ -175,7 +177,7 @@ public abstract class Enemy {
         p.rotate(angle);
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
-        if (hp > 0) HpBar();
+        if (hp > 0 && !stealthMode) HpBar();
         if (debug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
             p.stroke(0, 0, 255);
@@ -251,7 +253,7 @@ public abstract class Enemy {
 
     //pathfinding
 
-    private boolean intersectTurnPoint() {
+    boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
         PVector p = point.position;
         boolean intersecting;

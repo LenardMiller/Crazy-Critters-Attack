@@ -56,8 +56,6 @@ public class SpriteLoader {
         getSprite(p,"snakeMove","EN","snake/move/",10);
         getSprite(p,"wormMove","EN","worm/move/",1);
         getSprite(p,"wormAttack","EN","worm/attack/",34);
-        getSprite(p,"wormHide","EN","worm/hide/",3);
-        getSprite(p,"wormReveal","EN","worm/reveal/",3);
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
@@ -132,6 +130,7 @@ public class SpriteLoader {
         spritesH.put("stonePt",p.loadImage("sprites/particles/debris/stone.png"));
         spritesH.put("ultimatePt",p.loadImage("sprites/particles/debris/ultimate.png"));
         spritesH.put("woodPt",p.loadImage("sprites/particles/debris/wood.png"));
+        spritesH.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         spritesH.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
         //projectiles
         spritesH.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
