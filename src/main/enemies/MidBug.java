@@ -15,7 +15,7 @@ public class MidBug extends Enemy{
         twDamage = 5;
         maxHp = 40; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "greenOuch";
         name = "midBug";
         numAttackFrames = 42;
         numMoveFrames = 8;

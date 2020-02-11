@@ -16,7 +16,7 @@ public class BigBug extends Enemy{
         twDamage = 15;
         maxHp = 80; //80
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "greenOuch";
         name = "bigBug";
         numAttackFrames = 100;
         numMoveFrames = 12;
