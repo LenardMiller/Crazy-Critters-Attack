@@ -16,7 +16,7 @@ public class TreeSpirit extends Enemy{
         twDamage = 5;
         maxHp = 50; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "leafOuch";
         name = "treeSpirit";
         numAttackFrames = 42;
         numMoveFrames = 47;

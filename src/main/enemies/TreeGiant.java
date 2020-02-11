@@ -16,7 +16,7 @@ public class TreeGiant extends Enemy {
         twDamage = 25;
         maxHp = 150; //Hp
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "leafOuch";
         name = "treeGiant";
         numAttackFrames = 63;
         numMoveFrames = 91;

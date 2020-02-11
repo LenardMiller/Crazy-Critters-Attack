@@ -16,7 +16,7 @@ public class TreeSprite extends Enemy{
         twDamage = 8; //2
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "leafOuch";
         name = "treeSprite";
         numAttackFrames = 50;
         numMoveFrames = 30;

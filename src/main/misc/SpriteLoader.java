@@ -89,6 +89,10 @@ public class SpriteLoader {
         for (int i = 10; i >= 0; i--){
             spritesAnimH.get("redOuchEnemyPT")[i] = p.loadImage("sprites/particles/enemy/redOuch/" + PApplet.nf(i,3) + ".png");
         }
+        spritesAnimH.put("leafOuchEnemyPT",new PImage[11]);
+        for (int i = 10; i >= 0; i--){
+            spritesAnimH.get("leafOuchEnemyPT")[i] = p.loadImage("sprites/particles/enemy/leafOuch/" + PApplet.nf(i,3) + ".png");
+        }
         spritesAnimH.put("mediumExplosionPT",new PImage[18]);
         for (int i = 17; i >= 0; i--){
             spritesAnimH.get("mediumExplosionPT")[i] = p.loadImage("sprites/particles/mediumExplosion/" + PApplet.nf(i,3) + ".png");
