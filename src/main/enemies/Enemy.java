@@ -32,7 +32,7 @@ public abstract class Enemy {
     public float radius;
     public float maxSpeed;
     public float speed;
-    public int dangerLevel;
+    public int moneyDrop;
     int twDamage;
     public int maxHp;
     public int hp;
@@ -66,7 +66,7 @@ public abstract class Enemy {
         radius = 10;
         maxSpeed = 1;
         speed = maxSpeed;
-        dangerLevel = 1;
+        moneyDrop = 1;
         twDamage = 1;
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
@@ -98,7 +98,7 @@ public abstract class Enemy {
     }
 
     private void die(int i) {
-        Main.money += dangerLevel;
+        Main.money += moneyDrop;
         int num = (int) (p.random(2, 5));
         for (int j = num; j >= 0; j--) { //creates death particles
             particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), "greyPuff"));
