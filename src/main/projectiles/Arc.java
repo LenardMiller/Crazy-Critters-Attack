@@ -64,24 +64,26 @@ public class Arc {
         bigPoints.add(new BigPoint(p,startPos));
         ArrayList<Enemy> hitEnemies = new ArrayList<>();
         Enemy enemy = getTargetEnemy(startPos, priority,false, hitEnemies);
-        int enId = 0;
-        for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemy) enId = j;
-        enemy.collidePJ(damage,"null",tower,enId);
-        hitEnemies.add(enemy);
-        bigPoints.add(new BigPoint(p,enemy.position));
-        int x = 2;
-        for (int i = 1; i < maxLength; i++) {
-            Enemy enemyJ = getTargetEnemy(bigPoints.get(x-1).position, 0, true, hitEnemies);
-            if (enemyJ != null) {
-                bigPoints.add(new BigPoint(p, enemyJ.position));
-                enId = 0;
-                for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemyJ) enId = j;
-                enemyJ.collidePJ(damage,"null",tower,enId);
-                hitEnemies.add(enemyJ);
-                x++;
+        if (enemy != null) {
+            int enId = 0;
+            for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemy) enId = j;
+            enemy.collidePJ(damage, "null", tower, enId);
+            hitEnemies.add(enemy);
+            bigPoints.add(new BigPoint(p, enemy.position));
+            int x = 2;
+            for (int i = 1; i < maxLength; i++) {
+                Enemy enemyJ = getTargetEnemy(bigPoints.get(x - 1).position, 0, true, hitEnemies);
+                if (enemyJ != null) {
+                    bigPoints.add(new BigPoint(p, enemyJ.position));
+                    enId = 0;
+                    for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemyJ) enId = j;
+                    enemyJ.collidePJ(damage, "null", tower, enId);
+                    hitEnemies.add(enemyJ);
+                    x++;
+                }
             }
+            for (int i = 0; i < bigPoints.size() - 1; i++) bigPoints.get(i).getPoints(bigPoints.get(i + 1).position);
         }
-        for (int i = 0; i < bigPoints.size()-1; i++) bigPoints.get(i).getPoints(bigPoints.get(i + 1).position);
     }
 
     private Enemy getTargetEnemy(PVector position, int targetting, boolean jumping, ArrayList<Enemy> enemiesRepeat) {
@@ -94,29 +96,33 @@ public class Arc {
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
-            boolean repeat = false;
-            for (Enemy enemyRepeat : enemiesRepeat)
-                if (enemy == enemyRepeat) {
-                    repeat = true;
-                    break;
+            if (!enemy.stealthMode) {
+                boolean repeat = false;
+                for (Enemy enemyRepeat : enemiesRepeat)
+                    if (enemy == enemyRepeat) {
+                        repeat = true;
+                        break;
+                    }
+                if (repeat) continue;
+                float x = abs(position.x - enemy.position.x);
+                float y = abs(position.y - enemy.position.y);
+                float t = sqrt(sq(x) + sq(y));
+                if (jumping && t > maxDistance) continue;
+                if (targetting == 0 && t < dist) { //close
+                    e = enemy;
+                    dist = t;
                 }
-            if (repeat) continue;
-            float x = abs(position.x - enemy.position.x);
-            float y = abs(position.y - enemy.position.y);
-            float t = sqrt(sq(x)+sq(y));
-            if (jumping && t > maxDistance) continue;
-            if (targetting == 0 && t < dist) { //close
-                e = enemy;
-                dist = t;
-            } if (targetting == 1 && t > dist) { //far
-                e = enemy;
-                dist = t;
-            } if (targetting == 2) if (enemy.maxHp > maxHp) { //strong
-                e = enemy;
-                maxHp = enemy.maxHp;
-            } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
-                e = enemy;
-                dist = t;
+                if (targetting == 1 && t > dist) { //far
+                    e = enemy;
+                    dist = t;
+                }
+                if (targetting == 2) if (enemy.maxHp > maxHp) { //strong
+                    e = enemy;
+                    maxHp = enemy.maxHp;
+                } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                    e = enemy;
+                    dist = t;
+                }
             }
         }
         return e;

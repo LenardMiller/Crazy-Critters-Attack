@@ -33,7 +33,7 @@ public abstract class Turret extends Tower {
     float loadDelay;
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
-    private Enemy targetEnemy;
+    Enemy targetEnemy;
 
     Turret(PApplet p, Tile tile) {
         super(p, tile);
