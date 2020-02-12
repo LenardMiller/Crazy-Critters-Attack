@@ -2,6 +2,7 @@ package main.misc;
 
 import main.pathfinding.Node;
 import main.towers.Tower;
+import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
@@ -78,5 +79,21 @@ public class MiscMethods {
             }
         }
         return minCost;
+    }
+
+    public static PVector randomSpawnPosition(PApplet p) {
+        float x;
+        float y;
+        boolean xy = p.random(0,1) > 0.5;
+        if (xy) {
+            x = -99;
+            y = p.random(-100,1000);
+        } else {
+            x = p.random(-100,1000);
+            y = -99;
+        }
+        if (p.random(0,1) > 0.5 && xy) x += 1000;
+        if (p.random(0,1) > 0.5 && !xy) y += 1000;
+        return new PVector(x,y);
     }
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.updateNodes;
+import static main.misc.MiscMethods.randomSpawnPosition;
 
 public class KeyBinds {
 
@@ -112,26 +113,10 @@ public class KeyBinds {
         if (largeExplosion) particles.add(new LargeExplosion(p, p.mouseX, p.mouseY, p.random(0, 360)));
     }
 
-    private PVector randomSpawnPosition() {
-        float x;
-        float y;
-        boolean xy = p.random(0,1) > 0.5;
-        if (xy) {
-            x = p.random(-100,0);
-            y = p.random(-100,1000);
-        } else {
-            x = p.random(-100,1000);
-            y = p.random(-100,0);
-        }
-        if (p.random(0,1) > 0.5 && xy) x += 1000;
-        if (p.random(0,1) > 0.5 && !xy) y += 1000;
-        return new PVector(x,y);
-    }
-
     private void spawnRandom() {
         for (int i = 0; i < 5; i++) {
             int r = (int) p.random(0, 4.99f);
-            PVector rp = randomSpawnPosition();
+            PVector rp = randomSpawnPosition(p);
             switch (r) {
                 case 0:
                     enemies.add(new SmolBug(p, rp.x, rp.y));
