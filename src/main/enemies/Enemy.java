@@ -56,6 +56,7 @@ public abstract class Enemy {
     public String name;
     private Tower target;
     public boolean stealthMode;
+    public boolean flying;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -82,6 +83,7 @@ public abstract class Enemy {
         attackDmgFrames = new int[]{0};
         pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
         stealthMode = false;
+        flying = false;
     }
 
     public void main(int i) {
@@ -312,7 +314,7 @@ public abstract class Enemy {
             TurnPoint pointC = pointsD.get(i+2);
             float angleAB = findAngleBetween(pointA.position, pointB.position);
             float angleBC = findAngleBetween(pointB.position, pointC.position);
-            if (angleAB == angleBC && !pointB.combat) {
+            if (angleAB == angleBC && !pointB.combat ) {
                 pointsD.remove(pointB);
                 i--;
             }
@@ -333,7 +335,7 @@ public abstract class Enemy {
                 for (int yn = 0; yn < kSize; yn++) {
                     if (!(x + xn >= nodeGrid.length || y + yn >= nodeGrid[x].length)) {
                         Node nodeB = nodeGrid[x + xn][y + yn];
-                        if (nodeB.tower != null) towers.add(nodeB.tower);
+                        if (nodeB.tower != null && !(flying && !nodeB.tower.turret)) towers.add(nodeB.tower);
                     } else {
                         clear = false;
                         break;
