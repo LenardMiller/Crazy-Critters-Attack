@@ -11,11 +11,11 @@ public class MidBug extends Enemy{
         radius = 13;
         maxSpeed = .5f;
         speed = maxSpeed;
-        dangerLevel = 1;
-        twDamage = 2;
+        moneyDrop = 10;
+        twDamage = 5;
         maxHp = 40; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "greenOuch";
         name = "midBug";
         numAttackFrames = 42;
         numMoveFrames = 8;

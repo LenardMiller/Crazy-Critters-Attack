@@ -11,11 +11,11 @@ public class SmolBug extends Enemy{
         radius = 6;
         maxSpeed = .4f;
         speed = maxSpeed;
-        dangerLevel = 1;
+        moneyDrop = 1;
         twDamage = 1;
         maxHp = 10; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "greenOuch";
         name = "smolBug";
         numAttackFrames = 34;
         numMoveFrames = 8;

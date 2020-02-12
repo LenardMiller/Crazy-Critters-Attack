@@ -40,6 +40,9 @@ public class KeyBinds {
         boolean treeSprite = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
         boolean treeSpirit = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
         boolean treeGiant = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
+        boolean snake = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
+        boolean worm = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
+        boolean butterfly = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
         //buffs
         boolean poisoned = keysPressed.getPressedPulse(',') && alive;
         boolean wet = keysPressed.getPressedPulse('.') && alive;
@@ -67,7 +70,10 @@ public class KeyBinds {
         if (treeSprite) enemies.add(new TreeSprite(p, p.mouseX, p.mouseY));
         if (treeSpirit) enemies.add(new TreeSpirit(p, p.mouseX, p.mouseY));
         if (treeGiant) enemies.add(new TreeGiant(p, p.mouseX, p.mouseY));
-        if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        if (snake) enemies.add(new Snake(p, p.mouseX, p.mouseY));
+        if (worm) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
+        if (butterfly) enemies.add(new Butterfly(p, p.mouseX, p.mouseY));
+        if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant || snake || worm || butterfly) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
         //buffs
         if (poisoned) buffs.add(new Poisoned(p, (int) (p.random(0, enemies.size()))));
         if (wet) buffs.add(new Wet(p, (int) (p.random(0, enemies.size()))));

@@ -18,9 +18,6 @@ public abstract class Button extends GuiObject {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(25, 25);
-
-        spriteOne = spritesAnimH.get("nullBT")[0]; //popped out
-        spriteTwo = spritesAnimH.get("nullBT")[1]; //pushed in
         sprite = spriteOne;
         holdable = false;
     }

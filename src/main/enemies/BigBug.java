@@ -12,11 +12,11 @@ public class BigBug extends Enemy{
         radius = 26;
         maxSpeed = .3f;
         speed = maxSpeed;
-        dangerLevel = 1;
+        moneyDrop = 36;
         twDamage = 15;
         maxHp = 80; //80
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "greenOuch";
         name = "bigBug";
         numAttackFrames = 100;
         numMoveFrames = 12;

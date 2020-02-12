@@ -12,11 +12,11 @@ public class TreeSpirit extends Enemy{
         radius = 21;
         maxSpeed = .35f;
         speed = maxSpeed;
-        dangerLevel = 1;
+        moneyDrop = 10;
         twDamage = 5;
         maxHp = 50; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "leafOuch";
         name = "treeSpirit";
         numAttackFrames = 42;
         numMoveFrames = 47;

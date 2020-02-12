@@ -11,259 +11,137 @@ public class SpriteLoader {
     public SpriteLoader() {}
     
     public static void loadSpritesAnim(PApplet p) {
-        spritesAnimH.put("upgradeIC",new PImage[15]);
-        for (int i = 14; i >= 0; i--){
-            spritesAnimH.get("upgradeIC")[i] = p.loadImage("sprites/guiObjects/upgrades/" + PApplet.nf(i,3) + ".png");
+        //icons & buttons
+        getSprite(p,"upgrade","IC","upgrades/",15);
+        getSprite(p,"livesAdd","BT","livesAdd/",2);
+        getSprite(p,"moneyAdd","BT","moneyAdd/",2);
+        getSprite(p,"upgrade","BT","upgradeButton/",4);
+        getSprite(p,"sellTower","BT","sellTower/",2);
+        getSprite(p,"targetPriority","BT","targetPriority/",2);
+        getSprite(p,"towerTabSwitch","BT","towerTabSwitch/",2);
+        getSprite(p,"wallBuy","BT","wallBuy/",2);
+        //particles
+        getSprite(p,"energyBuff","PT","buff/energy/",8);
+        getSprite(p,"fireBuff","PT","buff/fire/",8);
+        getSprite(p,"poisonBuff","PT","buff/poison/",8);
+        getSprite(p,"waterBuff","PT","buff/water/",8);
+        getSprite(p,"nullBuff","PT","buff/null/",8);
+        getSprite(p,"greenOuchEnemy","PT","enemy/greenOuch/",11);
+        getSprite(p,"greyPuffEnemy","PT","enemy/greyPuff/",11);
+        getSprite(p,"greenPuffEnemy","PT","enemy/greenPuff/",10);
+        getSprite(p,"pinkOuchEnemy","PT","enemy/pinkOuch/",11);
+        getSprite(p,"redOuchEnemy","PT","enemy/redOuch/",11);
+        getSprite(p,"leafOuchEnemy","PT","enemy/leafOuch/",11);
+        getSprite(p,"mediumExplosion","PT","mediumExplosion/",18);
+        getSprite(p,"largeExplosion","PT","largeExplosion/",18);
+        getSprite(p,"energyExDebris","PT","explosionDebris/energy/",4);
+        getSprite(p,"greenMagicBuff","PT","buff/greenMagic/",8);
+        getSprite(p,"boltBreak","PT","boltBreak/",4);
+        //projectiles
+        getSprite(p,"misc","PJ","misc/",6);
+        //enemies
+        getSprite(p,"treeGiantAttack","EN","treeGiant/attack/",63);
+        getSprite(p,"treeGiantMove","EN","treeGiant/move/",91);
+        getSprite(p,"treeSpiritAttack","EN","treeSpirit/attack/",42);
+        getSprite(p,"treeSpiritMove","EN","treeSpirit/move/",47);
+        getSprite(p,"treeSpriteMove","EN","treeSprite/move/",30);
+        getSprite(p,"treeSpriteAttack","EN","treeSprite/attack/",50);
+        getSprite(p,"midBugAttack","EN","midBug/attack/",42);
+        getSprite(p,"midBugMove","EN","midBug/move/",8);
+        getSprite(p,"smolBugAttack","EN","smolBug/attack/",34);
+        getSprite(p,"smolBugMove","EN","smolBug/move/",8);
+        getSprite(p,"bigBugAttack","EN","bigBug/attack/",100);
+        getSprite(p,"bigBugMove","EN","bigBug/move/",12);
+        getSprite(p,"snakeAttack","EN","snake/attack/",15);
+        getSprite(p,"snakeMove","EN","snake/move/",10);
+        getSprite(p,"wormMove","EN","worm/move/",1);
+        getSprite(p,"wormAttack","EN","worm/attack/",34); //todo: make not look like dick
+        getSprite(p,"butterflyAttack","EN","butterfly/attack/",16);
+        getSprite(p,"butterflyMove","EN","butterfly/move/",8);
+        //turrets
+        getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
+        getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
+        getSprite(p,"teslaFire","TR","tesla/fire/",6);
+        getSprite(p,"teslaLoad","TR","tesla/load/",5);
+        getSprite(p,"teslaIdle","TR","tesla/idle/",18);
+        getSprite(p,"crossbowFire","TR","crossbow/fire/",13);
+        getSprite(p,"crossbowLoad","TR","crossbow/load/",81);
+        getSprite(p,"miscCannonFire","TR","miscCannon/fire/",12);
+        getSprite(p,"miscCannonLoad","TR","miscCannon/load/",1);
+        getSprite(p,"energyBlasterFire","TR","energyBlaster/fire/",14);
+        getSprite(p,"energyBlasterLoad","TR","energyBlaster/load/",42);
+        getSprite(p,"magicMissleerFire","TR","magicMissleer/fire/",8);
+        getSprite(p,"magicMissleerLoad","TR","magicMissleer/load/",26);
+        getSprite(p,"magicMissleerIdle","TR","magicMissleer/idle/",8);
+        //walls
+        getSprite(p,"woodWall","TW","wood/",4);
+        getSprite(p,"stoneWall","TW","stone/",4);
+        getSprite(p,"metalWall","TW","metal/",4);
+        getSprite(p,"crystalWall","TW","crystal/",4);
+        getSprite(p,"ultimateWall","TW","ultimate/",4);
+    }
+
+    private static void getSprite(PApplet p, String name, String type, String folder, int length) {
+        String mainFolder = "";
+        switch (type) {
+            case "IC":
+                mainFolder = "guiObjects/";
+                break;
+            case "BT":
+                mainFolder = "guiObjects/buttons/";
+                break;
+            case "PT":
+                mainFolder = "particles/";
+                break;
+            case "PJ":
+                mainFolder = "projectiles/";
+                break;
+            case "EN":
+                mainFolder = "enemies/";
+                break;
+            case "TR":
+                mainFolder = "towers/turrets/";
+                break;
+            case "TW":
+                mainFolder = "towers/walls/";
+                break;
         }
-        spritesAnimH.put("livesAddBT",new PImage[2]);
-        for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("livesAddBT")[i] = p.loadImage("sprites/guiObjects/buttons/livesAdd/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("moneyAddBT",new PImage[2]);
-        for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("moneyAddBT")[i] = p.loadImage("sprites/guiObjects/buttons/moneyAdd/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("nullBT",new PImage[2]);
-        for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("nullBT")[i] = p.loadImage("sprites/guiObjects/buttons/null/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("upgradeBT",new PImage[4]);
-        for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("upgradeBT")[i] = p.loadImage("sprites/guiObjects/buttons/upgradeButton/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("sellTowerBT",new PImage[2]);
-        for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("sellTowerBT")[i] = p.loadImage("sprites/guiObjects/buttons/sellTower/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("targetPriorityBT",new PImage[2]);
-        for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("targetPriorityBT")[i] = p.loadImage("sprites/guiObjects/buttons/targetPriority/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("towerTabSwitchBT",new PImage[2]);
-        for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("towerTabSwitchBT")[i] = p.loadImage("sprites/guiObjects/buttons/towerTabSwitch/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("wallBuyBT",new PImage[2]);
-        for (int i = 1; i >= 0; i--){
-            spritesAnimH.get("wallBuyBT")[i] = p.loadImage("sprites/guiObjects/buttons/wallBuy/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("energyBuffPT",new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("energyBuffPT")[i] = p.loadImage("sprites/particles/buff/energy/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("fireBuffPT",new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("fireBuffPT")[i] = p.loadImage("sprites/particles/buff/fire/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("poisonBuffPT",new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("poisonBuffPT")[i] = p.loadImage("sprites/particles/buff/poison/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("waterBuffPT",new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("waterBuffPT")[i] = p.loadImage("sprites/particles/buff/water/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("nullBuffPT",new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("nullBuffPT")[i] = p.loadImage("sprites/particles/buff/null/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("greenOuchEnemyPT",new PImage[11]);
-        for (int i = 10; i >= 0; i--){
-            spritesAnimH.get("greenOuchEnemyPT")[i] = p.loadImage("sprites/particles/enemy/greenOuch/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("greyPuffEnemyPT",new PImage[11]);
-        for (int i = 10; i >= 0; i--){
-            spritesAnimH.get("greyPuffEnemyPT")[i] = p.loadImage("sprites/particles/enemy/greyPuff/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("greenPuffEnemyPT",new PImage[10]);
-        for (int i = 9; i >= 0; i--){
-            spritesAnimH.get("greenPuffEnemyPT")[i] = p.loadImage("sprites/particles/enemy/greenPuff/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("pinkOuchEnemyPT",new PImage[11]);
-        for (int i = 10; i >= 0; i--){
-            spritesAnimH.get("pinkOuchEnemyPT")[i] = p.loadImage("sprites/particles/enemy/pinkOuch/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("redOuchEnemyPT",new PImage[11]);
-        for (int i = 10; i >= 0; i--){
-            spritesAnimH.get("redOuchEnemyPT")[i] = p.loadImage("sprites/particles/enemy/redOuch/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("mediumExplosionPT",new PImage[18]);
-        for (int i = 17; i >= 0; i--){
-            spritesAnimH.get("mediumExplosionPT")[i] = p.loadImage("sprites/particles/mediumExplosion/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("largeExplosionPT",new PImage[18]);
-        for (int i = 17; i >= 0; i--){
-            spritesAnimH.get("largeExplosionPT")[i] = p.loadImage("sprites/particles/largeExplosion/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("energyExDebrisPT",new PImage[4]);
-        for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("energyExDebrisPT")[i] = p.loadImage("sprites/particles/explosionDebris/energy/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("greenMagicBuffPT",new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("greenMagicBuffPT")[i] = p.loadImage("sprites/particles/buff/greenMagic/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("boltBreakPT",new PImage[4]);
-        for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("boltBreakPT")[i] = p.loadImage("sprites/particles/boltBreak/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("miscPJ",new PImage[6]);
-        for (int i = 5; i >= 0; i--){
-            spritesAnimH.get("miscPJ")[i] = p.loadImage("sprites/projectiles/misc/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("nullAttackEN", new PImage[1]);
-        spritesAnimH.get("nullAttackEN")[0] = p.loadImage("sprites/enemies/null/attack/000.png");
-        spritesAnimH.put("nullMoveEN", new PImage[1]);
-        spritesAnimH.get("nullMoveEN")[0] = p.loadImage("sprites/enemies/null/move/000.png");
-        spritesAnimH.put("treeGiantAttackEN", new PImage[63]);
-        for (int i = 62; i >= 0; i--){
-            spritesAnimH.get("treeGiantAttackEN")[i] = p.loadImage("sprites/enemies/treeGiant/attack/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("treeGiantMoveEN", new PImage[91]);
-        for (int i = 90; i >= 0; i--){
-            spritesAnimH.get("treeGiantMoveEN")[i] = p.loadImage("sprites/enemies/treeGiant/move/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("treeSpiritAttackEN", new PImage[42]);
-        for (int i = 41; i >= 0; i--){
-            spritesAnimH.get("treeSpiritAttackEN")[i] = p.loadImage("sprites/enemies/treeSpirit/attack/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("treeSpiritMoveEN", new PImage[47]);
-        for (int i = 46; i >= 0; i--){
-            spritesAnimH.get("treeSpiritMoveEN")[i] = p.loadImage("sprites/enemies/treeSpirit/move/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("treeSpriteMoveEN", new PImage[30]);
-        for (int i = 29; i >= 0; i--){
-            spritesAnimH.get("treeSpriteMoveEN")[i] = p.loadImage("sprites/enemies/treeSprite/move/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("treeSpriteAttackEN", new PImage[50]);
-        for (int i = 49; i >= 0; i--){
-            spritesAnimH.get("treeSpriteAttackEN")[i] = p.loadImage("sprites/enemies/treeSprite/attack/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("midBugAttackEN", new PImage[42]);
-        for (int i = 41; i >= 0; i--){
-            spritesAnimH.get("midBugAttackEN")[i] = p.loadImage("sprites/enemies/midBug/attack/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("midBugMoveEN", new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("midBugMoveEN")[i] = p.loadImage("sprites/enemies/midBug/move/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("smolBugAttackEN", new PImage[34]);
-        for (int i = 33; i >= 0; i--){
-            spritesAnimH.get("smolBugAttackEN")[i] = p.loadImage("sprites/enemies/smolBug/attack/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("smolBugMoveEN", new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("smolBugMoveEN")[i] = p.loadImage("sprites/enemies/smolBug/move/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("bigBugAttackEN", new PImage[100]);
-        for (int i = 99; i >= 0; i--){
-            spritesAnimH.get("bigBugAttackEN")[i] = p.loadImage("sprites/enemies/bigBug/attack/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("bigBugMoveEN", new PImage[12]);
-        for (int i = 11; i >= 0; i--){
-            spritesAnimH.get("bigBugMoveEN")[i] = p.loadImage("sprites/enemies/bigBug/move/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("slingshotFireTR",new PImage[34]);
-        for (int i = 33; i >= 0; i--){
-            spritesAnimH.get("slingshotFireTR")[i] = p.loadImage("sprites/towers/turrets/slingshot/fire/fire" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("slingshotLoadTR",new PImage[59]);
-        for (int i = 58; i >= 0; i--){
-            spritesAnimH.get("slingshotLoadTR")[i] = p.loadImage("sprites/towers/turrets/slingshot/load/load" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("teslaFireTR",new PImage[6]);
-        for (int i = 5; i >= 0; i--){
-            spritesAnimH.get("teslaFireTR")[i] = p.loadImage("sprites/towers/turrets/tesla/fire/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("teslaLoadTR",new PImage[5]);
-        for (int i = 4; i >= 0; i--){
-            spritesAnimH.get("teslaLoadTR")[i] = p.loadImage("sprites/towers/turrets/tesla/load/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("teslaIdleTR",new PImage[18]);
-        for (int i = 17; i >= 0; i--){
-            spritesAnimH.get("teslaIdleTR")[i] = p.loadImage("sprites/towers/turrets/tesla/idle/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("crossbowFireTR",new PImage[13]);
-        for (int i = 12; i >= 0; i--){
-            spritesAnimH.get("crossbowFireTR")[i] = p.loadImage("sprites/towers/turrets/crossbow/fire/fire" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("crossbowLoadTR",new PImage[81]);
-        for (int i = 80; i >= 0; i--){
-            spritesAnimH.get("crossbowLoadTR")[i] = p.loadImage("sprites/towers/turrets/crossbow/load/load" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("miscCannonFireTR",new PImage[12]);
-        for (int i = 11; i >= 0; i--){
-            spritesAnimH.get("miscCannonFireTR")[i] = p.loadImage("sprites/towers/turrets/miscCannon/fire/fire" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("miscCannonLoadTR",new PImage[1]);
-        for (int i = 0; i >= 0; i--){
-            spritesAnimH.get("miscCannonLoadTR")[i] = p.loadImage("sprites/towers/turrets/miscCannon/load/load" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("energyBlasterFireTR",new PImage[14]);
-        for (int i = 13; i >= 0; i--){
-            spritesAnimH.get("energyBlasterFireTR")[i] = p.loadImage("sprites/towers/turrets/energyBlaster/fire/fire" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("energyBlasterLoadTR",new PImage[42]);
-        for (int i = 41; i >= 0; i--){
-            spritesAnimH.get("energyBlasterLoadTR")[i] = p.loadImage("sprites/towers/turrets/energyBlaster/load/load" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("magicMissleerFireTR",new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("magicMissleerFireTR")[i] = p.loadImage("sprites/towers/turrets/magicMissleer/fire/fire" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("magicMissleerLoadTR",new PImage[26]);
-        for (int i = 25; i >= 0; i--){
-            spritesAnimH.get("magicMissleerLoadTR")[i] = p.loadImage("sprites/towers/turrets/magicMissleer/load/load" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("magicMissleerIdleTR",new PImage[8]);
-        for (int i = 7; i >= 0; i--){
-            spritesAnimH.get("magicMissleerIdleTR")[i] = p.loadImage("sprites/towers/turrets/magicMissleer/idle/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("woodWallTW", new PImage[4]);
-        for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("woodWallTW")[i] = p.loadImage("sprites/towers/walls/wood/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("stoneWallTW", new PImage[4]);
-        for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("stoneWallTW")[i] = p.loadImage("sprites/towers/walls/stone/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("metalWallTW", new PImage[4]);
-        for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("metalWallTW")[i] = p.loadImage("sprites/towers/walls/metal/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("crystalWallTW", new PImage[4]);
-        for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("crystalWallTW")[i] = p.loadImage("sprites/towers/walls/crystal/" + PApplet.nf(i,3) + ".png");
-        }
-        spritesAnimH.put("ultimateWallTW", new PImage[4]);
-        for (int i = 3; i >= 0; i--){
-            spritesAnimH.get("ultimateWallTW")[i] = p.loadImage("sprites/towers/walls/ultimate/" + PApplet.nf(i,3) + ".png");
+        String fullName = name+type;
+        String path = "sprites/"+mainFolder+folder;
+        spritesAnimH.put(fullName, new PImage[length]);
+        for (int i = length-1; i >= 0; i--) {
+            spritesAnimH.get(fullName)[i] = p.loadImage(path + PApplet.nf(i,3) + ".png");
         }
     }
 
-    public static void loadSprites(PApplet p){
-        spritesH.put("nullEN",p.loadImage("sprites/enemies/null/idle.png"));
+    public static void loadSprites(PApplet p) {
+        //enemies
         spritesH.put("treeGiantEN",p.loadImage("sprites/enemies/treeGiant/idle.png"));
         spritesH.put("treeSpiritEN",p.loadImage("sprites/enemies/treeSpirit/idle.png"));
         spritesH.put("treeSpriteEN",p.loadImage("sprites/enemies/treeSprite/idle.png"));
         spritesH.put("midBugEN",p.loadImage("sprites/enemies/midBug/idle.png"));
         spritesH.put("bigBugEN",p.loadImage("sprites/enemies/bigBug/idle.png"));
+        spritesH.put("snakeEN",p.loadImage("sprites/enemies/snake/idle.png"));
+        //icons
         spritesH.put("livesIc",p.loadImage("sprites/guiObjects/lives.png"));
         spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
-        spritesH.put("nullIc",p.loadImage("sprites/guiObjects/null.png"));
+        //particles
         spritesH.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
         spritesH.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));
         spritesH.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));
         spritesH.put("stonePt",p.loadImage("sprites/particles/debris/stone.png"));
         spritesH.put("ultimatePt",p.loadImage("sprites/particles/debris/ultimate.png"));
         spritesH.put("woodPt",p.loadImage("sprites/particles/debris/wood.png"));
+        spritesH.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         spritesH.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
+        //projectiles
         spritesH.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
         spritesH.put("devPj",p.loadImage("sprites/projectiles/dev.png"));
         spritesH.put("energyPj",p.loadImage("sprites/projectiles/energy.png"));
         spritesH.put("magicMisslePj",p.loadImage("sprites/projectiles/magicMissle.png"));
         spritesH.put("nullPj",p.loadImage("sprites/projectiles/null.png"));
         spritesH.put("pebblePj",p.loadImage("sprites/projectiles/pebble.png"));
+        //turrets
         spritesH.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
         spritesH.put("crossbowFullTR",p.loadImage("sprites/towers/turrets/crossbow/full.png"));
         spritesH.put("crossbowIdleTR",p.loadImage("sprites/towers/turrets/crossbow/idle.png"));
@@ -282,10 +160,10 @@ public class SpriteLoader {
         spritesH.put("teslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/base.png"));
         spritesH.put("teslaFullTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
         spritesH.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));
+        //walls
         spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
         spritesH.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
-        //walls
         for (int i = 0; i < 5; i++) {
             String name = "null";
             if (i == 0) name = "Wood";

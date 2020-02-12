@@ -168,6 +168,7 @@ public class Node {
                 if (request != null) size = request.size;
                 float mpn = movementPenalty;
                 if (clearanceMp.size() >= size) mpn += clearanceMp.get(size - 1); //mpc
+                if (request != null && request.enemy != null && request.enemy.flying && !isEnd) mpn = 0;
                 if (mpn > 0) startCost += mpn;
                 startCost += parent.startCost;
             }

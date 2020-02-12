@@ -12,11 +12,11 @@ public class TreeSprite extends Enemy{
         radius = 15;
         maxSpeed = .4f;
         speed = maxSpeed;
-        dangerLevel = 1;
+        moneyDrop = 5;
         twDamage = 8; //2
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = "leafOuch";
         name = "treeSprite";
         numAttackFrames = 50;
         numMoveFrames = 30;

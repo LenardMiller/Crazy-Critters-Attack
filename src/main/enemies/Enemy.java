@@ -22,17 +22,17 @@ import static main.misc.MiscMethods.roundTo;
 
 public abstract class Enemy {
 
-    private PApplet p;
+    PApplet p;
 
     public ArrayList<TurnPoint> points;
     public int pfSize;
     public PVector position;
     public PVector size;
-    private float angle;
+    float angle;
     public float radius;
     public float maxSpeed;
     public float speed;
-    public int dangerLevel;
+    public int moneyDrop;
     int twDamage;
     public int maxHp;
     public int hp;
@@ -55,6 +55,8 @@ public abstract class Enemy {
     String hitParticle;
     public String name;
     private Tower target;
+    public boolean stealthMode;
+    public boolean flying;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -66,21 +68,22 @@ public abstract class Enemy {
         radius = 10;
         maxSpeed = 1;
         speed = maxSpeed;
-        dangerLevel = 1;
+        moneyDrop = 1;
         twDamage = 1;
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
         barTrans = 0;
         tintColor = 255;
         hitParticle = "redOuch";
-        name = "null";
+        name = "";
         numAttackFrames = 1;
         numMoveFrames = 1;
         startFrame = 0;
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
-        loadSprites();
         pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
+        stealthMode = false;
+        flying = false;
     }
 
     public void main(int i) {
@@ -97,8 +100,8 @@ public abstract class Enemy {
         if (dead) die(i);
     }
 
-    private void die(int i) {
-        Main.money += dangerLevel;
+    void die(int i) {
+        Main.money += moneyDrop;
         int num = (int) (p.random(2, 5));
         for (int j = num; j >= 0; j--) { //creates death particles
             particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), "greyPuff"));
@@ -113,14 +116,14 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    private void move() { //todo: add super stylish turning system
+    void move() { //todo: add super stylish turning system
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
         speed = maxSpeed;
     }
 
-    private void attack() {
+    void attack() {
         boolean dmg = false;
         for (int frame : attackDmgFrames) {
             if (attackFrame == frame) {
@@ -166,7 +169,7 @@ public abstract class Enemy {
         if (tintColor < 255) tintColor += 20;
     }
 
-    private void display() {
+    void display() {
         preDisplay();
         if (debug) for (int i = points.size() - 1; i > 0; i--) {
             points.get(i).display();
@@ -176,7 +179,7 @@ public abstract class Enemy {
         p.rotate(angle);
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
-        if (hp > 0) HpBar();
+        if (hp > 0 && !stealthMode) HpBar();
         if (debug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
             p.stroke(0, 0, 255);
@@ -252,7 +255,7 @@ public abstract class Enemy {
 
     //pathfinding
 
-    private boolean intersectTurnPoint() {
+    boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
         PVector p = point.position;
         boolean intersecting;
@@ -311,7 +314,7 @@ public abstract class Enemy {
             TurnPoint pointC = pointsD.get(i+2);
             float angleAB = findAngleBetween(pointA.position, pointB.position);
             float angleBC = findAngleBetween(pointB.position, pointC.position);
-            if (angleAB == angleBC && !pointB.combat) {
+            if (angleAB == angleBC && !pointB.combat ) {
                 pointsD.remove(pointB);
                 i--;
             }
@@ -332,7 +335,7 @@ public abstract class Enemy {
                 for (int yn = 0; yn < kSize; yn++) {
                     if (!(x + xn >= nodeGrid.length || y + yn >= nodeGrid[x].length)) {
                         Node nodeB = nodeGrid[x + xn][y + yn];
-                        if (nodeB.tower != null) towers.add(nodeB.tower);
+                        if (nodeB.tower != null && !(flying && !nodeB.tower.turret)) towers.add(nodeB.tower);
                     } else {
                         clear = false;
                         break;
