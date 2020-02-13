@@ -47,7 +47,7 @@ public class MagicMissileer extends Turret{
         updateTowerArray();
     }
 
-    public void checkTarget() {
+    public void checkTarget() { //todo: fix not being able to fire
         if (spriteType == 0 && targetEnemy != null) { //if done animating
             spriteType = 1;
             fire();
