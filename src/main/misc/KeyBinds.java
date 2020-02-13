@@ -4,6 +4,7 @@ import main.buffs.Burning;
 import main.buffs.Poisoned;
 import main.buffs.Wet;
 import main.enemies.*;
+import main.levelStructure.Wave;
 import main.particles.*;
 import main.projectiles.*;
 import main.towers.Tower;
@@ -63,9 +64,10 @@ public class KeyBinds {
         if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
         if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
         //enemies
-        if (activateLevels) {
+        if (activateLevels) { //temp
             runLevels = !runLevels;
-            forest.waves[forest.currentWave].endTime = p.frameCount + forest.waves[forest.currentWave].length;
+            Wave wave = forest.waves[forest.currentWave];
+            wave.endTime = p.frameCount + wave.length;
         }
         if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));

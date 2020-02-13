@@ -89,7 +89,7 @@ public abstract class Turret extends Tower {
         }
     }
 
-    private void getTargetEnemy() {
+    void getTargetEnemy() {
         //0: close
         //1: far
         //2: strong

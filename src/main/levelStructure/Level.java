@@ -15,7 +15,7 @@ public class Level {
     }
 
     public void main() {
-        if (currentWave < waves.length) { //temp
+        if (currentWave < waves.length) { //temp, replace with win condition
             Wave wave = waves[currentWave];
             if (p.frameCount >= wave.endTime) {
                 currentWave++;

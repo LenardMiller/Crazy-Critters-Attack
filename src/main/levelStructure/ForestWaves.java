@@ -12,7 +12,7 @@ public class ForestWaves {
         waves[0].spawns.add(new Wave.Spawn("smolBug",10,3));
         waves[0].spawns.add(new Wave.Spawn("midBug",3,5));
         waves[1] = new Wave(p, 20,1);
-        waves[1].spawns.add(new Wave.Spawn("snake",10,4));
+        waves[1].spawns.add(new Wave.Spawn("snake",10,6));
         return waves;
     }
 }
