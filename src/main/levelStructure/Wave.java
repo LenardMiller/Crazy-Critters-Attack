@@ -15,13 +15,14 @@ public class Wave {
     public int endTime;
     private int betweenSpawns;
     private int spawnTime;
+    public int length;
     public ArrayList<Spawn> spawns;
 
     public Wave(PApplet p, int length, int betweenSpawns) {
         this.p = p;
         this.betweenSpawns = betweenSpawns;
+        this.length = length;
         spawns = new ArrayList<>();
-        endTime = p.frameCount + length;
         spawnTime = p.frameCount + betweenSpawns + (int)p.random(-(betweenSpawns/10f),betweenSpawns/10f);
     }
 

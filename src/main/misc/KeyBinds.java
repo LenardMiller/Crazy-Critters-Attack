@@ -63,7 +63,10 @@ public class KeyBinds {
         if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
         if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
         //enemies
-        if (activateLevels) runLevels = !runLevels;
+        if (activateLevels) {
+            runLevels = !runLevels;
+            forest.waves[forest.currentWave].endTime = p.frameCount + forest.waves[forest.currentWave].length;
+        }
         if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
         if (bigBug) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
