@@ -23,8 +23,9 @@ public class Wave {
     private Color bgColor;
     private Color textColor;
     private String title;
+    private int iconId;
 
-    public Wave(PApplet p, int length, int betweenSpawns, int spawnLength, Color bgColor, Color textColor, String title) {
+    public Wave(PApplet p, int length, int betweenSpawns, int spawnLength, Color bgColor, Color textColor, String title, int iconId) {
         this.p = p;
         this.betweenSpawns = betweenSpawns;
         this.length = length;
@@ -32,6 +33,7 @@ public class Wave {
         this.bgColor = bgColor;
         this.textColor = textColor;
         this.title = title;
+        this.iconId = iconId;
         spawns = new ArrayList<>();
         spawnTimer = p.frameCount + betweenSpawns + (int)p.random(-(betweenSpawns/10f),betweenSpawns/10f);
     }
@@ -72,6 +74,7 @@ public class Wave {
         p.text(title,1000,y+30);
         p.textAlign(LEFT);
         p.text(id,910,y+115);
+        p.image(spritesAnimH.get("waveIC")[iconId],974,y+48);
     }
 
     private Spawn getEnemySpawn() {
