@@ -4,6 +4,7 @@ import main.enemies.*;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static main.Main.*;
@@ -14,25 +15,39 @@ public class Wave {
     private PApplet p;
     public int endTime;
     private int betweenSpawns;
-    private int spawnTime;
+    private int spawnTimer;
+    private int spawnLength;
+    private int waitTimer;
     public int length;
     public ArrayList<Spawn> spawns;
+    private Color bgColor;
+    private Color textColor;
+    private String title;
 
-    public Wave(PApplet p, int length, int betweenSpawns) {
+    public Wave(PApplet p, int length, int betweenSpawns, int spawnLength, Color bgColor, Color textColor, String title) {
         this.p = p;
         this.betweenSpawns = betweenSpawns;
         this.length = length;
+        this.spawnLength = spawnLength;
+        this.bgColor = bgColor;
+        this.textColor = textColor;
+        this.title = title;
         spawns = new ArrayList<>();
-        spawnTime = p.frameCount + betweenSpawns + (int)p.random(-(betweenSpawns/10f),betweenSpawns/10f);
+        spawnTimer = p.frameCount + betweenSpawns + (int)p.random(-(betweenSpawns/10f),betweenSpawns/10f);
+    }
+
+    public void init() {
+        endTime = p.frameCount + length;
+        waitTimer = p.frameCount + spawnLength;
     }
 
     public void spawnEnemies() {
-        if (spawns.size() > 0 && spawnTime <= p.frameCount) {
-            spawnTime = p.frameCount + betweenSpawns + (int)p.random(-(betweenSpawns/10f),betweenSpawns/10f);
+        if (spawns.size() > 0 && spawnTimer <= p.frameCount && waitTimer >= p.frameCount) {
+            spawnTimer = p.frameCount + betweenSpawns + (int)p.random(-(betweenSpawns/10f),betweenSpawns/10f);
             Spawn s = getEnemySpawn();
             int cs = 1;
             while (true) {
-                if ((int)(p.random(0,s.clusterChance)) == 0) cs++;
+                if ((int)(p.random(0,s.clusterChance)) == 0) cs++; //todo: see if floats work
                 else break;
             }
             PVector pos = randomSpawnPosition(p);
@@ -45,6 +60,18 @@ public class Wave {
                 }
             }
         }
+    }
+
+    public void display(float y, int id) {
+        p.tint(bgColor.getRed(),bgColor.getGreen(),bgColor.getBlue());
+        p.image(spritesH.get("waveBgIc"),900,y);
+        p.tint(255);
+        p.fill(textColor.getRed(),textColor.getGreen(),textColor.getBlue());
+        p.textAlign(CENTER);
+        p.textFont(largeFont);
+        p.text(title,1000,y+30);
+        p.textAlign(LEFT);
+        p.text(id,910,y+115);
     }
 
     private Spawn getEnemySpawn() {
@@ -102,9 +129,9 @@ public class Wave {
 
         String enemyName;
         int weight;
-        int clusterChance;
+        float clusterChance;
 
-        Spawn(String enemyName, int weight, int clusterChance) {
+        Spawn(String enemyName, int weight, float clusterChance) {
             this.enemyName = enemyName;
             this.weight = weight;
             this.clusterChance = clusterChance;

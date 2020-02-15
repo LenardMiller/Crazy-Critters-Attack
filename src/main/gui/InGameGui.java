@@ -24,10 +24,13 @@ public class InGameGui {
                 break;
             }
         }
-        p.fill(235);
+        p.fill(235); //big white bg
         p.rect(900,212,200,688);
+        forest.display();
+        p.fill(200); //money bg
+        p.rect(BOARD_WIDTH, 175, BOARD_WIDTH + 200, 37);
         openMenuButton.main();
-        p.fill(130);
+        p.fill(130); //towerbuy bg
         p.rect(900,21,200,127);
         wallBuyButton.main();
         addMoneyButton.main();

@@ -172,17 +172,15 @@ public class Main extends PApplet {
         minCost = minCost(maxCost);
         //objects
         drawObjects();
-        //levels
-        if (runLevels) forest.main();
         //gui stuff
         noStroke();
-        fill(200);
-        rect(BOARD_WIDTH, 0, BOARD_WIDTH + 250, BOARD_HEIGHT);
         inGameGui.display();
         hand.displayHeldInfo(); //so text appears on top
         //text
         textAlign(LEFT);
         inGameGui.drawText(this, 10);
+        //levels
+        if (runLevels) forest.main();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;

@@ -2,6 +2,8 @@ package main.levelStructure;
 
 import processing.core.PApplet;
 
+import static main.Main.spritesH;
+
 public class Level {
 
     private PApplet p;
@@ -21,9 +23,26 @@ public class Level {
                 currentWave++;
                 if (currentWave < waves.length) {
                     wave = waves[currentWave];
-                    wave.endTime = p.frameCount + wave.length;
+                    wave.init();
                 }
             } else wave.spawnEnemies();
         }
+    }
+
+    public void display() {
+        for (int i = currentWave-1; i <= currentWave+6; i++) {
+            if (i < waves.length && i > -1 && currentWave < waves.length) {
+                Wave wave = waves[i];
+                Wave current = waves[currentWave];
+                float y = (125*(i-currentWave));
+                float y2 = 125f*(((current.endTime-p.frameCount)+1)/(float)current.length);
+                if (y2 > 0) y += y2;
+                else y+= 125;
+                wave.display(212 + y, i+1);
+            } else if (currentWave == waves.length) {
+                waves[currentWave-1].display(212, currentWave);
+            }
+        }
+        p.image(spritesH.get("currentLineIc"),900,212+125-3);
     }
 }

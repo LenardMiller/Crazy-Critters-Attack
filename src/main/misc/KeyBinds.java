@@ -65,9 +65,10 @@ public class KeyBinds {
         if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
         //enemies
         if (activateLevels) { //temp
-            runLevels = !runLevels;
+            runLevels = true;
+            forest.currentWave = 0;
             Wave wave = forest.waves[forest.currentWave];
-            wave.endTime = p.frameCount + wave.length;
+            wave.init();
         }
         if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));

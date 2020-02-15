@@ -81,7 +81,7 @@ public class MiscMethods {
         return minCost;
     }
 
-    public static PVector randomSpawnPosition(PApplet p) {
+    public static PVector randomSpawnPosition(PApplet p) { //todo: fix enemies spawning onscreen
         float x;
         float y;
         boolean xy = p.random(0,1) > 0.5;
@@ -92,8 +92,8 @@ public class MiscMethods {
             x = p.random(-100,1000);
             y = -99;
         }
-        if (p.random(0,1) > 0.5 && xy) x += 1000;
-        if (p.random(0,1) > 0.5 && !xy) y += 1000;
+        if (p.random(0,1) > 0.5 && xy) x = 999;
+        if (p.random(0,1) > 0.5 && !xy) y = 999;
         return new PVector(x,y);
     }
 }
