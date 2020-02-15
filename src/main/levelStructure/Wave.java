@@ -52,14 +52,11 @@ public class Wave {
                 if ((int)(p.random(0,s.clusterChance)) == 0) cs++; //todo: see if floats work
                 else break;
             }
-            PVector pos = randomSpawnPosition(p);
+            PVector pos;
             for (int i = 0; i < cs; i++) { //cluster stuff
-                Enemy e = getEnemy(s, pos); //just to find enemy size
-                pos = new PVector(pos.x+p.random(e.size.x,e.size.x*4),pos.y+p.random(e.size.y,e.size.y*4));
-                if (pos.x < 1000 && pos.x > -100 && pos.y < 1000 && pos.y > -100) {
-                    enemies.add(getEnemy(s,pos));
-                    enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-                }
+                pos = randomSpawnPosition(p);
+                enemies.add(getEnemy(s,pos));
+                enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
             }
         }
     }

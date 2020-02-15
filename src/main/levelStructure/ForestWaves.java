@@ -18,7 +18,7 @@ public class ForestWaves {
         waves[2] = new Wave(p,900,120,1000,new Color(0,225,25),new Color(0,50,5),"Tree Sprites",2);
         waves[2].spawns.add(new Wave.Spawn("treeSprite",10,4));
         waves[2].spawns.add(new Wave.Spawn("treeSpirit",2,7));
-        waves[3] = new Wave(p,500,10,50,new Color(0,100,25),new Color(100,255,0),"Tree Giant",3);
+        waves[3] = new Wave(p,500,10,5,new Color(0,100,25),new Color(100,255,0),"Tree Giant",3);
         waves[3].spawns.add(new Wave.Spawn("treeGiant",10,100));
         return waves;
     }
