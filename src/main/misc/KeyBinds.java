@@ -127,6 +127,7 @@ public class KeyBinds {
         //other stuff
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
         boolean updatePaths = keysPressed.getPressedPulse(' ');
+        boolean loseMoney = keysPressed.getPressedPulse('-');
         //entity stuff
         if (killEnemies) {
             enemies = new ArrayList<>();
@@ -153,9 +154,8 @@ public class KeyBinds {
         if (killProjectiles) projectiles = new ArrayList<>();
         //other stuff
         if (displayPathLines) debug = !debug;
-        if (updatePaths) {
-            updateNodes();
-        }
+        if (updatePaths) updateNodes();
+        if (loseMoney) money = 0;
     }
 
     public void loadKeyBinds() {

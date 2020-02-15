@@ -124,7 +124,8 @@ public class SpriteLoader {
         spritesH.put("snakeEN",p.loadImage("sprites/enemies/snake/idle.png"));
         //icons
         spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
-        spritesH.put("waveBgIc",p.loadImage("sprites/guiObjects/wave.png"));
+        spritesH.put("wavePrimaryIc",p.loadImage("sprites/guiObjects/wavePrimary.png"));
+        spritesH.put("waveSecondaryIc",p.loadImage("sprites/guiObjects/waveSecondary.png"));
         spritesH.put("currentLineIc",p.loadImage("sprites/guiObjects/currentLine.png"));
         //particles
         spritesH.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));

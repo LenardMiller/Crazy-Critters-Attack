@@ -20,18 +20,18 @@ public class Wave {
     private int waitTimer;
     public int length;
     public ArrayList<Spawn> spawns;
-    private Color bgColor;
-    private Color textColor;
+    private Color primary;
+    private Color secondary;
     private String title;
     private int iconId;
 
-    public Wave(PApplet p, int length, int betweenSpawns, int spawnLength, Color bgColor, Color textColor, String title, int iconId) {
+    public Wave(PApplet p, int length, int betweenSpawns, int spawnLength, Color primary, Color secondary, String title, int iconId) {
         this.p = p;
         this.betweenSpawns = betweenSpawns;
         this.length = length;
         this.spawnLength = spawnLength;
-        this.bgColor = bgColor;
-        this.textColor = textColor;
+        this.primary = primary;
+        this.secondary = secondary;
         this.title = title;
         this.iconId = iconId;
         spawns = new ArrayList<>();
@@ -62,10 +62,12 @@ public class Wave {
     }
 
     public void display(float y, int id) {
-        p.tint(bgColor.getRed(),bgColor.getGreen(),bgColor.getBlue());
-        p.image(spritesH.get("waveBgIc"),900,y);
+        p.tint(primary.getRed(), primary.getGreen(), primary.getBlue());
+        p.image(spritesH.get("wavePrimaryIc"),900,y);
+        p.tint(secondary.getRed(), secondary.getGreen(), secondary.getBlue());
+        p.image(spritesH.get("waveSecondaryIc"),900,y);
         p.tint(255);
-        p.fill(textColor.getRed(),textColor.getGreen(),textColor.getBlue());
+        p.fill(secondary.getRed(), secondary.getGreen(), secondary.getBlue());
         p.textAlign(CENTER);
         p.textFont(largeFont);
         p.text(title,1000,y+30);
