@@ -7,6 +7,7 @@ import main.gui.InGameGui;
 import main.gui.Selection;
 import main.guiObjects.GuiObject;
 import main.guiObjects.buttons.Button;
+import main.guiObjects.buttons.Play;
 import main.guiObjects.buttons.TowerBuy;
 import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
@@ -56,6 +57,7 @@ public class Main extends PApplet {
     public static GuiObject moneyIcon;
     public static Button openMenuButton;
     public static Button wallBuyButton;
+    public static Play playButton;
     public static Button sellButton;
     public static Button targetButton;
     public static Button upgradeButtonA;

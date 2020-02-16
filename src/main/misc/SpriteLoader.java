@@ -20,6 +20,7 @@ public class SpriteLoader {
         getSprite(p,"targetPriority","BT","targetPriority/",2);
         getSprite(p,"towerTabSwitch","BT","towerTabSwitch/",2);
         getSprite(p,"wallBuy","BT","wallBuy/",2);
+        getSprite(p,"play","BT","play/",3);
         //particles
         getSprite(p,"energyBuff","PT","buff/energy/",8);
         getSprite(p,"fireBuff","PT","buff/fire/",8);
