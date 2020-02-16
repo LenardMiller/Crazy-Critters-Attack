@@ -2,8 +2,7 @@ package main.levelStructure;
 
 import processing.core.PApplet;
 
-import static main.Main.playButton;
-import static main.Main.spritesH;
+import static main.Main.*;
 
 public class Level {
 
@@ -22,13 +21,16 @@ public class Level {
     public void main() {
         if (currentWave < waves.length) { //temp, replace with win condition
             Wave wave = waves[currentWave];
-            if (p.frameCount >= wave.endTime) {
+            if (p.frameCount >= wave.endTimer) {
                 currentWave++;
                 if (currentWave < waves.length) {
                     wave = waves[currentWave];
                     wave.init();
                 }
             } else wave.spawnEnemies();
+            if (p.frameCount >= wave.waitTimer && enemies.size() == 0) {
+                wave.endTimer -= wave.length / 500;
+            }
         }
     }
 
@@ -39,8 +41,8 @@ public class Level {
                 Wave wave = waves[i];
                 Wave current = waves[currentWave];
                 float y = (125*(i-currentWave));
-                float y2 = 125f*(((current.endTime-p.frameCount)+1)/(float)current.length);
-                if (y2 > 0) y += y2;
+                float y2 = 125*(((current.endTimer - p.frameCount)+1)/(float)current.length);
+                if (playingLevel) y += y2;
                 else y+= 125;
                 wave.display(212 + y, i+1);
                 if (i == startWave) playY = y;

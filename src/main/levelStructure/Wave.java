@@ -13,11 +13,11 @@ import static main.misc.MiscMethods.randomSpawnPosition;
 public class Wave {
 
     private PApplet p;
-    public int endTime;
+    public int endTimer;
     private int betweenSpawns;
     private int spawnTimer;
     private int spawnLength;
-    private int waitTimer;
+    int waitTimer;
     public int length;
     public ArrayList<Spawn> spawns;
     private Color primary;
@@ -39,7 +39,7 @@ public class Wave {
     }
 
     public void init() {
-        endTime = p.frameCount + length;
+        endTimer = p.frameCount + length;
         waitTimer = p.frameCount + spawnLength;
     }
 

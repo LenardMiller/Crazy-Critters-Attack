@@ -24,7 +24,7 @@ public class Play extends Button {
 
     public void main() {
         if (active) {
-            if (!runLevels) hover();
+            if (!playingLevel) hover();
             else sprite = spriteGrey;
         }
     }
@@ -39,7 +39,7 @@ public class Play extends Button {
     }
 
     public void action() {
-        runLevels = true;
+        playingLevel = true;
         forest.currentWave = 0;
         Wave wave = forest.waves[forest.currentWave];
         wave.init();

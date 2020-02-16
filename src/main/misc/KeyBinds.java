@@ -65,7 +65,7 @@ public class KeyBinds {
         if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
         //enemies
         if (activateLevels) { //temp
-            runLevels = true;
+            playingLevel = true;
             forest.currentWave = 0;
             Wave wave = forest.waves[forest.currentWave];
             wave.init();

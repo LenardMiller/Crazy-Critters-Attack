@@ -77,7 +77,7 @@ public class Main extends PApplet {
     public static int money = 2000;
     public static boolean alive = true;
     public static boolean debug = false;
-    public static boolean runLevels = false;
+    public static boolean playingLevel = false;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
@@ -182,7 +182,7 @@ public class Main extends PApplet {
         textAlign(LEFT);
         inGameGui.drawText(this, 10);
         //levels
-        if (runLevels) forest.main();
+        if (playingLevel) forest.main();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;
