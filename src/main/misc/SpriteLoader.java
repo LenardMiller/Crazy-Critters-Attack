@@ -13,13 +13,15 @@ public class SpriteLoader {
     public static void loadSpritesAnim(PApplet p) {
         //icons & buttons
         getSprite(p,"upgrade","IC","upgrades/",15);
-        getSprite(p,"livesAdd","BT","livesAdd/",2);
+        getSprite(p,"wave","IC","waveIcons/",4);
+        getSprite(p,"waveBg","IC","waveBackgrounds/",1);
         getSprite(p,"moneyAdd","BT","moneyAdd/",2);
         getSprite(p,"upgrade","BT","upgradeButton/",4);
         getSprite(p,"sellTower","BT","sellTower/",2);
         getSprite(p,"targetPriority","BT","targetPriority/",2);
         getSprite(p,"towerTabSwitch","BT","towerTabSwitch/",2);
         getSprite(p,"wallBuy","BT","wallBuy/",2);
+        getSprite(p,"play","BT","play/",3);
         //particles
         getSprite(p,"energyBuff","PT","buff/energy/",8);
         getSprite(p,"fireBuff","PT","buff/fire/",8);
@@ -123,8 +125,10 @@ public class SpriteLoader {
         spritesH.put("bigBugEN",p.loadImage("sprites/enemies/bigBug/idle.png"));
         spritesH.put("snakeEN",p.loadImage("sprites/enemies/snake/idle.png"));
         //icons
-        spritesH.put("livesIc",p.loadImage("sprites/guiObjects/lives.png"));
         spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
+        spritesH.put("wavePrimaryIc",p.loadImage("sprites/guiObjects/wavePrimary.png"));
+        spritesH.put("waveSecondaryIc",p.loadImage("sprites/guiObjects/waveSecondary.png"));
+        spritesH.put("currentLineIc",p.loadImage("sprites/guiObjects/currentLine.png"));
         //particles
         spritesH.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
         spritesH.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));

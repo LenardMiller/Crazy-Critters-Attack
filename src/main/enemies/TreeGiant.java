@@ -12,7 +12,7 @@ public class TreeGiant extends Enemy {
         radius = 30;
         maxSpeed = .3f;
         speed = maxSpeed;
-        moneyDrop = 110;
+        moneyDrop = 150;
         twDamage = 25;
         maxHp = 150; //Hp
         hp = maxHp;

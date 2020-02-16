@@ -12,7 +12,7 @@ public class Butterfly extends Enemy {
         radius = 12.5f;
         maxSpeed = .4f;
         speed = maxSpeed;
-        moneyDrop = 5;
+        moneyDrop = 30;
         twDamage = 1;
         maxHp = 20; //Hp
         hp = maxHp;

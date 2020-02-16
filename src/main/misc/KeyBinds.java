@@ -4,6 +4,7 @@ import main.buffs.Burning;
 import main.buffs.Poisoned;
 import main.buffs.Wet;
 import main.enemies.*;
+import main.levelStructure.Wave;
 import main.particles.*;
 import main.projectiles.*;
 import main.towers.Tower;
@@ -33,7 +34,7 @@ public class KeyBinds {
         boolean magicMissle = keysPressed.getPressedPulse('t') && alive;
         boolean arc = keysPressed.getPressedPulse('y') && alive && enemies.size() != 0;
         //enemies
-        boolean randomEnemy = keysPressed.getPressedPulse('0') && alive;
+        boolean activateLevels = keysPressed.getPressedPulse('0') && alive;
         boolean littleBug = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
         boolean mediumBug = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
         boolean bigBug = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
@@ -61,9 +62,14 @@ public class KeyBinds {
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 20, false));
         if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 30, true));
         if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
-        if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));;
+        if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
         //enemies
-        if (randomEnemy) spawnRandom();
+        if (activateLevels) { //temp
+            playingLevel = true;
+            forest.currentWave = 0;
+            Wave wave = forest.waves[forest.currentWave];
+            wave.init();
+        }
         if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
         if (bigBug) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
@@ -112,50 +118,6 @@ public class KeyBinds {
         if (largeExplosion) particles.add(new LargeExplosion(p, p.mouseX, p.mouseY, p.random(0, 360)));
     }
 
-    private PVector randomSpawnPosition() {
-        float x;
-        float y;
-        boolean xy = p.random(0,1) > 0.5;
-        if (xy) {
-            x = p.random(-100,0);
-            y = p.random(-100,1000);
-        } else {
-            x = p.random(-100,1000);
-            y = p.random(-100,0);
-        }
-        if (p.random(0,1) > 0.5 && xy) x += 1000;
-        if (p.random(0,1) > 0.5 && !xy) y += 1000;
-        return new PVector(x,y);
-    }
-
-    private void spawnRandom() {
-        for (int i = 0; i < 5; i++) {
-            int r = (int) p.random(0, 4.99f);
-            PVector rp = randomSpawnPosition();
-            switch (r) {
-                case 0:
-                    enemies.add(new SmolBug(p, rp.x, rp.y));
-                    break;
-                case 1:
-                    enemies.add(new MidBug(p, rp.x, rp.y));
-                    break;
-                case 2:
-                    enemies.add(new BigBug(p, rp.x, rp.y));
-                    break;
-                case 3:
-                    enemies.add(new TreeSprite(p, rp.x, rp.y));
-                    break;
-                case 4:
-                    enemies.add(new TreeSpirit(p, rp.x, rp.y));
-                    break;
-                case 5:
-                    enemies.add(new TreeGiant(p, rp.x, rp.y));
-                    break;
-            }
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
-    }
-
     public void debugKeys() {
         //entity stuff
         boolean killEnemies = keysPressed.getReleasedPulse('s') && alive;
@@ -165,6 +127,7 @@ public class KeyBinds {
         //other stuff
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
         boolean updatePaths = keysPressed.getPressedPulse(' ');
+        boolean loseMoney = keysPressed.getPressedPulse('-');
         //entity stuff
         if (killEnemies) {
             enemies = new ArrayList<>();
@@ -191,9 +154,8 @@ public class KeyBinds {
         if (killProjectiles) projectiles = new ArrayList<>();
         //other stuff
         if (displayPathLines) debug = !debug;
-        if (updatePaths) {
-            updateNodes();
-        }
+        if (updatePaths) updateNodes();
+        if (loseMoney) money = 0;
     }
 
     public void loadKeyBinds() {

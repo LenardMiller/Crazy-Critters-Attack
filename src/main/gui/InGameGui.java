@@ -24,14 +24,18 @@ public class InGameGui {
                 break;
             }
         }
-        p.fill(235);
+        p.fill(235); //big white bg
         p.rect(900,212,200,688);
+        forest.display();
+        p.fill(200); //money bg
+        p.rect(BOARD_WIDTH, 175, BOARD_WIDTH + 200, 37);
         openMenuButton.main();
-        p.fill(130);
+        p.fill(130); //towerbuy bg
         p.rect(900,21,200,127);
         wallBuyButton.main();
         addMoneyButton.main();
         moneyIcon.main();
+        playButton.main(); //display is in Level
         if (!isTowers || selection.name.equals("null")) {
             sellButton.active = false;
             targetButton.active = false;
@@ -101,6 +105,7 @@ public class InGameGui {
         wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-12,"null",true);
         addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
         moneyIcon = new GuiObject(p,BOARD_WIDTH+33, 211-29,"moneyIc",true);
+        playButton = new Play(p,1000,274.5f,"null",true);
         upgradeButtonA = new UpgradeTower(p,1000,480,"null",false, 0);
         upgradeButtonB = new UpgradeTower(p,1000,630,"null",false, 1);
         upgradeIconA = new UpgradeIcon(p,1030,610,"null",false);

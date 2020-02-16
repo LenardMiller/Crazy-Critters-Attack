@@ -11,7 +11,7 @@ public class SmolBug extends Enemy{
         radius = 6;
         maxSpeed = .4f;
         speed = maxSpeed;
-        moneyDrop = 1;
+        moneyDrop = 10;
         twDamage = 1;
         maxHp = 10; //Hp <---------------------------
         hp = maxHp;

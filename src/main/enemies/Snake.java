@@ -12,7 +12,7 @@ public class Snake extends Enemy {
         radius = 12.5f;
         maxSpeed = .3f;
         speed = maxSpeed;
-        moneyDrop = 2;
+        moneyDrop = 20;
         twDamage = 3;
         maxHp = 20; //Hp
         hp = maxHp;

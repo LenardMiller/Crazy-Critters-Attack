@@ -7,7 +7,12 @@ import main.gui.InGameGui;
 import main.gui.Selection;
 import main.guiObjects.GuiObject;
 import main.guiObjects.buttons.Button;
+import main.guiObjects.buttons.Play;
 import main.guiObjects.buttons.TowerBuy;
+import main.levelStructure.ForestWaves;
+import main.levelStructure.Level;
+import main.misc.CompressArray;
+import main.misc.KeyBinds;
 import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
@@ -16,8 +21,6 @@ import main.projectiles.Arc;
 import main.projectiles.Projectile;
 import main.towers.Tile;
 import main.towers.Tower;
-import main.misc.CompressArray;
-import main.misc.KeyBinds;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
@@ -45,6 +48,8 @@ public class Main extends PApplet {
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<Buff> buffs;
 
+    public static Level forest;
+
     public static InGameGui inGameGui;
     public static CompressArray compress;
 
@@ -52,6 +57,7 @@ public class Main extends PApplet {
     public static GuiObject moneyIcon;
     public static Button openMenuButton;
     public static Button wallBuyButton;
+    public static Play playButton;
     public static Button sellButton;
     public static Button targetButton;
     public static Button upgradeButtonA;
@@ -71,6 +77,7 @@ public class Main extends PApplet {
     public static int money = 2000;
     public static boolean alive = true;
     public static boolean debug = false;
+    public static boolean playingLevel = false;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
@@ -118,6 +125,8 @@ public class Main extends PApplet {
         arcs = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
         buffs = new ArrayList<>();
+        //generates levels todo: put in own method
+        forest = new Level(this, ForestWaves.genForestWaves(this));
         //loads sprites
         loadSprites(this);
         loadSpritesAnim(this);
@@ -167,13 +176,13 @@ public class Main extends PApplet {
         drawObjects();
         //gui stuff
         noStroke();
-        fill(200);
-        rect(BOARD_WIDTH, 0, BOARD_WIDTH + 250, BOARD_HEIGHT);
         inGameGui.display();
         hand.displayHeldInfo(); //so text appears on top
         //text
         textAlign(LEFT);
         inGameGui.drawText(this, 10);
+        //levels
+        if (playingLevel) forest.main();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;
