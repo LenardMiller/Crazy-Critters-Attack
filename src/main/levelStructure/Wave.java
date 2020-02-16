@@ -73,6 +73,7 @@ public class Wave {
         p.text(title,1000,y+30);
         p.textAlign(LEFT);
         p.text(id,910,y+115);
+        p.image(spritesAnimH.get("waveBgIC")[0],974,y+48);
         p.image(spritesAnimH.get("waveIC")[iconId],974,y+48);
     }
 
