@@ -23,7 +23,7 @@ public class Play extends Button {
     }
 
     public void main() {
-        if (active) {
+        if (active && selection.name.equals("null")) {
             if (!playingLevel) hover();
             else sprite = spriteGrey;
         }

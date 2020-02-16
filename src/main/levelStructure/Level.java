@@ -51,6 +51,9 @@ public class Level {
             }
         }
         p.image(spritesH.get("currentLineIc"),900,212+125-3);
+        p.tint(0,60);
+        p.image(spritesH.get("currentLineIc"),900+1,212+125-3+1);
+        p.tint(255);
         playButton.display((int)playY);
     }
 }
