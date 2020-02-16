@@ -164,9 +164,8 @@ public class EnergyBlaster extends Turret{
         }
     }
 
-    public void display(){
+    public void displayPassB2(){
         p.tint(255,tintColor,tintColor);
-        p.image(sBase,tile.position.x-size.x,tile.position.y-size.y);
         p.pushMatrix();
         p.translate(tile.position.x-size.x/2,tile.position.y-size.y/2);
         p.rotate(angle);

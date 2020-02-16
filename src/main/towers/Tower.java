@@ -98,10 +98,10 @@ public abstract class Tower {
                 selection.swapSelected(tile.id);
             }
         }
-        display();
+        displayPassA();
     }
 
-    private void display() {
+    public void displayPassA() {
         if (hit) { //change to red if under attack
             tintColor = 0;
             hit = false;
@@ -111,6 +111,8 @@ public abstract class Tower {
         p.tint(255);
         if (tintColor < 255) tintColor += 20;
     }
+
+    public void displayPassB() {}
 
     public void damage(int dangerLevel) { //if it touches an enemy, animate and loose health
         hp -= dangerLevel;

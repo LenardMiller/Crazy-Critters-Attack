@@ -188,10 +188,10 @@ public abstract class Turret extends Tower {
         if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) {
             selection.swapSelected(tile.id);
         }
-        preDisplay();
+        displayPassA();
     }
 
-    private void preDisplay() {
+    public void displayPassB() {
         if (tintColor < 255) tintColor += 20;
         //idle
         if (spriteType == 0) {
@@ -243,17 +243,22 @@ public abstract class Turret extends Tower {
             tintColor = 0;
             hit = false;
         }
-        display();
+        displayPassB2();
     }
 
-    public void display() {
+    public void displayPassB2() {
         p.tint(255, tintColor, tintColor);
-        p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
+        p.tint(255, 255, 255);
+    }
+
+    public void displayPassA() {
+        p.tint(255, tintColor, tintColor);
+        p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.tint(255, 255, 255);
     }
 

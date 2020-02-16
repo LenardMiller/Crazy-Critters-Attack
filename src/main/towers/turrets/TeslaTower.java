@@ -54,7 +54,7 @@ public class TeslaTower extends Turret{
         arcs.add(new Arc(p, tile.position.x - 25, tile.position.y - 25, this, damage, arcLength, arcDistance, priority));
     }
 
-    public void display() {
+    public void displayHead() {
         p.tint(255, tintColor, tintColor);
         p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.pushMatrix();
