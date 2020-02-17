@@ -33,7 +33,6 @@ public abstract class Projectile {
     String trail;
     boolean hasTrail;
     String buff;
-    int hitDelay;
     int effectRadius;
     ArrayList<Enemy> hitEnemies;
     Tower tower;
@@ -58,7 +57,6 @@ public abstract class Projectile {
         trail = "null";
         buff = "null";
         effectRadius = 0;
-        hitDelay = 6;
     }
 
     public void main(ArrayList<Projectile> projectiles, int i) {
@@ -69,16 +67,14 @@ public abstract class Projectile {
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) {
             dead = true;
         }
-        if (dead) {
-            die(i);
-        }
+        if (dead) die(i);
     }
 
     public void die(int i) {
         projectiles.remove(i);
     }
 
-    private void trail() { //leaves a trail of particles
+    void trail() { //leaves a trail of particles
         if (hasTrail) {
             int num = floor(p.random(0, 3));
             if (num == 0) particles.add(new BuffParticle(p, position.x, position.y, p.random(0, 360), trail));

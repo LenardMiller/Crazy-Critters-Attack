@@ -19,7 +19,6 @@ public class Bolt extends Projectile {
         this.damage = damage;
         this.pierce = pierce;
         this.angle = angle;
-        hitDelay = 2;
         sprite = spritesH.get("boltPj");
     }
 
