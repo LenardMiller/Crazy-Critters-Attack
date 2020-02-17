@@ -218,6 +218,7 @@ public class Main extends PApplet {
         }
         if (enemies.size() == 0) buffs = new ArrayList<>();
         //projectiles
+        for (Projectile projectile : projectiles) projectile.displayPassA();
         for (int i = projectiles.size() - 1; i >= 0; i--) {
             Projectile projectile = projectiles.get(i);
             projectile.main(projectiles, i);

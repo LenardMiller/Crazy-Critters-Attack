@@ -63,7 +63,7 @@ public abstract class Projectile {
 
     public void main(ArrayList<Projectile> projectiles, int i) {
         trail();
-        display();
+        displayPassB();
         move();
         collideEn();
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) {
@@ -85,7 +85,18 @@ public abstract class Projectile {
         }
     }
 
-    private void display() { //move and rotate whole grid before displaying, than reset
+    public void displayPassA() {
+        angleTwo += radians(angularVelocity);
+        p.pushMatrix();
+        p.tint(0,60);
+        p.translate(position.x + 2, position.y + 2);
+        p.rotate(angleTwo);
+        p.image(sprite, -size.x / 2, -size.y / 2);
+        p.tint(255);
+        p.popMatrix();
+    }
+
+    public void displayPassB() { //move and rotate whole grid before displaying, than reset
         angleTwo += radians(angularVelocity);
         p.pushMatrix();
         p.translate(position.x, position.y);
