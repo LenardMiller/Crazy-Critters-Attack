@@ -11,6 +11,7 @@ import static processing.core.PConstants.CENTER;
 public class Play extends Button {
 
     private PImage spriteGrey;
+    private int timer;
 
     public Play(PApplet p, float x, float y, String type, boolean active) {
         super(p,x,y,type,active);
@@ -23,10 +24,10 @@ public class Play extends Button {
     }
 
     public void main() {
-        if (active && selection.name.equals("null")) {
+        if (active && selection.name.equals("null") && !hand.held.equals("wall")) {
             if (!playingLevel) hover();
             else sprite = spriteGrey;
-        }
+        } else timer = p.frameCount + 10;
     }
 
     public void display(int y) {
@@ -39,9 +40,11 @@ public class Play extends Button {
     }
 
     public void action() {
-        playingLevel = true;
-        forest.currentWave = 0;
-        Wave wave = forest.waves[forest.currentWave];
-        wave.init();
+        if (p.frameCount > timer) {
+            playingLevel = true;
+            forest.currentWave = 0;
+            Wave wave = forest.waves[forest.currentWave];
+            wave.init();
+        }
     }
 }
