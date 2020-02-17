@@ -43,7 +43,7 @@ public class LittleWorm extends Enemy {
             attack();
         }
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
-        display();
+        displayPassB();
         //prevent from going offscreen
         if (position.x >= GRID_WIDTH-100 || position.x <= -100 || position.y >= GRID_HEIGHT-100 || position.y <= -100) dead = true;
         //if health is 0, die

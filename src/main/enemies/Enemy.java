@@ -92,9 +92,10 @@ public abstract class Enemy {
         if (!attacking) move();
         else attack();
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
-        display();
+        displayPassB();
         //prevent from going offscreen
-        if (position.x >= GRID_WIDTH-100 || position.x <= -100 || position.y >= GRID_HEIGHT-100 || position.y <= -100) dead = true;
+        if (position.x >= GRID_WIDTH - 100 || position.x <= -100 || position.y >= GRID_HEIGHT - 100 || position.y <= -100)
+            dead = true;
         //if health is 0, die
         if (hp <= 0) dead = true;
         if (dead) die(i);
@@ -169,8 +170,18 @@ public abstract class Enemy {
         if (tintColor < 255) tintColor += 20;
     }
 
-    void display() {
+    public void displayPassA() {
         preDisplay();
+        p.pushMatrix();
+        p.tint(0, 60);
+        p.translate(position.x + 1, position.y + 1);
+        p.rotate(angle);
+        p.image(sprite, -size.x / 2, -size.y / 2);
+        p.tint(255);
+        p.popMatrix();
+    }
+
+    public void displayPassB() {
         if (debug) for (int i = points.size() - 1; i > 0; i--) {
             points.get(i).display();
         }
@@ -245,7 +256,7 @@ public abstract class Enemy {
     private void HpBar() {
         p.fill(255, 0, 0, barTrans);
         p.noStroke();
-        p.rect(position.x - size.x/2 - 10, position.y + size.y / 2 + 6, (size.x + 20) * (((float) hp) / ((float) maxHp)), 6);
+        p.rect(position.x - size.x / 2 - 10, position.y + size.y / 2 + 6, (size.x + 20) * (((float) hp) / ((float) maxHp)), 6);
     }
 
     public void loadSprites() {
@@ -306,19 +317,19 @@ public abstract class Enemy {
             backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
         }
         //remove extra white points
-        TurnPoint startpoint = pointsD.get(pointsD.size()-1);
+        TurnPoint startpoint = pointsD.get(pointsD.size() - 1);
         if (!startpoint.combat && !attacking) pointsD.remove(startpoint);
-        for (int i = 0; i < pointsD.size()-2; i++) {
+        for (int i = 0; i < pointsD.size() - 2; i++) {
             TurnPoint pointA = pointsD.get(i);
-            TurnPoint pointB = pointsD.get(i+1);
-            TurnPoint pointC = pointsD.get(i+2);
+            TurnPoint pointB = pointsD.get(i + 1);
+            TurnPoint pointC = pointsD.get(i + 2);
             float angleAB = findAngleBetween(pointA.position, pointB.position);
             float angleBC = findAngleBetween(pointB.position, pointC.position);
-            if (angleAB == angleBC && !pointB.combat ) {
+            if (angleAB == angleBC && !pointB.combat) {
                 pointsD.remove(pointB);
                 i--;
             }
-            if (i+1 == pointsD.size()+2) break;
+            if (i + 1 == pointsD.size() + 2) break;
         }
         points = new ArrayList<>();
         points.addAll(pointsD);
@@ -328,8 +339,8 @@ public abstract class Enemy {
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
         int kSize = 1;
-        int x = (int) (point.position.x+100) / 25;
-        int y = (int) (point.position.y+100) / 25;
+        int x = (int) (point.position.x + 100) / 25;
+        int y = (int) (point.position.y + 100) / 25;
         while (true) {
             for (int xn = 0; xn < kSize; xn++) {
                 for (int yn = 0; yn < kSize; yn++) {
@@ -355,10 +366,10 @@ public abstract class Enemy {
 
     private TurnPoint backPoint() {
         TurnPoint bp = null;
-        for (int i = points.size()-1; i >= 0; i--) {
+        for (int i = points.size() - 1; i >= 0; i--) {
             if (points.get(i).towers != null && points.get(i).towers.size() > 0) {
                 points.get(i).combat = true;
-                if (i < points.size()-1) bp = points.get(i + 1);
+                if (i < points.size() - 1) bp = points.get(i + 1);
                 else bp = points.get(i);
                 bp.towers = points.get(i).towers;
                 bp.combat = true;

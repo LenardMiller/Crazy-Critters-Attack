@@ -212,6 +212,7 @@ public class Main extends PApplet {
         for (Tower tower : towers) if (tower.turret) tower.displayPassB();
         for (Tower tower : towers) tower.main();
         //enemies
+        for (Enemy enemy : enemies) enemy.displayPassA();
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
             enemy.main(i);
