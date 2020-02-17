@@ -18,6 +18,7 @@ public class EnergyBlaster extends Turret{
 
     public EnergyBlaster(PApplet p, Tile tile) {
         super(p,tile);
+        offset = 11;
         name = "energyBlaster";
         size = new PVector(50,50);
         maxHp = 20;
@@ -162,17 +163,6 @@ public class EnergyBlaster extends Turret{
         for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
-    }
-
-    public void display(){
-        p.tint(255,tintColor,tintColor);
-        p.image(sBase,tile.position.x-size.x,tile.position.y-size.y);
-        p.pushMatrix();
-        p.translate(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        p.rotate(angle);
-        p.image(sprite,-size.x/2-11,-size.y/2-11);
-        p.popMatrix();
-        p.tint(255,255,255);
     }
 
     public void updateSprite() {}

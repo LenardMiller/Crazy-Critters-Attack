@@ -19,6 +19,7 @@ public abstract class Turret extends Tower {
     PImage sBase;
     PImage sIdle;
     public int delayTime;
+    int offset;
     int pjSpeed;
     int numFireFrames;
     int numLoadFrames;
@@ -38,6 +39,7 @@ public abstract class Turret extends Tower {
     Turret(PApplet p, Tile tile) {
         super(p, tile);
         this.p = p;
+        offset = 0;
         name = null;
         size = new PVector(50, 50);
         maxHp = 20;
@@ -123,7 +125,7 @@ public abstract class Turret extends Tower {
         targetEnemy = e;
     }
 
-    private void aim(Enemy enemy) {
+    private void aim(Enemy enemy) { //todo: fix
         PVector position = tile.position;
         PVector e = PVector.div(enemy.size, 2);
         PVector target = enemy.position;
@@ -188,10 +190,9 @@ public abstract class Turret extends Tower {
         if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) {
             selection.swapSelected(tile.id);
         }
-        preDisplay();
     }
 
-    private void preDisplay() {
+    public void displayPassB() {
         if (tintColor < 255) tintColor += 20;
         //idle
         if (spriteType == 0) {
@@ -243,17 +244,30 @@ public abstract class Turret extends Tower {
             tintColor = 0;
             hit = false;
         }
-        display();
+        displayPassB2();
     }
 
-    public void display() {
-        p.tint(255, tintColor, tintColor);
-        p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
+    public void displayPassB2() {
+        //shadow
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
+        p.rotate(angle);
+        p.tint(0,60);
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        p.popMatrix();
+        //main
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
-        p.image(sprite, -size.x / 2, -size.y / 2);
+        p.tint(255, tintColor, tintColor);
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
+        p.tint(255);
+    }
+
+    public void displayPassA() {
+        p.tint(255, tintColor, tintColor);
+        p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.tint(255, 255, 255);
     }
 

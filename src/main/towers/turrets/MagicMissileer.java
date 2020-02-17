@@ -66,6 +66,24 @@ public class MagicMissileer extends Turret{
         }
     }
 
+    public void displayPassB2() {
+        //shadow
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
+        p.rotate(angle);
+        p.tint(0,60);
+        p.image(fireFrames[0],-size.x/2-offset,-size.y/2-offset);
+        p.popMatrix();
+        //main
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+        p.rotate(angle);
+        p.tint(255, tintColor, tintColor);
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        p.popMatrix();
+        p.tint(255);
+    }
+
     private void setUpgrades() {
         //special
         upgradeSpecial[0] = false;
