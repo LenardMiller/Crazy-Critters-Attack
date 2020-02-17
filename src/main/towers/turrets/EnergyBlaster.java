@@ -164,6 +164,6 @@ public class EnergyBlaster extends Turret{
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
-    
+
     public void updateSprite() {}
 }

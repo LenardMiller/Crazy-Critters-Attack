@@ -49,19 +49,36 @@ public class TeslaTower extends Turret{
         updateTowerArray();
     }
 
+    public void checkTarget() {
+        getTargetEnemy();
+        if (spriteType == 0 && targetEnemy != null) { //if done animating
+            spriteType = 1;
+            frame = 0;
+            fire();
+        }
+    }
+
     public void fire(){ //needed to change projectile fired
         delayTime = p.frameCount + delay; //waits this time before firing
         arcs.add(new Arc(p, tile.position.x - 25, tile.position.y - 25, this, damage, arcLength, arcDistance, priority));
     }
 
-    public void displayHead() {
-        p.tint(255, tintColor, tintColor);
-        p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
+    public void displayPassB2() {
+        //shadow
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
+        p.rotate(angle);
+        p.tint(0,60);
+        p.image(fireFrames[0],-size.x/2-offset,-size.y/2-offset);
+        p.popMatrix();
+        //main
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
-        p.image(sprite, -size.x / 2, -size.y / 2);
+        p.rotate(angle);
+        p.tint(255, tintColor, tintColor);
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
-        p.tint(255, 255, 255);
+        p.tint(255);
     }
 
     private void setUpgrades(){

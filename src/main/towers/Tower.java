@@ -98,7 +98,6 @@ public abstract class Tower {
                 selection.swapSelected(tile.id);
             }
         }
-        displayPassA();
     }
 
     public void displayPassA() {
@@ -106,8 +105,10 @@ public abstract class Tower {
             tintColor = 0;
             hit = false;
         }
-        p.tint(255,tintColor,tintColor);
+        p.tint(0,60);
         p.image(sprite,tile.position.x-size.x,tile.position.y-size.y);
+        p.tint(255,tintColor,tintColor);
+        p.image(sprite,tile.position.x-size.x+2,tile.position.y-size.y+2);
         p.tint(255);
         if (tintColor < 255) tintColor += 20;
     }

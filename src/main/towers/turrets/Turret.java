@@ -190,7 +190,6 @@ public abstract class Turret extends Tower {
         if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) {
             selection.swapSelected(tile.id);
         }
-        displayPassA();
     }
 
     public void displayPassB() {
