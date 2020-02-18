@@ -39,6 +39,7 @@ public class Nightmare extends Turret {
         damage = 15;
         numProjectiles = 3;
         effectLevel = 1;
+        effectDuration = 120;
         loadSprites();
         debrisType = "metal";
         price = 150;
@@ -57,7 +58,7 @@ public class Nightmare extends Turret {
             PVector spa = PVector.fromAngle(angleB-HALF_PI);
             spa.setMag(20);
             spp.add(spa);
-            projectiles.add(new Needle(p, spp.x, spp.y, angleB, this, damage, effectLevel,range/pjSpeed));
+            projectiles.add(new Needle(p, spp.x, spp.y, angleB, this, damage, effectLevel, effectDuration,range/pjSpeed));
         }
         delayTime = p.frameCount + delay; //waits this time before firing
     }

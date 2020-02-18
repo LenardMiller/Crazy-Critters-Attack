@@ -2,7 +2,7 @@ package main.projectiles;
 
 import main.enemies.Enemy;
 import main.particles.BuffParticle;
-import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -35,12 +35,14 @@ public abstract class Projectile {
     String buff;
     int effectRadius;
     ArrayList<Enemy> hitEnemies;
-    Tower tower;
+    Turret turret;
+    int effectLevel;
+    int effectDuration;
 
-    Projectile(PApplet p, float x, float y, float angle, Tower tower) {
+    Projectile(PApplet p, float x, float y, float angle, Turret turret) {
         this.p = p;
 
-        this.tower = tower;
+        this.turret = turret;
         hitEnemies = new ArrayList<>();
         position = new PVector(x, y);
         size = new PVector(10, 10);
@@ -57,6 +59,8 @@ public abstract class Projectile {
         trail = "null";
         buff = "null";
         effectRadius = 0;
+        effectLevel = 0;
+        effectDuration = 0;
     }
 
     public void main(ArrayList<Projectile> projectiles, int i) {
@@ -117,7 +121,7 @@ public abstract class Projectile {
                 }
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
-                enemy.collidePJ(damage, buff, tower, i);
+                enemy.collidePJ(damage, buff, effectLevel, effectDuration, turret, i);
                 hitEnemies.add(enemy);
                 pierce--;
                 for (int j = enemies.size() - 1; j >= 0; j--) {
@@ -130,7 +134,7 @@ public abstract class Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.collidePJ(3 * (damage / 4), buff, tower, i);
+                        erEnemy.collidePJ(3 * (damage / 4), buff, effectLevel, effectDuration, turret, i);
                     }
                 }
             }

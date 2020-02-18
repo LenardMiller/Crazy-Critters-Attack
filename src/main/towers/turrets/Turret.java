@@ -36,6 +36,8 @@ public abstract class Turret extends Tower {
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
     Enemy targetEnemy;
+    public int effectLevel;
+    public int effectDuration;
 
     Turret(PApplet p, Tile tile) {
         super(p, tile);
@@ -59,6 +61,8 @@ public abstract class Turret extends Tower {
         idleFrames = new PImage[numIdleFrames];
         spriteArray = new ArrayList<>();
         spriteType = 0;
+        effectLevel = 0;
+        effectDuration = 0;
         range = 800;
         frame = 0;
         loadDelay = 0;

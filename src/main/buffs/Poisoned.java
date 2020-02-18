@@ -13,10 +13,11 @@ public class Poisoned extends Buff{
         effectDelay = 60; //frames
         lifeDuration = 600;
         particle = "poison";
+        name = "poisoned";
         this.enId = enId;
     }
 
-    private void effect(){ //a bit of damage a second
+    public void effect(){ //a bit of damage a second
         Enemy enemy = enemies.get(enId);
         enemy.tintColor = 0;
         enemy.barTrans = 255;

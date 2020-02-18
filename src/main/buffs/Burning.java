@@ -14,10 +14,11 @@ public class Burning extends Buff{
         effectDelay = 12; //frames
         lifeDuration = round(p.random(2500,15000)); //milliseconds
         particle = "fire";
+        name = "burning";
         this.enId = enId;
     }
 
-    private void effect(){ //small damage fast
+    public void effect(){ //small damage fast
         Enemy enemy = enemies.get(enId);
         if (enemy.tintColor > 100){
             enemy.tintColor = 100;

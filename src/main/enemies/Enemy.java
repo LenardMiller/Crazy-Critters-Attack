@@ -1,14 +1,12 @@
 package main.enemies;
 
 import main.Main;
-import main.buffs.Buff;
-import main.buffs.Burning;
-import main.buffs.Poisoned;
-import main.buffs.Wet;
+import main.buffs.*;
 import main.particles.Ouch;
 import main.pathfinding.Node;
 import main.pathfinding.PathRequest;
 import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -205,47 +203,37 @@ public abstract class Enemy {
         }
     }
 
-    public void collidePJ(int damage, String pjBuff, Tower tower, int i) { //when the enemy hits a projectile
+    public void collidePJ(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, int i) { //when the enemy hits a projectile
         hp -= damage;
-        if (tower != null) {
+        if (turret != null) {
             if (hp <= 0) {
-                tower.killsTotal++;
-                tower.damageTotal += damage + hp;
-            } else tower.damageTotal += damage;
+                turret.killsTotal++;
+                turret.damageTotal += damage + hp;
+            } else turret.damageTotal += damage;
         }
-        if (pjBuff.equals("poison")) { //applies buffs
-            if (buffs.size() > 0) {
-                for (int j = buffs.size() - 1; j >= 0; j--) {
-                    Buff buff = buffs.get(j);
-                    if (buff.particle.equals("poison") && buff.enId == i) {
-                        buffs.remove(j);
-                    }
+        if (buffs.size() > 0) {
+            for (int j = 0; j < buffs.size(); j++) {
+                Buff buff = buffs.get(j);
+                if (buff.enId == i && buff.name.equals(pjBuff)) {
+                    buffs.remove(j);
+                    break;
                 }
             }
-            buffs.add(new Poisoned(p, i));
         }
-        if (pjBuff.equals("wet")) {
-            if (buffs.size() > 0) {
-                for (int j = buffs.size() - 1; j >= 0; j--) {
-                    Buff buff = buffs.get(j);
-                    if (buff.particle.equals("water") && buff.enId == i) {
-                        buffs.remove(j);
-                    }
-                }
-            }
-            buffs.add(new Wet(p, i));
-        }
-        if (pjBuff.equals("burning")) {
-            if (buffs.size() > 0) {
-                for (int j = buffs.size() - 1; j >= 0; j--) {
-                    Buff buff = buffs.get(j);
-                    if (buff.particle.equals("fire") && buff.enId == i) {
-                        buffs.remove(j);
-
-                    }
-                }
-            }
-            buffs.add(new Burning(p, i));
+        switch (pjBuff) {
+            case "wet":
+                buffs.add(new Wet(p,i));
+                break;
+            case "burning":
+                buffs.add(new Burning(p,i));
+                break;
+            case "poisoned":
+                buffs.add(new Poisoned(p,i));
+                break;
+            case "decay":
+                if (turret != null) buffs.add(new Decay(p, i, effectLevel, effectDuration));
+                else buffs.add(new Decay(p, i, 1, 120));
+                break;
         }
         barTrans = 255;
         tintColor = 0;

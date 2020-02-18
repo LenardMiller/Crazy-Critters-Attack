@@ -4,7 +4,7 @@ import main.enemies.Enemy;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;
-import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -15,8 +15,8 @@ public class EnergyBlast extends Projectile {
 
     private boolean bigExplosion;
 
-    public EnergyBlast(PApplet p, float x, float y, float angle, Tower tower, int damage, int effectRadius, boolean bigExplosion) {
-        super(p, x, y, angle, tower);
+    public EnergyBlast(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectRadius, boolean bigExplosion) {
+        super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(10, 18);
         radius = 14;
@@ -43,7 +43,7 @@ public class EnergyBlast extends Projectile {
                 }
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
-                enemy.collidePJ(damage, buff, tower, i);
+                enemy.collidePJ(damage, buff, effectLevel, effectDuration, turret, i);
                 if (!bigExplosion) {
                     int num = (int) (p.random(10, 16));
                     for (int j = num; j >= 0; j--) {
@@ -68,7 +68,7 @@ public class EnergyBlast extends Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.collidePJ(3 * (damage / 4), buff, tower, i);
+                        erEnemy.collidePJ(3 * (damage / 4), buff, effectLevel, effectDuration, turret, i);
                     }
                 }
             }

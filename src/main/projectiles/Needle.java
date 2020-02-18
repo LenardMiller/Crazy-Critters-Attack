@@ -1,7 +1,7 @@
 package main.projectiles;
 
 import main.particles.Ouch;
-import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -11,11 +11,10 @@ import static main.Main.*;
 
 public class Needle extends Projectile {
 
-    public int effectLevel;
     private int lifeTimer;
 
-    public Needle(PApplet p, float x, float y, float angle, Tower tower, int damage, int effectLevel, int lifespan) {
-        super(p, x, y, angle, tower);
+    public Needle(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectLevel, int effectDuration, int lifespan) {
+        super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(2, 17);
         radius = 10;
@@ -23,9 +22,11 @@ public class Needle extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.effectLevel = effectLevel;
+        this.effectDuration = effectDuration;
         lifeTimer = lifespan + p.frameCount;
         this.angle = angle;
         sprite = spritesH.get("needlePj");
+        buff = "decay";
     }
 
     public void main(ArrayList<Projectile> projectiles, int i) {

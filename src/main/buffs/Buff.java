@@ -13,20 +13,22 @@ public abstract class Buff {
     public PApplet p;
 
     int effectDelay;
-    private int effectTimer;
-    private int lifeTimer;
+    int effectTimer;
+    int lifeTimer;
     int lifeDuration;
     public String particle;
     public int enId;
+    public String name;
 
     Buff(PApplet p, int enId){
         this.p = p;
 
         effectDelay = 60; //frames
         effectTimer = p.frameCount + effectDelay;
-        int lifeDuration = 600; //frames
+        lifeDuration = 600; //frames
         lifeTimer = p.frameCount + lifeDuration;
         particle = "null";
+        name = "null";
         this.enId = enId;
     }
 
@@ -45,7 +47,7 @@ public abstract class Buff {
         }
     }
 
-    private void effect(){ //prints enemies id
+    public void effect(){ //prints enemies id
         System.out.print(enId + " ");
     }
 
