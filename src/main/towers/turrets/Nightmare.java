@@ -23,7 +23,7 @@ public class Nightmare extends Turret {
         hp = maxHp;
         range = 300;
         hit = false;
-        delay = 210; //default: 210 frames
+        delay = 210; //210
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 18;

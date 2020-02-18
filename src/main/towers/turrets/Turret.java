@@ -217,17 +217,22 @@ public abstract class Turret extends Tower {
                 sprite = fireFrames[frame];
             } else { //if done, switch to load
                 if (numLoadFrames > 0) {
-                    ArrayList<Integer> oldArray = new ArrayList<>();
                     int oldSize = numLoadFrames;
                     int newSize = (delayTime - p.frameCount);
+//                    System.out.println(oldSize + " -> " + newSize); //print
                     spriteArray = new ArrayList<>();
-                    for (int i = 0; i < oldSize; i++) oldArray.add(i);
-                    for (int i = 0; i < oldSize; i++) spriteArray.add(i);
-                    int count = 0;
-                    while (spriteArray.size() != newSize) {
-                        count++;
-                        compress = new CompressArray(spriteArray.size(), newSize, count, oldArray, spriteArray);
+                    if (oldSize > newSize) for (int i = 0; i < oldSize; i++) spriteArray.add(i);
+                    if (oldSize > newSize) {
+                        while (spriteArray.size() != newSize) {
+                            compress = new CompressArray(oldSize, newSize, spriteArray);
+                            compress.main();
+                        }
+                    } else {
+                        compress = new CompressArray(oldSize-1,newSize,spriteArray);
                         compress.main();
+                        spriteArray = compress.compArray;
+//                        System.out.println(spriteArray.size()); //print
+//                        System.out.println(spriteArray); //print
                     }
                 }
                 frame = 0;
