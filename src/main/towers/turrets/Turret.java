@@ -107,20 +107,22 @@ public abstract class Turret extends Tower {
                 float x = abs(tile.position.x - enemy.position.x);
                 float y = abs(tile.position.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
-                if (priority == 0 && t < dist) { //close
-                    e = enemy;
-                    dist = t;
-                }
-                if (priority == 1 && t > dist) { //far
-                    e = enemy;
-                    dist = t;
-                }
-                if (priority == 2) if (enemy.maxHp > maxHp) { //strong
-                    e = enemy;
-                    maxHp = enemy.maxHp;
-                } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
-                    e = enemy;
-                    dist = t;
+                if (t < range) {
+                    if (priority == 0 && t < dist) { //close
+                        e = enemy;
+                        dist = t;
+                    }
+                    if (priority == 1 && t > dist) { //far
+                        e = enemy;
+                        dist = t;
+                    }
+                    if (priority == 2) if (enemy.maxHp > maxHp) { //strong
+                        e = enemy;
+                        maxHp = enemy.maxHp;
+                    } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                        e = enemy;
+                        dist = t;
+                    }
                 }
             }
         }
