@@ -31,7 +31,6 @@ public abstract class Turret extends Tower {
     int frame;
     int frameTimer;
     int betweenIdleFrames;
-    int range;
     float loadDelay;
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
@@ -63,7 +62,6 @@ public abstract class Turret extends Tower {
         spriteType = 0;
         effectLevel = 0;
         effectDuration = 0;
-        range = 800;
         frame = 0;
         loadDelay = 0;
         betweenIdleFrames = 0;
@@ -111,7 +109,7 @@ public abstract class Turret extends Tower {
                 float x = abs(tile.position.x - enemy.position.x);
                 float y = abs(tile.position.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
-                if (t < range) {
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900) {
                     if (priority == 0 && t < dist) { //close
                         e = enemy;
                         dist = t;

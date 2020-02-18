@@ -21,7 +21,6 @@ public class Nightmare extends Turret {
         size = new PVector(50,50);
         maxHp = 20;
         hp = maxHp;
-        range = 800; //350
         hit = false;
         delay = 210; //210
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
@@ -38,7 +37,7 @@ public class Nightmare extends Turret {
         loadDelayTime = 0;
         damage = 15;
         numProjectiles = 3;
-        effectLevel = 1;
+        effectLevel = 2;
         effectDuration = 150;
         loadSprites();
         debrisType = "metal";
@@ -58,7 +57,7 @@ public class Nightmare extends Turret {
             PVector spa = PVector.fromAngle(angleB-HALF_PI);
             spa.setMag(20);
             spp.add(spa);
-            projectiles.add(new Needle(p, spp.x, spp.y, angleB, this, damage, effectLevel, effectDuration,range/pjSpeed));
+            projectiles.add(new Needle(p, spp.x, spp.y, angleB, this, damage, effectLevel, effectDuration));
         }
         delayTime = p.frameCount + delay; //waits this time before firing
     }
