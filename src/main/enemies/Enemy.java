@@ -28,7 +28,7 @@ public abstract class Enemy {
     public int pfSize;
     public PVector position;
     public PVector size;
-    float angle;
+    public float angle;
     public float radius;
     public float maxSpeed;
     public float speed;
