@@ -300,6 +300,7 @@ public abstract class Turret extends Tower {
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
         sprite = upgradeSprites[nextLevel];
+        if (upgradeSpecial[nextLevel]) upgradeSpecial(id);
         if (id == 0) {
             nextLevelA++;
             if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
@@ -314,4 +315,6 @@ public abstract class Turret extends Tower {
             particles.add(new Debris(p, (tile.position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (tile.position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
         }
     }
+
+    public void upgradeSpecial(int id) {}
 }  

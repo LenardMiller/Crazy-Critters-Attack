@@ -1,6 +1,5 @@
 package main.towers.turrets;
 
-import main.particles.Debris;
 import main.projectiles.Needle;
 import main.towers.Tile;
 import processing.core.PApplet;
@@ -37,7 +36,7 @@ public class Nightmare extends Turret {
         loadDelayTime = 0;
         damage = 15;
         numProjectiles = 3;
-        effectLevel = 4;
+        effectLevel = 3;
         effectDuration = 220;
         loadSprites();
         debrisType = "metal";
@@ -65,24 +64,24 @@ public class Nightmare extends Turret {
     private void setUpgrades(){
         //special
         upgradeSpecial[0] = false;
-        upgradeSpecial[1] = false;
+        upgradeSpecial[1] = true;
         upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
+        upgradeSpecial[3] = true;
         //damage
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;
         upgradeDamage[2] = 0;
         upgradeDamage[3] = 0;
         //delay (firerate)
-        upgradeDelay[0] = 0;
+        upgradeDelay[0] = -45;
         upgradeDelay[1] = 0;
         upgradeDelay[2] = 0;
         upgradeDelay[3] = 0;
         //price
-        upgradePrices[0] = 0;
-        upgradePrices[1] = 0;
-        upgradePrices[2] = 0;
-        upgradePrices[3] = 0;
+        upgradePrices[0] = 50;
+        upgradePrices[1] = 100;
+        upgradePrices[2] = 50;
+        upgradePrices[3] = 100;
         //heath
         upgradeHealth[0] = 0;
         upgradeHealth[1] = 0;
@@ -91,7 +90,7 @@ public class Nightmare extends Turret {
         //error (accuracy)
         upgradeError[0] = 0;
         upgradeError[1] = 0;
-        upgradeError[2] = 0;
+        upgradeError[2] = -4;
         upgradeError[3] = 0;
         //names
         upgradeNames[0] = name;
@@ -104,30 +103,30 @@ public class Nightmare extends Turret {
         upgradeDebris[2] = "metal";
         upgradeDebris[3] = "metal";
         //titles
-        upgradeTitles[0] = "PLACEHOLDER";
-        upgradeTitles[1] = "PLACEHOLDER";
-        upgradeTitles[2] = "PLACEHOLDER";
-        upgradeTitles[3] = "PLACEHOLDER";
+        upgradeTitles[0] = "Firerate";
+        upgradeTitles[1] = "More Needles";
+        upgradeTitles[2] = "Reduce Spread";
+        upgradeTitles[3] = "Effect Power";
         //desc line one
-        upgradeDescA[0] = "";
-        upgradeDescA[1] = "";
-        upgradeDescA[2] = "";
-        upgradeDescA[3] = "";
+        upgradeDescA[0] = "Increase";
+        upgradeDescA[1] = "Fire more";
+        upgradeDescA[2] = "Increase";
+        upgradeDescA[3] = "Increase";
         //desc line two
-        upgradeDescB[0] = "";
-        upgradeDescB[1] = "";
-        upgradeDescB[2] = "";
-        upgradeDescB[3] = "";
+        upgradeDescB[0] = "firerate";
+        upgradeDescB[1] = "projectiles";
+        upgradeDescB[2] = "accuracy";
+        upgradeDescB[3] = "damage,";
         //desc line three
         upgradeDescC[0] = "";
         upgradeDescC[1] = "";
         upgradeDescC[2] = "";
-        upgradeDescC[3] = "";
+        upgradeDescC[3] = "duration";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[7];
+        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[4];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[5];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[3];
         //sprites
         upgradeSprites[0] = spritesH.get("stoneWallTW");
         upgradeSprites[1] = spritesH.get("metalWallTW");
@@ -135,48 +134,11 @@ public class Nightmare extends Turret {
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgrade(int id){
-        int nextLevel;
-        if (id == 0){
-            nextLevel = nextLevelA;
-        } else{
-            nextLevel = nextLevelB;
-        }
-        damage += upgradeDamage[nextLevel];
-        delay += upgradeDelay[nextLevel];
-        price += upgradePrices[nextLevel];
-        value += upgradePrices[nextLevel];
-        maxHp += upgradeHealth[nextLevel];
-        hp += upgradeHealth[nextLevel];
-        error += upgradeError[nextLevel];
-        name = upgradeNames[nextLevel];
-        debrisType = upgradeDebris[nextLevel];
-        sprite = upgradeSprites[nextLevel];
-        if (upgradeSpecial[nextLevel]){
-            //placeholder
-        }
-        if (id == 0){
-            nextLevelA++;
-        } else if (id == 1){
-            nextLevelB++;
-        }
-        if (id == 0){
-            if (nextLevelA < upgradeNames.length/2){
-                upgradeIconA.sprite = upgradeIcons[nextLevelA];
-            } else{
-                upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
-        }
-        if (id == 1){
-            if (nextLevelB < upgradeNames.length){
-                upgradeIconB.sprite = upgradeIcons[nextLevelB];
-            } else{
-                upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
-        }
-        int num = floor(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+    public void upgradeSpecial(int id) {
+        if (id == 0) numProjectiles = 5;
+        else {
+            effectDuration += 60;
+            effectLevel += 3;
         }
     }
 

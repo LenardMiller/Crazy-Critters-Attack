@@ -28,7 +28,7 @@ public class Slingshot extends Turret{
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
-        damage = 10; //10
+        damage = 15; //15
         loadSprites();
         debrisType = "stone";
         price = 50;
