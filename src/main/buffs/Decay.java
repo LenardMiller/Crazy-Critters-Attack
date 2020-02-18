@@ -15,7 +15,7 @@ public class Decay extends Buff {
         effectTimer = p.frameCount + effectDelay;
         lifeDuration = duration; //frames
         lifeTimer = p.frameCount + lifeDuration;
-        particle = "fire";
+        particle = "decay";
         name = "decay";
         this.damage = damage;
         this.enId = enId;
