@@ -1,12 +1,13 @@
 package main.buffs;
 
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
 import static main.Main.buffs;
 
 public class Wet extends Buff{
-    public Wet(PApplet p, int enId){
-        super(p,enId);
+    public Wet(PApplet p, int enId, Turret turret){
+        super(p,enId,turret);
         effectDelay = 6; //frames
         lifeDuration = 600;
         particle = "water";

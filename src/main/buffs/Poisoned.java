@@ -2,14 +2,15 @@ package main.buffs;
 
 import main.enemies.Enemy;
 import main.particles.Ouch;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
 import static main.Main.enemies;
 import static main.Main.particles;
 
 public class Poisoned extends Buff{
-    public Poisoned(PApplet p, int enId){
-        super(p,enId);
+    public Poisoned(PApplet p, int enId, Turret turret){
+        super(p,enId,turret);
         effectDelay = 60; //frames
         lifeDuration = 600;
         particle = "poison";

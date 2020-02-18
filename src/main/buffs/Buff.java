@@ -2,6 +2,7 @@ package main.buffs;
 
 import main.enemies.Enemy;
 import main.particles.BuffParticle;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
 import static main.Main.buffs;
@@ -19,8 +20,9 @@ public abstract class Buff {
     public String particle;
     public int enId;
     public String name;
+    public Turret turret;
 
-    Buff(PApplet p, int enId){
+    Buff(PApplet p, int enId, Turret turret){
         this.p = p;
 
         effectDelay = 60; //frames
@@ -30,6 +32,7 @@ public abstract class Buff {
         particle = "null";
         name = "null";
         this.enId = enId;
+        this.turret = turret;
     }
 
     public void main(int i){

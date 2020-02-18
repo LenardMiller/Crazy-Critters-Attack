@@ -222,17 +222,17 @@ public abstract class Enemy {
         }
         switch (pjBuff) {
             case "wet":
-                buffs.add(new Wet(p,i));
+                buffs.add(new Wet(p,i,turret));
                 break;
             case "burning":
-                buffs.add(new Burning(p,i));
+                buffs.add(new Burning(p,i,turret));
                 break;
             case "poisoned":
-                buffs.add(new Poisoned(p,i));
+                buffs.add(new Poisoned(p,i,turret));
                 break;
             case "decay":
-                if (turret != null) buffs.add(new Decay(p, i, effectLevel, effectDuration));
-                else buffs.add(new Decay(p, i, 1, 120));
+                if (turret != null) buffs.add(new Decay(p, i, effectLevel, effectDuration,turret));
+                else buffs.add(new Decay(p, i, 1, 120, null));
                 break;
         }
         barTrans = 255;

@@ -2,6 +2,7 @@ package main.buffs;
 
 import main.enemies.Enemy;
 import main.particles.Ouch;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
 import static main.Main.enemies;
@@ -9,8 +10,8 @@ import static main.Main.particles;
 import static processing.core.PApplet.round;
 
 public class Burning extends Buff{
-    public Burning(PApplet p, int enId){
-        super(p,enId);
+    public Burning(PApplet p, int enId, Turret turret){
+        super(p,enId,turret);
         effectDelay = 12; //frames
         lifeDuration = round(p.random(2500,15000)); //milliseconds
         particle = "fire";

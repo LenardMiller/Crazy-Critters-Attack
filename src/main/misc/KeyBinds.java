@@ -83,9 +83,9 @@ public class KeyBinds {
         if (butterfly) enemies.add(new Butterfly(p, p.mouseX, p.mouseY));
         if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant || snake || worm || butterfly) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
         //buffs
-        if (poisoned) buffs.add(new Poisoned(p, (int) (p.random(0, enemies.size()))));
-        if (wet) buffs.add(new Wet(p, (int) (p.random(0, enemies.size()))));
-        if (burning) buffs.add(new Burning(p, (int) (p.random(0, enemies.size()))));
+        if (poisoned) buffs.add(new Poisoned(p, (int) (p.random(0, enemies.size())),null));
+        if (wet) buffs.add(new Wet(p, (int) (p.random(0, enemies.size())),null));
+        if (burning) buffs.add(new Burning(p, (int) (p.random(0, enemies.size())),null));
         //particles
         if (hurt) {
             int num = round(p.random(0, 2));
