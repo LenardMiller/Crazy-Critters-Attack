@@ -31,6 +31,7 @@ public abstract class Turret extends Tower {
     int frame;
     int frameTimer;
     int betweenIdleFrames;
+    int range;
     float loadDelay;
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
@@ -58,6 +59,7 @@ public abstract class Turret extends Tower {
         idleFrames = new PImage[numIdleFrames];
         spriteArray = new ArrayList<>();
         spriteType = 0;
+        range = 800;
         frame = 0;
         loadDelay = 0;
         betweenIdleFrames = 0;

@@ -41,9 +41,10 @@ public class Slingshot extends Turret{
     }
 
     public void fire(){ //needed to change projectile fired
-        angle += radians(p.random(-error,error));
+        float angleB = angle;
+        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angleB, this, damage));
     }
 
     private void setUpgrades(){

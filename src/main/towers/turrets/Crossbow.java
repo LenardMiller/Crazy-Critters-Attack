@@ -49,9 +49,10 @@ public class Crossbow extends Turret {
     }
 
     public void fire(){ //needed to change projectile fired
-        angle += radians(p.random(-error,error));
+        float angleB = angle;
+        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
+        projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angleB, this, damage, pierce));
     }
 
     private void setUpgrades(){

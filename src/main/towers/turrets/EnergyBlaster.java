@@ -49,13 +49,14 @@ public class EnergyBlaster extends Turret{
     }
 
     public void fire() { //needed to change projectile fired
-        angle += radians(p.random(-error,error));
+        float angleB = angle;
+        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angle-HALF_PI);
+        PVector spa = PVector.fromAngle(angleB-HALF_PI);
         spa.setMag(40);
         spp.add(spa);
-        projectiles.add(new EnergyBlast(p,spp.x,spp.y, angle, this, damage, effectRadius, bigExplosion));
+        projectiles.add(new EnergyBlast(p,spp.x,spp.y, angleB, this, damage, effectRadius, bigExplosion));
     }
 
     private void setUpgrades(){

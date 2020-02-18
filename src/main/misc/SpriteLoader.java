@@ -75,6 +75,8 @@ public class SpriteLoader {
         getSprite(p,"magicMissleerFire","TR","magicMissleer/fire/",8);
         getSprite(p,"magicMissleerLoad","TR","magicMissleer/load/",26);
         getSprite(p,"magicMissleerIdle","TR","magicMissleer/idle/",8);
+        getSprite(p,"nightmareFire","TR","nightmare/fire/",14);
+        getSprite(p,"nightmareLoad","TR","nightmare/load/",22);
         //walls
         getSprite(p,"woodWall","TW","wood/",4);
         getSprite(p,"stoneWall","TW","stone/",4);
@@ -165,6 +167,9 @@ public class SpriteLoader {
         spritesH.put("teslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/base.png"));
         spritesH.put("teslaFullTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
         spritesH.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));
+        spritesH.put("nightmareBaseTR",p.loadImage("sprites/towers/turrets/nightmare/base.png"));
+        spritesH.put("nightmareFullTR",p.loadImage("sprites/towers/turrets/nightmare/full.png"));
+        spritesH.put("nightmareIdleTR",p.loadImage("sprites/towers/turrets/nightmare/idle.png"));
         //walls
         spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
