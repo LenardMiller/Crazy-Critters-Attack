@@ -25,7 +25,7 @@ public class Burning extends Buff{
             enemy.tintColor = 100;
         }
         enemy.barTrans = 255;
-        enemy.hp--;
+        enemy.effectDamage(1,turret);
         int num = (int)(p.random(0,2));
         if (num == 0){ //small red splatter
             particles.add(new Ouch(p,(float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), p.random(0,360), "redOuch"));

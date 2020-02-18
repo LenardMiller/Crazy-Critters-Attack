@@ -243,6 +243,16 @@ public abstract class Enemy {
         }
     }
 
+    public void effectDamage(int damage, Turret turret) {
+        hp -= damage;
+        if (turret != null) {
+            if (hp <= 0) {
+                turret.killsTotal++;
+                turret.damageTotal += damage + hp;
+            } else turret.damageTotal += damage;
+        }
+    }
+
     private void HpBar() {
         p.fill(255, 0, 0, barTrans);
         p.noStroke();
