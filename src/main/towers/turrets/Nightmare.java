@@ -21,13 +21,13 @@ public class Nightmare extends Turret {
         size = new PVector(50,50);
         maxHp = 20;
         hp = maxHp;
-        range = 300;
+        range = 350;
         hit = false;
         delay = 210; //210
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 18;
-        error = 15; //15
+        error = 15; //12
         numFireFrames = 14;
         numLoadFrames = 22;
         fireFrames = new PImage[numFireFrames];

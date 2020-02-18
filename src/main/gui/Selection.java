@@ -160,6 +160,7 @@ public class Selection { //what tower is selected
                 p.textAlign(LEFT);
                 p.fill(100,0,200);
                 p.text("Chain Lightning", 910, 376 + offset);
+                break;
             case "nightmare":
                 p.text("Nightmare", 1000, 241);
                 p.text("Blaster", 1000, 266);

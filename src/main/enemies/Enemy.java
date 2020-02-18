@@ -174,7 +174,9 @@ public abstract class Enemy {
         preDisplay();
         p.pushMatrix();
         p.tint(0, 60);
-        p.translate(position.x + 1, position.y + 1);
+        int x = 1;
+        if (pfSize > 1) x++;
+        p.translate(position.x + x, position.y + x);
         p.rotate(angle);
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.tint(255);
