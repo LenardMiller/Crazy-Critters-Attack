@@ -225,7 +225,7 @@ public abstract class Enemy {
                 buffs.add(new Wet(p,i,turret));
                 break;
             case "burning":
-                buffs.add(new Burning(p,i,turret));
+                buffs.add(new Burning(p,i,effectLevel,effectDuration,turret));
                 break;
             case "poisoned":
                 buffs.add(new Poisoned(p,i,turret));

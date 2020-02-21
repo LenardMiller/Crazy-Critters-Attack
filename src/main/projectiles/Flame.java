@@ -16,8 +16,9 @@ public class Flame extends Projectile {
     private float spawnRange;
     private int fireChance;
     private int smokeChance;
+    private int timer;
 
-    public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage) {
+    public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectLevel, int effectDuration, int timer) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(25, 25);
@@ -27,7 +28,10 @@ public class Flame extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         pierce = 900;
+        this.effectLevel = effectLevel;
+        this.effectDuration = effectDuration;
         this.angle = angle;
+        this.timer = timer;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
         sprites = spritesAnimH.get("flamePJ");
@@ -64,7 +68,7 @@ public class Flame extends Projectile {
             particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "smoke"));
         }
         //animation
-        if (delay > 5 && p.random(0, 20) > 1) {
+        if (delay > timer && p.random(0, 20) > 1) {
             currentSprite++;
             delay = 0;
         }

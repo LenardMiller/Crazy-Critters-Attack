@@ -59,11 +59,6 @@ public class EnergyBlaster extends Turret{
     }
 
     private void setUpgrades(){
-        //special
-        upgradeSpecial[0] = false;
-        upgradeSpecial[1] = true;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
         //damage
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;
@@ -131,9 +126,11 @@ public class EnergyBlaster extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgradeSpecial(int id) {
-        effectRadius += 20;
-        bigExplosion = true;
+    public void upgradeSpecial() {
+        if (nextLevelA == 1) {
+            effectRadius += 20;
+            bigExplosion = true;
+        }
     }
 
     public void updateSprite() {}

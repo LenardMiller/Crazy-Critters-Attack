@@ -13,6 +13,10 @@ import static main.misc.MiscMethods.updateTowerArray;
 public class Flamethrower extends Turret {
 
     public float targetAngle;
+    private int effectLevel;
+    private int effectDuration;
+    private int flameTimer;
+    private float rotationSpeed;
 
     public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
@@ -30,6 +34,8 @@ public class Flamethrower extends Turret {
         numFireFrames = 3;
         numLoadFrames = 1;
         numIdleFrames = 4;
+        effectLevel = 1;
+        effectDuration = 300;
         betweenIdleFrames = 1;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
@@ -39,6 +45,8 @@ public class Flamethrower extends Turret {
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 2;
+        flameTimer = 5;
+        rotationSpeed = 0.05f;
         loadSprites();
         debrisType = "metal";
         price = 150;
@@ -51,14 +59,20 @@ public class Flamethrower extends Turret {
     }
 
     public void fire() { //needed to change projectile fired
-        if (targetAngle > angle) angle += 0.05;
-        if (targetAngle < angle) angle -= 0.05;
+        if (targetAngle > angle) {
+            if (targetAngle - angle < rotationSpeed) angle = targetAngle;
+            else angle += rotationSpeed;
+        }
+        if (targetAngle < angle) {
+            if (angle - targetAngle < rotationSpeed) angle = targetAngle;
+            else angle -= rotationSpeed;
+        }
         float angleB = angle + radians(p.random(-error, error));
         PVector spp = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         PVector spa = PVector.fromAngle(angleB - HALF_PI);
         spa.setMag(24);
         spp.add(spa);
-        projectiles.add(new Flame(p, spp.x, spp.y, angleB, this, damage));
+        projectiles.add(new Flame(p, spp.x, spp.y, angleB, this, damage, effectLevel, effectDuration, flameTimer));
         delayTime = p.frameCount + delay; //waits this time before firing
     }
 
@@ -71,7 +85,7 @@ public class Flamethrower extends Turret {
         PVector t = PVector.div(d, pjSpeed); //finds time to hit
 
         PVector enemyHeading = PVector.fromAngle(enemy.angle);
-        enemyHeading.setMag(enemy.speed*t.mag());
+        enemyHeading.setMag(enemy.speed * t.mag());
 
         target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y); //leads shots todo: fix again
         PVector ratio = PVector.sub(target, position);
@@ -110,15 +124,10 @@ public class Flamethrower extends Turret {
     }
 
     private void setUpgrades() {
-        //special
-        upgradeSpecial[0] = false;
-        upgradeSpecial[1] = false;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
         //damage
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;
-        upgradeDamage[2] = 0;
+        upgradeDamage[2] = 2;
         upgradeDamage[3] = 0;
         //delay (firerate)
         upgradeDelay[0] = 0;
@@ -126,10 +135,10 @@ public class Flamethrower extends Turret {
         upgradeDelay[2] = 0;
         upgradeDelay[3] = 0;
         //price
-        upgradePrices[0] = 0;
-        upgradePrices[1] = 0;
-        upgradePrices[2] = 0;
-        upgradePrices[3] = 0;
+        upgradePrices[0] = 50;
+        upgradePrices[1] = 100;
+        upgradePrices[2] = 50;
+        upgradePrices[3] = 100;
         //heath
         upgradeHealth[0] = 0;
         upgradeHealth[1] = 0;
@@ -151,30 +160,30 @@ public class Flamethrower extends Turret {
         upgradeDebris[2] = "metal";
         upgradeDebris[3] = "metal";
         //titles
-        upgradeTitles[0] = "PLACEHOLDER";
-        upgradeTitles[1] = "PLACEHOLDER";
-        upgradeTitles[2] = "PLACEHOLDER";
-        upgradeTitles[3] = "PLACEHOLDER";
+        upgradeTitles[0] = "Range";
+        upgradeTitles[1] = "Swivel";
+        upgradeTitles[2] = "Base Damage";
+        upgradeTitles[3] = "Effect Power";
         //desc line one
-        upgradeDescA[0] = "";
-        upgradeDescA[1] = "";
-        upgradeDescA[2] = "";
-        upgradeDescA[3] = "";
+        upgradeDescA[0] = "Increase";
+        upgradeDescA[1] = "Increase";
+        upgradeDescA[2] = "Doubles";
+        upgradeDescA[3] = "Increase";
         //desc line two
-        upgradeDescB[0] = "";
-        upgradeDescB[1] = "";
-        upgradeDescB[2] = "";
-        upgradeDescB[3] = ",";
+        upgradeDescB[0] = "range";
+        upgradeDescB[1] = "rotation";
+        upgradeDescB[2] = "base";
+        upgradeDescB[3] = "damage";
         //desc line three
         upgradeDescC[0] = "";
-        upgradeDescC[1] = "";
-        upgradeDescC[2] = "";
-        upgradeDescC[3] = "";
+        upgradeDescC[1] = "speed";
+        upgradeDescC[2] = "damage";
+        upgradeDescC[3] = "& duration";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[12];
+        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[15];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[8];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[11];
         //sprites
         upgradeSprites[0] = spritesH.get("stoneWallTW");
         upgradeSprites[1] = spritesH.get("metalWallTW");
@@ -182,7 +191,13 @@ public class Flamethrower extends Turret {
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgradeSpecial(int id) {
+    public void upgradeSpecial() {
+        if (nextLevelA == 0) flameTimer += 2;
+        if (nextLevelA == 1) rotationSpeed += 0.05;
+        if (nextLevelB == 1) {
+            effectDuration += 100;
+            effectLevel += 2;
+        }
     }
 
     public void updateSprite() {

@@ -48,11 +48,6 @@ public class Slingshot extends Turret{
     }
 
     private void setUpgrades(){
-        //special
-        upgradeSpecial[0] = false;
-        upgradeSpecial[1] = false;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
         //damage
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;

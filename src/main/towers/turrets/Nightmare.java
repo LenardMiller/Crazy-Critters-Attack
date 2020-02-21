@@ -62,11 +62,6 @@ public class Nightmare extends Turret {
     }
 
     private void setUpgrades(){
-        //special
-        upgradeSpecial[0] = false;
-        upgradeSpecial[1] = true;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = true;
         //damage
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;
@@ -134,9 +129,9 @@ public class Nightmare extends Turret {
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgradeSpecial(int id) {
-        if (id == 0) numProjectiles = 5;
-        else {
+    public void upgradeSpecial() {
+        if (nextLevelA == 1) numProjectiles = 5;
+        if (nextLevelB == 1) {
             effectDuration += 60;
             effectLevel += 3;
         }

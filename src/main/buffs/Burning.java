@@ -5,14 +5,17 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
 import static main.Main.enemies;
-import static processing.core.PApplet.round;
 
 public class Burning extends Buff {
-    public Burning(PApplet p, int enId, Turret turret) {
+
+    private int damage;
+
+    public Burning(PApplet p, int enId, int damage, int duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 4;
         effectDelay = 12; //frames
-        lifeDuration = round(p.random(120,600));
+        lifeDuration = duration;
+        this.damage = damage;
         particle = "fire";
         name = "burning";
         this.enId = enId;
@@ -24,6 +27,6 @@ public class Burning extends Buff {
             enemy.tintColor = 100;
         }
         enemy.barTrans = 255;
-        enemy.effectDamage(1,turret);
+        enemy.effectDamage(damage,turret);
     }
 }

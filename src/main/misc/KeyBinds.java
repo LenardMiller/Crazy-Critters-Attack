@@ -1,8 +1,5 @@
 package main.misc;
 
-import main.buffs.Burning;
-import main.buffs.Poisoned;
-import main.buffs.Wet;
 import main.enemies.*;
 import main.levelStructure.Wave;
 import main.particles.*;
@@ -46,10 +43,6 @@ public class KeyBinds {
         boolean snake = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
         boolean worm = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
         boolean butterfly = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
-        //buffs
-        boolean poisoned = keysPressed.getPressedPulse(',') && alive;
-        boolean wet = keysPressed.getPressedPulse('.') && alive;
-        boolean burning = keysPressed.getPressedPulse('/') && alive;
         //particles
         boolean hurt = keysPressed.getPressed('z') && alive;
         boolean die = keysPressed.getPressed('x') && alive;
@@ -65,8 +58,8 @@ public class KeyBinds {
         if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 30, true));
         if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
         if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
-        if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,20));
-        if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5));
+        if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,150));
+        if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5));
         //enemies
         if (activateLevels) { //temp
             playingLevel = true;
@@ -84,10 +77,6 @@ public class KeyBinds {
         if (worm) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
         if (butterfly) enemies.add(new Butterfly(p, p.mouseX, p.mouseY));
         if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant || snake || worm || butterfly) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        //buffs
-        if (poisoned) buffs.add(new Poisoned(p, (int) (p.random(0, enemies.size())),null));
-        if (wet) buffs.add(new Wet(p, (int) (p.random(0, enemies.size())),null));
-        if (burning) buffs.add(new Burning(p, (int) (p.random(0, enemies.size())),null));
         //particles
         if (hurt) {
             int num = round(p.random(0, 2));

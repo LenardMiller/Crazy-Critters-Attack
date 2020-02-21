@@ -84,11 +84,6 @@ public class MagicMissileer extends Turret{
     }
 
     private void setUpgrades() {
-        //special
-        upgradeSpecial[0] = false;
-        upgradeSpecial[1] = false;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = true;
         //damage
         upgradeDamage[0] = 10;
         upgradeDamage[1] = 10;
@@ -156,8 +151,8 @@ public class MagicMissileer extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgradeSpecial(int id) {
-        four = true;
+    public void upgradeSpecial() {
+        if (nextLevelB == 1) four = true;
     }
 
     public void updateSprite() {}

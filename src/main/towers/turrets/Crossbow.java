@@ -55,11 +55,6 @@ public class Crossbow extends Turret {
     }
 
     private void setUpgrades(){
-        //special
-        upgradeSpecial[0] = false;
-        upgradeSpecial[1] = true;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
         //damage
         upgradeDamage[0] = 10;
         upgradeDamage[1] = 0;
@@ -127,8 +122,8 @@ public class Crossbow extends Turret {
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgradeSpecial(int id) {
-        pierce += 2;
+    public void upgradeSpecial() {
+        if (nextLevelA == 1) pierce += 2;
     }
 
     public void updateSprite() {};

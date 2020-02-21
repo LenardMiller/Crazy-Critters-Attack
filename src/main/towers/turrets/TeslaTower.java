@@ -81,11 +81,6 @@ public class TeslaTower extends Turret{
     }
 
     private void setUpgrades(){
-        //special
-        upgradeSpecial[0] = true;
-        upgradeSpecial[1] = true;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
         //damage
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;
@@ -153,9 +148,11 @@ public class TeslaTower extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgradeSpecial(int id) {
-        arcDistance += 100;
-        arcLength++;
+    public void upgradeSpecial() {
+        if (nextLevelA == 0 || nextLevelA == 1) {
+            arcDistance += 100;
+            arcLength++;
+        }
     }
 
     public void updateSprite() {}

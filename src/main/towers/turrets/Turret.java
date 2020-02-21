@@ -68,7 +68,6 @@ public abstract class Turret extends Tower {
         loadDelayTime = 0;
         turret = true;
         loadSprites();
-        upgradeSpecial = new boolean[4];
         upgradeDamage = new int[4];
         upgradeDelay = new int[4];
         upgradePrices = new int[4];
@@ -299,7 +298,7 @@ public abstract class Turret extends Tower {
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
         sprite = upgradeSprites[nextLevel];
-        if (upgradeSpecial[nextLevel]) upgradeSpecial(id);
+        upgradeSpecial();
         if (id == 0) {
             nextLevelA++;
             if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
@@ -315,5 +314,5 @@ public abstract class Turret extends Tower {
         }
     }
 
-    public void upgradeSpecial(int id) {}
+    public void upgradeSpecial() {}
 }  
