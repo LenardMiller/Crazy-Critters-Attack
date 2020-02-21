@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
-import main.projectiles.Pebble;
+import main.enemies.Enemy;
+import main.projectiles.Flame;
 import main.towers.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -11,6 +12,8 @@ import static main.misc.MiscMethods.updateTowerArray;
 
 public class Flamethrower extends Turret {
 
+    public float targetAngle;
+
     public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
         name = "flamethrower";
@@ -19,11 +22,11 @@ public class Flamethrower extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 5;
+        delay = 3;
         delay += (round(p.random(-(delay / 10f), delay / 10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 5;
-        error = 0;
+        error = 0.25f;
         numFireFrames = 3;
         numLoadFrames = 1;
         numIdleFrames = 4;
@@ -35,7 +38,7 @@ public class Flamethrower extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 15;
+        damage = 1;
         loadSprites();
         debrisType = "metal";
         price = 150;
@@ -48,13 +51,62 @@ public class Flamethrower extends Turret {
     }
 
     public void fire() { //needed to change projectile fired
+        if (targetAngle > angle) angle += 0.05;
+        if (targetAngle < angle) angle -= 0.05;
         float angleB = angle + radians(p.random(-error, error));
         PVector spp = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         PVector spa = PVector.fromAngle(angleB - HALF_PI);
-        spa.setMag(0);
+        spa.setMag(24);
         spp.add(spa);
-        projectiles.add(new Pebble(p, spp.x, spp.y, angleB, this, damage));
+        projectiles.add(new Flame(p, spp.x, spp.y, angleB, this, damage));
         delayTime = p.frameCount + delay; //waits this time before firing
+    }
+
+    void aim(Enemy enemy) {
+        PVector position = tile.position;
+        PVector e = PVector.div(enemy.size, 2);
+        PVector target = enemy.position;
+        target = PVector.add(target, e);
+        PVector d = PVector.sub(target, position); //finds distance to enemy
+        PVector t = PVector.div(d, pjSpeed); //finds time to hit
+
+        PVector enemyHeading = PVector.fromAngle(enemy.angle);
+        enemyHeading.setMag(enemy.speed*t.mag());
+
+        target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y); //leads shots todo: fix again
+        PVector ratio = PVector.sub(target, position);
+//        angle = findAngleBetween(position,target);
+        if (position.x == target.x) { //if on the same x
+            if (position.y >= target.y) { //if below target or on same y, angle right
+                targetAngle = 0;
+            } else if (position.y < target.y) { //if above target, angle left
+                targetAngle = PI;
+            }
+        } else if (position.y == target.y) { //if on same y
+            if (position.x > target.x) { //if  right of target, angle down
+                targetAngle = 3 * HALF_PI;
+            } else if (position.x < target.x) { //if left of target, angle up
+                targetAngle = HALF_PI;
+            }
+        } else {
+            if (position.x < target.x && position.y > target.y) { //if to left and below
+                targetAngle = (atan(abs(ratio.x + 15) / abs(ratio.y)));
+            } else if (position.x < target.x && position.y < target.y) { //if to left and above
+                targetAngle = (atan(abs(ratio.y) / abs(ratio.x))) + HALF_PI;
+            } else if (position.x > target.x && position.y < target.y) { //if to right and above
+                targetAngle = (atan(abs(ratio.x + 15) / abs(ratio.y))) + PI;
+            } else if (position.x > target.x && position.y > target.y) { //if to right and below
+                targetAngle = (atan(abs(ratio.y) / abs(ratio.x))) + 3 * HALF_PI;
+            }
+        }
+        if (visualize && debug) { //cool lines
+            p.stroke(255);
+            p.line(position.x - size.x / 2, position.y - size.y / 2, target.x - enemy.size.x / 2, target.y - enemy.size.y / 2);
+            p.stroke(255, 0, 0, 150);
+            p.line(target.x - enemy.size.x / 2, p.height, target.x - enemy.size.x / 2, 0);
+            p.stroke(0, 0, 255, 150);
+            p.line(p.width, target.y - enemy.size.y / 2, 0, target.y - enemy.size.y / 2);
+        }
     }
 
     private void setUpgrades() {

@@ -171,6 +171,13 @@ public class Selection { //what tower is selected
                 p.fill(100,0,200);
                 p.text("Shotgun, decay", 910, 376 + offset);
                 break;
+            case "flamethrower":
+                p.text("Flamethrower", 1000, 241);
+                speed = 5;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100,0,200);
+                p.text("Fire", 910, 376 + offset);
         }
 
         //stats

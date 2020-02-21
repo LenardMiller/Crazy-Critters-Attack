@@ -38,10 +38,12 @@ public abstract class Projectile {
     Turret turret;
     int effectLevel;
     int effectDuration;
+    boolean splashEn;
 
     Projectile(PApplet p, float x, float y, float angle, Turret turret) {
         this.p = p;
 
+        splashEn = true;
         this.turret = turret;
         hitEnemies = new ArrayList<>();
         position = new PVector(x, y);
@@ -96,7 +98,7 @@ public abstract class Projectile {
         p.popMatrix();
     }
 
-    public void displayPassB() { //move and rotate whole grid before displaying, than reset
+    public void displayPassB() {
         angleTwo += radians(angularVelocity);
         p.pushMatrix();
         p.translate(position.x, position.y);
@@ -121,7 +123,7 @@ public abstract class Projectile {
                 }
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
-                enemy.collidePJ(damage, buff, effectLevel, effectDuration, turret, i);
+                enemy.collidePJ(damage, buff, effectLevel, effectDuration, turret, splashEn, i);
                 hitEnemies.add(enemy);
                 pierce--;
                 for (int j = enemies.size() - 1; j >= 0; j--) {
@@ -134,7 +136,7 @@ public abstract class Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.collidePJ(3 * (damage / 4), buff, effectLevel, effectDuration, turret, i);
+                        erEnemy.collidePJ(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, i);
                     }
                 }
             }

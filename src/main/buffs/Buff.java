@@ -17,6 +17,7 @@ public abstract class Buff {
     int effectTimer;
     int lifeTimer;
     int lifeDuration;
+    int particleChance;
     public String particle;
     public int enId;
     public String name;
@@ -25,6 +26,7 @@ public abstract class Buff {
     Buff(PApplet p, int enId, Turret turret){
         this.p = p;
 
+        particleChance = 8;
         effectDelay = 60; //frames
         effectTimer = p.frameCount + effectDelay;
         lifeDuration = 600; //frames
@@ -56,8 +58,8 @@ public abstract class Buff {
 
     private void display(){ //particles around enemy
         Enemy enemy = enemies.get(enId);
-        int num = (int)(p.random(0,8));
-        if (num == 0){
+        int num = (int)(p.random(0, particleChance));
+        if (num == 0) {
             particles.add(new BuffParticle(p,(float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), p.random(0,360), particle));
         }
     }

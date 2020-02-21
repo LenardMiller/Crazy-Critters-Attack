@@ -42,6 +42,7 @@ public class SpriteLoader {
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
+        getSprite(p,"flame","PJ","flame/",23);
         //enemies
         getSprite(p,"treeGiantAttack","EN","treeGiant/attack/",63);
         getSprite(p,"treeGiantMove","EN","treeGiant/move/",91);

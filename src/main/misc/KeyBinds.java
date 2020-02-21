@@ -34,6 +34,7 @@ public class KeyBinds {
         boolean magicMissle = keysPressed.getPressedPulse('t') && alive;
         boolean arc = keysPressed.getPressedPulse('y') && alive && enemies.size() != 0;
         boolean needle = keysPressed.getPressedPulse('u') && alive;
+        boolean flame = keysPressed.getPressed('i') && alive;
         //enemies
         boolean activateLevels = keysPressed.getPressedPulse('0') && alive;
         boolean littleBug = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
@@ -65,6 +66,7 @@ public class KeyBinds {
         if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
         if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
         if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,20));
+        if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5));
         //enemies
         if (activateLevels) { //temp
             playingLevel = true;
