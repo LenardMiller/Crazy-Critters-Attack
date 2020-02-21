@@ -231,7 +231,13 @@ public class Main extends PApplet {
             if (arc.alpha <= 0) arcs.remove(i);
         }
         //particles
-        for (int i = particles.size() - 1; i >= 0; i--) {
+        int p = particles.size();
+        int p2 = p-800;
+        if (p > 800) for (int i = 0; i < p; i++) if (random(0,p2) < 5) {
+            if (i < particles.size()) particles.remove(i);
+            else break;
+        }
+        for (int i = particles.size()-1; i >= 0; i--) {
             Particle particle = particles.get(i);
             particle.main(particles, i);
         }

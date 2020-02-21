@@ -47,6 +47,7 @@ public class Flame extends Projectile {
     public void displayPassB() {
         delay++;
         sprite = sprites[currentSprite];
+        //particles
         spawnRange += 0.5f;
         if (currentSprite == 9) smokeChance = 10;
         if (currentSprite > 9) {
@@ -62,14 +63,16 @@ public class Flame extends Projectile {
         if (num == 0) {
             particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "smoke"));
         }
-        if (delay > 4 && p.random(0, 20) > 1) {
+        //animation
+        if (delay > 5 && p.random(0, 20) > 1) {
             currentSprite++;
             delay = 0;
         }
+        //control
         if (currentSprite > 9 && speed > 0) speed /= 1.1;
         if (pierce < 900) speed = 0;
         if (currentSprite >= sprites.length) dead = true;
-
+        //main sprite
         angleTwo += radians(angularVelocity);
         p.pushMatrix();
         p.translate(position.x, position.y);
