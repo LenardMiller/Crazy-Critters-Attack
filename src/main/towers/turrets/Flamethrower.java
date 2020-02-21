@@ -191,7 +191,7 @@ public class Flamethrower extends Turret {
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgradeSpecial() {
+    public void upgradeSpecial() { //todo: fix crash
         if (nextLevelA == 0) flameTimer += 2;
         if (nextLevelA == 1) rotationSpeed += 0.05;
         if (nextLevelB == 1) {
