@@ -44,7 +44,7 @@ public abstract class Turret extends Tower {
         offset = 0;
         name = null;
         size = new PVector(50, 50);
-        maxHp = 20;
+        maxHp = 20; //todo: heal
         hp = maxHp;
         hit = false;
         delay = 240;

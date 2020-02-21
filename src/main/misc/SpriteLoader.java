@@ -25,6 +25,7 @@ public class SpriteLoader {
         //particles
         getSprite(p,"energyBuff","PT","buff/energy/",8);
         getSprite(p,"fireBuff","PT","buff/fire/",8);
+        getSprite(p,"smokeBuff","PT","buff/smoke/",8);
         getSprite(p,"poisonBuff","PT","buff/poison/",8);
         getSprite(p,"waterBuff","PT","buff/water/",8);
         getSprite(p,"nullBuff","PT","buff/null/",8);

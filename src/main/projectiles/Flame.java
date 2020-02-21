@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.particles.BuffParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -7,16 +8,20 @@ import processing.core.PVector;
 
 import static main.Main.*;
 
-public class Flame extends Projectile{
+public class Flame extends Projectile {
 
     private PImage[] sprites;
     private int currentSprite;
     private int delay;
+    private float spawnRange;
+    private int fireChance;
+    private int smokeChance;
 
     public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(25, 25);
+        spawnRange = 0;
         radius = 5;
         maxSpeed = 5;
         speed = maxSpeed;
@@ -28,18 +33,36 @@ public class Flame extends Projectile{
         sprites = spritesAnimH.get("flamePJ");
         buff = "burning";
         splashEn = false;
+        fireChance = 4;
+        smokeChance = 100;
     }
 
     public void die(int i) {
         projectiles.remove(i);
     }
 
-    public void displayPassA() {} //no shadow
+    public void displayPassA() {
+    } //no shadow
 
     public void displayPassB() {
         delay++;
         sprite = sprites[currentSprite];
-        if (delay > 4 && p.random(0,10) > 1) {
+        spawnRange += 0.5f;
+        if (currentSprite == 9) smokeChance = 10;
+        if (currentSprite > 9) {
+            fireChance +=5;
+            if (smokeChance > 4 && currentSprite < 15) smokeChance -= 0.5f;
+            else smokeChance +=5;
+        }
+        int num = (int) (p.random(0, fireChance));
+        if (num == 0) {
+            particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "fire"));
+        }
+        num = (int) (p.random(0, smokeChance));
+        if (num == 0) {
+            particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "smoke"));
+        }
+        if (delay > 4 && p.random(0, 20) > 1) {
             currentSprite++;
             delay = 0;
         }
