@@ -1,14 +1,12 @@
 package main.enemies;
 
 import main.Main;
-import main.buffs.Buff;
-import main.buffs.Burning;
-import main.buffs.Poisoned;
-import main.buffs.Wet;
+import main.buffs.*;
 import main.particles.Ouch;
 import main.pathfinding.Node;
 import main.pathfinding.PathRequest;
 import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -28,7 +26,7 @@ public abstract class Enemy {
     public int pfSize;
     public PVector position;
     public PVector size;
-    float angle;
+    public float angle;
     public float radius;
     public float maxSpeed;
     public float speed;
@@ -174,7 +172,9 @@ public abstract class Enemy {
         preDisplay();
         p.pushMatrix();
         p.tint(0, 60);
-        p.translate(position.x + 1, position.y + 1);
+        int x = 1;
+        if (pfSize > 1) x++;
+        p.translate(position.x + x, position.y + x);
         p.rotate(angle);
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.tint(255);
@@ -203,53 +203,55 @@ public abstract class Enemy {
         }
     }
 
-    public void collidePJ(int damage, String pjBuff, Tower tower, int i) { //when the enemy hits a projectile
+    public void collidePJ(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, int i) { //when the enemy hits a projectile
         hp -= damage;
-        if (tower != null) {
+        if (turret != null) {
             if (hp <= 0) {
-                tower.killsTotal++;
-                tower.damageTotal += damage + hp;
-            } else tower.damageTotal += damage;
+                turret.killsTotal++;
+                turret.damageTotal += damage + hp;
+            } else turret.damageTotal += damage;
         }
-        if (pjBuff.equals("poison")) { //applies buffs
-            if (buffs.size() > 0) {
-                for (int j = buffs.size() - 1; j >= 0; j--) {
-                    Buff buff = buffs.get(j);
-                    if (buff.particle.equals("poison") && buff.enId == i) {
-                        buffs.remove(j);
-                    }
+        if (buffs.size() > 0) {
+            for (int j = 0; j < buffs.size(); j++) {
+                Buff buff = buffs.get(j);
+                if (buff.enId == i && buff.name.equals(pjBuff)) {
+                    buffs.remove(j);
+                    break;
                 }
             }
-            buffs.add(new Poisoned(p, i));
         }
-        if (pjBuff.equals("wet")) {
-            if (buffs.size() > 0) {
-                for (int j = buffs.size() - 1; j >= 0; j--) {
-                    Buff buff = buffs.get(j);
-                    if (buff.particle.equals("water") && buff.enId == i) {
-                        buffs.remove(j);
-                    }
-                }
-            }
-            buffs.add(new Wet(p, i));
-        }
-        if (pjBuff.equals("burning")) {
-            if (buffs.size() > 0) {
-                for (int j = buffs.size() - 1; j >= 0; j--) {
-                    Buff buff = buffs.get(j);
-                    if (buff.particle.equals("fire") && buff.enId == i) {
-                        buffs.remove(j);
-
-                    }
-                }
-            }
-            buffs.add(new Burning(p, i));
+        switch (pjBuff) {
+            case "wet":
+                buffs.add(new Wet(p,i,turret));
+                break;
+            case "burning":
+                buffs.add(new Burning(p,i,effectLevel,effectDuration,turret));
+                break;
+            case "poisoned":
+                buffs.add(new Poisoned(p,i,turret));
+                break;
+            case "decay":
+                if (turret != null) buffs.add(new Decay(p, i, effectLevel, effectDuration,turret));
+                else buffs.add(new Decay(p, i, 1, 120, null));
+                break;
         }
         barTrans = 255;
         tintColor = 0;
-        int num = (int) (p.random(1, 3));
-        for (int j = num; j >= 0; j--) { //sprays ouch
-            particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+        if (splash) {
+            int num = (int) (p.random(1, 3));
+            for (int j = num; j >= 0; j--) { //sprays ouch
+                particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+            }
+        }
+    }
+
+    public void effectDamage(int damage, Turret turret) {
+        hp -= damage;
+        if (turret != null) {
+            if (hp <= 0) {
+                turret.killsTotal++;
+                turret.damageTotal += damage + hp;
+            } else turret.damageTotal += damage;
         }
     }
 

@@ -2,7 +2,7 @@ package main.projectiles;
 
 import main.enemies.Enemy;
 import main.particles.Ouch;
-import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -15,8 +15,8 @@ public class MagicMissile extends Projectile {
     private Enemy targetEnemy;
     private PVector spawnPos;
     
-    public MagicMissile(PApplet p, float x, float y, float angle, Tower tower, int damage, int priority, PVector spawnPos) {
-        super(p, x, y, angle, tower);
+    public MagicMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, int priority, PVector spawnPos) {
+        super(p, x, y, angle, turret);
         this.spawnPos = spawnPos;
         position = new PVector(x, y);
         size = new PVector(6, 20);

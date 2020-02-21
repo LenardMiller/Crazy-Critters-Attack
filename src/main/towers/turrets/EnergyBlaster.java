@@ -1,6 +1,5 @@
 package main.towers.turrets;
 
-import main.particles.Debris;
 import main.projectiles.EnergyBlast;
 import main.towers.Tile;
 import processing.core.PApplet;
@@ -49,21 +48,17 @@ public class EnergyBlaster extends Turret{
     }
 
     public void fire() { //needed to change projectile fired
-        angle += radians(p.random(-error,error));
+        float angleB = angle;
+        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angle-HALF_PI);
+        PVector spa = PVector.fromAngle(angleB-HALF_PI);
         spa.setMag(40);
         spp.add(spa);
-        projectiles.add(new EnergyBlast(p,spp.x,spp.y, angle, this, damage, effectRadius, bigExplosion));
+        projectiles.add(new EnergyBlast(p,spp.x,spp.y, angleB, this, damage, effectRadius, bigExplosion));
     }
 
     private void setUpgrades(){
-        //special
-        upgradeSpecial[0] = false;
-        upgradeSpecial[1] = true;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
         //damage
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;
@@ -131,37 +126,10 @@ public class EnergyBlaster extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgrade(int id) {
-        int nextLevel;
-        if (id == 0) nextLevel = nextLevelA;
-        else nextLevel = nextLevelB;
-        damage += upgradeDamage[nextLevel];
-        delay += upgradeDelay[nextLevel];
-        price += upgradePrices[nextLevel];
-        value += upgradePrices[nextLevel];
-        maxHp += upgradeHealth[nextLevel];
-        hp += upgradeHealth[nextLevel];
-        error += upgradeError[nextLevel];
-        name = upgradeNames[nextLevel];
-        debrisType = upgradeDebris[nextLevel];
-        sprite = upgradeSprites[nextLevel];
-        if (upgradeSpecial[nextLevel]) {
+    public void upgradeSpecial() {
+        if (nextLevelA == 1) {
             effectRadius += 20;
             bigExplosion = true;
-        }
-        if (id == 0) nextLevelA++;
-        else if (id == 1) nextLevelB++;
-        if (id == 0) {
-            if (nextLevelA < upgradeNames.length/2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
-            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-        }
-        if (id == 1) {
-            if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
-            else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-        }
-        int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--) {
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
 

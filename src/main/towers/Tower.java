@@ -39,7 +39,6 @@ public abstract class Tower {
     public int nextLevelA;
     public int nextLevelB;
 
-    protected boolean[] upgradeSpecial;
     public int[] upgradePrices;
     public int[] upgradeHealth;
     protected int[] upgradeDamage;
@@ -72,7 +71,6 @@ public abstract class Tower {
         turret = false;
         visualize = false;
         nextLevelB = 2;
-        upgradeSpecial = new boolean[4];
         upgradeDamage = new int[4];
         upgradeDelay = new int[4];
         upgradePrices = new int[4];

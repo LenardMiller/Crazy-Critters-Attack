@@ -220,7 +220,7 @@ public class Main extends PApplet {
         if (enemies.size() == 0) buffs = new ArrayList<>();
         //projectiles
         for (Projectile projectile : projectiles) projectile.displayPassA();
-        for (int i = projectiles.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < projectiles.size(); i++) {
             Projectile projectile = projectiles.get(i);
             projectile.main(projectiles, i);
         }
@@ -230,8 +230,16 @@ public class Main extends PApplet {
             arc.main();
             if (arc.alpha <= 0) arcs.remove(i);
         }
+        //particle culling
+        int p = particles.size();
+        int p2 = p-800;
+        if (p > 800) for (int i = 0; i < p; i++) if (random(0,p2) < 5) {
+            if (i < particles.size()) particles.remove(i);
+            else break;
+        }
+        if (p > 1200) particles = new ArrayList<>();
         //particles
-        for (int i = particles.size() - 1; i >= 0; i--) {
+        for (int i = particles.size()-1; i >= 0; i--) {
             Particle particle = particles.get(i);
             particle.main(particles, i);
         }

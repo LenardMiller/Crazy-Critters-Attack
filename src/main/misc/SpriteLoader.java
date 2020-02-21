@@ -12,7 +12,7 @@ public class SpriteLoader {
     
     public static void loadSpritesAnim(PApplet p) {
         //icons & buttons
-        getSprite(p,"upgrade","IC","upgrades/",15);
+        getSprite(p,"upgrade","IC","upgrades/",16);
         getSprite(p,"wave","IC","waveIcons/",4);
         getSprite(p,"waveBg","IC","waveBackgrounds/",1);
         getSprite(p,"moneyAdd","BT","moneyAdd/",2);
@@ -25,9 +25,11 @@ public class SpriteLoader {
         //particles
         getSprite(p,"energyBuff","PT","buff/energy/",8);
         getSprite(p,"fireBuff","PT","buff/fire/",8);
+        getSprite(p,"smokeBuff","PT","buff/smoke/",8);
         getSprite(p,"poisonBuff","PT","buff/poison/",8);
         getSprite(p,"waterBuff","PT","buff/water/",8);
         getSprite(p,"nullBuff","PT","buff/null/",8);
+        getSprite(p,"decayBuff","PT","buff/decay/",8);
         getSprite(p,"greenOuchEnemy","PT","enemy/greenOuch/",11);
         getSprite(p,"greyPuffEnemy","PT","enemy/greyPuff/",11);
         getSprite(p,"greenPuffEnemy","PT","enemy/greenPuff/",10);
@@ -41,6 +43,7 @@ public class SpriteLoader {
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
+        getSprite(p,"flame","PJ","flame/",23);
         //enemies
         getSprite(p,"treeGiantAttack","EN","treeGiant/attack/",63);
         getSprite(p,"treeGiantMove","EN","treeGiant/move/",91);
@@ -75,6 +78,11 @@ public class SpriteLoader {
         getSprite(p,"magicMissleerFire","TR","magicMissleer/fire/",8);
         getSprite(p,"magicMissleerLoad","TR","magicMissleer/load/",26);
         getSprite(p,"magicMissleerIdle","TR","magicMissleer/idle/",8);
+        getSprite(p,"nightmareFire","TR","nightmare/fire/",14);
+        getSprite(p,"nightmareLoad","TR","nightmare/load/",22);
+        getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",3);
+        getSprite(p,"flamethrowerLoad","TR","flamethrower/load/",1);
+        getSprite(p,"flamethrowerIdle","TR","flamethrower/idle/",4);
         //walls
         getSprite(p,"woodWall","TW","wood/",4);
         getSprite(p,"stoneWall","TW","stone/",4);
@@ -145,6 +153,7 @@ public class SpriteLoader {
         spritesH.put("magicMisslePj",p.loadImage("sprites/projectiles/magicMissle.png"));
         spritesH.put("nullPj",p.loadImage("sprites/projectiles/null.png"));
         spritesH.put("pebblePj",p.loadImage("sprites/projectiles/pebble.png"));
+        spritesH.put("needlePj",p.loadImage("sprites/projectiles/needle.png"));
         //turrets
         spritesH.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
         spritesH.put("crossbowFullTR",p.loadImage("sprites/towers/turrets/crossbow/full.png"));
@@ -164,6 +173,12 @@ public class SpriteLoader {
         spritesH.put("teslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/base.png"));
         spritesH.put("teslaFullTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
         spritesH.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));
+        spritesH.put("nightmareBaseTR",p.loadImage("sprites/towers/turrets/nightmare/base.png"));
+        spritesH.put("nightmareFullTR",p.loadImage("sprites/towers/turrets/nightmare/full.png"));
+        spritesH.put("nightmareIdleTR",p.loadImage("sprites/towers/turrets/nightmare/idle.png"));
+        spritesH.put("flamethrowerBaseTR",p.loadImage("sprites/towers/turrets/flamethrower/base.png"));
+        spritesH.put("flamethrowerFullTR",p.loadImage("sprites/towers/turrets/flamethrower/full.png"));
+        spritesH.put("flamethrowerIdleTR",p.loadImage("sprites/towers/turrets/flamethrower/idle.png"));
         //walls
         spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));

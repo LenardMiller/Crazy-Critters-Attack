@@ -22,13 +22,13 @@ public class Slingshot extends Turret{
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
-        error = 5; //set to 360 for a fun time. default: 5 degrees
+        error = 5; //5
         numFireFrames = 34;
         numLoadFrames = 59;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
-        damage = 10; //10
+        damage = 15; //15
         loadSprites();
         debrisType = "stone";
         price = 50;
@@ -41,17 +41,13 @@ public class Slingshot extends Turret{
     }
 
     public void fire(){ //needed to change projectile fired
-        angle += radians(p.random(-error,error));
+        float angleB = angle;
+        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angleB, this, damage));
     }
 
     private void setUpgrades(){
-        //special
-        upgradeSpecial[0] = false;
-        upgradeSpecial[1] = false;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
         //damage
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;

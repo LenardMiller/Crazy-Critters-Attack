@@ -19,7 +19,7 @@ public class Selection { //what tower is selected
     }
 
     public void main() {
-        clickoff();
+        clickOff();
         //don't display if nothing held
         if (!name.equals("null") && tiles.get(id).tower != null) display();
     }
@@ -72,7 +72,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    private void clickoff() { //desselect, hide stuff
+    private void clickOff() { //desselect, hide stuff
         Tower tower = tiles.get(id).tower;
         if (tower != null) {
             if (inputHandler.leftMousePressedPulse && p.mouseX < 900 && (p.mouseX > tower.tile.position.x || p.mouseX < tower.tile.position.x - tower.size.x || p.mouseY > tower.tile.position.y || p.mouseY < tower.tile.position.y - tower.size.y) && alive) {
@@ -160,6 +160,24 @@ public class Selection { //what tower is selected
                 p.textAlign(LEFT);
                 p.fill(100,0,200);
                 p.text("Chain Lightning", 910, 376 + offset);
+                break;
+            case "nightmare":
+                p.text("Nightmare", 1000, 241);
+                p.text("Blaster", 1000, 266);
+                offset = 25;
+                speed = 18;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100,0,200);
+                p.text("Shotgun, decay", 910, 376 + offset);
+                break;
+            case "flamethrower":
+                p.text("Flamethrower", 1000, 241);
+                speed = 5;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100,0,200);
+                p.text("Fire, limited range", 910, 376 + offset);
         }
 
         //stats

@@ -35,6 +35,8 @@ public abstract class Turret extends Tower {
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
     Enemy targetEnemy;
+    public int effectLevel;
+    public int effectDuration;
 
     Turret(PApplet p, Tile tile) {
         super(p, tile);
@@ -42,7 +44,7 @@ public abstract class Turret extends Tower {
         offset = 0;
         name = null;
         size = new PVector(50, 50);
-        maxHp = 20;
+        maxHp = 20; //todo: heal
         hp = maxHp;
         hit = false;
         delay = 240;
@@ -58,13 +60,14 @@ public abstract class Turret extends Tower {
         idleFrames = new PImage[numIdleFrames];
         spriteArray = new ArrayList<>();
         spriteType = 0;
+        effectLevel = 0;
+        effectDuration = 0;
         frame = 0;
         loadDelay = 0;
         betweenIdleFrames = 0;
         loadDelayTime = 0;
         turret = true;
         loadSprites();
-        upgradeSpecial = new boolean[4];
         upgradeDamage = new int[4];
         upgradeDelay = new int[4];
         upgradePrices = new int[4];
@@ -105,34 +108,40 @@ public abstract class Turret extends Tower {
                 float x = abs(tile.position.x - enemy.position.x);
                 float y = abs(tile.position.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
-                if (priority == 0 && t < dist) { //close
-                    e = enemy;
-                    dist = t;
-                }
-                if (priority == 1 && t > dist) { //far
-                    e = enemy;
-                    dist = t;
-                }
-                if (priority == 2) if (enemy.maxHp > maxHp) { //strong
-                    e = enemy;
-                    maxHp = enemy.maxHp;
-                } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
-                    e = enemy;
-                    dist = t;
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900) {
+                    if (priority == 0 && t < dist) { //close
+                        e = enemy;
+                        dist = t;
+                    }
+                    if (priority == 1 && t > dist) { //far
+                        e = enemy;
+                        dist = t;
+                    }
+                    if (priority == 2) if (enemy.maxHp > maxHp) { //strong
+                        e = enemy;
+                        maxHp = enemy.maxHp;
+                    } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                        e = enemy;
+                        dist = t;
+                    }
                 }
             }
         }
         targetEnemy = e;
     }
 
-    private void aim(Enemy enemy) { //todo: fix
+    void aim(Enemy enemy) {
         PVector position = tile.position;
         PVector e = PVector.div(enemy.size, 2);
         PVector target = enemy.position;
         target = PVector.add(target, e);
         PVector d = PVector.sub(target, position); //finds distance to enemy
         PVector t = PVector.div(d, pjSpeed); //finds time to hit
-        target = new PVector(target.x, target.y + (t.mag() * enemy.speed)); //leads shots
+
+        PVector enemyHeading = PVector.fromAngle(enemy.angle);
+        enemyHeading.setMag(enemy.speed*t.mag());
+
+        target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y); //leads shots todo: fix again
         PVector ratio = PVector.sub(target, position);
 //        angle = findAngleBetween(position,target);
         if (position.x == target.x) { //if on the same x
@@ -148,11 +157,11 @@ public abstract class Turret extends Tower {
                 angle = HALF_PI;
             }
         } else {
-            if (position.x < target.x && position.y > target.y) { //if to left and below NOT WORKING
+            if (position.x < target.x && position.y > target.y) { //if to left and below
                 angle = (atan(abs(ratio.x + 15) / abs(ratio.y)));
             } else if (position.x < target.x && position.y < target.y) { //if to left and above
                 angle = (atan(abs(ratio.y) / abs(ratio.x))) + HALF_PI;
-            } else if (position.x > target.x && position.y < target.y) { //if to right and above NOT WORKING
+            } else if (position.x > target.x && position.y < target.y) { //if to right and above
                 angle = (atan(abs(ratio.x + 15) / abs(ratio.y))) + PI;
             } else if (position.x > target.x && position.y > target.y) { //if to right and below
                 angle = (atan(abs(ratio.y) / abs(ratio.x))) + 3 * HALF_PI;
@@ -194,8 +203,7 @@ public abstract class Turret extends Tower {
 
     public void displayPassB() {
         if (tintColor < 255) tintColor += 20;
-        //idle
-        if (spriteType == 0) {
+        if (spriteType == 0) { //idle
             sprite = sIdle;
             if (numIdleFrames > 1) {
                 if (frame < numIdleFrames) {
@@ -215,17 +223,22 @@ public abstract class Turret extends Tower {
                 sprite = fireFrames[frame];
             } else { //if done, switch to load
                 if (numLoadFrames > 0) {
-                    ArrayList<Integer> oldArray = new ArrayList<>();
                     int oldSize = numLoadFrames;
                     int newSize = (delayTime - p.frameCount);
+//                    System.out.println(oldSize + " -> " + newSize); //print
                     spriteArray = new ArrayList<>();
-                    for (int i = 0; i < oldSize; i++) oldArray.add(i);
-                    for (int i = 0; i < oldSize; i++) spriteArray.add(i);
-                    int count = 0;
-                    while (spriteArray.size() != newSize) {
-                        count++;
-                        compress = new CompressArray(spriteArray.size(), newSize, count, oldArray, spriteArray);
+                    if (oldSize > newSize) for (int i = 0; i < oldSize; i++) spriteArray.add(i);
+                    if (oldSize > newSize) {
+                        while (spriteArray.size() != newSize) {
+                            compress = new CompressArray(oldSize, newSize, spriteArray);
+                            compress.main();
+                        }
+                    } else {
+                        compress = new CompressArray(oldSize-1,newSize,spriteArray);
                         compress.main();
+                        spriteArray = compress.compArray;
+//                        System.out.println(spriteArray.size()); //print
+//                        System.out.println(spriteArray); //print
                     }
                 }
                 frame = 0;
@@ -285,6 +298,7 @@ public abstract class Turret extends Tower {
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
         sprite = upgradeSprites[nextLevel];
+        upgradeSpecial();
         if (id == 0) {
             nextLevelA++;
             if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
@@ -299,4 +313,6 @@ public abstract class Turret extends Tower {
             particles.add(new Debris(p, (tile.position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (tile.position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
         }
     }
+
+    public void upgradeSpecial() {}
 }  

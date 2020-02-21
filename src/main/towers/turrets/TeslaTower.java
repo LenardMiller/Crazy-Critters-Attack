@@ -1,6 +1,5 @@
 package main.towers.turrets;
 
-import main.particles.Debris;
 import main.projectiles.Arc;
 import main.towers.Tile;
 import processing.core.PApplet;
@@ -29,7 +28,7 @@ public class TeslaTower extends Turret{
         arcDistance = 200;
         arcLength = 3;
         pjSpeed = -1;
-        error = 0; //0 degrees
+        error = 5; //5 degrees
         numFireFrames = 6;
         numLoadFrames = 5;
         numIdleFrames = 18;
@@ -82,11 +81,6 @@ public class TeslaTower extends Turret{
     }
 
     private void setUpgrades(){
-        //special
-        upgradeSpecial[0] = true;
-        upgradeSpecial[1] = true;
-        upgradeSpecial[2] = false;
-        upgradeSpecial[3] = false;
         //damage
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;
@@ -154,40 +148,10 @@ public class TeslaTower extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgrade(int id) {
-        int nextLevel;
-        if (id == 0) nextLevel = nextLevelA;
-        else nextLevel = nextLevelB;
-        damage += upgradeDamage[nextLevel];
-        delay += upgradeDelay[nextLevel];
-        price += upgradePrices[nextLevel];
-        value += upgradePrices[nextLevel];
-        maxHp += upgradeHealth[nextLevel];
-        hp += upgradeHealth[nextLevel];
-        error += upgradeError[nextLevel];
-        name = upgradeNames[nextLevel];
-        debrisType = upgradeDebris[nextLevel];
-        sprite = upgradeSprites[nextLevel];
-        if (upgradeSpecial[nextLevel]) {
+    public void upgradeSpecial() {
+        if (nextLevelA == 0 || nextLevelA == 1) {
             arcDistance += 100;
             arcLength++;
-        }
-        if (id == 0) {
-            nextLevelA++;
-            if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
-            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-        } else if (id == 1) {
-            nextLevelB++;
-            if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
-            else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-        }
-        //reset names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        int num = floor(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
 

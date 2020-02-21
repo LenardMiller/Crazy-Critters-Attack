@@ -1,7 +1,7 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
-import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -10,13 +10,12 @@ import java.util.ArrayList;
 import static main.Main.debug;
 import static main.Main.enemies;
 import static processing.core.PApplet.*;
-import static processing.core.PApplet.sq;
 
 public class Arc {
 
     private PApplet p;
     private PVector startPos;
-    private Tower tower;
+    private Turret turret;
     private int damage;
     private int maxLength;
     private int maxDistance;
@@ -26,10 +25,10 @@ public class Arc {
     private static int variation;
     private static int maxPoints;
 
-    public Arc(PApplet p, float startX, float startY, Tower tower, int damage, int maxLength, int maxDistance, int priority) {
+    public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance, int priority) {
         this.p = p;
         startPos = new PVector(startX,startY);
-        this.tower = tower;
+        this.turret = turret;
         this.damage = damage;
         this.maxLength = maxLength;
         this.maxDistance = maxDistance;
@@ -67,7 +66,7 @@ public class Arc {
         if (enemy != null) {
             int enId = 0;
             for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemy) enId = j;
-            enemy.collidePJ(damage, "null", tower, enId);
+            enemy.collidePJ(damage, "null", 0, 0, turret, true, enId);
             hitEnemies.add(enemy);
             bigPoints.add(new BigPoint(p, enemy.position));
             int x = 2;
@@ -77,7 +76,7 @@ public class Arc {
                     bigPoints.add(new BigPoint(p, enemyJ.position));
                     enId = 0;
                     for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemyJ) enId = j;
-                    enemyJ.collidePJ(damage, "null", tower, enId);
+                    enemyJ.collidePJ(damage, "null", 0, 0, turret, true, enId);
                     hitEnemies.add(enemyJ);
                     x++;
                 }

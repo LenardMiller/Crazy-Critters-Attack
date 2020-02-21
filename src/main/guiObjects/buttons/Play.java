@@ -24,7 +24,7 @@ public class Play extends Button {
     }
 
     public void main() {
-        if (active && selection.name.equals("null") && !hand.held.equals("wall")) {
+        if (active && selection.name.equals("null") && hand.held.equals("null")) {
             if (!playingLevel) hover();
             else sprite = spriteGrey;
         } else timer = p.frameCount + 10;
