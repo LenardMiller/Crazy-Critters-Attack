@@ -37,6 +37,7 @@ public class TowerBuy extends Button {
                 price = 150;
                 break;
             case "nightmare":
+            case "flamethrower":
                 price = 200;
                 break;
         }
@@ -96,6 +97,11 @@ public class TowerBuy extends Button {
                     p.text("Blaster", x, 266);
                     p.textFont(mediumFont);
                     p.text("$200", x, 296);
+                    break;
+                case "flamethrower":
+                    p.text("Flamethrower", x, 241);
+                    p.textFont(mediumFont);
+                    p.text("$200", x, 271);
                     break;
             }
             //if pressed

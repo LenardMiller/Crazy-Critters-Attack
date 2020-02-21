@@ -142,7 +142,7 @@ public abstract class Turret extends Tower {
         PVector enemyHeading = PVector.fromAngle(enemy.angle);
         enemyHeading.setMag(enemy.speed*t.mag());
 
-        target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y); //leads shots
+        target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y); //leads shots todo: fix again
         PVector ratio = PVector.sub(target, position);
 //        angle = findAngleBetween(position,target);
         if (position.x == target.x) { //if on the same x
@@ -204,8 +204,7 @@ public abstract class Turret extends Tower {
 
     public void displayPassB() {
         if (tintColor < 255) tintColor += 20;
-        //idle
-        if (spriteType == 0) {
+        if (spriteType == 0) { //idle
             sprite = sIdle;
             if (numIdleFrames > 1) {
                 if (frame < numIdleFrames) {

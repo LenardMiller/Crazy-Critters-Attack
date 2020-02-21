@@ -6,7 +6,7 @@ import processing.core.PVector;
 public class SmolBug extends Enemy{
     public SmolBug(PApplet p, float x, float y){
         super(p,x,y);
-        size = new PVector(12,12);
+        size = new PVector(12,12); //todo: make bigger?
         pfSize = 1;
         radius = 6;
         maxSpeed = .4f;

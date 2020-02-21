@@ -19,7 +19,7 @@ public class Selection { //what tower is selected
     }
 
     public void main() {
-        clickoff();
+        clickOff();
         //don't display if nothing held
         if (!name.equals("null") && tiles.get(id).tower != null) display();
     }
@@ -72,7 +72,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    private void clickoff() { //desselect, hide stuff
+    private void clickOff() { //desselect, hide stuff
         Tower tower = tiles.get(id).tower;
         if (tower != null) {
             if (inputHandler.leftMousePressedPulse && p.mouseX < 900 && (p.mouseX > tower.tile.position.x || p.mouseX < tower.tile.position.x - tower.size.x || p.mouseY > tower.tile.position.y || p.mouseY < tower.tile.position.y - tower.size.y) && alive) {

@@ -142,5 +142,5 @@ public class Nightmare extends Turret {
         }
     }
 
-    public void updateSprite() {};
+    public void updateSprite() {}
 }
