@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.projectiles.Flame;
-import main.tiles.Tile;
+import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;

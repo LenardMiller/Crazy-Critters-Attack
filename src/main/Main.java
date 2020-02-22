@@ -4,6 +4,7 @@ import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.gui.Hand;
 import main.gui.InGameGui;
+import main.gui.LevelBuilderGui;
 import main.gui.Selection;
 import main.guiObjects.GuiObject;
 import main.guiObjects.buttons.Button;
@@ -19,7 +20,7 @@ import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
 import main.projectiles.Arc;
 import main.projectiles.Projectile;
-import main.tiles.Tile;
+import main.misc.Tile;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -48,9 +49,8 @@ public class Main extends PApplet {
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<Buff> buffs;
 
-    public static Level forest;
+    public static Level forest; //todo: make array
 
-    public static InGameGui inGameGui;
     public static CompressArray compress;
 
     public static Button addMoneyButton;
@@ -67,6 +67,8 @@ public class Main extends PApplet {
 
     public static Hand hand;
     public static Selection selection;
+    public static InGameGui inGameGui;
+    public static LevelBuilderGui levelBuilderGui;
 
     public static PFont veryLargeFont;
     public static PFont largeFont;
@@ -78,6 +80,7 @@ public class Main extends PApplet {
     public static boolean alive = true;
     public static boolean debug = false;
     public static boolean playingLevel = false;
+    public static boolean levelBuilder = false;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
@@ -114,8 +117,8 @@ public class Main extends PApplet {
         smallFont = createFont("STHeitiSC-Light", 12);
         //creates object data structures
         tiles = new Tile.TileDS();
-        for (int y = 0; y <= BOARD_HEIGHT / 50; y++) {
-            for (int x = 0; x <= BOARD_WIDTH / 50; x++) {
+        for (int y = 0; y <= (BOARD_HEIGHT / 50) - 1; y++) {
+            for (int x = 0; x <= (BOARD_WIDTH / 50) - 1; x++) {
                 tiles.add(new Tile(this, new PVector(x * 50, y * 50), tiles.size()), x, y);
             }
         }
@@ -137,6 +140,7 @@ public class Main extends PApplet {
         hand = new Hand(this);
         selection = new Selection(this);
         inGameGui = new InGameGui(this);
+        levelBuilderGui = new LevelBuilderGui(this);
         //pathfinding stuff
         nSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
@@ -156,10 +160,10 @@ public class Main extends PApplet {
         updateTowerArray();
         updateNodes();
         //tile stuff TEMP
-        for (int i = 0; i < tiles.size(); i++) tiles.get(i).set("grass");
+        for (int i = 0; i < tiles.size(); i++) tiles.get(i).setBgA("grass");
         for (int x = 5; x < 13; x++) {
             for (int y = 5; y < 13; y++) {
-                tiles.get(x,y).set("dirt");
+                tiles.get(x,y).setBgA("dirt");
             }
         }
     }
@@ -182,11 +186,12 @@ public class Main extends PApplet {
         drawObjects();
         //gui stuff
         noStroke();
-        inGameGui.display();
-        hand.displayHeldInfo(); //so text appears on top
+        if (!levelBuilder) inGameGui.display();
+        else levelBuilderGui.display();
+        hand.displayHeldInfo();
         //text
         textAlign(LEFT);
-        inGameGui.drawText(this, 10);
+        if (!levelBuilder) inGameGui.drawText(this, 10);
         //levels
         if (playingLevel) forest.main();
         //reset mouse pulses

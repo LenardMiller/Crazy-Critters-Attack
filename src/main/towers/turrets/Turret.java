@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.particles.Debris;
-import main.tiles.Tile;
+import main.misc.Tile;
 import main.towers.Tower;
 import main.misc.CompressArray;
 import processing.core.PApplet;

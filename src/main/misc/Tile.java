@@ -1,4 +1,4 @@
-package main.tiles;
+package main.misc;
 
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -15,7 +15,8 @@ public class Tile {
     public PVector position;
     public int id;
     public Tower tower;
-    public PImage bg;
+    public PImage bgA;
+    public PImage bgB;
     public PImage[] bgEdges;
     private String name;
 
@@ -32,7 +33,7 @@ public class Tile {
     }
 
     public void displayBg() {
-        if (bg != null) p.image(bg,position.x,position.y);
+        if (bgA != null) p.image(bgA,position.x,position.y);
         int x = (int)(position.x / 50);
         int y = (int)(position.y / 50);
         if (y != 0) {
@@ -43,23 +44,23 @@ public class Tile {
             Tile tile = tiles.get(x-1, y);
             if (!name.equals(tile.name) && tile.bgEdges[3] != null) p.image(tile.bgEdges[3],position.x,position.y);
         }
-        if (y != 18) {
+        if (y != 17) {
             Tile tile = tiles.get(x, y+1);
             if (!name.equals(tile.name) && tile.bgEdges[2] != null) p.image(tile.bgEdges[2],position.x,position.y);
         }
-        if (x != 18) {
+        if (x != 17) {
             Tile tile = tiles.get(x+1, y);
             if (!name.equals(tile.name) && tile.bgEdges[1] != null) p.image(tile.bgEdges[1],position.x,position.y);
         }
     }
 
-    public void set(String s) {
+    public void setBgA(String s) {
         name = s;
-        bg = spritesH.get(s+"BgTL");
-        bgEdges[0] = spritesH.get(s+"BgTTL");
-        bgEdges[1] = spritesH.get(s+"BgRTL");
-        bgEdges[2] = spritesH.get(s+"BgBTL");
-        bgEdges[3] = spritesH.get(s+"BgLTL");
+        bgA = spritesH.get(s+"BGA_TL");
+        bgEdges[0] = spritesH.get(s+"BGA_T_TL");
+        bgEdges[1] = spritesH.get(s+"BGA_R_TL");
+        bgEdges[2] = spritesH.get(s+"BGA_B_TL");
+        bgEdges[3] = spritesH.get(s+"BGA_L_TL");
     }
 
     public static class TileDS {

@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.projectiles.MagicMissile;
-import main.tiles.Tile;
+import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
