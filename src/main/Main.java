@@ -19,7 +19,7 @@ import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
 import main.projectiles.Arc;
 import main.projectiles.Projectile;
-import main.towers.Tile;
+import main.tiles.Tile;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -155,10 +155,16 @@ public class Main extends PApplet {
         for (Node node : end) node.findGHF();
         updateTowerArray();
         updateNodes();
+        //tile stuff TEMP
+        for (int i = 0; i < tiles.size(); i++) tiles.get(i).set("grass");
+        for (int x = 5; x < 13; x++) {
+            for (int y = 5; y < 13; y++) {
+                tiles.get(x,y).set("dirt");
+            }
+        }
     }
 
     public void draw() { //this will need to be change when I todo: add more menu "scenes"
-        //bg todo: make background
         noStroke();
         fill(25, 25, 25);
         rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
@@ -195,6 +201,10 @@ public class Main extends PApplet {
     }
 
     private void drawObjects() {
+        //tiles
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayBg();
+        }
         //pathfinding debug
         if (debug) {
             for (Node[] nodes : nodeGrid) {

@@ -1,6 +1,7 @@
 package main.towers;
 
 import main.particles.Debris;
+import main.tiles.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;

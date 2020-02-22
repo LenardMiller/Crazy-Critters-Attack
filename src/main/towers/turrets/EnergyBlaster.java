@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.projectiles.EnergyBlast;
-import main.towers.Tile;
+import main.tiles.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;

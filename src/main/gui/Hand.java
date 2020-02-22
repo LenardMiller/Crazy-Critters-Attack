@@ -1,7 +1,7 @@
 package main.gui;
 
 import main.guiObjects.buttons.TowerBuy;
-import main.towers.Tile;
+import main.tiles.Tile;
 import main.towers.Tower;
 import main.towers.Wall;
 import main.towers.turrets.*;

@@ -2,7 +2,7 @@ package main.pathfinding;
 
 import main.Main;
 import main.enemies.Enemy;
-import main.towers.Tile;
+import main.tiles.Tile;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
