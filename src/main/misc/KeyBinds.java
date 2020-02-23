@@ -113,7 +113,6 @@ public class KeyBinds {
         if (switchMode) {
             levelBuilder = !levelBuilder;
             hand.setHeld("null");
-            if (levelBuilder) hand.setHeld("dirtBGA_TL");
         }
     }
 

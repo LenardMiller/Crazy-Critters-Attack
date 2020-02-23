@@ -9,6 +9,7 @@ import main.gui.Selection;
 import main.guiObjects.GuiObject;
 import main.guiObjects.buttons.Button;
 import main.guiObjects.buttons.Play;
+import main.guiObjects.buttons.TileSelect;
 import main.guiObjects.buttons.TowerBuy;
 import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
@@ -47,6 +48,7 @@ public class Main extends PApplet {
     public static ArrayList<main.particles.Particle> particles;
     public static ArrayList<main.projectiles.Arc> arcs;
     public static ArrayList<TowerBuy> towerBuyButtons;
+    public static ArrayList<TileSelect> tileSelectButtons;
     public static ArrayList<Buff> buffs;
 
     public static Level forest; //todo: make array
@@ -117,8 +119,8 @@ public class Main extends PApplet {
         smallFont = createFont("STHeitiSC-Light", 12);
         //creates object data structures
         tiles = new Tile.TileDS();
-        for (int y = 0; y <= (BOARD_HEIGHT / 50) - 1; y++) {
-            for (int x = 0; x <= (BOARD_WIDTH / 50) - 1; x++) {
+        for (int y = 0; y <= (BOARD_HEIGHT / 50); y++) {
+            for (int x = 0; x <= (BOARD_WIDTH / 50); x++) {
                 tiles.add(new Tile(this, new PVector(x * 50, y * 50), tiles.size()), x, y);
             }
         }
@@ -127,6 +129,7 @@ public class Main extends PApplet {
         particles = new ArrayList<>();
         arcs = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
+        tileSelectButtons = new ArrayList<>();
         buffs = new ArrayList<>();
         //generates levels todo: put in own method
         forest = new Level(this, ForestWaves.genForestWaves(this));
@@ -160,7 +163,12 @@ public class Main extends PApplet {
         updateTowerArray();
         updateNodes();
         //tile stuff TEMP
-        for (int i = 0; i < tiles.size(); i++) tiles.get(i).setBgA("grass");
+//        for (int i = 0; i < tiles.size(); i++) tiles.get(i).setBgA("grass");
+        for (int x = 0; x < 18; x++) {
+            for (int y = 0; y < 18; y++) {
+                tiles.get(x,y).setBgA("grass");
+            }
+        }
         for (int x = 5; x < 13; x++) {
             for (int y = 5; y < 13; y++) {
                 tiles.get(x,y).setBgA("dirt");
@@ -208,7 +216,7 @@ public class Main extends PApplet {
     private void drawObjects() {
         //tiles
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayBg();
+            tiles.get(i).display();
         }
         //pathfinding debug
         if (debug) {

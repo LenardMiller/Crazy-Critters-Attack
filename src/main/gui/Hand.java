@@ -35,6 +35,7 @@ public class Hand {
 
     public void main() {
         if (!levelBuilder) checkPlaceable();
+        else implacable = false;
         if (inputHandler.rightMousePressedPulse) remove();
         if ((inputHandler.leftMousePressedPulse || inputHandler.rightMousePressedPulse) && p.mouseX > BOARD_WIDTH) {
             held = "null";
@@ -298,6 +299,8 @@ public class Hand {
             tile = tiles.get((roundTo(p.mouseX, 50) / 50), (roundTo(p.mouseY, 50) / 50));
             changeHeld = false;
             if (held.contains("BGA")) tile.setBgA(held);
+            if (held.contains("BGB")) tile.setBgB(held);
+            if (held.contains("BGC")) tile.setBgC(held);
         }
         if (!held.equals("null")) money -= price;
         if (changeHeld) held = "null";

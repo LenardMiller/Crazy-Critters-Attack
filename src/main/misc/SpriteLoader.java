@@ -213,15 +213,19 @@ public class SpriteLoader {
             spritesH.put(name + "RWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
         }
         //tiles
-        spritesH.put("dirtBGA_TL",p.loadImage("sprites/tiles/dirt/base.png"));
-        spritesH.put("grassBGA_TL",p.loadImage("sprites/tiles/grass/base.png"));
+        //BGA
+        spritesH.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt/base.png"));
+        spritesH.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
         for (int i = 0; i < 1; i++) {
             String name = null;
             if (i == 0) name = "grass";
-            spritesH.put(name + "BGA_T_TL", p.loadImage("sprites/tiles/" + name + "/t.png"));
-            spritesH.put(name + "BGA_R_TL", p.loadImage("sprites/tiles/" + name + "/r.png"));
-            spritesH.put(name + "BGA_B_TL", p.loadImage("sprites/tiles/" + name + "/b.png"));
-            spritesH.put(name + "BGA_L_TL", p.loadImage("sprites/tiles/" + name + "/l.png"));
+            spritesH.put(name + "BGA_T_TL", p.loadImage("sprites/tiles/BGA/" + name + "/t.png"));
+            spritesH.put(name + "BGA_R_TL", p.loadImage("sprites/tiles/BGA/" + name + "/r.png"));
+            spritesH.put(name + "BGA_B_TL", p.loadImage("sprites/tiles/BGA/" + name + "/b.png"));
+            spritesH.put(name + "BGA_L_TL", p.loadImage("sprites/tiles/BGA/" + name + "/l.png"));
         }
+        //BGB
+        spritesH.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
+        spritesH.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
     }
 }

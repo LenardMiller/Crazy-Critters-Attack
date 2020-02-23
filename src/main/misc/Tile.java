@@ -17,50 +17,65 @@ public class Tile {
     public Tower tower;
     public PImage bgA;
     public PImage bgB;
-    public PImage[] bgEdges;
-    private String name;
+    public PImage bgC;
+    public PImage[] bgAEdges;
+    private String bgAname;
 
     public Tile(PApplet p, PVector position, int id) {
         this.p = p;
         
         this.position = position;
         this.id = id;
-        bgEdges = new PImage[4];
+        bgAEdges = new PImage[4];
     }
 
     public void main() {
         if (tower != null) tower.main();
     }
 
-    public void displayBg() {
+    public void display() {
+        if (tower != null) bgC = null; //todo: move to more efficient place?
         if (bgA != null) p.image(bgA,position.x,position.y);
+        if (bgB != null) p.image(bgB,position.x,position.y);
+        if (bgC != null) p.image(bgC,position.x,position.y);
         int x = (int)(position.x / 50);
         int y = (int)(position.y / 50);
         if (y != 0) {
             Tile tile = tiles.get(x, y-1);
-            if (!name.equals(tile.name) && tile.bgEdges[0] != null) p.image(tile.bgEdges[0],position.x,position.y);
+            if (bgAname != null && !bgAname.equals(tile.bgAname) && tile.bgAEdges[0] != null) p.image(tile.bgAEdges[0],position.x,position.y);
         }
         if (x != 0) {
             Tile tile = tiles.get(x-1, y);
-            if (!name.equals(tile.name) && tile.bgEdges[3] != null) p.image(tile.bgEdges[3],position.x,position.y);
+            if (bgAname != null && !bgAname.equals(tile.bgAname) && tile.bgAEdges[3] != null) p.image(tile.bgAEdges[3],position.x,position.y);
         }
-        if (y != 17) {
+        if (y != 18) {
             Tile tile = tiles.get(x, y+1);
-            if (!name.equals(tile.name) && tile.bgEdges[2] != null) p.image(tile.bgEdges[2],position.x,position.y);
+            if (bgAname != null && !bgAname.equals(tile.bgAname) && tile.bgAEdges[2] != null) p.image(tile.bgAEdges[2],position.x,position.y);
         }
-        if (x != 17) {
+        if (x != 18) {
             Tile tile = tiles.get(x+1, y);
-            if (!name.equals(tile.name) && tile.bgEdges[1] != null) p.image(tile.bgEdges[1],position.x,position.y);
+            if (bgAname != null && !bgAname.equals(tile.bgAname) && tile.bgAEdges[1] != null) p.image(tile.bgAEdges[1],position.x,position.y);
         }
     }
 
     public void setBgA(String s) {
-        name = s;
+        s = s.replace("BGA_TL","");
+        bgAname = s;
         bgA = spritesH.get(s+"BGA_TL");
-        bgEdges[0] = spritesH.get(s+"BGA_T_TL");
-        bgEdges[1] = spritesH.get(s+"BGA_R_TL");
-        bgEdges[2] = spritesH.get(s+"BGA_B_TL");
-        bgEdges[3] = spritesH.get(s+"BGA_L_TL");
+        bgAEdges[0] = spritesH.get(s+"BGA_T_TL");
+        bgAEdges[1] = spritesH.get(s+"BGA_R_TL");
+        bgAEdges[2] = spritesH.get(s+"BGA_B_TL");
+        bgAEdges[3] = spritesH.get(s+"BGA_L_TL");
+    }
+
+    public void setBgB(String s) {
+        if (spritesH.get(s) != bgB) bgB = spritesH.get(s);
+        else bgB = null;
+    }
+
+    public void setBgC(String s) {
+        if (spritesH.get(s) != bgC) bgC = spritesH.get(s);
+        else bgC = null;
     }
 
     public static class TileDS {
