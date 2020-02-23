@@ -34,7 +34,6 @@ public class Tile {
     }
 
     public void display() {
-        if (tower != null) bgC = null; //todo: move to more efficient place?
         if (bgA != null) p.image(bgA,position.x,position.y);
         if (bgB != null) p.image(bgB,position.x,position.y);
         if (bgC != null) p.image(bgC,position.x,position.y);

@@ -225,6 +225,9 @@ public class SpriteLoader {
             spritesH.put(name + "BGA_L_TL", p.loadImage("sprites/tiles/BGA/" + name + "/l.png"));
         }
         //BGB
+        spritesH.put("dirtPatchBGB_TL",p.loadImage("sprites/tiles/BGB/dirtPatch.png"));
+        spritesH.put("grassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/grassPatch.png"));
+        //BGC
         spritesH.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
         spritesH.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
     }

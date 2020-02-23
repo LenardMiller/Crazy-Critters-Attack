@@ -42,8 +42,6 @@ public class Node {
     public void display() {
         p.stroke(255);
         p.noFill();
-        if (isOpen) p.fill(0, 255, 0);
-        if (isClosed) p.fill(255, 125, 0);
         if (isStart) p.fill(125, 125, 255);
         if (isEnd) p.fill(255, 0, 0);
         if (isNotTraversable) p.fill(255);

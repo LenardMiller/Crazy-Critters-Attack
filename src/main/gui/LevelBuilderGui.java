@@ -25,7 +25,9 @@ public class LevelBuilderGui {
     public void build() {
         tileSelectButtons.add(new TileSelect(p,925,25,"dirtBGA",true));
         tileSelectButtons.add(new TileSelect(p,975,25,"grassBGA",true));
-        tileSelectButtons.add(new TileSelect(p,1025,25,"rockBGC",true));
-        tileSelectButtons.add(new TileSelect(p,1075,25,"smallRockBGC",true));
+        tileSelectButtons.add(new TileSelect(p,1025,25,"dirtPatchBGB",true));
+        tileSelectButtons.add(new TileSelect(p,1075,25,"grassPatchBGB",true));
+        tileSelectButtons.add(new TileSelect(p,925,75,"rockBGC",true));
+        tileSelectButtons.add(new TileSelect(p,975,75,"smallRockBGC",true));
     }
 }

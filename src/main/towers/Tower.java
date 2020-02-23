@@ -57,6 +57,7 @@ public abstract class Tower {
     public Tower(PApplet p, Tile tile) {
         this.p = p;
         this.tile = tile;
+        tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1).setBgC(null);
 
         name = "null";
         size = new PVector(120, 37);

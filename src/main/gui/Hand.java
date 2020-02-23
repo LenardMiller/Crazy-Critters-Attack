@@ -46,7 +46,7 @@ public class Hand {
         if (inputHandler.leftMousePressedPulse && !implacable) place();
     }
 
-    private void checkPlaceable() {
+    private void checkPlaceable() { //todo: bug here?
         implacable = false;
         Tile tile = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1);
         if (tile == null) implacable = true;
