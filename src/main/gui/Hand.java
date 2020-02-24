@@ -261,7 +261,10 @@ public class Hand {
                 heldSprite = null;
                 break;
         }
-        if (heldSet.contains("TL")) heldSprite = spritesH.get(heldSet);
+        if (heldSet.contains("TL")) {
+            offset = new PVector(0,0);
+            heldSprite = spritesH.get(heldSet);
+        }
         held = heldSet;
     }
 

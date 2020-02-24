@@ -35,8 +35,6 @@ public class Tile {
 
     public void display() {
         if (bgA != null) p.image(bgA,position.x,position.y);
-        if (bgB != null) p.image(bgB,position.x,position.y);
-        if (bgC != null) p.image(bgC,position.x,position.y);
         int x = (int)(position.x / 50);
         int y = (int)(position.y / 50);
         if (y != 0) {
@@ -55,6 +53,8 @@ public class Tile {
             Tile tile = tiles.get(x+1, y);
             if (bgAname != null && !bgAname.equals(tile.bgAname) && tile.bgAEdges[1] != null) p.image(tile.bgAEdges[1],position.x,position.y);
         }
+        if (bgB != null) p.image(bgB,position.x,position.y);
+        if (bgC != null) p.image(bgC,position.x,position.y);
     }
 
     public void setBgA(String s) {

@@ -227,6 +227,10 @@ public class SpriteLoader {
         //BGB
         spritesH.put("dirtPatchBGB_TL",p.loadImage("sprites/tiles/BGB/dirtPatch.png"));
         spritesH.put("grassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/grassPatch.png"));
+        spritesH.put("woodWallBGB_TL",p.loadImage("sprites/tiles/BGB/woodWall.png"));
+        spritesH.put("stoneWallBGB_TL",p.loadImage("sprites/tiles/BGB/stoneWall.png"));
+        spritesH.put("metalWallBGB_TL",p.loadImage("sprites/tiles/BGB/metalWall.png"));
+        spritesH.put("crystalWallBGB_TL",p.loadImage("sprites/tiles/BGB/crystalWall.png"));
         //BGC
         spritesH.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
         spritesH.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
