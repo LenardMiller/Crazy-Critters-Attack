@@ -263,6 +263,7 @@ public class Hand {
         }
         if (heldSet.contains("TL")) {
             offset = new PVector(0,0);
+            price = 0;
             heldSprite = spritesH.get(heldSet);
         }
         held = heldSet;
@@ -295,7 +296,10 @@ public class Hand {
                     tile.tower.upgrade(0);
                 }
                 money += price; //cancel out price change later
-            } else tile.tower = new Wall(p, tile);
+            } else {
+                tile.tower = new Wall(p, tile);
+                updateWallTiles();
+            }
             changeHeld = false;
         }
         if (held.contains("TL")) {
@@ -303,7 +307,9 @@ public class Hand {
             changeHeld = false;
             if (held.contains("BGA")) tile.setBgA(held);
             if (held.contains("BGB")) tile.setBgB(held);
+            if (held.contains("BGW")) tile.setBgW(held);
             if (held.contains("BGC")) tile.setBgC(held);
+//            updateWallTiles();
         }
         if (!held.equals("null")) money -= price;
         if (changeHeld) held = "null";

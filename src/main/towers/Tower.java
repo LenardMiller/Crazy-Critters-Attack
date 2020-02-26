@@ -7,8 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateNodes;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.MiscMethods.*;
 
 public abstract class Tower {
 
@@ -115,8 +114,8 @@ public abstract class Tower {
 
     public void displayPassB() {}
 
-    public void damage(int dangerLevel) { //if it touches an enemy, animate and loose health
-        hp -= dangerLevel;
+    public void damage(int dmg) { //if it touches an enemy, animate and loose health
+        hp -= dmg;
         hit = true;
         barTrans = 255;
         int num = (int)(p.random(1,4));
@@ -151,6 +150,7 @@ public abstract class Tower {
         updateTowerArray();
         if (selection.id == tile.id) selection.name = "null";
         else if (!selection.name.equals("null")) selection.swapSelected(selection.tower.tile.id);
+        if (!turret) updateWallTiles();
         updateNodes();
     }
 

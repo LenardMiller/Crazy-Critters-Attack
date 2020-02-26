@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.updateNodes;
+import static main.misc.MiscMethods.updateWallTiles;
 
 public class KeyBinds {
 
@@ -79,7 +80,7 @@ public class KeyBinds {
         boolean killProjectiles = keysPressed.getReleasedPulse('f') && alive;
         //other stuff
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
-        boolean updatePaths = keysPressed.getPressedPulse(' ');
+        boolean update = keysPressed.getPressedPulse(' ');
         boolean loseMoney = keysPressed.getPressedPulse('-');
         boolean switchMode = keysPressed.getPressedPulse('b');
         //entity stuff
@@ -108,7 +109,10 @@ public class KeyBinds {
         if (killProjectiles) projectiles = new ArrayList<>();
         //other stuff
         if (displayPathLines) debug = !debug;
-        if (updatePaths) updateNodes();
+        if (update) {
+            updateNodes();
+            updateWallTiles();
+        }
         if (loseMoney) money = 0;
         if (switchMode) {
             levelBuilder = !levelBuilder;

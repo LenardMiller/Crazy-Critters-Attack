@@ -19,6 +19,7 @@ public class TileSelect extends Button {
         tileSprite = spritesH.get(type + "_TL");
         String sl = "";
         if (type.contains("BGA")) sl = "BGA";
+        if (type.contains("BGW")) sl = "BGW";
         if (type.contains("BGB")) sl = "BGB";
         if (type.contains("BGC")) sl = "BGC";
         spriteLocation = "sprites/guiObjects/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game

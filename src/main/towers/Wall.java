@@ -7,8 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateNodes;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.MiscMethods.*;
 
 public class Wall extends Tower {
 
@@ -43,6 +42,10 @@ public class Wall extends Tower {
         price = 25;
         value = price;
         nextLevelB = 0;
+
+        int x = (int)(tile.position.x / 50);
+        int y = (int)(tile.position.y / 50);
+        tiles.get(x-1,y-1).setBgW(name);
 
         upgradePrices = new int[4];
         upgradeHealth = new int[4];
@@ -241,6 +244,10 @@ public class Wall extends Tower {
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
+        int x = (int)(tile.position.x / 50);
+        int y = (int)(tile.position.y / 50);
+        tiles.get(x-1,y-1).setBgW(name);
+        updateWallTiles();
         updateNodes();
     }
 

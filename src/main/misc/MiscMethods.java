@@ -16,17 +16,18 @@ import static processing.core.PConstants.TWO_PI;
 
 public class MiscMethods {
 
-    public MiscMethods() {}
+    public MiscMethods() {
+    }
 
     public static void updateNodes() {
         for (Node[] nodes : nodeGrid) {
             for (Node node : nodes) {
-                node.setNotEnd((int)(node.position.x/nSize),(int)(node.position.y/nSize));
+                node.setNotEnd((int) (node.position.x / nSize), (int) (node.position.y / nSize));
                 node.checkObs();
             }
         }
         updateClearance();
-        updateNode(start,null);
+        updateNode(start, null);
         updatePath();
     }
 
@@ -41,10 +42,12 @@ public class MiscMethods {
         }
     }
 
-    public static float findAngleBetween(PVector p1, PVector p2){
+    public static float findAngleBetween(PVector p1, PVector p2) {
         //https://forum.processing.org/one/topic/pvector-anglebetween.html
-        float a = atan2(p1.y-p2.y, p1.x-p2.x);
-        if (a<0) { a+=TWO_PI; }
+        float a = atan2(p1.y - p2.y, p1.x - p2.x);
+        if (a < 0) {
+            a += TWO_PI;
+        }
         return a;
     }
 
@@ -54,11 +57,11 @@ public class MiscMethods {
         boolean xBA = testPoint.x >= pointB.x && testPoint.x < pointA.x;
         boolean yAB = testPoint.y >= pointA.y && testPoint.y < pointB.y;
         boolean yBA = testPoint.y >= pointB.y && testPoint.y < pointA.y;
-        return (xAB||xBA)&&(yAB||yBA);
+        return (xAB || xBA) && (yAB || yBA);
     }
 
     public static int roundTo(float input, int rounder) {
-        return ((int)(input/rounder)) * rounder;
+        return ((int) (input / rounder)) * rounder;
     }
 
     public static float maxCost() {
@@ -82,7 +85,7 @@ public class MiscMethods {
     }
 
     public static PVector randomSpawnPosition(PApplet p) {
-        float z = p.random(0,4);
+        float z = p.random(0, 4);
         float low = -90;
         float high = 990;
         boolean l = z >= 0 && z < 1;
@@ -95,8 +98,82 @@ public class MiscMethods {
         if (r) x = high;
         if (u) y = low;
         if (d) y = high;
-        if (l||r) y = p.random(low,high);
-        if (u||d) x = p.random(low,high);
-        return new PVector(x,y);
+        if (l || r) y = p.random(low, high);
+        if (u || d) x = p.random(low, high);
+        return new PVector(x, y);
+    }
+
+    public static void updateWallTiles() {
+        //remove
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile bgTile = tiles.get(i);
+            int x = (int) (bgTile.position.x / 50);
+            int y = (int) (bgTile.position.y / 50);
+            Tile towerTile = tiles.get(x + 1, y + 1);
+            if (towerTile != null) {
+                if (towerTile.tower == null || towerTile.tower.turret) {
+                    bgTile.setBgW(null);
+                }
+            }
+        }
+        int numChanges = 1;
+        while (numChanges > 0) {
+            //create special grid
+            String[][] nameGrid = new String[18][18];
+            for (int x = 0; x < 18; x++) {
+                for (int y = 0; y < 18; y++) {
+                    Tile tile = tiles.get(x, y);
+                    if (tile.bgW != null) nameGrid[x][y] = tile.bgWname;
+                }
+            }
+            //place
+            numChanges = 0;
+            for (int x = 0; x < 18; x++) {
+                for (int y = 0; y < 18; y++) {
+                    Tile tile = tiles.get(x, y);
+                    if (tile.bgW == null) {
+                        int[] n = new int[5];
+                        n[0] = countN(nameGrid, x, y, "woodWall");
+                        n[1] = countN(nameGrid, x, y, "stoneWall");
+                        n[2] = countN(nameGrid, x, y, "metalWall");
+                        n[3] = countN(nameGrid, x, y, "crystalWall");
+                        n[4] = countN(nameGrid, x, y, "titaniumWall");
+                        int sum = 0;
+                        for (int i : n) sum += i;
+                        if (sum >= 4) {
+                            int count = 0;
+                            int l = 0;
+                            for (int i = 0; i < 5; i++) {
+                                if (n[i] >= count) {
+                                    count = n[i];
+                                    l = i;
+                                }
+                            }
+                            String name = "";
+                            if (l == 0) name = "woodWall";
+                            if (l == 1) name = "stoneWall";
+                            if (l == 2) name = "metalWall";
+                            if (l == 3) name = "crystalWall";
+                            if (l == 4) name = "titaniumWall";
+                            tile.setBgW(name);
+                            numChanges++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static int countN(String[][] nameGrid, int x, int y, String name) {
+        int r = 0;
+        if (x > 0 && y > 0) if (name.equals(nameGrid[x - 1][y - 1])) r++;
+        if (y > 0) if (name.equals(nameGrid[x][y - 1])) r++;
+        if (x < 17 && y > 0) if (name.equals(nameGrid[x + 1][y - 1])) r++;
+        if (x > 0) if (name.equals(nameGrid[x - 1][y])) r++;
+        if (x < 17) if (name.equals(nameGrid[x + 1][y])) r++;
+        if (x > 0 && y < 17) if (name.equals(nameGrid[x - 1][y + 1])) r++;
+        if (y < 17) if (name.equals(nameGrid[x][y + 1])) r++;
+        if (x < 17 && y < 17) if (name.equals(nameGrid[x + 1][y + 1])) r++;
+        return r;
     }
 }

@@ -16,10 +16,14 @@ public class Tile {
     public int id;
     public Tower tower;
     public PImage bgA;
+    public PImage bgW;
     public PImage bgB;
     public PImage bgC;
     public PImage[] bgAEdges;
+    public PImage[] bgWEdges;
     private String bgAname;
+    public String bgWname;
+    private boolean doTileBgB;
 
     public Tile(PApplet p, PVector position, int id) {
         this.p = p;
@@ -27,6 +31,7 @@ public class Tile {
         this.position = position;
         this.id = id;
         bgAEdges = new PImage[4];
+        bgWEdges = new PImage[4];
     }
 
     public void main() {
@@ -35,6 +40,14 @@ public class Tile {
 
     public void display() {
         if (bgA != null) p.image(bgA,position.x,position.y);
+        tileBgA();
+        if (bgB != null) p.image(bgB,position.x,position.y);
+        if (bgW != null) p.image(bgW,position.x,position.y);
+        if (doTileBgB) tileBgW();
+        if (bgC != null) p.image(bgC,position.x,position.y);
+    }
+
+    private void tileBgA() {
         int x = (int)(position.x / 50);
         int y = (int)(position.y / 50);
         if (y != 0) {
@@ -53,8 +66,43 @@ public class Tile {
             Tile tile = tiles.get(x+1, y);
             if (bgAname != null && !bgAname.equals(tile.bgAname) && tile.bgAEdges[1] != null) p.image(tile.bgAEdges[1],position.x,position.y);
         }
-        if (bgB != null) p.image(bgB,position.x,position.y);
-        if (bgC != null) p.image(bgC,position.x,position.y);
+    }
+
+    private void tileBgW() {
+        int x = (int)(position.x / 50);
+        int y = (int)(position.y / 50);
+        if (y != 0) {
+            Tile tile = tiles.get(x, y-1);
+            if (isConnected(0,tile)) {
+                p.image(tile.bgWEdges[0], position.x, position.y);
+            }
+        }
+        if (x != 0) {
+            Tile tile = tiles.get(x-1, y);
+            if (isConnected(3,tile)) {
+                p.image(tile.bgWEdges[3],position.x,position.y);
+            }
+        }
+        if (y != 18) {
+            Tile tile = tiles.get(x, y+1);
+            if (isConnected(2,tile)) {
+                p.image(tile.bgWEdges[2],position.x,position.y);
+            }
+        }
+        if (x != 18) {
+            Tile tile = tiles.get(x+1, y);
+            if (isConnected(1,tile)) {
+                p.image(tile.bgWEdges[1],position.x,position.y);
+            }
+        }
+    }
+
+    private boolean isConnected(int i, Tile tile) {
+        if (bgWname != null && tile.bgWname != null) {
+            if (bgWname.equals("woodWall") || tile.bgWname.equals("woodWall")) {
+                return bgWname.equals(tile.bgWname) && tile.bgWEdges[i] != null;
+            } else return tile.bgWEdges[i] != null;
+        } else return false;
     }
 
     public void setBgA(String s) {
@@ -65,6 +113,32 @@ public class Tile {
         bgAEdges[1] = spritesH.get(s+"BGA_R_TL");
         bgAEdges[2] = spritesH.get(s+"BGA_B_TL");
         bgAEdges[3] = spritesH.get(s+"BGA_L_TL");
+    }
+
+    public void setBgW(String s) {
+        bgWEdges = new PImage[4];
+        if (s == null) {
+            bgW = null;
+            bgWname = null;
+        }
+        else {
+            s = s.replace("BGW_TL", "");
+            s = s.replace("ultimate","titanium");
+            bgWname = s;
+            if (spritesH.get(s + "BGW_TL") != bgW) {
+                bgW = spritesH.get(s + "BGW_TL");
+                if (s.contains("woodWall") || s.contains("stoneWall")) {
+                    doTileBgB = true;
+                    bgWEdges[0] = spritesH.get(s + "BGW_T_TL");
+                    bgWEdges[1] = spritesH.get(s + "BGW_R_TL");
+                    bgWEdges[2] = spritesH.get(s + "BGW_B_TL");
+                    bgWEdges[3] = spritesH.get(s + "BGW_L_TL");
+                } else doTileBgB = false;
+            } else {
+                bgW = null;
+                bgWname = null;
+            }
+        }
     }
 
     public void setBgB(String s) {
