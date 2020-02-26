@@ -104,59 +104,61 @@ public class MiscMethods {
     }
 
     public static void updateWallTiles() {
-        //remove
-        for (int i = 0; i < tiles.size(); i++) {
-            Tile bgTile = tiles.get(i);
-            int x = (int) (bgTile.position.x / 50);
-            int y = (int) (bgTile.position.y / 50);
-            Tile towerTile = tiles.get(x + 1, y + 1);
-            if (towerTile != null) {
-                if (towerTile.tower == null || towerTile.tower.turret) {
-                    bgTile.setBgW(null);
+        if (!debug) {
+            //remove
+            for (int i = 0; i < tiles.size(); i++) {
+                Tile bgTile = tiles.get(i);
+                int x = (int) (bgTile.position.x / 50);
+                int y = (int) (bgTile.position.y / 50);
+                Tile towerTile = tiles.get(x + 1, y + 1);
+                if (towerTile != null) {
+                    if (towerTile.tower == null || towerTile.tower.turret) {
+                        bgTile.setBgW(null);
+                    }
                 }
             }
-        }
-        int numChanges = 1;
-        while (numChanges > 0) {
-            //create special grid
-            String[][] nameGrid = new String[18][18];
-            for (int x = 0; x < 18; x++) {
-                for (int y = 0; y < 18; y++) {
-                    Tile tile = tiles.get(x, y);
-                    if (tile.bgW != null) nameGrid[x][y] = tile.bgWname;
+            boolean change = true;
+            while (change) {
+                //create special grid
+                String[][] nameGrid = new String[18][18];
+                for (int x = 0; x < 18; x++) {
+                    for (int y = 0; y < 18; y++) {
+                        Tile tile = tiles.get(x, y);
+                        if (tile.bgW != null) nameGrid[x][y] = tile.bgWname;
+                    }
                 }
-            }
-            //place
-            numChanges = 0;
-            for (int x = 0; x < 18; x++) {
-                for (int y = 0; y < 18; y++) {
-                    Tile tile = tiles.get(x, y);
-                    if (tile.bgW == null) {
-                        int[] n = new int[5];
-                        n[0] = countN(nameGrid, x, y, "woodWall");
-                        n[1] = countN(nameGrid, x, y, "stoneWall");
-                        n[2] = countN(nameGrid, x, y, "metalWall");
-                        n[3] = countN(nameGrid, x, y, "crystalWall");
-                        n[4] = countN(nameGrid, x, y, "titaniumWall");
-                        int sum = 0;
-                        for (int i : n) sum += i;
-                        if (sum >= 4) {
-                            int count = 0;
-                            int l = 0;
-                            for (int i = 0; i < 5; i++) {
-                                if (n[i] >= count) {
-                                    count = n[i];
-                                    l = i;
+                //place
+                change = false;
+                for (int x = 0; x < 18; x++) {
+                    for (int y = 0; y < 18; y++) {
+                        Tile tile = tiles.get(x, y);
+                        if (tile.bgW == null) {
+                            int[] n = new int[5];
+                            n[0] = countN(nameGrid, x, y, "woodWall");
+                            n[1] = countN(nameGrid, x, y, "stoneWall");
+                            n[2] = countN(nameGrid, x, y, "metalWall");
+                            n[3] = countN(nameGrid, x, y, "crystalWall");
+                            n[4] = countN(nameGrid, x, y, "titaniumWall");
+                            int sum = 0;
+                            for (int i : n) sum += i;
+                            if (sum >= 4) {
+                                int count = 0;
+                                int l = 0;
+                                for (int i = 0; i < 5; i++) {
+                                    if (n[i] >= count) {
+                                        count = n[i];
+                                        l = i;
+                                    }
                                 }
+                                String name = "";
+                                if (l == 0) name = "woodWall";
+                                if (l == 1) name = "stoneWall";
+                                if (l == 2) name = "metalWall";
+                                if (l == 3) name = "crystalWall";
+                                if (l == 4) name = "titaniumWall";
+                                tile.setBgW(name);
+                                change = true;
                             }
-                            String name = "";
-                            if (l == 0) name = "woodWall";
-                            if (l == 1) name = "stoneWall";
-                            if (l == 2) name = "metalWall";
-                            if (l == 3) name = "crystalWall";
-                            if (l == 4) name = "titaniumWall";
-                            tile.setBgW(name);
-                            numChanges++;
                         }
                     }
                 }
