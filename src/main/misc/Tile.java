@@ -6,6 +6,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.MiscMethods.updateWallTileConnections;
 
 public class Tile {
 
@@ -20,8 +21,12 @@ public class Tile {
     public PImage bgC;
     public PImage[] bgAEdges;
     public PImage[] bgWEdges;
+    private PImage[] bgWOCorners;
+    private String[] bgWOCornerNames;
+    private PImage[] bgWICorners;
     private String bgAname;
     public String bgWname;
+    private boolean drawMain;
 
     public Tile(PApplet p, PVector position, int id) {
         this.p = p;
@@ -30,6 +35,9 @@ public class Tile {
         this.id = id;
         bgAEdges = new PImage[4];
         bgWEdges = new PImage[4];
+        bgWOCorners = new PImage[4];
+        bgWOCornerNames = new String[4];
+        bgWICorners = new PImage[4];
     }
 
     public void main() {
@@ -40,12 +48,14 @@ public class Tile {
         if (bgA != null) p.image(bgA, position.x, position.y);
         tileBgA();
         if (bgB != null) p.image(bgB, position.x, position.y);
-        if (bgWEdges != null) tileBgWEdges();
+        if (bgWEdges != null) connectBgWEdges();
         if (bgWname != null) {
-            if (!bgWname.equals("woodWall") && !bgWname.equals("stoneWall")) tileBgWICorners();
-            else p.image(bgW, position.x, position.y);
+            if (bgWname.equals("woodWall") || bgWname.equals("stoneWall")) {
+                if (debug) p.tint(255,0,255);
+                p.image(bgW, position.x, position.y);
+                if (debug) p.tint(255);
+            }
         }
-        tileBgWOCorners();
         if (bgC != null) p.image(bgC, position.x, position.y);
     }
 
@@ -74,10 +84,10 @@ public class Tile {
         }
     }
 
-    private void tileBgWEdges() {
+    private void connectBgWEdges() {
+        if (debug) p.tint(0,255,0);
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
-        if (debug) p.tint(0,255,0);
         if (y != 0) {
             Tile tile = tiles.get(x, y - 1);
             if (isConnected(0, tile)) p.image(tile.bgWEdges[0], position.x, position.y);
@@ -94,40 +104,101 @@ public class Tile {
         if (debug) p.tint(255);
     }
 
-    private void tileBgWICorners() {
+    public void connectBgWICorners() {
+        bgWICorners = new PImage[4];
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
-        boolean drawMain = true;
-        if (debug) p.tint(255,0,0);
+        drawMain = true;
         if (x != 18 && y != 0) {
-            if (doubleDiagonalIn(x, y, 1, -1, bgWname)) {
-                p.image(spritesH.get(bgWname + "BGW_TRI_TL"), position.x, position.y);
+            if (doubleDiagonalIn(x, y, 1, -1, bgWname)) { //tri
+                bgWICorners[0] = spritesH.get(bgWname + "BGW_TRI_TL");
                 drawMain = false;
             }
         } if (x != 18 && y != 18) {
-            if (doubleDiagonalIn(x, y, 1, 1, bgWname)) {
-                p.image(spritesH.get(bgWname + "BGW_BRI_TL"), position.x, position.y);
+            if (doubleDiagonalIn(x, y, 1, 1, bgWname)) { //bri
+                bgWICorners[1] = spritesH.get(bgWname + "BGW_BRI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 18) {
-            if (doubleDiagonalIn(x, y, -1, 1, bgWname)) {
-                p.image(spritesH.get(bgWname + "BGW_BLI_TL"), position.x, position.y);
+            if (doubleDiagonalIn(x, y, -1, 1, bgWname)) { //bli
+                bgWICorners[2] = spritesH.get(bgWname + "BGW_BLI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 0) {
-            if (doubleDiagonalIn(x, y, -1, -1, bgWname)) {
-                p.image(spritesH.get(bgWname + "BGW_TLI_TL"), position.x, position.y);
+            if (doubleDiagonalIn(x, y, -1, -1, bgWname)) { //tli
+                bgWICorners[3] = spritesH.get(bgWname + "BGW_TLI_TL");
                 drawMain = false;
             }
         }
         String s = checkMissing(x,y,bgWname);
-        if (s != null) {
-            p.image(spritesH.get(bgWname + "BGW_" + s + "_TL"), position.x, position.y);
+        if (s != null) { //s
+            int i = 0;
+            if (s.equals("BRI")) i = 1;
+            if (s.equals("BLI")) i = 2;
+            if (s.equals("TLI")) i = 3;
+            bgWICorners[i] = spritesH.get(bgWname + "BGW_" + s + "_TL");
             drawMain = false;
         }
         if (countTouchingVN(x,y) > 2) drawMain = true;
+    }
+
+    public void drawBgWICorners() {
+        if (!bgWname.equals("woodWall") && !bgWname.equals("stoneWall")) {
+            if (drawMain) p.image(bgW, position.x, position.y);
+            for (int i = 0; i < 4; i++) {
+                if (bgWICorners[i] != null) {
+                    if (debug) p.tint(255,0,0);
+                    p.image(bgWICorners[i], position.x, position.y);
+                    if (debug) p.tint(255);
+                }
+            }
+        }
+    }
+
+    public void drawBgWOCorners(String name) {
+        for (int i = 0; i < 4; i++) {
+            if (bgWOCorners[i] != null) {
+                if (bgWOCornerNames[i].equals(name)) {
+                    if (debug) p.tint(0,0,255);
+                    p.image(bgWOCorners[i], position.x, position.y);
+                    if (debug) p.tint(255);
+                }
+            }
+        }
+    }
+
+    public void connectBgWOCorners() {
+        bgWOCorners = new PImage[4];
+        bgWOCornerNames = new String[4];
+        int x = (int) (position.x / 50);
+        int y = (int) (position.y / 50);
+        if (debug) p.tint(0,0,255);
+        if (x != 18 && y != 0) { //tro
+            String n = doubleDiagonalOut(x,y,1,-1);
+            if (n != null) {
+                bgWOCorners[0] = spritesH.get(n + "BGW_TRO_TL");
+                bgWOCornerNames[0] = n;
+            }
+        } if (x != 18 && y != 18) { //bro
+            String n = doubleDiagonalOut(x,y,1,1);
+            if (n != null) {
+                bgWOCorners[1] = spritesH.get(n + "BGW_BRO_TL");
+                bgWOCornerNames[1] = n;
+            }
+        } if (x != 0 && y != 18) { //blo
+            String n = doubleDiagonalOut(x,y,-1,1);
+            if (n != null) {
+                bgWOCorners[2] = spritesH.get(n + "BGW_BLO_TL");
+                bgWOCornerNames[2] = n;
+            }
+        } if (x != 0 && y != 0) { //tlo
+            String n = doubleDiagonalOut(x,y,-1,-1);
+            if (n != null) {
+                bgWOCorners[3] = spritesH.get(n + "BGW_TLO_TL");
+                bgWOCornerNames[3] = n;
+            }
+        }
         if (debug) p.tint(255);
-        if (drawMain) p.image(bgW, position.x, position.y);
     }
 
     private String checkMissing(int x, int y, String name) {
@@ -159,26 +230,6 @@ public class Tile {
         if (tileX.bgWname != null && tileX.bgWname.equals(name)) return true;
         if (tileY.bgWname != null && tileY.bgWname.equals(name)) return true;
         return tileM.bgWname != null && tileM.bgWname.equals(name);
-    }
-
-    private void tileBgWOCorners() {
-        int x = (int) (position.x / 50);
-        int y = (int) (position.y / 50);
-        if (debug) p.tint(0,0,255);
-        if (x != 18 && y != 0) {
-            String n = doubleDiagonalOut(x,y,1,-1);
-            if (n != null) p.image(spritesH.get(n + "BGW_TRO_TL"), position.x, position.y);
-        } if (x != 18 && y != 18) {
-            String n = doubleDiagonalOut(x,y,1,1);
-            if (n != null) p.image(spritesH.get(n + "BGW_BRO_TL"), position.x, position.y);
-        } if (x != 0 && y != 18) {
-            String n = doubleDiagonalOut(x,y,-1,1);
-            if (n != null) p.image(spritesH.get(n + "BGW_BLO_TL"), position.x, position.y);
-        } if (x != 0 && y != 0) {
-            String n = doubleDiagonalOut(x,y,-1,-1);
-            if (n != null) p.image(spritesH.get(n + "BGW_TLO_TL"), position.x, position.y);
-        }
-        if (debug) p.tint(255);
     }
 
     private int countTouchingVN(int x, int y) {
@@ -269,6 +320,7 @@ public class Tile {
                 bgWname = null;
             }
         }
+        updateWallTileConnections();
     }
 
     public void setBgB(String s) {

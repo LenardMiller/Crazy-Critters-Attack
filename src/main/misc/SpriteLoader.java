@@ -231,8 +231,8 @@ public class SpriteLoader {
         spritesH.put("woodWallBGW_TL",p.loadImage("sprites/tiles/BGW/woodWall/base.png"));
         spritesH.put("stoneWallBGW_TL",p.loadImage("sprites/tiles/BGW/stoneWall/base.png"));
         spritesH.put("metalWallBGW_TL",p.loadImage("sprites/tiles/BGW/metalWall/base.png"));
-        spritesH.put("crystalWallBGW_TL",p.loadImage("sprites/tiles/BGW/crystalWall.png"));
-        spritesH.put("titaniumWallBGW_TL",p.loadImage("sprites/tiles/BGW/titaniumWall.png"));
+        spritesH.put("crystalWallBGW_TL",p.loadImage("sprites/tiles/BGW/crystalWall/base.png"));
+        spritesH.put("titaniumWallBGW_TL",p.loadImage("sprites/tiles/BGW/titaniumWall/base.png"));
         for (int i = 0; i < 2; i++) { //simple connections
             String name = null;
             if (i == 0) name = "woodWall";
@@ -242,9 +242,11 @@ public class SpriteLoader {
             spritesH.put(name + "BGW_B_TL", p.loadImage("sprites/tiles/BGW/" + name + "/b.png"));
             spritesH.put(name + "BGW_L_TL", p.loadImage("sprites/tiles/BGW/" + name + "/l.png"));
         }
-        for (int i = 0; i < 1; i++) { //diagonal double connections
+        for (int i = 0; i < 3; i++) { //diagonal double connections
             String name = null;
             if (i == 0) name = "metalWall";
+            if (i == 1) name = "crystalWall";
+            if (i == 2) name = "titaniumWall";
             spritesH.put(name + "BGW_BLI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bli.png"));
             spritesH.put(name + "BGW_BLO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/blo.png"));
             spritesH.put(name + "BGW_BRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bri.png"));

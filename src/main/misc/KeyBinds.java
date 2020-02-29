@@ -10,8 +10,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateNodes;
-import static main.misc.MiscMethods.updateWallTiles;
+import static main.misc.MiscMethods.*;
 
 public class KeyBinds {
 
@@ -112,6 +111,7 @@ public class KeyBinds {
         if (update) {
             updateNodes();
             updateWallTiles();
+            updateWallTileConnections();
         }
         if (loseMoney) money = 0;
         if (switchMode) {

@@ -15,13 +15,13 @@ import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
 import main.misc.CompressArray;
 import main.misc.KeyBinds;
+import main.misc.Tile;
 import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
 import main.projectiles.Arc;
 import main.projectiles.Projectile;
-import main.misc.Tile;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -83,6 +83,7 @@ public class Main extends PApplet {
     public static boolean debug = false;
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
+    public static int connectWallY;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
@@ -144,6 +145,8 @@ public class Main extends PApplet {
         selection = new Selection(this);
         inGameGui = new InGameGui(this);
         levelBuilderGui = new LevelBuilderGui(this);
+        //other
+        connectWallY = 0;
         //pathfinding stuff
         nSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
@@ -163,7 +166,6 @@ public class Main extends PApplet {
         updateTowerArray();
         updateNodes();
         //tile stuff TEMP
-//        for (int i = 0; i < tiles.size(); i++) tiles.get(i).setBgA("grass");
         for (int x = 0; x < 18; x++) {
             for (int y = 0; y < 18; y++) {
                 tiles.get(x,y).setBgA("grass");
@@ -215,8 +217,36 @@ public class Main extends PApplet {
 
     private void drawObjects() {
         //tiles
+        if (connectWallY > 0) updateWallTileConnections();
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).display();
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i);
+            if (tile.bgWname != null) {
+                if (tile.bgWname.equals("metalWall")) {
+                    tile.drawBgWICorners();
+                }
+            }
+            tile.drawBgWOCorners("metalWall");
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i);
+            if (tile.bgWname != null) {
+                if (tile.bgWname.equals("crystalWall")) {
+                    tile.drawBgWICorners();
+                }
+            }
+            tile.drawBgWOCorners("crystalWall");
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i);
+            if (tile.bgWname != null) {
+                if (tile.bgWname.equals("titaniumWall")) {
+                    tile.drawBgWICorners();
+                }
+            }
+            tile.drawBgWOCorners("titaniumWall");
         }
         //pathfinding debug
         if (debug) {

@@ -178,4 +178,16 @@ public class MiscMethods {
         if (x < 17 && y < 17) if (name.equals(nameGrid[x + 1][y + 1])) r++;
         return r;
     }
+
+    public static void updateWallTileConnections() {
+        for (int x = 0; x < 18; x++) {
+            Tile tile = tiles.get(x,connectWallY);
+            if (tile.bgWname != null && !tile.bgWname.equals("stoneWall") && !tile.bgWname.equals("woodWall")) {
+                tile.connectBgWICorners();
+            }
+            tile.connectBgWOCorners();
+        }
+        if (connectWallY < 18) connectWallY++;
+        else connectWallY = 0;
+    }
 }
