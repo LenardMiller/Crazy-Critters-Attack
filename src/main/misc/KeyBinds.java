@@ -111,7 +111,8 @@ public class KeyBinds {
         if (update) {
             updateNodes();
             updateWallTiles();
-            updateWallTileConnections();
+//            updateWallTileConnections();
+            connectWallQueues++;
         }
         if (loseMoney) money = 0;
         if (switchMode) {

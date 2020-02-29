@@ -150,7 +150,10 @@ public abstract class Tower {
         updateTowerArray();
         if (selection.id == tile.id) selection.name = "null";
         else if (!selection.name.equals("null")) selection.swapSelected(selection.tower.tile.id);
-        if (!turret) updateWallTiles();
+        if (!turret) {
+            updateWallTiles();
+            connectWallQueues++;
+        }
         updateNodes();
     }
 

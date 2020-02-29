@@ -294,11 +294,13 @@ public class Hand {
                 } else if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                     money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
                     tile.tower.upgrade(0);
+                    connectWallQueues++;
                 }
                 money += price; //cancel out price change later
             } else {
                 tile.tower = new Wall(p, tile);
                 updateWallTiles();
+                connectWallQueues++;
             }
             changeHeld = false;
         }
@@ -309,7 +311,7 @@ public class Hand {
             if (held.contains("BGB")) tile.setBgB(held);
             if (held.contains("BGW")) tile.setBgW(held);
             if (held.contains("BGC")) tile.setBgC(held);
-//            updateWallTiles();
+            connectWallQueues++;
         }
         if (!held.equals("null")) money -= price;
         if (changeHeld) held = "null";

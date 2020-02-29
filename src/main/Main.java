@@ -83,7 +83,7 @@ public class Main extends PApplet {
     public static boolean debug = false;
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
-    public static int connectWallY;
+    public static int connectWallQueues;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
@@ -146,7 +146,7 @@ public class Main extends PApplet {
         inGameGui = new InGameGui(this);
         levelBuilderGui = new LevelBuilderGui(this);
         //other
-        connectWallY = 0;
+        connectWallQueues = 0;
         //pathfinding stuff
         nSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
@@ -217,7 +217,10 @@ public class Main extends PApplet {
 
     private void drawObjects() {
         //tiles
-        if (connectWallY > 0) updateWallTileConnections();
+        if (connectWallQueues > 0) { //else
+            connectWallQueues = 0;
+            updateWallTileConnections();
+        }
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).display();
         }

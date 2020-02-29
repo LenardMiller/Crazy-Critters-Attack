@@ -6,7 +6,6 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateWallTileConnections;
 
 public class Tile {
 
@@ -50,7 +49,7 @@ public class Tile {
         if (bgB != null) p.image(bgB, position.x, position.y);
         if (bgWEdges != null) connectBgWEdges();
         if (bgWname != null) {
-            if (bgWname.equals("woodWall") || bgWname.equals("stoneWall")) {
+            if (!isConcrete(bgWname)) {
                 if (debug) p.tint(255,0,255);
                 p.image(bgW, position.x, position.y);
                 if (debug) p.tint(255);
@@ -91,17 +90,29 @@ public class Tile {
         if (y != 0) {
             Tile tile = tiles.get(x, y - 1);
             if (isConnected(0, tile)) p.image(tile.bgWEdges[0], position.x, position.y);
+            if (bgWEdges[0] != null && isConcrete(tile.bgWname)) p.image(bgWEdges[0], position.x, position.y);
         } if (x != 0) {
             Tile tile = tiles.get(x - 1, y);
             if (isConnected(3, tile)) p.image(tile.bgWEdges[3], position.x, position.y);
+            if (bgWEdges[3] != null && isConcrete(tile.bgWname)) p.image(bgWEdges[3], position.x, position.y);
         } if (y != 18) {
             Tile tile = tiles.get(x, y + 1);
             if (isConnected(2, tile)) p.image(tile.bgWEdges[2], position.x, position.y);
+            if (bgWEdges[2] != null && isConcrete(tile.bgWname)) p.image(bgWEdges[2], position.x, position.y);
         } if (x != 18) {
             Tile tile = tiles.get(x + 1, y);
             if (isConnected(1, tile)) p.image(tile.bgWEdges[1], position.x, position.y);
+            if (bgWEdges[1] != null && isConcrete(tile.bgWname)) p.image(bgWEdges[1], position.x, position.y);
         }
         if (debug) p.tint(255);
+    }
+
+    private boolean isConnected(int i, Tile tile) {
+        if (bgWname != null && tile.bgWname != null) {
+            if (!isConcrete(bgWname)) {
+                return bgWname.equals(tile.bgWname) && tile.bgWEdges[i] != null;
+            } else return tile.bgWEdges[i] != null;
+        } else return false;
     }
 
     public void connectBgWICorners() {
@@ -143,7 +154,7 @@ public class Tile {
     }
 
     public void drawBgWICorners() {
-        if (!bgWname.equals("woodWall") && !bgWname.equals("stoneWall")) {
+        if (isConcrete(bgWname)) {
             if (drawMain) p.image(bgW, position.x, position.y);
             for (int i = 0; i < 4; i++) {
                 if (bgWICorners[i] != null) {
@@ -253,17 +264,10 @@ public class Tile {
     private String doubleDiagonalOut(int x, int y, int dx, int dy) {
         Tile tileA = tiles.get(x + dx, y);
         Tile tileB = tiles.get(x, y + dy);
-        if (tileA.bgWname == null || tileA.bgWname.equals("woodWall") || tileA.bgWname.equals("stoneWall")) return null;
-        if (tileB.bgWname == null || tileB.bgWname.equals("woodWall") || tileB.bgWname.equals("stoneWall")) return null;
+        if (!isConcrete(tileA.bgWname)) return null;
+        if (!isConcrete(tileA.bgWname)) return null;
         if (!tileA.bgWname.equals(tileB.bgWname)) return null;
         else return tileA.bgWname;
-    }
-
-    private boolean diagonalIn(int x, int y, int dx, int dy, String name) {
-        if ((x + dx > -1 && x + dx > 19 && y + dy > -1 && y + dy < 19)) return false;
-        Tile tile = tiles.get(x + dx, y + dy);
-        if (tile.bgWname == null) return false;
-        return tile.bgWname.equals(name);
     }
 
     private boolean doubleDiagonalIn(int x, int y, int dx, int dy, String name) {
@@ -280,12 +284,12 @@ public class Tile {
         return tileB.bgWname.equals(name);
     }
 
-    private boolean isConnected(int i, Tile tile) {
-        if (bgWname != null && tile.bgWname != null) {
-            if (bgWname.equals("woodWall") || tile.bgWname.equals("woodWall")) {
-                return bgWname.equals(tile.bgWname) && tile.bgWEdges[i] != null;
-            } else return tile.bgWEdges[i] != null;
-        } else return false;
+    private boolean isConcrete(String name) {
+        if (name == null) return false;
+        boolean m = name.equals("metalWall");
+        boolean c = name.equals("crystalWall");
+        boolean t = name.equals("titaniumWall");
+        return m || c || t;
     }
 
     public void setBgA(String s) {
@@ -300,6 +304,7 @@ public class Tile {
 
     public void setBgW(String s) {
         bgWEdges = new PImage[4];
+        bgC = null;
         if (s == null) {
             bgW = null;
             bgWname = null;
@@ -320,7 +325,6 @@ public class Tile {
                 bgWname = null;
             }
         }
-        updateWallTileConnections();
     }
 
     public void setBgB(String s) {
