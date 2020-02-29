@@ -304,11 +304,11 @@ public class Tile {
 
     public void setBgW(String s) {
         bgWEdges = new PImage[4];
-        bgC = null;
         if (s == null) {
             bgW = null;
             bgWname = null;
         } else {
+            bgC = null;
             s = s.replace("BGW_TL", "");
             s = s.replace("ultimate", "titanium");
             bgWname = s;
