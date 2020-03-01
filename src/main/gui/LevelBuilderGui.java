@@ -17,26 +17,30 @@ public class LevelBuilderGui {
     public void display() {
         p.fill(235); //big white bg
         p.rect(900,0,200,900);
-        for (TileSelect tileSelectButton : tileSelectButtons) {
-            tileSelectButton.main();
-        }
+        for (TileSelect tileSelectButton : tileSelectButtons) tileSelectButton.main();
     }
 
     public void build() {
         //bgA
-        tileSelectButtons.add(new TileSelect(p,925,25,"dirtBGA",true));
-        tileSelectButtons.add(new TileSelect(p,975,25,"grassBGA",true));
+        placeButton(0,0,"dirtBGA");
+        placeButton(1,0,"grassBGA");
         //bgB
-        tileSelectButtons.add(new TileSelect(p,1025,25,"dirtPatchBGB",true));
-        tileSelectButtons.add(new TileSelect(p,1075,25,"grassPatchBGB",true));
+        placeButton(2,0,"dirtPatchBGB");
+        placeButton(3,0,"grassPatchBGB");
         //bgC
-        tileSelectButtons.add(new TileSelect(p,925,75,"rockBGC",true));
-        tileSelectButtons.add(new TileSelect(p,975,75,"smallRockBGC",true));
+        placeButton(0,1,"rockBGC");
+        placeButton(1,1,"smallRockBGC");
+        placeButton(2,1,"leavesBGC");
+        placeButton(3,1,"dandelionsBGC");
         //obstacles
-        tileSelectButtons.add(new TileSelect(p,1025,75,"smallTreeOb",true));
-        tileSelectButtons.add(new TileSelect(p,925,175,"treeBLOb",true));
-        tileSelectButtons.add(new TileSelect(p,975,175,"treeBROb",true));
-        tileSelectButtons.add(new TileSelect(p,925,125,"treeTLOb",true));
-        tileSelectButtons.add(new TileSelect(p,975,125,"treeTROb",true));
+        placeButton(2,2,"smallTreeOb");
+        placeButton(0,3,"treeBLOb");
+        placeButton(1,3,"treeBROb");
+        placeButton(0,2,"treeTLOb");
+        placeButton(1,2,"treeTROb");
+    }
+
+    private void placeButton(int x, int y, String type) {
+        tileSelectButtons.add(new TileSelect(p,925 + (x*50), 25 + (y*50), type, true));
     }
 }
