@@ -19,6 +19,7 @@ public class Tile {
     public PImage bgB;
     public PImage bgC;
     public PImage obstacle;
+    private int obstacleShadowLength;
     public PImage[] bgAEdges;
     public PImage[] bgWEdges;
     private PImage[] bgWOCorners;
@@ -33,6 +34,7 @@ public class Tile {
 
         this.position = position;
         this.id = id;
+        obstacleShadowLength = 0;
         bgAEdges = new PImage[4];
         bgWEdges = new PImage[4];
         bgWOCorners = new PImage[4];
@@ -44,7 +46,7 @@ public class Tile {
         if (tower != null) tower.main();
     }
 
-    public void display() {
+    public void displayA() {
         if (bgA != null) p.image(bgA, position.x, position.y);
         tileBgA();
         if (bgB != null) p.image(bgB, position.x, position.y);
@@ -57,12 +59,19 @@ public class Tile {
             }
         }
         if (bgC != null) p.image(bgC, position.x, position.y);
+
+    }
+
+    public void displayB() {
         if (obstacle != null) {
-            p.tint(0,60);
-            p.image(obstacle, position.x + 3, position.y + 3);
+            p.tint(0, 60);
+            p.image(obstacle, position.x + obstacleShadowLength, position.y + obstacleShadowLength);
             p.tint(255);
-            p.image(obstacle, position.x, position.y);
         }
+    }
+
+    public void displayC() {
+        if (obstacle != null) p.image(obstacle, position.x, position.y);
     }
 
     private void tileBgA() {
@@ -344,9 +353,20 @@ public class Tile {
         else bgC = null;
     }
 
-    public void setObstacle(String s) {
-        if (spritesH.get(s) != obstacle) obstacle = spritesH.get(s);
-        else obstacle = null;
+    public void setObstacle(String name) {
+        if (spritesH.get(name) != obstacle) {
+            obstacle = spritesH.get(name);
+            if (name.contains("smallTree")) obstacleShadowLength = 3;
+            if (containsCorners(name,"tree")) obstacleShadowLength = 8;
+        } else obstacle = null;
+    }
+
+    private boolean containsCorners(String name, String subName) {
+        boolean bl = name.contains(subName + "BL");
+        boolean br = name.contains(subName + "BR");
+        boolean tl = name.contains(subName + "TL");
+        boolean tr = name.contains(subName + "TR");
+        return bl || br || tl || tr;
     }
 
     public static class TileDS {

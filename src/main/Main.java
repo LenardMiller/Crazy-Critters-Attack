@@ -222,7 +222,13 @@ public class Main extends PApplet {
             updateWallTileConnections();
         }
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).display();
+            tiles.get(i).displayA();
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayB();
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayC();
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);

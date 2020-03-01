@@ -74,7 +74,7 @@ public class Wall extends Tower {
         float x = tile.position.x-size.x;
         float y = tile.position.y-size.y;
         p.tint(0,60);
-        p.image(sprite[0],x+2,y+2);
+        p.image(sprite[0],x+3,y+3);
         p.tint(255);
     }
 
