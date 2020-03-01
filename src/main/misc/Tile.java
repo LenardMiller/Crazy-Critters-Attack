@@ -18,6 +18,7 @@ public class Tile {
     public PImage bgW;
     public PImage bgB;
     public PImage bgC;
+    public PImage obstacle;
     public PImage[] bgAEdges;
     public PImage[] bgWEdges;
     private PImage[] bgWOCorners;
@@ -56,6 +57,12 @@ public class Tile {
             }
         }
         if (bgC != null) p.image(bgC, position.x, position.y);
+        if (obstacle != null) {
+            p.tint(0,60);
+            p.image(obstacle, position.x + 3, position.y + 3);
+            p.tint(255);
+            p.image(obstacle, position.x, position.y);
+        }
     }
 
     private void tileBgA() {
@@ -335,6 +342,11 @@ public class Tile {
     public void setBgC(String s) {
         if (spritesH.get(s) != bgC) bgC = spritesH.get(s);
         else bgC = null;
+    }
+
+    public void setObstacle(String s) {
+        if (spritesH.get(s) != obstacle) obstacle = spritesH.get(s);
+        else obstacle = null;
     }
 
     public static class TileDS {

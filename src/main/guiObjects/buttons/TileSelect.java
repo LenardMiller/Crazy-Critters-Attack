@@ -22,6 +22,7 @@ public class TileSelect extends Button {
         if (type.contains("BGW")) sl = "BGW";
         if (type.contains("BGB")) sl = "BGB";
         if (type.contains("BGC")) sl = "BGC";
+        if (type.contains("Ob")) sl = "obstacle";
         spriteLocation = "sprites/guiObjects/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
         spriteOne = p.loadImage(spriteLocation + "000.png");
         spriteTwo = p.loadImage(spriteLocation + "001.png");

@@ -259,5 +259,7 @@ public class SpriteLoader {
         //BGC
         spritesH.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
         spritesH.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
+        //obstacles
+        spritesH.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
     }
 }
