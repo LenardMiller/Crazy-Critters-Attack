@@ -46,13 +46,15 @@ public class Hand {
         if (inputHandler.leftMousePressedPulse && !implacable) place();
     }
 
-    private void checkPlaceable() { //todo: bug here?
+    private void checkPlaceable() {
         implacable = false;
-        Tile tile = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1);
-        if (tile == null) implacable = true;
-        else if (!held.equals("wall")) implacable = (tile.tower != null);
-        else implacable = (tile.tower != null && tile.tower.turret);
-        if (!implacable) implacable = (price > money);
+        Tile tileTower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1);
+        Tile tileObstacle = tiles.get((roundTo(p.mouseX, 50) / 50), (roundTo(p.mouseY, 50) / 50));
+        if (tileTower == null) implacable = true;
+        else if (!held.equals("wall")) implacable = (tileTower.tower != null);
+        else implacable = (tileTower.tower != null && tileTower.tower.turret);
+        if (tileObstacle != null && tileObstacle.obstacle != null) implacable = true;
+        if (price > money) implacable = true;
     }
 
     private void checkDisplay() {

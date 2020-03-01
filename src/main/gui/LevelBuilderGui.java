@@ -41,6 +41,6 @@ public class LevelBuilderGui {
     }
 
     private void placeButton(int x, int y, String type) {
-        tileSelectButtons.add(new TileSelect(p,925 + (x*50), 25 + (y*50), type, true));
+        tileSelectButtons.add(new TileSelect(p,925+(x*50),25+(y*50),type,true));
     }
 }
