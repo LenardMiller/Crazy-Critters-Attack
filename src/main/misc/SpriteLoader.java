@@ -180,6 +180,9 @@ public class SpriteLoader {
         spritesH.put("flamethrowerFullTR",p.loadImage("sprites/towers/turrets/flamethrower/full.png"));
         spritesH.put("flamethrowerIdleTR",p.loadImage("sprites/towers/turrets/flamethrower/idle.png"));
         //walls
+        spritesH.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
+        spritesH.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
+        spritesH.put("shadowTRTW",p.loadImage("sprites/towers/walls/overlays/shadowTR.png"));
         spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
         spritesH.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));

@@ -74,8 +74,21 @@ public class Wall extends Tower {
         float x = tile.position.x-size.x;
         float y = tile.position.y-size.y;
         p.tint(0,60);
-        p.image(sprite[0],x+3,y+3);
+        String sT = shadowType();
+        if (sT != null) p.image(spritesH.get("shadow" + sT + "TW"), x, y);
+        else p.image(sprite[0],x+5,y+5);
         p.tint(255);
+    }
+
+    private String shadowType() {
+        int x = (int)tile.position.x/50;
+        int y = (int)tile.position.y/50;
+        boolean t = y > 0 && tiles.get(x,y-1).tower != null && !tiles.get(x,y-1).tower.turret;
+        boolean l = x > 0 && tiles.get(x-1,y).tower != null && !tiles.get(x-1,y).tower.turret;
+        if (!t && !l) return "Both";
+        if (!l) return "BL";
+        if (!t) return "TR";
+        else return null;
     }
 
     public void displayPassB() {
