@@ -90,7 +90,7 @@ public abstract class Tower {
     }
 
     public void main(){
-        if (hp <= 0) die();
+        if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
         if (turret) {
             if (inputHandler.leftMousePressedPulse && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) { //clicked on
@@ -141,7 +141,7 @@ public abstract class Tower {
         updateNodes();
     }
 
-    public void die() {
+    public void die(boolean sold) {
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
@@ -150,6 +150,7 @@ public abstract class Tower {
         updateTowerArray();
         if (selection.id == tile.id) selection.name = "null";
         else if (!selection.name.equals("null")) selection.swapSelected(selection.tower.tile.id);
+        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
         if (!turret) {
             updateWallTiles();
             connectWallQueues++;
@@ -164,7 +165,7 @@ public abstract class Tower {
 
     public void sell() {
         money += (int) (value * .8);
-        die();
+        die(true);
     }
 
     public abstract void updateSprite();

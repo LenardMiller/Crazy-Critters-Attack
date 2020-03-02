@@ -144,6 +144,7 @@ public class SpriteLoader {
         spritesH.put("stonePt",p.loadImage("sprites/particles/debris/stone.png"));
         spritesH.put("ultimatePt",p.loadImage("sprites/particles/debris/ultimate.png"));
         spritesH.put("woodPt",p.loadImage("sprites/particles/debris/wood.png"));
+        spritesH.put("darkMetalPt",p.loadImage("sprites/particles/debris/darkMetal.png"));
         spritesH.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         spritesH.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
         //projectiles
@@ -264,6 +265,12 @@ public class SpriteLoader {
         spritesH.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
         spritesH.put("leavesBGC_TL",p.loadImage("sprites/tiles/BGC/leaves.png"));
         spritesH.put("dandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/dandelions.png"));
+        spritesH.put("woodDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/wood.png"));
+        spritesH.put("stoneDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/stone.png"));
+        spritesH.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));
+        spritesH.put("darkMetalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/darkMetal.png"));
+        spritesH.put("crystalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/crystal.png"));
+        spritesH.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png"));
         //obstacles
         spritesH.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         spritesH.put("treeBLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/bl.png"));

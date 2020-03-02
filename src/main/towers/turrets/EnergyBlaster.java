@@ -37,7 +37,7 @@ public class EnergyBlaster extends Turret{
         effectRadius = 25;
         bigExplosion = false;
         loadSprites();
-        debrisType = "metal";
+        debrisType = "darkMetal";
         price = 150;
         value = price;
         priority = 2; //strong

@@ -66,7 +66,7 @@ public class Wall extends Tower {
     }
 
     public void main(){
-        if (hp <= 0) die();
+        if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
     }
 

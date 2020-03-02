@@ -192,7 +192,7 @@ public abstract class Turret extends Tower {
 
     public void main() { //need to check target
         if (hp <= 0) {
-            die();
+            die(false);
             tile.tower = null;
         }
         if (enemies.size() > 0 && alive) checkTarget();

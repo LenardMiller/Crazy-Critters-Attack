@@ -18,6 +18,7 @@ public class Tile {
     public PImage bgW;
     public PImage bgB;
     public PImage bgC;
+    private String bgCName;
     public PImage obstacle;
     private int obstacleShadowLength;
     public PImage[] bgAEdges;
@@ -324,7 +325,12 @@ public class Tile {
             bgW = null;
             bgWname = null;
         } else {
-            bgC = null;
+            if (bgCName != null) {
+                if (!bgCName.contains("Debris")) {
+                    bgC = null;
+                    bgCName = null;
+                }
+            }
             s = s.replace("BGW_TL", "");
             s = s.replace("ultimate", "titanium");
             bgWname = s;
@@ -349,8 +355,14 @@ public class Tile {
     }
 
     public void setBgC(String s) {
-        if (spritesH.get(s) != bgC) bgC = spritesH.get(s);
-        else bgC = null;
+        if (s != null) s = s.replace("ultimate","titanium");
+        if (spritesH.get(s) != bgC) {
+            bgC = spritesH.get(s);
+            bgCName = s;
+        } else {
+            bgC = null;
+            bgCName = null;
+        }
     }
 
     public void setObstacle(String name) {

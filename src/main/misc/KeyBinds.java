@@ -91,7 +91,7 @@ public class KeyBinds {
         if (killTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
-                if (tower != null) tower.die();
+                if (tower != null) tower.die(false);
             }
             updateNodes();
         }
