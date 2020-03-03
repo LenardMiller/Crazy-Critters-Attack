@@ -61,11 +61,11 @@ public class Tile {
                 if (debug) p.tint(255);
             }
         }
-        if (bgC != null) p.image(bgC, position.x, position.y);
-
+//        if (bgC != null) p.image(bgC, position.x, position.y);
     }
 
     public void displayB() {
+        if (bgC != null) p.image(bgC, position.x, position.y);
         if (obstacle != null) {
             p.tint(0, 60);
             p.image(obstacle, position.x + obstacleShadowLength, position.y + obstacleShadowLength);

@@ -224,12 +224,6 @@ public class Main extends PApplet {
             tiles.get(i).displayA();
         }
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayB();
-        }
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayC();
-        }
-        for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
             if (tile.bgWName != null) {
                 if (tile.bgWName.equals("metalWall")) {
@@ -255,6 +249,12 @@ public class Main extends PApplet {
                 }
             }
             tile.drawBgWOCorners("titaniumWall");
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayB();
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayC();
         }
         //pathfinding debug
         if (debug) {
