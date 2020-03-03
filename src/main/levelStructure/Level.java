@@ -10,10 +10,12 @@ public class Level {
     public Wave[] waves;
     public int currentWave;
     public int startWave;
+    public String layout;
 
-    public Level(PApplet p, Wave[] waves) {
+    public Level(PApplet p, Wave[] waves, String layout) {
         this.p = p;
         this.waves = waves;
+        this.layout = layout;
         currentWave = 0;
         startWave = 0;
     }

@@ -1,6 +1,5 @@
-package main.data;
+package main.misc;
 
-import main.misc.Tile;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
@@ -11,11 +10,11 @@ import java.io.IOException;
 import static main.Main.tiles;
 import static processing.core.PApplet.*;
 
-public class SaveLoadTiles {
+public class DataControl {
 
-    public SaveLoadTiles() {}
+    public DataControl() {}
 
-    public static void save() throws IOException {
+    public static void saveTiles() throws IOException {
         JSONArray saveArray = new JSONArray();
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
@@ -34,7 +33,7 @@ public class SaveLoadTiles {
         saveWriter.close();
     }
 
-    public static void load(String name) {
+    public static void loadTiles(String name) {
         File loadFile = new File("resources/data/"+name+".json");
         JSONArray loadArray = loadJSONArray(loadFile);
         for (int i = 0; i < tiles.size(); i++) {

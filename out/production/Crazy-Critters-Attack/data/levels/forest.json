@@ -301,18 +301,15 @@
   },
   {
     "id": 78,
-    "bgA": "grass",
-    "bgC": "dandelionsBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 79,
-    "bgA": "grass",
-    "bgC": "dandelionsBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 80,
-    "bgA": "grass",
-    "bgC": "dandelionsBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 81,
@@ -352,18 +349,15 @@
   },
   {
     "id": 90,
-    "bgA": "grass",
-    "bgC": "dandelionsBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 91,
-    "bgA": "grass",
-    "bgC": "dandelionsBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 92,
-    "bgA": "grass",
-    "bgC": "dandelionsBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 93,
@@ -400,19 +394,19 @@
   },
   {
     "id": 102,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 103,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 104,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 105,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 106,
@@ -449,49 +443,47 @@
   },
   {
     "id": 115,
-    "bgB": "dirtPatchBGB_TL",
     "bgA": "grass"
   },
   {
     "id": 116,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 117,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 118,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 119,
-    "bgB": "dirtPatchBGB_TL",
     "bgA": "grass"
   },
   {
     "id": 120,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 121,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 122,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 123,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 124,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 125,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 126,
@@ -499,24 +491,22 @@
   },
   {
     "id": 127,
-    "bgB": "dirtPatchBGB_TL",
     "bgA": "grass"
   },
   {
     "id": 128,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 129,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 130,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 131,
-    "bgB": "dirtPatchBGB_TL",
     "bgA": "grass"
   },
   {"id": 132},
@@ -526,7 +516,7 @@
   },
   {
     "id": 134,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 135,
@@ -534,8 +524,7 @@
   },
   {
     "id": 136,
-    "bgA": "grass",
-    "bgC": "leavesBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 137,
@@ -547,37 +536,35 @@
   },
   {
     "id": 139,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 140,
-    "bgB": "grassPatchBGB_TL",
     "bgA": "dirt"
   },
   {
     "id": 141,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 142,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 143,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 144,
-    "bgB": "grassPatchBGB_TL",
     "bgA": "dirt"
   },
   {
     "id": 145,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 146,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 147,
@@ -585,8 +572,7 @@
   },
   {
     "id": 148,
-    "bgA": "grass",
-    "bgC": "leavesBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 149,
@@ -594,7 +580,7 @@
   },
   {
     "id": 150,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {"id": 151},
   {
@@ -603,23 +589,19 @@
   },
   {
     "id": 153,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 154,
-    "bgA": "grass",
-    "bgC": "leavesBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 155,
-    "bgA": "grass",
-    "obstacle": "smallTreeOb_TL",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 156,
-    "bgA": "grass",
-    "bgC": "leavesBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 157,
@@ -627,7 +609,7 @@
   },
   {
     "id": 158,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 159,
@@ -635,15 +617,15 @@
   },
   {
     "id": 160,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 161,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 162,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 163,
@@ -651,31 +633,27 @@
   },
   {
     "id": 164,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 165,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 166,
-    "bgA": "grass",
-    "bgC": "leavesBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 167,
-    "bgA": "grass",
-    "obstacle": "smallTreeOb_TL",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 168,
-    "bgA": "grass",
-    "bgC": "leavesBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 169,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {"id": 170},
   {
@@ -684,7 +662,7 @@
   },
   {
     "id": 172,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 173,
@@ -692,8 +670,7 @@
   },
   {
     "id": 174,
-    "bgA": "grass",
-    "bgC": "leavesBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 175,
@@ -705,7 +682,7 @@
   },
   {
     "id": 177,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 178,
@@ -713,7 +690,7 @@
   },
   {
     "id": 179,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 180,
@@ -721,7 +698,7 @@
   },
   {
     "id": 181,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 182,
@@ -729,11 +706,11 @@
   },
   {
     "id": 183,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 184,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 185,
@@ -741,8 +718,7 @@
   },
   {
     "id": 186,
-    "bgA": "grass",
-    "bgC": "leavesBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 187,
@@ -750,7 +726,7 @@
   },
   {
     "id": 188,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {"id": 189},
   {
@@ -759,33 +735,31 @@
   },
   {
     "id": 191,
-    "bgB": "dirtPatchBGB_TL",
     "bgA": "grass"
   },
   {
     "id": 192,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 193,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 194,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 195,
-    "bgB": "dirtPatchBGB_TL",
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 196,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 197,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 198,
@@ -793,7 +767,7 @@
   },
   {
     "id": 199,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 200,
@@ -801,32 +775,30 @@
   },
   {
     "id": 201,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 202,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 203,
-    "bgB": "dirtPatchBGB_TL",
     "bgA": "grass"
   },
   {
     "id": 204,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 205,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 206,
-    "bgA": "dirt"
+    "bgA": "grass"
   },
   {
     "id": 207,
-    "bgB": "dirtPatchBGB_TL",
     "bgA": "grass"
   },
   {"id": 208},
@@ -856,27 +828,27 @@
   },
   {
     "id": 215,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 216,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 217,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 218,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 219,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 220,
-    "bgA": "grass"
+    "bgA": "dirt"
   },
   {
     "id": 221,
@@ -905,195 +877,157 @@
   {"id": 227},
   {
     "id": 228,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 229,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 230,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 231,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 232,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 233,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 234,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 235,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "dirt"
   },
   {
     "id": 236,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "dirt"
   },
   {
     "id": 237,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "dirt"
   },
   {
     "id": 238,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "dirt"
   },
   {
     "id": 239,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 240,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 241,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 242,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 243,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 244,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 245,
-    "bgA": "grass",
-    "bgC": "rockBGC_TL"
+    "bgA": "grass"
   },
   {"id": 246},
   {
     "id": 247,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 248,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 249,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 250,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 251,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 252,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 253,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 254,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 255,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 256,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 257,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 258,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 259,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 260,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 261,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 262,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 263,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 264,
-    "bgA": "grass",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "grass"
   },
   {"id": 265},
   {
     "id": 266,
-    "bgA": "grass",
-    "obstacle": "treeTLOb_TL"
+    "bgA": "grass"
   },
   {
     "id": 267,
-    "bgA": "grass",
-    "obstacle": "treeTROb_TL"
+    "bgA": "grass"
   },
   {
     "id": 268,
@@ -1153,24 +1087,20 @@
   },
   {
     "id": 282,
-    "bgA": "grass",
-    "obstacle": "treeTLOb_TL"
+    "bgA": "grass"
   },
   {
     "id": 283,
-    "bgA": "grass",
-    "obstacle": "treeTROb_TL"
+    "bgA": "grass"
   },
   {"id": 284},
   {
     "id": 285,
-    "bgA": "grass",
-    "obstacle": "treeBLOb_TL"
+    "bgA": "grass"
   },
   {
     "id": 286,
-    "bgA": "grass",
-    "obstacle": "treeBROb_TL"
+    "bgA": "grass"
   },
   {
     "id": 287,
@@ -1230,13 +1160,11 @@
   },
   {
     "id": 301,
-    "bgA": "grass",
-    "obstacle": "treeBLOb_TL"
+    "bgA": "grass"
   },
   {
     "id": 302,
-    "bgA": "grass",
-    "obstacle": "treeBROb_TL"
+    "bgA": "grass"
   },
   {"id": 303},
   {

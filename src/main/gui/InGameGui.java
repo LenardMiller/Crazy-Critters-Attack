@@ -26,7 +26,7 @@ public class InGameGui {
         }
         p.fill(235); //big white bg
         p.rect(900,212,200,688);
-        forest.display();
+        levels[currentLevel].display();
         p.fill(200); //money bg
         p.rect(BOARD_WIDTH, 175, BOARD_WIDTH + 200, 37);
         openMenuButton.main();

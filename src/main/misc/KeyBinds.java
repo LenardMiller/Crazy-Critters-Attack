@@ -1,7 +1,7 @@
 package main.misc;
 
-import main.data.SaveLoadTiles;
 import main.enemies.*;
+import main.levelStructure.Level;
 import main.levelStructure.Wave;
 import main.projectiles.*;
 import main.towers.Tower;
@@ -57,8 +57,9 @@ public class KeyBinds {
         //enemies
         if (activateLevels) { //temp
             playingLevel = true;
-            forest.currentWave = 0;
-            Wave wave = forest.waves[forest.currentWave];
+            Level level = levels[currentLevel];
+            level.currentWave = 0;
+            Wave wave = level.waves[level.currentWave];
             wave.init();
         }
         if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
@@ -123,8 +124,8 @@ public class KeyBinds {
             levelBuilder = !levelBuilder;
             hand.setHeld("null");
         }
-        if (saveTiles) SaveLoadTiles.save();
-        if (loadTiles) SaveLoadTiles.load("levels/forest");
+        if (saveTiles) DataControl.saveTiles();
+        if (loadTiles) DataControl.loadTiles("levels/forest");
     }
 
     public void loadKeyBinds() {

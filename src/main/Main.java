@@ -14,6 +14,7 @@ import main.guiObjects.buttons.TowerBuy;
 import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
 import main.misc.CompressArray;
+import main.misc.DataControl;
 import main.misc.KeyBinds;
 import main.misc.Tile;
 import main.particles.Particle;
@@ -52,7 +53,8 @@ public class Main extends PApplet {
     public static ArrayList<TileSelect> tileSelectButtons;
     public static ArrayList<Buff> buffs;
 
-    public static Level forest; //todo: make array
+    public static int currentLevel;
+    public static Level[] levels;
 
     public static CompressArray compress;
 
@@ -133,8 +135,6 @@ public class Main extends PApplet {
         towerBuyButtons = new ArrayList<>();
         tileSelectButtons = new ArrayList<>();
         buffs = new ArrayList<>();
-        //generates levels todo: put in own method
-        forest = new Level(this, ForestWaves.genForestWaves(this));
         //loads sprites
         loadSprites(this);
         loadSpritesAnim(this);
@@ -166,17 +166,11 @@ public class Main extends PApplet {
         for (Node node : end) node.findGHF();
         updateTowerArray();
         updateNodes();
-        //tile stuff TEMP
-        for (int x = 0; x < 18; x++) {
-            for (int y = 0; y < 18; y++) {
-                tiles.get(x,y).setBgA("grass");
-            }
-        }
-        for (int x = 5; x < 13; x++) {
-            for (int y = 5; y < 13; y++) {
-                tiles.get(x,y).setBgA("dirt");
-            }
-        }
+        //generates levels
+        currentLevel = 0; //temp
+        levels = new Level[1];
+        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest");
+        DataControl.loadTiles(levels[currentLevel].layout);
     }
 
     public void draw() { //this will need to be change when I todo: add more menu "scenes"
@@ -208,7 +202,7 @@ public class Main extends PApplet {
         textAlign(LEFT);
         if (!levelBuilder) inGameGui.drawText(this, 10);
         //levels
-        if (playingLevel) forest.main();
+        if (playingLevel) levels[currentLevel].main();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;
