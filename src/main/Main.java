@@ -28,6 +28,7 @@ import processing.core.PFont;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -183,7 +184,11 @@ public class Main extends PApplet {
         fill(25, 25, 25);
         rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
         //keys
-        keyBinds.debugKeys();
+        try {
+            keyBinds.debugKeys();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         keyBinds.spawnKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
@@ -232,8 +237,8 @@ public class Main extends PApplet {
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWname != null) {
-                if (tile.bgWname.equals("metalWall")) {
+            if (tile.bgWName != null) {
+                if (tile.bgWName.equals("metalWall")) {
                     tile.drawBgWICorners();
                 }
             }
@@ -241,8 +246,8 @@ public class Main extends PApplet {
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWname != null) {
-                if (tile.bgWname.equals("crystalWall")) {
+            if (tile.bgWName != null) {
+                if (tile.bgWName.equals("crystalWall")) {
                     tile.drawBgWICorners();
                 }
             }
@@ -250,8 +255,8 @@ public class Main extends PApplet {
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWname != null) {
-                if (tile.bgWname.equals("titaniumWall")) {
+            if (tile.bgWName != null) {
+                if (tile.bgWName.equals("titaniumWall")) {
                     tile.drawBgWICorners();
                 }
             }

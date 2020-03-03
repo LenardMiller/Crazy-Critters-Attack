@@ -123,7 +123,7 @@ public class MiscMethods {
             for (int x = 0; x < 18; x++) {
                 for (int y = 0; y < 18; y++) {
                     Tile tile = tiles.get(x, y);
-                    if (tile.bgW != null) nameGrid[x][y] = tile.bgWname;
+                    if (tile.bgW != null) nameGrid[x][y] = tile.bgWName;
                 }
             }
             //place
@@ -180,7 +180,7 @@ public class MiscMethods {
     public static void updateWallTileConnections() {
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWname != null && !tile.bgWname.equals("stoneWall") && !tile.bgWname.equals("woodWall")) {
+            if (tile.bgWName != null && !tile.bgWName.equals("stoneWall") && !tile.bgWName.equals("woodWall")) {
                 tile.connectBgWICorners();
             }
             tile.connectBgWOCorners();

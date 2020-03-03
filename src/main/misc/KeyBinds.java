@@ -1,5 +1,6 @@
 package main.misc;
 
+import main.data.SaveLoadTiles;
 import main.enemies.*;
 import main.levelStructure.Wave;
 import main.projectiles.*;
@@ -7,6 +8,7 @@ import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static main.Main.*;
@@ -71,7 +73,7 @@ public class KeyBinds {
         if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant || snake || worm || butterfly) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
-    public void debugKeys() {
+    public void debugKeys() throws IOException {
         //entity stuff
         boolean killEnemies = keysPressed.getReleasedPulse('s') && alive;
         boolean killTowers = keysPressed.getReleasedPulse('d') && alive;
@@ -82,6 +84,8 @@ public class KeyBinds {
         boolean update = keysPressed.getPressedPulse(' ');
         boolean loseMoney = keysPressed.getPressedPulse('-');
         boolean switchMode = keysPressed.getPressedPulse('b');
+        boolean saveTiles = keysPressed.getPressedPulse('z');
+        boolean loadTiles = keysPressed.getPressedPulse('x');
         //entity stuff
         if (killEnemies) {
             enemies = new ArrayList<>();
@@ -111,7 +115,7 @@ public class KeyBinds {
         if (update) {
             updateNodes();
             updateWallTiles();
-//            updateWallTileConnections();
+            updateWallTileConnections();
             connectWallQueues++;
         }
         if (loseMoney) money = 0;
@@ -119,6 +123,8 @@ public class KeyBinds {
             levelBuilder = !levelBuilder;
             hand.setHeld("null");
         }
+        if (saveTiles) SaveLoadTiles.save();
+        if (loadTiles) SaveLoadTiles.load("levels/forest");
     }
 
     public void loadKeyBinds() {
