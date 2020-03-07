@@ -89,6 +89,8 @@ public class SpriteLoader {
         getSprite(p,"metalWall","TW","metal/",4);
         getSprite(p,"crystalWall","TW","crystal/",4);
         getSprite(p,"ultimateWall","TW","ultimate/",4);
+        //machines
+        getSprite(p,"stoneDrill","MA","stoneDrill/",4);
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {
@@ -114,6 +116,9 @@ public class SpriteLoader {
                 break;
             case "TW":
                 mainFolder = "towers/walls/";
+                break;
+            case "MA":
+                mainFolder = "machines/";
                 break;
         }
         String fullName = name+type;
@@ -270,7 +275,7 @@ public class SpriteLoader {
         spritesH.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));
         spritesH.put("darkMetalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/darkMetal.png"));
         spritesH.put("crystalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/crystal.png"));
-        spritesH.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png"));
+        spritesH.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png")); //todo: make not butt ugly
         //obstacles
         spritesH.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         spritesH.put("treeBLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/bl.png"));

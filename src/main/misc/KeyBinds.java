@@ -103,10 +103,7 @@ public class KeyBinds {
         if (hurtTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
-                if (tower != null) {
-                    tower.hp = tower.maxHp / 2;
-                    tower.barTrans = 255;
-                }
+                if (tower != null) tower.hp = tower.maxHp / 2;
             }
             updateNodes();
         }
@@ -124,8 +121,8 @@ public class KeyBinds {
             levelBuilder = !levelBuilder;
             hand.setHeld("null");
         }
-        if (saveTiles) DataControl.saveTiles();
-        if (loadTiles) DataControl.loadTiles("levels/forest");
+        if (saveTiles) DataControl.save();
+        if (loadTiles) DataControl.load(p,"levels/forest");
     }
 
     public void loadKeyBinds() {

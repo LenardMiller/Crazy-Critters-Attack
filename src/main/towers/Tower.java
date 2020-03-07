@@ -27,7 +27,6 @@ public abstract class Tower {
     public int damage;
     public boolean hit;
     public PImage sprite;
-    public int barTrans;
     public Object updateSprite;
     protected int tintColor;
     protected String debrisType;
@@ -65,7 +64,6 @@ public abstract class Tower {
         this.maxHp = 1;
         hp = maxHp;
         hit = false;
-        barTrans = 255;
         tintColor = 255;
         debrisType = "null";
         price = 0;
@@ -89,7 +87,7 @@ public abstract class Tower {
         updateTowerArray();
     }
 
-    public void main(){
+    public void main() {
         if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
         if (turret) {
@@ -117,7 +115,6 @@ public abstract class Tower {
     public void damage(int dmg) { //if it touches an enemy, animate and loose health
         hp -= dmg;
         hit = true;
-        barTrans = 255;
         int num = (int)(p.random(1,4));
         for (int i = num; i >= 0; i--){ //spray debris
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));

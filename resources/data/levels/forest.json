@@ -1331,5 +1331,16 @@
   {"id": 357},
   {"id": 358},
   {"id": 359},
-  {"id": 360}
+  {"id": 360},
+  {
+    "id": 361,
+    "hp": 200,
+    "x": 500,
+    "y": 500,
+    "size x": 100,
+    "size y": 100,
+    "name": "stoneDrillMA",
+    "debris": "darkMetal",
+    "betweenFrames": 4
+  }
 ]

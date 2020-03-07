@@ -13,10 +13,7 @@ import main.guiObjects.buttons.TileSelect;
 import main.guiObjects.buttons.TowerBuy;
 import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
-import main.misc.CompressArray;
-import main.misc.DataControl;
-import main.misc.KeyBinds;
-import main.misc.Tile;
+import main.misc.*;
 import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
@@ -44,10 +41,12 @@ public class Main extends PApplet {
     public static InputHandler inputHandler;
     public static KeyBinds keyBinds;
 
+    public static Machine machine;
     public static ArrayList<main.towers.Tower> towers;
     public static ArrayList<main.enemies.Enemy> enemies;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles;
+    public static ArrayList<main.particles.Particle> underParticles;
     public static ArrayList<main.projectiles.Arc> arcs;
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;
@@ -131,6 +130,7 @@ public class Main extends PApplet {
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         particles = new ArrayList<>();
+        underParticles = new ArrayList<>();
         arcs = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
         tileSelectButtons = new ArrayList<>();
@@ -170,7 +170,7 @@ public class Main extends PApplet {
         currentLevel = 0; //temp
         levels = new Level[1];
         levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest");
-        DataControl.loadTiles(levels[currentLevel].layout);
+        DataControl.load(this, levels[currentLevel].layout);
     }
 
     public void draw() { //this will need to be change when I todo: add more menu "scenes"
@@ -272,6 +272,13 @@ public class Main extends PApplet {
         for (Tower tower : towers) if (!tower.turret) tower.displayPassB();
         for (Tower tower : towers) if (tower.turret) tower.displayPassB();
         for (Tower tower : towers) tower.main();
+        //under particles, for drills
+        for (int i = underParticles.size()-1; i >= 0; i--) {
+            Particle particle = underParticles.get(i);
+            particle.main(underParticles, i);
+        }
+        //machine
+        machine.main();
         //enemies
         for (Enemy enemy : enemies) enemy.displayPassA();
         for (int i = enemies.size() - 1; i >= 0; i--) {
