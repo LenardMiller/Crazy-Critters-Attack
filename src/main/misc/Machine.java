@@ -9,6 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.MiscMethods.updateNodes;
 
 public class Machine {
 
@@ -47,6 +48,8 @@ public class Machine {
                 tiles.get(-x+x2-1,-y+y2-1).machine = true;
             }
         }
+
+        updateNodes();
     }
 
     public void main() {
@@ -100,9 +103,12 @@ public class Machine {
             }
         }
         if (deathFrame == 180) {
-            for (int i = 0; i < tiles.size(); i++) {
-                Tile tile = tiles.get(i);
-                if (tile.machine) tile.setBgC(debris + "DebrisBGC_TL");
+            int x2 = (int)position.x/50;
+            int y2 = (int)position.y/50;
+            for (int x = 0; x < (size.x/50); x++) {
+                for (int y = 0; y < (size.y/50); y++) {
+                    tiles.get(-x+x2-1,-y+y2-1).setBgC(debris + "DebrisBGC_TL");
+                }
             }
         }
     }

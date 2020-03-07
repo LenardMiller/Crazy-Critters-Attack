@@ -266,12 +266,6 @@ public class Main extends PApplet {
             fill(0,0,255);
             rect(start.position.x,start.position.y,nSize,nSize);
         }
-        //towers
-        for (Tower tower : towers) if (tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassB();
-        for (Tower tower : towers) if (tower.turret) tower.displayPassB();
-        for (Tower tower : towers) tower.main();
         //under particles, for drills
         for (int i = underParticles.size()-1; i >= 0; i--) {
             Particle particle = underParticles.get(i);
@@ -279,6 +273,12 @@ public class Main extends PApplet {
         }
         //machine
         machine.main();
+        //towers
+        for (Tower tower : towers) if (tower.turret) tower.displayPassA();
+        for (Tower tower : towers) if (!tower.turret) tower.displayPassA();
+        for (Tower tower : towers) if (!tower.turret) tower.displayPassB();
+        for (Tower tower : towers) if (tower.turret) tower.displayPassB();
+        for (Tower tower : towers) tower.main();
         //enemies
         for (Enemy enemy : enemies) enemy.displayPassA();
         for (int i = enemies.size() - 1; i >= 0; i--) {

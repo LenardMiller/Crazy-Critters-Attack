@@ -110,11 +110,14 @@ public class Node {
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
         if (tower != null) {
-            movementPenalty = tower.maxHp;
+            if (!tower.turret) movementPenalty = tower.maxHp;
             if (tower.turret) setEnd((int) ((position.x + 100) / nSize), (int) ((position.y + 100) / nSize));
         } else movementPenalty = 0;
         Tile obsTile = tiles.get(x,y);
-        isNotTraversable = obsTile != null && obsTile.obstacle != null;
+        if (obsTile != null) {
+            isNotTraversable = obsTile.obstacle != null;
+            if (obsTile.machine) setEnd((int) ((position.x) / nSize), (int) ((position.y) / nSize));
+        }
     }
 
     void setClose() {
