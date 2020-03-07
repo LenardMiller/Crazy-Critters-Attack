@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import static main.Main.machine;
 import static main.Main.tiles;
+import static main.Main.alive;
 import static processing.core.PApplet.*;
 
 public class DataControl {
@@ -56,9 +57,11 @@ public class DataControl {
     public static void load(PApplet p, String name) {
         File loadFile = new File("resources/data/"+name+".json");
         JSONArray loadArray = loadJSONArray(loadFile);
+        alive = true;
         //tiles
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
+            tile.machine = false;
             JSONObject loadObject = loadArray.getJSONObject(i);
             String bgA = loadObject.getString("bgA");
             String bgB = loadObject.getString("bgB");

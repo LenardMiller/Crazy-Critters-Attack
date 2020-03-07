@@ -53,7 +53,7 @@ public class Hand {
         if (tileTower == null) implacable = true;
         else if (!held.equals("wall")) implacable = (tileTower.tower != null);
         else implacable = (tileTower.tower != null && tileTower.tower.turret);
-        if (tileObstacle != null && tileObstacle.obstacle != null) implacable = true;
+        if (tileObstacle != null && (tileObstacle.obstacle != null || tileObstacle.machine)) implacable = true;
         if (price > money) implacable = true;
     }
 

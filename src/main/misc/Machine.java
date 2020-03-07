@@ -39,7 +39,14 @@ public class Machine {
         this.betweenFrames = betweenFrames;
         sprites = spritesAnimH.get(name);
         tintColor = 255;
-        //todo: tiles
+
+        int x2 = (int)position.x/50;
+        int y2 = (int)position.y/50;
+        for (int x = 0; x < (size.x/50); x++) {
+            for (int y = 0; y < (size.y/50); y++) {
+                tiles.get(-x+x2-1,-y+y2-1).machine = true;
+            }
+        }
     }
 
     public void main() {
@@ -90,6 +97,12 @@ public class Machine {
                 particles.add(new Debris(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debris));
             } if ((int) (p.random(0, 2f)) == 0) {
                 projectiles.add(new Flame(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1), p.random(0, 360), null, 50, 5, 100, (int) p.random(1, 4)));
+            }
+        }
+        if (deathFrame == 180) {
+            for (int i = 0; i < tiles.size(); i++) {
+                Tile tile = tiles.get(i);
+                if (tile.machine) tile.setBgC(debris + "DebrisBGC_TL");
             }
         }
     }

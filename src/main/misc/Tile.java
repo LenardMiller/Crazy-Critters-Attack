@@ -31,6 +31,7 @@ public class Tile {
     private PImage[] bgWICorners;
     public String bgWName;
     private boolean drawMain;
+    public boolean machine;
 
     public Tile(PApplet p, PVector position, int id) {
         this.p = p;
