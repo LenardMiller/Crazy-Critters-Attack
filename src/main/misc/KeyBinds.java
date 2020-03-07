@@ -99,13 +99,15 @@ public class KeyBinds {
                 if (tower != null) tower.die(false);
             }
             updateNodes();
+            machine.die();
         }
         if (hurtTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
-                if (tower != null) tower.hp = tower.maxHp / 2;
+                if (tower != null) tower.hp -= tower.maxHp/5;
             }
             updateNodes();
+            machine.damage(20);
         }
         if (killProjectiles) projectiles = new ArrayList<>();
         //other stuff
