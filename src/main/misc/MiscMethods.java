@@ -23,7 +23,7 @@ public class MiscMethods {
         for (Node[] nodes : nodeGrid) {
             for (Node node : nodes) {
                 node.setNotEnd((int) (node.position.x / nSize), (int) (node.position.y / nSize));
-                node.checkObs();
+                node.checkTile();
             }
         }
         updateClearance();

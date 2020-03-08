@@ -56,13 +56,15 @@ public class Node {
         start.isStart = true;
     }
 
-    public void setEnd(int x, int y) {
+    public void setEnd(int x, int y) { //issue is here!
         if (!isEnd) {
+//            System.out.println(end.length);
             Node[] end2 = new Node[end.length + 1];
             arrayCopy(end, end2);
             end2[end2.length - 1] = nodeGrid[x][y];
             end = end2;
             isEnd = true;
+//            System.out.println(end.length);
         }
     }
 
@@ -103,21 +105,31 @@ public class Node {
         }
     }
 
-    public void checkObs() {
-        int x = (int) (position.x / 50);
-        int y = (int) (position.y / 50);
-        Tile towerTile = tiles.get(x+1, y+1);
+    public void checkTile() {
+        boolean ended = false;
+        int tX = (int) (position.x / 50);
+        int tY = (int) (position.y / 50);
+        int nX = (int) (position.x / 25) + 4;
+        int nY = (int) (position.y / 25) + 4;
+        Tile towerTile = tiles.get(tX+1, tY+1);
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
         if (tower != null) {
             if (!tower.turret) movementPenalty = tower.maxHp;
-            if (tower.turret) setEnd((int) ((position.x + 100) / nSize), (int) ((position.y + 100) / nSize));
+            if (tower.turret) {
+                setEnd(nX, nY);
+                ended = true;
+            }
         } else movementPenalty = 0;
-        Tile obsTile = tiles.get(x,y);
+        Tile obsTile = tiles.get(tX,tY);
         if (obsTile != null) {
             isNotTraversable = obsTile.obstacle != null;
-            if (obsTile.machine) setEnd((int) ((position.x) / nSize), (int) ((position.y) / nSize));
+            if (obsTile.machine) {
+                setEnd(nX,nY);
+                ended = true;
+            }
         }
+        if (!ended) setNotEnd(tX,tY);
     }
 
     void setClose() {

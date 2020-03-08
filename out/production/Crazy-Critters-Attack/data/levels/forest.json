@@ -294,7 +294,8 @@
   {
     "id": 59,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "id": 60,
@@ -319,7 +320,8 @@
   {
     "id": 64,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "id": 65,
@@ -344,7 +346,8 @@
   {
     "id": 69,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "id": 70,
@@ -537,8 +540,7 @@
   {
     "id": 108,
     "type": "tile",
-    "bgA": "grass",
-    "bgC": "woodDebrisBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 109,
@@ -726,8 +728,7 @@
   {
     "id": 146,
     "type": "tile",
-    "bgA": "grass",
-    "bgC": "woodDebrisBGC_TL"
+    "bgA": "grass"
   },
   {
     "id": 147,

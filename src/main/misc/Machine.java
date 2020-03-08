@@ -9,7 +9,6 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateNodes;
 
 public class Machine {
 
@@ -48,8 +47,6 @@ public class Machine {
                 tiles.get(-x+x2-1,-y+y2-1).machine = true;
             }
         }
-
-        updateNodes();
     }
 
     public void main() {

@@ -165,12 +165,12 @@ public class Main extends PApplet {
         start.findGHF();
         for (Node node : end) node.findGHF();
         updateTowerArray();
-        updateNodes();
         //generates levels
         currentLevel = 0; //temp
         levels = new Level[1];
         levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest");
         DataControl.load(this, levels[currentLevel].layout);
+        updateNodes();
     }
 
     public void draw() { //this will need to be change when I todo: add more menu "scenes"
