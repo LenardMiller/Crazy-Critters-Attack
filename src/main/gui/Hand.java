@@ -314,6 +314,10 @@ public class Hand {
             if (held.contains("BGW")) tile.setBgW(held);
             if (held.contains("BGC")) tile.setBgC(held);
             if (held.contains("Ob")) tile.setObstacle(held);
+            if (held.contains("Ma")) {
+                tile.machine = !tile.machine;
+                machine.updateNodes();
+            }
             connectWallQueues++;
         }
         if (!held.equals("null")) money -= price;

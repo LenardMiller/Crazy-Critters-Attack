@@ -30,6 +30,7 @@ public class DataControl {
             saveObject.setString("bgB", tile.bgBName);
             saveObject.setString("bgC", tile.bgCName);
             saveObject.setString("obstacle", tile.obstacleName);
+            saveObject.setBoolean("machine", tile.machine);
             saveArray.setJSONObject(i, saveObject);
         }
         int i = tiles.size();
@@ -40,8 +41,6 @@ public class DataControl {
         saveObject.setInt("hp", machine.hp);
         saveObject.setFloat("x", machine.position.x);
         saveObject.setFloat("y", machine.position.y);
-        saveObject.setFloat("size x", machine.size.x);
-        saveObject.setFloat("size y", machine.size.x);
         saveObject.setString("name", machine.name);
         saveObject.setString("debris", machine.debris);
         saveObject.setInt("betweenFrames", machine.betweenFrames);
@@ -67,10 +66,12 @@ public class DataControl {
             String bgB = loadObject.getString("bgB");
             String bgC = loadObject.getString("bgC");
             String obstacle = loadObject.getString("obstacle");
+            boolean machine = loadObject.getBoolean("machine");
             if (bgA != null) tile.setBgA(bgA);
             if (bgB != null) tile.setBgB(bgB);
             if (bgC != null) tile.setBgC(bgC);
             if (obstacle != null) tile.setObstacle(obstacle);
+            tile.machine = machine;
         }
         int i = tiles.size();
         //machine
@@ -78,12 +79,10 @@ public class DataControl {
         int hp = loadObject.getInt("hp");
         int x = loadObject.getInt("x");
         int y = loadObject.getInt("y");
-        int sizeX = loadObject.getInt("size x");
-        int sizeY = loadObject.getInt("size y");
         String machineName = loadObject.getString("name");
         String debris = loadObject.getString("debris");
         int betweenFrames = loadObject.getInt("betweenFrames");
-        machine = new Machine(p,new PVector(x,y), new PVector(sizeX,sizeY), machineName, debris, betweenFrames);
+        machine = new Machine(p,new PVector(x,y), machineName, debris, betweenFrames);
         machine.hp = hp;
     }
 }

@@ -16,7 +16,6 @@ public class Machine {
 
     public int hp;
     public PVector position;
-    public PVector size;
     public String name;
     public String debris;
     public int betweenFrames;
@@ -27,24 +26,34 @@ public class Machine {
     private int deathFrame;
     private boolean dead;
     private PImage[] sprites;
+    public Tile[] machTiles;
 
-    public Machine(PApplet p, PVector position, PVector size, String name, String debris, int betweenFrames) {
+    public Machine(PApplet p, PVector position, String name, String debris, int betweenFrames) {
         this.p = p;
 
         hp = 200; //todo: Balance
         this.position = position;
-        this.size = size;
         this.name = name;
         this.debris = debris;
         this.betweenFrames = betweenFrames;
         sprites = spritesAnimH.get(name);
         tintColor = 255;
+        updateNodes();
+    }
 
-        int x2 = (int)position.x/50;
-        int y2 = (int)position.y/50;
-        for (int x = 0; x < (size.x/50); x++) {
-            for (int y = 0; y < (size.y/50); y++) {
-                tiles.get(-x+x2-1,-y+y2-1).machine = true;
+    public void updateNodes() {
+        int l = 0;
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i);
+            if (tile.machine) l++;
+        }
+        machTiles = new Tile[l];
+        l = 0;
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i);
+            if (tile.machine) {
+                machTiles[l] = tile;
+                l++;
             }
         }
     }
@@ -60,18 +69,12 @@ public class Machine {
             hit = false;
         }
         p.tint(255, tintColor, tintColor);
-        if (deathFrame < 200) p.image(sprites[currentFrame], position.x - size.x, position.y - size.y);
+        p.imageMode(CENTER);
+        if (deathFrame < 200) p.image(sprites[currentFrame], position.x, position.y);
+        p.imageMode(CORNER);
         p.tint(255);
-        if (!dead) {
-            if (name.equals("stoneDrillMA")) {
-                int r = (int) p.random(0, 10);
-                if (r == 0) {
-                    underParticles.add(new Debris(p, position.x - size.x / 2, position.y - size.y / 2, p.random(0, 360), "stone"));
-                } else {
-                    underParticles.add(new Debris(p, position.x - size.x / 2, position.y - size.y / 2, p.random(0, 360), "dirt"));
-                }
-            }
-        } else if (deathFrame < 200) deathAnim();
+        if (!dead) drillParticles();
+        else if (deathFrame < 200) deathAnim();
         if (p.frameCount > frameTimer && !dead) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
@@ -80,48 +83,55 @@ public class Machine {
         if (tintColor < 255) tintColor += 20;
     }
 
+    private void drillParticles() {
+        if (name.equals("stoneDrillMA")) {
+            int r = (int) p.random(0, 10);
+            if (r == 0) {
+                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "stone"));
+            } else {
+                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "dirt"));
+            }
+        }
+    }
+
+    private float shuffle(int i) {
+        return i + p.random(0,50);
+    }
+
     private void deathAnim() {
         deathFrame++;
         if (deathFrame < 160) {
-            int num = (int) (p.random(0, 2));
-            for (int j = 2; j >= 0; j--) {
-                particles.add(new Debris(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debris));
-            } if (num == 0) {
-                particles.add(new MediumExplosion(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360)));
+            for (Tile tile : machTiles) {
+                int x = (int)tile.position.x;
+                int y = (int)tile.position.y;
+                if ((int)p.random(0,3) == 0) particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0,360), debris));
+                if ((int)p.random(0,6) == 0) particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0,360)));
             }
         } else {
-            particles.add(new LargeExplosion(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360)));
-            for (int i = 5; i >= 0; i--) {
-                particles.add(new MediumExplosion(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360)));
-            } for (int j = 15; j >= 0; j--) {
-                particles.add(new Debris(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debris));
-            } if ((int) (p.random(0, 2f)) == 0) {
-                projectiles.add(new Flame(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1), p.random(0, 360), null, 50, 5, 100, (int) p.random(1, 4)));
-            }
-        }
-        if (deathFrame == 180) {
-            int x2 = (int)position.x/50;
-            int y2 = (int)position.y/50;
-            for (int x = 0; x < (size.x/50); x++) {
-                for (int y = 0; y < (size.y/50); y++) {
-                    tiles.get(-x+x2-1,-y+y2-1).setBgC(debris + "DebrisBGC_TL");
+            for (Tile tile : machTiles) {
+                int x = (int)tile.position.x;
+                int y = (int)tile.position.y;
+                if ((int)p.random(0,4) == 0) particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0,360)));
+                if ((int)p.random(0,2) == 0) particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0,360)));
+                for (int i = 0; i < 3; i++) {
+                    particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0,360), debris));
+                } if ((int)p.random(0,8) == 0) {
+                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0,360), null, 100, 10, 100, (int)p.random(1,4)));
                 }
             }
         }
+        if (deathFrame == 180) for (Tile tile : machTiles) tile.setBgC(debris + "DebrisBGC_TL");
     }
 
     public void damage(int dmg) {
         hp -= dmg;
         hit = true;
-        //explosions
-        int num = (int) (p.random(1, 3));
-        for (int i = num; i >= 0; i--) {
-            particles.add(new MediumExplosion(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360)));
-        }
-        //debris
-        num = (int) (p.random(1, 8));
-        for (int i = num; i >= 0; i--) {
-            particles.add(new Debris(p, (position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debris));
+        for (Tile tile : machTiles) {
+            int x = (int)tile.position.x;
+            int y = (int)tile.position.y;
+            for (int i = 0; i < 5; i++) {
+                particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0,360), debris));
+            } if ((int)p.random(0,2) == 0) particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0,360)));
         }
     }
 

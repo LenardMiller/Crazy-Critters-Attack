@@ -16,13 +16,16 @@ public class TileSelect extends Button {
         position = new PVector(x, y);
         size = new PVector(50, 50);
         this.type = type;
-        tileSprite = spritesH.get(type + "_TL");
         String sl = "";
         if (type.contains("BGA")) sl = "BGA";
         if (type.contains("BGW")) sl = "BGW";
         if (type.contains("BGB")) sl = "BGB";
         if (type.contains("BGC")) sl = "BGC";
         if (type.contains("Ob")) sl = "obstacle";
+        if (type.contains("Ma")) {
+            sl = "machine";
+            tileSprite = p.loadImage("sprites/guiObjects/buttons/tileSelect/machine/icon.png");
+        } else tileSprite = spritesH.get(type + "_TL");
         spriteLocation = "sprites/guiObjects/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
         spriteOne = p.loadImage(spriteLocation + "000.png");
         spriteTwo = p.loadImage(spriteLocation + "001.png");

@@ -38,6 +38,8 @@ public class LevelBuilderGui {
         placeButton(1,3,"treeBROb");
         placeButton(0,2,"treeTLOb");
         placeButton(1,2,"treeTROb");
+        //machine
+        placeButton(3,2,"Ma");
     }
 
     private void placeButton(int x, int y, String type) {
