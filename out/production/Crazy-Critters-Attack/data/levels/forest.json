@@ -126,7 +126,8 @@
     "machine": false,
     "id": 19,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "machine": false,
@@ -139,8 +140,7 @@
     "machine": false,
     "id": 21,
     "type": "tile",
-    "bgA": "grass",
-    "obstacle": "smallTreeOb_TL"
+    "bgA": "grass"
   },
   {
     "machine": false,
@@ -487,7 +487,8 @@
     "machine": false,
     "id": 74,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "bgC": "leavesBGC_TL"
   },
   {
     "machine": false,
@@ -606,6 +607,7 @@
     "id": 93,
     "type": "tile",
     "bgA": "grass",
+    "obstacle": "smallTreeOb_TL",
     "bgC": "leavesBGC_TL"
   },
   {
@@ -719,7 +721,8 @@
     "machine": false,
     "id": 111,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "bgC": "leavesBGC_TL"
   },
   {
     "machine": false,
@@ -853,7 +856,8 @@
     "machine": false,
     "id": 133,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "machine": false,
@@ -1670,7 +1674,8 @@
     "machine": false,
     "id": 266,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "machine": false,
@@ -1910,14 +1915,14 @@
     "machine": false,
     "id": 304,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "machine": false,
     "id": 305,
     "type": "tile",
-    "bgA": "grass",
-    "obstacle": "smallTreeOb_TL"
+    "bgA": "grass"
   },
   {
     "machine": false,
@@ -2034,7 +2039,8 @@
     "machine": false,
     "id": 323,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "machine": false,
