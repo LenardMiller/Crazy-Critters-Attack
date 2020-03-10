@@ -2,7 +2,7 @@ package main.pathfinding;
 
 import main.Main;
 import main.enemies.Enemy;
-import main.towers.Tile;
+import main.misc.Tile;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -42,11 +42,9 @@ public class Node {
     public void display() {
         p.stroke(255);
         p.noFill();
-        if (isOpen) p.fill(0, 255, 0);
-        if (isClosed) p.fill(255, 125, 0);
         if (isStart) p.fill(125, 125, 255);
         if (isEnd) p.fill(255, 0, 0);
-        if (isNotTraversable) p.fill(255);
+        if (isNotTraversable) p.fill(255,100);
         p.rect(position.x, position.y, nSize, nSize);
     }
 
@@ -58,13 +56,15 @@ public class Node {
         start.isStart = true;
     }
 
-    public void setEnd(int x, int y) {
+    public void setEnd(int x, int y) { //issue is here!
         if (!isEnd) {
+//            System.out.println(end.length);
             Node[] end2 = new Node[end.length + 1];
             arrayCopy(end, end2);
             end2[end2.length - 1] = nodeGrid[x][y];
             end = end2;
             isEnd = true;
+//            System.out.println(end.length);
         }
     }
 
@@ -105,16 +105,31 @@ public class Node {
         }
     }
 
-    public void checkObs() {
-        int towerX = (int) (position.x / 50) + 1;
-        int towerY = (int) (position.y / 50) + 1;
-        Tile tile = tiles.get(towerX, towerY);
+    public void checkTile() {
+        boolean ended = false;
+        int tX = (int) (position.x / 50);
+        int tY = (int) (position.y / 50);
+        int nX = (int) (position.x / 25) + 4;
+        int nY = (int) (position.y / 25) + 4;
+        Tile towerTile = tiles.get(tX+1, tY+1);
         tower = null;
-        if (tile != null) tower = tile.tower;
+        if (towerTile != null) tower = towerTile.tower;
         if (tower != null) {
-            movementPenalty = tower.maxHp;
-            if (tower.turret) setEnd((int) ((position.x + 100) / nSize), (int) ((position.y + 100) / nSize));
+            if (!tower.turret) movementPenalty = tower.maxHp;
+            if (tower.turret) {
+                setEnd(nX, nY);
+                ended = true;
+            }
         } else movementPenalty = 0;
+        Tile obsTile = tiles.get(tX,tY);
+        if (obsTile != null) {
+            isNotTraversable = obsTile.obstacle != null;
+            if (obsTile.machine) {
+                setEnd(nX,nY);
+                ended = true;
+            }
+        }
+        if (!ended) setNotEnd(tX,tY);
     }
 
     void setClose() {

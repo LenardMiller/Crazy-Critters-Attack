@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.projectiles.Needle;
-import main.towers.Tile;
+import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -39,7 +39,7 @@ public class Nightmare extends Turret {
         effectLevel = 3;
         effectDuration = 220;
         loadSprites();
-        debrisType = "metal";
+        debrisType = "darkMetal";
         price = 150;
         value = price;
         priority = 2; //strong

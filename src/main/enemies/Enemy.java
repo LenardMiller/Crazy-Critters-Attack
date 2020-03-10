@@ -142,7 +142,7 @@ public abstract class Enemy {
         }
     }
 
-    //todo: dance?
+    //todo: dance
 
     private void preDisplay() {
         if (attacking) {
@@ -337,7 +337,7 @@ public abstract class Enemy {
         points.addAll(pointsD);
     }
 
-    private ArrayList<Tower> clearanceTowers(TurnPoint point) { //todo: fix weird clearance around end points
+    private ArrayList<Tower> clearanceTowers(TurnPoint point) {
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
         int kSize = 1;

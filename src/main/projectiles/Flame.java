@@ -37,7 +37,7 @@ public class Flame extends Projectile {
         sprites = spritesAnimH.get("flamePJ");
         buff = "burning";
         splashEn = false;
-        fireChance = 4;
+        fireChance = 8;
         smokeChance = 100;
     }
 
@@ -53,7 +53,7 @@ public class Flame extends Projectile {
         sprite = sprites[currentSprite];
         //particles
         spawnRange += 0.5f;
-        if (currentSprite == 9) smokeChance = 10;
+        if (currentSprite == 9) smokeChance = 20;
         if (currentSprite > 9) {
             fireChance +=5;
             if (smokeChance > 4 && currentSprite < 15) smokeChance -= 0.5f;

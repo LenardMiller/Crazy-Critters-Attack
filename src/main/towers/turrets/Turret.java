@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.particles.Debris;
-import main.towers.Tile;
+import main.misc.Tile;
 import main.towers.Tower;
 import main.misc.CompressArray;
 import processing.core.PApplet;
@@ -192,7 +192,7 @@ public abstract class Turret extends Tower {
 
     public void main() { //need to check target
         if (hp <= 0) {
-            die();
+            die(false);
             tile.tower = null;
         }
         if (enemies.size() > 0 && alive) checkTarget();

@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.projectiles.EnergyBlast;
-import main.towers.Tile;
+import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -37,7 +37,7 @@ public class EnergyBlaster extends Turret{
         effectRadius = 25;
         bigExplosion = false;
         loadSprites();
-        debrisType = "metal";
+        debrisType = "darkMetal";
         price = 150;
         value = price;
         priority = 2; //strong

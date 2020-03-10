@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.projectiles.MiscProjectile;
-import main.towers.Tile;
+import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -34,7 +34,7 @@ public class RandomCannon extends Turret {
         damage = 3;
         error = 8; //default 8
         loadSprites();
-        debrisType = "metal";
+        debrisType = "darkMetal";
         price = 100;
         value = price;
         priority = 0; //close

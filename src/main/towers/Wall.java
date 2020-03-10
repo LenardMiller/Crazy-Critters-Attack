@@ -1,13 +1,13 @@
 package main.towers;
 
 import main.particles.Debris;
+import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateNodes;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.MiscMethods.*;
 
 public class Wall extends Tower {
 
@@ -43,6 +43,10 @@ public class Wall extends Tower {
         value = price;
         nextLevelB = 0;
 
+        int x = (int)(tile.position.x / 50);
+        int y = (int)(tile.position.y / 50);
+        tiles.get(x-1,y-1).setBgW(name);
+
         upgradePrices = new int[4];
         upgradeHealth = new int[4];
         upgradeNames = new String[4];
@@ -62,7 +66,7 @@ public class Wall extends Tower {
     }
 
     public void main(){
-        if (hp <= 0) die();
+        if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
     }
 
@@ -70,8 +74,21 @@ public class Wall extends Tower {
         float x = tile.position.x-size.x;
         float y = tile.position.y-size.y;
         p.tint(0,60);
-        p.image(sprite[0],x+2,y+2);
+        String sT = shadowType();
+        if (sT != null) p.image(spritesH.get("shadow" + sT + "TW"), x, y);
+        else p.image(sprite[0],x+5,y+5);
         p.tint(255);
+    }
+
+    private String shadowType() {
+        int x = (int)tile.position.x/50;
+        int y = (int)tile.position.y/50;
+        boolean t = y > 0 && tiles.get(x,y-1).tower != null && !tiles.get(x,y-1).tower.turret;
+        boolean l = x > 0 && tiles.get(x-1,y).tower != null && !tiles.get(x-1,y).tower.turret;
+        if (!t && !l) return "Both";
+        if (!l) return "BL";
+        if (!t) return "TR";
+        else return null;
     }
 
     public void displayPassB() {
@@ -240,6 +257,10 @@ public class Wall extends Tower {
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
+        int x = (int)(tile.position.x / 50);
+        int y = (int)(tile.position.y / 50);
+        tiles.get(x-1,y-1).setBgW(name);
+        updateWallTiles();
         updateNodes();
     }
 

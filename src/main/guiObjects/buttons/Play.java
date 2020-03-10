@@ -1,5 +1,6 @@
 package main.guiObjects.buttons;
 
+import main.levelStructure.Level;
 import main.levelStructure.Wave;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -42,8 +43,9 @@ public class Play extends Button {
     public void action() {
         if (p.frameCount > timer) {
             playingLevel = true;
-            forest.currentWave = 0;
-            Wave wave = forest.waves[forest.currentWave];
+            Level level = levels[currentLevel];
+            level.currentWave = 0;
+            Wave wave = level.waves[level.currentWave];
             wave.init();
         }
     }

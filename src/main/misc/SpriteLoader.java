@@ -80,7 +80,7 @@ public class SpriteLoader {
         getSprite(p,"magicMissleerIdle","TR","magicMissleer/idle/",8);
         getSprite(p,"nightmareFire","TR","nightmare/fire/",14);
         getSprite(p,"nightmareLoad","TR","nightmare/load/",22);
-        getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",3);
+        getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",4);
         getSprite(p,"flamethrowerLoad","TR","flamethrower/load/",1);
         getSprite(p,"flamethrowerIdle","TR","flamethrower/idle/",4);
         //walls
@@ -89,6 +89,8 @@ public class SpriteLoader {
         getSprite(p,"metalWall","TW","metal/",4);
         getSprite(p,"crystalWall","TW","crystal/",4);
         getSprite(p,"ultimateWall","TW","ultimate/",4);
+        //machines
+        getSprite(p,"stoneDrill","MA","stoneDrill/",4);
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {
@@ -114,6 +116,9 @@ public class SpriteLoader {
                 break;
             case "TW":
                 mainFolder = "towers/walls/";
+                break;
+            case "MA":
+                mainFolder = "machines/";
                 break;
         }
         String fullName = name+type;
@@ -144,6 +149,7 @@ public class SpriteLoader {
         spritesH.put("stonePt",p.loadImage("sprites/particles/debris/stone.png"));
         spritesH.put("ultimatePt",p.loadImage("sprites/particles/debris/ultimate.png"));
         spritesH.put("woodPt",p.loadImage("sprites/particles/debris/wood.png"));
+        spritesH.put("darkMetalPt",p.loadImage("sprites/particles/debris/darkMetal.png"));
         spritesH.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         spritesH.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
         //projectiles
@@ -180,6 +186,9 @@ public class SpriteLoader {
         spritesH.put("flamethrowerFullTR",p.loadImage("sprites/towers/turrets/flamethrower/full.png"));
         spritesH.put("flamethrowerIdleTR",p.loadImage("sprites/towers/turrets/flamethrower/idle.png"));
         //walls
+        spritesH.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
+        spritesH.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
+        spritesH.put("shadowTRTW",p.loadImage("sprites/towers/walls/overlays/shadowTR.png"));
         spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
         spritesH.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
@@ -212,5 +221,70 @@ public class SpriteLoader {
             spritesH.put(name + "LWallTW", p.loadImage("sprites/towers/walls/" + name + "/l.png"));
             spritesH.put(name + "RWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
         }
+        //tiles
+        //BGA
+        spritesH.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt/base.png"));
+        spritesH.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
+        for (int i = 0; i < 1; i++) {
+            String name = null;
+            if (i == 0) name = "grass";
+            spritesH.put(name + "BGA_T_TL", p.loadImage("sprites/tiles/BGA/" + name + "/t.png"));
+            spritesH.put(name + "BGA_R_TL", p.loadImage("sprites/tiles/BGA/" + name + "/r.png"));
+            spritesH.put(name + "BGA_B_TL", p.loadImage("sprites/tiles/BGA/" + name + "/b.png"));
+            spritesH.put(name + "BGA_L_TL", p.loadImage("sprites/tiles/BGA/" + name + "/l.png"));
+        }
+        //BGB
+        spritesH.put("dirtPatchBGB_TL",p.loadImage("sprites/tiles/BGB/dirtPatch.png"));
+        spritesH.put("grassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/grassPatch.png"));
+        spritesH.put("grassCornerBL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/bl.png"));
+        spritesH.put("grassCornerBR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/br.png"));
+        spritesH.put("grassCornerTL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tl.png"));
+        spritesH.put("grassCornerTR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tr.png"));
+        //BGW
+        spritesH.put("woodWallBGW_TL",p.loadImage("sprites/tiles/BGW/woodWall/base.png"));
+        spritesH.put("stoneWallBGW_TL",p.loadImage("sprites/tiles/BGW/stoneWall/base.png"));
+        spritesH.put("metalWallBGW_TL",p.loadImage("sprites/tiles/BGW/metalWall/base.png"));
+        spritesH.put("crystalWallBGW_TL",p.loadImage("sprites/tiles/BGW/crystalWall/base.png"));
+        spritesH.put("titaniumWallBGW_TL",p.loadImage("sprites/tiles/BGW/titaniumWall/base.png"));
+        for (int i = 0; i < 2; i++) { //simple connections
+            String name = null;
+            if (i == 0) name = "woodWall";
+            if (i == 1) name = "stoneWall";
+            spritesH.put(name + "BGW_T_TL", p.loadImage("sprites/tiles/BGW/" + name + "/t.png"));
+            spritesH.put(name + "BGW_R_TL", p.loadImage("sprites/tiles/BGW/" + name + "/r.png"));
+            spritesH.put(name + "BGW_B_TL", p.loadImage("sprites/tiles/BGW/" + name + "/b.png"));
+            spritesH.put(name + "BGW_L_TL", p.loadImage("sprites/tiles/BGW/" + name + "/l.png"));
+        }
+        for (int i = 0; i < 3; i++) { //diagonal double connections
+            String name = null;
+            if (i == 0) name = "metalWall";
+            if (i == 1) name = "crystalWall";
+            if (i == 2) name = "titaniumWall";
+            spritesH.put(name + "BGW_BLI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bli.png"));
+            spritesH.put(name + "BGW_BLO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/blo.png"));
+            spritesH.put(name + "BGW_BRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bri.png"));
+            spritesH.put(name + "BGW_BRO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bro.png"));
+            spritesH.put(name + "BGW_TLI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tli.png"));
+            spritesH.put(name + "BGW_TLO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tlo.png"));
+            spritesH.put(name + "BGW_TRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tri.png"));
+            spritesH.put(name + "BGW_TRO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tro.png"));
+        }
+        //BGC
+        spritesH.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
+        spritesH.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
+        spritesH.put("leavesBGC_TL",p.loadImage("sprites/tiles/BGC/leaves.png"));
+        spritesH.put("dandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/dandelions.png"));
+        spritesH.put("woodDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/wood.png"));
+        spritesH.put("stoneDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/stone.png"));
+        spritesH.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));
+        spritesH.put("darkMetalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/darkMetal.png"));
+        spritesH.put("crystalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/crystal.png"));
+        spritesH.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png")); //todo: make not butt ugly
+        //obstacles
+        spritesH.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
+        spritesH.put("treeBLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/bl.png"));
+        spritesH.put("treeBROb_TL",p.loadImage("sprites/tiles/obstacles/tree/br.png"));
+        spritesH.put("treeTLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/tl.png"));
+        spritesH.put("treeTROb_TL",p.loadImage("sprites/tiles/obstacles/tree/tr.png"));
     }
 }

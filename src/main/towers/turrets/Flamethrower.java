@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.projectiles.Flame;
-import main.towers.Tile;
+import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -26,12 +26,12 @@ public class Flamethrower extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 3;
+        delay = 4;
         delay += (round(p.random(-(delay / 10f), delay / 10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 5;
         error = 0.25f;
-        numFireFrames = 3;
+        numFireFrames = 4;
         numLoadFrames = 1;
         numIdleFrames = 4;
         effectLevel = 1;

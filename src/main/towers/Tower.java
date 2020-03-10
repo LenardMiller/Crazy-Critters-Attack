@@ -1,13 +1,13 @@
 package main.towers;
 
 import main.particles.Debris;
+import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateNodes;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.MiscMethods.*;
 
 public abstract class Tower {
 
@@ -27,7 +27,6 @@ public abstract class Tower {
     public int damage;
     public boolean hit;
     public PImage sprite;
-    public int barTrans;
     public Object updateSprite;
     protected int tintColor;
     protected String debrisType;
@@ -56,6 +55,7 @@ public abstract class Tower {
     public Tower(PApplet p, Tile tile) {
         this.p = p;
         this.tile = tile;
+        tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1).setBgC(null);
 
         name = "null";
         size = new PVector(120, 37);
@@ -64,7 +64,6 @@ public abstract class Tower {
         this.maxHp = 1;
         hp = maxHp;
         hit = false;
-        barTrans = 255;
         tintColor = 255;
         debrisType = "null";
         price = 0;
@@ -88,8 +87,8 @@ public abstract class Tower {
         updateTowerArray();
     }
 
-    public void main(){
-        if (hp <= 0) die();
+    public void main() {
+        if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
         if (turret) {
             if (inputHandler.leftMousePressedPulse && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) { //clicked on
@@ -113,10 +112,9 @@ public abstract class Tower {
 
     public void displayPassB() {}
 
-    public void damage(int dangerLevel) { //if it touches an enemy, animate and loose health
-        hp -= dangerLevel;
+    public void damage(int dmg) { //if it touches an enemy, animate and loose health
+        hp -= dmg;
         hit = true;
-        barTrans = 255;
         int num = (int)(p.random(1,4));
         for (int i = num; i >= 0; i--){ //spray debris
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
@@ -140,7 +138,7 @@ public abstract class Tower {
         updateNodes();
     }
 
-    public void die() {
+    public void die(boolean sold) {
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
@@ -149,6 +147,11 @@ public abstract class Tower {
         updateTowerArray();
         if (selection.id == tile.id) selection.name = "null";
         else if (!selection.name.equals("null")) selection.swapSelected(selection.tower.tile.id);
+        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
+        if (!turret) {
+            updateWallTiles();
+            connectWallQueues++;
+        }
         updateNodes();
     }
 
@@ -159,7 +162,7 @@ public abstract class Tower {
 
     public void sell() {
         money += (int) (value * .8);
-        die();
+        die(true);
     }
 
     public abstract void updateSprite();

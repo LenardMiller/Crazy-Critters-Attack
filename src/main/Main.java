@@ -4,28 +4,29 @@ import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.gui.Hand;
 import main.gui.InGameGui;
+import main.gui.LevelBuilderGui;
 import main.gui.Selection;
 import main.guiObjects.GuiObject;
 import main.guiObjects.buttons.Button;
 import main.guiObjects.buttons.Play;
+import main.guiObjects.buttons.TileSelect;
 import main.guiObjects.buttons.TowerBuy;
 import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
-import main.misc.CompressArray;
-import main.misc.KeyBinds;
+import main.misc.*;
 import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
 import main.projectiles.Arc;
 import main.projectiles.Projectile;
-import main.towers.Tile;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,17 +41,20 @@ public class Main extends PApplet {
     public static InputHandler inputHandler;
     public static KeyBinds keyBinds;
 
+    public static Machine machine;
     public static ArrayList<main.towers.Tower> towers;
     public static ArrayList<main.enemies.Enemy> enemies;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles;
+    public static ArrayList<main.particles.Particle> underParticles;
     public static ArrayList<main.projectiles.Arc> arcs;
     public static ArrayList<TowerBuy> towerBuyButtons;
+    public static ArrayList<TileSelect> tileSelectButtons;
     public static ArrayList<Buff> buffs;
 
-    public static Level forest;
+    public static int currentLevel;
+    public static Level[] levels;
 
-    public static InGameGui inGameGui;
     public static CompressArray compress;
 
     public static Button addMoneyButton;
@@ -67,6 +71,8 @@ public class Main extends PApplet {
 
     public static Hand hand;
     public static Selection selection;
+    public static InGameGui inGameGui;
+    public static LevelBuilderGui levelBuilderGui;
 
     public static PFont veryLargeFont;
     public static PFont largeFont;
@@ -78,6 +84,8 @@ public class Main extends PApplet {
     public static boolean alive = true;
     public static boolean debug = false;
     public static boolean playingLevel = false;
+    public static boolean levelBuilder = false;
+    public static int connectWallQueues;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
@@ -114,19 +122,19 @@ public class Main extends PApplet {
         smallFont = createFont("STHeitiSC-Light", 12);
         //creates object data structures
         tiles = new Tile.TileDS();
-        for (int y = 0; y <= BOARD_HEIGHT / 50; y++) {
-            for (int x = 0; x <= BOARD_WIDTH / 50; x++) {
+        for (int y = 0; y <= (BOARD_HEIGHT / 50); y++) {
+            for (int x = 0; x <= (BOARD_WIDTH / 50); x++) {
                 tiles.add(new Tile(this, new PVector(x * 50, y * 50), tiles.size()), x, y);
             }
         }
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         particles = new ArrayList<>();
+        underParticles = new ArrayList<>();
         arcs = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
+        tileSelectButtons = new ArrayList<>();
         buffs = new ArrayList<>();
-        //generates levels todo: put in own method
-        forest = new Level(this, ForestWaves.genForestWaves(this));
         //loads sprites
         loadSprites(this);
         loadSpritesAnim(this);
@@ -137,6 +145,9 @@ public class Main extends PApplet {
         hand = new Hand(this);
         selection = new Selection(this);
         inGameGui = new InGameGui(this);
+        levelBuilderGui = new LevelBuilderGui(this);
+        //other
+        connectWallQueues = 0;
         //pathfinding stuff
         nSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
@@ -154,16 +165,24 @@ public class Main extends PApplet {
         start.findGHF();
         for (Node node : end) node.findGHF();
         updateTowerArray();
+        //generates levels
+        currentLevel = 0; //temp
+        levels = new Level[1];
+        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest");
+        DataControl.load(this, levels[currentLevel].layout);
         updateNodes();
     }
 
     public void draw() { //this will need to be change when I todo: add more menu "scenes"
-        //bg todo: make background
         noStroke();
         fill(25, 25, 25);
         rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
         //keys
-        keyBinds.debugKeys();
+        try {
+            keyBinds.debugKeys();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         keyBinds.spawnKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
@@ -176,13 +195,14 @@ public class Main extends PApplet {
         drawObjects();
         //gui stuff
         noStroke();
-        inGameGui.display();
-        hand.displayHeldInfo(); //so text appears on top
+        if (!levelBuilder) inGameGui.display();
+        else levelBuilderGui.display();
+        hand.displayHeldInfo();
         //text
         textAlign(LEFT);
-        inGameGui.drawText(this, 10);
+        if (!levelBuilder) inGameGui.drawText(this, 10);
         //levels
-        if (playingLevel) forest.main();
+        if (playingLevel) levels[currentLevel].main();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;
@@ -195,6 +215,47 @@ public class Main extends PApplet {
     }
 
     private void drawObjects() {
+        //tiles
+        if (connectWallQueues > 0) { //else
+            connectWallQueues = 0;
+            updateWallTileConnections();
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayA();
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i);
+            if (tile.bgWName != null) {
+                if (tile.bgWName.equals("metalWall")) {
+                    tile.drawBgWICorners();
+                }
+            }
+            tile.drawBgWOCorners("metalWall");
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i);
+            if (tile.bgWName != null) {
+                if (tile.bgWName.equals("crystalWall")) {
+                    tile.drawBgWICorners();
+                }
+            }
+            tile.drawBgWOCorners("crystalWall");
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i);
+            if (tile.bgWName != null) {
+                if (tile.bgWName.equals("titaniumWall")) {
+                    tile.drawBgWICorners();
+                }
+            }
+            tile.drawBgWOCorners("titaniumWall");
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayB();
+        }
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayC();
+        }
         //pathfinding debug
         if (debug) {
             for (Node[] nodes : nodeGrid) {
@@ -205,6 +266,13 @@ public class Main extends PApplet {
             fill(0,0,255);
             rect(start.position.x,start.position.y,nSize,nSize);
         }
+        //under particles, for drills
+        for (int i = underParticles.size()-1; i >= 0; i--) {
+            Particle particle = underParticles.get(i);
+            particle.main(underParticles, i);
+        }
+        //machine
+        machine.main();
         //towers
         for (Tower tower : towers) if (tower.turret) tower.displayPassA();
         for (Tower tower : towers) if (!tower.turret) tower.displayPassA();

@@ -1,7 +1,7 @@
 package main.gui;
 
 import main.guiObjects.buttons.TowerBuy;
-import main.towers.Tile;
+import main.misc.Tile;
 import main.towers.Tower;
 import main.towers.Wall;
 import main.towers.turrets.*;
@@ -34,24 +34,27 @@ public class Hand {
     }
 
     public void main() {
-        checkPlaceable();
+        if (!levelBuilder) checkPlaceable();
+        else implacable = false;
         if (inputHandler.rightMousePressedPulse) remove();
         if ((inputHandler.leftMousePressedPulse || inputHandler.rightMousePressedPulse) && p.mouseX > BOARD_WIDTH) {
             held = "null";
             for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;
         }
-        checkDisplay();
+        if (!levelBuilder) checkDisplay();
         displayHeld();
         if (inputHandler.leftMousePressedPulse && !implacable) place();
     }
 
     private void checkPlaceable() {
         implacable = false;
-        Tile tile = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1);
-        if (tile == null) implacable = true;
-        else if (!held.equals("wall")) implacable = (tile.tower != null);
-        else implacable = (tile.tower != null && tile.tower.turret);
-        if (!implacable) implacable = (price > money);
+        Tile tileTower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1);
+        Tile tileObstacle = tiles.get((roundTo(p.mouseX, 50) / 50), (roundTo(p.mouseY, 50) / 50));
+        if (tileTower == null) implacable = true;
+        else if (!held.equals("wall")) implacable = (tileTower.tower != null);
+        else implacable = (tileTower.tower != null && tileTower.tower.turret);
+        if (tileObstacle != null && (tileObstacle.obstacle != null || tileObstacle.machine)) implacable = true;
+        if (price > money) implacable = true;
     }
 
     private void checkDisplay() {
@@ -83,7 +86,8 @@ public class Hand {
     }
 
     private void displayHeld() { //shows whats held at ~1/2 opacity
-        if (!held.equals("null") && alive) {
+//        System.out.println(heldSprite);
+        if (!held.equals("null") && heldSprite != null && alive) {
             //red if implacable
             if (implacable) p.tint(255, 0, 0, 150);
             else p.tint(255, 150);
@@ -209,56 +213,62 @@ public class Hand {
     }
 
     public void setHeld(String heldSet) { //swaps whats held
-        if (!heldSet.equals("null")) {
-            switch (heldSet) {
-                case "slingshot":
-                    heldSprite = spritesH.get("slingshotFullTR");
-                    offset = new PVector(0, 0);
-                    price = 50;
-                    break;
-                case "crossbow":
-                    heldSprite = spritesH.get("crossbowFullTR");
-                    offset = new PVector(2, 2);
-                    price = 100;
-                    break;
-                case "miscCannon":
-                    heldSprite = spritesH.get("miscCannonFullTR");
-                    offset = new PVector(0, 0);
-                    price = 100;
-                    break;
-                case "energyBlaster":
-                    heldSprite = spritesH.get("energyBlasterFullTR");
-                    offset = new PVector(11, 11);
-                    price = 150;
-                    break;
-                case "magicMissleer":
-                    heldSprite = spritesH.get("magicMissleerFullTR");
-                    offset = new PVector(0, 0);
-                    price = 150;
-                    break;
-                case "tesla":
-                    heldSprite = spritesH.get("teslaFullTR");
-                    offset = new PVector(0, 0);
-                    price = 150;
-                    break;
-                case "nightmare":
-                    heldSprite = spritesH.get("nightmareFullTR");
-                    offset = new PVector(0, 0);
-                    price = 200;
-                    break;
-                case "flamethrower":
-                    heldSprite = spritesH.get("flamethrowerFullTR");
-                    offset = new PVector(7,7);
-                    price = 200;
-                    break;
-                case "wall":
-                    heldSprite = spritesH.get("woodWallTW");
-                    offset = new PVector(0, 0);
-                    price = 25;
-                    break;
-            }
-            held = heldSet;
+        switch (heldSet) {
+            case "slingshot":
+                heldSprite = spritesH.get("slingshotFullTR");
+                offset = new PVector(0, 0);
+                price = 50;
+                break;
+            case "crossbow":
+                heldSprite = spritesH.get("crossbowFullTR");
+                offset = new PVector(2, 2);
+                price = 100;
+                break;
+            case "miscCannon":
+                heldSprite = spritesH.get("miscCannonFullTR");
+                offset = new PVector(0, 0);
+                price = 100;
+                break;
+            case "energyBlaster":
+                heldSprite = spritesH.get("energyBlasterFullTR");
+                offset = new PVector(11, 11);
+                price = 150;
+                break;
+            case "magicMissleer":
+                heldSprite = spritesH.get("magicMissleerFullTR");
+                offset = new PVector(0, 0);
+                price = 150;
+                break;
+            case "tesla":
+                heldSprite = spritesH.get("teslaFullTR");
+                offset = new PVector(0, 0);
+                price = 150;
+                break;
+            case "nightmare":
+                heldSprite = spritesH.get("nightmareFullTR");
+                offset = new PVector(0, 0);
+                price = 200;
+                break;
+            case "flamethrower":
+                heldSprite = spritesH.get("flamethrowerFullTR");
+                offset = new PVector(7, 7);
+                price = 200;
+                break;
+            case "wall":
+                heldSprite = spritesH.get("woodWallTW");
+                offset = new PVector(0, 0);
+                price = 25;
+                break;
+            case "null":
+                heldSprite = null;
+                break;
         }
+        if (heldSet.contains("TL")) {
+            offset = new PVector(0,0);
+            price = 0;
+            heldSprite = spritesH.get(heldSet);
+        }
+        held = heldSet;
     }
 
     private void remove() {
@@ -286,10 +296,29 @@ public class Hand {
                 } else if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                     money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
                     tile.tower.upgrade(0);
+                    connectWallQueues++;
                 }
                 money += price; //cancel out price change later
-            } else tile.tower = new Wall(p, tile);
+            } else {
+                tile.tower = new Wall(p, tile);
+                updateWallTiles();
+                connectWallQueues++;
+            }
             changeHeld = false;
+        }
+        if (held.contains("TL")) {
+            tile = tiles.get((roundTo(p.mouseX, 50) / 50), (roundTo(p.mouseY, 50) / 50));
+            changeHeld = false;
+            if (held.contains("BGA")) tile.setBgA(held);
+            if (held.contains("BGB")) tile.setBgB(held);
+            if (held.contains("BGW")) tile.setBgW(held);
+            if (held.contains("BGC")) tile.setBgC(held);
+            if (held.contains("Ob")) tile.setObstacle(held);
+            if (held.contains("Ma")) {
+                tile.machine = !tile.machine;
+                machine.updateNodes();
+            }
+            connectWallQueues++;
         }
         if (!held.equals("null")) money -= price;
         if (changeHeld) held = "null";

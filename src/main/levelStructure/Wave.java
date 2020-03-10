@@ -61,7 +61,7 @@ public class Wave {
         }
     }
 
-    public void display(float y, int id) {
+    public void display(float y, int id) { //todo: add little tabs
         p.tint(primary.getRed(), primary.getGreen(), primary.getBlue());
         p.image(spritesH.get("wavePrimaryIc"),900,y);
         p.tint(secondary.getRed(), secondary.getGreen(), secondary.getBlue());

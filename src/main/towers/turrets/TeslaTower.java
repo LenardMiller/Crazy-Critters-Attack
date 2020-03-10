@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.projectiles.Arc;
-import main.towers.Tile;
+import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -24,7 +24,7 @@ public class TeslaTower extends Turret{
         delay = 200; //200 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
-        damage = 35;
+        damage = 15;
         arcDistance = 200;
         arcLength = 3;
         pjSpeed = -1;
@@ -85,7 +85,7 @@ public class TeslaTower extends Turret{
         upgradeDamage[0] = 0;
         upgradeDamage[1] = 0;
         upgradeDamage[2] = 0;
-        upgradeDamage[3] = 15;
+        upgradeDamage[3] = 10;
         //delay (firerate)
         upgradeDelay[0] = 0;
         upgradeDelay[1] = 0;
@@ -125,7 +125,7 @@ public class TeslaTower extends Turret{
         upgradeDescA[0] = "Increase";
         upgradeDescA[1] = "Increase";
         upgradeDescA[2] = "Increase";
-        upgradeDescA[3] = "+15";
+        upgradeDescA[3] = "+10";
         //desc line two
         upgradeDescB[0] = "arc";
         upgradeDescB[1] = "arc";
