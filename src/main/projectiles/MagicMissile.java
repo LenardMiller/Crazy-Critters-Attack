@@ -51,20 +51,22 @@ public class MagicMissile extends Projectile {
                 float x = abs(spawnPos.x - enemy.position.x);
                 float y = abs(spawnPos.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
-                if (priority == 0 && t < dist) { //close
-                    e = enemy;
-                    dist = t;
-                }
-                if (priority == 1 && t > dist) { //far
-                    e = enemy;
-                    dist = t;
-                }
-                if (priority == 2) if (enemy.maxHp > maxHp) { //strong
-                    e = enemy;
-                    maxHp = enemy.maxHp;
-                } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
-                    e = enemy;
-                    dist = t;
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900) {
+                    if (priority == 0 && t < dist) { //close
+                        e = enemy;
+                        dist = t;
+                    }
+                    if (priority == 1 && t > dist) { //far
+                        e = enemy;
+                        dist = t;
+                    }
+                    if (priority == 2) if (enemy.maxHp > maxHp) { //strong
+                        e = enemy;
+                        maxHp = enemy.maxHp;
+                    } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                        e = enemy;
+                        dist = t;
+                    }
                 }
             }
         }
