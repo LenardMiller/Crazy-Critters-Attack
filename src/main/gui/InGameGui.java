@@ -1,8 +1,8 @@
 package main.gui;
 
-import main.guiObjects.GuiObject;
-import main.guiObjects.UpgradeIcon;
-import main.guiObjects.buttons.*;
+import main.gui.guiObjects.GuiObject;
+import main.gui.guiObjects.UpgradeIcon;
+import main.gui.guiObjects.buttons.*;
 import processing.core.PApplet;
 
 import static main.Main.*;
@@ -95,7 +95,7 @@ public class InGameGui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 85.5f,"tesla",true)); //row 2
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 85.5f,"nightmare",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 85.5f,"flamethrower",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"railgun",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 85.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 124.5f,"null",true)); //row 3
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 124.5f,"null",true));

@@ -41,6 +41,7 @@ public class SpriteLoader {
         getSprite(p,"energyExDebris","PT","explosionDebris/energy/",4);
         getSprite(p,"greenMagicBuff","PT","buff/greenMagic/",8);
         getSprite(p,"boltBreak","PT","boltBreak/",4);
+        getSprite(p,"railgunBlast","PT","railgunBlast/",11);
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
         getSprite(p,"flame","PJ","flame/",23);
@@ -83,6 +84,9 @@ public class SpriteLoader {
         getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",4);
         getSprite(p,"flamethrowerLoad","TR","flamethrower/load/",1);
         getSprite(p,"flamethrowerIdle","TR","flamethrower/idle/",4);
+        getSprite(p,"railgunFire","TR","railgun/fire/",6);
+        getSprite(p,"railgunLoad","TR","railgun/load/",9);
+        getSprite(p,"railgunIdle","TR","railgun/idle/",6);
         //walls
         getSprite(p,"woodWall","TW","wood/",4);
         getSprite(p,"stoneWall","TW","stone/",4);
@@ -185,6 +189,9 @@ public class SpriteLoader {
         spritesH.put("flamethrowerBaseTR",p.loadImage("sprites/towers/turrets/flamethrower/base.png"));
         spritesH.put("flamethrowerFullTR",p.loadImage("sprites/towers/turrets/flamethrower/full.png"));
         spritesH.put("flamethrowerIdleTR",p.loadImage("sprites/towers/turrets/flamethrower/idle.png"));
+        spritesH.put("railgunBaseTR",p.loadImage("sprites/towers/turrets/railgun/base.png"));
+        spritesH.put("railgunFullTR",p.loadImage("sprites/towers/turrets/railgun/full.png"));
+        spritesH.put("railgunIdleTR",p.loadImage("sprites/towers/turrets/railgun/idle.png"));
         //walls
         spritesH.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
         spritesH.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
