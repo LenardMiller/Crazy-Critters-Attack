@@ -12,6 +12,18 @@ import static main.misc.MiscMethods.updateTowerArray;
 
 public class Railgun extends Turret {
 
+    private PImage[] vaporTrail;
+    private PImage[] vaporEndSprites;
+    private int numVaporFrames;
+    private int betweenVaporFrames;
+    private int betweenVaporTimer;
+    private int currentVaporFrame;
+    private PVector vaporStart;
+    private PVector vaporEnd;
+    private float vaporAngle;
+    private int vaporLength;
+    private PVector vaporPartLength;
+
     public Railgun(PApplet p, Tile tile) {
         super(p,tile);
         name = "railgun";
@@ -26,15 +38,23 @@ public class Railgun extends Turret {
         damage = 300;
         pjSpeed = -1;
         error = 0; //0
-        numFireFrames = 6;
+        numFireFrames = 15;
         numLoadFrames = 9;
         numIdleFrames = 6;
+        numVaporFrames = 15;
+        betweenVaporFrames = 3;
+        betweenVaporTimer = 0;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         idleFrames = new PImage[numIdleFrames];
+        vaporTrail = new PImage[numVaporFrames];
+        vaporEndSprites = new PImage[11];
+        currentVaporFrame = 16;
         betweenIdleFrames = 3;
         betweenFireFrames = 3;
         spriteType = 0;
+        vaporTrail = spritesAnimH.get("railgunVaporTrailTR");
+        vaporEndSprites = spritesAnimH.get("railgunBlastPT");
         loadSprites();
         debrisType = "ultimate";
         price = 150;
@@ -53,11 +73,54 @@ public class Railgun extends Turret {
         spa.setMag(30);
         spp.add(spa);
         particles.add(new RailgunBlast(p,spp.x,spp.y,0));
-        particles.add(new RailgunBlast(p,targetEnemy.position.x,targetEnemy.position.y,0));
 
-        //todo: cool effect
+        currentVaporFrame = 0;
+        vaporStart = spp;
+        vaporEnd = targetEnemy.position;
+        vaporAngle = angle;
+        float c = sqrt(sq(vaporEnd.x-vaporStart.x)+sq(vaporEnd.y-vaporStart.y));
+        vaporLength = (int)(c/24);
+        vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
+        vaporPartLength.setMag(24);
 
         targetEnemy.effectDamage(damage,this);
+    }
+
+    public void displayPassB2() {
+        //shadow
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
+        p.rotate(angle);
+        p.tint(0,60);
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        p.tint(255);
+        p.popMatrix();
+        //vaporTrail
+        if (currentVaporFrame < numVaporFrames) {
+            for (int i = 0; i <= vaporLength; i++) {
+                p.pushMatrix();
+                float x = vaporStart.x + (vaporPartLength.x*i);
+                float y = vaporStart.y + (vaporPartLength.y*i);
+                p.translate(x, y);
+                p.rotate(vaporAngle);
+                p.image(vaporTrail[currentVaporFrame], -2, 0);
+                if (i == vaporLength && currentVaporFrame < 11) p.image(vaporEndSprites[currentVaporFrame], -13, -15);
+                p.popMatrix();
+            }
+            if (betweenVaporTimer < betweenVaporFrames) betweenVaporTimer++;
+            else {
+                currentVaporFrame++;
+                betweenVaporTimer = 0;
+            }
+        }
+        //main
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+        p.rotate(angle);
+        p.tint(255, tintColor, tintColor);
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        p.popMatrix();
+        p.tint(255);
     }
 
     void aim(Enemy enemy) {

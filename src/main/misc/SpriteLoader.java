@@ -84,9 +84,10 @@ public class SpriteLoader {
         getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",4);
         getSprite(p,"flamethrowerLoad","TR","flamethrower/load/",1);
         getSprite(p,"flamethrowerIdle","TR","flamethrower/idle/",4);
-        getSprite(p,"railgunFire","TR","railgun/fire/",6);
+        getSprite(p,"railgunFire","TR","railgun/fire/",15);
         getSprite(p,"railgunLoad","TR","railgun/load/",9);
         getSprite(p,"railgunIdle","TR","railgun/idle/",6);
+        getSprite(p,"railgunVaporTrail","TR","railgun/vaporTrail/",15);
         //walls
         getSprite(p,"woodWall","TW","wood/",4);
         getSprite(p,"stoneWall","TW","stone/",4);
@@ -286,7 +287,7 @@ public class SpriteLoader {
         spritesH.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));
         spritesH.put("darkMetalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/darkMetal.png"));
         spritesH.put("crystalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/crystal.png"));
-        spritesH.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png")); //todo: make not butt ugly
+        spritesH.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png"));
         //obstacles
         spritesH.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         spritesH.put("treeBLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/bl.png"));
