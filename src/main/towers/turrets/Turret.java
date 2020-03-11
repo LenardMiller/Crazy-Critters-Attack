@@ -87,7 +87,7 @@ public abstract class Turret extends Tower {
 
     public void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null) aim(targetEnemy);
+        if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
         if (spriteType == 0 && targetEnemy != null) { //if done animating
             spriteType = 1;
             frame = 0;
