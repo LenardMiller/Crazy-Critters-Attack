@@ -273,12 +273,6 @@ public class Main extends PApplet {
         }
         //machine
         machine.main();
-        //towers
-        for (Tower tower : towers) if (tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassB();
-        for (Tower tower : towers) if (tower.turret) tower.displayPassB();
-        for (Tower tower : towers) tower.main();
         //enemies
         for (Enemy enemy : enemies) enemy.displayPassA();
         for (int i = enemies.size() - 1; i >= 0; i--) {
@@ -286,6 +280,12 @@ public class Main extends PApplet {
             enemy.main(i);
         }
         if (enemies.size() == 0) buffs = new ArrayList<>();
+        //towers
+        for (Tower tower : towers) if (tower.turret) tower.displayPassA();
+        for (Tower tower : towers) if (!tower.turret) tower.displayPassA();
+        for (Tower tower : towers) if (!tower.turret) tower.displayPassB();
+        for (Tower tower : towers) if (tower.turret) tower.displayPassB();
+        for (Tower tower : towers) tower.main();
         //projectiles
         for (Projectile projectile : projectiles) projectile.displayPassA();
         for (int i = 0; i < projectiles.size(); i++) {
