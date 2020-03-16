@@ -57,7 +57,7 @@ public class Railgun extends Turret {
         vaporEndSprites = spritesAnimH.get("railgunBlastPT");
         loadSprites();
         debrisType = "ultimate";
-        price = 150;
+        price = 200;
         value = price;
         priority = 2; //strong
         nextLevelA = 0;
@@ -83,7 +83,7 @@ public class Railgun extends Turret {
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
 
-        targetEnemy.effectDamage(damage,this);
+        targetEnemy.damageSimple(damage,this);
     }
 
     public void displayPassB2() {

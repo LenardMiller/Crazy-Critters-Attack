@@ -96,7 +96,7 @@ public class InGameGui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 85.5f,"nightmare",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 85.5f,"flamethrower",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"railgun",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 85.5f,"null",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 85.5f,"waveMotion",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 124.5f,"null",true)); //row 3
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 124.5f,"null",true));

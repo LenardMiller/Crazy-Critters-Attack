@@ -88,6 +88,10 @@ public class SpriteLoader {
         getSprite(p,"railgunLoad","TR","railgun/load/",9);
         getSprite(p,"railgunIdle","TR","railgun/idle/",6);
         getSprite(p,"railgunVaporTrail","TR","railgun/vaporTrail/",15);
+        getSprite(p,"waveMotionFire","TR","waveMotion/fire/",18);
+        getSprite(p,"waveMotionLoad","TR","waveMotion/load/",80);
+        getSprite(p,"waveMotionIdle","TR","waveMotion/idle/",14);
+        getSprite(p,"waveMotionBeam","TR","waveMotion/beam/",18);
         //walls
         getSprite(p,"woodWall","TW","wood/",4);
         getSprite(p,"stoneWall","TW","stone/",4);
@@ -193,6 +197,9 @@ public class SpriteLoader {
         spritesH.put("railgunBaseTR",p.loadImage("sprites/towers/turrets/railgun/base.png"));
         spritesH.put("railgunFullTR",p.loadImage("sprites/towers/turrets/railgun/full.png"));
         spritesH.put("railgunIdleTR",p.loadImage("sprites/towers/turrets/railgun/idle.png"));
+        spritesH.put("waveMotionBaseTR",p.loadImage("sprites/towers/turrets/waveMotion/base.png"));
+        spritesH.put("waveMotionFullTR",p.loadImage("sprites/towers/turrets/waveMotion/full.png"));
+        spritesH.put("waveMotionIdleTR",p.loadImage("sprites/towers/turrets/waveMotion/idle.png"));
         //walls
         spritesH.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
         spritesH.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));

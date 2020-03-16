@@ -41,6 +41,9 @@ public class TowerBuy extends Button {
             case "railgun":
                 price = 200;
                 break;
+            case "waveMotion":
+                price = 250;
+                break;
         }
     }
 
@@ -108,6 +111,12 @@ public class TowerBuy extends Button {
                     p.text("Railgun", x, 241);
                     p.textFont(mediumFont);
                     p.text("$200", x, 271);
+                    break;
+                case "waveMotion":
+                    p.text("Wave Motion", x, 241);
+                    p.text("Tower", x, 266);
+                    p.textFont(mediumFont);
+                    p.text("$250", x, 296);
                     break;
             }
             //if pressed

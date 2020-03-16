@@ -22,7 +22,7 @@ public class Poisoned extends Buff{
         Enemy enemy = enemies.get(enId);
         enemy.tintColor = 0;
         enemy.barTrans = 255;
-        enemy.effectDamage(3,turret);
+        enemy.damageSimple(3,turret);
         int num = PApplet.ceil(p.random(0,3));
         for (int j = num; j >= 0; j--){ //sprays green
             particles.add(new Ouch(p,(float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), p.random(0,360), "greenOuch"));
