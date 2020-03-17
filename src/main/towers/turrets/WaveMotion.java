@@ -118,7 +118,7 @@ public class WaveMotion extends Turret {
         p.tint(255);
     }
 
-    private void beamDamage(PVector start, PVector end) {
+    private void beamDamage(PVector start, PVector end) { //todo: fix hitting enemies behind tower
         for (Enemy enemy : enemies) {
             float enemyXref = enemy.position.x-start.x;
             float enemyYref = (enemy.position.y-start.y)*-1;
