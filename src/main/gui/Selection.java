@@ -178,6 +178,21 @@ public class Selection { //what tower is selected
                 p.textAlign(LEFT);
                 p.fill(100,0,200);
                 p.text("Fire, limited range", 910, 376 + offset);
+                break;
+            case "railgun":
+                p.text("Railgun", 1000, 241);
+                speed = -1;
+                break;
+            case "waveMotion":
+                p.text("Wave Motion", 1000, 241);
+                p.text("Tower",1000,266);
+                offset = 25;
+                speed = -1;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100,0,200);
+                p.text("Energy beam", 910, 376 + offset);
+                break;
         }
 
         //stats

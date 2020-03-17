@@ -11,8 +11,6 @@ import static main.Main.*;
 import static main.pathfinding.UpdateClearance.updateClearance;
 import static main.pathfinding.UpdateNode.updateNode;
 import static main.pathfinding.UpdatePath.updatePath;
-import static processing.core.PApplet.atan2;
-import static processing.core.PConstants.TWO_PI;
 
 public class MiscMethods {
 
@@ -42,22 +40,16 @@ public class MiscMethods {
         }
     }
 
+    public static float findSlope(PVector p1, PVector p2) {
+        float m = (p2.y-p1.y)/(p2.x-p1.x);
+        return m*-1;
+    }
+
     public static float findAngleBetween(PVector p1, PVector p2) {
         //https://forum.processing.org/one/topic/pvector-anglebetween.html
         float a = atan2(p1.y - p2.y, p1.x - p2.x);
-        if (a < 0) {
-            a += TWO_PI;
-        }
+        if (a < 0) a += TWO_PI;
         return a;
-    }
-
-    public static boolean isBetween(PVector pointA, PVector pointB, PVector testPoint) {
-        //inclusive top point, exclusive bottom
-        boolean xAB = testPoint.x >= pointA.x && testPoint.x < pointB.x;
-        boolean xBA = testPoint.x >= pointB.x && testPoint.x < pointA.x;
-        boolean yAB = testPoint.y >= pointA.y && testPoint.y < pointB.y;
-        boolean yBA = testPoint.y >= pointB.y && testPoint.y < pointA.y;
-        return (xAB || xBA) && (yAB || yBA);
     }
 
     public static int roundTo(float input, int rounder) {
@@ -185,5 +177,38 @@ public class MiscMethods {
             }
             tile.connectBgWOCorners();
         }
+    }
+
+    public static float findAngle(PVector v1, PVector v2) {
+        float angle = 0;
+        PVector ratio = PVector.sub(v2, v1);
+        if (v1.x == v2.x) { //if on the same x
+            if (v1.y >= v2.y) { //if below target or on same y, angle right
+                angle = 0;
+            } else if (v1.y < v2.y) { //if above target, angle left
+                angle = PI;
+            }
+        } else if (v1.y == v2.y) { //if on same y
+            if (v1.x > v2.x) { //if  right of target, angle down
+                angle = 3 * HALF_PI;
+            } else if (v1.x < v2.x) { //if left of target, angle up
+                angle = HALF_PI;
+            }
+        } else {
+            if (v1.x < v2.x && v1.y > v2.y) { //if to left and below
+                angle = (atan(abs(ratio.x + 15) / abs(ratio.y)));
+            } else if (v1.x < v2.x && v1.y < v2.y) { //if to left and above
+                angle = (atan(abs(ratio.y) / abs(ratio.x))) + HALF_PI;
+            } else if (v1.x > v2.x && v1.y < v2.y) { //if to right and above
+                angle = (atan(abs(ratio.x + 15) / abs(ratio.y))) + PI;
+            } else if (v1.x > v2.x && v1.y > v2.y) { //if to right and below
+                angle = (atan(abs(ratio.y) / abs(ratio.x))) + 3 * HALF_PI;
+            }
+        }
+        return angle;
+    }
+
+    public static float findAngle(PVector v) {
+        return findAngle(new PVector(0,0), v);
     }
 }

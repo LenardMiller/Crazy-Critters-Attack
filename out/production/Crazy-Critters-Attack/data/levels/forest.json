@@ -115,7 +115,8 @@
     "machine": false,
     "id": 17,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "machine": false,
@@ -1802,7 +1803,8 @@
     "machine": false,
     "id": 286,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "bgC": "leavesBGC_TL"
   },
   {
     "machine": false,

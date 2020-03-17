@@ -6,11 +6,11 @@ import main.gui.Hand;
 import main.gui.InGameGui;
 import main.gui.LevelBuilderGui;
 import main.gui.Selection;
-import main.guiObjects.GuiObject;
-import main.guiObjects.buttons.Button;
-import main.guiObjects.buttons.Play;
-import main.guiObjects.buttons.TileSelect;
-import main.guiObjects.buttons.TowerBuy;
+import main.gui.guiObjects.GuiObject;
+import main.gui.guiObjects.buttons.Button;
+import main.gui.guiObjects.buttons.Play;
+import main.gui.guiObjects.buttons.TileSelect;
+import main.gui.guiObjects.buttons.TowerBuy;
 import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
 import main.misc.*;
@@ -273,12 +273,6 @@ public class Main extends PApplet {
         }
         //machine
         machine.main();
-        //towers
-        for (Tower tower : towers) if (tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassB();
-        for (Tower tower : towers) if (tower.turret) tower.displayPassB();
-        for (Tower tower : towers) tower.main();
         //enemies
         for (Enemy enemy : enemies) enemy.displayPassA();
         for (int i = enemies.size() - 1; i >= 0; i--) {
@@ -286,6 +280,12 @@ public class Main extends PApplet {
             enemy.main(i);
         }
         if (enemies.size() == 0) buffs = new ArrayList<>();
+        //towers
+        for (Tower tower : towers) if (tower.turret) tower.displayPassA();
+        for (Tower tower : towers) if (!tower.turret) tower.displayPassA();
+        for (Tower tower : towers) if (!tower.turret) tower.displayPassB();
+        for (Tower tower : towers) if (tower.turret) tower.displayPassB();
+        for (Tower tower : towers) tower.main();
         //projectiles
         for (Projectile projectile : projectiles) projectile.displayPassA();
         for (int i = 0; i < projectiles.size(); i++) {

@@ -41,6 +41,7 @@ public class SpriteLoader {
         getSprite(p,"energyExDebris","PT","explosionDebris/energy/",4);
         getSprite(p,"greenMagicBuff","PT","buff/greenMagic/",8);
         getSprite(p,"boltBreak","PT","boltBreak/",4);
+        getSprite(p,"railgunBlast","PT","railgunBlast/",11);
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
         getSprite(p,"flame","PJ","flame/",23);
@@ -63,6 +64,8 @@ public class SpriteLoader {
         getSprite(p,"wormAttack","EN","worm/attack/",34); //todo: make not look like dick
         getSprite(p,"butterflyAttack","EN","butterfly/attack/",16);
         getSprite(p,"butterflyMove","EN","butterfly/move/",8);
+        getSprite(p,"dummyAttack","EN","dummy/attack/",1);
+        getSprite(p,"dummyMove","EN","dummy/move/",1);
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
@@ -83,6 +86,14 @@ public class SpriteLoader {
         getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",4);
         getSprite(p,"flamethrowerLoad","TR","flamethrower/load/",1);
         getSprite(p,"flamethrowerIdle","TR","flamethrower/idle/",4);
+        getSprite(p,"railgunFire","TR","railgun/fire/",15);
+        getSprite(p,"railgunLoad","TR","railgun/load/",9);
+        getSprite(p,"railgunIdle","TR","railgun/idle/",6);
+        getSprite(p,"railgunVaporTrail","TR","railgun/vaporTrail/",15);
+        getSprite(p,"waveMotionFire","TR","waveMotion/fire/",18);
+        getSprite(p,"waveMotionLoad","TR","waveMotion/load/",80);
+        getSprite(p,"waveMotionIdle","TR","waveMotion/idle/",14);
+        getSprite(p,"waveMotionBeam","TR","waveMotion/beam/",18);
         //walls
         getSprite(p,"woodWall","TW","wood/",4);
         getSprite(p,"stoneWall","TW","stone/",4);
@@ -137,6 +148,7 @@ public class SpriteLoader {
         spritesH.put("midBugEN",p.loadImage("sprites/enemies/midBug/idle.png"));
         spritesH.put("bigBugEN",p.loadImage("sprites/enemies/bigBug/idle.png"));
         spritesH.put("snakeEN",p.loadImage("sprites/enemies/snake/idle.png"));
+        spritesH.put("dummyEN",p.loadImage("sprites/enemies/dummy/idle.png"));
         //icons
         spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
         spritesH.put("wavePrimaryIc",p.loadImage("sprites/guiObjects/wavePrimary.png"));
@@ -185,6 +197,12 @@ public class SpriteLoader {
         spritesH.put("flamethrowerBaseTR",p.loadImage("sprites/towers/turrets/flamethrower/base.png"));
         spritesH.put("flamethrowerFullTR",p.loadImage("sprites/towers/turrets/flamethrower/full.png"));
         spritesH.put("flamethrowerIdleTR",p.loadImage("sprites/towers/turrets/flamethrower/idle.png"));
+        spritesH.put("railgunBaseTR",p.loadImage("sprites/towers/turrets/railgun/base.png"));
+        spritesH.put("railgunFullTR",p.loadImage("sprites/towers/turrets/railgun/full.png"));
+        spritesH.put("railgunIdleTR",p.loadImage("sprites/towers/turrets/railgun/idle.png"));
+        spritesH.put("waveMotionBaseTR",p.loadImage("sprites/towers/turrets/waveMotion/base.png"));
+        spritesH.put("waveMotionFullTR",p.loadImage("sprites/towers/turrets/waveMotion/full.png"));
+        spritesH.put("waveMotionIdleTR",p.loadImage("sprites/towers/turrets/waveMotion/idle.png"));
         //walls
         spritesH.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
         spritesH.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
@@ -279,7 +297,7 @@ public class SpriteLoader {
         spritesH.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));
         spritesH.put("darkMetalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/darkMetal.png"));
         spritesH.put("crystalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/crystal.png"));
-        spritesH.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png")); //todo: make not butt ugly
+        spritesH.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png"));
         //obstacles
         spritesH.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         spritesH.put("treeBLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/bl.png"));

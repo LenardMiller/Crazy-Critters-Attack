@@ -203,7 +203,7 @@ public abstract class Enemy {
         }
     }
 
-    public void collidePJ(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, int i) { //when the enemy hits a projectile
+    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, int i) { //when the enemy hits a projectile
         hp -= damage;
         if (turret != null) {
             if (hp <= 0) {
@@ -220,24 +220,30 @@ public abstract class Enemy {
                 }
             }
         }
-        switch (pjBuff) {
-            case "wet":
-                buffs.add(new Wet(p,i,turret));
-                break;
-            case "burning":
-                buffs.add(new Burning(p,i,effectLevel,effectDuration,turret));
-                break;
-            case "poisoned":
-                buffs.add(new Poisoned(p,i,turret));
-                break;
-            case "decay":
-                if (turret != null) buffs.add(new Decay(p, i, effectLevel, effectDuration,turret));
-                else buffs.add(new Decay(p, i, 1, 120, null));
-                break;
+        if (pjBuff != null) {
+            switch (pjBuff) {
+                case "wet":
+                    buffs.add(new Wet(p, i, turret));
+                    break;
+                case "burning":
+                    buffs.add(new Burning(p, i, effectLevel, effectDuration, turret));
+                    break;
+                case "poisoned":
+                    buffs.add(new Poisoned(p, i, turret));
+                    break;
+                case "decay":
+                    if (turret != null) buffs.add(new Decay(p, i, effectLevel, effectDuration, turret));
+                    else buffs.add(new Decay(p, i, 1, 120, null));
+                    break;
+            }
         }
+        damageEffect(splash);
+    }
+
+    private void damageEffect(boolean parts) {
         barTrans = 255;
         tintColor = 0;
-        if (splash) {
+        if (parts) {
             int num = (int) (p.random(1, 3));
             for (int j = num; j >= 0; j--) { //sprays ouch
                 particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
@@ -245,7 +251,7 @@ public abstract class Enemy {
         }
     }
 
-    public void effectDamage(int damage, Turret turret) {
+    public void damageSimple(int damage, Turret turret) {
         hp -= damage;
         if (turret != null) {
             if (hp <= 0) {
@@ -253,6 +259,7 @@ public abstract class Enemy {
                 turret.damageTotal += damage + hp;
             } else turret.damageTotal += damage;
         }
+        damageEffect(false);
     }
 
     private void HpBar() {

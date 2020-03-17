@@ -1,6 +1,6 @@
 package main.gui;
 
-import main.guiObjects.buttons.TowerBuy;
+import main.gui.guiObjects.buttons.TowerBuy;
 import main.misc.Tile;
 import main.towers.Tower;
 import main.towers.Wall;
@@ -254,6 +254,16 @@ public class Hand {
                 offset = new PVector(7, 7);
                 price = 200;
                 break;
+            case "railgun":
+                heldSprite = spritesH.get("railgunFullTR");
+                offset = new PVector(6, 6);
+                price = 200;
+                break;
+            case "waveMotion":
+                heldSprite = spritesH.get("waveMotionFullTR");
+                offset = new PVector(0, 0);
+                price = 250;
+                break;
             case "wall":
                 heldSprite = spritesH.get("woodWallTW");
                 offset = new PVector(0, 0);
@@ -289,6 +299,8 @@ public class Hand {
         else if (held.equals("tesla") && alive) tile.tower = new TeslaTower(p, tile);
         else if (held.equals("nightmare") && alive) tile.tower = new Nightmare(p, tile);
         else if (held.equals("flamethrower") && alive) tile.tower = new Flamethrower(p, tile);
+        else if (held.equals("railgun") && alive) tile.tower = new Railgun(p, tile);
+        else if (held.equals("waveMotion") && alive) tile.tower = new WaveMotion(p, tile);
         else if (held.equals("wall") && alive) {
             if (tile.tower != null && !tile.tower.turret) { //upgrade or repair
                 if (tile.tower.hp < tile.tower.maxHp && money >= ceil((float) (tile.tower.price) - (float) (tile.tower.value))) {

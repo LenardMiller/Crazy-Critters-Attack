@@ -1,6 +1,6 @@
 package main.gui;
 
-import main.guiObjects.buttons.TileSelect;
+import main.gui.guiObjects.buttons.TileSelect;
 import processing.core.PApplet;
 
 import static main.Main.tileSelectButtons;
