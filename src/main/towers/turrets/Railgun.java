@@ -124,13 +124,9 @@ public class Railgun extends Turret {
     }
 
     void aim(Enemy enemy) {
-        PVector position = tile.position;
-        PVector e = PVector.div(enemy.size, 2);
+        PVector position = new PVector(tile.position.x-25,tile.position.y-25);
         PVector target = enemy.position;
-        target = PVector.add(target, e);
-
         PVector ratio = PVector.sub(target, position);
-//        angle = findAngleBetween(position,target);
         if (position.x == target.x) { //if on the same x
             if (position.y >= target.y) { //if below target or on same y, angle right
                 angle = 0;
@@ -156,11 +152,11 @@ public class Railgun extends Turret {
         }
         if (visualize && debug) { //cool lines
             p.stroke(255);
-            p.line(position.x - size.x / 2, position.y - size.y / 2, target.x - enemy.size.x / 2, target.y - enemy.size.y / 2);
+            p.line(position.x, position.y, target.x, target.y);
             p.stroke(255, 0, 0, 150);
-            p.line(target.x - enemy.size.x / 2, p.height, target.x - enemy.size.x / 2, 0);
+            p.line(target.x, p.height, target.x, 0);
             p.stroke(0, 0, 255, 150);
-            p.line(p.width, target.y - enemy.size.y / 2, 0, target.y - enemy.size.y / 2);
+            p.line(p.width, target.y, 0, target.y);
         }
     }
 
