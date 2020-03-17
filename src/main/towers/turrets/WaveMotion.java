@@ -7,7 +7,8 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
+import static main.misc.MiscMethods.findSlope;
+import static main.misc.MiscMethods.updateTowerArray;
 
 public class WaveMotion extends Turret {
 
@@ -120,28 +121,29 @@ public class WaveMotion extends Turret {
 
     private void beamDamage(PVector start, PVector end) {
         for (Enemy enemy : enemies) {
-            float enemyXref = enemy.position.x-start.x;
-            float enemyYref = (enemy.position.y-start.y)*-1;
-            float m = findSlope(start,end);
+            float enemyXref = enemy.position.x - start.x;
+            float enemyYref = (enemy.position.y - start.y) * -1;
+            float m = findSlope(start, end);
             float angle2 = atan(m);
             if (angle < 0) angle2 += TWO_PI;
 
-            //prevent hitting enemies behind tower
-            PVector position = new PVector(tile.position.x-25,tile.position.y-25);
-            float angleToEnemy = findAngle(enemy.position,position);
-            float angleDif = angleToEnemy - angle2;
-            if (!(angleDif < -HALF_PI && angleDif > -PI + HALF_PI|| angleDif > HALF_PI && angleDif < PI + HALF_PI)) {
-                continue;
-            }
+//            //prevent hitting enemies behind tower
+//            PVector position = new PVector(tile.position.x-25,tile.position.y-25);
+//            float angleToEnemy = findAngle(enemy.position,position);
+//            float angleDif = angleToEnemy - angle2;
+//            if (!(angleDif < -HALF_PI && angleDif > -PI + HALF_PI|| angleDif > HALF_PI && angleDif < PI + HALF_PI)) {
+//                continue;
+//            }
 
             float tanAngle = tan(angle2);
-            float tanAngleMin90 = tan(angle2-radians(90));
-            float intersectionX = (tanAngleMin90*enemyXref-enemyYref)/(tanAngle-tanAngleMin90);
-            float intersectionY = tan(angle2)*intersectionX;
-            float distToIntersection = sqrt(sq(intersectionX)+sq(intersectionY));
-            float distToEnemy = sqrt(sq(enemyXref)+sq(enemyYref));
-            float distFromEnemyToBeam = sqrt(sq(distToEnemy)-sq(distToIntersection));
-            distFromEnemyToBeam -= enemy.radius/2;
+            float tanAngleMin90 = tan(angle2 - radians(90));
+            float intersectionX = (tanAngleMin90 * enemyXref - enemyYref) / (tanAngle - tanAngleMin90);
+            float intersectionY = tan(angle2) * intersectionX;
+            float distToIntersection = sqrt(sq(intersectionX) + sq(intersectionY));
+            float distToEnemy = sqrt(sq(enemyXref) + sq(enemyYref));
+            float distFromEnemyToBeam = sqrt(sq(distToEnemy) - sq(distToIntersection));
+            if (Float.isNaN(distFromEnemyToBeam)) distFromEnemyToBeam = 1;
+            distFromEnemyToBeam -= enemy.radius / 2;
             if (distFromEnemyToBeam < 1) distFromEnemyToBeam = 1;
             if (distFromEnemyToBeam < 10) enemy.damageSimple(damage, this);
             else if (distFromEnemyToBeam < 50 && currentBeamFrame % 4 == 0) enemy.damageSimple(damage, this);
