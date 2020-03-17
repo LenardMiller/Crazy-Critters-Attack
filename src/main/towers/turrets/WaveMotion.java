@@ -140,20 +140,6 @@ public class WaveMotion extends Turret {
         }
     }
 
-    void aim(Enemy enemy) {
-        PVector position = new PVector(tile.position.x-25,tile.position.y-25);
-        PVector target = enemy.position;
-        angle = findAngle(position,target);
-        if (visualize && debug) { //cool lines
-            p.stroke(255);
-            p.line(position.x, position.y, target.x, target.y);
-            p.stroke(255, 0, 0, 150);
-            p.line(target.x, p.height, target.x, 0);
-            p.stroke(0, 0, 255, 150);
-            p.line(p.width, target.y, 0, target.y);
-        }
-    }
-
     private void setUpgrades(){
         //damage
         upgradeDamage[0] = 0;
