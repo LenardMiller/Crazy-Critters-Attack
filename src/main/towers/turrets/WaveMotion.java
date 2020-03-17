@@ -147,8 +147,8 @@ public class WaveMotion extends Turret {
             distFromEnemyToBeam -= enemy.radius / 2;
             if (distFromEnemyToBeam < 1) distFromEnemyToBeam = 1;
             if (distFromEnemyToBeam < 10) enemy.damageSimple(damage, this);
-            else if (distFromEnemyToBeam < 50 && currentBeamFrame % 4 == 0) enemy.damageSimple(damage, this);
-            else if (distFromEnemyToBeam < 100 && currentBeamFrame % 8 == 0) enemy.damageSimple(damage, this);
+            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageSimple(damage, this);
+            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageSimple(damage, this);
         }
     }
 
