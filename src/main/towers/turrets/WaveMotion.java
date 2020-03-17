@@ -118,17 +118,24 @@ public class WaveMotion extends Turret {
         p.tint(255);
     }
 
-    private void beamDamage(PVector start, PVector end) { //todo: fix hitting enemies behind tower
+    private void beamDamage(PVector start, PVector end) { //todo: fix
         for (Enemy enemy : enemies) {
             float enemyXref = enemy.position.x-start.x;
             float enemyYref = (enemy.position.y-start.y)*-1;
-            float m = findSlope(start,end);
-            float angle = atan(m);
-            if (angle < 0) angle += TWO_PI;
-            float tanAngle = tan(angle);
-            float tanAngleMin90 = tan(angle-radians(90));
+            float angle2 = findAngle(start, end);
+            angle2 -= HALF_PI;
+
+            PVector position = new PVector(tile.position.x-25,tile.position.y-25);
+            float angleToEnemy = findAngle(enemy.position,position);
+            float angleDif = angleToEnemy - angle2;
+//            System.out.println(degrees(angleDif));
+//            if (angleDif < -HALF_PI && angleDif > -PI + HALF_PI|| angleDif > HALF_PI && angleDif < PI + HALF_PI) {
+//                continue;
+//            }
+            float tanAngle = tan(angle2);
+            float tanAngleMin90 = tan(angle2-radians(90));
             float intersectionX = (tanAngleMin90*enemyXref-enemyYref)/(tanAngle-tanAngleMin90);
-            float intersectionY = tan(angle)*intersectionX;
+            float intersectionY = tan(angle2)*intersectionX;
             float distToIntersection = sqrt(sq(intersectionX)+sq(intersectionY));
             float distToEnemy = sqrt(sq(enemyXref)+sq(enemyYref));
             float distFromEnemyToBeam = sqrt(sq(distToEnemy)-sq(distToIntersection));
