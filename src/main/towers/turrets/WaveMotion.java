@@ -7,8 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.findSlope;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.MiscMethods.*;
 
 public class WaveMotion extends Turret {
 
@@ -87,7 +86,7 @@ public class WaveMotion extends Turret {
         p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.tint(255);
         p.popMatrix();
-        //vaporTrail
+        //beam
         if (currentBeamFrame < numFireFrames) {
             PVector s = new PVector();
             PVector e = new PVector();
@@ -127,13 +126,15 @@ public class WaveMotion extends Turret {
             float angle2 = atan(m);
             if (angle < 0) angle2 += TWO_PI;
 
-//            //prevent hitting enemies behind tower
-//            PVector position = new PVector(tile.position.x-25,tile.position.y-25);
-//            float angleToEnemy = findAngle(enemy.position,position);
-//            float angleDif = angleToEnemy - angle2;
-//            if (!(angleDif < -HALF_PI && angleDif > -PI + HALF_PI|| angleDif > HALF_PI && angleDif < PI + HALF_PI)) {
-//                continue;
-//            }
+            //prevent hitting enemies behind tower
+            PVector position = new PVector(tile.position.x-25,tile.position.y-25);
+            float angleToEnemy = findAngle(enemy.position,position);
+            float angleDif = angleToEnemy - angle2;
+            boolean b = angleDif < -HALF_PI && angleDif > -PI + HALF_PI || angleDif > HALF_PI && angleDif < PI + HALF_PI;
+            boolean q = angle > PI+HALF_PI && angle <= TWO_PI || angle >= 0 && angle < HALF_PI;
+            if (q) { //something to do with angle weirdness
+                if ((!b)) continue;
+            } else if (b) continue;
 
             float tanAngle = tan(angle2);
             float tanAngleMin90 = tan(angle2 - radians(90));
