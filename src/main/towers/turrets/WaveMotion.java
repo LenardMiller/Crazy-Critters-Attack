@@ -15,7 +15,6 @@ public class WaveMotion extends Turret {
     private int betweenBeamTimer;
     private int currentBeamFrame;
     private PVector beamStart;
-    private PVector beamEnd;
     private float beamAngle;
     private int beamLength;
     private PVector beamPartLength;
@@ -31,7 +30,7 @@ public class WaveMotion extends Turret {
         delay = 400; //400 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
-        damage = 1;
+        damage = 2;
         pjSpeed = -1;
         error = 0; //0
         numFireFrames = 18;
@@ -67,7 +66,7 @@ public class WaveMotion extends Turret {
 
         currentBeamFrame = 0;
         beamStart = spp;
-        beamEnd = targetEnemy.position;
+        PVector beamEnd = targetEnemy.position;
         PVector ref = new PVector(beamEnd.x-beamStart.x, beamEnd.y-beamStart.y);
         ref.setMag(5000);
         beamEnd = ref;
