@@ -44,6 +44,7 @@ public class KeyBinds {
         boolean snake = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
         boolean worm = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
         boolean butterfly = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
+        boolean dummy = keysPressed.getPressedPulse('!') && alive && p.mouseX < BOARD_WIDTH;
         //projectiles
         if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 10));
         if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, null, 20, 2));
@@ -71,7 +72,8 @@ public class KeyBinds {
         if (snake) enemies.add(new Snake(p, p.mouseX, p.mouseY));
         if (worm) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
         if (butterfly) enemies.add(new Butterfly(p, p.mouseX, p.mouseY));
-        if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant || snake || worm || butterfly) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        if (dummy) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
+        if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant || snake || worm || butterfly || dummy) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
     public void debugKeys() throws IOException {

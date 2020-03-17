@@ -64,6 +64,8 @@ public class SpriteLoader {
         getSprite(p,"wormAttack","EN","worm/attack/",34); //todo: make not look like dick
         getSprite(p,"butterflyAttack","EN","butterfly/attack/",16);
         getSprite(p,"butterflyMove","EN","butterfly/move/",8);
+        getSprite(p,"dummyAttack","EN","dummy/attack/",1);
+        getSprite(p,"dummyMove","EN","dummy/move/",1);
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
@@ -146,6 +148,7 @@ public class SpriteLoader {
         spritesH.put("midBugEN",p.loadImage("sprites/enemies/midBug/idle.png"));
         spritesH.put("bigBugEN",p.loadImage("sprites/enemies/bigBug/idle.png"));
         spritesH.put("snakeEN",p.loadImage("sprites/enemies/snake/idle.png"));
+        spritesH.put("dummyEN",p.loadImage("sprites/enemies/dummy/idle.png"));
         //icons
         spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
         spritesH.put("wavePrimaryIc",p.loadImage("sprites/guiObjects/wavePrimary.png"));
