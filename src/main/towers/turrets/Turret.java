@@ -145,6 +145,7 @@ public abstract class Turret extends Tower {
         }
 
         angle = findAngle(position,target);
+
         if (visualize && debug) { //cool lines
             p.stroke(255);
             p.line(position.x, position.y, target.x, target.y);
