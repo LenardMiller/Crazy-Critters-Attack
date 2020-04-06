@@ -21,8 +21,8 @@ public class BigBug extends Enemy{
         numAttackFrames = 100;
         numMoveFrames = 12;
         betweenWalkFrames = 3;
-        startFrame = 48; //attack start
-        attackFrame = startFrame;
+        attackStartFrame = 48; //attack start
+        attackFrame = attackStartFrame;
         loadSprites();
     }
 }

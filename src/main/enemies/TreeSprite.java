@@ -21,8 +21,8 @@ public class TreeSprite extends Enemy{
         numAttackFrames = 50;
         numMoveFrames = 30;
         betweenWalkFrames = 1;
-        startFrame = 28;
-        attackFrame = startFrame;
+        attackStartFrame = 28;
+        attackFrame = attackStartFrame;
         loadSprites();
     }
 }

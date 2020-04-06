@@ -6,22 +6,24 @@ import processing.core.PVector;
 public class SmolBug extends Enemy{
     public SmolBug(PApplet p, float x, float y){
         super(p,x,y);
-        size = new PVector(12,12); //todo: make bigger?
+        size = new PVector(25,25);
         pfSize = 1;
-        radius = 6;
+        radius = 13;
         maxSpeed = .4f;
         speed = maxSpeed;
         moneyDrop = 10;
         twDamage = 1;
-        maxHp = 10; //Hp <---------------------------
+        maxHp = 15; //Hp <---------------------------
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "smolBug";
-        numAttackFrames = 34;
+        numAttackFrames = 27;
         numMoveFrames = 8;
         betweenWalkFrames = 3;
-        startFrame = 15; //attack start
-        attackFrame = startFrame;
+        betweenAttackFrames = 3;
+        attackStartFrame = 1; //attack start
+        attackFrame = attackStartFrame;
+        attackDmgFrames = new int[]{17};
         loadSprites();
     }
 }

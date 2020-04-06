@@ -20,8 +20,9 @@ public class MidBug extends Enemy{
         numAttackFrames = 42;
         numMoveFrames = 8;
         betweenWalkFrames = 4;
-        startFrame = 34; //attack start
-        attackFrame = startFrame;
+        betweenAttackFrames = 2;
+        attackStartFrame = 34; //attack start
+        attackFrame = attackStartFrame;
         loadSprites();
     }
 }

@@ -23,10 +23,10 @@ public class LittleWorm extends Enemy {
         name = "worm";
         numAttackFrames = 34;
         numMoveFrames = 1;
-        startFrame = 0;
+        attackStartFrame = 0;
         attackDmgFrames = new int[]{18};
         betweenAttackFrames = 2;
-        attackFrame = startFrame;
+        attackFrame = attackStartFrame;
         stealthMode = true;
         loadSprites();
     }
