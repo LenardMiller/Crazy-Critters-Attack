@@ -61,7 +61,7 @@ public class SpriteLoader {
         getSprite(p,"snakeAttack","EN","snake/attack/",15);
         getSprite(p,"snakeMove","EN","snake/move/",10);
         getSprite(p,"wormMove","EN","worm/move/",1);
-        getSprite(p,"wormAttack","EN","worm/attack/",34); //todo: make not look like dick
+        getSprite(p,"wormAttack","EN","worm/attack/",34);
         getSprite(p,"butterflyAttack","EN","butterfly/attack/",16);
         getSprite(p,"butterflyMove","EN","butterfly/move/",8);
         getSprite(p,"dummyAttack","EN","dummy/attack/",1);
