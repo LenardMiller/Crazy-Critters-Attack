@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.particles.BuffParticle;
 import main.projectiles.EnergyBlast;
 import main.misc.Tile;
 import processing.core.PApplet;
@@ -56,6 +57,13 @@ public class EnergyBlaster extends Turret{
         spa.setMag(40);
         spp.add(spa);
         projectiles.add(new EnergyBlast(p,spp.x,spp.y, angleB, this, damage, effectRadius, bigExplosion));
+        for (int i = 0; i < 5; i++) {
+            PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
+            spa2.setMag(-2);
+            PVector spp2 = new PVector(spp.x,spp.y);
+            spp2.add(spa2);
+            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"energy"));
+        }
     }
 
     private void setUpgrades(){
