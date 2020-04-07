@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.particles.BuffParticle;
 import main.projectiles.MiscProjectile;
 import main.misc.Tile;
 import processing.core.PApplet;
@@ -23,7 +24,8 @@ public class RandomCannon extends Turret {
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
-        numFireFrames = 12;
+        numFireFrames = 5;
+        betweenFireFrames = 4;
         numLoadFrames = 1;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
@@ -31,10 +33,10 @@ public class RandomCannon extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 3;
+        damage = 4;
         error = 8; //default 8
         loadSprites();
-        debrisType = "darkMetal";
+        debrisType = "wood";
         price = 100;
         value = price;
         priority = 0; //close
@@ -44,15 +46,22 @@ public class RandomCannon extends Turret {
         updateTowerArray();
     }
 
-    public void fire() { //needed to change projectile fired
+    public void fire() {
         float angleB = angle;
         angleB += PApplet.radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         int spriteType = (int)(p.random(0,5.99f));
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angleB-HALF_PI);
-        spa.setMag(20);
+        spa.setMag(18);
         spp.add(spa);
+        for (int i = 0; i < 5; i++) {
+            PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
+            spa2.setMag(-2);
+            PVector spp2 = new PVector(spp.x,spp.y);
+            spp2.add(spa2);
+            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"decay"));
+        }
         projectiles.add(new MiscProjectile(p,spp.x,spp.y, angleB, this, spriteType, damage));
     }
 
@@ -64,7 +73,7 @@ public class RandomCannon extends Turret {
         upgradeDamage[3] = 0;
         //delay (firerate)
         upgradeDelay[0] = 0;
-        upgradeDelay[1] = -10;
+        upgradeDelay[1] = -5;
         upgradeDelay[2] = 0;
         upgradeDelay[3] = 0;
         //price
@@ -88,10 +97,10 @@ public class RandomCannon extends Turret {
         upgradeNames[2] = name;
         upgradeNames[3] = name;
         //debris
-        upgradeDebris[0] = "metal";
-        upgradeDebris[1] = "metal";
-        upgradeDebris[2] = "metal";
-        upgradeDebris[3] = "metal";
+        upgradeDebris[0] = "wood";
+        upgradeDebris[1] = "wood";
+        upgradeDebris[2] = "wood";
+        upgradeDebris[3] = "wood";
         //titles
         upgradeTitles[0] = "Damage Up";
         upgradeTitles[1] = "Faster Firing";

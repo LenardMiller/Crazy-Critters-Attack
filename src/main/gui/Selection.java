@@ -120,8 +120,8 @@ public class Selection { //what tower is selected
                 p.fill(0);
                 break;
             case "miscCannon":
-                p.text("Random", 1000, 241);
-                p.text("Cannon", 1000, 266);
+                p.text("Luggage", 1000, 241);
+                p.text("Blaster", 1000, 266);
                 offset = 25;
                 speed = 12;
                 p.textFont(mediumFont);

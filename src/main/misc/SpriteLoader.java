@@ -74,7 +74,7 @@ public class SpriteLoader {
         getSprite(p,"teslaIdle","TR","tesla/idle/",18);
         getSprite(p,"crossbowFire","TR","crossbow/fire/",13);
         getSprite(p,"crossbowLoad","TR","crossbow/load/",81);
-        getSprite(p,"miscCannonFire","TR","miscCannon/fire/",12);
+        getSprite(p,"miscCannonFire","TR","miscCannon/fire/",5);
         getSprite(p,"miscCannonLoad","TR","miscCannon/load/",1);
         getSprite(p,"energyBlasterFire","TR","energyBlaster/fire/",14);
         getSprite(p,"energyBlasterLoad","TR","energyBlaster/load/",42);

@@ -245,7 +245,7 @@ public abstract class Turret extends Tower {
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
         p.rotate(angle);
         p.tint(0,60);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset); //todo: crash here
         p.popMatrix();
         //main
         p.pushMatrix();
@@ -291,6 +291,8 @@ public abstract class Turret extends Tower {
         for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p, (tile.position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (tile.position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
         }
+        //prevent having fire animations longer than delays
+        while (delay <= numFireFrames*betweenFireFrames + numIdleFrames) betweenFireFrames--;
     }
 
     public void upgradeSpecial() {}
