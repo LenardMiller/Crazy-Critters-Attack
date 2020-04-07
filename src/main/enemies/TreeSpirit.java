@@ -20,8 +20,8 @@ public class TreeSpirit extends Enemy{
         name = "treeSpirit";
         numAttackFrames = 42;
         numMoveFrames = 47;
-        startFrame = 22;
-        attackFrame = startFrame;
+        attackStartFrame = 22;
+        attackFrame = attackStartFrame;
         loadSprites();
     }
 }

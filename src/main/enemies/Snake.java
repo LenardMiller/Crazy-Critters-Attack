@@ -20,10 +20,10 @@ public class Snake extends Enemy {
         name = "snake";
         numAttackFrames = 15;
         numMoveFrames = 10;
-        startFrame = 0;
+        attackStartFrame = 0;
         attackDmgFrames = new int[]{8};
         betweenAttackFrames = 5;
-        attackFrame = startFrame;
+        attackFrame = attackStartFrame;
         loadSprites();
     }
 }

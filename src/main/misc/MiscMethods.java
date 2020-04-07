@@ -196,11 +196,11 @@ public class MiscMethods {
             }
         } else {
             if (v1.x < v2.x && v1.y > v2.y) { //if to left and below
-                angle = (atan(abs(ratio.x + 15) / abs(ratio.y)));
+                angle = (atan(abs(ratio.x) / abs(ratio.y)));
             } else if (v1.x < v2.x && v1.y < v2.y) { //if to left and above
                 angle = (atan(abs(ratio.y) / abs(ratio.x))) + HALF_PI;
             } else if (v1.x > v2.x && v1.y < v2.y) { //if to right and above
-                angle = (atan(abs(ratio.x + 15) / abs(ratio.y))) + PI;
+                angle = (atan(abs(ratio.x) / abs(ratio.y))) + PI;
             } else if (v1.x > v2.x && v1.y > v2.y) { //if to right and below
                 angle = (atan(abs(ratio.y) / abs(ratio.x))) + 3 * HALF_PI;
             }

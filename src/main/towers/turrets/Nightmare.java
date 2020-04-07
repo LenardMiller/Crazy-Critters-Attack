@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.particles.BuffParticle;
 import main.projectiles.Needle;
 import main.misc.Tile;
 import processing.core.PApplet;
@@ -57,7 +58,15 @@ public class Nightmare extends Turret {
             spa.setMag(20);
             spp.add(spa);
             projectiles.add(new Needle(p, spp.x, spp.y, angleB, this, damage, effectLevel, effectDuration));
+            for (int j = 0; j < 3; j++) {
+                PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
+                spa2.setMag(-2);
+                PVector spp2 = new PVector(spp.x,spp.y);
+                spp2.add(spa2);
+                particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"decay"));
+            }
         }
+
         delayTime = p.frameCount + delay; //waits this time before firing
     }
 

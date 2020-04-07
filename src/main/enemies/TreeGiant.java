@@ -20,10 +20,10 @@ public class TreeGiant extends Enemy {
         name = "treeGiant";
         numAttackFrames = 63;
         numMoveFrames = 91;
-        startFrame = 0;
+        attackStartFrame = 0;
         attackDmgFrames = new int[]{28};
         betweenAttackFrames = 2;
-        attackFrame = startFrame;
+        attackFrame = attackStartFrame;
         loadSprites();
     }
 }

@@ -76,8 +76,8 @@ public class TowerBuy extends Button {
                     p.text("$100", x, 271);
                     break;
                 case "miscCannon":
-                    p.text("Random", x, 241);
-                    p.text("Cannon", x, 266);
+                    p.text("Luggage", x, 241);
+                    p.text("Blaster", x, 266);
                     p.textFont(mediumFont);
                     p.text("$100", x, 296);
                     break;

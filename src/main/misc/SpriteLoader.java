@@ -54,14 +54,14 @@ public class SpriteLoader {
         getSprite(p,"treeSpriteAttack","EN","treeSprite/attack/",50);
         getSprite(p,"midBugAttack","EN","midBug/attack/",42);
         getSprite(p,"midBugMove","EN","midBug/move/",8);
-        getSprite(p,"smolBugAttack","EN","smolBug/attack/",34);
+        getSprite(p,"smolBugAttack","EN","smolBug/attack/",27);
         getSprite(p,"smolBugMove","EN","smolBug/move/",8);
         getSprite(p,"bigBugAttack","EN","bigBug/attack/",100);
         getSprite(p,"bigBugMove","EN","bigBug/move/",12);
         getSprite(p,"snakeAttack","EN","snake/attack/",15);
         getSprite(p,"snakeMove","EN","snake/move/",10);
         getSprite(p,"wormMove","EN","worm/move/",1);
-        getSprite(p,"wormAttack","EN","worm/attack/",34); //todo: make not look like dick
+        getSprite(p,"wormAttack","EN","worm/attack/",34);
         getSprite(p,"butterflyAttack","EN","butterfly/attack/",16);
         getSprite(p,"butterflyMove","EN","butterfly/move/",8);
         getSprite(p,"dummyAttack","EN","dummy/attack/",1);
@@ -74,7 +74,7 @@ public class SpriteLoader {
         getSprite(p,"teslaIdle","TR","tesla/idle/",18);
         getSprite(p,"crossbowFire","TR","crossbow/fire/",13);
         getSprite(p,"crossbowLoad","TR","crossbow/load/",81);
-        getSprite(p,"miscCannonFire","TR","miscCannon/fire/",12);
+        getSprite(p,"miscCannonFire","TR","miscCannon/fire/",5);
         getSprite(p,"miscCannonLoad","TR","miscCannon/load/",1);
         getSprite(p,"energyBlasterFire","TR","energyBlaster/fire/",14);
         getSprite(p,"energyBlasterLoad","TR","energyBlaster/load/",42);

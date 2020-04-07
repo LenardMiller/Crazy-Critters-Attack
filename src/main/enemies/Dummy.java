@@ -20,8 +20,8 @@ public class Dummy extends Enemy {
         numAttackFrames = 1;
         numMoveFrames = 1;
         betweenWalkFrames = 1;
-        startFrame = 0; //attack start
-        attackFrame = startFrame;
+        attackStartFrame = 0; //attack start
+        attackFrame = attackStartFrame;
         loadSprites();
     }
 }

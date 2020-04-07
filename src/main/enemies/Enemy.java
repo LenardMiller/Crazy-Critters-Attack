@@ -47,7 +47,7 @@ public abstract class Enemy {
     int betweenWalkFrames;
     int betweenAttackFrames;
     int idleTime;
-    int startFrame;
+    int attackStartFrame;
     public int barTrans;
     public int tintColor;
     String hitParticle;
@@ -76,7 +76,7 @@ public abstract class Enemy {
         name = "";
         numAttackFrames = 1;
         numMoveFrames = 1;
-        startFrame = 0;
+        attackStartFrame = 0;
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
         pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
@@ -136,9 +136,9 @@ public abstract class Enemy {
             moveFrame = 0;
             if (dmg) target.damage(twDamage);
         }
-        if (!attackCue && attackFrame == startFrame) {
+        if (!attackCue && attackFrame == attackStartFrame) {
             attacking = false;
-            attackFrame = startFrame;
+            attackFrame = attackStartFrame;
         }
     }
 

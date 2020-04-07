@@ -20,10 +20,10 @@ public class Butterfly extends Enemy {
         name = "butterfly";
         numAttackFrames = 16;
         numMoveFrames = 8;
-        startFrame = 0;
+        attackStartFrame = 0;
         attackDmgFrames = new int[]{3};
         betweenAttackFrames = 5;
-        attackFrame = startFrame;
+        attackFrame = attackStartFrame;
         flying = true;
         loadSprites();
     }
