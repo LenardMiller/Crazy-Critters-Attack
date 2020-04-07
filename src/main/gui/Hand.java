@@ -231,7 +231,7 @@ public class Hand {
                 break;
             case "energyBlaster":
                 heldSprite = spritesH.get("energyBlasterFullTR");
-                offset = new PVector(11, 11);
+                offset = new PVector(13, 13);
                 price = 150;
                 break;
             case "magicMissleer":

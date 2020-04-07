@@ -18,7 +18,7 @@ public class EnergyBlaster extends Turret{
 
     public EnergyBlaster(PApplet p, Tile tile) {
         super(p,tile);
-        offset = 11;
+        offset = 13;
         name = "energyBlaster";
         size = new PVector(50,50);
         maxHp = 20;
@@ -31,6 +31,7 @@ public class EnergyBlaster extends Turret{
         pjSpeed = 16;
         error = 3; //3 degrees
         numFireFrames = 14; //14
+        betweenFireFrames = 2;
         numLoadFrames = 42; //42
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
