@@ -2,6 +2,7 @@ package main.enemies;
 
 import main.Main;
 import main.buffs.*;
+import main.misc.Tile;
 import main.particles.Ouch;
 import main.pathfinding.Node;
 import main.pathfinding.PathRequest;
@@ -31,7 +32,7 @@ public abstract class Enemy {
     public float maxSpeed;
     public float speed;
     public int moneyDrop;
-    int twDamage;
+    int damage;
     public int maxHp;
     public int hp;
     private PImage sprite;
@@ -52,7 +53,8 @@ public abstract class Enemy {
     public int tintColor;
     String hitParticle;
     public String name;
-    private Tower target;
+    private Tower targetTower;
+    private boolean targetMachine;
     public boolean stealthMode;
     public boolean flying;
 
@@ -67,7 +69,7 @@ public abstract class Enemy {
         maxSpeed = 1;
         speed = maxSpeed;
         moneyDrop = 1;
-        twDamage = 1;
+        damage = 1;
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
         barTrans = 0;
@@ -115,31 +117,11 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    void move() { //todo: add super stylish turning system
+    void move() { //todo: add super stylish turning system?
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
         speed = maxSpeed;
-    }
-
-    void attack() {
-        boolean dmg = false;
-        for (int frame : attackDmgFrames) {
-            if (attackFrame == frame) {
-                dmg = true;
-                break;
-            }
-        }
-        if (target != null) {
-//            angle = radians(roundTo(degrees(findAngleBetween(target.tile.position, position)), 90));
-            angle = findAngleBetween(target.tile.position, position); //todo: angle better
-            moveFrame = 0;
-            if (dmg) target.damage(twDamage);
-        }
-        if (!attackCue && attackFrame == attackStartFrame) {
-            attacking = false;
-            attackFrame = attackStartFrame;
-        }
     }
 
     //todo: dance
@@ -273,7 +255,36 @@ public abstract class Enemy {
         moveFrames = spritesAnimH.get(name + "MoveEN");
     }
 
-    //pathfinding
+    void attack() {
+        boolean dmg = false;
+        for (int frame : attackDmgFrames) {
+            if (attackFrame == frame) {
+                dmg = true;
+                break;
+            }
+        }
+        if (targetTower != null) {
+//            angle = radians(roundTo(degrees(findAngleBetween(target.tile.position, position)), 90));
+            PVector t = new PVector(targetTower.tile.position.x-25,targetTower.tile.position.y-25);
+            angle = findAngleBetween(t, position); //todo: angle better
+            moveFrame = 0;
+            if (dmg) targetTower.damage(damage);
+        }
+        if (targetMachine) {
+            //todo: angle
+            moveFrame = 0;
+            if (dmg) {
+                machine.damage(damage);
+//                System.out.println("POW");
+            }
+        }
+        if (!attackCue && attackFrame == attackStartFrame) {
+            attacking = false;
+            attackFrame = attackStartFrame;
+        }
+    }
+
+    //pathfinding -----------------------------------------------------------------
 
     boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
@@ -298,7 +309,8 @@ public abstract class Enemy {
                 if (intersectingPoint.combat) {
                     attacking = true;
                     attackCue = true;
-                    target = intersectingPoint.tower;
+                    targetTower = intersectingPoint.tower;
+                    targetMachine = intersectingPoint.machine;
                 } else attackCue = false;
                 points.remove(intersectingPoint);
             }
@@ -317,13 +329,15 @@ public abstract class Enemy {
         boolean combatPoints = false;
         for (TurnPoint point : pointsD) {
             point.towers = clearanceTowers(point);
-            if (point.towers.size() > 0) combatPoints = true;
+            point.machine = clearanceMachine(point);
+            if (point.towers.size() > 0 || point.machine) combatPoints = true;
         }
         if (combatPoints) {
-            TurnPoint backPoint;
-            backPoint = backPoint();
+            TurnPoint backPoint = backPoint();
             backPoint.combat = true;
-            backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
+            if (backPoint.towers != null && backPoint.towers.size() > 0) { //what the hell is this for??
+                backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
+            } else backPoint.tower = null;
         }
         //remove extra white points
         TurnPoint startpoint = pointsD.get(pointsD.size() - 1);
@@ -345,6 +359,7 @@ public abstract class Enemy {
     }
 
     private ArrayList<Tower> clearanceTowers(TurnPoint point) {
+        //returns all towers in enemy "bubble"?
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
         int kSize = 1;
@@ -373,14 +388,44 @@ public abstract class Enemy {
         return towers;
     }
 
+    private boolean clearanceMachine(TurnPoint point) {
+        boolean clear = true;
+        int kSize = 1;
+        int x = (int) (point.position.x + 100) / 25;
+        int y = (int) (point.position.y + 100) / 25;
+        while (true) {
+            for (int xn = 0; xn < kSize; xn++) {
+                for (int yn = 0; yn < kSize; yn++) {
+                    if (!(x + xn >= nodeGrid.length || y + yn >= nodeGrid[x].length)) {
+                        Node nodeB = nodeGrid[x + xn][y + yn];
+                        Tile tileB;
+                        if (nodeB != null) {
+                            tileB = nodeB.getTile();
+                            if (tileB != null && tileB.machine) return true;
+                        }
+                    } else {
+                        clear = false;
+                        break;
+                    }
+                }
+                if (!clear) break;
+            }
+            if (clear && kSize < pfSize) kSize++;
+            else break;
+        }
+        return false;
+    }
+
     private TurnPoint backPoint() {
         TurnPoint bp = null;
         for (int i = points.size() - 1; i >= 0; i--) {
-            if (points.get(i).towers != null && points.get(i).towers.size() > 0) {
+            if (points.get(i).towers != null && points.get(i).towers.size() > 0 || points.get(i).machine) {
+//                if (points.get(i).machine) System.out.println("test");
                 points.get(i).combat = true;
                 if (i < points.size() - 1) bp = points.get(i + 1);
                 else bp = points.get(i);
                 bp.towers = points.get(i).towers;
+                bp.machine = points.get(i).machine;
                 bp.combat = true;
                 bp.back = true;
                 break;
@@ -394,6 +439,7 @@ public abstract class Enemy {
         private PApplet p;
         public Tower tower;
         public ArrayList<Tower> towers;
+        public boolean machine;
         public PVector position;
         boolean combat;
         boolean back;
@@ -403,6 +449,7 @@ public abstract class Enemy {
             this.position = new PVector(position.x, position.y);
             this.tower = tower;
 
+//            machine = tiles.get((int)(position.x/50)+2,(int)(position.y/50)+2).machine;
             combat = false;
             back = false;
         }

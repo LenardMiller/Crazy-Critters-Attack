@@ -12,7 +12,7 @@ public class SmolBug extends Enemy{
         maxSpeed = .4f;
         speed = maxSpeed;
         moneyDrop = 10;
-        twDamage = 1;
+        damage = 1;
         maxHp = 15; //Hp <---------------------------
         hp = maxHp;
         hitParticle = "greenOuch";

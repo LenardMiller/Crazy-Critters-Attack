@@ -12,7 +12,7 @@ public class MidBug extends Enemy{
         maxSpeed = .5f;
         speed = maxSpeed;
         moneyDrop = 40;
-        twDamage = 3;
+        damage = 3;
         maxHp = 40; //Hp <---------------------------
         hp = maxHp;
         hitParticle = "greenOuch";

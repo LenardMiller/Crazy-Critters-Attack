@@ -31,7 +31,7 @@ public class Machine {
     public Machine(PApplet p, PVector position, String name, String debris, int betweenFrames) {
         this.p = p;
 
-        hp = 200; //todo: Balance
+        hp = 500; //todo: Balance
         this.position = position;
         this.name = name;
         this.debris = debris;

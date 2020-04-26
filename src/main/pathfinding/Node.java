@@ -39,6 +39,12 @@ public class Node {
         this.position = position;
     }
 
+    public Tile getTile() {
+        int x = (int)((position.x/nSize)/2);
+        int y = (int)((position.y/nSize)/2);
+        return tiles.get(x,y);
+    }
+
     public void display() {
         p.stroke(255);
         p.noFill();
