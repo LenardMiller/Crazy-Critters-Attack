@@ -121,7 +121,7 @@ public class Node {
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
         if (tower != null) {
-            if (!tower.turret) movementPenalty = tower.maxHp;
+            if (!tower.turret) movementPenalty = 1000;
             if (tower.turret) {
                 setEnd(nX, nY);
                 ended = true;
