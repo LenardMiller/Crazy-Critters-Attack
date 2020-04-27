@@ -285,6 +285,7 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
+    //todo: fix big enemy clearance
 
     boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
