@@ -264,19 +264,16 @@ public abstract class Enemy {
             }
         }
         if (targetTower != null) {
-//            angle = radians(roundTo(degrees(findAngleBetween(target.tile.position, position)), 90));
-            PVector t = new PVector(targetTower.tile.position.x-25,targetTower.tile.position.y-25);
-            angle = findAngleBetween(t, position); //todo: angle better
+            if (pfSize > 2) { //angle towards tower correctly
+                PVector t = new PVector(targetTower.tile.position.x - 25, targetTower.tile.position.y - 25);
+                angle = findAngleBetween(t, position);
+            }
             moveFrame = 0;
             if (dmg) targetTower.damage(damage);
         }
         if (targetMachine) {
-            //todo: angle
             moveFrame = 0;
-            if (dmg) {
-                machine.damage(damage);
-//                System.out.println("POW");
-            }
+            if (dmg) machine.damage(damage);
         }
         if (!attackCue && attackFrame == attackStartFrame) {
             attacking = false;
