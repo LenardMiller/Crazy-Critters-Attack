@@ -24,6 +24,7 @@ public class Level {
         if (currentWave < waves.length) { //temp, replace with win condition
             Wave wave = waves[currentWave];
             if (p.frameCount >= wave.endTimer) {
+                wave.end();
                 currentWave++;
                 if (currentWave < waves.length) {
                     wave = waves[currentWave];

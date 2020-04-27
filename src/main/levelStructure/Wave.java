@@ -1,6 +1,7 @@
 package main.levelStructure;
 
 import main.enemies.*;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -41,6 +42,10 @@ public class Wave {
     public void init() {
         endTimer = p.frameCount + length;
         waitTimer = p.frameCount + spawnLength;
+    }
+
+    public void end() {
+        for (Tower tower : towers) if (tower.turret) tower.hp = tower.maxHp;
     }
 
     public void spawnEnemies() {
