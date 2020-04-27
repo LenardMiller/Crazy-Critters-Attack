@@ -3,8 +3,8 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class SmolBug extends Enemy{
-    public SmolBug(PApplet p, float x, float y){
+public class SmolBug extends Enemy {
+    public SmolBug(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(25,25);
         pfSize = 1;

@@ -57,6 +57,7 @@ public abstract class Enemy {
     private boolean targetMachine;
     public boolean stealthMode;
     public boolean flying;
+    private int attackCount;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -84,6 +85,7 @@ public abstract class Enemy {
         pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
         stealthMode = false;
         flying = false;
+        attackCount = 0;
     }
 
     public void main(int i) {
@@ -259,10 +261,14 @@ public abstract class Enemy {
         boolean dmg = false;
         for (int frame : attackDmgFrames) {
             if (attackFrame == frame) {
+                if (betweenAttackFrames > 1) attackCount++;
                 dmg = true;
                 break;
             }
         }
+        //all attackCount stuff prevents attacking multiple times
+        if (!dmg) attackCount = 0;
+        if (attackCount > 1) dmg = false;
         if (targetTower != null) {
             if (pfSize > 2) { //angle towards tower correctly
                 PVector t = new PVector(targetTower.tile.position.x - 25, targetTower.tile.position.y - 25);
