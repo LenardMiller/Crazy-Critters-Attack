@@ -9,7 +9,7 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.MiscMethods.updateTowerArray;
 
-public class Slingshot extends Turret{
+public class Slingshot extends Turret {
 
     public Slingshot(PApplet p, Tile tile) {
         super(p,tile);
@@ -22,7 +22,7 @@ public class Slingshot extends Turret{
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
-        error = 0; //5
+        error = 5; //5
         numFireFrames = 34;
         numLoadFrames = 59;
         fireFrames = new PImage[numFireFrames];

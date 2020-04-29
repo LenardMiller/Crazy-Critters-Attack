@@ -101,7 +101,7 @@ public class SpriteLoader {
         getSprite(p,"crystalWall","TW","crystal/",4);
         getSprite(p,"ultimateWall","TW","ultimate/",4);
         //machines
-        getSprite(p,"stoneDrill","MA","stoneDrill/",4);
+        getSprite(p,"stoneDrill","MA","stoneDrill/",12);
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {

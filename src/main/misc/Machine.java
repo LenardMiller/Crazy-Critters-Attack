@@ -84,14 +84,14 @@ public class Machine {
     }
 
     private void drillParticles() {
-        if (name.equals("stoneDrillMA")) {
-            int r = (int) p.random(0, 10);
-            if (r == 0) {
-                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "stone"));
-            } else {
-                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "dirt"));
-            }
-        }
+//        if (name.equals("stoneDrillMA")) {
+//            int r = (int) p.random(0, 10);
+//            if (r == 0) {
+//                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "stone"));
+//            } else {
+//                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "dirt"));
+//            }
+//        }
     }
 
     private float shuffle(int i) {
