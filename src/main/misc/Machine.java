@@ -3,6 +3,7 @@ package main.misc;
 import main.particles.Debris;
 import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;
+import main.particles.Ouch;
 import main.projectiles.Flame;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -15,6 +16,7 @@ public class Machine {
     public PApplet p;
 
     public int hp;
+    public int maxHp;
     public PVector position;
     public String name;
     public String debris;
@@ -27,11 +29,14 @@ public class Machine {
     private boolean dead;
     private PImage[] sprites;
     public Tile[] machTiles;
+    private int damageState;
 
-    public Machine(PApplet p, PVector position, String name, String debris, int betweenFrames) {
+    public Machine(PApplet p, PVector position, String name, String debris, int betweenFrames, int maxHp) {
         this.p = p;
 
-        hp = 500; //todo: Balance
+        damageState = 0;
+        hp = maxHp;
+        this.maxHp = maxHp;
         this.position = position;
         this.name = name;
         this.debris = debris;
@@ -63,7 +68,7 @@ public class Machine {
         display();
     }
 
-    public void display() { //todo: some sort of health indicator
+    public void display() {
         if (hit) {
             tintColor = 0;
             hit = false;
@@ -73,14 +78,31 @@ public class Machine {
         if (deathFrame < 200) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
-        if (!dead) drillParticles();
-        else if (deathFrame < 200) deathAnim();
+        if (!dead) {
+            hurtParticles();
+            drillParticles();
+        } else if (deathFrame < 200) deathAnim();
         if (p.frameCount > frameTimer && !dead) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
             frameTimer = p.frameCount + betweenFrames;
         }
         if (tintColor < 255) tintColor += 20;
+    }
+
+    private void hurtParticles() {
+        if (damageState > 0) {
+            int r = 0;
+            if (damageState == 1) r = 150;
+            if (damageState == 2) r = 100;
+            if (damageState == 3) r = 20;
+            for (Tile tile : machTiles) {
+                int x = (int) tile.position.x;
+                int y = (int) tile.position.y;
+                if ((int) p.random(0, r) == 0)
+                    particles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greyPuff"));
+            }
+        }
     }
 
     private void drillParticles() {
@@ -95,28 +117,33 @@ public class Machine {
     }
 
     private float shuffle(int i) {
-        return i + p.random(0,50);
+        return i + p.random(0, 50);
     }
 
     private void deathAnim() {
         deathFrame++;
         if (deathFrame < 160) {
             for (Tile tile : machTiles) {
-                int x = (int)tile.position.x;
-                int y = (int)tile.position.y;
-                if ((int)p.random(0,3) == 0) particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0,360), debris));
-                if ((int)p.random(0,6) == 0) particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0,360)));
+                int x = (int) tile.position.x;
+                int y = (int) tile.position.y;
+                if ((int) p.random(0, 3) == 0)
+                    particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                if ((int) p.random(0, 6) == 0)
+                    particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
             }
         } else {
             for (Tile tile : machTiles) {
-                int x = (int)tile.position.x;
-                int y = (int)tile.position.y;
-                if ((int)p.random(0,4) == 0) particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0,360)));
-                if ((int)p.random(0,2) == 0) particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0,360)));
+                int x = (int) tile.position.x;
+                int y = (int) tile.position.y;
+                if ((int) p.random(0, 4) == 0)
+                    particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+                if ((int) p.random(0, 2) == 0)
+                    particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
                 for (int i = 0; i < 3; i++) {
-                    particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0,360), debris));
-                } if ((int)p.random(0,8) == 0) {
-                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0,360), null, 100, 10, 100, (int)p.random(1,4)));
+                    particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                }
+                if ((int) p.random(0, 8) == 0) {
+                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, 100, 10, 100, (int) p.random(1, 4)));
                 }
             }
         }
@@ -126,18 +153,27 @@ public class Machine {
     public void damage(int dmg) {
         hp -= dmg;
         hit = true;
+        int hpSegment = maxHp / 4;
+        if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
+        if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
+        if (hp <= hpSegment) damageState = 3;
+        if (damageState > 0) {
+            sprites = spritesAnimH.get(name + "d" + damageState);
+//            currentFrame = 0;
+        }
         for (Tile tile : machTiles) {
-            int x = (int)tile.position.x;
-            int y = (int)tile.position.y;
+            int x = (int) tile.position.x;
+            int y = (int) tile.position.y;
             for (int i = 0; i < 5; i++) {
-                particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0,360), debris));
-            } if ((int)p.random(0,2) == 0) particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0,360)));
+                particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+            }
+            if ((int) p.random(0, 2) == 0)
+                particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
         }
     }
 
     public void die() {
         dead = true;
         alive = false;
-        //todo: enemies party
     }
 }

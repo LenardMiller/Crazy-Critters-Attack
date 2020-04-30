@@ -39,6 +39,7 @@ public class DataControl {
         saveObject.setString("type", "machine");
         saveObject.setInt("id", i);
         saveObject.setInt("hp", machine.hp);
+        saveObject.setInt("maxHp", machine.maxHp);
         saveObject.setFloat("x", machine.position.x);
         saveObject.setFloat("y", machine.position.y);
         saveObject.setString("name", machine.name);
@@ -77,12 +78,13 @@ public class DataControl {
         //machine
         JSONObject loadObject = loadArray.getJSONObject(i);
         int hp = loadObject.getInt("hp");
+        int maxHp = loadObject.getInt("maxHp");
         int x = loadObject.getInt("x");
         int y = loadObject.getInt("y");
         String machineName = loadObject.getString("name");
         String debris = loadObject.getString("debris");
         int betweenFrames = loadObject.getInt("betweenFrames");
-        machine = new Machine(p,new PVector(x,y), machineName, debris, betweenFrames);
+        machine = new Machine(p,new PVector(x,y), machineName, debris, betweenFrames, maxHp);
         machine.hp = hp;
     }
 }

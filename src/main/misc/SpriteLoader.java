@@ -101,7 +101,7 @@ public class SpriteLoader {
         getSprite(p,"crystalWall","TW","crystal/",4);
         getSprite(p,"ultimateWall","TW","ultimate/",4);
         //machines
-        getSprite(p,"stoneDrill","MA","stoneDrill/",12);
+        getMachineSprite(p,"stoneDrill",new int[]{12,12,13,20});
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {
@@ -128,15 +128,27 @@ public class SpriteLoader {
             case "TW":
                 mainFolder = "towers/walls/";
                 break;
-            case "MA":
-                mainFolder = "machines/";
-                break;
         }
         String fullName = name+type;
         String path = "sprites/"+mainFolder+folder;
         spritesAnimH.put(fullName, new PImage[length]);
         for (int i = length-1; i >= 0; i--) {
             spritesAnimH.get(fullName)[i] = p.loadImage(path + PApplet.nf(i,3) + ".png");
+        }
+    }
+
+    private static void getMachineSprite(PApplet p, String name, int[] lengths) {
+        String fullName = name + "MA";
+        String path = "sprites/machines/" + name + "/";
+        spritesAnimH.put(fullName, new PImage[lengths[0]]); //base
+        for (int i = lengths[0]-1; i >= 0; i--) {
+            spritesAnimH.get(fullName)[i] = p.loadImage(path + "base/" + PApplet.nf(i,3) + ".png");
+        }
+        for (int i = 1; i <= 3; i++) { //damage variants
+            spritesAnimH.put(fullName + "d" + i, new PImage[lengths[i]]);
+            for (int j = lengths[i]-1; j >= 0; j--) {
+                spritesAnimH.get(fullName + "d" + i)[j] = p.loadImage(path + "d" + i + "/" + PApplet.nf(j,3) + ".png");
+            }
         }
     }
 

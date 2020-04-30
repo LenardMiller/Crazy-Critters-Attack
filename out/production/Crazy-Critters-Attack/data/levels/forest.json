@@ -2258,7 +2258,8 @@
   },
   {
     "betweenFrames": 4,
-    "hp": 200,
+    "hp": 500,
+    "maxHp": 500,
     "x": 450,
     "name": "stoneDrillMA",
     "y": 425,
