@@ -34,10 +34,10 @@ public class RandomCannon extends Turret {
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 4;
-        error = 8; //default 8
+        error = 11; //8
         loadSprites();
         debrisType = "wood";
-        price = 100;
+        price = 200;
         value = price;
         priority = 0; //close
         nextLevelA = 0;

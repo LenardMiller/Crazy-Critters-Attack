@@ -34,11 +34,11 @@ public class Crossbow extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 15;
+        damage = 25;
         pierce = 2;
         loadSprites();
         debrisType = "wood";
-        price = 100;
+        price = 200;
         value = price;
         priority = 1; //last
         nextLevelA = 0;

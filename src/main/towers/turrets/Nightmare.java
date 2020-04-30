@@ -41,7 +41,7 @@ public class Nightmare extends Turret {
         effectDuration = 220;
         loadSprites();
         debrisType = "darkMetal";
-        price = 150;
+        price = 300;
         value = price;
         priority = 2; //strong
         nextLevelA = 0;

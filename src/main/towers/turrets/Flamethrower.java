@@ -48,7 +48,7 @@ public class Flamethrower extends Turret {
         rotationSpeed = 0.05f;
         loadSprites();
         debrisType = "metal";
-        price = 150;
+        price = 400;
         value = price;
         priority = 0; //close
         nextLevelA = 0;

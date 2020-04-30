@@ -36,7 +36,7 @@ public class MagicMissileer extends Turret{
         spriteType = 0;
         loadSprites();
         debrisType = "crystal";
-        price = 150;
+        price = 300;
         value = price;
         priority = 2; //strong
         nextLevelA = 0;

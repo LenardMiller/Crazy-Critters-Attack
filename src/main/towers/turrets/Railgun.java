@@ -56,7 +56,7 @@ public class Railgun extends Turret {
         vaporEndSprites = spritesAnimH.get("railgunBlastPT");
         loadSprites();
         debrisType = "ultimate";
-        price = 200;
+        price = 400;
         value = price;
         priority = 2; //strong
         nextLevelA = 0;
