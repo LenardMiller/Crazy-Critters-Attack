@@ -54,7 +54,7 @@ public class Wave {
             Spawn s = getEnemySpawn();
             int cs = 1;
             while (true) {
-                if ((int)(p.random(0,s.clusterChance)) == 0) cs++; //todo: see if floats work
+                if ((int)(p.random(0,s.clusterChance)) == 0) cs++; //idk if floats work
                 else break;
             }
             PVector pos;
