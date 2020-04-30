@@ -7,8 +7,6 @@ import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
 import static main.Main.*;
 import static main.pathfinding.UpdateNode.updateNode;
 
@@ -18,10 +16,8 @@ public class Node {
 
     private Node parent;
     int clearance;
-    ArrayList<Float> clearanceMp;
     HeapNode.ItemNode openItem;
     public PVector position;
-    float movementPenalty;
     private float startCost;
     private float endCost;
     public float totalCost;
@@ -113,6 +109,7 @@ public class Node {
 
     public void checkTile() {
         boolean ended = false;
+        boolean iNT = false;
         int tX = (int) (position.x / 50);
         int tY = (int) (position.y / 50);
         int nX = (int) (position.x / 25) + 4;
@@ -121,21 +118,21 @@ public class Node {
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
         if (tower != null) {
-            if (!tower.turret) movementPenalty = 1000;
             if (tower.turret) {
                 setEnd(nX, nY);
                 ended = true;
-            }
-        } else movementPenalty = 0;
+            } else iNT = true;
+        }
         Tile obsTile = tiles.get(tX,tY);
         if (obsTile != null) {
-            isNotTraversable = obsTile.obstacle != null;
+            if (obsTile.obstacle != null) iNT = true;
             if (obsTile.machine) {
                 setEnd(nX,nY);
                 ended = true;
             }
         }
         if (!ended) setNotEnd(tX,tY);
+        isNotTraversable = iNT;
     }
 
     void setClose() {
@@ -185,9 +182,6 @@ public class Node {
             if (parent != null) {
                 offset = PVector.sub(position, parent.position);
                 startCost = sqrt(sq(offset.x) + sq(offset.y));
-                float mpn = movementPenalty;
-                if (request != null && request.enemy != null && request.enemy.flying && !isEnd) mpn = 0;
-                if (mpn > 0) startCost += mpn;
                 startCost += parent.startCost;
             }
         }
