@@ -15,14 +15,14 @@ public class UpdateClearance {
                 int kSize = 1;
                 Node node = nodeGrid[x][y];
                 node.clearanceMp = new ArrayList<>(); //mpc
-                float mp = 0;
+                boolean mp = false;
                 int clearance = 0;
                 while (clear) {
                     for (int xn = 0; xn < kSize; xn++) {
                         for (int yn = 0; yn < kSize; yn++) {
                             if (!(x + xn >= nodeGrid.length || y + yn >= nodeGrid[x].length)) {
                                 Node nodeB = nodeGrid[x + xn][y + yn];
-                                mp += nodeB.movementPenalty; //mpc
+                                mp = nodeB.movementPenalty; //mpc
                                 if (nodeB.isNotTraversable) {
                                     clear = false;
                                     break;

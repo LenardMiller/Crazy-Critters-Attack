@@ -18,10 +18,10 @@ public class Node {
 
     private Node parent;
     int clearance;
-    ArrayList<Float> clearanceMp;
+    ArrayList<Boolean> clearanceMp;
     HeapNode.ItemNode openItem;
     public PVector position;
-    float movementPenalty;
+    boolean movementPenalty;
     private float startCost;
     private float endCost;
     public float totalCost;
@@ -32,11 +32,13 @@ public class Node {
     boolean isNotTraversable;
     private PathRequest request;
     public Tower tower;
+    public int mPSmearState;
 
     public Node(PApplet p, PVector position) {
         this.p = p;
 
         this.position = position;
+        mPSmearState = 0;
     }
 
     public Tile getTile() {
@@ -121,12 +123,13 @@ public class Node {
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
         if (tower != null) {
-            if (!tower.turret) movementPenalty = 1000;
-            if (tower.turret) {
+            if (!tower.turret) movementPenalty = true;
+            else {
+                movementPenalty = true;
                 setEnd(nX, nY);
                 ended = true;
             }
-        } else movementPenalty = 0;
+        } else movementPenalty = false;
         Tile obsTile = tiles.get(tX,tY);
         if (obsTile != null) {
             isNotTraversable = obsTile.obstacle != null;
@@ -187,10 +190,10 @@ public class Node {
                 startCost = sqrt(sq(offset.x) + sq(offset.y));
                 int size = defaultSize;
                 if (request != null) size = request.size;
-                float mpn = movementPenalty;
-                if (clearanceMp.size() >= size) mpn += clearanceMp.get(size - 1); //mpc
-                if (request != null && request.enemy != null && request.enemy.flying && !isEnd) mpn = 0;
-                if (mpn > 0) startCost += mpn;
+                boolean mpn = movementPenalty;
+                if (clearanceMp.size() >= size) mpn = clearanceMp.get(size - 1); //mpc
+                if (request != null && request.enemy != null && request.enemy.flying && !isEnd) mpn = false;
+                if (mpn) startCost += 1000;
                 startCost += parent.startCost;
             }
         }
