@@ -291,16 +291,17 @@ public class Selection { //what tower is selected
             p.text("Damage: " + tower.damage, 910, 296 + offset);
             //firerate (delay)
             p.text("Load time: " + (float) (round((float) (tower.delay) / 6)) / 10 + "s", 910, 316 + offset);
-            //accuracy (error)
-            if (tower.error == 0) p.text("Perfect accuracy", 910, 336 + offset);
-            else if (tower.error > 0 && tower.error <= 2) p.text("High accuracy", 910, 336 + offset);
-            else if (tower.error > 2 && tower.error <= 4) p.text("Medium accuracy", 910, 336 + offset);
-            else if (tower.error > 4) p.text("Low accuracy", 910, 336 + offset);
             //velocity
-            if (speed < 0) p.text("Instant", 910, 356 + offset);
-            else if (speed < 8) p.text("Low velocity", 910, 356 + offset);
-            else if (speed <= 18) p.text("Medium velocity", 910, 356 + offset);
-            else p.text("High velocity", 910, 356 + offset);
+            if (speed < 0) p.text("Instant", 910, 336 + offset);
+            else if (speed < 8) p.text("Low velocity", 910, 336 + offset);
+            else if (speed <= 15) p.text("Medium velocity", 910, 336 + offset);
+            else p.text("High velocity", 910, 336 + offset);
+            //accuracy (error)
+            if (tower.error == 0) p.text("Perfect accuracy", 910, 356 + offset);
+            else if (tower.error > 0 && tower.error <= 3) p.text("High accuracy", 910, 356 + offset);
+            else if (tower.error > 3 && tower.error <= 5) p.text("Medium accuracy", 910, 356 + offset);
+            else if (tower.error > 5 && tower.error <= 9) p.text("Low accuracy", 910, 356 + offset);
+            else if (tower.error > 9) p.text("Very low accuracy", 910, 356 + offset);
         }
     }
 }

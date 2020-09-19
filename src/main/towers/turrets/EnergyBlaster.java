@@ -29,7 +29,7 @@ public class EnergyBlaster extends Turret{
         delayTime = delay;
         damage = 30;
         pjSpeed = 16;
-        error = 3; //3 degrees
+        error = 4; //5 degrees
         numFireFrames = 14; //14
         betweenFireFrames = 2;
         numLoadFrames = 42; //42
@@ -40,7 +40,7 @@ public class EnergyBlaster extends Turret{
         bigExplosion = false;
         loadSprites();
         debrisType = "darkMetal";
-        price = 150;
+        price = 300;
         value = price;
         priority = 2; //strong
         nextLevelA = 0;
@@ -89,7 +89,7 @@ public class EnergyBlaster extends Turret{
         upgradeHealth[2] = 0;
         upgradeHealth[3] = 0;
         //error (accuracy)
-        upgradeError[0] = -1.5f;
+        upgradeError[0] = -2;
         upgradeError[1] = 0;
         upgradeError[2] = 0;
         upgradeError[3] = 0;

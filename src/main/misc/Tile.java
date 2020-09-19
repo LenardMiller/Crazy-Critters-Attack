@@ -1,5 +1,6 @@
 package main.misc;
 
+import main.pathfinding.Node;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -391,6 +392,19 @@ public class Tile {
         boolean tl = name.contains(subName + "TL");
         boolean tr = name.contains(subName + "TR");
         return bl || br || tl || tr;
+    }
+
+    public Node findClosestNode(PVector posEnemy, boolean tower) {
+        PVector posTile;
+        if (tower) posTile = new PVector(position.x + 50, position.y + 50); //compensate for tower position weirdness
+        else posTile = new PVector(position.x, position.y);
+        boolean left = posEnemy.x < posTile.x + 25;
+        boolean top = posEnemy.y < posTile.y + 25;
+        int x = (int)posTile.x / 25;
+        int y = (int)posTile.y / 25;
+        if (!left) x++;
+        if (!top) y++;
+        return nodeGrid[x][y];
     }
 
     public static class TileDS {

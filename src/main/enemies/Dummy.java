@@ -12,7 +12,7 @@ public class Dummy extends Enemy {
         maxSpeed = 0;
         speed = maxSpeed;
         moneyDrop = 0;
-        twDamage = 0;
+        damage = 0;
         maxHp = 50; //Hp
         hp = maxHp;
         hitParticle = "leafOuch";

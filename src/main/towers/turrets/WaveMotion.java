@@ -48,7 +48,7 @@ public class WaveMotion extends Turret {
         beam = spritesAnimH.get("waveMotionBeamTR");
         loadSprites();
         debrisType = "darkMetal";
-        price = 250;
+        price = 500;
         value = price;
         priority = 2; //strong
         nextLevelA = 0;

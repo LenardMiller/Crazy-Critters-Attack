@@ -1135,13 +1135,13 @@
     "bgA": "dirt"
   },
   {
-    "machine": true,
+    "machine": false,
     "id": 179,
     "type": "tile",
     "bgA": "dirt"
   },
   {
-    "machine": true,
+    "machine": false,
     "id": 180,
     "type": "tile",
     "bgA": "dirt"
@@ -2258,11 +2258,12 @@
   },
   {
     "betweenFrames": 4,
-    "hp": 200,
+    "hp": 500,
+    "maxHp": 500,
     "x": 450,
     "name": "stoneDrillMA",
-    "y": 450,
-    "debris": "darkMetal",
+    "y": 425,
+    "debris": "wood",
     "id": 361,
     "type": "machine"
   }

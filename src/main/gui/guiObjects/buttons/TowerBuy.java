@@ -25,24 +25,24 @@ public class TowerBuy extends Button {
         depressed = false;
         switch (type) {
             case "slingshot":
-                price = 50;
+                price = 100;
                 break;
             case "crossbow":
             case "miscCannon":
-                price = 100;
+                price = 200;
                 break;
             case "tesla":
             case "energyBlaster":
             case "magicMissleer":
-                price = 150;
+                price = 300;
                 break;
             case "nightmare":
             case "flamethrower":
             case "railgun":
-                price = 200;
+                price = 400;
                 break;
             case "waveMotion":
-                price = 250;
+                price = 500;
                 break;
         }
     }
@@ -68,55 +68,55 @@ public class TowerBuy extends Button {
                 case "slingshot":
                     p.text("Slingshot", 1000, 241);
                     p.textFont(mediumFont);
-                    p.text("$50", x, 271);
+                    p.text("$100", x, 271);
                     break;
                 case "crossbow":
                     p.text("Crossbow", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$100", x, 271);
+                    p.text("$200", x, 271);
                     break;
                 case "miscCannon":
                     p.text("Luggage", x, 241);
                     p.text("Blaster", x, 266);
                     p.textFont(mediumFont);
-                    p.text("$100", x, 296);
+                    p.text("$200", x, 296);
                     break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$150", x, 271);
+                    p.text("$300", x, 271);
                     break;
                 case "magicMissleer":
                     p.text("Magic Missileer", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$150", x, 271);
+                    p.text("$300", x, 271);
                     break;
                 case "tesla":
                     p.text("Tesla Tower", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$150", x, 271);
+                    p.text("$300", x, 271);
                     break;
                 case "nightmare":
                     p.text("Nightmare", x, 241);
                     p.text("Blaster", x, 266);
                     p.textFont(mediumFont);
-                    p.text("$200", x, 296);
+                    p.text("$400", x, 296);
                     break;
                 case "flamethrower":
                     p.text("Flamethrower", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$200", x, 271);
+                    p.text("$400", x, 271);
                     break;
                 case "railgun":
                     p.text("Railgun", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$200", x, 271);
+                    p.text("$400", x, 271);
                     break;
                 case "waveMotion":
                     p.text("Wave Motion", x, 241);
                     p.text("Tower", x, 266);
                     p.textFont(mediumFont);
-                    p.text("$250", x, 296);
+                    p.text("$500", x, 296);
                     break;
             }
             //if pressed

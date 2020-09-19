@@ -1,6 +1,7 @@
 package main.levelStructure;
 
 import main.enemies.*;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -43,13 +44,17 @@ public class Wave {
         waitTimer = p.frameCount + spawnLength;
     }
 
+    public void end() {
+        for (Tower tower : towers) if (tower.turret) tower.hp = tower.maxHp;
+    }
+
     public void spawnEnemies() {
         if (spawns.size() > 0 && spawnTimer <= p.frameCount && waitTimer >= p.frameCount) {
             spawnTimer = p.frameCount + betweenSpawns + (int)p.random(-(betweenSpawns/10f),betweenSpawns/10f);
             Spawn s = getEnemySpawn();
             int cs = 1;
             while (true) {
-                if ((int)(p.random(0,s.clusterChance)) == 0) cs++; //todo: see if floats work
+                if ((int)(p.random(0,s.clusterChance)) == 0) cs++; //idk if floats work
                 else break;
             }
             PVector pos;
