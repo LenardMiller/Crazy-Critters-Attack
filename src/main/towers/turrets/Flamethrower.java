@@ -58,7 +58,7 @@ public class Flamethrower extends Turret {
     }
 
     public void fire() { //needed to change projectile fired
-        if (targetAngle > angle) {
+        if (targetAngle > angle) { //todo: why is this broken!?
             if (targetAngle - angle < rotationSpeed) angle = targetAngle;
             else angle += rotationSpeed;
         }

@@ -32,13 +32,13 @@ public class Node {
     boolean isNotTraversable;
     private PathRequest request;
     public Tower tower;
-    public int mPSmearState;
+    public int smearState; //empty, full, partial, toPartial, toFull
 
     public Node(PApplet p, PVector position) {
         this.p = p;
 
         this.position = position;
-        mPSmearState = 0;
+        smearState = 0;
     }
 
     public Tile getTile() {

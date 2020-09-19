@@ -48,7 +48,7 @@ public class DataControl {
         saveArray.setJSONObject(i, saveObject);
 
         String name = "Save-"+month()+"-"+day()+"-"+year()+"-"+hour() +"-"+minute()+"-"+second();
-        File saveFile = new File("resources/data/saves/" + name + ".json");
+        new File("resources/data/saves/" + name + ".json");
         FileWriter saveWriter = new FileWriter("resources/data/saves/" + name + ".json");
         saveWriter.write(saveArray.toString());
         saveWriter.close();
