@@ -36,7 +36,7 @@ public class EnergyBlaster extends Turret{
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
-        effectRadius = 25;
+        effectRadius = 35;
         bigExplosion = false;
         loadSprites();
         debrisType = "darkMetal";
@@ -137,7 +137,7 @@ public class EnergyBlaster extends Turret{
 
     public void upgradeSpecial() {
         if (nextLevelA == 1) {
-            effectRadius += 20;
+            effectRadius += 25;
             bigExplosion = true;
         }
     }
