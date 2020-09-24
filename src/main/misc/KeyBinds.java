@@ -1,8 +1,6 @@
 package main.misc;
 
 import main.enemies.*;
-import main.levelStructure.Level;
-import main.levelStructure.Wave;
 import main.projectiles.*;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -34,7 +32,7 @@ public class KeyBinds {
         boolean needle = keysPressed.getPressedPulse('u') && alive;
         boolean flame = keysPressed.getPressed('i') && alive;
         //enemies
-        boolean activateLevels = keysPressed.getPressedPulse('0') && alive;
+        boolean pause = keysPressed.getPressedPulse('0') && alive;
         boolean littleBug = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
         boolean mediumBug = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
         boolean bigBug = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
@@ -56,12 +54,12 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,150));
         if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5));
         //enemies
-        if (activateLevels) { //temp
-            playingLevel = true;
-            Level level = levels[currentLevel];
-            level.currentWave = 0;
-            Wave wave = level.waves[level.currentWave];
-            wave.init();
+        if (pause) { //temp
+            playingLevel = false;
+//            Level level = levels[currentLevel];
+//            level.currentWave = 0;
+//            Wave wave = level.waves[level.currentWave];
+//            wave.init();
         }
         if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));

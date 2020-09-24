@@ -25,6 +25,7 @@ public class Wave {
     private Color secondary;
     private String title;
 
+    //todo: pause functionality
     public Wave(PApplet p, int length, int betweenSpawns, int spawnLength, Color primary, Color secondary, String title) {
         this.p = p;
         this.betweenSpawns = betweenSpawns;
