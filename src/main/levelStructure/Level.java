@@ -53,10 +53,10 @@ public class Level {
                 waves[currentWave-1].display(212, currentWave);
             }
         }
-        p.image(spritesH.get("currentLineIc"),890+1,212+125-1-1);
         p.tint(0,60);
         p.image(spritesH.get("currentLineIc"),890,212+125-1);
         p.tint(255);
+        p.image(spritesH.get("currentLineIc"),890-1,212+125-1-1);
         playButton.display((int)playY);
     }
 }
