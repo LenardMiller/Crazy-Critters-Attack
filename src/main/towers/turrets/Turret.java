@@ -132,7 +132,7 @@ public abstract class Turret extends Tower {
         targetEnemy = e;
     }
 
-    void aim(Enemy enemy) {
+    public void aim(Enemy enemy) {
         PVector position = new PVector(tile.position.x-25,tile.position.y-25);
         PVector target = enemy.position;
 
