@@ -37,9 +37,9 @@ public class Level {
         }
     }
 
-    public void display() {
+    public void display() { //todo: display tabs if level finished
         float playY = 0;
-        for (int i = currentWave-1; i <= currentWave+6; i++) {
+        for (int i = currentWave-3; i <= currentWave+6; i++) {
             if (i < waves.length && i > -1 && currentWave < waves.length) {
                 Wave wave = waves[i];
                 Wave current = waves[currentWave];
@@ -53,9 +53,9 @@ public class Level {
                 waves[currentWave-1].display(212, currentWave);
             }
         }
-        p.image(spritesH.get("currentLineIc"),900,212+125-3);
+        p.image(spritesH.get("currentLineIc"),890+1,212+125-1-1);
         p.tint(0,60);
-        p.image(spritesH.get("currentLineIc"),900+1,212+125-3+1);
+        p.image(spritesH.get("currentLineIc"),890,212+125-1);
         p.tint(255);
         playButton.display((int)playY);
     }
