@@ -29,7 +29,7 @@ public class EnergyBlaster extends Turret{
         delayTime = delay;
         damage = 30;
         pjSpeed = 16;
-        error = 4; //5 degrees
+        error = 6; //5 degrees
         numFireFrames = 14; //14
         betweenFireFrames = 2;
         numLoadFrames = 42; //42
