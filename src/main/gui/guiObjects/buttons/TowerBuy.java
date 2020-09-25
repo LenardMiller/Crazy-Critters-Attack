@@ -113,10 +113,9 @@ public class TowerBuy extends Button {
                     p.text("$400", x, 271);
                     break;
                 case "waveMotion":
-                    p.text("Wave Motion", x, 241);
-                    p.text("Tower", x, 266);
+                    p.text("Death Beam", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$500", x, 296);
+                    p.text("$500", x, 271);
                     break;
             }
             //if pressed
