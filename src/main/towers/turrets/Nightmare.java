@@ -102,10 +102,10 @@ public class Nightmare extends Turret {
         upgradeNames[2] = name;
         upgradeNames[3] = name;
         //debris
-        upgradeDebris[0] = "metal";
-        upgradeDebris[1] = "metal";
-        upgradeDebris[2] = "metal";
-        upgradeDebris[3] = "metal";
+        upgradeDebris[0] = "darkMetal";
+        upgradeDebris[1] = "darkMetal";
+        upgradeDebris[2] = "darkMetal";
+        upgradeDebris[3] = "darkMetal";
         //titles
         upgradeTitles[0] = "Firerate";
         upgradeTitles[1] = "More Needles";
