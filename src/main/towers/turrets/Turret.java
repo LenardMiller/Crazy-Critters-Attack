@@ -39,6 +39,7 @@ public abstract class Turret extends Tower {
     Enemy targetEnemy;
     public int effectLevel;
     public int effectDuration;
+    private float targetAngle;
 
     Turret(PApplet p, Tile tile) {
         super(p, tile);
@@ -89,7 +90,7 @@ public abstract class Turret extends Tower {
     public void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
-        if (spriteType == 0 && targetEnemy != null) { //if done animating
+        if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
             spriteType = 1;
             frame = 0;
             fire();
@@ -147,7 +148,9 @@ public abstract class Turret extends Tower {
             target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
         }
 
-        angle = findAngle(position,target);
+        targetAngle = findAngle(position,target);
+        if (angle < targetAngle) angle += (abs(angle - targetAngle)) / 10;
+        if (angle > targetAngle) angle -= (abs(angle - targetAngle)) / 10;
 
         if (visualize && debug) { //cool lines
             p.stroke(255);
@@ -248,7 +251,7 @@ public abstract class Turret extends Tower {
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
         p.rotate(angle);
         p.tint(0,60);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset); //todo: crash here
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         //main
         p.pushMatrix();

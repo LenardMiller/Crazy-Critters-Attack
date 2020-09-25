@@ -59,6 +59,16 @@ public class Flamethrower extends Turret {
         updateTowerArray();
     }
 
+    public void checkTarget() {
+        getTargetEnemy();
+        if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
+        if (spriteType == 0 && targetEnemy != null) { //if done animating
+            spriteType = 1;
+            frame = 0;
+            fire();
+        }
+    }
+
     public void fire() { //needed to change projectile fired
         float angleB = angle + radians(p.random(-error, error));
         PVector spp = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
