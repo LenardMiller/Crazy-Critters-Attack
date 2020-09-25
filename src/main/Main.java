@@ -251,7 +251,7 @@ public class Main extends PApplet {
             }
             tile.drawBgWOCorners("titaniumWall");
         }
-        //obstacle shadow, background c
+        //obstacle shadows, background c
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).displayB();
         }

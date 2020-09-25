@@ -119,12 +119,15 @@ public abstract class Turret extends Tower {
                         e = enemy;
                         dist = t;
                     }
-                    if (priority == 2) if (enemy.maxHp > maxHp) { //strong
-                        e = enemy;
-                        maxHp = enemy.maxHp;
-                    } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
-                        e = enemy;
-                        dist = t;
+                    if (priority == 2) {
+                        if (enemy.maxHp > maxHp) { //strong
+                            e = enemy;
+                            dist = t;
+                            maxHp = enemy.maxHp;
+                        } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                            e = enemy;
+                            dist = t;
+                        }
                     }
                 }
             }
