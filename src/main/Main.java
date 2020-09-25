@@ -220,6 +220,7 @@ public class Main extends PApplet {
             connectWallQueues = 0;
             updateWallTileConnections();
         }
+        //main background
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).displayA();
         }
@@ -250,11 +251,9 @@ public class Main extends PApplet {
             }
             tile.drawBgWOCorners("titaniumWall");
         }
+        //obstacle shadow, background c
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).displayB();
-        }
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayC();
         }
         //pathfinding debug
         if (debug) {
@@ -318,6 +317,10 @@ public class Main extends PApplet {
         }
         //currently held
         hand.main();
+        //obstacles
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayC();
+        }
     }
 
     public void keyPressed() {
