@@ -276,7 +276,7 @@ public abstract class Turret extends Tower {
         error += upgradeError[nextLevel];
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
-        sprite = upgradeSprites[nextLevel];
+//        sprite = upgradeSprites[nextLevel];
         upgradeSpecial();
         if (id == 0) {
             nextLevelA++;
