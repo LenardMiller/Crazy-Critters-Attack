@@ -7,6 +7,8 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.MiscMethods.clampAngle;
+import static main.misc.MiscMethods.findAngle;
 import static processing.core.PConstants.HALF_PI;
 
 public class MagicMissile extends Projectile {
@@ -73,32 +75,16 @@ public class MagicMissile extends Projectile {
         targetEnemy = e;
     }
 
-    private void aim(PVector target) { //todo: cool slow turn
-//        angle = findAngleBetween(target,position) + QUARTER_PI;
-        PVector ratio = PVector.sub(target,position);
-        if (position.x == target.x){ //if on the same x
-            if (position.y >= target.y){ //if below target or on same y, angle right
-                angle = 0;
-            } else if (position.y < target.y){ //if above target, angle left
-                angle = PI;
-            }
-        } else if (position.y == target.y){ //if on same y
-            if (position.x > target.x){ //if  right of target, angle down
-                angle = 3*HALF_PI;
-            } else if (position.x < target.x){ //if left of target, angle up
-                angle = HALF_PI;
-            }
-        } else{
-            if (position.x < target.x && position.y > target.y){ //if to left and below NOT WORKING
-                angle = (atan(abs(ratio.x+15)/abs(ratio.y)));
-            } else if (position.x < target.x && position.y < target.y){ //if to left and above
-                angle = (atan(abs(ratio.y)/abs(ratio.x))) + HALF_PI;
-            } else if (position.x > target.x && position.y < target.y){ //if to right and above NOT WORKING
-                angle = (atan(abs(ratio.x+15)/abs(ratio.y))) + PI;
-            } else if (position.x > target.x && position.y > target.y){ //if to right and below
-                angle = (atan(abs(ratio.y)/abs(ratio.x))) + 3*HALF_PI;
-            }
-        }
+    private void aim(PVector target) {
+        float targetAngle = clampAngle(findAngle(position, target));
+        angle = clampAngle(angle);
+        float diffA = targetAngle - angle;
+        float diffB = -diffA;
+        diffA = clampAngle(diffA);
+        diffB = clampAngle(diffB);
+        float diff = min(diffA,diffB);
+        if (angle + diff != targetAngle && targetAngle > PI) diff *= -1;
+        angle += diff / 10;
         angleTwo = angle;
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
