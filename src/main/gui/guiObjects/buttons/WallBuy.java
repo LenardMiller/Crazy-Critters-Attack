@@ -13,9 +13,10 @@ public class WallBuy extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 24);
-        spriteOne = spritesAnimH.get("wallBuyBT")[0];
-        spriteTwo = spritesAnimH.get("wallBuyBT")[1];
-        sprite = spriteOne;
+        spriteIdle = spritesAnimH.get("wallBuyBT")[0];
+        spritePressed = spritesAnimH.get("wallBuyBT")[1];
+        spriteHover = spritesAnimH.get("wallBuyBT")[2];
+        sprite = spriteIdle;
         depressed = false;
     }
 
@@ -28,10 +29,15 @@ public class WallBuy extends Button {
 
     public void hover(){ //below is if hovered or depressed
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active) {
-            sprite = spriteTwo;
-            if (inputHandler.leftMousePressedPulse) action();
+            sprite = spriteHover;
+            if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
+            if (inputHandler.leftMouseReleasedPulse) {
+                action();
+                sprite = spritePressed;
+            }
         }
-        else sprite = spriteOne;
+        else sprite = spriteIdle;
+        if (!hand.displayInfo.equals("null")) sprite = spritePressed;
     }
 
     public void action() {

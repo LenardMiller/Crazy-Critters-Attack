@@ -20,7 +20,7 @@ public class Hand {
     private PImage heldSprite;
     private PVector offset;
     private boolean implacable;
-    private String displayInfo;
+    public String displayInfo;
     public int price;
 
     public Hand(PApplet p) {

@@ -13,13 +13,13 @@ public class SpriteLoader {
     public static void loadSpritesAnim(PApplet p) {
         //icons & buttons
         getSprite(p,"upgrade","IC","upgrades/",16);
-        getSprite(p,"moneyAdd","BT","moneyAdd/",2);
-        getSprite(p,"upgrade","BT","upgradeButton/",4);
-        getSprite(p,"sellTower","BT","sellTower/",2);
-        getSprite(p,"targetPriority","BT","targetPriority/",2);
-        getSprite(p,"towerTabSwitch","BT","towerTabSwitch/",2);
-        getSprite(p,"wallBuy","BT","wallBuy/",2);
-        getSprite(p,"play","BT","play/",3);
+        getSprite(p,"moneyAdd","BT","moneyAdd/",3);
+        getSprite(p,"upgrade","BT","upgradeButton/",5);
+        getSprite(p,"sellTower","BT","sellTower/",3);
+        getSprite(p,"targetPriority","BT","targetPriority/",3);
+        getSprite(p,"towerTabSwitch","BT","towerTabSwitch/",3);
+        getSprite(p,"wallBuy","BT","wallBuy/",3);
+        getSprite(p,"play","BT","play/",4);
         //particles
         getSprite(p,"energyBuff","PT","buff/energy/",8);
         getSprite(p,"fireBuff","PT","buff/fire/",8);

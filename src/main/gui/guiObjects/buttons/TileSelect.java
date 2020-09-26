@@ -27,9 +27,9 @@ public class TileSelect extends Button {
             tileSprite = p.loadImage("sprites/guiObjects/buttons/tileSelect/machine/icon.png");
         } else tileSprite = spritesH.get(type + "_TL");
         spriteLocation = "sprites/guiObjects/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
-        spriteOne = p.loadImage(spriteLocation + "000.png");
-        spriteTwo = p.loadImage(spriteLocation + "001.png");
-        sprite = spriteOne;
+        spriteIdle = p.loadImage(spriteLocation + "000.png");
+        spritePressed = p.loadImage(spriteLocation + "001.png");
+        sprite = spriteIdle;
     }
 
     public void main() {
@@ -46,10 +46,10 @@ public class TileSelect extends Button {
 
     public void hover() { //below is if hovered or depressed
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active){
-            sprite = spriteTwo;
+            sprite = spritePressed;
             if (inputHandler.leftMousePressedPulse) action();
         }
-        else sprite = spriteOne;
+        else sprite = spriteIdle;
     }
 
     public void action() {
