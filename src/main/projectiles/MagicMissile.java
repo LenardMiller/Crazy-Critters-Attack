@@ -7,8 +7,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.clampAngle;
-import static main.misc.MiscMethods.findAngle;
+import static main.misc.MiscMethods.*;
 import static processing.core.PConstants.HALF_PI;
 
 public class MagicMissile extends Projectile {
@@ -78,13 +77,7 @@ public class MagicMissile extends Projectile {
     private void aim(PVector target) {
         float targetAngle = clampAngle(findAngle(position, target));
         angle = clampAngle(angle);
-        float diffA = targetAngle - angle;
-        float diffB = -diffA;
-        diffA = clampAngle(diffA);
-        diffB = clampAngle(diffB);
-        float diff = min(diffA,diffB);
-        if (angle + diff != targetAngle && targetAngle > PI) diff *= -1;
-        angle += diff / 10;
+        angle += angleDifference(targetAngle, angle) / 10;
         angleTwo = angle;
         velocity = PVector.fromAngle(angle-HALF_PI);
     }

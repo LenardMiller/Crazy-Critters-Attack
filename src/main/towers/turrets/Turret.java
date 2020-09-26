@@ -150,13 +150,7 @@ public abstract class Turret extends Tower {
 
         targetAngle = clampAngle(findAngle(position, target));
         angle = clampAngle(angle);
-        float diffA = targetAngle - angle;
-        float diffB = -diffA;
-        diffA = clampAngle(diffA);
-        diffB = clampAngle(diffB);
-        float diff = min(diffA,diffB);
-        if (angle + diff != targetAngle && targetAngle > PI) diff *= -1;
-        angle += diff / 10;
+        angle += angleDifference(targetAngle, angle) / 10;
 
         if (visualize && debug) { //cool lines
             p.stroke(255);

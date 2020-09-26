@@ -212,8 +212,17 @@ public class MiscMethods {
         return findAngle(new PVector(0,0), v);
     }
 
-    //radians mode
     public static float clampAngle(float a) {
         return a - TWO_PI * floor(a / TWO_PI);
+    }
+
+    public static float angleDifference(float a, float b) { //todo: fix spinning
+        float diffA = a - b;
+        float diffB = -diffA;
+        diffA = clampAngle(diffA);
+        diffB = clampAngle(diffB);
+        float diff = min(diffA,diffB);
+        if (b + diff != a && a > PI) diff *= -1;
+        return diff;
     }
 }
