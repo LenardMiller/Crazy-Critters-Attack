@@ -184,9 +184,7 @@ public class Selection { //what tower is selected
                 speed = -1;
                 break;
             case "waveMotion":
-                p.text("Wave Motion", 1000, 241);
-                p.text("Tower",1000,266);
-                offset = 25;
+                p.text("Death Beam", 1000, 241);
                 speed = -1;
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);

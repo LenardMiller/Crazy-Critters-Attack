@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.enemies.Enemy;
 import main.misc.Tile;
 import main.projectiles.Flame;
 import processing.core.PApplet;
@@ -7,6 +8,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.MiscMethods.findAngle;
 import static main.misc.MiscMethods.updateTowerArray;
 
 public class Flamethrower extends Turret {
@@ -29,7 +31,7 @@ public class Flamethrower extends Turret {
         delay += (round(p.random(-(delay / 10f), delay / 10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 5;
-        error = 0.25f;
+        error = 1;
         numFireFrames = 4;
         numLoadFrames = 1;
         numIdleFrames = 4;
@@ -45,7 +47,7 @@ public class Flamethrower extends Turret {
         loadDelayTime = 0;
         damage = 2;
         flameTimer = 5;
-        rotationSpeed = 0.05f;
+        rotationSpeed = 0.02f;
         loadSprites();
         debrisType = "metal";
         price = 400;
@@ -57,15 +59,17 @@ public class Flamethrower extends Turret {
         updateTowerArray();
     }
 
+    public void checkTarget() {
+        getTargetEnemy();
+        if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
+        if (spriteType == 0 && targetEnemy != null) { //if done animating
+            spriteType = 1;
+            frame = 0;
+            fire();
+        }
+    }
+
     public void fire() { //needed to change projectile fired
-        if (targetAngle > angle) { //todo: why is this broken!?
-            if (targetAngle - angle < rotationSpeed) angle = targetAngle;
-            else angle += rotationSpeed;
-        }
-        if (targetAngle < angle) {
-            if (angle - targetAngle < rotationSpeed) angle = targetAngle;
-            else angle -= rotationSpeed;
-        }
         float angleB = angle + radians(p.random(-error, error));
         PVector spp = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         PVector spa = PVector.fromAngle(angleB - HALF_PI);
@@ -73,6 +77,46 @@ public class Flamethrower extends Turret {
         spp.add(spa);
         projectiles.add(new Flame(p, spp.x, spp.y, angleB, this, damage, effectLevel, effectDuration, flameTimer));
         delayTime = p.frameCount + delay; //waits this time before firing
+    }
+
+    public void aim(Enemy enemy) {
+        PVector position = new PVector(tile.position.x-25,tile.position.y-25);
+        PVector target = enemy.position;
+
+        if (pjSpeed > 0) { //shot leading
+            float dist = PVector.sub(target, position).mag();
+            float time = dist / pjSpeed;
+            PVector enemyHeading = PVector.fromAngle(enemy.angle);
+            enemyHeading.setMag(enemy.speed * time);
+            target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
+        }
+
+        targetAngle = findAngle(position,target);
+
+        if (visualize && debug) { //cool lines
+            p.stroke(255);
+            p.line(position.x, position.y, target.x, target.y);
+            p.stroke(255, 0, 0, 150);
+            p.line(target.x, p.height, target.x, 0);
+            p.stroke(0, 0, 255, 150);
+            p.line(p.width, target.y, 0, target.y);
+        }
+    }
+
+    public void main() { //need to check target
+        if (hp <= 0) {
+            die(false);
+            tile.tower = null;
+        }
+        if (enemies.size() > 0 && alive) checkTarget();
+        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) {
+            selection.swapSelected(tile.id);
+        }
+        if (angle < targetAngle) {
+            angle += rotationSpeed;
+        } if (angle > targetAngle) {
+            angle -= rotationSpeed;
+        }
     }
 
     private void setUpgrades() {
@@ -145,7 +189,7 @@ public class Flamethrower extends Turret {
 
     public void upgradeSpecial() { //todo: fix crash
         if (nextLevelA == 0) flameTimer += 2;
-        if (nextLevelA == 1) rotationSpeed += 0.05;
+        if (nextLevelA == 1) rotationSpeed += 0.02;
         if (nextLevelB == 1) {
             effectDuration += 100;
             effectLevel += 2;

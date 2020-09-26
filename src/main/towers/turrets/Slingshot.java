@@ -11,7 +11,7 @@ import static main.misc.MiscMethods.updateTowerArray;
 
 public class Slingshot extends Turret {
 
-    public Slingshot(PApplet p, Tile tile) {
+    public Slingshot(PApplet p, Tile tile) { //todo: redo sprite
         super(p,tile);
         name = "slingshot";
         size = new PVector(50,50);
@@ -22,7 +22,7 @@ public class Slingshot extends Turret {
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
-        error = 8; //5
+        error = 6; //6
         numFireFrames = 34;
         numLoadFrames = 59;
         fireFrames = new PImage[numFireFrames];

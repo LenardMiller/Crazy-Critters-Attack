@@ -24,9 +24,9 @@ public class Wave {
     private Color primary;
     private Color secondary;
     private String title;
-    private int iconId;
 
-    public Wave(PApplet p, int length, int betweenSpawns, int spawnLength, Color primary, Color secondary, String title, int iconId) {
+    //todo: pause functionality
+    public Wave(PApplet p, int length, int betweenSpawns, int spawnLength, Color primary, Color secondary, String title) {
         this.p = p;
         this.betweenSpawns = betweenSpawns;
         this.length = length;
@@ -34,7 +34,6 @@ public class Wave {
         this.primary = primary;
         this.secondary = secondary;
         this.title = title;
-        this.iconId = iconId;
         spawns = new ArrayList<>();
         spawnTimer = p.frameCount + betweenSpawns + (int)p.random(-(betweenSpawns/10f),betweenSpawns/10f);
     }
@@ -66,20 +65,19 @@ public class Wave {
         }
     }
 
-    public void display(float y, int id) { //todo: add little tabs
+    public void display(float y, int id) { //todo: fix jiggle text
         p.tint(primary.getRed(), primary.getGreen(), primary.getBlue());
-        p.image(spritesH.get("wavePrimaryIc"),900,y);
+        p.image(spritesH.get("wavePrimaryIc"),890,y);
         p.tint(secondary.getRed(), secondary.getGreen(), secondary.getBlue());
-        p.image(spritesH.get("waveSecondaryIc"),900,y);
+        p.image(spritesH.get("waveSecondaryIc"),890,y);
         p.tint(255);
         p.fill(secondary.getRed(), secondary.getGreen(), secondary.getBlue());
         p.textAlign(CENTER);
         p.textFont(largeFont);
-        p.text(title,1000,y+30);
-        p.textAlign(LEFT);
-        p.text(id,910,y+115);
-        p.image(spritesAnimH.get("waveBgIC")[0],974,y+48);
-        p.image(spritesAnimH.get("waveIC")[iconId],974,y+48);
+        p.text(title,1000,y+110);
+        p.textAlign(CENTER);
+        p.textFont(veryLargeFont);
+        p.text(id,1000,y+70);
     }
 
     private Spawn getEnemySpawn() {

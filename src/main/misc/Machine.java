@@ -81,7 +81,7 @@ public class Machine {
         if (!dead) {
             hurtParticles();
             drillParticles();
-        } else if (deathFrame < 200) deathAnim();
+        } else if (deathFrame < 300) deathAnim();
         if (p.frameCount > frameTimer && !dead) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
@@ -147,7 +147,7 @@ public class Machine {
                 }
             }
         }
-        if (deathFrame == 180) for (Tile tile : machTiles) tile.setBgC(debris + "DebrisBGC_TL");
+        if (deathFrame == 280) for (Tile tile : machTiles) tile.setBgC(debris + "DebrisBGC_TL");
     }
 
     public void damage(int dmg) {

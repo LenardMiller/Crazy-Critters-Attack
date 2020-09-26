@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
-import main.projectiles.MagicMissile;
 import main.misc.Tile;
+import main.projectiles.MagicMissile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -57,11 +57,11 @@ public class MagicMissileer extends Turret{
 
     public void fire() { //needed to change projectile fired
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, this, damage, 0,tile.position));
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, this, damage, 1,tile.position));
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, this, damage, 2,tile.position));
+        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 0,tile.position));
+        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 1,tile.position));
+        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 2,tile.position));
         if (four) {
-            projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), angle, this, damage, (int)(p.random(0,2.99f)),tile.position));
+            projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, (int)(p.random(0,2.99f)),tile.position));
         }
     }
 

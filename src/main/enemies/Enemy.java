@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.findAngleBetween;
-import static main.misc.MiscMethods.roundTo;
+import static main.misc.MiscMethods.*;
 
 public abstract class Enemy {
 
@@ -28,6 +27,7 @@ public abstract class Enemy {
     public PVector position;
     public PVector size;
     public float angle;
+    private float targetAngle;
     public float radius;
     public float maxSpeed;
     public float speed;
@@ -82,7 +82,7 @@ public abstract class Enemy {
         attackStartFrame = 0;
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
-        pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
+        pfSize = 1; //enemies pathfinding size, measured in nodes
         stealthMode = false;
         flying = false;
         attackCount = 0;
@@ -91,6 +91,11 @@ public abstract class Enemy {
     public void main(int i) {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
+
+        angle = clampAngle(angle);
+        targetAngle = clampAngle(targetAngle);
+        angle += angleDifference(targetAngle, angle) / 10;
+
         if (!attacking) move();
         else attack();
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
@@ -103,9 +108,9 @@ public abstract class Enemy {
         if (dead) die(i);
     }
 
-    void die(int i) {
+    void die(int i) { //todo: extra death anims?
         Main.money += moneyDrop;
-        int num = (int) (p.random(2, 5));
+        int num = (int) (p.random(2, 5)) * pfSize * pfSize;
         for (int j = num; j >= 0; j--) { //creates death particles
             particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), "greyPuff"));
         }
@@ -113,13 +118,13 @@ public abstract class Enemy {
             Buff buff = buffs.get(j);
             //if attached, remove
             if (buff.enId == i) buffs.remove(j);
-                //shift ids to compensate for enemy removal
+            //shift ids to compensate for enemy removal
             else if (buff.enId > i) buff.enId -= 1;
         }
         enemies.remove(i);
     }
 
-    void move() { //todo: add super stylish turning system?
+    void move() {
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
@@ -228,7 +233,7 @@ public abstract class Enemy {
         barTrans = 255;
         tintColor = 0;
         if (parts) {
-            int num = (int) (p.random(1, 3));
+            int num = (int) (p.random(1, 3)) * pfSize * pfSize;
             for (int j = num; j >= 0; j--) { //sprays ouch
                 particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
             }
@@ -272,7 +277,7 @@ public abstract class Enemy {
         if (targetTower != null) {
             if (pfSize > 2) { //angle towards tower correctly
                 PVector t = new PVector(targetTower.tile.position.x - 25, targetTower.tile.position.y - 25);
-                angle = findAngleBetween(t, position);
+                targetAngle = findAngleBetween(t, position);
             }
             moveFrame = 0;
             if (dmg) targetTower.damage(damage);
@@ -322,7 +327,7 @@ public abstract class Enemy {
                 PVector pointPosition = points.get(points.size() - 1).position;
                 pointPosition = new PVector(pointPosition.x + 12.5f, pointPosition.y + 12.5f);
                 pointPosition = new PVector(pointPosition.x + ((pfSize - 1) * 12.5f), pointPosition.y + ((pfSize - 1) * 12.5f));
-                angle = findAngleBetween(pointPosition, position);
+                targetAngle = findAngleBetween(pointPosition, position);
             }
         }
     }

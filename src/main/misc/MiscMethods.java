@@ -76,7 +76,7 @@ public class MiscMethods {
         return minCost;
     }
 
-    public static PVector randomSpawnPosition(PApplet p) {
+    public static PVector randomSpawnPosition(PApplet p) { //todo: better spawning
         float z = p.random(0, 4);
         float low = -90;
         float high = 990;
@@ -210,5 +210,20 @@ public class MiscMethods {
 
     public static float findAngle(PVector v) {
         return findAngle(new PVector(0,0), v);
+    }
+
+    public static float clampAngle(float a) {
+        return a - TWO_PI * floor(a / TWO_PI);
+    }
+
+    public static float angleDifference(float target, float current) {
+        float diffA = -(current - target);
+        float diffB = diffA - TWO_PI;
+        float diffC = clampAngle(diffB);
+        float f = min(abs(diffA),abs(diffB),abs(diffC));
+        if (f == abs(diffA)) return diffA;
+        if (f == abs(diffB)) return diffB;
+        if (f == abs(diffC)) return diffC;
+        return 0;
     }
 }
