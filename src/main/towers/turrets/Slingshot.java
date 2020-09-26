@@ -11,7 +11,7 @@ import static main.misc.MiscMethods.updateTowerArray;
 
 public class Slingshot extends Turret {
 
-    public Slingshot(PApplet p, Tile tile) {
+    public Slingshot(PApplet p, Tile tile) { //todo: redo sprite
         super(p,tile);
         name = "slingshot";
         size = new PVector(50,50);
