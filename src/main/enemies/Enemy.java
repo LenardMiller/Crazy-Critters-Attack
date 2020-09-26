@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.findAngleBetween;
-import static main.misc.MiscMethods.roundTo;
+import static main.misc.MiscMethods.*;
+import static main.misc.MiscMethods.angleDifference;
 
 public abstract class Enemy {
 
@@ -28,6 +28,7 @@ public abstract class Enemy {
     public PVector position;
     public PVector size;
     public float angle;
+    private float targetAngle;
     public float radius;
     public float maxSpeed;
     public float speed;
@@ -91,6 +92,10 @@ public abstract class Enemy {
     public void main(int i) {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
+
+        angle = clampAngle(angle);
+        angle += angleDifference(targetAngle, angle) / 10;
+
         if (!attacking) move();
         else attack();
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
@@ -272,7 +277,7 @@ public abstract class Enemy {
         if (targetTower != null) {
             if (pfSize > 2) { //angle towards tower correctly
                 PVector t = new PVector(targetTower.tile.position.x - 25, targetTower.tile.position.y - 25);
-                angle = findAngleBetween(t, position);
+                targetAngle = findAngleBetween(t, position);
             }
             moveFrame = 0;
             if (dmg) targetTower.damage(damage);
@@ -322,7 +327,7 @@ public abstract class Enemy {
                 PVector pointPosition = points.get(points.size() - 1).position;
                 pointPosition = new PVector(pointPosition.x + 12.5f, pointPosition.y + 12.5f);
                 pointPosition = new PVector(pointPosition.x + ((pfSize - 1) * 12.5f), pointPosition.y + ((pfSize - 1) * 12.5f));
-                angle = findAngleBetween(pointPosition, position);
+                targetAngle = findAngleBetween(pointPosition, position);
             }
         }
     }
