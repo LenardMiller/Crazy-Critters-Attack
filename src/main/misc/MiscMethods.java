@@ -216,13 +216,14 @@ public class MiscMethods {
         return a - TWO_PI * floor(a / TWO_PI);
     }
 
-    public static float angleDifference(float a, float b) { //todo: fix spinning
-        float diffA = a - b;
-        float diffB = -diffA;
-        diffA = clampAngle(diffA);
-        diffB = clampAngle(diffB);
-        float diff = min(diffA,diffB);
-        if (b + diff != a && a > PI) diff *= -1;
-        return diff;
+    public static float angleDifference(float target, float current) {
+        float diffA = -(current - target);
+        float diffB = diffA - TWO_PI;
+        float diffC = clampAngle(diffB);
+        float f = min(abs(diffA),abs(diffB),abs(diffC));
+        if (f == abs(diffA)) return diffA;
+        if (f == abs(diffB)) return diffB;
+        if (f == abs(diffC)) return diffC;
+        return 0;
     }
 }

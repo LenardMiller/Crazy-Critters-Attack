@@ -17,7 +17,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
-import static main.misc.MiscMethods.angleDifference;
 
 public abstract class Enemy {
 
@@ -83,7 +82,7 @@ public abstract class Enemy {
         attackStartFrame = 0;
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
-        pfSize = 1; //enemies pathfinding size, multiplied by twenty-five
+        pfSize = 1; //enemies pathfinding size, measured in nodes
         stealthMode = false;
         flying = false;
         attackCount = 0;
@@ -94,6 +93,7 @@ public abstract class Enemy {
         swapPoints(false);
 
         angle = clampAngle(angle);
+        targetAngle = clampAngle(targetAngle);
         angle += angleDifference(targetAngle, angle) / 10;
 
         if (!attacking) move();
@@ -124,7 +124,7 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    void move() { //todo: add super stylish turning system?
+    void move() {
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
