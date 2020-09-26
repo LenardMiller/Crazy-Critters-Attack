@@ -108,7 +108,7 @@ public abstract class Enemy {
         if (dead) die(i);
     }
 
-    void die(int i) {
+    void die(int i) { //todo: extra death anims?
         Main.money += moneyDrop;
         int num = (int) (p.random(2, 5)) * pfSize * pfSize;
         for (int j = num; j >= 0; j--) { //creates death particles
