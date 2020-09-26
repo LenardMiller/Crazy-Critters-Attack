@@ -5,7 +5,7 @@ import processing.core.PVector;
 
 public class TreeGiant extends Enemy {
 
-    public TreeGiant(PApplet p, float x, float y) {
+    public TreeGiant(PApplet p, float x, float y) { //todo: make shoulders smaller
         super(p,x,y);
         size = new PVector(76,76);
         pfSize = 3;
