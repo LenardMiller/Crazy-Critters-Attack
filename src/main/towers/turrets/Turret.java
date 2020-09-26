@@ -12,8 +12,8 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.findAngle;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.MiscMethods.*;
+import static main.misc.MiscMethods.clampAngle;
 
 public abstract class Turret extends Tower {
 
@@ -137,7 +137,7 @@ public abstract class Turret extends Tower {
     }
 
     public void aim(Enemy enemy) {
-        PVector position = new PVector(tile.position.x-25,tile.position.y-25);
+        PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
         PVector target = enemy.position;
 
         if (pjSpeed > 0) { //shot leading
@@ -148,9 +148,15 @@ public abstract class Turret extends Tower {
             target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
         }
 
-        targetAngle = findAngle(position,target);
-        if (angle < targetAngle) angle += (abs(angle - targetAngle)) / 10;
-        if (angle > targetAngle) angle -= (abs(angle - targetAngle)) / 10;
+        targetAngle = clampAngle(findAngle(position, target));
+        angle = clampAngle(angle);
+        float diffA = targetAngle - angle;
+        float diffB = -diffA;
+        diffA = clampAngle(diffA);
+        diffB = clampAngle(diffB);
+        float diff = min(diffA,diffB);
+        if (angle + diff != targetAngle && targetAngle > PI) diff *= -1;
+        angle += diff / 10;
 
         if (visualize && debug) { //cool lines
             p.stroke(255);
@@ -221,7 +227,7 @@ public abstract class Turret extends Tower {
                             compress.main();
                         }
                     } else {
-                        compress = new CompressArray(oldSize-1,newSize,spriteArray);
+                        compress = new CompressArray(oldSize - 1, newSize, spriteArray);
                         compress.main();
                         spriteArray = compress.compArray;
                     }
@@ -250,15 +256,15 @@ public abstract class Turret extends Tower {
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
         p.rotate(angle);
-        p.tint(0,60);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        p.tint(0, 60);
+        p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
         p.popMatrix();
         //main
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
         p.tint(255, tintColor, tintColor);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
         p.popMatrix();
         p.tint(255);
     }
@@ -298,8 +304,9 @@ public abstract class Turret extends Tower {
             particles.add(new Debris(p, (tile.position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (tile.position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
         }
         //prevent having fire animations longer than delays
-        while (delay <= numFireFrames*betweenFireFrames + numIdleFrames) betweenFireFrames--;
+        while (delay <= numFireFrames * betweenFireFrames + numIdleFrames) betweenFireFrames--;
     }
 
-    public void upgradeSpecial() {}
+    public void upgradeSpecial() {
+    }
 }  

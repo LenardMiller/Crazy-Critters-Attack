@@ -211,4 +211,9 @@ public class MiscMethods {
     public static float findAngle(PVector v) {
         return findAngle(new PVector(0,0), v);
     }
+
+    //radians mode
+    public static float clampAngle(float a) {
+        return a - TWO_PI * floor(a / TWO_PI);
+    }
 }
