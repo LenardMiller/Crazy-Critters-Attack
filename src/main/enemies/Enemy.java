@@ -110,7 +110,7 @@ public abstract class Enemy {
 
     void die(int i) {
         Main.money += moneyDrop;
-        int num = (int) (p.random(2, 5));
+        int num = (int) (p.random(2, 5)) * pfSize * pfSize;
         for (int j = num; j >= 0; j--) { //creates death particles
             particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), "greyPuff"));
         }
@@ -118,7 +118,7 @@ public abstract class Enemy {
             Buff buff = buffs.get(j);
             //if attached, remove
             if (buff.enId == i) buffs.remove(j);
-                //shift ids to compensate for enemy removal
+            //shift ids to compensate for enemy removal
             else if (buff.enId > i) buff.enId -= 1;
         }
         enemies.remove(i);
@@ -233,7 +233,7 @@ public abstract class Enemy {
         barTrans = 255;
         tintColor = 0;
         if (parts) {
-            int num = (int) (p.random(1, 3));
+            int num = (int) (p.random(1, 3)) * pfSize * pfSize;
             for (int j = num; j >= 0; j--) { //sprays ouch
                 particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
             }
