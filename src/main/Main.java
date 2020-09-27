@@ -44,6 +44,7 @@ public class Main extends PApplet {
     public static Machine machine;
     public static ArrayList<main.towers.Tower> towers;
     public static ArrayList<main.enemies.Enemy> enemies;
+    public static ArrayList<main.misc.Corpse> corpses;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles;
     public static ArrayList<main.particles.Particle> underParticles;
@@ -129,6 +130,7 @@ public class Main extends PApplet {
         }
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
+        corpses = new ArrayList<>();
         particles = new ArrayList<>();
         underParticles = new ArrayList<>();
         arcs = new ArrayList<>();
@@ -272,6 +274,11 @@ public class Main extends PApplet {
         }
         //machine
         machine.main();
+        //corpses
+        for (int i = corpses.size() - 1; i >= 0; i--) {
+            Corpse corpse = corpses.get(i);
+            corpse.main(i);
+        }
         //enemies
         for (Enemy enemy : enemies) enemy.displayPassA();
         for (int i = enemies.size() - 1; i >= 0; i--) {

@@ -2,6 +2,7 @@ package main.enemies;
 
 import main.Main;
 import main.buffs.*;
+import main.misc.Corpse;
 import main.misc.Tile;
 import main.particles.Ouch;
 import main.pathfinding.Node;
@@ -108,12 +109,8 @@ public abstract class Enemy {
         if (dead) die(i);
     }
 
-    void die(int i) { //todo: extra death anims?
+    void die(int i) {
         Main.money += moneyDrop;
-        int num = (int) (p.random(2, 5)) * pfSize * pfSize;
-        for (int j = num; j >= 0; j--) { //creates death particles
-            particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), "greyPuff"));
-        }
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
             //if attached, remove
@@ -121,6 +118,9 @@ public abstract class Enemy {
             //shift ids to compensate for enemy removal
             else if (buff.enId > i) buff.enId -= 1;
         }
+
+        corpses.add(new Corpse(p, position, size, angle, new PVector(0, 0), 0, 7, name));
+
         enemies.remove(i);
     }
 
@@ -130,8 +130,6 @@ public abstract class Enemy {
         position.add(m);
         speed = maxSpeed;
     }
-
-    //todo: dance
 
     private void preDisplay() {
         if (attacking) {
