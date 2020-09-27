@@ -50,13 +50,16 @@ public class SpriteLoader {
         getSprite(p,"treeSpiritMove","EN","treeSpirit/move/",47);
         getSprite(p,"treeSpriteMove","EN","treeSprite/move/",30);
         getSprite(p,"treeSpriteAttack","EN","treeSprite/attack/",50);
+        getSprite(p,"treeSpriteDie","EN","treeSprite/die/",4);
         getSprite(p,"midBugAttack","EN","midBug/attack/",42);
         getSprite(p,"midBugMove","EN","midBug/move/",8);
+        getSprite(p,"midBugDie","EN","midBug/die/",5);
         getSprite(p,"smolBugAttack","EN","smolBug/attack/",27);
         getSprite(p,"smolBugMove","EN","smolBug/move/",8);
         getSprite(p,"smolBugDie","EN","smolBug/die/", 4);
         getSprite(p,"bigBugAttack","EN","bigBug/attack/",100);
         getSprite(p,"bigBugMove","EN","bigBug/move/",12);
+        getSprite(p,"bigBugDie","EN","bigBug/die/",6);
         getSprite(p,"snakeAttack","EN","snake/attack/",15);
         getSprite(p,"snakeMove","EN","snake/move/",10);
         getSprite(p,"wormMove","EN","worm/move/",1);

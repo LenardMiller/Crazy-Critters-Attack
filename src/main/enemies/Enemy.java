@@ -59,6 +59,8 @@ public abstract class Enemy {
     public boolean stealthMode;
     public boolean flying;
     private int attackCount;
+    PVector corpseSize;
+    int betweenCorpseFrames;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -87,6 +89,8 @@ public abstract class Enemy {
         stealthMode = false;
         flying = false;
         attackCount = 0;
+        corpseSize = size;
+        betweenCorpseFrames = 7;
     }
 
     public void main(int i) {
@@ -119,7 +123,7 @@ public abstract class Enemy {
             else if (buff.enId > i) buff.enId -= 1;
         }
 
-        corpses.add(new Corpse(p, position, size, angle, new PVector(0, 0), 0, 7, name));
+        corpses.add(new Corpse(p, position, corpseSize, angle, new PVector(0, 0), 0, betweenCorpseFrames, name));
 
         enemies.remove(i);
     }
