@@ -272,13 +272,13 @@ public class Main extends PApplet {
             Particle particle = underParticles.get(i);
             particle.main(underParticles, i);
         }
-        //machine
-        machine.main();
         //corpses
         for (int i = corpses.size() - 1; i >= 0; i--) {
             Corpse corpse = corpses.get(i);
             corpse.main(i);
         }
+        //machine
+        machine.main();
         //enemies
         for (Enemy enemy : enemies) enemy.displayPassA();
         for (int i = enemies.size() - 1; i >= 0; i--) {
