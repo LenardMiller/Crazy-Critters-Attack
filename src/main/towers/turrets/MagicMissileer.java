@@ -11,7 +11,7 @@ import static main.misc.MiscMethods.updateTowerArray;
 
 public class MagicMissileer extends Turret{
 
-    public MagicMissileer(PApplet p, Tile tile) { //todo: fix fourth missile not spawning
+    public MagicMissileer(PApplet p, Tile tile) {
         super(p,tile);
         name = "magicMissleer";
         size = new PVector(50,50);
