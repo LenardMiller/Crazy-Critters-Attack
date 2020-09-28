@@ -16,7 +16,6 @@ public abstract class Particle {
 
     public PVector position;
     public PVector size;
-    public PVector target;
     public float maxSpeed;
     public float speed;
     public PImage[] sprites;

@@ -25,6 +25,7 @@ public class TreeGiant extends Enemy {
         betweenAttackFrames = 2;
         attackFrame = attackStartFrame;
         corpseSize = new PVector(152,152);
+        corpseLifespan = 750;
         loadSprites();
     }
 }

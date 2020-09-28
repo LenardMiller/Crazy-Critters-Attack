@@ -25,7 +25,7 @@ public class Corpse {
     private int maxLife;
     private int lifespan;
 
-    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, String name) {
+    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String name) {
         this.p = p;
 
         this.position = position;
@@ -39,7 +39,7 @@ public class Corpse {
         betweenTime = 0;
         frame = 0;
 
-        maxLife = 500;
+        this.maxLife = maxLife;
         lifespan = maxLife;
     }
 

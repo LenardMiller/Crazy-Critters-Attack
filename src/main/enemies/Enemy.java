@@ -61,6 +61,7 @@ public abstract class Enemy {
     private int attackCount;
     PVector corpseSize;
     int betweenCorpseFrames;
+    int corpseLifespan;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -91,6 +92,7 @@ public abstract class Enemy {
         attackCount = 0;
         corpseSize = size;
         betweenCorpseFrames = 7;
+        corpseLifespan = 500;
     }
 
     public void main(int i) {
@@ -123,7 +125,7 @@ public abstract class Enemy {
             else if (buff.enId > i) buff.enId -= 1;
         }
 
-        corpses.add(new Corpse(p, position, corpseSize, angle, new PVector(0, 0), 0, betweenCorpseFrames, name));
+        corpses.add(new Corpse(p, position, corpseSize, angle, new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, name));
 
         enemies.remove(i);
     }
