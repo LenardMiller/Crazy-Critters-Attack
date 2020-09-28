@@ -25,6 +25,7 @@ public class Butterfly extends Enemy {
         betweenAttackFrames = 5;
         attackFrame = attackStartFrame;
         flying = true;
+        betweenCorpseFrames = 4;
         loadSprites();
     }
 }
