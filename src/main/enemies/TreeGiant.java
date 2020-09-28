@@ -24,6 +24,7 @@ public class TreeGiant extends Enemy {
         attackDmgFrames = new int[]{28};
         betweenAttackFrames = 2;
         attackFrame = attackStartFrame;
+        corpseSize = new PVector(152,152);
         loadSprites();
     }
 }
