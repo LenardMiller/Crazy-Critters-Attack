@@ -36,7 +36,7 @@ public class Corpse {
         this.angle = angle;
         if (!animated) {
             float speed = 3.5f;
-            speed *= p.random(1f, 1.6f);
+            speed *= p.random(1, 2);
             float a = p.random(radians(0), radians(360));
             if (!(velocity.x == 0 && velocity.y == 0)) a = MiscMethods.findAngle(velocity);
             a -= HALF_PI;
