@@ -47,6 +47,7 @@ public class SpriteLoader {
         getSprite(p,"treeGiantAttack","EN","treeGiant/attack/",63);
         getSprite(p,"treeGiantMove","EN","treeGiant/move/",91);
         getSprite(p,"treeGiantDie","EN","treeGiant/die/",7);
+        getSprite(p,"treeGiantParts","EN","treeGiant/parts/",6);
         getSprite(p,"treeSpiritAttack","EN","treeSpirit/attack/",42);
         getSprite(p,"treeSpiritMove","EN","treeSpirit/move/",47);
         getSprite(p,"treeSpiritDie","EN","treeSpirit/die/",5);
