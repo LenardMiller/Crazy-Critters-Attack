@@ -24,6 +24,7 @@ public class MidBug extends Enemy{
         attackStartFrame = 34; //attack start
         attackFrame = attackStartFrame;
         corpseSize = size;
+        partSize = new PVector(14,14);
         loadSprites();
     }
 }
