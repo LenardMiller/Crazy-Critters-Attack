@@ -56,6 +56,7 @@ public class SpriteLoader {
         getSprite(p,"midBugAttack","EN","midBug/attack/",42);
         getSprite(p,"midBugMove","EN","midBug/move/",8);
         getSprite(p,"midBugDie","EN","midBug/die/",5);
+        getSprite(p,"midBugParts","EN","midBug/parts/",9);
         getSprite(p,"smolBugAttack","EN","smolBug/attack/",27);
         getSprite(p,"smolBugMove","EN","smolBug/move/",8);
         getSprite(p,"smolBugDie","EN","smolBug/die/", 4);
