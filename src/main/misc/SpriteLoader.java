@@ -71,6 +71,7 @@ public class SpriteLoader {
         getSprite(p,"snakeAttack","EN","snake/attack/",15);
         getSprite(p,"snakeMove","EN","snake/move/",10);
         getSprite(p,"snakeDie","EN","snake/die/",3);
+        getSprite(p,"snakeParts","EN","snake/parts/",3);
         getSprite(p,"wormMove","EN","worm/move/",1);
         getSprite(p,"wormAttack","EN","worm/attack/",34);
         getSprite(p,"wormDie","EN","worm/die/",5);
