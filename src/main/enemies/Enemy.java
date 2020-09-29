@@ -117,15 +117,22 @@ public abstract class Enemy {
 
     void die(int i) {
         Main.money += moneyDrop;
+
+        String type = "normal";
+        for (Buff buff : buffs) {
+            if (buff.enId == i) {
+                type = buff.name;
+            }
+        }
+        corpses.add(new Corpse(p, position, corpseSize, angle, new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name));
+
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
             //if attached, remove
             if (buff.enId == i) buffs.remove(j);
-            //shift ids to compensate for enemy removal
+                //shift ids to compensate for enemy removal
             else if (buff.enId > i) buff.enId -= 1;
         }
-
-        corpses.add(new Corpse(p, position, corpseSize, angle, new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, name));
 
         enemies.remove(i);
     }

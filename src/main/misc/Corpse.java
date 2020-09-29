@@ -1,5 +1,6 @@
 package main.misc;
 
+import main.particles.BuffParticle;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -17,6 +18,7 @@ public class Corpse {
     private PVector velocity;
     private float angularVelocity;
     private PImage[] sprites;
+    private String type;
 
     private int betweenFrames;
     private int betweenTime;
@@ -24,8 +26,9 @@ public class Corpse {
 
     private int maxLife;
     private int lifespan;
+    private float gTint;
 
-    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String name) {
+    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String type, String name) {
         this.p = p;
 
         this.position = position;
@@ -34,6 +37,7 @@ public class Corpse {
         this.velocity = velocity;
         this.angularVelocity = angularVelocity;
         sprites = spritesAnimH.get(name + "DieEN");
+        this.type = type;
 
         this.betweenFrames = betweenFrames;
         betweenTime = 0;
@@ -64,7 +68,27 @@ public class Corpse {
             }
         }
 
-        p.tint(255, ((float)lifespan / (float)maxLife) * 255f);
+        if (type.equals("burning") || type.equals("decay")) {
+            float g = 0;
+            String part = "";
+            if (type.equals("burning")) {
+                g = 60;
+                part = "fire";
+            }
+            if (type.equals("decay")) {
+                g = 0;
+                part = "decay";
+            }
+            gTint = (pow((float)lifespan / (float)maxLife, 3) * (255 - g)) + g;
+            for (int i = (int) ((size.x / 25) * (size.y / 25)) / 25; i >= 0; i--) {
+                int num = (int)(p.random(0, sq(2 * ((float)maxLife / (float)lifespan))));
+                if (num == 0) {
+                    particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), p.random(0, 360), part));
+                }
+            }
+        } else gTint = 255;
+
+        p.tint(gTint, ((float)lifespan / (float)maxLife) * 255f);
         angle += radians(angularVelocity);
         p.pushMatrix();
         p.translate(position.x, position.y);
