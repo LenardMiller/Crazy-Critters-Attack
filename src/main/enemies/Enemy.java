@@ -60,6 +60,7 @@ public abstract class Enemy {
     public boolean flying;
     private int attackCount;
     PVector corpseSize;
+    PVector partSize;
     int betweenCorpseFrames;
     int corpseLifespan;
     public String lastDamageType;
@@ -94,6 +95,7 @@ public abstract class Enemy {
         flying = false;
         attackCount = 0;
         corpseSize = size;
+        partSize = size;
         betweenCorpseFrames = 7;
         corpseLifespan = 500;
         lastDamageType = "normal";
@@ -130,7 +132,7 @@ public abstract class Enemy {
         }
         if (overkill) {
             for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {
-                corpses.add(new Corpse(p, position, corpseSize, angle, partsDirection, p.random(radians(-20),radians(20)), 0, corpseLifespan, type, name + "Parts", j, false));
+                corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-20),radians(20)), 0, corpseLifespan, type, name + "Parts", j, false));
             }
         }
         else corpses.add(new Corpse(p, position, corpseSize, angle + p.random(radians(-5), radians(5)), new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name + "Die", 0, true));
