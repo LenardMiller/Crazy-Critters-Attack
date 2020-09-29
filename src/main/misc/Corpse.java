@@ -36,11 +36,11 @@ public class Corpse {
         this.angle = angle;
         if (!animated) {
             float speed = 3.5f;
-            speed *= p.random(0.8f, 1.2f);
+            speed *= p.random(1f, 1.6f);
             float a = p.random(radians(0), radians(360));
             if (!(velocity.x == 0 && velocity.y == 0)) a = MiscMethods.findAngle(velocity);
             a -= HALF_PI;
-            a += p.random(radians(-20), radians(20));
+            a += p.random(radians(-40), radians(40));
             velocity = PVector.fromAngle(a);
             this.velocity = velocity.setMag(speed);
         } else this.velocity = velocity;
