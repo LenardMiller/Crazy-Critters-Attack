@@ -22,6 +22,7 @@ public class Dummy extends Enemy {
         betweenWalkFrames = 1;
         attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;
+        corpseSize = size;
         loadSprites();
     }
 }
