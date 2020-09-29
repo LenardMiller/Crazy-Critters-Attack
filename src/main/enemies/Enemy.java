@@ -322,6 +322,7 @@ public abstract class Enemy {
     //todo: fix big enemy clearance
     //todo: big enemies randomly attack stuff
     //todo: won't target turrets?
+    //todo: enemies sometimes wander off if there are a lot of them
 
     boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
