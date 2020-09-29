@@ -66,7 +66,7 @@ public class Arc {
         if (enemy != null) {
             int enId = 0;
             for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemy) enId = j;
-            enemy.damagePj(damage, "null", 0, 0, turret, true, "normal", enId);
+            enemy.damagePj(damage, "null", 0, 0, turret, true, "normal", new PVector(0,0), enId);
             hitEnemies.add(enemy);
             bigPoints.add(new BigPoint(p, enemy.position));
             int x = 2;
@@ -76,7 +76,7 @@ public class Arc {
                     bigPoints.add(new BigPoint(p, enemyJ.position));
                     enId = 0;
                     for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemyJ) enId = j;
-                    enemyJ.damagePj(damage, "null", 0, 0, turret, true, "normal", enId);
+                    enemyJ.damagePj(damage, "null", 0, 0, turret, true, "normal", new PVector(0,0), enId);
                     hitEnemies.add(enemyJ);
                     x++;
                 }

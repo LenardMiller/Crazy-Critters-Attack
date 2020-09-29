@@ -63,6 +63,8 @@ public abstract class Enemy {
     int betweenCorpseFrames;
     int corpseLifespan;
     public String lastDamageType;
+    private boolean overkill;
+    private PVector partsDirection;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -126,7 +128,12 @@ public abstract class Enemy {
                 type = buff.name;
             }
         }
-        corpses.add(new Corpse(p, position, corpseSize, angle, new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name));
+        if (overkill) {
+            for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {
+                corpses.add(new Corpse(p, position, corpseSize, angle, partsDirection, p.random(radians(-20),radians(20)), 0, corpseLifespan, type, name + "Parts", j, false));
+            }
+        }
+        else corpses.add(new Corpse(p, position, corpseSize, angle + p.random(radians(-5), radians(5)), new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name + "Die", 0, true));
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
@@ -205,8 +212,10 @@ public abstract class Enemy {
         }
     }
 
-    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, int i) { //when the enemy hits a projectile
+    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) { //when the enemy hits a projectile
         lastDamageType = type;
+        overkill = damage >= maxHp;
+        partsDirection = direction;
         hp -= damage;
         if (turret != null) {
             if (hp <= 0) {
@@ -254,8 +263,10 @@ public abstract class Enemy {
         }
     }
 
-    public void damageSimple(int damage, Turret turret, String type) {
+    public void damageSimple(int damage, Turret turret, String type, PVector direction) {
         lastDamageType = type;
+        overkill = damage >= maxHp;
+        partsDirection = direction;
         hp -= damage;
         if (turret != null) {
             if (hp <= 0) {

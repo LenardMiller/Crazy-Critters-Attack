@@ -23,25 +23,36 @@ public class Corpse {
     private int betweenFrames;
     private int betweenTime;
     private int frame;
+    private boolean animated;
 
     private int maxLife;
     private int lifespan;
 
-    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String type, String name) {
+    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String type, String name, int frame, boolean animated) {
         this.p = p;
 
-        this.position = position;
+        this.position = new PVector(position.x, position.y);
         this.size = size;
         this.angle = angle;
-        this.velocity = velocity;
+        if (!animated) {
+            float speed = 3.5f;
+            speed *= p.random(0.8f, 1.2f);
+            float a = p.random(radians(0), radians(360));
+            if (!(velocity.x == 0 && velocity.y == 0)) a = MiscMethods.findAngle(velocity);
+            a -= HALF_PI;
+            a += p.random(radians(-20), radians(20));
+            velocity = PVector.fromAngle(a);
+            this.velocity = velocity.setMag(speed);
+        } else this.velocity = velocity;
         this.angularVelocity = angularVelocity;
-        sprites = spritesAnimH.get(name + "DieEN");
+        sprites = spritesAnimH.get(name + "EN");
         this.type = type;
         if (this.type == null) this.type = "normal";
+        this.frame = frame;
+        this.animated = animated;
 
         this.betweenFrames = betweenFrames;
         betweenTime = 0;
-        frame = 0;
 
         this.maxLife = maxLife;
         lifespan = maxLife;
@@ -55,12 +66,16 @@ public class Corpse {
     }
 
     private void move() {
+        velocity.x *= (((float)lifespan / (float)maxLife));
+        velocity.y *= (((float)lifespan / (float)maxLife));
+        angularVelocity *= (((float)lifespan / (float)maxLife));
+        angle += angularVelocity;
         position.add(velocity);
     }
 
     private void display() {
         PImage sprite = sprites[frame];
-        if (frame < sprites.length - 1) {
+        if (animated && frame < sprites.length - 1) {
             betweenTime++;
             if (betweenTime >= betweenFrames) {
                 frame++;
@@ -83,7 +98,9 @@ public class Corpse {
 
             gTint = (pow((float)lifespan / (float)maxLife, 3) * (255 - g)) + g;
             for (int i = (int) ((size.x / 25) * (size.y / 25)) / 25; i >= 0; i--) {
-                int num = (int)(p.random(0, sq(2 * ((float)maxLife / (float)lifespan))));
+                float chance = sq(2 * ((float)maxLife / (float)lifespan));
+                if (!animated) chance += 16;
+                int num = (int)(p.random(0, chance));
                 if (num == 0) {
                     particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), p.random(0, 360), part));
                 }

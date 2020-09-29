@@ -3,6 +3,7 @@ package main.buffs;
 import main.enemies.Enemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import static main.Main.enemies;
 
@@ -27,6 +28,6 @@ public class Burning extends Buff {
             enemy.tintColor = 100;
         }
         enemy.barTrans = 255;
-        enemy.damageSimple(damage,turret, "fire");
+        enemy.damageSimple(damage,turret, "fire", new PVector(0,0));
     }
 }
