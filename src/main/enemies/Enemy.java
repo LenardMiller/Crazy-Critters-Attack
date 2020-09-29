@@ -62,7 +62,7 @@ public abstract class Enemy {
     PVector corpseSize;
     int betweenCorpseFrames;
     int corpseLifespan;
-    private String lastDamageType;
+    public String lastDamageType;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
