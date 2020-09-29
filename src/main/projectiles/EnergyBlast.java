@@ -44,6 +44,7 @@ public class EnergyBlast extends Projectile {
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
                 enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "burning", i);
+                hitEnemies.add(enemy);
                 if (!bigExplosion) {
                     int num = (int) (p.random(10, 16));
                     for (int j = num; j >= 0; j--) {
