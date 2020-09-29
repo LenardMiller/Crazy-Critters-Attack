@@ -26,7 +26,7 @@ public class Decay extends Buff {
     public void effect() {
         Enemy enemy = enemies.get(enId);
         enemy.barTrans = 255;
-        enemy.damageSimple(damage,turret);
+        enemy.damageSimple(damage,turret, "decay");
         effectTimer = p.frameCount + effectDelay;
     }
 }

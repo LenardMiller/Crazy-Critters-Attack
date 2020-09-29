@@ -82,7 +82,7 @@ public class Railgun extends Turret {
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
 
-        targetEnemy.damageSimple(damage,this);
+        targetEnemy.damageSimple(damage,this, "normal");
     }
 
     public void displayPassB2() {

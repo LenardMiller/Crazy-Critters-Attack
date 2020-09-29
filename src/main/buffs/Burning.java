@@ -27,6 +27,6 @@ public class Burning extends Buff {
             enemy.tintColor = 100;
         }
         enemy.barTrans = 255;
-        enemy.damageSimple(damage,turret);
+        enemy.damageSimple(damage,turret, "fire");
     }
 }

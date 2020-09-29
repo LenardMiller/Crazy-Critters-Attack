@@ -133,7 +133,7 @@ public class WaveMotion extends Turret {
             boolean b = angleDif < -HALF_PI && angleDif > -PI + HALF_PI || angleDif > HALF_PI && angleDif < PI + HALF_PI;
             boolean q = angle > PI+HALF_PI && angle <= TWO_PI || angle >= 0 && angle < HALF_PI;
             if (q) { //something to do with angle weirdness
-                if ((!b)) continue;
+                if (!b) continue;
             } else if (b) continue;
 
             float tanAngle = tan(angle2);
@@ -146,9 +146,9 @@ public class WaveMotion extends Turret {
             if (Float.isNaN(distFromEnemyToBeam)) distFromEnemyToBeam = 1;
             distFromEnemyToBeam -= enemy.radius / 2;
             if (distFromEnemyToBeam < 1) distFromEnemyToBeam = 1;
-            if (distFromEnemyToBeam < 10) enemy.damageSimple(damage, this);
-            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageSimple(damage, this);
-            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageSimple(damage, this);
+            if (distFromEnemyToBeam < 10) enemy.damageSimple(damage, this, "burning");
+            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageSimple(damage, this, "burning");
+            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageSimple(damage, this, "burning");
         }
     }
 

@@ -62,6 +62,7 @@ public abstract class Enemy {
     PVector corpseSize;
     int betweenCorpseFrames;
     int corpseLifespan;
+    private String lastDamageType;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -93,6 +94,7 @@ public abstract class Enemy {
         corpseSize = size;
         betweenCorpseFrames = 7;
         corpseLifespan = 500;
+        lastDamageType = "normal";
     }
 
     public void main(int i) {
@@ -118,7 +120,7 @@ public abstract class Enemy {
     void die(int i) {
         Main.money += moneyDrop;
 
-        String type = "normal";
+        String type = lastDamageType;
         for (Buff buff : buffs) {
             if (buff.enId == i) {
                 type = buff.name;
@@ -203,7 +205,8 @@ public abstract class Enemy {
         }
     }
 
-    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, int i) { //when the enemy hits a projectile
+    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, int i) { //when the enemy hits a projectile
+        lastDamageType = type;
         hp -= damage;
         if (turret != null) {
             if (hp <= 0) {
@@ -251,7 +254,8 @@ public abstract class Enemy {
         }
     }
 
-    public void damageSimple(int damage, Turret turret) {
+    public void damageSimple(int damage, Turret turret, String type) {
+        lastDamageType = type;
         hp -= damage;
         if (turret != null) {
             if (hp <= 0) {

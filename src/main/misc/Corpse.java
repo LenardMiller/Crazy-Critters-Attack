@@ -26,7 +26,6 @@ public class Corpse {
 
     private int maxLife;
     private int lifespan;
-    private float gTint;
 
     public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String type, String name) {
         this.p = p;
@@ -68,6 +67,7 @@ public class Corpse {
             }
         }
 
+        float gTint = 255;
         if (type.equals("burning") || type.equals("decay")) {
             float g = 0;
             String part = "";
@@ -79,6 +79,7 @@ public class Corpse {
                 g = 0;
                 part = "decay";
             }
+
             gTint = (pow((float)lifespan / (float)maxLife, 3) * (255 - g)) + g;
             for (int i = (int) ((size.x / 25) * (size.y / 25)) / 25; i >= 0; i--) {
                 int num = (int)(p.random(0, sq(2 * ((float)maxLife / (float)lifespan))));
@@ -86,7 +87,7 @@ public class Corpse {
                     particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), p.random(0, 360), part));
                 }
             }
-        } else gTint = 255;
+        }
 
         p.tint(gTint, ((float)lifespan / (float)maxLife) * 255f);
         angle += radians(angularVelocity);
