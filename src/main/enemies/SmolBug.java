@@ -24,6 +24,7 @@ public class SmolBug extends Enemy {
         attackStartFrame = 1; //attack start
         attackFrame = attackStartFrame;
         attackDmgFrames = new int[]{17};
+        corpseSize = size;
         loadSprites();
     }
 }

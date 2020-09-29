@@ -23,6 +23,7 @@ public class MidBug extends Enemy{
         betweenAttackFrames = 2;
         attackStartFrame = 34; //attack start
         attackFrame = attackStartFrame;
+        corpseSize = size;
         loadSprites();
     }
 }
