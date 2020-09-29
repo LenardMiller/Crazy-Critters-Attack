@@ -37,6 +37,7 @@ public class Corpse {
         this.angularVelocity = angularVelocity;
         sprites = spritesAnimH.get(name + "DieEN");
         this.type = type;
+        if (this.type == null) this.type = "normal";
 
         this.betweenFrames = betweenFrames;
         betweenTime = 0;
