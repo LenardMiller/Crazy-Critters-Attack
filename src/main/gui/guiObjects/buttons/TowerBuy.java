@@ -49,8 +49,8 @@ public class TowerBuy extends Button {
     }
 
     public void main() {
-        if (active){
-            hover();
+        if (active) {
+            if (!towerType.equals("null")) hover();
             display();
         }
     }
