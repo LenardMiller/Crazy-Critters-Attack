@@ -11,6 +11,8 @@ public class InGameGui {
 
     private PApplet p;
 
+    public int flashA;
+
     public InGameGui(PApplet p) {
         this.p = p;
         build();
@@ -52,6 +54,10 @@ public class InGameGui {
         upgradeIconB.main();
         if (isTowers) selection.main();
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
+        p.fill(255, flashA); //flash
+        p.noStroke();
+        p.rect(900,212,200,688);
+        flashA -= 25;
     }
 
     public void drawText(PApplet p, int x) {

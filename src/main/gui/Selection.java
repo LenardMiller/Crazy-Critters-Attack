@@ -70,6 +70,7 @@ public class Selection { //what tower is selected
                 } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
+        inGameGui.flashA = 255;
     }
 
     private void clickOff() { //desselect, hide stuff

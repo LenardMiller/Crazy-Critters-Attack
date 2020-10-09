@@ -49,5 +49,6 @@ public class UpgradeTower extends Button {
         else nextLevel = tower.nextLevelB;
         money -= tower.upgradePrices[nextLevel];
         tower.upgrade(id);
+        inGameGui.flashA = 255;
     }
 }

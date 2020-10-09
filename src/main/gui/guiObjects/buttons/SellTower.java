@@ -35,5 +35,6 @@ public class SellTower extends Button {
         upgradeIconA.active = false;
         upgradeIconB.active = false;
         selection.name = "null";
+        inGameGui.flashA = 255;
     }
 }
