@@ -145,7 +145,10 @@ public abstract class Tower {
         }
         tile.tower = null;
         updateTowerArray();
-        if (selection.id == tile.id) selection.name = "null";
+        if (selection.id == tile.id) {
+            selection.name = "null";
+            inGameGui.flashA = 255;
+        }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.tower.tile.id);
         if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
         if (!turret) {
