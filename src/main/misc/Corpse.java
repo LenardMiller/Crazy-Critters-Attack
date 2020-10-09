@@ -1,6 +1,7 @@
 package main.misc;
 
 import main.particles.BuffParticle;
+import main.particles.Ouch;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -19,6 +20,7 @@ public class Corpse {
     private float angularVelocity;
     private PImage[] sprites;
     private String type;
+    private String bloodParticle;
 
     private int betweenFrames;
     private int betweenTime;
@@ -28,7 +30,7 @@ public class Corpse {
     private int maxLife;
     private int lifespan;
 
-    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String type, String name, int frame, boolean animated) {
+    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String type, String name, String bloodParticle, int frame, boolean animated) {
         this.p = p;
 
         this.position = new PVector(position.x, position.y);
@@ -48,6 +50,7 @@ public class Corpse {
         sprites = spritesAnimH.get(name + "EN");
         this.type = type;
         if (this.type == null) this.type = "normal";
+        this.bloodParticle = bloodParticle;
         this.frame = frame;
         this.animated = animated;
 
@@ -66,9 +69,9 @@ public class Corpse {
     }
 
     private void move() {
-        velocity.x *= (((float)lifespan / (float)maxLife));
-        velocity.y *= (((float)lifespan / (float)maxLife));
-        angularVelocity *= (((float)lifespan / (float)maxLife));
+        velocity.x *= (float)lifespan / (float)maxLife;
+        velocity.y *= (float)lifespan / (float)maxLife;
+        angularVelocity *= (float)lifespan / (float)maxLife;
         angle += angularVelocity;
         position.add(velocity);
     }
@@ -103,6 +106,18 @@ public class Corpse {
                 int num = (int)(p.random(0, chance));
                 if (num == 0) {
                     particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), p.random(0, 360), part));
+                }
+            }
+        }
+
+        if (!bloodParticle.equals("none") && !type.equals("burning") && !type.equals("decay")) {
+            for (int i = (int) ((size.x / 25) * (size.y / 25)) / 25; i >= 0; i--) {
+                float speed = sqrt(sq(velocity.x) + sq(velocity.y));
+                float chance = sq(1 / (speed + 0.01f));
+                chance += 16;
+                int num = (int)(p.random(0, chance));
+                if (num == 0) {
+                    particles.add(new Ouch(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), p.random(0, 360), bloodParticle));
                 }
             }
         }

@@ -133,10 +133,10 @@ public abstract class Enemy {
         if (overkill) {
             for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {
                 float maxRv = 200f / partSize.x;
-                corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRv),radians(maxRv)), 0, corpseLifespan, type, name + "Parts", j, false));
+                corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRv),radians(maxRv)), 0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
             }
         }
-        else corpses.add(new Corpse(p, position, corpseSize, angle + p.random(radians(-5), radians(5)), new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name + "Die", 0, true));
+        else corpses.add(new Corpse(p, position, corpseSize, angle + p.random(radians(-5), radians(5)), new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name + "Die", "none",0, true));
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
