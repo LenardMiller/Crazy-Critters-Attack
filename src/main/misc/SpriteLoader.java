@@ -78,9 +78,11 @@ public class SpriteLoader {
         getSprite(p,"butterflyAttack","EN","butterfly/attack/",16);
         getSprite(p,"butterflyMove","EN","butterfly/move/",8);
         getSprite(p,"butterflyDie","EN","butterfly/die/",5);
+        getSprite(p,"butterflyParts", "EN", "butterfly/parts/", 5);
         getSprite(p,"dummyAttack","EN","dummy/attack/",1);
         getSprite(p,"dummyMove","EN","dummy/move/",1);
         getSprite(p,"dummyDie","EN","dummy/die/",1);
+        getSprite(p,"dummyParts","EN", "dummy/parts/", 1);
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
