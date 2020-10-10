@@ -25,7 +25,7 @@ public class LittleWorm extends Enemy {
         betweenAttackFrames = 2;
         attackFrame = attackStartFrame;
         stealthy = true;
-        corpseSize = new PVector(5,5);
+        corpseSize = new PVector(7,7);
         loadSprites();
     }
 }
