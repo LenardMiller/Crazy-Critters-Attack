@@ -56,9 +56,9 @@ public class Level {
             }
         }
         p.tint(0,60);
-        p.image(spritesH.get("currentLineIc"),890,212+125-1);
+        p.image(spritesH.get("currentLineIc"),891,212+125-1);
         p.tint(255);
-        p.image(spritesH.get("currentLineIc"),890-1,212+125-1-1);
+        p.image(spritesH.get("currentLineIc"),891-1,212+125-1-1);
         playButton.display((int)playY);
     }
 }
