@@ -23,7 +23,7 @@ public class BigBug extends Enemy{
         betweenWalkFrames = 3;
         attackStartFrame = 48; //attack start
         corpseSize = size;
-        partSize = new PVector(30,30);
+        partSize = new PVector(32,32);
         attackFrame = attackStartFrame;
         loadSprites();
     }
