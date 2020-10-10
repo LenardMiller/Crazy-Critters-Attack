@@ -64,8 +64,8 @@ public abstract class Enemy {
     int betweenCorpseFrames;
     int corpseLifespan;
     public String lastDamageType;
-    private boolean overkill;
-    private PVector partsDirection;
+    boolean overkill;
+    PVector partsDirection;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
