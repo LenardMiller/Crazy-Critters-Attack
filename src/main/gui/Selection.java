@@ -77,6 +77,7 @@ public class Selection { //what tower is selected
         Tower tower = tiles.get(id).tower;
         if (tower != null) {
             if (inputHandler.leftMousePressedPulse && p.mouseX < 900 && (p.mouseX > tower.tile.position.x || p.mouseX < tower.tile.position.x - tower.size.x || p.mouseY > tower.tile.position.y || p.mouseY < tower.tile.position.y - tower.size.y) && alive) {
+                if (!name.equals("null")) inGameGui.flashA = 255;
                 name = "null";
                 sellButton.active = false;
                 targetButton.active = false;
