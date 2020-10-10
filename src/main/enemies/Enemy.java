@@ -4,6 +4,7 @@ import main.Main;
 import main.buffs.*;
 import main.misc.Corpse;
 import main.misc.Tile;
+import main.particles.Debris;
 import main.particles.Ouch;
 import main.pathfinding.Node;
 import main.pathfinding.PathRequest;
@@ -57,6 +58,7 @@ public abstract class Enemy {
     private Tower targetTower;
     private boolean targetMachine;
     public boolean stealthMode;
+    boolean stealthy;
     public boolean flying;
     private int attackCount;
     PVector corpseSize;
@@ -91,6 +93,7 @@ public abstract class Enemy {
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
         pfSize = 1; //enemies pathfinding size, measured in nodes
+        stealthy = false;
         stealthMode = false;
         flying = false;
         attackCount = 0;
@@ -109,8 +112,17 @@ public abstract class Enemy {
         targetAngle = clampAngle(targetAngle);
         angle += angleDifference(targetAngle, angle) / 10;
 
-        if (!attacking) move();
-        else attack();
+        if (!attacking) {
+            stealthMode = stealthy;
+            //todo: add piles of debris
+            //todo: make work with other backgrounds
+            if (stealthMode && (int)p.random(0,15) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),"dirt"));
+            move();
+        }
+        else {
+            attack();
+            stealthMode = false;
+        }
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         displayPassB();
         //prevent from going offscreen
@@ -121,7 +133,7 @@ public abstract class Enemy {
         if (dead) die(i);
     }
 
-    void die(int i) {
+    private void die(int i) {
         Main.money += moneyDrop;
 
         String type = lastDamageType;
@@ -130,13 +142,15 @@ public abstract class Enemy {
                 type = buff.name;
             }
         }
-        if (overkill) {
-            for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {
-                float maxRv = 200f / partSize.x;
-                corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRv),radians(maxRv)), 0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
-            }
+        if (!stealthMode) {
+            if (overkill) {
+                for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {
+                    float maxRv = 200f / partSize.x;
+                    corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRv), radians(maxRv)), 0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
+                }
+            } else
+                corpses.add(new Corpse(p, position, corpseSize, angle + p.random(radians(-5), radians(5)), new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name + "Die", "none", 0, true));
         }
-        else corpses.add(new Corpse(p, position, corpseSize, angle + p.random(radians(-5), radians(5)), new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name + "Die", "none",0, true));
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
