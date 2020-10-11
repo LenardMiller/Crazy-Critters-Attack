@@ -2,6 +2,7 @@ package main.misc;
 
 import main.particles.BuffParticle;
 import main.particles.Ouch;
+import main.particles.Pile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -110,14 +111,21 @@ public class Corpse {
             }
         }
 
-        if (!bloodParticle.equals("none") && !type.equals("burning") && !type.equals("decay")) {
+        if (!bloodParticle.equals("none")) {
             for (int i = (int) ((size.x / 25) * (size.y / 25)) / 25; i >= 0; i--) {
                 float speed = sqrt(sq(velocity.x) + sq(velocity.y));
                 float chance = sq(1 / (speed + 0.01f));
                 chance += 16;
-                int num = (int)(p.random(0, chance));
+                if (!type.equals("burning") && !type.equals("decay")) {
+                    int num = (int) (p.random(0, chance));
+                    if (num == 0) {
+                        particles.add(new Ouch(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), p.random(0, 360), bloodParticle));
+                    }
+                }
+                chance += 10;
+                int num = (int) (p.random(0,chance));
                 if (num == 0) {
-                    particles.add(new Ouch(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), p.random(0, 360), bloodParticle));
+                    particles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), 0, bloodParticle));
                 }
             }
         }

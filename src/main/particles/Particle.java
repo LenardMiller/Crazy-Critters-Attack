@@ -58,7 +58,7 @@ public abstract class Particle {
         move();
     }
 
-    private void display() {
+    void display() {
         if (numFrames > 1) {
             if (p.frameCount - delayTime >= delay) {
                 if (currentSprite == numFrames-1) dead = true;
