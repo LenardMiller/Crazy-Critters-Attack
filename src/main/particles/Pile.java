@@ -3,7 +3,7 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesH;
+import static main.Main.spritesAnimH;
 import static processing.core.PApplet.radians;
 
 public class Pile extends Particle {
@@ -14,8 +14,9 @@ public class Pile extends Particle {
         speed = 0;
         angleTwo = 0;
         lifespan = 500;
-        sprite = spritesH.get(type + "PilePt");
-        numFrames = 1;
+        sprites = spritesAnimH.get(type + "PilePT");
+        currentSprite = (int) p.random(0,3.99f);
+        numFrames = 4;
         velocity = new PVector(0,0);
         angularVelocity = 0;
     }
@@ -28,7 +29,7 @@ public class Pile extends Particle {
         p.pushMatrix();
         p.translate(position.x,position.y);
         p.rotate(angleTwo);
-        p.image(sprite,-size.x/2,-size.y/2);
+        p.image(sprites[currentSprite],-size.x/2,-size.y/2);
         p.tint(255);
         p.popMatrix();
     }

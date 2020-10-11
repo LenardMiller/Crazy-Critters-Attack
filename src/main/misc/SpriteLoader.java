@@ -40,6 +40,7 @@ public class SpriteLoader {
         getSprite(p,"greenMagicBuff","PT","buff/greenMagic/",8);
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         getSprite(p,"railgunBlast","PT","railgunBlast/",11);
+        getSprite(p,"greenOuchPile","PT", "pile/greenOuch/", 4);
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
         getSprite(p,"flame","PJ","flame/",23);
@@ -194,9 +195,6 @@ public class SpriteLoader {
         spritesH.put("darkMetalPt",p.loadImage("sprites/particles/debris/darkMetal.png"));
         spritesH.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         spritesH.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
-        spritesH.put("greenOuchPilePt",p.loadImage("sprites/particles/pile/greenOuch.png"));
-        spritesH.put("redOuchPilePt",p.loadImage("sprites/particles/pile/redOuch.png"));
-        spritesH.put("leafOuchPilePt",p.loadImage("sprites/particles/pile/leafOuch.png"));
         //projectiles
         spritesH.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
         spritesH.put("devPj",p.loadImage("sprites/projectiles/dev.png"));
