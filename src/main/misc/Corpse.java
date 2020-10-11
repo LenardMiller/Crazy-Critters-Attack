@@ -125,7 +125,7 @@ public class Corpse {
                 chance += 10;
                 int num = (int) (p.random(0,chance));
                 if (num == 0) {
-                    particles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), 0, bloodParticle));
+                    underParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), 0, bloodParticle));
                 }
             }
         }
