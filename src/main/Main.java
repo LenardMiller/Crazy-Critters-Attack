@@ -267,7 +267,15 @@ public class Main extends PApplet {
             fill(0,0,255);
             rect(start.position.x,start.position.y,nSize,nSize);
         }
-        //under particles, for drills
+        //under particle culling
+        int up = underParticles.size();
+        int up2 = up-800;
+        if (up > 800) for (int i = 0; i < up; i++) if (random(0,up2) < 5) {
+            if (i < underParticles.size()) underParticles.remove(i);
+            else break;
+        }
+        if (up > 1200) underParticles = new ArrayList<>();
+        //under particles
         for (int i = underParticles.size()-1; i >= 0; i--) {
             Particle particle = underParticles.get(i);
             particle.main(underParticles, i);

@@ -195,6 +195,7 @@ public class SpriteLoader {
         spritesH.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         spritesH.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
         spritesH.put("greenOuchPilePt",p.loadImage("sprites/particles/pile/greenOuch.png"));
+        spritesH.put("redOuchPilePt",p.loadImage("sprites/particles/pile/redOuch.png"));
         //projectiles
         spritesH.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
         spritesH.put("devPj",p.loadImage("sprites/projectiles/dev.png"));
