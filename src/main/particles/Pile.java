@@ -9,7 +9,7 @@ import static processing.core.PApplet.radians;
 public class Pile extends Particle {
     public Pile(PApplet p, float x, float y, float angle, String type) {
         super(p,x,y,angle);
-        size = new PVector(30,30);
+        size = new PVector(10,10);
         maxSpeed = 0;
         speed = 0;
         angleTwo = 0;
