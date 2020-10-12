@@ -71,7 +71,7 @@ public class ForestWaves {
         waves[13].addSpawns("midBug", 15);
         waves[13].addSpawns("bigBug", 7);
         waves[13].addSpawns("butterfly", 5);
-        waves[13].addSpawns("worm", 5);
+        waves[13].addSpawns("littleWorm", 5);
         waves[13].addSpawns("treeSprite", 20);
         waves[13].addSpawns("treeSpirit",10);
 
