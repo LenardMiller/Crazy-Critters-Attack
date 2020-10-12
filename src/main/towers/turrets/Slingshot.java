@@ -18,7 +18,7 @@ public class Slingshot extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 180; //default: 180 frames
+        delay = 100; //default: 100 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
