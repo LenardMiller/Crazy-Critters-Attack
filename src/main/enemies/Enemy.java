@@ -5,6 +5,7 @@ import main.buffs.*;
 import main.misc.Corpse;
 import main.misc.Tile;
 import main.particles.Ouch;
+import main.particles.Pile;
 import main.pathfinding.Node;
 import main.pathfinding.PathRequest;
 import main.towers.Tower;
@@ -144,6 +145,9 @@ public abstract class Enemy {
                 for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {
                     float maxRv = 200f / partSize.x;
                     corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRv), radians(maxRv)), 0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
+                }
+                for (int k = 0; k < sq(pfSize); k++) {
+                    underParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), 0, hitParticle));
                 }
             } else
                 corpses.add(new Corpse(p, position, corpseSize, angle + p.random(radians(-5), radians(5)), new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name + "Die", "none", 0, true));
