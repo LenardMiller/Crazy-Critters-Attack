@@ -205,9 +205,10 @@ public class Selection { //what tower is selected
         else p.text(tower.killsTotal + " kill", 910, 475 + offsetB);
         p.text(tower.damageTotal + " damage", 910, 500 + offsetB);
 
-        //display range
+        //display range and square
         p.fill(255, 25);
         p.stroke(255);
+        p.rect(tower.tile.position.x - tower.size.x, tower.tile.position.y - tower.size.y, tower.size.y, tower.size.y);
         p.circle(tower.tile.position.x - (tower.size.x / 2), tower.tile.position.y - (tower.size.y / 2), tower.range * 2);
 
         //priority
