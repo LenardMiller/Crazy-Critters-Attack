@@ -36,7 +36,7 @@ public class Railgun extends Turret {
         delayTime = delay;
         damage = 300;
         pjSpeed = -1;
-        error = 0; //0
+        range = 0; //0
         numFireFrames = 15;
         numLoadFrames = 9;
         numIdleFrames = 6;

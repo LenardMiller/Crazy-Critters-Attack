@@ -28,7 +28,7 @@ public class TeslaTower extends Turret{
         arcDistance = 200;
         arcLength = 3;
         pjSpeed = -1;
-        error = 0;
+        range = 0;
         numFireFrames = 6;
         numLoadFrames = 5;
         numIdleFrames = 18;

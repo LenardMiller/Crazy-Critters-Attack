@@ -20,7 +20,7 @@ public abstract class Tower {
     public String name;
     public float angle;
     public int delay;
-    public float error;
+    public float range;
     public PVector size;
     public int maxHp;
     public int hp;
@@ -60,7 +60,7 @@ public abstract class Tower {
         name = "null";
         size = new PVector(120, 37);
         delay = 0;
-        error = 0;
+        range = 0;
         this.maxHp = 1;
         hp = maxHp;
         hit = false;

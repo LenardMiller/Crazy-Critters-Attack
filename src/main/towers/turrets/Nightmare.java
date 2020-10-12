@@ -26,7 +26,7 @@ public class Nightmare extends Turret {
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 18;
-        error = 20; //12
+        range = 20; //12
         numFireFrames = 14;
         numLoadFrames = 22;
         fireFrames = new PImage[numFireFrames];
@@ -51,8 +51,9 @@ public class Nightmare extends Turret {
     }
 
     public void fire(){ //needed to change projectile fired
+        //todo: fix spread
         for (int i = 0; i < numProjectiles; i++) {
-            float angleB = angle + radians(p.random(-error, error));
+            float angleB = angle;
             PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
             PVector spa = PVector.fromAngle(angleB-HALF_PI);
             spa.setMag(20);

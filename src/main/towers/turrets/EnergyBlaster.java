@@ -29,7 +29,7 @@ public class EnergyBlaster extends Turret{
         delayTime = delay;
         damage = 30;
         pjSpeed = 16;
-        error = 6; //5 degrees
+        range = 6; //5 degrees
         numFireFrames = 14; //14
         betweenFireFrames = 2;
         numLoadFrames = 42; //42
@@ -51,7 +51,6 @@ public class EnergyBlaster extends Turret{
 
     public void fire() { //needed to change projectile fired
         float angleB = angle;
-        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angleB-HALF_PI);

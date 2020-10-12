@@ -25,7 +25,7 @@ public class Crossbow extends Turret {
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 24;
-        error = 2; //set to 360 for a fun time. default: 2 degrees
+        range = 2; //set to 360 for a fun time. default: 2 degrees
         numFireFrames = 13;
         numLoadFrames = 81;
         fireFrames = new PImage[numFireFrames];
@@ -38,7 +38,7 @@ public class Crossbow extends Turret {
         pierce = 2;
         loadSprites();
         debrisType = "wood";
-        price = 200;
+        price = 400;
         value = price;
         priority = 1; //last
         nextLevelA = 0;
@@ -48,10 +48,8 @@ public class Crossbow extends Turret {
     }
 
     public void fire(){ //needed to change projectile fired
-        float angleB = angle;
-        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angleB, this, damage, pierce));
+        projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
     }
 
     private void setUpgrades(){

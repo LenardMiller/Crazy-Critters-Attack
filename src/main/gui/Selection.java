@@ -297,11 +297,11 @@ public class Selection { //what tower is selected
             else if (speed <= 15) p.text("Medium velocity", 910, 336 + offset);
             else p.text("High velocity", 910, 336 + offset);
             //accuracy (error)
-            if (tower.error == 0) p.text("Perfect accuracy", 910, 356 + offset);
-            else if (tower.error > 0 && tower.error <= 3) p.text("High accuracy", 910, 356 + offset);
-            else if (tower.error > 3 && tower.error <= 5) p.text("Medium accuracy", 910, 356 + offset);
-            else if (tower.error > 5 && tower.error <= 9) p.text("Low accuracy", 910, 356 + offset);
-            else if (tower.error > 9) p.text("Very low accuracy", 910, 356 + offset);
+            if (tower.range == 0) p.text("Perfect accuracy", 910, 356 + offset);
+            else if (tower.range > 0 && tower.range <= 3) p.text("High accuracy", 910, 356 + offset);
+            else if (tower.range > 3 && tower.range <= 5) p.text("Medium accuracy", 910, 356 + offset);
+            else if (tower.range > 5 && tower.range <= 9) p.text("Low accuracy", 910, 356 + offset);
+            else if (tower.range > 9) p.text("Very low accuracy", 910, 356 + offset);
         }
     }
 }

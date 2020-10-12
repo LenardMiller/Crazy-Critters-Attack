@@ -34,7 +34,7 @@ public class RandomCannon extends Turret {
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 6;
-        error = 11; //8
+        range = 100;
         loadSprites();
         debrisType = "wood";
         price = 200;
@@ -48,7 +48,6 @@ public class RandomCannon extends Turret {
 
     public void fire() {
         float angleB = angle;
-        angleB += PApplet.radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         int spriteType = (int)(p.random(0,5.99f));
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);

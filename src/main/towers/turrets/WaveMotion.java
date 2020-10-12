@@ -32,7 +32,7 @@ public class WaveMotion extends Turret {
         delayTime = delay;
         damage = 2;
         pjSpeed = -1;
-        error = 0; //0
+        range = 0; //0
         numFireFrames = 18;
         numLoadFrames = 80;
         numIdleFrames = 14;

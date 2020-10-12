@@ -23,7 +23,7 @@ public class MagicMissileer extends Turret{
         delayTime = delay;
         damage = 15;
         pjSpeed = 5;
-        error = 0; //0 degrees
+        range = 0; //0 degrees
         numFireFrames = 8;
         numLoadFrames = 26;
         numIdleFrames = 8;

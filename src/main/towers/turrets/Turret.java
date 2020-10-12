@@ -53,7 +53,7 @@ public abstract class Turret extends Tower {
         delay = 240;
         delayTime = delay;
         pjSpeed = 2;
-        error = 0;
+        range = 0;
         numFireFrames = 1;
         numLoadFrames = 1;
         numIdleFrames = 1;
@@ -101,33 +101,33 @@ public abstract class Turret extends Tower {
         //0: close
         //1: far
         //2: strong
-        float dist;
-        if (priority == 0) dist = 1000000;
-        else dist = 0;
+        float finalDist;
+        if (priority == 0) finalDist = 1000000;
+        else finalDist = 0;
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
             if (!enemy.stealthMode) {
                 float x = abs(tile.position.x - enemy.position.x);
                 float y = abs(tile.position.y - enemy.position.y);
-                float t = sqrt(sq(x) + sq(y));
-                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900) {
-                    if (priority == 0 && t < dist) { //close
+                float dist = sqrt(sq(x) + sq(y));
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < range) {
+                    if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
-                        dist = t;
+                        finalDist = dist;
                     }
-                    if (priority == 1 && t > dist) { //far
+                    if (priority == 1 && dist > finalDist) { //far
                         e = enemy;
-                        dist = t;
+                        finalDist = dist;
                     }
                     if (priority == 2) {
                         if (enemy.maxHp > maxHp) { //strong
                             e = enemy;
-                            dist = t;
+                            finalDist = dist;
                             maxHp = enemy.maxHp;
-                        } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                        } else if (enemy.maxHp == maxHp && dist < finalDist) { //strong -> close
                             e = enemy;
-                            dist = t;
+                            finalDist = dist;
                         }
                     }
                 }
@@ -164,7 +164,6 @@ public abstract class Turret extends Tower {
 
     public void fire() {
         delayTime = p.frameCount + delay; //waits this time before firing
-        angle += radians(p.random(-error, error));
     }
 
     public void loadSprites() {
@@ -279,7 +278,7 @@ public abstract class Turret extends Tower {
         value += upgradePrices[nextLevel];
         maxHp += upgradeHealth[nextLevel];
         hp += upgradeHealth[nextLevel];
-        error += upgradeError[nextLevel];
+        range += upgradeError[nextLevel];
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
 //        sprite = upgradeSprites[nextLevel];

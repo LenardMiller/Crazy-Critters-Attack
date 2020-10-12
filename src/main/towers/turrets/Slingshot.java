@@ -18,11 +18,11 @@ public class Slingshot extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 100; //default: 100 frames
+        delay = 120;
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
-        error = 6; //6
+        range = 200;
         numFireFrames = 34;
         numLoadFrames = 59;
         fireFrames = new PImage[numFireFrames];
@@ -41,10 +41,8 @@ public class Slingshot extends Turret {
     }
 
     public void fire(){ //needed to change projectile fired
-        float angleB = angle;
-        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angleB, this, damage));
+        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
     }
 
     private void setUpgrades(){
