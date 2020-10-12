@@ -11,10 +11,10 @@ public class ForestWaves {
     public static Wave[] genForestWaves(PApplet p) {
         Wave[] waves = new Wave[10];
         waves[0] = new Wave(p, 1600, 600, new Color(255,100,100), new Color(10,10,10), "Small Bugs");
-        waves[0].addSpawns("smolBug",5);
+        waves[0].addSpawns("smolBug",3);
 
         waves[1] = new Wave(p, 2800, 1100, new Color(255,100,100), new Color(10,10,10), "Small Bugs");
-        waves[1].addSpawns("smolBug", 10);
+        waves[1].addSpawns("smolBug", 6);
 
         waves[2] = new Wave(p, 2000, 800, new Color(175, 0, 0), new Color(10, 10, 10), "Bugs");
         waves[2].addSpawns("smolBug", 5);
