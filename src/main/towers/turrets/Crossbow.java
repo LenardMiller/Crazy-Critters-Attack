@@ -25,7 +25,7 @@ public class Crossbow extends Turret {
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 24;
-        range = 2; //set to 360 for a fun time. default: 2 degrees
+        range = 300;
         numFireFrames = 13;
         numLoadFrames = 81;
         fireFrames = new PImage[numFireFrames];
