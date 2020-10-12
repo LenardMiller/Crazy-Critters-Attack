@@ -14,7 +14,7 @@ public class BigBug extends Enemy{
         speed = maxSpeed;
         moneyDrop = 80;
         damage = 15;
-        maxHp = 80; //80
+        maxHp = 300; //300
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "bigBug";
