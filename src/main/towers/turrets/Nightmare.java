@@ -93,10 +93,10 @@ public class Nightmare extends Turret {
         upgradeHealth[2] = 0;
         upgradeHealth[3] = 0;
         //error (accuracy)
-        upgradeError[0] = 0;
-        upgradeError[1] = 0;
-        upgradeError[2] = -4;
-        upgradeError[3] = 0;
+        upgradeRange[0] = 0;
+        upgradeRange[1] = 0;
+        upgradeRange[2] = -4;
+        upgradeRange[3] = 0;
         //names
         upgradeNames[0] = name;
         upgradeNames[1] = name;

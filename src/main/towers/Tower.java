@@ -42,7 +42,7 @@ public abstract class Tower {
     public int[] upgradeHealth;
     protected int[] upgradeDamage;
     protected int[] upgradeDelay;
-    protected float[] upgradeError;
+    protected float[] upgradeRange;
     public String[] upgradeNames;
     protected String[] upgradeDebris;
     public String[] upgradeTitles;
@@ -74,7 +74,7 @@ public abstract class Tower {
         upgradeDelay = new int[4];
         upgradePrices = new int[4];
         upgradeHealth = new int[4];
-        upgradeError = new float[4];
+        upgradeRange = new float[4];
         upgradeNames = new String[4];
         upgradeDescA = new String[4];
         upgradeDescB = new String[4];

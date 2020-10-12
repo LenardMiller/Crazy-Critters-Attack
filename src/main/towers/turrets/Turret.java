@@ -75,7 +75,7 @@ public abstract class Turret extends Tower {
         upgradeDelay = new int[4];
         upgradePrices = new int[4];
         upgradeHealth = new int[4];
-        upgradeError = new float[4];
+        upgradeRange = new float[4];
         upgradeNames = new String[4];
         upgradeDebris = new String[4];
         upgradeTitles = new String[4];
@@ -278,7 +278,7 @@ public abstract class Turret extends Tower {
         value += upgradePrices[nextLevel];
         maxHp += upgradeHealth[nextLevel];
         hp += upgradeHealth[nextLevel];
-        range += upgradeError[nextLevel];
+        range += upgradeRange[nextLevel];
         name = upgradeNames[nextLevel];
         debrisType = upgradeDebris[nextLevel];
 //        sprite = upgradeSprites[nextLevel];

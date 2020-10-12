@@ -86,11 +86,11 @@ public class RandomCannon extends Turret {
         upgradeHealth[1] = 0;
         upgradeHealth[2] = 0;
         upgradeHealth[3] = 0;
-        //error (accuracy)
-        upgradeError[0] = 0;
-        upgradeError[1] = 0;
-        upgradeError[2] = -2;
-        upgradeError[3] = -2;
+        //range
+        upgradeRange[0] = 0;
+        upgradeRange[1] = 0;
+        upgradeRange[2] = 30;
+        upgradeRange[3] = 40;
         //names
         upgradeNames[0] = name;
         upgradeNames[1] = name;
