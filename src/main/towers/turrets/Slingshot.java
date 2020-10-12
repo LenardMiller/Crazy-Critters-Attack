@@ -67,8 +67,8 @@ public class Slingshot extends Turret {
         upgradeHealth[2] = 0;
         upgradeHealth[3] = 0;
         //range
-        upgradeRange[0] = 10;
-        upgradeRange[1] = 15;
+        upgradeRange[0] = 25;
+        upgradeRange[1] = 40;
         upgradeRange[2] = 0;
         upgradeRange[3] = 0;
         //names

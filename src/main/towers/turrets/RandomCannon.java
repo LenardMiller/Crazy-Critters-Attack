@@ -89,8 +89,8 @@ public class RandomCannon extends Turret {
         //range
         upgradeRange[0] = 0;
         upgradeRange[1] = 0;
-        upgradeRange[2] = 30;
-        upgradeRange[3] = 40;
+        upgradeRange[2] = 20;
+        upgradeRange[3] = 30;
         //names
         upgradeNames[0] = name;
         upgradeNames[1] = name;
