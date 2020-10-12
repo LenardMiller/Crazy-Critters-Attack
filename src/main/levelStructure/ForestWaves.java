@@ -9,7 +9,8 @@ public class ForestWaves {
     public ForestWaves() {}
 
     public static Wave[] genForestWaves(PApplet p) {
-        Wave[] waves = new Wave[10];
+        Wave[] waves = new Wave[15];
+
         waves[0] = new Wave(p, 1600, 600, new Color(255,100,100), new Color(10,10,10), "Small Bugs");
         waves[0].addSpawns("smolBug",3);
 
@@ -49,6 +50,35 @@ public class ForestWaves {
         waves[9].addSpawns("smolBug", 15);
         waves[9].addSpawns("midBug", 5);
         waves[9].addSpawns("bigBug", 3);
+
+        waves[10] = new Wave(p, 2800, 1100, new Color(10,10,10), new Color(175, 0, 10), "Big Bugs");
+        waves[10].addSpawns("smolBug", 10);
+        waves[10].addSpawns("midBug", 10);
+        waves[10].addSpawns("bigBug", 7);
+
+        waves[11] = new Wave(p, 2000, 800, new Color(215, 123, 186), new Color(102, 63, 83), "Worms");
+        waves[11].addSpawns("smolBug", 10);
+        waves[11].addSpawns("midBug", 6);
+        waves[11].addSpawns("butterfly", 15);
+        waves[11].addSpawns("littleWorm", 5);
+
+        waves[12] = new Wave(p, 3000, 500, new Color(0, 100, 0), new Color(255, 0, 77), "Tree Giant");
+        waves[12].addSpawns("treeSprite",5);
+        waves[12].addSpawns("treeGiant",1);
+
+        waves[13] = new Wave(p, 3200, 1300, new Color(0, 0, 0), new Color(255, 100, 0), "Swarm");
+        waves[13].addSpawns("smolBug", 25);
+        waves[13].addSpawns("midBug", 15);
+        waves[13].addSpawns("bigBug", 7);
+        waves[13].addSpawns("butterfly", 5);
+        waves[13].addSpawns("worm", 5);
+        waves[13].addSpawns("treeSprite", 20);
+        waves[13].addSpawns("treeSpirit",10);
+
+        waves[14] = new Wave(p, 3500, 1400, new Color(0, 100, 0), new Color(255, 0, 77), "Tree Giants");
+        waves[14].addSpawns("treeSprite",15);
+        waves[14].addSpawns("treeSpirit", 5);
+        waves[14].addSpawns("treeGiant",4);
 
         for (Wave wave : waves) wave.load();
         return waves;
