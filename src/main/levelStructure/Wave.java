@@ -20,22 +20,20 @@ public class Wave {
     private int spawnLength;
     int waitTimer;
     public int length;
-    public ArrayList<Spawn> spawns;
+    public ArrayList<String> spawns;
     private Color primary;
     private Color secondary;
     private String title;
 
     //todo: pause functionality
-    public Wave(PApplet p, int length, int betweenSpawns, int spawnLength, Color primary, Color secondary, String title) {
+    public Wave(PApplet p, int length, int spawnLength, Color primary, Color secondary, String title) {
         this.p = p;
-        this.betweenSpawns = betweenSpawns;
         this.length = length;
         this.spawnLength = spawnLength;
         this.primary = primary;
         this.secondary = secondary;
         this.title = title;
         spawns = new ArrayList<>();
-        spawnTimer = p.frameCount + betweenSpawns + (int) p.random(-(betweenSpawns / 10f), betweenSpawns / 10f);
     }
 
     public void init() {
@@ -47,10 +45,22 @@ public class Wave {
         for (Tower tower : towers) if (tower.turret) tower.hp = tower.maxHp;
     }
 
+    void load() {
+        betweenSpawns = spawnLength / spawns.size();
+        spawnTimer = p.frameCount + betweenSpawns;
+    }
+
+    void addSpawns(String enemy, int count) {
+        for (int i = count; i > 0; i--) {
+            spawns.add(enemy);
+        }
+    }
+
     public void spawnEnemies() {
         if (spawns.size() > 0 && spawnTimer <= p.frameCount && waitTimer >= p.frameCount) {
-            spawnTimer = p.frameCount + betweenSpawns + (int) p.random(-(betweenSpawns / 10f), betweenSpawns / 10f);
-            Spawn s = getEnemySpawn();
+            spawnTimer = p.frameCount + betweenSpawns;
+            String s = spawns.get(spawns.size() - 1);
+            spawns.remove(spawns.size() - 1);
             PVector pos;
             pos = randomSpawnPosition(p);
             enemies.add(getEnemy(s, pos));
@@ -73,26 +83,10 @@ public class Wave {
         p.text(id, 1000, y + 70);
     }
 
-    private Spawn getEnemySpawn() {
-        int m = 0;
-        for (Spawn spawn : spawns) m += spawn.weight;
-        int r = (int) p.random(0, m + 0.99f);
-        Spawn s = spawns.get(0);
-        int t = 0;
-        for (Spawn spawn : spawns) {
-            int w = spawn.weight;
-            if (r >= t && r < t + w) {
-                s = spawn;
-                return s;
-            } else t += w;
-        }
-        return s;
-    }
-
-    private Enemy getEnemy(Spawn s, PVector pos) {
+    private Enemy getEnemy(String name, PVector pos) {
         Enemy e = null;
 
-        switch (s.enemyName) {
+        switch (name) {
             case "smolBug":
                 e = new SmolBug(p, pos.x, pos.y);
                 break;
@@ -122,16 +116,5 @@ public class Wave {
                 break;
         }
         return e;
-    }
-
-    static class Spawn {
-
-        String enemyName;
-        int weight;
-
-        Spawn(String enemyName, int weight) {
-            this.enemyName = enemyName;
-            this.weight = weight;
-        }
     }
 }
