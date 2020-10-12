@@ -12,9 +12,10 @@ public class SellTower extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 45);
-        spriteOne = spritesAnimH.get("sellTowerBT")[0];
-        spriteTwo = spritesAnimH.get("sellTowerBT")[1];
-        sprite = spriteOne;
+        spriteIdle = spritesAnimH.get("sellTowerBT")[0];
+        spritePressed = spritesAnimH.get("sellTowerBT")[1];
+        spriteHover = spritesAnimH.get("sellTowerBT")[2];
+        sprite = spriteIdle;
     }
 
     public void main(){
@@ -34,5 +35,6 @@ public class SellTower extends Button {
         upgradeIconA.active = false;
         upgradeIconB.active = false;
         selection.name = "null";
+        inGameGui.flashA = 255;
     }
 }

@@ -23,6 +23,9 @@ public class TreeSprite extends Enemy{
         betweenWalkFrames = 1;
         attackStartFrame = 28;
         attackFrame = attackStartFrame;
+        corpseSize = new PVector(50,50);
+        partSize = new PVector(21,21);
+        betweenCorpseFrames = 5;
         loadSprites();
     }
 }

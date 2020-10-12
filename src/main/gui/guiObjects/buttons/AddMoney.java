@@ -12,9 +12,10 @@ public class AddMoney extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(25, 25);
-        spriteOne = spritesAnimH.get("moneyAddBT")[0];
-        spriteTwo = spritesAnimH.get("moneyAddBT")[1];
-        sprite = spriteOne;
+        spriteIdle = spritesAnimH.get("moneyAddBT")[0];
+        spritePressed = spritesAnimH.get("moneyAddBT")[1];
+        spriteHover = spritesAnimH.get("moneyAddBT")[2];
+        sprite = spriteIdle;
         holdable = true;
     }
 

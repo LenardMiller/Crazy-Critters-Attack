@@ -25,6 +25,8 @@ public class Butterfly extends Enemy {
         betweenAttackFrames = 5;
         attackFrame = attackStartFrame;
         flying = true;
+        corpseSize = new PVector(18,18);
+        betweenCorpseFrames = 4;
         loadSprites();
     }
 }

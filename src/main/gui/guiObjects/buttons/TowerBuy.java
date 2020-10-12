@@ -19,9 +19,10 @@ public class TowerBuy extends Button {
         size = new PVector(35, 35);
         towerType = type;
         spriteLocation = "sprites/guiObjects/buttons/towerBuy/" + towerType + "/"; //still uses old system because it is only created at beginning of game
-        spriteOne = p.loadImage(spriteLocation + "000.png");
-        spriteTwo = p.loadImage(spriteLocation + "001.png");
-        sprite = spriteOne;
+        spriteIdle = p.loadImage(spriteLocation + "000.png");
+        spritePressed = p.loadImage(spriteLocation + "001.png");
+        spriteHover = p.loadImage(spriteLocation + "002.png");
+        sprite = spriteIdle;
         depressed = false;
         switch (type) {
             case "slingshot":
@@ -48,15 +49,17 @@ public class TowerBuy extends Button {
     }
 
     public void main() {
-        if (active){
-            hover();
+        if (active) {
+            if (!towerType.equals("null")) hover();
             display();
         }
     }
 
     public void hover() { //below is if hovered or depressed
-        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active || depressed && alive){
-            sprite = spriteTwo;
+        int d = 2;
+        if (p.mouseX < (position.x+size.x/2)+d && p.mouseX > (position.x-size.x/2)-d && p.mouseY < (position.y+size.y/2)+d && p.mouseY > (position.y-size.y/2)-d && alive && active || depressed && alive){
+            if (depressed) sprite = spritePressed;
+            else sprite = spriteHover;
             p.fill(235);
             p.noStroke();
             p.rect(900,212,200,707);
@@ -118,10 +121,13 @@ public class TowerBuy extends Button {
                     p.text("$500", x, 271);
                     break;
             }
-            //if pressed
-            if (inputHandler.leftMousePressedPulse && alive) action();
+            if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
+            if (inputHandler.leftMouseReleasedPulse && alive) {
+                action();
+                sprite = spritePressed;
+            }
         }
-        else sprite = spriteOne;
+        else sprite = spriteIdle;
     }
 
     public void action() {

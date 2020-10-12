@@ -1,10 +1,12 @@
 package main.enemies;
 
 import main.particles.Debris;
+import main.particles.Pile;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.*;
+import static main.Main.particles;
+import static main.Main.underParticles;
 
 public class LittleWorm extends Enemy {
 
@@ -27,27 +29,17 @@ public class LittleWorm extends Enemy {
         attackDmgFrames = new int[]{18};
         betweenAttackFrames = 2;
         attackFrame = attackStartFrame;
-        stealthMode = true;
+        stealthy = true;
+        corpseSize = new PVector(7,7);
         loadSprites();
     }
 
-    public void main(int i) {
-        boolean dead = false; //if its gotten this far, it must be alive?
-        swapPoints(false);
-        if (!attacking) {
-            stealthMode = true;
-            move();
-            if ((int)p.random(0,15) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),"dirt"));
-        } else {
-            stealthMode = false;
-            attack();
-        }
-        if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
-        displayPassB();
-        //prevent from going offscreen
-        if (position.x >= GRID_WIDTH-100 || position.x <= -100 || position.y >= GRID_HEIGHT-100 || position.y <= -100) dead = true;
-        //if health is 0, die
-        if (hp <= 0) dead = true;
-        if (dead) die(i);
+    void move() {
+        if (stealthMode && (int)p.random(0,15) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),"dirt"));
+        if (p.random(0,50) < 1) underParticles.add(new Pile(p, position.x, position.y, 0, "dirt"));
+        PVector m = PVector.fromAngle(angle);
+        m.setMag(speed);
+        position.add(m);
+        speed = maxSpeed;
     }
 }

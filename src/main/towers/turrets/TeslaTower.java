@@ -21,14 +21,14 @@ public class TeslaTower extends Turret{
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 200; //200 frames
+        delay = 500; //500 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         damage = 30;
         arcDistance = 200;
         arcLength = 3;
         pjSpeed = -1;
-        error = 0; //5 degrees
+        error = 0;
         numFireFrames = 6;
         numLoadFrames = 5;
         numIdleFrames = 18;

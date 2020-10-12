@@ -3,6 +3,7 @@ package main.buffs;
 import main.enemies.Enemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import static main.Main.enemies;
 
@@ -26,7 +27,7 @@ public class Decay extends Buff {
     public void effect() {
         Enemy enemy = enemies.get(enId);
         enemy.barTrans = 255;
-        enemy.damageSimple(damage,turret);
+        enemy.damageSimple(damage,turret, "decay", new PVector(0,0));
         effectTimer = p.frameCount + effectDelay;
     }
 }

@@ -17,11 +17,12 @@ public class UpgradeTower extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 150);
-        spriteOne = spritesAnimH.get("upgradeBT")[0]; //green out
-        spriteTwo = spritesAnimH.get("upgradeBT")[1]; //green in
-        spriteRed = spritesAnimH.get("upgradeBT")[2]; //red
-        spriteGrey = spritesAnimH.get("upgradeBT")[3]; //grey
-        sprite = spriteOne;
+        spriteIdle = spritesAnimH.get("upgradeBT")[0]; //green out
+        spritePressed = spritesAnimH.get("upgradeBT")[1]; //green in
+        spriteHover = spritesAnimH.get("upgradeBT")[2]; //hover
+        spriteRed = spritesAnimH.get("upgradeBT")[3]; //red
+        spriteGrey = spritesAnimH.get("upgradeBT")[4]; //grey
+        sprite = spriteIdle;
         this.id = id;
     }
 
@@ -48,5 +49,6 @@ public class UpgradeTower extends Button {
         else nextLevel = tower.nextLevelB;
         money -= tower.upgradePrices[nextLevel];
         tower.upgrade(id);
+        inGameGui.flashA = 255;
     }
 }

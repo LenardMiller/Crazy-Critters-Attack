@@ -11,7 +11,7 @@ import static main.misc.MiscMethods.updateTowerArray;
 
 public class Slingshot extends Turret {
 
-    public Slingshot(PApplet p, Tile tile) { //todo: redo sprite
+    public Slingshot(PApplet p, Tile tile) {
         super(p,tile);
         name = "slingshot";
         size = new PVector(50,50);
@@ -30,7 +30,7 @@ public class Slingshot extends Turret {
         spriteType = 0;
         damage = 15; //15
         loadSprites();
-        debrisType = "stone";
+        debrisType = "wood";
         price = 100;
         value = price;
         priority = 0; //first
@@ -79,10 +79,10 @@ public class Slingshot extends Turret {
         upgradeNames[2] = name;
         upgradeNames[3] = name;
         //debris
-        upgradeDebris[0] = "stone";
-        upgradeDebris[1] = "stone";
-        upgradeDebris[2] = "stone";
-        upgradeDebris[3] = "stone";
+        upgradeDebris[0] = "wood";
+        upgradeDebris[1] = "wood";
+        upgradeDebris[2] = "wood";
+        upgradeDebris[3] = "wood";
         //titles
         upgradeTitles[0] = "More Precise";
         upgradeTitles[1] = "Super Precise";

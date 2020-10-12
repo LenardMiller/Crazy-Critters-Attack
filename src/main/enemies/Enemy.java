@@ -2,8 +2,10 @@ package main.enemies;
 
 import main.Main;
 import main.buffs.*;
+import main.misc.Corpse;
 import main.misc.Tile;
 import main.particles.Ouch;
+import main.particles.Pile;
 import main.pathfinding.Node;
 import main.pathfinding.PathRequest;
 import main.towers.Tower;
@@ -56,8 +58,16 @@ public abstract class Enemy {
     private Tower targetTower;
     private boolean targetMachine;
     public boolean stealthMode;
+    boolean stealthy;
     public boolean flying;
     private int attackCount;
+    PVector corpseSize;
+    PVector partSize;
+    int betweenCorpseFrames;
+    int corpseLifespan;
+    public String lastDamageType;
+    boolean overkill;
+    PVector partsDirection;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -83,9 +93,15 @@ public abstract class Enemy {
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
         pfSize = 1; //enemies pathfinding size, measured in nodes
+        stealthy = false;
         stealthMode = false;
         flying = false;
         attackCount = 0;
+        corpseSize = size;
+        partSize = size;
+        betweenCorpseFrames = 7;
+        corpseLifespan = 500;
+        lastDamageType = "normal";
     }
 
     public void main(int i) {
@@ -96,8 +112,15 @@ public abstract class Enemy {
         targetAngle = clampAngle(targetAngle);
         angle += angleDifference(targetAngle, angle) / 10;
 
-        if (!attacking) move();
-        else attack();
+        if (!attacking) {
+            stealthMode = stealthy;
+            //todo: make work with other backgrounds
+            move();
+        }
+        else {
+            attack();
+            stealthMode = false;
+        }
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         displayPassB();
         //prevent from going offscreen
@@ -108,19 +131,36 @@ public abstract class Enemy {
         if (dead) die(i);
     }
 
-    void die(int i) { //todo: extra death anims?
+    private void die(int i) {
         Main.money += moneyDrop;
-        int num = (int) (p.random(2, 5)) * pfSize * pfSize;
-        for (int j = num; j >= 0; j--) { //creates death particles
-            particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), "greyPuff"));
+
+        String type = lastDamageType;
+        for (Buff buff : buffs) {
+            if (buff.enId == i) {
+                type = buff.name;
+            }
         }
+        if (!stealthMode) {
+            if (overkill) {
+                for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {
+                    float maxRv = 200f / partSize.x;
+                    corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRv), radians(maxRv)), 0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
+                }
+                for (int k = 0; k < sq(pfSize); k++) {
+                    underParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), 0, hitParticle));
+                }
+            } else
+                corpses.add(new Corpse(p, position, corpseSize, angle + p.random(radians(-5), radians(5)), new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name + "Die", "none", 0, true));
+        }
+
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
             //if attached, remove
             if (buff.enId == i) buffs.remove(j);
-            //shift ids to compensate for enemy removal
+                //shift ids to compensate for enemy removal
             else if (buff.enId > i) buff.enId -= 1;
         }
+
         enemies.remove(i);
     }
 
@@ -130,8 +170,6 @@ public abstract class Enemy {
         position.add(m);
         speed = maxSpeed;
     }
-
-    //todo: dance
 
     private void preDisplay() {
         if (attacking) {
@@ -192,7 +230,10 @@ public abstract class Enemy {
         }
     }
 
-    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, int i) { //when the enemy hits a projectile
+    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) { //when the enemy hits a projectile
+        lastDamageType = type;
+        overkill = damage >= maxHp;
+        partsDirection = direction;
         hp -= damage;
         if (turret != null) {
             if (hp <= 0) {
@@ -240,7 +281,10 @@ public abstract class Enemy {
         }
     }
 
-    public void damageSimple(int damage, Turret turret) {
+    public void damageSimple(int damage, Turret turret, String type, PVector direction) {
+        lastDamageType = type;
+        overkill = damage >= maxHp;
+        partsDirection = direction;
         hp -= damage;
         if (turret != null) {
             if (hp <= 0) {
@@ -294,6 +338,9 @@ public abstract class Enemy {
 
     //pathfinding -----------------------------------------------------------------
     //todo: fix big enemy clearance
+    //todo: big enemies randomly attack stuff
+    //todo: won't target turrets?
+    //todo: enemies sometimes wander off if there are a lot of them
 
     boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);

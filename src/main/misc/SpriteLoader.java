@@ -13,13 +13,13 @@ public class SpriteLoader {
     public static void loadSpritesAnim(PApplet p) {
         //icons & buttons
         getSprite(p,"upgrade","IC","upgrades/",16);
-        getSprite(p,"moneyAdd","BT","moneyAdd/",2);
-        getSprite(p,"upgrade","BT","upgradeButton/",4);
-        getSprite(p,"sellTower","BT","sellTower/",2);
-        getSprite(p,"targetPriority","BT","targetPriority/",2);
-        getSprite(p,"towerTabSwitch","BT","towerTabSwitch/",2);
-        getSprite(p,"wallBuy","BT","wallBuy/",2);
-        getSprite(p,"play","BT","play/",3);
+        getSprite(p,"moneyAdd","BT","moneyAdd/",3);
+        getSprite(p,"upgrade","BT","upgradeButton/",5);
+        getSprite(p,"sellTower","BT","sellTower/",3);
+        getSprite(p,"targetPriority","BT","targetPriority/",3);
+        getSprite(p,"towerTabSwitch","BT","towerTabSwitch/",3);
+        getSprite(p,"wallBuy","BT","wallBuy/",3);
+        getSprite(p,"play","BT","play/",4);
         //particles
         getSprite(p,"energyBuff","PT","buff/energy/",8);
         getSprite(p,"fireBuff","PT","buff/fire/",8);
@@ -40,30 +40,54 @@ public class SpriteLoader {
         getSprite(p,"greenMagicBuff","PT","buff/greenMagic/",8);
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         getSprite(p,"railgunBlast","PT","railgunBlast/",11);
+        getSprite(p,"greenOuchPile","PT", "pile/greenOuch/", 4);
+        getSprite(p,"redOuchPile","PT", "pile/redOuch/", 4);
+        getSprite(p,"leafOuchPile","PT", "pile/leafOuch/", 4);
+        getSprite(p,"dirtPile","PT","pile/dirt/", 4);
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
         getSprite(p,"flame","PJ","flame/",23);
         //enemies
         getSprite(p,"treeGiantAttack","EN","treeGiant/attack/",63);
         getSprite(p,"treeGiantMove","EN","treeGiant/move/",91);
+        getSprite(p,"treeGiantDie","EN","treeGiant/die/",7);
+        getSprite(p,"treeGiantParts","EN","treeGiant/parts/",6);
         getSprite(p,"treeSpiritAttack","EN","treeSpirit/attack/",42);
         getSprite(p,"treeSpiritMove","EN","treeSpirit/move/",47);
+        getSprite(p,"treeSpiritDie","EN","treeSpirit/die/",5);
+        getSprite(p,"treeSpiritParts","EN","treeSpirit/parts/",6);
         getSprite(p,"treeSpriteMove","EN","treeSprite/move/",30);
         getSprite(p,"treeSpriteAttack","EN","treeSprite/attack/",50);
+        getSprite(p,"treeSpriteDie","EN","treeSprite/die/",4);
+        getSprite(p,"treeSpriteParts","EN","treeSprite/parts/",6);
         getSprite(p,"midBugAttack","EN","midBug/attack/",42);
         getSprite(p,"midBugMove","EN","midBug/move/",8);
+        getSprite(p,"midBugDie","EN","midBug/die/",5);
+        getSprite(p,"midBugParts","EN","midBug/parts/",9);
         getSprite(p,"smolBugAttack","EN","smolBug/attack/",27);
         getSprite(p,"smolBugMove","EN","smolBug/move/",8);
+        getSprite(p,"smolBugDie","EN","smolBug/die/", 4);
+        getSprite(p,"smolBugParts","EN","smolBug/parts/",9);
         getSprite(p,"bigBugAttack","EN","bigBug/attack/",100);
         getSprite(p,"bigBugMove","EN","bigBug/move/",12);
+        getSprite(p,"bigBugDie","EN","bigBug/die/",6);
+        getSprite(p,"bigBugParts","EN","bigBug/parts/",9);
         getSprite(p,"snakeAttack","EN","snake/attack/",15);
         getSprite(p,"snakeMove","EN","snake/move/",10);
+        getSprite(p,"snakeDie","EN","snake/die/",3);
+        getSprite(p,"snakeParts","EN","snake/parts/",3);
         getSprite(p,"wormMove","EN","worm/move/",1);
         getSprite(p,"wormAttack","EN","worm/attack/",34);
+        getSprite(p,"wormDie","EN","worm/die/",5);
+        getSprite(p, "wormParts", "EN", "worm/parts/", 3);
         getSprite(p,"butterflyAttack","EN","butterfly/attack/",16);
         getSprite(p,"butterflyMove","EN","butterfly/move/",8);
+        getSprite(p,"butterflyDie","EN","butterfly/die/",5);
+        getSprite(p,"butterflyParts", "EN", "butterfly/parts/", 5);
         getSprite(p,"dummyAttack","EN","dummy/attack/",1);
         getSprite(p,"dummyMove","EN","dummy/move/",1);
+        getSprite(p,"dummyDie","EN","dummy/die/",1);
+        getSprite(p,"dummyParts","EN", "dummy/parts/", 1);
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);

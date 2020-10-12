@@ -16,7 +16,6 @@ public abstract class Particle {
 
     public PVector position;
     public PVector size;
-    public PVector target;
     public float maxSpeed;
     public float speed;
     public PImage[] sprites;
@@ -59,7 +58,7 @@ public abstract class Particle {
         move();
     }
 
-    private void display() {
+    void display() {
         if (numFrames > 1) {
             if (p.frameCount - delayTime >= delay) {
                 if (currentSprite == numFrames-1) dead = true;

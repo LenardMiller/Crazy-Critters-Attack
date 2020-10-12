@@ -4,8 +4,8 @@ import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.selection;
-import static main.Main.tiles;
+import static main.Main.*;
+import static main.Main.spritesAnimH;
 
 public class TargetPriority extends Button {
 
@@ -13,10 +13,10 @@ public class TargetPriority extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 45);
-        spriteLocation = "sprites/guiObjects/buttons/targetPriority/";
-        spriteOne = p.loadImage(spriteLocation + "000.png");
-        spriteTwo = p.loadImage(spriteLocation + "001.png");
-        sprite = spriteOne;
+        spriteIdle = spritesAnimH.get("targetPriorityBT")[0];
+        spritePressed = spritesAnimH.get("targetPriorityBT")[1];
+        spriteHover = spritesAnimH.get("targetPriorityBT")[2];
+        sprite = spriteIdle;
     }
 
     public void main(){

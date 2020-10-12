@@ -24,6 +24,8 @@ public class Snake extends Enemy {
         attackDmgFrames = new int[]{8};
         betweenAttackFrames = 5;
         attackFrame = attackStartFrame;
+        corpseSize = size;
+        partSize = new PVector(9,9);
         loadSprites();
     }
 }

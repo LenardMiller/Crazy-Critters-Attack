@@ -132,7 +132,7 @@ public abstract class Tower {
         if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
+        for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
         updateNodes();
@@ -140,12 +140,15 @@ public abstract class Tower {
 
     public void die(boolean sold) {
         int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
+        for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
         tile.tower = null;
         updateTowerArray();
-        if (selection.id == tile.id) selection.name = "null";
+        if (selection.id == tile.id) {
+            selection.name = "null";
+            inGameGui.flashA = 255;
+        }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.tower.tile.id);
         if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
         if (!turret) {

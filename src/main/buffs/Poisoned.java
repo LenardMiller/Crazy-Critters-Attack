@@ -4,6 +4,7 @@ import main.enemies.Enemy;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import static main.Main.enemies;
 import static main.Main.particles;
@@ -22,7 +23,7 @@ public class Poisoned extends Buff{
         Enemy enemy = enemies.get(enId);
         enemy.tintColor = 0;
         enemy.barTrans = 255;
-        enemy.damageSimple(3,turret);
+        enemy.damageSimple(3,turret, "poison", new PVector(0,0));
         int num = PApplet.ceil(p.random(0,3));
         for (int j = num; j >= 0; j--){ //sprays green
             particles.add(new Ouch(p,(float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), p.random(0,360), "greenOuch"));

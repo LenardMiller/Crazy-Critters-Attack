@@ -18,10 +18,11 @@ public class Play extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 125);
-        spriteOne = spritesAnimH.get("playBT")[1]; //out
-        spriteTwo = spritesAnimH.get("playBT")[0]; //in
-        spriteGrey = spritesAnimH.get("playBT")[2]; //grey
-        sprite = spriteOne;
+        spritePressed = spritesAnimH.get("playBT")[0]; //in
+        spriteIdle = spritesAnimH.get("playBT")[1]; //out
+        spriteHover = spritesAnimH.get("playBT")[2]; //hover
+        spriteGrey = spritesAnimH.get("playBT")[3]; //grey
+        sprite = spriteIdle;
     }
 
     public void main() {

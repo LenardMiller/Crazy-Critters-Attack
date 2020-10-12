@@ -5,7 +5,7 @@ import processing.core.PVector;
 
 public class TreeGiant extends Enemy {
 
-    public TreeGiant(PApplet p, float x, float y) { //todo: make shoulders smaller
+    public TreeGiant(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(76,76);
         pfSize = 3;
@@ -24,6 +24,9 @@ public class TreeGiant extends Enemy {
         attackDmgFrames = new int[]{28};
         betweenAttackFrames = 2;
         attackFrame = attackStartFrame;
+        corpseSize = new PVector(152,152);
+        partSize = new PVector(68,68);
+        corpseLifespan = 750;
         loadSprites();
     }
 }

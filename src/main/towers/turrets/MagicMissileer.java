@@ -11,8 +11,6 @@ import static main.misc.MiscMethods.updateTowerArray;
 
 public class MagicMissileer extends Turret{
 
-    private boolean four;
-
     public MagicMissileer(PApplet p, Tile tile) {
         super(p,tile);
         name = "magicMissleer";
@@ -41,7 +39,6 @@ public class MagicMissileer extends Turret{
         priority = 2; //strong
         nextLevelA = 0;
         nextLevelB = 2;
-        four = false;
         setUpgrades();
         updateTowerArray();
     }
@@ -60,7 +57,7 @@ public class MagicMissileer extends Turret{
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 0,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 1,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 2,tile.position));
-        if (four) {
+        if (name.equals("magicMissleerFour")) {
             projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, (int)(p.random(0,2.99f)),tile.position));
         }
     }
@@ -151,9 +148,7 @@ public class MagicMissileer extends Turret{
         upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
-    public void upgradeSpecial() {
-        if (nextLevelB == 1) four = true;
-    }
+    public void upgradeSpecial() {}
 
     public void updateSprite() {}
 }
