@@ -81,7 +81,7 @@ public class Main extends PApplet {
     public static PFont mediumFont;
     public static PFont smallFont;
 
-    public static int money = 2000;
+    public static int money = 100;
     public static boolean alive = true;
     public static boolean debug = false;
     public static boolean playingLevel = false;
