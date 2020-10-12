@@ -35,7 +35,7 @@ public class ForestWaves {
         waves[5].addSpawns("treeSprite",10);
 
         waves[6] = new Wave(p, 2000, 400, new Color(44, 235, 83), new Color(255, 0, 0), "Snakes");
-        waves[6].addSpawns("snake", 20);
+        waves[6].addSpawns("snake", 30);
 
         waves[7] = new Wave(p, 2400, 1000, new Color(20, 183, 24), new Color(123, 78, 15), "Tree Spirits");
         waves[7].addSpawns("treeSprite", 10);
