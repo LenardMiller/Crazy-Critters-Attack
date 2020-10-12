@@ -12,7 +12,7 @@ public class TreeSprite extends Enemy{
         radius = 15;
         maxSpeed = .4f;
         speed = maxSpeed;
-        moneyDrop = 20;
+        moneyDrop = 15;
         damage = 4; //4
         maxHp = 40; //Hp <---------------------------
         hp = maxHp;
