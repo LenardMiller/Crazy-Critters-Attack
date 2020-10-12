@@ -34,6 +34,6 @@ case sensitive
 - \- - set money to 0
 - b - switch in and out of level builder
 - z - save tile info
-- x - load tile info (will probably break everything
+- x - load tile info (will probably break everything)
 ### Other
 - 0 - pause level (currently nonfunctional)
