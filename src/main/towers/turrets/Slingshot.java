@@ -56,7 +56,7 @@ public class Slingshot extends Turret {
         //delay (firerate)
         upgradeDelay[0] = 0;
         upgradeDelay[1] = 0;
-        upgradeDelay[2] = -30;
+        upgradeDelay[2] = -20;
         upgradeDelay[3] = 0;
         //price
         upgradePrices[0] = 50;
