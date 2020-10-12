@@ -13,8 +13,8 @@ public class TreeSprite extends Enemy{
         maxSpeed = .4f;
         speed = maxSpeed;
         moneyDrop = 20;
-        damage = 2; //2
-        maxHp = 20; //Hp <---------------------------
+        damage = 4; //4
+        maxHp = 40; //Hp <---------------------------
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "treeSprite";
