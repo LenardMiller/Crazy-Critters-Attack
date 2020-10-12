@@ -1,7 +1,12 @@
 package main.enemies;
 
+import main.particles.Debris;
+import main.particles.Pile;
 import processing.core.PApplet;
 import processing.core.PVector;
+
+import static main.Main.particles;
+import static main.Main.underParticles;
 
 public class LittleWorm extends Enemy {
 
@@ -27,5 +32,14 @@ public class LittleWorm extends Enemy {
         stealthy = true;
         corpseSize = new PVector(7,7);
         loadSprites();
+    }
+
+    void move() {
+        if (stealthMode && (int)p.random(0,15) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),"dirt"));
+        if (p.random(0,50) < 1) underParticles.add(new Pile(p, position.x, position.y, 0, "dirt"));
+        PVector m = PVector.fromAngle(angle);
+        m.setMag(speed);
+        position.add(m);
+        speed = maxSpeed;
     }
 }

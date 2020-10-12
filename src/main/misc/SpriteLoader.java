@@ -43,6 +43,7 @@ public class SpriteLoader {
         getSprite(p,"greenOuchPile","PT", "pile/greenOuch/", 4);
         getSprite(p,"redOuchPile","PT", "pile/redOuch/", 4);
         getSprite(p,"leafOuchPile","PT", "pile/leafOuch/", 4);
+        getSprite(p,"dirtPile","PT","pile/dirt/", 4);
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
         getSprite(p,"flame","PJ","flame/",23);

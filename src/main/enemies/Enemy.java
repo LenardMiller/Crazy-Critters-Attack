@@ -4,7 +4,6 @@ import main.Main;
 import main.buffs.*;
 import main.misc.Corpse;
 import main.misc.Tile;
-import main.particles.Debris;
 import main.particles.Ouch;
 import main.pathfinding.Node;
 import main.pathfinding.PathRequest;
@@ -114,9 +113,7 @@ public abstract class Enemy {
 
         if (!attacking) {
             stealthMode = stealthy;
-            //todo: add piles of debris
             //todo: make work with other backgrounds
-            if (stealthMode && (int)p.random(0,15) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),"dirt"));
             move();
         }
         else {
