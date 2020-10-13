@@ -10,7 +10,7 @@ public class Butterfly extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = .4f;
+        maxSpeed = .8f;
         speed = maxSpeed;
         moneyDrop = 30;
         damage = 1;
