@@ -33,7 +33,7 @@ public class RandomCannon extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 6;
+        damage = 10;
         range = 150;
         loadSprites();
         debrisType = "wood";
@@ -67,7 +67,7 @@ public class RandomCannon extends Turret {
 
     private void setUpgrades() {
         //damage
-        upgradeDamage[0] = 6;
+        upgradeDamage[0] = 15;
         upgradeDamage[1] = 0;
         upgradeDamage[2] = 0;
         upgradeDamage[3] = 0;
@@ -107,7 +107,7 @@ public class RandomCannon extends Turret {
         upgradeTitles[2] = "Reduce Spread";
         upgradeTitles[3] = "Limited Spread";
         //desc line one
-        upgradeDescA[0] = "+2";
+        upgradeDescA[0] = "+15";
         upgradeDescA[1] = "Increase";
         upgradeDescA[2] = "Increase";
         upgradeDescA[3] = "Further";
