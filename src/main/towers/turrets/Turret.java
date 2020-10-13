@@ -1,10 +1,11 @@
 package main.towers.turrets;
 
 import main.enemies.Enemy;
-import main.particles.Debris;
-import main.misc.Tile;
-import main.towers.Tower;
 import main.misc.CompressArray;
+import main.misc.Tile;
+import main.particles.Debris;
+import main.particles.Ouch;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
-import static main.misc.MiscMethods.clampAngle;
 
 public abstract class Turret extends Tower {
 
@@ -186,6 +186,9 @@ public abstract class Turret extends Tower {
     }
 
     public void displayPassB() {
+        if (hp < maxHp && p.random(0,30) < 1) {
+            particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greyPuff"));
+        }
         if (tintColor < 255) tintColor += 20;
         if (spriteType == 0) { //idle
             sprite = sIdle;
