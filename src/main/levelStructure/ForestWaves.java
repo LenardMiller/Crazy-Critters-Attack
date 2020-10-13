@@ -108,7 +108,7 @@ public class ForestWaves {
         waves[18].addSpawns("treeSprite", 5);
         waves[18].addSpawns("treeSpirit", 8);
 
-        waves[19] = new Wave(p, 2400, 1000, bigBugPrimary, bigBugSecondary, "Big Bugs");
+        waves[19] = new Wave(p, 2400, 1000, bigBugPrimary, bigBugSecondary, "Big Bug");
         waves[19].addSpawns("midBug", 5);
         waves[19].addSpawns("bigBug", 1);
 
