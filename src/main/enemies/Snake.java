@@ -10,7 +10,7 @@ public class Snake extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = 1;
+        maxSpeed = 0.7f;
         speed = maxSpeed;
         moneyDrop = 20;
         damage = 3;
