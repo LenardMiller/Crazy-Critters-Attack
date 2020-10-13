@@ -34,7 +34,7 @@ public class Crossbow extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 25;
+        damage = 30;
         pierce = 2;
         loadSprites();
         debrisType = "wood";
@@ -54,7 +54,7 @@ public class Crossbow extends Turret {
 
     private void setUpgrades(){
         //damage
-        upgradeDamage[0] = 10;
+        upgradeDamage[0] = 15;
         upgradeDamage[1] = 0;
         upgradeDamage[2] = 0;
         upgradeDamage[3] = 0;
@@ -94,7 +94,7 @@ public class Crossbow extends Turret {
         upgradeTitles[2] = "Faster Firing";
         upgradeTitles[3] = "Yet Faster Firing";
         //desc line one
-        upgradeDescA[0] = "+10";
+        upgradeDescA[0] = "+15";
         upgradeDescA[1] = "Increase";
         upgradeDescA[2] = "Increase";
         upgradeDescA[3] = "Further";
