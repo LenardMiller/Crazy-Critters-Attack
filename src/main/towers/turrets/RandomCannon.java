@@ -37,7 +37,7 @@ public class RandomCannon extends Turret {
         range = 150;
         loadSprites();
         debrisType = "wood";
-        price = 200;
+        price = RANDOMCANNON_PRICE;
         value = price;
         priority = 0; //close
         nextLevelA = 0;

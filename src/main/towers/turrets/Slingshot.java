@@ -31,7 +31,7 @@ public class Slingshot extends Turret {
         damage = 15; //15
         loadSprites();
         debrisType = "wood";
-        price = 100;
+        price = SLINGSHOT_PRICE;
         value = price;
         priority = 0; //first
         nextLevelA = 0;

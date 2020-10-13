@@ -26,11 +26,13 @@ public class TowerBuy extends Button {
         depressed = false;
         switch (type) {
             case "slingshot":
-                price = 100;
+                price = SLINGSHOT_PRICE;
                 break;
             case "crossbow":
+                price = CROSSBOW_PRICE;
+                break;
             case "miscCannon":
-                price = 200;
+                price = RANDOMCANNON_PRICE;
                 break;
             case "tesla":
             case "energyBlaster":
@@ -71,54 +73,54 @@ public class TowerBuy extends Button {
                 case "slingshot":
                     p.text("Slingshot", 1000, 241);
                     p.textFont(mediumFont);
-                    p.text("$100", x, 271);
+                    p.text("$" + price, x, 271);
                     break;
                 case "crossbow":
                     p.text("Crossbow", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$200", x, 271);
+                    p.text("$" + price, x, 271);
                     break;
                 case "miscCannon":
                     p.text("Luggage", x, 241);
                     p.text("Blaster", x, 266);
                     p.textFont(mediumFont);
-                    p.text("$200", x, 296);
+                    p.text("$" + price, x, 296);
                     break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$300", x, 271);
+                    p.text("$" + price, x, 271);
                     break;
                 case "magicMissleer":
                     p.text("Magic Missileer", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$300", x, 271);
+                    p.text("$" + price, x, 271);
                     break;
                 case "tesla":
                     p.text("Tesla Tower", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$300", x, 271);
+                    p.text("$" + price, x, 271);
                     break;
                 case "nightmare":
                     p.text("Nightmare", x, 241);
                     p.text("Blaster", x, 266);
                     p.textFont(mediumFont);
-                    p.text("$400", x, 296);
+                    p.text("$" + price, x, 296);
                     break;
                 case "flamethrower":
                     p.text("Flamethrower", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$400", x, 271);
+                    p.text("$" + price, x, 271);
                     break;
                 case "railgun":
                     p.text("Railgun", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$400", x, 271);
+                    p.text("$" + price, x, 271);
                     break;
                 case "waveMotion":
                     p.text("Death Beam", x, 241);
                     p.textFont(mediumFont);
-                    p.text("$500", x, 271);
+                    p.text("$" + price, x, 271);
                     break;
             }
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;

@@ -93,6 +93,10 @@ public class Main extends PApplet {
     public static final int GRID_WIDTH = 1100;
     public static final int GRID_HEIGHT = 1100;
 
+    public static final int SLINGSHOT_PRICE = 75;
+    public static final int RANDOMCANNON_PRICE = 150;
+    public static final int CROSSBOW_PRICE = 200;
+
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
 

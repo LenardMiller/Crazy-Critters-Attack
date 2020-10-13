@@ -217,17 +217,17 @@ public class Hand {
             case "slingshot":
                 heldSprite = spritesH.get("slingshotFullTR");
                 offset = new PVector(0, 0);
-                price = 50;
+                price = SLINGSHOT_PRICE;
                 break;
             case "crossbow":
                 heldSprite = spritesH.get("crossbowFullTR");
                 offset = new PVector(2, 2);
-                price = 100;
+                price = CROSSBOW_PRICE;
                 break;
             case "miscCannon":
                 heldSprite = spritesH.get("miscCannonFullTR");
                 offset = new PVector(0, 0);
-                price = 100;
+                price = RANDOMCANNON_PRICE;
                 break;
             case "energyBlaster":
                 heldSprite = spritesH.get("energyBlasterFullTR");

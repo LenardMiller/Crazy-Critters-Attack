@@ -38,7 +38,7 @@ public class Crossbow extends Turret {
         pierce = 2;
         loadSprites();
         debrisType = "wood";
-        price = 400;
+        price = CROSSBOW_PRICE;
         value = price;
         priority = 1; //last
         nextLevelA = 0;
