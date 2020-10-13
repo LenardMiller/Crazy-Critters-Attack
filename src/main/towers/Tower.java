@@ -1,8 +1,8 @@
 package main.towers;
 
-import main.particles.BuffParticle;
-import main.particles.Debris;
 import main.misc.Tile;
+import main.particles.Debris;
+import main.particles.Ouch;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -162,7 +162,7 @@ public abstract class Tower {
     public void heal() {
         if (hp < maxHp) {
             for (int i = 0; i < 5; i++) {
-                particles.add(new BuffParticle(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenMagic"));
+                particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
             }
         }
         hp = maxHp;
