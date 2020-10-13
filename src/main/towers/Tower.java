@@ -1,5 +1,6 @@
 package main.towers;
 
+import main.particles.BuffParticle;
 import main.particles.Debris;
 import main.misc.Tile;
 import processing.core.PApplet;
@@ -158,9 +159,18 @@ public abstract class Tower {
         updateNodes();
     }
 
+    public void heal() {
+        if (hp < maxHp) {
+            for (int i = 0; i < 5; i++) {
+                particles.add(new BuffParticle(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenMagic"));
+            }
+        }
+        hp = maxHp;
+    }
+
     public void repair() {
         money -= ceil((float)(price) - (float)(value));
-        hp = maxHp;
+        heal();
     }
 
     public void sell() {

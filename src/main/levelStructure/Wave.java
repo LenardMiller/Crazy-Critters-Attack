@@ -42,7 +42,7 @@ public class Wave {
     }
 
     public void end() {
-        for (Tower tower : towers) if (tower.turret) tower.hp = tower.maxHp;
+        for (Tower tower : towers) if (tower.turret) tower.heal();
     }
 
     void load() {
