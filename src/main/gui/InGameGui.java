@@ -94,8 +94,8 @@ public class InGameGui {
     private void build() {
         openMenuButton = new OpenMenu(p,BOARD_WIDTH+100,12,"null",true);
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 45.5f,"slingshot",true)); //row 1
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 45.5f,"crossbow",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 45.5f,"miscCannon",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 45.5f,"miscCannon",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 45.5f,"crossbow",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 45.5f,"energyBlaster",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 45.5f,"magicMissleer",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 85.5f,"tesla",true)); //row 2
