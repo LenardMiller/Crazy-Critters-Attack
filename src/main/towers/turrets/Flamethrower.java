@@ -53,8 +53,6 @@ public class Flamethrower extends Turret {
         price = 400;
         value = price;
         priority = 0; //close
-        nextLevelA = 0;
-        nextLevelB = 2;
         setUpgrades();
         updateTowerArray();
     }
@@ -120,41 +118,6 @@ public class Flamethrower extends Turret {
     }
 
     private void setUpgrades() {
-        //damage
-        upgradeDamage[0] = 0;
-        upgradeDamage[1] = 0;
-        upgradeDamage[2] = 2;
-        upgradeDamage[3] = 0;
-        //delay (firerate)
-        upgradeDelay[0] = 0;
-        upgradeDelay[1] = 0;
-        upgradeDelay[2] = 0;
-        upgradeDelay[3] = 0;
-        //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 50;
-        upgradePrices[3] = 100;
-        //heath
-        upgradeHealth[0] = 0;
-        upgradeHealth[1] = 0;
-        upgradeHealth[2] = 0;
-        upgradeHealth[3] = 0;
-        //error (accuracy)
-        upgradeRange[0] = 0;
-        upgradeRange[1] = 0;
-        upgradeRange[2] = 0;
-        upgradeRange[3] = 0;
-        //names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        upgradeNames[3] = name;
-        //debris
-        upgradeDebris[0] = "metal";
-        upgradeDebris[1] = "metal";
-        upgradeDebris[2] = "metal";
-        upgradeDebris[3] = "metal";
         //titles
         upgradeTitles[0] = "Range";
         upgradeTitles[1] = "Swivel";
@@ -180,11 +143,6 @@ public class Flamethrower extends Turret {
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[15];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[11];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("stoneWallTW");
-        upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
     public void upgradeSpecial() {

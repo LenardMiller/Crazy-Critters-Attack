@@ -40,18 +40,11 @@ public abstract class Tower {
     public int nextLevelB;
 
     public int[] upgradePrices;
-    public int[] upgradeHealth;
-    protected int[] upgradeDamage;
-    protected int[] upgradeDelay;
-    protected float[] upgradeRange;
-    public String[] upgradeNames;
-    protected String[] upgradeDebris;
     public String[] upgradeTitles;
     public String[] upgradeDescA;
     public String[] upgradeDescB;
     public String[] upgradeDescC;
     public PImage[] upgradeIcons;
-    public PImage[] upgradeSprites;
 
     public Tower(PApplet p, Tile tile) {
         this.p = p;
@@ -70,20 +63,12 @@ public abstract class Tower {
         price = 0;
         turret = false;
         visualize = false;
-        nextLevelB = 2;
-        upgradeDamage = new int[4];
-        upgradeDelay = new int[4];
-        upgradePrices = new int[4];
-        upgradeHealth = new int[4];
-        upgradeRange = new float[4];
-        upgradeNames = new String[4];
+        nextLevelB = 0;
         upgradeDescA = new String[4];
         upgradeDescB = new String[4];
         upgradeDescC = new String[4];
-        upgradeDebris = new String[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
-        upgradeSprites = new PImage[4];
         updateNodes();
         updateTowerArray();
     }
@@ -123,14 +108,8 @@ public abstract class Tower {
     }
 
     public void upgrade(int id) {
-        price += upgradePrices[nextLevelB];
-        maxHp += upgradeHealth[nextLevelB];
-        hp += upgradeHealth[nextLevelB];
-        name = upgradeNames[nextLevelB];
-        debrisType = upgradeDebris[nextLevelB];
-        sprite = upgradeSprites[nextLevelB];
         nextLevelB++;
-        if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--) {

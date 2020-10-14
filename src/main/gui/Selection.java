@@ -45,10 +45,10 @@ public class Selection { //what tower is selected
                 upgradeIconA.active = true;
                 upgradeIconA.position.y = 565;
                 upgradeIconB.position.y = 715;
-                if (tower.nextLevelA < tower.upgradeNames.length / 2) {
+                if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
                     upgradeIconA.sprite = tower.upgradeIcons[tower.nextLevelA];
                 } else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-                if (tower.nextLevelB < tower.upgradeNames.length) {
+                if (tower.nextLevelB < tower.upgradeTitles.length) {
                     upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
                 } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
@@ -65,7 +65,7 @@ public class Selection { //what tower is selected
                 upgradeButtonB.position.y = 630;
                 upgradeIconA.active = false;
                 upgradeIconB.position.y = 610;
-                if (tower.nextLevelB < tower.upgradeNames.length) {
+                if (tower.nextLevelB < tower.upgradeTitles.length) {
                     upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
                 } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
@@ -227,7 +227,7 @@ public class Selection { //what tower is selected
         if (tower.turret) { //only display if turret
             offsetC = -45;
             if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
-            if (tower.nextLevelA < tower.upgradeNames.length / 2) {
+            if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
                 if (money >= tower.upgradePrices[tower.nextLevelA]) p.fill(11, 56, 0);
                 else p.fill(75, 0, 0);
                 p.textFont(largeFont);
@@ -252,7 +252,7 @@ public class Selection { //what tower is selected
         offsetC = 0;
         if (tower.turret) offsetC = 105;
         if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
-        if (tower.nextLevelB < tower.upgradeNames.length) {
+        if (tower.nextLevelB < tower.upgradeTitles.length) {
             if (money >= tower.upgradePrices[tower.nextLevelB]) p.fill(11, 56, 0);
             else p.fill(75, 0, 0);
             p.textFont(largeFont);

@@ -48,9 +48,6 @@ public class Wall extends Tower {
         tiles.get(x-1,y-1).setBgW(name);
 
         upgradePrices = new int[4];
-        upgradeHealth = new int[4];
-        upgradeNames = new String[4];
-        upgradeDebris = new String[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         upgradeSprites = new PImage[4][4];
@@ -125,21 +122,6 @@ public class Wall extends Tower {
         upgradePrices[1] = 100;
         upgradePrices[2] = 225;
         upgradePrices[3] = 500;
-        //heath
-        upgradeHealth[0] = 75;
-        upgradeHealth[1] = 125;
-        upgradeHealth[2] = 250;
-        upgradeHealth[3] = 500;
-        //names
-        upgradeNames[0] = "stoneWall";
-        upgradeNames[1] = "metalWall";
-        upgradeNames[2] = "crystalWall";
-        upgradeNames[3] = "ultimateWall";
-        //debris
-        upgradeDebris[0] = "stone";
-        upgradeDebris[1] = "metal";
-        upgradeDebris[2] = "crystal";
-        upgradeDebris[3] = "ultimate";
         //titles
         upgradeTitles[0] = "Stone";
         upgradeTitles[1] = "Metal";
@@ -150,6 +132,44 @@ public class Wall extends Tower {
         upgradeSprites[1] = spritesAnimH.get("metalWallTW");
         upgradeSprites[2] = spritesAnimH.get("crystalWallTW");
         upgradeSprites[3] = spritesAnimH.get("ultimateWallTW");
+    }
+
+
+
+    public void upgrade(int id) {
+        price += upgradePrices[nextLevelB];
+        sprite = upgradeSprites[nextLevelB];
+
+        if (nextLevelB == 0) {
+            maxHp += 75;
+            name = "stoneWall";
+            debrisType = "stone";
+        } if (nextLevelB == 1) {
+            maxHp += 125;
+            name = "metalWall";
+            debrisType = "metal";
+        } if (nextLevelB == 2) {
+            maxHp += 250;
+            name = "crystalWall";
+            debrisType = "crystal";
+        } if (nextLevelB == 3) {
+            maxHp += 500;
+            name = "titaniumWall";
+            debrisType = "ultimate";
+        } hp = maxHp;
+
+        nextLevelB++;
+        if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        int num = (int)(p.random(30,50)); //shower debris
+        for (int j = num; j >= 0; j--){
+            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+        }
+        int x = (int)(tile.position.x / 50);
+        int y = (int)(tile.position.y / 50);
+        tiles.get(x-1,y-1).setBgW(name);
+        updateWallTiles();
+        updateNodes();
     }
 
     public void updateSprite() {
@@ -241,27 +261,6 @@ public class Wall extends Tower {
         else blCSprite = null;
         if (brC) brCSprite = spriteDS.get(false,false,!brCcv);
         else brCSprite = null;
-    }
-
-    public void upgrade(int id) {
-        price += upgradePrices[nextLevelB];
-        maxHp += upgradeHealth[nextLevelB];
-        hp += upgradeHealth[nextLevelB];
-        name = upgradeNames[nextLevelB];
-        debrisType = upgradeDebris[nextLevelB];
-        sprite = upgradeSprites[nextLevelB];
-        nextLevelB++;
-        if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-        int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
-        }
-        int x = (int)(tile.position.x / 50);
-        int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setBgW(name);
-        updateWallTiles();
-        updateNodes();
     }
 
     private void loadSprites() {

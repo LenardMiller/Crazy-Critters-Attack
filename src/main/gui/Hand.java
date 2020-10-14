@@ -97,7 +97,7 @@ public class Hand {
     }
 
     public void displayHeldInfo() {
-        if (displayInfo.equals("placeWall")) {
+        if (displayInfo.equals("placeWall")) { //todo: can't place on enemies?
             p.fill(235);
             p.noStroke();
             p.rect(900, 212, 200, 707);
@@ -148,7 +148,22 @@ public class Hand {
                 p.text(tower.upgradeTitles[tower.nextLevelB], 1000, 430);
                 p.text("Wall", 1000, 455);
                 p.textFont(mediumFont);
-                p.text("+" + tower.upgradeHealth[tower.nextLevelB] + " HP", 1000, 485);
+                int hpDisplay = 0;
+                switch (tower.name) {
+                    case "woodWall":
+                        hpDisplay = 75;
+                        break;
+                    case "stoneWall":
+                        hpDisplay = 125;
+                        break;
+                    case "metalWall":
+                        hpDisplay = 250;
+                        break;
+                    case "crystalWall":
+                        hpDisplay = 500;
+                        break;
+                }
+                p.text("+" + hpDisplay + " HP", 1000, 485);
                 p.text("$" + tower.upgradePrices[tower.nextLevelB], 1000, 510);
             }
         }
@@ -171,7 +186,7 @@ public class Hand {
             p.text(tower.hp + " hp", 1000, 331);
             p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
         }
-        if (displayInfo.equals("repairWall")) {
+        if (displayInfo.equals("repairWall")) { //todo: repair progress bar?
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
             p.fill(235);
             p.noStroke();

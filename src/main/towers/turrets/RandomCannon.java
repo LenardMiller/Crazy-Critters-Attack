@@ -40,8 +40,6 @@ public class RandomCannon extends Turret {
         price = RANDOMCANNON_PRICE;
         value = price;
         priority = 0; //close
-        nextLevelA = 0;
-        nextLevelB = 2;
         setUpgrades();
         updateTowerArray();
     }
@@ -66,71 +64,47 @@ public class RandomCannon extends Turret {
     }
 
     private void setUpgrades() {
-        //damage
-        upgradeDamage[0] = 15;
-        upgradeDamage[1] = 0;
-        upgradeDamage[2] = 0;
-        upgradeDamage[3] = 0;
-        //delay (firerate)
-        upgradeDelay[0] = 0;
-        upgradeDelay[1] = -5;
-        upgradeDelay[2] = 0;
-        upgradeDelay[3] = 0;
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 50;
-        upgradePrices[3] = 100;
-        //heath
-        upgradeHealth[0] = 0;
-        upgradeHealth[1] = 0;
-        upgradeHealth[2] = 0;
-        upgradeHealth[3] = 0;
-        //range
-        upgradeRange[0] = 0;
-        upgradeRange[1] = 0;
-        upgradeRange[2] = 20;
-        upgradeRange[3] = 30;
-        //names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        upgradeNames[3] = name;
-        //debris
-        upgradeDebris[0] = "wood";
-        upgradeDebris[1] = "wood";
-        upgradeDebris[2] = "wood";
-        upgradeDebris[3] = "wood";
+        upgradePrices[0] = 125;
+        upgradePrices[1] = 150;
+        upgradePrices[2] = 75;
+        upgradePrices[3] = 125;
         //titles
         upgradeTitles[0] = "Damage Up";
         upgradeTitles[1] = "Faster Firing";
-        upgradeTitles[2] = "Reduce Spread";
-        upgradeTitles[3] = "Limited Spread";
-        //desc line one
+        upgradeTitles[2] = "Longer range";
+        upgradeTitles[3] = "Longest range";
+        //description
         upgradeDescA[0] = "+15";
-        upgradeDescA[1] = "Increase";
-        upgradeDescA[2] = "Increase";
-        upgradeDescA[3] = "Further";
-        //desc line two
         upgradeDescB[0] = "damage";
-        upgradeDescB[1] = "firerate";
-        upgradeDescB[2] = "accuracy";
-        upgradeDescB[3] = "increase";
-        //desc line three
         upgradeDescC[0] = "";
+
+        upgradeDescA[1] = "Increase";
+        upgradeDescB[1] = "firerate";
         upgradeDescC[1] = "";
+
+        upgradeDescA[2] = "Increase";
+        upgradeDescB[2] = "range";
         upgradeDescC[2] = "";
-        upgradeDescC[3] = "accuracy";
+
+        upgradeDescA[3] = "Further";
+        upgradeDescB[3] = "increase";
+        upgradeDescC[3] = "range";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[10];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[6];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("stoneWallTW");
-        upgradeSprites[3] = spritesH.get("metalWallTW");
+    }
+
+    public void upgradeSpecial(int id) {
+        if (id == 0) {
+            if (nextLevelA == 0) damage += 15;
+            if (nextLevelA == 1) delay -= 10;
+        } if (id == 1) {
+            if (nextLevelB == 2) range += 20;
+            if (nextLevelB == 3) range += 30;
+        }
     }
 
     public void updateSprite() {}

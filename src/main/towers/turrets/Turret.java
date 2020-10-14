@@ -71,19 +71,14 @@ public abstract class Turret extends Tower {
         loadDelayTime = 0;
         turret = true;
         loadSprites();
-        upgradeDamage = new int[4];
-        upgradeDelay = new int[4];
+        nextLevelA = 0;
+        nextLevelB = 2;
         upgradePrices = new int[4];
-        upgradeHealth = new int[4];
-        upgradeRange = new float[4];
-        upgradeNames = new String[4];
-        upgradeDebris = new String[4];
         upgradeTitles = new String[4];
         upgradeDescA = new String[4];
         upgradeDescB = new String[4];
         upgradeDescC = new String[4];
         upgradeIcons = new PImage[4];
-        upgradeSprites = new PImage[4];
         updateTowerArray();
     }
 
@@ -274,30 +269,22 @@ public abstract class Turret extends Tower {
     }
 
     public void upgrade(int id) {
-        int nextLevel;
-        if (id == 0) nextLevel = nextLevelA;
-        else nextLevel = nextLevelB;
-        damage += upgradeDamage[nextLevel];
-        delay += upgradeDelay[nextLevel];
-        price += upgradePrices[nextLevel];
-        value += upgradePrices[nextLevel];
-        maxHp += upgradeHealth[nextLevel];
-        hp += upgradeHealth[nextLevel];
-        range += upgradeRange[nextLevel];
-        name = upgradeNames[nextLevel];
-        debrisType = upgradeDebris[nextLevel];
-//        sprite = upgradeSprites[nextLevel];
-        upgradeSpecial();
+        upgradeSpecial(id);
         if (id == 0) {
+            value += upgradePrices[nextLevelA];
             nextLevelA++;
-            if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
+            if (nextLevelA < upgradeTitles.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
             else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-        } else if (id == 1) nextLevelB++;
+        } else if (id == 1) {
+            value += upgradePrices[nextLevelB];
+            nextLevelB++;
+        }
         if (id == 1) {
-            if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+            if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
             else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         }
-        int num = (int) (p.random(30, 50)); //shower debris
+        //shower debris
+        int num = (int) (p.random(30, 50));
         for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p, (tile.position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (tile.position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
         }
@@ -305,6 +292,5 @@ public abstract class Turret extends Tower {
         while (delay <= numFireFrames * betweenFireFrames + numIdleFrames) betweenFireFrames--;
     }
 
-    public void upgradeSpecial() {
-    }
+    public void upgradeSpecial(int id) {}
 }  

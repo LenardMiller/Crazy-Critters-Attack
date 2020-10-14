@@ -37,8 +37,6 @@ public class MagicMissileer extends Turret{
         price = 300;
         value = price;
         priority = 2; //strong
-        nextLevelA = 0;
-        nextLevelB = 2;
         setUpgrades();
         updateTowerArray();
     }
@@ -81,41 +79,26 @@ public class MagicMissileer extends Turret{
     }
 
     private void setUpgrades() {
-        //damage
-        upgradeDamage[0] = 10;
-        upgradeDamage[1] = 10;
-        upgradeDamage[2] = 0;
-        upgradeDamage[3] = 0;
-        //delay (firerate)
-        upgradeDelay[0] = 0;
-        upgradeDelay[1] = 0;
-        upgradeDelay[2] = -45;
-        upgradeDelay[3] = 0;
+//        //damage
+//        upgradeDamage[0] = 10;
+//        upgradeDamage[1] = 10;
+//        upgradeDamage[2] = 0;
+//        upgradeDamage[3] = 0;
+//        //delay (firerate)
+//        upgradeDelay[0] = 0;
+//        upgradeDelay[1] = 0;
+//        upgradeDelay[2] = -45;
+//        upgradeDelay[3] = 0;
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 100;
         upgradePrices[2] = 50;
         upgradePrices[3] = 200;
-        //heath
-        upgradeHealth[0] = 0;
-        upgradeHealth[1] = 0;
-        upgradeHealth[2] = 0;
-        upgradeHealth[3] = 0;
-        //error (accuracy)
-        upgradeRange[0] = 0;
-        upgradeRange[1] = 0;
-        upgradeRange[2] = 0;
-        upgradeRange[3] = 0;
-        //names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        upgradeNames[3] = "magicMissleerFour";
-        //debris
-        upgradeDebris[0] = "crystal";
-        upgradeDebris[1] = "crystal";
-        upgradeDebris[2] = "crystal";
-        upgradeDebris[3] = "crystal";
+//        //names
+//        upgradeNames[0] = name;
+//        upgradeNames[1] = name;
+//        upgradeNames[2] = name;
+//        upgradeNames[3] = "magicMissleerFour";
         //titles
         upgradeTitles[0] = "Magic Power";
         upgradeTitles[1] = "Mega Magic";
@@ -141,11 +124,6 @@ public class MagicMissileer extends Turret{
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[13];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[7];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[14];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("stoneWallTW");
-        upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
     public void upgradeSpecial() {}
