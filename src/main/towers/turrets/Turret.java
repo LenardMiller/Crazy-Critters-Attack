@@ -152,6 +152,8 @@ public abstract class Turret extends Tower {
         angle = clampAngle(angle);
         angle += angleDifference(targetAngle, angle) / 10;
 
+        if (abs(targetAngle - angle) < 0.05) angle = targetAngle; //snap to prevent getting stuck
+
         if (visualize && debug) { //cool lines
             p.stroke(255);
             p.line(position.x, position.y, target.x, target.y);
