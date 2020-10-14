@@ -3,8 +3,8 @@ package main.misc;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.ceil;
-import static processing.core.PApplet.abs;
 
 public class CompressArray{
 

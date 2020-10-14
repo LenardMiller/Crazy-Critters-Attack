@@ -186,7 +186,7 @@ public abstract class Turret extends Tower {
     }
 
     public void displayPassB() {
-        if (hp < maxHp && p.random(0,30) < 1) {
+        if (hp < maxHp && p.random(0, 30) < 1) {
             particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greyPuff"));
         }
         if (tintColor < 255) tintColor += 20;
@@ -216,13 +216,13 @@ public abstract class Turret extends Tower {
                     int oldSize = numLoadFrames;
                     int newSize = (delayTime - p.frameCount);
                     spriteArray = new ArrayList<>();
-                    if (oldSize > newSize) for (int i = 0; i < oldSize; i++) spriteArray.add(i);
-                    if (oldSize > newSize) {
-                        while (spriteArray.size() != newSize) {
-                            compress = new CompressArray(oldSize, newSize, spriteArray);
-                            compress.main();
-                        }
-                    } else {
+                    if (oldSize > newSize) { //decreasing size
+                        //creates the new spriteArray
+                        for (int i = 0; i < oldSize; i++) spriteArray.add(i);
+                        //compression
+                        compress = new CompressArray(oldSize, newSize, spriteArray);
+                        compress.main();
+                    } else { //increasing size
                         compress = new CompressArray(oldSize - 1, newSize, spriteArray);
                         compress.main();
                         spriteArray = compress.compArray;
