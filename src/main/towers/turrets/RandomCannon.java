@@ -53,7 +53,10 @@ public class RandomCannon extends Turret {
         spa.setMag(18);
         spp.add(spa);
         float particleCount = p.random(1,5);
-        if (delay == 5) particleCount = 1;
+        if (delay == 5) {
+            particleCount = 1;
+            angleB += p.random(-0.1f,0.1f);
+        }
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
