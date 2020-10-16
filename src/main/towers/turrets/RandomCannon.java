@@ -52,8 +52,9 @@ public class RandomCannon extends Turret {
         PVector spa = PVector.fromAngle(angleB-HALF_PI);
         spa.setMag(18);
         spp.add(spa);
-        float iM = p.random(1,5);
-        for (int i = 0; i < iM; i++) {
+        float particleCount = p.random(1,5);
+        if (delay == 5) particleCount = 1;
+        for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
             PVector spp2 = new PVector(spp.x,spp.y);
@@ -67,13 +68,17 @@ public class RandomCannon extends Turret {
         //price
         upgradePrices[0] = 125;
         upgradePrices[1] = 150;
-        upgradePrices[2] = 75;
-        upgradePrices[3] = 125;
+        upgradePrices[2] = 300;
+        upgradePrices[3] = 75;
+        upgradePrices[4] = 125;
+        upgradePrices[5] = 300;
         //titles
         upgradeTitles[0] = "Damage Up";
         upgradeTitles[1] = "Faster Firing";
-        upgradeTitles[2] = "Longer range";
-        upgradeTitles[3] = "Longest range";
+        upgradeTitles[2] = "Rotating Barrel";
+        upgradeTitles[3] = "Longer Range";
+        upgradeTitles[4] = "Longest Range";
+        upgradeTitles[5] = "Dirty Laundry";
         //description
         upgradeDescA[0] = "+15";
         upgradeDescB[0] = "damage";
@@ -83,27 +88,59 @@ public class RandomCannon extends Turret {
         upgradeDescB[1] = "firerate";
         upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "Increase";
-        upgradeDescB[2] = "range";
-        upgradeDescC[2] = "";
+        upgradeDescA[2] = "Greatly";
+        upgradeDescB[2] = "increase";
+        upgradeDescC[2] = "firerate";
 
-        upgradeDescA[3] = "Further";
-        upgradeDescB[3] = "increase";
-        upgradeDescC[3] = "range";
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "range";
+        upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "Further";
+        upgradeDescB[4] = "increase";
+        upgradeDescC[4] = "range";
+
+        upgradeDescA[5] = "Inflict";
+        upgradeDescB[5] = "poison";
+        upgradeDescC[5] = "";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[10];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[6];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[15];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[6];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[3];
     }
 
     public void upgradeSpecial(int id) {
         if (id == 0) {
-            if (nextLevelA == 0) damage += 15;
-            if (nextLevelA == 1) delay -= 10;
+            switch (nextLevelA) {
+                case 0:
+                    damage += 15;
+                    break;
+                case 1:
+                    delay -= 10;
+                    if (nextLevelB > 5) nextLevelA++;
+                    break;
+                case 2:
+                    delay = 5;
+                    damage -= 5;
+                    if (nextLevelB == 5) nextLevelB++;
+                    break;
+            }
         } if (id == 1) {
-            if (nextLevelB == 2) range += 20;
-            if (nextLevelB == 3) range += 30;
+            switch (nextLevelB) {
+                case 3:
+                    range += 20;
+                    break;
+                case 4:
+                    range += 30;
+                    if (nextLevelA > 2) nextLevelB++;
+                    break;
+                case 5:
+                    if (nextLevelA == 2) nextLevelA++;
+                    break;
+            }
         }
     }
 
