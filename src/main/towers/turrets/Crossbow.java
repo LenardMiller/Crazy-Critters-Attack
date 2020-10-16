@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
-import main.projectiles.Bolt;
 import main.misc.Tile;
+import main.projectiles.Bolt;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -12,6 +12,7 @@ import static main.misc.MiscMethods.updateTowerArray;
 public class Crossbow extends Turret {
 
     private int pierce;
+    private boolean multishot;
 
     public Crossbow(PApplet p, Tile tile) {
         super(p,tile);
@@ -41,26 +42,39 @@ public class Crossbow extends Turret {
         price = CROSSBOW_PRICE;
         value = price;
         priority = 1; //last
+        multishot = false;
         setUpgrades();
         updateTowerArray();
     }
 
     public void fire(){ //needed to change projectile fired
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
+        if (multishot) {
+            float offset = 0.07f;
+            int count = 7;
+            float a = angle - (floor(count / 2f) * offset);
+            for (int i = 0; i < count; i++) {
+                projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, a, this, damage, pierce));
+                a += offset;
+            }
+        } else projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
     }
 
     private void setUpgrades(){
         //price
         upgradePrices[0] = 75;
         upgradePrices[1] = 175;
-        upgradePrices[2] = 100;
-        upgradePrices[3] = 150;
+        upgradePrices[2] = 300;
+        upgradePrices[3] = 100;
+        upgradePrices[4] = 150;
+        upgradePrices[5] = 300;
         //titles
-        upgradeTitles[0] = "Pointy";
-        upgradeTitles[1] = "Sharp";
-        upgradeTitles[2] = "Increase range";
-        upgradeTitles[3] = "Faster Firing";
+        upgradeTitles[0] = "Pointier";
+        upgradeTitles[1] = "Sharper";
+        upgradeTitles[2] = "Reinforced";
+        upgradeTitles[3] = "Increase range";
+        upgradeTitles[4] = "Faster Firing";
+        upgradeTitles[5] = "Barrage";
         //description
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "piercing";
@@ -70,27 +84,60 @@ public class Crossbow extends Turret {
         upgradeDescB[1] = "damage";
         upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "Increase";
-        upgradeDescB[2] = "range";
-        upgradeDescC[2] = "";
+        upgradeDescA[2] = "+300";
+        upgradeDescB[2] = "damage,";
+        upgradeDescC[2] = "+piercing";
 
         upgradeDescA[3] = "Increase";
-        upgradeDescB[3] = "firerate";
+        upgradeDescB[3] = "range";
         upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "firerate";
+        upgradeDescC[4] = "";
+
+        upgradeDescA[5] = "Fire";
+        upgradeDescB[5] = "multiple";
+        upgradeDescC[5] = "shots";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[9];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[10];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[9];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[10];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[4];
     }
 
     public void upgradeSpecial(int id) {
         if (id == 0) {
-            if (nextLevelA == 0) pierce += 2;
-            if (nextLevelA == 1) damage += 20;
+            switch (nextLevelA) {
+                case 0:
+                    pierce += 2;
+                    break;
+                case 1:
+                    damage += 20;
+                    if (nextLevelB > 5) nextLevelA++;
+                    break;
+                case 2:
+                    damage += 300;
+                    pierce += 100;
+                    if (nextLevelB == 5) nextLevelB++;
+                    break;
+            }
         } if (id == 1) {
-            if (nextLevelB == 2) range += 30;
-            if (nextLevelB == 3) delay -= 70;
+            switch (nextLevelB) {
+                case 3:
+                    range += 30;
+                    break;
+                case 4:
+                    delay -= 70;
+                    if (nextLevelA > 2) nextLevelB++;
+                    break;
+                case 5:
+                    multishot = true;
+                    if (nextLevelA == 2) nextLevelA++;
+                    break;
+            }
         }
     }
 
