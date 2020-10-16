@@ -14,7 +14,7 @@ public abstract class Buff {
     public PApplet p;
 
     int effectDelay;
-    int effectTimer;
+    public int effectTimer;
     int lifeTimer;
     int lifeDuration;
     int particleChance;

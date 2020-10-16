@@ -241,33 +241,44 @@ public abstract class Enemy {
                 turret.damageTotal += damage + hp;
             } else turret.damageTotal += damage;
         }
+        int effectTimer = 0;
         if (buffs.size() > 0) {
             for (int j = 0; j < buffs.size(); j++) {
                 Buff buff = buffs.get(j);
                 if (buff.enId == i && buff.name.equals(pjBuff)) {
+                    effectTimer = buff.effectTimer;
                     buffs.remove(j);
                     break;
                 }
             }
         }
         if (pjBuff != null) {
+            Buff buff;
             switch (pjBuff) {
                 case "wet":
-                    buffs.add(new Wet(p, i, turret));
+                    buff = new Wet(p, i, turret);
                     break;
                 case "burning":
-                    buffs.add(new Burning(p, i, effectLevel, effectDuration, turret));
+                    buff = new Burning(p, i, effectLevel, effectDuration, turret);
                     break;
                 case "bleeding":
-                    buffs.add(new Bleeding(p, i, turret));
+                    buff = new Bleeding(p, i, turret);
                     break;
                 case "poisoned":
-                    buffs.add(new Poisoned(p, i, turret));
+                    buff = new Poisoned(p, i, turret);
                     break;
                 case "decay":
-                    if (turret != null) buffs.add(new Decay(p, i, effectLevel, effectDuration, turret));
-                    else buffs.add(new Decay(p, i, 1, 120, null));
+                    if (turret != null) buff = new Decay(p, i, effectLevel, effectDuration, turret);
+                    else buff = new Decay(p, i, 1, 120, null);
                     break;
+                default:
+                    buff = null;
+                    break;
+            }
+            if (buff != null) {
+                //in order to prevent resetting timer after buff is reapplied
+                buff.effectTimer = effectTimer;
+                buffs.add(buff);
             }
         }
         damageEffect(splash);
