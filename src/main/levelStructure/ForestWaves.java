@@ -26,8 +26,8 @@ public class ForestWaves {
         Color treeSpiritPrimary = new Color(20, 183, 83);
         Color treeSpiritSecondary = new Color(123, 78, 15);
 
-        Color bigBugPrimary = new Color(175, 0, 0);
-        Color bigBugSecondary = new Color(10, 10, 10);
+        Color bigBugPrimary = new Color(10, 10, 10);
+        Color bigBugSecondary = new Color(170, 0, 0);
 
         Color treeGiantPrimary = new Color(0, 100, 0);
         Color treeGiantSecondary = new Color(255, 0, 77);
