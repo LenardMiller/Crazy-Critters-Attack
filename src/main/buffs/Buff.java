@@ -56,11 +56,13 @@ public abstract class Buff {
         System.out.print(enId + " ");
     }
 
-    private void display(){ //particles around enemy
-        Enemy enemy = enemies.get(enId);
-        int num = (int)(p.random(0, particleChance));
-        if (num == 0) {
-            particles.add(new BuffParticle(p,(float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), p.random(0,360), particle));
+    void display() { //particles around enemy
+        if (particle != null) {
+            Enemy enemy = enemies.get(enId);
+            int num = (int) (p.random(0, particleChance));
+            if (num == 0) {
+                particles.add(new BuffParticle(p, (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), p.random(0, 360), particle));
+            }
         }
     }
 }

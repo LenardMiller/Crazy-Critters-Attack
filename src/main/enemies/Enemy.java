@@ -53,7 +53,7 @@ public abstract class Enemy {
     int attackStartFrame;
     public int barTrans;
     public int tintColor;
-    String hitParticle;
+    public String hitParticle;
     public String name;
     private Tower targetTower;
     private boolean targetMachine;
@@ -257,6 +257,9 @@ public abstract class Enemy {
                     break;
                 case "burning":
                     buffs.add(new Burning(p, i, effectLevel, effectDuration, turret));
+                    break;
+                case "bleeding":
+                    buffs.add(new Bleeding(p, i, turret));
                     break;
                 case "poisoned":
                     buffs.add(new Poisoned(p, i, turret));

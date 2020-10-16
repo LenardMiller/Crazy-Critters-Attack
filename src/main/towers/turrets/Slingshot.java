@@ -1,7 +1,9 @@
 package main.towers.turrets;
 
-import main.projectiles.Pebble;
 import main.misc.Tile;
+import main.projectiles.Gravel;
+import main.projectiles.Pebble;
+import main.projectiles.Rock;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -10,6 +12,9 @@ import static main.Main.*;
 import static main.misc.MiscMethods.updateTowerArray;
 
 public class Slingshot extends Turret {
+
+    boolean painful;
+    boolean gravel;
 
     public Slingshot(PApplet p, Tile tile) {
         super(p,tile);
@@ -34,26 +39,42 @@ public class Slingshot extends Turret {
         price = SLINGSHOT_PRICE;
         value = price;
         priority = 0; //first
+        painful = false;
+        gravel = false;
         setUpgrades();
         updateTowerArray();
     }
 
-    public void fire(){ //needed to change projectile fired
+    public void fire() { //needed to change projectile fired
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+        if (painful) projectiles.add(new Rock(p, tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+        if (gravel) {
+            float offset = 0.03f;
+            int count = 8;
+            float a = angle - (floor(count / 2f) * offset);
+            for (int i = 0; i < count; i++) {
+                projectiles.add(new Gravel(p, tile.position.x-size.x/2,tile.position.y-size.y/2, a, this, damage));
+                a += offset;
+            }
+        }
+        if (!painful && !gravel) projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
     }
 
     private void setUpgrades(){
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 75;
-        upgradePrices[2] = 75;
-        upgradePrices[3] = 100;
+        upgradePrices[2] = 200;
+        upgradePrices[3] = 75;
+        upgradePrices[4] = 100;
+        upgradePrices[5] = 200;
         //titles
         upgradeTitles[0] = "Long Range";
         upgradeTitles[1] = "Super Range";
-        upgradeTitles[2] = "Damage Up";
-        upgradeTitles[3] = "Faster Firing";
+        upgradeTitles[2] = "Gravel Slinger";
+        upgradeTitles[3] = "Damage Up";
+        upgradeTitles[4] = "Faster Firing";
+        upgradeTitles[5] = "Painful Rocks";
         //descriptions
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "range";
@@ -63,29 +84,62 @@ public class Slingshot extends Turret {
         upgradeDescB[1] = "increase";
         upgradeDescC[1] = "range";
 
-        upgradeDescA[2] = "+10";
-        upgradeDescB[2] = "damage";
-        upgradeDescC[2] = "";
+        upgradeDescA[2] = "Shoots";
+        upgradeDescB[2] = "gravel at";
+        upgradeDescC[2] = "enemies";
 
-        upgradeDescA[3] = "Increase";
-        upgradeDescB[3] = "firerate";
+        upgradeDescA[3] = "+5";
+        upgradeDescB[3] = "damage";
         upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "firerate";
+        upgradeDescC[4] = "";
+
+        upgradeDescA[5] = "Inflicts";
+        upgradeDescB[5] = "bleeding,";
+        upgradeDescC[5] = "+50 dmg";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[7];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[4];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[8];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[7];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[13];
     }
 
     public void upgradeSpecial(int id) {
-        System.out.println("A: " + nextLevelA);
-        System.out.println("B: " + nextLevelB);
         if (id == 0) {
-            if (nextLevelA == 0) range += 30;
-            if (nextLevelA == 1) range += 40;
+            switch (nextLevelA) {
+                case 0:
+                    range += 30;
+                    break;
+                case 1:
+                    range += 40;
+                    if (nextLevelB > 5) nextLevelA++;
+                    break;
+                case 2:
+                    gravel = true;
+                    damage -= 10;
+                    if (nextLevelB == 5) nextLevelB++;
+                    break;
+            }
         } if (id == 1) {
-            if (nextLevelB == 2) damage += 10;
-            if (nextLevelB == 3) delay -= 20;
+            switch (nextLevelB) {
+                case 3:
+                    damage += 5;
+                    break;
+                case 4:
+                    delay -= 20;
+                    if (nextLevelA > 2) nextLevelB++;
+                    break;
+                case 5:
+                    painful = true;
+                    damage += 50;
+                    delay += 10;
+                    if (nextLevelA == 2) nextLevelA++;
+                    break;
+            }
         }
     }
 

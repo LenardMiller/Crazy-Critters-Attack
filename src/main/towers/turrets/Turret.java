@@ -71,14 +71,14 @@ public abstract class Turret extends Tower {
         loadDelayTime = 0;
         turret = true;
         loadSprites();
+        upgradePrices = new int[6];
+        upgradeTitles = new String[6];
+        upgradeDescA = new String[6];
+        upgradeDescB = new String[6];
+        upgradeDescC = new String[6];
+        upgradeIcons = new PImage[6];
         nextLevelA = 0;
-        nextLevelB = 2;
-        upgradePrices = new int[4];
-        upgradeTitles = new String[4];
-        upgradeDescA = new String[4];
-        upgradeDescB = new String[4];
-        upgradeDescC = new String[4];
-        upgradeIcons = new PImage[4];
+        nextLevelB = upgradeTitles.length / 2;
         updateTowerArray();
     }
 
@@ -275,11 +275,13 @@ public abstract class Turret extends Tower {
             nextLevelA++;
             if (nextLevelA < upgradeTitles.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
             else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+            if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+            else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         } else if (id == 1) {
             value += upgradePrices[nextLevelB];
             nextLevelB++;
-        }
-        if (id == 1) {
+            if (nextLevelA < upgradeTitles.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
+            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
             if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
             else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         }

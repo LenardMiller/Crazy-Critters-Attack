@@ -160,7 +160,7 @@ public class Selection { //what tower is selected
                 speed = -1;
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
-                p.fill(100,0,200);
+                p.fill(100, 0, 200);
                 p.text("Chain Lightning", 910, 376 + offset);
                 break;
             case "nightmare":
@@ -170,7 +170,7 @@ public class Selection { //what tower is selected
                 speed = 18;
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
-                p.fill(100,0,200);
+                p.fill(100, 0, 200);
                 p.text("Shotgun, decay", 910, 376 + offset);
                 break;
             case "flamethrower":
@@ -178,7 +178,7 @@ public class Selection { //what tower is selected
                 speed = 5;
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
-                p.fill(100,0,200);
+                p.fill(100, 0, 200);
                 p.text("Fire, limited range", 910, 376 + offset);
                 break;
             case "railgun":
@@ -190,7 +190,7 @@ public class Selection { //what tower is selected
                 speed = -1;
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
-                p.fill(100,0,200);
+                p.fill(100, 0, 200);
                 p.text("Energy beam", 910, 376 + offset);
                 break;
         }
@@ -222,33 +222,31 @@ public class Selection { //what tower is selected
             p.text("Priority: " + priority, 1000, 843);
         }
 
-        //upgrade Zero
+        //upgrade Zero / A
         int offsetC;
-        if (tower.turret) { //only display if turret
-            offsetC = -45;
-            if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
-            if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
-                if (money >= tower.upgradePrices[tower.nextLevelA]) p.fill(11, 56, 0);
-                else p.fill(75, 0, 0);
-                p.textFont(largeFont);
-                p.text(tower.upgradeTitles[tower.nextLevelA], 1000, 585 + offsetC);
-                p.text("$" + tower.upgradePrices[tower.nextLevelA], 1000, 693 + offsetC);
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.text(tower.upgradeDescA[tower.nextLevelA], 910, 615 + offsetC);
-                p.text(tower.upgradeDescB[tower.nextLevelA], 910, 635 + offsetC);
-                p.text(tower.upgradeDescC[tower.nextLevelA], 910, 655 + offsetC);
-            } else {
-                p.fill(15);
-                p.textFont(largeFont);
-                p.text("N/A", 1000, 585 + offsetC);
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.text("No more", 910, 615 + offsetC);
-                p.text("upgrades", 910, 635 + offsetC);
-            }
+        offsetC = -45;
+        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
+        if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
+            if (money >= tower.upgradePrices[tower.nextLevelA]) p.fill(11, 56, 0);
+            else p.fill(75, 0, 0);
+            p.textFont(largeFont);
+            p.text(tower.upgradeTitles[tower.nextLevelA], 1000, 585 + offsetC);
+            p.text("$" + tower.upgradePrices[tower.nextLevelA], 1000, 693 + offsetC);
+            p.textFont(mediumFont);
+            p.textAlign(LEFT);
+            p.text(tower.upgradeDescA[tower.nextLevelA], 910, 615 + offsetC);
+            p.text(tower.upgradeDescB[tower.nextLevelA], 910, 635 + offsetC);
+            p.text(tower.upgradeDescC[tower.nextLevelA], 910, 655 + offsetC);
+        } else {
+            p.fill(15);
+            p.textFont(largeFont);
+            p.text("N/A", 1000, 585 + offsetC);
+            p.textFont(mediumFont);
+            p.textAlign(LEFT);
+            p.text("No more", 910, 615 + offsetC);
+            p.text("upgrades", 910, 635 + offsetC);
         }
-        //upgrade One
+        //upgrade One / B
         offsetC = 0;
         if (tower.turret) offsetC = 105;
         if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
