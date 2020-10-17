@@ -4,33 +4,39 @@ import main.enemies.Enemy;
 import main.misc.MiscMethods;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
-import main.particles.MediumExplosion;
+import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static processing.core.PApplet.abs;
 
-public class EnergyBlast extends Projectile {
+public class Laundry extends Projectile {
 
-    private boolean bigExplosion;
+    public PImage[] sprites; //alternate sprites, passed in
 
-    public EnergyBlast(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectRadius, boolean bigExplosion) {
+    public Laundry(PApplet p, float x, float y, float angle, Turret turret, int spriteType, int damage) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
-        size = new PVector(10, 18);
-        radius = 14;
-        maxSpeed = 16;
+        size = new PVector(10, 10);
+        radius = 5;
+        maxSpeed = 12;
         speed = maxSpeed;
         this.damage = damage;
         pierce = 1;
         this.angle = angle;
-        sprite = spritesH.get("energyPj");
-        hasTrail = true;
-        this.effectRadius = effectRadius;
-        trail = "energy";
-        this.bigExplosion = bigExplosion;
+        angleTwo = angle;
+        angularVelocity = 15; //degrees mode
+        sprites = spritesAnimH.get("miscPJ");
+        sprite = sprites[spriteType];
+        effectRadius = 60;
+        buff = "poisoned";
+    }
+
+    public void die(int i) {
+        projectiles.remove(i);
+        particles.add(new Ouch(p, position.x, position.y, p.random(0, 360), "poisonPuff"));
     }
 
     public void collideEn() {
@@ -44,20 +50,12 @@ public class EnergyBlast extends Projectile {
                 }
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
-                enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "burning", velocity, i);
-                if (!bigExplosion) {
-                    int num = (int) (p.random(10, 16));
-                    for (int j = num; j >= 0; j--) {
-                        particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "energy", maxSpeed = p.random(0.5f, 2.5f)));
-                    }
-                    particles.add(new MediumExplosion(p, position.x, position.y, p.random(0, 360)));
-                } else {
-                    int num = (int) (p.random(16, 42));
-                    for (int j = num; j >= 0; j--) {
-                        particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "energy", maxSpeed = p.random(1.5f, 4.5f)));
-                    }
-                    particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360)));
+                enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "poison", velocity, i);
+                int num = (int) (p.random(16, 42));
+                for (int j = num; j >= 0; j--) {
+                    particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "poison", maxSpeed = p.random(1.5f, 4.5f)));
                 }
+                particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360)));
                 pierce--;
                 for (int j = enemies.size() - 1; j >= 0; j--) {
                     Enemy erEnemy = enemies.get(j);
@@ -69,7 +67,7 @@ public class EnergyBlast extends Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.damagePj(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, erEnemy.lastDamageType, PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
+                        erEnemy.damagePj(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, "poison", PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
                     }
                 }
             }

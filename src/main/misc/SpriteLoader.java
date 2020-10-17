@@ -31,12 +31,14 @@ public class SpriteLoader {
         getSprite(p,"greenOuchEnemy","PT","enemy/greenOuch/",11);
         getSprite(p,"greyPuffEnemy","PT","enemy/greyPuff/",11);
         getSprite(p,"greenPuffEnemy","PT","enemy/greenPuff/",10);
+        getSprite(p,"poisonPuffEnemy","PT","enemy/poisonPuff/",10);
         getSprite(p,"pinkOuchEnemy","PT","enemy/pinkOuch/",11);
         getSprite(p,"redOuchEnemy","PT","enemy/redOuch/",11);
         getSprite(p,"leafOuchEnemy","PT","enemy/leafOuch/",11);
         getSprite(p,"mediumExplosion","PT","mediumExplosion/",18);
         getSprite(p,"largeExplosion","PT","largeExplosion/",18);
         getSprite(p,"energyExDebris","PT","explosionDebris/energy/",4);
+        getSprite(p,"poisonExDebris","PT","explosionDebris/poison/",4);
         getSprite(p,"greenMagicBuff","PT","buff/greenMagic/",8);
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         getSprite(p,"railgunBlast","PT","railgunBlast/",11);

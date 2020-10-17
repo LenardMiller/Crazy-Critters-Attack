@@ -230,7 +230,7 @@ public abstract class Enemy {
         }
     }
 
-    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) { //when the enemy hits a projectile
+    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) {
         lastDamageType = type;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -284,13 +284,13 @@ public abstract class Enemy {
         damageEffect(splash);
     }
 
-    private void damageEffect(boolean parts) {
+    private void damageEffect(boolean particles) {
         barTrans = 255;
         tintColor = 0;
-        if (parts) {
+        if (particles) {
             int num = (int) (p.random(1, 3)) * pfSize * pfSize;
             for (int j = num; j >= 0; j--) { //sprays ouch
-                particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+                Main.particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
             }
         }
     }

@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
 import main.particles.BuffParticle;
+import main.projectiles.Laundry;
 import main.projectiles.MiscProjectile;
 import main.misc.Tile;
 import processing.core.PApplet;
@@ -12,6 +13,8 @@ import static main.misc.MiscMethods.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
 public class RandomCannon extends Turret {
+
+    boolean laundry;
 
     public RandomCannon(PApplet p, Tile tile) {
         super(p,tile);
@@ -64,7 +67,8 @@ public class RandomCannon extends Turret {
             spp2.add(spa2);
             particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"smoke"));
         }
-        projectiles.add(new MiscProjectile(p,spp.x,spp.y, angleB, this, spriteType, damage));
+        if (laundry && p.random(0,3) < 1) projectiles.add(new Laundry(p,spp.x,spp.y, angleB, this, spriteType, damage));
+        else projectiles.add(new MiscProjectile(p,spp.x,spp.y, angleB, this, spriteType, damage));
     }
 
     private void setUpgrades() {
@@ -141,6 +145,7 @@ public class RandomCannon extends Turret {
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
+                    laundry = true;
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }

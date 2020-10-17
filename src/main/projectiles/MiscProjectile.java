@@ -10,7 +10,7 @@ import static main.Main.*;
 
 public class MiscProjectile extends Projectile{
 
-    public PImage[] sprites = new PImage[6]; //alternate sprites, passed in
+    public PImage[] sprites; //alternate sprites, passed in
 
     public MiscProjectile(PApplet p, float x, float y, float angle, Turret turret, int spriteType, int damage) {
         super(p, x, y, angle, turret);
