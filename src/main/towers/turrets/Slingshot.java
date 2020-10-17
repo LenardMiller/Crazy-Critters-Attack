@@ -64,10 +64,10 @@ public class Slingshot extends Turret {
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 75;
-        upgradePrices[2] = 200;
+        upgradePrices[2] = 400;
         upgradePrices[3] = 75;
         upgradePrices[4] = 100;
-        upgradePrices[5] = 300;
+        upgradePrices[5] = 400;
         //titles
         upgradeTitles[0] = "Long Range";
         upgradeTitles[1] = "Super Range";
