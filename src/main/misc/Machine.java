@@ -78,10 +78,8 @@ public class Machine {
         if (deathFrame < 200) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
-        if (!dead) {
-            hurtParticles();
-            drillParticles();
-        } else if (deathFrame < 300) deathAnim();
+        if (!dead) hurtParticles();
+        else if (deathFrame < 300) deathAnim();
         if (p.frameCount > frameTimer && !dead) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
@@ -103,17 +101,6 @@ public class Machine {
                     particles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greyPuff"));
             }
         }
-    }
-
-    private void drillParticles() {
-//        if (name.equals("stoneDrillMA")) {
-//            int r = (int) p.random(0, 10);
-//            if (r == 0) {
-//                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "stone"));
-//            } else {
-//                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "dirt"));
-//            }
-//        }
     }
 
     private float shuffle(int i) {
