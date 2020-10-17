@@ -37,7 +37,7 @@ public class RandomCannon extends Turret {
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 10;
-        range = 150;
+        range = 200;
         loadSprites();
         debrisType = "wood";
         price = RANDOMCANNON_PRICE;

@@ -27,7 +27,7 @@ public class Slingshot extends Turret {
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
-        range = 200;
+        range = 230;
         numFireFrames = 34;
         numLoadFrames = 59;
         fireFrames = new PImage[numFireFrames];
