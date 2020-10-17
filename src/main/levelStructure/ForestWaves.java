@@ -133,12 +133,14 @@ public class ForestWaves {
         waves[24].addSpawns("midBug", 10);
         waves[24].addSpawns("bigBug", 5);
         waves[24].addSpawns("littleWorm", 5);
+        waves[24].addSpawns("snake", 20);
 
         waves[25] = new Wave(p, 2800, 1100, treeGiantPrimary, treeGiantSecondary, "Tree Giant");
         waves[25].addSpawns("treeGiant", 1);
 
         waves[26] = new Wave(p, 3000, 1200, bigBugPrimary, bigBugSecondary, "Big Bugs");
         waves[26].addSpawns("bigBug", 10);
+        waves[26].addSpawns("snake", 10);
 
         waves[27] = new Wave(p, 2800, 1100, treeGiantPrimary, treeGiantSecondary, "Tree Giant");
         waves[27].addSpawns("treeSprite", 5);
@@ -149,13 +151,14 @@ public class ForestWaves {
         waves[28].addSpawns("midBug", 10);
         waves[28].addSpawns("treeSpirit", 10);
         waves[28].addSpawns("bigBug", 3);
-        waves[28].addSpawns("snake", 20);
+        waves[28].addSpawns("snake", 30);
         waves[28].addSpawns("butterfly", 5);
         waves[28].addSpawns("littleWorm", 5);
 
         waves[29] = new Wave(p, 4000, 600, treeGiantPrimary, treeGiantSecondary, "Tree Giants");
         waves[29].addSpawns("treeGiant", 3);
         waves[29].addSpawns("treeSpirit", 10);
+        waves[29].addSpawns("snake", 10);
 
         for (Wave wave : waves) wave.load();
         return waves;
