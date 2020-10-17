@@ -12,7 +12,7 @@ public class BigBug extends Enemy{
         radius = 26;
         maxSpeed = .3f;
         speed = maxSpeed;
-        moneyDrop = 40;
+        moneyDrop = 100;
         damage = 5;
         maxHp = 1500;
         hp = maxHp;
