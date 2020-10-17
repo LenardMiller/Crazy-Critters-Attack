@@ -175,7 +175,10 @@ public class Main extends PApplet {
         currentLevel = 0; //temp
         levels = new Level[1];
         levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest");
+        levels[0].startingCash = 100;
+        //load level data
         DataControl.load(this, levels[currentLevel].layout);
+        money = levels[currentLevel].startingCash;
         updateNodes();
     }
 

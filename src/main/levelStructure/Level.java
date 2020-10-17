@@ -11,6 +11,7 @@ public class Level {
     public int currentWave;
     public int startWave;
     public String layout;
+    public int startingCash;
 
     public Level(PApplet p, Wave[] waves, String layout) {
         this.p = p;
