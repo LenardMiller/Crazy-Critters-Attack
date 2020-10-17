@@ -43,7 +43,7 @@ public class Wave {
 
     public void end() {
         for (Tower tower : towers) if (tower.turret) tower.heal();
-        money += 25;
+        money += levels[currentLevel].reward;
     }
 
     void load() {
