@@ -24,7 +24,7 @@ public class Bleeding extends Buff {
     public void effect() { //small damage fast
         Enemy enemy = enemies.get(enId);
         enemy.barTrans = 255;
-        enemy.damageSimple(10, turret, "none", new PVector(0,0));
+        enemy.damageSimple(15, turret, "none", new PVector(0,0));
     }
 
     void display() { //particles around enemy
