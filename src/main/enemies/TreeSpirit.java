@@ -13,7 +13,7 @@ public class TreeSpirit extends Enemy{
         maxSpeed = .35f;
         speed = maxSpeed;
         moneyDrop = 30;
-        damage = 6;
+        damage = 5;
         maxHp = 350; //Hp <---------------------------
         hp = maxHp;
         hitParticle = "leafOuch";
@@ -21,6 +21,7 @@ public class TreeSpirit extends Enemy{
         numAttackFrames = 42;
         numMoveFrames = 47;
         attackStartFrame = 22;
+        betweenAttackFrames = 2;
         attackFrame = attackStartFrame;
         corpseSize = new PVector(84,84);
         partSize = new PVector(38,38);
