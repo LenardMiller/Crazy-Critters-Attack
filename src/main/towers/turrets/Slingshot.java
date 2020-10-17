@@ -98,7 +98,7 @@ public class Slingshot extends Turret {
 
         upgradeDescA[5] = "Inflicts";
         upgradeDescB[5] = "bleeding,";
-        upgradeDescC[5] = "+30 dmg";
+        upgradeDescC[5] = "+50 dmg";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[6];
@@ -135,7 +135,7 @@ public class Slingshot extends Turret {
                     break;
                 case 5:
                     painful = true;
-                    damage += 30;
+                    damage += 50;
                     delay += 10;
                     if (nextLevelA == 2) nextLevelA++;
                     break;
