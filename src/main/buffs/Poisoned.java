@@ -22,6 +22,6 @@ public class Poisoned extends Buff{
         Enemy enemy = enemies.get(enId);
         enemy.tintColor = 0;
         enemy.barTrans = 255;
-        enemy.damageSimple(15,turret, "poison", new PVector(0,0));
+        enemy.damageSimple(25,turret, "poison", new PVector(0,0));
     }
 }
