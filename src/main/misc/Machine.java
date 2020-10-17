@@ -130,7 +130,7 @@ public class Machine {
                     particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 }
                 if ((int) p.random(0, 8) == 0) {
-                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, 100, 10, 100, (int) p.random(1, 4)));
+                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, maxHp * 10, maxHp, 1000, (int) p.random(1, 4)));
                 }
             }
         }
