@@ -26,6 +26,7 @@ public class InGameGui {
                 break;
             }
         }
+        selection.turretOverlay();
         p.fill(235); //big white bg
         p.rect(900,212,200,688);
         levels[currentLevel].display();

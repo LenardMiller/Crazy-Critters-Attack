@@ -90,6 +90,17 @@ public class Selection { //what tower is selected
         }
     }
 
+    void turretOverlay() {
+        if (!name.equals("null") && tiles.get(id).tower != null) {
+            //display range and square
+            p.fill(255, 25);
+            p.stroke(255);
+            p.rect(tower.tile.position.x - tower.size.x, tower.tile.position.y - tower.size.y, tower.size.y, tower.size.y);
+            p.circle(tower.tile.position.x - (tower.size.x / 2), tower.tile.position.y - (tower.size.y / 2), tower.range * 2);
+            p.noStroke();
+        }
+    }
+
     private void display() {
         Tower tower = tiles.get(id).tower;
         int speed = 0;
@@ -204,12 +215,6 @@ public class Selection { //what tower is selected
         if (tower.killsTotal != 1) p.text(tower.killsTotal + " kills", 910, 475 + offsetB);
         else p.text(tower.killsTotal + " kill", 910, 475 + offsetB);
         p.text(tower.damageTotal + " damage", 910, 500 + offsetB);
-
-        //display range and square
-        p.fill(255, 25);
-        p.stroke(255);
-        p.rect(tower.tile.position.x - tower.size.x, tower.tile.position.y - tower.size.y, tower.size.y, tower.size.y);
-        p.circle(tower.tile.position.x - (tower.size.x / 2), tower.tile.position.y - (tower.size.y / 2), tower.range * 2);
 
         //priority
         p.textFont(largeFont);
