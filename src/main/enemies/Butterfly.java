@@ -14,7 +14,7 @@ public class Butterfly extends Enemy {
         speed = maxSpeed;
         moneyDrop = 30;
         damage = 1;
-        maxHp = 20; //Hp
+        maxHp = 60; //Hp
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "butterfly";

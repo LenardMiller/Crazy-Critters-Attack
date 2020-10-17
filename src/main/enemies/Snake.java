@@ -14,7 +14,7 @@ public class Snake extends Enemy {
         speed = maxSpeed;
         moneyDrop = 20;
         damage = 3;
-        maxHp = 20; //Hp
+        maxHp = 60; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "snake";
