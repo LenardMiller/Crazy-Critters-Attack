@@ -64,7 +64,7 @@ public class Crossbow extends Turret {
         //price
         upgradePrices[0] = 75;
         upgradePrices[1] = 175;
-        upgradePrices[2] = 500;
+        upgradePrices[2] = 700;
         upgradePrices[3] = 100;
         upgradePrices[4] = 150;
         upgradePrices[5] = 500;
