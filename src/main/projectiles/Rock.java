@@ -12,15 +12,15 @@ public class Rock extends Projectile {
     public Rock(PApplet p, float x, float y, float angle, Turret turret, int damage) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
-        size = new PVector(10, 10);
+        size = new PVector(13, 13);
         radius = 5;
         maxSpeed = 12;
         speed = maxSpeed;
         this.damage = damage;
         pierce = 1;
         this.angle = angle;
-        angularVelocity = 15;
-        sprite = spritesH.get("pebblePj");
+        angularVelocity = p.random(-15,15);
+        sprite = spritesH.get("rockPj");
         buff = "bleeding";
     }
 

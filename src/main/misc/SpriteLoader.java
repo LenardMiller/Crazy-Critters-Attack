@@ -12,7 +12,7 @@ public class SpriteLoader {
     
     public static void loadSpritesAnim(PApplet p) {
         //icons & buttons
-        getSprite(p,"upgrade","IC","upgrades/",16);
+        getSprite(p,"upgrade","IC","upgrades/",18);
         getSprite(p,"moneyAdd","BT","moneyAdd/",3);
         getSprite(p,"upgrade","BT","upgradeButton/",5);
         getSprite(p,"sellTower","BT","sellTower/",3);
@@ -207,6 +207,7 @@ public class SpriteLoader {
         spritesH.put("magicMisslePj",p.loadImage("sprites/projectiles/magicMissle.png"));
         spritesH.put("nullPj",p.loadImage("sprites/projectiles/null.png"));
         spritesH.put("pebblePj",p.loadImage("sprites/projectiles/pebble.png"));
+        spritesH.put("rockPj",p.loadImage("sprites/projectiles/rock.png"));
         spritesH.put("needlePj",p.loadImage("sprites/projectiles/needle.png"));
         //turrets
         spritesH.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
