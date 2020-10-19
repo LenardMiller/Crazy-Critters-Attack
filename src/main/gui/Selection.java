@@ -124,7 +124,7 @@ public class Selection { //what tower is selected
                 speed = 12;
                 break;
             case "slingshotRock":
-                p.text("Slingshot", 1000, 241);
+                p.text("Slingshot MKII", 1000, 241);
                 speed = 12;
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
