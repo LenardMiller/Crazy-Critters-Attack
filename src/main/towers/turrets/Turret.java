@@ -164,6 +164,8 @@ public abstract class Turret extends Tower {
     }
 
     public void loadSprites() {
+        fireFrames = new PImage[numFireFrames];
+        loadFrames = new PImage[numLoadFrames];
         sBase = spritesH.get(name + "BaseTR");
         sIdle = spritesH.get(name + "IdleTR");
         fireFrames = spritesAnimH.get(name + "FireTR");

@@ -93,6 +93,8 @@ public class SpriteLoader {
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
+        getSprite(p,"slingshotRockFire","TR","slingshot/rock/fire/",34);
+        getSprite(p,"slingshotRockLoad","TR","slingshot/rock/load/",59);
         getSprite(p,"teslaFire","TR","tesla/fire/",6);
         getSprite(p,"teslaLoad","TR","tesla/load/",5);
         getSprite(p,"teslaIdle","TR","tesla/idle/",18);
@@ -225,6 +227,9 @@ public class SpriteLoader {
         spritesH.put("slingshotBaseTR",p.loadImage("sprites/towers/turrets/slingshot/base.png"));
         spritesH.put("slingshotFullTR",p.loadImage("sprites/towers/turrets/slingshot/full.png"));
         spritesH.put("slingshotIdleTR",p.loadImage("sprites/towers/turrets/slingshot/idle.png"));
+        spritesH.put("slingshotRockBaseTR",p.loadImage("sprites/towers/turrets/slingshot/rock/base.png"));
+        spritesH.put("slingshotRockFullTR",p.loadImage("sprites/towers/turrets/slingshot/rock/full.png"));
+        spritesH.put("slingshotRockIdleTR",p.loadImage("sprites/towers/turrets/slingshot/rock/idle.png"));
         spritesH.put("teslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/base.png"));
         spritesH.put("teslaFullTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
         spritesH.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));
