@@ -123,6 +123,15 @@ public class Selection { //what tower is selected
                 p.text("Slingshot", 1000, 241);
                 speed = 12;
                 break;
+            case "slingshotRock":
+                p.text("Slingshot", 1000, 241);
+                speed = 12;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100, 0, 200);
+                p.text("Bleeding", 910, 336 + offset);
+                p.fill(0);
+                break;
             case "crossbow":
                 p.text("Crossbow", 1000, 241);
                 speed = 24;
