@@ -13,7 +13,7 @@ public class Rock extends Projectile {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(13, 13);
-        radius = 5;
+        radius = 6;
         maxSpeed = 12;
         speed = maxSpeed;
         this.damage = damage;
