@@ -129,7 +129,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Piercing", 910, 376 + offset);
+                p.text("Piercing", 910, 336 + offset);
                 p.fill(0);
                 break;
             case "miscCannon":
@@ -147,7 +147,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Splash damage", 910, 376 + offset);
+                p.text("Splash damage", 910, 336 + offset);
                 p.fill(0);
                 break;
             case "magicMissleer":
@@ -156,7 +156,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Three homing missiles", 910, 376 + offset);
+                p.text("Three homing missiles", 910, 336 + offset);
                 break;
             case "magicMissleerFour":
                 p.text("Magic Missileer", 1000, 241);
@@ -164,7 +164,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Four homing missiles", 910, 376 + offset);
+                p.text("Four homing missiles", 910, 336 + offset);
                 break;
             case "tesla":
                 p.text("Tesla Tower", 1000, 241);
@@ -172,7 +172,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Chain Lightning", 910, 376 + offset);
+                p.text("Chain Lightning", 910, 336 + offset);
                 break;
             case "nightmare":
                 p.text("Nightmare", 1000, 241);
@@ -182,7 +182,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Shotgun, decay", 910, 376 + offset);
+                p.text("Shotgun, decay", 910, 336 + offset);
                 break;
             case "flamethrower":
                 p.text("Flamethrower", 1000, 241);
@@ -190,7 +190,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Fire, limited range", 910, 376 + offset);
+                p.text("Fire, limited range", 910, 336 + offset);
                 break;
             case "railgun":
                 p.text("Railgun", 1000, 241);
@@ -202,7 +202,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Energy beam", 910, 376 + offset);
+                p.text("Energy beam", 910, 336 + offset);
                 break;
         }
 
@@ -300,12 +300,6 @@ public class Selection { //what tower is selected
             else if (speed < 8) p.text("Low velocity", 910, 336 + offset);
             else if (speed <= 15) p.text("Medium velocity", 910, 336 + offset);
             else p.text("High velocity", 910, 336 + offset);
-            //accuracy (error)
-            if (tower.range == 0) p.text("Perfect accuracy", 910, 356 + offset);
-            else if (tower.range > 0 && tower.range <= 3) p.text("High accuracy", 910, 356 + offset);
-            else if (tower.range > 3 && tower.range <= 5) p.text("Medium accuracy", 910, 356 + offset);
-            else if (tower.range > 5 && tower.range <= 9) p.text("Low accuracy", 910, 356 + offset);
-            else if (tower.range > 9) p.text("Very low accuracy", 910, 356 + offset);
         }
     }
 }
