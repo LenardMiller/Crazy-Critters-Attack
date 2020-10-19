@@ -129,7 +129,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Bleeding", 910, 336 + offset);
+                p.text("Bleeding", 910, 356 + offset);
                 p.fill(0);
                 break;
             case "crossbow":
@@ -138,7 +138,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Piercing", 910, 336 + offset);
+                p.text("Piercing", 910, 356 + offset);
                 p.fill(0);
                 break;
             case "miscCannon":
@@ -156,7 +156,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Splash damage", 910, 336 + offset);
+                p.text("Splash damage", 910, 356 + offset);
                 p.fill(0);
                 break;
             case "magicMissleer":
@@ -165,7 +165,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Three homing missiles", 910, 336 + offset);
+                p.text("Three homing missiles", 910, 356 + offset);
                 break;
             case "magicMissleerFour":
                 p.text("Magic Missileer", 1000, 241);
@@ -173,7 +173,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Four homing missiles", 910, 336 + offset);
+                p.text("Four homing missiles", 910, 356 + offset);
                 break;
             case "tesla":
                 p.text("Tesla Tower", 1000, 241);
@@ -181,7 +181,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Chain Lightning", 910, 336 + offset);
+                p.text("Chain Lightning", 910, 356 + offset);
                 break;
             case "nightmare":
                 p.text("Nightmare", 1000, 241);
@@ -191,7 +191,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Shotgun, decay", 910, 336 + offset);
+                p.text("Shotgun, decay", 910, 356 + offset);
                 break;
             case "flamethrower":
                 p.text("Flamethrower", 1000, 241);
@@ -199,7 +199,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Fire, limited range", 910, 336 + offset);
+                p.text("Fire, limited range", 910, 356 + offset);
                 break;
             case "railgun":
                 p.text("Railgun", 1000, 241);
@@ -211,7 +211,7 @@ public class Selection { //what tower is selected
                 p.textFont(mediumFont);
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
-                p.text("Energy beam", 910, 336 + offset);
+                p.text("Energy beam", 910, 356 + offset);
                 break;
         }
 
