@@ -132,6 +132,15 @@ public class Selection { //what tower is selected
                 p.text("Bleeding", 910, 356 + offset);
                 p.fill(0);
                 break;
+            case "slingshotGravel":
+                p.text("Gravel Slinger", 1000, 241);
+                speed = 12;
+                p.textFont(mediumFont);
+                p.textAlign(LEFT);
+                p.fill(100, 0, 200);
+                p.text("scattershot", 910, 356 + offset);
+                p.fill(0);
+                break;
             case "crossbow":
                 p.text("Crossbow", 1000, 241);
                 speed = 24;
