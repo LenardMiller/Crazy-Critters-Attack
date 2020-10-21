@@ -141,6 +141,16 @@ public class Selection { //what tower is selected
                 p.text("scattershot", 910, 356 + offset);
                 p.fill(0);
                 break;
+            case "miscCannon":
+                p.text("Luggage", 1000, 241);
+                p.text("Blaster", 1000, 266);
+                offset = 25;
+                speed = 12;
+                break;
+            case "miscCannonBarrel":
+                p.text("Minibarrel", 1000, 241);
+                speed = 12;
+                break;
             case "crossbow":
                 p.text("Crossbow", 1000, 241);
                 speed = 24;
@@ -148,15 +158,6 @@ public class Selection { //what tower is selected
                 p.textAlign(LEFT);
                 p.fill(100, 0, 200);
                 p.text("Piercing", 910, 356 + offset);
-                p.fill(0);
-                break;
-            case "miscCannon":
-                p.text("Luggage", 1000, 241);
-                p.text("Blaster", 1000, 266);
-                offset = 25;
-                speed = 12;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
                 p.fill(0);
                 break;
             case "energyBlaster":

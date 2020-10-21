@@ -15,6 +15,7 @@ import static processing.core.PConstants.HALF_PI;
 public class RandomCannon extends Turret {
 
     boolean laundry;
+    boolean barrel;
 
     public RandomCannon(PApplet p, Tile tile) {
         super(p,tile);
@@ -52,14 +53,14 @@ public class RandomCannon extends Turret {
         delayTime = p.frameCount + delay; //waits this time before firing
         int spriteType = (int)(p.random(0,5.99f));
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);
-        spa.setMag(18);
-        spp.add(spa);
-        float particleCount = p.random(1,5);
-        if (delay == 5) {
+        PVector spa = PVector.fromAngle(angleB-HALF_PI);float particleCount = p.random(1,5);
+        if (barrel) {
             particleCount = 1;
             angleB += p.random(-0.1f,0.1f);
+            spa.setMag(27);
         }
+        else spa.setMag(18);
+        spp.add(spa);
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
@@ -130,8 +131,11 @@ public class RandomCannon extends Turret {
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
-                    delay = 5;
+                    barrel = true;
+                    delay = 6;
                     damage -= 5;
+                    name = "miscCannonBarrel";
+                    loadSprites();
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
