@@ -126,26 +126,25 @@ public class Selection { //what tower is selected
             case "slingshotRock":
                 p.text("Slingshot MKII", 1000, 241);
                 speed = 12;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Bleeding", 910, 356 + offset);
-                p.fill(0);
+                setTextPurple("Bleeding", offset);
                 break;
             case "slingshotGravel":
                 p.text("Gravel Slinger", 1000, 241);
                 speed = 12;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("scattershot", 910, 356 + offset);
-                p.fill(0);
+                setTextPurple("Scattershot", offset);
                 break;
             case "miscCannon":
                 p.text("Luggage", 1000, 241);
                 p.text("Blaster", 1000, 266);
                 offset = 25;
                 speed = 12;
+                break;
+            case "miscCannonLaundry":
+                p.text("Dirty Luggage", 1000, 241);
+                p.text("Blaster", 1000, 266);
+                offset = 25;
+                speed = 12;
+                setTextPurple("Poison explosions", offset);
                 break;
             case "miscCannonBarrel":
                 p.text("Minibarrel", 1000, 241);
@@ -154,62 +153,39 @@ public class Selection { //what tower is selected
             case "crossbow":
                 p.text("Crossbow", 1000, 241);
                 speed = 24;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Piercing", 910, 356 + offset);
-                p.fill(0);
+                setTextPurple("Piercing", offset);
                 break;
             case "energyBlaster":
                 p.text("Energy Blaster", 1000, 241);
                 speed = 16;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Splash damage", 910, 356 + offset);
-                p.fill(0);
+                setTextPurple("Energy explosions", offset);
                 break;
             case "magicMissleer":
                 p.text("Magic Missileer", 1000, 241);
                 speed = 5;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Three homing missiles", 910, 356 + offset);
+                setTextPurple("Three homing missiles", offset);
                 break;
             case "magicMissleerFour":
                 p.text("Magic Missileer", 1000, 241);
                 speed = 5;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Four homing missiles", 910, 356 + offset);
+                setTextPurple("Four homing missiles", offset);
                 break;
             case "tesla":
                 p.text("Tesla Tower", 1000, 241);
                 speed = -1;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Chain Lightning", 910, 356 + offset);
+                setTextPurple("Chain lightning", offset);
                 break;
             case "nightmare":
                 p.text("Nightmare", 1000, 241);
                 p.text("Blaster", 1000, 266);
                 offset = 25;
                 speed = 18;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Shotgun, decay", 910, 356 + offset);
+                setTextPurple("Shotgun, decay", offset);
                 break;
             case "flamethrower":
                 p.text("Flamethrower", 1000, 241);
                 speed = 5;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Fire, limited range", 910, 356 + offset);
+                setTextPurple("Fire, slow rotation", offset);
                 break;
             case "railgun":
                 p.text("Railgun", 1000, 241);
@@ -218,10 +194,7 @@ public class Selection { //what tower is selected
             case "waveMotion":
                 p.text("Death Beam", 1000, 241);
                 speed = -1;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Energy beam", 910, 356 + offset);
+                setTextPurple("Energy beam", offset);
                 break;
         }
 
@@ -320,5 +293,12 @@ public class Selection { //what tower is selected
             else if (speed <= 15) p.text("Medium velocity", 910, 336 + offset);
             else p.text("High velocity", 910, 336 + offset);
         }
+    }
+
+    private void setTextPurple(String s, int offset) {
+        p.textFont(mediumFont);
+        p.textAlign(LEFT);
+        p.fill(100, 0, 200);
+        p.text(s, 910, 356 + offset);
     }
 }

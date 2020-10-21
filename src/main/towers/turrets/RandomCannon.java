@@ -151,6 +151,8 @@ public class RandomCannon extends Turret {
                 case 5:
                     laundry = true;
                     damage += 10;
+                    name = "miscCannonLaundry";
+                    loadSprites();
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }

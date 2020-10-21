@@ -104,6 +104,8 @@ public class SpriteLoader {
         getSprite(p,"crossbowLoad","TR","crossbow/load/",81);
         getSprite(p,"miscCannonFire","TR","miscCannon/fire/",5);
         getSprite(p,"miscCannonLoad","TR","miscCannon/load/",1);
+        getSprite(p,"miscCannonLaundryFire","TR","miscCannon/laundry/fire/",5);
+        getSprite(p,"miscCannonLaundryLoad","TR","miscCannon/laundry/load/",1);
         getSprite(p,"miscCannonBarrelFire","TR","miscCannon/barrel/fire/",5);
         getSprite(p,"miscCannonBarrelLoad","TR","miscCannon/barrel/load/",1);
         getSprite(p,"energyBlasterFire","TR","energyBlaster/fire/",14);
@@ -228,6 +230,9 @@ public class SpriteLoader {
         spritesH.put("miscCannonBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/base.png"));
         spritesH.put("miscCannonFullTR",p.loadImage("sprites/towers/turrets/miscCannon/full.png"));
         spritesH.put("miscCannonIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/idle.png"));
+        spritesH.put("miscCannonLaundryBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/base.png"));
+        spritesH.put("miscCannonLaundryFullTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/full.png"));
+        spritesH.put("miscCannonLaundryIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/idle.png"));
         spritesH.put("miscCannonBarrelBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/base.png"));
         spritesH.put("miscCannonBarrelFullTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/full.png"));
         spritesH.put("miscCannonBarrelIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/idle.png"));
