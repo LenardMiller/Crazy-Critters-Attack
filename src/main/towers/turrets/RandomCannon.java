@@ -1,9 +1,9 @@
 package main.towers.turrets;
 
+import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.Laundry;
 import main.projectiles.MiscProjectile;
-import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -61,15 +61,19 @@ public class RandomCannon extends Turret {
         }
         else spa.setMag(18);
         spp.add(spa);
+        String part = "smoke";
+        if (laundry && p.random(0,3) < 1) {
+            projectiles.add(new Laundry(p,spp.x,spp.y, angleB, this, damage));
+            part = "poison";
+        }
+        else projectiles.add(new MiscProjectile(p,spp.x,spp.y, angleB, this, spriteType, damage));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
             PVector spp2 = new PVector(spp.x,spp.y);
             spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"smoke"));
+            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),part));
         }
-        if (laundry && p.random(0,3) < 1) projectiles.add(new Laundry(p,spp.x,spp.y, angleB, this, spriteType, damage));
-        else projectiles.add(new MiscProjectile(p,spp.x,spp.y, angleB, this, spriteType, damage));
     }
 
     private void setUpgrades() {

@@ -16,7 +16,7 @@ public class Laundry extends Projectile {
 
     public PImage[] sprites; //alternate sprites, passed in
 
-    public Laundry(PApplet p, float x, float y, float angle, Turret turret, int spriteType, int damage) {
+    public Laundry(PApplet p, float x, float y, float angle, Turret turret, int damage) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(10, 10);
@@ -28,8 +28,9 @@ public class Laundry extends Projectile {
         this.angle = angle;
         angleTwo = angle;
         angularVelocity = 15; //degrees mode
-        sprites = spritesAnimH.get("miscPJ");
-        sprite = sprites[spriteType];
+        sprite = spritesH.get("laundryPj");
+        trail = "poison";
+        hasTrail = true;
         effectRadius = 60;
         buff = "poisoned";
     }
@@ -55,7 +56,7 @@ public class Laundry extends Projectile {
                 for (int j = num; j >= 0; j--) {
                     particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "poison", maxSpeed = p.random(1.5f, 4.5f)));
                 }
-                particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360)));
+                particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "poison"));
                 pierce--;
                 for (int j = enemies.size() - 1; j >= 0; j--) {
                     Enemy erEnemy = enemies.get(j);

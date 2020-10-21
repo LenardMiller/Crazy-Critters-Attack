@@ -123,7 +123,7 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if ((int) p.random(0, 4) == 0)
-                    particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+                    particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 if ((int) p.random(0, 2) == 0)
                     particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
                 for (int i = 0; i < 3; i++) {
