@@ -16,7 +16,7 @@ public class LargeExplosion extends Particle {
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
         betweenFrames = 1;
-        numFrames = 18;
+        numFrames = 17;
         currentSprite = 0;
         sprites = spritesAnimH.get(type + "LargeExplosionPT");
         velocity = PVector.fromAngle(angle-HALF_PI);
