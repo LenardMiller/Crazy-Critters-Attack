@@ -121,6 +121,8 @@ public class Crossbow extends Turret {
                 case 2:
                     damage += 300;
                     pierce += 100;
+                    name = "crossbowReinforced";
+                    loadSprites();
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
