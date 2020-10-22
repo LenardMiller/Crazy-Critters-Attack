@@ -3,8 +3,10 @@ package main.misc;
 import main.pathfinding.Node;
 import main.towers.Tower;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static main.Main.*;
@@ -41,8 +43,8 @@ public class MiscMethods {
     }
 
     public static float findSlope(PVector p1, PVector p2) {
-        float m = (p2.y-p1.y)/(p2.x-p1.x);
-        return m*-1;
+        float m = (p2.y - p1.y) / (p2.x - p1.x);
+        return m * -1;
     }
 
     public static float findAngleBetween(PVector p1, PVector p2) {
@@ -209,7 +211,7 @@ public class MiscMethods {
     }
 
     public static float findAngle(PVector v) {
-        return findAngle(new PVector(0,0), v);
+        return findAngle(new PVector(0, 0), v);
     }
 
     public static float clampAngle(float a) {
@@ -220,10 +222,35 @@ public class MiscMethods {
         float diffA = -(current - target);
         float diffB = diffA - TWO_PI;
         float diffC = clampAngle(diffB);
-        float f = min(abs(diffA),abs(diffB),abs(diffC));
+        float f = min(abs(diffA), abs(diffB), abs(diffC));
         if (f == abs(diffA)) return diffA;
         if (f == abs(diffB)) return diffB;
         if (f == abs(diffC)) return diffC;
         return 0;
+    }
+
+    public static PImage superTint(PImage image, Color tintColor, float magnitude) { //debug number: 432
+        image.loadPixels();
+        for (int i = 0; i < image.pixels.length; i++) {
+            if (image.pixels[i] != 0) {
+                Color pixel = new Color(image.pixels[i]);
+                float m = abs(magnitude - 1);
+                pixel = new Color (
+                        calcColor(pixel.getRed(), m, tintColor.getRed()),
+                        calcColor(pixel.getGreen(), m, tintColor.getGreen()),
+                        calcColor(pixel.getBlue(), m, tintColor.getBlue()),
+                        calcColor(pixel.getAlpha(), m, tintColor.getAlpha())
+                );
+                image.pixels[i] = pixel.getRGB();
+            }
+        }
+        return image;
+    }
+
+    private static int calcColor(float p, float m, float t) {
+        float d = t - p;
+        float d2 = m * d;
+        float c = p + d2;
+        return (int) c;
     }
 }

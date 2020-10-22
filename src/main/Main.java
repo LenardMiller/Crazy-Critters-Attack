@@ -191,6 +191,7 @@ public class Main extends PApplet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         keyBinds.spawnKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
