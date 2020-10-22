@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.misc.Tile;
 import main.projectiles.Bolt;
+import main.projectiles.ReinforcedBolt;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -13,6 +14,7 @@ public class Crossbow extends Turret {
 
     private int pierce;
     private boolean multishot;
+    private boolean reinforced;
 
     public Crossbow(PApplet p, Tile tile) {
         super(p,tile);
@@ -57,7 +59,10 @@ public class Crossbow extends Turret {
                 projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, a, this, damage, pierce));
                 a += offset;
             }
-        } else projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
+        } else {
+            if (reinforced) projectiles.add(new ReinforcedBolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
+            else projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
+        }
     }
 
     private void setUpgrades(){
@@ -121,6 +126,7 @@ public class Crossbow extends Turret {
                 case 2:
                     damage += 300;
                     pierce += 100;
+                    reinforced = true;
                     name = "crossbowReinforced";
                     loadSprites();
                     if (nextLevelB == 5) nextLevelB++;
