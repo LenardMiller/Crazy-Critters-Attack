@@ -15,9 +15,7 @@ public class LargeExplosion extends Particle {
         speed = maxSpeed;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        lifespan = 0; //in frames, default: 0
-        delay = lifespan/numFrames;
-        delayTime = p.frameCount + delay;
+        betweenFrames = 1;
         numFrames = 18;
         currentSprite = 0;
         sprites = spritesAnimH.get(type + "LargeExplosionPT");

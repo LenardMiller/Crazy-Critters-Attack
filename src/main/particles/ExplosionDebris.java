@@ -15,10 +15,7 @@ public class ExplosionDebris extends Particle{
         speed = maxSpeed;
         angleTwo = angle;
         angularVelocity = 5; //degrees mode
-        lifespan = 0; //in frames, default: 0
-        lifespan += (PApplet.round(p.random((-lifespan)+2,lifespan))); //injects 25% randomness so all don't die at once
-        delay = lifespan/numFrames;
-        delayTime = p.frameCount + delay;
+        betweenFrames = (int)p.random(2,5);
         numFrames = 4;
         currentSprite = 0;
         sprites = spritesAnimH.get(type + "ExDebrisPT");
