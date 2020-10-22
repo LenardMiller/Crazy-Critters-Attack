@@ -112,8 +112,8 @@ public class RandomCannon extends Turret {
         upgradeDescB[4] = "increase";
         upgradeDescC[4] = "range";
 
-        upgradeDescA[5] = "Inflict";
-        upgradeDescB[5] = "poison";
+        upgradeDescA[5] = "Toxic";
+        upgradeDescB[5] = "explosions";
         upgradeDescC[5] = "";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
@@ -121,7 +121,7 @@ public class RandomCannon extends Turret {
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[15];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[4] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[3];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[12];
     }
 
     public void upgradeSpecial(int id) {
