@@ -31,11 +31,11 @@ public class Flamethrower extends Turret {
         delay += (round(p.random(-(delay / 10f), delay / 10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 5;
-        range = 1;
+        range = 320;
         numFireFrames = 4;
         numLoadFrames = 1;
         numIdleFrames = 4;
-        effectLevel = 1;
+        effectLevel = 50;
         effectDuration = 300;
         betweenIdleFrames = 1;
         fireFrames = new PImage[numFireFrames];
@@ -45,7 +45,7 @@ public class Flamethrower extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 2;
+        damage = 20;
         flameTimer = 5;
         rotationSpeed = 0.02f;
         loadSprites();

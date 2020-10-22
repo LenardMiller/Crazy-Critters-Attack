@@ -26,7 +26,7 @@ public class Nightmare extends Turret {
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 18;
-        range = 20; //12
+        range = 200;
         numFireFrames = 14;
         numLoadFrames = 22;
         fireFrames = new PImage[numFireFrames];
@@ -35,9 +35,9 @@ public class Nightmare extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 15;
+        damage = 100;
         numProjectiles = 3;
-        effectLevel = 3;
+        effectLevel = 50;
         effectDuration = 220;
         loadSprites();
         debrisType = "darkMetal";
