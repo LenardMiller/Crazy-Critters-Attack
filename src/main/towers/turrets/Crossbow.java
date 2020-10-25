@@ -143,6 +143,8 @@ public class Crossbow extends Turret {
                     break;
                 case 5:
                     multishot = true;
+                    name = "crossbowMultishot";
+                    loadSprites();
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }
