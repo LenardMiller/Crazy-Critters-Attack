@@ -85,7 +85,7 @@ public class ForestWaves {
         waves[12].addSpawns("treeSprite",10);
 
         waves[13] = new Wave(p, 3500, 600, snakePrimary, snakeSecondary, "Snakes");
-        waves[13].addSpawns("snake", 40);
+        waves[13].addSpawns("snake", 20);
 
         waves[14] = new Wave(p, 2400, 1000, treeSpiritPrimary, treeSpiritSecondary, "Tree Spirits");
         waves[14].addSpawns("treeSprite", 5);
