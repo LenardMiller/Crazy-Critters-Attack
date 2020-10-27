@@ -54,10 +54,15 @@ public class TowerBuy extends Button {
         if (active) {
             if (!towerType.equals("null")) hover();
             display();
+            if (money < price) {
+                p.tint(255, 0, 0, 100);
+                p.image(sprite, position.x - size.x / 2, position.y - size.y / 2);
+                p.tint(255);
+            }
         }
     }
 
-    public void hover() { //below is if hovered or depressed
+    public void hover() { //if hovered or depressed
         int d = 2;
         if (p.mouseX < (position.x+size.x/2)+d && p.mouseX > (position.x-size.x/2)-d && p.mouseY < (position.y+size.y/2)+d && p.mouseY > (position.y-size.y/2)-d && alive && active || depressed && alive){
             if (depressed) sprite = spritePressed;
@@ -69,67 +74,60 @@ public class TowerBuy extends Button {
             p.fill(0);
             p.textFont(largeFont); //displays info about tower todo: put more info
             int x = 1000;
+            int offset = 0;
             switch (towerType) {
                 case "slingshot":
                     p.text("Slingshot", 1000, 241);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 271);
                     break;
                 case "crossbow":
                     p.text("Crossbow", x, 241);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 271);
                     break;
                 case "miscCannon":
                     p.text("Luggage", x, 241);
                     p.text("Blaster", x, 266);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 296);
+                    offset = 25;
                     break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 271);
                     break;
                 case "magicMissleer":
                     p.text("Magic Missileer", x, 241);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 271);
                     break;
                 case "tesla":
                     p.text("Tesla Tower", x, 241);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 271);
                     break;
                 case "nightmare":
                     p.text("Nightmare", x, 241);
                     p.text("Blaster", x, 266);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 296);
+                    offset = 25;
                     break;
                 case "flamethrower":
                     p.text("Flamethrower", x, 241);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 271);
                     break;
                 case "railgun":
                     p.text("Railgun", x, 241);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 271);
                     break;
                 case "waveMotion":
                     p.text("Death Beam", x, 241);
-                    p.textFont(mediumFont);
-                    p.text("$" + price, x, 271);
                     break;
             }
-            if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
-            if (inputHandler.leftMouseReleasedPulse && alive) {
-                action();
-                sprite = spritePressed;
+            displayPrice(offset, x);
+            if (money > price) {
+                if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
+                if (inputHandler.leftMouseReleasedPulse && alive) {
+                    action();
+                    sprite = spritePressed;
+                }
             }
         }
         else sprite = spriteIdle;
+        if (money < price) sprite = spritePressed;
+    }
+
+    private void displayPrice(int offset, int x) {
+        p.textFont(mediumFont);
+        if (money < price) p.fill(255,0,0);
+        p.text("$" + price, x, 271 + offset);
     }
 
     public void action() {
