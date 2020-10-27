@@ -73,7 +73,7 @@ public class TowerBuy extends Button {
             p.rect(900,212,200,707);
             p.textAlign(CENTER);
             p.fill(0);
-            p.textFont(largeFont); //displays info about tower todo: put more info
+            p.textFont(largeFont); //displays info about tower
             int x = 1000;
             int offset = 0;
             switch (towerType) {
