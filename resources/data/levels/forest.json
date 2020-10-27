@@ -88,7 +88,8 @@
     "machine": false,
     "id": 13,
     "type": "tile",
-    "bgA": "grass"
+    "bgA": "grass",
+    "obstacle": "smallTreeOb_TL"
   },
   {
     "machine": false,
@@ -147,8 +148,7 @@
     "machine": false,
     "id": 22,
     "type": "tile",
-    "bgA": "grass",
-    "obstacle": "smallTreeOb_TL"
+    "bgA": "grass"
   },
   {
     "machine": false,
@@ -213,8 +213,7 @@
     "machine": false,
     "id": 32,
     "type": "tile",
-    "bgA": "grass",
-    "obstacle": "smallTreeOb_TL"
+    "bgA": "grass"
   },
   {
     "machine": false,
@@ -358,8 +357,7 @@
     "machine": false,
     "id": 54,
     "type": "tile",
-    "bgA": "grass",
-    "obstacle": "smallTreeOb_TL"
+    "bgA": "grass"
   },
   {
     "machine": false,
@@ -489,6 +487,7 @@
     "id": 74,
     "type": "tile",
     "bgA": "grass",
+    "obstacle": "smallTreeOb_TL",
     "bgC": "leavesBGC_TL"
   },
   {
@@ -507,8 +506,7 @@
     "machine": false,
     "id": 77,
     "type": "tile",
-    "bgA": "grass",
-    "obstacle": "smallTreeOb_TL"
+    "bgA": "grass"
   },
   {
     "machine": false,
@@ -594,8 +592,7 @@
     "machine": false,
     "id": 91,
     "type": "tile",
-    "bgA": "grass",
-    "obstacle": "smallTreeOb_TL"
+    "bgA": "grass"
   },
   {
     "machine": false,
@@ -723,6 +720,7 @@
     "id": 111,
     "type": "tile",
     "bgA": "grass",
+    "obstacle": "smallTreeOb_TL",
     "bgC": "leavesBGC_TL"
   },
   {
@@ -2258,8 +2256,8 @@
   },
   {
     "betweenFrames": 4,
-    "hp": 100,
     "maxHp": 100,
+    "hp": 100,
     "x": 450,
     "name": "stoneDrillMA",
     "y": 425,
