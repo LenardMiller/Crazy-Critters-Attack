@@ -84,6 +84,7 @@ public class KeyBinds {
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
         boolean update = keysPressed.getPressedPulse(' ');
         boolean loseMoney = keysPressed.getPressedPulse('-');
+        boolean addMoney = keysPressed.getPressed('=');
         boolean switchMode = keysPressed.getPressedPulse('b');
         boolean saveTiles = keysPressed.getPressedPulse('z');
         boolean loadTiles = keysPressed.getPressedPulse('x');
@@ -118,6 +119,7 @@ public class KeyBinds {
             updateWallTileConnections();
             connectWallQueues++;
         }
+        if (addMoney) money += 25;
         if (loseMoney) money = 0;
         if (switchMode) {
             levelBuilder = !levelBuilder;
