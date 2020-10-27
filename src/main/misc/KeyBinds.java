@@ -44,7 +44,7 @@ public class KeyBinds {
         boolean butterfly = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
         boolean dummy = keysPressed.getPressedPulse('!') && alive && p.mouseX < BOARD_WIDTH;
         //projectiles
-        if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 10));
+        if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 50));
         if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, null, 20, 2));
         if (miscProjectile) projectiles.add(new MiscProjectile(p, p.mouseX, p.mouseY, 0, null, round(p.random(0, 5)), 6));
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 20, false));

@@ -241,7 +241,7 @@ public abstract class Enemy {
                 turret.damageTotal += damage + hp;
             } else turret.damageTotal += damage;
         }
-        int effectTimer = 0;
+        int effectTimer = p.frameCount + 10;
         if (buffs.size() > 0) {
             for (int j = 0; j < buffs.size(); j++) {
                 Buff buff = buffs.get(j);
