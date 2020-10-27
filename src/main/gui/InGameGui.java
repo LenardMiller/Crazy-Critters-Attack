@@ -36,7 +36,7 @@ public class InGameGui {
         p.fill(130); //towerbuy bg
         p.rect(900,21,200,127);
         wallBuyButton.main();
-        addMoneyButton.main();
+//        addMoneyButton.main();
         moneyIcon.main();
         playButton.main(); //display is in Level
         if (!isTowers || selection.name.equals("null")) {
@@ -120,8 +120,8 @@ public class InGameGui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 124.5f,"null",true));
         wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-12,"null",true);
-        addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
-        moneyIcon = new GuiObject(p,BOARD_WIDTH+33, 211-29,"moneyIc",true);
+//        addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
+        moneyIcon = new GuiObject(p,BOARD_WIDTH, 211-29,"moneyIc",true);
         playButton = new Play(p,1000,274.5f,"null",true);
         upgradeButtonA = new UpgradeTower(p,1000,480,"null",false, 0);
         upgradeButtonB = new UpgradeTower(p,1000,630,"null",false, 1);
