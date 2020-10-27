@@ -116,10 +116,9 @@ public class TowerBuy extends Button {
                     break;
             }
             displayPrice(offset, x);
-            if (money > price) {
-                if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
-                if (inputHandler.leftMouseReleasedPulse && alive) {
-                    action();
+            if (inputHandler.leftMouseReleasedPulse && alive) {
+                action();
+                if (money >= price) {
                     sprite = spritePressed;
                 }
             }
@@ -136,10 +135,11 @@ public class TowerBuy extends Button {
     }
 
     public void action() {
-        depressed = !depressed;
+        if (money < price) depressed = false;
+        else depressed = !depressed;
         //if already holding, stop
         if (hand.held.equals(towerType)) hand.setHeld("null");
         //if not, do
-        else if (depressed) hand.setHeld(towerType);
+        else if (depressed && money >= price) hand.setHeld(towerType);
     }
 }
