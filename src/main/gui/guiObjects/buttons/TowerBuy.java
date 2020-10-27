@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.TowerInfo.*;
 import static processing.core.PConstants.CENTER;
 
 public class TowerBuy extends Button {
@@ -78,14 +79,17 @@ public class TowerBuy extends Button {
             switch (towerType) {
                 case "slingshot":
                     p.text("Slingshot", 1000, 241);
-                    break;
-                case "crossbow":
-                    p.text("Crossbow", x, 241);
+                    slingshotInfo(p);
                     break;
                 case "miscCannon":
                     p.text("Luggage", x, 241);
                     p.text("Blaster", x, 266);
                     offset = 25;
+                    randomCannonInfo(p);
+                    break;
+                case "crossbow":
+                    p.text("Crossbow", x, 241);
+                    crossbowInfo(p);
                     break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);
@@ -125,6 +129,7 @@ public class TowerBuy extends Button {
     }
 
     private void displayPrice(int offset, int x) {
+        p.textAlign(CENTER);
         p.textFont(mediumFont);
         if (money < price) p.fill(255,0,0);
         p.text("$" + price, x, 271 + offset);
