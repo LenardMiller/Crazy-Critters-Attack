@@ -1,5 +1,5 @@
 # Crazy Critters Attack
-A small tower defense game made in Java using Processing. Now in alpha!
+A small tower defense game made using Processing. Now in alpha!
 ## Playtesting Info
 This is all the stuff that will be in a short tutorial, it should be the bare minimum needed to play the game. \
 \
