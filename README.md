@@ -32,6 +32,7 @@ case sensitive
 - g - display debug information
 - [SPACE] - update various things
 - \- - set money to 0
+- = - add money
 - b - switch in and out of level builder
 - z - save tile info
 - x - load tile info (will probably break everything)
