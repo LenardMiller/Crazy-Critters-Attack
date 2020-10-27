@@ -3,8 +3,8 @@ package main.misc;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.ceil;
-import static processing.core.PApplet.abs;
 
 public class CompressArray{
 
@@ -29,7 +29,7 @@ public class CompressArray{
     public void main(){
         if (factor < 0) { //shrink
             for (int i = 0; i < oldSize; i++) {
-                if (count > ceil(period)) {
+                if (count >= ceil(period)) {
                     compArray.remove(i-changed);
                     changed++;
                     count = -1;

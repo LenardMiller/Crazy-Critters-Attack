@@ -1,7 +1,9 @@
 package main.towers.turrets;
 
-import main.projectiles.Pebble;
 import main.misc.Tile;
+import main.projectiles.Gravel;
+import main.projectiles.Pebble;
+import main.projectiles.Rock;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -11,6 +13,9 @@ import static main.misc.MiscMethods.updateTowerArray;
 
 public class Slingshot extends Turret {
 
+    boolean painful;
+    boolean gravel;
+
     public Slingshot(PApplet p, Tile tile) {
         super(p,tile);
         name = "slingshot";
@@ -18,11 +23,11 @@ public class Slingshot extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 180; //default: 180 frames
+        delay = 100;
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 12;
-        error = 6; //6
+        range = 230;
         numFireFrames = 34;
         numLoadFrames = 59;
         fireFrames = new PImage[numFireFrames];
@@ -31,88 +36,115 @@ public class Slingshot extends Turret {
         damage = 15; //15
         loadSprites();
         debrisType = "wood";
-        price = 100;
+        price = SLINGSHOT_PRICE;
         value = price;
         priority = 0; //first
-        nextLevelA = 0;
-        nextLevelB = 2;
+        painful = false;
+        gravel = false;
         setUpgrades();
         updateTowerArray();
     }
 
-    public void fire(){ //needed to change projectile fired
-        float angleB = angle;
-        angleB += radians(p.random(-error,error));
+    public void fire() { //needed to change projectile fired
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angleB, this, damage));
+        if (painful) projectiles.add(new Rock(p, tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+        if (gravel) {
+            float offset = 0.03f;
+            int count = 8;
+            float a = angle - (floor(count / 2f) * offset);
+            for (int i = 0; i < count; i++) {
+                projectiles.add(new Gravel(p, tile.position.x-size.x/2,tile.position.y-size.y/2, a, this, damage));
+                a += offset;
+            }
+        }
+        if (!painful && !gravel) projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
     }
 
     private void setUpgrades(){
-        //damage
-        upgradeDamage[0] = 0;
-        upgradeDamage[1] = 0;
-        upgradeDamage[2] = 0;
-        upgradeDamage[3] = 5;
-        //delay (firerate)
-        upgradeDelay[0] = 0;
-        upgradeDelay[1] = 0;
-        upgradeDelay[2] = -30;
-        upgradeDelay[3] = 0;
         //price
         upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 50;
-        upgradePrices[3] = 100;
-        //heath
-        upgradeHealth[0] = 0;
-        upgradeHealth[1] = 0;
-        upgradeHealth[2] = 0;
-        upgradeHealth[3] = 0;
-        //error (accuracy)
-        upgradeError[0] = -1;
-        upgradeError[1] = -2;
-        upgradeError[2] = 0;
-        upgradeError[3] = 0;
-        //names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        upgradeNames[3] = name;
-        //debris
-        upgradeDebris[0] = "wood";
-        upgradeDebris[1] = "wood";
-        upgradeDebris[2] = "wood";
-        upgradeDebris[3] = "wood";
+        upgradePrices[1] = 75;
+        upgradePrices[2] = 400;
+        upgradePrices[3] = 75;
+        upgradePrices[4] = 100;
+        upgradePrices[5] = 400;
         //titles
-        upgradeTitles[0] = "More Precise";
-        upgradeTitles[1] = "Super Precise";
-        upgradeTitles[2] = "Faster Firing";
+        upgradeTitles[0] = "Long Range";
+        upgradeTitles[1] = "Super Range";
+        upgradeTitles[2] = "Gravel Slinger";
         upgradeTitles[3] = "Damage Up";
-        //desc line one
+        upgradeTitles[4] = "Faster Firing";
+        upgradeTitles[5] = "Painful Rocks";
+        //descriptions
         upgradeDescA[0] = "Increase";
-        upgradeDescA[1] = "further";
-        upgradeDescA[2] = "Increase";
-        upgradeDescA[3] = "+5";
-        //desc line two
-        upgradeDescB[0] = "accuracy";
-        upgradeDescB[1] = "increase";
-        upgradeDescB[2] = "firerate";
-        upgradeDescB[3] = "damage";
-        //desc line three
+        upgradeDescB[0] = "range";
         upgradeDescC[0] = "";
-        upgradeDescC[1] = "accuracy";
-        upgradeDescC[2] = "";
+
+        upgradeDescA[1] = "Further";
+        upgradeDescB[1] = "increase";
+        upgradeDescC[1] = "range";
+
+        upgradeDescA[2] = "Shoots";
+        upgradeDescB[2] = "gravel at";
+        upgradeDescC[2] = "enemies";
+
+        upgradeDescA[3] = "+5";
+        upgradeDescB[3] = "damage";
         upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "firerate";
+        upgradeDescC[4] = "";
+
+        upgradeDescA[5] = "Inflicts";
+        upgradeDescB[5] = "bleeding,";
+        upgradeDescC[5] = "+50 dmg";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[7];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[17];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[8];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("stoneWallTW");
-        upgradeSprites[3] = spritesH.get("metalWallTW");
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[7];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[16];
+    }
+
+    public void upgradeSpecial(int id) {
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    range += 30;
+                    break;
+                case 1:
+                    range += 40;
+                    if (nextLevelB > 5) nextLevelA++;
+                    break;
+                case 2:
+                    gravel = true;
+                    damage -= 10;
+                    name = "slingshotGravel";
+                    loadSprites();
+                    if (nextLevelB == 5) nextLevelB++;
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    damage += 5;
+                    break;
+                case 4:
+                    delay -= 20;
+                    if (nextLevelA > 2) nextLevelB++;
+                    break;
+                case 5:
+                    painful = true;
+                    damage += 50;
+                    delay += 10;
+                    name = "slingshotRock";
+                    loadSprites();
+                    if (nextLevelA == 2) nextLevelA++;
+                    break;
+            }
+        }
     }
 
     public void updateSprite() {}

@@ -26,7 +26,7 @@ public class Nightmare extends Turret {
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 18;
-        error = 20; //12
+        range = 200;
         numFireFrames = 14;
         numLoadFrames = 22;
         fireFrames = new PImage[numFireFrames];
@@ -35,24 +35,23 @@ public class Nightmare extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 15;
+        damage = 100;
         numProjectiles = 3;
-        effectLevel = 3;
+        effectLevel = 50;
         effectDuration = 220;
         loadSprites();
         debrisType = "darkMetal";
         price = 300;
         value = price;
         priority = 2; //strong
-        nextLevelA = 0;
-        nextLevelB = 2;
         setUpgrades();
         updateTowerArray();
     }
 
     public void fire(){ //needed to change projectile fired
+        //todo: fix spread
         for (int i = 0; i < numProjectiles; i++) {
-            float angleB = angle + radians(p.random(-error, error));
+            float angleB = angle;
             PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
             PVector spa = PVector.fromAngle(angleB-HALF_PI);
             spa.setMag(20);
@@ -71,41 +70,21 @@ public class Nightmare extends Turret {
     }
 
     private void setUpgrades(){
-        //damage
-        upgradeDamage[0] = 0;
-        upgradeDamage[1] = 0;
-        upgradeDamage[2] = 0;
-        upgradeDamage[3] = 0;
-        //delay (firerate)
-        upgradeDelay[0] = -45;
-        upgradeDelay[1] = 0;
-        upgradeDelay[2] = 0;
-        upgradeDelay[3] = 0;
+//        //delay (firerate)
+//        upgradeDelay[0] = -45;
+//        upgradeDelay[1] = 0;
+//        upgradeDelay[2] = 0;
+//        upgradeDelay[3] = 0;
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 100;
         upgradePrices[2] = 50;
         upgradePrices[3] = 100;
-        //heath
-        upgradeHealth[0] = 0;
-        upgradeHealth[1] = 0;
-        upgradeHealth[2] = 0;
-        upgradeHealth[3] = 0;
-        //error (accuracy)
-        upgradeError[0] = 0;
-        upgradeError[1] = 0;
-        upgradeError[2] = -4;
-        upgradeError[3] = 0;
-        //names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        upgradeNames[3] = name;
-        //debris
-        upgradeDebris[0] = "darkMetal";
-        upgradeDebris[1] = "darkMetal";
-        upgradeDebris[2] = "darkMetal";
-        upgradeDebris[3] = "darkMetal";
+//        //error (accuracy)
+//        upgradeRange[0] = 0;
+//        upgradeRange[1] = 0;
+//        upgradeRange[2] = -4;
+//        upgradeRange[3] = 0;
         //titles
         upgradeTitles[0] = "Firerate";
         upgradeTitles[1] = "More Needles";
@@ -131,11 +110,6 @@ public class Nightmare extends Turret {
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[4];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[3];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("stoneWallTW");
-        upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
     public void upgradeSpecial() {

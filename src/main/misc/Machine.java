@@ -78,10 +78,8 @@ public class Machine {
         if (deathFrame < 200) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
-        if (!dead) {
-            hurtParticles();
-            drillParticles();
-        } else if (deathFrame < 300) deathAnim();
+        if (!dead) hurtParticles();
+        else if (deathFrame < 300) deathAnim();
         if (p.frameCount > frameTimer && !dead) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
@@ -105,17 +103,6 @@ public class Machine {
         }
     }
 
-    private void drillParticles() {
-//        if (name.equals("stoneDrillMA")) {
-//            int r = (int) p.random(0, 10);
-//            if (r == 0) {
-//                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "stone"));
-//            } else {
-//                underParticles.add(new Debris(p, position.x, position.y, p.random(0, 360), "dirt"));
-//            }
-//        }
-    }
-
     private float shuffle(int i) {
         return i + p.random(0, 50);
     }
@@ -136,14 +123,14 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if ((int) p.random(0, 4) == 0)
-                    particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+                    particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 if ((int) p.random(0, 2) == 0)
                     particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
                 for (int i = 0; i < 3; i++) {
                     particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 }
                 if ((int) p.random(0, 8) == 0) {
-                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, 100, 10, 100, (int) p.random(1, 4)));
+                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, maxHp * 10, maxHp, 1000, (int) p.random(1, 4)));
                 }
             }
         }

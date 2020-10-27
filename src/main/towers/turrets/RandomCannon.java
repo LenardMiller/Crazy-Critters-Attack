@@ -1,8 +1,9 @@
 package main.towers.turrets;
 
-import main.particles.BuffParticle;
-import main.projectiles.MiscProjectile;
 import main.misc.Tile;
+import main.particles.BuffParticle;
+import main.projectiles.Laundry;
+import main.projectiles.MiscProjectile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -12,6 +13,9 @@ import static main.misc.MiscMethods.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
 public class RandomCannon extends Turret {
+
+    boolean laundry;
+    boolean barrel;
 
     public RandomCannon(PApplet p, Tile tile) {
         super(p,tile);
@@ -33,105 +37,130 @@ public class RandomCannon extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 3;
-        error = 11; //8
+        damage = 10;
+        range = 200;
         loadSprites();
         debrisType = "wood";
-        price = 200;
+        price = RANDOMCANNON_PRICE;
         value = price;
         priority = 0; //close
-        nextLevelA = 0;
-        nextLevelB = 2;
         setUpgrades();
         updateTowerArray();
     }
 
     public void fire() {
         float angleB = angle;
-        angleB += PApplet.radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         int spriteType = (int)(p.random(0,5.99f));
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);
-        spa.setMag(18);
+        PVector spa = PVector.fromAngle(angleB-HALF_PI);float particleCount = p.random(1,5);
+        if (barrel) {
+            particleCount = 1;
+            angleB += p.random(-0.1f,0.1f);
+            spa.setMag(27);
+        }
+        else spa.setMag(18);
         spp.add(spa);
-        float iM = p.random(1,5);
-        for (int i = 0; i < iM; i++) {
+        String part = "smoke";
+        if (laundry && p.random(0,3) < 1) {
+            projectiles.add(new Laundry(p,spp.x,spp.y, angleB, this, damage));
+            part = "poison";
+        }
+        else projectiles.add(new MiscProjectile(p,spp.x,spp.y, angleB, this, spriteType, damage));
+        for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
             PVector spp2 = new PVector(spp.x,spp.y);
             spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"smoke"));
+            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),part));
         }
-        projectiles.add(new MiscProjectile(p,spp.x,spp.y, angleB, this, spriteType, damage));
     }
 
     private void setUpgrades() {
-        //damage
-        upgradeDamage[0] = 2;
-        upgradeDamage[1] = 0;
-        upgradeDamage[2] = 0;
-        upgradeDamage[3] = 0;
-        //delay (firerate)
-        upgradeDelay[0] = 0;
-        upgradeDelay[1] = -5;
-        upgradeDelay[2] = 0;
-        upgradeDelay[3] = 0;
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 50;
-        upgradePrices[3] = 100;
-        //heath
-        upgradeHealth[0] = 0;
-        upgradeHealth[1] = 0;
-        upgradeHealth[2] = 0;
-        upgradeHealth[3] = 0;
-        //error (accuracy)
-        upgradeError[0] = 0;
-        upgradeError[1] = 0;
-        upgradeError[2] = -2;
-        upgradeError[3] = -2;
-        //names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        upgradeNames[3] = name;
-        //debris
-        upgradeDebris[0] = "wood";
-        upgradeDebris[1] = "wood";
-        upgradeDebris[2] = "wood";
-        upgradeDebris[3] = "wood";
+        upgradePrices[0] = 125;
+        upgradePrices[1] = 150;
+        upgradePrices[2] = 600;
+        upgradePrices[3] = 75;
+        upgradePrices[4] = 125;
+        upgradePrices[5] = 500;
         //titles
         upgradeTitles[0] = "Damage Up";
         upgradeTitles[1] = "Faster Firing";
-        upgradeTitles[2] = "Reduce Spread";
-        upgradeTitles[3] = "Limited Spread";
-        //desc line one
-        upgradeDescA[0] = "+2";
-        upgradeDescA[1] = "Increase";
-        upgradeDescA[2] = "Increase";
-        upgradeDescA[3] = "Further";
-        //desc line two
+        upgradeTitles[2] = "Rotating Barrel";
+        upgradeTitles[3] = "Longer Range";
+        upgradeTitles[4] = "Longest Range";
+        upgradeTitles[5] = "Dirty Laundry";
+        //description
+        upgradeDescA[0] = "+15";
         upgradeDescB[0] = "damage";
-        upgradeDescB[1] = "firerate";
-        upgradeDescB[2] = "accuracy";
-        upgradeDescB[3] = "increase";
-        //desc line three
         upgradeDescC[0] = "";
+
+        upgradeDescA[1] = "Increase";
+        upgradeDescB[1] = "firerate";
         upgradeDescC[1] = "";
-        upgradeDescC[2] = "";
-        upgradeDescC[3] = "accuracy";
+
+        upgradeDescA[2] = "Greatly";
+        upgradeDescB[2] = "increase";
+        upgradeDescC[2] = "firerate";
+
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "range";
+        upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "Further";
+        upgradeDescB[4] = "increase";
+        upgradeDescC[4] = "range";
+
+        upgradeDescA[5] = "Toxic";
+        upgradeDescB[5] = "explosions";
+        upgradeDescC[5] = "";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[10];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[6];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("stoneWallTW");
-        upgradeSprites[3] = spritesH.get("metalWallTW");
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[15];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[6];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[12];
+    }
+
+    public void upgradeSpecial(int id) {
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    damage += 15;
+                    break;
+                case 1:
+                    delay -= 10;
+                    if (nextLevelB > 5) nextLevelA++;
+                    break;
+                case 2:
+                    barrel = true;
+                    delay = 6;
+                    damage -= 5;
+                    name = "miscCannonBarrel";
+                    loadSprites();
+                    if (nextLevelB == 5) nextLevelB++;
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    range += 20;
+                    break;
+                case 4:
+                    range += 30;
+                    if (nextLevelA > 2) nextLevelB++;
+                    break;
+                case 5:
+                    laundry = true;
+                    damage += 10;
+                    name = "miscCannonLaundry";
+                    loadSprites();
+                    if (nextLevelA == 2) nextLevelA++;
+                    break;
+            }
+        }
     }
 
     public void updateSprite() {}

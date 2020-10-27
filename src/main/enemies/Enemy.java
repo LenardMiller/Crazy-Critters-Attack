@@ -53,7 +53,7 @@ public abstract class Enemy {
     int attackStartFrame;
     public int barTrans;
     public int tintColor;
-    String hitParticle;
+    public String hitParticle;
     public String name;
     private Tower targetTower;
     private boolean targetMachine;
@@ -230,7 +230,7 @@ public abstract class Enemy {
         }
     }
 
-    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) { //when the enemy hits a projectile
+    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) {
         lastDamageType = type;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -241,42 +241,56 @@ public abstract class Enemy {
                 turret.damageTotal += damage + hp;
             } else turret.damageTotal += damage;
         }
+        int effectTimer = p.frameCount + 10;
         if (buffs.size() > 0) {
             for (int j = 0; j < buffs.size(); j++) {
                 Buff buff = buffs.get(j);
                 if (buff.enId == i && buff.name.equals(pjBuff)) {
+                    effectTimer = buff.effectTimer;
                     buffs.remove(j);
                     break;
                 }
             }
         }
         if (pjBuff != null) {
+            Buff buff;
             switch (pjBuff) {
                 case "wet":
-                    buffs.add(new Wet(p, i, turret));
+                    buff = new Wet(p, i, turret);
                     break;
                 case "burning":
-                    buffs.add(new Burning(p, i, effectLevel, effectDuration, turret));
+                    buff = new Burning(p, i, effectLevel, effectDuration, turret);
+                    break;
+                case "bleeding":
+                    buff = new Bleeding(p, i, turret);
                     break;
                 case "poisoned":
-                    buffs.add(new Poisoned(p, i, turret));
+                    buff = new Poisoned(p, i, turret);
                     break;
                 case "decay":
-                    if (turret != null) buffs.add(new Decay(p, i, effectLevel, effectDuration, turret));
-                    else buffs.add(new Decay(p, i, 1, 120, null));
+                    if (turret != null) buff = new Decay(p, i, effectLevel, effectDuration, turret);
+                    else buff = new Decay(p, i, 1, 120, null);
                     break;
+                default:
+                    buff = null;
+                    break;
+            }
+            if (buff != null) {
+                //in order to prevent resetting timer after buff is reapplied
+                buff.effectTimer = effectTimer;
+                buffs.add(buff);
             }
         }
         damageEffect(splash);
     }
 
-    private void damageEffect(boolean parts) {
+    private void damageEffect(boolean particles) {
         barTrans = 255;
         tintColor = 0;
-        if (parts) {
+        if (particles) {
             int num = (int) (p.random(1, 3)) * pfSize * pfSize;
             for (int j = num; j >= 0; j--) { //sprays ouch
-                particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+                Main.particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
             }
         }
     }

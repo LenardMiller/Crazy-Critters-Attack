@@ -1,7 +1,8 @@
 package main.towers;
 
-import main.particles.Debris;
 import main.misc.Tile;
+import main.particles.Debris;
+import main.particles.Ouch;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -20,7 +21,7 @@ public abstract class Tower {
     public String name;
     public float angle;
     public int delay;
-    public float error;
+    public float range;
     public PVector size;
     public int maxHp;
     public int hp;
@@ -39,18 +40,11 @@ public abstract class Tower {
     public int nextLevelB;
 
     public int[] upgradePrices;
-    public int[] upgradeHealth;
-    protected int[] upgradeDamage;
-    protected int[] upgradeDelay;
-    protected float[] upgradeError;
-    public String[] upgradeNames;
-    protected String[] upgradeDebris;
     public String[] upgradeTitles;
     public String[] upgradeDescA;
     public String[] upgradeDescB;
     public String[] upgradeDescC;
     public PImage[] upgradeIcons;
-    public PImage[] upgradeSprites;
 
     public Tower(PApplet p, Tile tile) {
         this.p = p;
@@ -60,7 +54,7 @@ public abstract class Tower {
         name = "null";
         size = new PVector(120, 37);
         delay = 0;
-        error = 0;
+        range = 0;
         this.maxHp = 1;
         hp = maxHp;
         hit = false;
@@ -69,20 +63,12 @@ public abstract class Tower {
         price = 0;
         turret = false;
         visualize = false;
-        nextLevelB = 2;
-        upgradeDamage = new int[4];
-        upgradeDelay = new int[4];
-        upgradePrices = new int[4];
-        upgradeHealth = new int[4];
-        upgradeError = new float[4];
-        upgradeNames = new String[4];
+        nextLevelB = 0;
         upgradeDescA = new String[4];
         upgradeDescB = new String[4];
         upgradeDescC = new String[4];
-        upgradeDebris = new String[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
-        upgradeSprites = new PImage[4];
         updateNodes();
         updateTowerArray();
     }
@@ -122,14 +108,8 @@ public abstract class Tower {
     }
 
     public void upgrade(int id) {
-        price += upgradePrices[nextLevelB];
-        maxHp += upgradeHealth[nextLevelB];
-        hp += upgradeHealth[nextLevelB];
-        name = upgradeNames[nextLevelB];
-        debrisType = upgradeDebris[nextLevelB];
-        sprite = upgradeSprites[nextLevelB];
         nextLevelB++;
-        if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--) {
@@ -158,9 +138,18 @@ public abstract class Tower {
         updateNodes();
     }
 
+    public void heal() {
+        if (hp < maxHp) {
+            for (int i = 0; i < 5; i++) {
+                particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
+            }
+        }
+        hp = maxHp;
+    }
+
     public void repair() {
         money -= ceil((float)(price) - (float)(value));
-        hp = maxHp;
+        heal();
     }
 
     public void sell() {

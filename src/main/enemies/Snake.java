@@ -10,11 +10,11 @@ public class Snake extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = .3f;
+        maxSpeed = 0.7f;
         speed = maxSpeed;
         moneyDrop = 20;
         damage = 3;
-        maxHp = 20; //Hp
+        maxHp = 60; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "snake";

@@ -19,7 +19,7 @@ public class LittleWorm extends Enemy {
         speed = maxSpeed;
         moneyDrop = 30;
         damage = 1;
-        maxHp = 20; //Hp
+        maxHp = 50; //Hp
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "worm";
@@ -30,7 +30,8 @@ public class LittleWorm extends Enemy {
         betweenAttackFrames = 2;
         attackFrame = attackStartFrame;
         stealthy = true;
-        corpseSize = new PVector(7,7);
+        partSize = new PVector(7, 7);
+        corpseSize = new PVector(25,25);
         loadSprites();
     }
 

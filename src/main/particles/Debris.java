@@ -6,7 +6,7 @@ import processing.core.PVector;
 import static main.Main.spritesH;
 import static processing.core.PConstants.HALF_PI;
 
-public class Debris extends Particle{
+public class Debris extends Particle {
     public Debris(PApplet p, float x, float y, float angle, String type) {
         super(p, x, y, angle);
         position = new PVector(x, y);

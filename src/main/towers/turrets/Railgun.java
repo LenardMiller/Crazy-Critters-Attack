@@ -36,7 +36,7 @@ public class Railgun extends Turret {
         delayTime = delay;
         damage = 300;
         pjSpeed = -1;
-        error = 0; //0
+        range = 0; //0
         numFireFrames = 15;
         numLoadFrames = 9;
         numIdleFrames = 6;
@@ -59,8 +59,6 @@ public class Railgun extends Turret {
         price = 400;
         value = price;
         priority = 2; //strong
-        nextLevelA = 0;
-        nextLevelB = 2;
         setUpgrades();
         updateTowerArray();
     }
@@ -123,41 +121,11 @@ public class Railgun extends Turret {
     }
 
     private void setUpgrades(){
-        //damage
-        upgradeDamage[0] = 0;
-        upgradeDamage[1] = 0;
-        upgradeDamage[2] = 0;
-        upgradeDamage[3] = 0;
-        //delay (firerate)
-        upgradeDelay[0] = 0;
-        upgradeDelay[1] = 0;
-        upgradeDelay[2] = 0;
-        upgradeDelay[3] = 0;
         //price
         upgradePrices[0] = 0;
         upgradePrices[1] = 0;
         upgradePrices[2] = 0;
         upgradePrices[3] = 0;
-        //heath
-        upgradeHealth[0] = 0;
-        upgradeHealth[1] = 0;
-        upgradeHealth[2] = 0;
-        upgradeHealth[3] = 0;
-        //error (accuracy)
-        upgradeError[0] = 0;
-        upgradeError[1] = 0;
-        upgradeError[2] = 0;
-        upgradeError[3] = 0;
-        //names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        upgradeNames[3] = name;
-        //debris
-        upgradeDebris[0] = "ultimate";
-        upgradeDebris[1] = "ultimate";
-        upgradeDebris[2] = "ultimate";
-        upgradeDebris[3] = "ultimate";
         //titles
         upgradeTitles[0] = "";
         upgradeTitles[1] = "";
@@ -183,11 +151,6 @@ public class Railgun extends Turret {
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("stoneWallTW");
-        upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
     public void upgradeSpecial() {}

@@ -81,7 +81,7 @@ public class Main extends PApplet {
     public static PFont mediumFont;
     public static PFont smallFont;
 
-    public static int money = 2000;
+    public static int money = 100;
     public static boolean alive = true;
     public static boolean debug = false;
     public static boolean playingLevel = false;
@@ -92,6 +92,10 @@ public class Main extends PApplet {
     public static final int BOARD_HEIGHT = 900;
     public static final int GRID_WIDTH = 1100;
     public static final int GRID_HEIGHT = 1100;
+
+    public static final int SLINGSHOT_PRICE = 75;
+    public static final int RANDOMCANNON_PRICE = 150;
+    public static final int CROSSBOW_PRICE = 200;
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
@@ -170,8 +174,10 @@ public class Main extends PApplet {
         //generates levels
         currentLevel = 0; //temp
         levels = new Level[1];
-        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest");
+        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50);
+        //load level data
         DataControl.load(this, levels[currentLevel].layout);
+        money = levels[currentLevel].startingCash;
         updateNodes();
     }
 
@@ -185,6 +191,7 @@ public class Main extends PApplet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         keyBinds.spawnKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {

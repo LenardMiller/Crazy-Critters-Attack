@@ -26,6 +26,7 @@ public class InGameGui {
                 break;
             }
         }
+        selection.turretOverlay();
         p.fill(235); //big white bg
         p.rect(900,212,200,688);
         levels[currentLevel].display();
@@ -35,7 +36,7 @@ public class InGameGui {
         p.fill(130); //towerbuy bg
         p.rect(900,21,200,127);
         wallBuyButton.main();
-        addMoneyButton.main();
+//        addMoneyButton.main();
         moneyIcon.main();
         playButton.main(); //display is in Level
         if (!isTowers || selection.name.equals("null")) {
@@ -94,23 +95,33 @@ public class InGameGui {
     private void build() {
         openMenuButton = new OpenMenu(p,BOARD_WIDTH+100,12,"null",true);
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 45.5f,"slingshot",true)); //row 1
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 45.5f,"crossbow",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 45.5f,"miscCannon",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 45.5f,"energyBlaster",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 45.5f,"magicMissleer",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 85.5f,"tesla",true)); //row 2
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 85.5f,"nightmare",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 85.5f,"flamethrower",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"railgun",true));
-        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 85.5f,"waveMotion",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 45.5f,"miscCannon",true));
+        towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 45.5f,"crossbow",true));
+        if (currentLevel > 0) {
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 139.5f, 45.5f, "energyBlaster", true));
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 178.5f, 45.5f, "magicMissleer", true));
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 22.5f, 85.5f, "tesla", true)); //row 2
+            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 85.5f,"nightmare",true));
+            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 85.5f,"flamethrower",true));
+            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"railgun",true));
+            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 85.5f,"waveMotion",true));
+        } else {
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 139.5f, 45.5f, "null", true));
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 178.5f, 45.5f, "null", true));
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 22.5f, 85.5f, "null", true)); //row 2
+            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 85.5f,"null",true));
+            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 85.5f,"null",true));
+            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"null",true));
+            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 85.5f,"null",true));
+        }
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 22.5f, 124.5f,"null",true)); //row 3
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 124.5f,"null",true));
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 124.5f,"null",true));
         wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-12,"null",true);
-        addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
-        moneyIcon = new GuiObject(p,BOARD_WIDTH+33, 211-29,"moneyIc",true);
+//        addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
+        moneyIcon = new GuiObject(p,BOARD_WIDTH, 211-29,"moneyIc",true);
         playButton = new Play(p,1000,274.5f,"null",true);
         upgradeButtonA = new UpgradeTower(p,1000,480,"null",false, 0);
         upgradeButtonB = new UpgradeTower(p,1000,630,"null",false, 1);

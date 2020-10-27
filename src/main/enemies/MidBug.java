@@ -11,7 +11,7 @@ public class MidBug extends Enemy{
         radius = 13;
         maxSpeed = .5f;
         speed = maxSpeed;
-        moneyDrop = 40;
+        moneyDrop = 20;
         damage = 3;
         maxHp = 40; //Hp <---------------------------
         hp = maxHp;

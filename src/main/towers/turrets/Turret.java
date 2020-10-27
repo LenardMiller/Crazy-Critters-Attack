@@ -1,10 +1,11 @@
 package main.towers.turrets;
 
 import main.enemies.Enemy;
-import main.particles.Debris;
-import main.misc.Tile;
-import main.towers.Tower;
 import main.misc.CompressArray;
+import main.misc.Tile;
+import main.particles.Debris;
+import main.particles.Ouch;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
-import static main.misc.MiscMethods.clampAngle;
 
 public abstract class Turret extends Tower {
 
@@ -53,7 +53,7 @@ public abstract class Turret extends Tower {
         delay = 240;
         delayTime = delay;
         pjSpeed = 2;
-        error = 0;
+        range = 0;
         numFireFrames = 1;
         numLoadFrames = 1;
         numIdleFrames = 1;
@@ -71,19 +71,14 @@ public abstract class Turret extends Tower {
         loadDelayTime = 0;
         turret = true;
         loadSprites();
-        upgradeDamage = new int[4];
-        upgradeDelay = new int[4];
-        upgradePrices = new int[4];
-        upgradeHealth = new int[4];
-        upgradeError = new float[4];
-        upgradeNames = new String[4];
-        upgradeDebris = new String[4];
-        upgradeTitles = new String[4];
-        upgradeDescA = new String[4];
-        upgradeDescB = new String[4];
-        upgradeDescC = new String[4];
-        upgradeIcons = new PImage[4];
-        upgradeSprites = new PImage[4];
+        upgradePrices = new int[6];
+        upgradeTitles = new String[6];
+        upgradeDescA = new String[6];
+        upgradeDescB = new String[6];
+        upgradeDescC = new String[6];
+        upgradeIcons = new PImage[6];
+        nextLevelA = 0;
+        nextLevelB = upgradeTitles.length / 2;
         updateTowerArray();
     }
 
@@ -101,33 +96,33 @@ public abstract class Turret extends Tower {
         //0: close
         //1: far
         //2: strong
-        float dist;
-        if (priority == 0) dist = 1000000;
-        else dist = 0;
+        float finalDist;
+        if (priority == 0) finalDist = 1000000;
+        else finalDist = 0;
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
             if (!enemy.stealthMode) {
-                float x = abs(tile.position.x - enemy.position.x);
-                float y = abs(tile.position.y - enemy.position.y);
-                float t = sqrt(sq(x) + sq(y));
-                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900) {
-                    if (priority == 0 && t < dist) { //close
+                float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
+                float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
+                float dist = sqrt(sq(x) + sq(y));
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < range) {
+                    if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
-                        dist = t;
+                        finalDist = dist;
                     }
-                    if (priority == 1 && t > dist) { //far
+                    if (priority == 1 && dist > finalDist) { //far
                         e = enemy;
-                        dist = t;
+                        finalDist = dist;
                     }
                     if (priority == 2) {
                         if (enemy.maxHp > maxHp) { //strong
                             e = enemy;
-                            dist = t;
+                            finalDist = dist;
                             maxHp = enemy.maxHp;
-                        } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                        } else if (enemy.maxHp == maxHp && dist < finalDist) { //strong -> close
                             e = enemy;
-                            dist = t;
+                            finalDist = dist;
                         }
                     }
                 }
@@ -152,6 +147,8 @@ public abstract class Turret extends Tower {
         angle = clampAngle(angle);
         angle += angleDifference(targetAngle, angle) / 10;
 
+        if (abs(targetAngle - angle) < 0.05) angle = targetAngle; //snap to prevent getting stuck
+
         if (visualize && debug) { //cool lines
             p.stroke(255);
             p.line(position.x, position.y, target.x, target.y);
@@ -164,10 +161,11 @@ public abstract class Turret extends Tower {
 
     public void fire() {
         delayTime = p.frameCount + delay; //waits this time before firing
-        angle += radians(p.random(-error, error));
     }
 
     public void loadSprites() {
+        fireFrames = new PImage[numFireFrames];
+        loadFrames = new PImage[numLoadFrames];
         sBase = spritesH.get(name + "BaseTR");
         sIdle = spritesH.get(name + "IdleTR");
         fireFrames = spritesAnimH.get(name + "FireTR");
@@ -187,6 +185,9 @@ public abstract class Turret extends Tower {
     }
 
     public void displayPassB() {
+        if (hp < maxHp && p.random(0, 30) < 1) {
+            particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greyPuff"));
+        }
         if (tintColor < 255) tintColor += 20;
         if (spriteType == 0) { //idle
             sprite = sIdle;
@@ -214,13 +215,13 @@ public abstract class Turret extends Tower {
                     int oldSize = numLoadFrames;
                     int newSize = (delayTime - p.frameCount);
                     spriteArray = new ArrayList<>();
-                    if (oldSize > newSize) for (int i = 0; i < oldSize; i++) spriteArray.add(i);
-                    if (oldSize > newSize) {
-                        while (spriteArray.size() != newSize) {
-                            compress = new CompressArray(oldSize, newSize, spriteArray);
-                            compress.main();
-                        }
-                    } else {
+                    if (oldSize > newSize) { //decreasing size
+                        //creates the new spriteArray
+                        for (int i = 0; i < oldSize; i++) spriteArray.add(i);
+                        //compression
+                        compress = new CompressArray(oldSize, newSize, spriteArray);
+                        compress.main();
+                    } else { //increasing size
                         compress = new CompressArray(oldSize - 1, newSize, spriteArray);
                         compress.main();
                         spriteArray = compress.compArray;
@@ -270,30 +271,24 @@ public abstract class Turret extends Tower {
     }
 
     public void upgrade(int id) {
-        int nextLevel;
-        if (id == 0) nextLevel = nextLevelA;
-        else nextLevel = nextLevelB;
-        damage += upgradeDamage[nextLevel];
-        delay += upgradeDelay[nextLevel];
-        price += upgradePrices[nextLevel];
-        value += upgradePrices[nextLevel];
-        maxHp += upgradeHealth[nextLevel];
-        hp += upgradeHealth[nextLevel];
-        error += upgradeError[nextLevel];
-        name = upgradeNames[nextLevel];
-        debrisType = upgradeDebris[nextLevel];
-//        sprite = upgradeSprites[nextLevel];
-        upgradeSpecial();
+        upgradeSpecial(id);
         if (id == 0) {
+            value += upgradePrices[nextLevelA];
             nextLevelA++;
-            if (nextLevelA < upgradeNames.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
+            if (nextLevelA < upgradeTitles.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
             else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-        } else if (id == 1) nextLevelB++;
-        if (id == 1) {
-            if (nextLevelB < upgradeNames.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+            if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+            else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        } else if (id == 1) {
+            value += upgradePrices[nextLevelB];
+            nextLevelB++;
+            if (nextLevelA < upgradeTitles.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
+            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+            if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
             else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         }
-        int num = (int) (p.random(30, 50)); //shower debris
+        //shower debris
+        int num = (int) (p.random(30, 50));
         for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p, (tile.position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (tile.position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
         }
@@ -301,6 +296,5 @@ public abstract class Turret extends Tower {
         while (delay <= numFireFrames * betweenFireFrames + numIdleFrames) betweenFireFrames--;
     }
 
-    public void upgradeSpecial() {
-    }
+    public void upgradeSpecial(int id) {}
 }  

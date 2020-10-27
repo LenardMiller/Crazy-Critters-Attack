@@ -29,7 +29,7 @@ public class EnergyBlaster extends Turret{
         delayTime = delay;
         damage = 30;
         pjSpeed = 16;
-        error = 6; //5 degrees
+        range = 6; //5 degrees
         numFireFrames = 14; //14
         betweenFireFrames = 2;
         numLoadFrames = 42; //42
@@ -43,15 +43,12 @@ public class EnergyBlaster extends Turret{
         price = 300;
         value = price;
         priority = 2; //strong
-        nextLevelA = 0;
-        nextLevelB = 2;
         setUpgrades();
         updateTowerArray();
     }
 
     public void fire() { //needed to change projectile fired
         float angleB = angle;
-        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angleB-HALF_PI);
@@ -68,41 +65,21 @@ public class EnergyBlaster extends Turret{
     }
 
     private void setUpgrades(){
-        //damage
-        upgradeDamage[0] = 0;
-        upgradeDamage[1] = 0;
-        upgradeDamage[2] = 0;
-        upgradeDamage[3] = 0;
-        //delay (firerate)
-        upgradeDelay[0] = 0;
-        upgradeDelay[1] = 0;
-        upgradeDelay[2] = -25;
-        upgradeDelay[3] = -35;
+//        //delay (firerate)
+//        upgradeDelay[0] = 0;
+//        upgradeDelay[1] = 0;
+//        upgradeDelay[2] = -25;
+//        upgradeDelay[3] = -35;
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 100;
         upgradePrices[2] = 50;
         upgradePrices[3] = 100;
-        //heath
-        upgradeHealth[0] = 0;
-        upgradeHealth[1] = 0;
-        upgradeHealth[2] = 0;
-        upgradeHealth[3] = 0;
-        //error (accuracy)
-        upgradeError[0] = -2;
-        upgradeError[1] = 0;
-        upgradeError[2] = 0;
-        upgradeError[3] = 0;
-        //names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        upgradeNames[3] = name;
-        //debris
-        upgradeDebris[0] = "metal";
-        upgradeDebris[1] = "metal";
-        upgradeDebris[2] = "metal";
-        upgradeDebris[3] = "metal";
+//        //error (accuracy)
+//        upgradeRange[0] = -2;
+//        upgradeRange[1] = 0;
+//        upgradeRange[2] = 0;
+//        upgradeRange[3] = 0;
         //titles
         upgradeTitles[0] = "More Precise";
         upgradeTitles[1] = "Splashier";
@@ -128,11 +105,6 @@ public class EnergyBlaster extends Turret{
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[12];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[7];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[10];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("stoneWallTW");
-        upgradeSprites[3] = spritesH.get("metalWallTW");
     }
 
     public void upgradeSpecial() {

@@ -45,10 +45,10 @@ public class Selection { //what tower is selected
                 upgradeIconA.active = true;
                 upgradeIconA.position.y = 565;
                 upgradeIconB.position.y = 715;
-                if (tower.nextLevelA < tower.upgradeNames.length / 2) {
+                if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
                     upgradeIconA.sprite = tower.upgradeIcons[tower.nextLevelA];
                 } else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-                if (tower.nextLevelB < tower.upgradeNames.length) {
+                if (tower.nextLevelB < tower.upgradeTitles.length) {
                     upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
                 } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
@@ -65,7 +65,7 @@ public class Selection { //what tower is selected
                 upgradeButtonB.position.y = 630;
                 upgradeIconA.active = false;
                 upgradeIconB.position.y = 610;
-                if (tower.nextLevelB < tower.upgradeNames.length) {
+                if (tower.nextLevelB < tower.upgradeTitles.length) {
                     upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
                 } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
@@ -87,6 +87,17 @@ public class Selection { //what tower is selected
                 upgradeIconB.active = false;
                 tower.visualize = false;
             }
+        }
+    }
+
+    void turretOverlay() {
+        if (!name.equals("null") && tiles.get(id).tower != null) {
+            //display range and square
+            p.fill(255, 25);
+            p.stroke(255);
+            p.rect(tower.tile.position.x - tower.size.x, tower.tile.position.y - tower.size.y, tower.size.y, tower.size.y);
+            p.circle(tower.tile.position.x - (tower.size.x / 2), tower.tile.position.y - (tower.size.y / 2), tower.range * 2);
+            p.noStroke();
         }
     }
 
@@ -112,74 +123,81 @@ public class Selection { //what tower is selected
                 p.text("Slingshot", 1000, 241);
                 speed = 12;
                 break;
-            case "crossbow":
-                p.text("Crossbow", 1000, 241);
-                speed = 24;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Piercing", 910, 376 + offset);
-                p.fill(0);
+            case "slingshotRock":
+                p.text("Slingshot MKII", 1000, 241);
+                speed = 12;
+                setTextPurple("Bleeding", offset);
+                break;
+            case "slingshotGravel":
+                p.text("Gravel Slinger", 1000, 241);
+                speed = 12;
+                setTextPurple("Scattershot", offset);
                 break;
             case "miscCannon":
                 p.text("Luggage", 1000, 241);
                 p.text("Blaster", 1000, 266);
                 offset = 25;
                 speed = 12;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(0);
+                break;
+            case "miscCannonLaundry":
+                p.text("Dirty Luggage", 1000, 241);
+                p.text("Blaster", 1000, 266);
+                offset = 25;
+                speed = 12;
+                setTextPurple("Toxic explosions", offset);
+                break;
+            case "miscCannonBarrel":
+                p.text("Minibarrel", 1000, 241);
+                speed = 12;
+                break;
+            case "crossbow":
+                p.text("Crossbow", 1000, 241);
+                speed = 24;
+                setTextPurple("Piercing", offset);
+                break;
+            case "crossbowReinforced":
+                p.text("Reinforced", 1000, 241);
+                p.text("Crossbow", 1000, 266);
+                offset = 25;
+                speed = 24;
+                setTextPurple("Piercing", offset);
+                break;
+            case "crossbowMultishot":
+                p.text("Shotbow", 1000, 241);
+                speed = 24;
+                setTextPurple("Piercing", offset);
                 break;
             case "energyBlaster":
                 p.text("Energy Blaster", 1000, 241);
                 speed = 16;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Splash damage", 910, 376 + offset);
-                p.fill(0);
+                setTextPurple("Energy explosions", offset);
                 break;
             case "magicMissleer":
                 p.text("Magic Missileer", 1000, 241);
                 speed = 5;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Three homing missiles", 910, 376 + offset);
+                setTextPurple("Three homing missiles", offset);
                 break;
             case "magicMissleerFour":
                 p.text("Magic Missileer", 1000, 241);
                 speed = 5;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100, 0, 200);
-                p.text("Four homing missiles", 910, 376 + offset);
+                setTextPurple("Four homing missiles", offset);
                 break;
             case "tesla":
                 p.text("Tesla Tower", 1000, 241);
                 speed = -1;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100,0,200);
-                p.text("Chain Lightning", 910, 376 + offset);
+                setTextPurple("Chain lightning", offset);
                 break;
             case "nightmare":
                 p.text("Nightmare", 1000, 241);
                 p.text("Blaster", 1000, 266);
                 offset = 25;
                 speed = 18;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100,0,200);
-                p.text("Shotgun, decay", 910, 376 + offset);
+                setTextPurple("Shotgun, decay", offset);
                 break;
             case "flamethrower":
                 p.text("Flamethrower", 1000, 241);
                 speed = 5;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100,0,200);
-                p.text("Fire, limited range", 910, 376 + offset);
+                setTextPurple("Fire, slow rotation", offset);
                 break;
             case "railgun":
                 p.text("Railgun", 1000, 241);
@@ -188,10 +206,7 @@ public class Selection { //what tower is selected
             case "waveMotion":
                 p.text("Death Beam", 1000, 241);
                 speed = -1;
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.fill(100,0,200);
-                p.text("Energy beam", 910, 376 + offset);
+                setTextPurple("Energy beam", offset);
                 break;
         }
 
@@ -205,11 +220,6 @@ public class Selection { //what tower is selected
         else p.text(tower.killsTotal + " kill", 910, 475 + offsetB);
         p.text(tower.damageTotal + " damage", 910, 500 + offsetB);
 
-        //put box around selected
-        p.fill(255, 25);
-        p.stroke(255);
-        p.rect(tower.tile.position.x - tower.size.x, tower.tile.position.y - tower.size.y, tower.size.x, tower.size.y);
-
         //priority
         p.textFont(largeFont);
         p.textAlign(CENTER);
@@ -221,37 +231,35 @@ public class Selection { //what tower is selected
             p.text("Priority: " + priority, 1000, 843);
         }
 
-        //upgrade Zero
+        //upgrade Zero / A
         int offsetC;
-        if (tower.turret) { //only display if turret
-            offsetC = -45;
-            if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
-            if (tower.nextLevelA < tower.upgradeNames.length / 2) {
-                if (money >= tower.upgradePrices[tower.nextLevelA]) p.fill(11, 56, 0);
-                else p.fill(75, 0, 0);
-                p.textFont(largeFont);
-                p.text(tower.upgradeTitles[tower.nextLevelA], 1000, 585 + offsetC);
-                p.text("$" + tower.upgradePrices[tower.nextLevelA], 1000, 693 + offsetC);
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.text(tower.upgradeDescA[tower.nextLevelA], 910, 615 + offsetC);
-                p.text(tower.upgradeDescB[tower.nextLevelA], 910, 635 + offsetC);
-                p.text(tower.upgradeDescC[tower.nextLevelA], 910, 655 + offsetC);
-            } else {
-                p.fill(15);
-                p.textFont(largeFont);
-                p.text("N/A", 1000, 585 + offsetC);
-                p.textFont(mediumFont);
-                p.textAlign(LEFT);
-                p.text("No more", 910, 615 + offsetC);
-                p.text("upgrades", 910, 635 + offsetC);
-            }
+        offsetC = -45;
+        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
+        if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
+            if (money >= tower.upgradePrices[tower.nextLevelA]) p.fill(11, 56, 0);
+            else p.fill(75, 0, 0);
+            p.textFont(largeFont);
+            p.text(tower.upgradeTitles[tower.nextLevelA], 1000, 585 + offsetC);
+            p.text("$" + tower.upgradePrices[tower.nextLevelA], 1000, 693 + offsetC);
+            p.textFont(mediumFont);
+            p.textAlign(LEFT);
+            p.text(tower.upgradeDescA[tower.nextLevelA], 910, 615 + offsetC);
+            p.text(tower.upgradeDescB[tower.nextLevelA], 910, 635 + offsetC);
+            p.text(tower.upgradeDescC[tower.nextLevelA], 910, 655 + offsetC);
+        } else {
+            p.fill(15);
+            p.textFont(largeFont);
+            p.text("N/A", 1000, 585 + offsetC);
+            p.textFont(mediumFont);
+            p.textAlign(LEFT);
+            p.text("No more", 910, 615 + offsetC);
+            p.text("upgrades", 910, 635 + offsetC);
         }
-        //upgrade One
+        //upgrade One / B
         offsetC = 0;
         if (tower.turret) offsetC = 105;
         if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
-        if (tower.nextLevelB < tower.upgradeNames.length) {
+        if (tower.nextLevelB < tower.upgradeTitles.length) {
             if (money >= tower.upgradePrices[tower.nextLevelB]) p.fill(11, 56, 0);
             else p.fill(75, 0, 0);
             p.textFont(largeFont);
@@ -296,12 +304,13 @@ public class Selection { //what tower is selected
             else if (speed < 8) p.text("Low velocity", 910, 336 + offset);
             else if (speed <= 15) p.text("Medium velocity", 910, 336 + offset);
             else p.text("High velocity", 910, 336 + offset);
-            //accuracy (error)
-            if (tower.error == 0) p.text("Perfect accuracy", 910, 356 + offset);
-            else if (tower.error > 0 && tower.error <= 3) p.text("High accuracy", 910, 356 + offset);
-            else if (tower.error > 3 && tower.error <= 5) p.text("Medium accuracy", 910, 356 + offset);
-            else if (tower.error > 5 && tower.error <= 9) p.text("Low accuracy", 910, 356 + offset);
-            else if (tower.error > 9) p.text("Very low accuracy", 910, 356 + offset);
         }
+    }
+
+    private void setTextPurple(String s, int offset) {
+        p.textFont(mediumFont);
+        p.textAlign(LEFT);
+        p.fill(100, 0, 200);
+        p.text(s, 910, 356 + offset);
     }
 }

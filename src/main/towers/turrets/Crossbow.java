@@ -1,7 +1,8 @@
 package main.towers.turrets;
 
-import main.projectiles.Bolt;
 import main.misc.Tile;
+import main.projectiles.Bolt;
+import main.projectiles.ReinforcedBolt;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -12,6 +13,8 @@ import static main.misc.MiscMethods.updateTowerArray;
 public class Crossbow extends Turret {
 
     private int pierce;
+    private boolean multishot;
+    private boolean reinforced;
 
     public Crossbow(PApplet p, Tile tile) {
         super(p,tile);
@@ -21,11 +24,11 @@ public class Crossbow extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 310; //default: 310 frames
+        delay = 270;
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 24;
-        error = 2; //set to 360 for a fun time. default: 2 degrees
+        range = 320;
         numFireFrames = 13;
         numLoadFrames = 81;
         fireFrames = new PImage[numFireFrames];
@@ -34,96 +37,118 @@ public class Crossbow extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 25;
+        damage = 30;
         pierce = 2;
         loadSprites();
         debrisType = "wood";
-        price = 200;
+        price = CROSSBOW_PRICE;
         value = price;
         priority = 1; //last
-        nextLevelA = 0;
-        nextLevelB = 2;
+        multishot = false;
         setUpgrades();
         updateTowerArray();
     }
 
     public void fire(){ //needed to change projectile fired
-        float angleB = angle;
-        angleB += radians(p.random(-error,error));
         delayTime = p.frameCount + delay; //waits this time before firing
-        projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angleB, this, damage, pierce));
+        if (multishot) {
+            float offset = 0.07f;
+            int count = 7;
+            float a = angle - (floor(count / 2f) * offset);
+            for (int i = 0; i < count; i++) {
+                projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, a, this, damage, pierce));
+                a += offset;
+            }
+        } else {
+            if (reinforced) projectiles.add(new ReinforcedBolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
+            else projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
+        }
     }
 
     private void setUpgrades(){
-        //damage
-        upgradeDamage[0] = 10;
-        upgradeDamage[1] = 0;
-        upgradeDamage[2] = 0;
-        upgradeDamage[3] = 0;
-        //delay (firerate)
-        upgradeDelay[0] = 0;
-        upgradeDelay[1] = 0;
-        upgradeDelay[2] = -25;
-        upgradeDelay[3] = -35;
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 50;
+        upgradePrices[0] = 75;
+        upgradePrices[1] = 175;
+        upgradePrices[2] = 850;
         upgradePrices[3] = 100;
-        //heath
-        upgradeHealth[0] = 0;
-        upgradeHealth[1] = 0;
-        upgradeHealth[2] = 0;
-        upgradeHealth[3] = 0;
-        //error (accuracy)
-        upgradeError[0] = 0;
-        upgradeError[1] = 0;
-        upgradeError[2] = 0;
-        upgradeError[3] = 0;
-        //names
-        upgradeNames[0] = name;
-        upgradeNames[1] = name;
-        upgradeNames[2] = name;
-        upgradeNames[3] = name;
-        //debris
-        upgradeDebris[0] = "wood";
-        upgradeDebris[1] = "wood";
-        upgradeDebris[2] = "wood";
-        upgradeDebris[3] = "wood";
+        upgradePrices[4] = 150;
+        upgradePrices[5] = 650;
         //titles
-        upgradeTitles[0] = "+Sharpness";
-        upgradeTitles[1] = "+Piercing";
-        upgradeTitles[2] = "Faster Firing";
-        upgradeTitles[3] = "Yet Faster Firing";
-        //desc line one
-        upgradeDescA[0] = "+10";
-        upgradeDescA[1] = "Increase";
-        upgradeDescA[2] = "Increase";
-        upgradeDescA[3] = "Further";
-        //desc line two
-        upgradeDescB[0] = "Damage";
-        upgradeDescB[1] = "Piercing";
-        upgradeDescB[2] = "firerate";
-        upgradeDescB[3] = "Increase";
-        //desc line three
+        upgradeTitles[0] = "Pointier";
+        upgradeTitles[1] = "Sharper";
+        upgradeTitles[2] = "Reinforced";
+        upgradeTitles[3] = "Increase range";
+        upgradeTitles[4] = "Faster Firing";
+        upgradeTitles[5] = "Barrage";
+        //description
+        upgradeDescA[0] = "Increase";
+        upgradeDescB[0] = "piercing";
         upgradeDescC[0] = "";
+
+        upgradeDescA[1] = "+20";
+        upgradeDescB[1] = "damage";
         upgradeDescC[1] = "";
-        upgradeDescC[2] = "";
-        upgradeDescC[3] = "firerate";
+
+        upgradeDescA[2] = "+300";
+        upgradeDescB[2] = "damage,";
+        upgradeDescC[2] = "+piercing";
+
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "range";
+        upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "firerate";
+        upgradeDescC[4] = "";
+
+        upgradeDescA[5] = "Fire";
+        upgradeDescB[5] = "multiple";
+        upgradeDescC[5] = "bolts";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[9];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[10];
-        //sprites
-        upgradeSprites[0] = spritesH.get("stoneWallTW");
-        upgradeSprites[1] = spritesH.get("metalWallTW");
-        upgradeSprites[2] = spritesH.get("stoneWallTW");
-        upgradeSprites[3] = spritesH.get("metalWallTW");
+        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[9];
+        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[8];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[18];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[10];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[19];
     }
 
-    public void upgradeSpecial() {
-        if (nextLevelA == 1) pierce += 2;
+    public void upgradeSpecial(int id) {
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    pierce += 2;
+                    break;
+                case 1:
+                    damage += 20;
+                    if (nextLevelB > 5) nextLevelA++;
+                    break;
+                case 2:
+                    damage += 300;
+                    pierce += 100;
+                    reinforced = true;
+                    name = "crossbowReinforced";
+                    loadSprites();
+                    if (nextLevelB == 5) nextLevelB++;
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    range += 30;
+                    break;
+                case 4:
+                    delay -= 70;
+                    if (nextLevelA > 2) nextLevelB++;
+                    break;
+                case 5:
+                    multishot = true;
+                    name = "crossbowMultishot";
+                    loadSprites();
+                    if (nextLevelA == 2) nextLevelA++;
+                    break;
+            }
+        }
     }
 
     public void updateSprite() {};

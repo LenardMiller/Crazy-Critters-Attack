@@ -15,10 +15,7 @@ public class RailgunBlast extends Particle {
         speed = maxSpeed;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        lifespan = 1; //in frames
-        lifespan += (PApplet.round(p.random(-(lifespan/4f),lifespan/4f))); //injects 25% randomness so all don't die at once
-        delay = lifespan/numFrames;
-        delayTime = p.frameCount + delay;
+        betweenFrames = 4;
         currentSprite = 0;
         sprites = spritesAnimH.get("railgunBlastPT");
         velocity = PVector.fromAngle(angle-HALF_PI);

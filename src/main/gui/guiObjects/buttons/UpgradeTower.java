@@ -33,7 +33,7 @@ public class UpgradeTower extends Button {
                 int nextLevel;
                 if (id == 0) nextLevel = tower.nextLevelA;
                 else nextLevel = tower.nextLevelB;
-                if (tower.upgradeNames.length == nextLevel && id == 1 || tower.upgradeNames.length / 2 == nextLevel && id == 0)
+                if (tower.upgradeTitles.length == nextLevel && id == 1 || tower.upgradeTitles.length / 2 == nextLevel && id == 0)
                     sprite = spriteGrey;
                 else if (tower.upgradePrices[nextLevel] > money) sprite = spriteRed;
                 else hover();

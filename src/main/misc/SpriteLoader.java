@@ -12,7 +12,7 @@ public class SpriteLoader {
     
     public static void loadSpritesAnim(PApplet p) {
         //icons & buttons
-        getSprite(p,"upgrade","IC","upgrades/",16);
+        getSprite(p,"upgrade","IC","upgrades/",20);
         getSprite(p,"moneyAdd","BT","moneyAdd/",3);
         getSprite(p,"upgrade","BT","upgradeButton/",5);
         getSprite(p,"sellTower","BT","sellTower/",3);
@@ -31,12 +31,15 @@ public class SpriteLoader {
         getSprite(p,"greenOuchEnemy","PT","enemy/greenOuch/",11);
         getSprite(p,"greyPuffEnemy","PT","enemy/greyPuff/",11);
         getSprite(p,"greenPuffEnemy","PT","enemy/greenPuff/",10);
+        getSprite(p,"poisonPuffEnemy","PT","enemy/poisonPuff/",10);
         getSprite(p,"pinkOuchEnemy","PT","enemy/pinkOuch/",11);
         getSprite(p,"redOuchEnemy","PT","enemy/redOuch/",11);
         getSprite(p,"leafOuchEnemy","PT","enemy/leafOuch/",11);
         getSprite(p,"mediumExplosion","PT","mediumExplosion/",18);
-        getSprite(p,"largeExplosion","PT","largeExplosion/",18);
+        getSprite(p,"fireLargeExplosion","PT","largeExplosion/fire/",17);
+        getSprite(p,"poisonLargeExplosion","PT","largeExplosion/poison/",17);
         getSprite(p,"energyExDebris","PT","explosionDebris/energy/",4);
+        getSprite(p,"poisonExDebris","PT","explosionDebris/poison/",4);
         getSprite(p,"greenMagicBuff","PT","buff/greenMagic/",8);
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         getSprite(p,"railgunBlast","PT","railgunBlast/",11);
@@ -91,13 +94,25 @@ public class SpriteLoader {
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
+        getSprite(p,"slingshotRockFire","TR","slingshot/rock/fire/",34);
+        getSprite(p,"slingshotRockLoad","TR","slingshot/rock/load/",59);
+        getSprite(p,"slingshotGravelFire","TR","slingshot/gravel/fire/",34);
+        getSprite(p,"slingshotGravelLoad","TR","slingshot/gravel/load/",59);
         getSprite(p,"teslaFire","TR","tesla/fire/",6);
         getSprite(p,"teslaLoad","TR","tesla/load/",5);
         getSprite(p,"teslaIdle","TR","tesla/idle/",18);
         getSprite(p,"crossbowFire","TR","crossbow/fire/",13);
         getSprite(p,"crossbowLoad","TR","crossbow/load/",81);
+        getSprite(p,"crossbowMultishotFire","TR","crossbow/multishot/fire/",13);
+        getSprite(p,"crossbowMultishotLoad","TR","crossbow/multishot/load/",81);
+        getSprite(p,"crossbowReinforcedFire","TR","crossbow/reinforced/fire/",13);
+        getSprite(p,"crossbowReinforcedLoad","TR","crossbow/reinforced/load/",81);
         getSprite(p,"miscCannonFire","TR","miscCannon/fire/",5);
         getSprite(p,"miscCannonLoad","TR","miscCannon/load/",1);
+        getSprite(p,"miscCannonLaundryFire","TR","miscCannon/laundry/fire/",5);
+        getSprite(p,"miscCannonLaundryLoad","TR","miscCannon/laundry/load/",1);
+        getSprite(p,"miscCannonBarrelFire","TR","miscCannon/barrel/fire/",5);
+        getSprite(p,"miscCannonBarrelLoad","TR","miscCannon/barrel/load/",1);
         getSprite(p,"energyBlasterFire","TR","energyBlaster/fire/",14);
         getSprite(p,"energyBlasterLoad","TR","energyBlaster/load/",42);
         getSprite(p,"magicMissleerFire","TR","magicMissleer/fire/",8);
@@ -200,16 +215,25 @@ public class SpriteLoader {
         spritesH.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
         //projectiles
         spritesH.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
+        spritesH.put("reinforcedBoltPj",p.loadImage("sprites/projectiles/reinforcedBolt.png"));
         spritesH.put("devPj",p.loadImage("sprites/projectiles/dev.png"));
         spritesH.put("energyPj",p.loadImage("sprites/projectiles/energy.png"));
         spritesH.put("magicMisslePj",p.loadImage("sprites/projectiles/magicMissle.png"));
         spritesH.put("nullPj",p.loadImage("sprites/projectiles/null.png"));
         spritesH.put("pebblePj",p.loadImage("sprites/projectiles/pebble.png"));
+        spritesH.put("rockPj",p.loadImage("sprites/projectiles/rock.png"));
         spritesH.put("needlePj",p.loadImage("sprites/projectiles/needle.png"));
+        spritesH.put("laundryPj",p.loadImage("sprites/projectiles/laundry.png"));
         //turrets
         spritesH.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
         spritesH.put("crossbowFullTR",p.loadImage("sprites/towers/turrets/crossbow/full.png"));
         spritesH.put("crossbowIdleTR",p.loadImage("sprites/towers/turrets/crossbow/idle.png"));
+        spritesH.put("crossbowMultishotBaseTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/base.png"));
+        spritesH.put("crossbowMultishotFullTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/full.png"));
+        spritesH.put("crossbowMultishotIdleTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/idle.png"));
+        spritesH.put("crossbowReinforcedBaseTR",p.loadImage("sprites/towers/turrets/crossbow/reinforced/base.png"));
+        spritesH.put("crossbowReinforcedFullTR",p.loadImage("sprites/towers/turrets/crossbow/reinforced/full.png"));
+        spritesH.put("crossbowReinforcedIdleTR",p.loadImage("sprites/towers/turrets/crossbow/reinforced/idle.png"));
         spritesH.put("energyBlasterBaseTR",p.loadImage("sprites/towers/turrets/energyBlaster/base.png"));
         spritesH.put("energyBlasterFullTR",p.loadImage("sprites/towers/turrets/energyBlaster/full.png"));
         spritesH.put("energyBlasterIdleTR",p.loadImage("sprites/towers/turrets/energyBlaster/idle.png"));
@@ -219,9 +243,21 @@ public class SpriteLoader {
         spritesH.put("miscCannonBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/base.png"));
         spritesH.put("miscCannonFullTR",p.loadImage("sprites/towers/turrets/miscCannon/full.png"));
         spritesH.put("miscCannonIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/idle.png"));
+        spritesH.put("miscCannonLaundryBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/base.png"));
+        spritesH.put("miscCannonLaundryFullTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/full.png"));
+        spritesH.put("miscCannonLaundryIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/idle.png"));
+        spritesH.put("miscCannonBarrelBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/base.png"));
+        spritesH.put("miscCannonBarrelFullTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/full.png"));
+        spritesH.put("miscCannonBarrelIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/idle.png"));
         spritesH.put("slingshotBaseTR",p.loadImage("sprites/towers/turrets/slingshot/base.png"));
         spritesH.put("slingshotFullTR",p.loadImage("sprites/towers/turrets/slingshot/full.png"));
         spritesH.put("slingshotIdleTR",p.loadImage("sprites/towers/turrets/slingshot/idle.png"));
+        spritesH.put("slingshotRockBaseTR",p.loadImage("sprites/towers/turrets/slingshot/rock/base.png"));
+        spritesH.put("slingshotRockFullTR",p.loadImage("sprites/towers/turrets/slingshot/rock/full.png"));
+        spritesH.put("slingshotRockIdleTR",p.loadImage("sprites/towers/turrets/slingshot/rock/idle.png"));
+        spritesH.put("slingshotGravelBaseTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/base.png"));
+        spritesH.put("slingshotGravelFullTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/full.png"));
+        spritesH.put("slingshotGravelIdleTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/idle.png"));
         spritesH.put("teslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/base.png"));
         spritesH.put("teslaFullTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
         spritesH.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));

@@ -7,7 +7,10 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
+import static main.misc.MiscMethods.superTint;
 import static processing.core.PApplet.radians;
 
 public class Corpse {
@@ -87,20 +90,38 @@ public class Corpse {
             }
         }
 
-        float gTint = 255;
-        if (type.equals("burning") || type.equals("decay")) {
-            float g = 0;
+        Color tint = new Color(255,255,255);
+        boolean doTint = false;
+        if (type.equals("burning") || type.equals("decay") || type.equals("poisoned")) {
+            Color tintFinal;
             String part = "";
-            if (type.equals("burning")) {
-                g = 60;
-                part = "fire";
+            switch (type) {
+                case "burning":
+                    tintFinal = new Color(60,60,60);
+                    doTint = true;
+                    part = "fire";
+                    break;
+                case "decay":
+                    tintFinal = new Color(0,0,0);
+                    doTint = true;
+                    part = "decay";
+                    break;
+                case "poisoned":
+                    tintFinal = new Color(120, 180, 0);
+                    doTint = true;
+                    part = "poison";
+                    break;
+                default:
+                    tintFinal = new Color(255,0,255);
+                    doTint = true;
+                    part = "fire";
+                    break;
             }
-            if (type.equals("decay")) {
-                g = 0;
-                part = "decay";
-            }
-
-            gTint = (pow((float)lifespan / (float)maxLife, 3) * (255 - g)) + g;
+            tint = new Color (
+                    getTintChannel(tintFinal.getRed(), lifespan, maxLife),
+                    getTintChannel(tintFinal.getGreen(), lifespan, maxLife),
+                    getTintChannel(tintFinal.getBlue(), lifespan, maxLife)
+            );
             for (int i = (int) ((size.x / 25) * (size.y / 25)) / 25; i >= 0; i--) {
                 float chance = sq(2 * ((float)maxLife / (float)lifespan));
                 if (!animated) chance += 16;
@@ -130,13 +151,27 @@ public class Corpse {
             }
         }
 
-        p.tint(gTint, ((float)lifespan / (float)maxLife) * 255f);
+        //for memory reasons
+        PImage st = p.createImage(sprite.width, sprite.height, ARGB);
+        sprite.loadPixels();
+        arrayCopy(sprite.pixels, st.pixels);
+
+        //tinting
+        float transparency = ((float) lifespan) / ((float) maxLife);
+        if (doTint) {
+            superTint(st, new Color(tint.getRed(), tint.getGreen(), tint.getBlue(), 0), transparency);
+        } else p.tint(255, transparency * 255);
+
         angle += radians(angularVelocity);
         p.pushMatrix();
         p.translate(position.x, position.y);
         p.rotate(angle);
-        p.image(sprite, -size.x / 2, -size.y / 2);
+        p.image(st, -size.x / 2, -size.y / 2);
         p.popMatrix();
         p.tint(255);
+    }
+
+    private int getTintChannel(float channel, float lifespan, float maxLife) {
+        return (int) ((pow(lifespan / maxLife, 3) * (255 - channel)) + channel);
     }
 }

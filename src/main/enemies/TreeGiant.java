@@ -12,9 +12,9 @@ public class TreeGiant extends Enemy {
         radius = 30;
         maxSpeed = .3f;
         speed = maxSpeed;
-        moneyDrop = 150;
-        damage = 25;
-        maxHp = 250; //Hp
+        moneyDrop = 250;
+        damage = 7;
+        maxHp = 5000; //Hp
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "treeGiant";
