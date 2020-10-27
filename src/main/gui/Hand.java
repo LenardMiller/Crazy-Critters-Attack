@@ -61,12 +61,12 @@ public class Hand {
         Tile tile = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower != null && !tile.tower.turret) { //if wall
-                if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length) { //if upgradeable
+                if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && tile.tower.nextLevelB < currentLevel) { //if upgradeable
                     heldSprite = spritesH.get("upgradeTW");
                     implacable = money < tile.tower.upgradePrices[tile.tower.nextLevelB];
                     displayInfo = "upgradeWall";
                 } else {
-                    heldSprite = spritesH.get("upgradeTW");
+                    if (currentLevel > 0) heldSprite = spritesH.get("upgradeTW");
                     implacable = true;
                     displayInfo = "maxWallUpgrade";
                 }
@@ -180,7 +180,8 @@ public class Hand {
             p.fill(0);
             p.text("Selected:", 1000, 241);
             p.textFont(largeFont);
-            p.text(tower.upgradeTitles[tower.upgradeTitles.length - 1], 1000, 276);
+            if (currentLevel == 0) p.text("Wooden", 1000, 276);
+            else p.text(tower.upgradeTitles[currentLevel - 1], 1000, 276);
             p.text("Wall", 1000, 301);
             p.textFont(mediumFont);
             p.text(tower.hp + " hp", 1000, 331);
