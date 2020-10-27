@@ -103,14 +103,14 @@ public class Crossbow extends Turret {
 
         upgradeDescA[5] = "Fire";
         upgradeDescB[5] = "multiple";
-        upgradeDescC[5] = "shots";
+        upgradeDescC[5] = "bolts";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[9];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[9];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[18];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[4] = spritesAnimH.get("upgradeIC")[10];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[4];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[19];
     }
 
     public void upgradeSpecial(int id) {
