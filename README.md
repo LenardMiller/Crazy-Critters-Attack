@@ -1,8 +1,10 @@
 # Crazy Critters Attack
-A small tower defense game made in Java using Processing, formerly known as Sketch TD. Now in alpha!
+A small tower defense game made in Java using Processing. Now in alpha!
 ## Playtesting Info
+This is all the stuff that will be in a short tutorial, it should be the bare minimum needed to play the game. \
+\
 Enemies will try to destroy the machine at the center, place turrets and walls to protect it. Walls are not recommended until passed level 10 or so. Don't touch the keyboard.
-## Key Commands 
+## Debug Key Commands 
 case sensitive
 ### Spawn Projectile
 - q - pebble
