@@ -13,6 +13,7 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.SoundFile;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -68,6 +69,7 @@ public abstract class Enemy {
     public String lastDamageType;
     boolean overkill;
     PVector partsDirection;
+    SoundFile overkillSound;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -140,6 +142,7 @@ public abstract class Enemy {
                 type = buff.name;
             }
         }
+        if (overkill) overkillSound.play(p.random(0.8f, 1.2f), 0.25f);
         if (!stealthMode) {
             if (overkill) {
                 for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {

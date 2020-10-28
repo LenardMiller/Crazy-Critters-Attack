@@ -12,5 +12,6 @@ public class SoundLoader {
     public static void loadSounds(PApplet p) {
         soundsH.put("woodDamage", new SoundFile(p, "sounds/woodDamage.wav"));
         soundsH.put("woodBreak", new SoundFile(p, "sounds/woodBreak.wav"));
+        soundsH.put("squish", new SoundFile(p, "sounds/squish.wav"));
     }
 }

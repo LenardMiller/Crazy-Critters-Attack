@@ -3,6 +3,8 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.soundsH;
+
 public class MidBug extends Enemy{
     public MidBug(PApplet p, float x, float y){
         super(p,x,y);
@@ -25,6 +27,7 @@ public class MidBug extends Enemy{
         attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(14,14);
+        overkillSound = soundsH.get("squish");
         loadSprites();
     }
 }

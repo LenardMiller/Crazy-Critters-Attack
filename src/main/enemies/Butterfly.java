@@ -3,6 +3,8 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.soundsH;
+
 public class Butterfly extends Enemy {
 
     public Butterfly(PApplet p, float x, float y) {
@@ -27,6 +29,7 @@ public class Butterfly extends Enemy {
         flying = true;
         corpseSize = new PVector(18,18);
         betweenCorpseFrames = 4;
+        overkillSound = soundsH.get("squish");
         loadSprites();
     }
 }
