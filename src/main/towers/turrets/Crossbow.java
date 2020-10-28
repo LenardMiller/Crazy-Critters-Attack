@@ -39,6 +39,8 @@ public class Crossbow extends Turret {
         loadDelayTime = 0;
         damage = 30;
         pierce = 2;
+        damageSound = soundsH.get("woodDamage");
+        breakSound = soundsH.get("woodBreak");
         loadSprites();
         debrisType = "wood";
         price = CROSSBOW_PRICE;

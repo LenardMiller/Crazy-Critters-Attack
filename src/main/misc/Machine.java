@@ -8,6 +8,7 @@ import main.projectiles.Flame;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.SoundFile;
 
 import static main.Main.*;
 
@@ -30,6 +31,8 @@ public class Machine {
     private PImage[] sprites;
     public Tile[] machTiles;
     private int damageState;
+    private SoundFile damageSound;
+    private SoundFile breakSound;
 
     public Machine(PApplet p, PVector position, String name, String debris, int betweenFrames, int maxHp) {
         this.p = p;
@@ -41,6 +44,8 @@ public class Machine {
         this.name = name;
         this.debris = debris;
         this.betweenFrames = betweenFrames;
+        damageSound = soundsH.get(debris + "Damage");
+        breakSound = soundsH.get(debris + "Break");
         sprites = spritesAnimH.get(name);
         tintColor = 255;
         updateNodes();
@@ -148,6 +153,7 @@ public class Machine {
             sprites = spritesAnimH.get(name + "d" + damageState);
 //            currentFrame = 0;
         }
+        damageSound.play(p.random(0.8f, 1.2f), 0.5f);
         for (Tile tile : machTiles) {
             int x = (int) tile.position.x;
             int y = (int) tile.position.y;

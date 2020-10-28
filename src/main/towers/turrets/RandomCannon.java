@@ -39,6 +39,8 @@ public class RandomCannon extends Turret {
         loadDelayTime = 0;
         damage = 10;
         range = 200;
+        damageSound = soundsH.get("woodDamage");
+        breakSound = soundsH.get("woodBreak");
         loadSprites();
         debrisType = "wood";
         price = RANDOMCANNON_PRICE;

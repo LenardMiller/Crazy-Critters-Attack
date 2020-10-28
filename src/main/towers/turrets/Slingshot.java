@@ -34,6 +34,8 @@ public class Slingshot extends Turret {
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         damage = 15; //15
+        damageSound = soundsH.get("woodDamage");
+        breakSound = soundsH.get("woodBreak");
         loadSprites();
         debrisType = "wood";
         price = SLINGSHOT_PRICE;
