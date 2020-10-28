@@ -2,6 +2,8 @@
   <library name="sound">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../Processing/libraries/sound/library/sound.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Processing/libraries/sound/library/javamp3-1.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Processing/libraries/sound/library/jsyn-20171016.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
