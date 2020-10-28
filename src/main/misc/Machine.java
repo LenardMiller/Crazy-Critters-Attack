@@ -153,7 +153,7 @@ public class Machine {
             sprites = spritesAnimH.get(name + "d" + damageState);
 //            currentFrame = 0;
         }
-        damageSound.play(p.random(0.8f, 1.2f), 0.5f);
+        damageSound.play(p.random(0.8f, 1.2f), volume);
         for (Tile tile : machTiles) {
             int x = (int) tile.position.x;
             int y = (int) tile.position.y;

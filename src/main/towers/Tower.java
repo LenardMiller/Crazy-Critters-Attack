@@ -104,7 +104,7 @@ public abstract class Tower {
     public void damage(int dmg) { //if it touches an enemy, animate and loose health
         hp -= dmg;
         hit = true;
-        damageSound.play(p.random(0.8f, 1.2f), 0.5f);
+        damageSound.play(p.random(0.8f, 1.2f), volume);
         int num = (int)(p.random(1,4));
         for (int i = num; i >= 0; i--){ //spray debris
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
@@ -123,7 +123,7 @@ public abstract class Tower {
     }
 
     public void die(boolean sold) {
-        breakSound.play(p.random(0.8f, 1.2f), 0.5f);
+        breakSound.play(p.random(0.8f, 1.2f), volume);
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));

@@ -142,7 +142,7 @@ public abstract class Enemy {
                 type = buff.name;
             }
         }
-        if (overkill) overkillSound.play(p.random(0.8f, 1.2f), 0.25f);
+        if (overkill) overkillSound.play(p.random(0.8f, 1.2f), volume);
         if (!stealthMode) {
             if (overkill) {
                 for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {
