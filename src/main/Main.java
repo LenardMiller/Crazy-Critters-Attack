@@ -184,8 +184,6 @@ public class Main extends PApplet {
         DataControl.load(this, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();
-
-        soundsH.get("test").play();
     }
 
     public void draw() { //this will need to be change when I todo: add more menu "scenes"

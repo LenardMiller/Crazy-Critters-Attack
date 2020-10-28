@@ -10,7 +10,7 @@ public class SoundLoader {
     public SoundLoader() {}
 
     public static void loadSounds(PApplet p) {
-        //enemies
-        soundsH.put("test", new SoundFile(p, "sounds/test.wav"));
+        soundsH.put("woodDamage", new SoundFile(p, "sounds/woodDamage.wav"));
+        soundsH.put("woodBreak", new SoundFile(p, "sounds/woodBreak.wav"));
     }
 }

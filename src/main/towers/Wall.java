@@ -1,7 +1,7 @@
 package main.towers;
 
-import main.particles.Debris;
 import main.misc.Tile;
+import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -39,6 +39,8 @@ public class Wall extends Tower {
         hit = false;
         sprite = spritesAnimH.get("woodWallTW");
         debrisType = "wood";
+        damageSound = soundsH.get(debrisType + "Damage");
+        breakSound = soundsH.get(debrisType + "Break");
         price = 25;
         value = price;
         nextLevelB = 0;
