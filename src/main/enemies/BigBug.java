@@ -27,6 +27,7 @@ public class BigBug extends Enemy{
         corpseSize = size;
         partSize = new PVector(32,32);
         attackFrame = attackStartFrame;
+        dieSound = soundsH.get("bigCrunch");
         overkillSound = soundsH.get("squash");
         loadSprites();
     }
