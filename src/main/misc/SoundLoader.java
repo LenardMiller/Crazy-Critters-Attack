@@ -13,5 +13,6 @@ public class SoundLoader {
         soundsH.put("woodDamage", new SoundFile(p, "sounds/woodDamage.wav"));
         soundsH.put("woodBreak", new SoundFile(p, "sounds/woodBreak.wav"));
         soundsH.put("squish", new SoundFile(p, "sounds/squish.wav"));
+        soundsH.put("squash", new SoundFile(p, "sounds/squash.wav"));
     }
 }

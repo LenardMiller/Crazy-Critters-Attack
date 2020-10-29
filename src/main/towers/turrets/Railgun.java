@@ -34,9 +34,9 @@ public class Railgun extends Turret {
         delay = 500; //500 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
-        damage = 300;
+        damage = 5000;
         pjSpeed = -1;
-        range = 0; //0
+        range = 800; //0
         numFireFrames = 15;
         numLoadFrames = 9;
         numIdleFrames = 6;
