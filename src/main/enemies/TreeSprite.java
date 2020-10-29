@@ -3,6 +3,8 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.soundsH;
+
 public class TreeSprite extends Enemy{
 
     public TreeSprite(PApplet p, float x, float y){
@@ -26,6 +28,8 @@ public class TreeSprite extends Enemy{
         corpseSize = new PVector(50,50);
         partSize = new PVector(21,21);
         betweenCorpseFrames = 5;
+        dieSound = soundsH.get("leaves");
+        overkillSound = soundsH.get("leavesImpact");
         loadSprites();
     }
 }
