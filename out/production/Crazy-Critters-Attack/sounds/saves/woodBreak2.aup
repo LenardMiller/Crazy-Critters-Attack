@@ -1,0 +1,56 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="woodBreak2_data" version="1.3.0" audacityversion="2.4.2" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0000000000" zoom="805.9721781685" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="TITLE" value="21.7.16"/>
+		<tag name="YEAR" value="2008"/>
+		<tag name="ARTIST" value="InspectorJ"/>
+		<tag name="COMMENTS" value="I release this file into the public domain"/>
+	</tags>
+	<wavetrack name="woodBreak" isSelected="1" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="66207">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1f49d.au" len="66207" min="-0.841717" max="0.817971" rms="0.063688"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="2">
+				<controlpoint t="0.121592286501" val="1.000000000000"/>
+				<controlpoint t="0.153851464553" val="0.746478915215"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="woodBreak" isSelected="1" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="66207">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1fc3a.au" len="66207" min="-0.849518" max="0.804014" rms="0.079127"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="2">
+				<controlpoint t="0.121592286501" val="1.000000000000"/>
+				<controlpoint t="0.153851464553" val="0.746478915215"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="smashing wood" isSelected="0" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.09181406" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="18737">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1fa68.au" len="18737" min="-1.0" max="0.999969" rms="0.136684"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="smashing wood" isSelected="0" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.09181406" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="18737">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1fe29.au" len="18737" min="-1.0" max="0.999969" rms="0.173043"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
