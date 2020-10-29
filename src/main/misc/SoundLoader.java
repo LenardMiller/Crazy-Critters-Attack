@@ -13,6 +13,7 @@ public class SoundLoader {
         //walls
         soundsH.put("woodDamage", new SoundFile(p, "sounds/walls/woodDamage.wav"));
         soundsH.put("woodBreak", new SoundFile(p, "sounds/walls/woodBreak.wav"));
+        soundsH.put("woodPlace", new SoundFile(p, "sounds/walls/woodPlace.wav"));
         //enemy
         soundsH.put("squish", new SoundFile(p, "sounds/enemies/squish.wav"));
         soundsH.put("squash", new SoundFile(p, "sounds/enemies/squash.wav"));

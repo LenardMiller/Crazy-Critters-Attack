@@ -41,6 +41,7 @@ public abstract class Tower {
     public int nextLevelB;
     protected SoundFile damageSound;
     protected SoundFile breakSound;
+    protected SoundFile placeSound;
 
     public int[] upgradePrices;
     public String[] upgradeTitles;
@@ -115,6 +116,7 @@ public abstract class Tower {
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        placeSound.play(p.random(0.8f, 1.2f), volume);
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--) {
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
@@ -153,6 +155,7 @@ public abstract class Tower {
     }
 
     public void repair() {
+        placeSound.play(p.random(0.8f, 1.2f), volume);
         money -= ceil((float)(price) - (float)(value));
         heal();
     }

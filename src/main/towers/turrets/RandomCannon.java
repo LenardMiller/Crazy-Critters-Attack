@@ -41,6 +41,7 @@ public class RandomCannon extends Turret {
         range = 200;
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
+        placeSound = soundsH.get("woodPlace");
         loadSprites();
         debrisType = "wood";
         price = RANDOMCANNON_PRICE;
@@ -48,6 +49,8 @@ public class RandomCannon extends Turret {
         priority = 0; //close
         setUpgrades();
         updateTowerArray();
+
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void fire() {

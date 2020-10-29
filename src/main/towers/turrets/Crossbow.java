@@ -41,6 +41,7 @@ public class Crossbow extends Turret {
         pierce = 2;
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
+        placeSound = soundsH.get("woodPlace");
         loadSprites();
         debrisType = "wood";
         price = CROSSBOW_PRICE;
@@ -49,6 +50,8 @@ public class Crossbow extends Turret {
         multishot = false;
         setUpgrades();
         updateTowerArray();
+
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void fire(){ //needed to change projectile fired

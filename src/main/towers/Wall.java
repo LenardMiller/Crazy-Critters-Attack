@@ -41,6 +41,7 @@ public class Wall extends Tower {
         debrisType = "wood";
         damageSound = soundsH.get(debrisType + "Damage");
         breakSound = soundsH.get(debrisType + "Break");
+        placeSound = soundsH.get(debrisType + "Place");
         price = 25;
         value = price;
         nextLevelB = 0;
@@ -62,6 +63,8 @@ public class Wall extends Tower {
         crystal = new CornerSpriteDS();
         ultimate = new CornerSpriteDS();
         loadSprites();
+
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void main(){
@@ -139,6 +142,7 @@ public class Wall extends Tower {
 
 
     public void upgrade(int id) {
+        placeSound.play(p.random(0.8f, 1.2f), volume);
         price += upgradePrices[nextLevelB];
         sprite = upgradeSprites[nextLevelB];
 
