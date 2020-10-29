@@ -30,6 +30,7 @@ public class Butterfly extends Enemy {
         corpseSize = new PVector(18,18);
         betweenCorpseFrames = 4;
         overkillSound = soundsH.get("squish");
+        dieSound = soundsH.get("crunch");
         loadSprites();
     }
 }

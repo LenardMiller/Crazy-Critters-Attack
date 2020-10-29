@@ -32,6 +32,7 @@ public class LittleWorm extends Enemy {
         partSize = new PVector(7, 7);
         corpseSize = new PVector(25,25);
         overkillSound = soundsH.get("squish");
+        dieSound = soundsH.get("crunch");
         loadSprites();
     }
 

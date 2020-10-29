@@ -70,6 +70,7 @@ public abstract class Enemy {
     boolean overkill;
     PVector partsDirection;
     SoundFile overkillSound;
+    SoundFile dieSound;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -138,11 +139,10 @@ public abstract class Enemy {
 
         String type = lastDamageType;
         for (Buff buff : buffs) {
-            if (buff.enId == i) {
-                type = buff.name;
-            }
+            if (buff.enId == i) type = buff.name;
         }
         if (overkill) overkillSound.play(p.random(0.8f, 1.2f), volume);
+        else dieSound.play(p.random(0.8f, 1.2f), volume);
         if (!stealthMode) {
             if (overkill) {
                 for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {

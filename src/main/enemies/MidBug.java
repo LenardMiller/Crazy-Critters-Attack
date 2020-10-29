@@ -28,6 +28,7 @@ public class MidBug extends Enemy{
         corpseSize = size;
         partSize = new PVector(14,14);
         overkillSound = soundsH.get("squish");
+        dieSound = soundsH.get("crunch");
         loadSprites();
     }
 }
