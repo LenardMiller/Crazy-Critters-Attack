@@ -41,7 +41,7 @@ public class Wall extends Tower {
         debrisType = "wood";
         damageSound = soundsH.get(debrisType + "Damage");
         breakSound = soundsH.get(debrisType + "Break");
-        placeSound = soundsH.get(debrisType + "Place");
+        placeSound = soundsH.get(debrisType + "PlaceShort");
         price = 25;
         value = price;
         nextLevelB = 0;
