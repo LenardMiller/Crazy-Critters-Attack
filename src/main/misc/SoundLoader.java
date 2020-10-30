@@ -22,9 +22,9 @@ public class SoundLoader {
         soundsH.put("snakeCrunch", new SoundFile(p, "sounds/enemies/snakeCrunch.wav"));
         soundsH.put("snakeSquish", new SoundFile(p, "sounds/enemies/snakeSquish.wav"));
         //projectiles
-        soundsH.put("gravel", new SoundFile(p, "sounds/projectiles/gravel.wav"));
-        soundsH.put("pebble", new SoundFile(p, "sounds/projectiles/pebble.wav"));
-        soundsH.put("rock", new SoundFile(p, "sounds/projectiles/rock.wav"));
+        soundsH.put("smallImpact", new SoundFile(p, "sounds/projectiles/smallImpact.wav"));
+        soundsH.put("mediumImpact", new SoundFile(p, "sounds/projectiles/mediumImpact.wav"));
+        soundsH.put("largeImpact", new SoundFile(p, "sounds/projectiles/largeImpact.wav"));
         //turrets
         soundsH.put("woodPlace", new SoundFile(p, "sounds/turrets/woodPlace.wav"));
         //walls
