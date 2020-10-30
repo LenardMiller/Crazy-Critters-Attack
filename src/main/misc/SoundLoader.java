@@ -25,5 +25,7 @@ public class SoundLoader {
         soundsH.put("leavesImpact", new SoundFile(p, "sounds/enemies/leavesImpact.wav"));
         soundsH.put("bigLeaves", new SoundFile(p, "sounds/enemies/bigLeaves.wav"));
         soundsH.put("bigLeavesImpact", new SoundFile(p, "sounds/enemies/bigLeavesImpact.wav"));
+        soundsH.put("snakeCrunch", new SoundFile(p, "sounds/enemies/snakeCrunch.wav"));
+        soundsH.put("snakeSquish", new SoundFile(p, "sounds/enemies/snakeSquish.wav"));
     }
 }

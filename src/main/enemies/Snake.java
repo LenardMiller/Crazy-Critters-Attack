@@ -28,8 +28,8 @@ public class Snake extends Enemy {
         attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(9,9);
-        overkillSound = soundsH.get("squish");
-        dieSound = soundsH.get("crunch");
+        overkillSound = soundsH.get("snakeSquish");
+        dieSound = soundsH.get("snakeCrunch");
         loadSprites();
     }
 }
