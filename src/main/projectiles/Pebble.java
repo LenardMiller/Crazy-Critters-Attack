@@ -20,6 +20,7 @@ public class Pebble extends Projectile{
         pierce = 1;
         this.angle = angle;
         sprite = spritesH.get("pebblePj");
+        hitSound = soundsH.get("pebble");
     }
 
     public void die(int i) {
