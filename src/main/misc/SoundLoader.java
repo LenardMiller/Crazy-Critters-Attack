@@ -24,6 +24,7 @@ public class SoundLoader {
         //projectiles
         soundsH.put("gravel", new SoundFile(p, "sounds/projectiles/gravel.wav"));
         soundsH.put("pebble", new SoundFile(p, "sounds/projectiles/pebble.wav"));
+        soundsH.put("rock", new SoundFile(p, "sounds/projectiles/rock.wav"));
         //turrets
         soundsH.put("woodPlace", new SoundFile(p, "sounds/turrets/woodPlace.wav"));
         //walls
