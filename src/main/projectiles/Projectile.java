@@ -6,6 +6,7 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.SoundFile;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public abstract class Projectile {
     int effectDuration;
     boolean splashEn;
     String type;
-    String hitSound;
+    SoundFile hitSound;
 
     Projectile(PApplet p, float x, float y, float angle, Turret turret) {
         this.p = p;
@@ -125,7 +126,7 @@ public abstract class Projectile {
                 }
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
-                soundsH.get(hitSound).play(p.random(0.8f, 1.2f), volume);
+                hitSound.play(p.random(0.8f, 1.2f), volume);
                 enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, type, velocity, i);
                 hitEnemies.add(enemy);
                 pierce--;

@@ -3,6 +3,8 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.soundsH;
+
 public class BigBug extends Enemy{
 
     public BigBug(PApplet p, float x, float y) {
@@ -25,8 +27,8 @@ public class BigBug extends Enemy{
         corpseSize = size;
         partSize = new PVector(32,32);
         attackFrame = attackStartFrame;
-        dieSound = "bigCrunch";
-        overkillSound = "squash";
+        dieSound = soundsH.get("bigCrunch");
+        overkillSound = soundsH.get("squash");
         loadSprites();
     }
 }
