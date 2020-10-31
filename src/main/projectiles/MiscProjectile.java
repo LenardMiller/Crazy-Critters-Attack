@@ -26,7 +26,7 @@ public class MiscProjectile extends Projectile {
         angularVelocity = 15; //degrees mode
         sprites = spritesAnimH.get("miscPJ");
         sprite = sprites[spriteType];
-        hitSound = soundsH.get("smallImpact");
+        hitSound = "smallImpact";
     }
 
     public void die(int i) {

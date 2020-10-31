@@ -3,11 +3,9 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+public class TreeSpirit extends Enemy {
 
-public class TreeSpirit extends Enemy{
-
-    public TreeSpirit(PApplet p, float x, float y){
+    public TreeSpirit(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(42,42);
         pfSize = 2; //2
@@ -28,8 +26,8 @@ public class TreeSpirit extends Enemy{
         corpseSize = new PVector(84,84);
         partSize = new PVector(38,38);
         betweenCorpseFrames = 6;
-        dieSound = soundsH.get("leaves");
-        overkillSound = soundsH.get("leavesImpact");
+        dieSound = "leaves";
+        overkillSound = "leavesImpact";
         loadSprites();
     }
 }

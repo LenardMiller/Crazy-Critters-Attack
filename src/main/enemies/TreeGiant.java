@@ -3,8 +3,6 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
-
 public class TreeGiant extends Enemy {
 
     public TreeGiant(PApplet p, float x, float y) {
@@ -29,8 +27,8 @@ public class TreeGiant extends Enemy {
         corpseSize = new PVector(152,152);
         partSize = new PVector(68,68);
         corpseLifespan = 750;
-        dieSound = soundsH.get("bigLeaves");
-        overkillSound = soundsH.get("bigLeavesImpact");
+        dieSound = "bigLeaves";
+        overkillSound = "bigLeavesImpact";
         loadSprites();
     }
 }
