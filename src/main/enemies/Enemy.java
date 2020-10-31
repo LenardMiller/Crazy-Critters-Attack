@@ -141,8 +141,14 @@ public abstract class Enemy {
         for (Buff buff : buffs) {
             if (buff.enId == i) type = buff.name;
         }
-        if (overkill) overkillSound.play(p.random(0.8f, 1.2f), volume);
-        else dieSound.play(p.random(0.8f, 1.2f), volume);
+        if (overkill) {
+            overkillSound.stop();
+            overkillSound.play(p.random(0.8f, 1.2f), volume);
+        }
+        else {
+            dieSound.stop();
+            dieSound.play(p.random(0.8f, 1.2f), volume);
+        }
         if (!stealthMode) {
             if (overkill) {
                 for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {

@@ -105,6 +105,7 @@ public abstract class Tower {
     public void damage(int dmg) { //if it touches an enemy, animate and loose health
         hp -= dmg;
         hit = true;
+        damageSound.stop();
         damageSound.play(p.random(0.8f, 1.2f), volume);
         int num = (int)(p.random(1,4));
         for (int i = num; i >= 0; i--){ //spray debris
@@ -116,6 +117,7 @@ public abstract class Tower {
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--) {
@@ -125,6 +127,7 @@ public abstract class Tower {
     }
 
     public void die(boolean sold) {
+        breakSound.stop();
         breakSound.play(p.random(0.8f, 1.2f), volume);
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--) {
@@ -155,6 +158,7 @@ public abstract class Tower {
     }
 
     public void repair() {
+        placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
         money -= ceil((float)(price) - (float)(value));
         heal();

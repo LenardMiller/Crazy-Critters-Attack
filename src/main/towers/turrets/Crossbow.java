@@ -51,6 +51,7 @@ public class Crossbow extends Turret {
         setUpgrades();
         updateTowerArray();
 
+        placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 

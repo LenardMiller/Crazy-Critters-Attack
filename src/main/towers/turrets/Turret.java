@@ -271,6 +271,7 @@ public abstract class Turret extends Tower {
     }
 
     public void upgrade(int id) {
+        placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
         upgradeSpecial(id);
         if (id == 0) {

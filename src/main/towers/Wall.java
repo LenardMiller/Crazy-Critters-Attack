@@ -64,6 +64,7 @@ public class Wall extends Tower {
         ultimate = new CornerSpriteDS();
         loadSprites();
 
+        placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
@@ -142,6 +143,7 @@ public class Wall extends Tower {
 
 
     public void upgrade(int id) {
+        placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
         price += upgradePrices[nextLevelB];
         sprite = upgradeSprites[nextLevelB];
