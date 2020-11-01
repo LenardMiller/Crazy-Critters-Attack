@@ -39,6 +39,7 @@ public class Flame extends Projectile {
         splashEn = false;
         fireChance = 8;
         smokeChance = 100;
+        hitSound = soundsH.get("fireImpact");
     }
 
     public void die(int i) {
