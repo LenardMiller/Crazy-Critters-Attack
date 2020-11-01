@@ -25,6 +25,7 @@ public class SoundLoader {
         soundsH.put("smallImpact", new SoundFile(p, "sounds/projectiles/smallImpact.wav"));
         soundsH.put("mediumImpact", new SoundFile(p, "sounds/projectiles/mediumImpact.wav"));
         soundsH.put("largeImpact", new SoundFile(p, "sounds/projectiles/largeImpact.wav"));
+        soundsH.put("whooshImpact", new SoundFile(p, "sounds/projectiles/whooshImpact.wav"));
         //turrets
         soundsH.put("woodPlace", new SoundFile(p, "sounds/turrets/woodPlace.wav"));
         //walls
