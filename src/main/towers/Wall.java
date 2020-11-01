@@ -139,9 +139,7 @@ public class Wall extends Tower {
         upgradeSprites[2] = spritesAnimH.get("crystalWallTW");
         upgradeSprites[3] = spritesAnimH.get("ultimateWallTW");
     }
-
-
-
+    
     public void upgrade(int id) {
         placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
