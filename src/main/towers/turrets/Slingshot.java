@@ -37,6 +37,7 @@ public class Slingshot extends Turret {
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
         placeSound = soundsH.get("woodPlace");
+        specialSound = soundsH.get("woodSpecial");
         loadSprites();
         debrisType = "wood";
         price = SLINGSHOT_PRICE;
