@@ -154,6 +154,7 @@ public class Crossbow extends Turret {
                 case 5:
                     multishot = true;
                     name = "crossbowMultishot";
+                    fireSound = soundsH.get("shotbow");
                     loadSprites();
                     if (nextLevelA == 2) nextLevelA++;
                     break;

@@ -33,6 +33,7 @@ public class SoundLoader {
         soundsH.put("woodSpecial", new SoundFile(p, "sounds/turrets/woodSpecial.wav"));
         soundsH.put("slingshot", new SoundFile(p, "sounds/turrets/slingshot.wav"));
         soundsH.put("crossbow", new SoundFile(p, "sounds/turrets/crossbow.wav"));
+        soundsH.put("shotbow", new SoundFile(p, "sounds/turrets/shotbow.wav"));
         //ui
         soundsH.put("waveEnd", new SoundFile(p,"sounds/ui/waveEnd.wav"));
         //walls
