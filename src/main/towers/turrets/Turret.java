@@ -42,6 +42,7 @@ public abstract class Turret extends Tower {
     public int effectDuration;
     private float targetAngle;
     SoundFile specialSound;
+    SoundFile fireSound;
 
     Turret(PApplet p, Tile tile) {
         super(p, tile);
@@ -162,6 +163,8 @@ public abstract class Turret extends Tower {
     }
 
     public void fire() {
+        fireSound.stop();
+        fireSound.play(p.random(0.8f, 1.2f), volume);
         delayTime = p.frameCount + delay; //waits this time before firing
     }
 

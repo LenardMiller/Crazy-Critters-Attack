@@ -318,7 +318,7 @@ public abstract class Enemy {
         damageEffect(false);
     }
 
-    private void HpBar() {
+    private void HpBar() { //todo: should render on top of everything else
         p.fill(255, 0, 0, barTrans);
         p.noStroke();
         p.rect(position.x - size.x / 2 - 10, position.y + size.y / 2 + 6, (size.x + 20) * (((float) hp) / ((float) maxHp)), 6);
