@@ -43,6 +43,7 @@ public class Crossbow extends Turret {
         breakSound = soundsH.get("woodBreak");
         placeSound = soundsH.get("woodPlace");
         specialSound = soundsH.get("woodSpecial");
+        fireSound = soundsH.get("crossbow");
         loadSprites();
         debrisType = "wood";
         price = CROSSBOW_PRICE;
@@ -57,6 +58,8 @@ public class Crossbow extends Turret {
     }
 
     public void fire(){ //needed to change projectile fired
+        fireSound.stop();
+        fireSound.play(p.random(0.8f, 1.2f), volume);
         delayTime = p.frameCount + delay; //waits this time before firing
         if (multishot) {
             float offset = 0.07f;
