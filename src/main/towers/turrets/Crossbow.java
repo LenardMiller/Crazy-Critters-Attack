@@ -41,6 +41,7 @@ public class Crossbow extends Turret {
         pierce = 2;
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
+        placeSound = soundsH.get("woodPlace");
         fireSound = soundsH.get("crossbow");
         loadSprites();
         debrisType = "wood";
