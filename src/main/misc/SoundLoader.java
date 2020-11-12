@@ -37,6 +37,8 @@ public class SoundLoader {
         soundsH.put("luggageBlaster", new SoundFile(p, "sounds/turrets/luggageBlaster.wav"));
         //ui
         soundsH.put("waveEnd", new SoundFile(p,"sounds/ui/waveEnd.wav"));
+        soundsH.put("clickIn", new SoundFile(p, "sounds/ui/clickIn.wav"));
+        soundsH.put("clickOut", new SoundFile(p, "sounds/ui/clickOut.wav"));
         //walls
         soundsH.put("woodDamage", new SoundFile(p, "sounds/walls/woodDamage.wav"));
         soundsH.put("woodBreak", new SoundFile(p, "sounds/walls/woodBreak.wav"));

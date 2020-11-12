@@ -38,12 +38,23 @@ public class Hand {
         else implacable = false;
         if (inputHandler.rightMousePressedPulse) remove();
         if ((inputHandler.leftMousePressedPulse || inputHandler.rightMousePressedPulse) && p.mouseX > BOARD_WIDTH) {
+            if (!held.equals("null")) {
+                soundsH.get("clickOut").stop();
+                soundsH.get("clickOut").play(1, volume);
+            }
             held = "null";
             for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;
         }
         if (!levelBuilder) checkDisplay();
         displayHeld();
-        if (inputHandler.leftMousePressedPulse && !implacable) place();
+        if (inputHandler.leftMousePressedPulse) {
+            if (!held.equals("wall") && !held.equals("null")) {
+                selection.towerJustPlaced = true; //prevents selection click sounds from playing
+                soundsH.get("clickOut").stop();
+                soundsH.get("clickOut").play(1, volume);
+            }
+            if (!implacable) place();
+        }
     }
 
     private void checkPlaceable() {

@@ -2,6 +2,7 @@ package main.gui;
 
 import main.towers.Tower;
 import processing.core.PApplet;
+import processing.sound.SoundFile;
 
 import static main.Main.*;
 
@@ -12,10 +13,15 @@ public class Selection { //what tower is selected
     public String name;
     public int id;
     public Tower tower;
+    public boolean towerJustPlaced;
+    private SoundFile clickIn;
+    private SoundFile clickOut;
 
     public Selection(PApplet p) {
         this.p = p;
         name = "null";
+        clickIn = soundsH.get("clickIn");
+        clickOut = soundsH.get("clickOut");
     }
 
     public void main() {
@@ -25,6 +31,13 @@ public class Selection { //what tower is selected
     }
 
     public void swapSelected(int id) { //switches what is selected
+        if (this.id != id || name.equals("null")) {
+            if (!towerJustPlaced) {
+                clickIn.stop();
+                clickIn.play(1, volume);
+                inGameGui.flashA = 255;
+            } else towerJustPlaced = false;
+        }
         tower = tiles.get(id).tower;
         hand.held = "null";
         if (tower.turret) {
@@ -70,14 +83,17 @@ public class Selection { //what tower is selected
                 } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
             }
         }
-        inGameGui.flashA = 255;
     }
 
     private void clickOff() { //desselect, hide stuff
         Tower tower = tiles.get(id).tower;
         if (tower != null) {
             if (inputHandler.leftMousePressedPulse && p.mouseX < 900 && (p.mouseX > tower.tile.position.x || p.mouseX < tower.tile.position.x - tower.size.x || p.mouseY > tower.tile.position.y || p.mouseY < tower.tile.position.y - tower.size.y) && alive) {
-                if (!name.equals("null")) inGameGui.flashA = 255;
+                if (!name.equals("null") && !towerJustPlaced) {
+                    inGameGui.flashA = 255;
+                    clickOut.stop();
+                    clickOut.play(1, volume);
+                }
                 name = "null";
                 sellButton.active = false;
                 targetButton.active = false;

@@ -30,6 +30,10 @@ public class WallBuy extends Button {
     public void hover(){ //below is if hovered or depressed
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active) {
             sprite = spriteHover;
+            if (inputHandler.leftMousePressedPulse) {
+                clickIn.stop();
+                clickIn.play(1, volume);
+            }
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
             if (inputHandler.leftMouseReleasedPulse) {
                 action();

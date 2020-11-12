@@ -68,6 +68,11 @@ public class TowerBuy extends Button {
         if (p.mouseX < (position.x+size.x/2)+d && p.mouseX > (position.x-size.x/2)-d-1 && p.mouseY < (position.y+size.y/2)+d && p.mouseY > (position.y-size.y/2)-d-1 && alive && active || depressed && alive){
             if (depressed) sprite = spritePressed;
             else sprite = spriteHover;
+            if (inputHandler.leftMousePressedPulse && !depressed) {
+                clickIn.stop();
+                clickIn.play(1, volume);
+            }
+            if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
             p.fill(235);
             p.noStroke();
             p.rect(900,212,200,707);
@@ -116,11 +121,9 @@ public class TowerBuy extends Button {
                     break;
             }
             displayPrice(offset, x);
-            if (inputHandler.leftMouseReleasedPulse && alive) {
+            if (inputHandler.leftMousePressedPulse && alive) {
                 action();
-                if (money >= price) {
-                    sprite = spritePressed;
-                }
+                if (money >= price) sprite = spritePressed;
             }
         }
         else sprite = spriteIdle;
