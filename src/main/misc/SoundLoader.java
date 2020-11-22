@@ -3,6 +3,7 @@ package main.misc;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
 
+import static main.Main.soundLoopsH;
 import static main.Main.soundsH;
 
 public class SoundLoader {
@@ -45,5 +46,8 @@ public class SoundLoader {
         soundsH.put("woodDamage", new SoundFile(p, "sounds/walls/woodDamage.wav"));
         soundsH.put("woodBreak", new SoundFile(p, "sounds/walls/woodBreak.wav"));
         soundsH.put("woodPlaceShort", new SoundFile(p, "sounds/walls/woodPlaceShort.wav"));
+
+        //loops
+        soundLoopsH.put("smallExplosion", new SoundLoop(p, "sounds/loops/smallExplosion", 60));
     }
 }

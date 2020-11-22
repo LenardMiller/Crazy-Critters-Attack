@@ -103,6 +103,7 @@ public class Main extends PApplet {
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
     public static HashMap<String, SoundFile> soundsH = new HashMap<>();
+    public static HashMap<String, SoundLoop> soundLoopsH = new HashMap<>();
 
     //pathfinding stuff
     public static int defaultSize = 1;
@@ -197,7 +198,6 @@ public class Main extends PApplet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         keyBinds.spawnKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
@@ -206,6 +206,8 @@ public class Main extends PApplet {
         }
         maxCost = maxCost();
         minCost = minCost(maxCost);
+        //looping sounds
+        for (SoundLoop soundLoop : soundLoopsH.values()) soundLoop.continueLoop();
         //objects
         drawObjects();
         //gui stuff
