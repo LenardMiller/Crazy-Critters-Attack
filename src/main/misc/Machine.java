@@ -33,6 +33,7 @@ public class Machine {
     private int damageState;
     private SoundFile damageSound;
     private SoundFile breakSound;
+    private SoundFile explodeSound;
 
     public Machine(PApplet p, PVector position, String name, String debris, int betweenFrames, int maxHp) {
         this.p = p;
@@ -46,6 +47,7 @@ public class Machine {
         this.betweenFrames = betweenFrames;
         damageSound = soundsH.get(debris + "Damage");
         breakSound = soundsH.get(debris + "Break");
+        explodeSound = soundsH.get("smallExplosion");
         sprites = spritesAnimH.get(name);
         tintColor = 255;
         updateNodes();
@@ -161,8 +163,11 @@ public class Machine {
             for (int i = 0; i < 5; i++) {
                 particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
             }
-            if ((int) p.random(0, 2) == 0)
+            if ((int) p.random(0, 2) == 0) {
+                explodeSound.stop();
+                explodeSound.play(p.random(0.8f, 1.2f), volume);
                 particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+            }
         }
     }
 
