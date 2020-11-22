@@ -34,6 +34,10 @@ public class Slingshot extends Turret {
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         damage = 15; //15
+        damageSound = soundsH.get("woodDamage");
+        breakSound = soundsH.get("woodBreak");
+        placeSound = soundsH.get("woodPlace");
+        fireSound = soundsH.get("slingshot");
         loadSprites();
         debrisType = "wood";
         price = SLINGSHOT_PRICE;
@@ -43,9 +47,14 @@ public class Slingshot extends Turret {
         gravel = false;
         setUpgrades();
         updateTowerArray();
+
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void fire() { //needed to change projectile fired
+        fireSound.stop();
+        fireSound.play(p.random(0.8f, 1.2f), volume);
         delayTime = p.frameCount + delay; //waits this time before firing
         if (painful) projectiles.add(new Rock(p, tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
         if (gravel) {

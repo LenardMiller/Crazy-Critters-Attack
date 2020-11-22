@@ -9,6 +9,7 @@ import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.SoundFile;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ public abstract class Turret extends Tower {
     public int effectLevel;
     public int effectDuration;
     private float targetAngle;
+    SoundFile specialSound;
+    SoundFile fireSound;
 
     Turret(PApplet p, Tile tile) {
         super(p, tile);
@@ -160,6 +163,8 @@ public abstract class Turret extends Tower {
     }
 
     public void fire() {
+        fireSound.stop();
+        fireSound.play(p.random(0.8f, 1.2f), volume);
         delayTime = p.frameCount + delay; //waits this time before firing
     }
 
@@ -271,22 +276,35 @@ public abstract class Turret extends Tower {
     }
 
     public void upgrade(int id) {
+        if (id == 0) {
+//            if (nextLevelA == 2 && nextLevelB != 6) {
+//                specialSound.stop();
+//                specialSound.play(p.random(0.8f, 1.2f), volume);
+//            } else {
+            placeSound.stop();
+            placeSound.play(p.random(0.8f, 1.2f), volume);
+//            }
+        } else if (id == 1) {
+//            if (nextLevelB == 5 && nextLevelA != 3) {
+//                specialSound.stop();
+//                specialSound.play(p.random(0.8f, 1.2f), volume);
+//            } else {
+            placeSound.stop();
+            placeSound.play(p.random(0.8f, 1.2f), volume);
+//            }
+        }
         upgradeSpecial(id);
         if (id == 0) {
             value += upgradePrices[nextLevelA];
             nextLevelA++;
-            if (nextLevelA < upgradeTitles.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
-            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-            if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
-            else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         } else if (id == 1) {
             value += upgradePrices[nextLevelB];
             nextLevelB++;
-            if (nextLevelA < upgradeTitles.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
-            else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-            if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
-            else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         }
+        if (nextLevelA < upgradeTitles.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
+        else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+        if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         //shower debris
         int num = (int) (p.random(30, 50));
         for (int j = num; j >= 0; j--) {
@@ -296,5 +314,6 @@ public abstract class Turret extends Tower {
         while (delay <= numFireFrames * betweenFireFrames + numIdleFrames) betweenFireFrames--;
     }
 
-    public void upgradeSpecial(int id) {}
+    public void upgradeSpecial(int id) {
+    }
 }  

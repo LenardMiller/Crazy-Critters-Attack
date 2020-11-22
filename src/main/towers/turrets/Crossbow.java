@@ -39,6 +39,10 @@ public class Crossbow extends Turret {
         loadDelayTime = 0;
         damage = 30;
         pierce = 2;
+        damageSound = soundsH.get("woodDamage");
+        breakSound = soundsH.get("woodBreak");
+        placeSound = soundsH.get("woodPlace");
+        fireSound = soundsH.get("crossbow");
         loadSprites();
         debrisType = "wood";
         price = CROSSBOW_PRICE;
@@ -47,9 +51,14 @@ public class Crossbow extends Turret {
         multishot = false;
         setUpgrades();
         updateTowerArray();
+
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void fire(){ //needed to change projectile fired
+        fireSound.stop();
+        fireSound.play(p.random(0.8f, 1.2f), volume);
         delayTime = p.frameCount + delay; //waits this time before firing
         if (multishot) {
             float offset = 0.07f;
@@ -69,7 +78,7 @@ public class Crossbow extends Turret {
         //price
         upgradePrices[0] = 75;
         upgradePrices[1] = 175;
-        upgradePrices[2] = 850;
+        upgradePrices[2] = 750;
         upgradePrices[3] = 100;
         upgradePrices[4] = 150;
         upgradePrices[5] = 650;
@@ -144,6 +153,7 @@ public class Crossbow extends Turret {
                 case 5:
                     multishot = true;
                     name = "crossbowMultishot";
+                    fireSound = soundsH.get("shotbow");
                     loadSprites();
                     if (nextLevelA == 2) nextLevelA++;
                     break;

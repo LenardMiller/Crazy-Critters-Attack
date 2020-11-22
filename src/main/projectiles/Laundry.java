@@ -33,6 +33,7 @@ public class Laundry extends Projectile {
         hasTrail = true;
         effectRadius = 60;
         buff = "poisoned";
+        hitSound = soundsH.get("squishImpact");
     }
 
     public void die(int i) {
@@ -51,6 +52,8 @@ public class Laundry extends Projectile {
                 }
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
+                hitSound.stop();
+                hitSound.play(p.random(0.8f, 1.2f), volume);
                 enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "poison", velocity, i);
                 int num = (int) (p.random(16, 42));
                 for (int j = num; j >= 0; j--) {

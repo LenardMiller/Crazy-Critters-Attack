@@ -44,7 +44,7 @@ public class KeyBinds {
         boolean butterfly = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
         boolean dummy = keysPressed.getPressedPulse('!') && alive && p.mouseX < BOARD_WIDTH;
         //projectiles
-        if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 50));
+        if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 50000));
         if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, null, 20, 2));
         if (miscProjectile) projectiles.add(new MiscProjectile(p, p.mouseX, p.mouseY, 0, null, round(p.random(0, 5)), 6));
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 20, false));
@@ -60,8 +60,7 @@ public class KeyBinds {
 //            level.currentWave = 0;
 //            Wave wave = level.waves[level.currentWave];
 //            wave.init();
-        }
-        if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
+        } if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
         if (bigBug) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
         if (treeSprite) enemies.add(new TreeSprite(p, p.mouseX, p.mouseY));
@@ -76,10 +75,12 @@ public class KeyBinds {
 
     public void debugKeys() throws IOException {
         //entity stuff
-        boolean killEnemies = keysPressed.getReleasedPulse('s') && alive;
+        boolean deleteEnemies = keysPressed.getReleasedPulse('s') && alive;
         boolean killTowers = keysPressed.getReleasedPulse('d') && alive;
         boolean hurtTowers = keysPressed.getReleasedPulse('D') && alive;
         boolean killProjectiles = keysPressed.getReleasedPulse('f') && alive;
+        boolean killEnemies = keysPressed.getPressedPulse('c') && alive;
+        boolean overkillEnemies = keysPressed.getPressedPulse('C') && alive;
         //other stuff
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
         boolean update = keysPressed.getPressedPulse(' ');
@@ -89,28 +90,36 @@ public class KeyBinds {
         boolean saveTiles = keysPressed.getPressedPulse('z');
         boolean loadTiles = keysPressed.getPressedPulse('x');
         //entity stuff
-        if (killEnemies) {
+        if (deleteEnemies) {
             enemies = new ArrayList<>();
             buffs = new ArrayList<>();
             updateNodes();
-        }
-        if (killTowers) {
+        } if (killTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
                 if (tower != null) tower.die(false);
             }
             updateNodes();
             machine.die();
-        }
-        if (hurtTowers) {
+        } if (hurtTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
                 if (tower != null) tower.hp -= tower.maxHp/5;
             }
             updateNodes();
             machine.damage(20);
+        } if (killProjectiles) projectiles = new ArrayList<>();
+        if (killEnemies) {
+            for (Enemy enemy : enemies) {
+                enemy.damageSimple(enemy.maxHp - 1, null, "none", new PVector(0,0));
+                enemy.damageSimple(1, null, "none", new PVector(0,0));
+
+            }
+        } if (overkillEnemies) {
+            for (Enemy enemy : enemies) {
+                enemy.damageSimple(enemy.maxHp + 1, null, "none", new PVector(0,0));
+            }
         }
-        if (killProjectiles) projectiles = new ArrayList<>();
         //other stuff
         if (displayPathLines) debug = !debug;
         if (update) {
@@ -118,14 +127,12 @@ public class KeyBinds {
             updateWallTiles();
             updateWallTileConnections();
             connectWallQueues++;
-        }
-        if (addMoney) money += 25;
+        } if (addMoney) money += 25;
         if (loseMoney) money = 0;
         if (switchMode) {
             levelBuilder = !levelBuilder;
             hand.setHeld("null");
-        }
-        if (saveTiles) DataControl.save();
+        } if (saveTiles) DataControl.save();
         if (loadTiles) DataControl.load(p,"levels/forest");
     }
 

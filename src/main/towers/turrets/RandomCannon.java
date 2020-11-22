@@ -39,6 +39,10 @@ public class RandomCannon extends Turret {
         loadDelayTime = 0;
         damage = 10;
         range = 200;
+        damageSound = soundsH.get("woodDamage");
+        breakSound = soundsH.get("woodBreak");
+        placeSound = soundsH.get("woodPlace");
+        fireSound = soundsH.get("luggageBlaster");
         loadSprites();
         debrisType = "wood";
         price = RANDOMCANNON_PRICE;
@@ -46,9 +50,14 @@ public class RandomCannon extends Turret {
         priority = 0; //close
         setUpgrades();
         updateTowerArray();
+
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void fire() {
+        fireSound.stop();
+        fireSound.play(p.random(0.8f, 1.2f), volume);
         float angleB = angle;
         delayTime = p.frameCount + delay; //waits this time before firing
         int spriteType = (int)(p.random(0,5.99f));
@@ -80,10 +89,10 @@ public class RandomCannon extends Turret {
         //price
         upgradePrices[0] = 125;
         upgradePrices[1] = 150;
-        upgradePrices[2] = 600;
+        upgradePrices[2] = 500;
         upgradePrices[3] = 75;
         upgradePrices[4] = 125;
-        upgradePrices[5] = 500;
+        upgradePrices[5] = 600;
         //titles
         upgradeTitles[0] = "Damage Up";
         upgradeTitles[1] = "Faster Firing";

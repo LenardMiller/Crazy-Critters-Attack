@@ -8,7 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 
-public class MiscProjectile extends Projectile{
+public class MiscProjectile extends Projectile {
 
     public PImage[] sprites; //alternate sprites, passed in
 
@@ -26,6 +26,7 @@ public class MiscProjectile extends Projectile{
         angularVelocity = 15; //degrees mode
         sprites = spritesAnimH.get("miscPJ");
         sprite = sprites[spriteType];
+        hitSound = soundsH.get("smallImpact");
     }
 
     public void die(int i) {

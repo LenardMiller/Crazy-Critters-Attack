@@ -1,7 +1,7 @@
 package main.towers;
 
-import main.particles.Debris;
 import main.misc.Tile;
+import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -39,6 +39,9 @@ public class Wall extends Tower {
         hit = false;
         sprite = spritesAnimH.get("woodWallTW");
         debrisType = "wood";
+        damageSound = soundsH.get(debrisType + "Damage");
+        breakSound = soundsH.get(debrisType + "Break");
+        placeSound = soundsH.get(debrisType + "PlaceShort");
         price = 25;
         value = price;
         nextLevelB = 0;
@@ -60,6 +63,9 @@ public class Wall extends Tower {
         crystal = new CornerSpriteDS();
         ultimate = new CornerSpriteDS();
         loadSprites();
+
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void main(){
@@ -134,28 +140,33 @@ public class Wall extends Tower {
         upgradeSprites[3] = spritesAnimH.get("ultimateWallTW");
     }
 
-
-
     public void upgrade(int id) {
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
         price += upgradePrices[nextLevelB];
         sprite = upgradeSprites[nextLevelB];
 
-        if (nextLevelB == 0) {
-            maxHp += 75;
-            name = "stoneWall";
-            debrisType = "stone";
-        } if (nextLevelB == 1) {
-            maxHp += 125;
-            name = "metalWall";
-            debrisType = "metal";
-        } if (nextLevelB == 2) {
-            maxHp += 250;
-            name = "crystalWall";
-            debrisType = "crystal";
-        } if (nextLevelB == 3) {
-            maxHp += 500;
-            name = "titaniumWall";
-            debrisType = "ultimate";
+        switch (nextLevelB) {
+            case 0:
+                maxHp += 75;
+                name = "stoneWall";
+                debrisType = "stone";
+                break;
+            case 1:
+                maxHp += 125;
+                name = "metalWall";
+                debrisType = "metal";
+                break;
+            case 2:
+                maxHp += 250;
+                name = "crystalWall";
+                debrisType = "crystal";
+                break;
+            case 3:
+                maxHp += 500;
+                name = "titaniumWall";
+                debrisType = "ultimate";
+                break;
         } hp = maxHp;
 
         nextLevelB++;

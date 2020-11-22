@@ -5,8 +5,7 @@ import main.particles.Pile;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.particles;
-import static main.Main.underParticles;
+import static main.Main.*;
 
 public class LittleWorm extends Enemy {
 
@@ -32,6 +31,8 @@ public class LittleWorm extends Enemy {
         stealthy = true;
         partSize = new PVector(7, 7);
         corpseSize = new PVector(25,25);
+        overkillSound = soundsH.get("squish");
+        dieSound = soundsH.get("crunch");
         loadSprites();
     }
 

@@ -25,12 +25,14 @@ import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.SoundFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static main.misc.MiscMethods.*;
+import static main.misc.SoundLoader.loadSounds;
 import static main.misc.SpriteLoader.loadSprites;
 import static main.misc.SpriteLoader.loadSpritesAnim;
 
@@ -87,6 +89,7 @@ public class Main extends PApplet {
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
     public static int connectWallQueues;
+    public static float volume = 0.25f;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
@@ -99,6 +102,8 @@ public class Main extends PApplet {
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
+    public static HashMap<String, SoundFile> soundsH = new HashMap<>();
+    public static HashMap<String, SoundLoop> soundLoopsH = new HashMap<>();
 
     //pathfinding stuff
     public static int defaultSize = 1;
@@ -144,6 +149,8 @@ public class Main extends PApplet {
         //loads sprites
         loadSprites(this);
         loadSpritesAnim(this);
+        //loads sounds
+        loadSounds(this);
         //other stuff
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
@@ -191,7 +198,6 @@ public class Main extends PApplet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         keyBinds.spawnKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
@@ -200,6 +206,8 @@ public class Main extends PApplet {
         }
         maxCost = maxCost();
         minCost = minCost(maxCost);
+        //looping sounds
+        for (SoundLoop soundLoop : soundLoopsH.values()) soundLoop.continueLoop();
         //objects
         drawObjects();
         //gui stuff

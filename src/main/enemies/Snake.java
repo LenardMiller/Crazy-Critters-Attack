@@ -3,6 +3,8 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.soundsH;
+
 public class Snake extends Enemy {
 
     public Snake(PApplet p, float x, float y) {
@@ -26,6 +28,8 @@ public class Snake extends Enemy {
         attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(9,9);
+        overkillSound = soundsH.get("snakeSquish");
+        dieSound = soundsH.get("snakeCrunch");
         loadSprites();
     }
 }
