@@ -7,8 +7,6 @@ import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
 import static main.Main.*;
 import static main.pathfinding.UpdateNode.updateNode;
 
@@ -18,10 +16,8 @@ public class Node {
 
     private Node parent;
     int clearance;
-    ArrayList<Boolean> clearanceMp;
     HeapNode.ItemNode openItem;
     public PVector position;
-    boolean movementPenalty;
     private float startCost;
     private float endCost;
     public float totalCost;
@@ -32,13 +28,11 @@ public class Node {
     boolean isNotTraversable;
     private PathRequest request;
     public Tower tower;
-    public int smearState; //empty, full, partial, toPartial, toFull
 
     public Node(PApplet p, PVector position) {
         this.p = p;
 
         this.position = position;
-        smearState = 0;
     }
 
     public Tile getTile() {
@@ -123,22 +117,16 @@ public class Node {
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
         if (tower != null) {
-            if (!tower.turret) movementPenalty = true;
-            else {
-                movementPenalty = true;
-                setEnd(nX, nY);
-                ended = true;
-            }
-        } else movementPenalty = false;
-        Tile obsTile = tiles.get(tX,tY);
+            setEnd(nX, nY);
+            ended = true;
+        } Tile obsTile = tiles.get(tX,tY);
         if (obsTile != null) {
             isNotTraversable = obsTile.obstacle != null;
             if (obsTile.machine) {
                 setEnd(nX,nY);
                 ended = true;
             }
-        }
-        if (!ended) setNotEnd(tX,tY);
+        } if (!ended) setNotEnd(tX,tY);
     }
 
     void setClose() {
@@ -163,8 +151,7 @@ public class Node {
                 Enemy enemy = enemies.get(path.index);
                 enemy.points.add(new Enemy.TurnPoint(p, position, tower));
             }
-        }
-        if (!isStart) parent.setDone();
+        } if (!isStart) parent.setDone();
     }
 
     public void findGHF() {
@@ -181,19 +168,12 @@ public class Node {
                 }
             }
             endCost = endH.removeFirstItem().value;
-        }
-        if (isStart) startCost = 0;
+        } if (isStart) startCost = 0;
         else {
             PVector offset;
             if (parent != null) {
                 offset = PVector.sub(position, parent.position);
                 startCost = sqrt(sq(offset.x) + sq(offset.y));
-                int size = defaultSize;
-                if (request != null) size = request.size;
-                boolean mpn = movementPenalty;
-                if (clearanceMp.size() >= size) mpn = clearanceMp.get(size - 1); //mpc
-                if (request != null && request.enemy != null && request.enemy.flying && !isEnd) mpn = false;
-                if (mpn) startCost += 1000;
                 startCost += parent.startCost;
             }
         }
