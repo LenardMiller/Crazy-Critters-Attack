@@ -11,6 +11,7 @@ import main.gui.guiObjects.buttons.Button;
 import main.gui.guiObjects.buttons.Play;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
+import main.levelStructure.DesertWaves;
 import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
 import main.misc.*;
@@ -179,9 +180,10 @@ public class Main extends PApplet {
         for (Node node : end) node.findGHF();
         updateTowerArray();
         //generates levels
-        currentLevel = 0; //temp
-        levels = new Level[1];
+        currentLevel = 1; //temp
+        levels = new Level[2];
         levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50);
+        levels[1] = new Level(this, DesertWaves.genDesertWaves(this), "levels/forest", 250, 75);
         //load level data
         DataControl.load(this, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
