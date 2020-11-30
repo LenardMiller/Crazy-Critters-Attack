@@ -78,7 +78,7 @@ public class MiscMethods {
         return minCost;
     }
 
-    public static PVector randomSpawnPosition(PApplet p) { //todo: better spawning
+    public static PVector randomSpawnPosition(PApplet p) {
         float z = p.random(0, 4);
         float low = -90;
         float high = 990;
