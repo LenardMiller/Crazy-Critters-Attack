@@ -351,6 +351,10 @@ public class Main extends PApplet {
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).displayC();
         }
+        //enemy hp bars
+        for (Enemy enemy : enemies) {
+            if (enemy.hp > 0 && !enemy.stealthMode) enemy.hpBar();
+        }
     }
 
     public void keyPressed() {

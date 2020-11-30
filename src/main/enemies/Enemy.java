@@ -226,7 +226,6 @@ public abstract class Enemy {
         p.rotate(angle);
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
-        if (hp > 0 && !stealthMode) HpBar();
         if (debug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
             p.stroke(0, 0, 255);
@@ -318,7 +317,7 @@ public abstract class Enemy {
         damageEffect(false);
     }
 
-    private void HpBar() { //todo: should render on top of everything else
+    public void hpBar() {
         p.fill(255, 0, 0, barTrans);
         p.noStroke();
         p.rect(position.x - size.x / 2 - 10, position.y + size.y / 2 + 6, (size.x + 20) * (((float) hp) / ((float) maxHp)), 6);
@@ -360,9 +359,6 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
-    //todo: fix big enemy clearance
-    //todo: big enemies randomly attack stuff
-    //todo: won't target turrets?
     //todo: enemies sometimes wander off if there are a lot of them
 
     boolean intersectTurnPoint() {
