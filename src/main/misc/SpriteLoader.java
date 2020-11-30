@@ -375,5 +375,8 @@ public class SpriteLoader {
         spritesH.put("treeBROb_TL",p.loadImage("sprites/tiles/obstacles/tree/br.png"));
         spritesH.put("treeTLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/tl.png"));
         spritesH.put("treeTROb_TL",p.loadImage("sprites/tiles/obstacles/tree/tr.png"));
+        spritesH.put("cactus0Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/0.png"));
+        spritesH.put("cactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/1.png"));
+        spritesH.put("cactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/2.png"));
     }
 }

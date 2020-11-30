@@ -39,7 +39,7 @@ public class Tile {
 
         this.position = position;
         this.id = id;
-        obstacleShadowLength = 0;
+        obstacleShadowLength = 3;
         bgAEdges = new PImage[4];
         bgWEdges = new PImage[4];
         bgWOCorners = new PImage[4];

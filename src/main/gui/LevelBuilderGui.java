@@ -43,6 +43,9 @@ public class LevelBuilderGui {
         placeButton(1, 4, "treeBROb");
         placeButton(0, 3, "treeTLOb");
         placeButton(1, 3, "treeTROb");
+        placeButton(0,5, "cactus0Ob");
+        placeButton(1,5, "cactus1Ob");
+        placeButton(2,5, "cactus2Ob");
         //machine
         placeButton(3, 3, "Ma");
     }
