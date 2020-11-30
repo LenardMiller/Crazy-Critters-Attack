@@ -182,8 +182,8 @@ public class Main extends PApplet {
         //generates levels
         currentLevel = 1; //temp
         levels = new Level[2];
-        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50);
-        levels[1] = new Level(this, DesertWaves.genDesertWaves(this), "levels/desert", 250, 75);
+        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50, "dirt");
+        levels[1] = new Level(this, DesertWaves.genDesertWaves(this), "levels/desert", 250, 75, "sand");
         //load level data
         DataControl.load(this, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;

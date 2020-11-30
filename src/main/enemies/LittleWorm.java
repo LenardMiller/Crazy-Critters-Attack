@@ -37,8 +37,8 @@ public class LittleWorm extends Enemy {
     }
 
     void move() {
-        if (stealthMode && (int)p.random(0,15) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),"dirt"));
-        if (p.random(0,50) < 1) underParticles.add(new Pile(p, position.x, position.y, 0, "dirt"));
+        if (stealthMode && (int)p.random(0,15) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),levels[currentLevel].groundType));
+        if (p.random(0,50) < 1) underParticles.add(new Pile(p, position.x, position.y, 0, levels[currentLevel].groundType));
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);

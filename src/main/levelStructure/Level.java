@@ -13,13 +13,15 @@ public class Level {
     public String layout;
     public int startingCash;
     public int reward;
+    public String groundType;
 
-    public Level(PApplet p, Wave[] waves, String layout, int startingCash, int reward) {
+    public Level(PApplet p, Wave[] waves, String layout, int startingCash, int reward, String groundType) {
         this.p = p;
         this.waves = waves;
         this.layout = layout;
         this.startingCash = startingCash;
         this.reward = reward;
+        this.groundType = groundType;
         currentWave = 0;
         startWave = 0;
     }
