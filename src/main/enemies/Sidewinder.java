@@ -23,7 +23,7 @@ public class Sidewinder extends Enemy {
         numAttackFrames = 15;
         numMoveFrames = 10;
         attackStartFrame = 0;
-        attackDmgFrames = new int[]{8};
+        attackDmgFrames = new int[]{4};
         betweenAttackFrames = 5;
         attackFrame = attackStartFrame;
         corpseSize = size;
