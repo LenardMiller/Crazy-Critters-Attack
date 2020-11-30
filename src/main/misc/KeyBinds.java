@@ -36,7 +36,7 @@ public class KeyBinds {
         boolean littleBug = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
         boolean mediumBug = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
         boolean bigBug = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
-        boolean treeSprite = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
+        boolean sideWinder = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
         boolean treeSpirit = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
         boolean treeGiant = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
         boolean snake = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
@@ -63,14 +63,14 @@ public class KeyBinds {
         } if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
         if (bigBug) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
-        if (treeSprite) enemies.add(new TreeSprite(p, p.mouseX, p.mouseY));
+        if (sideWinder) enemies.add(new Sidewinder(p, p.mouseX, p.mouseY));
         if (treeSpirit) enemies.add(new TreeSpirit(p, p.mouseX, p.mouseY));
         if (treeGiant) enemies.add(new TreeGiant(p, p.mouseX, p.mouseY));
         if (snake) enemies.add(new Snake(p, p.mouseX, p.mouseY));
         if (worm) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
         if (butterfly) enemies.add(new Butterfly(p, p.mouseX, p.mouseY));
         if (dummy) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
-        if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant || snake || worm || butterfly || dummy) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        if (littleBug || mediumBug || bigBug || sideWinder || treeSpirit || treeGiant || snake || worm || butterfly || dummy) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
     public void debugKeys() throws IOException {
