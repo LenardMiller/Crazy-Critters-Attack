@@ -312,6 +312,7 @@ public class SpriteLoader {
         //tiles
         //BGA
         spritesH.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt/base.png"));
+        spritesH.put("sandBGA_TL", p.loadImage("sprites/tiles/BGA/sand/base.png"));
         spritesH.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
         for (int i = 0; i < 1; i++) {
             String name = null;
