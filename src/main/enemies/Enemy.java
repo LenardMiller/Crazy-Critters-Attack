@@ -360,7 +360,6 @@ public abstract class Enemy {
 
     //pathfinding -----------------------------------------------------------------
     //todo: enemies sometimes wander off if there are a lot of them
-    //todo: sometimes attack multiple things at once?
 
     boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);

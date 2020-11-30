@@ -116,10 +116,11 @@ public class Node {
         Tile towerTile = tiles.get(tX+1, tY+1);
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
-        if (tower != null) {
-            setEnd(nX, nY);
-            ended = true;
-        } Tile obsTile = tiles.get(tX,tY);
+//        if (tower != null) { //apparently this breaks everything
+//            setEnd(nX, nY);
+//            ended = true;
+//        }
+        Tile obsTile = tiles.get(tX,tY);
         if (obsTile != null) {
             isNotTraversable = obsTile.obstacle != null;
             if (obsTile.machine) {
