@@ -20,7 +20,7 @@ public class Scorpion extends Enemy {
         hitParticle = "greenOuch";
         name = "scorpion";
         numAttackFrames = 13;
-        attackDmgFrames = new int[]{4};
+        attackDmgFrames = new int[]{5};
         numMoveFrames = 4;
         betweenWalkFrames = 5;
         betweenAttackFrames = 6;
