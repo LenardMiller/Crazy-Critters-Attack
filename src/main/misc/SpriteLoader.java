@@ -84,10 +84,14 @@ public class SpriteLoader {
         getSprite(p,"sidewinderMove","EN","sidewinder/move/",10);
         getSprite(p,"sidewinderDie","EN","sidewinder/die/",3);
         getSprite(p,"sidewinderParts","EN","sidewinder/parts/",3);
+        getSprite(p,"scorpionAttack","EN","scorpion/attack/",13);
+        getSprite(p,"scorpionMove","EN","scorpion/move/",4);
+        getSprite(p,"scorpionDie","EN","scorpion/die/",5);
+        getSprite(p,"scorpionParts","EN","scorpion/parts/",5);
         getSprite(p,"wormMove","EN","worm/move/",1);
         getSprite(p,"wormAttack","EN","worm/attack/",34);
         getSprite(p,"wormDie","EN","worm/die/",5);
-        getSprite(p, "wormParts", "EN", "worm/parts/", 3);
+        getSprite(p,"wormParts", "EN", "worm/parts/", 3);
         getSprite(p,"butterflyAttack","EN","butterfly/attack/",16);
         getSprite(p,"butterflyMove","EN","butterfly/move/",8);
         getSprite(p,"butterflyDie","EN","butterfly/die/",5);

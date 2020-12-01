@@ -5,28 +5,29 @@ import processing.core.PVector;
 
 import static main.Main.soundsH;
 
-public class MidBug extends Enemy {
-    public MidBug(PApplet p, float x, float y) {
+public class Scorpion extends Enemy {
+    public Scorpion(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(25,25);
         pfSize = 1; //1
         radius = 13;
-        maxSpeed = .5f;
+        maxSpeed = .65f;
         speed = maxSpeed;
-        moneyDrop = 20;
-        damage = 3;
-        maxHp = 40;
+        moneyDrop = 35;
+        damage = 5;
+        maxHp = 50;
         hp = maxHp;
         hitParticle = "greenOuch";
-        name = "midBug";
-        numAttackFrames = 42;
-        numMoveFrames = 8;
-        betweenWalkFrames = 4;
-        betweenAttackFrames = 2;
-        attackStartFrame = 34; //attack start
+        name = "scorpion";
+        numAttackFrames = 13;
+        attackDmgFrames = new int[]{4};
+        numMoveFrames = 4;
+        betweenWalkFrames = 5;
+        betweenAttackFrames = 6;
+        attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;
         corpseSize = size;
-        partSize = new PVector(14,14);
+        partSize = new PVector(11,11);
         overkillSound = soundsH.get("squish");
         dieSound = soundsH.get("crunch");
         loadSprites();
