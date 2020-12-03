@@ -88,6 +88,10 @@ public class SpriteLoader {
         getSprite(p,"scorpionMove","EN","scorpion/move/",4);
         getSprite(p,"scorpionDie","EN","scorpion/die/",5);
         getSprite(p,"scorpionParts","EN","scorpion/parts/",5);
+        getSprite(p,"emperorAttack","EN","emperor/attack/",15);
+        getSprite(p,"emperorMove","EN","emperor/move/",8);
+        getSprite(p,"emperorDie","EN","emperor/die/",5);
+        getSprite(p,"emperorParts","EN","emperor/parts/",5);
         getSprite(p,"wormMove","EN","worm/move/",1);
         getSprite(p,"wormAttack","EN","worm/attack/",34);
         getSprite(p,"wormDie","EN","worm/die/",5);
