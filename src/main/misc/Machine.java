@@ -132,7 +132,7 @@ public class Machine {
                     if ((int) p.random(0, 5) == 0) {
                         explodeSound.stop();
                         explodeSound.play(p.random(0.8f, 1.2f), volume);
-                    } particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+                    } particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 }
             }
         } else {
@@ -143,7 +143,7 @@ public class Machine {
                 if ((int) p.random(0, 4) == 0)
                     particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 if ((int) p.random(0, 2) == 0)
-                    particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+                    particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 for (int i = 0; i < 3; i++) {
                     particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 } if ((int) p.random(0, 8) == 0) {
@@ -176,7 +176,7 @@ public class Machine {
             if ((int) p.random(0, 2 * ((float) hp / (float) hpSegment)) == 0) {
                 explodeSound.stop();
                 explodeSound.play(p.random(0.8f, 1.2f), volume);
-                particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+                particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
             }
         }
     }

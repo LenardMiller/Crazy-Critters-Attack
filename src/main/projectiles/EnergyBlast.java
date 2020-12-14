@@ -50,7 +50,7 @@ public class EnergyBlast extends Projectile {
                     for (int j = num; j >= 0; j--) {
                         particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "energy", maxSpeed = p.random(0.5f, 2.5f)));
                     }
-                    particles.add(new MediumExplosion(p, position.x, position.y, p.random(0, 360)));
+                    particles.add(new MediumExplosion(p, position.x, position.y, p.random(0, 360), "fire"));
                 } else {
                     int num = (int) (p.random(16, 42));
                     for (int j = num; j >= 0; j--) {
