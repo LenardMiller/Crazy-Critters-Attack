@@ -41,7 +41,7 @@ public class CannonBall extends Projectile {
                 enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "none", velocity, i);
                 int num = (int) (p.random(10, 16));
                 for (int j = num; j >= 0; j--) {
-                    particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "energy", maxSpeed = p.random(0.5f, 2.5f)));
+                    particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "metal", maxSpeed = p.random(0.5f, 2.5f)));
                 }
                 particles.add(new MediumExplosion(p, position.x, position.y, p.random(0, 360), "puff"));
 
