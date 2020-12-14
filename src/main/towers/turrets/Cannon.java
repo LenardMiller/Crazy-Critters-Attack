@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.misc.Tile;
 import main.particles.BuffParticle;
-import main.projectiles.Pebble;
+import main.projectiles.CannonBall;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -12,6 +12,8 @@ import static main.misc.MiscMethods.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
 public class Cannon extends Turret {
+
+    private int effectRadius;
 
     public Cannon(PApplet p, Tile tile) {
         super(p,tile);
@@ -36,6 +38,7 @@ public class Cannon extends Turret {
         loadDelayTime = 0;
         damage = 50;
         range = 250;
+        effectRadius = 25;
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
         placeSound = soundsH.get("woodPlace");
@@ -62,7 +65,7 @@ public class Cannon extends Turret {
         spa.setMag(29); //barrel length
         spp.add(spa);
         String part = "smoke";
-        projectiles.add(new Pebble(p,spp.x,spp.y, angleB, this, damage));
+        projectiles.add(new CannonBall(p,spp.x,spp.y, angleB, this, damage, effectRadius));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);

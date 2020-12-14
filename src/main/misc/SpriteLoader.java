@@ -231,6 +231,7 @@ public class SpriteLoader {
         spritesH.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
         //projectiles
         spritesH.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
+        spritesH.put("cannonBallPj",p.loadImage("sprites/projectiles/cannonBall.png"));
         spritesH.put("reinforcedBoltPj",p.loadImage("sprites/projectiles/reinforcedBolt.png"));
         spritesH.put("devPj",p.loadImage("sprites/projectiles/dev.png"));
         spritesH.put("energyPj",p.loadImage("sprites/projectiles/energy.png"));
