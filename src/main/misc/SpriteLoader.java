@@ -116,6 +116,8 @@ public class SpriteLoader {
         getSprite(p,"teslaIdle","TR","tesla/idle/",18);
         getSprite(p,"crossbowFire","TR","crossbow/fire/",13);
         getSprite(p,"crossbowLoad","TR","crossbow/load/",81);
+        getSprite(p,"cannonFire","TR","cannon/fire/",6);
+        getSprite(p,"cannonLoad","TR","cannon/load/",18);
         getSprite(p,"crossbowMultishotFire","TR","crossbow/multishot/fire/",13);
         getSprite(p,"crossbowMultishotLoad","TR","crossbow/multishot/load/",81);
         getSprite(p,"crossbowReinforcedFire","TR","crossbow/reinforced/fire/",13);
@@ -242,6 +244,9 @@ public class SpriteLoader {
         spritesH.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
         spritesH.put("crossbowFullTR",p.loadImage("sprites/towers/turrets/crossbow/full.png"));
         spritesH.put("crossbowIdleTR",p.loadImage("sprites/towers/turrets/crossbow/idle.png"));
+        spritesH.put("cannonBaseTR",p.loadImage("sprites/towers/turrets/cannon/base.png"));
+        spritesH.put("cannonFullTR",p.loadImage("sprites/towers/turrets/cannon/full.png"));
+        spritesH.put("cannonIdleTR",p.loadImage("sprites/towers/turrets/cannon/idle.png"));
         spritesH.put("crossbowMultishotBaseTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/base.png"));
         spritesH.put("crossbowMultishotFullTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/full.png"));
         spritesH.put("crossbowMultishotIdleTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/idle.png"));

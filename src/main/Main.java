@@ -100,6 +100,7 @@ public class Main extends PApplet {
     public static final int SLINGSHOT_PRICE = 75;
     public static final int RANDOMCANNON_PRICE = 150;
     public static final int CROSSBOW_PRICE = 200;
+    public static final int CANNON_PRICE = 250;
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
