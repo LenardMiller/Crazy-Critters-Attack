@@ -59,7 +59,7 @@ public class Cannon extends Turret {
         delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angleB-HALF_PI);float particleCount = p.random(1,5);
-        spa.setMag(18); //barrel length
+        spa.setMag(29); //barrel length
         spp.add(spa);
         String part = "smoke";
         projectiles.add(new Pebble(p,spp.x,spp.y, angleB, this, damage));
