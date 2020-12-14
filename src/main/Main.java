@@ -100,7 +100,7 @@ public class Main extends PApplet {
     public static final int SLINGSHOT_PRICE = 75;
     public static final int RANDOMCANNON_PRICE = 150;
     public static final int CROSSBOW_PRICE = 200;
-    public static final int CANNON_PRICE = 250;
+    public static final int CANNON_PRICE = 300;
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
@@ -153,16 +153,6 @@ public class Main extends PApplet {
         loadSpritesAnim(this);
         //loads sounds
         loadSounds(this);
-        //other stuff
-        inputHandler = new InputHandler(this);
-        keyBinds = new KeyBinds(this);
-        keyBinds.loadKeyBinds();
-        hand = new Hand(this);
-        selection = new Selection(this);
-        inGameGui = new InGameGui(this);
-        levelBuilderGui = new LevelBuilderGui(this);
-        //other
-        connectWallQueues = 0;
         //pathfinding stuff
         nSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
@@ -189,6 +179,16 @@ public class Main extends PApplet {
         DataControl.load(this, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();
+        //other stuff
+        inputHandler = new InputHandler(this);
+        keyBinds = new KeyBinds(this);
+        keyBinds.loadKeyBinds();
+        hand = new Hand(this);
+        selection = new Selection(this);
+        inGameGui = new InGameGui(this);
+        levelBuilderGui = new LevelBuilderGui(this);
+        //other
+        connectWallQueues = 0;
     }
 
     public void draw() { //this will need to be change when I todo: add more menu "scenes"

@@ -99,16 +99,19 @@ public class InGameGui {
         towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 45.5f,"crossbow",true));
         if (currentLevel > 0) {
             towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 139.5f, 45.5f, "energyBlaster", true));
-            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 178.5f, 45.5f, "magicMissleer", true));
-            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 22.5f, 85.5f, "tesla", true)); //row 2
-            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 85.5f,"nightmare",true));
-            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 85.5f,"flamethrower",true));
-            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"railgun",true));
-            towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 178.5f, 85.5f,"waveMotion",true));
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 178.5f, 45.5f, "null", true));
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 22.5f, 85.5f, "null", true)); //row 2
         } else {
             towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 139.5f, 45.5f, "null", true));
             towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 178.5f, 45.5f, "null", true));
             towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 22.5f, 85.5f, "null", true)); //row 2
+        } if (currentLevel > 1) {
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 61.5f, 85.5f, "nightmare", true));
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 100.5f, 85.5f, "flamethrower", true));
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 139.5f, 85.5f, "railgun", true));
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 178.5f, 85.5f, "waveMotion", true));
+        }
+         else {
             towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 61.5f, 85.5f,"null",true));
             towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 100.5f, 85.5f,"null",true));
             towerBuyButtons.add(new TowerBuy(p,BOARD_WIDTH + 139.5f, 85.5f,"null",true));
