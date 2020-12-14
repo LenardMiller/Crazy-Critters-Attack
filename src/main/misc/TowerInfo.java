@@ -54,7 +54,7 @@ public class TowerInfo {
     public static void cannonInfo(PApplet p) {
         loadStyle(p);
         int x = 910;
-        p.text("NOT YET IMPLEMENTED", x, space(0));
-
+        p.text("NOT YET", x, space(0));
+        p.text("IMPLEMENTED", x, space(1));
     }
 }
