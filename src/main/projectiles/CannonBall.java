@@ -24,6 +24,7 @@ public class CannonBall extends Projectile {
         pierce = 1;
         this.angle = angle;
         sprite = spritesH.get("cannonBallPj");
+        hitSound = soundsH.get("largeImpact");
         this.effectRadius = effectRadius;
     }
 
@@ -38,6 +39,8 @@ public class CannonBall extends Projectile {
                 }
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
+                hitSound.stop();
+                hitSound.play(p.random(0.8f, 1.2f), volume);
                 enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "none", velocity, i);
                 int num = (int) (p.random(10, 16));
                 for (int j = num; j >= 0; j--) {
