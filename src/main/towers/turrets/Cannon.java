@@ -42,7 +42,7 @@ public class Cannon extends Turret {
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
         placeSound = soundsH.get("woodPlace");
-        fireSound = soundsH.get("luggageBlaster");
+        fireSound = soundsH.get("smallExplosion");
         loadSprites();
         debrisType = "stone";
         price = RANDOMCANNON_PRICE;
