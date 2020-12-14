@@ -35,6 +35,9 @@ public class TowerBuy extends Button {
             case "miscCannon":
                 price = RANDOMCANNON_PRICE;
                 break;
+            case "cannon":
+                price = CANNON_PRICE;
+                break;
             case "tesla":
             case "energyBlaster":
             case "magicMissleer":
@@ -95,6 +98,10 @@ public class TowerBuy extends Button {
                 case "crossbow":
                     p.text("Crossbow", x, 241);
                     crossbowInfo(p);
+                    break;
+                case "cannon":
+                    p.text("Cannon", x, 241);
+                    cannonInfo(p);
                     break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);

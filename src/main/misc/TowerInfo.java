@@ -50,4 +50,11 @@ public class TowerInfo {
         p.text("and range,  but low", x, space(4));
         p.text("rate of fire.", x, space(5));
     }
+
+    public static void cannonInfo(PApplet p) {
+        loadStyle(p);
+        int x = 910;
+        p.text("NOT YET IMPLEMENTED", x, space(0));
+
+    }
 }
