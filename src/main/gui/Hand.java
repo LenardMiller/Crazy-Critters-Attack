@@ -256,6 +256,11 @@ public class Hand {
                 offset = new PVector(0, 0);
                 price = RANDOMCANNON_PRICE;
                 break;
+            case "cannon":
+                heldSprite = spritesH.get("cannonFullTR");
+                offset = new PVector(5, 5);
+                price = CANNON_PRICE;
+                break;
             case "energyBlaster":
                 heldSprite = spritesH.get("energyBlasterFullTR");
                 offset = new PVector(13, 13);
@@ -321,6 +326,7 @@ public class Hand {
         if (held.equals("slingshot") && alive) tile.tower = new Slingshot(p, tile);
         else if (held.equals("crossbow") && alive) tile.tower = new Crossbow(p, tile);
         else if (held.equals("miscCannon") && alive) tile.tower = new RandomCannon(p, tile);
+        else if (held.equals("cannon") && alive) tile.tower = new Cannon(p, tile);
         else if (held.equals("energyBlaster") && alive) tile.tower = new EnergyBlaster(p, tile);
         else if (held.equals("magicMissleer") && alive) tile.tower = new MagicMissileer(p, tile);
         else if (held.equals("tesla") && alive) tile.tower = new TeslaTower(p, tile);
