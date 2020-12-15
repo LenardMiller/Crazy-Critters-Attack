@@ -122,7 +122,7 @@ public class RandomCannon extends Turret {
         upgradeDescC[4] = "range";
 
         upgradeDescA[5] = "Toxic";
-        upgradeDescB[5] = "explosions";
+        upgradeDescB[5] = "splatters";
         upgradeDescC[5] = "";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];

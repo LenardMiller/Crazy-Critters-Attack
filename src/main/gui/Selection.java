@@ -160,7 +160,7 @@ public class Selection { //what tower is selected
                 p.text("Blaster", 1000, 266);
                 offset = 25;
                 speed = 12;
-                setTextPurple("Toxic explosions", offset);
+                setTextPurple("Toxic splatters", offset);
                 break;
             case "miscCannonBarrel":
                 p.text("Minibarrel", 1000, 241);
