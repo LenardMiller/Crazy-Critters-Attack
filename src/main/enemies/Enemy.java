@@ -117,10 +117,8 @@ public abstract class Enemy {
 
         if (!attacking) {
             stealthMode = stealthy;
-            //todo: make work with other backgrounds
             move();
-        }
-        else {
+        } else {
             attack();
             stealthMode = false;
         }
