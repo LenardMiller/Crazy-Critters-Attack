@@ -37,7 +37,7 @@ public class MidWorm extends Enemy {
     }
 
     void move() {
-        if (stealthMode && (int)p.random(0,15) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),levels[currentLevel].groundType));
+        if (stealthMode && (int)p.random(0,12) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),levels[currentLevel].groundType));
         if (p.random(0,40) < 1) underParticles.add(new Pile(p, p.random(position.x - 5f, position.x + 5f), p.random(position.y - 12.5f, position.y + 12.5f), 0, levels[currentLevel].groundType));
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
