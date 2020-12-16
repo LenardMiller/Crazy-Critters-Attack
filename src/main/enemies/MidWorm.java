@@ -29,7 +29,7 @@ public class MidWorm extends Enemy {
         betweenAttackFrames = 4;
         attackFrame = attackStartFrame;
         stealthy = true;
-        partSize = new PVector(7, 7);
+        partSize = new PVector(9, 9);
         corpseSize = new PVector(25,25);
         overkillSound = soundsH.get("squish");
         dieSound = soundsH.get("crunch");
