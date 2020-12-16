@@ -27,7 +27,7 @@ public class Scorpion extends Enemy {
         attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;
         corpseSize = size;
-        partSize = new PVector(11,11);
+        partSize = new PVector(13,13);
         overkillSound = soundsH.get("squish");
         dieSound = soundsH.get("crunch");
         loadSprites();

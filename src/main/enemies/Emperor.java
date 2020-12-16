@@ -27,7 +27,7 @@ public class Emperor extends Enemy{
         attackDmgFrames = new int[]{7};
         attackStartFrame = 0; //attack start
         corpseSize = size;
-        partSize = new PVector(18,18);
+        partSize = new PVector(20,20);
         attackFrame = attackStartFrame;
         dieSound = soundsH.get("bigCrunch");
         overkillSound = soundsH.get("squash");
