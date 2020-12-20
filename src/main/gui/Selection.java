@@ -188,6 +188,11 @@ public class Selection { //what tower is selected
                 speed = 14;
                 setTextPurple("Small splash", offset);
                 break;
+            case "gluer":
+                p.text("Gluer", 1000, 241);
+                speed = 7;
+                setTextPurple("Slows", offset);
+                break;
             case "energyBlaster":
                 p.text("Energy Blaster", 1000, 241);
                 speed = 16;

@@ -24,7 +24,7 @@ public class Gluer extends Turret {
         delay = 150; //default: 150 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
-        pjSpeed = 8;
+        pjSpeed = 7;
         numFireFrames = 5;
         betweenFireFrames = 1;
         numLoadFrames = 7;
