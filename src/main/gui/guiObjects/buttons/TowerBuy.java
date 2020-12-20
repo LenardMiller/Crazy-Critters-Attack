@@ -103,6 +103,10 @@ public class TowerBuy extends Button {
                     p.text("Cannon", x, 241);
                     cannonInfo(p);
                     break;
+                case "gluer":
+                    p.text("Gluer", x, 241);
+                    gluerInfo(p);
+                    break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);
                     break;
