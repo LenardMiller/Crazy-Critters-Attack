@@ -181,7 +181,7 @@ public class Selection { //what tower is selected
             case "crossbowMultishot":
                 p.text("Shotbow", 1000, 241);
                 speed = 24;
-                setTextPurple("Piercing", offset);
+                setTextPurple("Seven Piercing Bolts", offset);
                 break;
             case "cannon":
                 p.text("Cannon", 1000, 241);

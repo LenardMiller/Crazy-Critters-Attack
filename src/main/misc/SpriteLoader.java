@@ -28,10 +28,12 @@ public class SpriteLoader {
         getSprite(p,"waterBuff","PT","buff/water/",8);
         getSprite(p,"nullBuff","PT","buff/null/",8);
         getSprite(p,"decayBuff","PT","buff/decay/",8);
+        getSprite(p,"glueBuff","PT","buff/glue/",8);
         getSprite(p,"greenOuchEnemy","PT","enemy/greenOuch/",11);
         getSprite(p,"greyPuffEnemy","PT","enemy/greyPuff/",11);
         getSprite(p,"greenPuffEnemy","PT","enemy/greenPuff/",10);
         getSprite(p,"poisonPuffEnemy","PT","enemy/poisonPuff/",10);
+        getSprite(p,"gluePuffEnemy","PT","enemy/gluePuff/",10);
         getSprite(p,"pinkOuchEnemy","PT","enemy/pinkOuch/",11);
         getSprite(p,"redOuchEnemy","PT","enemy/redOuch/",11);
         getSprite(p,"leafOuchEnemy","PT","enemy/leafOuch/",11);
