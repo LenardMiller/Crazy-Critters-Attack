@@ -17,7 +17,7 @@ public class Gluer extends Turret {
         super(p,tile);
         name = "gluer";
         size = new PVector(50,50);
-        offset = 5;
+        offset = 0;
         maxHp = 20;
         hp = maxHp;
         hit = false;
@@ -34,7 +34,7 @@ public class Gluer extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 50;
+        damage = 5;
         range = 250;
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
