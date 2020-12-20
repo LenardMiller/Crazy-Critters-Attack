@@ -251,6 +251,7 @@ public class SpriteLoader {
         spritesH.put("rockPj",p.loadImage("sprites/projectiles/rock.png"));
         spritesH.put("needlePj",p.loadImage("sprites/projectiles/needle.png"));
         spritesH.put("laundryPj",p.loadImage("sprites/projectiles/laundry.png"));
+        spritesH.put("gluePj",p.loadImage("sprites/projectiles/glue.png"));
         //turrets
         spritesH.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
         spritesH.put("crossbowFullTR",p.loadImage("sprites/towers/turrets/crossbow/full.png"));

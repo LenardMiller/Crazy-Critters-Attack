@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.misc.Tile;
 import main.particles.BuffParticle;
-import main.projectiles.Pebble;
+import main.projectiles.Glue;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -62,7 +62,7 @@ public class Gluer extends Turret {
         spa.setMag(28); //barrel length
         spp.add(spa);
         String part = "glue";
-        projectiles.add(new Pebble(p,spp.x,spp.y, angleB, this, damage));
+        projectiles.add(new Glue(p,spp.x,spp.y, angleB, this, damage));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
