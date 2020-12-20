@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.misc.Tile;
 import main.particles.BuffParticle;
-import main.projectiles.CannonBall;
+import main.projectiles.Pebble;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -11,13 +11,11 @@ import static main.Main.*;
 import static main.misc.MiscMethods.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
-public class Cannon extends Turret {
+public class Gluer extends Turret {
 
-    private int effectRadius;
-
-    public Cannon(PApplet p, Tile tile) {
+    public Gluer(PApplet p, Tile tile) {
         super(p,tile);
-        name = "cannon";
+        name = "gluer";
         size = new PVector(50,50);
         offset = 5;
         maxHp = 20;
@@ -26,10 +24,10 @@ public class Cannon extends Turret {
         delay = 150; //default: 150 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
-        pjSpeed = 14;
-        numFireFrames = 6;
+        pjSpeed = 8;
+        numFireFrames = 5;
         betweenFireFrames = 1;
-        numLoadFrames = 18;
+        numLoadFrames = 7;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
@@ -38,14 +36,13 @@ public class Cannon extends Turret {
         loadDelayTime = 0;
         damage = 50;
         range = 250;
-        effectRadius = 25;
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
         placeSound = soundsH.get("woodPlace");
-        fireSound = soundsH.get("smallExplosion");
+        fireSound = soundsH.get("squishImpact");
         loadSprites();
         debrisType = "stone";
-        price = CANNON_PRICE;
+        price = RANDOMCANNON_PRICE;
         value = price;
         priority = 0; //close
         setUpgrades();
@@ -65,7 +62,7 @@ public class Cannon extends Turret {
         spa.setMag(29); //barrel length
         spp.add(spa);
         String part = "smoke";
-        projectiles.add(new CannonBall(p,spp.x,spp.y, angleB, this, damage, effectRadius));
+        projectiles.add(new Pebble(p,spp.x,spp.y, angleB, this, damage));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
