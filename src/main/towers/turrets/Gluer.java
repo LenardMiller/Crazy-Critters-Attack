@@ -42,7 +42,7 @@ public class Gluer extends Turret {
         fireSound = soundsH.get("squishImpact");
         loadSprites();
         debrisType = "stone";
-        price = RANDOMCANNON_PRICE;
+        price = GLUER_PRICE;
         value = price;
         priority = 0; //close
         setUpgrades();
