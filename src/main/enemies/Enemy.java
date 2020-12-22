@@ -236,7 +236,7 @@ public abstract class Enemy {
         }
     }
 
-    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) {
+    public void damagePj(int damage, String pjBuff, float effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) {
         lastDamageType = type;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -276,6 +276,9 @@ public abstract class Enemy {
                 case "decay":
                     if (turret != null) buff = new Decay(p, i, effectLevel, effectDuration, turret);
                     else buff = new Decay(p, i, 1, 120, null);
+                    break;
+                case "glued":
+                    buff = new Glued(p, i, effectLevel, effectDuration, turret);
                     break;
                 default:
                     buff = null;

@@ -11,12 +11,12 @@ public class Burning extends Buff {
 
     private int damage;
 
-    public Burning(PApplet p, int enId, int damage, int duration, Turret turret) {
+    public Burning(PApplet p, int enId, float damage, int duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 4;
         effectDelay = 12; //frames
         lifeDuration = duration;
-        this.damage = damage;
+        this.damage = (int) damage;
         particle = "fire";
         name = "burning";
         this.enId = enId;

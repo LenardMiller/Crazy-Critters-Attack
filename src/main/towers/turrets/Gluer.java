@@ -13,6 +13,9 @@ import static processing.core.PConstants.HALF_PI;
 
 public class Gluer extends Turret {
 
+    float effectLevel;
+    int effectDuration;
+
     public Gluer(PApplet p, Tile tile) {
         super(p,tile);
         name = "gluer";
@@ -36,6 +39,8 @@ public class Gluer extends Turret {
         loadDelayTime = 0;
         damage = 5;
         range = 250;
+        effectDuration = 100;
+        effectLevel = 0.8f;
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
         placeSound = soundsH.get("woodPlace");
@@ -62,7 +67,7 @@ public class Gluer extends Turret {
         spa.setMag(28); //barrel length
         spp.add(spa);
         String part = "glue";
-        projectiles.add(new Glue(p,spp.x,spp.y, angleB, this, damage));
+        projectiles.add(new Glue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
