@@ -29,7 +29,7 @@ public class BigWorm extends Enemy {
         betweenAttackFrames = 4;
         attackFrame = attackStartFrame;
         stealthy = true;
-        partSize = new PVector(9, 9);
+        partSize = new PVector(31, 31);
         corpseSize = new PVector(50,50);
         overkillSound = soundsH.get("squash");
         dieSound = soundsH.get("bigCrunch");
