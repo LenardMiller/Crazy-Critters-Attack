@@ -39,7 +39,7 @@ public abstract class Enemy {
     public int maxHp;
     public int hp;
     private PImage sprite;
-    private PImage[] attackFrames;
+    public PImage[] attackFrames;
     private PImage[] moveFrames;
     private float moveFrame;
     int attackFrame;
@@ -177,11 +177,11 @@ public abstract class Enemy {
         position.add(m);
     }
 
-    private void preDisplay() {
+    private void preDisplay() { //handle animation states
         if (attacking) {
             sprite = attackFrames[attackFrame];
             idleTime++;
-            if (attackFrame < numAttackFrames - 1) {
+            if (attackFrame < attackFrames.length - 1) {
                 if (idleTime >= betweenAttackFrames) {
                     attackFrame += 1;
                     idleTime = 0;
