@@ -35,9 +35,9 @@ public class BigWorm extends Enemy {
     }
 
     void move() {
-        if (stealthMode && (int) p.random(0, 10) == 0)
+        if (stealthMode && (int) p.random(0, 8) == 0)
             particles.add(new Debris(p, p.random(position.x - radius, position.x + radius), p.random(position.y - radius, position.y + radius), p.random(0, 360), levels[currentLevel].groundType));
-        if (p.random(0, 30) < 1)
+        if (p.random(0, 20) < 1)
             underParticles.add(new Pile(p, p.random(position.x - radius, position.x + radius), p.random(position.y - radius, position.y + radius), 0, levels[currentLevel].groundType));
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
