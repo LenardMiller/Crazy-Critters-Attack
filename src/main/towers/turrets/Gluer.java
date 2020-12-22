@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.enemies.Enemy;
 import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.Glue;
@@ -75,6 +76,46 @@ public class Gluer extends Turret {
             spp2.add(spa2);
             particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),part));
         }
+    }
+
+    void getTargetEnemy() {
+        //0: close
+        //1: far
+        //2: strong
+        float finalDist;
+        if (priority == 0) finalDist = 1000000;
+        else finalDist = 0;
+        float maxHp = 0;
+        Enemy e = null;
+        for (Enemy enemy : enemies) {
+            float newSpeed = enemy.maxSpeed * effectLevel;
+            if (!enemy.stealthMode && enemy.speed > newSpeed) { //make sure effect would actually slow down enemy
+                float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
+                float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
+                float dist = sqrt(sq(x) + sq(y));
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < range) {
+                    if (priority == 0 && dist < finalDist) { //close
+                        e = enemy;
+                        finalDist = dist;
+                    }
+                    if (priority == 1 && dist > finalDist) { //far
+                        e = enemy;
+                        finalDist = dist;
+                    }
+                    if (priority == 2) {
+                        if (enemy.maxHp > maxHp) { //strong
+                            e = enemy;
+                            finalDist = dist;
+                            maxHp = enemy.maxHp;
+                        } else if (enemy.maxHp == maxHp && dist < finalDist) { //strong -> close
+                            e = enemy;
+                            finalDist = dist;
+                        }
+                    }
+                }
+            }
+        }
+        targetEnemy = e;
     }
 
     private void setUpgrades() {
