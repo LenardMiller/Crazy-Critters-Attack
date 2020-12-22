@@ -42,7 +42,7 @@ public abstract class Enemy {
     public PImage[] attackFrames;
     private PImage[] moveFrames;
     private float moveFrame;
-    int attackFrame;
+    public int attackFrame;
     int[] attackDmgFrames;
     public boolean attacking;
     private boolean attackCue;

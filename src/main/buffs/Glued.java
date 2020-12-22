@@ -33,9 +33,7 @@ public class Glued extends Buff {
             //setup
             enemy.speed = newSpeed;
             int oldSize = enemy.attackFrames.length;
-            System.out.println(oldSize);
             int newSize = (int) (oldSize * (2 - speedMod));
-            System.out.println(newSize);
             ArrayList<Integer> expandedInts = new ArrayList<>();
             //run expansion algorithm
             compress = new CompressArray(oldSize - 1, newSize, expandedInts);
@@ -64,7 +62,10 @@ public class Glued extends Buff {
         float newSpeed = enemy.maxSpeed * speedMod;
         if (p.frameCount > lifeTimer) {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
-                enemy.speed = enemy.maxSpeed; //set speed back to default
+                enemy.speed = enemy.maxSpeed; //set movement speed back to default
+                //set attack speed back to default
+                enemy.attackFrames = spritesAnimH.get(enemy.name + "AttackEN");
+                if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
             }
             buffs.remove(i);
         }
