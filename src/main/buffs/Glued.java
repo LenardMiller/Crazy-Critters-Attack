@@ -33,7 +33,7 @@ public class Glued extends Buff {
             //setup
             enemy.speed = newSpeed;
             int oldSize = enemy.attackFrames.length;
-            int newSize = (int) (oldSize * (2 - speedMod));
+            int newSize = (int) (1f / (speedMod * (1f / (float) oldSize)));
             ArrayList<Integer> expandedInts = new ArrayList<>();
             //run expansion algorithm
             compress = new CompressArray(oldSize - 1, newSize, expandedInts);
