@@ -22,8 +22,6 @@ public class LittleWorm extends Enemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "worm";
-        numAttackFrames = 34;
-        numMoveFrames = 1;
         attackStartFrame = 0;
         attackDmgFrames = new int[]{18};
         betweenAttackFrames = 2;

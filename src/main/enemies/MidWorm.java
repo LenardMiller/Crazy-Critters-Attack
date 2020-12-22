@@ -22,8 +22,6 @@ public class MidWorm extends Enemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "midWorm";
-        numAttackFrames = 30;
-        numMoveFrames = 1;
         attackStartFrame = 0;
         attackDmgFrames = new int[]{15};
         betweenAttackFrames = 4;

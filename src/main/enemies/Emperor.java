@@ -20,9 +20,7 @@ public class Emperor extends Enemy{
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "emperor";
-        numAttackFrames = 15;
         betweenAttackFrames = 10;
-        numMoveFrames = 8;
         betweenWalkFrames = 4;
         attackDmgFrames = new int[]{7};
         attackStartFrame = 0; //attack start

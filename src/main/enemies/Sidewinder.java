@@ -20,8 +20,6 @@ public class Sidewinder extends Enemy {
         hp = maxHp;
         hitParticle = "redOuch";
         name = "sidewinder";
-        numAttackFrames = 15;
-        numMoveFrames = 10;
         attackStartFrame = 0;
         attackDmgFrames = new int[]{4};
         betweenAttackFrames = 5;

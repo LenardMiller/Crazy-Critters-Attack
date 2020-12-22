@@ -20,8 +20,6 @@ public class TreeGiant extends Enemy {
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "treeGiant";
-        numAttackFrames = 63;
-        numMoveFrames = 91;
         attackStartFrame = 0;
         attackDmgFrames = new int[]{28};
         betweenAttackFrames = 2;

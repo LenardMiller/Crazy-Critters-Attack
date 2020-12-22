@@ -19,9 +19,7 @@ public class Scorpion extends Enemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "scorpion";
-        numAttackFrames = 13;
         attackDmgFrames = new int[]{5};
-        numMoveFrames = 4;
         betweenWalkFrames = 5;
         betweenAttackFrames = 6;
         attackStartFrame = 0; //attack start

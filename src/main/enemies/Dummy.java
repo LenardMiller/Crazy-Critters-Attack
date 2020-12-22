@@ -17,8 +17,6 @@ public class Dummy extends Enemy {
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "dummy";
-        numAttackFrames = 1;
-        numMoveFrames = 1;
         betweenWalkFrames = 1;
         attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;

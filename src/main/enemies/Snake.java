@@ -20,8 +20,6 @@ public class Snake extends Enemy {
         hp = maxHp;
         hitParticle = "redOuch";
         name = "snake";
-        numAttackFrames = 15;
-        numMoveFrames = 10;
         attackStartFrame = 0;
         attackDmgFrames = new int[]{8};
         betweenAttackFrames = 5;

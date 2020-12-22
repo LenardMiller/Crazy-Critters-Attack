@@ -46,8 +46,6 @@ public abstract class Enemy {
     int[] attackDmgFrames;
     public boolean attacking;
     private boolean attackCue;
-    int numAttackFrames;
-    int numMoveFrames;
     int betweenWalkFrames;
     int betweenAttackFrames;
     int idleTime;
@@ -90,8 +88,6 @@ public abstract class Enemy {
         tintColor = 255;
         hitParticle = "redOuch";
         name = "";
-        numAttackFrames = 1;
-        numMoveFrames = 1;
         attackStartFrame = 0;
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
@@ -190,7 +186,7 @@ public abstract class Enemy {
         } else {
             sprite = moveFrames[(int) (moveFrame)];
             idleTime++;
-            if (moveFrame < numMoveFrames - 1) {
+            if (moveFrame < moveFrames.length - 1) {
                 if (idleTime >= betweenWalkFrames) {
                     moveFrame += speed;
                     idleTime = 0;
