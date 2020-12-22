@@ -39,7 +39,7 @@ public class Gluer extends Turret {
         loadDelayTime = 0;
         damage = 5;
         range = 250;
-        effectDuration = 100;
+        effectDuration = 50;
         effectLevel = 0.7f;
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");

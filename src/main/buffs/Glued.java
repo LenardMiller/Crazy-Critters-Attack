@@ -34,7 +34,7 @@ public class Glued extends Buff {
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * speedMod;
         if (p.frameCount > lifeTimer) {
-            if (enemy.speed != newSpeed) { //prevent speeding up enemy
+            if (enemy.speed == newSpeed) { //prevent speeding up enemy
                 enemy.speed = enemy.maxSpeed; //set speed back to default
             }
             buffs.remove(i);
