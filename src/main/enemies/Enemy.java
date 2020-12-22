@@ -175,7 +175,6 @@ public abstract class Enemy {
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
-        speed = maxSpeed;
     }
 
     private void preDisplay() {
