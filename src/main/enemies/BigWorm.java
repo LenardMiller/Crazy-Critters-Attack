@@ -10,8 +10,8 @@ import static main.Main.*;
 public class BigWorm extends Enemy {
 
     public BigWorm(PApplet p, float x, float y) {
-        super(p,x,y);
-        size = new PVector(50,50);
+        super(p, x, y);
+        size = new PVector(50, 50);
         pfSize = 2;
         radius = 25f;
         maxSpeed = .25f;
@@ -30,15 +30,17 @@ public class BigWorm extends Enemy {
         attackFrame = attackStartFrame;
         stealthy = true;
         partSize = new PVector(31, 31);
-        corpseSize = new PVector(50,50);
+        corpseSize = new PVector(50, 50);
         overkillSound = soundsH.get("squash");
         dieSound = soundsH.get("bigCrunch");
         loadSprites();
     }
 
     void move() {
-        if (stealthMode && (int)p.random(0,10) == 0) particles.add(new Debris(p,position.x,position.y,p.random(0,360),levels[currentLevel].groundType));
-        if (p.random(0,30) < 1) underParticles.add(new Pile(p, p.random(position.x - 5f, position.x + 5f), p.random(position.y - 25, position.y + 25), 0, levels[currentLevel].groundType));
+        if (stealthMode && (int) p.random(0, 10) == 0)
+            particles.add(new Debris(p, p.random(position.x - radius, position.x + radius), p.random(position.y - radius, position.y + radius), p.random(0, 360), levels[currentLevel].groundType));
+        if (p.random(0, 30) < 1)
+            underParticles.add(new Pile(p, p.random(position.x - radius, position.x + radius), p.random(position.y - radius, position.y + radius), 0, levels[currentLevel].groundType));
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
