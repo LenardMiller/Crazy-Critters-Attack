@@ -41,7 +41,7 @@ public class KeyBinds {
         boolean emperor = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
         boolean worm = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
         boolean midWorm = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
-        boolean butterfly = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
+        boolean bigWorm = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
         boolean dummy = keysPressed.getPressedPulse('!') && alive && p.mouseX < BOARD_WIDTH;
         //projectiles
         if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 50000));
@@ -68,9 +68,9 @@ public class KeyBinds {
         if (emperor) enemies.add(new Emperor(p, p.mouseX, p.mouseY));
         if (worm) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
         if (midWorm) enemies.add(new MidWorm(p, p.mouseX, p.mouseY));
-        if (butterfly) enemies.add(new Butterfly(p, p.mouseX, p.mouseY));
+        if (bigWorm) enemies.add(new BigWorm(p, p.mouseX, p.mouseY));
         if (dummy) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
-        if (littleBug || mediumBug || bigBug || sidewinder || scorpion || emperor || midWorm || worm || butterfly || dummy) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        if (littleBug || mediumBug || bigBug || sidewinder || scorpion || emperor || midWorm || worm || bigWorm || dummy) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
     public void debugKeys() throws IOException {
