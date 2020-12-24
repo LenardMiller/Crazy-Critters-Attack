@@ -73,7 +73,7 @@ public class Shockwave {
             float angleDif = angle - a;
             float dist = findDistBetween(enemy.position, center);
             if (abs(angleDif) < width && dist < radius) {
-                enemy.damageSimple(damage, turret, "normal", PVector.fromAngle(a), true);
+                enemy.damageSimple(damage, turret, "normal", PVector.fromAngle(a - HALF_PI), true);
                 untouchedEnemies.remove(enemy);
             }
         }
