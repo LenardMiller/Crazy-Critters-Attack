@@ -46,14 +46,14 @@ public class Shockwave {
     }
 
     private void display() {
-        float a = p.random(angle - width, angle + width);
+        float a = p.random(angle - (width / 2), angle + (width / 2));
         float x = radius * sin(a);
         float y = -(radius * cos(a));
         underParticles.add(new Pile(p, x + center.x, y + center.y, 0, levels[currentLevel].groundType));
 
         int debrisCount = (int) p.random(2, 5);
         for (int i = 0; i < debrisCount; i++) {
-            a = p.random(angle - width, angle + width);
+            a = p.random(angle - (width / 2), angle + (width / 2));
             x = radius * sin(a);
             y = -(radius * cos(a));
             particles.add(new Debris(p, x + center.x, y + center.y, angle, levels[currentLevel].groundType));
