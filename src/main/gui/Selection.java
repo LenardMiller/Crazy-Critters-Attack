@@ -193,6 +193,11 @@ public class Selection { //what tower is selected
                 speed = 7;
                 setTextPurple("Slows", offset);
                 break;
+            case "seismic":
+                p.text("Seismic Tower", 1000, 241);
+                speed = 7;
+                setTextPurple("Shockwave", offset);
+                break;
             case "energyBlaster":
                 p.text("Energy Blaster", 1000, 241);
                 speed = 16;
