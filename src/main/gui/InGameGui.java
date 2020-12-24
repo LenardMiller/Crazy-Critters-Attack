@@ -100,7 +100,7 @@ public class InGameGui {
         if (currentLevel > 0) {
             towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 139.5f, 45.5f, "cannon", true));
             towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 178.5f, 45.5f, "gluer", true));
-            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 22.5f, 85.5f, "null", true)); //row 2
+            towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 22.5f, 85.5f, "seismic", true)); //row 2
         } else {
             towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 139.5f, 45.5f, "null", true));
             towerBuyButtons.add(new TowerBuy(p, BOARD_WIDTH + 178.5f, 45.5f, "null", true));

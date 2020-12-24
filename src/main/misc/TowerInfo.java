@@ -64,4 +64,11 @@ public class TowerInfo {
         p.text("NOT YET", x, space(0));
         p.text("IMPLEMENTED", x, space(1));
     }
+
+    public static void seismicInfo(PApplet p) {
+        loadStyle(p);
+        int x = 910;
+        p.text("NOT YET", x, space(0));
+        p.text("IMPLEMENTED", x, space(1));
+    }
 }

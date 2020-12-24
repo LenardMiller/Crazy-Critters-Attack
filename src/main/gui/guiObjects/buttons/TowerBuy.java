@@ -41,6 +41,9 @@ public class TowerBuy extends Button {
             case "gluer":
                 price = GLUER_PRICE;
                 break;
+            case "siesmic":
+                price = SEISMIC_PRICE;
+                break;
             case "tesla":
             case "energyBlaster":
             case "magicMissleer":
@@ -109,6 +112,10 @@ public class TowerBuy extends Button {
                 case "gluer":
                     p.text("Gluer", x, 241);
                     gluerInfo(p);
+                    break;
+                case "seismic":
+                    p.text("Seismic Tower", x, 241);
+                    seismicInfo(p);
                     break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);
