@@ -56,7 +56,7 @@ public class Shockwave {
             a = p.random(angle - (width / 2), angle + (width / 2));
             x = radius * sin(a);
             y = -(radius * cos(a));
-            particles.add(new Debris(p, x + center.x, y + center.y, angle, levels[currentLevel].groundType));
+            particles.add(new Debris(p, x + center.x, y + center.y, a, levels[currentLevel].groundType));
         }
     }
 }
