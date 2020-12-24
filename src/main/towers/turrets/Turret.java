@@ -40,7 +40,7 @@ public abstract class Turret extends Tower {
     Enemy targetEnemy;
     public int effectLevel;
     public int effectDuration;
-    private float targetAngle;
+    float targetAngle;
     SoundFile specialSound;
     SoundFile fireSound;
 

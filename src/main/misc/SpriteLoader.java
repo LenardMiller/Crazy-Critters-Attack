@@ -280,7 +280,7 @@ public class SpriteLoader {
         spritesH.put("gluerBaseTR",p.loadImage("sprites/towers/turrets/gluer/base.png"));
         spritesH.put("gluerFullTR",p.loadImage("sprites/towers/turrets/gluer/full.png"));
         spritesH.put("gluerIdleTR",p.loadImage("sprites/towers/turrets/gluer/idle.png"));
-        spritesH.put("siesmicBaseTR",p.loadImage("sprites/towers/turrets/seismic/base.png"));
+        spritesH.put("seismicBaseTR",p.loadImage("sprites/towers/turrets/seismic/base.png"));
         spritesH.put("seismicFullTR",p.loadImage("sprites/towers/turrets/seismic/full.png"));
         spritesH.put("seismicIdleTR",p.loadImage("sprites/towers/turrets/seismic/idle.png"));
         spritesH.put("miscCannonBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/base.png"));

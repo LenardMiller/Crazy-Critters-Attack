@@ -52,6 +52,16 @@ public class SeismicTower extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
+    public void checkTarget() {
+        getTargetEnemy();
+        if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
+        if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
+            spriteType = 1;
+            frame = 0;
+        }
+        if (spriteType == 1 && frame == fireFrames.length - 1) fire();
+    }
+
     public void fire() {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
