@@ -52,6 +52,7 @@ public class Main extends PApplet {
     public static ArrayList<main.particles.Particle> particles;
     public static ArrayList<main.particles.Particle> underParticles;
     public static ArrayList<main.projectiles.Arc> arcs;
+    public static ArrayList<main.projectiles.Shockwave> shockwaves;
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;
     public static ArrayList<Buff> buffs;
@@ -147,6 +148,7 @@ public class Main extends PApplet {
         particles = new ArrayList<>();
         underParticles = new ArrayList<>();
         arcs = new ArrayList<>();
+        shockwaves = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
         tileSelectButtons = new ArrayList<>();
         buffs = new ArrayList<>();
@@ -332,6 +334,8 @@ public class Main extends PApplet {
             arc.main();
             if (arc.alpha <= 0) arcs.remove(i);
         }
+        //shockwaves
+        for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).main();
         //particle culling
         int p = particles.size();
         int p2 = p-800;

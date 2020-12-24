@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.misc.Tile;
 import main.particles.BuffParticle;
-import main.projectiles.Pebble;
+import main.projectiles.Shockwave;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -73,7 +73,7 @@ public class SeismicTower extends Turret {
         spa.setMag(29); //barrel length
         spp.add(spa);
         String part = "smoke";
-        projectiles.add(new Pebble(p,spp.x,spp.y, angleB, this, damage));
+        shockwaves.add(new Shockwave(p, spp.x, spp.y, (int) range, angleB, 30, damage));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
