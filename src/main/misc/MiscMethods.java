@@ -253,4 +253,9 @@ public class MiscMethods {
         float c = p + d2;
         return (int) c;
     }
+
+    public static float findDistBetween(PVector p1, PVector p2) {
+        PVector p0 = new PVector(p1.x - p2.x, p1.y - p2.y);
+        return sqrt(sq(p0.x) + sq(p0.y));
+    }
 }

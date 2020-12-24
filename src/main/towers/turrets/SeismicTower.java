@@ -73,7 +73,7 @@ public class SeismicTower extends Turret {
         spa.setMag(29); //barrel length
         spp.add(spa);
         String part = "smoke";
-        shockwaves.add(new Shockwave(p, spp.x, spp.y, (int) range, angleB, 60, damage));
+        shockwaves.add(new Shockwave(p, spp.x, spp.y, (int) range, angleB, 60, damage, this));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);

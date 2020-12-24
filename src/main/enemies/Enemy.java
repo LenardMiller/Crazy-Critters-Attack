@@ -299,7 +299,7 @@ public abstract class Enemy {
         }
     }
 
-    public void damageSimple(int damage, Turret turret, String type, PVector direction) {
+    public void damageSimple(int damage, Turret turret, String type, PVector direction, boolean splash) {
         lastDamageType = type;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -310,7 +310,7 @@ public abstract class Enemy {
                 turret.damageTotal += damage + hp;
             } else turret.damageTotal += damage;
         }
-        damageEffect(false);
+        damageEffect(splash);
     }
 
     public void hpBar() {

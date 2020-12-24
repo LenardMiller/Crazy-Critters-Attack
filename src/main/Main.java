@@ -46,7 +46,7 @@ public class Main extends PApplet {
 
     public static Machine machine;
     public static ArrayList<main.towers.Tower> towers;
-    public static ArrayList<main.enemies.Enemy> enemies;
+    public static ArrayList<Enemy> enemies;
     public static ArrayList<main.misc.Corpse> corpses;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles;

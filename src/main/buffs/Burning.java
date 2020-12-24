@@ -28,6 +28,6 @@ public class Burning extends Buff {
             enemy.tintColor = 100;
         }
         enemy.barTrans = 255;
-        enemy.damageSimple(damage,turret, "fire", new PVector(0,0));
+        enemy.damageSimple(damage,turret, "fire", new PVector(0,0), false);
     }
 }
