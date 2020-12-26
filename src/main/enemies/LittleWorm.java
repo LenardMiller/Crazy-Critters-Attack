@@ -14,7 +14,7 @@ public class LittleWorm extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = .3f;
+        maxSpeed = .6f;
         speed = maxSpeed;
         moneyDrop = 30;
         damage = 3;

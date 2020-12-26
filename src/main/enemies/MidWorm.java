@@ -14,7 +14,7 @@ public class MidWorm extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = .35f;
+        maxSpeed = .7f;
         speed = maxSpeed;
         moneyDrop = 60;
         damage = 6;
