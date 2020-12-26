@@ -33,7 +33,7 @@ public class PathRequest {
         PVector pfPosition = new PVector(enemy.position.x-((enemy.pfSize-1)*12.5f)+100,enemy.position.y-((enemy.pfSize-1)*12.5f)+100);
         int x = (int)((pfPosition.x)/nSize);
         int y = (int)((pfPosition.y)/nSize);
-        nodeGrid[x][y].setStart(x-4,y-4);
+        nodeGrid[x][y].setStart(x-4,y-4); //todo: crash here
         Main.start.findGHF();
         updateNode(Main.start,this);
         Main.path.done = false;

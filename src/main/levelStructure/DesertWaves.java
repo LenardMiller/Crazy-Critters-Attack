@@ -129,13 +129,16 @@ public class DesertWaves {
 
         waves[23] = new Wave(p, 5000, 2000, midWormPrimary, midWormSecondary, "Sandworms");
         waves[23].addSpawns("midWorm", 15);
+        waves[23].addSpawns("scorpion", 10);
 
         waves[24] = new Wave(p, 4000, 1000, midWormPrimary, midWormSecondary, "Sandworms");
         waves[24].addSpawns("midWorm", 5);
+        waves[24].addSpawns("scorpion", 10);
         waves[24].addSpawns("littleWorm", 25);
 
         waves[25] = new Wave(p, 5000, 2000, midWormPrimary, midWormSecondary, "Sandworms");
         waves[25].addSpawns("midWorm", 15);
+        waves[25].addSpawns("bigBug", 5);
 
         waves[26] = new Wave(p, 2800, 200, emperorPrimary, emperorSecondry, "Emperor");
         waves[26].addSpawns("emperor", 1);
@@ -143,7 +146,7 @@ public class DesertWaves {
 
         waves[27] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondry, "Emperors");
         waves[27].addSpawns("emperor", 5);
-        waves[27].addSpawns("midWorm", 3);
+        waves[27].addSpawns("midWorm", 5);
 
         waves[28] = new Wave(p, 3700, 900, sidewinderPrimary, sindewinderSecondary, "Sidewinders");
         waves[28].addSpawns("sidewinder", 30);
@@ -162,7 +165,8 @@ public class DesertWaves {
         waves[31].addSpawns("smolBug", 15);
 
         waves[32] = new Wave(p, 4000, 1000, midWormPrimary, midWormSecondary, "Sandworms");
-        waves[32].addSpawns("midWorm", 5);
+        waves[32].addSpawns("midWorm", 10);
+        waves[32].addSpawns("bigBug", 5);
         waves[32].addSpawns("littleWorm", 30);
 
         waves[33] = new Wave(p, 4000, 200, bigWormPrimary, bigWormSecondary, "Megaworm");
@@ -174,6 +178,8 @@ public class DesertWaves {
 
         waves[35] = new Wave(p, 4000, 1000, midWormPrimary, midWormSecondary, "Sandworms");
         waves[35].addSpawns("midWorm", 20);
+        waves[35].addSpawns("bigBug", 5);
+        waves[35].addSpawns("scorpion", 10);
         waves[35].addSpawns("littleWorm", 30);
 
         waves[36] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondry, "Emperors");
