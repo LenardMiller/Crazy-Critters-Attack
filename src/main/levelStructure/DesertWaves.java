@@ -27,10 +27,10 @@ public class DesertWaves {
         Color scorpionSecondary = new Color(138, 94, 55);
 
         Color wormPrimary = new Color(215, 123, 186);
-        Color wormSecondery = new Color(100, 77, 100);
+        Color wormSecondary = new Color(100, 77, 110);
 
         Color emperorPrimary = new Color(0, 0,0);
-        Color emperorSecondry = new Color(241, 96, 255);
+        Color emperorSecondary = new Color(241, 96, 255);
 
         Color midWormPrimary = new Color(220, 133, 101);
         Color midWormSecondary = new Color(136, 108, 87);
@@ -39,7 +39,7 @@ public class DesertWaves {
         Color bigWormSecondary = new Color(255, 255, 255);
 
         Color sidewinderPrimary = new Color(154, 193, 66);
-        Color sindewinderSecondary = new Color(0, 0,0);
+        Color sidewinderSecondary = new Color(0, 0,0);
 
         waves[0] = new Wave(p, 3200, 1300, smolBugPrimary, smolBugSecondary, "Small Bugs");
         waves[0].addSpawns("smolBug",6);
@@ -78,10 +78,10 @@ public class DesertWaves {
         waves[8].addSpawns("midBug", 20);
         waves[8].addSpawns("smolBug", 5);
 
-        waves[9] = new Wave(p, 3500, 600, sidewinderPrimary, sindewinderSecondary, "Sidewinders");
+        waves[9] = new Wave(p, 3500, 600, sidewinderPrimary, sidewinderSecondary, "Sidewinders");
         waves[9].addSpawns("sidewinder", 15);
 
-        waves[10] = new Wave(p, 3700, 900, sidewinderPrimary, sindewinderSecondary, "Sidewinders");
+        waves[10] = new Wave(p, 3700, 900, sidewinderPrimary, sidewinderSecondary, "Sidewinders");
         waves[10].addSpawns("sidewinder", 20);
         waves[10].addSpawns("scorpion", 5);
 
@@ -92,13 +92,13 @@ public class DesertWaves {
         waves[12] = new Wave(p, 3800, 1600, scorpionPrimary, scorpionSecondary, "Scorpions");
         waves[12].addSpawns("scorpion", 15);
 
-        waves[13] = new Wave(p, 4000, 600, wormPrimary, wormSecondery, "Worms");
+        waves[13] = new Wave(p, 4000, 600, wormPrimary, wormSecondary, "Worms");
         waves[13].addSpawns("littleWorm", 5);
 
         waves[14] = new Wave(p, 2400, 200, bigBugPrimary, bigBugSecondary, "Big Bug");
         waves[14].addSpawns("bigBug", 1);
 
-        waves[15] = new Wave(p, 4000, 600, wormPrimary, wormSecondery, "Worms");
+        waves[15] = new Wave(p, 4000, 600, wormPrimary, wormSecondary, "Worms");
         waves[15].addSpawns("littleWorm", 10);
         waves[15].addSpawns("scorpion", 5);
 
@@ -109,7 +109,7 @@ public class DesertWaves {
         waves[17].addSpawns("scorpion", 20);
         waves[17].addSpawns("sidewinder", 5);
 
-        waves[18] = new Wave(p, 4000, 600, wormPrimary, wormSecondery, "Worms");
+        waves[18] = new Wave(p, 4000, 600, wormPrimary, wormSecondary, "Worms");
         waves[18].addSpawns("littleWorm", 10);
         waves[18].addSpawns("scorpion", 5);
 
@@ -140,19 +140,19 @@ public class DesertWaves {
         waves[25].addSpawns("midWorm", 15);
         waves[25].addSpawns("bigBug", 5);
 
-        waves[26] = new Wave(p, 2800, 200, emperorPrimary, emperorSecondry, "Emperor");
+        waves[26] = new Wave(p, 2800, 200, emperorPrimary, emperorSecondary, "Emperor");
         waves[26].addSpawns("emperor", 1);
         waves[26].addSpawns("scorpion", 5);
 
-        waves[27] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondry, "Emperors");
+        waves[27] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondary, "Emperors");
         waves[27].addSpawns("emperor", 5);
         waves[27].addSpawns("midWorm", 5);
 
-        waves[28] = new Wave(p, 3700, 900, sidewinderPrimary, sindewinderSecondary, "Sidewinders");
+        waves[28] = new Wave(p, 3700, 900, sidewinderPrimary, sidewinderSecondary, "Sidewinders");
         waves[28].addSpawns("sidewinder", 30);
         waves[28].addSpawns("scorpion", 5);
 
-        waves[29] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondry, "Emperors");
+        waves[29] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondary, "Emperors");
         waves[29].addSpawns("emperor", 5);
         waves[29].addSpawns("scorpion", 15);
 
@@ -172,7 +172,7 @@ public class DesertWaves {
         waves[33] = new Wave(p, 4000, 200, bigWormPrimary, bigWormSecondary, "Megaworm");
         waves[33].addSpawns("bigWorm", 1);
 
-        waves[34] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondry, "Emperors");
+        waves[34] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondary, "Emperors");
         waves[34].addSpawns("emperor", 10);
         waves[34].addSpawns("bigBug", 5);
 
@@ -182,7 +182,7 @@ public class DesertWaves {
         waves[35].addSpawns("scorpion", 10);
         waves[35].addSpawns("littleWorm", 30);
 
-        waves[36] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondry, "Emperors");
+        waves[36] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondary, "Emperors");
         waves[36].addSpawns("emperor", 15);
 
         waves[37] = new Wave(p, 4000, 1200, bigWormPrimary, bigWormSecondary, "Megaworms");
