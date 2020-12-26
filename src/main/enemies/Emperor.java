@@ -15,8 +15,8 @@ public class Emperor extends Enemy{
         maxSpeed = .45f;
         speed = maxSpeed;
         moneyDrop = 200;
-        damage = 12;
-        maxHp = 2000;
+        damage = 18;
+        maxHp = 3000;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "emperor";

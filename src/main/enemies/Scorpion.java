@@ -15,7 +15,7 @@ public class Scorpion extends Enemy {
         speed = maxSpeed;
         moneyDrop = 35;
         damage = 4;
-        maxHp = 50;
+        maxHp = 75;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "scorpion";
