@@ -32,7 +32,7 @@ public class DesertWaves {
         Color emperorPrimary = new Color(0, 0,0);
         Color emperorSecondry = new Color(241, 96, 255);
 
-        Color midWormPrimary = new Color(181, 123, 91);
+        Color midWormPrimary = new Color(220, 133, 101);
         Color midWormSecondary = new Color(136, 108, 87);
 
         Color bigWormPrimary = new Color(232, 106, 115);
