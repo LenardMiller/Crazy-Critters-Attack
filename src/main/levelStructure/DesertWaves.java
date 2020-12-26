@@ -184,15 +184,15 @@ public class DesertWaves {
 
         waves[38] = new Wave(p, 4000, 1600, hordePrimary, hordeSecondary, "Horde");
         waves[38].addSpawns("midBug", 15);
-        waves[38].addSpawns("bigBug", 5);
-        waves[38].addSpawns("emperor", 3);
+        waves[38].addSpawns("bigBug", 20);
+        waves[38].addSpawns("emperor", 15);
         waves[38].addSpawns("sidewinder", 15);
         waves[38].addSpawns("scorpion", 30);
 
         waves[39] = new Wave(p, 4000, 1600, hordePrimary, hordeSecondary, "Mega Horde");
-        waves[39].addSpawns("bigBug", 15);
-        waves[39].addSpawns("emperor", 5);
-        waves[39].addSpawns("bigWorm", 3);
+        waves[39].addSpawns("bigBug", 30);
+        waves[39].addSpawns("emperor", 20);
+        waves[39].addSpawns("bigWorm", 6);
 
         for (Wave wave : waves) wave.load();
         return waves;
