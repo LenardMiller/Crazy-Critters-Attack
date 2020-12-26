@@ -33,7 +33,7 @@ public class ForestWaves {
         Color treeGiantSecondary = new Color(255, 0, 77);
 
         Color hordePrimary = new Color(0, 0, 0);
-        Color hordeSecondary = new Color(255, 100, 0);
+        Color hordeSecondary = new Color(200, 200, 200);
 
         waves[0] = new Wave(p, 3200, 1600, smolBugPrimary, smolBugSecondary, "Small Bugs");
         waves[0].addSpawns("smolBug",3);
@@ -147,7 +147,7 @@ public class ForestWaves {
         waves[27].addSpawns("treeSpirit", 5);
         waves[27].addSpawns("treeGiant", 1);
 
-        waves[28] = new Wave(p, 4000, 1600, hordePrimary, hordeSecondary, "horde");
+        waves[28] = new Wave(p, 4000, 1600, hordePrimary, hordeSecondary, "Horde");
         waves[28].addSpawns("midBug", 10);
         waves[28].addSpawns("treeSpirit", 10);
         waves[28].addSpawns("bigBug", 3);

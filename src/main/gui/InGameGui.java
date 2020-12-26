@@ -97,7 +97,7 @@ public class InGameGui {
         towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(0),"slingshot",true)); //row 1
         towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(1),"miscCannon",true));
         towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(2),"crossbow",true));
-        boolean test = true;
+        boolean test = false;
         if (currentLevel > 0 || test) {
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(0), "cannon", true));
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(1), "gluer", true));

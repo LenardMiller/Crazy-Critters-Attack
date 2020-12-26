@@ -117,6 +117,21 @@ public class Wave {
             case "butterfly":
                 e = new Butterfly(p, pos.x, pos.y);
                 break;
+            case "scorpion":
+                e = new Scorpion(p, pos.x, pos.y);
+                break;
+            case "sidewinder":
+                e = new Sidewinder(p, pos.x, pos.y);
+                break;
+            case "emperor":
+                e = new Emperor(p, pos.x, pos.y);
+                break;
+            case "midWorm":
+                e = new MidWorm(p, pos.x, pos.y);
+                break;
+            case "bigWorm":
+                e = new BigWorm(p, pos.x, pos.y);
+                break;
         }
         return e;
     }
