@@ -17,8 +17,8 @@ public class MidWorm extends Enemy {
         maxSpeed = .35f;
         speed = maxSpeed;
         moneyDrop = 60;
-        damage = 3;
-        maxHp = 100; //Hp
+        damage = 6;
+        maxHp = 1200; //Hp
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "midWorm";

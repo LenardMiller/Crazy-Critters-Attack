@@ -17,8 +17,8 @@ public class LittleWorm extends Enemy {
         maxSpeed = .3f;
         speed = maxSpeed;
         moneyDrop = 30;
-        damage = 1;
-        maxHp = 50; //Hp
+        damage = 3;
+        maxHp = 100; //Hp
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "worm";
