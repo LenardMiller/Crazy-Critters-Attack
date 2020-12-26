@@ -27,7 +27,7 @@ public class DesertWaves {
         Color scorpionSecondary = new Color(138, 94, 55);
 
         Color wormPrimary = new Color(215, 123, 186);
-        Color wormSecondery = new Color(147, 97, 122);
+        Color wormSecondery = new Color(100, 77, 100);
 
         Color emperorPrimary = new Color(0, 0,0);
         Color emperorSecondry = new Color(241, 96, 255);
