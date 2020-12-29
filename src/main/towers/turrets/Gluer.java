@@ -45,7 +45,7 @@ public class Gluer extends Turret {
         damageSound = soundsH.get("stoneDamage");
         breakSound = soundsH.get("stoneBreak");
         placeSound = soundsH.get("stonePlace");
-        fireSound = soundsH.get("squishImpact");
+        fireSound = soundsH.get("glueFire");
         loadSprites();
         debrisType = "stone";
         price = GLUER_PRICE;
