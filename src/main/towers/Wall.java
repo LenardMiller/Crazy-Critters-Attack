@@ -141,8 +141,6 @@ public class Wall extends Tower {
     }
 
     public void upgrade(int id) {
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
         price += upgradePrices[nextLevelB];
         sprite = upgradeSprites[nextLevelB];
 
@@ -168,6 +166,13 @@ public class Wall extends Tower {
                 debrisType = "ultimate";
                 break;
         } hp = maxHp;
+
+        damageSound = soundsH.get(debrisType + "Damage");
+        breakSound = soundsH.get(debrisType + "Break");
+        placeSound = soundsH.get(debrisType + "PlaceShort");
+
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
 
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
