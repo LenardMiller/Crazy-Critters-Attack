@@ -18,7 +18,7 @@ public class BigWorm extends Enemy {
         speed = maxSpeed;
         moneyDrop = 250;
         damage = 30;
-        maxHp = 5000; //Hp
+        maxHp = 10000; //Hp
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "bigWorm";
