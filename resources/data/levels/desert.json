@@ -1082,13 +1082,13 @@
     "bgA": "sand"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 179,
     "type": "tile",
     "bgA": "sand"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 180,
     "type": "tile",
     "bgA": "sand"
@@ -2167,12 +2167,12 @@
   },
   {
     "betweenFrames": 4,
-    "maxHp": 100,
-    "hp": 100,
+    "maxHp": 500,
+    "hp": 500,
     "x": 450,
-    "name": "stoneDrillMA",
-    "y": 425,
-    "debris": "wood",
+    "name": "metalDrillMA",
+    "y": 450,
+    "debris": "stone",
     "id": 361,
     "type": "machine"
   }
