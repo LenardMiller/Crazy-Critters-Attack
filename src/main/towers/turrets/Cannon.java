@@ -39,9 +39,9 @@ public class Cannon extends Turret {
         damage = 50;
         range = 250;
         effectRadius = 25;
-        damageSound = soundsH.get("woodDamage");
-        breakSound = soundsH.get("woodBreak");
-        placeSound = soundsH.get("woodPlace");
+        damageSound = soundsH.get("stoneDamage");
+        breakSound = soundsH.get("stoneBreak");
+        placeSound = soundsH.get("stonePlace");
         fireSound = soundsH.get("smallExplosion");
         loadSprites();
         debrisType = "stone";
