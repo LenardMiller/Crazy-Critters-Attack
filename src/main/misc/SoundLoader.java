@@ -38,6 +38,7 @@ public class SoundLoader {
         soundsH.put("crossbow", new SoundFile(p, "sounds/turrets/crossbow.wav"));
         soundsH.put("shotbow", new SoundFile(p, "sounds/turrets/shotbow.wav"));
         soundsH.put("luggageBlaster", new SoundFile(p, "sounds/turrets/luggageBlaster.wav"));
+        soundsH.put("lowHit", new SoundFile(p, "sounds/turrets/lowHit.wav"));
         //ui
         soundsH.put("waveEnd", new SoundFile(p,"sounds/ui/waveEnd.wav"));
         soundsH.put("clickIn", new SoundFile(p, "sounds/ui/clickIn.wav"));
