@@ -37,7 +37,7 @@ public class SeismicTower extends Turret {
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 30;
-        range = 250;
+        range = 225;
         shockwaveWidth = 60;
         damageSound = soundsH.get("stoneDamage");
         breakSound = soundsH.get("stoneBreak");
@@ -145,7 +145,7 @@ public class SeismicTower extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    range += 100;
+                    range += 50;
                     break;
                 case 1:
                     shockwaveWidth += 30;
