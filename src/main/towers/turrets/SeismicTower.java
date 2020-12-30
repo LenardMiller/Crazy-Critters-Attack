@@ -45,7 +45,7 @@ public class SeismicTower extends Turret {
         fireSound = soundsH.get("seismicSlam");
         loadSprites();
         debrisType = "stone";
-        price = CANNON_PRICE;
+        price = SEISMIC_PRICE;
         value = price;
         priority = 0; //close
         setUpgrades();
