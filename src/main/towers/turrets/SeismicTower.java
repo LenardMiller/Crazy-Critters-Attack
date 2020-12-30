@@ -139,7 +139,7 @@ public class SeismicTower extends Turret {
         //price
         upgradePrices[0] = 200;
         upgradePrices[1] = 200;
-        upgradePrices[2] = 800;
+        upgradePrices[2] = 900;
         upgradePrices[3] = 250;
         upgradePrices[4] = 300;
         upgradePrices[5] = 700;
@@ -180,7 +180,7 @@ public class SeismicTower extends Turret {
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[21];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[7];
         upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[22];
     }
 
     public void upgradeSpecial(int id) {
