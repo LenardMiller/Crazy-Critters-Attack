@@ -210,7 +210,7 @@ public class SeismicTower extends Turret {
                     break;
                 case 5:
                     seismicSense = true;
-                    shockwaveWidth -= 20;
+                    shockwaveWidth -= 40;
                     range += 50;
                     damage += 20;
                     if (nextLevelA == 2) nextLevelA++;
