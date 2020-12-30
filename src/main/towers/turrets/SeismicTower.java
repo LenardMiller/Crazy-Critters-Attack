@@ -177,7 +177,7 @@ public class SeismicTower extends Turret {
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[20];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[21];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[7];
         upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[0];
