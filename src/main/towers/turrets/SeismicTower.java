@@ -95,49 +95,49 @@ public class SeismicTower extends Turret {
 
     private void setUpgrades() {
         //price
-        upgradePrices[0] = 125;
-        upgradePrices[1] = 150;
-        upgradePrices[2] = 500;
-        upgradePrices[3] = 75;
-        upgradePrices[4] = 125;
-        upgradePrices[5] = 600;
+        upgradePrices[0] = 200;
+        upgradePrices[1] = 200;
+        upgradePrices[2] = 800;
+        upgradePrices[3] = 250;
+        upgradePrices[4] = 300;
+        upgradePrices[5] = 700;
         //titles
-        upgradeTitles[0] = "NYI";
-        upgradeTitles[1] = "NYI";
-        upgradeTitles[2] = "NYI";
-        upgradeTitles[3] = "NYI";
-        upgradeTitles[4] = "NYI";
-        upgradeTitles[5] = "NYI";
+        upgradeTitles[0] = "Longer range";
+        upgradeTitles[1] = "Larger AOE";
+        upgradeTitles[2] = "360 Wave";
+        upgradeTitles[3] = "Faster firing";
+        upgradeTitles[4] = "Damage boost";
+        upgradeTitles[5] = "Seismic sense";
         //description
-        upgradeDescA[0] = "";
-        upgradeDescB[0] = "";
+        upgradeDescA[0] = "Increase";
+        upgradeDescB[0] = "range";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "";
-        upgradeDescB[1] = "";
-        upgradeDescC[1] = "";
+        upgradeDescA[1] = "Increase";
+        upgradeDescB[1] = "area of";
+        upgradeDescC[1] = "effect";
 
-        upgradeDescA[2] = "";
-        upgradeDescB[2] = "";
-        upgradeDescC[2] = "";
+        upgradeDescA[2] = "Shockwave";
+        upgradeDescB[2] = "encircles";
+        upgradeDescC[2] = "tower";
 
-        upgradeDescA[3] = "";
-        upgradeDescB[3] = "";
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "firerate";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "";
-        upgradeDescB[4] = "";
+        upgradeDescA[4] = "+30";
+        upgradeDescB[4] = "damage";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "";
-        upgradeDescB[5] = "";
-        upgradeDescC[5] = "";
+        upgradeDescA[5] = "Detect";
+        upgradeDescB[5] = "stealthy";
+        upgradeDescC[5] = "enemies";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[7];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[0];
     }
 
@@ -145,19 +145,24 @@ public class SeismicTower extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
+                    range += 100;
                     break;
                 case 1:
+                    shockwaveWidth += 30;
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
+                    shockwaveWidth = 360;
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
+                    delay -= 50;
                     break;
                 case 4:
+                    damage += 30;
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
