@@ -153,6 +153,7 @@ public class SeismicTower extends Turret {
                     break;
                 case 2:
                     shockwaveWidth = 360;
+                    delay -= 75;
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
@@ -166,6 +167,9 @@ public class SeismicTower extends Turret {
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
+                    shockwaveWidth -= 20;
+                    range += 50;
+                    damage += 20;
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }
