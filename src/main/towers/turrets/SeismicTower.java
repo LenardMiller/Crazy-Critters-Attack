@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.enemies.Enemy;
 import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.Shockwave;
@@ -14,6 +15,7 @@ import static processing.core.PConstants.HALF_PI;
 public class SeismicTower extends Turret {
 
     private float shockwaveWidth;
+    private boolean seismicSense;
 
     public SeismicTower(PApplet p, Tile tile) {
         super(p,tile);
@@ -39,6 +41,7 @@ public class SeismicTower extends Turret {
         damage = 30;
         range = 225;
         shockwaveWidth = 60;
+        seismicSense = false;
         damageSound = soundsH.get("stoneDamage");
         breakSound = soundsH.get("stoneBreak");
         placeSound = soundsH.get("stonePlace");
@@ -63,6 +66,45 @@ public class SeismicTower extends Turret {
             frame = 0;
         }
         if (spriteType == 1 && frame == fireFrames.length - 1) fire();
+    }
+
+    void getTargetEnemy() {
+        //0: close
+        //1: far
+        //2: strong
+        float finalDist;
+        if (priority == 0) finalDist = 1000000;
+        else finalDist = 0;
+        float maxHp = 0;
+        Enemy e = null;
+        for (Enemy enemy : enemies) {
+            if (!enemy.stealthMode || seismicSense) {
+                float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
+                float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
+                float dist = sqrt(sq(x) + sq(y));
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < range) {
+                    if (priority == 0 && dist < finalDist) { //close
+                        e = enemy;
+                        finalDist = dist;
+                    }
+                    if (priority == 1 && dist > finalDist) { //far
+                        e = enemy;
+                        finalDist = dist;
+                    }
+                    if (priority == 2) {
+                        if (enemy.maxHp > maxHp) { //strong
+                            e = enemy;
+                            finalDist = dist;
+                            maxHp = enemy.maxHp;
+                        } else if (enemy.maxHp == maxHp && dist < finalDist) { //strong -> close
+                            e = enemy;
+                            finalDist = dist;
+                        }
+                    }
+                }
+            }
+        }
+        targetEnemy = e;
     }
 
     public void fire() {
@@ -167,6 +209,7 @@ public class SeismicTower extends Turret {
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
+                    seismicSense = true;
                     shockwaveWidth -= 20;
                     range += 50;
                     damage += 20;
