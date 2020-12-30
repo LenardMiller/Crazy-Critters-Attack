@@ -159,7 +159,7 @@ public class SeismicTower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    delay -= 50;
+                    delay -= 75;
                     break;
                 case 4:
                     damage += 30;
