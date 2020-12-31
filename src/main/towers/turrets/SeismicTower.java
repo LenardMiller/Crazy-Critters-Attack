@@ -107,6 +107,32 @@ public class SeismicTower extends Turret {
         targetEnemy = e;
     }
 
+    public void displayPassB2() {
+        //shadow
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
+        p.rotate(angle);
+        p.tint(0, 60);
+        p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+        p.popMatrix();
+        //main
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+        int count = 6;
+        p.tint(255, tintColor, tintColor);
+        if (name.equals("seismicSlammer")) {
+            for (int i = 0; i <= count; i++) {
+                p.rotate(TWO_PI / count);
+                p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+            }
+        } else {
+            p.rotate(angle);
+            p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+        }
+        p.popMatrix();
+        p.tint(255);
+    }
+
     public void fire() {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
@@ -196,6 +222,7 @@ public class SeismicTower extends Turret {
                 case 2:
                     shockwaveWidth = 360;
                     delay -= 50;
+                    name = "seismicSlammer";
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
