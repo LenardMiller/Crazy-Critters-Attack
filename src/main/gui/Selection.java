@@ -181,7 +181,8 @@ public class Selection { //what tower is selected
             case "crossbowMultishot":
                 p.text("Shotbow", 1000, 241);
                 speed = 24;
-                setTextPurple("Seven Piercing Bolts", offset);
+                setTextPurple("Piercing", offset);
+                setTextPurple("Multishot", offset + 20);
                 break;
             case "cannon":
                 p.text("Cannon", 1000, 241);
@@ -202,6 +203,7 @@ public class Selection { //what tower is selected
                 p.text("Seismic Sniper", 1000, 241);
                 speed = 7;
                 setTextPurple("Shockwave", offset);
+                setTextPurple("Anti-stealth", offset + 20);
                 break;
             case "energyBlaster":
                 p.text("Energy Blaster", 1000, 241);
@@ -228,12 +230,14 @@ public class Selection { //what tower is selected
                 p.text("Blaster", 1000, 266);
                 offset = 25;
                 speed = 18;
-                setTextPurple("Shotgun, decay", offset);
+                setTextPurple("Shotgun", offset);
+                setTextPurple("Decay", offset + 20);
                 break;
             case "flamethrower":
                 p.text("Flamethrower", 1000, 241);
                 speed = 5;
-                setTextPurple("Fire, slow rotation", offset);
+                setTextPurple("Fire", offset);
+                setTextPurple("Slow rotation", offset + 20);
                 break;
             case "railgun":
                 p.text("Railgun", 1000, 241);
