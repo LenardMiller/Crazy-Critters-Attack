@@ -144,15 +144,15 @@ public class SeismicTower extends Turret {
         upgradePrices[4] = 300;
         upgradePrices[5] = 700;
         //titles
-        upgradeTitles[0] = "Longer range";
+        upgradeTitles[0] = "Faster Firing";
         upgradeTitles[1] = "Larger AOE";
         upgradeTitles[2] = "360 Wave";
-        upgradeTitles[3] = "Faster firing";
+        upgradeTitles[3] = "Longer Range";
         upgradeTitles[4] = "Damage boost";
         upgradeTitles[5] = "Seismic sense";
         //description
         upgradeDescA[0] = "Increase";
-        upgradeDescB[0] = "range";
+        upgradeDescB[0] = "firerate";
         upgradeDescC[0] = "";
 
         upgradeDescA[1] = "Increase";
@@ -164,7 +164,7 @@ public class SeismicTower extends Turret {
         upgradeDescC[2] = "tower";
 
         upgradeDescA[3] = "Increase";
-        upgradeDescB[3] = "firerate";
+        upgradeDescB[3] = "range";
         upgradeDescC[3] = "";
 
         upgradeDescA[4] = "+30";
@@ -175,10 +175,10 @@ public class SeismicTower extends Turret {
         upgradeDescB[5] = "stealthy";
         upgradeDescC[5] = "enemies";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
+        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[7];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[20];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[21];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[7];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[22];
     }
@@ -187,7 +187,7 @@ public class SeismicTower extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    range += 50;
+                    delay -= 50;
                     break;
                 case 1:
                     shockwaveWidth += 30;
@@ -202,7 +202,7 @@ public class SeismicTower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    delay -= 50;
+                    range += 50;
                     break;
                 case 4:
                     damage += 30;
