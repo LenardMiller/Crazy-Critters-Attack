@@ -132,6 +132,8 @@ public class SpriteLoader {
         getSprite(p,"cannonLoad","TR","cannon/load/",18);
         getSprite(p,"seismicFire","TR","seismic/fire/",14);
         getSprite(p,"seismicLoad","TR","seismic/load/",20);
+        getSprite(p,"seismicSniperFire","TR","seismic/sniper/fire/",14);
+        getSprite(p,"seismicSniperLoad","TR","seismic/sniper/load/",20);
         getSprite(p,"crossbowMultishotFire","TR","crossbow/multishot/fire/",13);
         getSprite(p,"crossbowMultishotLoad","TR","crossbow/multishot/load/",81);
         getSprite(p,"crossbowReinforcedFire","TR","crossbow/reinforced/fire/",13);
@@ -284,6 +286,9 @@ public class SpriteLoader {
         spritesH.put("seismicBaseTR",p.loadImage("sprites/towers/turrets/seismic/base.png"));
         spritesH.put("seismicFullTR",p.loadImage("sprites/towers/turrets/seismic/full.png"));
         spritesH.put("seismicIdleTR",p.loadImage("sprites/towers/turrets/seismic/idle.png"));
+        spritesH.put("seismicSniperBaseTR",p.loadImage("sprites/towers/turrets/seismic/sniper/base.png"));
+        spritesH.put("seismicSniperFullTR",p.loadImage("sprites/towers/turrets/seismic/sniper/full.png"));
+        spritesH.put("seismicSniperIdleTR",p.loadImage("sprites/towers/turrets/seismic/sniper/idle.png"));
         spritesH.put("miscCannonBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/base.png"));
         spritesH.put("miscCannonFullTR",p.loadImage("sprites/towers/turrets/miscCannon/full.png"));
         spritesH.put("miscCannonIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/idle.png"));
