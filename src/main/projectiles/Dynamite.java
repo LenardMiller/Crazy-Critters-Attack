@@ -4,41 +4,29 @@ import main.enemies.Enemy;
 import main.misc.MiscMethods;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
-import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static processing.core.PApplet.abs;
 
-public class Laundry extends Projectile {
+public class Dynamite extends Projectile {
 
-    public PImage[] sprites; //alternate sprites, passed in
-
-    public Laundry(PApplet p, float x, float y, float angle, Turret turret, int damage) {
+    public Dynamite(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectRadius) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
-        size = new PVector(10, 10);
-        radius = 5;
-        maxSpeed = 12;
+        size = new PVector(9, 15);
+        angularVelocity = p.random(-15, 15); //degrees mode
+        radius = 10;
+        maxSpeed = 14;
         speed = maxSpeed;
         this.damage = damage;
         pierce = 1;
         this.angle = angle;
-        angleTwo = angle;
-        angularVelocity = p.random(-15, 15); //degrees mode
-        sprite = spritesH.get("laundryPj");
-        trail = "poison";
-        hasTrail = true;
-        effectRadius = 60;
-        buff = "poisoned";
-        hitSound = soundsH.get("squishImpact");
-    }
-
-    public void die(int i) {
-        projectiles.remove(i);
-        particles.add(new Ouch(p, position.x, position.y, p.random(0, 360), "poisonPuff"));
+        sprite = spritesH.get("dynamitePj");
+        hitSound = soundsH.get("smallExplosion");
+        this.effectRadius = effectRadius;
     }
 
     public void collideEn() {
@@ -54,12 +42,13 @@ public class Laundry extends Projectile {
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
                 hitSound.stop();
                 hitSound.play(p.random(0.8f, 1.2f), volume);
-                enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "poison", velocity, i);
+                enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "none", velocity, i);
                 int num = (int) (p.random(16, 42));
                 for (int j = num; j >= 0; j--) {
-                    particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "poison", maxSpeed = p.random(1.5f, 4.5f)));
+                    particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "fire", maxSpeed = p.random(1.5f, 4.5f)));
                 }
-                particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "poison"));
+                particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "fire"));
+
                 pierce--;
                 for (int j = enemies.size() - 1; j >= 0; j--) {
                     Enemy erEnemy = enemies.get(j);
@@ -71,7 +60,7 @@ public class Laundry extends Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.damagePj(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, "poison", PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
+                        erEnemy.damagePj(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, erEnemy.lastDamageType, PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
                     }
                 }
             }

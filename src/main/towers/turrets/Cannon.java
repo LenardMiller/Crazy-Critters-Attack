@@ -3,6 +3,7 @@ package main.towers.turrets;
 import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.CannonBall;
+import main.projectiles.Dynamite;
 import main.projectiles.FragBall;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -16,6 +17,7 @@ public class Cannon extends Turret {
 
     private int effectRadius;
     private boolean frags;
+    private boolean dynamite;
 
     public Cannon(PApplet p, Tile tile) {
         super(p,tile);
@@ -68,6 +70,7 @@ public class Cannon extends Turret {
         spp.add(spa);
         String part = "smoke";
         if (frags) projectiles.add(new FragBall(p,spp.x,spp.y, angleB, this, damage, effectRadius));
+        else if (dynamite) projectiles.add(new Dynamite(p,spp.x,spp.y, angleB, this, damage, effectRadius));
         else projectiles.add(new CannonBall(p,spp.x,spp.y, angleB, this, damage, effectRadius));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
@@ -138,6 +141,8 @@ public class Cannon extends Turret {
                     break;
                 case 2:
                     damage += 30;
+                    effectRadius = 60;
+                    dynamite = true;
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }

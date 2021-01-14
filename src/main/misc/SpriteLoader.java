@@ -44,6 +44,7 @@ public class SpriteLoader {
         getSprite(p,"energyExDebris","PT","explosionDebris/energy/",4);
         getSprite(p,"poisonExDebris","PT","explosionDebris/poison/",4);
         getSprite(p,"metalExDebris","PT","explosionDebris/metal/",4);
+        getSprite(p,"fireExDebris","PT","explosionDebris/fire/",4);
         getSprite(p,"greenMagicBuff","PT","buff/greenMagic/",8);
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         getSprite(p,"railgunBlast","PT","railgunBlast/",11);
@@ -263,6 +264,7 @@ public class SpriteLoader {
         spritesH.put("needlePj",p.loadImage("sprites/projectiles/needle.png"));
         spritesH.put("laundryPj",p.loadImage("sprites/projectiles/laundry.png"));
         spritesH.put("gluePj",p.loadImage("sprites/projectiles/glue.png"));
+        spritesH.put("dynamitePj",p.loadImage("sprites/projectiles/dynamite.png"));
         //turrets
         spritesH.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
         spritesH.put("crossbowFullTR",p.loadImage("sprites/towers/turrets/crossbow/full.png"));
