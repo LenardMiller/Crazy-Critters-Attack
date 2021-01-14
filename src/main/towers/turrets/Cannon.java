@@ -23,7 +23,7 @@ public class Cannon extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 150; //default: 150 frames
+        delay = 270; //default: 150 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 14;
@@ -36,7 +36,7 @@ public class Cannon extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 50;
+        damage = 40;
         range = 250;
         effectRadius = 25;
         damageSound = soundsH.get("stoneDamage");
@@ -77,49 +77,49 @@ public class Cannon extends Turret {
 
     private void setUpgrades() {
         //price
-        upgradePrices[0] = 125;
-        upgradePrices[1] = 150;
+        upgradePrices[0] = 175;
+        upgradePrices[1] = 225;
         upgradePrices[2] = 500;
-        upgradePrices[3] = 75;
-        upgradePrices[4] = 125;
+        upgradePrices[3] = 150;
+        upgradePrices[4] = 200;
         upgradePrices[5] = 600;
         //titles
-        upgradeTitles[0] = "NYI";
-        upgradeTitles[1] = "NYI";
-        upgradeTitles[2] = "NYI";
-        upgradeTitles[3] = "NYI";
-        upgradeTitles[4] = "NYI";
-        upgradeTitles[5] = "NYI";
+        upgradeTitles[0] = "Strong blast";
+        upgradeTitles[1] = "Powerful blast";
+        upgradeTitles[2] = "Dynamite";
+        upgradeTitles[3] = "Extra range";
+        upgradeTitles[4] = "Rapid reload";
+        upgradeTitles[5] = "Frags";
         //description
-        upgradeDescA[0] = "";
-        upgradeDescB[0] = "";
+        upgradeDescA[0] = "+20";
+        upgradeDescB[0] = "damage";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "";
-        upgradeDescB[1] = "";
+        upgradeDescA[1] = "+30";
+        upgradeDescB[1] = "damage";
         upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "";
-        upgradeDescB[2] = "";
-        upgradeDescC[2] = "";
+        upgradeDescA[2] = "Creates";
+        upgradeDescB[2] = "huge";
+        upgradeDescC[2] = "fireballs";
 
-        upgradeDescA[3] = "";
-        upgradeDescB[3] = "";
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "range";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "";
-        upgradeDescB[4] = "";
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "firerate";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "";
-        upgradeDescB[5] = "";
+        upgradeDescA[5] = "Bursts into";
+        upgradeDescB[5] = "shrapnel";
         upgradeDescC[5] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
+        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[13];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[6];
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[0];
     }
 
@@ -127,22 +127,29 @@ public class Cannon extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
+                    damage += 20;
                     break;
                 case 1:
+                    damage += 30;
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
+                    damage += 30;
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
+                    range += 35;
                     break;
                 case 4:
+                    delay -= 50;
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
+                    range += 40;
+                    delay -= 30;
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }
