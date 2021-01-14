@@ -143,6 +143,7 @@ public class Cannon extends Turret {
                     damage += 30;
                     effectRadius = 60;
                     dynamite = true;
+                    fireSound = soundsH.get("luggageBlaster");
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
