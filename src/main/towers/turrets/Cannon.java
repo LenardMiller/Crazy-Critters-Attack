@@ -90,8 +90,8 @@ public class Cannon extends Turret {
         upgradePrices[4] = 200;
         upgradePrices[5] = 600;
         //titles
-        upgradeTitles[0] = "Strong blast";
-        upgradeTitles[1] = "Powerful blast";
+        upgradeTitles[0] = "Stronger shot";
+        upgradeTitles[1] = "Powerful shot";
         upgradeTitles[2] = "Dynamite";
         upgradeTitles[3] = "Extra range";
         upgradeTitles[4] = "Rapid reload";
@@ -107,7 +107,7 @@ public class Cannon extends Turret {
 
         upgradeDescA[2] = "Creates";
         upgradeDescB[2] = "huge";
-        upgradeDescC[2] = "fireballs";
+        upgradeDescC[2] = "explosions";
 
         upgradeDescA[3] = "Increase";
         upgradeDescB[3] = "range";
