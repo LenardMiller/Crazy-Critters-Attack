@@ -157,7 +157,7 @@ public class Cannon extends Turret {
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
-                    range += 40;
+                    range += 30;
                     delay -= 30;
                     frags = true;
                     if (nextLevelA == 2) nextLevelA++;

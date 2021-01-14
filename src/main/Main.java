@@ -49,8 +49,7 @@ public class Main extends PApplet {
     public static ArrayList<Enemy> enemies;
     public static ArrayList<main.misc.Corpse> corpses;
     public static ArrayList<main.projectiles.Projectile> projectiles;
-    public static ArrayList<main.particles.Particle> particles;
-    public static ArrayList<main.particles.Particle> underParticles;
+    public static ArrayList<main.particles.Particle> particles, underParticles;
     public static ArrayList<main.projectiles.Arc> arcs;
     public static ArrayList<main.projectiles.Shockwave> shockwaves;
     public static ArrayList<TowerBuy> towerBuyButtons;
@@ -62,17 +61,14 @@ public class Main extends PApplet {
 
     public static CompressArray compress;
 
-    public static Button addMoneyButton;
-    public static GuiObject moneyIcon;
     public static Button openMenuButton;
     public static Button wallBuyButton;
-    public static Play playButton;
     public static Button sellButton;
     public static Button targetButton;
-    public static Button upgradeButtonA;
-    public static Button upgradeButtonB;
-    public static GuiObject upgradeIconA;
-    public static GuiObject upgradeIconB;
+    public static Button upgradeButtonA, upgradeButtonB;
+    public static GuiObject moneyIcon;
+    public static GuiObject upgradeIconA, upgradeIconB;
+    public static Play playButton;
 
     public static Hand hand;
     public static Selection selection;
@@ -107,8 +103,7 @@ public class Main extends PApplet {
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
-    public static HashMap<String, SoundFile> soundsH = new HashMap<>();
-    public static HashMap<String, SoundLoop> soundLoopsH = new HashMap<>();
+    public static HashMap<String, SoundFile> soundsH = new HashMap<>(), soundLoopsH = new HashMap<>();
 
     //pathfinding stuff
     public static int defaultSize = 1;
@@ -118,8 +113,7 @@ public class Main extends PApplet {
     public static Node[] end;
     public static AStar path;
     public static int nSize;
-    public static float maxCost;
-    public static float minCost;
+    public static float maxCost, minCost;
 
     public static void main(String[] args) {
         PApplet.main("main.Main", args);
