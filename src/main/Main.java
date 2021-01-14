@@ -103,7 +103,8 @@ public class Main extends PApplet {
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
-    public static HashMap<String, SoundFile> soundsH = new HashMap<>(), soundLoopsH = new HashMap<>();
+    public static HashMap<String, SoundFile> soundsH = new HashMap<>();
+    public static HashMap<String, SoundLoop> soundLoopsH = new HashMap<>();
 
     //pathfinding stuff
     public static int defaultSize = 1;
