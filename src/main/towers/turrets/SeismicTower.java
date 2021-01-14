@@ -223,6 +223,9 @@ public class SeismicTower extends Turret {
                     shockwaveWidth = 360;
                     delay -= 50;
                     name = "seismicSlammer";
+                    numFireFrames = 3;
+                    numLoadFrames = 9;
+                    loadSprites();
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }

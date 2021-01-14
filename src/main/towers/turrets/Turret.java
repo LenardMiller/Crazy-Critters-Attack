@@ -113,12 +113,10 @@ public abstract class Turret extends Tower {
                     if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
                         finalDist = dist;
-                    }
-                    if (priority == 1 && dist > finalDist) { //far
+                    } if (priority == 1 && dist > finalDist) { //far
                         e = enemy;
                         finalDist = dist;
-                    }
-                    if (priority == 2) {
+                    } if (priority == 2) {
                         if (enemy.maxHp > maxHp) { //strong
                             e = enemy;
                             finalDist = dist;
