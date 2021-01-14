@@ -205,6 +205,14 @@ public class Selection { //what tower is selected
                 setTextPurple("Shockwave", offset);
                 setTextPurple("Anti-stealth", offset + 20);
                 break;
+            case "seismicSlammer":
+                p.text("Seismic", 1000, 241);
+                p.text("Slammer", 1000, 266);
+                offset = 25;
+                speed = 7;
+                setTextPurple("Shockwave", offset);
+                setTextPurple("360 degrees", offset + 20);
+                break;
             case "energyBlaster":
                 p.text("Energy Blaster", 1000, 241);
                 speed = 16;
