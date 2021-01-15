@@ -220,6 +220,8 @@ public class SeismicTower extends Turret {
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
+                    debrisType = "metal";
+                    //todo: metal sounds
                     shockwaveWidth = 360;
                     delay -= 50;
                     name = "seismicSlammer";
@@ -239,6 +241,8 @@ public class SeismicTower extends Turret {
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
+                    debrisType = "metal";
+                    //todo: metal sounds
                     seismicSense = true;
                     shockwaveWidth -= 40;
                     range += 50;

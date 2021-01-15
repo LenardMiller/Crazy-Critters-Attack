@@ -145,6 +145,10 @@ public class Slingshot extends Turret {
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
+                    debrisType = "stone";
+                    damageSound = soundsH.get("stoneDamage");
+                    breakSound = soundsH.get("stoneBreak");
+                    placeSound = soundsH.get("stonePlace");
                     painful = true;
                     damage += 50;
                     delay += 10;

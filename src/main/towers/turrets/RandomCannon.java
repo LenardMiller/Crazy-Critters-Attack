@@ -144,6 +144,10 @@ public class RandomCannon extends Turret {
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
+                    damageSound = soundsH.get("stoneDamage");
+                    breakSound = soundsH.get("stoneBreak");
+                    placeSound = soundsH.get("stonePlace");
+                    debrisType = "stone";
                     barrel = true;
                     delay = 6;
                     damage -= 5;

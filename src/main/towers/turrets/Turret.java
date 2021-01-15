@@ -273,24 +273,14 @@ public abstract class Turret extends Tower {
     }
 
     public void upgrade(int id) {
-        if (id == 0) {
-//            if (nextLevelA == 2 && nextLevelB != 6) {
-//                specialSound.stop();
-//                specialSound.play(p.random(0.8f, 1.2f), volume);
-//            } else {
-            placeSound.stop();
-            placeSound.play(p.random(0.8f, 1.2f), volume);
-//            }
-        } else if (id == 1) {
-//            if (nextLevelB == 5 && nextLevelA != 3) {
-//                specialSound.stop();
-//                specialSound.play(p.random(0.8f, 1.2f), volume);
-//            } else {
-            placeSound.stop();
-            placeSound.play(p.random(0.8f, 1.2f), volume);
-//            }
-        }
         upgradeSpecial(id);
+        if (id == 0) {
+            placeSound.stop();
+            placeSound.play(p.random(0.8f, 1.2f), volume);
+        } else if (id == 1) {
+            placeSound.stop();
+            placeSound.play(p.random(0.8f, 1.2f), volume);
+        }
         if (id == 0) {
             value += upgradePrices[nextLevelA];
             nextLevelA++;
