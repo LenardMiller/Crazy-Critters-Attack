@@ -144,6 +144,8 @@ public class Cannon extends Turret {
                     effectRadius = 60;
                     dynamite = true;
                     fireSound = soundsH.get("luggageBlaster");
+                    name = "dynamiteLauncher";
+                    pjSpeed = 10;
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
@@ -160,6 +162,7 @@ public class Cannon extends Turret {
                     range += 30;
                     delay -= 30;
                     frags = true;
+                    name = "fragCannon";
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }

@@ -19,7 +19,7 @@ public class Dynamite extends Projectile {
         size = new PVector(9, 15);
         angularVelocity = p.random(-15, 15); //degrees mode
         radius = 10;
-        maxSpeed = 14;
+        maxSpeed = 10;
         speed = maxSpeed;
         this.damage = damage;
         pierce = 1;

@@ -189,6 +189,19 @@ public class Selection { //what tower is selected
                 speed = 14;
                 setTextPurple("Small splash", offset);
                 break;
+            case "fragCannon":
+                p.text("Frag Cannon", 1000, 241);
+                speed = 14;
+                setTextPurple("Small splash", offset);
+                setTextPurple("Shrapnel", offset + 20);
+                break;
+            case "dynamiteLauncher":
+                p.text("Dynamite", 1000, 241);
+                p.text("Launcher", 1000, 266);
+                offset = 25;
+                speed = 10;
+                setTextPurple("Large splash", offset);
+                break;
             case "gluer":
                 p.text("Gluer", 1000, 241);
                 speed = 7;
