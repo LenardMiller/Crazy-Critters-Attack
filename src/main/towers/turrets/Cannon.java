@@ -163,6 +163,9 @@ public class Cannon extends Turret {
                     delay -= 30;
                     frags = true;
                     name = "fragCannon";
+                    debrisType = "metal";
+                    //todo: metal sounds
+                    loadSprites();
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }
