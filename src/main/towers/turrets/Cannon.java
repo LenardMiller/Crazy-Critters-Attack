@@ -126,7 +126,7 @@ public class Cannon extends Turret {
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[23];
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[4] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[24];
     }
 
     public void upgradeSpecial(int id) {

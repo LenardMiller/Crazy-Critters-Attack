@@ -41,7 +41,6 @@ public abstract class Turret extends Tower {
     public int effectLevel;
     public int effectDuration;
     float targetAngle;
-    SoundFile specialSound;
     SoundFile fireSound;
 
     Turret(PApplet p, Tile tile) {
