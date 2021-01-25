@@ -177,7 +177,7 @@ public class SpriteLoader {
         getSprite(p,"ultimateWall","TW","ultimate/",4);
         //machines
         getMachineSprite(p,"stoneDrill",new int[]{12,12,13,20});
-        getMachineSprite(p, "metalDrill", new int[]{8,8,8,8});
+        getMachineSprite(p, "metalDrill", new int[]{8,8,9,11});
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {
