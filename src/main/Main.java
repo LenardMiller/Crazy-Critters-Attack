@@ -121,8 +121,8 @@ public class Main extends PApplet {
     }
 
     public void settings() {
-        size(1100, 900);
-    }
+        size(GRID_WIDTH, BOARD_HEIGHT);
+    } //todo: openGL?
 
     public void setup() {
         veryLargeFont = createFont("STHeitiSC-Light", 48);
