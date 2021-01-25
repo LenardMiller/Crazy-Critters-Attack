@@ -246,7 +246,7 @@ public class SeismicTower extends Turret {
                     seismicSense = true;
                     shockwaveWidth -= 40;
                     range += 50;
-                    damage += 20;
+                    damage += 100;
                     name = "seismicSniper";
                     loadSprites();
                     if (nextLevelA == 2) nextLevelA++;
