@@ -66,18 +66,21 @@ public class Cannon extends Turret {
         delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angleB-HALF_PI);float particleCount = p.random(1,5);
-        spa.setMag(29); //barrel length
+        if (dynamite) spa.setMag(0);
+        else spa.setMag(29); //barrel length
         spp.add(spa);
         String part = "smoke";
         if (frags) projectiles.add(new FragBall(p,spp.x,spp.y, angleB, this, damage, effectRadius));
         else if (dynamite) projectiles.add(new Dynamite(p,spp.x,spp.y, angleB, this, damage, effectRadius));
         else projectiles.add(new CannonBall(p,spp.x,spp.y, angleB, this, damage, effectRadius));
-        for (int i = 0; i < particleCount; i++) {
-            PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
-            spa2.setMag(-5);
-            PVector spp2 = new PVector(spp.x,spp.y);
-            spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),part));
+        if (!dynamite) {
+            for (int i = 0; i < particleCount; i++) {
+                PVector spa2 = PVector.fromAngle(angleB - HALF_PI + radians(p.random(-20, 20)));
+                spa2.setMag(-5);
+                PVector spp2 = new PVector(spp.x, spp.y);
+                spp2.add(spa2);
+                particles.add(new BuffParticle(p, spp2.x, spp2.y, angleB + radians(p.random(-45, 45)), part));
+            }
         }
     }
 
@@ -142,10 +145,16 @@ public class Cannon extends Turret {
                 case 2:
                     damage += 30;
                     effectRadius = 60;
+                    pjSpeed = 10;
                     dynamite = true;
                     fireSound = soundsH.get("luggageBlaster");
                     name = "dynamiteLauncher";
-                    pjSpeed = 10;
+                    debrisType = "wood";
+                    damageSound = soundsH.get("woodDamage");
+                    breakSound = soundsH.get("woodBreak");
+                    placeSound = soundsH.get("woodPlace");
+                    loadSprites();
+                    numLoadFrames = 80;
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
