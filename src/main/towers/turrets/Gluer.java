@@ -120,49 +120,53 @@ public class Gluer extends Turret {
 
     private void setUpgrades() {
         //price
-        upgradePrices[0] = 125;
+        upgradePrices[0] = 75;
         upgradePrices[1] = 150;
         upgradePrices[2] = 500;
-        upgradePrices[3] = 75;
-        upgradePrices[4] = 125;
-        upgradePrices[5] = 600;
+
+        upgradePrices[3] = 150;
+        upgradePrices[4] = 150;
+        upgradePrices[5] = 700;
         //titles
-        upgradeTitles[0] = "NYI";
-        upgradeTitles[1] = "NYI";
-        upgradeTitles[2] = "NYI";
-        upgradeTitles[3] = "NYI";
-        upgradeTitles[4] = "NYI";
-        upgradeTitles[5] = "NYI";
+        upgradeTitles[0] = "Long Range";
+        upgradeTitles[1] = "Long Glue";
+        upgradeTitles[2] = "Glue Splash";
+
+        upgradeTitles[3] = "Gluier Glue";
+        upgradeTitles[4] = "Hard Glue";
+        upgradeTitles[5] = "Pointy Glue";
         //description
-        upgradeDescA[0] = "";
-        upgradeDescB[0] = "";
+        upgradeDescA[0] = "Increase";
+        upgradeDescB[0] = "range";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "";
-        upgradeDescB[1] = "";
-        upgradeDescC[1] = "";
+        upgradeDescA[1] = "Increase";
+        upgradeDescB[1] = "glue";
+        upgradeDescC[1] = "duration";
 
-        upgradeDescA[2] = "";
-        upgradeDescB[2] = "";
+        upgradeDescA[2] = "Glue";
+        upgradeDescB[2] = "splatters";
         upgradeDescC[2] = "";
 
-        upgradeDescA[3] = "";
-        upgradeDescB[3] = "";
-        upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "";
-        upgradeDescB[4] = "";
-        upgradeDescC[4] = "";
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "glue";
+        upgradeDescC[3] = "strength";
 
-        upgradeDescA[5] = "";
-        upgradeDescB[5] = "";
-        upgradeDescC[5] = "";
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "glue";
+        upgradeDescC[4] = "damage";
+
+        upgradeDescA[5] = "Enemies";
+        upgradeDescB[5] = "shatter into";
+        upgradeDescC[5] = "shards";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
+
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[0];
     }
 
@@ -170,8 +174,10 @@ public class Gluer extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
+                    range += 30;
                     break;
                 case 1:
+                    effectDuration += 35;
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
@@ -181,8 +187,10 @@ public class Gluer extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
+                    effectLevel = 0.5f;
                     break;
                 case 4:
+                    damage = 50;
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
