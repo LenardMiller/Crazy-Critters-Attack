@@ -147,7 +147,7 @@ public class Cannon extends Turret {
                     effectRadius = 60;
                     pjSpeed = 10;
                     dynamite = true;
-                    fireSound = soundsH.get("luggageBlaster");
+                    fireSound = soundsH.get("slingshot");
                     name = "dynamiteLauncher";
                     debrisType = "wood";
                     damageSound = soundsH.get("woodDamage");
