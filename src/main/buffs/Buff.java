@@ -63,4 +63,6 @@ public abstract class Buff {
             }
         }
     }
+
+    public void dieEffect() {}
 }

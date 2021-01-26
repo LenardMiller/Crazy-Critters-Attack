@@ -159,8 +159,10 @@ public abstract class Enemy {
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
             //if attached, remove
-            if (buff.enId == i) buffs.remove(j);
-                //shift ids to compensate for enemy removal
+            if (buff.enId == i) {
+                buffs.get(j).dieEffect();
+                buffs.remove(j);
+            } //shift ids to compensate for enemy removal
             else if (buff.enId > i) buff.enId -= 1;
         }
 
