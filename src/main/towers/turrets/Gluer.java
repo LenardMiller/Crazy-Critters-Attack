@@ -4,6 +4,7 @@ import main.enemies.Enemy;
 import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.Glue;
+import main.projectiles.SpikeyGlue;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -16,6 +17,7 @@ public class Gluer extends Turret {
 
     float effectLevel;
     int effectDuration;
+    boolean spikey;
 
     public Gluer(PApplet p, Tile tile) {
         super(p,tile);
@@ -42,6 +44,7 @@ public class Gluer extends Turret {
         range = 250;
         effectDuration = 50;
         effectLevel = 0.7f;
+        spikey = false;
         damageSound = soundsH.get("stoneDamage");
         breakSound = soundsH.get("stoneBreak");
         placeSound = soundsH.get("stonePlace");
@@ -68,7 +71,8 @@ public class Gluer extends Turret {
         spa.setMag(28); //barrel length
         spp.add(spa);
         String part = "glue";
-        projectiles.add(new Glue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
+        if (spikey) projectiles.add(new SpikeyGlue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
+        else projectiles.add(new Glue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
@@ -134,7 +138,7 @@ public class Gluer extends Turret {
 
         upgradeTitles[3] = "Gluier Glue";
         upgradeTitles[4] = "Hard Glue";
-        upgradeTitles[5] = "Pointy Glue";
+        upgradeTitles[5] = "Spikey Glue";
         //description
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "range";
@@ -198,6 +202,7 @@ public class Gluer extends Turret {
                 case 5:
                     damage += 35;
                     effectLevel = 0.5f;
+                    spikey = true;
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }

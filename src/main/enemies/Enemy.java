@@ -277,6 +277,9 @@ public abstract class Enemy {
                 case "glued":
                     buff = new Glued(p, i, effectLevel, effectDuration, turret);
                     break;
+                case "spikeyGlued":
+                    buff = new SpikeyGlued(p, i, effectLevel, effectDuration, turret);
+                    break;
                 default:
                     buff = null;
                     break;
