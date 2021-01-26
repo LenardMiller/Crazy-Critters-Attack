@@ -181,19 +181,23 @@ public class Gluer extends Turret {
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
+                    effectDuration += 35;
+                    range += 30;
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    effectLevel = 0.5f;
+                    effectLevel = 0.6f;
                     break;
                 case 4:
-                    damage = 50;
+                    damage = 35;
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
+                    damage += 35;
+                    effectLevel = 0.5f;
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }
