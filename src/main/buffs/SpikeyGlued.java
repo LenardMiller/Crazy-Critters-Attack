@@ -59,6 +59,7 @@ public class SpikeyGlued extends Buff {
             }
             //profit
             enemy.attackFrames = expandedPImages;
+            //todo: fix damage frames
         }
     }
 
