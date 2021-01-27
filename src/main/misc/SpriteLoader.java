@@ -12,7 +12,7 @@ public class SpriteLoader {
     
     public static void loadSpritesAnim(PApplet p) {
         //icons & buttons
-        getSprite(p,"upgrade","IC","upgrades/",25);
+        getSprite(p,"upgrade","IC","upgrades/",26);
         getSprite(p,"moneyAdd","BT","moneyAdd/",3);
         getSprite(p,"upgrade","BT","upgradeButton/",5);
         getSprite(p,"sellTower","BT","sellTower/",3);

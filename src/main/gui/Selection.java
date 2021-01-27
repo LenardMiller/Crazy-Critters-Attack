@@ -366,7 +366,7 @@ public class Selection { //what tower is selected
         p.textAlign(LEFT);
         p.text("Health: " + tower.hp + "/" + tower.maxHp, 910, 276 + offset);
 
-        //stats
+        //stats todo: add effect stuff
         if (tower.turret) {
             //damage
             p.text("Damage: " + tower.damage, 910, 296 + offset);
