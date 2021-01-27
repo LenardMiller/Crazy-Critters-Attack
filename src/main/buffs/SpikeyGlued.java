@@ -33,8 +33,8 @@ public class SpikeyGlued extends Buff {
         spikes = new Spike[enemies.get(enId).pfSize * 3];
         for (int i = 0; i < spikes.length; i++) {
             Enemy enemy = enemies.get(enId);
-            float x = p.random(-enemy.size.x/4, enemy.size.x/4);
-            float y = p.random(-enemy.size.y/4, enemy.size.y/4);
+            float x = p.random(-enemy.size.x/3, enemy.size.x/3);
+            float y = p.random(-enemy.size.y/3, enemy.size.y/3);
             spikes[i] = new Spike(x, y, p.random(0,360));
         }
     }
