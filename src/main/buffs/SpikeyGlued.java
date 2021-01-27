@@ -2,10 +2,12 @@ package main.buffs;
 
 import main.enemies.Enemy;
 import main.misc.CompressArray;
+import main.particles.BuffParticle;
 import main.projectiles.GlueSpike;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.core.PVector;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,8 @@ import static main.Main.*;
 public class SpikeyGlued extends Buff {
 
     private float speedMod;
+
+    private Spike[] spikes;
 
     public SpikeyGlued(PApplet p, int enId, float speedMod, int duration, Turret turret) {
         super(p,enId,turret);
@@ -25,6 +29,14 @@ public class SpikeyGlued extends Buff {
         name = "glued";
         this.enId = enId;
         slowAttacking();
+
+        spikes = new Spike[enemies.get(enId).pfSize * 3];
+        for (int i = 0; i < spikes.length; i++) {
+            Enemy enemy = enemies.get(enId);
+            float x = p.random(-enemy.size.x/4, enemy.size.x/4);
+            float y = p.random(-enemy.size.y/4, enemy.size.y/4);
+            spikes[i] = new Spike(x, y, p.random(0,360));
+        }
     }
 
     private void slowAttacking() { //slowing enemy attacking done once
@@ -58,6 +70,19 @@ public class SpikeyGlued extends Buff {
         }
     }
 
+    void display() { //particles around enemy
+        if (particle != null) {
+            Enemy enemy = enemies.get(enId);
+            int num = (int) (p.random(0, particleChance));
+            if (num == 0) {
+                particles.add(new BuffParticle(p, (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))),
+                        (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), p.random(0, 360),
+                        particle));
+            }
+        }
+        for (Spike spike : spikes) spike.display(enemies.get(enId).position);
+    }
+
     void end(int i){ //ends if at end of lifespan
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * speedMod;
@@ -78,6 +103,29 @@ public class SpikeyGlued extends Buff {
         Enemy enemy = enemies.get(enId);
         for (int i = 0; i < numSpikes; i++) {
             projectiles.add(new GlueSpike(p, enemy.position.x, enemy.position.y, p.random(0,360), turret, spikeDamage));
+        }
+    }
+
+    private class Spike {
+
+        private PVector position;
+        private float angle;
+        private PImage sprite;
+        private PVector size;
+
+        Spike(float x, float y, float angle) {
+            position = new PVector(x,y);
+            this.angle = radians(angle);
+            sprite = spritesH.get("glueSpikePj");
+            size = new PVector(7,7);
+        }
+
+        void display(PVector absPosition) {
+            p.pushMatrix();
+            p.translate(absPosition.x + position.x, absPosition.y + position.y);
+            p.rotate(angle);
+            p.image(sprite, -size.x / 2, -size.y / 2);
+            p.popMatrix();
         }
     }
 }
