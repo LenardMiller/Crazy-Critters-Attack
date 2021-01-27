@@ -2,6 +2,7 @@ package main.buffs;
 
 import main.enemies.Enemy;
 import main.misc.CompressArray;
+import main.projectiles.GlueSpike;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -72,6 +73,11 @@ public class SpikeyGlued extends Buff {
     }
 
     public void dieEffect() {
-        p.println("krsh");
+        int numSpikes = 8;
+        int spikeDamage = 50;
+        Enemy enemy = enemies.get(enId);
+        for (int i = 0; i < numSpikes; i++) {
+            projectiles.add(new GlueSpike(p, enemy.position.x, enemy.position.y, p.random(0,360), turret, spikeDamage));
+        }
     }
 }

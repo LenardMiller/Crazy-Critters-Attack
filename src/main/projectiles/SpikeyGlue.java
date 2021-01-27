@@ -22,7 +22,7 @@ public class SpikeyGlue extends Projectile {
         pierce = 1;
         this.angle = angle;
         angularVelocity = 0;
-        sprite = spritesH.get("gluePj");
+        sprite = spritesH.get("spikeyGluePj");
         hasTrail = true;
         trail = "glue";
         hitSound = soundsH.get("squishImpact");
