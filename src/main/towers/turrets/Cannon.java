@@ -143,7 +143,7 @@ public class Cannon extends Turret {
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
-                    damage += 30;
+                    damage += 60;
                     effectRadius = 60;
                     pjSpeed = 10;
                     dynamite = true;
