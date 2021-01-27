@@ -5,6 +5,7 @@ import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.Glue;
 import main.projectiles.SpikeyGlue;
+import main.projectiles.SplatterGlue;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -18,6 +19,7 @@ public class Gluer extends Turret {
     float effectLevel;
     int effectDuration;
     boolean spikey;
+    boolean splatter;
 
     public Gluer(PApplet p, Tile tile) {
         super(p,tile);
@@ -72,6 +74,7 @@ public class Gluer extends Turret {
         spp.add(spa);
         String part = "glue";
         if (spikey) projectiles.add(new SpikeyGlue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
+        else if (splatter) projectiles.add(new SplatterGlue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
         else projectiles.add(new Glue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
@@ -187,6 +190,7 @@ public class Gluer extends Turret {
                 case 2:
                     effectDuration += 35;
                     range += 30;
+                    splatter = true;
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
