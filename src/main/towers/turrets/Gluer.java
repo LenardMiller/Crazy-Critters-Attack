@@ -164,9 +164,9 @@ public class Gluer extends Turret {
         upgradeDescB[4] = "glue";
         upgradeDescC[4] = "damage";
 
-        upgradeDescA[5] = "Enemies";
-        upgradeDescB[5] = "shatter into";
-        upgradeDescC[5] = "shards";
+        upgradeDescA[5] = "Release";
+        upgradeDescB[5] = "spikes on";
+        upgradeDescC[5] = "death";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
@@ -191,6 +191,7 @@ public class Gluer extends Turret {
                     effectDuration += 35;
                     range += 30;
                     splatter = true;
+                    name = "splashGluer";
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
@@ -207,6 +208,7 @@ public class Gluer extends Turret {
                     damage += 35;
                     effectLevel = 0.5f;
                     spikey = true;
+                    name = "shatterGluer";
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }
