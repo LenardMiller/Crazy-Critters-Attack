@@ -15,7 +15,7 @@ public class Bleeding extends Buff {
         super(p,enId,turret);
         particleChance = 8;
         effectDelay = 12; //frames
-        lifeDuration = 600;
+        lifeDuration = 360;
         lifeTimer = p.frameCount + lifeDuration;
         particle = null;
         name = "bleeding";
