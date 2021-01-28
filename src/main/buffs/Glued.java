@@ -61,7 +61,6 @@ public class Glued extends Buff {
     void end(int i){ //ends if at end of lifespan
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * speedMod;
-        System.out.println(p.frameCount - lifeTimer);
         if (p.frameCount > lifeTimer) {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
                 enemy.speed = enemy.maxSpeed; //set movement speed back to default
