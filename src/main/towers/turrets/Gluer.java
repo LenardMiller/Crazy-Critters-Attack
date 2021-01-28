@@ -42,7 +42,7 @@ public class Gluer extends Turret {
         loadDelayTime = 0;
         damage = 0;
         range = 250;
-        effectDuration = 50;
+        effectDuration = 360;
         effectLevel = 0.7f;
         spikey = false;
         damageSound = soundsH.get("stoneDamage");
@@ -199,11 +199,11 @@ public class Gluer extends Turret {
                     effectLevel = 0.6f;
                     break;
                 case 4:
-                    damage = 35;
+                    damage = 180;
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
-                    damage += 35;
+                    damage += 180;
                     effectLevel = 0.5f;
                     spikey = true;
                     name = "shatterGluer";

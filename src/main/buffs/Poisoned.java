@@ -12,7 +12,7 @@ public class Poisoned extends Buff{
         super(p,enId,turret);
         particleChance = 16;
         effectDelay = 60; //frames
-        lifeDuration = 600;
+        lifeDuration = 360;
         lifeTimer = p.frameCount + lifeDuration;
         particle = "poison";
         name = "poisoned";
