@@ -383,8 +383,17 @@ public class Selection { //what tower is selected
             //effects
             if (tower.effectLevel != 0) {
                 p.fill(0, 200, 50);
-                p.text("Effect Level: " + tower.effectLevel, 910, 356 + 20 * purpleCount + offset);
-                p.text("Effect Duration: " + MiscMethods.roundTo(tower.effectDuration / (float) FRAMERATE, 0.1f) + "s", 910, 376 + 20 * purpleCount + offset);
+                if (tower.effectLevel % 1 == 0) {
+                    p.text("Effect Level: " + (int) tower.effectLevel, 910, 356 + 20 * purpleCount + offset);
+                } else {
+                    p.text("Effect Level: " + tower.effectLevel, 910, 356 + 20 * purpleCount + offset);
+                }
+                float effectDuration = MiscMethods.roundTo(tower.effectDuration / (float) FRAMERATE, 0.1f);
+                if (effectDuration % 1 == 0) {
+                    p.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 + 20 * purpleCount + offset);
+                } else {
+                    p.text("Effect Duration: " + effectDuration + "s", 910, 376 + 20 * purpleCount + offset);
+                }
             }
         }
     }
