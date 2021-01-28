@@ -65,8 +65,13 @@ public class TowerInfo {
     public static void gluerInfo(PApplet p) {
         loadStyle(p);
         int x = 910;
-        p.text("NOT YET", x, space(0));
-        p.text("IMPLEMENTED", x, space(1));
+        p.text("Fires a glob of", x, space(0));
+        p.text("glue at the nearest", x, space(1));
+        p.text("unglued enemy.", x, space(2));
+        p.text("Slows movement", x, space(3));
+        p.text("and attack speed,", x, space(4));
+        p.text("does no damage.", x, space(5));
+
     }
 
     public static void seismicInfo(PApplet p) {
