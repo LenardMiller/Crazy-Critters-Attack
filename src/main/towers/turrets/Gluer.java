@@ -41,7 +41,7 @@ public class Gluer extends Turret {
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 0;
-        range = 250;
+        range = 300;
         effectDuration = 360;
         effectLevel = 0.7f;
         spikey = false;
