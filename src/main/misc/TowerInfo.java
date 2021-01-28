@@ -77,7 +77,11 @@ public class TowerInfo {
     public static void seismicInfo(PApplet p) {
         loadStyle(p);
         int x = 910;
-        p.text("NOT YET", x, space(0));
-        p.text("IMPLEMENTED", x, space(1));
+        p.text("Sends a shockwave", x, space(0));
+        p.text("towards the nearest", x, space(1));
+        p.text("enemy.  Does low", x, space(2));
+        p.text("damage,  but can", x, space(3));
+        p.text("hit large numbers", x, space(4));
+        p.text("of enemies.", x, space(5));
     }
 }
