@@ -152,6 +152,8 @@ public class Slingshot extends Turret {
                     painful = true;
                     damage += 50;
                     delay += 10;
+                    effectDuration = 360;
+                    effectLevel = 15;
                     name = "slingshotRock";
                     loadSprites();
                     if (nextLevelA == 2) nextLevelA++;

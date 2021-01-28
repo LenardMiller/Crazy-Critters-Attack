@@ -168,6 +168,8 @@ public class RandomCannon extends Turret {
                 case 5:
                     laundry = true;
                     damage += 10;
+                    effectDuration = 360;
+                    effectLevel = 25;
                     name = "miscCannonLaundry";
                     loadSprites();
                     if (nextLevelA == 2) nextLevelA++;
