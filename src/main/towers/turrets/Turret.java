@@ -233,8 +233,9 @@ public abstract class Turret extends Tower {
             }
         } else if (spriteType == 2) { //load
             frame++;
-            if (frame < spriteArray.size()) sprite = loadFrames[spriteArray.get(frame)]; //todo: crash here? seismic slammer?
-            else { //if time runs out, switch to idle
+            if (frame < spriteArray.size() && spriteArray.get(frame) < loadFrames.length) {
+                sprite = loadFrames[spriteArray.get(frame)];
+            } else { //if time runs out, switch to idle
                 frame = 0;
                 sprite = sIdle;
                 spriteType = 0;

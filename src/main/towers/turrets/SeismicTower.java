@@ -138,26 +138,44 @@ public class SeismicTower extends Turret {
         fireSound.play(p.random(0.8f, 1.2f), volume);
         float angleB = angle;
         delayTime = p.frameCount + delay; //waits this time before firing
-        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);
-        float particleCount = p.random(1,5);
+        PVector spp = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+        PVector spa = PVector.fromAngle(angleB - HALF_PI);
         spa.setMag(29); //barrel length
         spp.add(spa);
-        String part = "smoke";
         shockwaves.add(new Shockwave(p, spp.x, spp.y, (int) range, angleB, shockwaveWidth, damage, this));
+        float a = angleB;
+        if (shockwaveWidth == 360) {
+            a = 0;
+            for (int i = 0; i < 6; i++) {
+                fireParticles(a);
+                a += TWO_PI / 6;
+            }
+        } else {
+            fireParticles(a);
+        }
+    }
+
+    private void fireParticles(float a) {
+        float particleCount = p.random(1, 5);
+        String part = "smoke";
+        PVector spp = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+        PVector spa = PVector.fromAngle(a - HALF_PI);
+        spa.setMag(29); //barrel length
+        spp.add(spa);
         for (int i = 0; i < particleCount; i++) {
-            PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
+            PVector spa2 = PVector.fromAngle(a - HALF_PI + radians(p.random(-20, 20)));
             spa2.setMag(-5);
-            PVector spp2 = new PVector(spp.x,spp.y);
+            PVector spp2 = new PVector(spp.x, spp.y);
             spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),part));
-        } particleCount = p.random(1,5);
+            particles.add(new BuffParticle(p, spp2.x, spp2.y, a + radians(p.random(-45, 45)), part));
+        }
+        particleCount = p.random(1, 5);
         for (int i = 0; i < particleCount; i++) {
-            PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
+            PVector spa2 = PVector.fromAngle(a - HALF_PI + radians(p.random(-20, 20)));
             spa2.setMag(-5);
-            PVector spp2 = new PVector(spp.x,spp.y);
+            PVector spp2 = new PVector(spp.x, spp.y);
             spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,p.random(0, 360),part));
+            particles.add(new BuffParticle(p, spp2.x, spp2.y, p.random(0, 360), part));
         }
     }
 
