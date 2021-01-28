@@ -258,9 +258,6 @@ public abstract class Enemy {
         if (pjBuff != null) {
             Buff buff;
             switch (pjBuff) {
-                case "wet":
-                    buff = new Wet(p, i, turret);
-                    break;
                 case "burning":
                     buff = new Burning(p, i, effectLevel, effectDuration, turret);
                     break;

@@ -25,6 +25,7 @@ public class SpikeyGlued extends Buff {
         effectDelay = 12; //frames
         lifeDuration = duration;
         this.speedMod = speedMod;
+        lifeTimer = p.frameCount + lifeDuration;
         particle = "glue";
         name = "glued";
         this.enId = enId;
