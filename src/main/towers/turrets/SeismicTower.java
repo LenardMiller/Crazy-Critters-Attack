@@ -108,21 +108,28 @@ public class SeismicTower extends Turret {
     }
 
     public void displayPassB2() {
+        int hammerCount = 6;
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
-        p.rotate(angle);
         p.tint(0, 60);
-        p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+        if (name.equals("seismicSlammer")) {
+            for (int i = 0; i <= hammerCount; i++) {
+                p.rotate(TWO_PI / hammerCount);
+                p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+            }
+        } else {
+            p.rotate(angle);
+            p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+        }
         p.popMatrix();
         //main
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
-        int count = 6;
         p.tint(255, tintColor, tintColor);
         if (name.equals("seismicSlammer")) {
-            for (int i = 0; i <= count; i++) {
-                p.rotate(TWO_PI / count);
+            for (int i = 0; i <= hammerCount; i++) {
+                p.rotate(TWO_PI / hammerCount);
                 p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
             }
         } else {
