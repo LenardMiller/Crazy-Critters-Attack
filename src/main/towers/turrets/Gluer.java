@@ -203,7 +203,7 @@ public class Gluer extends Turret {
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
-                    damage += 35;
+                    damage += 65;
                     effectLevel = 0.5f;
                     spikey = true;
                     name = "shatterGluer";

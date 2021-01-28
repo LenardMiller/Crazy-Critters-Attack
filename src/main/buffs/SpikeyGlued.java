@@ -101,7 +101,7 @@ public class SpikeyGlued extends Buff {
 
     public void dieEffect() {
         int numSpikes = 8;
-        int spikeDamage = 50;
+        int spikeDamage = 100;
         Enemy enemy = enemies.get(enId);
         for (int i = 0; i < numSpikes; i++) {
             projectiles.add(new GlueSpike(p, enemy.position.x, enemy.position.y, p.random(0,360), turret, spikeDamage));
