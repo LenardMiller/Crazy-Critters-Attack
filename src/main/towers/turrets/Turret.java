@@ -38,8 +38,7 @@ public abstract class Turret extends Tower {
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
     Enemy targetEnemy;
-    public int effectLevel;
-    public int effectDuration;
+
     float targetAngle;
     SoundFile fireSound;
 

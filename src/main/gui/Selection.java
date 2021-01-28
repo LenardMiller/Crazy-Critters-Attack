@@ -1,5 +1,6 @@
 package main.gui;
 
+import main.misc.MiscMethods;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
@@ -16,6 +17,7 @@ public class Selection { //what tower is selected
     public boolean towerJustPlaced;
     private SoundFile clickIn;
     private SoundFile clickOut;
+    private int purpleCount;
 
     public Selection(PApplet p) {
         this.p = p;
@@ -121,6 +123,7 @@ public class Selection { //what tower is selected
         Tower tower = tiles.get(id).tower;
         int speed = 0;
         int offset = 0;
+        purpleCount = 0;
         String priority = "first";
 
         //bg
@@ -366,7 +369,7 @@ public class Selection { //what tower is selected
         p.textAlign(LEFT);
         p.text("Health: " + tower.hp + "/" + tower.maxHp, 910, 276 + offset);
 
-        //stats todo: add effect stuff
+        //data
         if (tower.turret) {
             //damage
             p.text("Damage: " + tower.damage, 910, 296 + offset);
@@ -377,6 +380,12 @@ public class Selection { //what tower is selected
             else if (speed < 8) p.text("Low velocity", 910, 336 + offset);
             else if (speed <= 15) p.text("Medium velocity", 910, 336 + offset);
             else p.text("High velocity", 910, 336 + offset);
+            //effects
+            if (tower.effectLevel != 0) {
+                p.fill(0, 200, 50);
+                p.text("Effect Level: " + tower.effectLevel, 910, 356 + 20 * purpleCount);
+                p.text("Effect Duration: " + MiscMethods.roundTo(tower.effectDuration / (float) FRAMERATE, 0.1f)*10 + "s", 910, 376 + 20 * purpleCount);
+            }
         }
     }
 
@@ -385,5 +394,6 @@ public class Selection { //what tower is selected
         p.textAlign(LEFT);
         p.fill(100, 0, 200);
         p.text(s, 910, 356 + offset);
+        purpleCount++;
     }
 }

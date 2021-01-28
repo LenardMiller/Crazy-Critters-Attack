@@ -177,7 +177,7 @@ public abstract class Enemy {
 
     private void preDisplay() { //handle animation states
         if (attacking) {
-            sprite = attackFrames[attackFrame];
+            sprite = attackFrames[attackFrame]; //todo: it crashed here while enemy was glued
             idleTime++;
             if (attackFrame < attackFrames.length - 1) {
                 if (idleTime >= betweenAttackFrames) {

@@ -16,8 +16,6 @@ import static processing.core.PConstants.HALF_PI;
 
 public class Gluer extends Turret {
 
-    float effectLevel;
-    int effectDuration;
     boolean spikey;
     boolean splatter;
 
@@ -96,7 +94,7 @@ public class Gluer extends Turret {
         Enemy e = null;
         for (Enemy enemy : enemies) {
             float newSpeed = enemy.maxSpeed * effectLevel;
-            if (!enemy.stealthMode && enemy.speed > newSpeed) { //make sure effect would actually slow down enemy todo: doesn't always work!? if glue runs out on its own?
+            if (!enemy.stealthMode && enemy.speed > newSpeed) { //make sure effect would actually slow down enemy todo: doesn't always work if glue runs out on its own?
                 float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));

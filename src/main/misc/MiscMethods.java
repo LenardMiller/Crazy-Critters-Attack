@@ -58,6 +58,10 @@ public class MiscMethods {
         return ((int) (input / rounder)) * rounder;
     }
 
+    public static float roundTo(float input, float rounder) {
+        return (round(input / rounder)) * rounder;
+    }
+
     public static float maxCost() {
         float maxCost = 0;
         for (Node[] nodes : nodeGrid) {

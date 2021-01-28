@@ -18,6 +18,7 @@ public class Glued extends Buff {
         super(p,enId,turret);
         particleChance = 8;
         effectDelay = 12; //frames
+        System.out.println(duration);
         lifeDuration = duration;
         this.speedMod = speedMod;
         particle = "glue";
