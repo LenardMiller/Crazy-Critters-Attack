@@ -220,7 +220,7 @@ public class Selection { //what tower is selected
                 p.text("Sticky Killer", 1000, 241);
                 speed = 7;
                 setTextPurple("Slows", offset);
-                setTextPurple("Release spikes", offset + 20);
+                setTextPurple("Releases spikes", offset + 20);
                 break;
             case "seismic":
                 p.text("Seismic Tower", 1000, 241);
