@@ -172,7 +172,7 @@ public class Gluer extends Turret {
 
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
         upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[26];
     }
 
     public void upgradeSpecial(int id) {
