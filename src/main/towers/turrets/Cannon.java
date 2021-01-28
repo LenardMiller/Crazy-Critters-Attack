@@ -27,7 +27,7 @@ public class Cannon extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 270; //default: 150 frames
+        delay = 230;
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 14;
@@ -143,7 +143,7 @@ public class Cannon extends Turret {
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
-                    damage += 60;
+                    damage += 300;
                     effectRadius = 60;
                     pjSpeed = 10;
                     dynamite = true;
