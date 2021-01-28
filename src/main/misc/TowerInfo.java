@@ -54,8 +54,12 @@ public class TowerInfo {
     public static void cannonInfo(PApplet p) {
         loadStyle(p);
         int x = 910;
-        p.text("NOT YET", x, space(0));
-        p.text("IMPLEMENTED", x, space(1));
+        p.text("Fires a cannonball", x, space(0));
+        p.text("at the nearest", x, space(1));
+        p.text("enemy.  Moderate", x, space(2));
+        p.text("range and firerate,", x, space(3));
+        p.text("good damage with", x, space(4));
+        p.text("a bit of splash.", x, space(5));
     }
 
     public static void gluerInfo(PApplet p) {
