@@ -182,11 +182,11 @@ public class Gluer extends Turret {
                     range += 30;
                     break;
                 case 1:
-                    effectDuration += 35;
+                    effectDuration += 180;
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
-                    effectDuration += 35;
+                    effectDuration += 180;
                     range += 30;
                     splatter = true;
                     name = "splashGluer";
@@ -199,11 +199,11 @@ public class Gluer extends Turret {
                     effectLevel = 0.6f;
                     break;
                 case 4:
-                    damage = 180;
+                    damage = 35;
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
-                    damage += 180;
+                    damage += 35;
                     effectLevel = 0.5f;
                     spikey = true;
                     name = "shatterGluer";
