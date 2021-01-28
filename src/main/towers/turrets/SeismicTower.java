@@ -150,9 +150,7 @@ public class SeismicTower extends Turret {
                 fireParticles(a);
                 a += TWO_PI / 6;
             }
-        } else {
-            fireParticles(a);
-        }
+        } else fireParticles(a);
     }
 
     private void fireParticles(float a) {
@@ -241,7 +239,7 @@ public class SeismicTower extends Turret {
                     debrisType = "metal";
                     //todo: metal sounds
                     shockwaveWidth = 360;
-                    delay -= 50;
+                    delay -= 80;
                     name = "seismicSlammer";
                     numFireFrames = 3;
                     numLoadFrames = 9;
