@@ -211,13 +211,13 @@ public class Selection { //what tower is selected
                 setTextPurple("Slows", offset);
                 break;
             case "splashGluer":
-                p.text("Super Gluper", 1000, 241);
+                p.text("Gluer Splasher", 1000, 241);
                 speed = 7;
                 setTextPurple("Slows", offset);
                 setTextPurple("Splatter", offset + 20);
                 break;
             case "shatterGluer":
-                p.text("Sticky Killer", 1000, 241);
+                p.text("Gluer Spiker", 1000, 241);
                 speed = 7;
                 setTextPurple("Slows", offset);
                 setTextPurple("Releases spikes", offset + 20);
