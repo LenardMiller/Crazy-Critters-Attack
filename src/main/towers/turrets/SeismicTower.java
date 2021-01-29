@@ -188,10 +188,10 @@ public class SeismicTower extends Turret {
         //price
         upgradePrices[0] = 200;
         upgradePrices[1] = 200;
-        upgradePrices[2] = 800;
+        upgradePrices[2] = 1000;
         upgradePrices[3] = 250;
         upgradePrices[4] = 300;
-        upgradePrices[5] = 1000;
+        upgradePrices[5] = 800;
         //titles
         upgradeTitles[0] = "Faster Firing";
         upgradeTitles[1] = "Larger AOE";
