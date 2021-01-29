@@ -58,7 +58,7 @@ public class SeismicTower extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void checkTarget() {
+    public void checkTarget() { //todo: fix pausing to aim if 360
         getTargetEnemy();
         if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
         if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
