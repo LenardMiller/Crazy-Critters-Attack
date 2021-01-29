@@ -71,7 +71,7 @@ public class FragBall extends Projectile {
 
     public void die(int i) {
         projectiles.remove(i);
-        int numFrags = 12;
+        int numFrags = 24;
         for (int j = 0; j < numFrags; j++)
             projectiles.add(new Frag(p, position.x, position.y, p.random(0, 360), turret, damage / 4));
     }

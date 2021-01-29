@@ -100,7 +100,7 @@ public class SpikeyGlued extends Buff {
     }
 
     public void dieEffect() {
-        int numSpikes = 8;
+        int numSpikes = 24;
         int spikeDamage = 100;
         Enemy enemy = enemies.get(enId);
         for (int i = 0; i < numSpikes; i++) {

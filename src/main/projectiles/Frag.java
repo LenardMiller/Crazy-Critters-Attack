@@ -26,7 +26,7 @@ public class Frag extends Projectile {
         angularVelocity = p.random(-15,15);
         sprite = spritesH.get("darkMetalPt");
         hitSound = soundsH.get("smallImpact");
-        int lifespan = 10;
+        int lifespan = 15;
         deathDate = p.frameCount + lifespan;
     }
 

@@ -26,7 +26,7 @@ public class GlueSpike extends Projectile {
         angularVelocity = 0;
         sprite = spritesH.get("glueSpikePj");
         hitSound = soundsH.get("smallImpact");
-        int lifespan = 10;
+        int lifespan = 15;
         deathDate = p.frameCount + lifespan;
     }
 

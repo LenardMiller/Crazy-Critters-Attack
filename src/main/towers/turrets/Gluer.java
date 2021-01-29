@@ -125,7 +125,7 @@ public class Gluer extends Turret {
 
     private void setUpgrades() {
         //price
-        upgradePrices[0] = 75;
+        upgradePrices[0] = 125;
         upgradePrices[1] = 150;
         upgradePrices[2] = 500;
 

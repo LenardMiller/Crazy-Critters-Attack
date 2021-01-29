@@ -88,10 +88,10 @@ public class Cannon extends Turret {
         //price
         upgradePrices[0] = 175;
         upgradePrices[1] = 225;
-        upgradePrices[2] = 500;
+        upgradePrices[2] = 700;
         upgradePrices[3] = 150;
         upgradePrices[4] = 200;
-        upgradePrices[5] = 600;
+        upgradePrices[5] = 800;
         //titles
         upgradeTitles[0] = "Stronger shot";
         upgradeTitles[1] = "Powerful shot";
@@ -169,7 +169,7 @@ public class Cannon extends Turret {
                     break;
                 case 5:
                     range += 30;
-                    delay -= 30;
+                    delay -= 60;
                     frags = true;
                     name = "fragCannon";
                     debrisType = "metal";

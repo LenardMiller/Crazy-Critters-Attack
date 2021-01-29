@@ -25,7 +25,7 @@ public class SeismicTower extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 200; //default: 200 frames
+        delay = 150; //default: 200 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         delayTime = delay;
         pjSpeed = 7;
@@ -188,17 +188,17 @@ public class SeismicTower extends Turret {
         //price
         upgradePrices[0] = 200;
         upgradePrices[1] = 200;
-        upgradePrices[2] = 900;
+        upgradePrices[2] = 800;
         upgradePrices[3] = 250;
         upgradePrices[4] = 300;
-        upgradePrices[5] = 700;
+        upgradePrices[5] = 1000;
         //titles
         upgradeTitles[0] = "Faster Firing";
         upgradeTitles[1] = "Larger AOE";
         upgradeTitles[2] = "360 Wave";
         upgradeTitles[3] = "Longer Range";
-        upgradeTitles[4] = "Damage boost";
-        upgradeTitles[5] = "Seismic sense";
+        upgradeTitles[4] = "Damage Boost";
+        upgradeTitles[5] = "Seismic Sense";
         //description
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "firerate";
@@ -236,7 +236,7 @@ public class SeismicTower extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    delay -= 50;
+                    delay -= 70;
                     break;
                 case 1:
                     shockwaveWidth += 30;
@@ -246,7 +246,7 @@ public class SeismicTower extends Turret {
                     debrisType = "metal";
                     //todo: metal sounds
                     shockwaveWidth = 360;
-                    delay -= 80;
+                    delay -= 60;
                     name = "seismicSlammer";
                     numFireFrames = 3;
                     numLoadFrames = 9;
@@ -269,7 +269,7 @@ public class SeismicTower extends Turret {
                     seismicSense = true;
                     shockwaveWidth -= 40;
                     range += 50;
-                    damage += 100;
+                    damage += 150;
                     name = "seismicSniper";
                     loadSprites();
                     if (nextLevelA == 2) nextLevelA++;
