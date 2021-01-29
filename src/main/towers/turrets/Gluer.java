@@ -207,6 +207,8 @@ public class Gluer extends Turret {
                     effectLevel = 0.5f;
                     spikey = true;
                     name = "shatterGluer";
+                    debrisType = "metal";
+                    loadSprites();
                     if (nextLevelA == 2) nextLevelA++;
                     break;
             }
