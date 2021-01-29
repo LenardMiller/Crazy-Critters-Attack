@@ -190,6 +190,7 @@ public class Gluer extends Turret {
                     range += 30;
                     splatter = true;
                     name = "splashGluer";
+                    loadSprites();
                     if (nextLevelB == 5) nextLevelB++;
                     break;
             }
