@@ -246,7 +246,7 @@ public class SeismicTower extends Turret {
                     debrisType = "metal";
                     //todo: metal sounds
                     shockwaveWidth = 360;
-                    delay -= 60;
+                    delay = 20;
                     name = "seismicSlammer";
                     numFireFrames = 3;
                     numLoadFrames = 9;
