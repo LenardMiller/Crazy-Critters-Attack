@@ -35,11 +35,11 @@ public class GlueSpike extends Projectile {
         displayPassB();
         move();
         collideEn();
+        if (p.frameCount > deathDate) dead = true;
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||
                 position.y + size.y < -100 || position.x + size.x < -100 || dead) {
             die(i);
         }
-        if (p.frameCount > deathDate) projectiles.remove(i);
     }
 
     public void die(int i) {
