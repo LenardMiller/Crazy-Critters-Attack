@@ -89,6 +89,10 @@ public class KeyBinds {
         boolean switchMode = keysPressed.getPressedPulse('b');
         boolean saveTiles = keysPressed.getPressedPulse('z');
         boolean loadTiles = keysPressed.getPressedPulse('x');
+        boolean increaseWave = keysPressed.getPressedPulse(']');
+        boolean decreaseWave = keysPressed.getPressedPulse('[');
+        boolean increaseWave5 = keysPressed.getPressedPulse('}');
+        boolean decreaseWave5 = keysPressed.getPressedPulse('{');
         //entity stuff
         if (deleteEnemies) {
             enemies = new ArrayList<>();
@@ -134,6 +138,15 @@ public class KeyBinds {
             hand.setHeld("null");
         } if (saveTiles) DataControl.save();
         if (loadTiles) DataControl.load(p,"levels/forest");
+        if (increaseWave && canWave(1)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);
+        if (decreaseWave && canWave(-1)) levels[currentLevel].setWave(levels[currentLevel].currentWave - 1);
+        if (increaseWave5 && canWave(5)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 5);
+        if (decreaseWave5 && canWave(-5)) levels[currentLevel].setWave(levels[currentLevel].currentWave - 5);
+    }
+
+    private boolean canWave(int count) {
+        if (levels[currentLevel].currentWave + count < 0) return false;
+        else return levels[currentLevel].currentWave + count <= levels[currentLevel].waves.length-1;
     }
 
     public void loadKeyBinds() {

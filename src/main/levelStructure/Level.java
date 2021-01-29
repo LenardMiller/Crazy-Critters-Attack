@@ -29,17 +29,21 @@ public class Level {
     public void main() {
         if (currentWave < waves.length) { //temp, replace with win condition
             Wave wave = waves[currentWave];
-            if (p.frameCount >= wave.endTimer) {
-                wave.end();
-                currentWave++;
-                if (currentWave < waves.length) {
-                    wave = waves[currentWave];
-                    wave.init();
-                }
-            } else wave.spawnEnemies();
+            if (p.frameCount >= wave.endTimer) setWave(currentWave + 1);
+            else wave.spawnEnemies();
             if (p.frameCount >= wave.waitTimer && enemies.size() == 0) {
                 wave.endTimer -= wave.length / 500;
             }
+        }
+    }
+
+    public void setWave(int waveNum) {
+        Wave wave = waves[currentWave];
+        wave.end();
+        currentWave = waveNum;
+        if (currentWave < waves.length) {
+            wave = waves[currentWave];
+            wave.init();
         }
     }
 
