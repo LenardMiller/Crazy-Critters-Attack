@@ -87,7 +87,7 @@ public class Cannon extends Turret {
     private void setUpgrades() {
         //price
         upgradePrices[0] = 175;
-        upgradePrices[1] = 225;
+        upgradePrices[1] = 250;
         upgradePrices[2] = 700;
         upgradePrices[3] = 150;
         upgradePrices[4] = 200;
