@@ -188,7 +188,7 @@ public class DesertWaves {
         waves[37] = new Wave(p, 4000, 1200, bigWormPrimary, bigWormSecondary, "Megaworms");
         waves[37].addSpawns("bigWorm", 5);
 
-        waves[38] = new Wave(p, 16000, 6400, hordePrimary, hordeSecondary, "Horde");
+        waves[38] = new Wave(p, 16000, 6400, hordePrimary, hordeSecondary, "Horde"); //todo: fix all spawning at once
         waves[38].addSpawns("midBug", 15);
         waves[38].addSpawns("bigBug", 20);
         waves[38].addSpawns("emperor", 15);
