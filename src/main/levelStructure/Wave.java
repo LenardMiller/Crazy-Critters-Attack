@@ -13,32 +13,33 @@ import static main.misc.MiscMethods.randomSpawnPosition;
 
 public class Wave {
 
-    private final PApplet p;
+    private final PApplet P;
+    private final Color PRIMARY;
+    private final Color SECONDARY;
+    private final String TITLE;
+    private final int SPAWN_LENGTH;
+
     public int endTimer;
     private int betweenSpawns;
     private int spawnTimer;
-    private final int spawnLength;
     int waitTimer;
     public int length;
     public ArrayList<String> spawns;
-    private final Color primary;
-    private final Color secondary;
-    private final String title;
 
     //todo: pause functionality
     public Wave(PApplet p, int length, int spawnLength, Color primary, Color secondary, String title) {
-        this.p = p;
+        this.P = p;
         this.length = length;
-        this.spawnLength = spawnLength;
-        this.primary = primary;
-        this.secondary = secondary;
-        this.title = title;
+        this.SPAWN_LENGTH = spawnLength;
+        this.PRIMARY = primary;
+        this.SECONDARY = secondary;
+        this.TITLE = title;
         spawns = new ArrayList<>();
     }
 
     public void init() {
-        endTimer = p.frameCount + length;
-        waitTimer = p.frameCount + spawnLength;
+        endTimer = P.frameCount + length;
+        waitTimer = P.frameCount + SPAWN_LENGTH;
     }
 
     public void end() {
@@ -49,8 +50,8 @@ public class Wave {
     }
 
     void load() {
-        betweenSpawns = spawnLength / spawns.size();
-        spawnTimer = p.frameCount + betweenSpawns;
+        betweenSpawns = SPAWN_LENGTH / spawns.size();
+        spawnTimer = P.frameCount + betweenSpawns;
     }
 
     void addSpawns(String enemy, int count) {
@@ -60,30 +61,30 @@ public class Wave {
     }
 
     public void spawnEnemies() {
-        if (spawns.size() > 0 && spawnTimer <= p.frameCount && waitTimer >= p.frameCount) {
-            spawnTimer = p.frameCount + betweenSpawns;
+        if (spawns.size() > 0 && spawnTimer <= P.frameCount && waitTimer >= P.frameCount) {
+            spawnTimer = P.frameCount + betweenSpawns;
             String s = spawns.get(spawns.size() - 1);
             spawns.remove(spawns.size() - 1);
             PVector pos;
-            pos = randomSpawnPosition(p);
+            pos = randomSpawnPosition(P);
             enemies.add(getEnemy(s, pos));
             enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
         }
     }
 
     public void display(float y, int id) { //todo: fix jiggle text
-        p.tint(primary.getRed(), primary.getGreen(), primary.getBlue());
-        p.image(spritesH.get("wavePrimaryIc"), 890, y);
-        p.tint(secondary.getRed(), secondary.getGreen(), secondary.getBlue());
-        p.image(spritesH.get("waveSecondaryIc"), 890, y);
-        p.tint(255);
-        p.fill(secondary.getRed(), secondary.getGreen(), secondary.getBlue());
-        p.textAlign(CENTER);
-        p.textFont(largeFont);
-        p.text(title, 1000, y + 110);
-        p.textAlign(CENTER);
-        p.textFont(veryLargeFont);
-        p.text(id, 1000, y + 70);
+        P.tint(PRIMARY.getRed(), PRIMARY.getGreen(), PRIMARY.getBlue());
+        P.image(spritesH.get("wavePrimaryIc"), 890, y);
+        P.tint(SECONDARY.getRed(), SECONDARY.getGreen(), SECONDARY.getBlue());
+        P.image(spritesH.get("waveSecondaryIc"), 890, y);
+        P.tint(255);
+        P.fill(SECONDARY.getRed(), SECONDARY.getGreen(), SECONDARY.getBlue());
+        P.textAlign(CENTER);
+        P.textFont(largeFont);
+        P.text(TITLE, 1000, y + 110);
+        P.textAlign(CENTER);
+        P.textFont(veryLargeFont);
+        P.text(id, 1000, y + 70);
     }
 
     private Enemy getEnemy(String name, PVector pos) {
@@ -91,46 +92,46 @@ public class Wave {
 
         switch (name) {
             case "smolBug":
-                e = new SmolBug(p, pos.x, pos.y);
+                e = new SmolBug(P, pos.x, pos.y);
                 break;
             case "midBug":
-                e = new MidBug(p, pos.x, pos.y);
+                e = new MidBug(P, pos.x, pos.y);
                 break;
             case "bigBug":
-                e = new BigBug(p, pos.x, pos.y);
+                e = new BigBug(P, pos.x, pos.y);
                 break;
             case "treeSprite":
-                e = new TreeSprite(p, pos.x, pos.y);
+                e = new TreeSprite(P, pos.x, pos.y);
                 break;
             case "treeSpirit":
-                e = new TreeSpirit(p, pos.x, pos.y);
+                e = new TreeSpirit(P, pos.x, pos.y);
                 break;
             case "treeGiant":
-                e = new TreeGiant(p, pos.x, pos.y);
+                e = new TreeGiant(P, pos.x, pos.y);
                 break;
             case "snake":
-                e = new Snake(p, pos.x, pos.y);
+                e = new Snake(P, pos.x, pos.y);
                 break;
             case "littleWorm":
-                e = new LittleWorm(p, pos.x, pos.y);
+                e = new LittleWorm(P, pos.x, pos.y);
                 break;
             case "butterfly":
-                e = new Butterfly(p, pos.x, pos.y);
+                e = new Butterfly(P, pos.x, pos.y);
                 break;
             case "scorpion":
-                e = new Scorpion(p, pos.x, pos.y);
+                e = new Scorpion(P, pos.x, pos.y);
                 break;
             case "sidewinder":
-                e = new Sidewinder(p, pos.x, pos.y);
+                e = new Sidewinder(P, pos.x, pos.y);
                 break;
             case "emperor":
-                e = new Emperor(p, pos.x, pos.y);
+                e = new Emperor(P, pos.x, pos.y);
                 break;
             case "midWorm":
-                e = new MidWorm(p, pos.x, pos.y);
+                e = new MidWorm(P, pos.x, pos.y);
                 break;
             case "bigWorm":
-                e = new BigWorm(p, pos.x, pos.y);
+                e = new BigWorm(P, pos.x, pos.y);
                 break;
         }
         return e;
