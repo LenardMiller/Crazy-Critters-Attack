@@ -7,6 +7,7 @@ import processing.core.PVector;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.randomSpawnPosition;
@@ -58,6 +59,7 @@ public class Wave {
         for (int i = count; i > 0; i--) {
             spawns.add(enemy);
         }
+        Collections.shuffle(spawns);
     }
 
     public void spawnEnemies() {
