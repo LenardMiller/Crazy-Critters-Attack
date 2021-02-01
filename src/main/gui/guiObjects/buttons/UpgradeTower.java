@@ -9,8 +9,9 @@ import static main.Main.*;
 
 public class UpgradeTower extends Button {
 
-    private PImage spriteRed;
-    private PImage spriteGrey;
+    private final PImage SPRITE_RED;
+    private final PImage SPRITE_GREY;
+
     public int id;
 
     public UpgradeTower(PApplet p, float x, float y, String type, boolean active, int id) {
@@ -20,8 +21,8 @@ public class UpgradeTower extends Button {
         spriteIdle = spritesAnimH.get("upgradeBT")[0]; //green out
         spritePressed = spritesAnimH.get("upgradeBT")[1]; //green in
         spriteHover = spritesAnimH.get("upgradeBT")[2]; //hover
-        spriteRed = spritesAnimH.get("upgradeBT")[3]; //red
-        spriteGrey = spritesAnimH.get("upgradeBT")[4]; //grey
+        SPRITE_RED = spritesAnimH.get("upgradeBT")[3]; //red
+        SPRITE_GREY = spritesAnimH.get("upgradeBT")[4]; //grey
         sprite = spriteIdle;
         this.id = id;
     }
@@ -34,8 +35,8 @@ public class UpgradeTower extends Button {
                 if (id == 0) nextLevel = tower.nextLevelA;
                 else nextLevel = tower.nextLevelB;
                 if (tower.upgradeTitles.length == nextLevel && id == 1 || tower.upgradeTitles.length / 2 == nextLevel && id == 0)
-                    sprite = spriteGrey;
-                else if (tower.upgradePrices[nextLevel] > money) sprite = spriteRed;
+                    sprite = SPRITE_GREY;
+                else if (tower.upgradePrices[nextLevel] > money) sprite = SPRITE_RED;
                 else hover();
                 display();
             } else active = false;

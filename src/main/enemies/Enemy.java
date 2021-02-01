@@ -511,7 +511,7 @@ public abstract class Enemy {
 
     public static class TurnPoint {
 
-        private PApplet p;
+        private final PApplet P;
         public Tower tower;
         public ArrayList<Tower> towers;
         public boolean machine;
@@ -520,7 +520,7 @@ public abstract class Enemy {
         boolean back;
 
         public TurnPoint(PApplet p, PVector position, Tower tower) {
-            this.p = p;
+            this.P = p;
             this.position = new PVector(position.x, position.y);
             this.tower = tower;
 
@@ -530,24 +530,24 @@ public abstract class Enemy {
         }
 
         public void display() {
-            p.noStroke();
-            if (back) p.stroke(0, 255, 0);
-            else p.noStroke();
-            if (combat) p.fill(255, 0, 0);
-            else p.fill(255);
-            p.ellipse(position.x + nSize / 2f, position.y + nSize / 2f, nSize, nSize);
+            P.noStroke();
+            if (back) P.stroke(0, 255, 0);
+            else P.noStroke();
+            if (combat) P.fill(255, 0, 0);
+            else P.fill(255);
+            P.ellipse(position.x + nSize / 2f, position.y + nSize / 2f, nSize, nSize);
             hover();
         }
 
         private void hover() {
             boolean intersecting;
             float tpSize = 10;
-            PVector pfPosition = new PVector(p.mouseX, p.mouseY);
+            PVector pfPosition = new PVector(P.mouseX, P.mouseY);
             intersecting = (pfPosition.x > position.x - tpSize + (nSize / 2f) && pfPosition.x < position.x + tpSize + (nSize / 2f)) && (pfPosition.y > position.y - tpSize + (nSize / 2f) && pfPosition.y < position.y + tpSize + (nSize / 2f));
             if (intersecting && tower != null) {
-                p.stroke(255, 255, 0);
-                p.noFill();
-                p.rect(tower.tile.position.x - 50, tower.tile.position.y - 50, 50, 50);
+                P.stroke(255, 255, 0);
+                P.noFill();
+                P.rect(tower.tile.position.x - 50, tower.tile.position.y - 50, 50, 50);
             }
         }
     }

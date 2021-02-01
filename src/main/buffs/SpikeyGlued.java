@@ -15,39 +15,39 @@ import static main.Main.*;
 
 public class SpikeyGlued extends Buff {
 
-    private float speedMod;
+    private final float SPEED_MODIFIER;
 
-    private Spike[] spikes;
+    private final Spike[] SPIKES;
 
     public SpikeyGlued(PApplet p, int enId, float speedMod, int duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
         effectDelay = 12; //frames
         lifeDuration = duration;
-        this.speedMod = speedMod;
+        this.SPEED_MODIFIER = speedMod;
         lifeTimer = p.frameCount + lifeDuration;
         particle = "glue";
         name = "glued";
         this.enId = enId;
         slowAttacking();
 
-        spikes = new Spike[enemies.get(enId).pfSize * 3];
-        for (int i = 0; i < spikes.length; i++) {
+        SPIKES = new Spike[enemies.get(enId).pfSize * 3];
+        for (int i = 0; i < SPIKES.length; i++) {
             Enemy enemy = enemies.get(enId);
             float x = p.random(-enemy.size.x/3, enemy.size.x/3);
             float y = p.random(-enemy.size.y/3, enemy.size.y/3);
-            spikes[i] = new Spike(x, y, p.random(0,360));
+            SPIKES[i] = new Spike(x, y, p.random(0,360));
         }
     }
 
     private void slowAttacking() { //slowing enemy attacking done once
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * speedMod;
+        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
             //setup
             enemy.speed = newSpeed;
             int oldSize = enemy.attackFrames.length;
-            int newSize = (int) (1f / (speedMod * (1f / (float) oldSize)));
+            int newSize = (int) (1f / (SPEED_MODIFIER * (1f / (float) oldSize)));
             ArrayList<Integer> expandedInts = new ArrayList<>();
             //run expansion algorithm
             compress = new CompressArray(oldSize - 1, newSize, expandedInts);
@@ -66,7 +66,7 @@ public class SpikeyGlued extends Buff {
 
     public void effect() { //slowing enemy movement done every frame
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * speedMod;
+        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
             enemy.speed = newSpeed;
         }
@@ -82,12 +82,12 @@ public class SpikeyGlued extends Buff {
                         particle));
             }
         }
-        for (Spike spike : spikes) spike.display(enemies.get(enId).position);
+        for (Spike spike : SPIKES) spike.display(enemies.get(enId).position);
     }
 
     void end(int i){ //ends if at end of lifespan
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * speedMod;
+        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (p.frameCount > lifeTimer) {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
                 enemy.speed = enemy.maxSpeed; //set movement speed back to default
@@ -110,23 +110,23 @@ public class SpikeyGlued extends Buff {
 
     private class Spike {
 
-        private PVector position;
-        private float angle;
-        private PImage sprite;
-        private PVector size;
+        private final PVector POSITION;
+        private final float ANGLE;
+        private final PImage SPRITE;
+        private final PVector SIZE;
 
         Spike(float x, float y, float angle) {
-            position = new PVector(x,y);
-            this.angle = radians(angle);
-            sprite = spritesH.get("glueSpikePj");
-            size = new PVector(7,7);
+            POSITION = new PVector(x,y);
+            this.ANGLE = radians(angle);
+            SPRITE = spritesH.get("glueSpikePj");
+            SIZE = new PVector(7,7);
         }
 
         void display(PVector absPosition) {
             p.pushMatrix();
-            p.translate(absPosition.x + position.x, absPosition.y + position.y);
-            p.rotate(angle);
-            p.image(sprite, -size.x / 2, -size.y / 2);
+            p.translate(absPosition.x + POSITION.x, absPosition.y + POSITION.y);
+            p.rotate(ANGLE);
+            p.image(SPRITE, -SIZE.x / 2, -SIZE.y / 2);
             p.popMatrix();
         }
     }

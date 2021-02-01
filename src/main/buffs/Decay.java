@@ -9,7 +9,7 @@ import static main.Main.enemies;
 
 public class Decay extends Buff {
 
-    private int damage;
+    private final int DAMAGE;
 
     public Decay(PApplet p, int enId, float damage, int duration, Turret turret) {
         super(p,enId,turret);
@@ -19,7 +19,7 @@ public class Decay extends Buff {
         lifeTimer = p.frameCount + lifeDuration;
         particle = "decay";
         name = "decay";
-        this.damage = (int) damage;
+        this.DAMAGE = (int) damage;
         this.enId = enId;
         this.turret = turret;
     }
@@ -27,7 +27,7 @@ public class Decay extends Buff {
     public void effect() {
         Enemy enemy = enemies.get(enId);
         enemy.barTrans = 255;
-        enemy.damageSimple(damage,turret, "decay", new PVector(0,0), false);
+        enemy.damageSimple(DAMAGE,turret, "decay", new PVector(0,0), false);
         effectTimer = p.frameCount + effectDelay;
     }
 }

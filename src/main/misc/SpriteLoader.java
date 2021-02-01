@@ -390,8 +390,8 @@ public class SpriteLoader {
         spritesH.put("sandBGA_TL", p.loadImage("sprites/tiles/BGA/sand/base.png"));
         spritesH.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
         for (int i = 0; i < 1; i++) {
-            String name = null;
-            if (i == 0) name = "grass";
+            String name;
+            name = "grass";
             spritesH.put(name + "BGA_T_TL", p.loadImage("sprites/tiles/BGA/" + name + "/t.png"));
             spritesH.put(name + "BGA_R_TL", p.loadImage("sprites/tiles/BGA/" + name + "/r.png"));
             spritesH.put(name + "BGA_B_TL", p.loadImage("sprites/tiles/BGA/" + name + "/b.png"));

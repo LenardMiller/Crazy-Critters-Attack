@@ -14,11 +14,12 @@ public class MagicMissile extends Projectile {
     
     public int priority;
     private Enemy targetEnemy;
-    private PVector spawnPos;
+
+    private final PVector SPAWN_POSITION;
     
     public MagicMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, int priority, PVector spawnPos) {
         super(p, x, y, angle, turret);
-        this.spawnPos = spawnPos;
+        this.SPAWN_POSITION = spawnPos;
         position = new PVector(x, y);
         size = new PVector(6, 20);
         radius = 14;
@@ -49,8 +50,8 @@ public class MagicMissile extends Projectile {
         Enemy e = null;
         for (Enemy enemy : enemies) {
             if (!enemy.stealthMode) {
-                float x = abs(spawnPos.x - enemy.position.x);
-                float y = abs(spawnPos.y - enemy.position.y);
+                float x = abs(SPAWN_POSITION.x - enemy.position.x);
+                float y = abs(SPAWN_POSITION.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
                 if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900) {
                     if (priority == 0 && t < dist) { //close

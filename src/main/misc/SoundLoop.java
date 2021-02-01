@@ -5,33 +5,34 @@ import processing.sound.SoundFile;
 
 public class SoundLoop {
 
-    private PApplet p;
+    private final PApplet P;
 
     private float speed;
     private float volume;
-    private int length;
     private int endTime;
-    private SoundFile start;
-    private SoundFile loop;
-    private SoundFile end;
+
+    private final int LENGTH;
+    private final SoundFile START;
+    private final SoundFile LOOP;
+    private final SoundFile END;
 
     public int state;
 
     public SoundLoop(PApplet p, String path, int length) {
-        this.p = p;
+        this.P = p;
 
-        start = new SoundFile(p, path + "Start.wav");
-        loop = new SoundFile(p, path + "Loop.wav");
-        end = new SoundFile(p, path + "End.wav");
-        this.length = length;
+        START = new SoundFile(p, path + "Start.wav");
+        LOOP = new SoundFile(p, path + "Loop.wav");
+        END = new SoundFile(p, path + "End.wav");
+        this.LENGTH = length;
 
         state = 0; //not playing, starting, looping, ending
     }
 
     private void reset() {
-        start.stop();
-        loop.stop();
-        end.stop();
+        START.stop();
+        LOOP.stop();
+        END.stop();
     }
 
     public void startLoop(float speed, float volume) {
@@ -40,20 +41,20 @@ public class SoundLoop {
             this.volume = volume;
             reset();
             state = 1;
-            endTime = p.frameCount + length;
-            start.play(speed, volume);
+            endTime = P.frameCount + LENGTH;
+            START.play(speed, volume);
         }
     }
 
     private void midLoop() {
         reset();
         state = 2;
-        loop.loop(speed, volume);
+        LOOP.loop(speed, volume);
     }
 
     public void continueLoop() {
-        if (state == 1 && p.frameCount >= endTime) midLoop();
-        if (state == 3 && p.frameCount >= endTime) endLoop();
+        if (state == 1 && P.frameCount >= endTime) midLoop();
+        if (state == 3 && P.frameCount >= endTime) endLoop();
     }
 
     public void stopLoop() {
@@ -62,7 +63,7 @@ public class SoundLoop {
 
     private void endLoop() {
         reset();
-        end.play(speed, volume);
+        END.play(speed, volume);
         state = 0;
     }
 }

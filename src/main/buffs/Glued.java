@@ -12,7 +12,7 @@ import static main.Main.*;
 
 public class Glued extends Buff {
 
-    private float speedMod;
+    private final float SPEED_MODIFIER;
 
     public Glued(PApplet p, int enId, float speedMod, int duration, Turret turret) {
         super(p,enId,turret);
@@ -20,7 +20,7 @@ public class Glued extends Buff {
         effectDelay = 12; //frames
         lifeDuration = duration;
         lifeTimer = p.frameCount + lifeDuration;
-        this.speedMod = speedMod;
+        this.SPEED_MODIFIER = speedMod;
         particle = "glue";
         name = "glued";
         this.enId = enId;
@@ -29,12 +29,12 @@ public class Glued extends Buff {
 
     private void slowAttacking() { //slowing enemy attacking done once
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * speedMod;
+        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
             //setup
             enemy.speed = newSpeed;
             int oldSize = enemy.attackFrames.length;
-            int newSize = (int) (1f / (speedMod * (1f / (float) oldSize)));
+            int newSize = (int) (1f / (SPEED_MODIFIER * (1f / (float) oldSize)));
             ArrayList<Integer> expandedInts = new ArrayList<>();
             //run expansion algorithm
             compress = new CompressArray(oldSize - 1, newSize, expandedInts);
@@ -52,7 +52,7 @@ public class Glued extends Buff {
 
     public void effect() { //slowing enemy movement done every frame
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * speedMod;
+        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
             enemy.speed = newSpeed;
         }
@@ -60,7 +60,7 @@ public class Glued extends Buff {
 
     void end(int i){ //ends if at end of lifespan
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * speedMod;
+        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (p.frameCount > lifeTimer) {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
                 enemy.speed = enemy.maxSpeed; //set movement speed back to default

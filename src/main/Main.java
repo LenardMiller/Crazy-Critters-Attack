@@ -383,7 +383,7 @@ public class Main extends PApplet {
 
     public class InputHandler {
 
-        private PApplet p;
+        private final PApplet P;
 
         public boolean rightMouseReleasedPulse;
         public boolean leftMouseReleasedPulse;
@@ -393,16 +393,16 @@ public class Main extends PApplet {
         public boolean leftMousePressedPulse;
 
         public InputHandler(PApplet p) {
-            this.p = p;
+            this.P = p;
         }
 
         void mouse(boolean b) {
             if (b) {
-                if (p.mouseButton == RIGHT) {
+                if (P.mouseButton == RIGHT) {
                     if (!rightMousePressed) rightMousePressedPulse = true;
                     rightMousePressed = true;
                 }
-                if (p.mouseButton == LEFT) {
+                if (P.mouseButton == LEFT) {
                     if (!leftMousePressed) leftMousePressedPulse = true;
                     leftMousePressed = true;
                 }

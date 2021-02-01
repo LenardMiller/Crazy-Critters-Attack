@@ -161,5 +161,5 @@ public class Crossbow extends Turret {
         }
     }
 
-    public void updateSprite() {};
+    public void updateSprite() {}
 }

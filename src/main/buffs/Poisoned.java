@@ -7,7 +7,8 @@ import processing.core.PVector;
 
 import static main.Main.enemies;
 
-public class Poisoned extends Buff{
+public class Poisoned extends Buff {
+
     public Poisoned(PApplet p, int enId, Turret turret){
         super(p,enId,turret);
         particleChance = 16;

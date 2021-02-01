@@ -12,7 +12,7 @@ import static main.pathfinding.UpdateNode.updateNode;
 
 public class Node {
 
-    private PApplet p;
+    private final PApplet P;
 
     private Node parent;
     int clearance;
@@ -30,7 +30,7 @@ public class Node {
     public Tower tower;
 
     public Node(PApplet p, PVector position) {
-        this.p = p;
+        this.P = p;
 
         this.position = position;
     }
@@ -42,12 +42,12 @@ public class Node {
     }
 
     public void display() {
-        p.stroke(255);
-        p.noFill();
-        if (isStart) p.fill(125, 125, 255);
-        if (isEnd) p.fill(255, 0, 0);
-        if (isNotTraversable) p.fill(255,100);
-        p.rect(position.x, position.y, nSize, nSize);
+        P.stroke(255);
+        P.noFill();
+        if (isStart) P.fill(125, 125, 255);
+        if (isEnd) P.fill(255, 0, 0);
+        if (isNotTraversable) P.fill(255,100);
+        P.rect(position.x, position.y, nSize, nSize);
     }
 
     public void setStart(int x, int y) {
@@ -116,10 +116,6 @@ public class Node {
         Tile towerTile = tiles.get(tX+1, tY+1);
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
-//        if (tower != null) { //apparently this breaks everything
-//            setEnd(nX, nY);
-//            ended = true;
-//        }
         Tile obsTile = tiles.get(tX,tY);
         if (obsTile != null) {
             isNotTraversable = obsTile.obstacle != null;
@@ -138,8 +134,8 @@ public class Node {
             Enemy enemy = null;
             if (enemies.size() - 1 > path.index) enemy = enemies.get(path.index);
             if (path.index != -1 && enemies.size() != 0 && enemy != null) { //points added HERE
-                enemy.points.add(new Enemy.TurnPoint(p, position, tower));
-                enemy.points.add(new Enemy.TurnPoint(p, parent.position, tower));
+                enemy.points.add(new Enemy.TurnPoint(P, position, tower));
+                enemy.points.add(new Enemy.TurnPoint(P, parent.position, tower));
             }
             setDone();
         } else updateNode(nodeGrid[(int) ((position.x + 100) / nSize)][(int) ((position.y + 100) / nSize)], request);
@@ -150,7 +146,7 @@ public class Node {
         if (path.index != -1) {
             if (path.index < enemies.size()) {
                 Enemy enemy = enemies.get(path.index);
-                enemy.points.add(new Enemy.TurnPoint(p, position, tower));
+                enemy.points.add(new Enemy.TurnPoint(P, position, tower));
             }
         } if (!isStart) parent.setDone();
     }

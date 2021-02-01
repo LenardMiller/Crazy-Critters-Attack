@@ -13,12 +13,11 @@ public class Railgun extends Turret {
 
     private PImage[] vaporTrail;
     private PImage[] vaporEndSprites;
-    private int numVaporFrames;
-    private int betweenVaporFrames;
+    private final int NUM_VAPOR_FRAMES;
+    private final int BETWEEN_VAPOR_FRAMES;
     private int betweenVaporTimer;
     private int currentVaporFrame;
     private PVector vaporStart;
-    private PVector vaporEnd;
     private float vaporAngle;
     private int vaporLength;
     private PVector vaporPartLength;
@@ -40,13 +39,13 @@ public class Railgun extends Turret {
         numFireFrames = 15;
         numLoadFrames = 9;
         numIdleFrames = 6;
-        numVaporFrames = 15;
-        betweenVaporFrames = 3;
+        NUM_VAPOR_FRAMES = 15;
+        BETWEEN_VAPOR_FRAMES = 3;
         betweenVaporTimer = 0;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         idleFrames = new PImage[numIdleFrames];
-        vaporTrail = new PImage[numVaporFrames];
+        vaporTrail = new PImage[NUM_VAPOR_FRAMES];
         vaporEndSprites = new PImage[11];
         currentVaporFrame = 16;
         betweenIdleFrames = 3;
@@ -73,7 +72,7 @@ public class Railgun extends Turret {
 
         currentVaporFrame = 0;
         vaporStart = spp;
-        vaporEnd = targetEnemy.position;
+        PVector vaporEnd = targetEnemy.position;
         vaporAngle = angle;
         float c = sqrt(sq(vaporEnd.x-vaporStart.x)+sq(vaporEnd.y-vaporStart.y));
         vaporLength = (int)(c/24);
@@ -93,7 +92,7 @@ public class Railgun extends Turret {
         p.tint(255);
         p.popMatrix();
         //vaporTrail
-        if (currentVaporFrame < numVaporFrames) {
+        if (currentVaporFrame < NUM_VAPOR_FRAMES) {
             for (int i = 0; i <= vaporLength; i++) {
                 p.pushMatrix();
                 float x = vaporStart.x + (vaporPartLength.x*i);
@@ -104,7 +103,7 @@ public class Railgun extends Turret {
                 if (i == vaporLength && currentVaporFrame < 11) p.image(vaporEndSprites[currentVaporFrame], -13, -15);
                 p.popMatrix();
             }
-            if (betweenVaporTimer < betweenVaporFrames) betweenVaporTimer++;
+            if (betweenVaporTimer < BETWEEN_VAPOR_FRAMES) betweenVaporTimer++;
             else {
                 currentVaporFrame++;
                 betweenVaporTimer = 0;

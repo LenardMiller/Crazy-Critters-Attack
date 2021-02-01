@@ -9,7 +9,7 @@ import static main.Main.enemies;
 
 public class Burning extends Buff {
 
-    private int damage;
+    private final int DAMAGE;
 
     public Burning(PApplet p, int enId, float damage, int duration, Turret turret) {
         super(p,enId,turret);
@@ -17,7 +17,7 @@ public class Burning extends Buff {
         effectDelay = 12; //frames
         lifeDuration = duration;
         lifeTimer = p.frameCount + lifeDuration;
-        this.damage = (int) damage;
+        this.DAMAGE = (int) damage;
         particle = "fire";
         name = "burning";
         this.enId = enId;
@@ -29,6 +29,6 @@ public class Burning extends Buff {
             enemy.tintColor = 100;
         }
         enemy.barTrans = 255;
-        enemy.damageSimple(damage,turret, "fire", new PVector(0,0), false);
+        enemy.damageSimple(DAMAGE,turret, "fire", new PVector(0,0), false);
     }
 }

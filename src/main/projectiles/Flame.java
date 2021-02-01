@@ -10,13 +10,14 @@ import static main.Main.*;
 
 public class Flame extends Projectile {
 
-    private PImage[] sprites;
+    private final PImage[] SPRITES;
+    private final int TIMER;
+
     private int currentSprite;
     private int delay;
     private float spawnRange;
     private int fireChance;
     private int smokeChance;
-    private int timer;
 
     public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectLevel, int effectDuration, int timer) {
         super(p, x, y, angle, turret);
@@ -31,10 +32,10 @@ public class Flame extends Projectile {
         this.effectLevel = effectLevel;
         this.effectDuration = effectDuration;
         this.angle = angle;
-        this.timer = timer;
+        this.TIMER = timer;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        sprites = spritesAnimH.get("flamePJ");
+        SPRITES = spritesAnimH.get("flamePJ");
         buff = "burning";
         splashEn = false;
         fireChance = 8;
@@ -51,7 +52,7 @@ public class Flame extends Projectile {
 
     public void displayPassB() {
         delay++;
-        sprite = sprites[currentSprite];
+        sprite = SPRITES[currentSprite];
         //particles
         spawnRange += 0.5f;
         if (currentSprite == 9) smokeChance = 20;
@@ -69,14 +70,14 @@ public class Flame extends Projectile {
             particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "smoke"));
         }
         //animation
-        if (delay > timer && p.random(0, 20) > 1) {
+        if (delay > TIMER && p.random(0, 20) > 1) {
             currentSprite++;
             delay = 0;
         }
         //control
         if (currentSprite > 9 && speed > 0) speed /= 1.1;
         if (pierce < 900) speed = 0;
-        if (currentSprite >= sprites.length) dead = true;
+        if (currentSprite >= SPRITES.length) dead = true;
         //main sprite
         angleTwo += radians(angularVelocity);
         p.pushMatrix();

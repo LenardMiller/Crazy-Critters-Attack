@@ -11,7 +11,7 @@ import static main.Main.*;
 
 public class Frag extends Projectile {
 
-    private int deathDate;
+    private final int DEATH_DATE;
 
     public Frag(PApplet p, float x, float y, float angle, Turret turret, int damage) {
         super(p, x, y, angle, turret);
@@ -27,7 +27,7 @@ public class Frag extends Projectile {
         sprite = spritesH.get("darkMetalPt");
         hitSound = soundsH.get("smallImpact");
         int lifespan = 15;
-        deathDate = p.frameCount + lifespan;
+        DEATH_DATE = p.frameCount + lifespan;
     }
 
     public void main(ArrayList<Projectile> projectiles, int i) {
@@ -35,7 +35,7 @@ public class Frag extends Projectile {
         displayPassB();
         move();
         collideEn();
-        if (p.frameCount > deathDate) dead = true;
+        if (p.frameCount > DEATH_DATE) dead = true;
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||
                 position.y + size.y < -100 || position.x + size.x < -100 || dead) {
             die(i);

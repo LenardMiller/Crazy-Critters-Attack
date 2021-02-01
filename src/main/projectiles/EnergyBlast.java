@@ -14,7 +14,7 @@ import static processing.core.PApplet.abs;
 
 public class EnergyBlast extends Projectile {
 
-    private boolean bigExplosion;
+    private final boolean BIG_EXPLOSION;
 
     public EnergyBlast(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectRadius, boolean bigExplosion) {
         super(p, x, y, angle, turret);
@@ -30,7 +30,7 @@ public class EnergyBlast extends Projectile {
         hasTrail = true;
         this.effectRadius = effectRadius;
         trail = "energy";
-        this.bigExplosion = bigExplosion;
+        this.BIG_EXPLOSION = bigExplosion;
     }
 
     public void collideEn() {
@@ -45,7 +45,7 @@ public class EnergyBlast extends Projectile {
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
                 enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "burning", velocity, i);
-                if (!bigExplosion) {
+                if (!BIG_EXPLOSION) {
                     int num = (int) (p.random(10, 16));
                     for (int j = num; j >= 0; j--) {
                         particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "energy", maxSpeed = p.random(0.5f, 2.5f)));

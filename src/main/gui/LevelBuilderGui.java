@@ -7,16 +7,16 @@ import static main.Main.tileSelectButtons;
 
 public class LevelBuilderGui {
 
-    private PApplet p;
+    private final PApplet P;
 
     public LevelBuilderGui(PApplet p) {
-        this.p = p;
+        this.P = p;
         build();
     }
 
     public void display() {
-        p.fill(235); //big white bg
-        p.rect(900, 0, 200, 900);
+        P.fill(235); //big white bg
+        P.rect(900, 0, 200, 900);
         for (TileSelect tileSelectButton : tileSelectButtons) tileSelectButton.main();
     }
 
@@ -51,6 +51,6 @@ public class LevelBuilderGui {
     }
 
     private void placeButton(int x, int y, String type) {
-        tileSelectButtons.add(new TileSelect(p, 925 + (x * 50), 25 + (y * 50), type, true));
+        tileSelectButtons.add(new TileSelect(P, 925 + (x * 50), 25 + (y * 50), type, true));
     }
 }
