@@ -13,17 +13,17 @@ import static main.misc.MiscMethods.randomSpawnPosition;
 
 public class Wave {
 
-    private PApplet p;
+    private final PApplet p;
     public int endTimer;
     private int betweenSpawns;
     private int spawnTimer;
-    private int spawnLength;
+    private final int spawnLength;
     int waitTimer;
     public int length;
     public ArrayList<String> spawns;
-    private Color primary;
-    private Color secondary;
-    private String title;
+    private final Color primary;
+    private final Color secondary;
+    private final String title;
 
     //todo: pause functionality
     public Wave(PApplet p, int length, int spawnLength, Color primary, Color secondary, String title) {

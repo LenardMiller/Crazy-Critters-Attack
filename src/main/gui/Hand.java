@@ -14,7 +14,7 @@ import static main.misc.MiscMethods.*;
 
 public class Hand {
 
-    private PApplet p;
+    private final PApplet p;
 
     public String held;
     private PImage heldSprite;
@@ -108,7 +108,7 @@ public class Hand {
     }
 
     public void displayHeldInfo() {
-        if (displayInfo.equals("placeWall")) { //todo: can't place on enemies?
+        if (displayInfo.equals("placeWall")) {
             p.fill(235);
             p.noStroke();
             p.rect(900, 212, 200, 707);
@@ -126,7 +126,7 @@ public class Hand {
             p.text("50 HP", 1000, 331);
             p.text("$25", 1000, 356);
         }
-        if (displayInfo.equals("upgradeWall")) {
+        if (displayInfo.equals("upgradeWall")) { //todo: only works between wave chunks?
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
             if (tower.nextLevelB > tower.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
             else {
@@ -198,7 +198,7 @@ public class Hand {
             p.text(tower.hp + " hp", 1000, 331);
             p.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
         }
-        if (displayInfo.equals("repairWall")) { //todo: repair progress bar?
+        if (displayInfo.equals("repairWall")) {
             Tower tower = tiles.get((roundTo(p.mouseX, 50) / 50) + 1, (roundTo(p.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
             p.fill(235);
             p.noStroke();
