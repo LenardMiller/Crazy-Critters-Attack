@@ -71,7 +71,6 @@ public class TowerInfo {
         p.text("Slows movement", x, space(3));
         p.text("and attack speed,", x, space(4));
         p.text("does no damage.", x, space(5));
-
     }
 
     public static void seismicInfo(PApplet p) {

@@ -115,17 +115,27 @@ public class Main extends PApplet {
     public static Node start;
     public static Node[] end;
     public static AStar path;
-    public static int nSize;
+    public static int nodeSize;
     public static float maxCost, minCost;
 
     public static void main(String[] args) {
         PApplet.main("main.Main", args);
     }
 
+    /**
+     * From Processing.
+     * Just controls window size and renderer type,
+     * run once at program start
+     */
     public void settings() {
         size(GRID_WIDTH, BOARD_HEIGHT); //todo: openGL?
     }
 
+    /**
+     * From Processing.
+     * Primary initialization,
+     * run once at program start
+     */
     public void setup() {
         frameRate(FRAMERATE);
         //fonts
@@ -157,19 +167,19 @@ public class Main extends PApplet {
         //loads sounds
         loadSounds(this);
         //pathfinding stuff
-        nSize = 25;
-        nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
-        for (int x = 0; x < GRID_WIDTH / nSize; x++) {
-            for (int y = 0; y < GRID_HEIGHT / nSize; y++) {
-                nodeGrid[x][y] = new Node(this, new PVector((nSize * x)-100, (nSize * y)-100));
+        nodeSize = 25;
+        nodeGrid = new Node[GRID_WIDTH / nodeSize][GRID_HEIGHT / nodeSize];
+        for (int x = 0; x < GRID_WIDTH / nodeSize; x++) {
+            for (int y = 0; y < GRID_HEIGHT / nodeSize; y++) {
+                nodeGrid[x][y] = new Node(this, new PVector((nodeSize * x)-100, (nodeSize * y)-100));
             }
         }
         path = new AStar();
-        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nSize)));
+        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nodeSize)));
         //create end nodes
         end = new Node[0];
         //create start node
-        nodeGrid[1][(GRID_WIDTH / nSize) / 2].setStart(1, (GRID_HEIGHT / nSize) / 2);
+        nodeGrid[1][(GRID_WIDTH / nodeSize) / 2].setStart(1, (GRID_HEIGHT / nodeSize) / 2);
         start.findGHF();
         for (Node node : end) node.findGHF();
         updateTowerArray();
@@ -194,7 +204,12 @@ public class Main extends PApplet {
         connectWallQueues = 0;
     }
 
-    public void draw() { //this will need to be change when I todo: add more menu "scenes"
+    /**
+     * From Processing.
+     * Everything else, run every frame.
+     * This will need to be change when I todo: add more menu "scenes."
+     */
+    public void draw() {
         noStroke();
         fill(25, 25, 25);
         rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
@@ -237,6 +252,9 @@ public class Main extends PApplet {
         }
     }
 
+    /**
+     * Runs all the in-game stuff.
+     */
     private void drawObjects() {
         //tiles
         if (connectWallQueues > 0) { //else
@@ -286,7 +304,7 @@ public class Main extends PApplet {
                 }
             }
             fill(0,0,255);
-            rect(start.position.x,start.position.y,nSize,nSize);
+            rect(start.position.x,start.position.y, nodeSize, nodeSize);
         }
         //under particle culling
         int up = underParticles.size();
@@ -392,10 +410,18 @@ public class Main extends PApplet {
         public boolean rightMousePressedPulse;
         public boolean leftMousePressedPulse;
 
+        /**
+         * Handles input from keyboard and mouse.
+         * @param p the PApplet
+         */
         public InputHandler(PApplet p) {
             this.P = p;
         }
 
+        /**
+         * Handles input from the mouse.
+         * @param b mouse pressed
+         */
         void mouse(boolean b) {
             if (b) {
                 if (P.mouseButton == RIGHT) {
@@ -418,6 +444,10 @@ public class Main extends PApplet {
             }
         }
 
+        /**
+         * Handles input from the keyboard.
+         * @param b any key pressed
+         */
         void key(boolean b) {
             for (KeyDS.KeyDSItem item : keysPressed.items) {
                 if (item.key == key) {
@@ -433,6 +463,9 @@ public class Main extends PApplet {
 
         public KeyDSItem[] items;
 
+        /**
+         * Containts all the keys from the keyboard,
+         */
         public KeyDS() {
             items = new KeyDSItem[0];
         }

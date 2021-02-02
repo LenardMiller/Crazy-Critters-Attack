@@ -34,7 +34,23 @@ public class Corpse {
     private final int MAX_LIFE;
     private int lifespan;
 
-    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String type, String name, String bloodParticle, int frame, boolean animated) {
+    /**
+     * A dead enemy.
+     * @param p the PApplet
+     * @param position position of the corpse
+     * @param size size of the corpse
+     * @param angle rotation of the corpse
+     * @param velocity movement of the corpse
+     * @param angularVelocity rotational speed of the corpse
+     * @param betweenFrames number of times to duplicate a frame
+     * @param maxLife how long it should last
+     * @param effectType what sort of visual effect to apply
+     * @param name what enemy this was
+     * @param bloodParticle what color the blood should be
+     * @param frame what frame to start its animation on
+     * @param animated should it be animated
+     */
+    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String effectType, String name, String bloodParticle, int frame, boolean animated) {
         this.p = p;
 
         this.POSITION = new PVector(position.x, position.y);
@@ -52,7 +68,7 @@ public class Corpse {
         } else this.VELOCITY = velocity;
         this.angularVelocity = angularVelocity;
         SPRITES = spritesAnimH.get(name + "EN");
-        this.type = type;
+        this.type = effectType;
         if (this.type == null) this.type = "normal";
         this.BLOOD_PARTICLE = bloodParticle;
         this.frame = frame;

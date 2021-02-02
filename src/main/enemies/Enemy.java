@@ -375,7 +375,7 @@ public abstract class Enemy {
         if (point.combat) tpSize = speed;
         else tpSize = 5;
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
-        intersecting = (pfPosition.x > p.x - tpSize + (nSize / 2f) && pfPosition.x < p.x + tpSize + (nSize / 2f)) && (pfPosition.y > p.y - tpSize + (nSize / 2f) && pfPosition.y < p.y + tpSize + (nSize / 2f));
+        intersecting = (pfPosition.x > p.x - tpSize + (nodeSize / 2f) && pfPosition.x < p.x + tpSize + (nodeSize / 2f)) && (pfPosition.y > p.y - tpSize + (nodeSize / 2f) && pfPosition.y < p.y + tpSize + (nodeSize / 2f));
         return intersecting;
     }
 
@@ -541,7 +541,7 @@ public abstract class Enemy {
             else P.noStroke();
             if (combat) P.fill(255, 0, 0);
             else P.fill(255);
-            P.ellipse(position.x + nSize / 2f, position.y + nSize / 2f, nSize, nSize);
+            P.ellipse(position.x + nodeSize / 2f, position.y + nodeSize / 2f, nodeSize, nodeSize);
             hover();
         }
 
@@ -549,7 +549,7 @@ public abstract class Enemy {
             boolean intersecting;
             float tpSize = 10;
             PVector pfPosition = new PVector(P.mouseX, P.mouseY);
-            intersecting = (pfPosition.x > position.x - tpSize + (nSize / 2f) && pfPosition.x < position.x + tpSize + (nSize / 2f)) && (pfPosition.y > position.y - tpSize + (nSize / 2f) && pfPosition.y < position.y + tpSize + (nSize / 2f));
+            intersecting = (pfPosition.x > position.x - tpSize + (nodeSize / 2f) && pfPosition.x < position.x + tpSize + (nodeSize / 2f)) && (pfPosition.y > position.y - tpSize + (nodeSize / 2f) && pfPosition.y < position.y + tpSize + (nodeSize / 2f));
             if (intersecting && tower != null) {
                 P.stroke(255, 255, 0);
                 P.noFill();

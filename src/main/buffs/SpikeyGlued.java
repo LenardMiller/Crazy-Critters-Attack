@@ -10,8 +10,6 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import static main.Main.*;
 
 public class SpikeyGlued extends Buff {
