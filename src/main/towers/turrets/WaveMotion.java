@@ -8,6 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
+import static main.misc.WallSpecialVisuals.*;
 
 public class WaveMotion extends Turret {
 

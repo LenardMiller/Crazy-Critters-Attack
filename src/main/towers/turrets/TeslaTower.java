@@ -7,7 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class TeslaTower extends Turret{
 

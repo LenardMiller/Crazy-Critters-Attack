@@ -9,7 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
 public class SeismicTower extends Turret {

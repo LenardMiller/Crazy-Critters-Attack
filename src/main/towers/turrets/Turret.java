@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
+import static main.misc.WallSpecialVisuals.*;
 
 public abstract class Turret extends Tower {
 

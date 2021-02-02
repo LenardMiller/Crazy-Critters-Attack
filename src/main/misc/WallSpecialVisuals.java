@@ -112,7 +112,6 @@ public class WallSpecialVisuals {
 
     /**
      * Something to do with wall tile flooring?
-     * TODO: move this stuff
      */
     public static void updateWallTileConnections() {
         for (int i = 0; i < tiles.size(); i++) {

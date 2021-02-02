@@ -47,14 +47,15 @@ public class MiscMethods {
     }
 
     /**
-     * https://forum.processing.org/one/topic/pvector-anglebetween.html
-     * Returns the angle of a line between two points.
+     * https://forum.processing.org/one/topic/pvector-anglebetween.html <p></p>
+     * DOES NOT return the angle of a line between two points.
+     * idk what this does.
      * @param p1 the first position
      * @param p2 the second position
-     * @return the angle of a line between the two positions
+     * @return something
      */
     public static float findAngleBetween(PVector p1, PVector p2) {
-        float a = atan2(p1.y - p2.y, p1.x - p2.x);
+        float a = atan2((p1.y - p2.y), p1.x - p2.x);
         if (a < 0) a += TWO_PI;
         return a;
     }
@@ -135,7 +136,7 @@ public class MiscMethods {
 
     /**
      * Returns the angle of a line between two points.
-     * todo: why does this exist?
+     * Compensates for Processing y being inverted.
      * @param v1 the first position
      * @param v2 the second position
      * @return the angle of a line between the two positions
