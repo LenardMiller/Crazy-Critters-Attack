@@ -46,7 +46,7 @@ public class SpikeyGlued extends Buff {
     */
     private void slowAttacking() {
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
+        float newSpeed = enemy.maxSpeed * ((1 + SPEED_MODIFIER) / 2);
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
             //setup
             enemy.speed = newSpeed;

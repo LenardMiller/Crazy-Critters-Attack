@@ -24,6 +24,7 @@ public class BigWorm extends Enemy {
         name = "bigWorm";
         attackStartFrame = 0;
         attackDmgFrames = new int[]{29};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = 4;
         attackFrame = attackStartFrame;
         stealthy = true;
