@@ -22,6 +22,7 @@ public class Butterfly extends Enemy {
         name = "butterfly";
         attackStartFrame = 0;
         attackDmgFrames = new int[]{3};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = 5;
         attackFrame = attackStartFrame;
         flying = true;

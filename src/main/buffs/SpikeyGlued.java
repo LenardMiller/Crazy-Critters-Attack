@@ -10,6 +10,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static main.Main.*;
 
@@ -40,7 +41,10 @@ public class SpikeyGlued extends Buff {
         }
     }
 
-    private void slowAttacking() { //slowing enemy attacking done once
+    /**
+     * slows enemy attacking, done once
+    */
+    private void slowAttacking() {
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
@@ -53,6 +57,13 @@ public class SpikeyGlued extends Buff {
             compress = new CompressArray(oldSize - 1, newSize, expandedInts);
             compress.main();
             expandedInts = compress.compArray;
+            //change damage frames
+            System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
+            for (int i = 0; i < enemy.tempAttackDmgFrames.length; i++) {
+                for (int j = 0; j < expandedInts.size(); j++) {
+                    if (expandedInts.get(j) == enemy.attackDmgFrames[i]) enemy.tempAttackDmgFrames[i] = j;
+                }
+            }
             //create expanded image array
             PImage[] expandedPImages = new PImage[expandedInts.size()];
             for (int i = 0; i < expandedInts.size(); i++) {
@@ -60,11 +71,13 @@ public class SpikeyGlued extends Buff {
             }
             //profit
             enemy.attackFrames = expandedPImages;
-            //todo: fix damage frames
         }
     }
 
-    public void effect() { //slowing enemy movement done every frame
+    /**
+     * slows enemy movement, done every frame
+     */
+    public void effect() {
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
@@ -72,7 +85,10 @@ public class SpikeyGlued extends Buff {
         }
     }
 
-    void display() { //particles around enemy
+    /**
+     * particles around enemy
+     */
+    void display() {
         if (particle != null) {
             Enemy enemy = enemies.get(enId);
             int num = (int) (p.random(0, particleChance));
@@ -85,7 +101,11 @@ public class SpikeyGlued extends Buff {
         for (Spike spike : SPIKES) spike.display(enemies.get(enId).position);
     }
 
-    void end(int i){ //ends if at end of lifespan
+    /**
+     * ends if at end of lifespan
+     * @param i buff id
+     */
+    void end(int i) {
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (p.frameCount > lifeTimer) {
@@ -94,11 +114,16 @@ public class SpikeyGlued extends Buff {
                 //set attack speed back to default
                 enemy.attackFrames = spritesAnimH.get(enemy.name + "AttackEN");
                 if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
+                //set damage frames back to default
+                System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
             }
             buffs.remove(i);
         }
     }
 
+    /**
+     * shoots a bunch of glue spikes
+     */
     public void dieEffect() {
         int numSpikes = 24;
         int spikeDamage = 100;
@@ -115,6 +140,12 @@ public class SpikeyGlued extends Buff {
         private final PImage SPRITE;
         private final PVector SIZE;
 
+        /**
+         * Little glue spikes that stick to enemy
+         * @param x x pos relative to enemy
+         * @param y y pos relative to enemy
+         * @param angle rotation relative to screen
+         */
         Spike(float x, float y, float angle) {
             POSITION = new PVector(x,y);
             this.ANGLE = radians(angle);

@@ -24,6 +24,7 @@ public class MidWorm extends Enemy {
         name = "midWorm";
         attackStartFrame = 0;
         attackDmgFrames = new int[]{15};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = 4;
         attackFrame = attackStartFrame;
         stealthy = true;

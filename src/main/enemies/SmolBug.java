@@ -24,6 +24,7 @@ public class SmolBug extends Enemy {
         attackStartFrame = 1; //attack start
         attackFrame = attackStartFrame;
         attackDmgFrames = new int[]{17};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         corpseSize = size;
         partSize = new PVector(11,11);
         overkillSound = soundsH.get("squish");

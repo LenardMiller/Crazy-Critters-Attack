@@ -26,6 +26,9 @@ public abstract class Enemy {
     PApplet p;
 
     public ArrayList<TurnPoint> points;
+    /**
+     * Enemy's pathfinding size, measured in nodes
+     */
     public int pfSize;
     public PVector position;
     public PVector size;
@@ -43,7 +46,8 @@ public abstract class Enemy {
     private PImage[] moveFrames;
     private float moveFrame;
     public int attackFrame;
-    int[] attackDmgFrames;
+    public int[] attackDmgFrames;
+    public int[] tempAttackDmgFrames;
     public boolean attacking;
     private boolean attackCue;
     int betweenWalkFrames;
@@ -91,7 +95,9 @@ public abstract class Enemy {
         attackStartFrame = 0;
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
-        pfSize = 1; //enemies pathfinding size, measured in nodes
+        tempAttackDmgFrames = new int[attackDmgFrames.length];
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
+        pfSize = 1;
         stealthy = false;
         stealthMode = false;
         flying = false;
@@ -329,7 +335,7 @@ public abstract class Enemy {
 
     void attack() {
         boolean dmg = false;
-        for (int frame : attackDmgFrames) {
+        for (int frame : tempAttackDmgFrames) {
             if (attackFrame == frame) {
                 if (betweenAttackFrames > 1) attackCount++;
                 dmg = true;

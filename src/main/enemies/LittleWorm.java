@@ -24,6 +24,7 @@ public class LittleWorm extends Enemy {
         name = "worm";
         attackStartFrame = 0;
         attackDmgFrames = new int[]{18};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = 2;
         attackFrame = attackStartFrame;
         stealthy = true;

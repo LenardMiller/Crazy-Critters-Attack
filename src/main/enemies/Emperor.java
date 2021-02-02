@@ -23,6 +23,7 @@ public class Emperor extends Enemy{
         betweenAttackFrames = 10;
         betweenWalkFrames = 4;
         attackDmgFrames = new int[]{7};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         attackStartFrame = 0; //attack start
         corpseSize = size;
         partSize = new PVector(20,20);
