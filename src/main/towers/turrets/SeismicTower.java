@@ -60,7 +60,7 @@ public class SeismicTower extends Turret {
 
     public void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null && spriteType != 1 && shockwaveWidth != 360) aim(targetEnemy);
+        if (targetEnemy != null && spriteType != 1 && shockwaveWidth < 360) aim(targetEnemy);
         if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
             spriteType = 1;
             frame = 0;
@@ -150,7 +150,7 @@ public class SeismicTower extends Turret {
         spa.setMag(29); //barrel length
         spp.add(spa);
         float a = angleB;
-        if (shockwaveWidth == 360) {
+        if (shockwaveWidth >= 360) {
             a = 0;
             for (int i = 0; i < 6; i++) {
                 fireParticles(a);
@@ -248,7 +248,7 @@ public class SeismicTower extends Turret {
                 case 2:
                     debrisType = "metal";
                     //todo: metal sounds
-                    shockwaveWidth = 360;
+                    shockwaveWidth = 720;
                     delay = 20;
                     name = "seismicSlammer";
                     numFireFrames = 3;
