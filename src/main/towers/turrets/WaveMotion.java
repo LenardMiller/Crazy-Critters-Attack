@@ -8,6 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
+import static main.misc.WallSpecialVisuals.*;
 
 public class WaveMotion extends Turret {
 
@@ -144,9 +145,9 @@ public class WaveMotion extends Turret {
             if (Float.isNaN(distFromEnemyToBeam)) distFromEnemyToBeam = 1;
             distFromEnemyToBeam -= enemy.radius / 2;
             if (distFromEnemyToBeam < 1) distFromEnemyToBeam = 1;
-            if (distFromEnemyToBeam < 10) enemy.damageSimple(damage, this, "burning", new PVector(0,0));
-            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageSimple(damage, this, "burning", new PVector(0,0));
-            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageSimple(damage, this, "burning", new PVector(0,0));
+            if (distFromEnemyToBeam < 10) enemy.damageSimple(damage, this, "burning", new PVector(0,0), false);
+            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageSimple(damage, this, "burning", new PVector(0,0), false);
+            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageSimple(damage, this, "burning", new PVector(0,0), false);
         }
     }
 

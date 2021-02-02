@@ -37,7 +37,7 @@ public abstract class Projectile {
     int effectRadius;
     ArrayList<Enemy> hitEnemies;
     Turret turret;
-    int effectLevel;
+    float effectLevel;
     int effectDuration;
     boolean splashEn;
     String type;

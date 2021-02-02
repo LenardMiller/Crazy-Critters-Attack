@@ -19,13 +19,12 @@ public class SmolBug extends Enemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "smolBug";
-        numAttackFrames = 27;
-        numMoveFrames = 8;
         betweenWalkFrames = 3;
         betweenAttackFrames = 3;
         attackStartFrame = 1; //attack start
         attackFrame = attackStartFrame;
         attackDmgFrames = new int[]{17};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         corpseSize = size;
         partSize = new PVector(11,11);
         overkillSound = soundsH.get("squish");

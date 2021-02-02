@@ -18,6 +18,10 @@ public class DataControl {
 
     public DataControl() {}
 
+    /**
+     * Saves level data to a JSON file.
+     * @throws IOException catch if file is missing
+     */
     public static void save() throws IOException {
         JSONArray saveArray = new JSONArray();
         //tiles
@@ -54,6 +58,11 @@ public class DataControl {
         saveWriter.close();
     }
 
+    /**
+     * Loads level data from a JSON file.
+     * @param p the PApplet
+     * @param name the filename, sans extension.
+     */
     public static void load(PApplet p, String name) {
         File loadFile = new File("resources/data/"+name+".json");
         JSONArray loadArray = loadJSONArray(loadFile);

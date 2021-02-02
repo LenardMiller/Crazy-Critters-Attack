@@ -50,4 +50,37 @@ public class TowerInfo {
         p.text("and range,  but low", x, space(4));
         p.text("rate of fire.", x, space(5));
     }
+
+    public static void cannonInfo(PApplet p) {
+        loadStyle(p);
+        int x = 910;
+        p.text("Fires a cannonball", x, space(0));
+        p.text("at the nearest", x, space(1));
+        p.text("enemy.  Moderate", x, space(2));
+        p.text("range and firerate,", x, space(3));
+        p.text("good damage with", x, space(4));
+        p.text("a bit of splash.", x, space(5));
+    }
+
+    public static void gluerInfo(PApplet p) {
+        loadStyle(p);
+        int x = 910;
+        p.text("Fires a glob of", x, space(0));
+        p.text("glue at the nearest", x, space(1));
+        p.text("unglued enemy.", x, space(2));
+        p.text("Slows movement", x, space(3));
+        p.text("and attack speed,", x, space(4));
+        p.text("does no damage.", x, space(5));
+    }
+
+    public static void seismicInfo(PApplet p) {
+        loadStyle(p);
+        int x = 910;
+        p.text("Sends a shockwave", x, space(0));
+        p.text("towards the nearest", x, space(1));
+        p.text("enemy.  Does low", x, space(2));
+        p.text("damage,  but can", x, space(3));
+        p.text("hit large numbers", x, space(4));
+        p.text("of enemies.", x, space(5));
+    }
 }

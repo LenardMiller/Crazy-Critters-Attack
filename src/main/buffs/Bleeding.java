@@ -15,7 +15,8 @@ public class Bleeding extends Buff {
         super(p,enId,turret);
         particleChance = 8;
         effectDelay = 12; //frames
-        lifeDuration = 50;
+        lifeDuration = 360;
+        lifeTimer = p.frameCount + lifeDuration;
         particle = null;
         name = "bleeding";
         this.enId = enId;
@@ -24,7 +25,7 @@ public class Bleeding extends Buff {
     public void effect() { //small damage fast
         Enemy enemy = enemies.get(enId);
         enemy.barTrans = 255;
-        enemy.damageSimple(15, turret, "none", new PVector(0,0));
+        enemy.damageSimple(15, turret, "none", new PVector(0,0), false);
     }
 
     void display() { //particles around enemy

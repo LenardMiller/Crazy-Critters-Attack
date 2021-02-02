@@ -31,10 +31,11 @@ public class Machine {
     private PImage[] sprites;
     public Tile[] machTiles;
     private int damageState;
-    private SoundFile damageSound;
-    private SoundFile breakSound;
-    private SoundFile explodeSound;
-    private SoundLoop explodeLoop;
+
+    private final SoundFile DAMAGE_SOUND;
+    private final SoundFile BREAK_SOUND;
+    private final SoundFile EXPLODE_SOUND;
+    private final SoundLoop EXPLODE_LOOP;
 
     public Machine(PApplet p, PVector position, String name, String debris, int betweenFrames, int maxHp) {
         this.p = p;
@@ -46,10 +47,10 @@ public class Machine {
         this.name = name;
         this.debris = debris;
         this.betweenFrames = betweenFrames;
-        damageSound = soundsH.get(debris + "Damage");
-        breakSound = soundsH.get(debris + "Break");
-        explodeSound = soundsH.get("smallExplosion");
-        explodeLoop = soundLoopsH.get("smallExplosion");
+        DAMAGE_SOUND = soundsH.get(debris + "Damage");
+        BREAK_SOUND = soundsH.get(debris + "Break");
+        EXPLODE_SOUND = soundsH.get("smallExplosion");
+        EXPLODE_LOOP = soundLoopsH.get("smallExplosion");
         sprites = spritesAnimH.get(name);
         tintColor = 255;
         updateNodes();
@@ -89,7 +90,7 @@ public class Machine {
         p.tint(255);
         if (!dead) hurtParticles();
         else if (deathFrame < 300) deathAnim();
-        else explodeLoop.stopLoop();
+        else EXPLODE_LOOP.stopLoop();
         if (p.frameCount > frameTimer && !dead) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
@@ -119,8 +120,8 @@ public class Machine {
 
     private void deathAnim() {
         if (deathFrame == 0) {
-            breakSound.stop();
-            breakSound.play(1, volume);
+            BREAK_SOUND.stop();
+            BREAK_SOUND.play(1, volume);
         } deathFrame++;
         if (deathFrame < 160) {
             for (Tile tile : machTiles) {
@@ -130,20 +131,20 @@ public class Machine {
                     particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 if ((int) p.random(0, 6) == 0) {
                     if ((int) p.random(0, 5) == 0) {
-                        explodeSound.stop();
-                        explodeSound.play(p.random(0.8f, 1.2f), volume);
-                    } particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+                        EXPLODE_SOUND.stop();
+                        EXPLODE_SOUND.play(p.random(0.8f, 1.2f), volume);
+                    } particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 }
             }
         } else {
-            explodeLoop.startLoop(1, volume);
+            EXPLODE_LOOP.startLoop(1, volume);
             for (Tile tile : machTiles) {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if ((int) p.random(0, 4) == 0)
                     particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 if ((int) p.random(0, 2) == 0)
-                    particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+                    particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 for (int i = 0; i < 3; i++) {
                     particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 } if ((int) p.random(0, 8) == 0) {
@@ -165,8 +166,8 @@ public class Machine {
             sprites = spritesAnimH.get(name + "d" + damageState);
 //            currentFrame = 0;
         }
-        damageSound.stop();
-        damageSound.play(p.random(0.8f, 1.2f), volume);
+        DAMAGE_SOUND.stop();
+        DAMAGE_SOUND.play(p.random(0.8f, 1.2f), volume);
         for (Tile tile : machTiles) {
             int x = (int) tile.position.x;
             int y = (int) tile.position.y;
@@ -174,9 +175,9 @@ public class Machine {
                 particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
             }
             if ((int) p.random(0, 2 * ((float) hp / (float) hpSegment)) == 0) {
-                explodeSound.stop();
-                explodeSound.play(p.random(0.8f, 1.2f), volume);
-                particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360)));
+                EXPLODE_SOUND.stop();
+                EXPLODE_SOUND.play(p.random(0.8f, 1.2f), volume);
+                particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
             }
         }
     }

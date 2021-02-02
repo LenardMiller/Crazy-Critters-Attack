@@ -10,7 +10,7 @@ import static main.Main.*;
 
 public class Tile {
 
-    private PApplet p;
+    private final PApplet P;
 
     public PVector position;
     public int id;
@@ -35,11 +35,11 @@ public class Tile {
     public boolean machine;
 
     public Tile(PApplet p, PVector position, int id) {
-        this.p = p;
+        this.P = p;
 
         this.position = position;
         this.id = id;
-        obstacleShadowLength = 0;
+        obstacleShadowLength = 3;
         bgAEdges = new PImage[4];
         bgWEdges = new PImage[4];
         bgWOCorners = new PImage[4];
@@ -52,31 +52,31 @@ public class Tile {
     }
 
     public void displayA() {
-        if (bgA != null) p.image(bgA, position.x, position.y);
+        if (bgA != null) P.image(bgA, position.x, position.y);
         tileBgA();
-        if (bgB != null) p.image(bgB, position.x, position.y);
+        if (bgB != null) P.image(bgB, position.x, position.y);
         if (bgWEdges != null) connectBgWEdges();
         if (bgWName != null) {
             if (!isConcrete(bgWName)) {
-                if (debug) p.tint(255,0,255);
-                p.image(bgW, position.x, position.y);
-                if (debug) p.tint(255);
+                if (debug) P.tint(255,0,255);
+                P.image(bgW, position.x, position.y);
+                if (debug) P.tint(255);
             }
         }
 //        if (bgC != null) p.image(bgC, position.x, position.y);
     }
 
     public void displayB() {
-        if (bgC != null) p.image(bgC, position.x, position.y);
+        if (bgC != null) P.image(bgC, position.x, position.y);
         if (obstacle != null) {
-            p.tint(0, 60);
-            p.image(obstacle, position.x + obstacleShadowLength, position.y + obstacleShadowLength);
-            p.tint(255);
+            P.tint(0, 60);
+            P.image(obstacle, position.x + obstacleShadowLength, position.y + obstacleShadowLength);
+            P.tint(255);
         }
     }
 
     public void displayC() {
-        if (obstacle != null) p.image(obstacle, position.x, position.y);
+        if (obstacle != null) P.image(obstacle, position.x, position.y);
     }
 
     private void tileBgA() {
@@ -85,47 +85,47 @@ public class Tile {
         if (y != 0) {
             Tile tile = tiles.get(x, y - 1);
             if (bgAName != null && !bgAName.equals(tile.bgAName) && tile.bgAEdges[0] != null)
-                p.image(tile.bgAEdges[0], position.x, position.y);
+                P.image(tile.bgAEdges[0], position.x, position.y);
         }
         if (x != 0) {
             Tile tile = tiles.get(x - 1, y);
             if (bgAName != null && !bgAName.equals(tile.bgAName) && tile.bgAEdges[3] != null)
-                p.image(tile.bgAEdges[3], position.x, position.y);
+                P.image(tile.bgAEdges[3], position.x, position.y);
         }
         if (y != 18) {
             Tile tile = tiles.get(x, y + 1);
             if (bgAName != null && !bgAName.equals(tile.bgAName) && tile.bgAEdges[2] != null)
-                p.image(tile.bgAEdges[2], position.x, position.y);
+                P.image(tile.bgAEdges[2], position.x, position.y);
         }
         if (x != 18) {
             Tile tile = tiles.get(x + 1, y);
             if (bgAName != null && !bgAName.equals(tile.bgAName) && tile.bgAEdges[1] != null)
-                p.image(tile.bgAEdges[1], position.x, position.y);
+                P.image(tile.bgAEdges[1], position.x, position.y);
         }
     }
 
     private void connectBgWEdges() {
-        if (debug) p.tint(0,255,0);
+        if (debug) P.tint(0,255,0);
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
         if (y != 0) {
             Tile tile = tiles.get(x, y - 1);
-            if (isConnected(0, tile)) p.image(tile.bgWEdges[0], position.x, position.y);
-            if (bgWEdges[0] != null && isConcrete(tile.bgWName)) p.image(bgWEdges[0], position.x, position.y);
+            if (isConnected(0, tile)) P.image(tile.bgWEdges[0], position.x, position.y);
+            if (bgWEdges[0] != null && isConcrete(tile.bgWName)) P.image(bgWEdges[0], position.x, position.y);
         } if (x != 0) {
             Tile tile = tiles.get(x - 1, y);
-            if (isConnected(3, tile)) p.image(tile.bgWEdges[3], position.x, position.y);
-            if (bgWEdges[3] != null && isConcrete(tile.bgWName)) p.image(bgWEdges[3], position.x, position.y);
+            if (isConnected(3, tile)) P.image(tile.bgWEdges[3], position.x, position.y);
+            if (bgWEdges[3] != null && isConcrete(tile.bgWName)) P.image(bgWEdges[3], position.x, position.y);
         } if (y != 18) {
             Tile tile = tiles.get(x, y + 1);
-            if (isConnected(2, tile)) p.image(tile.bgWEdges[2], position.x, position.y);
-            if (bgWEdges[2] != null && isConcrete(tile.bgWName)) p.image(bgWEdges[2], position.x, position.y);
+            if (isConnected(2, tile)) P.image(tile.bgWEdges[2], position.x, position.y);
+            if (bgWEdges[2] != null && isConcrete(tile.bgWName)) P.image(bgWEdges[2], position.x, position.y);
         } if (x != 18) {
             Tile tile = tiles.get(x + 1, y);
-            if (isConnected(1, tile)) p.image(tile.bgWEdges[1], position.x, position.y);
-            if (bgWEdges[1] != null && isConcrete(tile.bgWName)) p.image(bgWEdges[1], position.x, position.y);
+            if (isConnected(1, tile)) P.image(tile.bgWEdges[1], position.x, position.y);
+            if (bgWEdges[1] != null && isConcrete(tile.bgWName)) P.image(bgWEdges[1], position.x, position.y);
         }
-        if (debug) p.tint(255);
+        if (debug) P.tint(255);
     }
 
     private boolean isConnected(int i, Tile tile) {
@@ -176,12 +176,12 @@ public class Tile {
 
     public void drawBgWICorners() {
         if (isConcrete(bgWName)) {
-            if (drawMain) p.image(bgW, position.x, position.y);
+            if (drawMain) P.image(bgW, position.x, position.y);
             for (int i = 0; i < 4; i++) {
                 if (bgWICorners[i] != null) {
-                    if (debug) p.tint(255,0,0);
-                    p.image(bgWICorners[i], position.x, position.y);
-                    if (debug) p.tint(255);
+                    if (debug) P.tint(255,0,0);
+                    P.image(bgWICorners[i], position.x, position.y);
+                    if (debug) P.tint(255);
                 }
             }
         }
@@ -191,9 +191,9 @@ public class Tile {
         for (int i = 0; i < 4; i++) {
             if (bgWOCorners[i] != null) {
                 if (bgWOCornerNames[i].equals(name)) {
-                    if (debug) p.tint(0,0,255);
-                    p.image(bgWOCorners[i], position.x, position.y);
-                    if (debug) p.tint(255);
+                    if (debug) P.tint(0,0,255);
+                    P.image(bgWOCorners[i], position.x, position.y);
+                    if (debug) P.tint(255);
                 }
             }
         }
@@ -204,7 +204,7 @@ public class Tile {
         bgWOCornerNames = new String[4];
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
-        if (debug) p.tint(0,0,255);
+        if (debug) P.tint(0,0,255);
         if (x != 18 && y != 0) { //tro
             String n = doubleDiagonalOut(x,y,1,-1);
             if (n != null) {
@@ -230,7 +230,7 @@ public class Tile {
                 bgWOCornerNames[3] = n;
             }
         }
-        if (debug) p.tint(255);
+        if (debug) P.tint(255);
     }
 
     private String checkMissing(int x, int y, String name) {

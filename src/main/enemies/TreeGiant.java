@@ -20,10 +20,9 @@ public class TreeGiant extends Enemy {
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "treeGiant";
-        numAttackFrames = 63;
-        numMoveFrames = 91;
         attackStartFrame = 0;
         attackDmgFrames = new int[]{28};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = 2;
         attackFrame = attackStartFrame;
         corpseSize = new PVector(152,152);

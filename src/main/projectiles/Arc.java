@@ -13,26 +13,27 @@ import static processing.core.PApplet.*;
 
 public class Arc {
 
-    private PApplet p;
-    private PVector startPos;
-    private Turret turret;
-    private int damage;
-    private int maxLength;
-    private int maxDistance;
-    private int priority;
+    private final PApplet P;
+    private final PVector START_POSITION;
+    private final Turret TURRET;
+    private final int DAMAGE;
+    private final int MAX_LENGTH;
+    private final int MAX_DISTANCE;
+    private final int PRIORITY;
+
     ArrayList<BigPoint> bigPoints;
     public int alpha;
     private static int variation;
     private static int maxPoints;
 
     public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance, int priority) {
-        this.p = p;
-        startPos = new PVector(startX,startY);
-        this.turret = turret;
-        this.damage = damage;
-        this.maxLength = maxLength;
-        this.maxDistance = maxDistance;
-        this.priority = priority;
+        this.P = p;
+        START_POSITION = new PVector(startX,startY);
+        this.TURRET = turret;
+        this.DAMAGE = damage;
+        this.MAX_LENGTH = maxLength;
+        this.MAX_DISTANCE = maxDistance;
+        this.PRIORITY = priority;
         bigPoints = new ArrayList<>();
         alpha = 255;
         variation = 25; //25
@@ -43,40 +44,40 @@ public class Arc {
     public void main() {
         for (int k = 0; k < bigPoints.size()-1; k++) {
 //            bigPoints.get(k).getPoints(bigPoints.get(k+1).position);
-            p.stroke(215,242,248, alpha);
-            p.fill(255);
+            P.stroke(215,242,248, alpha);
+            P.fill(255);
             PVector pointB = bigPoints.get(k).position;
             PVector pointA = bigPoints.get(k+1).position;
             PVector[] points = bigPoints.get(k).points;
-            if (debug) p.ellipse(points[1].x,points[1].y,5,5);
-            p.line(pointB.x,pointB.y,points[points.length-1].x,points[points.length-1].y);
+            if (debug) P.ellipse(points[1].x,points[1].y,5,5);
+            P.line(pointB.x,pointB.y,points[points.length-1].x,points[points.length-1].y);
             for (int i = points.length-1; i > 1; i--) {
-                p.line(points[i].x,points[i].y,points[i-1].x,points[i-1].y);
-                if (debug) p.ellipse(points[i].x,points[i].y,5,5);
+                P.line(points[i].x,points[i].y,points[i-1].x,points[i-1].y);
+                if (debug) P.ellipse(points[i].x,points[i].y,5,5);
             }
-            p.line(points[1].x,points[1].y,pointA.x,pointA.y);
+            P.line(points[1].x,points[1].y,pointA.x,pointA.y);
         }
         alpha -= 5;
     }
 
     private void zap() {
-        bigPoints.add(new BigPoint(p,startPos));
+        bigPoints.add(new BigPoint(P, START_POSITION));
         ArrayList<Enemy> hitEnemies = new ArrayList<>();
-        Enemy enemy = getTargetEnemy(startPos, priority,false, hitEnemies);
+        Enemy enemy = getTargetEnemy(START_POSITION, PRIORITY,false, hitEnemies);
         if (enemy != null) {
             int enId = 0;
             for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemy) enId = j;
-            enemy.damagePj(damage, "null", 0, 0, turret, true, "normal", new PVector(0,0), enId);
+            enemy.damagePj(DAMAGE, "null", 0, 0, TURRET, true, "normal", new PVector(0,0), enId);
             hitEnemies.add(enemy);
-            bigPoints.add(new BigPoint(p, enemy.position));
+            bigPoints.add(new BigPoint(P, enemy.position));
             int x = 2;
-            for (int i = 1; i < maxLength; i++) {
+            for (int i = 1; i < MAX_LENGTH; i++) {
                 Enemy enemyJ = getTargetEnemy(bigPoints.get(x - 1).position, 0, true, hitEnemies);
                 if (enemyJ != null) {
-                    bigPoints.add(new BigPoint(p, enemyJ.position));
+                    bigPoints.add(new BigPoint(P, enemyJ.position));
                     enId = 0;
                     for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemyJ) enId = j;
-                    enemyJ.damagePj(damage, "null", 0, 0, turret, true, "normal", new PVector(0,0), enId);
+                    enemyJ.damagePj(DAMAGE, "null", 0, 0, TURRET, true, "normal", new PVector(0,0), enId);
                     hitEnemies.add(enemyJ);
                     x++;
                 }
@@ -106,7 +107,7 @@ public class Arc {
                 float x = abs(position.x - enemy.position.x);
                 float y = abs(position.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
-                if (jumping && t > maxDistance) continue;
+                if (jumping && t > MAX_DISTANCE) continue;
                 if (targetting == 0 && t < dist) { //close
                     e = enemy;
                     dist = t;
@@ -129,20 +130,20 @@ public class Arc {
 
     private static class BigPoint {
 
-        private PApplet p;
+        private final PApplet P;
 
         PVector position;
         PVector[] points;
 
         private BigPoint(PApplet p, PVector position) {
             this.position = position;
-            this.p = p;
+            this.P = p;
         }
 
         void getPoints(PVector pointA) {
             PVector pointB = position;
-            points = new PVector[(int)p.random(3,maxPoints)];
-            float lineLength = sqrt(sq(pointA.x-pointA.x)+sq(pointB.y-pointA.y));
+            points = new PVector[(int) P.random(3,maxPoints)];
+            float lineLength = sqrt(sq(0.0f)+sq(pointB.y-pointA.y));
             float d = lineLength / points.length+1;
             for (int i = 1; i < points.length; i++) {
                 float di = d*(i);
@@ -150,7 +151,7 @@ public class Arc {
                 e.setMag(di);
                 e.x *= -1;
                 e.y *= -1;
-                points[i] = new PVector(e.x+pointA.x+p.random(-variation,variation),e.y+pointA.y+p.random(-variation,variation));
+                points[i] = new PVector(e.x+pointA.x+ P.random(-variation,variation),e.y+pointA.y+ P.random(-variation,variation));
             }
         }
     }

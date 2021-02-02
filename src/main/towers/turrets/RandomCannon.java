@@ -9,7 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
 public class RandomCannon extends Turret {
@@ -122,7 +122,7 @@ public class RandomCannon extends Turret {
         upgradeDescC[4] = "range";
 
         upgradeDescA[5] = "Toxic";
-        upgradeDescB[5] = "explosions";
+        upgradeDescB[5] = "splatters";
         upgradeDescC[5] = "";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
@@ -144,6 +144,10 @@ public class RandomCannon extends Turret {
                     if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
+                    damageSound = soundsH.get("stoneDamage");
+                    breakSound = soundsH.get("stoneBreak");
+                    placeSound = soundsH.get("stonePlace");
+                    debrisType = "stone";
                     barrel = true;
                     delay = 6;
                     damage -= 5;
@@ -164,6 +168,8 @@ public class RandomCannon extends Turret {
                 case 5:
                     laundry = true;
                     damage += 10;
+                    effectDuration = 360;
+                    effectLevel = 25;
                     name = "miscCannonLaundry";
                     loadSprites();
                     if (nextLevelA == 2) nextLevelA++;

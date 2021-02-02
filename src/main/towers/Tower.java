@@ -11,6 +11,8 @@ import processing.sound.SoundFile;
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
 
+import static main.misc.WallSpecialVisuals.*;
+
 public abstract class Tower {
 
     public PApplet p;
@@ -34,6 +36,8 @@ public abstract class Tower {
     protected String debrisType;
     public int price;
     public int value;
+    public float effectLevel;
+    public int effectDuration;
     public boolean turret;
     public boolean visualize;
     public int priority;

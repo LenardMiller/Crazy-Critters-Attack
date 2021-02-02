@@ -46,10 +46,8 @@ public abstract class Buff {
         display();
     }
 
-    private void end(int i){ //ends if at end of lifespan
-        if (p.frameCount > lifeTimer){
-            buffs.remove(i);
-        }
+    void end(int i){ //ends if at end of lifespan
+        if (p.frameCount > lifeTimer) buffs.remove(i);
     }
 
     public void effect(){ //prints enemies id
@@ -65,4 +63,6 @@ public abstract class Buff {
             }
         }
     }
+
+    public void dieEffect() {}
 }

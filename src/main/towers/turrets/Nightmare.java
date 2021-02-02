@@ -8,7 +8,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Nightmare extends Turret {
 
@@ -49,7 +49,6 @@ public class Nightmare extends Turret {
     }
 
     public void fire(){ //needed to change projectile fired
-        //todo: fix spread
         for (int i = 0; i < numProjectiles; i++) {
             float angleB = angle;
             PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);

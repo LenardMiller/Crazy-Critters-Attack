@@ -8,7 +8,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Crossbow extends Turret {
 
@@ -117,7 +117,7 @@ public class Crossbow extends Turret {
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[9];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[8];
         upgradeIcons[2] = spritesAnimH.get("upgradeIC")[18];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[6];
         upgradeIcons[4] = spritesAnimH.get("upgradeIC")[10];
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[19];
     }
@@ -161,5 +161,5 @@ public class Crossbow extends Turret {
         }
     }
 
-    public void updateSprite() {};
+    public void updateSprite() {}
 }

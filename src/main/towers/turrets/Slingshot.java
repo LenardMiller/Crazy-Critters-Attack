@@ -9,7 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Slingshot extends Turret {
 
@@ -145,9 +145,15 @@ public class Slingshot extends Turret {
                     if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
+                    debrisType = "stone";
+                    damageSound = soundsH.get("stoneDamage");
+                    breakSound = soundsH.get("stoneBreak");
+                    placeSound = soundsH.get("stonePlace");
                     painful = true;
                     damage += 50;
                     delay += 10;
+                    effectDuration = 360;
+                    effectLevel = 15;
                     name = "slingshotRock";
                     loadSprites();
                     if (nextLevelA == 2) nextLevelA++;

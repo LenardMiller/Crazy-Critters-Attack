@@ -17,28 +17,44 @@ public class Corpse {
 
     PApplet p;
 
-    private PVector position;
-    private PVector size;
+    private final PVector POSITION;
+    private final PVector SIZE;
     private float angle;
-    private PVector velocity;
+    private final PVector VELOCITY;
     private float angularVelocity;
-    private PImage[] sprites;
+    private final PImage[] SPRITES;
     private String type;
-    private String bloodParticle;
+    private final String BLOOD_PARTICLE;
 
-    private int betweenFrames;
+    private final int BETWEEN_FRAMES;
     private int betweenTime;
     private int frame;
-    private boolean animated;
+    private final boolean ANIMATED;
 
-    private int maxLife;
+    private final int MAX_LIFE;
     private int lifespan;
 
-    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String type, String name, String bloodParticle, int frame, boolean animated) {
+    /**
+     * A dead enemy.
+     * @param p the PApplet
+     * @param position position of the corpse
+     * @param size size of the corpse
+     * @param angle rotation of the corpse
+     * @param velocity movement of the corpse
+     * @param angularVelocity rotational speed of the corpse
+     * @param betweenFrames number of times to duplicate a frame
+     * @param maxLife how long it should last
+     * @param effectType what sort of visual effect to apply
+     * @param name what enemy this was
+     * @param bloodParticle what color the blood should be
+     * @param frame what frame to start its animation on
+     * @param animated should it be animated
+     */
+    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String effectType, String name, String bloodParticle, int frame, boolean animated) {
         this.p = p;
 
-        this.position = new PVector(position.x, position.y);
-        this.size = size;
+        this.POSITION = new PVector(position.x, position.y);
+        this.SIZE = size;
         this.angle = angle;
         if (!animated) {
             float speed = 3.5f;
@@ -48,20 +64,20 @@ public class Corpse {
             a -= HALF_PI;
             a += p.random(radians(-40), radians(40));
             velocity = PVector.fromAngle(a);
-            this.velocity = velocity.setMag(speed);
-        } else this.velocity = velocity;
+            this.VELOCITY = velocity.setMag(speed);
+        } else this.VELOCITY = velocity;
         this.angularVelocity = angularVelocity;
-        sprites = spritesAnimH.get(name + "EN");
-        this.type = type;
+        SPRITES = spritesAnimH.get(name + "EN");
+        this.type = effectType;
         if (this.type == null) this.type = "normal";
-        this.bloodParticle = bloodParticle;
+        this.BLOOD_PARTICLE = bloodParticle;
         this.frame = frame;
-        this.animated = animated;
+        this.ANIMATED = animated;
 
-        this.betweenFrames = betweenFrames;
+        this.BETWEEN_FRAMES = betweenFrames;
         betweenTime = 0;
 
-        this.maxLife = maxLife;
+        this.MAX_LIFE = maxLife;
         lifespan = maxLife;
     }
 
@@ -73,18 +89,18 @@ public class Corpse {
     }
 
     private void move() {
-        velocity.x *= (float)lifespan / (float)maxLife;
-        velocity.y *= (float)lifespan / (float)maxLife;
-        angularVelocity *= (float)lifespan / (float)maxLife;
+        VELOCITY.x *= (float)lifespan / (float) MAX_LIFE;
+        VELOCITY.y *= (float)lifespan / (float) MAX_LIFE;
+        angularVelocity *= (float)lifespan / (float) MAX_LIFE;
         angle += angularVelocity;
-        position.add(velocity);
+        POSITION.add(VELOCITY);
     }
 
     private void display() {
-        PImage sprite = sprites[frame];
-        if (animated && frame < sprites.length - 1) {
+        PImage sprite = SPRITES[frame];
+        if (ANIMATED && frame < SPRITES.length - 1) {
             betweenTime++;
-            if (betweenTime >= betweenFrames) {
+            if (betweenTime >= BETWEEN_FRAMES) {
                 frame++;
                 betweenTime = 0;
             }
@@ -94,7 +110,7 @@ public class Corpse {
         boolean doTint = false;
         if (type.equals("burning") || type.equals("decay") || type.equals("poisoned")) {
             Color tintFinal;
-            String part = "";
+            String part;
             switch (type) {
                 case "burning":
                     tintFinal = new Color(60,60,60);
@@ -118,35 +134,35 @@ public class Corpse {
                     break;
             }
             tint = new Color (
-                    getTintChannel(tintFinal.getRed(), lifespan, maxLife),
-                    getTintChannel(tintFinal.getGreen(), lifespan, maxLife),
-                    getTintChannel(tintFinal.getBlue(), lifespan, maxLife)
+                    getTintChannel(tintFinal.getRed(), lifespan, MAX_LIFE),
+                    getTintChannel(tintFinal.getGreen(), lifespan, MAX_LIFE),
+                    getTintChannel(tintFinal.getBlue(), lifespan, MAX_LIFE)
             );
-            for (int i = (int) ((size.x / 25) * (size.y / 25)) / 25; i >= 0; i--) {
-                float chance = sq(2 * ((float)maxLife / (float)lifespan));
-                if (!animated) chance += 16;
+            for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
+                float chance = sq(2 * ((float) MAX_LIFE / (float)lifespan));
+                if (!ANIMATED) chance += 16;
                 int num = (int)(p.random(0, chance));
                 if (num == 0) {
-                    particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), p.random(0, 360), part));
+                    particles.add(new BuffParticle(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), p.random(0, 360), part));
                 }
             }
         }
 
-        if (!bloodParticle.equals("none")) {
-            for (int i = (int) ((size.x / 25) * (size.y / 25)) / 25; i >= 0; i--) {
-                float speed = sqrt(sq(velocity.x) + sq(velocity.y));
+        if (!BLOOD_PARTICLE.equals("none")) {
+            for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
+                float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
                 float chance = sq(1 / (speed + 0.01f));
                 chance += 16;
                 if (!type.equals("burning") && !type.equals("decay")) {
                     int num = (int) (p.random(0, chance));
                     if (num == 0) {
-                        particles.add(new Ouch(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), p.random(0, 360), bloodParticle));
+                        particles.add(new Ouch(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), p.random(0, 360), BLOOD_PARTICLE));
                     }
                 }
                 chance += 10;
                 int num = (int) (p.random(0,chance));
                 if (num == 0) {
-                    underParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), 0, bloodParticle));
+                    underParticles.add(new Pile(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), 0, BLOOD_PARTICLE));
                 }
             }
         }
@@ -157,16 +173,16 @@ public class Corpse {
         arrayCopy(sprite.pixels, st.pixels);
 
         //tinting
-        float transparency = ((float) lifespan) / ((float) maxLife);
+        float transparency = ((float) lifespan) / ((float) MAX_LIFE);
         if (doTint) {
             superTint(st, new Color(tint.getRed(), tint.getGreen(), tint.getBlue(), 0), transparency);
         } else p.tint(255, transparency * 255);
 
         angle += radians(angularVelocity);
         p.pushMatrix();
-        p.translate(position.x, position.y);
+        p.translate(POSITION.x, POSITION.y);
         p.rotate(angle);
-        p.image(st, -size.x / 2, -size.y / 2);
+        p.image(st, -SIZE.x / 2, -SIZE.y / 2);
         p.popMatrix();
         p.tint(255);
     }

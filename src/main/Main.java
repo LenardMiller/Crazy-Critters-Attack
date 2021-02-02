@@ -11,6 +11,7 @@ import main.gui.guiObjects.buttons.Button;
 import main.gui.guiObjects.buttons.Play;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
+import main.levelStructure.DesertWaves;
 import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
 import main.misc.*;
@@ -36,6 +37,8 @@ import static main.misc.SoundLoader.loadSounds;
 import static main.misc.SpriteLoader.loadSprites;
 import static main.misc.SpriteLoader.loadSpritesAnim;
 
+import static main.misc.WallSpecialVisuals.*;
+
 public class Main extends PApplet {
 
     public static Tile.TileDS tiles;
@@ -45,12 +48,12 @@ public class Main extends PApplet {
 
     public static Machine machine;
     public static ArrayList<main.towers.Tower> towers;
-    public static ArrayList<main.enemies.Enemy> enemies;
+    public static ArrayList<Enemy> enemies;
     public static ArrayList<main.misc.Corpse> corpses;
     public static ArrayList<main.projectiles.Projectile> projectiles;
-    public static ArrayList<main.particles.Particle> particles;
-    public static ArrayList<main.particles.Particle> underParticles;
+    public static ArrayList<main.particles.Particle> particles, underParticles;
     public static ArrayList<main.projectiles.Arc> arcs;
+    public static ArrayList<main.projectiles.Shockwave> shockwaves;
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;
     public static ArrayList<Buff> buffs;
@@ -60,17 +63,14 @@ public class Main extends PApplet {
 
     public static CompressArray compress;
 
-    public static Button addMoneyButton;
-    public static GuiObject moneyIcon;
     public static Button openMenuButton;
     public static Button wallBuyButton;
-    public static Play playButton;
     public static Button sellButton;
     public static Button targetButton;
-    public static Button upgradeButtonA;
-    public static Button upgradeButtonB;
-    public static GuiObject upgradeIconA;
-    public static GuiObject upgradeIconB;
+    public static Button upgradeButtonA, upgradeButtonB;
+    public static GuiObject moneyIcon;
+    public static GuiObject upgradeIconA, upgradeIconB;
+    public static Play playButton;
 
     public static Hand hand;
     public static Selection selection;
@@ -91,6 +91,8 @@ public class Main extends PApplet {
     public static int connectWallQueues;
     public static float volume = 0.25f;
 
+    public static final int FRAMERATE = 60;
+
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
     public static final int GRID_WIDTH = 1100;
@@ -99,6 +101,9 @@ public class Main extends PApplet {
     public static final int SLINGSHOT_PRICE = 75;
     public static final int RANDOMCANNON_PRICE = 150;
     public static final int CROSSBOW_PRICE = 200;
+    public static final int CANNON_PRICE = 300;
+    public static final int GLUER_PRICE = 300;
+    public static final int SEISMIC_PRICE = 400;
 
     public static HashMap<String, PImage> spritesH = new HashMap<>();
     public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
@@ -112,19 +117,30 @@ public class Main extends PApplet {
     public static Node start;
     public static Node[] end;
     public static AStar path;
-    public static int nSize;
-    public static float maxCost;
-    public static float minCost;
+    public static int nodeSize;
+    public static float maxCost, minCost;
 
     public static void main(String[] args) {
         PApplet.main("main.Main", args);
     }
 
+    /**
+     * From Processing.
+     * Just controls window size and renderer type,
+     * run once at program start
+     */
     public void settings() {
-        size(1100, 900);
+        size(GRID_WIDTH, BOARD_HEIGHT); //todo: openGL?
     }
 
+    /**
+     * From Processing.
+     * Primary initialization,
+     * run once at program start
+     */
     public void setup() {
+        frameRate(FRAMERATE);
+        //fonts
         veryLargeFont = createFont("STHeitiSC-Light", 48);
         largeFont = createFont("STHeitiSC-Light", 24);
         mediumLargeFont = createFont("STHeitiSC-Light", 21);
@@ -143,6 +159,7 @@ public class Main extends PApplet {
         particles = new ArrayList<>();
         underParticles = new ArrayList<>();
         arcs = new ArrayList<>();
+        shockwaves = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
         tileSelectButtons = new ArrayList<>();
         buffs = new ArrayList<>();
@@ -151,6 +168,32 @@ public class Main extends PApplet {
         loadSpritesAnim(this);
         //loads sounds
         loadSounds(this);
+        //pathfinding stuff
+        nodeSize = 25;
+        nodeGrid = new Node[GRID_WIDTH / nodeSize][GRID_HEIGHT / nodeSize];
+        for (int x = 0; x < GRID_WIDTH / nodeSize; x++) {
+            for (int y = 0; y < GRID_HEIGHT / nodeSize; y++) {
+                nodeGrid[x][y] = new Node(this, new PVector((nodeSize * x)-100, (nodeSize * y)-100));
+            }
+        }
+        path = new AStar();
+        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nodeSize)));
+        //create end nodes
+        end = new Node[0];
+        //create start node
+        nodeGrid[1][(GRID_WIDTH / nodeSize) / 2].setStart(1, (GRID_HEIGHT / nodeSize) / 2);
+        start.findGHF();
+        for (Node node : end) node.findGHF();
+        updateTowerArray();
+        //generates levels
+        currentLevel = 1; //temp
+        levels = new Level[2];
+        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50, "dirt");
+        levels[1] = new Level(this, DesertWaves.genDesertWaves(this), "levels/desert", 250, 75, "sand");
+        //load level data
+        DataControl.load(this, levels[currentLevel].layout);
+        money = levels[currentLevel].startingCash;
+        updateNodes();
         //other stuff
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
@@ -161,34 +204,14 @@ public class Main extends PApplet {
         levelBuilderGui = new LevelBuilderGui(this);
         //other
         connectWallQueues = 0;
-        //pathfinding stuff
-        nSize = 25;
-        nodeGrid = new Node[GRID_WIDTH / nSize][GRID_HEIGHT / nSize];
-        for (int x = 0; x < GRID_WIDTH / nSize; x++) {
-            for (int y = 0; y < GRID_HEIGHT / nSize; y++) {
-                nodeGrid[x][y] = new Node(this, new PVector((nSize * x)-100, (nSize * y)-100));
-            }
-        }
-        path = new AStar();
-        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nSize)));
-        //create end nodes
-        end = new Node[0];
-        //create start node
-        nodeGrid[1][(GRID_WIDTH / nSize) / 2].setStart(1, (GRID_HEIGHT / nSize) / 2);
-        start.findGHF();
-        for (Node node : end) node.findGHF();
-        updateTowerArray();
-        //generates levels
-        currentLevel = 0; //temp
-        levels = new Level[1];
-        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50);
-        //load level data
-        DataControl.load(this, levels[currentLevel].layout);
-        money = levels[currentLevel].startingCash;
-        updateNodes();
     }
 
-    public void draw() { //this will need to be change when I todo: add more menu "scenes"
+    /**
+     * From Processing.
+     * Everything else, run every frame.
+     * This will need to be change when I todo: add more menu "scenes."
+     */
+    public void draw() {
         noStroke();
         fill(25, 25, 25);
         rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
@@ -231,6 +254,9 @@ public class Main extends PApplet {
         }
     }
 
+    /**
+     * Runs all the in-game stuff.
+     */
     private void drawObjects() {
         //tiles
         if (connectWallQueues > 0) { //else
@@ -280,7 +306,7 @@ public class Main extends PApplet {
                 }
             }
             fill(0,0,255);
-            rect(start.position.x,start.position.y,nSize,nSize);
+            rect(start.position.x,start.position.y, nodeSize, nodeSize);
         }
         //under particle culling
         int up = underParticles.size();
@@ -327,6 +353,8 @@ public class Main extends PApplet {
             arc.main();
             if (arc.alpha <= 0) arcs.remove(i);
         }
+        //shockwaves
+        for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).main();
         //particle culling
         int p = particles.size();
         int p2 = p-800;
@@ -375,7 +403,7 @@ public class Main extends PApplet {
 
     public class InputHandler {
 
-        private PApplet p;
+        private final PApplet P;
 
         public boolean rightMouseReleasedPulse;
         public boolean leftMouseReleasedPulse;
@@ -384,17 +412,25 @@ public class Main extends PApplet {
         public boolean rightMousePressedPulse;
         public boolean leftMousePressedPulse;
 
+        /**
+         * Handles input from keyboard and mouse.
+         * @param p the PApplet
+         */
         public InputHandler(PApplet p) {
-            this.p = p;
+            this.P = p;
         }
 
+        /**
+         * Handles input from the mouse.
+         * @param b mouse pressed
+         */
         void mouse(boolean b) {
             if (b) {
-                if (p.mouseButton == RIGHT) {
+                if (P.mouseButton == RIGHT) {
                     if (!rightMousePressed) rightMousePressedPulse = true;
                     rightMousePressed = true;
                 }
-                if (p.mouseButton == LEFT) {
+                if (P.mouseButton == LEFT) {
                     if (!leftMousePressed) leftMousePressedPulse = true;
                     leftMousePressed = true;
                 }
@@ -410,6 +446,10 @@ public class Main extends PApplet {
             }
         }
 
+        /**
+         * Handles input from the keyboard.
+         * @param b any key pressed
+         */
         void key(boolean b) {
             for (KeyDS.KeyDSItem item : keysPressed.items) {
                 if (item.key == key) {
@@ -425,6 +465,9 @@ public class Main extends PApplet {
 
         public KeyDSItem[] items;
 
+        /**
+         * Containts all the keys from the keyboard,
+         */
         public KeyDS() {
             items = new KeyDSItem[0];
         }

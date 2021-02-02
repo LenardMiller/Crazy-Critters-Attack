@@ -27,7 +27,7 @@ public class Laundry extends Projectile {
         pierce = 1;
         this.angle = angle;
         angleTwo = angle;
-        angularVelocity = 15; //degrees mode
+        angularVelocity = p.random(-15, 15); //degrees mode
         sprite = spritesH.get("laundryPj");
         trail = "poison";
         hasTrail = true;

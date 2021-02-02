@@ -11,7 +11,8 @@ import static processing.core.PConstants.CENTER;
 
 public class Play extends Button {
 
-    private PImage spriteGrey;
+    private final PImage SPRITE_GREY;
+
     private int timer;
 
     public Play(PApplet p, float x, float y, String type, boolean active) {
@@ -21,14 +22,14 @@ public class Play extends Button {
         spritePressed = spritesAnimH.get("playBT")[0]; //in
         spriteIdle = spritesAnimH.get("playBT")[1]; //out
         spriteHover = spritesAnimH.get("playBT")[2]; //hover
-        spriteGrey = spritesAnimH.get("playBT")[3]; //grey
+        SPRITE_GREY = spritesAnimH.get("playBT")[3]; //grey
         sprite = spriteIdle;
     }
 
     public void main() {
         if (active && selection.name.equals("null") && hand.held.equals("null")) {
             if (!playingLevel) hover();
-            else sprite = spriteGrey;
+            else sprite = SPRITE_GREY;
         } else timer = p.frameCount + 10;
     }
 

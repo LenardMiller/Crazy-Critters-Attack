@@ -9,7 +9,8 @@ import static processing.core.PConstants.CENTER;
 
 public class TowerBuy extends Button {
 
-    private String towerType;
+    private final String TOWER_TYPE;
+
     public boolean depressed;
     public int price;
 
@@ -18,8 +19,8 @@ public class TowerBuy extends Button {
         price = 0;
         position = new PVector(x, y);
         size = new PVector(35, 35);
-        towerType = type;
-        spriteLocation = "sprites/guiObjects/buttons/towerBuy/" + towerType + "/"; //still uses old system because it is only created at beginning of game
+        TOWER_TYPE = type;
+        spriteLocation = "sprites/guiObjects/buttons/towerBuy/" + TOWER_TYPE + "/"; //still uses old system because it is only created at beginning of game
         spriteIdle = p.loadImage(spriteLocation + "000.png");
         spritePressed = p.loadImage(spriteLocation + "001.png");
         spriteHover = p.loadImage(spriteLocation + "002.png");
@@ -34,6 +35,15 @@ public class TowerBuy extends Button {
                 break;
             case "miscCannon":
                 price = RANDOMCANNON_PRICE;
+                break;
+            case "cannon":
+                price = CANNON_PRICE;
+                break;
+            case "gluer":
+                price = GLUER_PRICE;
+                break;
+            case "seismic":
+                price = SEISMIC_PRICE;
                 break;
             case "tesla":
             case "energyBlaster":
@@ -53,7 +63,7 @@ public class TowerBuy extends Button {
 
     public void main() {
         if (active) {
-            if (!towerType.equals("null")) hover();
+            if (!TOWER_TYPE.equals("null")) hover();
             display();
             if (money < price) {
                 p.tint(255, 0, 0, 100);
@@ -81,7 +91,7 @@ public class TowerBuy extends Button {
             p.textFont(largeFont); //displays info about tower
             int x = 1000;
             int offset = 0;
-            switch (towerType) {
+            switch (TOWER_TYPE) {
                 case "slingshot":
                     p.text("Slingshot", 1000, 241);
                     slingshotInfo(p);
@@ -95,6 +105,18 @@ public class TowerBuy extends Button {
                 case "crossbow":
                     p.text("Crossbow", x, 241);
                     crossbowInfo(p);
+                    break;
+                case "cannon":
+                    p.text("Cannon", x, 241);
+                    cannonInfo(p);
+                    break;
+                case "gluer":
+                    p.text("Gluer", x, 241);
+                    gluerInfo(p);
+                    break;
+                case "seismic":
+                    p.text("Seismic Tower", x, 241);
+                    seismicInfo(p);
                     break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);
@@ -141,8 +163,8 @@ public class TowerBuy extends Button {
         if (money < price) depressed = false;
         else depressed = !depressed;
         //if already holding, stop
-        if (hand.held.equals(towerType)) hand.setHeld("null");
+        if (hand.held.equals(TOWER_TYPE)) hand.setHeld("null");
         //if not, do
-        else if (depressed && money >= price) hand.setHeld(towerType);
+        else if (depressed) hand.setHeld(TOWER_TYPE);
     }
 }

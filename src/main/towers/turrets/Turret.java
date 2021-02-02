@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
+import static main.misc.WallSpecialVisuals.*;
 
 public abstract class Turret extends Tower {
 
@@ -38,10 +39,8 @@ public abstract class Turret extends Tower {
     float loadDelayTime;
     private ArrayList<Integer> spriteArray;
     Enemy targetEnemy;
-    public int effectLevel;
-    public int effectDuration;
-    private float targetAngle;
-    SoundFile specialSound;
+
+    float targetAngle;
     SoundFile fireSound;
 
     Turret(PApplet p, Tile tile) {
@@ -113,12 +112,10 @@ public abstract class Turret extends Tower {
                     if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
                         finalDist = dist;
-                    }
-                    if (priority == 1 && dist > finalDist) { //far
+                    } if (priority == 1 && dist > finalDist) { //far
                         e = enemy;
                         finalDist = dist;
-                    }
-                    if (priority == 2) {
+                    } if (priority == 2) {
                         if (enemy.maxHp > maxHp) { //strong
                             e = enemy;
                             finalDist = dist;
@@ -237,8 +234,9 @@ public abstract class Turret extends Tower {
             }
         } else if (spriteType == 2) { //load
             frame++;
-            if (frame < spriteArray.size()) sprite = loadFrames[spriteArray.get(frame)];
-            else { //if time runs out, switch to idle
+            if (frame < spriteArray.size() && spriteArray.get(frame) < loadFrames.length) {
+                sprite = loadFrames[spriteArray.get(frame)];
+            } else { //if time runs out, switch to idle
                 frame = 0;
                 sprite = sIdle;
                 spriteType = 0;
@@ -276,24 +274,14 @@ public abstract class Turret extends Tower {
     }
 
     public void upgrade(int id) {
-        if (id == 0) {
-//            if (nextLevelA == 2 && nextLevelB != 6) {
-//                specialSound.stop();
-//                specialSound.play(p.random(0.8f, 1.2f), volume);
-//            } else {
-            placeSound.stop();
-            placeSound.play(p.random(0.8f, 1.2f), volume);
-//            }
-        } else if (id == 1) {
-//            if (nextLevelB == 5 && nextLevelA != 3) {
-//                specialSound.stop();
-//                specialSound.play(p.random(0.8f, 1.2f), volume);
-//            } else {
-            placeSound.stop();
-            placeSound.play(p.random(0.8f, 1.2f), volume);
-//            }
-        }
         upgradeSpecial(id);
+        if (id == 0) {
+            placeSound.stop();
+            placeSound.play(p.random(0.8f, 1.2f), volume);
+        } else if (id == 1) {
+            placeSound.stop();
+            placeSound.play(p.random(0.8f, 1.2f), volume);
+        }
         if (id == 0) {
             value += upgradePrices[nextLevelA];
             nextLevelA++;

@@ -7,6 +7,7 @@ import static main.Main.spritesAnimH;
 import static processing.core.PConstants.HALF_PI;
 
 public class LargeExplosion extends Particle {
+
     public LargeExplosion(PApplet p, float x, float y, float angle, String type) {
         super(p, x, y, angle);
         position = new PVector(x, y);

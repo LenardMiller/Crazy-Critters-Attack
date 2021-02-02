@@ -33,11 +33,14 @@ public class SoundLoader {
         soundsH.put("fireImpact", new SoundFile(p, "sounds/projectiles/fireImpact.wav"));
         //turrets
         soundsH.put("woodPlace", new SoundFile(p, "sounds/turrets/woodPlace.wav"));
-//        soundsH.put("woodSpecial", new SoundFile(p, "sounds/turrets/woodSpecial.wav"));
+        soundsH.put("stonePlace", new SoundFile(p, "sounds/turrets/stonePlace.wav"));
+        soundsH.put("woodSpecial", new SoundFile(p, "sounds/turrets/woodSpecial.wav"));
         soundsH.put("slingshot", new SoundFile(p, "sounds/turrets/slingshot.wav"));
         soundsH.put("crossbow", new SoundFile(p, "sounds/turrets/crossbow.wav"));
         soundsH.put("shotbow", new SoundFile(p, "sounds/turrets/shotbow.wav"));
         soundsH.put("luggageBlaster", new SoundFile(p, "sounds/turrets/luggageBlaster.wav"));
+        soundsH.put("seismicSlam", new SoundFile(p, "sounds/turrets/seismicSlam.wav"));
+        soundsH.put("glueFire", new SoundFile(p, "sounds/turrets/glueFire.wav"));
         //ui
         soundsH.put("waveEnd", new SoundFile(p,"sounds/ui/waveEnd.wav"));
         soundsH.put("clickIn", new SoundFile(p, "sounds/ui/clickIn.wav"));
@@ -46,6 +49,9 @@ public class SoundLoader {
         soundsH.put("woodDamage", new SoundFile(p, "sounds/walls/woodDamage.wav"));
         soundsH.put("woodBreak", new SoundFile(p, "sounds/walls/woodBreak.wav"));
         soundsH.put("woodPlaceShort", new SoundFile(p, "sounds/walls/woodPlaceShort.wav"));
+        soundsH.put("stoneDamage", new SoundFile(p, "sounds/walls/stoneDamage.wav"));
+        soundsH.put("stoneBreak", new SoundFile(p, "sounds/walls/stoneBreak.wav"));
+        soundsH.put("stonePlaceShort", new SoundFile(p, "sounds/walls/stonePlaceShort.wav"));
 
         //loops
         soundLoopsH.put("smallExplosion", new SoundLoop(p, "sounds/loops/smallExplosion", 60));

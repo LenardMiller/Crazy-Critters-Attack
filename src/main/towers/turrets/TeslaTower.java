@@ -7,7 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class TeslaTower extends Turret{
 
@@ -79,16 +79,6 @@ public class TeslaTower extends Turret{
     }
 
     private void setUpgrades(){
-//        //damage
-//        upgradeDamage[0] = 0;
-//        upgradeDamage[1] = 0;
-//        upgradeDamage[2] = 0;
-//        upgradeDamage[3] = 10;
-//        //delay (firerate)
-//        upgradeDelay[0] = 0;
-//        upgradeDelay[1] = 0;
-//        upgradeDelay[2] = -30;
-//        upgradeDelay[3] = 0;
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 100;

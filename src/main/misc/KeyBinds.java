@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
 
+import static main.misc.WallSpecialVisuals.*;
+
 public class KeyBinds {
 
     private static PApplet p;
@@ -36,12 +38,12 @@ public class KeyBinds {
         boolean littleBug = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
         boolean mediumBug = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
         boolean bigBug = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
-        boolean treeSprite = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
-        boolean treeSpirit = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
-        boolean treeGiant = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
-        boolean snake = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
-        boolean worm = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
-        boolean butterfly = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
+        boolean sidewinder = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
+        boolean scorpion = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
+        boolean emperor = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
+        boolean worm = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
+        boolean midWorm = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
+        boolean bigWorm = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
         boolean dummy = keysPressed.getPressedPulse('!') && alive && p.mouseX < BOARD_WIDTH;
         //projectiles
         if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 50000));
@@ -63,14 +65,14 @@ public class KeyBinds {
         } if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
         if (bigBug) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
-        if (treeSprite) enemies.add(new TreeSprite(p, p.mouseX, p.mouseY));
-        if (treeSpirit) enemies.add(new TreeSpirit(p, p.mouseX, p.mouseY));
-        if (treeGiant) enemies.add(new TreeGiant(p, p.mouseX, p.mouseY));
-        if (snake) enemies.add(new Snake(p, p.mouseX, p.mouseY));
+        if (sidewinder) enemies.add(new Sidewinder(p, p.mouseX, p.mouseY));
+        if (scorpion) enemies.add(new Scorpion(p, p.mouseX, p.mouseY));
+        if (emperor) enemies.add(new Emperor(p, p.mouseX, p.mouseY));
         if (worm) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
-        if (butterfly) enemies.add(new Butterfly(p, p.mouseX, p.mouseY));
+        if (midWorm) enemies.add(new MidWorm(p, p.mouseX, p.mouseY));
+        if (bigWorm) enemies.add(new BigWorm(p, p.mouseX, p.mouseY));
         if (dummy) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
-        if (littleBug || mediumBug || bigBug || treeSprite || treeSpirit || treeGiant || snake || worm || butterfly || dummy) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        if (littleBug || mediumBug || bigBug || sidewinder || scorpion || emperor || midWorm || worm || bigWorm || dummy) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
     public void debugKeys() throws IOException {
@@ -89,6 +91,10 @@ public class KeyBinds {
         boolean switchMode = keysPressed.getPressedPulse('b');
         boolean saveTiles = keysPressed.getPressedPulse('z');
         boolean loadTiles = keysPressed.getPressedPulse('x');
+        boolean increaseWave = keysPressed.getPressedPulse(']');
+        boolean decreaseWave = keysPressed.getPressedPulse('[');
+        boolean increaseWave5 = keysPressed.getPressedPulse('}');
+        boolean decreaseWave5 = keysPressed.getPressedPulse('{');
         //entity stuff
         if (deleteEnemies) {
             enemies = new ArrayList<>();
@@ -111,13 +117,13 @@ public class KeyBinds {
         } if (killProjectiles) projectiles = new ArrayList<>();
         if (killEnemies) {
             for (Enemy enemy : enemies) {
-                enemy.damageSimple(enemy.maxHp - 1, null, "none", new PVector(0,0));
-                enemy.damageSimple(1, null, "none", new PVector(0,0));
+                enemy.damageSimple(enemy.maxHp - 1, null, "none", new PVector(0,0), true);
+                enemy.damageSimple(1, null, "none", new PVector(0,0), true);
 
             }
         } if (overkillEnemies) {
             for (Enemy enemy : enemies) {
-                enemy.damageSimple(enemy.maxHp + 1, null, "none", new PVector(0,0));
+                enemy.damageSimple(enemy.maxHp + 1, null, "none", new PVector(0,0), true);
             }
         }
         //other stuff
@@ -134,6 +140,15 @@ public class KeyBinds {
             hand.setHeld("null");
         } if (saveTiles) DataControl.save();
         if (loadTiles) DataControl.load(p,"levels/forest");
+        if (increaseWave && canWave(1)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);
+        if (decreaseWave && canWave(-1)) levels[currentLevel].setWave(levels[currentLevel].currentWave - 1);
+        if (increaseWave5 && canWave(5)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 5);
+        if (decreaseWave5 && canWave(-5)) levels[currentLevel].setWave(levels[currentLevel].currentWave - 5);
+    }
+
+    private boolean canWave(int count) {
+        if (levels[currentLevel].currentWave + count < 0) return false;
+        else return levels[currentLevel].currentWave + count <= levels[currentLevel].waves.length-1;
     }
 
     public void loadKeyBinds() {

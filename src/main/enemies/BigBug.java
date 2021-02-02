@@ -20,8 +20,6 @@ public class BigBug extends Enemy{
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "bigBug";
-        numAttackFrames = 100;
-        numMoveFrames = 12;
         betweenWalkFrames = 3;
         attackStartFrame = 48; //attack start
         corpseSize = size;

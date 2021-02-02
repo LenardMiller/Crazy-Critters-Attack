@@ -12,7 +12,7 @@ import static main.pathfinding.UpdateNode.updateNode;
 
 public class Node {
 
-    private PApplet p;
+    private final PApplet P;
 
     private Node parent;
     int clearance;
@@ -30,24 +30,24 @@ public class Node {
     public Tower tower;
 
     public Node(PApplet p, PVector position) {
-        this.p = p;
+        this.P = p;
 
         this.position = position;
     }
 
     public Tile getTile() {
-        int x = (int)((position.x/nSize)/2);
-        int y = (int)((position.y/nSize)/2);
+        int x = (int)((position.x/ nodeSize)/2);
+        int y = (int)((position.y/ nodeSize)/2);
         return tiles.get(x,y);
     }
 
     public void display() {
-        p.stroke(255);
-        p.noFill();
-        if (isStart) p.fill(125, 125, 255);
-        if (isEnd) p.fill(255, 0, 0);
-        if (isNotTraversable) p.fill(255,100);
-        p.rect(position.x, position.y, nSize, nSize);
+        P.stroke(255);
+        P.noFill();
+        if (isStart) P.fill(125, 125, 255);
+        if (isEnd) P.fill(255, 0, 0);
+        if (isNotTraversable) P.fill(255,100);
+        P.rect(position.x, position.y, nodeSize, nodeSize);
     }
 
     public void setStart(int x, int y) {
@@ -74,7 +74,7 @@ public class Node {
         if (isEnd) {
             isEnd = false;
             int index = end.length + 1;
-            PVector pv = new PVector(x * nSize, y * nSize);
+            PVector pv = new PVector(x * nodeSize, y * nodeSize);
             for (int i = 0; i < end.length; i++) {
                 if (end[i] != null) { //shouldn't be necessary?
                     if (end[i].position.x == pv.x && end[i].position.y == pv.y && i < end.length - 1) {
@@ -103,7 +103,7 @@ public class Node {
         if ((parentNew.isClosed || parentNew.isStart) && (isOpen || isClosed) && (parent == null || parentNew.startCost < parent.startCost)) {
             parent = parentNew;
             findGHF();
-            openNodes.addItem(new HeapNode.ItemNode(nodeGrid[(int) ((position.x + 100) / nSize)][(int) ((position.y + 100) / nSize)]));
+            openNodes.addItem(new HeapNode.ItemNode(nodeGrid[(int) ((position.x + 100) / nodeSize)][(int) ((position.y + 100) / nodeSize)]));
         }
     }
 
@@ -116,10 +116,6 @@ public class Node {
         Tile towerTile = tiles.get(tX+1, tY+1);
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
-//        if (tower != null) { //apparently this breaks everything
-//            setEnd(nX, nY);
-//            ended = true;
-//        }
         Tile obsTile = tiles.get(tX,tY);
         if (obsTile != null) {
             isNotTraversable = obsTile.obstacle != null;
@@ -138,11 +134,11 @@ public class Node {
             Enemy enemy = null;
             if (enemies.size() - 1 > path.index) enemy = enemies.get(path.index);
             if (path.index != -1 && enemies.size() != 0 && enemy != null) { //points added HERE
-                enemy.points.add(new Enemy.TurnPoint(p, position, tower));
-                enemy.points.add(new Enemy.TurnPoint(p, parent.position, tower));
+                enemy.points.add(new Enemy.TurnPoint(P, position, tower));
+                enemy.points.add(new Enemy.TurnPoint(P, parent.position, tower));
             }
             setDone();
-        } else updateNode(nodeGrid[(int) ((position.x + 100) / nSize)][(int) ((position.y + 100) / nSize)], request);
+        } else updateNode(nodeGrid[(int) ((position.x + 100) / nodeSize)][(int) ((position.y + 100) / nodeSize)], request);
         findGHF();
     }
 
@@ -150,7 +146,7 @@ public class Node {
         if (path.index != -1) {
             if (path.index < enemies.size()) {
                 Enemy enemy = enemies.get(path.index);
-                enemy.points.add(new Enemy.TurnPoint(p, position, tower));
+                enemy.points.add(new Enemy.TurnPoint(P, position, tower));
             }
         } if (!isStart) parent.setDone();
     }
@@ -190,7 +186,7 @@ public class Node {
             endCost = 0;
             startCost = 0;
         }
-        openNodes = new HeapNode((int) (sq((float) GRID_HEIGHT / nSize)));
+        openNodes = new HeapNode((int) (sq((float) GRID_HEIGHT / nodeSize)));
         parent = null;
     }
 }

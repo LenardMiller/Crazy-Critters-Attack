@@ -26,6 +26,9 @@ public abstract class Enemy {
     PApplet p;
 
     public ArrayList<TurnPoint> points;
+    /**
+     * Enemy's pathfinding size, measured in nodes
+     */
     public int pfSize;
     public PVector position;
     public PVector size;
@@ -39,15 +42,14 @@ public abstract class Enemy {
     public int maxHp;
     public int hp;
     private PImage sprite;
-    private PImage[] attackFrames;
+    public PImage[] attackFrames;
     private PImage[] moveFrames;
     private float moveFrame;
-    int attackFrame;
-    int[] attackDmgFrames;
+    public int attackFrame;
+    public int[] attackDmgFrames;
+    public int[] tempAttackDmgFrames;
     public boolean attacking;
     private boolean attackCue;
-    int numAttackFrames;
-    int numMoveFrames;
     int betweenWalkFrames;
     int betweenAttackFrames;
     int idleTime;
@@ -90,12 +92,12 @@ public abstract class Enemy {
         tintColor = 255;
         hitParticle = "redOuch";
         name = "";
-        numAttackFrames = 1;
-        numMoveFrames = 1;
         attackStartFrame = 0;
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
-        pfSize = 1; //enemies pathfinding size, measured in nodes
+        tempAttackDmgFrames = new int[attackDmgFrames.length];
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
+        pfSize = 1;
         stealthy = false;
         stealthMode = false;
         flying = false;
@@ -117,10 +119,8 @@ public abstract class Enemy {
 
         if (!attacking) {
             stealthMode = stealthy;
-            //todo: make work with other backgrounds
             move();
-        }
-        else {
+        } else {
             attack();
             stealthMode = false;
         }
@@ -165,8 +165,10 @@ public abstract class Enemy {
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
             //if attached, remove
-            if (buff.enId == i) buffs.remove(j);
-                //shift ids to compensate for enemy removal
+            if (buff.enId == i) {
+                buffs.get(j).dieEffect();
+                buffs.remove(j);
+            } //shift ids to compensate for enemy removal
             else if (buff.enId > i) buff.enId -= 1;
         }
 
@@ -177,14 +179,14 @@ public abstract class Enemy {
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
-        speed = maxSpeed;
     }
 
-    private void preDisplay() {
+    private void preDisplay() { //handle animation states
         if (attacking) {
+            if (attackFrame >= attackFrames.length) attackFrame = 0;
             sprite = attackFrames[attackFrame];
             idleTime++;
-            if (attackFrame < numAttackFrames - 1) {
+            if (attackFrame < attackFrames.length - 1) {
                 if (idleTime >= betweenAttackFrames) {
                     attackFrame += 1;
                     idleTime = 0;
@@ -193,7 +195,7 @@ public abstract class Enemy {
         } else {
             sprite = moveFrames[(int) (moveFrame)];
             idleTime++;
-            if (moveFrame < numMoveFrames - 1) {
+            if (moveFrame < moveFrames.length - 1) {
                 if (idleTime >= betweenWalkFrames) {
                     moveFrame += speed;
                     idleTime = 0;
@@ -238,7 +240,7 @@ public abstract class Enemy {
         }
     }
 
-    public void damagePj(int damage, String pjBuff, int effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) {
+    public void damagePj(int damage, String pjBuff, float effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) {
         lastDamageType = type;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -263,9 +265,6 @@ public abstract class Enemy {
         if (pjBuff != null) {
             Buff buff;
             switch (pjBuff) {
-                case "wet":
-                    buff = new Wet(p, i, turret);
-                    break;
                 case "burning":
                     buff = new Burning(p, i, effectLevel, effectDuration, turret);
                     break;
@@ -278,6 +277,12 @@ public abstract class Enemy {
                 case "decay":
                     if (turret != null) buff = new Decay(p, i, effectLevel, effectDuration, turret);
                     else buff = new Decay(p, i, 1, 120, null);
+                    break;
+                case "glued":
+                    buff = new Glued(p, i, effectLevel, effectDuration, turret);
+                    break;
+                case "spikeyGlued":
+                    buff = new SpikeyGlued(p, i, effectLevel, effectDuration, turret);
                     break;
                 default:
                     buff = null;
@@ -303,7 +308,7 @@ public abstract class Enemy {
         }
     }
 
-    public void damageSimple(int damage, Turret turret, String type, PVector direction) {
+    public void damageSimple(int damage, Turret turret, String type, PVector direction, boolean splash) {
         lastDamageType = type;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -314,7 +319,7 @@ public abstract class Enemy {
                 turret.damageTotal += damage + hp;
             } else turret.damageTotal += damage;
         }
-        damageEffect(false);
+        damageEffect(splash);
     }
 
     public void hpBar() {
@@ -330,7 +335,7 @@ public abstract class Enemy {
 
     void attack() {
         boolean dmg = false;
-        for (int frame : attackDmgFrames) {
+        for (int frame : tempAttackDmgFrames) {
             if (attackFrame == frame) {
                 if (betweenAttackFrames > 1) attackCount++;
                 dmg = true;
@@ -359,7 +364,8 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
-    //todo: enemies sometimes wander off if there are a lot of them
+    //todo: fix enemies sometimes wandering off if there are a lot of them
+    //todo: fix enemies spinning in place
 
     boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
@@ -369,7 +375,7 @@ public abstract class Enemy {
         if (point.combat) tpSize = speed;
         else tpSize = 5;
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
-        intersecting = (pfPosition.x > p.x - tpSize + (nSize / 2f) && pfPosition.x < p.x + tpSize + (nSize / 2f)) && (pfPosition.y > p.y - tpSize + (nSize / 2f) && pfPosition.y < p.y + tpSize + (nSize / 2f));
+        intersecting = (pfPosition.x > p.x - tpSize + (nodeSize / 2f) && pfPosition.x < p.x + tpSize + (nodeSize / 2f)) && (pfPosition.y > p.y - tpSize + (nodeSize / 2f) && pfPosition.y < p.y + tpSize + (nodeSize / 2f));
         return intersecting;
     }
 
@@ -511,7 +517,7 @@ public abstract class Enemy {
 
     public static class TurnPoint {
 
-        private PApplet p;
+        private final PApplet P;
         public Tower tower;
         public ArrayList<Tower> towers;
         public boolean machine;
@@ -520,7 +526,7 @@ public abstract class Enemy {
         boolean back;
 
         public TurnPoint(PApplet p, PVector position, Tower tower) {
-            this.p = p;
+            this.P = p;
             this.position = new PVector(position.x, position.y);
             this.tower = tower;
 
@@ -530,24 +536,24 @@ public abstract class Enemy {
         }
 
         public void display() {
-            p.noStroke();
-            if (back) p.stroke(0, 255, 0);
-            else p.noStroke();
-            if (combat) p.fill(255, 0, 0);
-            else p.fill(255);
-            p.ellipse(position.x + nSize / 2f, position.y + nSize / 2f, nSize, nSize);
+            P.noStroke();
+            if (back) P.stroke(0, 255, 0);
+            else P.noStroke();
+            if (combat) P.fill(255, 0, 0);
+            else P.fill(255);
+            P.ellipse(position.x + nodeSize / 2f, position.y + nodeSize / 2f, nodeSize, nodeSize);
             hover();
         }
 
         private void hover() {
             boolean intersecting;
             float tpSize = 10;
-            PVector pfPosition = new PVector(p.mouseX, p.mouseY);
-            intersecting = (pfPosition.x > position.x - tpSize + (nSize / 2f) && pfPosition.x < position.x + tpSize + (nSize / 2f)) && (pfPosition.y > position.y - tpSize + (nSize / 2f) && pfPosition.y < position.y + tpSize + (nSize / 2f));
+            PVector pfPosition = new PVector(P.mouseX, P.mouseY);
+            intersecting = (pfPosition.x > position.x - tpSize + (nodeSize / 2f) && pfPosition.x < position.x + tpSize + (nodeSize / 2f)) && (pfPosition.y > position.y - tpSize + (nodeSize / 2f) && pfPosition.y < position.y + tpSize + (nodeSize / 2f));
             if (intersecting && tower != null) {
-                p.stroke(255, 255, 0);
-                p.noFill();
-                p.rect(tower.tile.position.x - 50, tower.tile.position.y - 50, 50, 50);
+                P.stroke(255, 255, 0);
+                P.noFill();
+                P.rect(tower.tile.position.x - 50, tower.tile.position.y - 50, 50, 50);
             }
         }
     }
