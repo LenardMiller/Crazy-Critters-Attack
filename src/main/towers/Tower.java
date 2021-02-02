@@ -11,6 +11,8 @@ import processing.sound.SoundFile;
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
 
+import static main.misc.WallSpecialVisuals.*;
+
 public abstract class Tower {
 
     public PApplet p;

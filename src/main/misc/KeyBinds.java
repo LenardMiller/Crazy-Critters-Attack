@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
 
+import static main.misc.WallSpecialVisuals.*;
+
 public class KeyBinds {
 
     private static PApplet p;

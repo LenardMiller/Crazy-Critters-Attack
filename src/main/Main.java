@@ -37,6 +37,8 @@ import static main.misc.SoundLoader.loadSounds;
 import static main.misc.SpriteLoader.loadSprites;
 import static main.misc.SpriteLoader.loadSpritesAnim;
 
+import static main.misc.WallSpecialVisuals.*;
+
 public class Main extends PApplet {
 
     public static Tile.TileDS tiles;
