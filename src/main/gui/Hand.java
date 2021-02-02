@@ -126,7 +126,7 @@ public class Hand {
             P.text("50 HP", 1000, 331);
             P.text("$25", 1000, 356);
         }
-        if (displayInfo.equals("upgradeWall")) { //todo: only works between wave chunks?
+        if (displayInfo.equals("upgradeWall")) { //todo: should only work between wave chunks?
             Tower tower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
             if (tower.nextLevelB > tower.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
             else {

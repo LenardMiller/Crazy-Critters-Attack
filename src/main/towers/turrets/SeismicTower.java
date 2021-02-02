@@ -58,9 +58,9 @@ public class SeismicTower extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void checkTarget() { //todo: fix pausing to aim if 360
+    public void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
+        if (targetEnemy != null && spriteType != 1 && shockwaveWidth != 360) aim(targetEnemy);
         if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
             spriteType = 1;
             frame = 0;
@@ -149,7 +149,6 @@ public class SeismicTower extends Turret {
         PVector spa = PVector.fromAngle(angleB - HALF_PI);
         spa.setMag(29); //barrel length
         spp.add(spa);
-        shockwaves.add(new Shockwave(p, spp.x, spp.y, (int) range, angleB, shockwaveWidth, damage, this));
         float a = angleB;
         if (shockwaveWidth == 360) {
             a = 0;
@@ -157,7 +156,11 @@ public class SeismicTower extends Turret {
                 fireParticles(a);
                 a += TWO_PI / 6;
             }
-        } else fireParticles(a);
+            shockwaves.add(new Shockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2, (int) range, angleB, shockwaveWidth, damage, this));
+        } else {
+            fireParticles(a);
+            shockwaves.add(new Shockwave(p, spp.x, spp.y, (int) range, angleB, shockwaveWidth, damage, this));
+        }
     }
 
     private void fireParticles(float a) {
