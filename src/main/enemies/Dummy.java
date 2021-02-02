@@ -3,6 +3,8 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.soundsH;
+
 public class Dummy extends Enemy {
     public Dummy(PApplet p, float x, float y) {
         super(p,x,y);
@@ -13,7 +15,7 @@ public class Dummy extends Enemy {
         speed = maxSpeed;
         moneyDrop = 0;
         damage = 0;
-        maxHp = 50; //Hp
+        maxHp = 500000; //Hp
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "dummy";
@@ -21,6 +23,8 @@ public class Dummy extends Enemy {
         attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;
         corpseSize = size;
+        dieSound = soundsH.get("woodBreak");
+        overkillSound = soundsH.get("wodBreak");
         loadSprites();
     }
 }
