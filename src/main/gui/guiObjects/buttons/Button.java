@@ -28,8 +28,12 @@ public abstract class Button extends GuiObject {
         clickOut = soundsH.get("clickOut");
     }
 
-    public void hover(){ //if mouse over, push in
-        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&p. mouseY > position.y-size.y/2 && alive){
+    /**
+     * If mouse over, push in.
+     */
+    public void hover(){
+        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
+                p.mouseY > position.y-size.y/2 && alive && !paused) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) {
                 clickIn.stop();

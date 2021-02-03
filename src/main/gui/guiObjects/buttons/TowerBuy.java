@@ -73,9 +73,13 @@ public class TowerBuy extends Button {
         }
     }
 
-    public void hover() { //if hovered or depressed
+    /**
+     * If hovered or depressed.
+     */
+    public void hover() {
         int d = 2;
-        if (p.mouseX < (position.x+size.x/2)+d && p.mouseX > (position.x-size.x/2)-d-1 && p.mouseY < (position.y+size.y/2)+d && p.mouseY > (position.y-size.y/2)-d-1 && alive && active || depressed && alive){
+        if ((p.mouseX < (position.x+size.x/2)+d && p.mouseX > (position.x-size.x/2)-d-1 && p.mouseY < (position.y+size.y/2)+d
+                && p.mouseY > (position.y-size.y/2)-d-1 && active || depressed) && !paused && alive) {
             if (depressed) sprite = spritePressed;
             else sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse && !depressed) {
