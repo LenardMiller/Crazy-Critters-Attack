@@ -2,10 +2,7 @@ package main;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.gui.Hand;
-import main.gui.InGameGui;
-import main.gui.LevelBuilderGui;
-import main.gui.Selection;
+import main.gui.*;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.levelStructure.DesertWaves;
@@ -64,6 +61,7 @@ public class Main extends PApplet {
     public static Selection selection;
     public static InGameGui inGameGui;
     public static LevelBuilderGui levelBuilderGui;
+    public static PauseGui pauseGui;
 
     public static PFont veryLargeFont;
     public static PFont largeFont;
@@ -201,6 +199,7 @@ public class Main extends PApplet {
         selection = new Selection(p);
         inGameGui = new InGameGui(p);
         levelBuilderGui = new LevelBuilderGui(p);
+        pauseGui = new PauseGui(p);
         //other
         connectWallQueues = 0;
     }
@@ -236,6 +235,7 @@ public class Main extends PApplet {
         noStroke();
         if (!levelBuilder) inGameGui.display();
         else levelBuilderGui.display();
+        if (paused) pauseGui.display();
         hand.displayHeldInfo();
         //text
         textAlign(LEFT);
