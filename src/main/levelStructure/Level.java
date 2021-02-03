@@ -31,8 +31,8 @@ public class Level {
         if (currentWave < waves.length) { //todo: replace with win condition
             Wave wave = waves[currentWave];
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
-            else if (!paused) wave.spawnEnemies();
-            if (wave.spawnLengthTimer > wave.SPAWN_LENGTH && enemies.size() == 0 && !paused) {
+            else if (!paused && alive) wave.spawnEnemies();
+            if (wave.spawnLengthTimer > wave.SPAWN_LENGTH && enemies.size() == 0 && !paused && alive) {
                 wave.lengthTimer += wave.LENGTH / 500;
             }
         }

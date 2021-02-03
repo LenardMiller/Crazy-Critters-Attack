@@ -24,10 +24,11 @@ public class ResumeGame extends Button {
 
     /**
      * If mouse over, push in.
+     * Works if paused or dead.
      */
     public void hover(){
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
-                p.mouseY > position.y-size.y/2 && alive) {
+                p.mouseY > position.y-size.y/2) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) {
                 clickIn.stop();

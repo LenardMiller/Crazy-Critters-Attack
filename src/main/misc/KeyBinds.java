@@ -23,7 +23,7 @@ public class KeyBinds {
     }
 
     public void playerKeys() {
-        boolean pause = keysPressed.getPressedPulse(' ') && alive;
+        boolean pause = keysPressed.getPressedPulse(' ');
         if (pause) {
             updateNodes();
             updateWallTiles();
