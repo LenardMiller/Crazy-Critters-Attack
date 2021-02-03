@@ -88,15 +88,15 @@ public class Machine {
         if (deathFrame < 200) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
-        if (!dead) hurtParticles();
+        if (!dead && !paused) hurtParticles();
         else if (deathFrame < 300) deathAnim();
         else EXPLODE_LOOP.stopLoop();
-        if (p.frameCount > frameTimer && !dead) {
+        if (p.frameCount > frameTimer && !dead && !paused) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
             frameTimer = p.frameCount + betweenFrames;
         }
-        if (tintColor < 255) tintColor += 20;
+        if (tintColor < 255 && !paused) tintColor += 20;
     }
 
     private void hurtParticles() {

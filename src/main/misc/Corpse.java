@@ -66,7 +66,7 @@ public class Corpse {
             velocity = PVector.fromAngle(a);
             this.VELOCITY = velocity.setMag(speed);
         } else this.VELOCITY = velocity;
-        this.angularVelocity = angularVelocity;
+        this.angularVelocity = angularVelocity * 2;
         SPRITES = spritesAnimH.get(name + "EN");
         this.type = effectType;
         if (this.type == null) this.type = "normal";
