@@ -228,7 +228,7 @@ public abstract class Enemy {
         p.pushMatrix();
         p.translate(position.x, position.y);
         p.rotate(angle);
-        p.image(sprite, -size.x / 2, -size.y / 2);
+        if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
         if (debug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));

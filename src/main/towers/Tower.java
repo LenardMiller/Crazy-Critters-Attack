@@ -9,9 +9,9 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
-
-import static main.misc.WallSpecialVisuals.*;
+import static main.misc.MiscMethods.updateNodes;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public abstract class Tower {
 
@@ -85,7 +85,8 @@ public abstract class Tower {
         if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
         if (turret) {
-            if (inputHandler.leftMousePressedPulse && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) { //clicked on
+            if (inputHandler.leftMousePressedPulse && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x
+                    && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive && !paused) { //clicked on
                 selection.swapSelected(tile.id);
             }
         }
@@ -101,7 +102,7 @@ public abstract class Tower {
         p.tint(255,tintColor,tintColor);
         p.image(sprite,tile.position.x-size.x+2,tile.position.y-size.y+2);
         p.tint(255);
-        if (tintColor < 255) tintColor += 20;
+        if (tintColor < 255 && !paused) tintColor += 20;
     }
 
     public void displayPassB() {}

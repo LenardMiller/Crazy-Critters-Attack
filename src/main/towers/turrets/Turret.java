@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.MiscMethods.*;
-import static main.misc.WallSpecialVisuals.*;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public abstract class Turret extends Tower {
 
@@ -159,7 +159,7 @@ public abstract class Turret extends Tower {
         }
     }
 
-    public void fire() {
+    public void fire() { //todo: fix timer
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
         delayTime = p.frameCount + delay; //waits this time before firing
@@ -180,71 +180,74 @@ public abstract class Turret extends Tower {
             die(false);
             tile.tower = null;
         }
-        if (enemies.size() > 0 && alive) checkTarget();
-        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) {
+        if (enemies.size() > 0 && alive && !paused) checkTarget();
+        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y
+                && p.mouseY > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
     }
 
     public void displayPassB() {
-        if (hp < maxHp && p.random(0, 30) < 1) {
-            particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greyPuff"));
-        }
-        if (tintColor < 255) tintColor += 20;
-        if (spriteType == 0) { //idle
-            sprite = sIdle;
-            if (numIdleFrames > 1) {
-                if (frame < numIdleFrames) {
-                    sprite = idleFrames[frame];
-                    if (frameTimer >= betweenIdleFrames) {
-                        frame++;
-                        frameTimer = 0;
-                    } else frameTimer++;
-                } else {
-                    frame = 0;
-                    sprite = idleFrames[frame];
-                }
+        if (!paused) {
+            if (hp < maxHp && p.random(0, 30) < 1) {
+                particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greyPuff"));
             }
-        } else if (spriteType == 1) { //fire
-            if (frame < numFireFrames - 1) { //if not done, keep going
-                if (frameTimer >= betweenFireFrames) {
-                    frame++;
-                    frameTimer = 0;
-                    sprite = fireFrames[frame];
-                } else frameTimer++;
-            } else { //if done, switch to load
-                if (numLoadFrames > 0) {
-                    int oldSize = numLoadFrames;
-                    int newSize = (delayTime - p.frameCount);
-                    spriteArray = new ArrayList<>();
-                    if (oldSize > newSize) { //decreasing size
-                        //creates the new spriteArray
-                        for (int i = 0; i < oldSize; i++) spriteArray.add(i);
-                        //compression
-                        compress = new CompressArray(oldSize, newSize, spriteArray);
-                        compress.main();
-                    } else { //increasing size
-                        compress = new CompressArray(oldSize - 1, newSize, spriteArray);
-                        compress.main();
-                        spriteArray = compress.compArray;
+            if (tintColor < 255) tintColor += 20;
+            if (spriteType == 0) { //idle
+                sprite = sIdle;
+                if (numIdleFrames > 1) {
+                    if (frame < numIdleFrames) {
+                        sprite = idleFrames[frame];
+                        if (frameTimer >= betweenIdleFrames) {
+                            frame++;
+                            frameTimer = 0;
+                        } else frameTimer++;
+                    } else {
+                        frame = 0;
+                        sprite = idleFrames[frame];
                     }
                 }
-                frame = 0;
-                spriteType = 2;
+            } else if (spriteType == 1) { //fire
+                if (frame < numFireFrames - 1) { //if not done, keep going
+                    if (frameTimer >= betweenFireFrames) {
+                        frame++;
+                        frameTimer = 0;
+                        sprite = fireFrames[frame];
+                    } else frameTimer++;
+                } else { //if done, switch to load
+                    if (numLoadFrames > 0) {
+                        int oldSize = numLoadFrames;
+                        int newSize = (delayTime - p.frameCount);
+                        spriteArray = new ArrayList<>();
+                        if (oldSize > newSize) { //decreasing size
+                            //creates the new spriteArray
+                            for (int i = 0; i < oldSize; i++) spriteArray.add(i);
+                            //compression
+                            compress = new CompressArray(oldSize, newSize, spriteArray);
+                            compress.main();
+                        } else { //increasing size
+                            compress = new CompressArray(oldSize - 1, newSize, spriteArray);
+                            compress.main();
+                            spriteArray = compress.compArray;
+                        }
+                    }
+                    frame = 0;
+                    spriteType = 2;
+                }
+            } else if (spriteType == 2) { //load
+                frame++;
+                if (frame < spriteArray.size() && spriteArray.get(frame) < loadFrames.length) {
+                    sprite = loadFrames[spriteArray.get(frame)];
+                } else { //if time runs out, switch to idle
+                    frame = 0;
+                    sprite = sIdle;
+                    spriteType = 0;
+                }
             }
-        } else if (spriteType == 2) { //load
-            frame++;
-            if (frame < spriteArray.size() && spriteArray.get(frame) < loadFrames.length) {
-                sprite = loadFrames[spriteArray.get(frame)];
-            } else { //if time runs out, switch to idle
-                frame = 0;
-                sprite = sIdle;
-                spriteType = 0;
+            if (hit) { //change to red if under attack
+                tintColor = 0;
+                hit = false;
             }
-        }
-        if (hit) { //change to red if under attack
-            tintColor = 0;
-            hit = false;
         }
         displayPassB2();
     }
@@ -255,14 +258,14 @@ public abstract class Turret extends Tower {
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
         p.rotate(angle);
         p.tint(0, 60);
-        p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+        if (sprite != null) p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
         p.popMatrix();
         //main
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
         p.tint(255, tintColor, tintColor);
-        p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+        if (sprite != null) p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
         p.popMatrix();
         p.tint(255);
     }
