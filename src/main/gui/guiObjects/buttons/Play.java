@@ -1,7 +1,6 @@
 package main.gui.guiObjects.buttons;
 
 import main.levelStructure.Level;
-import main.levelStructure.Wave;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -47,8 +46,6 @@ public class Play extends Button {
             playingLevel = true;
             Level level = levels[currentLevel];
             level.currentWave = 0;
-            Wave wave = level.waves[level.currentWave];
-            wave.init();
         }
     }
 }

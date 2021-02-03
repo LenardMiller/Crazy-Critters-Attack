@@ -18,29 +18,33 @@ public class Wave {
     private final Color PRIMARY;
     private final Color SECONDARY;
     private final String TITLE;
-    private final int SPAWN_LENGTH;
+    final int SPAWN_LENGTH;
+    public final int LENGTH;
 
-    public int endTimer;
     private int betweenSpawns;
-    private int spawnTimer;
-    int waitTimer;
-    public int length;
+    /**
+     * Time until wave end
+     */
+    public int lengthTimer;
+    /**
+     * Time until next spawn
+     */
+    private int betweenSpawnTimer;
+    /**
+     * Time until stop spawning
+     */
+    int spawnLengthTimer;
+
     public ArrayList<String> spawns;
 
-    //todo: pause functionality
     public Wave(PApplet p, int length, int spawnLength, Color primary, Color secondary, String title) {
         this.P = p;
-        this.length = length;
+        this.LENGTH = length;
         this.SPAWN_LENGTH = spawnLength;
         this.PRIMARY = primary;
         this.SECONDARY = secondary;
         this.TITLE = title;
         spawns = new ArrayList<>();
-    }
-
-    public void init() {
-        endTimer = P.frameCount + length;
-        waitTimer = P.frameCount + SPAWN_LENGTH;
     }
 
     public void end() {
@@ -50,21 +54,24 @@ public class Wave {
         money += levels[currentLevel].reward;
     }
 
+    /**
+     * Calculates the time between spawns.
+     */
     void load() {
         betweenSpawns = SPAWN_LENGTH / spawns.size();
-        spawnTimer = P.frameCount + betweenSpawns;
     }
 
     void addSpawns(String enemy, int count) {
-        for (int i = count; i > 0; i--) {
-            spawns.add(enemy);
-        }
+        for (int i = count; i > 0; i--) spawns.add(enemy);
         Collections.shuffle(spawns);
     }
 
     public void spawnEnemies() {
-        if (spawns.size() > 0 && spawnTimer <= P.frameCount && waitTimer >= P.frameCount) {
-            spawnTimer = P.frameCount + betweenSpawns;
+        betweenSpawnTimer++;
+        spawnLengthTimer++;
+        lengthTimer++;
+        if (spawns.size() > 0 && betweenSpawnTimer > betweenSpawns && spawnLengthTimer < SPAWN_LENGTH) {
+            betweenSpawnTimer = 0;
             String s = spawns.get(spawns.size() - 1);
             spawns.remove(spawns.size() - 1);
             PVector pos;
