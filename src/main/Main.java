@@ -75,6 +75,7 @@ public class Main extends PApplet {
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
     public static boolean paused = false;
+    public static boolean dev = true;
     public static int connectWallQueues;
     public static float volume = 0.25f;
 
@@ -214,12 +215,15 @@ public class Main extends PApplet {
         fill(25, 25, 25);
         rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
         //keys
-        try {
-            keyBinds.debugKeys();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (dev) {
+            try {
+                keyBinds.debugKeys();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            keyBinds.spawnKeys();
         }
-        keyBinds.spawnKeys();
+        keyBinds.playerKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
             path.reqQ.get(0).getPath();
