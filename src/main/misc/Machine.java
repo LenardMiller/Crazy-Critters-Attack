@@ -89,7 +89,7 @@ public class Machine {
         p.imageMode(CORNER);
         p.tint(255);
         if (!dead && !paused) hurtParticles();
-        else if (deathFrame < 300) deathAnim();
+        else if (deathFrame < 300 && !paused) deathAnim();
         else EXPLODE_LOOP.stopLoop();
         if (p.frameCount > frameTimer && !dead && !paused) {
             if (currentFrame < sprites.length - 1) currentFrame++;

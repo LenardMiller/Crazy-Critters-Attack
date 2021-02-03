@@ -113,16 +113,18 @@ public abstract class Enemy {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
 
-        angle = clampAngle(angle);
-        targetAngle = clampAngle(targetAngle);
-        angle += angleDifference(targetAngle, angle) / 10;
+        if (!paused) {
+            angle = clampAngle(angle);
+            targetAngle = clampAngle(targetAngle);
+            angle += angleDifference(targetAngle, angle) / 10;
 
-        if (!attacking) {
-            stealthMode = stealthy;
-            move();
-        } else {
-            attack();
-            stealthMode = false;
+            if (!attacking) {
+                stealthMode = stealthy;
+                move();
+            } else {
+                attack();
+                stealthMode = false;
+            }
         }
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         displayPassB();
@@ -207,14 +209,14 @@ public abstract class Enemy {
     }
 
     public void displayPassA() {
-        preDisplay();
+        if (!paused) preDisplay();
         p.pushMatrix();
         p.tint(0, 60);
         int x = 1;
         if (pfSize > 1) x++;
         p.translate(position.x + x, position.y + x);
         p.rotate(angle);
-        p.image(sprite, -size.x / 2, -size.y / 2);
+        if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
         p.tint(255);
         p.popMatrix();
     }
