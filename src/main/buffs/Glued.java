@@ -19,7 +19,6 @@ public class Glued extends Buff {
         particleChance = 8;
         effectDelay = 12; //frames
         lifeDuration = duration;
-        lifeTimer = p.frameCount + lifeDuration;
         this.SPEED_MODIFIER = speedMod;
         particle = "glue";
         name = "glued";
@@ -61,7 +60,8 @@ public class Glued extends Buff {
     void end(int i){ //ends if at end of lifespan
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
-        if (p.frameCount > lifeTimer) {
+        if (!paused) lifeTimer++;
+        if (lifeTimer > lifeDuration) {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
                 enemy.speed = enemy.maxSpeed; //set movement speed back to default
                 //set attack speed back to default

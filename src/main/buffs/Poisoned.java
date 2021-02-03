@@ -14,7 +14,6 @@ public class Poisoned extends Buff {
         particleChance = 16;
         effectDelay = 60; //frames
         lifeDuration = 360;
-        lifeTimer = p.frameCount + lifeDuration;
         particle = "poison";
         name = "poisoned";
         this.enId = enId;

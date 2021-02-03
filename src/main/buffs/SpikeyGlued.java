@@ -10,6 +10,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
+
 import static main.Main.*;
 
 public class SpikeyGlued extends Buff {
@@ -24,7 +25,6 @@ public class SpikeyGlued extends Buff {
         effectDelay = 12; //frames
         lifeDuration = duration;
         this.SPEED_MODIFIER = speedMod;
-        lifeTimer = p.frameCount + lifeDuration;
         particle = "glue";
         name = "glued";
         this.enId = enId;
@@ -106,7 +106,8 @@ public class SpikeyGlued extends Buff {
     void end(int i) {
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
-        if (p.frameCount > lifeTimer) {
+        if (!paused) lifeTimer++;
+        if (lifeTimer > lifeDuration) {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
                 enemy.speed = enemy.maxSpeed; //set movement speed back to default
                 //set attack speed back to default

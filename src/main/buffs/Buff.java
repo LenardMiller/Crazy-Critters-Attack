@@ -5,9 +5,7 @@ import main.particles.BuffParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
-import static main.Main.buffs;
-import static main.Main.enemies;
-import static main.Main.particles;
+import static main.Main.*;
 
 public abstract class Buff {
 
@@ -28,9 +26,7 @@ public abstract class Buff {
 
         particleChance = 8;
         effectDelay = 60; //frames
-        effectTimer = p.frameCount + effectDelay;
         lifeDuration = 600; //frames
-        lifeTimer = p.frameCount + lifeDuration;
         particle = "null";
         name = "null";
         this.enId = enId;
@@ -39,22 +35,33 @@ public abstract class Buff {
 
     public void main(int i){
         end(i);
-        if (p.frameCount > effectTimer){
-            effect();
-            effectTimer = p.frameCount + effectDelay;
+        if (!paused) {
+            effectTimer++;
+            if (effectTimer > effectDelay){
+                effect();
+                effectTimer = 0;
+            }
+            display();
         }
-        display();
     }
 
-    void end(int i){ //ends if at end of lifespan
-        if (p.frameCount > lifeTimer) buffs.remove(i);
+    /**
+     * Ends if at end of lifespan.
+     * @param i buff id
+     */
+    void end(int i) {
+        if (!paused) lifeTimer++;
+        if (lifeTimer > lifeDuration) buffs.remove(i);
     }
 
-    public void effect(){ //prints enemies id
+    public void effect() {
         System.out.print(enId + " ");
     }
 
-    void display() { //particles around enemy
+    /**
+     * Particles around enemy.
+     */
+    void display() {
         if (particle != null) {
             Enemy enemy = enemies.get(enId);
             int num = (int) (p.random(0, particleChance));

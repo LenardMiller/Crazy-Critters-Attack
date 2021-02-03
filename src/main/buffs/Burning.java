@@ -16,7 +16,6 @@ public class Burning extends Buff {
         particleChance = 4;
         effectDelay = 12; //frames
         lifeDuration = duration;
-        lifeTimer = p.frameCount + lifeDuration;
         this.DAMAGE = (int) damage;
         particle = "fire";
         name = "burning";
