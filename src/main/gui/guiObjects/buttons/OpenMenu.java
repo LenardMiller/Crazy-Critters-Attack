@@ -3,6 +3,7 @@ package main.gui.guiObjects.buttons;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.paused;
 import static main.Main.spritesAnimH;
 
 public class OpenMenu extends Button {
@@ -24,6 +25,6 @@ public class OpenMenu extends Button {
     }
 
     public void action(){
-        System.out.println("Not yet implemented!");
+        paused = !paused;
     }
 }

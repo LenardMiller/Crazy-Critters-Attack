@@ -36,8 +36,8 @@ import static main.misc.MiscMethods.*;
 import static main.misc.SoundLoader.loadSounds;
 import static main.misc.SpriteLoader.loadSprites;
 import static main.misc.SpriteLoader.loadSpritesAnim;
-
-import static main.misc.WallSpecialVisuals.*;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateWallTileConnections;
 
 public class Main extends PApplet {
 
@@ -88,6 +88,7 @@ public class Main extends PApplet {
     public static boolean debug = false;
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
+    public static boolean paused = false;
     public static int connectWallQueues;
     public static float volume = 0.25f;
 
