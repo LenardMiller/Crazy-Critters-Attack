@@ -11,7 +11,8 @@ import static main.Main.*;
 
 public class Frag extends Projectile {
 
-    private final int DEATH_DATE;
+    private final int LIFESPAN;
+    private int lifeTimer;
 
     public Frag(PApplet p, float x, float y, float angle, Turret turret, int damage) {
         super(p, x, y, angle, turret);
@@ -26,16 +27,18 @@ public class Frag extends Projectile {
         angularVelocity = p.random(-15,15);
         sprite = spritesH.get("darkMetalPt");
         hitSound = soundsH.get("smallImpact");
-        int lifespan = 15;
-        DEATH_DATE = p.frameCount + lifespan;
+        LIFESPAN = 15;
     }
 
     public void main(ArrayList<Projectile> projectiles, int i) {
-        trail();
+        if (!paused) {
+            lifeTimer++;
+            trail();
+            move();
+        }
         displayPassB();
-        move();
         collideEn();
-        if (p.frameCount > DEATH_DATE) dead = true;
+        if (lifeTimer > LIFESPAN) dead = true;
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||
                 position.y + size.y < -100 || position.x + size.x < -100 || dead) {
             die(i);

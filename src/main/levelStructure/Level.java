@@ -27,8 +27,8 @@ public class Level {
         startWave = 0;
     }
 
-    public void main() {
-        if (currentWave < waves.length) { //temp, replace with win condition
+    public void main() { //todo: can sometimes fail to spawn an enemy
+        if (currentWave < waves.length) { //todo: replace with win condition
             Wave wave = waves[currentWave];
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
             else if (!paused) wave.spawnEnemies();
