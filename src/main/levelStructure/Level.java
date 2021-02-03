@@ -70,6 +70,6 @@ public class Level {
         P.image(spritesH.get("currentLineIc"),891,212+125-1);
         P.tint(255);
         P.image(spritesH.get("currentLineIc"),891-1,212+125-1-1);
-        playButton.display((int)playY);
+        inGameGui.playButton.display((int)playY);
     }
 }

@@ -289,10 +289,10 @@ public abstract class Turret extends Tower {
             value += upgradePrices[nextLevelB];
             nextLevelB++;
         }
-        if (nextLevelA < upgradeTitles.length / 2) upgradeIconA.sprite = upgradeIcons[nextLevelA];
-        else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-        if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
+        else inGameGui.upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+        if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         //shower debris
         int num = (int) (p.random(30, 50));
         for (int j = num; j >= 0; j--) {

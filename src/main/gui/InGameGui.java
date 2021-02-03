@@ -13,6 +13,15 @@ public class InGameGui {
 
     public int flashA;
 
+    public Button openMenuButton;
+    public Button wallBuyButton;
+    public Button sellButton;
+    public Button targetButton;
+    public Button upgradeButtonA, upgradeButtonB;
+    public GuiObject moneyIcon;
+    public GuiObject upgradeIconA, upgradeIconB;
+    public Play playButton;
+
     public InGameGui(PApplet p) {
         this.P = p;
         build();

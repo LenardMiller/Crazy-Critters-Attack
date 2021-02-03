@@ -6,9 +6,6 @@ import main.gui.Hand;
 import main.gui.InGameGui;
 import main.gui.LevelBuilderGui;
 import main.gui.Selection;
-import main.gui.guiObjects.GuiObject;
-import main.gui.guiObjects.buttons.Button;
-import main.gui.guiObjects.buttons.Play;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.levelStructure.DesertWaves;
@@ -62,15 +59,6 @@ public class Main extends PApplet {
     public static Level[] levels;
 
     public static CompressArray compress;
-
-    public static Button openMenuButton;
-    public static Button wallBuyButton;
-    public static Button sellButton;
-    public static Button targetButton;
-    public static Button upgradeButtonA, upgradeButtonB;
-    public static GuiObject moneyIcon;
-    public static GuiObject upgradeIconA, upgradeIconB;
-    public static Play playButton;
 
     public static Hand hand;
     public static Selection selection;
