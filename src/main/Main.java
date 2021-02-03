@@ -152,19 +152,23 @@ public class Main extends PApplet {
         loadSpritesAnim(this);
         //loads sounds
         loadSounds(this);
+        //load input
+        inputHandler = new InputHandler(this);
+        keyBinds = new KeyBinds(this);
+        keyBinds.loadKeyBinds();
 
-        resetGame();
+        resetGame(this);
     }
 
     /**
      * Sets all the ingame stuff up.
      */
-    public void resetGame() {
+    public static void resetGame(PApplet p) {
         //creates object data structures
         tiles = new Tile.TileDS();
         for (int y = 0; y <= (BOARD_HEIGHT / 50); y++) {
             for (int x = 0; x <= (BOARD_WIDTH / 50); x++) {
-                tiles.add(new Tile(this, new PVector(x * 50, y * 50), tiles.size()), x, y);
+                tiles.add(new Tile(p, new PVector(x * 50, y * 50), tiles.size()), x, y);
             }
         }
         enemies = new ArrayList<>();
@@ -182,7 +186,7 @@ public class Main extends PApplet {
         nodeGrid = new Node[GRID_WIDTH / nodeSize][GRID_HEIGHT / nodeSize];
         for (int x = 0; x < GRID_WIDTH / nodeSize; x++) {
             for (int y = 0; y < GRID_HEIGHT / nodeSize; y++) {
-                nodeGrid[x][y] = new Node(this, new PVector((nodeSize * x)-100, (nodeSize * y)-100));
+                nodeGrid[x][y] = new Node(p, new PVector((nodeSize * x)-100, (nodeSize * y)-100));
             }
         }
         path = new AStar();
@@ -195,22 +199,20 @@ public class Main extends PApplet {
         for (Node node : end) node.findGHF();
         updateTowerArray();
         //generates levels
+        playingLevel = false;
         currentLevel = 1; //temp
         levels = new Level[2];
-        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50, "dirt");
-        levels[1] = new Level(this, DesertWaves.genDesertWaves(this), "levels/desert", 250, 75, "sand");
+        levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
+        levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
         //load level data
-        DataControl.load(this, levels[currentLevel].layout);
+        DataControl.load(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();
         //other stuff
-        inputHandler = new InputHandler(this);
-        keyBinds = new KeyBinds(this);
-        keyBinds.loadKeyBinds();
-        hand = new Hand(this);
-        selection = new Selection(this);
-        inGameGui = new InGameGui(this);
-        levelBuilderGui = new LevelBuilderGui(this);
+        hand = new Hand(p);
+        selection = new Selection(p);
+        inGameGui = new InGameGui(p);
+        levelBuilderGui = new LevelBuilderGui(p);
         //other
         connectWallQueues = 0;
     }

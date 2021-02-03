@@ -1,5 +1,6 @@
 package main.gui.guiObjects.buttons;
 
+import main.Main;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -49,5 +50,6 @@ public class OpenMenu extends Button {
 
     public void action(){
         paused = !paused;
+        Main.resetGame(p);
     }
 }
