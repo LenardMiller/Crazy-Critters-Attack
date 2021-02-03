@@ -62,7 +62,7 @@ public class Wave {
     }
 
     void addSpawns(String enemy, int count) {
-        for (int i = count; i > 0; i--) spawns.add(enemy);
+        for (int i = 0; i < count; i++) spawns.add(enemy);
         Collections.shuffle(spawns);
     }
 
@@ -70,7 +70,7 @@ public class Wave {
         betweenSpawnTimer++;
         spawnLengthTimer++;
         lengthTimer++;
-        if (spawns.size() > 0 && betweenSpawnTimer > betweenSpawns && spawnLengthTimer < SPAWN_LENGTH) {
+        if (spawns.size() > 0 && betweenSpawnTimer >= betweenSpawns) {
             betweenSpawnTimer = 0;
             String s = spawns.get(spawns.size() - 1);
             spawns.remove(spawns.size() - 1);
@@ -81,7 +81,13 @@ public class Wave {
         }
     }
 
-    public void display(float y, int id) { //todo: fix jiggle text
+    /**
+     * Draws wave icons.
+     * todo: fix jiggle text
+     * @param y displacement of icons
+     * @param id current wave id
+     */
+    public void display(float y, int id) {
         P.tint(PRIMARY.getRed(), PRIMARY.getGreen(), PRIMARY.getBlue());
         P.image(spritesH.get("wavePrimaryIc"), 890, y);
         P.tint(SECONDARY.getRed(), SECONDARY.getGreen(), SECONDARY.getBlue());

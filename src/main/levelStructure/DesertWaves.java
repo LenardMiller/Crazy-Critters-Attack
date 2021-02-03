@@ -95,7 +95,7 @@ public class DesertWaves {
         waves[13] = new Wave(p, 4000, 600, wormPrimary, wormSecondary, "Worms");
         waves[13].addSpawns("littleWorm", 5);
 
-        waves[14] = new Wave(p, 2400, 200, bigBugPrimary, bigBugSecondary, "Big Bug");
+        waves[14] = new Wave(p, 2400, 20, bigBugPrimary, bigBugSecondary, "Big Bug");
         waves[14].addSpawns("bigBug", 1);
 
         waves[15] = new Wave(p, 4000, 600, wormPrimary, wormSecondary, "Worms");
@@ -169,7 +169,7 @@ public class DesertWaves {
         waves[32].addSpawns("bigBug", 5);
         waves[32].addSpawns("littleWorm", 30);
 
-        waves[33] = new Wave(p, 4000, 200, bigWormPrimary, bigWormSecondary, "Megaworm");
+        waves[33] = new Wave(p, 4000, 20, bigWormPrimary, bigWormSecondary, "Megaworm");
         waves[33].addSpawns("bigWorm", 1);
 
         waves[34] = new Wave(p, 3600, 1500, emperorPrimary, emperorSecondary, "Emperors");
