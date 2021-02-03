@@ -46,9 +46,11 @@ public class Shockwave {
     }
 
     public void main() {
-        radius += SPEED;
+        if (!paused) {
+            radius += SPEED;
+            display();
+        }
         if (radius > MAX_RADIUS) shockwaves.remove(this);
-        display();
         damageEnemies();
     }
 
