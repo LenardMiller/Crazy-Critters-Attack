@@ -147,6 +147,19 @@ public class Main extends PApplet {
         mediumLargeFont = createFont("STHeitiSC-Light", 21);
         mediumFont = createFont("STHeitiSC-Light", 18);
         smallFont = createFont("STHeitiSC-Light", 12);
+        //loads sprites
+        loadSprites(this);
+        loadSpritesAnim(this);
+        //loads sounds
+        loadSounds(this);
+
+        resetGame();
+    }
+
+    /**
+     * Sets all the ingame stuff up.
+     */
+    public void resetGame() {
         //creates object data structures
         tiles = new Tile.TileDS();
         for (int y = 0; y <= (BOARD_HEIGHT / 50); y++) {
@@ -164,11 +177,6 @@ public class Main extends PApplet {
         towerBuyButtons = new ArrayList<>();
         tileSelectButtons = new ArrayList<>();
         buffs = new ArrayList<>();
-        //loads sprites
-        loadSprites(this);
-        loadSpritesAnim(this);
-        //loads sounds
-        loadSounds(this);
         //pathfinding stuff
         nodeSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nodeSize][GRID_HEIGHT / nodeSize];
@@ -467,7 +475,7 @@ public class Main extends PApplet {
         public KeyDSItem[] items;
 
         /**
-         * Containts all the keys from the keyboard,
+         * Contains all the keys from the keyboard
          */
         public KeyDS() {
             items = new KeyDSItem[0];
