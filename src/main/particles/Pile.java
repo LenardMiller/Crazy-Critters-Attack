@@ -3,6 +3,7 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.paused;
 import static main.Main.spritesAnimH;
 import static processing.core.PApplet.radians;
 
@@ -25,8 +26,10 @@ public class Pile extends Particle {
     void display() {
         if (lifespan <= 0) dead = true;
         p.tint(255,255*((float)lifespan / 500));
-        lifespan--;
-        angleTwo += radians(angularVelocity);
+        if (!paused) {
+            lifespan--;
+            angleTwo += radians(angularVelocity);
+        }
         p.pushMatrix();
         p.translate(position.x,position.y);
         p.rotate(angleTwo);

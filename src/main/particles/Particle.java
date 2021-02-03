@@ -46,7 +46,6 @@ public abstract class Particle {
         numFrames = 1;
         currentSprite = 0;
         delay = lifespan / numFrames;
-        delayTime = p.frameCount + delay;
         sprite = spritesH.get("nullPt");
         velocity = PVector.fromAngle(angle - HALF_PI);
         betweenFrames = 0;
@@ -77,9 +76,12 @@ public abstract class Particle {
             p.translate(position.x, position.y);
             p.rotate(angleTwo);
             p.image(sprites[currentSprite], -size.x / 2, -size.y / 2);
-        } else { //todo: fix timer
-            if (p.frameCount - delayTime >= delay) dead = true;
-            angleTwo += radians(angularVelocity);
+        } else {
+            if (!paused) {
+                delayTime++;
+                angleTwo += radians(angularVelocity);
+            }
+            if (delayTime > delay) dead = true;
             p.pushMatrix();
             p.translate(position.x, position.y);
             p.rotate(angleTwo);
