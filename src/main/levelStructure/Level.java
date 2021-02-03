@@ -32,7 +32,7 @@ public class Level {
             Wave wave = waves[currentWave];
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
             else if (!paused) wave.spawnEnemies();
-            if (wave.spawnLengthTimer > wave.SPAWN_LENGTH && enemies.size() == 0) {
+            if (wave.spawnLengthTimer > wave.SPAWN_LENGTH && enemies.size() == 0 && !paused) {
                 wave.lengthTimer += wave.LENGTH / 500;
             }
         }
