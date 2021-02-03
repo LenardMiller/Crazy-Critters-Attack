@@ -21,7 +21,6 @@ public abstract class Turret extends Tower {
 
     PImage sBase;
     PImage sIdle;
-    public int delayTime;
     int offset;
     int pjSpeed;
     int numFireFrames;
@@ -53,7 +52,6 @@ public abstract class Turret extends Tower {
         hp = maxHp;
         hit = false;
         delay = 240;
-        delayTime = delay;
         pjSpeed = 2;
         range = 0;
         numFireFrames = 1;
@@ -159,10 +157,9 @@ public abstract class Turret extends Tower {
         }
     }
 
-    public void fire() { //todo: fix timer
+    public void fire() {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
-        delayTime = p.frameCount + delay; //waits this time before firing
     }
 
     public void loadSprites() {
@@ -217,7 +214,7 @@ public abstract class Turret extends Tower {
                 } else { //if done, switch to load
                     if (numLoadFrames > 0) {
                         int oldSize = numLoadFrames;
-                        int newSize = (delayTime - p.frameCount);
+                        int newSize = delay;
                         spriteArray = new ArrayList<>();
                         if (oldSize > newSize) { //decreasing size
                             //creates the new spriteArray

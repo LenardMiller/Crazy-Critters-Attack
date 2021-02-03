@@ -1,8 +1,8 @@
 package main.towers.turrets;
 
+import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.Needle;
-import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -24,7 +24,6 @@ public class Nightmare extends Turret {
         hit = false;
         delay = 210; //210
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         pjSpeed = 18;
         range = 200;
         numFireFrames = 14;
@@ -65,7 +64,6 @@ public class Nightmare extends Turret {
             }
         }
 
-        delayTime = p.frameCount + delay; //waits this time before firing
     }
 
     private void setUpgrades(){

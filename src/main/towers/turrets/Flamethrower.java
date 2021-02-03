@@ -29,7 +29,6 @@ public class Flamethrower extends Turret {
         hit = false;
         delay = 4;
         delay += (round(p.random(-(delay / 10f), delay / 10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         pjSpeed = 5;
         range = 320;
         numFireFrames = 4;
@@ -74,7 +73,6 @@ public class Flamethrower extends Turret {
         spa.setMag(24);
         spp.add(spa);
         projectiles.add(new Flame(p, spp.x, spp.y, angleB, this, damage, effectLevel, effectDuration, flameTimer));
-        delayTime = p.frameCount + delay; //waits this time before firing
     }
 
     public void aim(Enemy enemy) {

@@ -20,7 +20,6 @@ public class MagicMissileer extends Turret{
         hit = false;
         delay = 200; //200 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         damage = 15;
         pjSpeed = 5;
         range = 0; //0 degrees
@@ -51,7 +50,6 @@ public class MagicMissileer extends Turret{
     }
 
     public void fire() { //needed to change projectile fired
-        delayTime = p.frameCount + delay; //waits this time before firing
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 0,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 1,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 2,tile.position));

@@ -29,7 +29,6 @@ public class Cannon extends Turret {
         hit = false;
         delay = 230;
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         pjSpeed = 14;
         numFireFrames = 6;
         betweenFireFrames = 1;
@@ -63,7 +62,6 @@ public class Cannon extends Turret {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
         float angleB = angle;
-        delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angleB-HALF_PI);float particleCount = p.random(1,5);
         if (dynamite) spa.setMag(0);

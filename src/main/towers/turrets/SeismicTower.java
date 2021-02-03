@@ -27,7 +27,6 @@ public class SeismicTower extends Turret {
         hit = false;
         delay = 150; //default: 200 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         pjSpeed = 7;
         numFireFrames = 14;
         betweenFireFrames = 1;
@@ -144,7 +143,6 @@ public class SeismicTower extends Turret {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
         float angleB = angle;
-        delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         PVector spa = PVector.fromAngle(angleB - HALF_PI);
         spa.setMag(29); //barrel length
