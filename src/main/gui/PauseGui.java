@@ -5,6 +5,9 @@ import main.gui.guiObjects.buttons.RestartLevel;
 import main.gui.guiObjects.buttons.ResumeGame;
 import processing.core.PApplet;
 
+import static main.Main.mediumFont;
+import static main.Main.veryLargeFont;
+
 public class PauseGui {
 
     private final PApplet P;
@@ -23,9 +26,24 @@ public class PauseGui {
     }
 
     public void display() {
+        //dark
+        P.fill(0, 0, 0, 50);
+        P.rect(0, 0, P.width, P.height);
+        //big text
+        P.fill(255);
+        P.textFont(veryLargeFont);
+        P.textAlign(P.CENTER);
+        P.text("Paused", P.width/2f, 300);
+        //buttons
+        P.fill(200);
+        P.textFont(mediumFont);
+        int offsetY = 7;
         resumeGame.main();
+        P.text("Resume (space)", resumeGame.position.x, resumeGame.position.y + offsetY);
         restartLevel.main();
+        P.text("Restart", restartLevel.position.x, restartLevel.position.y + offsetY);
         exitGame.main();
+        P.text("Quit (esc)", exitGame.position.x, exitGame.position.y + offsetY);
     }
 
     /**

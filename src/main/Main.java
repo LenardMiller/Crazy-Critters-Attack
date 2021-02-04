@@ -63,6 +63,7 @@ public class Main extends PApplet {
     public static LevelBuilderGui levelBuilderGui;
     public static PauseGui pauseGui;
 
+    //can't be final because created by PApplet
     public static PFont veryLargeFont;
     public static PFont largeFont;
     public static PFont mediumLargeFont;
