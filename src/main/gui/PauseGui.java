@@ -5,8 +5,7 @@ import main.gui.guiObjects.buttons.RestartLevel;
 import main.gui.guiObjects.buttons.ResumeGame;
 import processing.core.PApplet;
 
-import static main.Main.mediumFont;
-import static main.Main.veryLargeFont;
+import static main.Main.*;
 
 public class PauseGui {
 
@@ -27,19 +26,24 @@ public class PauseGui {
 
     public void display() {
         //dark
-        P.fill(0, 0, 0, 50);
+        if (!alive) P.fill(50, 0, 0, 50);
+        else P.fill(0, 0, 0, 50);
         P.rect(0, 0, P.width, P.height);
         //big text
-        P.fill(255);
+        if (!alive) P.fill(255, 0, 0);
+        else P.fill(255);
         P.textFont(veryLargeFont);
         P.textAlign(P.CENTER);
-        P.text("Paused", P.width/2f, 300);
+        if (!alive) P.text("Game Over", P.width/2f, 300);
+        else P.text("Paused", P.width/2f, 300);
         //buttons
         P.fill(200);
         P.textFont(mediumFont);
         int offsetY = 7;
-        resumeGame.main();
-        P.text("Resume (space)", resumeGame.position.x, resumeGame.position.y + offsetY);
+        if (alive) {
+            resumeGame.main();
+            P.text("Resume (space)", resumeGame.position.x, resumeGame.position.y + offsetY);
+        }
         restartLevel.main();
         P.text("Restart", restartLevel.position.x, restartLevel.position.y + offsetY);
         exitGame.main();
