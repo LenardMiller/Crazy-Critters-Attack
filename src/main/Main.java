@@ -72,6 +72,7 @@ public class Main extends PApplet {
 
     public static int money = 100;
     public static boolean alive = true;
+    public static boolean won = false;
     public static boolean debug = false;
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
@@ -196,13 +197,14 @@ public class Main extends PApplet {
         DataControl.load(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();
-        //other stuff
+        //gui stuff
         hand = new Hand(p);
         selection = new Selection(p);
         inGameGui = new InGameGui(p);
         levelBuilderGui = new LevelBuilderGui(p);
         pauseGui = new PauseGui(p);
         //other
+        won = false;
         connectWallQueues = 0;
     }
 

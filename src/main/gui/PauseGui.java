@@ -31,10 +31,12 @@ public class PauseGui {
         P.rect(0, 0, P.width, P.height);
         //big text
         if (!alive) P.fill(255, 0, 0);
+        else if (won) P.fill(255, 255, 0);
         else P.fill(255);
         P.textFont(veryLargeFont);
         P.textAlign(P.CENTER);
         if (!alive) P.text("Game Over", P.width/2f, 300);
+        else if (won) P.text("You Win!", P.width/2f, 300);
         else P.text("Paused", P.width/2f, 300);
         //buttons
         P.fill(200);

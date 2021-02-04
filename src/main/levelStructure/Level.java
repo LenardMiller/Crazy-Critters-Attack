@@ -28,13 +28,16 @@ public class Level {
     }
 
     public void main() {
-        if (currentWave < waves.length) { //todo: replace with win condition
+        if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
             else if (!paused && alive) wave.spawnEnemies();
             if (wave.spawnLengthTimer > wave.SPAWN_LENGTH && enemies.size() == 0 && !paused && alive) {
                 wave.lengthTimer += wave.LENGTH / 500;
             }
+        } else if (enemies.size() == 0) { //win condition
+            if (!won) paused = true; //prevent stuck on pause
+            won = true;
         }
     }
 
