@@ -88,9 +88,11 @@ public class Machine {
         if (deathFrame < 200) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
+        if (dead && !paused) deathFrame++;
         if (!dead && !paused) hurtParticles();
         else if (deathFrame < 300 && !paused) deathAnim();
         else EXPLODE_LOOP.stopLoop();
+        if (deathFrame > 500) paused = true;
         if (p.frameCount > frameTimer && !dead && !paused) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
@@ -122,8 +124,7 @@ public class Machine {
         if (deathFrame == 0) {
             BREAK_SOUND.stop();
             BREAK_SOUND.play(1, volume);
-        } deathFrame++;
-        if (deathFrame < 160) {
+        } if (deathFrame < 160) {
             for (Tile tile : machTiles) {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
