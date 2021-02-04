@@ -47,37 +47,41 @@ public class Flame extends Projectile {
         projectiles.remove(i);
     }
 
-    public void displayPassA() {
-    } //no shadow
+    /**
+     * no shadow
+     */
+    public void displayPassA() {}
 
     public void displayPassB() {
-        delay++;
-        sprite = SPRITES[currentSprite];
-        //particles
-        spawnRange += 0.5f;
-        if (currentSprite == 9) smokeChance = 20;
-        if (currentSprite > 9) {
-            fireChance +=5;
-            if (smokeChance > 4 && currentSprite < 15) smokeChance -= 0.5f;
-            else smokeChance +=5;
+        if (!paused) {
+            delay++;
+            sprite = SPRITES[currentSprite];
+            //particles
+            spawnRange += 0.5f;
+            if (currentSprite == 9) smokeChance = 20;
+            if (currentSprite > 9) {
+                fireChance += 5;
+                if (smokeChance > 4 && currentSprite < 15) smokeChance -= 0.5f;
+                else smokeChance += 5;
+            }
+            int num = (int) (p.random(0, fireChance));
+            if (num == 0) {
+                particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "fire"));
+            }
+            num = (int) (p.random(0, smokeChance));
+            if (num == 0) {
+                particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "smoke"));
+            }
+            //animation
+            if (delay > TIMER && p.random(0, 20) > 1) {
+                currentSprite++;
+                delay = 0;
+            }
+            //control
+            if (currentSprite > 9 && speed > 0) speed /= 1.1;
+            if (pierce < 900) speed = 0;
+            if (currentSprite >= SPRITES.length) dead = true;
         }
-        int num = (int) (p.random(0, fireChance));
-        if (num == 0) {
-            particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "fire"));
-        }
-        num = (int) (p.random(0, smokeChance));
-        if (num == 0) {
-            particles.add(new BuffParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "smoke"));
-        }
-        //animation
-        if (delay > TIMER && p.random(0, 20) > 1) {
-            currentSprite++;
-            delay = 0;
-        }
-        //control
-        if (currentSprite > 9 && speed > 0) speed /= 1.1;
-        if (pierce < 900) speed = 0;
-        if (currentSprite >= SPRITES.length) dead = true;
         //main sprite
         angleTwo += radians(angularVelocity);
         p.pushMatrix();
