@@ -10,10 +10,10 @@ public class ExitGame extends Button {
     public ExitGame(PApplet p, float x, float y, String type, boolean active) {
         super(p, x, y, type, active);
         position = new PVector(x, y);
-        size = new PVector(200, 24);
-        spriteIdle = spritesAnimH.get("towerTabSwitchBT")[0];
-        spritePressed = spritesAnimH.get("towerTabSwitchBT")[1];
-        spriteHover = spritesAnimH.get("towerTabSwitchBT")[2];
+        size = new PVector(200, 42);
+        spriteIdle = spritesAnimH.get("genericButtonBT")[0];
+        spritePressed = spritesAnimH.get("genericButtonBT")[1];
+        spriteHover = spritesAnimH.get("genericButtonBT")[2];
         sprite = spriteIdle;
     }
 
