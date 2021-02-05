@@ -150,11 +150,8 @@ public class Main extends PApplet {
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
         keyBinds.loadKeyBinds();
-        //generates levels
-        playingLevel = false;
+        //set level count
         levels = new Level[2];
-        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50, "dirt");
-        levels[1] = new Level(this, DesertWaves.genDesertWaves(this), "levels/desert", 250, 75, "sand");
         //guis
         levelSelectGui = new LevelSelectGui(this);
 
@@ -200,6 +197,9 @@ public class Main extends PApplet {
         for (Node node : end) node.findGHF();
         updateTowerArray();
         //load level data
+        playingLevel = false;
+        levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
+        levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
         DataControl.load(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();
