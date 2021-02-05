@@ -1,13 +1,11 @@
 package main.misc;
 
 import main.pathfinding.Node;
-import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.pathfinding.UpdateClearance.updateClearance;

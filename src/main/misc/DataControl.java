@@ -9,12 +9,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static main.Main.machine;
-import static main.Main.tiles;
-import static main.Main.alive;
+import static main.Main.*;
 import static processing.core.PApplet.*;
 
-public class DataControl {
+public class DataControl extends ClassLoader {
 
     public DataControl() {}
 
@@ -52,7 +50,13 @@ public class DataControl {
         saveArray.setJSONObject(i, saveObject);
 
         String name = "Save-"+month()+"-"+day()+"-"+year()+"-"+hour() +"-"+minute()+"-"+second();
-        new File("resources/data/saves/" + name + ".json");
+        //run from terminal
+        String filePath = new File("").getAbsolutePath();
+        //run from intelliJ
+        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
+            filePath = "resources";
+        }
+        new File(filePath + "/data/saves/" + name + ".json");
         FileWriter saveWriter = new FileWriter("resources/data/saves/" + name + ".json");
         saveWriter.write(saveArray.toString());
         saveWriter.close();
@@ -64,7 +68,13 @@ public class DataControl {
      * @param name the filename, sans extension.
      */
     public static void load(PApplet p, String name) {
-        File loadFile = new File("resources/data/"+name+".json");
+        //run from terminal
+        String filePath = new File("").getAbsolutePath();
+        //run from intelliJ
+        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
+            filePath = "resources";
+        }
+        File loadFile = new File(filePath+"/data/"+name+".json");
         JSONArray loadArray = loadJSONArray(loadFile);
         alive = true;
         //tiles

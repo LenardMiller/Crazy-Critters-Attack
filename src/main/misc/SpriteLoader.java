@@ -358,19 +358,19 @@ public class SpriteLoader {
         spritesH.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
         for (int i = 0; i < 5; i++) {
             String name = "null";
-            if (i == 0) name = "Wood";
-            if (i == 1) name = "Stone";
-            if (i == 2) name = "Metal";
-            if (i == 3) name = "Crystal";
-            if (i == 4) name = "Ultimate";
+            if (i == 0) name = "wood";
+            if (i == 1) name = "stone";
+            if (i == 2) name = "metal";
+            if (i == 3) name = "crystal";
+            if (i == 4) name = "ultimate";
             String idA = "null";
             String idB = "null";
             String idC = "null";
             for (int a = 0; a < 2; a++) {
                 for (int b = 0; b < 2; b++) {
                     for (int c = 0; c < 2; c++) {
-                        if (a == 0) idA = "T";
-                        if (a == 1) idA = "B";
+                        if (a == 0) idA = "t";
+                        if (a == 1) idA = "b";
                         if (b == 0) idB = "l";
                         if (b == 1) idB = "r";
                         if (c == 0) idC = "c";
