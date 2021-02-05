@@ -70,6 +70,10 @@ public class Main extends PApplet {
     public static PFont mediumFont;
     public static PFont smallFont;
 
+    /**
+     * in-game, level select
+     */
+    public static int screen = 0;
     public static int money = 100;
     public static boolean alive = true;
     public static boolean won = false;
@@ -189,7 +193,7 @@ public class Main extends PApplet {
         updateTowerArray();
         //generates levels
         playingLevel = false;
-        currentLevel = 1; //temp
+        currentLevel = 0; //temp
         levels = new Level[2];
         levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
@@ -211,12 +215,28 @@ public class Main extends PApplet {
     /**
      * From Processing.
      * Everything else, run every frame.
-     * This will need to be change when I todo: add more menu "scenes."
      */
     public void draw() {
-        noStroke();
-        fill(25, 25, 25);
-        rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+        background(50, 50, 50);
+        //in-game
+        if (screen == 0) drawInGame();
+        //looping sounds
+        for (SoundLoop soundLoop : soundLoopsH.values()) soundLoop.continueLoop();
+        //reset mouse pulses
+        inputHandler.rightMouseReleasedPulse = false;
+        inputHandler.leftMouseReleasedPulse = false;
+        inputHandler.rightMousePressedPulse = false;
+        inputHandler.leftMousePressedPulse = false;
+        for (KeyDS.KeyDSItem key : keysPressed.items) {
+            key.pressedPulse = false;
+            key.releasedPulse = false;
+        }
+    }
+
+    /**
+     * Stuff for the main game
+     */
+    private void drawInGame() {
         //keys
         if (dev) {
             try {
@@ -234,8 +254,6 @@ public class Main extends PApplet {
         }
         maxCost = maxCost();
         minCost = minCost(maxCost);
-        //looping sounds
-        for (SoundLoop soundLoop : soundLoopsH.values()) soundLoop.continueLoop();
         //objects
         drawObjects();
         //gui stuff
@@ -249,15 +267,6 @@ public class Main extends PApplet {
         if (!levelBuilder) inGameGui.drawText(this, 10);
         //levels
         if (playingLevel) levels[currentLevel].main();
-        //reset mouse pulses
-        inputHandler.rightMouseReleasedPulse = false;
-        inputHandler.leftMouseReleasedPulse = false;
-        inputHandler.rightMousePressedPulse = false;
-        inputHandler.leftMousePressedPulse = false;
-        for (KeyDS.KeyDSItem key : keysPressed.items) {
-            key.pressedPulse = false;
-            key.releasedPulse = false;
-        }
     }
 
     /**
