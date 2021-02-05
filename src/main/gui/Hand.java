@@ -10,9 +10,10 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
-
-import static main.misc.WallSpecialVisuals.*;
+import static main.misc.MiscMethods.roundTo;
+import static main.misc.MiscMethods.updateNodes;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public class Hand {
 
@@ -36,6 +37,7 @@ public class Hand {
     }
 
     public void main() {
+        if (paused && !held.equals("null")) setHeld("null");
         if (!levelBuilder) checkPlaceable();
         else implacable = false;
         if (inputHandler.rightMousePressedPulse) remove();
@@ -98,8 +100,10 @@ public class Hand {
         }
     }
 
-    private void displayHeld() { //shows whats held at ~1/2 opacity
-//        System.out.println(heldSprite);
+    /**
+     * Shows what's held at reduced opacity
+     */
+    private void displayHeld() {
         if (!held.equals("null") && heldSprite != null && alive) {
             //red if implacable
             if (implacable) P.tint(255, 0, 0, 150);
@@ -241,7 +245,11 @@ public class Hand {
         }
     }
 
-    public void setHeld(String heldSet) { //swaps whats held
+    /**
+     * Swaps what's held.
+     * @param heldSet name of what should be held
+     */
+    public void setHeld(String heldSet) {
         switch (heldSet) {
             case "slingshot":
                 heldSprite = spritesH.get("slingshotFullTR");
@@ -332,7 +340,10 @@ public class Hand {
         }
     }
 
-    private void place() { //puts down tower and subtracts price
+    /**
+     * Puts down tower and subtracts price.
+     */
+    private void place() {
         Tile tile = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
         boolean changeHeld = true;
         if (held.equals("slingshot") && alive) tile.tower = new Slingshot(P, tile);

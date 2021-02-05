@@ -29,11 +29,11 @@ public class SellTower extends Button {
         Tower tower = tiles.get(selection.id).tower;
         tower.sell();
         active = false;
-        targetButton.active = false;
-        upgradeButtonA.active = false;
-        upgradeButtonB.active = false;
-        upgradeIconA.active = false;
-        upgradeIconB.active = false;
+        inGameGui.targetButton.active = false;
+        inGameGui.upgradeButtonA.active = false;
+        inGameGui.upgradeButtonB.active = false;
+        inGameGui.upgradeIconA.active = false;
+        inGameGui.upgradeIconB.active = false;
         selection.name = "null";
         inGameGui.flashA = 255;
     }

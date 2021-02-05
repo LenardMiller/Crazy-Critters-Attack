@@ -13,6 +13,15 @@ public class InGameGui {
 
     public int flashA;
 
+    public Button openMenuButton;
+    public Button wallBuyButton;
+    public Button sellButton;
+    public Button targetButton;
+    public Button upgradeButtonA, upgradeButtonB;
+    public GuiObject moneyIcon;
+    public GuiObject upgradeIconA, upgradeIconB;
+    public Play playButton;
+
     public InGameGui(PApplet p) {
         this.P = p;
         build();
@@ -58,7 +67,7 @@ public class InGameGui {
         P.fill(255, flashA); //flash
         P.noStroke();
         P.rect(900,212,200,688);
-        flashA -= 25;
+        if (!paused) flashA -= 25;
     }
 
     public void drawText(PApplet p, int x) {
@@ -84,12 +93,6 @@ public class InGameGui {
         p.fill(0);
         p.textAlign(RIGHT);
         p.text(nfc(money), p.width - x, 211-5);
-//        if (!alive) { todo: game over screen
-//            p.textAlign(CENTER);
-//            p.textFont(veryLargeFont);
-//            p.fill(75,0,0);
-//            p.text("Game Over", p.width/2f, p.height/2f);
-//        }
     }
 
     private void build() {
@@ -97,8 +100,7 @@ public class InGameGui {
         towerBuyButtons.add(new TowerBuy(P,towerBuyX(0), towerBuyY(0),"slingshot",true)); //row 1
         towerBuyButtons.add(new TowerBuy(P,towerBuyX(0), towerBuyY(1),"miscCannon",true));
         towerBuyButtons.add(new TowerBuy(P,towerBuyX(0), towerBuyY(2),"crossbow",true));
-        boolean test = false;
-        if (currentLevel > 0 || test) {
+        if (currentLevel > 0 || dev) {
             towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(0), "cannon", true));
             towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(1), "gluer", true));
             towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(2), "seismic", true)); //row 2
@@ -106,7 +108,7 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(0), "null", true));
             towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(1), "null", true));
             towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(2), "null", true)); //row 2
-        } if (currentLevel > 1 || test) {
+        } if (currentLevel > 1 || dev) {
             towerBuyButtons.add(new TowerBuy(P, towerBuyX(2), towerBuyY(0), "energyBlaster", true));
             towerBuyButtons.add(new TowerBuy(P, towerBuyX(2), towerBuyY(1), "flamethrower", true));
             towerBuyButtons.add(new TowerBuy(P, towerBuyX(2), towerBuyY(2), "tesla", true));
@@ -114,7 +116,7 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(2), towerBuyY(0),"null",true));
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(2), towerBuyY(1),"null",true));
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(2), towerBuyY(2),"null",true));
-        } if (currentLevel > 2 || test) {
+        } if (currentLevel > 2 || dev) {
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(0),"null",true));
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(1),"null",true)); //row 3
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(2),"magicMissleer",true));
@@ -122,7 +124,7 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(0),"null",true));
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(1),"null",true)); //row 3
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(2),"null",true));
-        } if (currentLevel > 3 || test) {
+        } if (currentLevel > 3 || dev) {
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(0),"railgun",true));
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(1),"nightmare",true));
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(2),"waveMotion",true));

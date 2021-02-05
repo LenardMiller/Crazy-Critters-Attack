@@ -32,57 +32,63 @@ public class Selection { //what tower is selected
         if (!name.equals("null") && tiles.get(id).tower != null) display();
     }
 
-    public void swapSelected(int id) { //switches what is selected
-        if (this.id != id || name.equals("null")) {
-            if (!towerJustPlaced) {
-                CLICK_IN.stop();
-                CLICK_IN.play(1, volume);
-                inGameGui.flashA = 255;
-            } else towerJustPlaced = false;
-        }
-        tower = tiles.get(id).tower;
-        hand.held = "null";
-        if (tower.turret) {
-            for (int i = tiles.size() - 1; i >= 0; i--) {
-                if (tiles.get(i).tower != null) tiles.get(i).tower.visualize = false;
+    /**
+     * Switches what is selected.
+     * @param id tower id
+     */
+    public void swapSelected(int id) {
+        if (!paused) {
+            if (this.id != id || name.equals("null")) {
+                if (!towerJustPlaced) {
+                    CLICK_IN.stop();
+                    CLICK_IN.play(1, volume);
+                    inGameGui.flashA = 255;
+                } else towerJustPlaced = false;
             }
-            this.id = id;
-            name = tower.name;
-            sellButton.active = true;
-            upgradeButtonB.active = true;
-            upgradeIconB.active = true;
+            tower = tiles.get(id).tower;
+            hand.held = "null";
             if (tower.turret) {
-                targetButton.active = true;
-                tower.visualize = true;
-                upgradeButtonA.active = true;
-                upgradeButtonB.position.y = 735;
-                upgradeButtonA.position.y = 585;
-                upgradeIconA.active = true;
-                upgradeIconA.position.y = 565;
-                upgradeIconB.position.y = 715;
-                if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
-                    upgradeIconA.sprite = tower.upgradeIcons[tower.nextLevelA];
-                } else upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-                if (tower.nextLevelB < tower.upgradeTitles.length) {
-                    upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
-                } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-            }
-            if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) {
-                targetButton.active = false;
-                upgradeButtonB.position.y += 45;
-                upgradeButtonA.position.y += 45;
-                upgradeIconA.position.y += 45;
-                upgradeIconB.position.y += 45;
-            }
-            if (!tower.turret) {
-                targetButton.active = false;
-                upgradeButtonA.active = false;
-                upgradeButtonB.position.y = 630;
-                upgradeIconA.active = false;
-                upgradeIconB.position.y = 610;
-                if (tower.nextLevelB < tower.upgradeTitles.length) {
-                    upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
-                } else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+                for (int i = tiles.size() - 1; i >= 0; i--) {
+                    if (tiles.get(i).tower != null) tiles.get(i).tower.visualize = false;
+                }
+                this.id = id;
+                name = tower.name;
+                inGameGui.sellButton.active = true;
+                inGameGui.upgradeButtonB.active = true;
+                inGameGui.upgradeIconB.active = true;
+                if (tower.turret) {
+                    inGameGui.targetButton.active = true;
+                    tower.visualize = true;
+                    inGameGui.upgradeButtonA.active = true;
+                    inGameGui.upgradeButtonB.position.y = 735;
+                    inGameGui.upgradeButtonA.position.y = 585;
+                    inGameGui.upgradeIconA.active = true;
+                    inGameGui.upgradeIconA.position.y = 565;
+                    inGameGui.upgradeIconB.position.y = 715;
+                    if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
+                        inGameGui.upgradeIconA.sprite = tower.upgradeIcons[tower.nextLevelA];
+                    } else inGameGui.upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+                    if (tower.nextLevelB < tower.upgradeTitles.length) {
+                        inGameGui.upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
+                    } else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+                }
+                if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) {
+                    inGameGui.targetButton.active = false;
+                    inGameGui.upgradeButtonB.position.y += 45;
+                    inGameGui.upgradeButtonA.position.y += 45;
+                    inGameGui.upgradeIconA.position.y += 45;
+                    inGameGui.upgradeIconB.position.y += 45;
+                }
+                if (!tower.turret) {
+                    inGameGui.targetButton.active = false;
+                    inGameGui.upgradeButtonA.active = false;
+                    inGameGui.upgradeButtonB.position.y = 630;
+                    inGameGui.upgradeIconA.active = false;
+                    inGameGui.upgradeIconB.position.y = 610;
+                    if (tower.nextLevelB < tower.upgradeTitles.length) {
+                        inGameGui.upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
+                    } else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+                }
             }
         }
     }
@@ -90,19 +96,21 @@ public class Selection { //what tower is selected
     private void clickOff() { //desselect, hide stuff
         Tower tower = tiles.get(id).tower;
         if (tower != null) {
-            if (inputHandler.leftMousePressedPulse && P.mouseX < 900 && (P.mouseX > tower.tile.position.x || P.mouseX < tower.tile.position.x - tower.size.x || P.mouseY > tower.tile.position.y || P.mouseY < tower.tile.position.y - tower.size.y) && alive) {
+            if (inputHandler.leftMousePressedPulse && P.mouseX < 900 && (P.mouseX > tower.tile.position.x ||
+                    P.mouseX < tower.tile.position.x - tower.size.x || P.mouseY > tower.tile.position.y ||
+                    P.mouseY < tower.tile.position.y - tower.size.y) && alive && !paused) {
                 if (!name.equals("null") && !towerJustPlaced) {
                     inGameGui.flashA = 255;
                     CLICK_OUT.stop();
                     CLICK_OUT.play(1, volume);
                 }
                 name = "null";
-                sellButton.active = false;
-                targetButton.active = false;
-                upgradeButtonA.active = false;
-                upgradeButtonB.active = false;
-                upgradeIconA.active = false;
-                upgradeIconB.active = false;
+                inGameGui.sellButton.active = false;
+                inGameGui.targetButton.active = false;
+                inGameGui.upgradeButtonA.active = false;
+                inGameGui.upgradeButtonB.active = false;
+                inGameGui.upgradeIconA.active = false;
+                inGameGui.upgradeIconB.active = false;
                 tower.visualize = false;
             }
         }

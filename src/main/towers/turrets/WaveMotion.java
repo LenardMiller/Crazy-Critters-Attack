@@ -7,8 +7,9 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
-import static main.misc.WallSpecialVisuals.*;
+import static main.misc.MiscMethods.findAngle;
+import static main.misc.MiscMethods.findSlope;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class WaveMotion extends Turret {
 
@@ -30,7 +31,6 @@ public class WaveMotion extends Turret {
         hit = false;
         delay = 400; //400 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         damage = 2;
         pjSpeed = -1;
         range = 0; //0
@@ -57,7 +57,6 @@ public class WaveMotion extends Turret {
     }
 
     public void fire() {
-        delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(35);

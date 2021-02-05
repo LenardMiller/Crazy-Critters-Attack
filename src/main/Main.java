@@ -2,13 +2,7 @@ package main;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.gui.Hand;
-import main.gui.InGameGui;
-import main.gui.LevelBuilderGui;
-import main.gui.Selection;
-import main.gui.guiObjects.GuiObject;
-import main.gui.guiObjects.buttons.Button;
-import main.gui.guiObjects.buttons.Play;
+import main.gui.*;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.levelStructure.DesertWaves;
@@ -36,8 +30,8 @@ import static main.misc.MiscMethods.*;
 import static main.misc.SoundLoader.loadSounds;
 import static main.misc.SpriteLoader.loadSprites;
 import static main.misc.SpriteLoader.loadSpritesAnim;
-
-import static main.misc.WallSpecialVisuals.*;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateWallTileConnections;
 
 public class Main extends PApplet {
 
@@ -63,31 +57,32 @@ public class Main extends PApplet {
 
     public static CompressArray compress;
 
-    public static Button openMenuButton;
-    public static Button wallBuyButton;
-    public static Button sellButton;
-    public static Button targetButton;
-    public static Button upgradeButtonA, upgradeButtonB;
-    public static GuiObject moneyIcon;
-    public static GuiObject upgradeIconA, upgradeIconB;
-    public static Play playButton;
-
     public static Hand hand;
     public static Selection selection;
     public static InGameGui inGameGui;
     public static LevelBuilderGui levelBuilderGui;
+    public static PauseGui pauseGui;
+    public static LevelSelectGui levelSelectGui;
 
+    //can't be final because created by PApplet
     public static PFont veryLargeFont;
     public static PFont largeFont;
     public static PFont mediumLargeFont;
     public static PFont mediumFont;
     public static PFont smallFont;
 
+    /**
+     * in-game, level select
+     */
+    public static int screen = 1;
     public static int money = 100;
     public static boolean alive = true;
+    public static boolean won = false;
     public static boolean debug = false;
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
+    public static boolean paused = false;
+    public static boolean dev = false;
     public static int connectWallQueues;
     public static float volume = 0.25f;
 
@@ -146,11 +141,32 @@ public class Main extends PApplet {
         mediumLargeFont = createFont("STHeitiSC-Light", 21);
         mediumFont = createFont("STHeitiSC-Light", 18);
         smallFont = createFont("STHeitiSC-Light", 12);
+        //loads sprites
+        loadSprites(this);
+        loadSpritesAnim(this);
+        //loads sounds
+        loadSounds(this);
+        //load input
+        inputHandler = new InputHandler(this);
+        keyBinds = new KeyBinds(this);
+        keyBinds.loadKeyBinds();
+        //set level count
+        levels = new Level[2];
+        //guis
+        levelSelectGui = new LevelSelectGui(this);
+
+        resetGame(this);
+    }
+
+    /**
+     * Sets all the ingame stuff up.
+     */
+    public static void resetGame(PApplet p) {
         //creates object data structures
         tiles = new Tile.TileDS();
         for (int y = 0; y <= (BOARD_HEIGHT / 50); y++) {
             for (int x = 0; x <= (BOARD_WIDTH / 50); x++) {
-                tiles.add(new Tile(this, new PVector(x * 50, y * 50), tiles.size()), x, y);
+                tiles.add(new Tile(p, new PVector(x * 50, y * 50), tiles.size()), x, y);
             }
         }
         enemies = new ArrayList<>();
@@ -163,17 +179,12 @@ public class Main extends PApplet {
         towerBuyButtons = new ArrayList<>();
         tileSelectButtons = new ArrayList<>();
         buffs = new ArrayList<>();
-        //loads sprites
-        loadSprites(this);
-        loadSpritesAnim(this);
-        //loads sounds
-        loadSounds(this);
         //pathfinding stuff
         nodeSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nodeSize][GRID_HEIGHT / nodeSize];
         for (int x = 0; x < GRID_WIDTH / nodeSize; x++) {
             for (int y = 0; y < GRID_HEIGHT / nodeSize; y++) {
-                nodeGrid[x][y] = new Node(this, new PVector((nodeSize * x)-100, (nodeSize * y)-100));
+                nodeGrid[x][y] = new Node(p, new PVector((nodeSize * x)-100, (nodeSize * y)-100));
             }
         }
         path = new AStar();
@@ -185,64 +196,35 @@ public class Main extends PApplet {
         start.findGHF();
         for (Node node : end) node.findGHF();
         updateTowerArray();
-        //generates levels
-        currentLevel = 1; //temp
-        levels = new Level[2];
-        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50, "dirt");
-        levels[1] = new Level(this, DesertWaves.genDesertWaves(this), "levels/desert", 250, 75, "sand");
         //load level data
-        DataControl.load(this, levels[currentLevel].layout);
+        playingLevel = false;
+        levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
+        levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
+        DataControl.load(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();
-        //other stuff
-        inputHandler = new InputHandler(this);
-        keyBinds = new KeyBinds(this);
-        keyBinds.loadKeyBinds();
-        hand = new Hand(this);
-        selection = new Selection(this);
-        inGameGui = new InGameGui(this);
-        levelBuilderGui = new LevelBuilderGui(this);
+        //gui stuff
+        hand = new Hand(p);
+        selection = new Selection(p);
+        inGameGui = new InGameGui(p);
+        levelBuilderGui = new LevelBuilderGui(p);
+        pauseGui = new PauseGui(p);
         //other
+        won = false;
         connectWallQueues = 0;
     }
 
     /**
      * From Processing.
      * Everything else, run every frame.
-     * This will need to be change when I todo: add more menu "scenes."
      */
     public void draw() {
-        noStroke();
-        fill(25, 25, 25);
-        rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
-        //keys
-        try {
-            keyBinds.debugKeys();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        keyBinds.spawnKeys();
-        //pathfinding
-        if (path.reqQ.size() > 0) {
-            path.reqQ.get(0).getPath();
-            path.reqQ.remove(0);
-        }
-        maxCost = maxCost();
-        minCost = minCost(maxCost);
+        background(50, 50, 50);
+        //screens
+        if (screen == 0) drawInGame();
+        if (screen == 1) drawLevelSelect();
         //looping sounds
         for (SoundLoop soundLoop : soundLoopsH.values()) soundLoop.continueLoop();
-        //objects
-        drawObjects();
-        //gui stuff
-        noStroke();
-        if (!levelBuilder) inGameGui.display();
-        else levelBuilderGui.display();
-        hand.displayHeldInfo();
-        //text
-        textAlign(LEFT);
-        if (!levelBuilder) inGameGui.drawText(this, 10);
-        //levels
-        if (playingLevel) levels[currentLevel].main();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;
@@ -252,6 +234,49 @@ public class Main extends PApplet {
             key.pressedPulse = false;
             key.releasedPulse = false;
         }
+    }
+
+    /**
+     * Stuff for the main game screen.
+     */
+    private void drawInGame() {
+        //keys
+        if (dev) {
+            try {
+                keyBinds.debugKeys();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            keyBinds.spawnKeys();
+        }
+        keyBinds.inGameKeys();
+        //pathfinding
+        if (path.reqQ.size() > 0) {
+            path.reqQ.get(0).getPath();
+            path.reqQ.remove(0);
+        }
+        maxCost = maxCost();
+        minCost = minCost(maxCost);
+        //objects
+        drawObjects();
+        //gui stuff
+        noStroke();
+        if (!levelBuilder) inGameGui.display();
+        else levelBuilderGui.display();
+        if (paused) pauseGui.display();
+        hand.displayHeldInfo();
+        //text
+        textAlign(LEFT);
+        if (!levelBuilder) inGameGui.drawText(this, 10);
+        //levels
+        if (playingLevel) levels[currentLevel].main();
+    }
+
+    /**
+     * Stuff for the level select screen.
+     */
+    private void drawLevelSelect() {
+        levelSelectGui.display();
     }
 
     /**
@@ -466,7 +491,7 @@ public class Main extends PApplet {
         public KeyDSItem[] items;
 
         /**
-         * Containts all the keys from the keyboard,
+         * Contains all the keys from the keyboard
          */
         public KeyDS() {
             items = new KeyDSItem[0];

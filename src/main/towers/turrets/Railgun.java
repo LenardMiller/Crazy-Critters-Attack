@@ -32,7 +32,6 @@ public class Railgun extends Turret {
         hit = false;
         delay = 500; //500 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         damage = 5000;
         pjSpeed = -1;
         range = 800; //0
@@ -63,7 +62,6 @@ public class Railgun extends Turret {
     }
 
     public void fire() {
-        delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(30);

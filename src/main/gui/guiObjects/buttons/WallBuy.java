@@ -27,8 +27,12 @@ public class WallBuy extends Button {
         }
     }
 
-    public void hover(){ //below is if hovered or depressed
-        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 && p.mouseY > position.y-size.y/2 && alive && active) {
+    /**
+     * If hovered or depressed.
+     */
+    public void hover() {
+        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
+                p.mouseY > position.y-size.y/2 && alive && active && !paused) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) {
                 clickIn.stop();

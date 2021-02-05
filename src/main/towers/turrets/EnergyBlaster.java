@@ -1,8 +1,8 @@
 package main.towers.turrets;
 
+import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.EnergyBlast;
-import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -26,7 +26,6 @@ public class EnergyBlaster extends Turret{
         hit = false;
         delay = 240; //240 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         damage = 30;
         pjSpeed = 16;
         range = 6; //5 degrees
@@ -49,7 +48,6 @@ public class EnergyBlaster extends Turret{
 
     public void fire() { //needed to change projectile fired
         float angleB = angle;
-        delayTime = p.frameCount + delay; //waits this time before firing
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angleB-HALF_PI);
         spa.setMag(40);

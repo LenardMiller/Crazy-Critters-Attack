@@ -25,7 +25,6 @@ public class Slingshot extends Turret {
         hit = false;
         delay = 100;
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         pjSpeed = 12;
         range = 230;
         numFireFrames = 34;
@@ -55,7 +54,6 @@ public class Slingshot extends Turret {
     public void fire() { //needed to change projectile fired
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
-        delayTime = p.frameCount + delay; //waits this time before firing
         if (painful) projectiles.add(new Rock(p, tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
         if (gravel) {
             float offset = 0.03f;

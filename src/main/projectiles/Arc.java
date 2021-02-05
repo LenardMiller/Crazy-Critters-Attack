@@ -7,9 +7,7 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static main.Main.debug;
-import static main.Main.enemies;
-import static processing.core.PApplet.*;
+import static main.Main.*;
 
 public class Arc {
 
@@ -43,7 +41,6 @@ public class Arc {
 
     public void main() {
         for (int k = 0; k < bigPoints.size()-1; k++) {
-//            bigPoints.get(k).getPoints(bigPoints.get(k+1).position);
             P.stroke(215,242,248, alpha);
             P.fill(255);
             PVector pointB = bigPoints.get(k).position;
@@ -57,7 +54,7 @@ public class Arc {
             }
             P.line(points[1].x,points[1].y,pointA.x,pointA.y);
         }
-        alpha -= 5;
+        if (!paused) alpha -= 5;
     }
 
     private void zap() {

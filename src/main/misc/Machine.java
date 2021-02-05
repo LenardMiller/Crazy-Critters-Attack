@@ -88,15 +88,17 @@ public class Machine {
         if (deathFrame < 200) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
-        if (!dead) hurtParticles();
-        else if (deathFrame < 300) deathAnim();
+        if (dead && !paused) deathFrame++;
+        if (!dead && !paused) hurtParticles();
+        else if (deathFrame < 300 && !paused) deathAnim();
         else EXPLODE_LOOP.stopLoop();
-        if (p.frameCount > frameTimer && !dead) {
+        if (deathFrame > 500) paused = true;
+        if (p.frameCount > frameTimer && !dead && !paused) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
             frameTimer = p.frameCount + betweenFrames;
         }
-        if (tintColor < 255) tintColor += 20;
+        if (tintColor < 255 && !paused) tintColor += 20;
     }
 
     private void hurtParticles() {
@@ -122,8 +124,7 @@ public class Machine {
         if (deathFrame == 0) {
             BREAK_SOUND.stop();
             BREAK_SOUND.play(1, volume);
-        } deathFrame++;
-        if (deathFrame < 160) {
+        } if (deathFrame < 160) {
             for (Tile tile : machTiles) {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;

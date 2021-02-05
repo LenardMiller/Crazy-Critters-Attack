@@ -69,9 +69,11 @@ public abstract class Projectile {
     }
 
     public void main(ArrayList<Projectile> projectiles, int i) {
-        trail();
         displayPassB();
-        move();
+        if (!paused) {
+            trail();
+            move();
+        }
         collideEn();
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) {
             dead = true;
@@ -91,7 +93,7 @@ public abstract class Projectile {
     }
 
     public void displayPassA() {
-        angleTwo += radians(angularVelocity);
+        if (!paused) angleTwo += radians(angularVelocity);
         p.pushMatrix();
         p.tint(0,60);
         p.translate(position.x + 2, position.y + 2);
@@ -102,7 +104,7 @@ public abstract class Projectile {
     }
 
     public void displayPassB() {
-        angleTwo += radians(angularVelocity);
+        if (!paused) angleTwo += radians(angularVelocity);
         p.pushMatrix();
         p.translate(position.x, position.y);
         p.rotate(angleTwo);

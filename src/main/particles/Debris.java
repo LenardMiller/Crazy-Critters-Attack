@@ -11,15 +11,13 @@ public class Debris extends Particle {
         super(p, x, y, angle);
         position = new PVector(x, y);
         size = new PVector(5, 5);
-        maxSpeed = 2; //default: 2
+        maxSpeed = p.random(1.5f,3.5f); //default: 2
         speed = maxSpeed;
         angleTwo = angle;
-        angularVelocity = 8; //degrees mode
-        lifespan = 6; //in frames, default: 6
-        lifespan += (PApplet.round(p.random((-lifespan+2),lifespan))); //injects 100% randomness so all don't die at once
+        angularVelocity = p.random(-15,15); //degrees mode
+        lifespan = (int) p.random(3, 15);
         numFrames = 1;
         delay = lifespan/numFrames;
-        delayTime = p.frameCount + delay;
         sprite = spritesH.get(type + "Pt");
         velocity = PVector.fromAngle(angle-HALF_PI);
     }

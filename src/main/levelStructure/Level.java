@@ -28,13 +28,16 @@ public class Level {
     }
 
     public void main() {
-        if (currentWave < waves.length) { //temp, replace with win condition
+        if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
-            if (P.frameCount >= wave.endTimer) setWave(currentWave + 1);
-            else wave.spawnEnemies();
-            if (P.frameCount >= wave.waitTimer && enemies.size() == 0) {
-                wave.endTimer -= wave.length / 500;
+            if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
+            else if (!paused && alive) wave.spawnEnemies();
+            if (wave.spawnLengthTimer > wave.SPAWN_LENGTH && enemies.size() == 0 && !paused && alive) {
+                wave.lengthTimer += wave.LENGTH / 500;
             }
+        } else if (enemies.size() == 0) { //win condition
+            if (!won) paused = true; //prevent stuck on pause
+            won = true;
         }
     }
 
@@ -42,10 +45,6 @@ public class Level {
         Wave wave = waves[currentWave];
         wave.end();
         currentWave = waveNum;
-        if (currentWave < waves.length) {
-            wave = waves[currentWave];
-            wave.init();
-        }
     }
 
     public void display() {
@@ -57,8 +56,8 @@ public class Level {
                 if (currentWave < waves.length) current = waves[currentWave];
                 float y = (125*(i-currentWave));
                 float y2 = 125;
-                if (currentWave < waves.length) y2 = 125*(((current.endTimer - P.frameCount)+1)/(float)current.length);
-                if (playingLevel) y += y2;
+                if (currentWave < waves.length) y2 = 125*(((current.lengthTimer)+1)/(float)current.LENGTH);
+                if (playingLevel) y -= y2 - 125;
                 else y += 125;
                 wave.display(212 + y, i+1);
                 if (i == startWave) playY = y;
@@ -70,6 +69,6 @@ public class Level {
         P.image(spritesH.get("currentLineIc"),891,212+125-1);
         P.tint(255);
         P.image(spritesH.get("currentLineIc"),891-1,212+125-1-1);
-        playButton.display((int)playY);
+        inGameGui.playButton.display((int)playY);
     }
 }

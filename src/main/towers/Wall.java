@@ -7,9 +7,9 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
-
-import static main.misc.WallSpecialVisuals.*;
+import static main.misc.MiscMethods.updateNodes;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public class Wall extends Tower {
 
@@ -177,8 +177,8 @@ public class Wall extends Tower {
         placeSound.play(p.random(0.8f, 1.2f), volume);
 
         nextLevelB++;
-        if (nextLevelB < upgradeTitles.length) upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));

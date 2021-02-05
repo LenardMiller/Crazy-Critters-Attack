@@ -66,7 +66,7 @@ public class Corpse {
             velocity = PVector.fromAngle(a);
             this.VELOCITY = velocity.setMag(speed);
         } else this.VELOCITY = velocity;
-        this.angularVelocity = angularVelocity;
+        this.angularVelocity = angularVelocity * 2;
         SPRITES = spritesAnimH.get(name + "EN");
         this.type = effectType;
         if (this.type == null) this.type = "normal";
@@ -82,27 +82,31 @@ public class Corpse {
     }
 
     public void main(int i) {
-        move();
+        if (!paused) {
+            move();
+            lifespan--;
+            if (lifespan <= 0) corpses.remove(i);
+        }
         display();
-        lifespan--;
-        if (lifespan <= 0) corpses.remove(i);
     }
 
     private void move() {
         VELOCITY.x *= (float)lifespan / (float) MAX_LIFE;
         VELOCITY.y *= (float)lifespan / (float) MAX_LIFE;
         angularVelocity *= (float)lifespan / (float) MAX_LIFE;
-        angle += angularVelocity;
+        angle += radians(angularVelocity);
         POSITION.add(VELOCITY);
     }
 
     private void display() {
         PImage sprite = SPRITES[frame];
-        if (ANIMATED && frame < SPRITES.length - 1) {
-            betweenTime++;
-            if (betweenTime >= BETWEEN_FRAMES) {
-                frame++;
-                betweenTime = 0;
+        if (!paused) {
+            if (ANIMATED && frame < SPRITES.length - 1) {
+                betweenTime++;
+                if (betweenTime >= BETWEEN_FRAMES) {
+                    frame++;
+                    betweenTime = 0;
+                }
             }
         }
 
@@ -138,31 +142,35 @@ public class Corpse {
                     getTintChannel(tintFinal.getGreen(), lifespan, MAX_LIFE),
                     getTintChannel(tintFinal.getBlue(), lifespan, MAX_LIFE)
             );
-            for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
-                float chance = sq(2 * ((float) MAX_LIFE / (float)lifespan));
-                if (!ANIMATED) chance += 16;
-                int num = (int)(p.random(0, chance));
-                if (num == 0) {
-                    particles.add(new BuffParticle(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), p.random(0, 360), part));
+            if (!paused) {
+                for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
+                    float chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
+                    if (!ANIMATED) chance += 16;
+                    int num = (int) (p.random(0, chance));
+                    if (num == 0) {
+                        particles.add(new BuffParticle(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), p.random(0, 360), part));
+                    }
                 }
             }
         }
 
-        if (!BLOOD_PARTICLE.equals("none")) {
-            for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
-                float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
-                float chance = sq(1 / (speed + 0.01f));
-                chance += 16;
-                if (!type.equals("burning") && !type.equals("decay")) {
+        if (!paused) {
+            if (!BLOOD_PARTICLE.equals("none")) {
+                for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
+                    float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
+                    float chance = sq(1 / (speed + 0.01f));
+                    chance += 16;
+                    if (!type.equals("burning") && !type.equals("decay")) {
+                        int num = (int) (p.random(0, chance));
+                        if (num == 0) {
+                            particles.add(new Ouch(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), p.random(0, 360), BLOOD_PARTICLE));
+                        }
+                    }
+                    chance += 10;
                     int num = (int) (p.random(0, chance));
                     if (num == 0) {
-                        particles.add(new Ouch(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), p.random(0, 360), BLOOD_PARTICLE));
+                        underParticles.add(new Pile(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), 0, BLOOD_PARTICLE));
                     }
-                }
-                chance += 10;
-                int num = (int) (p.random(0,chance));
-                if (num == 0) {
-                    underParticles.add(new Pile(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), 0, BLOOD_PARTICLE));
                 }
             }
         }
@@ -178,7 +186,6 @@ public class Corpse {
             superTint(st, new Color(tint.getRed(), tint.getGreen(), tint.getBlue(), 0), transparency);
         } else p.tint(255, transparency * 255);
 
-        angle += radians(angularVelocity);
         p.pushMatrix();
         p.translate(POSITION.x, POSITION.y);
         p.rotate(angle);

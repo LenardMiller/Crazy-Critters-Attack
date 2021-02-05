@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
-import main.projectiles.Arc;
 import main.misc.Tile;
+import main.projectiles.Arc;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -23,7 +23,6 @@ public class TeslaTower extends Turret{
         hit = false;
         delay = 500; //500 frames
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        delayTime = delay;
         damage = 30;
         arcDistance = 200;
         arcLength = 3;
@@ -56,7 +55,6 @@ public class TeslaTower extends Turret{
     }
 
     public void fire(){ //needed to change projectile fired
-        delayTime = p.frameCount + delay; //waits this time before firing
         arcs.add(new Arc(p, tile.position.x - 25, tile.position.y - 25, this, damage, arcLength, arcDistance, priority));
     }
 

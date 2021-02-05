@@ -14,9 +14,7 @@ public class Decay extends Buff {
     public Decay(PApplet p, int enId, float damage, int duration, Turret turret) {
         super(p,enId,turret);
         effectDelay = 6; //frames
-        effectTimer = p.frameCount + effectDelay;
         lifeDuration = duration; //frames
-        lifeTimer = p.frameCount + lifeDuration;
         particle = "decay";
         name = "decay";
         this.DAMAGE = (int) damage;
