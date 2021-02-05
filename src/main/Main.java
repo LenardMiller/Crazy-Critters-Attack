@@ -62,6 +62,7 @@ public class Main extends PApplet {
     public static InGameGui inGameGui;
     public static LevelBuilderGui levelBuilderGui;
     public static PauseGui pauseGui;
+    public static LevelSelectGui levelSelectGui;
 
     //can't be final because created by PApplet
     public static PFont veryLargeFont;
@@ -73,7 +74,7 @@ public class Main extends PApplet {
     /**
      * in-game, level select
      */
-    public static int screen = 0;
+    public static int screen = 1;
     public static int money = 100;
     public static boolean alive = true;
     public static boolean won = false;
@@ -149,6 +150,13 @@ public class Main extends PApplet {
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
         keyBinds.loadKeyBinds();
+        //generates levels
+        playingLevel = false;
+        levels = new Level[2];
+        levels[0] = new Level(this, ForestWaves.genForestWaves(this), "levels/forest", 125, 50, "dirt");
+        levels[1] = new Level(this, DesertWaves.genDesertWaves(this), "levels/desert", 250, 75, "sand");
+        //guis
+        levelSelectGui = new LevelSelectGui(this);
 
         resetGame(this);
     }
@@ -191,12 +199,6 @@ public class Main extends PApplet {
         start.findGHF();
         for (Node node : end) node.findGHF();
         updateTowerArray();
-        //generates levels
-        playingLevel = false;
-        currentLevel = 0; //temp
-        levels = new Level[2];
-        levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
-        levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
         //load level data
         DataControl.load(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
@@ -218,8 +220,9 @@ public class Main extends PApplet {
      */
     public void draw() {
         background(50, 50, 50);
-        //in-game
+        //screens
         if (screen == 0) drawInGame();
+        if (screen == 1) drawLevelSelect();
         //looping sounds
         for (SoundLoop soundLoop : soundLoopsH.values()) soundLoop.continueLoop();
         //reset mouse pulses
@@ -234,7 +237,7 @@ public class Main extends PApplet {
     }
 
     /**
-     * Stuff for the main game
+     * Stuff for the main game screen.
      */
     private void drawInGame() {
         //keys
@@ -267,6 +270,13 @@ public class Main extends PApplet {
         if (!levelBuilder) inGameGui.drawText(this, 10);
         //levels
         if (playingLevel) levels[currentLevel].main();
+    }
+
+    /**
+     * Stuff for the level select screen.
+     */
+    private void drawLevelSelect() {
+        levelSelectGui.display();
     }
 
     /**

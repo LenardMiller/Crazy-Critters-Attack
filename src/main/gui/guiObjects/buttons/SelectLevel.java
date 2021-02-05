@@ -1,14 +1,17 @@
 package main.gui.guiObjects.buttons;
 
 import main.Main;
+import main.gui.LevelSelectGui;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 
-public class LevelSelect extends Button {
+public class SelectLevel extends Button {
 
-    public LevelSelect(PApplet p, float x, float y, String type, boolean active) {
+    private final int LEVEL;
+
+    public SelectLevel(PApplet p, float x, float y, String type, boolean active, int level) {
         super(p, x, y, type, active);
         position = new PVector(x, y);
         size = new PVector(200, 42);
@@ -16,6 +19,7 @@ public class LevelSelect extends Button {
         spritePressed = spritesAnimH.get("genericButtonBT")[1];
         spriteHover = spritesAnimH.get("genericButtonBT")[2];
         sprite = spriteIdle;
+        this.LEVEL = level;
     }
 
     public void main(){
@@ -29,7 +33,7 @@ public class LevelSelect extends Button {
      */
     public void hover(){
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
-                p.mouseY > position.y-size.y/2) {
+                p.mouseY > position.y-size.y/2 && LevelSelectGui.delay < 0) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) {
                 clickIn.stop();
@@ -47,7 +51,10 @@ public class LevelSelect extends Button {
     }
 
     public void action() {
+        currentLevel = LEVEL;
         Main.resetGame(p);
-        screen = 1;
+        paused = false;
+        alive = true;
+        screen = 0;
     }
 }

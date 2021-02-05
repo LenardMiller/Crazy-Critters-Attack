@@ -1,7 +1,7 @@
 package main.gui;
 
 import main.gui.guiObjects.buttons.ExitGame;
-import main.gui.guiObjects.buttons.LevelSelect;
+import main.gui.guiObjects.buttons.LevelSelectScreen;
 import main.gui.guiObjects.buttons.RestartLevel;
 import main.gui.guiObjects.buttons.ResumeGame;
 import processing.core.PApplet;
@@ -14,7 +14,7 @@ public class PauseGui {
 
     public static ResumeGame resumeGame;
     public static RestartLevel restartLevel;
-    public static LevelSelect levelSelect;
+    public static LevelSelectScreen levelSelect;
     public static ExitGame exitGame;
 
     /**
@@ -62,7 +62,7 @@ public class PauseGui {
     private void build() {
         resumeGame = new ResumeGame(P, P.width/2f, (P.height/2f) - 75, "null", true);
         restartLevel = new RestartLevel(P, P.width/2f, P.height/2f - 25, "null", true);
-        levelSelect = new LevelSelect(P, P.width/2f, (P.height/2f) + 25, "null", true);
+        levelSelect = new LevelSelectScreen(P, P.width/2f, (P.height/2f) + 25, "null", true);
         exitGame = new ExitGame(P, P.width/2f, (P.height/2f) + 75, "null", true);
     }
 }
