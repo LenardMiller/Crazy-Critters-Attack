@@ -51,7 +51,7 @@ public class LevelSelectScreen extends Button {
         Main.resetGame(p);
         paused = false;
         alive = true;
-        LevelSelectGui.delay = 30;
+        LevelSelectGui.delay = 1;
         screen = 1;
     }
 }

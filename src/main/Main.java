@@ -82,7 +82,7 @@ public class Main extends PApplet {
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
     public static boolean paused = false;
-    public static boolean dev = true;
+    public static boolean dev = false;
     public static int connectWallQueues;
     public static float volume = 0.25f;
 
@@ -249,7 +249,7 @@ public class Main extends PApplet {
             }
             keyBinds.spawnKeys();
         }
-        keyBinds.playerKeys();
+        keyBinds.inGameKeys();
         //pathfinding
         if (path.reqQ.size() > 0) {
             path.reqQ.get(0).getPath();

@@ -22,9 +22,10 @@ public class KeyBinds {
         KeyBinds.p = p;
     }
 
-    public void playerKeys() {
+    public void inGameKeys() {
         boolean pause = keysPressed.getPressedPulse(' ');
         if (pause) {
+            soundsH.get("clickOut").play(1, volume);
             updateNodes();
             updateWallTiles();
             updateWallTileConnections();
@@ -67,13 +68,7 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,150));
         if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5));
         //enemies
-        if (pause) { //temp
-            playingLevel = false;
-//            Level level = levels[currentLevel];
-//            level.currentWave = 0;
-//            Wave wave = level.waves[level.currentWave];
-//            wave.init();
-        } if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
+        if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
         if (bigBug) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
         if (sidewinder) enemies.add(new Sidewinder(p, p.mouseX, p.mouseY));
