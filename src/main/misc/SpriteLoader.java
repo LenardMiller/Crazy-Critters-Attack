@@ -179,11 +179,11 @@ public class SpriteLoader {
         getSprite(p,"waveMotionIdle","TR","waveMotion/idle/",14);
         getSprite(p,"waveMotionBeam","TR","waveMotion/beam/",18);
         //walls
-        getSprite(p,"woodWall","TW","wood/",4);
-        getSprite(p,"stoneWall","TW","stone/",4);
-        getSprite(p,"metalWall","TW","metal/",4);
-        getSprite(p,"crystalWall","TW","crystal/",4);
-        getSprite(p,"ultimateWall","TW","ultimate/",4);
+        getSprite(p,"woodWall","TW","Wood/",4);
+        getSprite(p,"stoneWall","TW","Stone/",4);
+        getSprite(p,"metalWall","TW","Metal/",4);
+        getSprite(p,"crystalWall","TW","Crystal/",4);
+        getSprite(p,"ultimateWall","TW","Ultimate/",4);
         //machines
         getMachineSprite(p,"stoneDrill",new int[]{12,12,13,20});
         getMachineSprite(p, "metalDrill", new int[]{8,8,9,11});
@@ -358,19 +358,19 @@ public class SpriteLoader {
         spritesH.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
         for (int i = 0; i < 5; i++) {
             String name = "null";
-            if (i == 0) name = "wood";
-            if (i == 1) name = "stone";
-            if (i == 2) name = "metal";
-            if (i == 3) name = "crystal";
-            if (i == 4) name = "ultimate";
+            if (i == 0) name = "Wood";
+            if (i == 1) name = "Stone";
+            if (i == 2) name = "Metal";
+            if (i == 3) name = "Crystal";
+            if (i == 4) name = "Ultimate";
             String idA = "null";
             String idB = "null";
             String idC = "null";
             for (int a = 0; a < 2; a++) {
                 for (int b = 0; b < 2; b++) {
                     for (int c = 0; c < 2; c++) {
-                        if (a == 0) idA = "t";
-                        if (a == 1) idA = "b";
+                        if (a == 0) idA = "T";
+                        if (a == 1) idA = "B";
                         if (b == 0) idB = "l";
                         if (b == 1) idB = "r";
                         if (c == 0) idC = "c";
