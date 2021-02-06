@@ -46,6 +46,8 @@ public class TowerBuy extends Button {
                 price = SEISMIC_PRICE;
                 break;
             case "tesla":
+                price = TESLATOWER_PRICE;
+                break;
             case "energyBlaster":
                 price = ENERGYBLASTER_PRICE;
                 break;

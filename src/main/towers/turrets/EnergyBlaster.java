@@ -88,7 +88,7 @@ public class EnergyBlaster extends Turret{
         upgradeTitles[3] = "Better Range";
         upgradeTitles[4] = "Fantastic Range";
         upgradeTitles[5] = "Big Succ";
-        //desc line one
+        //description
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "firerate";
         upgradeDescC[0] = "";

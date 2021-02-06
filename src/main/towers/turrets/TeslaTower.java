@@ -9,7 +9,7 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
-public class TeslaTower extends Turret{
+public class TeslaTower extends Turret {
 
     private int arcLength;
     private int arcDistance;
@@ -21,13 +21,13 @@ public class TeslaTower extends Turret{
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 500; //500 frames
+        delay = 200;
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         damage = 30;
         arcDistance = 200;
         arcLength = 3;
         pjSpeed = -1;
-        range = 0;
+        range = 200;
         numFireFrames = 6;
         numLoadFrames = 5;
         numIdleFrames = 18;
@@ -38,11 +38,18 @@ public class TeslaTower extends Turret{
         spriteType = 0;
         loadSprites();
         debrisType = "metal";
-        price = 300;
+        price = TESLATOWER_PRICE;
         value = price;
         priority = 0; //close
+        damageSound = soundsH.get("stoneDamage");
+        breakSound = soundsH.get("stoneBreak");
+        placeSound = soundsH.get("stonePlace");
+        fireSound = soundsH.get("smallImpact");
         setUpgrades();
         updateTowerArray();
+
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void checkTarget() {
@@ -54,7 +61,8 @@ public class TeslaTower extends Turret{
         }
     }
 
-    public void fire(){ //needed to change projectile fired
+    public void fire() {
+        fireSound.play();
         arcs.add(new Arc(p, tile.position.x - 25, tile.position.y - 25, this, damage, arcLength, arcDistance, priority));
     }
 
@@ -80,39 +88,85 @@ public class TeslaTower extends Turret{
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 100;
-        upgradePrices[2] = 50;
-        upgradePrices[3] = 100;
+        upgradePrices[2] = 200;
+
+        upgradePrices[3] = 50;
+        upgradePrices[4] = 100;
+        upgradePrices[5] = 200;
         //titles
-        upgradeTitles[0] = "+Wattage";
-        upgradeTitles[1] = "++Wattage";
-        upgradeTitles[2] = "+Capacitance";
-        upgradeTitles[3] = "+Amperage";
-        //desc line one
+        upgradeTitles[0] = "Chain";
+        upgradeTitles[1] = "More Chain";
+        upgradeTitles[2] = "lightning";
+
+        upgradeTitles[3] = "Battery Size";
+        upgradeTitles[4] = "Shocking";
+        upgradeTitles[5] = "zap";
+        //description
         upgradeDescA[0] = "Increase";
-        upgradeDescA[1] = "Increase";
-        upgradeDescA[2] = "Increase";
-        upgradeDescA[3] = "+10";
-        //desc line two
         upgradeDescB[0] = "arc";
-        upgradeDescB[1] = "arc";
-        upgradeDescB[2] = "recharge";
-        upgradeDescB[3] = "damage";
-        //desc line three
         upgradeDescC[0] = "distance";
+
+        upgradeDescA[1] = "Increase";
+        upgradeDescB[1] = "arc";
         upgradeDescC[1] = "distance";
-        upgradeDescC[2] = "rate";
-        upgradeDescC[3] = "";
+
+        upgradeDescA[2] = "calls";
+        upgradeDescB[2] = "lightning";
+        upgradeDescC[2] = "";
+
+
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "recharge";
+        upgradeDescC[3] = "rate";
+
+        upgradeDescA[4] = "+10";
+        upgradeDescB[4] = "damage";
+        upgradeDescC[4] = "";
+
+        upgradeDescA[5] = "vastly";
+        upgradeDescB[5] = "increase";
+        upgradeDescC[5] = "firerate";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[1];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[2];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[8];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[22];
+
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[7];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[10];
     }
 
-    public void upgradeSpecial() {
-        if (nextLevelA == 0 || nextLevelA == 1) {
-            arcDistance += 100;
-            arcLength++;
+    public void upgradeSpecial(int id) {
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    arcDistance += 100;
+                    arcLength++;
+                    break;
+                case 1:
+                    arcDistance += 100;
+                    arcLength++;
+                    if (nextLevelB > 5) nextLevelA++;
+                    break;
+                case 2:
+                    range = 1000;
+                    if (nextLevelB == 5) nextLevelB++;
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    delay -= 35;
+                    break;
+                case 4:
+                    damage += 30;
+                    if (nextLevelA > 2) nextLevelB++;
+                    break;
+                case 5:
+                    delay = 1;
+                    if (nextLevelA == 2) nextLevelA++;
+                    break;
+            }
         }
     }
 

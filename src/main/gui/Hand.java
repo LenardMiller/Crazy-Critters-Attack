@@ -294,7 +294,7 @@ public class Hand {
             case "tesla":
                 heldSprite = spritesH.get("teslaFullTR");
                 offset = new PVector(0, 0);
-                price = 150;
+                price = TESLATOWER_PRICE;
                 break;
             case "nightmare":
                 heldSprite = spritesH.get("nightmareFullTR");
