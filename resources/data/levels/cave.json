@@ -33,8 +33,7 @@
     "machine": false,
     "id": 5,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -58,8 +57,7 @@
     "machine": false,
     "id": 9,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus2Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -83,8 +81,7 @@
     "machine": false,
     "id": 13,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -137,8 +134,7 @@
     "machine": false,
     "id": 22,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "rockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -156,8 +152,7 @@
     "machine": false,
     "id": 25,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus1Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -181,7 +176,6 @@
     "machine": false,
     "id": 29,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -194,8 +188,7 @@
     "machine": false,
     "id": 31,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus0Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -219,8 +212,7 @@
     "machine": false,
     "id": 35,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -243,7 +235,6 @@
     "machine": false,
     "id": 39,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -286,8 +277,7 @@
     "machine": false,
     "id": 46,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus0Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -376,8 +366,7 @@
     "machine": false,
     "id": 61,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -478,8 +467,7 @@
     "machine": false,
     "id": 78,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -551,8 +539,7 @@
     "machine": false,
     "id": 90,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "rockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -629,8 +616,7 @@
     "machine": false,
     "id": 103,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -874,8 +860,7 @@
     "machine": false,
     "id": 144,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "dandelionsBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -946,7 +931,6 @@
     "machine": false,
     "id": 156,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -1001,8 +985,7 @@
     "machine": false,
     "id": 165,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1246,8 +1229,7 @@
     "machine": false,
     "id": 206,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1270,7 +1252,6 @@
     "machine": false,
     "id": 210,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -1426,8 +1407,7 @@
     "machine": false,
     "id": 236,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1457,8 +1437,7 @@
     "machine": false,
     "id": 241,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1470,8 +1449,7 @@
     "machine": false,
     "id": 243,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus2Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1494,15 +1472,13 @@
     "machine": false,
     "id": 247,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus0Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
     "id": 248,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1514,8 +1490,7 @@
     "machine": false,
     "id": 250,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus2Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1575,8 +1550,7 @@
     "machine": false,
     "id": 260,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus1Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1588,7 +1562,6 @@
     "machine": false,
     "id": 262,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -1612,8 +1585,7 @@
     "machine": false,
     "id": 266,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "dandelionsBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1643,8 +1615,7 @@
     "machine": false,
     "id": 271,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1739,8 +1710,7 @@
     "machine": false,
     "id": 287,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus0Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1824,8 +1794,7 @@
     "machine": false,
     "id": 301,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "dandelionsBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1848,7 +1817,6 @@
     "machine": false,
     "id": 305,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -1867,8 +1835,7 @@
     "machine": false,
     "id": 308,
     "type": "tile",
-    "bgA": "sand",
-    "obstacle": "cactus1Ob_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1880,7 +1847,6 @@
     "machine": false,
     "id": 310,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -1911,8 +1877,7 @@
     "machine": false,
     "id": 315,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "rockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1930,8 +1895,7 @@
     "machine": false,
     "id": 318,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
@@ -1978,8 +1942,7 @@
     "machine": false,
     "id": 326,
     "type": "tile",
-    "bgA": "sand",
-    "bgC": "smallRockBGC_TL"
+    "bgA": "sand"
   },
   {
     "machine": false,
