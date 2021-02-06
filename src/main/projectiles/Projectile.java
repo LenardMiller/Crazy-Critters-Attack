@@ -128,8 +128,10 @@ public abstract class Projectile {
                 }
             if (hitAlready) continue;
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
-                hitSound.stop();
-                hitSound.play(p.random(0.8f, 1.2f), volume);
+                if (hitSound != null) {
+                    hitSound.stop();
+                    hitSound.play(p.random(0.8f, 1.2f), volume);
+                }
                 enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, type, velocity, i);
                 hitEnemies.add(enemy);
                 pierce--;

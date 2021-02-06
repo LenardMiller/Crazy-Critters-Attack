@@ -304,7 +304,7 @@ public class Hand {
             case "flamethrower":
                 heldSprite = spritesH.get("flamethrowerFullTR");
                 offset = new PVector(7, 7);
-                price = 200;
+                price = FLAMETHROWER_PRICE;
                 break;
             case "railgun":
                 heldSprite = spritesH.get("railgunFullTR");

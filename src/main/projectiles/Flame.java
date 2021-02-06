@@ -19,7 +19,7 @@ public class Flame extends Projectile {
     private int fireChance;
     private int smokeChance;
 
-    public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectLevel, int effectDuration, int timer) {
+    public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectLevel, int effectDuration, int timer, boolean sound) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(25, 25);
@@ -40,7 +40,8 @@ public class Flame extends Projectile {
         splashEn = false;
         fireChance = 8;
         smokeChance = 100;
-        hitSound = soundsH.get("fireImpact");
+        if (sound) hitSound = soundsH.get("fireImpact");
+        else hitSound = null;
     }
 
     public void die(int i) {

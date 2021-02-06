@@ -66,7 +66,7 @@ public class KeyBinds {
         if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
         if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
         if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,150));
-        if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5));
+        if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5, false));
         //enemies
         if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
         if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));

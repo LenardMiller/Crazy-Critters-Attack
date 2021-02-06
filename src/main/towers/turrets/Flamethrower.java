@@ -14,8 +14,6 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 public class Flamethrower extends Turret {
 
     public float targetAngle;
-    private int effectLevel;
-    private int effectDuration;
     private int flameTimer;
     private float rotationSpeed;
 
@@ -30,7 +28,7 @@ public class Flamethrower extends Turret {
         delay = 4;
         delay += (round(p.random(-(delay / 10f), delay / 10f))); //injects 10% randomness so all don't fire at once
         pjSpeed = 5;
-        range = 320;
+        range = 250;
         numFireFrames = 4;
         numLoadFrames = 1;
         numIdleFrames = 4;
@@ -45,15 +43,22 @@ public class Flamethrower extends Turret {
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 20;
-        flameTimer = 5;
+        flameTimer = 2;
         rotationSpeed = 0.02f;
         loadSprites();
         debrisType = "metal";
-        price = 400;
+        price = FLAMETHROWER_PRICE;
         value = price;
         priority = 0; //close
+        damageSound = soundsH.get("stoneDamage");
+        breakSound = soundsH.get("stoneBreak");
+        placeSound = soundsH.get("stonePlace");
+        fireSound = soundsH.get("fireImpact");
         setUpgrades();
         updateTowerArray();
+
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void checkTarget() {
@@ -72,7 +77,9 @@ public class Flamethrower extends Turret {
         PVector spa = PVector.fromAngle(angleB - HALF_PI);
         spa.setMag(24);
         spp.add(spa);
-        projectiles.add(new Flame(p, spp.x, spp.y, angleB, this, damage, effectLevel, effectDuration, flameTimer));
+        projectiles.add(new Flame(p, spp.x, spp.y, angleB, this, damage, (int) effectLevel, effectDuration, flameTimer, false));
+        fireSound.stop();
+        fireSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     public void aim(Enemy enemy) {
@@ -119,36 +126,84 @@ public class Flamethrower extends Turret {
         //titles
         upgradeTitles[0] = "Range";
         upgradeTitles[1] = "Swivel";
-        upgradeTitles[2] = "Base Damage";
-        upgradeTitles[3] = "Effect Power";
-        //desc line one
+        upgradeTitles[2] = "Fireball";
+
+        upgradeTitles[3] = "Base Damage";
+        upgradeTitles[4] = "Effect Power";
+        upgradeTitles[5] = "Magic Fire";
+        //description
         upgradeDescA[0] = "Increase";
-        upgradeDescA[1] = "Increase";
-        upgradeDescA[2] = "Doubles";
-        upgradeDescA[3] = "Increase";
-        //desc line two
         upgradeDescB[0] = "range";
-        upgradeDescB[1] = "rotation";
-        upgradeDescB[2] = "base";
-        upgradeDescB[3] = "damage";
-        //desc line three
         upgradeDescC[0] = "";
+
+        upgradeDescA[1] = "Increase";
+        upgradeDescB[1] = "rotation";
         upgradeDescC[1] = "speed";
-        upgradeDescC[2] = "damage";
-        upgradeDescC[3] = "& duration";
+
+        upgradeDescA[2] = "explosive";
+        upgradeDescB[2] = "fireball";
+        upgradeDescC[2] = "";
+
+
+        upgradeDescA[3] = "Doubles";
+        upgradeDescB[3] = "base";
+        upgradeDescC[3] = "damage";
+
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "damage";
+        upgradeDescC[4] = "& duration";
+
+        upgradeDescA[5] = "idk,";
+        upgradeDescB[5] = "sumthin";
+        upgradeDescC[5] = "weird";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[12];
+        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[15];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[11];
+        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[23];
+
+        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[9];
+        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[11];
+        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[14];
     }
 
-    public void upgradeSpecial() {
+    public void upgradeSpecial(int id) {
         if (nextLevelA == 0) flameTimer += 2;
         if (nextLevelA == 1) rotationSpeed += 0.02;
         if (nextLevelB == 1) {
             effectDuration += 100;
             effectLevel += 2;
+        }
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    flameTimer += 1;
+                    range += 75;
+                    break;
+                case 1:
+                    rotationSpeed += 0.02;
+                    if (nextLevelB > 5) nextLevelA++;
+                    break;
+                case 2:
+                    range += 50;
+                    if (nextLevelB == 5) nextLevelB++;
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    damage += 20;
+                    break;
+                case 4:
+                    effectDuration += 100;
+                    effectLevel += 2;
+                    if (nextLevelA > 2) nextLevelB++;
+                    break;
+                case 5:
+                    effectDuration += 100;
+                    effectLevel += 2;
+                    if (nextLevelA == 2) nextLevelA++;
+                    break;
+            }
         }
     }
 
