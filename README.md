@@ -5,7 +5,7 @@ A small tower defense game made using Processing. Now in alpha!
 - Unzip it
 - Open up the resulting folder and double click `launcher`
   
-If your on a Mac and get a `Developer cannot be verified` error:
+If you're on a Mac and get a `Developer cannot be verified` error:
 - When the error pops up, click `ok`/`cancel`
 - Open System Preferences
 - `Security & Privacy/General`
