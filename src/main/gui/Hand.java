@@ -284,7 +284,7 @@ public class Hand {
             case "energyBlaster":
                 heldSprite = spritesH.get("energyBlasterFullTR");
                 offset = new PVector(13, 13);
-                price = 150;
+                price = ENERGYBLASTER_PRICE;
                 break;
             case "magicMissleer":
                 heldSprite = spritesH.get("magicMissleerFullTR");
