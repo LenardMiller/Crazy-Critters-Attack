@@ -25,6 +25,7 @@ public class LevelBuilderGui {
         placeButton(0, 0, "dirtBGA");
         placeButton(1, 0, "grassBGA");
         placeButton(2, 4, "sandBGA");
+        placeButton(3, 4, "stoneBGA");
         //bgB
         placeButton(0, 1, "dirtPatchBGB");
         placeButton(1, 1, "grassPatchBGB");

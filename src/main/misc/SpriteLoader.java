@@ -387,6 +387,7 @@ public class SpriteLoader {
         }
         //tiles
         //BGA
+        spritesH.put("stoneBGA_TL",p.loadImage("sprites/tiles/BGA/stone/base.png"));
         spritesH.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt/base.png"));
         spritesH.put("sandBGA_TL", p.loadImage("sprites/tiles/BGA/sand/base.png"));
         spritesH.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
