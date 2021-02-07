@@ -91,6 +91,10 @@ public class SpriteLoader {
         getSprite(p,"bigBugMove","EN","bigBug/move/",12);
         getSprite(p,"bigBugDie","EN","bigBug/die/",6);
         getSprite(p,"bigBugParts","EN","bigBug/parts/",9);
+        getSprite(p,"bigAlbinoBugAttack","EN","bigAlbinoBug/attack/",100);
+        getSprite(p,"bigAlbinoBugMove","EN","bigAlbinoBug/move/",12);
+        getSprite(p,"bigAlbinoBugDie","EN","bigAlbinoBug/die/",6);
+        getSprite(p,"bigAlbinoBugParts","EN","bigAlbinoBug/parts/",9);
         getSprite(p,"snakeAttack","EN","snake/attack/",15);
         getSprite(p,"snakeMove","EN","snake/move/",10);
         getSprite(p,"snakeDie","EN","snake/die/",3);

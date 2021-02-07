@@ -69,7 +69,7 @@ public class KeyBinds {
         if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5, false));
         //enemies
         if (en1) enemies.add(new AlbinoBug(p, p.mouseX, p.mouseY));
-        if (en2) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
+        if (en2) enemies.add(new BigAlbinoBug(p, p.mouseX, p.mouseY));
         if (en3) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
         if (en4) enemies.add(new Sidewinder(p, p.mouseX, p.mouseY));
         if (en5) enemies.add(new Scorpion(p, p.mouseX, p.mouseY));

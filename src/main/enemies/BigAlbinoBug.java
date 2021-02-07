@@ -1,0 +1,32 @@
+package main.enemies;
+
+import processing.core.PApplet;
+import processing.core.PVector;
+
+import static main.Main.soundsH;
+
+public class BigAlbinoBug extends Enemy{
+
+    public BigAlbinoBug(PApplet p, float x, float y) {
+        super(p,x,y);
+        size = new PVector(53,53);
+        pfSize = 2; //2
+        radius = 26;
+        maxSpeed = .3f;
+        speed = maxSpeed;
+        moneyDrop = 100;
+        damage = 5;
+        maxHp = 1500;
+        hp = maxHp;
+        hitParticle = "glowOuch";
+        name = "bigAlbinoBug";
+        betweenWalkFrames = 3;
+        attackStartFrame = 48; //attack start
+        corpseSize = size;
+        partSize = new PVector(32,32);
+        attackFrame = attackStartFrame;
+        dieSound = soundsH.get("bigCrunch");
+        overkillSound = soundsH.get("squash");
+        loadSprites();
+    }
+}
