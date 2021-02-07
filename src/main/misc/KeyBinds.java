@@ -47,16 +47,16 @@ public class KeyBinds {
         boolean flame = keysPressed.getPressed('i') && alive;
         //enemies
         boolean pause = keysPressed.getPressedPulse('0') && alive;
-        boolean littleBug = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
-        boolean mediumBug = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
-        boolean bigBug = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
-        boolean sidewinder = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
-        boolean scorpion = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
-        boolean emperor = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
-        boolean worm = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
-        boolean midWorm = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
-        boolean bigWorm = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
-        boolean dummy = keysPressed.getPressedPulse('!') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en1 = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en2 = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en3 = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en4 = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en5 = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en6 = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en7 = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en8 = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en9 = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en1b = keysPressed.getPressedPulse('!') && alive && p.mouseX < BOARD_WIDTH;
         //projectiles
         if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 50000));
         if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, null, 20, 2));
@@ -68,17 +68,17 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,150));
         if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (littleBug) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
-        if (mediumBug) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
-        if (bigBug) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
-        if (sidewinder) enemies.add(new Sidewinder(p, p.mouseX, p.mouseY));
-        if (scorpion) enemies.add(new Scorpion(p, p.mouseX, p.mouseY));
-        if (emperor) enemies.add(new Emperor(p, p.mouseX, p.mouseY));
-        if (worm) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
-        if (midWorm) enemies.add(new MidWorm(p, p.mouseX, p.mouseY));
-        if (bigWorm) enemies.add(new BigWorm(p, p.mouseX, p.mouseY));
-        if (dummy) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
-        if (littleBug || mediumBug || bigBug || sidewinder || scorpion || emperor || midWorm || worm || bigWorm || dummy) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
+        if (en1) enemies.add(new AlbinoBug(p, p.mouseX, p.mouseY));
+        if (en2) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
+        if (en3) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
+        if (en4) enemies.add(new Sidewinder(p, p.mouseX, p.mouseY));
+        if (en5) enemies.add(new Scorpion(p, p.mouseX, p.mouseY));
+        if (en6) enemies.add(new Emperor(p, p.mouseX, p.mouseY));
+        if (en7) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
+        if (en8) enemies.add(new MidWorm(p, p.mouseX, p.mouseY));
+        if (en9) enemies.add(new BigWorm(p, p.mouseX, p.mouseY));
+        if (en1b) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
+        if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
     public void debugKeys() throws IOException {

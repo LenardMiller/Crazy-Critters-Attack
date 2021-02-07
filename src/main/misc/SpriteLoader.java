@@ -37,6 +37,7 @@ public class SpriteLoader {
         getSprite(p,"gluePuffEnemy","PT","enemy/gluePuff/",10);
         getSprite(p,"pinkOuchEnemy","PT","enemy/pinkOuch/",11);
         getSprite(p,"redOuchEnemy","PT","enemy/redOuch/",11);
+        getSprite(p,"glowOuchEnemy","PT","enemy/glowOuch/",11);
         getSprite(p,"leafOuchEnemy","PT","enemy/leafOuch/",11);
         getSprite(p,"fireMediumExplosion","PT","mediumExplosion/fire/",18);
         getSprite(p,"puffMediumExplosion","PT","mediumExplosion/puff/",18);
@@ -53,6 +54,7 @@ public class SpriteLoader {
         getSprite(p,"railgunBlast","PT","railgunBlast/",11);
         getSprite(p,"greenOuchPile","PT", "pile/greenOuch/", 4);
         getSprite(p,"redOuchPile","PT", "pile/redOuch/", 4);
+        getSprite(p,"glowOuchPile","PT", "pile/glowOuch/", 4);
         getSprite(p,"leafOuchPile","PT", "pile/leafOuch/", 4);
         getSprite(p,"dirtPile","PT","pile/dirt/", 4);
         getSprite(p,"sandPile","PT","pile/sand/", 4);
@@ -76,6 +78,10 @@ public class SpriteLoader {
         getSprite(p,"midBugMove","EN","midBug/move/",8);
         getSprite(p,"midBugDie","EN","midBug/die/",5);
         getSprite(p,"midBugParts","EN","midBug/parts/",9);
+        getSprite(p,"albinoBugAttack","EN","albinoBug/attack/",42);
+        getSprite(p,"albinoBugMove","EN","albinoBug/move/",8);
+        getSprite(p,"albinoBugDie","EN","albinoBug/die/",5);
+        getSprite(p,"albinoBugParts","EN","albinoBug/parts/",9);
         getSprite(p,"smolBugAttack","EN","smolBug/attack/",27);
         getSprite(p,"smolBugMove","EN","smolBug/move/",8);
         getSprite(p,"smolBugDie","EN","smolBug/die/", 4);
