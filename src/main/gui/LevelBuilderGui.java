@@ -47,6 +47,7 @@ public class LevelBuilderGui {
         placeButton(0,5, "cactus0Ob");
         placeButton(1,5, "cactus1Ob");
         placeButton(2,5, "cactus2Ob");
+        placeButton(1, 7, "caveWallBaseOb");
         //machine
         placeButton(3, 3, "Ma");
     }
