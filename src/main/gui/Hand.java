@@ -36,12 +36,12 @@ public class Hand {
         displayInfo = "null";
     }
 
-    public void main() { //todo: rclick deselect
+    public void main() {
         if (paused && !held.equals("null")) setHeld("null");
         if (!levelBuilder) checkPlaceable();
         else implacable = false;
         if (inputHandler.rightMousePressedPulse) remove();
-        if ((inputHandler.leftMousePressedPulse || inputHandler.rightMousePressedPulse) && P.mouseX > BOARD_WIDTH) {
+        if ((inputHandler.leftMousePressedPulse && P.mouseX > BOARD_WIDTH) || inputHandler.rightMousePressedPulse) {
             if (!held.equals("null")) {
                 inGameGui.wallBuyButton.timer = 0;
                 soundsH.get("clickOut").stop();
