@@ -392,6 +392,11 @@ public class Selection { //what tower is selected
             P.text("upgrades", 910, 635 + offsetC);
         }
         P.stroke(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+        if (tower.nextLevelB > 5 || tower.nextLevelA > 2) {
+            //little x
+            P.line(950, 685 + offsetC, 960, 685 + offsetC + 10);
+            P.line(960, 685 + offsetC, 950, 685 + offsetC + 10);
+        }
         if (upgradeButton == inGameGui.upgradeButtonA) { //A
             for (int i = 0; i < 3; i++) {
                 if (nextLevel <= i) P.noFill();
