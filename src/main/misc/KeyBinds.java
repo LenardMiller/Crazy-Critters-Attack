@@ -1,6 +1,7 @@
 package main.misc;
 
 import main.enemies.*;
+import main.levelStructure.Level;
 import main.projectiles.*;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -22,8 +23,9 @@ public class KeyBinds {
         KeyBinds.p = p;
     }
 
-    public void inGameKeys() { //todo: do some rebinding, esp. ESC
-        boolean pause = keysPressed.getPressedPulse(' ');
+    public void inGameKeys() { //todo: hotkeys
+        boolean pause = keysPressed.getPressedPulse('|');
+        boolean play = keysPressed.getPressedPulse(' ');
         if (pause) {
             soundsH.get("clickOut").play(1, volume);
             updateNodes();
@@ -31,6 +33,11 @@ public class KeyBinds {
             updateWallTileConnections();
             connectWallQueues++;
             paused = !paused;
+        }
+        if (play) {
+            playingLevel = true;
+            Level level = levels[currentLevel];
+            level.currentWave = 0;
         }
     }
 

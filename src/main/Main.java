@@ -418,6 +418,7 @@ public class Main extends PApplet {
     }
 
     public void keyPressed() {
+        if (keyCode == 27) key = '|';
         inputHandler.key(true);
     }
 
