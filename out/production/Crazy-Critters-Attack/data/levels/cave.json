@@ -162,6 +162,7 @@
     "machine": false,
     "id": 24,
     "type": "tile",
+    "bgB": "lichenBGB_TL",
     "bgA": "stone"
   },
   {
@@ -253,7 +254,8 @@
     "machine": false,
     "id": 38,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,
@@ -286,7 +288,8 @@
     "machine": false,
     "id": 43,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "rockBGC_TL"
   },
   {
     "machine": false,
@@ -311,13 +314,15 @@
     "machine": false,
     "id": 47,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms3BGC_TL"
   },
   {
     "machine": false,
     "id": 48,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,
@@ -357,7 +362,8 @@
     "machine": false,
     "id": 54,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "rockBGC_TL"
   },
   {
     "machine": false,
@@ -387,7 +393,8 @@
     "machine": false,
     "id": 59,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms1BGC_TL"
   },
   {
     "machine": false,
@@ -400,7 +407,8 @@
     "machine": false,
     "id": 61,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,
@@ -461,7 +469,8 @@
     "machine": false,
     "id": 71,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,
@@ -536,7 +545,8 @@
     "machine": false,
     "id": 83,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms3BGC_TL"
   },
   {
     "machine": false,
@@ -554,7 +564,8 @@
     "machine": false,
     "id": 86,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "obstacle": "caveWallBaseOb_TL"
   },
   {
     "machine": false,
@@ -642,7 +653,8 @@
     "machine": false,
     "id": 100,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "obstacle": "caveWallBaseOb_TL"
   },
   {
     "machine": false,
@@ -666,7 +678,8 @@
     "machine": false,
     "id": 104,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "obstacle": "caveWallBaseOb_TL"
   },
   {
     "machine": false,
@@ -696,7 +709,8 @@
     "machine": false,
     "id": 109,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "rockBGC_TL"
   },
   {
     "machine": false,
@@ -742,6 +756,7 @@
     "machine": false,
     "id": 116,
     "type": "tile",
+    "bgB": "lichenBGB_TL",
     "bgA": "stone"
   },
   {
@@ -766,7 +781,8 @@
     "machine": false,
     "id": 120,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "rockBGC_TL"
   },
   {
     "machine": false,
@@ -808,6 +824,7 @@
     "machine": false,
     "id": 127,
     "type": "tile",
+    "bgB": "lichenBGB_TL",
     "bgA": "stone"
   },
   {
@@ -1035,7 +1052,8 @@
     "machine": false,
     "id": 164,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,
@@ -1053,7 +1071,8 @@
     "machine": false,
     "id": 167,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms2BGC_TL"
   },
   {
     "machine": false,
@@ -1089,7 +1108,8 @@
     "machine": false,
     "id": 173,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms2BGC_TL"
   },
   {
     "machine": false,
@@ -1101,13 +1121,15 @@
     "machine": false,
     "id": 175,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "obstacle": "caveWallBaseOb_TL"
   },
   {
     "machine": false,
     "id": 176,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,
@@ -1191,7 +1213,8 @@
     "machine": false,
     "id": 190,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "rockBGC_TL"
   },
   {
     "machine": false,
@@ -1269,7 +1292,8 @@
     "machine": false,
     "id": 203,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "obstacle": "caveWallBaseOb_TL"
   },
   {
     "machine": false,
@@ -1327,7 +1351,8 @@
     "machine": false,
     "id": 212,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "rockBGC_TL"
   },
   {
     "machine": false,
@@ -1406,6 +1431,7 @@
     "machine": false,
     "id": 225,
     "type": "tile",
+    "bgB": "lichenBGB_TL",
     "bgA": "stone"
   },
   {
@@ -1456,7 +1482,8 @@
     "machine": false,
     "id": 233,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms1BGC_TL"
   },
   {
     "machine": false,
@@ -1492,7 +1519,8 @@
     "machine": false,
     "id": 239,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms1BGC_TL"
   },
   {
     "machine": false,
@@ -1510,7 +1538,8 @@
     "machine": false,
     "id": 242,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,
@@ -1579,7 +1608,8 @@
     "machine": false,
     "id": 253,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,
@@ -1591,7 +1621,8 @@
     "machine": false,
     "id": 255,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "obstacle": "caveWallBaseOb_TL"
   },
   {
     "machine": false,
@@ -1603,7 +1634,8 @@
     "machine": false,
     "id": 257,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "rockBGC_TL"
   },
   {
     "machine": false,
@@ -1667,7 +1699,8 @@
     "machine": false,
     "id": 267,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,
@@ -1795,6 +1828,7 @@
     "machine": false,
     "id": 288,
     "type": "tile",
+    "bgB": "lichenBGB_TL",
     "bgA": "stone"
   },
   {
@@ -1860,7 +1894,8 @@
     "machine": false,
     "id": 298,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms3BGC_TL"
   },
   {
     "machine": false,
@@ -1956,6 +1991,7 @@
     "machine": false,
     "id": 313,
     "type": "tile",
+    "bgB": "lichenBGB_TL",
     "bgA": "stone"
   },
   {
@@ -1996,7 +2032,8 @@
     "machine": false,
     "id": 319,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "smallRockBGC_TL"
   },
   {
     "machine": false,

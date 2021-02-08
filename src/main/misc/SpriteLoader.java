@@ -417,6 +417,7 @@ public class SpriteLoader {
         spritesH.put("grassCornerBR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/br.png"));
         spritesH.put("grassCornerTL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tl.png"));
         spritesH.put("grassCornerTR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tr.png"));
+        spritesH.put("lichenBGB_TL",p.loadImage("sprites/tiles/BGB/lichen.png"));
         //BGW
         spritesH.put("woodWallBGW_TL",p.loadImage("sprites/tiles/BGW/woodWall/base.png"));
         spritesH.put("stoneWallBGW_TL",p.loadImage("sprites/tiles/BGW/stoneWall/base.png"));
@@ -451,6 +452,9 @@ public class SpriteLoader {
         spritesH.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
         spritesH.put("leavesBGC_TL",p.loadImage("sprites/tiles/BGC/leaves.png"));
         spritesH.put("dandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/dandelions.png"));
+        spritesH.put("glowshrooms1BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms1.png"));
+        spritesH.put("glowshrooms2BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms2.png"));
+        spritesH.put("glowshrooms3BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms3.png"));
         spritesH.put("woodDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/wood.png"));
         spritesH.put("stoneDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/stone.png"));
         spritesH.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));

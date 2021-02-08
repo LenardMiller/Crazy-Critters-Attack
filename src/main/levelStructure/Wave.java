@@ -148,6 +148,12 @@ public class Wave {
             case "bigWorm":
                 e = new BigWorm(P, pos.x, pos.y);
                 break;
+            case "albinoBug":
+                e = new AlbinoBug(P, pos.x, pos.y);
+                break;
+            case "bigAlbinoBug":
+                e = new BigAlbinoBug(P, pos.x, pos.y);
+                break;
         }
         return e;
     }

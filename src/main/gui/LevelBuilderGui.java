@@ -33,11 +33,15 @@ public class LevelBuilderGui {
         placeButton(3, 0, "grassCornerBL_BGB");
         placeButton(2, 1, "grassCornerTR_BGB");
         placeButton(3, 1, "grassCornerTL_BGB");
+        placeButton(3, 8, "lichenBGB");
         //bgC
         placeButton(0, 2, "rockBGC");
         placeButton(1, 2, "smallRockBGC");
         placeButton(2, 2, "leavesBGC");
         placeButton(3, 2, "dandelionsBGC");
+        placeButton(3, 5, "glowshrooms1BGC");
+        placeButton(3, 6, "glowshrooms2BGC");
+        placeButton(3, 7, "glowshrooms3BGC");
         //obstacles
         placeButton(2, 3, "smallTreeOb");
         placeButton(0, 4, "treeBLOb");
