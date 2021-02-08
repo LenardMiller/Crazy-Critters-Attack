@@ -48,7 +48,7 @@ public class WallBuy extends Button {
         if (!hand.displayInfo.equals("null")) sprite = spritePressed;
     }
 
-    public void action() {
+    public void action() { //todo: add timer
         depressed = !depressed;
         selection.name = "null";
         //if already holding, stop

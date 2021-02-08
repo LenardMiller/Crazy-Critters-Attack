@@ -22,7 +22,7 @@ public class KeyBinds {
         KeyBinds.p = p;
     }
 
-    public void inGameKeys() {
+    public void inGameKeys() { //todo: do some rebinding, esp. ESC
         boolean pause = keysPressed.getPressedPulse(' ');
         if (pause) {
             soundsH.get("clickOut").play(1, volume);

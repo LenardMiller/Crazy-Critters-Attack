@@ -267,6 +267,7 @@ public class SeismicTower extends Turret {
                 case 5:
                     debrisType = "metal";
                     //todo: metal sounds
+                    //todo: STUN
                     seismicSense = true;
                     shockwaveWidth -= 40;
                     range += 50;

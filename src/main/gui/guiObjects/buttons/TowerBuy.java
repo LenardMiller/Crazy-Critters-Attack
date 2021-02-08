@@ -72,7 +72,7 @@ public class TowerBuy extends Button {
             if (!TOWER_TYPE.equals("null")) hover();
             display();
             if (money < price) {
-                p.tint(255, 0, 0, 100);
+                p.tint(255, 0, 0, 200);
                 p.image(sprite, position.x - size.x / 2, position.y - size.y / 2);
                 p.tint(255);
             }

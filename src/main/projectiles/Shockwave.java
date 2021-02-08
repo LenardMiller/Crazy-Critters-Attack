@@ -54,7 +54,7 @@ public class Shockwave {
         damageEnemies();
     }
 
-    private void display() {
+    private void display() { //todo: remove piles, add CHUNKS
         float a = P.random(ANGLE - (WIDTH / 2), ANGLE + (WIDTH / 2));
         float x = radius * sin(a);
         float y = -(radius * cos(a));

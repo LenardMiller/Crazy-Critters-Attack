@@ -294,7 +294,7 @@ public class Selection { //what tower is selected
                 break;
         }
 
-        //stats
+        //stats //todo: add pierce and multishot
         int offsetB = 0;
         if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetB = 45;
         P.fill(255, 0, 0);
@@ -377,10 +377,10 @@ public class Selection { //what tower is selected
         P.textAlign(LEFT);
         P.text("Health: " + tower.hp + "/" + tower.maxHp, 910, 276 + offset);
 
-        //data
+        //data todo: fix
         if (tower.turret) {
             //damage
-            P.text("Damage: " + tower.damage, 910, 296 + offset);
+            P.text("Total Damage: " + tower.damage, 910, 296 + offset);
             //firerate (delay)
             P.text("Load time: " + (float) (round((float) (tower.delay) / 6)) / 10 + "s", 910, 316 + offset);
             //velocity

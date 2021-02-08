@@ -84,6 +84,7 @@ public class Wave {
     /**
      * Draws wave icons.
      * todo: fix jiggle text
+     * todo: fix contrast issues
      * @param y displacement of icons
      * @param id current wave id
      */

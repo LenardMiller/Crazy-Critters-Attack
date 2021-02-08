@@ -47,6 +47,9 @@ public class Tile {
         bgWICorners = new PImage[4];
     }
 
+    //todo: BGW don't go away
+    //todo: make stone BGW less noisy
+
     public void main() {
         if (tower != null) tower.main();
     }

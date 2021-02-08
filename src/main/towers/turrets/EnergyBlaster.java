@@ -35,7 +35,7 @@ public class EnergyBlaster extends Turret{
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
-        effectRadius = 35;
+        effectRadius = 25;
         bigExplosion = false;
         damageSound = soundsH.get("stoneDamage");
         breakSound = soundsH.get("stoneBreak");

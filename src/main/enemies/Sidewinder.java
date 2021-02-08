@@ -7,7 +7,7 @@ import static main.Main.soundsH;
 
 public class Sidewinder extends Enemy {
 
-    public Sidewinder(PApplet p, float x, float y) {
+    public Sidewinder(PApplet p, float x, float y) { //todo: too small
         super(p,x,y);
         size = new PVector(25,25);
         pfSize = 1;

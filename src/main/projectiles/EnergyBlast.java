@@ -24,7 +24,6 @@ public class EnergyBlast extends Projectile {
         maxSpeed = 16;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         sprite = spritesH.get("energyPj");
         hasTrail = true;

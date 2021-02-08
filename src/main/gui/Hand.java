@@ -36,7 +36,7 @@ public class Hand {
         displayInfo = "null";
     }
 
-    public void main() {
+    public void main() { //todo: rclick deselect
         if (paused && !held.equals("null")) setHeld("null");
         if (!levelBuilder) checkPlaceable();
         else implacable = false;
@@ -362,7 +362,7 @@ public class Hand {
         else if (held.equals("wall") && alive) {
             if (tile.tower != null && !tile.tower.turret) { //upgrade or repair
                 if (tile.tower.hp < tile.tower.maxHp && money >= ceil((float) (tile.tower.price) - (float) (tile.tower.value))) {
-                    tile.tower.repair();
+                    tile.tower.repair(); //todo: remove and replace with % heal on wave end
                 } else if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                     money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
                     tile.tower.upgrade(0);

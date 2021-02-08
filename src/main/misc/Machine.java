@@ -78,7 +78,7 @@ public class Machine {
         display();
     }
 
-    public void display() {
+    public void display() { //todo: add hp bar
         if (hit) {
             tintColor = 0;
             hit = false;

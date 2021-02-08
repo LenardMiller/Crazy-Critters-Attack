@@ -14,6 +14,7 @@ public class UpgradeTower extends Button {
 
     public int id;
 
+    //todo: B O X E S
     public UpgradeTower(PApplet p, float x, float y, String type, boolean active, int id) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
