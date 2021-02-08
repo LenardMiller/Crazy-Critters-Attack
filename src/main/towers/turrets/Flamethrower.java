@@ -181,11 +181,9 @@ public class Flamethrower extends Turret {
                     break;
                 case 1:
                     rotationSpeed += 0.02;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     range += 50;
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -196,12 +194,10 @@ public class Flamethrower extends Turret {
                 case 4:
                     effectDuration += 100;
                     effectLevel += 2;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     effectDuration += 100;
                     effectLevel += 2;
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

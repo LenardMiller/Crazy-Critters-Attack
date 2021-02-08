@@ -128,7 +128,6 @@ public class Crossbow extends Turret {
                     break;
                 case 1:
                     damage += 20;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     damage += 300;
@@ -136,7 +135,6 @@ public class Crossbow extends Turret {
                     reinforced = true;
                     name = "crossbowReinforced";
                     loadSprites();
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -146,14 +144,12 @@ public class Crossbow extends Turret {
                     break;
                 case 4:
                     delay -= 70;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     multishot = true;
                     name = "crossbowMultishot";
                     fireSound = soundsH.get("shotbow");
                     loadSprites();
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

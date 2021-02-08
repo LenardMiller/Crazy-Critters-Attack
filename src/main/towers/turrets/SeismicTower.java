@@ -252,7 +252,6 @@ public class SeismicTower extends Turret {
                     numFireFrames = 3;
                     numLoadFrames = 9;
                     loadSprites();
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -262,7 +261,6 @@ public class SeismicTower extends Turret {
                     break;
                 case 4:
                     damage += 30;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     debrisType = "metal";

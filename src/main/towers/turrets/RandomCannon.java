@@ -139,7 +139,6 @@ public class RandomCannon extends Turret {
                     break;
                 case 1:
                     delay -= 10;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     damageSound = soundsH.get("stoneDamage");
@@ -151,7 +150,6 @@ public class RandomCannon extends Turret {
                     damage -= 5;
                     name = "miscCannonBarrel";
                     loadSprites();
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -161,7 +159,6 @@ public class RandomCannon extends Turret {
                     break;
                 case 4:
                     range += 30;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     laundry = true;
@@ -170,7 +167,6 @@ public class RandomCannon extends Turret {
                     effectLevel = 25;
                     name = "miscCannonLaundry";
                     loadSprites();
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

@@ -181,7 +181,6 @@ public class Gluer extends Turret {
                     break;
                 case 1:
                     effectDuration += 180;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     effectDuration += 180;
@@ -189,7 +188,6 @@ public class Gluer extends Turret {
                     splatter = true;
                     name = "splashGluer";
                     loadSprites();
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -199,7 +197,6 @@ public class Gluer extends Turret {
                     break;
                 case 4:
                     damage = 35;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     damage += 65;
@@ -208,7 +205,6 @@ public class Gluer extends Turret {
                     name = "shatterGluer";
                     debrisType = "metal";
                     loadSprites();
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

@@ -132,11 +132,9 @@ public class EnergyBlaster extends Turret{
                 case 1:
                     effectRadius += 25;
                     bigExplosion = true;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     effectRadius += 75;
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -146,11 +144,9 @@ public class EnergyBlaster extends Turret{
                     break;
                 case 4:
                     range += 35;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     damage += 500;
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

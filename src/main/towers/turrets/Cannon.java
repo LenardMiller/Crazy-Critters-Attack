@@ -138,7 +138,6 @@ public class Cannon extends Turret {
                     break;
                 case 1:
                     damage += 30;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     damage += 300;
@@ -153,7 +152,6 @@ public class Cannon extends Turret {
                     placeSound = soundsH.get("woodPlace");
                     loadSprites();
                     numLoadFrames = 80;
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -163,7 +161,6 @@ public class Cannon extends Turret {
                     break;
                 case 4:
                     delay -= 50;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     range += 30;
@@ -173,7 +170,6 @@ public class Cannon extends Turret {
                     debrisType = "metal";
                     //todo: metal sounds
                     loadSprites();
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

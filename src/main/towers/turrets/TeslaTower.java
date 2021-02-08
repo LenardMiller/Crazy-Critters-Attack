@@ -140,17 +140,12 @@ public class TeslaTower extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    arcDistance += 100;
-                    arcLength++;
-                    break;
                 case 1:
                     arcDistance += 100;
                     arcLength++;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     range = 1000;
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -160,11 +155,9 @@ public class TeslaTower extends Turret {
                     break;
                 case 4:
                     damage += 30;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     delay = 1;
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }
