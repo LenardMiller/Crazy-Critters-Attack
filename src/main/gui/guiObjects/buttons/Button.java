@@ -10,6 +10,7 @@ import static main.Main.*;
 
 public abstract class Button extends GuiObject {
 
+    public int timer;
     PImage spriteIdle;
     PImage spritePressed;
     PImage spriteHover;

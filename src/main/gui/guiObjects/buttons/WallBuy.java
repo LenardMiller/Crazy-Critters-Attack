@@ -21,6 +21,7 @@ public class WallBuy extends Button {
     }
 
     public void main(){
+        timer++;
         if (active){
             hover();
             display();
@@ -39,7 +40,8 @@ public class WallBuy extends Button {
                 clickIn.play(1, volume);
             }
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
-            if (inputHandler.leftMouseReleasedPulse) {
+            if (inputHandler.leftMouseReleasedPulse && timer > 20) {
+                timer = 0;
                 action();
                 sprite = spritePressed;
             }
@@ -48,12 +50,12 @@ public class WallBuy extends Button {
         if (!hand.displayInfo.equals("null")) sprite = spritePressed;
     }
 
-    public void action() { //todo: add timer
+    public void action() {
         depressed = !depressed;
         selection.name = "null";
         //if already holding, stop
         if (hand.held.equals("wall")) hand.setHeld("null");
-        //if not, do
+            //if not, do
         else hand.setHeld("wall");
     }
 }

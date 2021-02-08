@@ -43,6 +43,7 @@ public class Hand {
         if (inputHandler.rightMousePressedPulse) remove();
         if ((inputHandler.leftMousePressedPulse || inputHandler.rightMousePressedPulse) && P.mouseX > BOARD_WIDTH) {
             if (!held.equals("null")) {
+                inGameGui.wallBuyButton.timer = 0;
                 soundsH.get("clickOut").stop();
                 soundsH.get("clickOut").play(1, volume);
             }
