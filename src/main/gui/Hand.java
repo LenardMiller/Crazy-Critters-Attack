@@ -114,7 +114,7 @@ public class Hand {
     }
 
     public void displayHeldInfo() {
-        if (displayInfo.equals("placeWall")) {
+        if (displayInfo.equals("placeWall")) { //todo: can't place too close to enemy
             P.fill(235);
             P.noStroke();
             P.rect(900, 212, 200, 707);
@@ -132,7 +132,7 @@ public class Hand {
             P.text("50 HP", 1000, 331);
             P.text("$25", 1000, 356);
         }
-        if (displayInfo.equals("upgradeWall")) { //todo: should only work between wave chunks?
+        if (displayInfo.equals("upgradeWall")) {
             Tower tower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
             if (tower.nextLevelB > tower.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
             else {
