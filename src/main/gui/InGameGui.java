@@ -13,11 +13,11 @@ public class InGameGui {
 
     public int flashA;
 
-    public Button openMenuButton;
-    public Button wallBuyButton;
-    public Button sellButton;
-    public Button targetButton;
-    public Button upgradeButtonA, upgradeButtonB;
+    public OpenMenu openMenuButton;
+    public WallBuy wallBuyButton;
+    public SellTower sellButton;
+    public TargetPriority targetButton;
+    public UpgradeTower upgradeButtonA, upgradeButtonB;
     public GuiObject moneyIcon;
     public GuiObject upgradeIconA, upgradeIconB;
     public Play playButton;

@@ -1,9 +1,12 @@
 package main.gui;
 
+import main.gui.guiObjects.buttons.UpgradeTower;
 import main.misc.MiscMethods;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
+
+import java.awt.*;
 
 import static main.Main.*;
 
@@ -65,12 +68,6 @@ public class Selection { //what tower is selected
                     inGameGui.upgradeIconA.active = true;
                     inGameGui.upgradeIconA.position.y = 565;
                     inGameGui.upgradeIconB.position.y = 715;
-                    if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
-                        inGameGui.upgradeIconA.sprite = tower.upgradeIcons[tower.nextLevelA];
-                    } else inGameGui.upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
-                    if (tower.nextLevelB < tower.upgradeTitles.length) {
-                        inGameGui.upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
-                    } else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
                 }
                 if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) {
                     inGameGui.targetButton.active = false;
@@ -315,55 +312,16 @@ public class Selection { //what tower is selected
             P.text("Priority: " + priority, 1000, 843);
         }
 
-        //upgrade Zero / A
-        int offsetC;
-        offsetC = -45;
-        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
-        if (tower.nextLevelA < tower.upgradeTitles.length / 2) {
-            if (money >= tower.upgradePrices[tower.nextLevelA]) P.fill(11, 56, 0);
-            else P.fill(75, 0, 0);
-            P.textFont(largeFont);
-            P.text(tower.upgradeTitles[tower.nextLevelA], 1000, 585 + offsetC);
-            P.text("$" + tower.upgradePrices[tower.nextLevelA], 1000, 693 + offsetC);
-            P.textFont(mediumFont);
-            P.textAlign(LEFT);
-            P.text(tower.upgradeDescA[tower.nextLevelA], 910, 615 + offsetC);
-            P.text(tower.upgradeDescB[tower.nextLevelA], 910, 635 + offsetC);
-            P.text(tower.upgradeDescC[tower.nextLevelA], 910, 655 + offsetC);
-        } else {
-            P.fill(15);
-            P.textFont(largeFont);
-            P.text("N/A", 1000, 585 + offsetC);
-            P.textFont(mediumFont);
-            P.textAlign(LEFT);
-            P.text("No more", 910, 615 + offsetC);
-            P.text("upgrades", 910, 635 + offsetC);
-        }
-        //upgrade One / B
-        offsetC = 0;
-        if (tower.turret) offsetC = 105;
-        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetC += 45;
-        if (tower.nextLevelB < tower.upgradeTitles.length) {
-            if (money >= tower.upgradePrices[tower.nextLevelB]) P.fill(11, 56, 0);
-            else P.fill(75, 0, 0);
-            P.textFont(largeFont);
-            P.textAlign(CENTER);
-            P.text(tower.upgradeTitles[tower.nextLevelB], 1000, 585 + offsetC);
-            P.text("$" + tower.upgradePrices[tower.nextLevelB], 1000, 693 + offsetC);
-            P.textFont(mediumFont);
-            P.textAlign(LEFT);
-            P.text(tower.upgradeDescA[tower.nextLevelB], 910, 615 + offsetC);
-            P.text(tower.upgradeDescB[tower.nextLevelB], 910, 635 + offsetC);
-            P.text(tower.upgradeDescC[tower.nextLevelB], 910, 655 + offsetC);
-        } else {
-            P.fill(15);
-            P.textFont(largeFont);
-            P.text("N/A", 1000, 585 + offsetC);
-            P.textFont(mediumFont);
-            P.textAlign(LEFT);
-            P.text("No more", 915, 615 + offsetC);
-            P.text("upgrades", 915, 635 + offsetC);
-        }
+        //upgrade icons
+        if (!inGameGui.upgradeButtonA.greyed) {
+            inGameGui.upgradeIconA.sprite = tower.upgradeIcons[tower.nextLevelA];
+        } else inGameGui.upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+        if (!inGameGui.upgradeButtonB.greyed && tower.nextLevelB < tower.upgradeIcons.length) {
+            inGameGui.upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
+        } else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+
+        displayUpgrade(-45, tower.nextLevelA, inGameGui.upgradeButtonA);
+        displayUpgrade(105, tower.nextLevelB, inGameGui.upgradeButtonB);
 
         //sell
         P.fill(75, 0, 0);
@@ -402,6 +360,49 @@ public class Selection { //what tower is selected
                 } else {
                     P.text("Effect Duration: " + effectDuration + "s", 910, 376 + 20 * purpleCount + offset);
                 }
+            }
+        }
+    }
+
+    private void displayUpgrade(int offsetC, int nextLevel, UpgradeTower upgradeButton) {
+        //upgrade Zero / A
+        Color fillColor;
+        P.textAlign(CENTER);
+        if (tower.name.contains("magicMissleer")) offsetC += 45;
+        if (!upgradeButton.greyed && nextLevel < tower.upgradePrices.length) {
+            if (money >= tower.upgradePrices[nextLevel]) fillColor = new Color(11, 56, 0);
+            else fillColor = new Color(75, 0, 0);
+            P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+            P.textFont(largeFont);
+            P.text(tower.upgradeTitles[nextLevel], 1000, 585 + offsetC);
+            P.text("$" + tower.upgradePrices[nextLevel], 1000, 693 + offsetC);
+            P.textFont(mediumFont);
+            P.textAlign(LEFT);
+            P.text(tower.upgradeDescA[nextLevel], 910, 615 + offsetC);
+            P.text(tower.upgradeDescB[nextLevel], 910, 635 + offsetC);
+            P.text(tower.upgradeDescC[nextLevel], 910, 655 + offsetC);
+        } else {
+            fillColor = new Color(15);
+            P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+            P.textFont(largeFont);
+            P.text("N/A", 1000, 585 + offsetC);
+            P.textFont(mediumFont);
+            P.textAlign(LEFT);
+            P.text("No more", 910, 615 + offsetC);
+            P.text("upgrades", 910, 635 + offsetC);
+        }
+        P.stroke(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+        if (upgradeButton == inGameGui.upgradeButtonA) { //A
+            for (int i = 0; i < 3; i++) {
+                if (nextLevel <= i) P.noFill();
+                else P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+                P.rect(910 + (20 * i), 685 + offsetC, 10, 10);
+            }
+        } else { //B
+            for (int i = 3; i < 6; i++) {
+                if (nextLevel <= i) P.noFill();
+                else P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+                P.rect(910 + (20 * (i-3)), 685 + offsetC, 10, 10);
             }
         }
     }

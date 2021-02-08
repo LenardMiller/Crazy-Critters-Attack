@@ -289,6 +289,7 @@ public abstract class Turret extends Tower {
             value += upgradePrices[nextLevelB];
             nextLevelB++;
         }
+        //icons
         if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
         else inGameGui.upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];

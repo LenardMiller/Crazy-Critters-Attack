@@ -13,8 +13,8 @@ public class UpgradeTower extends Button {
     private final PImage SPRITE_GREY;
 
     public int id;
+    public boolean greyed;
 
-    //todo: B O X E S
     public UpgradeTower(PApplet p, float x, float y, String type, boolean active, int id) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
@@ -32,12 +32,27 @@ public class UpgradeTower extends Button {
         if (active) {
             if (towers.size() > 0) {
                 Tower tower = tiles.get(selection.id).tower;
-                int nextLevel;
-                if (id == 0) nextLevel = tower.nextLevelA;
-                else nextLevel = tower.nextLevelB;
-                if (tower.upgradeTitles.length == nextLevel && id == 1 || tower.upgradeTitles.length / 2 == nextLevel && id == 0)
+                int thisNextLevel;
+                int thisMax;
+                int otherNextLevel;
+                int otherMax;
+                if (id == 0) {
+                    thisNextLevel = tower.nextLevelA;
+                    thisMax = tower.upgradeTitles.length / 2;
+                    otherNextLevel = tower.nextLevelB;
+                    otherMax = tower.upgradeTitles.length;
+                } else {
+                    thisNextLevel = tower.nextLevelB;
+                    thisMax = tower.upgradeTitles.length;
+                    otherNextLevel = tower.nextLevelA;
+                    otherMax = tower.upgradeTitles.length / 2;
+                }
+                greyed = false;
+                if (thisNextLevel == thisMax || (otherNextLevel == otherMax && thisNextLevel == thisMax-1)) {
+                    greyed = true;
                     sprite = SPRITE_GREY;
-                else if (tower.upgradePrices[nextLevel] > money) sprite = SPRITE_RED;
+                }
+                else if (tower.upgradePrices[thisNextLevel] > money) sprite = SPRITE_RED;
                 else hover();
                 display();
             } else active = false;

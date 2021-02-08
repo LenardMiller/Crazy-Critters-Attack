@@ -123,14 +123,12 @@ public class Slingshot extends Turret {
                     break;
                 case 1:
                     range += 40;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     gravel = true;
                     damage -= 10;
                     name = "slingshotGravel";
                     loadSprites();
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -140,7 +138,6 @@ public class Slingshot extends Turret {
                     break;
                 case 4:
                     delay -= 20;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     debrisType = "stone";
@@ -154,7 +151,6 @@ public class Slingshot extends Turret {
                     effectLevel = 15;
                     name = "slingshotRock";
                     loadSprites();
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

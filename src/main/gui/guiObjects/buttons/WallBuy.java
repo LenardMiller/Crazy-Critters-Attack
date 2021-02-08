@@ -8,6 +8,7 @@ import static main.Main.*;
 public class WallBuy extends Button {
 
     public boolean depressed;
+    public int timer;
 
     public WallBuy(PApplet p, float x, float y, String type, boolean active) {
         super(p,x,y,type,active);
