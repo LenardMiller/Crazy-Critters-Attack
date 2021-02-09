@@ -29,6 +29,7 @@ public abstract class Tower {
     public int maxHp;
     public int hp;
     public int damage;
+    public int pierce;
     public boolean hit;
     public PImage sprite;
     public Object updateSprite;

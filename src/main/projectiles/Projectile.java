@@ -54,7 +54,7 @@ public abstract class Projectile {
         radius = 10;
         speed = (float) 2;
         damage = 1;
-        pierce = 1;
+        pierce = 0;
         hitTime = 0;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
@@ -127,7 +127,7 @@ public abstract class Projectile {
                     break;
                 }
             if (hitAlready) continue;
-            if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
+            if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > -1) { //if touching enemy, and has pierce
                 if (hitSound != null) {
                     hitSound.stop();
                     hitSound.play(p.random(0.8f, 1.2f), volume);
@@ -149,7 +149,7 @@ public abstract class Projectile {
                     }
                 }
             }
-            if (pierce == 0) dead = true;
+            if (pierce < 0) dead = true;
         }
     }
 }

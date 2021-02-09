@@ -155,7 +155,7 @@ public class Selection { //what tower is selected
             case "slingshotGravel":
                 P.text("Gravel Slinger", 1000, 241);
                 speed = 12;
-                setTextPurple("Scattershot", offset);
+                setTextPurple("8 gravel bits", offset);
                 break;
             case "miscCannon":
                 P.text("Luggage", 1000, 241);
@@ -177,20 +177,17 @@ public class Selection { //what tower is selected
             case "crossbow":
                 P.text("Crossbow", 1000, 241);
                 speed = 24;
-                setTextPurple("Piercing", offset);
                 break;
             case "crossbowReinforced":
                 P.text("Reinforced", 1000, 241);
                 P.text("Crossbow", 1000, 266);
                 offset = 25;
                 speed = 24;
-                setTextPurple("Piercing", offset);
                 break;
             case "crossbowMultishot":
                 P.text("Shotbow", 1000, 241);
                 speed = 24;
-                setTextPurple("Piercing", offset);
-                setTextPurple("Multishot", offset + 20);
+                setTextPurple("Seven bolts", offset);
                 break;
             case "cannon":
                 P.text("Cannon", 1000, 241);
@@ -249,7 +246,7 @@ public class Selection { //what tower is selected
             case "energyBlaster":
                 P.text("Energy Blaster", 1000, 241);
                 speed = 16;
-                setTextPurple("Energy explosions", offset);
+                setTextPurple("Splash", offset);
                 break;
             case "magicMissleer":
                 P.text("Magic Missileer", 1000, 241);
@@ -287,13 +284,13 @@ public class Selection { //what tower is selected
             case "waveMotion":
                 P.text("Death Beam", 1000, 241);
                 speed = -1;
-                setTextPurple("Energy beam", offset);
+                setTextPurple("Infinite pierce", offset);
                 break;
         }
 
-        //stats //todo: add pierce and multishot
+        //stats todo: fix
         int offsetB = 0;
-        if (tower.name.equals("magicMissleer") || tower.name.equals("magicMissleerFour")) offsetB = 45;
+        if (tower.name.contains("magicMissleer")) offsetB = 45;
         P.fill(255, 0, 0);
         P.textAlign(LEFT);
         P.textFont(mediumFont);
@@ -307,7 +304,7 @@ public class Selection { //what tower is selected
         if (tower.priority == 0) priority = "close";
         else if (tower.priority == 1) priority = "far";
         else if (tower.priority == 2) priority = "strong";
-        if (tower.turret && !tower.name.equals("magicMissleer") && !tower.name.equals("magicMissleerFour")) {
+        if (tower.turret && !tower.name.contains("magicMissleer")) {
             P.fill(75, 45, 0);
             P.text("Priority: " + priority, 1000, 843);
         }
@@ -335,7 +332,7 @@ public class Selection { //what tower is selected
         P.textAlign(LEFT);
         P.text("Health: " + tower.hp + "/" + tower.maxHp, 910, 276 + offset);
 
-        //data todo: fix
+        //data
         if (tower.turret) {
             //damage
             P.text("Damage: " + tower.damage, 910, 296 + offset);
@@ -346,6 +343,11 @@ public class Selection { //what tower is selected
             else if (speed < 8) P.text("Low velocity", 910, 336 + offset);
             else if (speed <= 15) P.text("Medium velocity", 910, 336 + offset);
             else P.text("High velocity", 910, 336 + offset);
+            if (tower.pierce > 0) {
+                P.fill(100, 0, 200);
+                P.text("Pierce: " + tower.pierce, 910, 356 + offset + 20 * purpleCount);
+                offset += 20;
+            }
             //effects
             if (tower.effectLevel != 0) {
                 P.fill(0, 200, 50);

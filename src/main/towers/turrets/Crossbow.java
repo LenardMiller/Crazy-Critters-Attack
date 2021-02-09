@@ -12,7 +12,6 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Crossbow extends Turret {
 
-    private int pierce;
     private boolean multishot;
     private boolean reinforced;
 
@@ -37,7 +36,7 @@ public class Crossbow extends Turret {
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 30;
-        pierce = 2;
+        pierce = 1;
         damageSound = soundsH.get("woodDamage");
         breakSound = soundsH.get("woodBreak");
         placeSound = soundsH.get("woodPlace");
@@ -131,7 +130,7 @@ public class Crossbow extends Turret {
                     break;
                 case 2:
                     damage += 300;
-                    pierce += 100;
+                    pierce += 5;
                     reinforced = true;
                     name = "crossbowReinforced";
                     loadSprites();
