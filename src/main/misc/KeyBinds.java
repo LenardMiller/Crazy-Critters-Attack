@@ -35,9 +35,11 @@ public class KeyBinds {
             paused = !paused;
         }
         if (play) {
-            playingLevel = true;
-            Level level = levels[currentLevel];
-            level.currentWave = 0;
+            if (!playingLevel) {
+                playingLevel = true;
+                Level level = levels[currentLevel];
+                level.currentWave = 0;
+            }
         }
     }
 
