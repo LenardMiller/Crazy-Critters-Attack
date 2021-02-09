@@ -153,20 +153,14 @@ public abstract class Tower {
         updateNodes();
     }
 
-    public void heal() {
+    public void heal(float relativeAmount) {
         if (hp < maxHp) {
             for (int i = 0; i < 5; i++) {
                 particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
             }
         }
-        hp = maxHp;
-    }
-
-    public void repair() {
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
-        money -= ceil((float)(price) - (float)(value));
-        heal();
+        hp += relativeAmount*maxHp;
+        if (hp > maxHp) hp = maxHp;
     }
 
     public void sell() {

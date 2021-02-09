@@ -86,11 +86,6 @@ public class Hand {
                     implacable = true;
                     displayInfo = "maxWallUpgrade";
                 }
-                if (tile.tower.hp < tile.tower.maxHp) { //if low hp
-                    heldSprite = spritesH.get("repairTW");
-                    implacable = money < ceil((float) (tile.tower.price) - (float) (tile.tower.value));
-                    displayInfo = "repairWall";
-                }
             } else {
                 heldSprite = spritesH.get("placeTW"); //reset wall sprite
                 displayInfo = "placeWall";
@@ -205,29 +200,6 @@ public class Hand {
             P.text(tower.hp + " hp", 1000, 331);
             P.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
         }
-        if (displayInfo.equals("repairWall")) {
-            Tower tower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
-            P.fill(235);
-            P.noStroke();
-            P.rect(900, 212, 200, 707);
-            P.textAlign(CENTER);
-            //tower info
-            if (money >= ceil((float) (tower.price) - (float) (tower.value))) P.fill(195, 232, 188);
-            else P.fill(230, 181, 181);
-            P.rect(905, 247, 190, 144);
-            P.textFont(mediumLargeFont);
-            P.fill(0);
-            P.text("Selected:", 1000, 241);
-            P.textFont(largeFont);
-            if (tower.nextLevelB > 0) {
-                P.text(tower.upgradeTitles[tower.nextLevelB - 1], 1000, 276); //if not base level
-            } else P.text("Wooden", 1000, 276);
-            P.text("Wall", 1000, 301);
-            P.textFont(mediumFont);
-            P.text(tower.hp + " hp", 1000, 331);
-            P.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
-            P.text("Repair for: $" + ceil((float) (tower.price) - (float) (tower.value)), 1000, 381);
-        }
         if (!displayInfo.equals("null")) {
             //universal info
             P.fill(200);
@@ -238,7 +210,7 @@ public class Hand {
             P.text("LClick to place", 910, 720);
             P.text("wall", 910, 740);
             P.text("LClick on wall to", 910, 770);
-            P.text("upgrade or repair", 910, 790);
+            P.text("upgrade", 910, 790);
             P.text("RClick on wall", 910, 820);
             P.text("to Sell", 910, 840);
             P.text("Click on sidebar", 910, 870);
@@ -361,10 +333,8 @@ public class Hand {
         else if (held.equals("railgun") && alive) tile.tower = new Railgun(P, tile);
         else if (held.equals("waveMotion") && alive) tile.tower = new WaveMotion(P, tile);
         else if (held.equals("wall") && alive) {
-            if (tile.tower != null && !tile.tower.turret) { //upgrade or repair
-                if (tile.tower.hp < tile.tower.maxHp && money >= ceil((float) (tile.tower.price) - (float) (tile.tower.value))) {
-                    tile.tower.repair(); //todo: remove and replace with % heal on wave end
-                } else if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
+            if (tile.tower != null && !tile.tower.turret) { //upgrade
+                if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                     money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
                     tile.tower.upgrade(0);
                     connectWallQueues++;

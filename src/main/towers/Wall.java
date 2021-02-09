@@ -146,6 +146,7 @@ public class Wall extends Tower {
         price += upgradePrices[nextLevelB];
         sprite = UPGRADE_SPRITES[nextLevelB];
 
+        int oldMax = maxHp;
         switch (nextLevelB) {
             case 0:
                 maxHp += 75;
@@ -167,7 +168,8 @@ public class Wall extends Tower {
                 name = "titaniumWall";
                 debrisType = "ultimate";
                 break;
-        } hp = maxHp;
+        }
+        hp = (int) map(hp, hp, oldMax, oldMax, maxHp);
 
         damageSound = soundsH.get(debrisType + "Damage");
         breakSound = soundsH.get(debrisType + "Break");
