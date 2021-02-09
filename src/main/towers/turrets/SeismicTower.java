@@ -241,7 +241,6 @@ public class SeismicTower extends Turret {
                     break;
                 case 1:
                     shockwaveWidth += 30;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     debrisType = "metal";
@@ -272,7 +271,6 @@ public class SeismicTower extends Turret {
                     damage += 150;
                     name = "seismicSniper";
                     loadSprites();
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

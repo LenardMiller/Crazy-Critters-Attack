@@ -169,7 +169,7 @@ public class Wall extends Tower {
                 debrisType = "ultimate";
                 break;
         }
-        hp = (int) map(hp, hp, oldMax, oldMax, maxHp);
+        hp = (hp/oldMax * maxHp);
 
         damageSound = soundsH.get(debrisType + "Damage");
         breakSound = soundsH.get(debrisType + "Break");

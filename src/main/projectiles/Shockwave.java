@@ -1,8 +1,10 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
+import main.particles.BuffParticle;
 import main.particles.Debris;
-import main.particles.Pile;
+import main.particles.ExplosionDebris;
+import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -54,11 +56,19 @@ public class Shockwave {
         damageEnemies();
     }
 
-    private void display() { //todo: remove piles, add CHUNKS
+    private void display() {
         float a = P.random(ANGLE - (WIDTH / 2), ANGLE + (WIDTH / 2));
-        float x = radius * sin(a);
-        float y = -(radius * cos(a));
-        underParticles.add(new Pile(P, x + CENTER.x, y + CENTER.y, 0, levels[currentLevel].groundType));
+        float x = (radius * sin(a)) + CENTER.x;
+        float y = (-(radius * cos(a))) + CENTER.y;
+        particles.add(new ExplosionDebris(P, x, y, a, "metal", P.random(0.5f, 2.5f)));
+        a = P.random(ANGLE - (WIDTH / 2), ANGLE + (WIDTH / 2));
+        x = (radius * sin(a)) + CENTER.x;
+        y = (-(radius * cos(a))) + CENTER.y;
+        particles.add(new Ouch(P, x, y, a, "greyPuff"));
+        a = P.random(ANGLE - (WIDTH / 2), ANGLE + (WIDTH / 2));
+        x = (radius * sin(a)) + CENTER.x;
+        y = (-(radius * cos(a))) + CENTER.y;
+        particles.add(new BuffParticle(P, x, y, a, "smoke"));
 
         int debrisCount = (int) P.random(2, 5);
         for (int i = 0; i < debrisCount; i++) {
