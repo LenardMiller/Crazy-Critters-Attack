@@ -160,8 +160,6 @@ public class Main extends PApplet {
         levels = new Level[3];
         //guis
         levelSelectGui = new LevelSelectGui(this);
-
-        resetGame(this);
     }
 
     /**
@@ -415,6 +413,8 @@ public class Main extends PApplet {
         for (Enemy enemy : enemies) {
             if (enemy.hp > 0 && !enemy.stealthMode) enemy.hpBar();
         }
+        //machine hp bar
+        machine.hpBar();
     }
 
     public void keyPressed() {

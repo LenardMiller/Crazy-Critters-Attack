@@ -31,6 +31,9 @@ public class Machine {
     private PImage[] sprites;
     public Tile[] machTiles;
     private int damageState;
+    public PVector barPosition;
+    public PVector barSize;
+    public boolean barHorizontal;
 
     private final SoundFile DAMAGE_SOUND;
     private final SoundFile BREAK_SOUND;
@@ -78,7 +81,7 @@ public class Machine {
         display();
     }
 
-    public void display() { //todo: add hp bar
+    public void display() {
         if (hit) {
             tintColor = 0;
             hit = false;
@@ -99,6 +102,15 @@ public class Machine {
             frameTimer = p.frameCount + betweenFrames;
         }
         if (tintColor < 255 && !paused) tintColor += 20;
+    }
+
+    public void hpBar() {
+        if (hp < maxHp && hp > 0) {
+            p.fill(0, 255, 0);
+            p.noStroke();
+            if (barHorizontal) p.rect(barPosition.x, barPosition.y, barSize.x * (hp/(float)maxHp), barSize.y);
+            else p.rect(barPosition.x, barPosition.y, barSize.x, barSize.y * (hp/(float)maxHp));
+        }
     }
 
     private void hurtParticles() {

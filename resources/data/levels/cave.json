@@ -2277,11 +2277,16 @@
   {
     "betweenFrames": 4,
     "maxHp": 500,
-    "hp": 285,
+    "hp": 500,
     "x": 450,
     "name": "metalDrillMA",
     "y": 450,
     "debris": "stone",
+    "barX": 400,
+    "barY": 500,
+    "barSizeX": 100,
+    "barSizeY": 6,
+    "barHorizontal": true,
     "id": 361,
     "type": "machine"
   }
