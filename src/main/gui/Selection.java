@@ -299,7 +299,7 @@ public class Selection { //what tower is selected
         P.textFont(mediumFont);
         if (tower.killsTotal != 1) P.text(tower.killsTotal + " kills", 910, 475 + offsetB);
         else P.text(tower.killsTotal + " kill", 910, 475 + offsetB);
-        P.text(tower.damageTotal + " damage", 910, 500 + offsetB);
+        P.text(tower.damageTotal + " total damage", 910, 500 + offsetB);
 
         //priority
         P.textFont(largeFont);
@@ -338,7 +338,7 @@ public class Selection { //what tower is selected
         //data todo: fix
         if (tower.turret) {
             //damage
-            P.text("Total Damage: " + tower.damage, 910, 296 + offset);
+            P.text("Damage: " + tower.damage, 910, 296 + offset);
             //firerate (delay)
             P.text("Load time: " + (float) (round((float) (tower.delay) / 6)) / 10 + "s", 910, 316 + offset);
             //velocity
