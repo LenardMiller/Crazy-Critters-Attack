@@ -74,7 +74,7 @@ public class Slingshot extends Turret {
         upgradePrices[2] = 400;
         upgradePrices[3] = 75;
         upgradePrices[4] = 100;
-        upgradePrices[5] = 400;
+        upgradePrices[5] = 500;
         //titles
         upgradeTitles[0] = "Long Range";
         upgradeTitles[1] = "Super Range";
@@ -105,7 +105,7 @@ public class Slingshot extends Turret {
 
         upgradeDescA[5] = "Inflicts";
         upgradeDescB[5] = "bleeding,";
-        upgradeDescC[5] = "+50 dmg";
+        upgradeDescC[5] = "+30 dmg";
         //icons
         upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
         upgradeIcons[1] = spritesAnimH.get("upgradeIC")[6];
@@ -145,7 +145,7 @@ public class Slingshot extends Turret {
                     breakSound = soundsH.get("stoneBreak");
                     placeSound = soundsH.get("stonePlace");
                     painful = true;
-                    damage += 50;
+                    damage += 30;
                     delay += 10;
                     effectDuration = 360;
                     effectLevel = 15;
