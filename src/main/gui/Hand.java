@@ -41,7 +41,7 @@ public class Hand {
         if (!levelBuilder) checkPlaceable();
         else implacable = false;
         if (inputHandler.rightMousePressedPulse) remove();
-        if ((inputHandler.leftMousePressedPulse && P.mouseX > BOARD_WIDTH) || inputHandler.rightMousePressedPulse) {
+        if ((inputHandler.leftMousePressedPulse && P.mouseX > BOARD_WIDTH) || (inputHandler.rightMousePressedPulse && !held.equals("wall"))) {
             if (!held.equals("null")) {
                 inGameGui.wallBuyButton.timer = 0;
                 soundsH.get("clickOut").stop();
