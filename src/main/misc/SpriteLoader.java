@@ -9,7 +9,12 @@ import static main.Main.spritesH;
 public class SpriteLoader {
     
     public SpriteLoader() {}
-    
+
+    /**
+     * Loads animations.
+     * todo: load dynamically
+     * @param p the PApplet
+     */
     public static void loadSpritesAnim(PApplet p) {
         //icons & buttons
         getSprite(p,"upgrade","IC","upgrades/",29);
