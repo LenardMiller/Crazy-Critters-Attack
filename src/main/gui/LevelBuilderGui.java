@@ -52,6 +52,18 @@ public class LevelBuilderGui {
         placeButton(1,5, "cactus1Ob");
         placeButton(2,5, "cactus2Ob");
         placeButton(1, 7, "caveWallBaseOb");
+        placeButton(0, 7, "caveWallLOb");
+        placeButton(2, 7, "caveWallROb");
+        placeButton(1, 6, "caveWallTOb");
+        placeButton(1, 8, "caveWallBOb");
+        placeButton(0, 6, "caveWallTLOb");
+        placeButton(2, 6, "caveWallTROb");
+        placeButton(0, 8, "caveWallBLOb");
+        placeButton(2, 8, "caveWallBROb");
+        placeButton(1, 10, "caveWallTLCOb");
+        placeButton(0, 10, "caveWallTRCOb");
+        placeButton(1, 9, "caveWallBLCOb");
+        placeButton(0, 9, "caveWallBRCOb");
         //machine
         placeButton(3, 3, "Ma");
     }

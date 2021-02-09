@@ -476,5 +476,17 @@ public class SpriteLoader {
         spritesH.put("cactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/1.png"));
         spritesH.put("cactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/2.png"));
         spritesH.put("caveWallBaseOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/base.png"));
+        spritesH.put("caveWallLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/l.png"));
+        spritesH.put("caveWallROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/r.png"));
+        spritesH.put("caveWallTOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/t.png"));
+        spritesH.put("caveWallBOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/b.png"));
+        spritesH.put("caveWallBROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/br.png"));
+        spritesH.put("caveWallBLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/bl.png"));
+        spritesH.put("caveWallTLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tl.png"));
+        spritesH.put("caveWallTROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tr.png"));
+        spritesH.put("caveWallBRCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/brc.png"));
+        spritesH.put("caveWallBLCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/blc.png"));
+        spritesH.put("caveWallTLCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tlc.png"));
+        spritesH.put("caveWallTRCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/trc.png"));
     }
 }
