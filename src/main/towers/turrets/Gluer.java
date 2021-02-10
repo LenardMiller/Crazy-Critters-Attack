@@ -205,6 +205,7 @@ public class Gluer extends Turret {
                     name = "shatterGluer";
                     debrisType = "metal";
                     placeSound = soundsH.get("metalPlace");
+                    damageSound = soundsH.get("metalDamage");
                     //todo: metal sounds
                     loadSprites();
                     break;

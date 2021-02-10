@@ -41,7 +41,7 @@ public class TeslaTower extends Turret {
         price = TESLATOWER_PRICE;
         value = price;
         priority = 0; //close
-        damageSound = soundsH.get("stoneDamage");
+        damageSound = soundsH.get("metalDamage");
         breakSound = soundsH.get("stoneBreak");
         placeSound = soundsH.get("metalPlace");
         fireSound = soundsH.get("smallImpact");
