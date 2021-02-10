@@ -2285,7 +2285,7 @@
     "x": 450,
     "name": "metalDrillMA",
     "y": 450,
-    "debris": "stone",
+    "debris": "metal",
     "id": 361,
     "barSizeY": 6,
     "barSizeX": 100

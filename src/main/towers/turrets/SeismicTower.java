@@ -246,7 +246,7 @@ public class SeismicTower extends Turret {
                     debrisType = "metal";
                     placeSound = soundsH.get("metalPlace");
                     damageSound = soundsH.get("metalDamage");
-                    //todo: metal sounds
+                    breakSound = soundsH.get("metalBreak");
                     shockwaveWidth = 720;
                     delay = 20;
                     name = "seismicSlammer";
@@ -267,7 +267,7 @@ public class SeismicTower extends Turret {
                     debrisType = "metal";
                     placeSound = soundsH.get("metalPlace");
                     damageSound = soundsH.get("metalDamage");
-                    //todo: metal sounds
+                    breakSound = soundsH.get("metalBreak");
                     //todo: STUN
                     seismicSense = true;
                     shockwaveWidth -= 40;

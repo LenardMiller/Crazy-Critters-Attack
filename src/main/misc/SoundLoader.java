@@ -52,6 +52,7 @@ public class SoundLoader {
         soundsH.put("stoneDamage", new SoundFile(p, "sounds/walls/stoneDamage.wav"));
         soundsH.put("metalDamage", new SoundFile(p, "sounds/walls/metalDamage.wav"));
         soundsH.put("stoneBreak", new SoundFile(p, "sounds/walls/stoneBreak.wav"));
+        soundsH.put("metalBreak", new SoundFile(p, "sounds/walls/metalBreak.wav"));
         soundsH.put("stonePlaceShort", new SoundFile(p, "sounds/walls/stonePlaceShort.wav"));
         soundsH.put("metalPlaceShort", new SoundFile(p, "sounds/walls/metalPlaceShort.wav"));
         //loops

@@ -170,7 +170,7 @@ public class Cannon extends Turret {
                     debrisType = "metal";
                     placeSound = soundsH.get("metalPlace");
                     damageSound = soundsH.get("metalDamage");
-                    //todo: metal sounds
+                    breakSound = soundsH.get("metalBreak");
                     loadSprites();
                     break;
             }

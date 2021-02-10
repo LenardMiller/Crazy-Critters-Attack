@@ -51,7 +51,7 @@ public class Flamethrower extends Turret {
         value = price;
         priority = 0; //close
         damageSound = soundsH.get("metalDamage");
-        breakSound = soundsH.get("stoneBreak");
+        breakSound = soundsH.get("metalBreak");
         placeSound = soundsH.get("metalPlace");
         fireSound = soundsH.get("fireImpact");
         setUpgrades();
