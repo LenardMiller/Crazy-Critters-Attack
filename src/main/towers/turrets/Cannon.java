@@ -168,6 +168,7 @@ public class Cannon extends Turret {
                     frags = true;
                     name = "fragCannon";
                     debrisType = "metal";
+                    placeSound = soundsH.get("metalPlace");
                     //todo: metal sounds
                     loadSprites();
                     break;

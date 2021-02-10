@@ -30,7 +30,7 @@ public class GuiObject {
         }
     }
 
-    private void display(){
-        p.image(sprite,position.x-size.x/2,position.y-size.y/2);
+    private void display() {
+        if (sprite != null) p.image(sprite,position.x-size.x/2,position.y-size.y/2);
     }
 }

@@ -39,7 +39,7 @@ public class EnergyBlaster extends Turret{
         bigExplosion = false;
         damageSound = soundsH.get("stoneDamage");
         breakSound = soundsH.get("stoneBreak");
-        placeSound = soundsH.get("stonePlace");
+        placeSound = soundsH.get("metalPlace");
         fireSound = soundsH.get("smallExplosion");
         loadSprites();
         debrisType = "darkMetal";

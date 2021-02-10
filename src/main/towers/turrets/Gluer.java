@@ -204,6 +204,8 @@ public class Gluer extends Turret {
                     spikey = true;
                     name = "shatterGluer";
                     debrisType = "metal";
+                    placeSound = soundsH.get("metalPlace");
+                    //todo: metal sounds
                     loadSprites();
                     break;
             }

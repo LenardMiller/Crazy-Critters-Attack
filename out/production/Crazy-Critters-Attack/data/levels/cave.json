@@ -64,7 +64,7 @@
     "id": 9,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallBLCOb_TL"
   },
   {
     "machine": false,
@@ -137,7 +137,7 @@
     "id": 20,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallBLCOb_TL"
   },
   {
     "machine": false,
@@ -204,7 +204,7 @@
     "id": 30,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallBLCOb_TL"
   },
   {
     "machine": false,
@@ -218,7 +218,7 @@
     "id": 32,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTRCOb_TL"
   },
   {
     "machine": false,
@@ -501,7 +501,7 @@
     "id": 76,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTRCOb_TL"
   },
   {
     "machine": false,
@@ -609,7 +609,7 @@
     "id": 93,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTLCOb_TL"
   },
   {
     "machine": false,
@@ -628,7 +628,7 @@
     "id": 96,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallBRCOb_TL"
   },
   {
     "machine": false,
@@ -724,7 +724,7 @@
     "id": 111,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTLCOb_TL"
   },
   {
     "machine": false,
@@ -845,7 +845,7 @@
     "id": 130,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallBLCOb_TL"
   },
   {
     "machine": false,
@@ -1451,7 +1451,7 @@
     "id": 228,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallBRCOb_TL"
   },
   {
     "machine": false,
@@ -1792,7 +1792,7 @@
     "id": 282,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallBLCOb_TL"
   },
   {
     "machine": false,
@@ -1958,7 +1958,7 @@
     "id": 308,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTLCOb_TL"
   },
   {
     "machine": false,
@@ -1972,7 +1972,7 @@
     "id": 310,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTRCOb_TL"
   },
   {
     "machine": false,
@@ -2006,14 +2006,14 @@
     "id": 315,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTLCOb_TL"
   },
   {
     "machine": false,
     "id": 316,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTRCOb_TL"
   },
   {
     "machine": false,
@@ -2047,7 +2047,7 @@
     "id": 321,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallBLCOb_TL"
   },
   {
     "machine": false,
@@ -2078,7 +2078,7 @@
     "id": 326,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTLCOb_TL"
   },
   {
     "machine": false,
@@ -2126,7 +2126,7 @@
     "id": 333,
     "type": "tile",
     "bgA": "stone",
-    "obstacle": "caveWallBaseOb_TL"
+    "obstacle": "caveWallTLCOb_TL"
   },
   {
     "machine": false,
