@@ -23,7 +23,7 @@ public class KeyBinds {
         KeyBinds.p = p;
     }
 
-    public void inGameKeys() { //todo: hotkeys
+    public void inGameKeys() {
         boolean pause = keysPressed.getPressedPulse('|');
         boolean play = keysPressed.getPressedPulse(' ');
         //hotkeys
