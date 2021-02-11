@@ -17,7 +17,6 @@ public class Rock extends Projectile {
         maxSpeed = 12;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         angularVelocity = p.random(-15,15);
         sprite = spritesH.get("rockPj");

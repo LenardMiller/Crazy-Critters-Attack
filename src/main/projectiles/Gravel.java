@@ -17,7 +17,6 @@ public class Gravel extends Projectile {
         maxSpeed = 12 + p.random(-3, 3);
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         angularVelocity = p.random(-15,15);
         sprite = spritesH.get("stonePt");

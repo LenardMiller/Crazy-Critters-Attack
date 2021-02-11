@@ -26,7 +26,6 @@ public class MagicMissile extends Projectile {
         maxSpeed = 5;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         sprite = spritesH.get("magicMisslePj");
         hasTrail = true;

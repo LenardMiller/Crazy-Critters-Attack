@@ -64,6 +64,7 @@ public abstract class Tower {
         size = new PVector(120, 37);
         delay = 0;
         range = 0;
+        pierce = 0;
         this.maxHp = 1;
         hp = maxHp;
         hit = false;

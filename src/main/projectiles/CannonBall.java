@@ -21,7 +21,6 @@ public class CannonBall extends Projectile {
         maxSpeed = 14;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         sprite = spritesH.get("cannonBallPj");
         hitSound = soundsH.get("largeImpact");

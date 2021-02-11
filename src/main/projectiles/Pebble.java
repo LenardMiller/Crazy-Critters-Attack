@@ -17,7 +17,6 @@ public class Pebble extends Projectile{
         maxSpeed = 12;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         sprite = spritesH.get("pebblePj");
         hitSound = soundsH.get("mediumImpact");

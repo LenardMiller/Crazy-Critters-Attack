@@ -24,7 +24,6 @@ public class Laundry extends Projectile {
         maxSpeed = 12;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         angleTwo = angle;
         angularVelocity = p.random(-15, 15); //degrees mode

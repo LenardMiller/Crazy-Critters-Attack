@@ -23,7 +23,6 @@ public class SplatterGlue extends Projectile {
         maxSpeed = 7;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         angularVelocity = 0;
         sprite = spritesH.get("gluePj");
