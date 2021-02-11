@@ -63,7 +63,7 @@ public class Dynamite extends Projectile {
                     }
                 }
             }
-            if (pierce == 0) {
+            if (pierce == -1) {
                 dead = true;
             }
         }

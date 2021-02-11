@@ -62,7 +62,7 @@ public class CannonBall extends Projectile {
                     }
                 }
             }
-            if (pierce == 0) {
+            if (pierce == -1) {
                 dead = true;
             }
         }
