@@ -50,7 +50,7 @@ public class Laundry extends Projectile {
                     break;
                 }
             if (hitAlready) continue;
-            if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > 0) { //if touching enemy, and has pierce
+            if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > -1) { //if touching enemy, and has pierce
                 hitSound.stop();
                 hitSound.play(p.random(0.8f, 1.2f), volume);
                 enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "poison", velocity, i);
