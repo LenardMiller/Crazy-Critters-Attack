@@ -417,8 +417,14 @@ public class Main extends PApplet {
         machine.hpBar();
     }
 
+    /**
+     * Checks if a key is pressed.
+     * Also includes overrides.
+     * todo: handle capitals
+     */
     public void keyPressed() {
         if (keyCode == 27) key = '|';
+        if (keyCode == 9) key = '?';
         inputHandler.key(true);
     }
 

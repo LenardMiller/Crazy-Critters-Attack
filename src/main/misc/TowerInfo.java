@@ -3,6 +3,7 @@ package main.misc;
 import processing.core.PApplet;
 
 import static main.Main.mediumFont;
+import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.LEFT;
 
 public class TowerInfo {
@@ -27,6 +28,8 @@ public class TowerInfo {
         p.text("mid-range tower,", x, space(3));
         p.text("and the most", x, space(4));
         p.text("cost-efficient.", x, space(5));
+        p.textAlign(CENTER);
+        p.text("[Q]", 1000, space(7));
     }
 
     public static void randomCannonInfo(PApplet p) {
@@ -38,6 +41,8 @@ public class TowerInfo {
         p.text("Potentially very high", x, space(3));
         p.text("DPS,  but has short", x, space(4));
         p.text("range.", x, space(5));
+        p.textAlign(CENTER);
+        p.text("[A]", 1000, space(7));
     }
 
     public static void crossbowInfo(PApplet p) {
@@ -49,6 +54,8 @@ public class TowerInfo {
         p.text("Very high damage", x, space(3));
         p.text("and range,  but low", x, space(4));
         p.text("rate of fire.", x, space(5));
+        p.textAlign(CENTER);
+        p.text("[Z]", 1000, space(7));
     }
 
     public static void cannonInfo(PApplet p) {
@@ -60,6 +67,8 @@ public class TowerInfo {
         p.text("range and firerate,", x, space(3));
         p.text("good damage with", x, space(4));
         p.text("a bit of splash.", x, space(5));
+        p.textAlign(CENTER);
+        p.text("[W]", 1000, space(7));
     }
 
     public static void gluerInfo(PApplet p) {
@@ -71,6 +80,8 @@ public class TowerInfo {
         p.text("Slows movement", x, space(3));
         p.text("and attack speed,", x, space(4));
         p.text("does no damage.", x, space(5));
+        p.textAlign(CENTER);
+        p.text("[S]", 1000, space(7));
     }
 
     public static void seismicInfo(PApplet p) {
@@ -80,7 +91,8 @@ public class TowerInfo {
         p.text("towards the nearest", x, space(1));
         p.text("enemy.  Does low", x, space(2));
         p.text("damage,  but can", x, space(3));
-        p.text("hit large numbers", x, space(4));
-        p.text("of enemies.", x, space(5));
+        p.text("hit several enemies.", x, space(4));
+        p.textAlign(CENTER);
+        p.text("[X]", 1000, space(6));
     }
 }

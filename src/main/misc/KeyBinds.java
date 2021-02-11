@@ -26,6 +26,18 @@ public class KeyBinds {
     public void inGameKeys() { //todo: hotkeys
         boolean pause = keysPressed.getPressedPulse('|');
         boolean play = keysPressed.getPressedPulse(' ');
+        //hotkeys
+        boolean wall = addHotkey('?', 0);
+        boolean slingshot = addHotkey('q', SLINGSHOT_PRICE);
+        boolean luggageBlaster = addHotkey('a', RANDOMCANNON_PRICE);
+        boolean crossbow = addHotkey('z', CROSSBOW_PRICE);
+        boolean cannon = addHotkey('w', CANNON_PRICE);
+        boolean gluer = addHotkey('s', GLUER_PRICE);
+        boolean seismicTower = addHotkey('x', SEISMIC_PRICE);
+        boolean energyBlaster = addHotkey('e', ENERGYBLASTER_PRICE);
+        boolean flamethrower = addHotkey('d', FLAMETHROWER_PRICE);
+        boolean teslaTower = addHotkey('c', TESLATOWER_PRICE);
+
         if (pause) {
             soundsH.get("clickOut").play(1, volume);
             updateNodes();
@@ -41,6 +53,29 @@ public class KeyBinds {
                 level.currentWave = 0;
             }
         }
+        //hotkeys
+        if (!dev) {
+            if (wall) {
+                if (hand.held.equals("wall")) hand.setHeld("null");
+                else hand.setHeld("wall");
+            }
+            if (slingshot) hand.setHeld("slingshot");
+            if (luggageBlaster) hand.setHeld("miscCannon");
+            if (crossbow) hand.setHeld("crossbow");
+            if (currentLevel > 0) {
+                if (cannon) hand.setHeld("cannon");
+                if (gluer) hand.setHeld("gluer");
+                if (seismicTower) hand.setHeld("seismic");
+            } if (currentLevel > 1) {
+                if (energyBlaster) hand.setHeld("energyBlaster");
+                if (flamethrower) hand.setHeld("flamethrower");
+                if (teslaTower) hand.setHeld("tesla");
+            }
+        }
+    }
+
+    private boolean addHotkey(char key, int price) {
+        return keysPressed.getPressedPulse(key) && alive && !paused && money >= price;
     }
 
     public void spawnKeys() {
