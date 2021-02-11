@@ -129,7 +129,7 @@ public class Main extends PApplet {
      * run once at program start
      */
     public void settings() {
-        size(GRID_WIDTH, BOARD_HEIGHT); //todo: openGL?
+        size(GRID_WIDTH, BOARD_HEIGHT, P2D);
     }
 
     /**

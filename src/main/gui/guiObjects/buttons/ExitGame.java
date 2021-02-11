@@ -47,6 +47,6 @@ public class ExitGame extends Button {
 
     public void action() {
         paused = false;
-        System.exit(0);
+        p.exit();
     }
 }
