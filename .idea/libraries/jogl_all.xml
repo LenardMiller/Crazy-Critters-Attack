@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="jogl-all">
-    <CLASSES>
-      <root url="jar:///Applications/Processing.app/Contents/Java/core/library/jogl-all.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
