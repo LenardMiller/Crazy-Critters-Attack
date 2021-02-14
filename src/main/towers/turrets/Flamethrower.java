@@ -1,6 +1,5 @@
 package main.towers.turrets;
 
-import main.enemies.Enemy;
 import main.misc.Tile;
 import main.projectiles.Flame;
 import processing.core.PApplet;
@@ -8,14 +7,11 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.findAngle;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Flamethrower extends Turret {
 
-    public float targetAngle;
     private int flameTimer;
-    private float rotationSpeed;
 
     public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
@@ -44,7 +40,6 @@ public class Flamethrower extends Turret {
         loadDelayTime = 0;
         damage = 20;
         flameTimer = 2;
-        rotationSpeed = 0.02f;
         loadSprites();
         debrisType = "metal";
         price = FLAMETHROWER_PRICE;
@@ -80,46 +75,6 @@ public class Flamethrower extends Turret {
         projectiles.add(new Flame(p, spp.x, spp.y, angleB, this, damage, (int) effectLevel, effectDuration, flameTimer, false));
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
-    }
-
-    public void aim(Enemy enemy) {
-        PVector position = new PVector(tile.position.x-25,tile.position.y-25);
-        PVector target = enemy.position;
-
-        if (pjSpeed > 0) { //shot leading
-            float dist = PVector.sub(target, position).mag();
-            float time = dist / pjSpeed;
-            PVector enemyHeading = PVector.fromAngle(enemy.angle);
-            enemyHeading.setMag(enemy.speed * time);
-            target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
-        }
-
-        targetAngle = findAngle(position,target);
-
-        if (visualize && debug) { //cool lines
-            p.stroke(255);
-            p.line(position.x, position.y, target.x, target.y);
-            p.stroke(255, 0, 0, 150);
-            p.line(target.x, p.height, target.x, 0);
-            p.stroke(0, 0, 255, 150);
-            p.line(p.width, target.y, 0, target.y);
-        }
-    }
-
-    public void main() { //need to check target
-        if (hp <= 0) {
-            die(false);
-            tile.tower = null;
-        }
-        if (enemies.size() > 0 && alive) checkTarget();
-        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive) {
-            selection.swapSelected(tile.id);
-        }
-        if (angle < targetAngle) {
-            angle += rotationSpeed;
-        } if (angle > targetAngle) {
-            angle -= rotationSpeed;
-        }
     }
 
     private void setUpgrades() {
@@ -167,12 +122,6 @@ public class Flamethrower extends Turret {
     }
 
     public void upgradeSpecial(int id) {
-        if (nextLevelA == 0) flameTimer += 2;
-        if (nextLevelA == 1) rotationSpeed += 0.02;
-        if (nextLevelB == 1) {
-            effectDuration += 100;
-            effectLevel += 2;
-        }
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
@@ -180,7 +129,6 @@ public class Flamethrower extends Turret {
                     range += 75;
                     break;
                 case 1:
-                    rotationSpeed += 0.02;
                     break;
                 case 2:
                     range += 50;
