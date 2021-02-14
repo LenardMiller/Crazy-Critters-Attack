@@ -143,13 +143,15 @@ public class Corpse {
                     getTintChannel(tintFinal.getBlue(), lifespan, MAX_LIFE)
             );
             if (!paused) {
-                for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
-                    float chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
-                    if (!ANIMATED) chance += 16;
-                    int num = (int) (p.random(0, chance));
-                    if (num == 0) {
-                        particles.add(new BuffParticle(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), p.random(0, 360), part));
-                    }
+                float chance = 0;
+                //prevent divide by 0
+                if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
+                if (!ANIMATED) chance += 16;
+                int num = (int) (p.random(0, chance));
+                if (num == 0) {
+                    particles.add(new BuffParticle(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1,
+                            (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
+                            p.random(0, 360), part));
                 }
             }
         }
@@ -163,13 +165,17 @@ public class Corpse {
                     if (!type.equals("burning") && !type.equals("decay")) {
                         int num = (int) (p.random(0, chance));
                         if (num == 0) {
-                            particles.add(new Ouch(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), p.random(0, 360), BLOOD_PARTICLE));
+                            particles.add(new Ouch(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1,
+                                    (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1,
+                                    (SIZE.x / 2))), p.random(0, 360), BLOOD_PARTICLE));
                         }
                     }
                     chance += 10;
                     int num = (int) (p.random(0, chance));
                     if (num == 0) {
-                        underParticles.add(new Pile(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))), 0, BLOOD_PARTICLE));
+                        underParticles.add(new Pile(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1,
+                                (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1,
+                                (SIZE.x / 2))), 0, BLOOD_PARTICLE));
                     }
                 }
             }
