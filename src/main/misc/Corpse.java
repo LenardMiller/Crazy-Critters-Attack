@@ -142,20 +142,44 @@ public class Corpse {
                     getTintChannel(tintFinal.getGreen(), lifespan, MAX_LIFE),
                     getTintChannel(tintFinal.getBlue(), lifespan, MAX_LIFE)
             );
-            if (!paused) {
-                float chance = 0;
-                //prevent divide by 0
-                if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
-                if (!ANIMATED) chance += 16;
-                int num = (int) (p.random(0, chance));
-                if (num == 0) {
-                    particles.add(new BuffParticle(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1,
-                            (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
-                            p.random(0, 360), part));
-                }
-            }
+            buffParticles(part);
         }
 
+        bloodParticles();
+        PImage st = tinting(sprite, tint, doTint);
+        drawSprites(st);
+    }
+
+    private void buffParticles(String part) {
+        if (!paused) {
+            float chance = 0;
+            //prevent divide by 0
+            if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
+            if (!ANIMATED) chance += 16;
+            int num = (int) (p.random(0, chance));
+            if (num == 0) {
+                particles.add(new BuffParticle(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1,
+                        (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
+                        p.random(0, 360), part));
+            }
+        }
+    }
+
+    private PImage tinting(PImage sprite, Color tint, boolean doTint) {
+        //for memory reasons
+        PImage st = p.createImage(sprite.width, sprite.height, ARGB);
+        sprite.loadPixels();
+        arrayCopy(sprite.pixels, st.pixels);
+
+        //tinting
+        float transparency = ((float) lifespan) / ((float) MAX_LIFE);
+        if (doTint) {
+            superTint(st, new Color(tint.getRed(), tint.getGreen(), tint.getBlue(), 0), transparency);
+        } else p.tint(255, transparency * 255);
+        return st;
+    }
+
+    private void bloodParticles() {
         if (!paused) {
             if (!BLOOD_PARTICLE.equals("none")) {
                 for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
@@ -180,22 +204,13 @@ public class Corpse {
                 }
             }
         }
+    }
 
-        //for memory reasons
-        PImage st = p.createImage(sprite.width, sprite.height, ARGB);
-        sprite.loadPixels();
-        arrayCopy(sprite.pixels, st.pixels);
-
-        //tinting
-        float transparency = ((float) lifespan) / ((float) MAX_LIFE);
-        if (doTint) {
-            superTint(st, new Color(tint.getRed(), tint.getGreen(), tint.getBlue(), 0), transparency);
-        } else p.tint(255, transparency * 255);
-
+    private void drawSprites(PImage sprite) {
         p.pushMatrix();
         p.translate(POSITION.x, POSITION.y);
         p.rotate(angle);
-        p.image(st, -SIZE.x / 2, -SIZE.y / 2);
+        p.image(sprite, -SIZE.x / 2, -SIZE.y / 2);
         p.popMatrix();
         p.tint(255);
     }
