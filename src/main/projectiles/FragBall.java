@@ -62,7 +62,7 @@ public class FragBall extends Projectile {
                     }
                 }
             }
-            if (pierce == 0) {
+            if (pierce < 0) {
                 dead = true;
             }
         }
