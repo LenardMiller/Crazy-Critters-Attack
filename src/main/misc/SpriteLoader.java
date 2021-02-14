@@ -50,6 +50,7 @@ public class SpriteLoader {
         getSprite(p,"fireLargeExplosion","PT","largeExplosion/fire/",17);
         getSprite(p,"poisonLargeExplosion","PT","largeExplosion/poison/",17);
         getSprite(p,"glueLargeExplosion","PT","largeExplosion/glue/",17);
+        getSprite(p,"energyLargeExplosion","PT","largeExplosion/energy/",17);
         getSprite(p,"energyExDebris","PT","explosionDebris/energy/",4);
         getSprite(p,"poisonExDebris","PT","explosionDebris/poison/",4);
         getSprite(p,"metalExDebris","PT","explosionDebris/metal/",4);
