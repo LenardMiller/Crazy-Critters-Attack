@@ -213,8 +213,8 @@ public class Hand {
             P.text("upgrade", 910, 790);
             P.text("RClick on wall", 910, 820);
             P.text("to Sell", 910, 840);
-            P.text("Click on sidebar", 910, 870);
-            P.text("to deselect", 910, 890);
+            P.text("Press tab or click on", 910, 870);
+            P.text("sidebar to deselect", 910, 890);
         }
     }
 
