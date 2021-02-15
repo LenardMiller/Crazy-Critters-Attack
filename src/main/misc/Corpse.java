@@ -186,7 +186,7 @@ public class Corpse {
                     float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
                     float chance = sq(1 / (speed + 0.01f));
                     chance += 16;
-                    if (!type.equals("burning") && !type.equals("decay")) {
+                    if (!type.equals("burning") && !type.equals("decay")) { //idk
                         int num = (int) (p.random(0, chance));
                         if (num == 0) {
                             particles.add(new Ouch(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1,

@@ -44,7 +44,7 @@ public class TeslaTower extends Turret {
         damageSound = soundsH.get("metalDamage");
         breakSound = soundsH.get("metalBreak");
         placeSound = soundsH.get("metalPlace");
-        fireSound = soundsH.get("smallImpact");
+        fireSound = soundsH.get("teslaFire");
         setUpgrades();
         updateTowerArray();
 
