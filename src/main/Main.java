@@ -359,10 +359,10 @@ public class Main extends PApplet {
         //machine
         machine.main();
         //enemies
-        for (Enemy enemy : enemies) enemy.displayPassA();
+        for (Enemy enemy : enemies) if (!enemy.flying) enemy.displayPassA();
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
-            enemy.main(i);
+            if (!enemy.flying) enemy.main(i);
         }
         if (enemies.size() == 0) buffs = new ArrayList<>();
         //towers
@@ -408,6 +408,12 @@ public class Main extends PApplet {
         //obstacles
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).displayC();
+        }
+        //flying enemies
+        for (Enemy enemy : enemies) if (enemy.flying) enemy.displayPassA();
+        for (int i = enemies.size() - 1; i >= 0; i--) {
+            Enemy enemy = enemies.get(i);
+            if (enemy.flying) enemy.main(i);
         }
         //enemy hp bars
         for (Enemy enemy : enemies) {

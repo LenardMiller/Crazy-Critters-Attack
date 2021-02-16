@@ -23,7 +23,7 @@ public class GiantBat extends Enemy {
         attackStartFrame = 0;
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = 8;
+        betweenAttackFrames = 12;
         attackFrame = attackStartFrame;
         flying = true;
         corpseSize = new PVector(100,100);
