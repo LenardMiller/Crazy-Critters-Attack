@@ -134,6 +134,10 @@ public class SpriteLoader {
         getSprite(p,"butterflyMove","EN","butterfly/move/",8);
         getSprite(p,"butterflyDie","EN","butterfly/die/",5);
         getSprite(p,"butterflyParts", "EN", "butterfly/parts/", 5);
+        getSprite(p,"albinoButterflyAttack","EN","albinoButterfly/attack/",16);
+        getSprite(p,"albinoButterflyMove","EN","albinoButterfly/move/",8);
+        getSprite(p,"albinoButterflyDie","EN","albinoButterfly/die/",5);
+        getSprite(p,"albinoButterflyParts", "EN", "albinoButterfly/parts/", 5);
         getSprite(p,"dummyAttack","EN","dummy/attack/",1);
         getSprite(p,"dummyMove","EN","dummy/move/",1);
         getSprite(p,"dummyDie","EN","dummy/die/",1);

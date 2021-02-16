@@ -114,8 +114,8 @@ public class KeyBinds {
         //enemies
         if (en1) enemies.add(new AlbinoBug(p, p.mouseX, p.mouseY));
         if (en2) enemies.add(new BigAlbinoBug(p, p.mouseX, p.mouseY));
-        if (en3) enemies.add(new GiantBat(p, p.mouseX, p.mouseY));
-        if (en4) enemies.add(new Sidewinder(p, p.mouseX, p.mouseY));
+        if (en3) enemies.add(new AlbinoButterfly(p, p.mouseX, p.mouseY));
+        if (en4) enemies.add(new GiantBat(p, p.mouseX, p.mouseY));
         if (en5) enemies.add(new Scorpion(p, p.mouseX, p.mouseY));
         if (en6) enemies.add(new Emperor(p, p.mouseX, p.mouseY));
         if (en7) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
