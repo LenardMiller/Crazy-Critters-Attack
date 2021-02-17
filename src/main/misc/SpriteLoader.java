@@ -264,14 +264,6 @@ public class SpriteLoader {
     }
 
     public static void loadSprites(PApplet p) {
-        //enemies
-        spritesH.put("treeGiantEN",p.loadImage("sprites/enemies/treeGiant/idle.png"));
-        spritesH.put("treeSpiritEN",p.loadImage("sprites/enemies/treeSpirit/idle.png"));
-        spritesH.put("treeSpriteEN",p.loadImage("sprites/enemies/treeSprite/idle.png"));
-        spritesH.put("midBugEN",p.loadImage("sprites/enemies/midBug/idle.png"));
-        spritesH.put("bigBugEN",p.loadImage("sprites/enemies/bigBug/idle.png"));
-        spritesH.put("snakeEN",p.loadImage("sprites/enemies/snake/idle.png"));
-        spritesH.put("dummyEN",p.loadImage("sprites/enemies/dummy/idle.png"));
         //icons
         spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
         spritesH.put("wavePrimaryIc",p.loadImage("sprites/guiObjects/wavePrimary.png"));
