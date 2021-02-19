@@ -64,6 +64,11 @@ public class LevelBuilderGui {
         placeButton(0, 10, "caveWallTRCOb");
         placeButton(1, 9, "caveWallBLCOb");
         placeButton(0, 9, "caveWallBRCOb");
+        placeButton(3, 10, "caveWallTLDOb");
+        placeButton(2, 10, "caveWallTRDOb");
+        placeButton(3, 9, "caveWallBLDOb");
+        placeButton(2, 9, "caveWallBRDOb");
+        placeButton(0, 11, "caveWallPillarOb");
         //machine
         placeButton(3, 3, "Ma");
     }

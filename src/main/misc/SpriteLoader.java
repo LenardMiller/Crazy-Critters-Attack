@@ -494,5 +494,10 @@ public class SpriteLoader {
         spritesH.put("caveWallBLCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/blc.png"));
         spritesH.put("caveWallTLCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tlc.png"));
         spritesH.put("caveWallTRCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/trc.png"));
+        spritesH.put("caveWallBRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/brd.png"));
+        spritesH.put("caveWallBLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/bld.png"));
+        spritesH.put("caveWallTLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tld.png"));
+        spritesH.put("caveWallTRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/trd.png"));
+        spritesH.put("caveWallPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/pillar.png"));
     }
 }
