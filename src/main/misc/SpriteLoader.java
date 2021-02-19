@@ -146,6 +146,10 @@ public class SpriteLoader {
         getSprite(p,"giantBatMove","EN","giantBat/move/",6);
         getSprite(p,"giantBatDie","EN","giantBat/die/",5);
         getSprite(p,"giantBatParts","EN", "giantBat/parts/", 6);
+        getSprite(p,"batAttack","EN","bat/attack/",6);
+        getSprite(p,"batMove","EN","bat/move/",6);
+        getSprite(p,"batDie","EN","bat/die/",5);
+        getSprite(p,"batParts","EN", "bat/parts/", 6);
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
