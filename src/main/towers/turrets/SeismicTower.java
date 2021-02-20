@@ -154,10 +154,11 @@ public class SeismicTower extends Turret {
                 fireParticles(a);
                 a += TWO_PI / 6;
             }
-            shockwaves.add(new Shockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2, (int) range, angleB, shockwaveWidth, damage, this));
+            shockwaves.add(new Shockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
+                    (int) range, angleB, shockwaveWidth, damage, this, false));
         } else {
             fireParticles(a);
-            shockwaves.add(new Shockwave(p, spp.x, spp.y, (int) range, angleB, shockwaveWidth, damage, this));
+            shockwaves.add(new Shockwave(p, spp.x, spp.y, (int) range, angleB, shockwaveWidth, damage, this, seismicSense));
         }
     }
 
@@ -221,7 +222,7 @@ public class SeismicTower extends Turret {
         upgradeDescB[4] = "damage";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "Detect";
+        upgradeDescA[5] = "Stun";
         upgradeDescB[5] = "stealthy";
         upgradeDescC[5] = "enemies";
         //icons
@@ -268,8 +269,9 @@ public class SeismicTower extends Turret {
                     placeSound = soundsH.get("metalPlace");
                     damageSound = soundsH.get("metalDamage");
                     breakSound = soundsH.get("metalBreak");
-                    //todo: STUN
                     seismicSense = true;
+                    effectLevel = 0;
+                    effectDuration = 120;
                     shockwaveWidth -= 40;
                     range += 50;
                     damage += 150;

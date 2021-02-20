@@ -53,7 +53,7 @@ public class Laundry extends Projectile {
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > -1) { //if touching enemy, and has pierce
                 hitSound.stop();
                 hitSound.play(p.random(0.8f, 1.2f), volume);
-                enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "poison", velocity, i);
+                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, splashEn, "poison", velocity, i);
                 int num = (int) (p.random(16, 42));
                 for (int j = num; j >= 0; j--) {
                     particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "poison", maxSpeed = p.random(1.5f, 4.5f)));
@@ -70,7 +70,7 @@ public class Laundry extends Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.damagePj(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, "poison", PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
+                        erEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, "poison", PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
                     }
                 }
             }

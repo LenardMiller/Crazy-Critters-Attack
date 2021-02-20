@@ -30,8 +30,10 @@ public class Shockwave {
     private final ArrayList<Enemy> UNTOUCHED_ENEMIES;
     private final int SPEED;
     private final Turret TURRET;
+    private final boolean SEISMIC_SENSE;
 
-    public Shockwave(PApplet p, float centerX, float centerY, int maxRadius, float angle, float width, int damage, Turret turret) {
+    public Shockwave(PApplet p, float centerX, float centerY, int maxRadius, float angle, float width, int damage,
+                     Turret turret, boolean seismicSense) {
         this.P = p;
 
         CENTER = new PVector(centerX, centerY);
@@ -40,6 +42,7 @@ public class Shockwave {
         this.WIDTH = radians(width); //from edge to center of AOE
         this.DAMAGE = damage;
         this.TURRET = turret;
+        this.SEISMIC_SENSE = seismicSense;
 
         UNTOUCHED_ENEMIES = new ArrayList<>();
         UNTOUCHED_ENEMIES.addAll(enemies);
@@ -86,7 +89,12 @@ public class Shockwave {
             float angleDif = ANGLE - a;
             float dist = findDistBetween(enemy.position, CENTER);
             if (abs(angleDif) < WIDTH / 2f && dist < radius) {
-                enemy.damageSimple(DAMAGE, TURRET, "normal", PVector.fromAngle(a - HALF_PI), true);
+                PVector direction = PVector.fromAngle(a - HALF_PI);
+                if (enemy.stealthMode && SEISMIC_SENSE) {
+                    enemy.damageWithBuff(DAMAGE, "stunned", 0, 60, TURRET,
+                            true, "normal", direction, -1);
+                }
+                else enemy.damageWithoutBuff(DAMAGE, TURRET, "normal", direction, true);
                 UNTOUCHED_ENEMIES.remove(enemy);
             }
         }

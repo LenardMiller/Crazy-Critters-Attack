@@ -233,7 +233,7 @@ public class Selection { //what tower is selected
                 P.text("Seismic Sniper", 1000, 241);
                 speed = 7;
                 setTextPurple("Shockwave", offset);
-                setTextPurple("Anti-stealth", offset + 20);
+                setTextPurple("Stuns stealth", offset + 20);
                 break;
             case "seismicSlammer":
                 P.text("Seismic", 1000, 241);
@@ -349,7 +349,7 @@ public class Selection { //what tower is selected
                 offset += 20;
             }
             //effects
-            if (tower.effectLevel != 0) {
+            if (tower.effectLevel != 0 || tower.effectDuration != 0) {
                 P.fill(0, 200, 50);
                 if (tower.effectLevel % 1 == 0) {
                     P.text("Effect Level: " + (int) tower.effectLevel, 910, 356 + 20 * purpleCount + offset);

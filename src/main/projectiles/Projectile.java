@@ -132,7 +132,7 @@ public abstract class Projectile {
                     hitSound.stop();
                     hitSound.play(p.random(0.8f, 1.2f), volume);
                 }
-                enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, type, velocity, i);
+                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, splashEn, type, velocity, i);
                 hitEnemies.add(enemy);
                 pierce--;
                 for (int j = enemies.size() - 1; j >= 0; j--) {
@@ -145,7 +145,7 @@ public abstract class Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.damagePj(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, type, velocity, i);
+                        erEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, type, velocity, i);
                     }
                 }
             }

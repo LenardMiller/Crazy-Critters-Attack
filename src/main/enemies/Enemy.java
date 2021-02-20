@@ -37,6 +37,7 @@ public abstract class Enemy {
     public float radius;
     public float maxSpeed;
     public float speed;
+    public boolean immobilized;
     public int moneyDrop;
     int damage;
     public int maxHp;
@@ -113,7 +114,7 @@ public abstract class Enemy {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
 
-        if (!paused) {
+        if (!paused && !immobilized) {
             angle = clampAngle(angle);
             targetAngle = clampAngle(targetAngle);
             angle += angleDifference(targetAngle, angle) / 10;
@@ -242,7 +243,21 @@ public abstract class Enemy {
         }
     }
 
-    public void damagePj(int damage, String pjBuff, float effectLevel, int effectDuration, Turret turret, boolean splash, String type, PVector direction, int i) {
+    /**
+     * Applies damage to the enemy, can also apply a buff
+     * @param damage the amount of damage to be taken
+     * @param buffName the name of the buff to be applied, nullable
+     * @param effectLevel level of the buff to be applied
+     * @param effectDuration duration of the buff to be applied
+     * @param turret turret that caused the damage, nullable
+     * @param displayParticles if should create particles
+     * @param type determines what effect to apply to corpse
+     * @param direction determines where parts will be flung
+     * @param id id of this enemy, set to -1 if unknown
+     */
+    public void damageWithBuff(int damage, String buffName, float effectLevel, int effectDuration, Turret turret,
+                               boolean displayParticles, String type, PVector direction, int id) {
+        if (id == -1 && buffName != null) id = getId();
         lastDamageType = type;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -257,34 +272,37 @@ public abstract class Enemy {
         if (buffs.size() > 0) {
             for (int j = 0; j < buffs.size(); j++) {
                 Buff buff = buffs.get(j);
-                if (buff.enId == i && buff.name.equals(pjBuff)) {
+                if (buff.enId == id && buff.name.equals(buffName)) {
                     effectTimer = buff.effectTimer;
                     buffs.remove(j);
                     break;
                 }
             }
         }
-        if (pjBuff != null) {
+        if (buffName != null) {
             Buff buff;
-            switch (pjBuff) {
+            switch (buffName) {
                 case "burning":
-                    buff = new Burning(p, i, effectLevel, effectDuration, turret);
+                    buff = new Burning(p, id, effectLevel, effectDuration, turret);
                     break;
                 case "bleeding":
-                    buff = new Bleeding(p, i, turret);
+                    buff = new Bleeding(p, id, turret);
                     break;
                 case "poisoned":
-                    buff = new Poisoned(p, i, turret);
+                    buff = new Poisoned(p, id, turret);
                     break;
                 case "decay":
-                    if (turret != null) buff = new Decay(p, i, effectLevel, effectDuration, turret);
-                    else buff = new Decay(p, i, 1, 120, null);
+                    if (turret != null) buff = new Decay(p, id, effectLevel, effectDuration, turret);
+                    else buff = new Decay(p, id, 1, 120, null);
                     break;
                 case "glued":
-                    buff = new Glued(p, i, effectLevel, effectDuration, turret);
+                    buff = new Glued(p, id, effectLevel, effectDuration, turret);
                     break;
                 case "spikeyGlued":
-                    buff = new SpikeyGlued(p, i, effectLevel, effectDuration, turret);
+                    buff = new SpikeyGlued(p, id, effectLevel, effectDuration, turret);
+                    break;
+                case "stunned":
+                    buff = new Stunned(p, id, turret);
                     break;
                 default:
                     buff = null;
@@ -296,7 +314,14 @@ public abstract class Enemy {
                 buffs.add(buff);
             }
         }
-        damageEffect(splash);
+        damageEffect(displayParticles);
+    }
+
+    private int getId() {
+        for (int i = 0; i < enemies.size(); i++) {
+            if (enemies.get(i) == this) return i;
+        }
+        return -1;
     }
 
     private void damageEffect(boolean particles) {
@@ -310,7 +335,15 @@ public abstract class Enemy {
         }
     }
 
-    public void damageSimple(int damage, Turret turret, String type, PVector direction, boolean splash) {
+    /**
+     * Applies damage to the enemy
+     * @param damage amount of damage to be applied
+     * @param turret the turret that caused the damage, nullable
+     * @param type determines what effect to apply to corpse
+     * @param direction where parts will be flung
+     * @param displayParticles whether it should spawn particles
+     */
+    public void damageWithoutBuff(int damage, Turret turret, String type, PVector direction, boolean displayParticles) {
         lastDamageType = type;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -321,7 +354,7 @@ public abstract class Enemy {
                 turret.damageTotal += damage + hp;
             } else turret.damageTotal += damage;
         }
-        damageEffect(splash);
+        damageEffect(displayParticles);
     }
 
     public void hpBar() {

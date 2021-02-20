@@ -47,7 +47,7 @@ public class EnergyBlast extends Projectile {
             if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > -1) { //if touching enemy, and has pierce
                 hitSound.stop();
                 hitSound.play(p.random(0.8f, 1.2f), volume);
-                enemy.damagePj(damage, buff, effectLevel, effectDuration, turret, splashEn, "burning", velocity, i);
+                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, splashEn, "burning", velocity, i);
 
                 if (!BIG_EXPLOSION) {
                     int num = (int) (p.random(10, 16));
@@ -74,7 +74,7 @@ public class EnergyBlast extends Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.damagePj(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, erEnemy.lastDamageType, PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
+                        erEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, erEnemy.lastDamageType, PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
                     }
                 }
             }
