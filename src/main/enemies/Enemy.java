@@ -373,8 +373,7 @@ public abstract class Enemy {
         PVector p = point.position;
         boolean intersecting;
         float tpSize;
-        if (point.combat) tpSize = speed;
-        else tpSize = 15;
+        tpSize = 15;
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
         intersecting = (pfPosition.x > p.x - tpSize + (nodeSize / 2f) && pfPosition.x < p.x + tpSize + (nodeSize / 2f)) && (pfPosition.y > p.y - tpSize + (nodeSize / 2f) && pfPosition.y < p.y + tpSize + (nodeSize / 2f));
         return intersecting;
