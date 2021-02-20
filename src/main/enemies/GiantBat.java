@@ -30,8 +30,8 @@ public class GiantBat extends Enemy {
         partSize = new PVector(50, 50);
         betweenWalkFrames = 5;
         betweenCorpseFrames = 4;
-        overkillSound = soundsH.get("squish");
-        dieSound = soundsH.get("crunch");
+        overkillSound = soundsH.get("bigSqueakSquash");
+        dieSound = soundsH.get("bigSqueak");
         loadSprites();
     }
 }
