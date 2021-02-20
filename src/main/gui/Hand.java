@@ -1,5 +1,6 @@
 package main.gui;
 
+import main.enemies.Enemy;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.misc.Tile;
 import main.towers.Tower;
@@ -10,8 +11,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.roundTo;
-import static main.misc.MiscMethods.updateNodes;
+import static main.misc.MiscMethods.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTiles;
 
@@ -26,6 +26,8 @@ public class Hand {
     public String displayInfo;
     public int price;
 
+    public final float MIN_ENEMY_DISTANCE;
+
     public Hand(PApplet p) {
         this.P = p;
 
@@ -34,6 +36,8 @@ public class Hand {
         price = 0;
         implacable = false;
         displayInfo = "null";
+
+        MIN_ENEMY_DISTANCE = 50;
     }
 
     public void main() {
@@ -51,6 +55,7 @@ public class Hand {
             for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;
         }
         if (!levelBuilder) checkDisplay();
+        checkPlaceableEnemies();
         displayHeld();
         if (inputHandler.leftMousePressedPulse) {
             if (!held.equals("wall") && !held.equals("null")) {
@@ -71,6 +76,31 @@ public class Hand {
         else implacable = (tileTower.tower != null && tileTower.tower.turret);
         if (tileObstacle != null && (tileObstacle.obstacle != null || tileObstacle.machine)) implacable = true;
         if (price > money) implacable = true;
+    }
+
+    private void checkPlaceableEnemies() {
+        if (held.equals("wall") && displayInfo.equals("placeWall") && enemyNearby()) {
+            implacable = true;
+        }
+    }
+
+    private boolean enemyNearby() {
+        if (enemies.size() == 0) return false;
+        for (Enemy enemy : enemies) {
+            if (findDistBetween (
+                    new PVector (
+                            roundTo(enemy.position.x, 50) + 25,
+                            roundTo(enemy.position.y, 50) + 25
+                    ),
+                    new PVector (
+                            roundTo(P.mouseX, 50) + 25,
+                            roundTo(P.mouseY, 50) + 25
+                    )
+            ) > MIN_ENEMY_DISTANCE * enemy.pfSize) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void checkDisplay() {
@@ -110,7 +140,7 @@ public class Hand {
     }
 
     public void displayHeldInfo() {
-        if (displayInfo.equals("placeWall")) { //todo: can't place too close to enemy
+        if (displayInfo.equals("placeWall")) {
             P.fill(235);
             P.noStroke();
             P.rect(900, 212, 200, 707);
