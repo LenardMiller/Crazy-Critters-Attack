@@ -367,7 +367,6 @@ public abstract class Enemy {
 
     //pathfinding -----------------------------------------------------------------
     //todo: fix enemies sometimes wandering off if there are a lot of them
-    //todo: fix enemies spinning in place
 
     boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
@@ -375,7 +374,7 @@ public abstract class Enemy {
         boolean intersecting;
         float tpSize;
         if (point.combat) tpSize = speed;
-        else tpSize = 5;
+        else tpSize = 15;
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
         intersecting = (pfPosition.x > p.x - tpSize + (nodeSize / 2f) && pfPosition.x < p.x + tpSize + (nodeSize / 2f)) && (pfPosition.y > p.y - tpSize + (nodeSize / 2f) && pfPosition.y < p.y + tpSize + (nodeSize / 2f));
         return intersecting;
