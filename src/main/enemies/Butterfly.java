@@ -26,7 +26,8 @@ public class Butterfly extends Enemy {
         betweenAttackFrames = 5;
         attackFrame = attackStartFrame;
         flying = true;
-        corpseSize = new PVector(18,18);
+        corpseSize = new PVector(25,25);
+        partSize = new PVector(18,18);
         betweenCorpseFrames = 4;
         overkillSound = soundsH.get("squish");
         dieSound = soundsH.get("crunch");
