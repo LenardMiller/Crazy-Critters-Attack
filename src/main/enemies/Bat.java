@@ -30,8 +30,8 @@ public class Bat extends Enemy {
         partSize = new PVector(23, 23);
         betweenWalkFrames = 4;
         betweenCorpseFrames = 4;
-        overkillSound = soundsH.get("squish");
-        dieSound = soundsH.get("crunch");
+        overkillSound = soundsH.get("squeakSquish");
+        dieSound = soundsH.get("squeak");
         loadSprites();
     }
 }

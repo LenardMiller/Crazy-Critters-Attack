@@ -22,6 +22,8 @@ public class SoundLoader {
         soundsH.put("bigLeavesImpact", new SoundFile(p, "sounds/enemies/bigLeavesImpact.wav"));
         soundsH.put("snakeCrunch", new SoundFile(p, "sounds/enemies/snakeCrunch.wav"));
         soundsH.put("snakeSquish", new SoundFile(p, "sounds/enemies/snakeSquish.wav"));
+        soundsH.put("squeak", new SoundFile(p, "sounds/enemies/squeak.wav"));
+        soundsH.put("squeakSquish", new SoundFile(p, "sounds/enemies/squeakSquish.wav"));
         //misc
         soundsH.put("smallExplosion", new SoundFile(p, "sounds/misc/smallExplosion.wav"));
         //projectiles
