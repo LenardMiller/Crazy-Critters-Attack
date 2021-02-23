@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.lang.Character.toLowerCase;
 import static main.misc.MiscMethods.*;
 import static main.misc.SoundLoader.loadSounds;
 import static main.misc.SpriteLoader.loadSprites;
@@ -426,9 +427,9 @@ public class Main extends PApplet {
     /**
      * Checks if a key is pressed.
      * Also includes overrides.
-     * todo: handle capitals
      */
     public void keyPressed() {
+        key = toLowerCase(key);
         if (keyCode == 27) key = '|';
         if (keyCode == 9) key = '?';
         inputHandler.key(true);
