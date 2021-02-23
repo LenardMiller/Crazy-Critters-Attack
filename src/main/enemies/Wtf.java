@@ -21,8 +21,9 @@ public class Wtf extends Enemy {
         hitParticle = "greenOuch";
         name = "wtf";
         betweenWalkFrames = 3;
-        attackDmgFrames = new int[]{10};
         attackStartFrame = 0; //attack start
+        attackDmgFrames = new int[]{11};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = 10;
         corpseSize = size;
         partSize = new PVector(32,32);
