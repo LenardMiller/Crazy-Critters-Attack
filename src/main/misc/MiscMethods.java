@@ -253,4 +253,34 @@ public class MiscMethods {
         PVector p0 = new PVector(p1.x - p2.x, p1.y - p2.y);
         return sqrt(sq(p0.x) + sq(p0.y));
     }
+
+    /**
+     * Displays text with a rectangle backing.
+     * @param p the PApplet
+     * @param text text to be displayed
+     * @param position position for text to be displayed
+     * @param textColor color of text, RGBA
+     * @param highlightColor color of highlight, RGBA
+     * @param textSize size of text
+     * @param textAlign what alignment to use, defaults to center
+     */
+    public static void highlightedText(PApplet p, String text, PVector position, Color textColor, Color highlightColor,
+                                       float textSize, int textAlign) {
+        if (textAlign != LEFT && textAlign != RIGHT) textAlign = CENTER;
+
+        p.noStroke();
+        p.textAlign(textAlign);
+        p.textSize(textSize);
+
+        float textWidth = p.textWidth(text);
+        float padding = textSize/6;
+        PVector highlightPosition = new PVector(position.x, position.y);
+        if (textAlign == LEFT) highlightPosition = new PVector(position.x + (textWidth/2), position.y);
+        if (textAlign == RIGHT) highlightPosition = new PVector(position.x - (textWidth/2), position.y);
+
+        p.fill(highlightColor.getRGB(), highlightColor.getAlpha());
+        p.rect(highlightPosition.x, highlightPosition.y - ((textSize/2) - padding), textWidth + padding, textSize);
+        p.fill(textColor.getRGB(), textColor.getAlpha());
+        p.text(text, position.x, position.y);
+    }
 }
