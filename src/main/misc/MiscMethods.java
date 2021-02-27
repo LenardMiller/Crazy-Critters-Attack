@@ -14,9 +14,6 @@ import static main.pathfinding.UpdatePath.updatePath;
 
 public class MiscMethods {
 
-    public MiscMethods() {
-    }
-
     /**
      * For pathfinding.
      * Refreshes all pathfinding nodes
@@ -31,6 +28,36 @@ public class MiscMethods {
         updateClearance();
         updateNode(start, null);
         updatePath();
+    }
+
+    /**
+     * For pathfinding.
+     * Calculates the maximum cost of a path.
+     * @return the path's maximum cost
+     */
+    public static float maxCost() {
+        float maxCost = 0;
+        for (Node[] nodes : nodeGrid) {
+            for (Node node : nodes) {
+                if (node.totalCost > maxCost && (node.isOpen || node.isClosed)) maxCost = node.totalCost;
+            }
+        }
+        return maxCost;
+    }
+
+    /**
+     * For pathfinding.
+     * Calculates the minimum cost of a path.
+     * @return the path's minimum cost
+     */
+    public static float minCost(float maxCost) {
+        float minCost = maxCost;
+        for (Node[] nodes : nodeGrid) {
+            for (Node node : nodes) {
+                if (node.totalCost < minCost && (node.isOpen || node.isClosed)) minCost = node.totalCost;
+            }
+        }
+        return minCost;
     }
 
     /**
@@ -76,36 +103,6 @@ public class MiscMethods {
      */
     public static float roundTo(float input, float rounder) {
         return (round(input / rounder)) * rounder;
-    }
-
-    /**
-     * For pathfinding.
-     * Calculates the maximum cost of a path.
-     * @return the path's maximum cost
-     */
-    public static float maxCost() {
-        float maxCost = 0;
-        for (Node[] nodes : nodeGrid) {
-            for (Node node : nodes) {
-                if (node.totalCost > maxCost && (node.isOpen || node.isClosed)) maxCost = node.totalCost;
-            }
-        }
-        return maxCost;
-    }
-
-    /**
-     * For pathfinding.
-     * Calculates the minimum cost of a path.
-     * @return the path's minimum cost
-     */
-    public static float minCost(float maxCost) {
-        float minCost = maxCost;
-        for (Node[] nodes : nodeGrid) {
-            for (Node node : nodes) {
-                if (node.totalCost < minCost && (node.isOpen || node.isClosed)) minCost = node.totalCost;
-            }
-        }
-        return minCost;
     }
 
     /**

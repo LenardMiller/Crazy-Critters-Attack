@@ -429,7 +429,7 @@ public class Main extends PApplet {
      * Also includes overrides.
      */
     public void keyPressed() {
-        key = toLowerCase(key);
+        if (!dev) key = toLowerCase(key);
         if (keyCode == 27) key = '|';
         if (keyCode == 9) key = '?';
         inputHandler.key(true);

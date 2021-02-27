@@ -26,7 +26,7 @@ public class Wtf extends Enemy {
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = 10;
         corpseSize = size;
-        partSize = new PVector(32,32);
+        partSize = new PVector(100,100);
         attackFrame = attackStartFrame;
         dieSound = soundsH.get("bigCrunch");
         overkillSound = soundsH.get("squash");
