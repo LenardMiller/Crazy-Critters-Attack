@@ -265,6 +265,7 @@ public class MiscMethods {
                                        float textSize, int textAlign) {
         if (textAlign != LEFT && textAlign != RIGHT) textAlign = CENTER;
 
+        p.rectMode(CENTER);
         p.noStroke();
         p.textAlign(textAlign);
         p.textSize(textSize);
@@ -279,5 +280,6 @@ public class MiscMethods {
         p.rect(highlightPosition.x, highlightPosition.y - ((textSize/2) - padding), textWidth + padding, textSize);
         p.fill(textColor.getRGB(), textColor.getAlpha());
         p.text(text, position.x, position.y);
+        p.rectMode(CORNER);
     }
 }

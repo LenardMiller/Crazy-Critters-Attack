@@ -15,8 +15,9 @@ import static main.misc.MiscMethods.randomSpawnPosition;
 public class Wave {
 
     private final PApplet P;
-    private final Color PRIMARY;
-    private final Color SECONDARY;
+    private final Color FILL_COLOR;
+    private final Color ACCENT_COLOR;
+    private final Color TEXT_COLOR;
     private final String TITLE;
     final int SPAWN_LENGTH;
     public final int LENGTH;
@@ -37,13 +38,14 @@ public class Wave {
 
     public ArrayList<String> spawns;
 
-    public Wave(PApplet p, int length, int spawnLength, Color primary, Color secondary, String title) {
-        this.P = p;
-        this.LENGTH = length;
-        this.SPAWN_LENGTH = spawnLength;
-        this.PRIMARY = primary;
-        this.SECONDARY = secondary;
-        this.TITLE = title;
+    public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
+        P = p;
+        LENGTH = length;
+        SPAWN_LENGTH = spawnLength;
+        FILL_COLOR = fillColor;
+        ACCENT_COLOR = accentColor;
+        TEXT_COLOR = textColor;
+        TITLE = title;
         spawns = new ArrayList<>();
     }
 
@@ -87,21 +89,20 @@ public class Wave {
     /**
      * Draws wave icons.
      * todo: fix jiggle text
-     * todo: fix contrast issues
      * @param y displacement of icons
      * @param id current wave id
      */
     public void display(float y, int id) {
-        P.tint(PRIMARY.getRed(), PRIMARY.getGreen(), PRIMARY.getBlue());
+        P.tint(FILL_COLOR.getRGB());
         P.image(spritesH.get("wavePrimaryIc"), 890, y);
-        P.tint(SECONDARY.getRed(), SECONDARY.getGreen(), SECONDARY.getBlue());
+        P.tint(ACCENT_COLOR.getRGB());
         P.image(spritesH.get("waveSecondaryIc"), 890, y);
         P.tint(255);
-        P.fill(SECONDARY.getRed(), SECONDARY.getGreen(), SECONDARY.getBlue());
+
+        P.fill(TEXT_COLOR.getRGB());
         P.textAlign(CENTER);
         P.textFont(largeFont);
         P.text(TITLE, 1000, y + 110);
-        P.textAlign(CENTER);
         P.textFont(veryLargeFont);
         P.text(id, 1000, y + 70);
     }
