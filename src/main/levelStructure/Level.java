@@ -54,9 +54,9 @@ public class Level {
                 Wave wave = waves[i];
                 Wave current = null;
                 if (currentWave < waves.length) current = waves[currentWave];
-                float y = (125*(i-currentWave));
-                float y2 = 125;
-                if (currentWave < waves.length) y2 = 125*(((current.lengthTimer)+1)/(float)current.LENGTH);
+                int y = (125*(i-currentWave));
+                int y2 = 125;
+                if (currentWave < waves.length) y2 = (int) (125*(((current.lengthTimer)+1)/(float)current.LENGTH));
                 if (playingLevel) y -= y2 - 125;
                 else y += 125;
                 wave.display(212 + y, i+1);

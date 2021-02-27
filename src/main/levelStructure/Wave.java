@@ -88,11 +88,10 @@ public class Wave {
 
     /**
      * Draws wave icons.
-     * todo: fix jiggle text
      * @param y displacement of icons
      * @param id current wave id
      */
-    public void display(float y, int id) {
+    public void display(int y, int id) {
         P.tint(FILL_COLOR.getRGB());
         P.image(spritesH.get("wavePrimaryIc"), 890, y);
         P.tint(ACCENT_COLOR.getRGB());
