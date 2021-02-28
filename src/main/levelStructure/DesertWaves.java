@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class DesertWaves {
 
-    public DesertWaves() {} //todo: (layout) big ass skeleton
+    public DesertWaves() {}
 
     public static Wave[] genDesertWaves(PApplet p) {
         Wave[] waves = new Wave[40];
