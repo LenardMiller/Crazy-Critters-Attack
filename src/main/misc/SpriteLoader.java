@@ -85,6 +85,10 @@ public class SpriteLoader {
         getSprite(p,"treeSpriteAttack","EN","treeSprite/attack/",50);
         getSprite(p,"treeSpriteDie","EN","treeSprite/die/",4);
         getSprite(p,"treeSpriteParts","EN","treeSprite/parts/",6);
+        getSprite(p,"golemAttack","EN","golem/attack/",42);
+        getSprite(p,"golemMove","EN","golem/move/",47);
+        getSprite(p,"golemDie","EN","golem/die/",5);
+        getSprite(p,"golemParts","EN","golem/parts/",6);
         getSprite(p,"smallGolemMove","EN","smallGolem/move/",30);
         getSprite(p,"smallGolemAttack","EN","smallGolem/attack/",25);
         getSprite(p,"smallGolemDie","EN","smallGolem/die/",4);

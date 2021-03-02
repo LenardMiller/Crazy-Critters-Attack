@@ -119,8 +119,8 @@ public class KeyBinds {
         if (en5) enemies.add(new GiantBat(p, p.mouseX, p.mouseY));
         if (en6) enemies.add(new Wtf(p, p.mouseX, p.mouseY));
         if (en7) enemies.add(new SmallGolem(p, p.mouseX, p.mouseY));
-        if (en8) enemies.add(new TreeSprite(p, p.mouseX, p.mouseY));
-        if (en9) enemies.add(new BigWorm(p, p.mouseX, p.mouseY));
+        if (en8) enemies.add(new Golem(p, p.mouseX, p.mouseY));
+        if (en9) enemies.add(new TreeSpirit(p, p.mouseX, p.mouseY));
         if (en1b) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
