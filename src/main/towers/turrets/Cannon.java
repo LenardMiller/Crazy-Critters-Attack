@@ -63,7 +63,8 @@ public class Cannon extends Turret {
         fireSound.play(p.random(0.8f, 1.2f), volume);
         float angleB = angle;
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);float particleCount = p.random(1,5);
+        PVector spa = PVector.fromAngle(angleB-HALF_PI);
+        float particleCount = p.random(1,5);
         if (dynamite) spa.setMag(0);
         else spa.setMag(29); //barrel length
         spp.add(spa);

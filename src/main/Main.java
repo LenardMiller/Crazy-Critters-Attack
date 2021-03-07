@@ -257,7 +257,7 @@ public class Main extends PApplet {
         }
         keyBinds.inGameKeys();
         //pathfinding
-        if (path.reqQ.size() > 0) {
+        if (!path.reqQ.isEmpty()) {
             path.reqQ.get(0).getPath();
             path.reqQ.remove(0);
         }
@@ -365,7 +365,7 @@ public class Main extends PApplet {
             Enemy enemy = enemies.get(i);
             if (!enemy.flying) enemy.main(i);
         }
-        if (enemies.size() == 0) buffs = new ArrayList<>();
+        if (enemies.isEmpty()) buffs = new ArrayList<>();
         //towers
         for (Tower tower : towers) if (tower.turret) tower.displayPassA();
         for (Tower tower : towers) if (!tower.turret) tower.displayPassA();
