@@ -9,7 +9,6 @@ import static main.Main.spritesH;
 public class GuiObject {
 
     public PApplet p;
-
     public PVector position;
     public PVector size;
     public PImage sprite;

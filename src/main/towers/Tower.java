@@ -15,47 +15,45 @@ import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public abstract class Tower {
 
-    public PApplet p;
-
-    public Tile tile;
-
     public int damageTotal;
     public int killsTotal;
-    public String name;
-    public float angle;
     public int delay;
-    public float range;
-    public PVector size;
     public int maxHp;
     public int hp;
     public int damage;
     public int pierce;
-    public boolean hit;
-    public PImage sprite;
-    public Object updateSprite;
-    protected int tintColor;
-    protected String debrisType;
-    public int price;
-    public int value;
-    public float effectLevel;
-    public int effectDuration;
-    public boolean turret;
-    public boolean visualize;
     public int priority;
     public int nextLevelA;
     public int nextLevelB;
-    protected SoundFile damageSound;
-    protected SoundFile breakSound;
-    protected SoundFile placeSound;
-
+    public int price;
+    public int value;
+    public int effectDuration;
     public int[] upgradePrices;
+    public float angle;
+    public float range;
+    public float effectLevel;
+    public boolean hit;
+    public boolean turret;
+    public boolean visualize;
+    public PVector size;
+    public PApplet p;
+    public Tile tile;
+    public Object updateSprite;
+    public String name;
     public String[] upgradeTitles;
     public String[] upgradeDescA;
     public String[] upgradeDescB;
     public String[] upgradeDescC;
+    public PImage sprite;
     public PImage[] upgradeIcons;
 
-    public Tower(PApplet p, Tile tile) {
+    protected int tintColor;
+    protected String debrisType;
+    protected SoundFile damageSound;
+    protected SoundFile breakSound;
+    protected SoundFile placeSound;
+
+    protected Tower(PApplet p, Tile tile) {
         this.p = p;
         this.tile = tile;
         tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1).setBgC(null);

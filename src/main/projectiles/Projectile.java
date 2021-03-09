@@ -15,35 +15,36 @@ import static processing.core.PConstants.HALF_PI;
 
 public abstract class Projectile {
 
-    public PApplet p;
 
-    public PVector position;
-    public PVector size;
+    public int damage;
     public float radius;
     public float maxSpeed;
     public float speed;
-    public int damage;
-    int pierce;
-    int hitTime;
-    public PImage sprite;
-    PVector velocity;
     public float angle;
-    float angleTwo;
-    float angularVelocity;
-    boolean dead;
-    String trail;
-    boolean hasTrail;
-    String buff;
-    int effectRadius;
-    ArrayList<Enemy> hitEnemies;
-    Turret turret;
-    float effectLevel;
-    int effectDuration;
-    boolean splashEn;
-    String type;
-    SoundFile hitSound;
+    public PImage sprite;
+    public PApplet p;
+    public PVector position;
+    public PVector size;
 
-    Projectile(PApplet p, float x, float y, float angle, Turret turret) {
+    protected int pierce;
+    protected int hitTime;
+    protected int effectRadius;
+    protected int effectDuration;
+    protected float angleTwo;
+    protected float angularVelocity;
+    protected float effectLevel;
+    protected boolean dead;
+    protected boolean hasTrail;
+    protected boolean splashEn;
+    protected PVector velocity;
+    protected String trail;
+    protected String buff;
+    protected String type;
+    protected ArrayList<Enemy> hitEnemies;
+    protected Turret turret;
+    protected SoundFile hitSound;
+
+    protected Projectile(PApplet p, float x, float y, float angle, Turret turret) {
         this.p = p;
 
         splashEn = true;
@@ -85,7 +86,7 @@ public abstract class Projectile {
         projectiles.remove(i);
     }
 
-    void trail() { //leaves a trail of particles
+    protected void trail() { //leaves a trail of particles
         if (hasTrail) {
             int num = floor(p.random(0, 3));
             if (num == 0) particles.add(new BuffParticle(p, position.x, position.y, p.random(0, 360), trail));

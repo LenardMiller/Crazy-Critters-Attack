@@ -12,28 +12,28 @@ import static processing.core.PConstants.HALF_PI;
 
 public abstract class Particle {
 
-    public PApplet p;
-
-    public PVector position;
-    public PVector size;
     public float maxSpeed;
     public float speed;
-    public PImage[] sprites;
-    PVector velocity;
     public float angle;
-    float angleTwo;
-    float angularVelocity;
-    boolean dead;
-    int lifespan;
-    int numFrames;
-    int currentSprite;
-    public PImage sprite;
     public int delay;
-    int delayTime;
-    int betweenFrames;
-    int bfTimer;
+    public PApplet p;
+    public PImage sprite;
+    public PImage[] sprites;
+    public PVector position;
+    public PVector size;
 
-    Particle(PApplet p, float x, float y, float angle) {
+    protected float angleTwo;
+    protected float angularVelocity;
+    protected boolean dead;
+    protected int lifespan;
+    protected int numFrames;
+    protected int currentSprite;
+    protected int delayTime;
+    protected int betweenFrames;
+    protected int bfTimer;
+    protected PVector velocity;
+
+    protected Particle(PApplet p, float x, float y, float angle) {
         this.p = p;
 
         position = new PVector(x, y);
@@ -60,7 +60,7 @@ public abstract class Particle {
         if (!paused) move();
     }
 
-    void display() {
+    protected void display() {
         if (numFrames > 1) {
             if (!paused) {
                 if (bfTimer >= betweenFrames) {

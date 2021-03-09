@@ -10,15 +10,15 @@ import static main.Main.*;
 
 public abstract class Button extends GuiObject {
 
-    PImage spriteIdle;
-    PImage spritePressed;
-    PImage spriteHover;
-    String spriteLocation;
-    boolean holdable;
-    SoundFile clickIn;
-    SoundFile clickOut;
+    protected boolean holdable;
+    protected PImage spriteIdle;
+    protected PImage spritePressed;
+    protected PImage spriteHover;
+    protected String spriteLocation;
+    protected SoundFile clickIn;
+    protected SoundFile clickOut;
 
-    public Button(PApplet p, float x, float y, String type, boolean active){
+    protected Button(PApplet p, float x, float y, String type, boolean active){
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(25, 25);

@@ -9,17 +9,17 @@ import static main.Main.*;
 
 public abstract class Buff {
 
-    public PApplet p;
-
-    int effectDelay;
-    public int effectTimer;
-    int lifeTimer;
-    int lifeDuration;
-    int particleChance;
-    public String particle;
     public int enId;
+    public int effectTimer;
+    public PApplet p;
+    public String particle;
     public String name;
     public Turret turret;
+
+    protected int effectDelay;
+    protected int lifeTimer;
+    protected int lifeDuration;
+    protected int particleChance;
 
     Buff(PApplet p, int enId, Turret turret){
         this.p = p;

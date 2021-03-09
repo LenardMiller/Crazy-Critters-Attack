@@ -24,9 +24,6 @@ public class Burning extends Buff {
 
     public void effect() { //small damage fast
         Enemy enemy = enemies.get(enId);
-        if (enemy.tintColor > 100){
-            enemy.tintColor = 100;
-        }
         enemy.barTrans = 255;
         enemy.damageWithoutBuff(DAMAGE,turret, "fire", new PVector(0,0), false);
     }

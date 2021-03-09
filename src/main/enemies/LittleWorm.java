@@ -35,7 +35,7 @@ public class LittleWorm extends Enemy {
         loadSprites();
     }
 
-    void move() {
+    protected void move() {
         if (stealthMode && (int)p.random(0,15) == 0)
             particles.add(new Debris(p,position.x,position.y,p.random(0,360),levels[currentLevel].groundType));
         if (p.random(0,50) < 1)
