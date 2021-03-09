@@ -54,7 +54,7 @@ public class Crossbow extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void fire(){ //needed to change projectile fired
+    protected void fire(float barrelLength, String particleType) {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
         if (multishot) {
@@ -119,7 +119,7 @@ public class Crossbow extends Turret {
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[19];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:

@@ -54,7 +54,7 @@ public class RandomCannon extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void fire() {
+    protected void fire(float barrelLength, String particleType) {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
         float angleB = angle;
@@ -69,7 +69,7 @@ public class RandomCannon extends Turret {
         else spa.setMag(18);
         spp.add(spa);
         String part = "smoke";
-        if (laundry && p.random(0,3) < 1) {
+        if (laundry && p.random(0,3) < 1) { //this is why this is here
             projectiles.add(new Laundry(p,spp.x,spp.y, angleB, this, damage));
             part = "poison";
         }
@@ -131,7 +131,7 @@ public class RandomCannon extends Turret {
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[12];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:

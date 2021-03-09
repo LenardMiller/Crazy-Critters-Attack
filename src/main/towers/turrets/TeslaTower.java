@@ -52,7 +52,7 @@ public class TeslaTower extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void checkTarget() {
+    protected void checkTarget() {
         getTargetEnemy();
         if (spriteType == 0 && targetEnemy != null) { //if done animating
             spriteType = 1;
@@ -61,7 +61,7 @@ public class TeslaTower extends Turret {
         }
     }
 
-    public void fire() {
+    protected void fire() {
         fireSound.play();
         arcs.add(new Arc(p, tile.position.x - 25, tile.position.y - 25, this, damage, arcLength, arcDistance, priority));
     }
@@ -136,7 +136,7 @@ public class TeslaTower extends Turret {
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[10];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:

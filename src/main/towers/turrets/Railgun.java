@@ -61,7 +61,7 @@ public class Railgun extends Turret {
         updateTowerArray();
     }
 
-    public void fire() {
+    protected void fire() {
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(30);
@@ -150,7 +150,7 @@ public class Railgun extends Turret {
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
     }
 
-    public void upgradeSpecial() {}
+    protected void upgradeSpecial() {}
 
     public void updateSprite() {}
 }

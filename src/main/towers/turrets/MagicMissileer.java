@@ -40,7 +40,7 @@ public class MagicMissileer extends Turret{
         updateTowerArray();
     }
 
-    public void checkTarget() {
+    protected void checkTarget() {
         getTargetEnemy();
         if (spriteType == 0 && targetEnemy != null) { //if done animating
             spriteType = 1;
@@ -49,7 +49,7 @@ public class MagicMissileer extends Turret{
         }
     }
 
-    public void fire() { //needed to change projectile fired
+    protected void fire() {
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 0,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 1,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 2,tile.position));
@@ -124,7 +124,7 @@ public class MagicMissileer extends Turret{
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[14];
     }
 
-    public void upgradeSpecial() {}
+    protected void upgradeSpecial() {}
 
     public void updateSprite() {}
 }

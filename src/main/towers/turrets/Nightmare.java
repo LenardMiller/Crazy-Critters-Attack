@@ -38,6 +38,8 @@ public class Nightmare extends Turret {
         numProjectiles = 3;
         effectLevel = 50;
         effectDuration = 220;
+        fireParticle = "decay";
+        barrelLength = 20;
         loadSprites();
         debrisType = "darkMetal";
         price = 300;
@@ -47,7 +49,7 @@ public class Nightmare extends Turret {
         updateTowerArray();
     }
 
-    public void fire(){ //needed to change projectile fired
+    protected void fire(float barrelLength, String particleType) {
         for (int i = 0; i < numProjectiles; i++) {
             float angleB = angle;
             PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
@@ -63,7 +65,6 @@ public class Nightmare extends Turret {
                 particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"decay"));
             }
         }
-
     }
 
     private void setUpgrades(){
@@ -109,7 +110,7 @@ public class Nightmare extends Turret {
         upgradeIcons[3] = spritesAnimH.get("upgradeIC")[3];
     }
 
-    public void upgradeSpecial() {
+    protected void upgradeSpecial() {
         if (nextLevelA == 1) numProjectiles = 5;
         if (nextLevelB == 1) {
             effectDuration += 60;

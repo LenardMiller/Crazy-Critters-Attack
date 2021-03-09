@@ -1,7 +1,6 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
-import main.particles.BuffParticle;
 import main.projectiles.CannonBall;
 import main.projectiles.Dynamite;
 import main.projectiles.FragBall;
@@ -11,7 +10,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static processing.core.PConstants.HALF_PI;
 
 public class Cannon extends Turret {
 
@@ -51,6 +49,8 @@ public class Cannon extends Turret {
         price = CANNON_PRICE;
         value = price;
         priority = 0; //close
+        fireParticle = "smoke";
+        barrelLength = 29;
         setUpgrades();
         updateTowerArray();
 
@@ -58,29 +58,10 @@ public class Cannon extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void fire() {
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
-        float angleB = angle;
-        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);
-        float particleCount = p.random(1,5);
-        if (dynamite) spa.setMag(0);
-        else spa.setMag(29); //barrel length
-        spp.add(spa);
-        String part = "smoke";
-        if (frags) projectiles.add(new FragBall(p,spp.x,spp.y, angleB, this, damage, effectRadius));
-        else if (dynamite) projectiles.add(new Dynamite(p,spp.x,spp.y, angleB, this, damage, effectRadius));
-        else projectiles.add(new CannonBall(p,spp.x,spp.y, angleB, this, damage, effectRadius));
-        if (!dynamite) {
-            for (int i = 0; i < particleCount; i++) {
-                PVector spa2 = PVector.fromAngle(angleB - HALF_PI + radians(p.random(-20, 20)));
-                spa2.setMag(-5);
-                PVector spp2 = new PVector(spp.x, spp.y);
-                spp2.add(spa2);
-                particles.add(new BuffParticle(p, spp2.x, spp2.y, angleB + radians(p.random(-45, 45)), part));
-            }
-        }
+    protected void spawnProjectile(PVector position, float angle) {
+        if (frags) projectiles.add(new FragBall(p,position.x,position.y, angle, this, damage, effectRadius));
+        else if (dynamite) projectiles.add(new Dynamite(p,position.x,position.y, angle, this, damage, effectRadius));
+        else projectiles.add(new CannonBall(p,position.x,position.y, angle, this, damage, effectRadius));
     }
 
     private void setUpgrades() {
@@ -131,7 +112,7 @@ public class Cannon extends Turret {
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[24];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
@@ -151,6 +132,7 @@ public class Cannon extends Turret {
                     damageSound = soundsH.get("woodDamage");
                     breakSound = soundsH.get("woodBreak");
                     placeSound = soundsH.get("woodPlace");
+                    barrelLength = 0;
                     loadSprites();
                     numLoadFrames = 80;
                     break;

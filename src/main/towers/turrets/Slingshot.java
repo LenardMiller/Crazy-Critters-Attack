@@ -51,7 +51,7 @@ public class Slingshot extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void fire() { //needed to change projectile fired
+    protected void fire(float barrelLength, String particleType) {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
         if (painful) projectiles.add(new Rock(p, tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));

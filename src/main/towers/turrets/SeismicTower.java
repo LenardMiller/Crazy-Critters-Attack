@@ -45,6 +45,8 @@ public class SeismicTower extends Turret {
         breakSound = soundsH.get("stoneBreak");
         placeSound = soundsH.get("stonePlace");
         fireSound = soundsH.get("seismicSlam");
+        fireParticle = null;
+        barrelLength = 29;
         loadSprites();
         debrisType = "stone";
         price = SEISMIC_PRICE;
@@ -57,17 +59,17 @@ public class SeismicTower extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void checkTarget() {
+    protected void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null && spriteType != 1 && shockwaveWidth < 360) aim(targetEnemy);
         if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
             spriteType = 1;
             frame = 0;
         }
-        if (spriteType == 1 && frame == fireFrames.length - 1) fire();
+        if (spriteType == 1 && frame == fireFrames.length - 1) fire(barrelLength, fireParticle);
     }
 
-    void getTargetEnemy() {
+    protected void getTargetEnemy() {
         //0: close
         //1: far
         //2: strong
@@ -139,15 +141,8 @@ public class SeismicTower extends Turret {
         p.tint(255);
     }
 
-    public void fire() {
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
-        float angleB = angle;
-        PVector spp = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
-        PVector spa = PVector.fromAngle(angleB - HALF_PI);
-        spa.setMag(29); //barrel length
-        spp.add(spa);
-        float a = angleB;
+    protected void spawnProjectile(PVector position, float angle) {
+        float a = angle;
         if (shockwaveWidth >= 360) {
             a = 0;
             for (int i = 0; i < 6; i++) {
@@ -155,10 +150,10 @@ public class SeismicTower extends Turret {
                 a += TWO_PI / 6;
             }
             shockwaves.add(new Shockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-                    (int) range, angleB, shockwaveWidth, damage, this, false));
+                    (int) range, angle, shockwaveWidth, damage, this, false));
         } else {
             fireParticles(a);
-            shockwaves.add(new Shockwave(p, spp.x, spp.y, (int) range, angleB, shockwaveWidth, damage, this, seismicSense));
+            shockwaves.add(new Shockwave(p, position.x, position.y, (int) range, angle, shockwaveWidth, damage, this, seismicSense));
         }
     }
 
@@ -234,7 +229,7 @@ public class SeismicTower extends Turret {
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[22];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:

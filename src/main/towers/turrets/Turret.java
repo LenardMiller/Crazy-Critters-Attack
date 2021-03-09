@@ -3,6 +3,7 @@ package main.towers.turrets;
 import main.enemies.Enemy;
 import main.misc.CompressArray;
 import main.misc.Tile;
+import main.particles.BuffParticle;
 import main.particles.Debris;
 import main.particles.Ouch;
 import main.towers.Tower;
@@ -19,30 +20,33 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public abstract class Turret extends Tower {
 
-    PImage sBase;
-    PImage sIdle;
-    int offset;
-    int pjSpeed;
-    int numFireFrames;
-    int numLoadFrames;
-    int numIdleFrames;
-    PImage[] fireFrames;
-    PImage[] loadFrames;
-    PImage[] idleFrames;
-    int spriteType;
-    int frame;
-    int frameTimer;
-    int betweenIdleFrames;
-    int betweenFireFrames;
-    float loadDelay;
-    float loadDelayTime;
+    protected PImage sBase;
+    protected PImage sIdle;
+    protected int offset;
+    protected int pjSpeed;
+    protected int numFireFrames;
+    protected int numLoadFrames;
+    protected int numIdleFrames;
+    protected PImage[] fireFrames;
+    protected PImage[] loadFrames;
+    protected PImage[] idleFrames;
+    protected int spriteType;
+    protected int frame;
+    protected int frameTimer;
+    protected int betweenIdleFrames;
+    protected int betweenFireFrames;
+    protected float loadDelay;
+    protected float loadDelayTime;
+    protected Enemy targetEnemy;
+    protected float targetAngle;
+    protected SoundFile fireSound;
+    protected float barrelLength;
+    protected String fireParticle;
+
     private ArrayList<Integer> spriteArray;
-    Enemy targetEnemy;
 
-    float targetAngle;
-    SoundFile fireSound;
 
-    Turret(PApplet p, Tile tile) {
+    protected Turret(PApplet p, Tile tile) {
         super(p, tile);
         this.p = p;
         offset = 0;
@@ -58,6 +62,8 @@ public abstract class Turret extends Tower {
         numLoadFrames = 1;
         numIdleFrames = 1;
         debrisType = null;
+        barrelLength = 0;
+        fireParticle = "null";
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         idleFrames = new PImage[numIdleFrames];
@@ -82,17 +88,17 @@ public abstract class Turret extends Tower {
         updateTowerArray();
     }
 
-    public void checkTarget() {
+    protected void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
         if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
             spriteType = 1;
             frame = 0;
-            fire();
+            fire(barrelLength, fireParticle);
         }
     }
 
-    void getTargetEnemy() {
+    protected void getTargetEnemy() {
         //0: close
         //1: far
         //2: strong
@@ -129,7 +135,7 @@ public abstract class Turret extends Tower {
         targetEnemy = e;
     }
 
-    public void aim(Enemy enemy) {
+    protected void aim(Enemy enemy) {
         PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
         PVector target = enemy.position;
 
@@ -157,12 +163,32 @@ public abstract class Turret extends Tower {
         }
     }
 
-    public void fire() {
+    protected void fire(float barrelLength, String particleType) {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
+        float angleB = angle;
+        PVector projectileSpawn = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
+        PVector angleVector = PVector.fromAngle(angleB-HALF_PI);
+        float particleCount = p.random(1,5);
+        angleVector.setMag(barrelLength); //barrel length
+        projectileSpawn.add(angleVector);
+        spawnProjectile(projectileSpawn, angleB);
+        if (particleType != null && !particleType.equals("null")) {
+            for (int i = 0; i < particleCount; i++) {
+                PVector spa2 = PVector.fromAngle(angleB - HALF_PI + radians(p.random(-20, 20)));
+                spa2.setMag(-5);
+                PVector spp2 = new PVector(projectileSpawn.x, projectileSpawn.y);
+                spp2.add(spa2);
+                particles.add(new BuffParticle(p, spp2.x, spp2.y, angleB + radians(p.random(-45, 45)), particleType));
+            }
+        }
     }
 
-    public void loadSprites() {
+    protected void spawnProjectile(PVector position, float angle) {
+
+    }
+
+    protected void loadSprites() {
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         sBase = spritesH.get(name + "BaseTR");
@@ -249,7 +275,7 @@ public abstract class Turret extends Tower {
         displayPassB2();
     }
 
-    public void displayPassB2() {
+    protected void displayPassB2() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -303,6 +329,6 @@ public abstract class Turret extends Tower {
         while (delay <= numFireFrames * betweenFireFrames + numIdleFrames) betweenFireFrames--;
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
     }
 }  

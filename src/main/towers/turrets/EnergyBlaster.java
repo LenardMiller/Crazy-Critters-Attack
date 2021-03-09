@@ -1,7 +1,6 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
-import main.particles.BuffParticle;
 import main.projectiles.EnergyBlast;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -9,7 +8,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static processing.core.PConstants.HALF_PI;
 
 public class EnergyBlaster extends Turret{
 
@@ -41,6 +39,8 @@ public class EnergyBlaster extends Turret{
         breakSound = soundsH.get("metalBreak");
         placeSound = soundsH.get("metalPlace");
         fireSound = soundsH.get("energyBlasterFire");
+        fireParticle = "energy";
+        barrelLength = 40;
         loadSprites();
         debrisType = "darkMetal";
         price = ENERGYBLASTER_PRICE;
@@ -53,22 +53,8 @@ public class EnergyBlaster extends Turret{
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void fire() { //needed to change projectile fired
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
-        float angleB = angle;
-        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);
-        spa.setMag(40);
-        spp.add(spa);
-        projectiles.add(new EnergyBlast(p,spp.x,spp.y, angleB, this, damage, effectRadius, bigExplosion));
-        for (int i = 0; i < 5; i++) {
-            PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
-            spa2.setMag(-2);
-            PVector spp2 = new PVector(spp.x,spp.y);
-            spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"energy"));
-        }
+    protected void spawnProjectile(PVector position, float angle) {
+        projectiles.add(new EnergyBlast(p,position.x,position.y, angle, this, damage, effectRadius, bigExplosion));
     }
 
     private void setUpgrades(){
@@ -123,7 +109,7 @@ public class EnergyBlaster extends Turret{
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[3];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:

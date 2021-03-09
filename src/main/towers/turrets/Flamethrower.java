@@ -49,6 +49,8 @@ public class Flamethrower extends Turret {
         breakSound = soundsH.get("metalBreak");
         placeSound = soundsH.get("metalPlace");
         fireSound = soundsH.get("fireImpact");
+        fireParticle = null;
+        barrelLength = 24;
         setUpgrades();
         updateTowerArray();
 
@@ -56,25 +58,19 @@ public class Flamethrower extends Turret {
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
-    public void checkTarget() {
+    protected void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
         if (spriteType == 0 && targetEnemy != null) { //if done animating
             spriteType = 1;
             frame = 0;
-            fire();
+            fire(barrelLength, fireParticle);
         }
     }
 
-    public void fire() { //needed to change projectile fired
-        float angleB = angle + radians(p.random(-1, 1));
-        PVector spp = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
-        PVector spa = PVector.fromAngle(angleB - HALF_PI);
-        spa.setMag(24);
-        spp.add(spa);
-        projectiles.add(new Flame(p, spp.x, spp.y, angleB, this, damage, (int) effectLevel, effectDuration, flameTimer, false));
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
+    protected void spawnProjectile(PVector position, float angle) {
+        projectiles.add(new Flame(p, position.x, position.y, angle, this, damage, (int) effectLevel, effectDuration,
+                flameTimer, false));
     }
 
     private void setUpgrades() {
@@ -121,7 +117,7 @@ public class Flamethrower extends Turret {
         upgradeIcons[5] = spritesAnimH.get("upgradeIC")[14];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
