@@ -73,7 +73,7 @@ public abstract class Enemy {
     private PImage sprite;
     private PVector partsDirection;
 
-    public Enemy(PApplet p, float x, float y) {
+    protected Enemy(PApplet p, float x, float y) {
         this.p = p;
 
         points = new ArrayList<>();
