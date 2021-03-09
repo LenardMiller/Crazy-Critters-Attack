@@ -11,7 +11,7 @@ public class Bat extends Enemy {
         super(p,x,y);
         size = new PVector(50,50);
         pfSize = 1;
-        radius = 25;
+        radius = 12.5f;
         maxSpeed = .5f;
         speed = maxSpeed;
         moneyDrop = 25;

@@ -11,7 +11,7 @@ public class GiantBat extends Enemy {
         super(p,x,y);
         size = new PVector(102,102);
         pfSize = 2;
-        radius = 50;
+        radius = 25;
         maxSpeed = .4f;
         speed = maxSpeed;
         moneyDrop = 250;
