@@ -23,57 +23,55 @@ import static main.misc.MiscMethods.*;
 
 public abstract class Enemy {
 
-    PApplet p;
-
-    public ArrayList<TurnPoint> points;
-    /**
-     * Enemy's pathfinding size, measured in nodes
-     */
-    public int pfSize;
-    public PVector position;
-    public PVector size;
-    public float angle;
-    private float targetAngle;
-    public float radius;
-    public float maxSpeed;
-    public float speed;
-    public boolean immobilized;
-    public int moneyDrop;
-    int damage;
-    public int maxHp;
-    public int hp;
-    private PImage sprite;
-    public PImage[] attackFrames;
-    private PImage[] moveFrames;
-    private float moveFrame;
-    public int attackFrame;
-    public int[] attackDmgFrames;
-    public int[] tempAttackDmgFrames;
-    public boolean attacking;
-    private boolean attackCue;
-    int betweenWalkFrames;
-    int betweenAttackFrames;
-    int idleTime;
-    int attackStartFrame;
     public int barTrans;
-    public int tintColor;
-    public String hitParticle;
-    public String name;
-    private Tower targetTower;
-    private boolean targetMachine;
-    public boolean stealthMode;
-    boolean stealthy;
     public boolean flying;
-    private int attackCount;
-    PVector corpseSize;
-    PVector partSize;
-    int betweenCorpseFrames;
-    int corpseLifespan;
+    public boolean immobilized;
+    public ArrayList<TurnPoint> points;
+    public PImage[] attackFrames;
     public String lastDamageType;
-    boolean overkill;
-    PVector partsDirection;
-    SoundFile overkillSound;
-    SoundFile dieSound;
+
+    protected float radius;
+    protected float maxSpeed;
+    protected float speed;
+    protected int pfSize;
+    protected int moneyDrop;
+    protected int damage;
+    protected int maxHp;
+    protected int hp;
+    protected int betweenWalkFrames;
+    protected int betweenAttackFrames;
+    protected int attackStartFrame;
+    protected int betweenCorpseFrames;
+    protected int corpseLifespan;
+    protected int[] attackDmgFrames;
+    protected int[] tempAttackDmgFrames;
+    protected boolean stealthy;
+    protected PApplet p;
+    protected String hitParticle;
+    protected String name;
+    protected PVector position;
+    protected PVector size;
+    protected PVector corpseSize;
+    protected PVector partSize;
+    protected SoundFile overkillSound;
+    protected SoundFile dieSound;
+
+    private int attackCount;
+    private int tintColor;
+    private int idleTime;
+    private int attackFrame;
+    private boolean attackCue;
+    private boolean targetMachine;
+    private boolean overkill;
+    private boolean attacking;
+    private boolean stealthMode;
+    private float targetAngle;
+    private float angle;
+    private float moveFrame;
+    private Tower targetTower;
+    private PImage[] moveFrames;
+    private PImage sprite;
+    private PVector partsDirection;
 
     public Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -178,7 +176,7 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    void move() {
+    protected void move() {
         PVector m = PVector.fromAngle(angle);
         m.setMag(speed);
         position.add(m);
@@ -368,7 +366,7 @@ public abstract class Enemy {
         moveFrames = spritesAnimH.get(name + "MoveEN");
     }
 
-    void attack() {
+    protected void attack() {
         boolean dmg = false;
         for (int frame : tempAttackDmgFrames) {
             if (attackFrame == frame) {
@@ -401,7 +399,7 @@ public abstract class Enemy {
     //pathfinding -----------------------------------------------------------------
     //todo: fix enemies sometimes wandering off if there are a lot of them
 
-    boolean intersectTurnPoint() {
+    protected boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
         PVector p = point.position;
         boolean intersecting;
