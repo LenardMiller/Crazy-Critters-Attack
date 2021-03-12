@@ -3,7 +3,7 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
+import static main.Main.animatedSprites;
 import static processing.core.PConstants.HALF_PI;
 
 public class LargeExplosion extends Particle {
@@ -19,7 +19,7 @@ public class LargeExplosion extends Particle {
         betweenFrames = 1;
         numFrames = 17;
         currentSprite = 0;
-        sprites = spritesAnimH.get(type + "LargeExplosionPT");
+        sprites = animatedSprites.get(type + "LargeExplosionPT");
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 }

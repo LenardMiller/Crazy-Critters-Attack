@@ -3,8 +3,8 @@ package main.misc;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-import static main.Main.spritesAnimH;
-import static main.Main.spritesH;
+import static main.Main.animatedSprites;
+import static main.Main.staticSprites;
 
 public class SpriteLoader {
     
@@ -15,7 +15,7 @@ public class SpriteLoader {
      * todo: load dynamically
      * @param p the PApplet
      */
-    public static void loadSpritesAnim(PApplet p) {
+    public static void loadAnimatedSprites(PApplet p) {
         //icons & buttons
         getSprite(p,"upgrade","IC","upgrades/",29);
         getSprite(p,"moneyAdd","BT","moneyAdd/",3);
@@ -261,138 +261,138 @@ public class SpriteLoader {
         }
         String fullName = name+type;
         String path = "sprites/"+mainFolder+folder;
-        spritesAnimH.put(fullName, new PImage[length]);
+        animatedSprites.put(fullName, new PImage[length]);
         for (int i = length-1; i >= 0; i--) {
-            spritesAnimH.get(fullName)[i] = p.loadImage(path + PApplet.nf(i,3) + ".png");
+            animatedSprites.get(fullName)[i] = p.loadImage(path + PApplet.nf(i,3) + ".png");
         }
     }
 
     private static void getMachineSprite(PApplet p, String name, int[] lengths) {
         String fullName = name + "MA";
         String path = "sprites/machines/" + name + "/";
-        spritesAnimH.put(fullName, new PImage[lengths[0]]); //base
+        animatedSprites.put(fullName, new PImage[lengths[0]]); //base
         for (int i = lengths[0]-1; i >= 0; i--) {
-            spritesAnimH.get(fullName)[i] = p.loadImage(path + "base/" + PApplet.nf(i,3) + ".png");
+            animatedSprites.get(fullName)[i] = p.loadImage(path + "base/" + PApplet.nf(i,3) + ".png");
         }
         for (int i = 1; i <= 3; i++) { //damage variants
-            spritesAnimH.put(fullName + "d" + i, new PImage[lengths[i]]);
+            animatedSprites.put(fullName + "d" + i, new PImage[lengths[i]]);
             for (int j = lengths[i]-1; j >= 0; j--) {
-                spritesAnimH.get(fullName + "d" + i)[j] = p.loadImage(path + "d" + i + "/" + PApplet.nf(j,3) + ".png");
+                animatedSprites.get(fullName + "d" + i)[j] = p.loadImage(path + "d" + i + "/" + PApplet.nf(j,3) + ".png");
             }
         }
     }
 
-    public static void loadSprites(PApplet p) {
+    public static void loadStaticSprites(PApplet p) {
         //icons
-        spritesH.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
-        spritesH.put("wavePrimaryIc",p.loadImage("sprites/guiObjects/wavePrimary.png"));
-        spritesH.put("waveSecondaryIc",p.loadImage("sprites/guiObjects/waveSecondary.png"));
-        spritesH.put("currentLineIc",p.loadImage("sprites/guiObjects/currentLine.png"));
+        staticSprites.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
+        staticSprites.put("wavePrimaryIc",p.loadImage("sprites/guiObjects/wavePrimary.png"));
+        staticSprites.put("waveSecondaryIc",p.loadImage("sprites/guiObjects/waveSecondary.png"));
+        staticSprites.put("currentLineIc",p.loadImage("sprites/guiObjects/currentLine.png"));
         //particles
-        spritesH.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
-        spritesH.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));
-        spritesH.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));
-        spritesH.put("stonePt",p.loadImage("sprites/particles/debris/stone.png"));
-        spritesH.put("ultimatePt",p.loadImage("sprites/particles/debris/ultimate.png"));
-        spritesH.put("woodPt",p.loadImage("sprites/particles/debris/wood.png"));
-        spritesH.put("darkMetalPt",p.loadImage("sprites/particles/debris/darkMetal.png"));
-        spritesH.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
-        spritesH.put("sandPt",p.loadImage("sprites/particles/debris/sand.png"));
-        spritesH.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
+        staticSprites.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
+        staticSprites.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));
+        staticSprites.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));
+        staticSprites.put("stonePt",p.loadImage("sprites/particles/debris/stone.png"));
+        staticSprites.put("ultimatePt",p.loadImage("sprites/particles/debris/ultimate.png"));
+        staticSprites.put("woodPt",p.loadImage("sprites/particles/debris/wood.png"));
+        staticSprites.put("darkMetalPt",p.loadImage("sprites/particles/debris/darkMetal.png"));
+        staticSprites.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
+        staticSprites.put("sandPt",p.loadImage("sprites/particles/debris/sand.png"));
+        staticSprites.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
         //projectiles
-        spritesH.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
-        spritesH.put("cannonBallPj",p.loadImage("sprites/projectiles/cannonBall.png"));
-        spritesH.put("reinforcedBoltPj",p.loadImage("sprites/projectiles/reinforcedBolt.png"));
-        spritesH.put("devPj",p.loadImage("sprites/projectiles/dev.png"));
-        spritesH.put("energyPj",p.loadImage("sprites/projectiles/energy.png"));
-        spritesH.put("magicMisslePj",p.loadImage("sprites/projectiles/magicMissle.png"));
-        spritesH.put("nullPj",p.loadImage("sprites/projectiles/null.png"));
-        spritesH.put("pebblePj",p.loadImage("sprites/projectiles/pebble.png"));
-        spritesH.put("rockPj",p.loadImage("sprites/projectiles/rock.png"));
-        spritesH.put("needlePj",p.loadImage("sprites/projectiles/needle.png"));
-        spritesH.put("laundryPj",p.loadImage("sprites/projectiles/laundry.png"));
-        spritesH.put("gluePj",p.loadImage("sprites/projectiles/glue.png"));
-        spritesH.put("spikeyGluePj",p.loadImage("sprites/projectiles/spikeyGlue.png"));
-        spritesH.put("glueSpikePj",p.loadImage("sprites/projectiles/glueSpike.png"));
-        spritesH.put("dynamitePj",p.loadImage("sprites/projectiles/dynamite.png"));
+        staticSprites.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
+        staticSprites.put("cannonBallPj",p.loadImage("sprites/projectiles/cannonBall.png"));
+        staticSprites.put("reinforcedBoltPj",p.loadImage("sprites/projectiles/reinforcedBolt.png"));
+        staticSprites.put("devPj",p.loadImage("sprites/projectiles/dev.png"));
+        staticSprites.put("energyPj",p.loadImage("sprites/projectiles/energy.png"));
+        staticSprites.put("magicMisslePj",p.loadImage("sprites/projectiles/magicMissle.png"));
+        staticSprites.put("nullPj",p.loadImage("sprites/projectiles/null.png"));
+        staticSprites.put("pebblePj",p.loadImage("sprites/projectiles/pebble.png"));
+        staticSprites.put("rockPj",p.loadImage("sprites/projectiles/rock.png"));
+        staticSprites.put("needlePj",p.loadImage("sprites/projectiles/needle.png"));
+        staticSprites.put("laundryPj",p.loadImage("sprites/projectiles/laundry.png"));
+        staticSprites.put("gluePj",p.loadImage("sprites/projectiles/glue.png"));
+        staticSprites.put("spikeyGluePj",p.loadImage("sprites/projectiles/spikeyGlue.png"));
+        staticSprites.put("glueSpikePj",p.loadImage("sprites/projectiles/glueSpike.png"));
+        staticSprites.put("dynamitePj",p.loadImage("sprites/projectiles/dynamite.png"));
         //turrets
-        spritesH.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
-        spritesH.put("crossbowFullTR",p.loadImage("sprites/towers/turrets/crossbow/full.png"));
-        spritesH.put("crossbowIdleTR",p.loadImage("sprites/towers/turrets/crossbow/idle.png"));
-        spritesH.put("cannonBaseTR",p.loadImage("sprites/towers/turrets/cannon/base.png"));
-        spritesH.put("cannonFullTR",p.loadImage("sprites/towers/turrets/cannon/full.png"));
-        spritesH.put("cannonIdleTR",p.loadImage("sprites/towers/turrets/cannon/idle.png"));
-        spritesH.put("fragCannonBaseTR",p.loadImage("sprites/towers/turrets/cannon/fragCannon/base.png"));
-        spritesH.put("fragCannonIdleTR",p.loadImage("sprites/towers/turrets/cannon/fragCannon/idle.png"));
-        spritesH.put("dynamiteLauncherBaseTR",p.loadImage("sprites/towers/turrets/cannon/dynamiteLauncher/base.png"));
-        spritesH.put("dynamiteLauncherIdleTR",p.loadImage("sprites/towers/turrets/cannon/dynamiteLauncher/idle.png"));
-        spritesH.put("crossbowMultishotBaseTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/base.png"));
-        spritesH.put("crossbowMultishotFullTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/full.png"));
-        spritesH.put("crossbowMultishotIdleTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/idle.png"));
-        spritesH.put("crossbowReinforcedBaseTR",p.loadImage("sprites/towers/turrets/crossbow/reinforced/base.png"));
-        spritesH.put("crossbowReinforcedFullTR",p.loadImage("sprites/towers/turrets/crossbow/reinforced/full.png"));
-        spritesH.put("crossbowReinforcedIdleTR",p.loadImage("sprites/towers/turrets/crossbow/reinforced/idle.png"));
-        spritesH.put("energyBlasterBaseTR",p.loadImage("sprites/towers/turrets/energyBlaster/base.png"));
-        spritesH.put("energyBlasterFullTR",p.loadImage("sprites/towers/turrets/energyBlaster/full.png"));
-        spritesH.put("energyBlasterIdleTR",p.loadImage("sprites/towers/turrets/energyBlaster/idle.png"));
-        spritesH.put("magicMissleerBaseTR",p.loadImage("sprites/towers/turrets/magicMissleer/base.png"));
-        spritesH.put("magicMissleerFullTR",p.loadImage("sprites/towers/turrets/magicMissleer/full.png"));
-        spritesH.put("magicMissleerIdleTR",p.loadImage("sprites/towers/turrets/magicMissleer/idle.png"));
-        spritesH.put("gluerBaseTR",p.loadImage("sprites/towers/turrets/gluer/base.png"));
-        spritesH.put("gluerFullTR",p.loadImage("sprites/towers/turrets/gluer/full.png"));
-        spritesH.put("gluerIdleTR",p.loadImage("sprites/towers/turrets/gluer/idle.png"));
-        spritesH.put("shatterGluerBaseTR",p.loadImage("sprites/towers/turrets/gluer/spiker/base.png"));
-        spritesH.put("shatterGluerIdleTR",p.loadImage("sprites/towers/turrets/gluer/spiker/idle.png"));
-        spritesH.put("splashGluerBaseTR",p.loadImage("sprites/towers/turrets/gluer/splasher/base.png"));
-        spritesH.put("splashGluerIdleTR",p.loadImage("sprites/towers/turrets/gluer/splasher/idle.png"));
-        spritesH.put("seismicBaseTR",p.loadImage("sprites/towers/turrets/seismic/base.png"));
-        spritesH.put("seismicFullTR",p.loadImage("sprites/towers/turrets/seismic/full.png"));
-        spritesH.put("seismicIdleTR",p.loadImage("sprites/towers/turrets/seismic/idle.png"));
-        spritesH.put("seismicSniperBaseTR",p.loadImage("sprites/towers/turrets/seismic/sniper/base.png"));
-        spritesH.put("seismicSniperFullTR",p.loadImage("sprites/towers/turrets/seismic/sniper/full.png"));
-        spritesH.put("seismicSniperIdleTR",p.loadImage("sprites/towers/turrets/seismic/sniper/idle.png"));
-        spritesH.put("seismicSlammerBaseTR",p.loadImage("sprites/towers/turrets/seismic/slammer/base.png"));
-        spritesH.put("seismicSlammerIdleTR",p.loadImage("sprites/towers/turrets/seismic/slammer/idle.png"));
-        spritesH.put("miscCannonBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/base.png"));
-        spritesH.put("miscCannonFullTR",p.loadImage("sprites/towers/turrets/miscCannon/full.png"));
-        spritesH.put("miscCannonIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/idle.png"));
-        spritesH.put("miscCannonLaundryBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/base.png"));
-        spritesH.put("miscCannonLaundryFullTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/full.png"));
-        spritesH.put("miscCannonLaundryIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/idle.png"));
-        spritesH.put("miscCannonBarrelBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/base.png"));
-        spritesH.put("miscCannonBarrelFullTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/full.png"));
-        spritesH.put("miscCannonBarrelIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/idle.png"));
-        spritesH.put("slingshotBaseTR",p.loadImage("sprites/towers/turrets/slingshot/base.png"));
-        spritesH.put("slingshotFullTR",p.loadImage("sprites/towers/turrets/slingshot/full.png"));
-        spritesH.put("slingshotIdleTR",p.loadImage("sprites/towers/turrets/slingshot/idle.png"));
-        spritesH.put("slingshotRockBaseTR",p.loadImage("sprites/towers/turrets/slingshot/rock/base.png"));
-        spritesH.put("slingshotRockFullTR",p.loadImage("sprites/towers/turrets/slingshot/rock/full.png"));
-        spritesH.put("slingshotRockIdleTR",p.loadImage("sprites/towers/turrets/slingshot/rock/idle.png"));
-        spritesH.put("slingshotGravelBaseTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/base.png"));
-        spritesH.put("slingshotGravelFullTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/full.png"));
-        spritesH.put("slingshotGravelIdleTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/idle.png"));
-        spritesH.put("teslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/base.png"));
-        spritesH.put("teslaFullTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
-        spritesH.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));
-        spritesH.put("nightmareBaseTR",p.loadImage("sprites/towers/turrets/nightmare/base.png"));
-        spritesH.put("nightmareFullTR",p.loadImage("sprites/towers/turrets/nightmare/full.png"));
-        spritesH.put("nightmareIdleTR",p.loadImage("sprites/towers/turrets/nightmare/idle.png"));
-        spritesH.put("flamethrowerBaseTR",p.loadImage("sprites/towers/turrets/flamethrower/base.png"));
-        spritesH.put("flamethrowerFullTR",p.loadImage("sprites/towers/turrets/flamethrower/full.png"));
-        spritesH.put("flamethrowerIdleTR",p.loadImage("sprites/towers/turrets/flamethrower/idle.png"));
-        spritesH.put("railgunBaseTR",p.loadImage("sprites/towers/turrets/railgun/base.png"));
-        spritesH.put("railgunFullTR",p.loadImage("sprites/towers/turrets/railgun/full.png"));
-        spritesH.put("railgunIdleTR",p.loadImage("sprites/towers/turrets/railgun/idle.png"));
-        spritesH.put("waveMotionBaseTR",p.loadImage("sprites/towers/turrets/waveMotion/base.png"));
-        spritesH.put("waveMotionFullTR",p.loadImage("sprites/towers/turrets/waveMotion/full.png"));
-        spritesH.put("waveMotionIdleTR",p.loadImage("sprites/towers/turrets/waveMotion/idle.png"));
+        staticSprites.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
+        staticSprites.put("crossbowFullTR",p.loadImage("sprites/towers/turrets/crossbow/full.png"));
+        staticSprites.put("crossbowIdleTR",p.loadImage("sprites/towers/turrets/crossbow/idle.png"));
+        staticSprites.put("cannonBaseTR",p.loadImage("sprites/towers/turrets/cannon/base.png"));
+        staticSprites.put("cannonFullTR",p.loadImage("sprites/towers/turrets/cannon/full.png"));
+        staticSprites.put("cannonIdleTR",p.loadImage("sprites/towers/turrets/cannon/idle.png"));
+        staticSprites.put("fragCannonBaseTR",p.loadImage("sprites/towers/turrets/cannon/fragCannon/base.png"));
+        staticSprites.put("fragCannonIdleTR",p.loadImage("sprites/towers/turrets/cannon/fragCannon/idle.png"));
+        staticSprites.put("dynamiteLauncherBaseTR",p.loadImage("sprites/towers/turrets/cannon/dynamiteLauncher/base.png"));
+        staticSprites.put("dynamiteLauncherIdleTR",p.loadImage("sprites/towers/turrets/cannon/dynamiteLauncher/idle.png"));
+        staticSprites.put("crossbowMultishotBaseTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/base.png"));
+        staticSprites.put("crossbowMultishotFullTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/full.png"));
+        staticSprites.put("crossbowMultishotIdleTR",p.loadImage("sprites/towers/turrets/crossbow/multishot/idle.png"));
+        staticSprites.put("crossbowReinforcedBaseTR",p.loadImage("sprites/towers/turrets/crossbow/reinforced/base.png"));
+        staticSprites.put("crossbowReinforcedFullTR",p.loadImage("sprites/towers/turrets/crossbow/reinforced/full.png"));
+        staticSprites.put("crossbowReinforcedIdleTR",p.loadImage("sprites/towers/turrets/crossbow/reinforced/idle.png"));
+        staticSprites.put("energyBlasterBaseTR",p.loadImage("sprites/towers/turrets/energyBlaster/base.png"));
+        staticSprites.put("energyBlasterFullTR",p.loadImage("sprites/towers/turrets/energyBlaster/full.png"));
+        staticSprites.put("energyBlasterIdleTR",p.loadImage("sprites/towers/turrets/energyBlaster/idle.png"));
+        staticSprites.put("magicMissleerBaseTR",p.loadImage("sprites/towers/turrets/magicMissleer/base.png"));
+        staticSprites.put("magicMissleerFullTR",p.loadImage("sprites/towers/turrets/magicMissleer/full.png"));
+        staticSprites.put("magicMissleerIdleTR",p.loadImage("sprites/towers/turrets/magicMissleer/idle.png"));
+        staticSprites.put("gluerBaseTR",p.loadImage("sprites/towers/turrets/gluer/base.png"));
+        staticSprites.put("gluerFullTR",p.loadImage("sprites/towers/turrets/gluer/full.png"));
+        staticSprites.put("gluerIdleTR",p.loadImage("sprites/towers/turrets/gluer/idle.png"));
+        staticSprites.put("shatterGluerBaseTR",p.loadImage("sprites/towers/turrets/gluer/spiker/base.png"));
+        staticSprites.put("shatterGluerIdleTR",p.loadImage("sprites/towers/turrets/gluer/spiker/idle.png"));
+        staticSprites.put("splashGluerBaseTR",p.loadImage("sprites/towers/turrets/gluer/splasher/base.png"));
+        staticSprites.put("splashGluerIdleTR",p.loadImage("sprites/towers/turrets/gluer/splasher/idle.png"));
+        staticSprites.put("seismicBaseTR",p.loadImage("sprites/towers/turrets/seismic/base.png"));
+        staticSprites.put("seismicFullTR",p.loadImage("sprites/towers/turrets/seismic/full.png"));
+        staticSprites.put("seismicIdleTR",p.loadImage("sprites/towers/turrets/seismic/idle.png"));
+        staticSprites.put("seismicSniperBaseTR",p.loadImage("sprites/towers/turrets/seismic/sniper/base.png"));
+        staticSprites.put("seismicSniperFullTR",p.loadImage("sprites/towers/turrets/seismic/sniper/full.png"));
+        staticSprites.put("seismicSniperIdleTR",p.loadImage("sprites/towers/turrets/seismic/sniper/idle.png"));
+        staticSprites.put("seismicSlammerBaseTR",p.loadImage("sprites/towers/turrets/seismic/slammer/base.png"));
+        staticSprites.put("seismicSlammerIdleTR",p.loadImage("sprites/towers/turrets/seismic/slammer/idle.png"));
+        staticSprites.put("miscCannonBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/base.png"));
+        staticSprites.put("miscCannonFullTR",p.loadImage("sprites/towers/turrets/miscCannon/full.png"));
+        staticSprites.put("miscCannonIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/idle.png"));
+        staticSprites.put("miscCannonLaundryBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/base.png"));
+        staticSprites.put("miscCannonLaundryFullTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/full.png"));
+        staticSprites.put("miscCannonLaundryIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/laundry/idle.png"));
+        staticSprites.put("miscCannonBarrelBaseTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/base.png"));
+        staticSprites.put("miscCannonBarrelFullTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/full.png"));
+        staticSprites.put("miscCannonBarrelIdleTR",p.loadImage("sprites/towers/turrets/miscCannon/barrel/idle.png"));
+        staticSprites.put("slingshotBaseTR",p.loadImage("sprites/towers/turrets/slingshot/base.png"));
+        staticSprites.put("slingshotFullTR",p.loadImage("sprites/towers/turrets/slingshot/full.png"));
+        staticSprites.put("slingshotIdleTR",p.loadImage("sprites/towers/turrets/slingshot/idle.png"));
+        staticSprites.put("slingshotRockBaseTR",p.loadImage("sprites/towers/turrets/slingshot/rock/base.png"));
+        staticSprites.put("slingshotRockFullTR",p.loadImage("sprites/towers/turrets/slingshot/rock/full.png"));
+        staticSprites.put("slingshotRockIdleTR",p.loadImage("sprites/towers/turrets/slingshot/rock/idle.png"));
+        staticSprites.put("slingshotGravelBaseTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/base.png"));
+        staticSprites.put("slingshotGravelFullTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/full.png"));
+        staticSprites.put("slingshotGravelIdleTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/idle.png"));
+        staticSprites.put("teslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/base.png"));
+        staticSprites.put("teslaFullTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
+        staticSprites.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));
+        staticSprites.put("nightmareBaseTR",p.loadImage("sprites/towers/turrets/nightmare/base.png"));
+        staticSprites.put("nightmareFullTR",p.loadImage("sprites/towers/turrets/nightmare/full.png"));
+        staticSprites.put("nightmareIdleTR",p.loadImage("sprites/towers/turrets/nightmare/idle.png"));
+        staticSprites.put("flamethrowerBaseTR",p.loadImage("sprites/towers/turrets/flamethrower/base.png"));
+        staticSprites.put("flamethrowerFullTR",p.loadImage("sprites/towers/turrets/flamethrower/full.png"));
+        staticSprites.put("flamethrowerIdleTR",p.loadImage("sprites/towers/turrets/flamethrower/idle.png"));
+        staticSprites.put("railgunBaseTR",p.loadImage("sprites/towers/turrets/railgun/base.png"));
+        staticSprites.put("railgunFullTR",p.loadImage("sprites/towers/turrets/railgun/full.png"));
+        staticSprites.put("railgunIdleTR",p.loadImage("sprites/towers/turrets/railgun/idle.png"));
+        staticSprites.put("waveMotionBaseTR",p.loadImage("sprites/towers/turrets/waveMotion/base.png"));
+        staticSprites.put("waveMotionFullTR",p.loadImage("sprites/towers/turrets/waveMotion/full.png"));
+        staticSprites.put("waveMotionIdleTR",p.loadImage("sprites/towers/turrets/waveMotion/idle.png"));
         //walls
-        spritesH.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
-        spritesH.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
-        spritesH.put("shadowTRTW",p.loadImage("sprites/towers/walls/overlays/shadowTR.png"));
-        spritesH.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
-        spritesH.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
-        spritesH.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
+        staticSprites.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
+        staticSprites.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
+        staticSprites.put("shadowTRTW",p.loadImage("sprites/towers/walls/overlays/shadowTR.png"));
+        staticSprites.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
+        staticSprites.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
+        staticSprites.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
         for (int i = 0; i < 5; i++) {
             String name = "null";
             if (i == 0) name = "Wood";
@@ -413,106 +413,106 @@ public class SpriteLoader {
                         if (c == 0) idC = "c";
                         if (c == 1) idC = "v";
                         String id = idA+idB+idC;
-                        spritesH.put(name + id + "WallTW", p.loadImage("sprites/towers/walls/" + name + "/" + id + ".png"));
+                        staticSprites.put(name + id + "WallTW", p.loadImage("sprites/towers/walls/" + name + "/" + id + ".png"));
                     }
                 }
             }
-            spritesH.put(name + "TWallTW", p.loadImage("sprites/towers/walls/" + name + "/t.png"));
-            spritesH.put(name + "BWallTW", p.loadImage("sprites/towers/walls/" + name + "/b.png"));
-            spritesH.put(name + "LWallTW", p.loadImage("sprites/towers/walls/" + name + "/l.png"));
-            spritesH.put(name + "RWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
+            staticSprites.put(name + "TWallTW", p.loadImage("sprites/towers/walls/" + name + "/t.png"));
+            staticSprites.put(name + "BWallTW", p.loadImage("sprites/towers/walls/" + name + "/b.png"));
+            staticSprites.put(name + "LWallTW", p.loadImage("sprites/towers/walls/" + name + "/l.png"));
+            staticSprites.put(name + "RWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
         }
         //tiles
         //BGA
-        spritesH.put("stoneBGA_TL",p.loadImage("sprites/tiles/BGA/stone/base.png"));
-        spritesH.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt/base.png"));
-        spritesH.put("sandBGA_TL", p.loadImage("sprites/tiles/BGA/sand/base.png"));
-        spritesH.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
+        staticSprites.put("stoneBGA_TL",p.loadImage("sprites/tiles/BGA/stone/base.png"));
+        staticSprites.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt/base.png"));
+        staticSprites.put("sandBGA_TL", p.loadImage("sprites/tiles/BGA/sand/base.png"));
+        staticSprites.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
         for (int i = 0; i < 1; i++) {
             String name;
             name = "grass";
-            spritesH.put(name + "BGA_T_TL", p.loadImage("sprites/tiles/BGA/" + name + "/t.png"));
-            spritesH.put(name + "BGA_R_TL", p.loadImage("sprites/tiles/BGA/" + name + "/r.png"));
-            spritesH.put(name + "BGA_B_TL", p.loadImage("sprites/tiles/BGA/" + name + "/b.png"));
-            spritesH.put(name + "BGA_L_TL", p.loadImage("sprites/tiles/BGA/" + name + "/l.png"));
+            staticSprites.put(name + "BGA_T_TL", p.loadImage("sprites/tiles/BGA/" + name + "/t.png"));
+            staticSprites.put(name + "BGA_R_TL", p.loadImage("sprites/tiles/BGA/" + name + "/r.png"));
+            staticSprites.put(name + "BGA_B_TL", p.loadImage("sprites/tiles/BGA/" + name + "/b.png"));
+            staticSprites.put(name + "BGA_L_TL", p.loadImage("sprites/tiles/BGA/" + name + "/l.png"));
         }
         //BGB
-        spritesH.put("dirtPatchBGB_TL",p.loadImage("sprites/tiles/BGB/dirtPatch.png"));
-        spritesH.put("grassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/grassPatch.png"));
-        spritesH.put("grassCornerBL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/bl.png"));
-        spritesH.put("grassCornerBR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/br.png"));
-        spritesH.put("grassCornerTL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tl.png"));
-        spritesH.put("grassCornerTR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tr.png"));
-        spritesH.put("lichenBGB_TL",p.loadImage("sprites/tiles/BGB/lichen.png"));
+        staticSprites.put("dirtPatchBGB_TL",p.loadImage("sprites/tiles/BGB/dirtPatch.png"));
+        staticSprites.put("grassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/grassPatch.png"));
+        staticSprites.put("grassCornerBL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/bl.png"));
+        staticSprites.put("grassCornerBR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/br.png"));
+        staticSprites.put("grassCornerTL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tl.png"));
+        staticSprites.put("grassCornerTR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tr.png"));
+        staticSprites.put("lichenBGB_TL",p.loadImage("sprites/tiles/BGB/lichen.png"));
         //BGW
-        spritesH.put("woodWallBGW_TL",p.loadImage("sprites/tiles/BGW/woodWall/base.png"));
-        spritesH.put("stoneWallBGW_TL",p.loadImage("sprites/tiles/BGW/stoneWall/base.png"));
-        spritesH.put("metalWallBGW_TL",p.loadImage("sprites/tiles/BGW/metalWall/base.png"));
-        spritesH.put("crystalWallBGW_TL",p.loadImage("sprites/tiles/BGW/crystalWall/base.png"));
-        spritesH.put("titaniumWallBGW_TL",p.loadImage("sprites/tiles/BGW/titaniumWall/base.png"));
+        staticSprites.put("woodWallBGW_TL",p.loadImage("sprites/tiles/BGW/woodWall/base.png"));
+        staticSprites.put("stoneWallBGW_TL",p.loadImage("sprites/tiles/BGW/stoneWall/base.png"));
+        staticSprites.put("metalWallBGW_TL",p.loadImage("sprites/tiles/BGW/metalWall/base.png"));
+        staticSprites.put("crystalWallBGW_TL",p.loadImage("sprites/tiles/BGW/crystalWall/base.png"));
+        staticSprites.put("titaniumWallBGW_TL",p.loadImage("sprites/tiles/BGW/titaniumWall/base.png"));
         for (int i = 0; i < 2; i++) { //simple connections
             String name = null;
             if (i == 0) name = "woodWall";
             if (i == 1) name = "stoneWall";
-            spritesH.put(name + "BGW_T_TL", p.loadImage("sprites/tiles/BGW/" + name + "/t.png"));
-            spritesH.put(name + "BGW_R_TL", p.loadImage("sprites/tiles/BGW/" + name + "/r.png"));
-            spritesH.put(name + "BGW_B_TL", p.loadImage("sprites/tiles/BGW/" + name + "/b.png"));
-            spritesH.put(name + "BGW_L_TL", p.loadImage("sprites/tiles/BGW/" + name + "/l.png"));
+            staticSprites.put(name + "BGW_T_TL", p.loadImage("sprites/tiles/BGW/" + name + "/t.png"));
+            staticSprites.put(name + "BGW_R_TL", p.loadImage("sprites/tiles/BGW/" + name + "/r.png"));
+            staticSprites.put(name + "BGW_B_TL", p.loadImage("sprites/tiles/BGW/" + name + "/b.png"));
+            staticSprites.put(name + "BGW_L_TL", p.loadImage("sprites/tiles/BGW/" + name + "/l.png"));
         }
         for (int i = 0; i < 3; i++) { //diagonal double connections
             String name = null;
             if (i == 0) name = "metalWall";
             if (i == 1) name = "crystalWall";
             if (i == 2) name = "titaniumWall";
-            spritesH.put(name + "BGW_BLI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bli.png"));
-            spritesH.put(name + "BGW_BLO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/blo.png"));
-            spritesH.put(name + "BGW_BRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bri.png"));
-            spritesH.put(name + "BGW_BRO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bro.png"));
-            spritesH.put(name + "BGW_TLI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tli.png"));
-            spritesH.put(name + "BGW_TLO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tlo.png"));
-            spritesH.put(name + "BGW_TRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tri.png"));
-            spritesH.put(name + "BGW_TRO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tro.png"));
+            staticSprites.put(name + "BGW_BLI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bli.png"));
+            staticSprites.put(name + "BGW_BLO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/blo.png"));
+            staticSprites.put(name + "BGW_BRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bri.png"));
+            staticSprites.put(name + "BGW_BRO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bro.png"));
+            staticSprites.put(name + "BGW_TLI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tli.png"));
+            staticSprites.put(name + "BGW_TLO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tlo.png"));
+            staticSprites.put(name + "BGW_TRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tri.png"));
+            staticSprites.put(name + "BGW_TRO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tro.png"));
         }
         //BGC
-        spritesH.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
-        spritesH.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
-        spritesH.put("leavesBGC_TL",p.loadImage("sprites/tiles/BGC/leaves.png"));
-        spritesH.put("dandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/dandelions.png"));
-        spritesH.put("glowshrooms1BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms1.png"));
-        spritesH.put("glowshrooms2BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms2.png"));
-        spritesH.put("glowshrooms3BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms3.png"));
-        spritesH.put("woodDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/wood.png"));
-        spritesH.put("stoneDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/stone.png"));
-        spritesH.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));
-        spritesH.put("darkMetalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/darkMetal.png"));
-        spritesH.put("crystalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/crystal.png"));
-        spritesH.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png"));
+        staticSprites.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
+        staticSprites.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
+        staticSprites.put("leavesBGC_TL",p.loadImage("sprites/tiles/BGC/leaves.png"));
+        staticSprites.put("dandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/dandelions.png"));
+        staticSprites.put("glowshrooms1BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms1.png"));
+        staticSprites.put("glowshrooms2BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms2.png"));
+        staticSprites.put("glowshrooms3BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms3.png"));
+        staticSprites.put("woodDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/wood.png"));
+        staticSprites.put("stoneDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/stone.png"));
+        staticSprites.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));
+        staticSprites.put("darkMetalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/darkMetal.png"));
+        staticSprites.put("crystalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/crystal.png"));
+        staticSprites.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png"));
         //obstacles
-        spritesH.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
-        spritesH.put("treeBLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/bl.png"));
-        spritesH.put("treeBROb_TL",p.loadImage("sprites/tiles/obstacles/tree/br.png"));
-        spritesH.put("treeTLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/tl.png"));
-        spritesH.put("treeTROb_TL",p.loadImage("sprites/tiles/obstacles/tree/tr.png"));
-        spritesH.put("cactus0Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/0.png"));
-        spritesH.put("cactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/1.png"));
-        spritesH.put("cactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/2.png"));
-        spritesH.put("caveWallBaseOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/base.png"));
-        spritesH.put("caveWallLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/l.png"));
-        spritesH.put("caveWallROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/r.png"));
-        spritesH.put("caveWallTOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/t.png"));
-        spritesH.put("caveWallBOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/b.png"));
-        spritesH.put("caveWallBROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/br.png"));
-        spritesH.put("caveWallBLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/bl.png"));
-        spritesH.put("caveWallTLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tl.png"));
-        spritesH.put("caveWallTROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tr.png"));
-        spritesH.put("caveWallBRCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/brc.png"));
-        spritesH.put("caveWallBLCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/blc.png"));
-        spritesH.put("caveWallTLCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tlc.png"));
-        spritesH.put("caveWallTRCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/trc.png"));
-        spritesH.put("caveWallBRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/brd.png"));
-        spritesH.put("caveWallBLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/bld.png"));
-        spritesH.put("caveWallTLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tld.png"));
-        spritesH.put("caveWallTRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/trd.png"));
-        spritesH.put("caveWallPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/pillar.png"));
+        staticSprites.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
+        staticSprites.put("treeBLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/bl.png"));
+        staticSprites.put("treeBROb_TL",p.loadImage("sprites/tiles/obstacles/tree/br.png"));
+        staticSprites.put("treeTLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/tl.png"));
+        staticSprites.put("treeTROb_TL",p.loadImage("sprites/tiles/obstacles/tree/tr.png"));
+        staticSprites.put("cactus0Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/0.png"));
+        staticSprites.put("cactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/1.png"));
+        staticSprites.put("cactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/2.png"));
+        staticSprites.put("caveWallBaseOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/base.png"));
+        staticSprites.put("caveWallLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/l.png"));
+        staticSprites.put("caveWallROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/r.png"));
+        staticSprites.put("caveWallTOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/t.png"));
+        staticSprites.put("caveWallBOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/b.png"));
+        staticSprites.put("caveWallBROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/br.png"));
+        staticSprites.put("caveWallBLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/bl.png"));
+        staticSprites.put("caveWallTLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tl.png"));
+        staticSprites.put("caveWallTROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tr.png"));
+        staticSprites.put("caveWallBRCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/brc.png"));
+        staticSprites.put("caveWallBLCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/blc.png"));
+        staticSprites.put("caveWallTLCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tlc.png"));
+        staticSprites.put("caveWallTRCOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/trc.png"));
+        staticSprites.put("caveWallBRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/brd.png"));
+        staticSprites.put("caveWallBLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/bld.png"));
+        staticSprites.put("caveWallTLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tld.png"));
+        staticSprites.put("caveWallTRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/trd.png"));
+        staticSprites.put("caveWallPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/pillar.png"));
     }
 }

@@ -3,7 +3,7 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
+import static main.Main.animatedSprites;
 import static processing.core.PConstants.HALF_PI;
 
 public class BuffParticle extends Particle {
@@ -18,7 +18,7 @@ public class BuffParticle extends Particle {
         betweenFrames = (int)p.random(3,6);
         numFrames = 8;
         currentSprite = 0;
-        sprites = spritesAnimH.get(type + "BuffPT");
+        sprites = animatedSprites.get(type + "BuffPT");
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 }

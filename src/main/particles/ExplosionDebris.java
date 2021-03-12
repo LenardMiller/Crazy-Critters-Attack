@@ -3,7 +3,7 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
+import static main.Main.animatedSprites;
 import static processing.core.PConstants.HALF_PI;
 
 public class ExplosionDebris extends Particle{
@@ -18,7 +18,7 @@ public class ExplosionDebris extends Particle{
         betweenFrames = (int)p.random(2,5);
         numFrames = 4;
         currentSprite = 0;
-        sprites = spritesAnimH.get(type + "ExDebrisPT");
+        sprites = animatedSprites.get(type + "ExDebrisPT");
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 }

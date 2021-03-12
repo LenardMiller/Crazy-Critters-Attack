@@ -39,7 +39,7 @@ public class KeyBinds {
         boolean teslaTower = addHotkey('c', TESLATOWER_PRICE);
 
         if (pause) {
-            soundsH.get("clickOut").play(1, volume);
+            sounds.get("clickOut").play(1, volume);
             updateNodes();
             updateWallTiles();
             updateWallTileConnections();

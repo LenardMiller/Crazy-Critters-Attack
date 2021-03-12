@@ -152,7 +152,7 @@ public abstract class Enemy {
         }
         if (!stealthMode) {
             if (overkill) {
-                for (int j = 0; j < spritesAnimH.get(name + "PartsEN").length; j++) {
+                for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
                     float maxRv = 200f / partSize.x;
                     corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRv), radians(maxRv)), 0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
                 }
@@ -362,8 +362,8 @@ public abstract class Enemy {
     }
 
     public void loadSprites() {
-        attackFrames = spritesAnimH.get(name + "AttackEN");
-        moveFrames = spritesAnimH.get(name + "MoveEN");
+        attackFrames = animatedSprites.get(name + "AttackEN");
+        moveFrames = animatedSprites.get(name + "MoveEN");
     }
 
     protected void attack() {

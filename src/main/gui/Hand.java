@@ -48,8 +48,8 @@ public class Hand {
         if ((inputHandler.leftMousePressedPulse && P.mouseX > BOARD_WIDTH) || (inputHandler.rightMousePressedPulse && !held.equals("wall"))) {
             if (!held.equals("null")) {
                 inGameGui.wallBuyButton.timer = 0;
-                soundsH.get("clickOut").stop();
-                soundsH.get("clickOut").play(1, volume);
+                sounds.get("clickOut").stop();
+                sounds.get("clickOut").play(1, volume);
             }
             held = "null";
             for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;
@@ -60,8 +60,8 @@ public class Hand {
         if (inputHandler.leftMousePressedPulse) {
             if (!held.equals("wall") && !held.equals("null")) {
                 selection.towerJustPlaced = true; //prevents selection click sounds from playing
-                soundsH.get("clickOut").stop();
-                soundsH.get("clickOut").play(1, volume);
+                sounds.get("clickOut").stop();
+                sounds.get("clickOut").play(1, volume);
             }
             if (!implacable) place();
         }
@@ -108,16 +108,16 @@ public class Hand {
         if (held.equals("wall")) {
             if (tile != null && tile.tower != null && !tile.tower.turret) { //if wall
                 if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && tile.tower.nextLevelB < currentLevel) { //if upgradeable
-                    heldSprite = spritesH.get("upgradeTW");
+                    heldSprite = staticSprites.get("upgradeTW");
                     implacable = money < tile.tower.upgradePrices[tile.tower.nextLevelB];
                     displayInfo = "upgradeWall";
                 } else {
-                    if (currentLevel > 0) heldSprite = spritesH.get("upgradeTW");
+                    if (currentLevel > 0) heldSprite = staticSprites.get("upgradeTW");
                     implacable = true;
                     displayInfo = "maxWallUpgrade";
                 }
             } else {
-                heldSprite = spritesH.get("placeTW"); //reset wall sprite
+                heldSprite = staticSprites.get("placeTW"); //reset wall sprite
                 displayInfo = "placeWall";
             }
         } else {
@@ -255,72 +255,72 @@ public class Hand {
     public void setHeld(String heldSet) {
         switch (heldSet) {
             case "slingshot":
-                heldSprite = spritesH.get("slingshotFullTR");
+                heldSprite = staticSprites.get("slingshotFullTR");
                 offset = new PVector(0, 0);
                 price = SLINGSHOT_PRICE;
                 break;
             case "crossbow":
-                heldSprite = spritesH.get("crossbowFullTR");
+                heldSprite = staticSprites.get("crossbowFullTR");
                 offset = new PVector(2, 2);
                 price = CROSSBOW_PRICE;
                 break;
             case "miscCannon":
-                heldSprite = spritesH.get("miscCannonFullTR");
+                heldSprite = staticSprites.get("miscCannonFullTR");
                 offset = new PVector(0, 0);
                 price = RANDOMCANNON_PRICE;
                 break;
             case "cannon":
-                heldSprite = spritesH.get("cannonFullTR");
+                heldSprite = staticSprites.get("cannonFullTR");
                 offset = new PVector(5, 5);
                 price = CANNON_PRICE;
                 break;
             case "gluer":
-                heldSprite = spritesH.get("gluerFullTR");
+                heldSprite = staticSprites.get("gluerFullTR");
                 offset = new PVector(0, 0);
                 price = GLUER_PRICE;
                 break;
             case "seismic":
-                heldSprite = spritesH.get("seismicFullTR");
+                heldSprite = staticSprites.get("seismicFullTR");
                 offset = new PVector(4, 4);
                 price = SEISMIC_PRICE;
                 break;
             case "energyBlaster":
-                heldSprite = spritesH.get("energyBlasterFullTR");
+                heldSprite = staticSprites.get("energyBlasterFullTR");
                 offset = new PVector(13, 13);
                 price = ENERGYBLASTER_PRICE;
                 break;
             case "magicMissleer":
-                heldSprite = spritesH.get("magicMissleerFullTR");
+                heldSprite = staticSprites.get("magicMissleerFullTR");
                 offset = new PVector(0, 0);
                 price = 150;
                 break;
             case "tesla":
-                heldSprite = spritesH.get("teslaFullTR");
+                heldSprite = staticSprites.get("teslaFullTR");
                 offset = new PVector(0, 0);
                 price = TESLATOWER_PRICE;
                 break;
             case "nightmare":
-                heldSprite = spritesH.get("nightmareFullTR");
+                heldSprite = staticSprites.get("nightmareFullTR");
                 offset = new PVector(0, 0);
                 price = 200;
                 break;
             case "flamethrower":
-                heldSprite = spritesH.get("flamethrowerFullTR");
+                heldSprite = staticSprites.get("flamethrowerFullTR");
                 offset = new PVector(7, 7);
                 price = FLAMETHROWER_PRICE;
                 break;
             case "railgun":
-                heldSprite = spritesH.get("railgunFullTR");
+                heldSprite = staticSprites.get("railgunFullTR");
                 offset = new PVector(6, 6);
                 price = 200;
                 break;
             case "waveMotion":
-                heldSprite = spritesH.get("waveMotionFullTR");
+                heldSprite = staticSprites.get("waveMotionFullTR");
                 offset = new PVector(0, 0);
                 price = 250;
                 break;
             case "wall":
-                heldSprite = spritesH.get("woodWallTW");
+                heldSprite = staticSprites.get("woodWallTW");
                 offset = new PVector(0, 0);
                 price = 25;
                 break;
@@ -331,7 +331,7 @@ public class Hand {
         if (heldSet.contains("TL")) {
             offset = new PVector(0,0);
             price = 0;
-            heldSprite = spritesH.get(heldSet);
+            heldSprite = staticSprites.get(heldSet);
         }
         held = heldSet;
     }

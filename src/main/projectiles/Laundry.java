@@ -27,12 +27,12 @@ public class Laundry extends Projectile {
         this.angle = angle;
         angleTwo = angle;
         angularVelocity = p.random(-15, 15); //degrees mode
-        sprite = spritesH.get("laundryPj");
+        sprite = staticSprites.get("laundryPj");
         trail = "poison";
         hasTrail = true;
         effectRadius = 60;
         buff = "poisoned";
-        hitSound = soundsH.get("squishImpact");
+        hitSound = sounds.get("squishImpact");
     }
 
     public void die(int i) {

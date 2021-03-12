@@ -37,10 +37,10 @@ public class Crossbow extends Turret {
         loadDelayTime = 0;
         damage = 30;
         pierce = 1;
-        damageSound = soundsH.get("woodDamage");
-        breakSound = soundsH.get("woodBreak");
-        placeSound = soundsH.get("woodPlace");
-        fireSound = soundsH.get("crossbow");
+        damageSound = sounds.get("woodDamage");
+        breakSound = sounds.get("woodBreak");
+        placeSound = sounds.get("woodPlace");
+        fireSound = sounds.get("crossbow");
         loadSprites();
         debrisType = "wood";
         price = CROSSBOW_PRICE;
@@ -111,12 +111,12 @@ public class Crossbow extends Turret {
         upgradeDescB[5] = "multiple";
         upgradeDescC[5] = "bolts";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[9];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[18];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[10];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[19];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[9];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[18];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[10];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[19];
     }
 
     protected void upgradeSpecial(int id) {
@@ -147,7 +147,7 @@ public class Crossbow extends Turret {
                 case 5:
                     multishot = true;
                     name = "crossbowMultishot";
-                    fireSound = soundsH.get("shotbow");
+                    fireSound = sounds.get("shotbow");
                     loadSprites();
                     break;
             }

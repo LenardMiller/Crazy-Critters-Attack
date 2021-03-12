@@ -25,7 +25,7 @@ public class TileSelect extends Button {
         if (type.contains("Ma")) {
             sl = "machine";
             TILE_SPRITE = p.loadImage("sprites/guiObjects/buttons/tileSelect/machine/icon.png");
-        } else TILE_SPRITE = spritesH.get(type + "_TL");
+        } else TILE_SPRITE = staticSprites.get(type + "_TL");
         spriteLocation = "sprites/guiObjects/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
         spriteIdle = p.loadImage(spriteLocation + "000.png");
         spritePressed = p.loadImage(spriteLocation + "001.png");

@@ -22,8 +22,8 @@ public class CannonBall extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
-        sprite = spritesH.get("cannonBallPj");
-        hitSound = soundsH.get("largeImpact");
+        sprite = staticSprites.get("cannonBallPj");
+        hitSound = sounds.get("largeImpact");
         this.effectRadius = effectRadius;
     }
 

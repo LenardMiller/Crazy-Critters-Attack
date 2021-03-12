@@ -67,7 +67,7 @@ public class Corpse {
             this.VELOCITY = velocity.setMag(speed);
         } else this.VELOCITY = velocity;
         this.angularVelocity = angularVelocity * 2;
-        SPRITES = spritesAnimH.get(name + "EN");
+        SPRITES = animatedSprites.get(name + "EN");
         this.type = effectType;
         if (this.type == null) this.type = "normal";
         this.BLOOD_PARTICLE = bloodParticle;

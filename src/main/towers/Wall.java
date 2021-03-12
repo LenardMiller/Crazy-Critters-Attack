@@ -39,11 +39,11 @@ public class Wall extends Tower {
         maxHp = 50;
         hp = maxHp;
         hit = false;
-        sprite = spritesAnimH.get("woodWallTW");
+        sprite = animatedSprites.get("woodWallTW");
         debrisType = "wood";
-        damageSound = soundsH.get(debrisType + "Damage");
-        breakSound = soundsH.get(debrisType + "Break");
-        placeSound = soundsH.get(debrisType + "PlaceShort");
+        damageSound = sounds.get(debrisType + "Damage");
+        breakSound = sounds.get(debrisType + "Break");
+        placeSound = sounds.get(debrisType + "PlaceShort");
         price = 25;
         value = price;
         nextLevelB = 0;
@@ -80,7 +80,7 @@ public class Wall extends Tower {
         float y = tile.position.y-size.y;
         p.tint(0,60);
         String sT = shadowType();
-        if (sT != null) p.image(spritesH.get("shadow" + sT + "TW"), x, y);
+        if (sT != null) p.image(staticSprites.get("shadow" + sT + "TW"), x, y);
         else p.image(sprite[0],x+5,y+5);
         p.tint(255);
     }
@@ -136,10 +136,10 @@ public class Wall extends Tower {
         upgradeTitles[2] = "Crystal";
         upgradeTitles[3] = "Titanium";
         //sprites
-        UPGRADE_SPRITES[0] = spritesAnimH.get("stoneWallTW");
-        UPGRADE_SPRITES[1] = spritesAnimH.get("metalWallTW");
-        UPGRADE_SPRITES[2] = spritesAnimH.get("crystalWallTW");
-        UPGRADE_SPRITES[3] = spritesAnimH.get("ultimateWallTW");
+        UPGRADE_SPRITES[0] = animatedSprites.get("stoneWallTW");
+        UPGRADE_SPRITES[1] = animatedSprites.get("metalWallTW");
+        UPGRADE_SPRITES[2] = animatedSprites.get("crystalWallTW");
+        UPGRADE_SPRITES[3] = animatedSprites.get("ultimateWallTW");
     }
 
     public void upgrade(int id) {
@@ -171,16 +171,16 @@ public class Wall extends Tower {
         }
         hp = (int)(hp/(float)oldMax * maxHp);
 
-        damageSound = soundsH.get(debrisType + "Damage");
-        breakSound = soundsH.get(debrisType + "Break");
-        placeSound = soundsH.get(debrisType + "PlaceShort");
+        damageSound = sounds.get(debrisType + "Damage");
+        breakSound = sounds.get(debrisType + "Break");
+        placeSound = sounds.get(debrisType + "PlaceShort");
 
         placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
 
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
         int num = (int)(p.random(30,50)); //shower debris
         for (int j = num; j >= 0; j--){
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
@@ -321,14 +321,14 @@ public class Wall extends Tower {
                         if (c == 0) idC = "c";
                         if (c == 1) idC = "v";
                         String id = idA+idB+idC;
-                        spriteDS.add(spritesH.get(name + id + "WallTW"),idA,idB,idC);
+                        spriteDS.add(staticSprites.get(name + id + "WallTW"),idA,idB,idC);
                     }
                 }
             }
-            spriteDS.t = spritesH.get(name + "TWallTW");
-            spriteDS.b = spritesH.get(name + "BWallTW");
-            spriteDS.l = spritesH.get(name + "LWallTW");
-            spriteDS.r = spritesH.get(name + "RWallTW");
+            spriteDS.t = staticSprites.get(name + "TWallTW");
+            spriteDS.b = staticSprites.get(name + "BWallTW");
+            spriteDS.l = staticSprites.get(name + "LWallTW");
+            spriteDS.r = staticSprites.get(name + "RWallTW");
         }
     }
 

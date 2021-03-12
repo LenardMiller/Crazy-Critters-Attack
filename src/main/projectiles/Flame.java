@@ -35,12 +35,12 @@ public class Flame extends Projectile {
         this.TIMER = timer;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        SPRITES = spritesAnimH.get("flamePJ");
+        SPRITES = animatedSprites.get("flamePJ");
         buff = "burning";
         splashEn = false;
         fireChance = 8;
         smokeChance = 100;
-        if (sound) hitSound = soundsH.get("fireImpact");
+        if (sound) hitSound = sounds.get("fireImpact");
         else hitSound = null;
     }
 

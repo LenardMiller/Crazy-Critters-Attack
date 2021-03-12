@@ -3,8 +3,8 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.animatedSprites;
 import static main.Main.paused;
-import static main.Main.spritesAnimH;
 import static processing.core.PApplet.radians;
 
 public class Pile extends Particle {
@@ -16,14 +16,14 @@ public class Pile extends Particle {
         speed = 0;
         angleTwo = 0;
         lifespan = 500;
-        sprites = spritesAnimH.get(type + "PilePT");
+        sprites = animatedSprites.get(type + "PilePT");
         currentSprite = (int) p.random(0,3.99f);
         numFrames = 4;
         velocity = new PVector(0,0);
         angularVelocity = 0;
     }
 
-    void display() {
+    protected void display() {
         if (lifespan <= 0) dead = true;
         p.tint(255,255*((float)lifespan / 500));
         if (!paused) {

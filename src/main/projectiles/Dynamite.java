@@ -23,8 +23,8 @@ public class Dynamite extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
-        sprite = spritesH.get("dynamitePj");
-        hitSound = soundsH.get("smallExplosion");
+        sprite = staticSprites.get("dynamitePj");
+        hitSound = sounds.get("smallExplosion");
         this.effectRadius = effectRadius;
     }
 

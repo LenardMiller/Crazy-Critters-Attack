@@ -19,11 +19,11 @@ public class UpgradeTower extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 150);
-        spriteIdle = spritesAnimH.get("upgradeBT")[0]; //green out
-        spritePressed = spritesAnimH.get("upgradeBT")[1]; //green in
-        spriteHover = spritesAnimH.get("upgradeBT")[2]; //hover
-        SPRITE_RED = spritesAnimH.get("upgradeBT")[3]; //red
-        SPRITE_GREY = spritesAnimH.get("upgradeBT")[4]; //grey
+        spriteIdle = animatedSprites.get("upgradeBT")[0]; //green out
+        spritePressed = animatedSprites.get("upgradeBT")[1]; //green in
+        spriteHover = animatedSprites.get("upgradeBT")[2]; //hover
+        SPRITE_RED = animatedSprites.get("upgradeBT")[3]; //red
+        SPRITE_GREY = animatedSprites.get("upgradeBT")[4]; //grey
         sprite = spriteIdle;
         this.id = id;
     }

@@ -21,10 +21,10 @@ public class Glue extends Projectile {
         this.damage = damage;
         this.angle = angle;
         angularVelocity = 0;
-        sprite = spritesH.get("gluePj");
+        sprite = staticSprites.get("gluePj");
         hasTrail = true;
         trail = "glue";
-        hitSound = soundsH.get("squishImpact");
+        hitSound = sounds.get("squishImpact");
         buff = "glued";
     }
 

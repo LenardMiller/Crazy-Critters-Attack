@@ -30,8 +30,8 @@ import java.util.HashMap;
 import static java.lang.Character.toLowerCase;
 import static main.misc.MiscMethods.*;
 import static main.misc.SoundLoader.loadSounds;
-import static main.misc.SpriteLoader.loadSprites;
-import static main.misc.SpriteLoader.loadSpritesAnim;
+import static main.misc.SpriteLoader.loadAnimatedSprites;
+import static main.misc.SpriteLoader.loadStaticSprites;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
 
@@ -105,10 +105,10 @@ public class Main extends PApplet {
     public static final int FLAMETHROWER_PRICE = 550;
     public static final int TESLATOWER_PRICE = 600;
 
-    public static HashMap<String, PImage> spritesH = new HashMap<>();
-    public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
-    public static HashMap<String, SoundFile> soundsH = new HashMap<>();
-    public static HashMap<String, SoundLoop> soundLoopsH = new HashMap<>();
+    public static HashMap<String, PImage> staticSprites = new HashMap<>();
+    public static HashMap<String, PImage[]> animatedSprites = new HashMap<>();
+    public static HashMap<String, SoundFile> sounds = new HashMap<>();
+    public static HashMap<String, SoundLoop> soundLoops = new HashMap<>();
 
     //pathfinding stuff
     public static int defaultSize = 1;
@@ -149,8 +149,8 @@ public class Main extends PApplet {
         mediumFont = createFont("STHeitiSC-Light", 18);
         smallFont = createFont("STHeitiSC-Light", 12);
         //loads sprites
-        loadSprites(this);
-        loadSpritesAnim(this);
+        loadStaticSprites(this);
+        loadAnimatedSprites(this);
         //loads sounds
         loadSounds(this);
         //load input
@@ -230,7 +230,7 @@ public class Main extends PApplet {
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
         //looping sounds
-        for (SoundLoop soundLoop : soundLoopsH.values()) soundLoop.continueLoop();
+        for (SoundLoop soundLoop : soundLoops.values()) soundLoop.continueLoop();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;

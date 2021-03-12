@@ -104,10 +104,10 @@ public class Nightmare extends Turret {
         upgradeDescC[2] = "";
         upgradeDescC[3] = "duration";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[4];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[3];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[4];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[3];
     }
 
     protected void upgradeSpecial() {

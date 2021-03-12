@@ -25,8 +25,8 @@ public class EnergyBlast extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
-        sprite = spritesH.get("energyPj");
-        hitSound = soundsH.get("energyImpact");
+        sprite = staticSprites.get("energyPj");
+        hitSound = sounds.get("energyImpact");
         hasTrail = true;
         this.effectRadius = effectRadius;
         trail = "energy";

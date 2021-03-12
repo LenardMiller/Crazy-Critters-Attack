@@ -25,8 +25,8 @@ public class Selection { //what tower is selected
     public Selection(PApplet p) {
         this.P = p;
         name = "null";
-        CLICK_IN = soundsH.get("clickIn");
-        CLICK_OUT = soundsH.get("clickOut");
+        CLICK_IN = sounds.get("clickIn");
+        CLICK_OUT = sounds.get("clickOut");
     }
 
     public void main() {
@@ -84,7 +84,7 @@ public class Selection { //what tower is selected
                     inGameGui.upgradeIconB.position.y = 610;
                     if (tower.nextLevelB < tower.upgradeTitles.length) {
                         inGameGui.upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
-                    } else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+                    } else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
                 }
             }
         }
@@ -312,10 +312,10 @@ public class Selection { //what tower is selected
         //upgrade icons
         if (!inGameGui.upgradeButtonA.greyed) {
             inGameGui.upgradeIconA.sprite = tower.upgradeIcons[tower.nextLevelA];
-        } else inGameGui.upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+        } else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
         if (!inGameGui.upgradeButtonB.greyed && tower.nextLevelB < tower.upgradeIcons.length) {
             inGameGui.upgradeIconB.sprite = tower.upgradeIcons[tower.nextLevelB];
-        } else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        } else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
 
         displayUpgrade(-45, tower.nextLevelA, inGameGui.upgradeButtonA);
         displayUpgrade(105, tower.nextLevelB, inGameGui.upgradeButtonB);

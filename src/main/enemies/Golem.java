@@ -3,7 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
 
 public class Golem extends Enemy{
 
@@ -26,8 +26,8 @@ public class Golem extends Enemy{
         corpseSize = new PVector(84,84);
         partSize = new PVector(36,36);
         betweenCorpseFrames = 6;
-        dieSound = soundsH.get("leaves");
-        overkillSound = soundsH.get("leavesImpact");
+        dieSound = sounds.get("leaves");
+        overkillSound = sounds.get("leavesImpact");
         loadSprites();
     }
 }

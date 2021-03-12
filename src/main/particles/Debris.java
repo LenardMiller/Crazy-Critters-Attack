@@ -3,7 +3,7 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesH;
+import static main.Main.staticSprites;
 import static processing.core.PConstants.HALF_PI;
 
 public class Debris extends Particle {
@@ -18,7 +18,7 @@ public class Debris extends Particle {
         lifespan = (int) p.random(3, 15);
         numFrames = 1;
         delay = lifespan/numFrames;
-        sprite = spritesH.get(type + "Pt");
+        sprite = staticSprites.get(type + "Pt");
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 }

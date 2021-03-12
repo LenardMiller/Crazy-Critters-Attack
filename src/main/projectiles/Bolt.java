@@ -19,8 +19,8 @@ public class Bolt extends Projectile {
         this.damage = damage;
         this.pierce = pierce;
         this.angle = angle;
-        sprite = spritesH.get("boltPj");
-        hitSound = soundsH.get("whooshImpact");
+        sprite = staticSprites.get("boltPj");
+        hitSound = sounds.get("whooshImpact");
     }
 
     public void die(int i) {

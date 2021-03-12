@@ -50,11 +50,11 @@ public class Machine {
         this.name = name;
         this.debris = debris;
         this.betweenFrames = betweenFrames;
-        DAMAGE_SOUND = soundsH.get(debris + "Damage");
-        BREAK_SOUND = soundsH.get(debris + "Break");
-        EXPLODE_SOUND = soundsH.get("smallExplosion");
-        EXPLODE_LOOP = soundLoopsH.get("smallExplosion");
-        sprites = spritesAnimH.get(name);
+        DAMAGE_SOUND = sounds.get(debris + "Damage");
+        BREAK_SOUND = sounds.get(debris + "Break");
+        EXPLODE_SOUND = sounds.get("smallExplosion");
+        EXPLODE_LOOP = soundLoops.get("smallExplosion");
+        sprites = animatedSprites.get(name);
         tintColor = 255;
         updateNodes();
     }
@@ -176,7 +176,7 @@ public class Machine {
         if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
         if (hp <= hpSegment) damageState = 3;
         if (damageState > 0) {
-            sprites = spritesAnimH.get(name + "d" + damageState);
+            sprites = animatedSprites.get(name + "d" + damageState);
 //            currentFrame = 0;
         }
         DAMAGE_SOUND.stop();

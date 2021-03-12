@@ -35,10 +35,10 @@ public class EnergyBlaster extends Turret{
         spriteType = 0;
         effectRadius = 25;
         bigExplosion = false;
-        damageSound = soundsH.get("metalDamage");
-        breakSound = soundsH.get("metalBreak");
-        placeSound = soundsH.get("metalPlace");
-        fireSound = soundsH.get("energyBlasterFire");
+        damageSound = sounds.get("metalDamage");
+        breakSound = sounds.get("metalBreak");
+        placeSound = sounds.get("metalPlace");
+        fireSound = sounds.get("energyBlasterFire");
         fireParticle = "energy";
         barrelLength = 40;
         loadSprites();
@@ -100,13 +100,13 @@ public class EnergyBlaster extends Turret{
         upgradeDescB[5] = "hole or";
         upgradeDescC[5] = "sumthin";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[21];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[23];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[21];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[23];
 
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[3];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[3];
     }
 
     protected void upgradeSpecial(int id) {

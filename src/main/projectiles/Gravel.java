@@ -19,8 +19,8 @@ public class Gravel extends Projectile {
         this.damage = damage;
         this.angle = angle;
         angularVelocity = p.random(-15,15);
-        sprite = spritesH.get("stonePt");
-        hitSound = soundsH.get("smallImpact");
+        sprite = staticSprites.get("stonePt");
+        hitSound = sounds.get("smallImpact");
     }
 
     public void die(int i) {

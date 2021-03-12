@@ -3,7 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
 
 public class BigAlbinoBug extends Enemy{
 
@@ -25,8 +25,8 @@ public class BigAlbinoBug extends Enemy{
         corpseSize = size;
         partSize = new PVector(32,32);
         attackFrame = attackStartFrame;
-        dieSound = soundsH.get("bigCrunch");
-        overkillSound = soundsH.get("squash");
+        dieSound = sounds.get("bigCrunch");
+        overkillSound = sounds.get("squash");
         loadSprites();
     }
 }

@@ -19,8 +19,8 @@ public class ReinforcedBolt extends Projectile {
         this.damage = damage;
         this.pierce = pierce;
         this.angle = angle;
-        sprite = spritesH.get("reinforcedBoltPj");
-        hitSound = soundsH.get("whooshImpact");
+        sprite = staticSprites.get("reinforcedBoltPj");
+        hitSound = sounds.get("whooshImpact");
     }
 
     public void die(int i) {

@@ -3,7 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
 
 public class GiantBat extends Enemy {
 
@@ -30,8 +30,8 @@ public class GiantBat extends Enemy {
         partSize = new PVector(50, 50);
         betweenWalkFrames = 5;
         betweenCorpseFrames = 4;
-        overkillSound = soundsH.get("bigSqueakSquash");
-        dieSound = soundsH.get("bigSqueak");
+        overkillSound = sounds.get("bigSqueakSquash");
+        dieSound = sounds.get("bigSqueak");
         loadSprites();
     }
 }

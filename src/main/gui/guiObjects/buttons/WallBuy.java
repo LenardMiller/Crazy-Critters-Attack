@@ -14,9 +14,9 @@ public class WallBuy extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 24);
-        spriteIdle = spritesAnimH.get("wallBuyBT")[0];
-        spritePressed = spritesAnimH.get("wallBuyBT")[1];
-        spriteHover = spritesAnimH.get("wallBuyBT")[2];
+        spriteIdle = animatedSprites.get("wallBuyBT")[0];
+        spritePressed = animatedSprites.get("wallBuyBT")[1];
+        spriteHover = animatedSprites.get("wallBuyBT")[2];
         sprite = spriteIdle;
         depressed = false;
     }

@@ -50,8 +50,8 @@ public class Railgun extends Turret {
         betweenIdleFrames = 3;
         betweenFireFrames = 3;
         spriteType = 0;
-        vaporTrail = spritesAnimH.get("railgunVaporTrailTR");
-        vaporEndSprites = spritesAnimH.get("railgunBlastPT");
+        vaporTrail = animatedSprites.get("railgunVaporTrailTR");
+        vaporEndSprites = animatedSprites.get("railgunBlastPT");
         loadSprites();
         debrisType = "ultimate";
         price = 400;
@@ -144,10 +144,10 @@ public class Railgun extends Turret {
         upgradeDescC[2] = "";
         upgradeDescC[3] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
     }
 
     protected void upgradeSpecial() {}

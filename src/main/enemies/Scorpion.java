@@ -3,7 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
 
 public class Scorpion extends Enemy {
     public Scorpion(PApplet p, float x, float y) {
@@ -27,8 +27,8 @@ public class Scorpion extends Enemy {
         attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(13,13);
-        overkillSound = soundsH.get("squish");
-        dieSound = soundsH.get("crunch");
+        overkillSound = sounds.get("squish");
+        dieSound = sounds.get("crunch");
         loadSprites();
     }
 }

@@ -24,8 +24,8 @@ public abstract class Button extends GuiObject {
         size = new PVector(25, 25);
         sprite = spriteIdle;
         holdable = false;
-        clickIn = soundsH.get("clickIn");
-        clickOut = soundsH.get("clickOut");
+        clickIn = sounds.get("clickIn");
+        clickOut = sounds.get("clickOut");
     }
 
     /**

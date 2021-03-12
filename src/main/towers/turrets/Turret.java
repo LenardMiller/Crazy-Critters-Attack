@@ -191,11 +191,11 @@ public abstract class Turret extends Tower {
     protected void loadSprites() {
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
-        sBase = spritesH.get(name + "BaseTR");
-        sIdle = spritesH.get(name + "IdleTR");
-        fireFrames = spritesAnimH.get(name + "FireTR");
-        loadFrames = spritesAnimH.get(name + "LoadTR");
-        if (numIdleFrames > 1) idleFrames = spritesAnimH.get(name + "IdleTR");
+        sBase = staticSprites.get(name + "BaseTR");
+        sIdle = staticSprites.get(name + "IdleTR");
+        fireFrames = animatedSprites.get(name + "FireTR");
+        loadFrames = animatedSprites.get(name + "LoadTR");
+        if (numIdleFrames > 1) idleFrames = animatedSprites.get(name + "IdleTR");
     }
 
     public void main() { //need to check target
@@ -317,9 +317,9 @@ public abstract class Turret extends Tower {
         }
         //icons
         if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
-        else inGameGui.upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+        else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
         //shower debris
         int num = (int) (p.random(30, 50));
         for (int j = num; j >= 0; j--) {

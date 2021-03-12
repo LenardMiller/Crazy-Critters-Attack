@@ -19,8 +19,8 @@ public class Rock extends Projectile {
         this.damage = damage;
         this.angle = angle;
         angularVelocity = p.random(-15,15);
-        sprite = spritesH.get("rockPj");
-        hitSound = soundsH.get("largeImpact");
+        sprite = staticSprites.get("rockPj");
+        hitSound = sounds.get("largeImpact");
         buff = "bleeding";
     }
 

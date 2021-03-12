@@ -11,9 +11,9 @@ public class ExitGame extends Button {
         super(p, x, y, type, active);
         position = new PVector(x, y);
         size = new PVector(200, 42);
-        spriteIdle = spritesAnimH.get("genericButtonBT")[0];
-        spritePressed = spritesAnimH.get("genericButtonBT")[1];
-        spriteHover = spritesAnimH.get("genericButtonBT")[2];
+        spriteIdle = animatedSprites.get("genericButtonBT")[0];
+        spritePressed = animatedSprites.get("genericButtonBT")[1];
+        spriteHover = animatedSprites.get("genericButtonBT")[2];
         sprite = spriteIdle;
     }
 

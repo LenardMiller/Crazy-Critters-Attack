@@ -46,7 +46,7 @@ public abstract class Particle {
         numFrames = 1;
         currentSprite = 0;
         delay = lifespan / numFrames;
-        sprite = spritesH.get("nullPt");
+        sprite = staticSprites.get("nullPt");
         velocity = PVector.fromAngle(angle - HALF_PI);
         betweenFrames = 0;
     }

@@ -3,7 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
 
 public class Bat extends Enemy {
 
@@ -30,8 +30,8 @@ public class Bat extends Enemy {
         partSize = new PVector(23, 23);
         betweenWalkFrames = 4;
         betweenCorpseFrames = 4;
-        overkillSound = soundsH.get("squeakSquish");
-        dieSound = soundsH.get("squeak");
+        overkillSound = sounds.get("squeakSquish");
+        dieSound = sounds.get("squeak");
         loadSprites();
     }
 }

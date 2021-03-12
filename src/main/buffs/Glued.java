@@ -65,7 +65,7 @@ public class Glued extends Buff {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
                 enemy.speed = enemy.maxSpeed; //set movement speed back to default
                 //set attack speed back to default
-                enemy.attackFrames = spritesAnimH.get(enemy.name + "AttackEN");
+                enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
                 if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
             }
             buffs.remove(i);

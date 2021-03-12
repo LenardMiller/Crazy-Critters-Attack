@@ -42,10 +42,10 @@ public class Gluer extends Turret {
         effectDuration = 360;
         effectLevel = 0.7f;
         spikey = false;
-        damageSound = soundsH.get("stoneDamage");
-        breakSound = soundsH.get("stoneBreak");
-        placeSound = soundsH.get("stonePlace");
-        fireSound = soundsH.get("glueFire");
+        damageSound = sounds.get("stoneDamage");
+        breakSound = sounds.get("stoneBreak");
+        placeSound = sounds.get("stonePlace");
+        fireSound = sounds.get("glueFire");
         fireParticle = "glue";
         barrelLength = 28;
         loadSprites();
@@ -149,13 +149,13 @@ public class Gluer extends Turret {
         upgradeDescB[5] = "spikes on";
         upgradeDescC[5] = "death";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[25];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[28];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[25];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[28];
 
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[27];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[26];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[27];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[26];
     }
 
     protected void upgradeSpecial(int id) {
@@ -189,9 +189,9 @@ public class Gluer extends Turret {
                     spikey = true;
                     name = "shatterGluer";
                     debrisType = "metal";
-                    placeSound = soundsH.get("metalPlace");
-                    damageSound = soundsH.get("metalDamage");
-                    breakSound = soundsH.get("metalBreak");
+                    placeSound = sounds.get("metalPlace");
+                    damageSound = sounds.get("metalDamage");
+                    breakSound = sounds.get("metalBreak");
                     loadSprites();
                     break;
             }

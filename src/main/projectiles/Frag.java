@@ -24,8 +24,8 @@ public class Frag extends Projectile {
         this.damage = damage;
         this.angle = angle;
         angularVelocity = p.random(-15,15);
-        sprite = spritesH.get("darkMetalPt");
-        hitSound = soundsH.get("smallImpact");
+        sprite = staticSprites.get("darkMetalPt");
+        hitSound = sounds.get("smallImpact");
         LIFESPAN = 15;
     }
 

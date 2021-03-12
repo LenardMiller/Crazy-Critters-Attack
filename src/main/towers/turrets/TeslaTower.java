@@ -41,10 +41,10 @@ public class TeslaTower extends Turret {
         price = TESLATOWER_PRICE;
         value = price;
         priority = 0; //close
-        damageSound = soundsH.get("metalDamage");
-        breakSound = soundsH.get("metalBreak");
-        placeSound = soundsH.get("metalPlace");
-        fireSound = soundsH.get("teslaFire");
+        damageSound = sounds.get("metalDamage");
+        breakSound = sounds.get("metalBreak");
+        placeSound = sounds.get("metalPlace");
+        fireSound = sounds.get("teslaFire");
         setUpgrades();
         updateTowerArray();
 
@@ -127,13 +127,13 @@ public class TeslaTower extends Turret {
         upgradeDescB[5] = "increase";
         upgradeDescC[5] = "firerate";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[1];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[2];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[22];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[1];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[2];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[22];
 
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[10];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[10];
     }
 
     protected void upgradeSpecial(int id) {

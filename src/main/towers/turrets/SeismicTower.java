@@ -41,10 +41,10 @@ public class SeismicTower extends Turret {
         range = 225;
         shockwaveWidth = 60;
         seismicSense = false;
-        damageSound = soundsH.get("stoneDamage");
-        breakSound = soundsH.get("stoneBreak");
-        placeSound = soundsH.get("stonePlace");
-        fireSound = soundsH.get("seismicSlam");
+        damageSound = sounds.get("stoneDamage");
+        breakSound = sounds.get("stoneBreak");
+        placeSound = sounds.get("stonePlace");
+        fireSound = sounds.get("seismicSlam");
         fireParticle = null;
         barrelLength = 29;
         loadSprites();
@@ -221,12 +221,12 @@ public class SeismicTower extends Turret {
         upgradeDescB[5] = "stealthy";
         upgradeDescC[5] = "enemies";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[20];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[21];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[22];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[20];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[21];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[22];
     }
 
     protected void upgradeSpecial(int id) {
@@ -240,9 +240,9 @@ public class SeismicTower extends Turret {
                     break;
                 case 2:
                     debrisType = "metal";
-                    placeSound = soundsH.get("metalPlace");
-                    damageSound = soundsH.get("metalDamage");
-                    breakSound = soundsH.get("metalBreak");
+                    placeSound = sounds.get("metalPlace");
+                    damageSound = sounds.get("metalDamage");
+                    breakSound = sounds.get("metalBreak");
                     shockwaveWidth = 720;
                     delay = 20;
                     name = "seismicSlammer";
@@ -261,9 +261,9 @@ public class SeismicTower extends Turret {
                     break;
                 case 5:
                     debrisType = "metal";
-                    placeSound = soundsH.get("metalPlace");
-                    damageSound = soundsH.get("metalDamage");
-                    breakSound = soundsH.get("metalBreak");
+                    placeSound = sounds.get("metalPlace");
+                    damageSound = sounds.get("metalDamage");
+                    breakSound = sounds.get("metalBreak");
                     seismicSense = true;
                     effectLevel = 0;
                     effectDuration = 120;

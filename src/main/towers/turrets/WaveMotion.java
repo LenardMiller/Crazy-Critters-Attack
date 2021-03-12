@@ -46,7 +46,7 @@ public class WaveMotion extends Turret {
         betweenIdleFrames = 3;
         betweenFireFrames = 4;
         spriteType = 0;
-        beam = spritesAnimH.get("waveMotionBeamTR");
+        beam = animatedSprites.get("waveMotionBeamTR");
         loadSprites();
         debrisType = "darkMetal";
         price = 500;
@@ -177,10 +177,10 @@ public class WaveMotion extends Turret {
         upgradeDescC[2] = "";
         upgradeDescC[3] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
     }
 
     public void upgradeSpecial() {}

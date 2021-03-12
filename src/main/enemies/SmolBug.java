@@ -3,7 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
 
 public class SmolBug extends Enemy {
     public SmolBug(PApplet p, float x, float y) {
@@ -27,8 +27,8 @@ public class SmolBug extends Enemy {
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         corpseSize = size;
         partSize = new PVector(11,11);
-        overkillSound = soundsH.get("squish");
-        dieSound = soundsH.get("crunch");
+        overkillSound = sounds.get("squish");
+        dieSound = sounds.get("crunch");
         loadSprites();
     }
 }

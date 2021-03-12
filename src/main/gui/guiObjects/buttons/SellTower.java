@@ -12,9 +12,9 @@ public class SellTower extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 45);
-        spriteIdle = spritesAnimH.get("sellTowerBT")[0];
-        spritePressed = spritesAnimH.get("sellTowerBT")[1];
-        spriteHover = spritesAnimH.get("sellTowerBT")[2];
+        spriteIdle = animatedSprites.get("sellTowerBT")[0];
+        spritePressed = animatedSprites.get("sellTowerBT")[1];
+        spriteHover = animatedSprites.get("sellTowerBT")[2];
         sprite = spriteIdle;
     }
 

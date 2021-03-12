@@ -111,7 +111,7 @@ public class SpikeyGlued extends Buff {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
                 enemy.speed = enemy.maxSpeed; //set movement speed back to default
                 //set attack speed back to default
-                enemy.attackFrames = spritesAnimH.get(enemy.name + "AttackEN");
+                enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
                 if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
                 //set damage frames back to default
                 System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
@@ -148,7 +148,7 @@ public class SpikeyGlued extends Buff {
         Spike(float x, float y, float angle) {
             POSITION = new PVector(x,y);
             this.ANGLE = radians(angle);
-            SPRITE = spritesH.get("glueSpikePj");
+            SPRITE = staticSprites.get("glueSpikePj");
             SIZE = new PVector(7,7);
         }
 

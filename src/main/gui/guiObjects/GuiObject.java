@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import static main.Main.spritesH;
+import static main.Main.staticSprites;
 
 public class GuiObject {
 
@@ -20,7 +20,7 @@ public class GuiObject {
         this.active = active;
         position = new PVector(x, y);
         size = new PVector(0, 0);
-        sprite = spritesH.get(type);
+        sprite = staticSprites.get(type);
     }
 
     public void main(){

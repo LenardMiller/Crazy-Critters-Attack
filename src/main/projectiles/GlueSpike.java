@@ -24,8 +24,8 @@ public class GlueSpike extends Projectile {
         this.damage = damage;
         this.angle = angle;
         angularVelocity = 0;
-        sprite = spritesH.get("glueSpikePj");
-        hitSound = soundsH.get("smallImpact");
+        sprite = staticSprites.get("glueSpikePj");
+        hitSound = sounds.get("smallImpact");
         LIFESPAN = 15;
     }
 

@@ -38,10 +38,10 @@ public class RandomCannon extends Turret {
         loadDelayTime = 0;
         damage = 10;
         range = 200;
-        damageSound = soundsH.get("woodDamage");
-        breakSound = soundsH.get("woodBreak");
-        placeSound = soundsH.get("woodPlace");
-        fireSound = soundsH.get("luggageBlaster");
+        damageSound = sounds.get("woodDamage");
+        breakSound = sounds.get("woodBreak");
+        placeSound = sounds.get("woodPlace");
+        fireSound = sounds.get("luggageBlaster");
         loadSprites();
         debrisType = "wood";
         price = RANDOMCANNON_PRICE;
@@ -123,12 +123,12 @@ public class RandomCannon extends Turret {
         upgradeDescB[5] = "splatters";
         upgradeDescC[5] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[10];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[15];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[12];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[10];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[15];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[12];
     }
 
     protected void upgradeSpecial(int id) {
@@ -141,9 +141,9 @@ public class RandomCannon extends Turret {
                     delay -= 10;
                     break;
                 case 2:
-                    damageSound = soundsH.get("stoneDamage");
-                    breakSound = soundsH.get("stoneBreak");
-                    placeSound = soundsH.get("stonePlace");
+                    damageSound = sounds.get("stoneDamage");
+                    breakSound = sounds.get("stoneBreak");
+                    placeSound = sounds.get("stonePlace");
                     debrisType = "stone";
                     barrel = true;
                     delay = 6;

@@ -23,9 +23,9 @@ public class MiscProjectile extends Projectile {
         this.angle = angle;
         angleTwo = angle;
         angularVelocity = 15; //degrees mode
-        sprites = spritesAnimH.get("miscPJ");
+        sprites = animatedSprites.get("miscPJ");
         sprite = sprites[spriteType];
-        hitSound = soundsH.get("smallImpact");
+        hitSound = sounds.get("smallImpact");
     }
 
     public void die(int i) {

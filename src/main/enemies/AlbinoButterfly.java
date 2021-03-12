@@ -3,7 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
 
 public class AlbinoButterfly extends Enemy {
 
@@ -29,8 +29,8 @@ public class AlbinoButterfly extends Enemy {
         corpseSize = new PVector(25,25);
         partSize = new PVector(18, 18);
         betweenCorpseFrames = 4;
-        overkillSound = soundsH.get("squish");
-        dieSound = soundsH.get("crunch");
+        overkillSound = sounds.get("squish");
+        dieSound = sounds.get("crunch");
         loadSprites();
     }
 }

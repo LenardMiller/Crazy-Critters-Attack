@@ -45,10 +45,10 @@ public class Flamethrower extends Turret {
         price = FLAMETHROWER_PRICE;
         value = price;
         priority = 0; //close
-        damageSound = soundsH.get("metalDamage");
-        breakSound = soundsH.get("metalBreak");
-        placeSound = soundsH.get("metalPlace");
-        fireSound = soundsH.get("fireImpact");
+        damageSound = sounds.get("metalDamage");
+        breakSound = sounds.get("metalBreak");
+        placeSound = sounds.get("metalPlace");
+        fireSound = sounds.get("fireImpact");
         fireParticle = null;
         barrelLength = 24;
         setUpgrades();
@@ -108,13 +108,13 @@ public class Flamethrower extends Turret {
         upgradeDescB[5] = "sumthin";
         upgradeDescC[5] = "weird";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[15];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[23];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[15];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[23];
 
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[9];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[11];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[14];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[9];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[11];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[14];
     }
 
     protected void upgradeSpecial(int id) {

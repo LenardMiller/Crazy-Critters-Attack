@@ -3,7 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
 
 public class Sidewinder extends Enemy {
 
@@ -27,8 +27,8 @@ public class Sidewinder extends Enemy {
         attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(9,9);
-        overkillSound = soundsH.get("hissSquish");
-        dieSound = soundsH.get("hiss");
+        overkillSound = sounds.get("hissSquish");
+        dieSound = sounds.get("hiss");
         loadSprites();
     }
 }

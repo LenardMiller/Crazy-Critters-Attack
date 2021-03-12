@@ -121,7 +121,7 @@ public abstract class Tower {
     public void upgrade(int id) {
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
+        else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
         placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
         int num = (int)(p.random(30,50)); //shower debris

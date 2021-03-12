@@ -54,8 +54,8 @@ public class Wave {
             if (tower.turret) tower.heal(1);
             else tower.heal(0.2f);
         }
-        soundsH.get("waveEnd").stop();
-        soundsH.get("waveEnd").play(1, volume);
+        sounds.get("waveEnd").stop();
+        sounds.get("waveEnd").play(1, volume);
         money += levels[currentLevel].reward;
     }
 
@@ -93,9 +93,9 @@ public class Wave {
      */
     public void display(int y, int id) {
         P.tint(FILL_COLOR.getRGB());
-        P.image(spritesH.get("wavePrimaryIc"), 890, y);
+        P.image(staticSprites.get("wavePrimaryIc"), 890, y);
         P.tint(ACCENT_COLOR.getRGB());
-        P.image(spritesH.get("waveSecondaryIc"), 890, y);
+        P.image(staticSprites.get("waveSecondaryIc"), 890, y);
         P.tint(255);
 
         P.fill(TEXT_COLOR.getRGB());

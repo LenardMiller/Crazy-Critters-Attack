@@ -3,7 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
 
 public class Wtf extends Enemy {
 
@@ -28,8 +28,8 @@ public class Wtf extends Enemy {
         corpseSize = size;
         partSize = new PVector(100,100);
         attackFrame = attackStartFrame;
-        dieSound = soundsH.get("bigCrunchRoar");
-        overkillSound = soundsH.get("squashRoar");
+        dieSound = sounds.get("bigCrunchRoar");
+        overkillSound = sounds.get("squashRoar");
         loadSprites();
     }
 }

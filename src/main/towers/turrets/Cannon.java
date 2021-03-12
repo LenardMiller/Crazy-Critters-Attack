@@ -40,10 +40,10 @@ public class Cannon extends Turret {
         damage = 40;
         range = 250;
         effectRadius = 25;
-        damageSound = soundsH.get("stoneDamage");
-        breakSound = soundsH.get("stoneBreak");
-        placeSound = soundsH.get("stonePlace");
-        fireSound = soundsH.get("smallExplosion");
+        damageSound = sounds.get("stoneDamage");
+        breakSound = sounds.get("stoneBreak");
+        placeSound = sounds.get("stonePlace");
+        fireSound = sounds.get("smallExplosion");
         loadSprites();
         debrisType = "stone";
         price = CANNON_PRICE;
@@ -104,12 +104,12 @@ public class Cannon extends Turret {
         upgradeDescB[5] = "shrapnel";
         upgradeDescC[5] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[13];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[23];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[24];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[13];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[23];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[24];
     }
 
     protected void upgradeSpecial(int id) {
@@ -126,12 +126,12 @@ public class Cannon extends Turret {
                     effectRadius = 60;
                     pjSpeed = 10;
                     dynamite = true;
-                    fireSound = soundsH.get("slingshot");
+                    fireSound = sounds.get("slingshot");
                     name = "dynamiteLauncher";
                     debrisType = "wood";
-                    damageSound = soundsH.get("woodDamage");
-                    breakSound = soundsH.get("woodBreak");
-                    placeSound = soundsH.get("woodPlace");
+                    damageSound = sounds.get("woodDamage");
+                    breakSound = sounds.get("woodBreak");
+                    placeSound = sounds.get("woodPlace");
                     barrelLength = 0;
                     loadSprites();
                     numLoadFrames = 80;
@@ -151,9 +151,9 @@ public class Cannon extends Turret {
                     frags = true;
                     name = "fragCannon";
                     debrisType = "metal";
-                    placeSound = soundsH.get("metalPlace");
-                    damageSound = soundsH.get("metalDamage");
-                    breakSound = soundsH.get("metalBreak");
+                    placeSound = sounds.get("metalPlace");
+                    damageSound = sounds.get("metalDamage");
+                    breakSound = sounds.get("metalBreak");
                     loadSprites();
                     break;
             }

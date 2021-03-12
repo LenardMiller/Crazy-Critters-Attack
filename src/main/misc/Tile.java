@@ -146,22 +146,22 @@ public class Tile {
         drawMain = true;
         if (x != 18 && y != 0) {
             if (doubleDiagonalIn(x, y, 1, -1, bgWName)) { //tri
-                bgWICorners[0] = spritesH.get(bgWName + "BGW_TRI_TL");
+                bgWICorners[0] = staticSprites.get(bgWName + "BGW_TRI_TL");
                 drawMain = false;
             }
         } if (x != 18 && y != 18) {
             if (doubleDiagonalIn(x, y, 1, 1, bgWName)) { //bri
-                bgWICorners[1] = spritesH.get(bgWName + "BGW_BRI_TL");
+                bgWICorners[1] = staticSprites.get(bgWName + "BGW_BRI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 18) {
             if (doubleDiagonalIn(x, y, -1, 1, bgWName)) { //bli
-                bgWICorners[2] = spritesH.get(bgWName + "BGW_BLI_TL");
+                bgWICorners[2] = staticSprites.get(bgWName + "BGW_BLI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 0) {
             if (doubleDiagonalIn(x, y, -1, -1, bgWName)) { //tli
-                bgWICorners[3] = spritesH.get(bgWName + "BGW_TLI_TL");
+                bgWICorners[3] = staticSprites.get(bgWName + "BGW_TLI_TL");
                 drawMain = false;
             }
         }
@@ -171,7 +171,7 @@ public class Tile {
             if (s.equals("BRI")) i = 1;
             if (s.equals("BLI")) i = 2;
             if (s.equals("TLI")) i = 3;
-            bgWICorners[i] = spritesH.get(bgWName + "BGW_" + s + "_TL");
+            bgWICorners[i] = staticSprites.get(bgWName + "BGW_" + s + "_TL");
             drawMain = false;
         }
         if (countTouchingVN(x,y) > 2) drawMain = true;
@@ -211,25 +211,25 @@ public class Tile {
         if (x != 18 && y != 0) { //tro
             String n = doubleDiagonalOut(x,y,1,-1);
             if (n != null) {
-                bgWOCorners[0] = spritesH.get(n + "BGW_TRO_TL");
+                bgWOCorners[0] = staticSprites.get(n + "BGW_TRO_TL");
                 bgWOCornerNames[0] = n;
             }
         } if (x != 18 && y != 18) { //bro
             String n = doubleDiagonalOut(x,y,1,1);
             if (n != null) {
-                bgWOCorners[1] = spritesH.get(n + "BGW_BRO_TL");
+                bgWOCorners[1] = staticSprites.get(n + "BGW_BRO_TL");
                 bgWOCornerNames[1] = n;
             }
         } if (x != 0 && y != 18) { //blo
             String n = doubleDiagonalOut(x,y,-1,1);
             if (n != null) {
-                bgWOCorners[2] = spritesH.get(n + "BGW_BLO_TL");
+                bgWOCorners[2] = staticSprites.get(n + "BGW_BLO_TL");
                 bgWOCornerNames[2] = n;
             }
         } if (x != 0 && y != 0) { //tlo
             String n = doubleDiagonalOut(x,y,-1,-1);
             if (n != null) {
-                bgWOCorners[3] = spritesH.get(n + "BGW_TLO_TL");
+                bgWOCorners[3] = staticSprites.get(n + "BGW_TLO_TL");
                 bgWOCornerNames[3] = n;
             }
         }
@@ -319,11 +319,11 @@ public class Tile {
     public void setBgA(String name) {
         name = name.replace("BGA_TL", "");
         bgAName = name;
-        bgA = spritesH.get(name + "BGA_TL");
-        bgAEdges[0] = spritesH.get(name + "BGA_T_TL");
-        bgAEdges[1] = spritesH.get(name + "BGA_R_TL");
-        bgAEdges[2] = spritesH.get(name + "BGA_B_TL");
-        bgAEdges[3] = spritesH.get(name + "BGA_L_TL");
+        bgA = staticSprites.get(name + "BGA_TL");
+        bgAEdges[0] = staticSprites.get(name + "BGA_T_TL");
+        bgAEdges[1] = staticSprites.get(name + "BGA_R_TL");
+        bgAEdges[2] = staticSprites.get(name + "BGA_B_TL");
+        bgAEdges[3] = staticSprites.get(name + "BGA_L_TL");
     }
 
     public void setBgW(String name) {
@@ -341,13 +341,13 @@ public class Tile {
             name = name.replace("BGW_TL", "");
             name = name.replace("ultimate", "titanium");
             bgWName = name;
-            if (spritesH.get(name + "BGW_TL") != bgW) {
-                bgW = spritesH.get(name + "BGW_TL");
+            if (staticSprites.get(name + "BGW_TL") != bgW) {
+                bgW = staticSprites.get(name + "BGW_TL");
                 if (name.contains("woodWall") || name.contains("stoneWall")) {
-                    bgWEdges[0] = spritesH.get(name + "BGW_T_TL");
-                    bgWEdges[1] = spritesH.get(name + "BGW_R_TL");
-                    bgWEdges[2] = spritesH.get(name + "BGW_B_TL");
-                    bgWEdges[3] = spritesH.get(name + "BGW_L_TL");
+                    bgWEdges[0] = staticSprites.get(name + "BGW_T_TL");
+                    bgWEdges[1] = staticSprites.get(name + "BGW_R_TL");
+                    bgWEdges[2] = staticSprites.get(name + "BGW_B_TL");
+                    bgWEdges[3] = staticSprites.get(name + "BGW_L_TL");
                 }
             } else {
                 bgW = null;
@@ -357,8 +357,8 @@ public class Tile {
     }
 
     public void setBgB(String name) {
-        if (spritesH.get(name) != bgB) {
-            bgB = spritesH.get(name);
+        if (staticSprites.get(name) != bgB) {
+            bgB = staticSprites.get(name);
             bgBName = name;
         } else {
             bgB = null;
@@ -368,8 +368,8 @@ public class Tile {
 
     public void setBgC(String name) {
         if (name != null) name = name.replace("ultimate","titanium");
-        if (spritesH.get(name) != bgC) {
-            bgC = spritesH.get(name);
+        if (staticSprites.get(name) != bgC) {
+            bgC = staticSprites.get(name);
             bgCName = name;
         } else {
             bgC = null;
@@ -378,8 +378,8 @@ public class Tile {
     }
 
     public void setObstacle(String name) {
-        if (spritesH.get(name) != obstacle) {
-            obstacle = spritesH.get(name);
+        if (staticSprites.get(name) != obstacle) {
+            obstacle = staticSprites.get(name);
             obstacleName = name;
             if (name.contains("smallTree")) obstacleShadowLength = 3;
             if (containsCorners(name,"tree")) obstacleShadowLength = 8;

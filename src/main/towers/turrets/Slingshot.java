@@ -33,10 +33,10 @@ public class Slingshot extends Turret {
         loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         damage = 15; //15
-        damageSound = soundsH.get("woodDamage");
-        breakSound = soundsH.get("woodBreak");
-        placeSound = soundsH.get("woodPlace");
-        fireSound = soundsH.get("slingshot");
+        damageSound = sounds.get("woodDamage");
+        breakSound = sounds.get("woodBreak");
+        placeSound = sounds.get("woodPlace");
+        fireSound = sounds.get("slingshot");
         loadSprites();
         debrisType = "wood";
         price = SLINGSHOT_PRICE;
@@ -107,12 +107,12 @@ public class Slingshot extends Turret {
         upgradeDescB[5] = "bleeding,";
         upgradeDescC[5] = "+30 dmg";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[17];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[16];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[17];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[16];
     }
 
     public void upgradeSpecial(int id) {
@@ -141,9 +141,9 @@ public class Slingshot extends Turret {
                     break;
                 case 5:
                     debrisType = "stone";
-                    damageSound = soundsH.get("stoneDamage");
-                    breakSound = soundsH.get("stoneBreak");
-                    placeSound = soundsH.get("stonePlace");
+                    damageSound = sounds.get("stoneDamage");
+                    breakSound = sounds.get("stoneBreak");
+                    placeSound = sounds.get("stonePlace");
                     painful = true;
                     damage += 30;
                     delay += 10;

@@ -118,10 +118,10 @@ public class MagicMissileer extends Turret{
         upgradeDescC[2] = "";
         upgradeDescC[3] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[13];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[14];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[13];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[14];
     }
 
     protected void upgradeSpecial() {}
