@@ -12,8 +12,8 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.findAngle;
-import static main.misc.MiscMethods.findDistBetween;
+import static main.misc.Utilities.findAngle;
+import static main.misc.Utilities.findDistBetween;
 import static processing.core.PApplet.cos;
 import static processing.core.PApplet.sin;
 

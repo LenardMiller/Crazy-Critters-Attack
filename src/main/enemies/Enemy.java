@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
+import static main.misc.Utilities.*;
 
 public abstract class Enemy {
 

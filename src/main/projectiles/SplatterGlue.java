@@ -1,7 +1,7 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
-import main.misc.MiscMethods;
+import main.misc.Utilities;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
 import main.particles.Ouch;
@@ -68,7 +68,7 @@ public class SplatterGlue extends Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, "glue", PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
+                        erEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, "glue", PVector.fromAngle(Utilities.findAngle(erEnemy.position, position) + HALF_PI), j);
                     }
                 }
             }

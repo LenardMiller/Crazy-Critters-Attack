@@ -5,9 +5,9 @@ import processing.core.PVector;
 
 import static main.Main.sounds;
 
-public class Golem extends Enemy{
+public class Golem extends Enemy {
 
-    public Golem(PApplet p, float x, float y){
+    public Golem(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(42,42);
         pfSize = 2; //2

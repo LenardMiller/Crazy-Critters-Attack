@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.randomSpawnPosition;
+import static main.misc.Utilities.randomSpawnPosition;
 
 public class Wave {
 

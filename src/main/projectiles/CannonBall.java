@@ -1,7 +1,7 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
-import main.misc.MiscMethods;
+import main.misc.Utilities;
 import main.particles.ExplosionDebris;
 import main.particles.MediumExplosion;
 import main.towers.turrets.Turret;
@@ -58,7 +58,7 @@ public class CannonBall extends Projectile {
                                 break;
                             }
                         if (hitAlready) continue;
-                        erEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, erEnemy.lastDamageType, PVector.fromAngle(MiscMethods.findAngle(erEnemy.position, position) + HALF_PI), j);
+                        erEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, erEnemy.lastDamageType, PVector.fromAngle(Utilities.findAngle(erEnemy.position, position) + HALF_PI), j);
                     }
                 }
             }

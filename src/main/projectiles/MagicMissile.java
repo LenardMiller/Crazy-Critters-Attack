@@ -7,7 +7,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
+import static main.misc.Utilities.*;
 import static processing.core.PConstants.HALF_PI;
 
 public class MagicMissile extends Projectile {

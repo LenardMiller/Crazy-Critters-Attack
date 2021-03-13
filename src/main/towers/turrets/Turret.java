@@ -15,7 +15,7 @@ import processing.sound.SoundFile;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
+import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public abstract class Turret extends Tower {

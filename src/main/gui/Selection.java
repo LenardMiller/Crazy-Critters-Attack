@@ -1,7 +1,7 @@
 package main.gui;
 
 import main.gui.guiObjects.buttons.UpgradeTower;
-import main.misc.MiscMethods;
+import main.misc.Utilities;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
@@ -356,7 +356,7 @@ public class Selection { //what tower is selected
                 } else {
                     P.text("Effect Level: " + tower.effectLevel, 910, 356 + 20 * purpleCount + offset);
                 }
-                float effectDuration = MiscMethods.roundTo(tower.effectDuration / (float) FRAMERATE, 0.1f);
+                float effectDuration = Utilities.roundTo(tower.effectDuration / (float) FRAMERATE, 0.1f);
                 if (effectDuration % 1 == 0) {
                     P.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 + 20 * purpleCount + offset);
                 } else {

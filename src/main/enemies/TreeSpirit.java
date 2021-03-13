@@ -5,9 +5,9 @@ import processing.core.PVector;
 
 import static main.Main.sounds;
 
-public class TreeSpirit extends Enemy{
+public class TreeSpirit extends Enemy {
 
-    public TreeSpirit(PApplet p, float x, float y){
+    public TreeSpirit(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(42,42);
         pfSize = 2; //2

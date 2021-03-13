@@ -7,8 +7,8 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.findAngle;
-import static main.misc.MiscMethods.findSlope;
+import static main.misc.Utilities.findAngle;
+import static main.misc.Utilities.findSlope;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class WaveMotion extends Turret {

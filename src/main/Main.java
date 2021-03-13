@@ -28,10 +28,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
-import static main.misc.MiscMethods.*;
 import static main.misc.SoundLoader.loadSounds;
 import static main.misc.SpriteLoader.loadAnimatedSprites;
 import static main.misc.SpriteLoader.loadStaticSprites;
+import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
 

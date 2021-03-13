@@ -10,7 +10,7 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.superTint;
+import static main.misc.Utilities.superTint;
 import static processing.core.PApplet.radians;
 
 public class Corpse {
@@ -60,7 +60,7 @@ public class Corpse {
             float speed = 3.5f;
             speed *= p.random(1, 2);
             float a = p.random(radians(0), radians(360));
-            if (!(velocity.x == 0 && velocity.y == 0)) a = MiscMethods.findAngle(velocity);
+            if (!(velocity.x == 0 && velocity.y == 0)) a = Utilities.findAngle(velocity);
             a -= HALF_PI;
             a += p.random(radians(-40), radians(40));
             velocity = PVector.fromAngle(a);

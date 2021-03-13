@@ -9,7 +9,7 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateNodes;
+import static main.misc.Utilities.updateNodes;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTiles;
 
