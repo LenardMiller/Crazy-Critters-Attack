@@ -18,7 +18,6 @@ public class SpriteLoader {
     public static void loadAnimatedSprites(PApplet p) {
         //icons & buttons
         getSprite(p,"upgrade","IC","upgrades/",29);
-        getSprite(p,"moneyAdd","BT","moneyAdd/",3);
         getSprite(p,"upgrade","BT","upgradeButton/",5);
         getSprite(p,"sellTower","BT","sellTower/",3);
         getSprite(p,"targetPriority","BT","targetPriority/",3);
@@ -31,8 +30,6 @@ public class SpriteLoader {
         getSprite(p,"fireBuff","PT","buff/fire/",8);
         getSprite(p,"smokeBuff","PT","buff/smoke/",8);
         getSprite(p,"poisonBuff","PT","buff/poison/",8);
-        getSprite(p,"waterBuff","PT","buff/water/",8);
-        getSprite(p,"nullBuff","PT","buff/null/",8);
         getSprite(p,"decayBuff","PT","buff/decay/",8);
         getSprite(p,"glueBuff","PT","buff/glue/",8);
         getSprite(p,"stunBuff","PT","buff/stun/",8);
@@ -302,7 +299,6 @@ public class SpriteLoader {
         staticSprites.put("darkMetalPt",p.loadImage("sprites/particles/debris/darkMetal.png"));
         staticSprites.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         staticSprites.put("sandPt",p.loadImage("sprites/particles/debris/sand.png"));
-        staticSprites.put("nullPt",p.loadImage("sprites/particles/null/null.png"));
         //projectiles
         staticSprites.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
         staticSprites.put("cannonBallPj",p.loadImage("sprites/projectiles/cannonBall.png"));
