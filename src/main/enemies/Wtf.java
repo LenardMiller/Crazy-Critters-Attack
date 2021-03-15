@@ -14,7 +14,7 @@ public class Wtf extends Enemy {
         radius = 40;
         maxSpeed = .2f;
         speed = maxSpeed;
-        moneyDrop = 500;
+        moneyDrop = 1000;
         damage = 25;
         maxHp = 10000;
         hp = maxHp;
