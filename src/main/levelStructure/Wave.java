@@ -158,6 +158,27 @@ public class Wave {
             case "bigAlbinoBug":
                 e = new BigAlbinoBug(P, pos.x, pos.y);
                 break;
+            case "albinoButterfly":
+                e = new AlbinoButterfly(P, pos.x, pos.y);
+                break;
+            case "smallGolem":
+                e = new SmallGolem(P, pos.x, pos.y);
+                break;
+            case "midGolem":
+                e = new Golem(P, pos.x, pos.y);
+                break;
+            case "bigGolem":
+                e = new GiantGolem(P, pos.x, pos.y);
+                break;
+            case "bat":
+                e = new Bat(P, pos.x, pos.y);
+                break;
+            case "bigBat":
+                e = new GiantBat(P, pos.x, pos.y);
+                break;
+            case "wtf":
+                e = new Wtf(P, pos.x, pos.y);
+                break;
         }
         return e;
     }
