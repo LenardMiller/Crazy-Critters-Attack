@@ -141,8 +141,8 @@ public class Gluer extends Turret {
         upgradeDescB[3] = "glue";
         upgradeDescC[3] = "strength";
 
-        upgradeDescA[4] = "Increase";
-        upgradeDescB[4] = "glue";
+        upgradeDescA[4] = "Glue";
+        upgradeDescB[4] = "does";
         upgradeDescC[4] = "damage";
 
         upgradeDescA[5] = "Release";
