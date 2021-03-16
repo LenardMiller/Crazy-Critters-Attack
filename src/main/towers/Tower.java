@@ -15,23 +15,13 @@ import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public abstract class Tower {
 
-    public int damageTotal;
-    public int killsTotal;
     public int maxHp;
     public int hp;
-    public int damage;
-    public int pierce;
-    public int priority;
     public int nextLevelA;
     public int nextLevelB;
     public int price;
     public int value;
-    public int effectDuration;
     public int[] upgradePrices;
-    public float delay;
-    public float angle;
-    public float range;
-    public float effectLevel;
     public boolean hit;
     public boolean turret;
     public boolean visualize;
@@ -39,12 +29,9 @@ public abstract class Tower {
     public PApplet p;
     public Tile tile;
     public Object updateSprite;
+    public PImage sprite;
     public String name;
     public String[] upgradeTitles;
-    public String[] upgradeDescA;
-    public String[] upgradeDescB;
-    public String[] upgradeDescC;
-    public PImage sprite;
     public PImage[] upgradeIcons;
 
     protected int tintColor;
@@ -60,9 +47,6 @@ public abstract class Tower {
 
         name = "null";
         size = new PVector(120, 37);
-        delay = 0;
-        range = 0;
-        pierce = 0;
         this.maxHp = 1;
         hp = maxHp;
         hit = false;
@@ -72,9 +56,6 @@ public abstract class Tower {
         turret = false;
         visualize = false;
         nextLevelB = 0;
-        upgradeDescA = new String[4];
-        upgradeDescB = new String[4];
-        upgradeDescC = new String[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         updateNodes();
@@ -144,7 +125,7 @@ public abstract class Tower {
             selection.name = "null";
             inGameGui.flashA = 255;
         }
-        else if (!selection.name.equals("null")) selection.swapSelected(selection.tower.tile.id);
+        else if (!selection.name.equals("null")) selection.swapSelected(selection.turret.tile.id);
         if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
         if (!turret) {
             updateWallTiles();

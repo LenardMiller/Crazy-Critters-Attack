@@ -1,6 +1,6 @@
 package main.gui.guiObjects.buttons;
 
-import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -26,11 +26,9 @@ public class TargetPriority extends Button {
     }
 
     public void action(){
-        Tower tower = tiles.get(selection.id).tower; //switch selected tower's priority
-        if (tower.priority < 2){
-            tower.priority += 1;
-        } else{ //roll over
-            tower.priority = 0;
-        }
+        Turret turret = (Turret) tiles.get(selection.id).tower; //switch selected tower's priority
+        //roll over
+        if (turret.priority < 2) turret.priority += 1;
+        else turret.priority = 0;
     }
 }

@@ -20,8 +20,22 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public abstract class Turret extends Tower {
 
+    public int pjSpeed;
+    public int range;
+    public int effectDuration;
+    public int priority;
+    public int pierce;
+    public int killsTotal;
+    public int damageTotal;
+    public int damage;
+    public float effectLevel;
+    public float delay;
+    public float angle;
+    public String[] upgradeDescA;
+    public String[] upgradeDescB;
+    public String[] upgradeDescC;
+
     protected int offset;
-    protected int pjSpeed;
     protected int numFireFrames;
     protected int numLoadFrames;
     protected int numIdleFrames;
