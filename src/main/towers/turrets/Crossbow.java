@@ -114,8 +114,9 @@ public class Crossbow extends Turret {
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[9];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[8];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[18];
+
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[6];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[10];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[19];
     }
 
