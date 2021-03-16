@@ -15,8 +15,8 @@ public class Wtf extends Enemy {
         maxSpeed = .2f;
         speed = maxSpeed;
         moneyDrop = 1000;
-        damage = 25;
-        maxHp = 10000;
+        damage = 65;
+        maxHp = 60000;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "wtf";
