@@ -37,7 +37,7 @@ public class SeismicTower extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 30;
+        damage = 50;
         range = 225;
         shockwaveWidth = 60;
         seismicSense = false;
@@ -257,7 +257,7 @@ public class SeismicTower extends Turret {
                     range += 50;
                     break;
                 case 4:
-                    damage += 30;
+                    damage += 50;
                     break;
                 case 5:
                     debrisType = "metal";
