@@ -25,6 +25,7 @@ public class Wtf extends Enemy {
         attackDmgFrames = new int[]{11};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = 10;
+        corpseLifespan = 750;
         corpseSize = size;
         partSize = new PVector(100,100);
         attackFrame = attackStartFrame;

@@ -78,7 +78,7 @@ public class Hand {
         if (price > money) implacable = true;
     }
 
-    private void checkPlaceableEnemies() {
+    private void checkPlaceableEnemies() { //todo: something isn't updating here
         if (held.equals("wall") && displayInfo.equals("placeWall") && enemyNearby()) {
             implacable = true;
         }
