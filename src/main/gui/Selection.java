@@ -145,58 +145,47 @@ public class Selection { //what tower is selected
         switch (turret.name) {
             case "slingshot":
                 P.text("Slingshot", 1000, 241);
-                speed = 12;
                 break;
             case "slingshotRock":
                 P.text("Slingshot MKII", 1000, 241);
-                speed = 12;
                 setTextPurple("Bleeding", offset);
                 break;
             case "slingshotGravel":
                 P.text("Gravel Slinger", 1000, 241);
-                speed = 12;
                 setTextPurple("8 gravel bits", offset);
                 break;
             case "miscCannon":
                 P.text("Luggage", 1000, 241);
                 P.text("Blaster", 1000, 266);
                 offset = 25;
-                speed = 12;
                 break;
             case "miscCannonLaundry":
                 P.text("Dirty Luggage", 1000, 241);
                 P.text("Blaster", 1000, 266);
                 offset = 25;
-                speed = 12;
                 setTextPurple("Toxic splatters", offset);
                 break;
             case "miscCannonBarrel":
                 P.text("Minibarrel", 1000, 241);
-                speed = 12;
                 break;
             case "crossbow":
                 P.text("Crossbow", 1000, 241);
-                speed = 24;
                 break;
             case "crossbowReinforced":
                 P.text("Reinforced", 1000, 241);
                 P.text("Crossbow", 1000, 266);
                 offset = 25;
-                speed = 24;
                 break;
             case "crossbowMultishot":
                 P.text("Shotbow", 1000, 241);
-                speed = 24;
                 setTextPurple("Seven bolts", offset);
                 break;
             case "cannon":
                 P.text("Cannon", 1000, 241);
-                speed = 14;
                 setTextPurple("Small splash", offset);
                 break;
             case "fragCannon":
                 P.text("Frag Cannon", 1000, 241);
-                speed = 14;
                 setTextPurple("Small splash", offset);
                 setTextPurple("Shrapnel", offset + 20);
                 break;
@@ -204,34 +193,28 @@ public class Selection { //what tower is selected
                 P.text("Dynamite", 1000, 241);
                 P.text("Launcher", 1000, 266);
                 offset = 25;
-                speed = 10;
                 setTextPurple("Large splash", offset);
                 break;
             case "gluer":
                 P.text("Gluer", 1000, 241);
-                speed = 7;
                 setTextPurple("Slows", offset);
                 break;
             case "splashGluer":
                 P.text("Gluer Splasher", 1000, 241);
-                speed = 7;
                 setTextPurple("Slows", offset);
                 setTextPurple("Splatter", offset + 20);
                 break;
             case "shatterGluer":
                 P.text("Gluer Spiker", 1000, 241);
-                speed = 7;
                 setTextPurple("Slows", offset);
                 setTextPurple("Releases spikes", offset + 20);
                 break;
             case "seismic":
                 P.text("Seismic Tower", 1000, 241);
-                speed = 7;
                 setTextPurple("Shockwave", offset);
                 break;
             case "seismicSniper":
                 P.text("Seismic Sniper", 1000, 241);
-                speed = 7;
                 setTextPurple("Shockwave", offset);
                 setTextPurple("Stuns stealth", offset + 20);
                 break;
@@ -239,51 +222,42 @@ public class Selection { //what tower is selected
                 P.text("Seismic", 1000, 241);
                 P.text("Slammer", 1000, 266);
                 offset = 25;
-                speed = 7;
                 setTextPurple("Shockwave", offset);
                 setTextPurple("360 degrees", offset + 20);
                 break;
             case "energyBlaster":
                 P.text("Energy Blaster", 1000, 241);
-                speed = 16;
                 setTextPurple("Splash", offset);
                 break;
             case "magicMissleer":
                 P.text("Magic Missileer", 1000, 241);
-                speed = 5;
                 setTextPurple("Three homing missiles", offset);
                 break;
             case "magicMissleerFour":
                 P.text("Magic Missileer", 1000, 241);
-                speed = 5;
                 setTextPurple("Four homing missiles", offset);
                 break;
             case "tesla":
                 P.text("Tesla Tower", 1000, 241);
-                speed = -1;
                 setTextPurple("Chain lightning", offset);
                 break;
             case "nightmare":
                 P.text("Nightmare", 1000, 241);
                 P.text("Blaster", 1000, 266);
                 offset = 25;
-                speed = 18;
                 setTextPurple("Shotgun", offset);
                 setTextPurple("Decay", offset + 20);
                 break;
             case "flamethrower":
                 P.text("Flamethrower", 1000, 241);
-                speed = 5;
                 setTextPurple("Fire", offset);
                 setTextPurple("Slow rotation", offset + 20);
                 break;
             case "railgun":
                 P.text("Railgun", 1000, 241);
-                speed = -1;
                 break;
             case "waveMotion":
                 P.text("Death Beam", 1000, 241);
-                speed = -1;
                 setTextPurple("Infinite pierce", offset);
                 break;
         }
@@ -340,8 +314,8 @@ public class Selection { //what tower is selected
             P.text("Load time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
             //velocity
             if (speed < 0) P.text("Instant", 910, 336 + offset);
-            else if (speed < 8) P.text("Low velocity", 910, 336 + offset);
-            else if (speed <= 15) P.text("Medium velocity", 910, 336 + offset);
+            else if (speed < 500) P.text("Low velocity", 910, 336 + offset);
+            else if (speed <= 1000) P.text("Medium velocity", 910, 336 + offset);
             else P.text("High velocity", 910, 336 + offset);
             if (turret.pierce > 0) {
                 P.fill(100, 0, 200);
