@@ -16,7 +16,7 @@ public class Bat extends Enemy {
         speed = maxSpeed;
         moneyDrop = 75;
         damage = 2;
-        maxHp = 250; //Hp
+        maxHp = 350; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "bat";
