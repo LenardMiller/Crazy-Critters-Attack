@@ -12,7 +12,7 @@ public class Wtf extends Enemy {
         size = new PVector(100,100);
         pfSize = 4;
         radius = 40;
-        maxSpeed = .2f;
+        maxSpeed = .3f;
         speed = maxSpeed;
         moneyDrop = 1000;
         damage = 65;

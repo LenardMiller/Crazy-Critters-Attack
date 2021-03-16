@@ -192,7 +192,7 @@ public class CaveWaves {
         waves[44] = wavePreset(p, 10000, 100, wtf);
         waves[44].addSpawns(wtf, 1);
 
-        waves[45] = wavePreset(p, 1, 1, horde);
+        waves[45] = wavePreset(p, 10000, 3000, horde);
         waves[45].addSpawns(bigAlbinoBug, 10);
         waves[45].addSpawns(midGolem, 15);
         waves[45].addSpawns(smallGolem, 10);
