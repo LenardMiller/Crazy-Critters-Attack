@@ -12,11 +12,11 @@ public class Bat extends Enemy {
         size = new PVector(50,50);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = .5f;
+        maxSpeed = .55f;
         speed = maxSpeed;
         moneyDrop = 75;
-        damage = 2;
-        maxHp = 350; //Hp
+        damage = 5;
+        maxHp = 400; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "bat";

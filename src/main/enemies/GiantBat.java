@@ -12,11 +12,11 @@ public class GiantBat extends Enemy {
         size = new PVector(102,102);
         pfSize = 2;
         radius = 25;
-        maxSpeed = .4f;
+        maxSpeed = .5f;
         speed = maxSpeed;
         moneyDrop = 500;
-        damage = 5;
-        maxHp = 2500; //Hp
+        damage = 20;
+        maxHp = 10000; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "giantBat";
