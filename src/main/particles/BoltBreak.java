@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.animatedSprites;
+import static main.misc.Utilities.from60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class BoltBreak extends Particle {
@@ -15,7 +16,7 @@ public class BoltBreak extends Particle {
         speed = maxSpeed;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        betweenFrames = (int)p.random(0,5);
+        betweenFrames = from60ToFramerate(p.random(0,5));
         currentSprite = 0;
         sprites = animatedSprites.get("boltBreakPT");
         velocity = PVector.fromAngle(angle-HALF_PI);

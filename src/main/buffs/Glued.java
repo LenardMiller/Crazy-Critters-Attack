@@ -9,6 +9,7 @@ import processing.core.PImage;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
 public class Glued extends Buff {
 
@@ -17,8 +18,8 @@ public class Glued extends Buff {
     public Glued(PApplet p, int enId, float speedMod, int duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
-        effectDelay = 12; //frames
-        lifeDuration = duration;
+        effectDelay = secondsToFrames(0.2f); //frames
+        lifeDuration = secondsToFrames(duration);
         this.SPEED_MODIFIER = speedMod;
         particle = "glue";
         name = "glued";

@@ -17,7 +17,6 @@ public abstract class Tower {
 
     public int damageTotal;
     public int killsTotal;
-    public int delay;
     public int maxHp;
     public int hp;
     public int damage;
@@ -29,6 +28,7 @@ public abstract class Tower {
     public int value;
     public int effectDuration;
     public int[] upgradePrices;
+    public float delay;
     public float angle;
     public float range;
     public float effectLevel;

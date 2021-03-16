@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.animatedSprites;
+import static main.misc.Utilities.from60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class ExplosionDebris extends Particle{
@@ -14,8 +15,8 @@ public class ExplosionDebris extends Particle{
         this.maxSpeed = maxSpeed;
         speed = maxSpeed;
         angleTwo = angle;
-        angularVelocity = 5; //degrees mode
-        betweenFrames = (int)p.random(2,5);
+        angularVelocity = 300; //degrees mode
+        betweenFrames = from60ToFramerate(p.random(2,5));
         numFrames = 4;
         currentSprite = 0;
         sprites = animatedSprites.get(type + "ExDebrisPT");

@@ -47,12 +47,12 @@ public class Shockwave {
         UNTOUCHED_ENEMIES = new ArrayList<>();
         UNTOUCHED_ENEMIES.addAll(enemies);
         radius = 0;
-        SPEED = 7;
+        SPEED = 400;
     }
 
     public void main() {
         if (!paused) {
-            radius += SPEED;
+            radius += SPEED/FRAMERATE;
             display();
         }
         if (radius > MAX_RADIUS) shockwaves.remove(this);

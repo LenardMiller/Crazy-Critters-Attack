@@ -20,16 +20,11 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public abstract class Turret extends Tower {
 
-    protected PImage sBase;
-    protected PImage sIdle;
     protected int offset;
     protected int pjSpeed;
     protected int numFireFrames;
     protected int numLoadFrames;
     protected int numIdleFrames;
-    protected PImage[] fireFrames;
-    protected PImage[] loadFrames;
-    protected PImage[] idleFrames;
     protected int spriteType;
     protected int frame;
     protected int frameTimer;
@@ -37,14 +32,18 @@ public abstract class Turret extends Tower {
     protected int betweenFireFrames;
     protected float loadDelay;
     protected float loadDelayTime;
-    protected Enemy targetEnemy;
     protected float targetAngle;
-    protected SoundFile fireSound;
     protected float barrelLength;
     protected String fireParticle;
+    protected PImage sIdle;
+    protected PImage sBase;
+    protected PImage[] fireFrames;
+    protected PImage[] loadFrames;
+    protected PImage[] idleFrames;
+    protected Enemy targetEnemy;
+    protected SoundFile fireSound;
 
     private ArrayList<Integer> spriteArray;
-
 
     protected Turret(PApplet p, Tile tile) {
         super(p, tile);
@@ -240,7 +239,7 @@ public abstract class Turret extends Tower {
                 } else { //if done, switch to load
                     if (numLoadFrames > 0) {
                         int oldSize = numLoadFrames;
-                        int newSize = delay;
+                        int newSize = secondsToFrames(delay);
                         spriteArray = new ArrayList<>();
                         if (oldSize > newSize) { //decreasing size
                             //creates the new spriteArray

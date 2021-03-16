@@ -21,7 +21,7 @@ public class EnergyBlast extends Projectile {
         position = new PVector(x, y);
         size = new PVector(10, 18);
         radius = 14;
-        maxSpeed = 16;
+        maxSpeed = 1000;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;

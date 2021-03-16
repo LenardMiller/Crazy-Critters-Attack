@@ -5,6 +5,7 @@ import processing.core.PVector;
 
 import static main.Main.animatedSprites;
 import static main.Main.paused;
+import static main.misc.Utilities.secondsToFrames;
 import static processing.core.PApplet.radians;
 
 public class Pile extends Particle {
@@ -15,7 +16,7 @@ public class Pile extends Particle {
         maxSpeed = 0;
         speed = 0;
         angleTwo = 0;
-        lifespan = 500;
+        lifespan = secondsToFrames(8);
         sprites = animatedSprites.get(type + "PilePT");
         currentSprite = (int) p.random(0,3.99f);
         numFrames = 4;

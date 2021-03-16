@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.animatedSprites;
+import static main.misc.Utilities.from60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class RailgunBlast extends Particle {
@@ -15,7 +16,7 @@ public class RailgunBlast extends Particle {
         speed = maxSpeed;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        betweenFrames = 4;
+        betweenFrames = from60ToFramerate(4);
         currentSprite = 0;
         sprites = animatedSprites.get("railgunBlastPT");
         velocity = PVector.fromAngle(angle-HALF_PI);

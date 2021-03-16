@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
+import static main.misc.Utilities.from60ToFramerate;
 
 public class Dummy extends Enemy {
     public Dummy(PApplet p, float x, float y) {
@@ -19,7 +20,7 @@ public class Dummy extends Enemy {
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "dummy";
-        betweenWalkFrames = 1;
+        betweenWalkFrames = from60ToFramerate(1);
         attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;
         corpseSize = size;

@@ -7,6 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 
 public class Flame extends Projectile {
 
@@ -25,14 +26,14 @@ public class Flame extends Projectile {
         size = new PVector(25, 25);
         spawnRange = 0;
         radius = 5;
-        maxSpeed = 5;
+        maxSpeed = 300;
         speed = maxSpeed;
         this.damage = damage;
         pierce = 900;
         this.effectLevel = effectLevel;
         this.effectDuration = effectDuration;
         this.angle = angle;
-        this.TIMER = timer;
+        this.TIMER = from60ToFramerate(timer);
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
         SPRITES = animatedSprites.get("flamePJ");

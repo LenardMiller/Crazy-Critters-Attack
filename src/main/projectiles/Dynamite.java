@@ -9,6 +9,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 import static processing.core.PApplet.abs;
 
 public class Dynamite extends Projectile {
@@ -17,9 +18,9 @@ public class Dynamite extends Projectile {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(9, 15);
-        angularVelocity = p.random(-15, 15); //degrees mode
+        angularVelocity = from60ToFramerate(p.random(-15, 15)); //degrees mode
         radius = 10;
-        maxSpeed = 10;
+        maxSpeed = 600;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;

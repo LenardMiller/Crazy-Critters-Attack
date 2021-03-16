@@ -1,7 +1,6 @@
 package main.gui;
 
 import main.gui.guiObjects.buttons.UpgradeTower;
-import main.misc.Utilities;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
@@ -337,7 +336,7 @@ public class Selection { //what tower is selected
             //damage
             P.text("Damage: " + tower.damage, 910, 296 + offset);
             //firerate (delay)
-            P.text("Load time: " + (float) (round((float) (tower.delay) / 6)) / 10 + "s", 910, 316 + offset);
+            P.text("Load time: " + nf(tower.delay, 1, 1) + "s", 910, 316 + offset);
             //velocity
             if (speed < 0) P.text("Instant", 910, 336 + offset);
             else if (speed < 8) P.text("Low velocity", 910, 336 + offset);
@@ -356,7 +355,7 @@ public class Selection { //what tower is selected
                 } else {
                     P.text("Effect Level: " + tower.effectLevel, 910, 356 + 20 * purpleCount + offset);
                 }
-                float effectDuration = Utilities.roundTo(tower.effectDuration / (float) FRAMERATE, 0.1f);
+                float effectDuration = tower.effectDuration;
                 if (effectDuration % 1 == 0) {
                     P.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 + 20 * purpleCount + offset);
                 } else {

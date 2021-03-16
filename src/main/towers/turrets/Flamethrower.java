@@ -21,15 +21,15 @@ public class Flamethrower extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 4;
-        delay += (round(p.random(-(delay / 10f), delay / 10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 5;
+        delay = 0.01f;
+        delay += p.random(-(delay / 10f), delay / 10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 300;
         range = 250;
         numFireFrames = 4;
         numLoadFrames = 1;
         numIdleFrames = 4;
         effectLevel = 50;
-        effectDuration = 300;
+        effectDuration = 5;
         betweenIdleFrames = 1;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
@@ -38,7 +38,7 @@ public class Flamethrower extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 20;
+        damage = 1;
         flameTimer = 2;
         loadSprites();
         debrisType = "metal";
@@ -136,11 +136,11 @@ public class Flamethrower extends Turret {
                     damage += 20;
                     break;
                 case 4:
-                    effectDuration += 100;
+                    effectDuration += 1;
                     effectLevel += 2;
                     break;
                 case 5:
-                    effectDuration += 100;
+                    effectDuration += 1;
                     effectLevel += 2;
                     break;
             }

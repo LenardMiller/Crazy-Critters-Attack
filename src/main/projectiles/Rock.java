@@ -6,6 +6,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 
 public class Rock extends Projectile {
 
@@ -14,11 +15,11 @@ public class Rock extends Projectile {
         position = new PVector(x, y);
         size = new PVector(13, 13);
         radius = 6;
-        maxSpeed = 12;
+        maxSpeed = 700;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
-        angularVelocity = p.random(-15,15);
+        angularVelocity = from60ToFramerate(p.random(-15,15));
         sprite = staticSprites.get("rockPj");
         hitSound = sounds.get("largeImpact");
         buff = "bleeding";

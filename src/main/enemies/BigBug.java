@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
+import static main.misc.Utilities.from60ToFramerate;
 
 public class BigBug extends Enemy{
 
@@ -12,7 +13,7 @@ public class BigBug extends Enemy{
         size = new PVector(53,53);
         pfSize = 2; //2
         radius = 26;
-        maxSpeed = .3f;
+        maxSpeed = 18;
         speed = maxSpeed;
         moneyDrop = 100;
         damage = 15;
@@ -20,7 +21,7 @@ public class BigBug extends Enemy{
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "bigBug";
-        betweenWalkFrames = 3;
+        betweenWalkFrames = from60ToFramerate(3);
         attackStartFrame = 48; //attack start
         corpseSize = size;
         partSize = new PVector(32,32);

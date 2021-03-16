@@ -8,14 +8,15 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
 public class Bleeding extends Buff {
 
     public Bleeding(PApplet p, int enId, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
-        effectDelay = 12; //frames
-        lifeDuration = 360;
+        effectDelay = secondsToFrames(0.2f); //frames
+        lifeDuration = secondsToFrames(6);
         particle = null;
         name = "bleeding";
         this.enId = enId;

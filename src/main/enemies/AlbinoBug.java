@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
+import static main.misc.Utilities.from60ToFramerate;
 
 public class AlbinoBug extends Enemy {
     public AlbinoBug(PApplet p, float x, float y) {
@@ -11,7 +12,7 @@ public class AlbinoBug extends Enemy {
         size = new PVector(25,25);
         pfSize = 1; //1
         radius = 13;
-        maxSpeed = .5f;
+        maxSpeed = 30;
         speed = maxSpeed;
         moneyDrop = 20;
         damage = 3;
@@ -19,8 +20,8 @@ public class AlbinoBug extends Enemy {
         hp = maxHp;
         hitParticle = "glowOuch";
         name = "albinoBug";
-        betweenWalkFrames = 4;
-        betweenAttackFrames = 2;
+        betweenWalkFrames = from60ToFramerate(4);
+        betweenAttackFrames = from60ToFramerate(2);
         attackStartFrame = 34; //attack start
         attackFrame = attackStartFrame;
         corpseSize = size;

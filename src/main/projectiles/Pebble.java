@@ -14,7 +14,7 @@ public class Pebble extends Projectile{
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 5;
-        maxSpeed = 12;
+        maxSpeed = 700;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;

@@ -16,7 +16,7 @@ public class Needle extends Projectile {
         position = new PVector(x, y);
         size = new PVector(2, 17);
         radius = 10;
-        maxSpeed = 18;
+        maxSpeed = 1100;
         speed = maxSpeed;
         this.damage = damage;
         this.effectLevel = effectLevel;

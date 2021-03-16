@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
+import static main.misc.Utilities.from60ToFramerate;
 
 public class TreeSpirit extends Enemy {
 
@@ -12,7 +13,7 @@ public class TreeSpirit extends Enemy {
         size = new PVector(42,42);
         pfSize = 2; //2
         radius = 21;
-        maxSpeed = .35f;
+        maxSpeed = 21;
         speed = maxSpeed;
         moneyDrop = 30;
         damage = 5;
@@ -21,11 +22,11 @@ public class TreeSpirit extends Enemy {
         hitParticle = "leafOuch";
         name = "treeSpirit";
         attackStartFrame = 22;
-        betweenAttackFrames = 2;
+        betweenAttackFrames = from60ToFramerate(2);
         attackFrame = attackStartFrame;
         corpseSize = new PVector(84,84);
         partSize = new PVector(38,38);
-        betweenCorpseFrames = 6;
+        betweenCorpseFrames = from60ToFramerate(6);
         dieSound = sounds.get("leaves");
         overkillSound = sounds.get("leavesImpact");
         loadSprites();

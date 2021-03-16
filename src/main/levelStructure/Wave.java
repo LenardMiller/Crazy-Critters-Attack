@@ -11,6 +11,7 @@ import java.util.Collections;
 
 import static main.Main.*;
 import static main.misc.Utilities.randomSpawnPosition;
+import static main.misc.Utilities.secondsToFrames;
 
 public class Wave {
 
@@ -40,8 +41,8 @@ public class Wave {
 
     public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
         P = p;
-        LENGTH = length;
-        SPAWN_LENGTH = spawnLength;
+        LENGTH = secondsToFrames(length);
+        SPAWN_LENGTH = secondsToFrames(spawnLength);
         FILL_COLOR = fillColor;
         ACCENT_COLOR = accentColor;
         TEXT_COLOR = textColor;

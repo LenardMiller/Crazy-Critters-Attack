@@ -11,6 +11,7 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
 public class Machine {
 
@@ -88,14 +89,14 @@ public class Machine {
         }
         p.tint(255, tintColor, tintColor);
         p.imageMode(CENTER);
-        if (deathFrame < 200) p.image(sprites[currentFrame], position.x, position.y);
+        if (deathFrame < secondsToFrames(3)) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
         if (dead && !paused) deathFrame++;
         if (!dead && !paused) hurtParticles();
-        else if (deathFrame < 300 && !paused) deathAnim();
+        else if (deathFrame < secondsToFrames(5) && !paused) deathAnim();
         else EXPLODE_LOOP.stopLoop();
-        if (deathFrame > 500) paused = true;
+        if (deathFrame > secondsToFrames(8)) paused = true;
         if (p.frameCount > frameTimer && !dead && !paused) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
@@ -136,7 +137,7 @@ public class Machine {
         if (deathFrame == 0) {
             BREAK_SOUND.stop();
             BREAK_SOUND.play(1, volume);
-        } if (deathFrame < 160) {
+        } if (deathFrame < secondsToFrames(2.6f)) {
             for (Tile tile : machTiles) {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
@@ -165,7 +166,7 @@ public class Machine {
                 }
             }
         }
-        if (deathFrame == 280) for (Tile tile : machTiles) tile.setBgC(debris + "DebrisBGC_TL");
+        if (deathFrame == 4.6f) for (Tile tile : machTiles) tile.setBgC(debris + "DebrisBGC_TL");
     }
 
     public void damage(int dmg) {

@@ -6,6 +6,7 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
 public abstract class Buff {
 
@@ -25,8 +26,8 @@ public abstract class Buff {
         this.p = p;
 
         particleChance = 8;
-        effectDelay = 60; //frames
-        lifeDuration = 600; //frames
+        effectDelay = secondsToFrames(1); //frames
+        lifeDuration = secondsToFrames(10); //frames
         particle = "null";
         name = "null";
         this.enId = enId;

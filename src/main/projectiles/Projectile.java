@@ -53,7 +53,7 @@ public abstract class Projectile {
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 10;
-        speed = (float) 2;
+        speed = 100;
         damage = 1;
         pierce = 0;
         hitTime = 0;
@@ -88,7 +88,7 @@ public abstract class Projectile {
 
     protected void trail() { //leaves a trail of particles
         if (hasTrail) {
-            int num = floor(p.random(0, 3));
+            int num = floor(p.random(0, 3) * (60 / (float) FRAMERATE));
             if (num == 0) particles.add(new BuffParticle(p, position.x, position.y, p.random(0, 360), trail));
         }
     }
@@ -114,7 +114,7 @@ public abstract class Projectile {
     }
 
     public void move() {
-        velocity.setMag(speed);
+        velocity.setMag(speed/FRAMERATE);
         position.add(velocity);
     }
 

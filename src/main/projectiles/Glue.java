@@ -16,7 +16,7 @@ public class Glue extends Projectile {
         position = new PVector(x, y);
         size = new PVector(10, 23);
         radius = 6;
-        maxSpeed = 7;
+        maxSpeed = 400;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;

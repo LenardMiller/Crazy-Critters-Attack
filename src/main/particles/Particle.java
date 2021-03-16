@@ -7,6 +7,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 import static processing.core.PApplet.radians;
 import static processing.core.PConstants.HALF_PI;
 
@@ -38,10 +39,10 @@ public abstract class Particle {
 
         position = new PVector(x, y);
         size = new PVector(5, 5);
-        speed = (float) 1;
+        speed = 60;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        lifespan = 60; //in frames
+        lifespan = secondsToFrames(1);
         lifespan += (PApplet.round(p.random(-(lifespan / 4f), lifespan / 4f))); //injects 10% randomness so all don't die at once
         numFrames = 1;
         currentSprite = 0;
@@ -91,7 +92,7 @@ public abstract class Particle {
     }
 
     private void move() {
-        velocity.setMag(speed);
+        velocity.setMag(speed/FRAMERATE);
         position.add(velocity);
     }
 }

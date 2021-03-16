@@ -11,6 +11,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 
 public class Laundry extends Projectile {
 
@@ -21,12 +22,12 @@ public class Laundry extends Projectile {
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 5;
-        maxSpeed = 12;
+        maxSpeed = 700;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
         angleTwo = angle;
-        angularVelocity = p.random(-15, 15); //degrees mode
+        angularVelocity = from60ToFramerate(p.random(-15, 15)); //degrees mode
         sprite = staticSprites.get("laundryPj");
         trail = "poison";
         hasTrail = true;

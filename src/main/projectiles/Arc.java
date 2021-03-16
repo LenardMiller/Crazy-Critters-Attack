@@ -8,6 +8,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
 public class Arc {
 
@@ -54,7 +55,7 @@ public class Arc {
             }
             P.line(points[1].x,points[1].y,pointA.x,pointA.y);
         }
-        if (!paused) alpha -= 5;
+        if (!paused) alpha -= secondsToFrames(1/12f);
     }
 
     private void zap() {

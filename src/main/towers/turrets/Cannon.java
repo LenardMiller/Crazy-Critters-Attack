@@ -9,6 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Cannon extends Turret {
@@ -25,11 +26,11 @@ public class Cannon extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 230;
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 14;
+        delay = 4;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 850;
         numFireFrames = 6;
-        betweenFireFrames = 1;
+        betweenFireFrames = from60ToFramerate(1);
         numLoadFrames = 18;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
@@ -129,6 +130,7 @@ public class Cannon extends Turret {
                     fireSound = sounds.get("slingshot");
                     name = "dynamiteLauncher";
                     debrisType = "wood";
+                    fireParticle = null;
                     damageSound = sounds.get("woodDamage");
                     breakSound = sounds.get("woodBreak");
                     placeSound = sounds.get("woodPlace");
@@ -143,11 +145,11 @@ public class Cannon extends Turret {
                     range += 35;
                     break;
                 case 4:
-                    delay -= 50;
+                    delay -= 0.8f;
                     break;
                 case 5:
                     range += 30;
-                    delay -= 60;
+                    delay -= 1;
                     frags = true;
                     name = "fragCannon";
                     debrisType = "metal";

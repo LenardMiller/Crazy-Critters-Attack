@@ -18,7 +18,7 @@ public class CannonBall extends Projectile {
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 10;
-        maxSpeed = 14;
+        maxSpeed = 850;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;

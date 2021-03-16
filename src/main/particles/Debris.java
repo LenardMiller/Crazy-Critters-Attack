@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.staticSprites;
+import static main.misc.Utilities.secondsToFrames;
 import static processing.core.PConstants.HALF_PI;
 
 public class Debris extends Particle {
@@ -11,11 +12,11 @@ public class Debris extends Particle {
         super(p, x, y, angle);
         position = new PVector(x, y);
         size = new PVector(5, 5);
-        maxSpeed = p.random(1.5f,3.5f); //default: 2
+        maxSpeed = p.random(100,200);
         speed = maxSpeed;
         angleTwo = angle;
-        angularVelocity = p.random(-15,15); //degrees mode
-        lifespan = (int) p.random(3, 15);
+        angularVelocity = p.random(-900,900); //degrees mode
+        lifespan = secondsToFrames(p.random(0.05f, 0.25f));
         numFrames = 1;
         delay = lifespan/numFrames;
         sprite = staticSprites.get(type + "Pt");

@@ -14,7 +14,7 @@ public class Bolt extends Projectile {
         position = new PVector(x, y);
         size = new PVector(7, 32);
         radius = 10;
-        maxSpeed = 24;
+        maxSpeed = 1400;
         speed = maxSpeed;
         this.damage = damage;
         this.pierce = pierce;

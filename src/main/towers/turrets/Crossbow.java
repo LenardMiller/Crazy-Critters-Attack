@@ -23,9 +23,9 @@ public class Crossbow extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 270;
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 24;
+        delay = 4.5f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 1400;
         range = 320;
         numFireFrames = 13;
         numLoadFrames = 81;
@@ -143,7 +143,7 @@ public class Crossbow extends Turret {
                     range += 30;
                     break;
                 case 4:
-                    delay -= 70;
+                    delay -= 1.1f;
                     break;
                 case 5:
                     multishot = true;

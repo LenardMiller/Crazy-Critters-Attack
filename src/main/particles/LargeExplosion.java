@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.animatedSprites;
+import static main.misc.Utilities.from60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class LargeExplosion extends Particle {
@@ -16,7 +17,7 @@ public class LargeExplosion extends Particle {
         speed = maxSpeed;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        betweenFrames = 1;
+        betweenFrames = from60ToFramerate(1);
         numFrames = 17;
         currentSprite = 0;
         sprites = animatedSprites.get(type + "LargeExplosionPT");

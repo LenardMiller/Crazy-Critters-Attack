@@ -6,6 +6,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 
 public class LittleWorm extends Enemy {
 
@@ -14,7 +15,7 @@ public class LittleWorm extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = .6f;
+        maxSpeed = 36;
         speed = maxSpeed;
         moneyDrop = 30;
         damage = 3;
@@ -25,7 +26,7 @@ public class LittleWorm extends Enemy {
         attackStartFrame = 0;
         attackDmgFrames = new int[]{18};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = 2;
+        betweenAttackFrames = from60ToFramerate(2);
         attackFrame = attackStartFrame;
         stealthy = true;
         partSize = new PVector(7, 7);

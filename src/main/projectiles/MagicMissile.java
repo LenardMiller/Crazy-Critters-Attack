@@ -23,7 +23,7 @@ public class MagicMissile extends Projectile {
         position = new PVector(x, y);
         size = new PVector(6, 20);
         radius = 14;
-        maxSpeed = 5;
+        maxSpeed = 300;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
@@ -84,7 +84,7 @@ public class MagicMissile extends Projectile {
 
     public void move() {
         if (enemies.size() > 0) checkTarget();
-        velocity.setMag(speed);
+        velocity.setMag(speed/FRAMERATE);
         position.add(velocity);
     }
 

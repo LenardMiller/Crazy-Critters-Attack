@@ -282,4 +282,12 @@ public class Utilities {
         p.text(text, position.x, position.y);
         p.rectMode(CORNER);
     }
+
+    public static int secondsToFrames(float numberOfSeconds) {
+        return (int) (numberOfSeconds * FRAMERATE);
+    }
+
+    public static int from60ToFramerate(float frames) {
+        return (int) ((frames / 60f) * FRAMERATE);
+    }
 }

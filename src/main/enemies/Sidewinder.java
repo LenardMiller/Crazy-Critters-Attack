@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
+import static main.misc.Utilities.from60ToFramerate;
 
 public class Sidewinder extends Enemy {
 
@@ -12,7 +13,7 @@ public class Sidewinder extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = 0.7f;
+        maxSpeed = 42;
         speed = maxSpeed;
         moneyDrop = 20;
         damage = 3;
@@ -23,7 +24,7 @@ public class Sidewinder extends Enemy {
         attackStartFrame = 0;
         attackDmgFrames = new int[]{4};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = 5;
+        betweenAttackFrames = from60ToFramerate(5);
         attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(9,9);

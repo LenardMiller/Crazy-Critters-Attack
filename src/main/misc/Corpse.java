@@ -10,6 +10,7 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 import static main.misc.Utilities.superTint;
 import static processing.core.PApplet.radians;
 
@@ -50,7 +51,9 @@ public class Corpse {
      * @param frame what frame to start its animation on
      * @param animated should it be animated
      */
-    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity, int betweenFrames, int maxLife, String effectType, String name, String bloodParticle, int frame, boolean animated) {
+    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity,
+                  int betweenFrames, int maxLife, String effectType, String name, String bloodParticle, int frame,
+                  boolean animated) {
         this.p = p;
 
         this.POSITION = new PVector(position.x, position.y);
@@ -77,8 +80,8 @@ public class Corpse {
         this.BETWEEN_FRAMES = betweenFrames;
         betweenTime = 0;
 
-        this.MAX_LIFE = maxLife;
-        lifespan = maxLife;
+        this.MAX_LIFE = secondsToFrames(maxLife);
+        lifespan = MAX_LIFE;
     }
 
     public void main(int i) {

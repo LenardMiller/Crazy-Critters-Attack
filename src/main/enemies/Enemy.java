@@ -23,6 +23,9 @@ import static main.misc.Utilities.*;
 
 public abstract class Enemy {
 
+    /**
+     * measured in pixels per second
+     */
     public float maxSpeed;
     public float speed;
     public float angle;
@@ -81,7 +84,7 @@ public abstract class Enemy {
         size = new PVector(20, 20);
         angle = radians(270);
         radius = 10;
-        maxSpeed = 1;
+        maxSpeed = 60;
         speed = maxSpeed;
         moneyDrop = 1;
         damage = 1;
@@ -103,8 +106,8 @@ public abstract class Enemy {
         attackCount = 0;
         corpseSize = size;
         partSize = size;
-        betweenCorpseFrames = 7;
-        corpseLifespan = 500;
+        betweenCorpseFrames = from60ToFramerate(7);
+        corpseLifespan = 8;
         lastDamageType = "normal";
     }
 
@@ -178,7 +181,7 @@ public abstract class Enemy {
 
     protected void move() {
         PVector m = PVector.fromAngle(angle);
-        m.setMag(speed);
+        m.setMag(speed/FRAMERATE);
         position.add(m);
     }
 
@@ -198,7 +201,7 @@ public abstract class Enemy {
             idleTime++;
             if (moveFrame < moveFrames.length - 1) {
                 if (idleTime >= betweenWalkFrames) {
-                    moveFrame += speed;
+                    moveFrame += speed/FRAMERATE;
                     idleTime = 0;
                 }
             } else moveFrame = 0;
@@ -404,7 +407,7 @@ public abstract class Enemy {
         PVector p = point.position;
         boolean intersecting;
         float tpSize;
-        if (point.combat) tpSize = speed;
+        if (point.combat) tpSize = speed/FRAMERATE;
         else tpSize = 15;
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
         intersecting = (pfPosition.x > p.x - tpSize + (nodeSize / 2f) && pfPosition.x < p.x + tpSize + (nodeSize / 2f)) && (pfPosition.y > p.y - tpSize + (nodeSize / 2f) && pfPosition.y < p.y + tpSize + (nodeSize / 2f));
@@ -581,7 +584,10 @@ public abstract class Enemy {
             boolean intersecting;
             float tpSize = 10;
             PVector pfPosition = new PVector(P.mouseX, P.mouseY);
-            intersecting = (pfPosition.x > position.x - tpSize + (nodeSize / 2f) && pfPosition.x < position.x + tpSize + (nodeSize / 2f)) && (pfPosition.y > position.y - tpSize + (nodeSize / 2f) && pfPosition.y < position.y + tpSize + (nodeSize / 2f));
+            intersecting = (pfPosition.x > position.x - tpSize + (nodeSize / 2f) &&
+                    pfPosition.x < position.x + tpSize + (nodeSize / 2f)) &&
+                    (pfPosition.y > position.y - tpSize + (nodeSize / 2f) &&
+                            pfPosition.y < position.y + tpSize + (nodeSize / 2f));
             if (intersecting && tower != null) {
                 P.stroke(255, 255, 0);
                 P.noFill();
