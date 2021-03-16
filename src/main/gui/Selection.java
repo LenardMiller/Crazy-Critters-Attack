@@ -350,16 +350,20 @@ public class Selection { //what tower is selected
             //effects
             if (tower.effectLevel != 0 || tower.effectDuration != 0) {
                 P.fill(0, 200, 50);
-                if (tower.effectLevel % 1 == 0) {
-                    P.text("Effect Level: " + (int) tower.effectLevel, 910, 356 + 20 * purpleCount + offset);
-                } else {
-                    P.text("Effect Level: " + tower.effectLevel, 910, 356 + 20 * purpleCount + offset);
+                int x = 0;
+                if (tower.effectLevel == 0) x = 20;
+                else {
+                    if (tower.effectLevel % 1 == 0) {
+                        P.text("Effect Level: " + (int) tower.effectLevel, 910, 356 + 20 * purpleCount + offset);
+                    } else {
+                        P.text("Effect Level: " + tower.effectLevel, 910, 356 + 20 * purpleCount + offset);
+                    }
                 }
                 float effectDuration = tower.effectDuration;
                 if (effectDuration % 1 == 0) {
-                    P.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 + 20 * purpleCount + offset);
+                    P.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
                 } else {
-                    P.text("Effect Duration: " + effectDuration + "s", 910, 376 + 20 * purpleCount + offset);
+                    P.text("Effect Duration: " + effectDuration + "s", 910, 376 + - x + 20 * purpleCount + offset);
                 }
             }
         }
