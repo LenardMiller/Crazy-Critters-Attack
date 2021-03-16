@@ -280,7 +280,7 @@ public class CaveWaves {
         String wtfTitle = "Colossal Bugs";
         Color wtfAccent = new Color(221, 128, 59);
         Color wtfFill = new Color(91, 110, 225);
-        Color wtfText = new Color(172, 50, 50);
+        Color wtfText = new Color(33, 42, 95);
 
         if (type.equals(horde)) return new Wave(p, length, spawnLength, hordeFill, hordeAccent, hordeText, hordeTitle);
         if (type.equals(albinoBug)) return new Wave(p, length, spawnLength, albinoBugFill, albinoBugAccent, albinoBugText, albinoBugTitle);
