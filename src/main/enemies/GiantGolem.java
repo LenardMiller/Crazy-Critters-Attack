@@ -12,11 +12,11 @@ public class GiantGolem extends Enemy {
         size = new PVector(76,76);
         pfSize = 3;
         radius = 30;
-        maxSpeed = .35f;
+        maxSpeed = .4f;
         speed = maxSpeed;
         moneyDrop = 500;
-        damage = 10;
-        maxHp = 8000; //Hp
+        damage = 25;
+        maxHp = 12000; //Hp
         hp = maxHp;
         hitParticle = "lichenOuch";
         name = "giantGolem";
