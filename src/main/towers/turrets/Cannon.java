@@ -69,10 +69,10 @@ public class Cannon extends Turret {
         //price
         upgradePrices[0] = 175;
         upgradePrices[1] = 250;
-        upgradePrices[2] = 700;
+        upgradePrices[2] = 850;
         upgradePrices[3] = 150;
         upgradePrices[4] = 200;
-        upgradePrices[5] = 800;
+        upgradePrices[5] = 1000;
         //titles
         upgradeTitles[0] = "Stronger shot";
         upgradeTitles[1] = "Powerful shot";
