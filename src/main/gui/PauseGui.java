@@ -5,8 +5,12 @@ import main.gui.guiObjects.buttons.LevelSelectScreen;
 import main.gui.guiObjects.buttons.RestartLevel;
 import main.gui.guiObjects.buttons.ResumeGame;
 import processing.core.PApplet;
+import processing.core.PVector;
+
+import java.awt.*;
 
 import static main.Main.*;
+import static main.misc.Utilities.shadowedText;
 
 public class PauseGui {
 
@@ -32,14 +36,13 @@ public class PauseGui {
         else P.fill(0, 0, 0, 50);
         P.rect(0, 0, P.width, P.height);
         //big text
-        if (!alive) P.fill(255, 0, 0);
-        else if (won) P.fill(255, 255, 0);
-        else P.fill(255);
-        P.textFont(veryLargeFont);
-        P.textAlign(P.CENTER);
-        if (!alive) P.text("Game Over", P.width/2f, 300);
-        else if (won) P.text("You Win!", P.width/2f, 300);
-        else P.text("Paused", P.width/2f, 300);
+        PVector position = new PVector(P.width/2f, 300);
+        if (!alive) shadowedText(P, "Game Over", position, new Color(255, 0, 0),
+                new Color(50, 0, 0), 48, CENTER);
+        else if (won) shadowedText(P, "You Win!", position, new Color(255, 255, 0),
+                new Color(125, 50, 0), 48, CENTER);
+        else shadowedText(P, "Paused", position, new Color(255, 255, 255),
+                    new Color(50, 50, 50), 48, CENTER);
         //buttons
         P.fill(200);
         P.textFont(mediumFont);

@@ -283,6 +283,28 @@ public class Utilities {
         p.rectMode(CORNER);
     }
 
+    /**
+     * Displays text with a slight 3d effect
+     * @param p the PApplet
+     * @param text text to be displayed
+     * @param position where text will be displayed
+     * @param lightColor main text color, RGBA
+     * @param darkColor shadow color, RGBA
+     * @param textSize size of text
+     * @param textAlign alignment of text
+     */
+    public static void shadowedText(PApplet p, String text, PVector position, Color lightColor, Color darkColor,
+                                    float textSize, int textAlign) {
+        p.textAlign(textAlign);
+        p.textSize(textSize);
+        int offset = 2;
+
+        p.fill(darkColor.getRGB(), darkColor.getAlpha());
+        p.text(text, position.x + offset, position.y + offset);
+        p.fill(lightColor.getRGB(), lightColor.getAlpha());
+        p.text(text, position.x, position.y);
+    }
+
     public static int secondsToFrames(float numberOfSeconds) {
         return (int) (numberOfSeconds * FRAMERATE);
     }
