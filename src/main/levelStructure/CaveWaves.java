@@ -111,10 +111,10 @@ public class CaveWaves {
         waves[23].addSpawns(albinoButterfly, 10);
 
         waves[24] = wavePreset(p, 130, 50, horde);
-        waves[24].addSpawns(albinoBug, 15);
-        waves[24].addSpawns(smallGolem, 15);
-        waves[24].addSpawns(albinoButterfly, 5);
-        waves[24].addSpawns(midGolem, 5);
+        waves[24].addSpawns(albinoBug, 35);
+        waves[24].addSpawns(smallGolem, 35);
+        waves[24].addSpawns(albinoButterfly, 50);
+        waves[24].addSpawns(midGolem, 20);
 
         waves[25] = wavePreset(p, 65, 25, bigAlbinoBug);
         waves[25].addSpawns(bigAlbinoBug, 5);
