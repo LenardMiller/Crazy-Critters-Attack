@@ -362,13 +362,25 @@ public abstract class Enemy {
 
     private void damageEffect(boolean particles) {
         barTrans = 255;
-        currentTintColor = new Color(maxTintColor.getRGB());
         if (particles) {
-            int num = (int) (p.random(1, 3)) * pfSize * pfSize;
-            for (int j = num; j >= 0; j--) { //sprays ouch
-                Main.particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+            int num = pfSize;
+            int chance = 5;
+            if (!recentlyHit()) {
+                num = (int) p.random(pfSize, pfSize * pfSize);
+                chance = 0;
+            }
+            if (p.random(0, 6) > chance) {
+                for (int j = num; j >= 0; j--) { //sprays ouch
+                    Main.particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+                }
             }
         }
+        currentTintColor = new Color(maxTintColor.getRGB());
+    }
+
+    private boolean recentlyHit() {
+        int totalTintColor = currentTintColor.getRed() + currentTintColor.getGreen() + currentTintColor.getBlue();
+        return totalTintColor < 700;
     }
 
     public void hpBar() {
