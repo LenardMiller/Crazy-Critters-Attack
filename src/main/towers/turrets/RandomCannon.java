@@ -29,7 +29,7 @@ public class RandomCannon extends Turret {
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 700;
         numFireFrames = 5;
-        betweenFireFrames = from60ToFramerate(4);
+        betweenFireFrames = from60ToFramerate(8);
         numLoadFrames = 1;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];

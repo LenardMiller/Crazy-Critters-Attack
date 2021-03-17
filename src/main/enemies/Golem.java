@@ -8,7 +8,7 @@ import static main.misc.Utilities.from60ToFramerate;
 
 public class Golem extends Enemy {
 
-    public Golem(PApplet p, float x, float y) {
+    public Golem(PApplet p, float x, float y) { //todo: just glides along!?
         super(p,x,y);
         size = new PVector(42,42);
         pfSize = 2; //2

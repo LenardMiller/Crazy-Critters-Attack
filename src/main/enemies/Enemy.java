@@ -70,7 +70,7 @@ public abstract class Enemy {
     private boolean overkill;
     private boolean attacking;
     private float targetAngle;
-    private float moveFrame;
+    private int moveFrame;
     private Tower targetTower;
     private PImage[] moveFrames;
     private PImage sprite;
@@ -197,7 +197,6 @@ public abstract class Enemy {
                 }
             } else attackFrame = 0;
         } else {
-            sprite = moveFrames[(int) (moveFrame)];
             idleTime++;
             if (moveFrame < moveFrames.length - 1) {
                 if (idleTime >= betweenWalkFrames) {
@@ -205,6 +204,7 @@ public abstract class Enemy {
                     idleTime = 0;
                 }
             } else moveFrame = 0;
+            sprite = moveFrames[moveFrame];
         }
         //shift back to normal
         if (tintColor < 255) tintColor += 20;
