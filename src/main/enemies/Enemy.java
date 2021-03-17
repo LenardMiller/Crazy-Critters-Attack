@@ -157,13 +157,20 @@ public abstract class Enemy {
             if (overkill) {
                 for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
                     float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
-                    corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)), 0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
+                    corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
+                            p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)), 0,
+                            corpseLifespan, type, name + "Parts", hitParticle, j, false));
                 }
                 for (int k = 0; k < sq(pfSize); k++) {
-                    underParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), 0, hitParticle));
+                    underParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
+                            (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
+                            0, hitParticle));
                 }
             } else
-                corpses.add(new Corpse(p, position, corpseSize, angle + p.random(radians(-5), radians(5)), new PVector(0, 0), 0, betweenCorpseFrames, corpseLifespan, type, name + "Die", "none", 0, true));
+                corpses.add(new Corpse(p, position, corpseSize,
+                        angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
+                        0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
+                        "none", 0, true));
         }
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
@@ -177,6 +184,10 @@ public abstract class Enemy {
         }
 
         enemies.remove(i);
+    }
+
+    private PVector adjustPartVelocityToFramerate(PVector partVelocity) {
+        return partVelocity.setMag(partVelocity.mag() * up60ToFramerate(1));
     }
 
     protected void move() {

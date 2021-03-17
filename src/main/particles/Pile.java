@@ -26,7 +26,7 @@ public class Pile extends Particle {
 
     protected void display() {
         if (lifespan <= 0) dead = true;
-        p.tint(255,255*((float)lifespan / 500));
+        p.tint(255,255*((float)lifespan / secondsToFrames(8)));
         if (!paused) {
             lifespan--;
             angleTwo += radians(angularVelocity);
