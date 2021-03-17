@@ -8,7 +8,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class GlueSpike extends Projectile {
 
@@ -27,7 +27,7 @@ public class GlueSpike extends Projectile {
         angularVelocity = 0;
         sprite = staticSprites.get("glueSpikePj");
         hitSound = sounds.get("smallImpact");
-        LIFESPAN = from60ToFramerate(15);
+        LIFESPAN = down60ToFramerate(15);
     }
 
     public void main(ArrayList<Projectile> projectiles, int i) {

@@ -9,7 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
@@ -30,7 +30,7 @@ public class SeismicTower extends Turret {
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 400;
         numFireFrames = 14;
-        betweenFireFrames = from60ToFramerate(1);
+        betweenFireFrames = down60ToFramerate(1);
         numLoadFrames = 20;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];

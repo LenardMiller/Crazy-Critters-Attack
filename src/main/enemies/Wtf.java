@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class Wtf extends Enemy {
 
@@ -21,11 +21,11 @@ public class Wtf extends Enemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "wtf";
-        betweenWalkFrames = from60ToFramerate(3);
+        betweenWalkFrames = down60ToFramerate(3);
         attackStartFrame = 0; //attack start
         attackDmgFrames = new int[]{11};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = from60ToFramerate(10);
+        betweenAttackFrames = down60ToFramerate(10);
         corpseLifespan = 12;
         corpseSize = size;
         partSize = new PVector(100,100);

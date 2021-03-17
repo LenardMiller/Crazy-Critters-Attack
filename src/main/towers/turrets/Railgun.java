@@ -7,7 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Railgun extends Turret {
@@ -40,7 +40,7 @@ public class Railgun extends Turret {
         numLoadFrames = 9;
         numIdleFrames = 6;
         NUM_VAPOR_FRAMES = 15;
-        BETWEEN_VAPOR_FRAMES = from60ToFramerate(3);
+        BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);
         betweenVaporTimer = 0;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];

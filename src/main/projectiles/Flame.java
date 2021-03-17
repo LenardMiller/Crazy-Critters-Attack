@@ -7,7 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class Flame extends Projectile {
 
@@ -33,7 +33,7 @@ public class Flame extends Projectile {
         this.effectLevel = effectLevel;
         this.effectDuration = effectDuration;
         this.angle = angle;
-        this.TIMER = from60ToFramerate(timer);
+        this.TIMER = down60ToFramerate(timer);
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
         SPRITES = animatedSprites.get("flamePJ");

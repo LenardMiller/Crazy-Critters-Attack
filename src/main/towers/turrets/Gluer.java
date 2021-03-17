@@ -10,7 +10,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Gluer extends Turret {
@@ -30,7 +30,7 @@ public class Gluer extends Turret {
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 400;
         numFireFrames = 5;
-        betweenFireFrames = from60ToFramerate(1);
+        betweenFireFrames = down60ToFramerate(1);
         numLoadFrames = 7;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];

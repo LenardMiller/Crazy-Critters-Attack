@@ -12,6 +12,7 @@ import processing.sound.SoundFile;
 
 import static main.Main.*;
 import static main.misc.Utilities.secondsToFrames;
+import static main.misc.Utilities.up60ToFramerate;
 
 public class Machine {
 
@@ -141,9 +142,9 @@ public class Machine {
             for (Tile tile : machTiles) {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
-                if ((int) p.random(0, 3) == 0)
+                if (up60ToFramerate(p.random(0, 3)) == 0)
                     particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
-                if ((int) p.random(0, 6) == 0) {
+                if (up60ToFramerate(p.random(0, 6)) == 0) {
                     if ((int) p.random(0, 5) == 0) {
                         EXPLODE_SOUND.stop();
                         EXPLODE_SOUND.play(p.random(0.8f, 1.2f), volume);
@@ -155,13 +156,13 @@ public class Machine {
             for (Tile tile : machTiles) {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
-                if ((int) p.random(0, 4) == 0)
+                if (up60ToFramerate(p.random(0, 4)) == 0)
                     particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
-                if ((int) p.random(0, 2) == 0)
+                if (up60ToFramerate((int) p.random(0, 2)) == 0)
                     particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < up60ToFramerate(3); i++) {
                     particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
-                } if ((int) p.random(0, 8) == 0) {
+                } if (up60ToFramerate(p.random(0, 8)) == 0) {
                     projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, maxHp * 10, maxHp, 1000, (int) p.random(1, 4), true));
                 }
             }

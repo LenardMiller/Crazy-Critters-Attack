@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class BigBug extends Enemy{
 
@@ -21,7 +21,7 @@ public class BigBug extends Enemy{
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "bigBug";
-        betweenWalkFrames = from60ToFramerate(3);
+        betweenWalkFrames = down60ToFramerate(3);
         attackStartFrame = 48; //attack start
         corpseSize = size;
         partSize = new PVector(32,32);

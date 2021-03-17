@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class DataControl extends ClassLoader {
 
@@ -107,7 +107,7 @@ public class DataControl extends ClassLoader {
         int y = loadObject.getInt("y");
         String machineName = loadObject.getString("name");
         String debris = loadObject.getString("debris");
-        int betweenFrames = from60ToFramerate(loadObject.getInt("betweenFrames"));
+        int betweenFrames = down60ToFramerate(loadObject.getInt("betweenFrames"));
         float barX = loadObject.getFloat("barX");
         float barY = loadObject.getFloat("barY");
         float barSizeX = loadObject.getFloat("barSizeX");

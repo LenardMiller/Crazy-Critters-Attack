@@ -7,7 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class EnergyBlaster extends Turret{
@@ -29,7 +29,7 @@ public class EnergyBlaster extends Turret{
         pjSpeed = 1000;
         range = 300;
         numFireFrames = 14; //14
-        betweenFireFrames = from60ToFramerate(2);
+        betweenFireFrames = down60ToFramerate(2);
         numLoadFrames = 42; //42
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];

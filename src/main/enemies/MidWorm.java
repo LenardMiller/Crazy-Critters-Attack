@@ -6,7 +6,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class MidWorm extends Enemy {
 
@@ -26,7 +26,7 @@ public class MidWorm extends Enemy {
         attackStartFrame = 0;
         attackDmgFrames = new int[]{15};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = from60ToFramerate(4);
+        betweenAttackFrames = down60ToFramerate(4);
         attackFrame = attackStartFrame;
         stealthy = true;
         partSize = new PVector(9, 9);

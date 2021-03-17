@@ -6,7 +6,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class Gravel extends Projectile {
 
@@ -19,7 +19,7 @@ public class Gravel extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
-        angularVelocity = from60ToFramerate(p.random(-15,15));
+        angularVelocity = down60ToFramerate(p.random(-15,15));
         sprite = staticSprites.get("stonePt");
         hitSound = sounds.get("smallImpact");
     }

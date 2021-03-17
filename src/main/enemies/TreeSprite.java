@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class TreeSprite extends Enemy{
 
@@ -21,12 +21,12 @@ public class TreeSprite extends Enemy{
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "treeSprite";
-        betweenWalkFrames = from60ToFramerate(1);
+        betweenWalkFrames = down60ToFramerate(1);
         attackStartFrame = 28;
         attackFrame = attackStartFrame;
         corpseSize = new PVector(50,50);
         partSize = new PVector(21,21);
-        betweenCorpseFrames = from60ToFramerate(5);
+        betweenCorpseFrames = down60ToFramerate(5);
         dieSound = sounds.get("leaves");
         overkillSound = sounds.get("leavesImpact");
         loadSprites();

@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class Bat extends Enemy {
 
@@ -24,13 +24,13 @@ public class Bat extends Enemy {
         attackStartFrame = 0;
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = from60ToFramerate(10);
+        betweenAttackFrames = down60ToFramerate(10);
         attackFrame = attackStartFrame;
         flying = true;
         corpseSize = new PVector(50,50);
         partSize = new PVector(23, 23);
-        betweenWalkFrames = from60ToFramerate(4);
-        betweenCorpseFrames = from60ToFramerate(4);
+        betweenWalkFrames = down60ToFramerate(4);
+        betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("squeakSquish");
         dieSound = sounds.get("squeak");
         loadSprites();

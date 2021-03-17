@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class SmolBug extends Enemy {
     public SmolBug(PApplet p, float x, float y) {
@@ -20,8 +20,8 @@ public class SmolBug extends Enemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "smolBug";
-        betweenWalkFrames = from60ToFramerate(3);
-        betweenAttackFrames = from60ToFramerate(3);
+        betweenWalkFrames = down60ToFramerate(3);
+        betweenAttackFrames = down60ToFramerate(3);
         attackStartFrame = 1; //attack start
         attackFrame = attackStartFrame;
         attackDmgFrames = new int[]{17};

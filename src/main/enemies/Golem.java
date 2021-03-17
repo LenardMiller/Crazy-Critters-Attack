@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class Golem extends Enemy {
 
@@ -22,11 +22,11 @@ public class Golem extends Enemy {
         hitParticle = "lichenOuch";
         name = "golem";
         attackStartFrame = 22;
-        betweenAttackFrames = from60ToFramerate(2);
+        betweenAttackFrames = down60ToFramerate(2);
         attackFrame = attackStartFrame;
         corpseSize = new PVector(84,84);
         partSize = new PVector(36,36);
-        betweenCorpseFrames = from60ToFramerate(6);
+        betweenCorpseFrames = down60ToFramerate(6);
         dieSound = sounds.get("leaves");
         overkillSound = sounds.get("leavesImpact");
         loadSprites();

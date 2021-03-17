@@ -6,6 +6,7 @@ import main.gui.guiObjects.buttons.*;
 import processing.core.PApplet;
 
 import static main.Main.*;
+import static main.misc.Utilities.up60ToFramerate;
 
 public class InGameGui {
 
@@ -67,7 +68,7 @@ public class InGameGui {
         P.fill(255, flashA); //flash
         P.noStroke();
         P.rect(900,212,200,688);
-        if (!paused) flashA -= 25 * (60/FRAMERATE);
+        if (!paused) flashA -= up60ToFramerate(25);
     }
 
     public void drawText(PApplet p, int x) {

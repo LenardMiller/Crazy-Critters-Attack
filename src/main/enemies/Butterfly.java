@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class Butterfly extends Enemy {
 
@@ -24,12 +24,12 @@ public class Butterfly extends Enemy {
         attackStartFrame = 0;
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = from60ToFramerate(5);
+        betweenAttackFrames = down60ToFramerate(5);
         attackFrame = attackStartFrame;
         flying = true;
         corpseSize = new PVector(25,25);
         partSize = new PVector(18,18);
-        betweenCorpseFrames = from60ToFramerate(4);
+        betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
         loadSprites();

@@ -8,7 +8,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class Frag extends Projectile {
 
@@ -24,10 +24,10 @@ public class Frag extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
-        angularVelocity = from60ToFramerate(p.random(-15,15));
+        angularVelocity = down60ToFramerate(p.random(-15,15));
         sprite = staticSprites.get("darkMetalPt");
         hitSound = sounds.get("smallImpact");
-        LIFESPAN = from60ToFramerate(15);
+        LIFESPAN = down60ToFramerate(15);
     }
 
     public void main(ArrayList<Projectile> projectiles, int i) {

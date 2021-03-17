@@ -7,7 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class MiscProjectile extends Projectile {
 
@@ -23,7 +23,7 @@ public class MiscProjectile extends Projectile {
         this.damage = damage;
         this.angle = angle;
         angleTwo = angle;
-        angularVelocity = from60ToFramerate(p.random(-15, 15)); //degrees mode
+        angularVelocity = down60ToFramerate(p.random(-15, 15)); //degrees mode
         sprites = animatedSprites.get("miscPJ");
         sprite = sprites[spriteType];
         hitSound = sounds.get("smallImpact");

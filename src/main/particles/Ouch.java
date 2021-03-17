@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.animatedSprites;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class Ouch extends Particle {
@@ -16,7 +16,7 @@ public class Ouch extends Particle {
         speed = maxSpeed;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        betweenFrames = from60ToFramerate(p.random(0,3));
+        betweenFrames = down60ToFramerate(p.random(0,3));
         currentSprite = 0;
         sprites = animatedSprites.get(type + "EnemyPT");
         velocity = PVector.fromAngle(angle-HALF_PI);

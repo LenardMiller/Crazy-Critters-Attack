@@ -7,7 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class MagicMissileer extends Turret{
@@ -30,7 +30,7 @@ public class MagicMissileer extends Turret{
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         idleFrames = new PImage[numIdleFrames];
-        betweenIdleFrames = from60ToFramerate(8);
+        betweenIdleFrames = down60ToFramerate(8);
         spriteType = 0;
         loadSprites();
         debrisType = "crystal";

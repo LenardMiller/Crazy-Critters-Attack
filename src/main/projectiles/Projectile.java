@@ -11,6 +11,7 @@ import processing.sound.SoundFile;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.up60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public abstract class Projectile {
@@ -76,7 +77,8 @@ public abstract class Projectile {
             move();
         }
         collideEn();
-        if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) {
+        if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||
+                position.y + size.y < -100 || position.x + size.x < -100) {
             dead = true;
         }
         if (dead) die(i);
@@ -88,7 +90,7 @@ public abstract class Projectile {
 
     protected void trail() { //leaves a trail of particles
         if (hasTrail) {
-            int num = floor(p.random(0, 3) * (60 / (float) FRAMERATE));
+            int num = up60ToFramerate(p.random(0, 3));
             if (num == 0) particles.add(new BuffParticle(p, position.x, position.y, p.random(0, 360), trail));
         }
     }

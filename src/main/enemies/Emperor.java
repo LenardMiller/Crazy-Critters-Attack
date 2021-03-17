@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.sounds;
-import static main.misc.Utilities.from60ToFramerate;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class Emperor extends Enemy{
 
@@ -21,8 +21,8 @@ public class Emperor extends Enemy{
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "emperor";
-        betweenAttackFrames = from60ToFramerate(10);
-        betweenWalkFrames = from60ToFramerate(4);
+        betweenAttackFrames = down60ToFramerate(10);
+        betweenWalkFrames = down60ToFramerate(4);
         attackDmgFrames = new int[]{7};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         attackStartFrame = 0; //attack start

@@ -309,7 +309,11 @@ public class Utilities {
         return (int) (numberOfSeconds * FRAMERATE);
     }
 
-    public static int from60ToFramerate(float frames) {
+    public static int down60ToFramerate(float frames) {
         return (int) ((frames / 60f) * FRAMERATE);
+    }
+
+    public static int up60ToFramerate(float frames) {
+        return (int) (frames * (60 / (float) FRAMERATE));
     }
 }
