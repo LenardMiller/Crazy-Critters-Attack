@@ -9,6 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
@@ -25,11 +26,11 @@ public class SeismicTower extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 150; //default: 200 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 7;
+        delay = 2.5f; //default: 200 frames
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 400;
         numFireFrames = 14;
-        betweenFireFrames = 1;
+        betweenFireFrames = from60ToFramerate(1);
         numLoadFrames = 20;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
@@ -150,10 +151,10 @@ public class SeismicTower extends Turret {
                 a += TWO_PI / 6;
             }
             shockwaves.add(new Shockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-                    (int) range, angle, shockwaveWidth, damage, this, false));
+                    range, angle, shockwaveWidth, damage, this, false));
         } else {
             fireParticles(a);
-            shockwaves.add(new Shockwave(p, position.x, position.y, (int) range, angle, shockwaveWidth, damage, this, seismicSense));
+            shockwaves.add(new Shockwave(p, position.x, position.y, range, angle, shockwaveWidth, damage, this, seismicSense));
         }
     }
 
@@ -233,7 +234,7 @@ public class SeismicTower extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    delay -= 70;
+                    delay -= 1.1f;
                     break;
                 case 1:
                     shockwaveWidth += 30;
@@ -244,7 +245,7 @@ public class SeismicTower extends Turret {
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
                     shockwaveWidth = 720;
-                    delay = 20;
+                    delay = 0.3f;
                     name = "seismicSlammer";
                     numFireFrames = 3;
                     numLoadFrames = 9;
@@ -266,7 +267,7 @@ public class SeismicTower extends Turret {
                     breakSound = sounds.get("metalBreak");
                     seismicSense = true;
                     effectLevel = 0;
-                    effectDuration = 120;
+                    effectDuration = 2;
                     shockwaveWidth -= 40;
                     range += 50;
                     damage += 150;

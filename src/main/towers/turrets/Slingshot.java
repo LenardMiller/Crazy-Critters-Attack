@@ -23,9 +23,9 @@ public class Slingshot extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 100;
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 12;
+        delay = 1.6f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 700;
         range = 230;
         numFireFrames = 34;
         numLoadFrames = 59;
@@ -137,7 +137,7 @@ public class Slingshot extends Turret {
                     damage += 5;
                     break;
                 case 4:
-                    delay -= 20;
+                    delay -= 0.3f;
                     break;
                 case 5:
                     debrisType = "stone";
@@ -146,8 +146,8 @@ public class Slingshot extends Turret {
                     placeSound = sounds.get("stonePlace");
                     painful = true;
                     damage += 30;
-                    delay += 10;
-                    effectDuration = 360;
+                    delay += 0.1f;
+                    effectDuration = 6;
                     effectLevel = 15;
                     name = "slingshotRock";
                     loadSprites();

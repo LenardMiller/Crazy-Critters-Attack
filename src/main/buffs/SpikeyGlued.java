@@ -20,7 +20,7 @@ public class SpikeyGlued extends Buff {
 
     private final Spike[] SPIKES;
 
-    public SpikeyGlued(PApplet p, int enId, float speedMod, int duration, Turret turret) {
+    public SpikeyGlued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
         effectDelay = secondsToFrames(0.2f); //frames

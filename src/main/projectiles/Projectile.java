@@ -29,7 +29,7 @@ public abstract class Projectile {
     protected int pierce;
     protected int hitTime;
     protected int effectRadius;
-    protected int effectDuration;
+    protected float effectDuration;
     protected float angleTwo;
     protected float angularVelocity;
     protected float effectLevel;

@@ -12,7 +12,7 @@ public class Decay extends Buff {
 
     private final int DAMAGE;
 
-    public Decay(PApplet p, int enId, float damage, int duration, Turret turret) {
+    public Decay(PApplet p, int enId, float damage, float duration, Turret turret) {
         super(p,enId,turret);
         effectDelay = secondsToFrames(0.1f); //frames
         lifeDuration = secondsToFrames(duration); //frames

@@ -315,7 +315,7 @@ public class Selection { //what tower is selected
             //velocity
             if (speed < 0) P.text("Instant", 910, 336 + offset);
             else if (speed < 500) P.text("Low velocity", 910, 336 + offset);
-            else if (speed <= 1000) P.text("Medium velocity", 910, 336 + offset);
+            else if (speed < 1000) P.text("Medium velocity", 910, 336 + offset);
             else P.text("High velocity", 910, 336 + offset);
             if (turret.pierce > 0) {
                 P.fill(100, 0, 200);

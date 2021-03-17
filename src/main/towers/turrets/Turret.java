@@ -22,7 +22,7 @@ public abstract class Turret extends Tower {
 
     public int pjSpeed;
     public int range;
-    public int effectDuration;
+    public float effectDuration;
     public int priority;
     public int pierce;
     public int killsTotal;

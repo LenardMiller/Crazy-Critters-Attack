@@ -20,7 +20,7 @@ public class Flame extends Projectile {
     private int fireChance;
     private int smokeChance;
 
-    public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectLevel, int effectDuration, int timer, boolean sound) {
+    public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectLevel, float effectDuration, int timer, boolean sound) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(25, 25);

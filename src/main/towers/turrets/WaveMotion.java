@@ -29,8 +29,8 @@ public class WaveMotion extends Turret {
         hp = maxHp;
         offset = 0;
         hit = false;
-        delay = 400; //400 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
+        delay = 6.6f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 2;
         pjSpeed = -1;
         range = 0; //0

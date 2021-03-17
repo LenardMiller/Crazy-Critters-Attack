@@ -7,6 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class TeslaTower extends Turret {
@@ -21,8 +22,8 @@ public class TeslaTower extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 200;
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
+        delay = 3.3f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 30;
         arcDistance = 200;
         arcLength = 3;
@@ -34,7 +35,7 @@ public class TeslaTower extends Turret {
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         idleFrames = new PImage[numIdleFrames];
-        betweenIdleFrames = 3;
+        betweenIdleFrames = from60ToFramerate(3);
         spriteType = 0;
         loadSprites();
         debrisType = "metal";
@@ -151,13 +152,13 @@ public class TeslaTower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    delay -= 35;
+                    delay -= 0.6f;
                     break;
                 case 4:
                     damage += 30;
                     break;
                 case 5:
-                    delay = 1;
+                    delay = 0.05f;
                     break;
             }
         }

@@ -7,6 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class MagicMissileer extends Turret{
@@ -18,10 +19,10 @@ public class MagicMissileer extends Turret{
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 200; //200 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
+        delay = 3.3f; //200 frames
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 15;
-        pjSpeed = 5;
+        pjSpeed = 300;
         range = 0; //0 degrees
         numFireFrames = 8;
         numLoadFrames = 26;
@@ -29,7 +30,7 @@ public class MagicMissileer extends Turret{
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
         idleFrames = new PImage[numIdleFrames];
-        betweenIdleFrames = 8;
+        betweenIdleFrames = from60ToFramerate(8);
         spriteType = 0;
         loadSprites();
         debrisType = "crystal";

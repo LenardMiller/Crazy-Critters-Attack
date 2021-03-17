@@ -10,6 +10,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Gluer extends Turret {
@@ -25,11 +26,11 @@ public class Gluer extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 150; //default: 150 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 7;
+        delay = 2.5f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 400;
         numFireFrames = 5;
-        betweenFireFrames = 1;
+        betweenFireFrames = from60ToFramerate(1);
         numLoadFrames = 7;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
@@ -39,7 +40,7 @@ public class Gluer extends Turret {
         loadDelayTime = 0;
         damage = 0;
         range = 300;
-        effectDuration = 120;
+        effectDuration = 3;
         effectLevel = 0.7f;
         spikey = false;
         damageSound = sounds.get("stoneDamage");
@@ -165,10 +166,10 @@ public class Gluer extends Turret {
                     range += 30;
                     break;
                 case 1:
-                    effectDuration += 60;
+                    effectDuration += 1;
                     break;
                 case 2:
-                    effectDuration += 60;
+                    effectDuration += 1;
                     range += 30;
                     splatter = true;
                     name = "splashGluer";

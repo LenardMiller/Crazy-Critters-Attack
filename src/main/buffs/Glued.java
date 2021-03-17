@@ -15,7 +15,7 @@ public class Glued extends Buff {
 
     private final float SPEED_MODIFIER;
 
-    public Glued(PApplet p, int enId, float speedMod, int duration, Turret turret) {
+    public Glued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
         effectDelay = secondsToFrames(0.2f); //frames

@@ -13,7 +13,7 @@ import static main.Main.*;
 
 public class SplatterGlue extends Projectile {
 
-    public SplatterGlue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, int effectDuration) {
+    public SplatterGlue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, float effectDuration) {
         super(p, x, y, angle, turret);
         this.effectLevel = effectLevel;
         this.effectDuration = effectDuration;

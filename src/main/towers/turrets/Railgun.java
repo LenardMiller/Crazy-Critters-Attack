@@ -7,6 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Railgun extends Turret {
@@ -30,8 +31,8 @@ public class Railgun extends Turret {
         hp = maxHp;
         offset = 6;
         hit = false;
-        delay = 500; //500 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
+        delay = 8;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 5000;
         pjSpeed = -1;
         range = 800; //0
@@ -39,7 +40,7 @@ public class Railgun extends Turret {
         numLoadFrames = 9;
         numIdleFrames = 6;
         NUM_VAPOR_FRAMES = 15;
-        BETWEEN_VAPOR_FRAMES = 3;
+        BETWEEN_VAPOR_FRAMES = from60ToFramerate(3);
         betweenVaporTimer = 0;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];

@@ -22,9 +22,9 @@ public class Nightmare extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 210; //210
+        delay = 3.5f;
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 18;
+        pjSpeed = 1000;
         range = 200;
         numFireFrames = 14;
         numLoadFrames = 22;
@@ -37,7 +37,7 @@ public class Nightmare extends Turret {
         damage = 100;
         numProjectiles = 3;
         effectLevel = 50;
-        effectDuration = 220;
+        effectDuration = 3.6f;
         fireParticle = "decay";
         barrelLength = 20;
         loadSprites();
@@ -113,7 +113,7 @@ public class Nightmare extends Turret {
     protected void upgradeSpecial() {
         if (nextLevelA == 1) numProjectiles = 5;
         if (nextLevelB == 1) {
-            effectDuration += 60;
+            effectDuration += 1;
             effectLevel += 3;
         }
     }

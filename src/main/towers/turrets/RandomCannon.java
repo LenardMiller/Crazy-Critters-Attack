@@ -9,6 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.from60ToFramerate;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
@@ -24,11 +25,11 @@ public class RandomCannon extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 25; //default: 25 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 12;
+        delay = 0.4f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 700;
         numFireFrames = 5;
-        betweenFireFrames = 4;
+        betweenFireFrames = from60ToFramerate(4);
         numLoadFrames = 1;
         fireFrames = new PImage[numFireFrames];
         loadFrames = new PImage[numLoadFrames];
@@ -138,7 +139,7 @@ public class RandomCannon extends Turret {
                     damage += 15;
                     break;
                 case 1:
-                    delay -= 10;
+                    delay -= 0.15f;
                     break;
                 case 2:
                     damageSound = sounds.get("stoneDamage");
@@ -146,7 +147,7 @@ public class RandomCannon extends Turret {
                     placeSound = sounds.get("stonePlace");
                     debrisType = "stone";
                     barrel = true;
-                    delay = 6;
+                    delay = 0.1f;
                     damage -= 5;
                     name = "miscCannonBarrel";
                     loadSprites();
@@ -163,7 +164,7 @@ public class RandomCannon extends Turret {
                 case 5:
                     laundry = true;
                     damage += 10;
-                    effectDuration = 360;
+                    effectDuration = 6;
                     effectLevel = 25;
                     name = "miscCannonLaundry";
                     loadSprites();

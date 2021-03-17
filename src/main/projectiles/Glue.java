@@ -9,7 +9,7 @@ import static main.Main.*;
 
 public class Glue extends Projectile {
 
-    public Glue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, int effectDuration) {
+    public Glue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, float effectDuration) {
         super(p, x, y, angle, turret);
         this.effectLevel = effectLevel;
         this.effectDuration = effectDuration;

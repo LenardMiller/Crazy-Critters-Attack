@@ -256,7 +256,7 @@ public abstract class Enemy {
      * @param direction determines where parts will be flung
      * @param id id of this enemy, set to -1 if unknown
      */
-    public void damageWithBuff(int damage, String buffName, float effectLevel, int effectDuration, Turret turret,
+    public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, Turret turret,
                                boolean displayParticles, String type, PVector direction, int id) {
         if (id == -1 && buffName != null) id = getId();
         lastDamageType = type;
