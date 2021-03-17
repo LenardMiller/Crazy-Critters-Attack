@@ -249,20 +249,20 @@ public class CaveWaves {
         String smallGolem = "smallGolem";
         String smallGolemTitle = "Pebble Golems";
         Color smallGolemAccent = new Color(95, 205, 228);
-        Color smallGolemFill = new Color(115, 123, 135);
+        Color smallGolemFill = new Color(121, 129, 141);
         Color smallGolemText = new Color(206, 209, 198);
 
         String midGolem = "midGolem";
         String midGolemTitle = "Rock Golems";
         Color midGolemAccent = new Color(188, 255, 0);
         Color midGolemFill = new Color(115, 123, 135);
-        Color midGolemText = new Color(206, 209, 198);
+        Color midGolemText = new Color(196, 200, 187);
 
         String bigGolem = "bigGolem";
         String bigGolemTitle = "Boulder Golems";
         Color bigGolemAccent = new Color(255, 0, 198);
-        Color bigGolemFill = new Color(115, 123, 135);
-        Color bigGolemText = new Color(206, 209, 198);
+        Color bigGolemFill = new Color(105, 112, 124);
+        Color bigGolemText = new Color(187, 191, 177);
 
         String bat = "bat";
         String batTitle = "Bats";
