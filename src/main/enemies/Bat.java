@@ -15,7 +15,7 @@ public class Bat extends Enemy {
         radius = 12.5f;
         maxSpeed = 33;
         speed = maxSpeed;
-        moneyDrop = 75;
+        moneyDrop = 50;
         damage = 5;
         maxHp = 400; //Hp
         hp = maxHp;
