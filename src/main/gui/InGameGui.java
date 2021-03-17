@@ -67,7 +67,7 @@ public class InGameGui {
         P.fill(255, flashA); //flash
         P.noStroke();
         P.rect(900,212,200,688);
-        if (!paused) flashA -= 25;
+        if (!paused) flashA -= 25 * (60/FRAMERATE);
     }
 
     public void drawText(PApplet p, int x) {

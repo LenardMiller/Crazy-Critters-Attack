@@ -88,7 +88,7 @@ public class Main extends PApplet {
     public static int connectWallQueues;
     public static float volume = 0.25f;
 
-    public static final int FRAMERATE = 60;
+    public static final int FRAMERATE = 30;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;

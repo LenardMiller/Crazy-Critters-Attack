@@ -156,8 +156,8 @@ public abstract class Enemy {
         if (!stealthMode) {
             if (overkill) {
                 for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
-                    float maxRv = 200f / partSize.x;
-                    corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRv), radians(maxRv)), 0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
+                    float maxRotationSpeed = (200f / partSize.x) * (60 / (float) FRAMERATE);
+                    corpses.add(new Corpse(p, position, partSize, angle, partsDirection, p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)), 0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
                 }
                 for (int k = 0; k < sq(pfSize); k++) {
                     underParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))), 0, hitParticle));

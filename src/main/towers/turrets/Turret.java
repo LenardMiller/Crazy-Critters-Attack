@@ -68,8 +68,8 @@ public abstract class Turret extends Tower {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 240;
-        pjSpeed = 2;
+        delay = 4;
+        pjSpeed = 500;
         range = 0;
         numFireFrames = 1;
         numLoadFrames = 1;
@@ -162,7 +162,7 @@ public abstract class Turret extends Tower {
 
         targetAngle = clampAngle(findAngle(position, target));
         angle = clampAngle(angle);
-        angle += angleDifference(targetAngle, angle) / 10;
+        angle += angleDifference(targetAngle, angle) / (FRAMERATE/6f);
 
         if (abs(targetAngle - angle) < 0.05) angle = targetAngle; //snap to prevent getting stuck
 
