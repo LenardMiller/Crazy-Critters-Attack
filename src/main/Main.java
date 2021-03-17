@@ -226,6 +226,7 @@ public class Main extends PApplet {
      */
     public void draw() {
         background(50, 50, 50);
+        tint(255);
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();

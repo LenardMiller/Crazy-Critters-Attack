@@ -33,6 +33,6 @@ public class GiantBat extends Enemy {
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("bigSqueakSquash");
         dieSound = sounds.get("bigSqueak");
-        loadSprites();
+        loadStuff();
     }
 }

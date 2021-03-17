@@ -28,6 +28,6 @@ public class BigAlbinoBug extends Enemy{
         attackFrame = attackStartFrame;
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
-        loadSprites();
+        loadStuff();
     }
 }

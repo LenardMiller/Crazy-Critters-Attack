@@ -33,7 +33,7 @@ public class MidWorm extends Enemy {
         corpseSize = new PVector(25,25);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
-        loadSprites();
+        loadStuff();
     }
 
     protected void move() {

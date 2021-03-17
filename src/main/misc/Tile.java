@@ -79,6 +79,7 @@ public class Tile {
     }
 
     public void displayC() {
+        P.tint(255);
         if (obstacle != null) P.image(obstacle, position.x, position.y);
     }
 

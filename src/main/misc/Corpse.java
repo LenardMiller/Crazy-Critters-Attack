@@ -10,30 +10,28 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.misc.Utilities.secondsToFrames;
-import static main.misc.Utilities.superTint;
+import static main.misc.Utilities.*;
 import static processing.core.PApplet.radians;
 
 public class Corpse {
 
-    PApplet p;
-
+    private final boolean ANIMATED;
+    private final int MAX_LIFE;
+    private final int BETWEEN_FRAMES;
     private final PVector POSITION;
     private final PVector SIZE;
-    private float angle;
     private final PVector VELOCITY;
-    private float angularVelocity;
     private final PImage[] SPRITES;
-    private String type;
     private final String BLOOD_PARTICLE;
+    private final PApplet P;
 
-    private final int BETWEEN_FRAMES;
     private int betweenTime;
     private int frame;
-    private final boolean ANIMATED;
-
-    private final int MAX_LIFE;
     private int lifespan;
+    private float angularVelocity;
+    private float angle;
+    private String type;
+    private Color currentTintColor;
 
     /**
      * A dead enemy.
@@ -42,6 +40,7 @@ public class Corpse {
      * @param size size of the corpse
      * @param angle rotation of the corpse
      * @param velocity movement of the corpse
+     * @param currentTintColor initial tint color
      * @param angularVelocity rotational speed of the corpse
      * @param betweenFrames number of times to duplicate a frame
      * @param maxLife how long it should last
@@ -51,14 +50,15 @@ public class Corpse {
      * @param frame what frame to start its animation on
      * @param animated should it be animated
      */
-    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, float angularVelocity,
+    public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, Color currentTintColor, float angularVelocity,
                   int betweenFrames, int maxLife, String effectType, String name, String bloodParticle, int frame,
                   boolean animated) {
-        this.p = p;
+        this.P = p;
 
         this.POSITION = new PVector(position.x, position.y);
         this.SIZE = size;
         this.angle = angle;
+        this.currentTintColor = currentTintColor;
         if (!animated) {
             float speed = 3.5f;
             speed *= p.random(1, 2);
@@ -151,6 +151,7 @@ public class Corpse {
         bloodParticles();
         PImage st = tinting(sprite, tint, doTint);
         drawSprites(st);
+        currentTintColor = incrementColorTo(currentTintColor, up60ToFramerate(20), new Color(255, 255, 255));
     }
 
     private void buffParticles(String part) {
@@ -159,26 +160,27 @@ public class Corpse {
             //prevent divide by 0
             if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
             if (!ANIMATED) chance += 16;
-            int num = (int) (p.random(0, chance));
+            int num = (int) (P.random(0, chance));
             if (num == 0) {
-                particles.add(new BuffParticle(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1,
-                        (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
-                        p.random(0, 360), part));
+                particles.add(new BuffParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                        (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
+                        P.random(0, 360), part));
             }
         }
     }
 
     private PImage tinting(PImage sprite, Color tint, boolean doTint) {
         //for memory reasons
-        PImage st = p.createImage(sprite.width, sprite.height, ARGB);
+        PImage st = P.createImage(sprite.width, sprite.height, ARGB);
         sprite.loadPixels();
         arrayCopy(sprite.pixels, st.pixels);
 
         //tinting
         float transparency = ((float) lifespan) / ((float) MAX_LIFE);
         if (doTint) {
+            P.tint(currentTintColor.getRGB());
             superTint(st, new Color(tint.getRed(), tint.getGreen(), tint.getBlue(), 0), transparency);
-        } else p.tint(255, transparency * 255);
+        } else P.tint(currentTintColor.getRGB(), transparency * 255);
         return st;
     }
 
@@ -190,18 +192,18 @@ public class Corpse {
                     float chance = sq(1 / (speed + 0.01f));
                     chance += 16;
                     if (!type.equals("burning") && !type.equals("decay")) { //idk
-                        int num = (int) (p.random(0, chance));
+                        int num = (int) (P.random(0, chance));
                         if (num == 0) {
-                            particles.add(new Ouch(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1,
-                                    (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1,
-                                    (SIZE.x / 2))), p.random(0, 360), BLOOD_PARTICLE));
+                            particles.add(new Ouch(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                                    (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1,
+                                    (SIZE.x / 2))), P.random(0, 360), BLOOD_PARTICLE));
                         }
                     }
                     chance += 10;
-                    int num = (int) (p.random(0, chance));
+                    int num = (int) (P.random(0, chance));
                     if (num == 0) {
-                        underParticles.add(new Pile(p, (float) (POSITION.x + 2.5 + p.random((SIZE.x / 2) * -1,
-                                (SIZE.x / 2))), (float) (POSITION.y + 2.5 + p.random((SIZE.x / 2) * -1,
+                        underParticles.add(new Pile(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                                (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1,
                                 (SIZE.x / 2))), 0, BLOOD_PARTICLE));
                     }
                 }
@@ -210,12 +212,12 @@ public class Corpse {
     }
 
     private void drawSprites(PImage sprite) {
-        p.pushMatrix();
-        p.translate(POSITION.x, POSITION.y);
-        p.rotate(angle);
-        p.image(sprite, -SIZE.x / 2, -SIZE.y / 2);
-        p.popMatrix();
-        p.tint(255);
+        P.pushMatrix();
+        P.translate(POSITION.x, POSITION.y);
+        P.rotate(angle);
+        P.image(sprite, -SIZE.x / 2, -SIZE.y / 2);
+        P.popMatrix();
+        P.tint(255);
     }
 
     private int getTintChannel(float channel, float lifespan, float maxLife) {

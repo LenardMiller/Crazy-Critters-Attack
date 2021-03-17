@@ -32,6 +32,6 @@ public class Butterfly extends Enemy {
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
-        loadSprites();
+        loadStuff();
     }
 }

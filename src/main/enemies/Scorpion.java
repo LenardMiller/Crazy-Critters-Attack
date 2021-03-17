@@ -30,6 +30,6 @@ public class Scorpion extends Enemy {
         partSize = new PVector(13,13);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
-        loadSprites();
+        loadStuff();
     }
 }

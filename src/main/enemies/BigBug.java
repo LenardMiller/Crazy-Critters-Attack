@@ -28,6 +28,6 @@ public class BigBug extends Enemy{
         attackFrame = attackStartFrame;
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
-        loadSprites();
+        loadStuff();
     }
 }

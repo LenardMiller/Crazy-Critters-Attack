@@ -316,4 +316,37 @@ public class Utilities {
     public static int up60ToFramerate(float frames) {
         return (int) (frames * (60 / (float) FRAMERATE));
     }
+
+    /**
+     * Adds by to f, approaching target without overshooting it.
+     * @param input starting value
+     * @param by amount to increment, must be positive
+     * @param target value to approach
+     * @return a value closer to but not overshooting the target
+     */
+    public static float incrementTo(float input, float by, float target) {
+        if (input == target) return target;
+        if (input < target) {
+            return Math.min(input + by, target);
+        } if (input > target) {
+            return Math.max(input - by, target);
+        } return target;
+    }
+
+    /**
+     * Increments one color to another.
+     * @param input starting color
+     * @param target target color
+     * @param by amount to increment by, must be positive
+     * @return input a little closer to target
+     */
+    public static Color incrementColorTo(Color input, int by, Color target) {
+        int red = input.getRed();
+        int green = input.getGreen();
+        int blue = input.getBlue();
+        red = (int) incrementTo(red, by, target.getRed());
+        green = (int) incrementTo(green, by, target.getGreen());
+        blue = (int) incrementTo(blue, by, target.getBlue());
+        return new Color(red, green, blue);
+    }
 }

@@ -33,7 +33,7 @@ public class BigWorm extends Enemy {
         corpseSize = new PVector(50, 50);
         overkillSound = sounds.get("squash");
         dieSound = sounds.get("bigCrunch");
-        loadSprites();
+        loadStuff();
     }
 
     protected void move() {

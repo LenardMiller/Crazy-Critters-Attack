@@ -15,6 +15,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 import processing.sound.SoundFile;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -63,7 +64,6 @@ public abstract class Enemy {
     protected SoundFile dieSound;
 
     private int attackCount;
-    private int tintColor;
     private int idleTime;
     private boolean attackCue;
     private boolean targetMachine;
@@ -75,6 +75,8 @@ public abstract class Enemy {
     private PImage[] moveFrames;
     private PImage sprite;
     private PVector partsDirection;
+    private Color currentTintColor;
+    private Color maxTintColor;
 
     protected Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -91,7 +93,6 @@ public abstract class Enemy {
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
         barTrans = 0;
-        tintColor = 255;
         hitParticle = "redOuch";
         name = "";
         attackStartFrame = 0;
@@ -158,8 +159,8 @@ public abstract class Enemy {
                 for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
                     float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
                     corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
-                            p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)), 0,
-                            corpseLifespan, type, name + "Parts", hitParticle, j, false));
+                            currentTintColor ,p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)),
+                            0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
                 }
                 for (int k = 0; k < sq(pfSize); k++) {
                     underParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
@@ -169,7 +170,7 @@ public abstract class Enemy {
             } else
                 corpses.add(new Corpse(p, position, corpseSize,
                         angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
-                        0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
+                        currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
                         "none", 0, true));
         }
 
@@ -218,7 +219,7 @@ public abstract class Enemy {
             sprite = moveFrames[moveFrame];
         }
         //shift back to normal
-        if (tintColor < 255) tintColor += 20;
+        currentTintColor = incrementColorTo(currentTintColor, up60ToFramerate(20), new Color(255, 255, 255));
     }
 
     public void displayPassA() {
@@ -241,6 +242,7 @@ public abstract class Enemy {
         p.pushMatrix();
         p.translate(position.x, position.y);
         p.rotate(angle);
+        p.tint(currentTintColor.getRGB());
         if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
         if (debug) {
@@ -329,24 +331,6 @@ public abstract class Enemy {
         damageEffect(displayParticles);
     }
 
-    private int getId() {
-        for (int i = 0; i < enemies.size(); i++) {
-            if (enemies.get(i) == this) return i;
-        }
-        return -1;
-    }
-
-    private void damageEffect(boolean particles) {
-        barTrans = 255;
-        tintColor = 0;
-        if (particles) {
-            int num = (int) (p.random(1, 3)) * pfSize * pfSize;
-            for (int j = num; j >= 0; j--) { //sprays ouch
-                Main.particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
-            }
-        }
-    }
-
     /**
      * Applies damage to the enemy
      * @param damage amount of damage to be applied
@@ -369,15 +353,54 @@ public abstract class Enemy {
         damageEffect(displayParticles);
     }
 
+    private int getId() {
+        for (int i = 0; i < enemies.size(); i++) {
+            if (enemies.get(i) == this) return i;
+        }
+        return -1;
+    }
+
+    private void damageEffect(boolean particles) {
+        barTrans = 255;
+        currentTintColor = new Color(maxTintColor.getRGB());
+        if (particles) {
+            int num = (int) (p.random(1, 3)) * pfSize * pfSize;
+            for (int j = num; j >= 0; j--) { //sprays ouch
+                Main.particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+            }
+        }
+    }
+
     public void hpBar() {
         p.fill(255, 0, 0, barTrans);
         p.noStroke();
         p.rect(position.x - size.x / 2 - 10, position.y + size.y / 2 + 6, (size.x + 20) * (((float) hp) / ((float) maxHp)), 6);
     }
 
-    public void loadSprites() {
+    protected void loadStuff() {
         attackFrames = animatedSprites.get(name + "AttackEN");
         moveFrames = animatedSprites.get(name + "MoveEN");
+        maxTintColor = getTintColor();
+        currentTintColor = new Color(255, 255, 255);
+    }
+
+    protected Color getTintColor() {
+        switch (hitParticle) {
+            case "glowOuch":
+                return new Color(0, 255, 195);
+            case "greenOuch":
+                return new Color(100, 166, 0);
+            case "leafOuch":
+                return new Color(19, 183, 25);
+            case "lichenOuch":
+                return new Color(144, 146, 133);
+            case "pinkOuch":
+                return new Color(255, 0, 255);
+            case "redOuch":
+                return new Color(216, 0, 0);
+            default:
+                return new Color(255, 0, 0);
+        }
     }
 
     protected void attack() {

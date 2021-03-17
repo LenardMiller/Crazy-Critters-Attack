@@ -32,6 +32,6 @@ public class Wtf extends Enemy {
         attackFrame = attackStartFrame;
         dieSound = sounds.get("bigCrunchRoar");
         overkillSound = sounds.get("squashRoar");
-        loadSprites();
+        loadStuff();
     }
 }

@@ -33,6 +33,6 @@ public class Bat extends Enemy {
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("squeakSquish");
         dieSound = sounds.get("squeak");
-        loadSprites();
+        loadStuff();
     }
 }

@@ -26,6 +26,6 @@ public class Dummy extends Enemy {
         corpseSize = size;
         dieSound = sounds.get("woodBreak");
         overkillSound = sounds.get("wodBreak");
-        loadSprites();
+        loadStuff();
     }
 }

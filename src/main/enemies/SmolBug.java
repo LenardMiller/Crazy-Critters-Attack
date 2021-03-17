@@ -30,6 +30,6 @@ public class SmolBug extends Enemy {
         partSize = new PVector(11,11);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
-        loadSprites();
+        loadStuff();
     }
 }

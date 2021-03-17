@@ -30,6 +30,6 @@ public class SmallGolem extends Enemy{
         betweenCorpseFrames = down60ToFramerate(5);
         dieSound = sounds.get("leaves");
         overkillSound = sounds.get("leavesImpact");
-        loadSprites();
+        loadStuff();
     }
 }
