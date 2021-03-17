@@ -126,10 +126,10 @@ public class Wall extends Tower {
 
     private void setUpgrades(){
         //price
-        upgradePrices[0] = 75;
-        upgradePrices[1] = 150;
-        upgradePrices[2] = 350;
-        upgradePrices[3] = 800;
+        upgradePrices[0] = 100;
+        upgradePrices[1] = 400;
+        upgradePrices[2] = 1500;
+        upgradePrices[3] = 5000;
         //titles
         upgradeTitles[0] = "Stone";
         upgradeTitles[1] = "Metal";
