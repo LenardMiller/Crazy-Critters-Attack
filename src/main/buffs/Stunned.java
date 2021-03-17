@@ -22,7 +22,7 @@ public class Stunned extends Buff {
         enemies.get(enId).immobilized = true;
     }
 
-    void end(int i){ //ends if at end of lifespan
+    protected void end(int i){ //ends if at end of lifespan
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) {
             enemies.get(enId).immobilized = false;

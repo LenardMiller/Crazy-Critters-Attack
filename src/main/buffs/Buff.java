@@ -22,7 +22,7 @@ public abstract class Buff {
     protected int lifeDuration;
     protected int particleChance;
 
-    Buff(PApplet p, int enId, Turret turret){
+    protected Buff(PApplet p, int enId, Turret turret){
         this.p = p;
 
         particleChance = 8;
@@ -50,7 +50,7 @@ public abstract class Buff {
      * Ends if at end of lifespan.
      * @param i buff id
      */
-    void end(int i) {
+    protected void end(int i) {
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) buffs.remove(i);
     }
@@ -62,7 +62,7 @@ public abstract class Buff {
     /**
      * Particles around enemy.
      */
-    void display() {
+    protected void display() {
         if (particle != null) {
             Enemy enemy = enemies.get(enId);
             int num = (int) (p.random(0, particleChance));

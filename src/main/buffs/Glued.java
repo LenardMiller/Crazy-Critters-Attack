@@ -27,7 +27,7 @@ public class Glued extends Buff {
         slowAttacking();
     }
 
-    private void slowAttacking() { //slowing enemy attacking done once
+    protected void slowAttacking() { //slowing enemy attacking done once
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
@@ -58,7 +58,7 @@ public class Glued extends Buff {
         }
     }
 
-    void end(int i){ //ends if at end of lifespan
+    protected void end(int i){ //ends if at end of lifespan
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (!paused) lifeTimer++;
@@ -68,6 +68,8 @@ public class Glued extends Buff {
                 //set attack speed back to default
                 enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
                 if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
+                //set damage frames back to default
+                System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
             }
             buffs.remove(i);
         }

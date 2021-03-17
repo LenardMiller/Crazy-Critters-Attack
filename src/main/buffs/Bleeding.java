@@ -28,7 +28,7 @@ public class Bleeding extends Buff {
         enemy.damageWithoutBuff(15, turret, "none", new PVector(0,0), false);
     }
 
-    void display() { //particles around enemy
+    protected void display() { //particles around enemy
         Enemy enemy = enemies.get(enId);
         int num = (int)(p.random(0, particleChance));
         if (num == 0) {
