@@ -123,9 +123,9 @@ public class CaveWaves {
         waves[26] = wavePreset(p, 85, 35, bigAlbinoBug);
         waves[26].addSpawns(bigAlbinoBug, 10);
 
-        waves[27] = wavePreset(p, 100, 25, bat);
-        waves[27].addSpawns(bat, 30);
-        waves[27].addSpawns(albinoButterfly, 10);
+        waves[27] = wavePreset(p, 100, 15, bat);
+        waves[27].addSpawns(bat, 50);
+        waves[27].addSpawns(albinoButterfly, 50);
 
         waves[28] = wavePreset(p, 65, 30, midGolem);
         waves[28].addSpawns(midGolem, 20);

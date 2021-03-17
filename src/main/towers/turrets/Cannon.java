@@ -122,7 +122,7 @@ public class Cannon extends Turret {
                 case 1:
                     damage += 30;
                     break;
-                case 2:
+                case 2: //todo: aiming is fucked
                     damage += 300;
                     effectRadius = 60;
                     pjSpeed = 10;
