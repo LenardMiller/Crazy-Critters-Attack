@@ -23,6 +23,7 @@ public class TreeSpirit extends Enemy {
         name = "treeSpirit";
         attackStartFrame = 22;
         betweenAttackFrames = down60ToFramerate(2);
+        betweenWalkFrames = down60ToFramerate(3);
         attackFrame = attackStartFrame;
         corpseSize = new PVector(84,84);
         partSize = new PVector(38,38);

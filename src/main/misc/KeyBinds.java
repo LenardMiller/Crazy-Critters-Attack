@@ -90,7 +90,6 @@ public class KeyBinds {
         boolean needle = keysPressed.getPressedPulse('u') && alive;
         boolean flame = keysPressed.getPressed('i') && alive;
         //enemies
-        boolean pause = keysPressed.getPressedPulse('0') && alive;
         boolean en1 = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
         boolean en2 = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
         boolean en3 = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
@@ -112,15 +111,15 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,150));
         if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new AlbinoBug(p, p.mouseX, p.mouseY));
-        if (en2) enemies.add(new BigAlbinoBug(p, p.mouseX, p.mouseY));
-        if (en3) enemies.add(new AlbinoButterfly(p, p.mouseX, p.mouseY));
-        if (en4) enemies.add(new Bat(p, p.mouseX, p.mouseY));
-        if (en5) enemies.add(new GiantBat(p, p.mouseX, p.mouseY));
-        if (en6) enemies.add(new Wtf(p, p.mouseX, p.mouseY));
-        if (en7) enemies.add(new SmallGolem(p, p.mouseX, p.mouseY));
-        if (en8) enemies.add(new Golem(p, p.mouseX, p.mouseY));
-        if (en9) enemies.add(new GiantGolem(p, p.mouseX, p.mouseY));
+        if (en1) enemies.add(new SmolBug(p, p.mouseX, p.mouseY));
+        if (en2) enemies.add(new MidBug(p, p.mouseX, p.mouseY));
+        if (en3) enemies.add(new BigBug(p, p.mouseX, p.mouseY));
+        if (en4) enemies.add(new TreeSprite(p, p.mouseX, p.mouseY));
+        if (en5) enemies.add(new TreeSpirit(p, p.mouseX, p.mouseY));
+        if (en6) enemies.add(new TreeGiant(p, p.mouseX, p.mouseY));
+        if (en7) enemies.add(new Snake(p, p.mouseX, p.mouseY));
+        if (en8) enemies.add(new Butterfly(p, p.mouseX, p.mouseY));
+        if (en9) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
         if (en1b) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
@@ -135,7 +134,6 @@ public class KeyBinds {
         boolean overkillEnemies = keysPressed.getPressedPulse('C') && alive;
         //other stuff
         boolean displayPathLines = keysPressed.getReleasedPulse('g');
-        boolean update = keysPressed.getPressedPulse(' ');
         boolean loseMoney = keysPressed.getPressedPulse('-');
         boolean addMoney = keysPressed.getPressed('=');
         boolean switchMode = keysPressed.getPressedPulse('b');

@@ -20,7 +20,7 @@ public class SmolBug extends Enemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "smolBug";
-        betweenWalkFrames = down60ToFramerate(3);
+        betweenWalkFrames = down60ToFramerate(6);
         betweenAttackFrames = down60ToFramerate(3);
         attackStartFrame = 1; //attack start
         attackFrame = attackStartFrame;
