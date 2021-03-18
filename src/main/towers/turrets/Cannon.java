@@ -123,10 +123,10 @@ public class Cannon extends Turret {
                 case 1:
                     damage += 30;
                     break;
-                case 2: //todo: aiming is fucked
+                case 2:
                     damage += 300;
                     effectRadius = 60;
-                    pjSpeed = 10;
+                    pjSpeed = 600;
                     dynamite = true;
                     fireSound = sounds.get("slingshot");
                     name = "dynamiteLauncher";
