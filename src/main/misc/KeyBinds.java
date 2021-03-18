@@ -111,15 +111,15 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,150));
         if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
-        if (en2) enemies.add(new MidWorm(p, p.mouseX, p.mouseY));
-        if (en3) enemies.add(new BigWorm(p, p.mouseX, p.mouseY));
-        if (en4) enemies.add(new TreeSprite(p, p.mouseX, p.mouseY));
-        if (en5) enemies.add(new TreeSpirit(p, p.mouseX, p.mouseY));
-        if (en6) enemies.add(new TreeGiant(p, p.mouseX, p.mouseY));
-        if (en7) enemies.add(new Snake(p, p.mouseX, p.mouseY));
-        if (en8) enemies.add(new Butterfly(p, p.mouseX, p.mouseY));
-        if (en9) enemies.add(new LittleWorm(p, p.mouseX, p.mouseY));
+        if (en1) enemies.add(new AlbinoBug(p, p.mouseX, p.mouseY));
+        if (en2) enemies.add(new BigAlbinoBug(p, p.mouseX, p.mouseY));
+        if (en3) enemies.add(new AlbinoButterfly(p, p.mouseX, p.mouseY));
+        if (en4) enemies.add(new Bat(p, p.mouseX, p.mouseY));
+        if (en5) enemies.add(new GiantBat(p, p.mouseX, p.mouseY));
+        if (en6) enemies.add(new SmallGolem(p, p.mouseX, p.mouseY));
+        if (en7) enemies.add(new Golem(p, p.mouseX, p.mouseY));
+        if (en8) enemies.add(new GiantGolem(p, p.mouseX, p.mouseY));
+        if (en9) enemies.add(new Wtf(p, p.mouseX, p.mouseY));
         if (en1b) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
