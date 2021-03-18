@@ -4,7 +4,6 @@ import main.enemies.Enemy;
 import main.misc.CompressArray;
 import main.misc.Tile;
 import main.particles.BuffParticle;
-import main.particles.Debris;
 import main.particles.Ouch;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -197,9 +196,7 @@ public abstract class Turret extends Tower {
         }
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
-
-    }
+    protected void spawnProjectile(PVector position, float angle) {}
 
     protected void loadSprites() {
         fireFrames = new PImage[numFireFrames];
@@ -315,29 +312,25 @@ public abstract class Turret extends Tower {
     public void upgrade(int id) {
         upgradeSpecial(id);
         if (id == 0) {
-            placeSound.stop();
-            placeSound.play(p.random(0.8f, 1.2f), volume);
-        } else if (id == 1) {
-            placeSound.stop();
-            placeSound.play(p.random(0.8f, 1.2f), volume);
-        }
-        if (id == 0) {
             value += upgradePrices[nextLevelA];
             nextLevelA++;
+//            placeSound.stop();
+//            placeSound.play(p.random(0.8f, 1.2f), volume);
         } else if (id == 1) {
             value += upgradePrices[nextLevelB];
             nextLevelB++;
+//            placeSound.stop();
+//            placeSound.play(p.random(0.8f, 1.2f), volume);
         }
         //icons
         if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
         else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
-        //shower debris
-        int num = (int) (p.random(30, 50));
-        for (int j = num; j >= 0; j--) {
-            particles.add(new Debris(p, (tile.position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (tile.position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
-        }
+
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
+        spawnParticles();
         //prevent having fire animations longer than delays
         while (delay <= numFireFrames * betweenFireFrames + numIdleFrames) betweenFireFrames--;
     }

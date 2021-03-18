@@ -51,7 +51,7 @@ public abstract class Tower {
         hp = maxHp;
         hit = false;
         tintColor = 255;
-        debrisType = "null";
+        debrisType = "wood";
         price = 0;
         turret = false;
         visualize = false;
@@ -105,20 +105,14 @@ public abstract class Tower {
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
         placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
-        int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--) {
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
-        }
+        spawnParticles();
         updateNodes();
     }
 
     public void die(boolean sold) {
         breakSound.stop();
         breakSound.play(p.random(0.8f, 1.2f), volume);
-        int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--) {
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
-        }
+        spawnParticles();
         tile.tower = null;
         updateTowerArray();
         if (selection.id == tile.id) {
@@ -150,4 +144,20 @@ public abstract class Tower {
     }
 
     public abstract void updateSprite();
+
+    protected void spawnParticles() {
+        PVector center = new PVector(tile.position.x-size.x/2, tile.position.y-size.y/2);
+        int num = (int) p.random(30,50); //shower debris
+        for (int j = num; j >= 0; j--) {
+            PVector deviation = new PVector(p.random(-size.x/2,size.x/2), p.random(-size.y/2,size.y/2));
+            PVector spawnPos = PVector.add(center, deviation);
+            particles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), debrisType));
+        }
+        num = (int) p.random(6, 12);
+        for (int k = num; k >= 0; k--) {
+            PVector deviation = new PVector(p.random(-size.x/2,size.x/2), p.random(-size.y/2,size.y/2));
+            PVector spawnPos = PVector.add(center, deviation);
+            particles.add(new Ouch(p, spawnPos.x, spawnPos.y, p.random(360), "greyPuff"));
+        }
+    }
 }

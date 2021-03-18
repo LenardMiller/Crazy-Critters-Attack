@@ -47,6 +47,10 @@ public class Nightmare extends Turret {
         priority = 2; //strong
         setUpgrades();
         updateTowerArray();
+
+        spawnParticles();
+        placeSound.stop();
+        placeSound.play(p.random(0.8f, 1.2f), volume);
     }
 
     protected void fire(float barrelLength, String particleType) {

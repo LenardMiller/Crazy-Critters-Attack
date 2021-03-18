@@ -1,7 +1,6 @@
 package main.towers;
 
 import main.misc.Tile;
-import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -66,6 +65,7 @@ public class Wall extends Tower {
         ULTIMATE = new CornerSpriteDS();
         loadSprites();
 
+        spawnParticles();
         placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
@@ -175,16 +175,13 @@ public class Wall extends Tower {
         breakSound = sounds.get(debrisType + "Break");
         placeSound = sounds.get(debrisType + "PlaceShort");
 
+        spawnParticles();
         placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
 
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
-        int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
-        }
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
         tiles.get(x-1,y-1).setBgW(name);

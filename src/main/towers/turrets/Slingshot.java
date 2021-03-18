@@ -47,6 +47,7 @@ public class Slingshot extends Turret {
         setUpgrades();
         updateTowerArray();
 
+        spawnParticles();
         placeSound.stop();
         placeSound.play(p.random(0.8f, 1.2f), volume);
     }
