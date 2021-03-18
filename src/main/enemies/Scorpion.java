@@ -22,7 +22,7 @@ public class Scorpion extends Enemy {
         name = "scorpion";
         attackDmgFrames = new int[]{5};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenWalkFrames = down60ToFramerate(5);
+        betweenWalkFrames = down60ToFramerate(8);
         betweenAttackFrames = down60ToFramerate(6);
         attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;

@@ -25,6 +25,7 @@ public class Sidewinder extends Enemy {
         attackDmgFrames = new int[]{4};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(5);
+        betweenWalkFrames = down60ToFramerate(2);
         attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(9,9);
