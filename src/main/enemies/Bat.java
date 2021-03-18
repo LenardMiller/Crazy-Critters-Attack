@@ -29,7 +29,7 @@ public class Bat extends Enemy {
         flying = true;
         corpseSize = new PVector(50,50);
         partSize = new PVector(23, 23);
-        betweenWalkFrames = down60ToFramerate(4);
+        betweenWalkFrames = down60ToFramerate(7);
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("squeakSquish");
         dieSound = sounds.get("squeak");

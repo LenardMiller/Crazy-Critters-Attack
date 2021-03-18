@@ -22,7 +22,7 @@ public class SmallGolem extends Enemy{
         hitParticle = "lichenOuch";
         name = "smallGolem";
         betweenAttackFrames = down60ToFramerate(2);
-        betweenWalkFrames = down60ToFramerate(1);
+        betweenWalkFrames = down60ToFramerate(3);
         attackStartFrame = 14;
         attackFrame = attackStartFrame;
         corpseSize = new PVector(50,50);

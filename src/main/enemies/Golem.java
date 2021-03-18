@@ -23,6 +23,7 @@ public class Golem extends Enemy {
         name = "golem";
         attackStartFrame = 22;
         betweenAttackFrames = down60ToFramerate(2);
+        betweenWalkFrames = down60ToFramerate(3);
         attackFrame = attackStartFrame;
         corpseSize = new PVector(84,84);
         partSize = new PVector(36,36);

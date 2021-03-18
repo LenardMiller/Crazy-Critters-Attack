@@ -212,7 +212,7 @@ public abstract class Enemy {
             idleTime++;
             if (moveFrame < moveFrames.length - 1) {
                 if (idleTime >= betweenWalkFrames) {
-                    moveFrame += speed/FRAMERATE;
+                    moveFrame++;
                     idleTime = 0;
                 }
             } else moveFrame = 0;

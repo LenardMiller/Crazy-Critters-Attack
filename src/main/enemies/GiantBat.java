@@ -29,7 +29,7 @@ public class GiantBat extends Enemy {
         flying = true;
         corpseSize = new PVector(100,100);
         partSize = new PVector(50, 50);
-        betweenWalkFrames = down60ToFramerate(5);
+        betweenWalkFrames = down60ToFramerate(11);
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("bigSqueakSquash");
         dieSound = sounds.get("bigSqueak");

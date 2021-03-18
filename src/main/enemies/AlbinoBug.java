@@ -20,7 +20,7 @@ public class AlbinoBug extends Enemy {
         hp = maxHp;
         hitParticle = "glowOuch";
         name = "albinoBug";
-        betweenWalkFrames = down60ToFramerate(4);
+        betweenWalkFrames = down60ToFramerate(6);
         betweenAttackFrames = down60ToFramerate(2);
         attackStartFrame = 34; //attack start
         attackFrame = attackStartFrame;

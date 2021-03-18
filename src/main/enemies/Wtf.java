@@ -21,7 +21,7 @@ public class Wtf extends Enemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "wtf";
-        betweenWalkFrames = down60ToFramerate(3);
+        betweenWalkFrames = down60ToFramerate(20);
         attackStartFrame = 0; //attack start
         attackDmgFrames = new int[]{11};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
