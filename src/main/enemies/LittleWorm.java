@@ -42,7 +42,7 @@ public class LittleWorm extends Enemy {
         if (p.random(0,50) < 1)
             underParticles.add(new Pile(p, position.x, position.y, 0, levels[currentLevel].groundType));
         PVector m = PVector.fromAngle(angle);
-        m.setMag(speed);
+        m.setMag(speed/FRAMERATE);
         position.add(m);
         speed = maxSpeed;
     }

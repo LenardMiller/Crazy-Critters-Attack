@@ -42,7 +42,7 @@ public class BigWorm extends Enemy {
         if (p.random(0, 20) < 1)
             underParticles.add(new Pile(p, p.random(position.x - radius, position.x + radius), p.random(position.y - radius, position.y + radius), 0, levels[currentLevel].groundType));
         PVector m = PVector.fromAngle(angle);
-        m.setMag(speed);
+        m.setMag(speed/FRAMERATE);
         position.add(m);
         speed = maxSpeed;
     }
