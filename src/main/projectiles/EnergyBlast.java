@@ -26,7 +26,7 @@ public class EnergyBlast extends Projectile {
         hitSound = sounds.get("energyImpact");
         hasTrail = true;
         this.effectRadius = effectRadius;
-        type = "burning"; //todo: change
+        type = "energy";
         trail = "energy";
         this.BIG_EXPLOSION = bigExplosion;
     }

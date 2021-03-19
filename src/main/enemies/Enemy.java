@@ -265,14 +265,14 @@ public abstract class Enemy {
      * @param effectDuration duration of the buff to be applied
      * @param turret turret that caused the damage, nullable
      * @param displayParticles if should create particles
-     * @param type determines what effect to apply to corpse
+     * @param damageType determines what effect to apply to corpse
      * @param direction determines where parts will be flung
      * @param id id of this enemy, set to -1 if unknown
      */
     public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, Turret turret,
-                               boolean displayParticles, String type, PVector direction, int id) {
+                               boolean displayParticles, String damageType, PVector direction, int id) {
         if (id == -1 && buffName != null) id = getId();
-        lastDamageType = type;
+        lastDamageType = damageType;
         overkill = damage >= maxHp;
         partsDirection = direction;
         hp -= damage;
@@ -335,12 +335,12 @@ public abstract class Enemy {
      * Applies damage to the enemy
      * @param damage amount of damage to be applied
      * @param turret the turret that caused the damage, nullable
-     * @param type determines what effect to apply to corpse
+     * @param damageType determines what effect to apply to corpse
      * @param direction where parts will be flung
      * @param displayParticles whether it should spawn particles
      */
-    public void damageWithoutBuff(int damage, Turret turret, String type, PVector direction, boolean displayParticles) {
-        lastDamageType = type;
+    public void damageWithoutBuff(int damage, Turret turret, String damageType, PVector direction, boolean displayParticles) {
+        lastDamageType = damageType;
         overkill = damage >= maxHp;
         partsDirection = direction;
         hp -= damage;

@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.animatedSprites;
+import static main.Main.particles;
 import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
@@ -19,7 +20,8 @@ public class BuffParticle extends Particle {
         betweenFrames = down60ToFramerate(p.random(3,6));
         numFrames = 8;
         currentSprite = 0;
-        sprites = animatedSprites.get(type + "BuffPT");
+        if (animatedSprites.get(type + "BuffPT") != null) sprites = animatedSprites.get(type + "BuffPT");
+        else particles.remove(this);
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 }

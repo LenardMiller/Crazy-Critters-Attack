@@ -113,43 +113,46 @@ public class Corpse {
             }
         }
 
-        Color tint = new Color(255,255,255);
-        boolean doTint = false;
-        if (type.equals("burning") || type.equals("decay") || type.equals("poisoned")) {
-            Color tintFinal;
-            String part;
-            switch (type) {
-                case "burning":
-                    tintFinal = new Color(60,60,60);
-                    doTint = true;
-                    part = "fire";
-                    break;
-                case "decay":
-                    tintFinal = new Color(0,0,0);
-                    doTint = true;
-                    part = "decay";
-                    break;
-                case "poisoned":
-                    tintFinal = new Color(120, 180, 0);
-                    doTint = true;
-                    part = "poison";
-                    break;
-                default:
-                    tintFinal = new Color(255,0,255);
-                    doTint = true;
-                    part = "fire";
-                    break;
-            }
-            tint = new Color (
-                    getTintChannel(tintFinal.getRed(), lifespan, MAX_LIFE),
-                    getTintChannel(tintFinal.getGreen(), lifespan, MAX_LIFE),
-                    getTintChannel(tintFinal.getBlue(), lifespan, MAX_LIFE)
-            );
-            buffParticles(part);
+        Color tint;
+        boolean doSpecialEffects = true;
+        Color tintFinal;
+        String part;
+        switch (type) {
+            case "burning":
+                tintFinal = new Color(60,60,60);
+                part = "fire";
+                break;
+            case "decay":
+                tintFinal = new Color(0,0,0);
+                part = "decay";
+                break;
+            case "poisoned":
+                tintFinal = new Color(120, 180, 0);
+                part = "poison";
+                break;
+            case "glued":
+                tintFinal = new Color(234, 229, 203);
+                part = "glue";
+                break;
+            case "energy":
+                tintFinal = new Color(255, 179, 179);
+                part = "energy";
+                break;
+            default:
+                tintFinal = new Color(255,255,255);
+                doSpecialEffects = false;
+                part = null;
+                break;
         }
+        tint = new Color (
+                getTintChannel(tintFinal.getRed(), lifespan, MAX_LIFE),
+                getTintChannel(tintFinal.getGreen(), lifespan, MAX_LIFE),
+                getTintChannel(tintFinal.getBlue(), lifespan, MAX_LIFE)
+        );
+        if (doSpecialEffects) buffParticles(part);
 
         bloodParticles();
-        PImage st = tinting(sprite, tint, doTint);
+        PImage st = tinting(sprite, tint, doSpecialEffects);
         drawSprites(st);
         currentTintColor = incrementColorTo(currentTintColor, up60ToFramerate(20), new Color(255, 255, 255));
     }
