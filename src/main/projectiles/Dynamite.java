@@ -1,7 +1,5 @@
 package main.projectiles;
 
-import main.enemies.Enemy;
-import main.misc.Utilities;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
 import main.towers.turrets.Turret;
@@ -10,7 +8,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static processing.core.PApplet.abs;
 
 public class Dynamite extends Projectile {
 
@@ -24,49 +21,18 @@ public class Dynamite extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
+        type = "burning";
         sprite = staticSprites.get("dynamitePj");
         hitSound = sounds.get("smallExplosion");
         this.effectRadius = effectRadius;
     }
 
-    public void collideEn() {
-        for (int i = enemies.size() - 1; i >= 0; i--) {
-            Enemy enemy = enemies.get(i);
-            boolean hitAlready = false;
-            for (Enemy hitEnemy : hitEnemies)
-                if (hitEnemy == enemy) {
-                    hitAlready = true;
-                    break;
-                }
-            if (hitAlready) continue;
-            if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > -1) { //if touching enemy
-                hitSound.stop();
-                hitSound.play(p.random(0.8f, 1.2f), volume);
-                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, splashEn, "burning", velocity, i);
-                int num = (int) (p.random(16, 42));
-                for (int j = num; j >= 0; j--) {
-                    particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "fire", maxSpeed = p.random(1.5f, 4.5f)));
-                }
-                particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "fire"));
-
-                pierce--;
-                for (int j = enemies.size() - 1; j >= 0; j--) {
-                    Enemy erEnemy = enemies.get(j);
-                    if (abs(erEnemy.position.x - position.x) <= (effectRadius + erEnemy.radius) && abs(erEnemy.position.y - position.y) <= (effectRadius + erEnemy.radius)) { //if near enemy
-                        hitAlready = false;
-                        for (Enemy hitEnemy : hitEnemies)
-                            if (hitEnemy == enemy) {
-                                hitAlready = true;
-                                break;
-                            }
-                        if (hitAlready) continue;
-                        erEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, erEnemy.lastDamageType, PVector.fromAngle(Utilities.findAngle(erEnemy.position, position) + HALF_PI), j);
-                    }
-                }
-            }
-            if (pierce == -1) {
-                dead = true;
-            }
+    public void die() {
+        int num = (int) (p.random(16, 42));
+        for (int j = num; j >= 0; j--) {
+            particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "fire", maxSpeed = p.random(1.5f, 4.5f)));
         }
+        particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "fire"));
+        projectiles.remove(this);
     }
 }

@@ -24,8 +24,8 @@ public class Gravel extends Projectile {
         hitSound = sounds.get("smallImpact");
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greyPuff"));
+        projectiles.remove(this);
     }
 }

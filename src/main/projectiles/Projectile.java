@@ -1,6 +1,7 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
+import main.misc.Utilities;
 import main.particles.BuffParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -36,7 +37,7 @@ public abstract class Projectile {
     protected float effectLevel;
     protected boolean dead;
     protected boolean hasTrail;
-    protected boolean splashEn;
+    protected boolean causeEnemyParticles;
     protected PVector velocity;
     protected String trail;
     protected String buff;
@@ -48,7 +49,7 @@ public abstract class Projectile {
     protected Projectile(PApplet p, float x, float y, float angle, Turret turret) {
         this.p = p;
 
-        splashEn = true;
+        causeEnemyParticles = true;
         this.turret = turret;
         hitEnemies = new ArrayList<>();
         position = new PVector(x, y);
@@ -81,11 +82,11 @@ public abstract class Projectile {
                 position.y + size.y < -100 || position.x + size.x < -100) {
             dead = true;
         }
-        if (dead) die(i);
+        if (dead) die();
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
+        projectiles.remove(this);
     }
 
     protected void trail() { //leaves a trail of particles
@@ -121,38 +122,61 @@ public abstract class Projectile {
     }
 
     public void collideEn() {
-        for (int i = enemies.size() - 1; i >= 0; i--) {
-            Enemy enemy = enemies.get(i);
-            boolean hitAlready = false;
-            for (Enemy hitEnemy : hitEnemies)
-                if (hitEnemy == enemy) {
-                    hitAlready = true;
-                    break;
-                }
-            if (hitAlready) continue;
-            if (abs(enemy.position.x - position.x) <= (radius + enemy.radius) && abs(enemy.position.y - position.y) <= (radius + enemy.radius) && pierce > -1) { //if touching enemy, and has pierce
-                if (hitSound != null) {
-                    hitSound.stop();
-                    hitSound.play(p.random(0.8f, 1.2f), volume);
-                }
-                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, splashEn, type, velocity, i);
+        for (int enemyId = 0; enemyId < enemies.size(); enemyId++) {
+            Enemy enemy = enemies.get(enemyId);
+            if (enemyAlreadyHit(enemy)) continue;
+            if (intersectingEnemy(enemy) && pierce > -1) {
+                playHitSound();
+                PVector applyVelocity = velocity;
+                if (effectRadius > 0) applyVelocity = new PVector(0, 0);
+                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, causeEnemyParticles, type, applyVelocity, enemyId);
                 hitEnemies.add(enemy);
                 pierce--;
-                for (int j = enemies.size() - 1; j >= 0; j--) {
-                    Enemy erEnemy = enemies.get(j);
-                    if (abs(erEnemy.position.x - position.x) <= (effectRadius + erEnemy.radius) && abs(erEnemy.position.y - position.y) <= (effectRadius + erEnemy.radius)) { //if near enemy
-                        hitAlready = false;
-                        for (Enemy hitEnemy : hitEnemies)
-                            if (hitEnemy == enemy) {
-                                hitAlready = true;
-                                break;
-                            }
-                        if (hitAlready) continue;
-                        erEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret, splashEn, type, velocity, i);
+                //splash
+                for (int splashEnemyId = enemies.size() - 1; splashEnemyId >= 0; splashEnemyId--) {
+                    Enemy splashEnemy = enemies.get(splashEnemyId);
+                    if (enemyAlreadyHit(splashEnemy)) continue;
+                    if (nearEnemy(splashEnemy)) {
+                        applyVelocity = fromExplosionCenter(splashEnemy);
+                        if (intersectingEnemy(splashEnemy)) applyVelocity = new PVector(0, 0);
+                        splashEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret,
+                                causeEnemyParticles, type, applyVelocity, splashEnemyId);
                     }
                 }
             }
             if (pierce < 0) dead = true;
         }
+    }
+
+    private PVector fromExplosionCenter(Enemy enemy) {
+        return PVector.fromAngle(Utilities.findAngle(enemy.position, position) + HALF_PI);
+    }
+
+    private void playHitSound() {
+        if (hitSound != null) {
+            hitSound.stop();
+            hitSound.play(p.random(0.8f, 1.2f), volume);
+        }
+    }
+
+    private boolean enemyAlreadyHit(Enemy enemy) {
+        for (Enemy hitEnemy : hitEnemies) {
+            if (hitEnemy == enemy) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean intersectingEnemy(Enemy enemy) {
+        boolean touchingX = abs(enemy.position.x - position.x) < radius + enemy.radius;
+        boolean touchingY = abs(enemy.position.y - position.y) < radius + enemy.radius;
+        return touchingX && touchingY;
+    }
+
+    protected boolean nearEnemy(Enemy enemy) {
+        boolean nearX = abs(enemy.position.x - position.x) <= effectRadius + enemy.radius;
+        boolean nearY = abs(enemy.position.y - position.y) <= effectRadius + enemy.radius;
+        return nearX && nearY;
     }
 }

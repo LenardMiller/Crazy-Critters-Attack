@@ -34,11 +34,11 @@ public class Needle extends Projectile {
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) {
             dead = true;
         }
-        if (dead) die(i);
+        if (dead) die();
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
         particles.add(new Ouch(p,position.x,position.y,angleTwo,"greyPuff"));
+        projectiles.remove(this);
     }
 }

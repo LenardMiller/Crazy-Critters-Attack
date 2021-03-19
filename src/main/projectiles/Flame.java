@@ -38,15 +38,16 @@ public class Flame extends Projectile {
         angularVelocity = 0; //degrees mode
         SPRITES = animatedSprites.get("flamePJ");
         buff = "burning";
-        splashEn = false;
+        type = "burning";
+        causeEnemyParticles = false;
         fireChance = 8;
         smokeChance = 100;
         if (sound) hitSound = sounds.get("fireImpact");
         else hitSound = null;
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
+        projectiles.remove(this);
     }
 
     /**

@@ -23,8 +23,8 @@ public class ReinforcedBolt extends Projectile {
         hitSound = sounds.get("whooshImpact");
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
         particles.add(new BoltBreak(p,position.x,position.y,angleTwo));
+        projectiles.remove(this);
     }
 }

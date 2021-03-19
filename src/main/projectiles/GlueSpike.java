@@ -41,12 +41,12 @@ public class GlueSpike extends Projectile {
         if (lifeTimer > LIFESPAN) dead = true;
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||
                 position.y + size.y < -100 || position.x + size.x < -100 || dead) {
-            die(i);
+            die();
         }
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"gluePuff"));
+        projectiles.remove(this);
     }
 }

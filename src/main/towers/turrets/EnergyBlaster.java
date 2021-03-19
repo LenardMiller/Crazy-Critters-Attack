@@ -82,7 +82,7 @@ public class EnergyBlaster extends Turret{
         upgradeDescC[0] = "";
 
         upgradeDescA[1] = "+Explosion";
-        upgradeDescB[1] = "radius,";
+        upgradeDescB[1] = "radius and";
         upgradeDescC[1] = "damage";
 
         upgradeDescA[2] = "big";

@@ -88,8 +88,8 @@ public class MagicMissile extends Projectile {
         position.add(velocity);
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greenPuff"));
+        projectiles.remove(this);
     }
 }
