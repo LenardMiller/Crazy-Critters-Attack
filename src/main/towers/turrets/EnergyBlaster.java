@@ -124,6 +124,9 @@ public class EnergyBlaster extends Turret{
                     break;
                 case 2:
                     effectRadius += 75;
+                    name = "nuclearBlaster";
+                    debrisType = "metal";
+                    loadSprites();
                     break;
             }
         } if (id == 1) {

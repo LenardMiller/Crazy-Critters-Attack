@@ -209,6 +209,8 @@ public class SpriteLoader {
         getSprite(p,"miscCannonBarrelLoad","TR","miscCannon/barrel/load/",1);
         getSprite(p,"energyBlasterFire","TR","energyBlaster/fire/",14);
         getSprite(p,"energyBlasterLoad","TR","energyBlaster/load/",42);
+        getSprite(p,"nuclearBlasterFire","TR","energyBlaster/nuclearBlaster/fire/",14);
+        getSprite(p,"nuclearBlasterLoad","TR","energyBlaster/nuclearBlaster/load/",43);
         getSprite(p,"magicMissleerFire","TR","magicMissleer/fire/",8);
         getSprite(p,"magicMissleerLoad","TR","magicMissleer/load/",26);
         getSprite(p,"magicMissleerIdle","TR","magicMissleer/idle/",8);
@@ -336,6 +338,9 @@ public class SpriteLoader {
         staticSprites.put("energyBlasterBaseTR",p.loadImage("sprites/towers/turrets/energyBlaster/base.png"));
         staticSprites.put("energyBlasterFullTR",p.loadImage("sprites/towers/turrets/energyBlaster/full.png"));
         staticSprites.put("energyBlasterIdleTR",p.loadImage("sprites/towers/turrets/energyBlaster/idle.png"));
+        staticSprites.put("nuclearBlasterBaseTR",p.loadImage("sprites/towers/turrets/energyBlaster/nuclearBlaster/base.png"));
+        staticSprites.put("nuclearBlasterFullTR",p.loadImage("sprites/towers/turrets/energyBlaster/nuclearBlaster/full.png"));
+        staticSprites.put("nuclearBlasterIdleTR",p.loadImage("sprites/towers/turrets/energyBlaster/nuclearBlaster/idle.png"));
         staticSprites.put("magicMissleerBaseTR",p.loadImage("sprites/towers/turrets/magicMissleer/base.png"));
         staticSprites.put("magicMissleerFullTR",p.loadImage("sprites/towers/turrets/magicMissleer/full.png"));
         staticSprites.put("magicMissleerIdleTR",p.loadImage("sprites/towers/turrets/magicMissleer/idle.png"));
