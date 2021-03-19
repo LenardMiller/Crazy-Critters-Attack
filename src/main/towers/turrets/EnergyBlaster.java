@@ -40,7 +40,7 @@ public class EnergyBlaster extends Turret{
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("energyBlasterFire");
-        fireParticle = "energy";
+        fireParticle = "nuclear";
         barrelLength = 40;
         loadSprites();
         debrisType = "darkMetal";
