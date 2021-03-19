@@ -20,7 +20,7 @@ public class NuclearBlast extends Projectile {
         this.damage = damage;
         this.angle = angle;
         sprite = staticSprites.get("nuclearPj");
-        hitSound = sounds.get("smallExplosion");
+        hitSound = sounds.get("hugeExplosion");
         hasTrail = true;
         this.effectRadius = effectRadius;
         type = "nuclear";
