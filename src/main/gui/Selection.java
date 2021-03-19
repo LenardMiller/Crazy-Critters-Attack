@@ -232,6 +232,7 @@ public class Selection { //what tower is selected
             case "nuclearBlaster":
                 P.text("Nuclear Blaster", 1000, 241);
                 setTextPurple("Huge splash", offset);
+                break;
             case "magicMissleer":
                 P.text("Magic Missileer", 1000, 241);
                 setTextPurple("Three homing missiles", offset);
