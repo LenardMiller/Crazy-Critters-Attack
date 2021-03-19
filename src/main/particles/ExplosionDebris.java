@@ -14,7 +14,7 @@ public class ExplosionDebris extends Particle{
         size = new PVector(9, 9);
         this.maxSpeed = maxSpeed;
         speed = maxSpeed;
-        angleTwo = angle;
+        angle2 = angle;
         angularVelocity = 300; //degrees mode
         betweenFrames = down60ToFramerate(p.random(2,5));
         numFrames = 4;

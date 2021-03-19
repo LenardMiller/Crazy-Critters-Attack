@@ -14,7 +14,7 @@ public class BoltBreak extends Particle {
         size = new PVector(14, 40);
         maxSpeed = 0;
         speed = maxSpeed;
-        angleTwo = angle;
+        angle2 = angle;
         angularVelocity = 0; //degrees mode
         betweenFrames = down60ToFramerate(p.random(0,5));
         currentSprite = 0;

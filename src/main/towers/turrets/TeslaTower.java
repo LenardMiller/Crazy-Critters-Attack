@@ -65,7 +65,8 @@ public class TeslaTower extends Turret {
 
     protected void fire() {
         fireSound.play();
-        arcs.add(new Arc(p, tile.position.x - 25, tile.position.y - 25, this, damage, arcLength, arcDistance, priority));
+        PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
+        arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, arcDistance, priority));
     }
 
     public void displayPassB2() {

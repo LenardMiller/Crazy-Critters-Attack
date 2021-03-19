@@ -14,7 +14,7 @@ public class RailgunBlast extends Particle {
         size = new PVector(25, 25);
         maxSpeed = 0;
         speed = maxSpeed;
-        angleTwo = angle;
+        angle2 = angle;
         angularVelocity = 0; //degrees mode
         betweenFrames = down60ToFramerate(4);
         currentSprite = 0;

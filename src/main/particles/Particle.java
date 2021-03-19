@@ -23,7 +23,7 @@ public abstract class Particle {
     public PVector position;
     public PVector size;
 
-    protected float angleTwo;
+    protected float angle2;
     protected float angularVelocity;
     protected boolean dead;
     protected int lifespan;
@@ -40,7 +40,7 @@ public abstract class Particle {
         position = new PVector(x, y);
         size = new PVector(5, 5);
         speed = 60;
-        angleTwo = angle;
+        angle2 = angle;
         angularVelocity = 0; //degrees mode
         lifespan = secondsToFrames(1);
         lifespan += (PApplet.round(p.random(-(lifespan / 4f), lifespan / 4f))); //injects 10% randomness so all don't die at once
@@ -71,21 +71,21 @@ public abstract class Particle {
                     }
                     bfTimer = 0;
                 } else bfTimer++;
-                angleTwo += radians(angularVelocity);
+                angle2 += radians(secondsToFrames(angularVelocity));
             }
             p.pushMatrix();
             p.translate(position.x, position.y);
-            p.rotate(angleTwo);
+            p.rotate(angle2);
             p.image(sprites[currentSprite], -size.x / 2, -size.y / 2);
         } else {
             if (!paused) {
                 delayTime++;
-                angleTwo += radians(angularVelocity);
+                angle2 += radians(secondsToFrames(angularVelocity));
             }
             if (delayTime > delay) dead = true;
             p.pushMatrix();
             p.translate(position.x, position.y);
-            p.rotate(angleTwo);
+            p.rotate(angle2);
             p.image(sprite, -size.x / 2, -size.y / 2);
         }
         p.popMatrix();

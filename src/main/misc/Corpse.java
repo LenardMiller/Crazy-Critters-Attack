@@ -135,8 +135,12 @@ public class Corpse {
                 part = "glue";
                 break;
             case "energy":
-                tintFinal = new Color(255, 179, 179);
+                tintFinal = new Color(60, 60, 60);
                 part = "energy";
+                break;
+            case "electricity":
+                tintFinal = new Color(60, 60, 60);
+                part = "electricity";
                 break;
             default:
                 tintFinal = new Color(255,255,255);

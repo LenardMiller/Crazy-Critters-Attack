@@ -15,7 +15,7 @@ public class Pile extends Particle {
         size = new PVector(10,10);
         maxSpeed = 0;
         speed = 0;
-        angleTwo = 0;
+        angle2 = 0;
         lifespan = secondsToFrames(8);
         sprites = animatedSprites.get(type + "PilePT");
         currentSprite = (int) p.random(0,3.99f);
@@ -29,11 +29,11 @@ public class Pile extends Particle {
         p.tint(255,255*((float)lifespan / secondsToFrames(8)));
         if (!paused) {
             lifespan--;
-            angleTwo += radians(angularVelocity);
+            angle2 += radians(angularVelocity);
         }
         p.pushMatrix();
         p.translate(position.x,position.y);
-        p.rotate(angleTwo);
+        p.rotate(angle2);
         p.image(sprites[currentSprite],-size.x/2,-size.y/2);
         p.tint(255);
         p.popMatrix();

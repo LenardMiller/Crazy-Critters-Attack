@@ -1,29 +1,33 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
+import main.particles.BuffParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.Utilities.secondsToFrames;
+import static main.misc.Utilities.up60ToFramerate;
 
 public class Arc {
 
-    private final PApplet P;
-    private final PVector START_POSITION;
-    private final Turret TURRET;
     private final int DAMAGE;
     private final int MAX_LENGTH;
     private final int MAX_DISTANCE;
     private final int PRIORITY;
+    private final int MAX_POINTS;
+    private final int VARIATION;
+    private final ArrayList<BigPoint> BIG_POINTS;
 
-    ArrayList<BigPoint> bigPoints;
+    private final PApplet P;
+    private final PVector START_POSITION;
+    private final Turret TURRET;
+    private final Color LINE_COLOR;
+
     public int alpha;
-    private static int variation;
-    private static int maxPoints;
 
     public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance, int priority) {
         this.P = p;
@@ -33,20 +37,21 @@ public class Arc {
         this.MAX_LENGTH = maxLength;
         this.MAX_DISTANCE = maxDistance;
         this.PRIORITY = priority;
-        bigPoints = new ArrayList<>();
+        BIG_POINTS = new ArrayList<>();
         alpha = 255;
-        variation = 25; //25
-        maxPoints = 10;
+        VARIATION = 25; //25
+        MAX_POINTS = 10;
+        LINE_COLOR = new Color(215, 242, 248);
         zap();
     }
 
     public void main() {
-        for (int k = 0; k < bigPoints.size()-1; k++) {
-            P.stroke(215,242,248, alpha);
+        for (int k = 0; k < BIG_POINTS.size()-1; k++) {
+            P.stroke(LINE_COLOR.getRGB(), alpha);
             P.fill(255);
-            PVector pointB = bigPoints.get(k).position;
-            PVector pointA = bigPoints.get(k+1).position;
-            PVector[] points = bigPoints.get(k).points;
+            PVector pointB = BIG_POINTS.get(k).position;
+            PVector pointA = BIG_POINTS.get(k+1).position;
+            PVector[] points = BIG_POINTS.get(k).points;
             if (debug) P.ellipse(points[1].x,points[1].y,5,5);
             P.line(pointB.x,pointB.y,points[points.length-1].x,points[points.length-1].y);
             for (int i = points.length-1; i > 1; i--) {
@@ -55,32 +60,28 @@ public class Arc {
             }
             P.line(points[1].x,points[1].y,pointA.x,pointA.y);
         }
-        if (!paused) alpha -= secondsToFrames(1/12f);
+        if (!paused) alpha -= up60ToFramerate(10);
     }
 
     private void zap() {
-        bigPoints.add(new BigPoint(P, START_POSITION));
+        BIG_POINTS.add(new BigPoint(P, START_POSITION));
         ArrayList<Enemy> hitEnemies = new ArrayList<>();
         Enemy enemy = getTargetEnemy(START_POSITION, PRIORITY,false, hitEnemies);
         if (enemy != null) {
-            int enId = 0;
-            for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemy) enId = j;
-            enemy.damageWithBuff(DAMAGE, "null", 0, 0, TURRET, true, "normal", new PVector(0,0), enId);
+            enemy.damageWithoutBuff(DAMAGE, TURRET, "electricity", new PVector(0,0), true);
             hitEnemies.add(enemy);
-            bigPoints.add(new BigPoint(P, enemy.position));
+            BIG_POINTS.add(new BigPoint(P, new PVector(enemy.position.x, enemy.position.y)));
             int x = 2;
             for (int i = 1; i < MAX_LENGTH; i++) {
-                Enemy enemyJ = getTargetEnemy(bigPoints.get(x - 1).position, 0, true, hitEnemies);
+                Enemy enemyJ = getTargetEnemy(BIG_POINTS.get(x - 1).position, 0, true, hitEnemies);
                 if (enemyJ != null) {
-                    bigPoints.add(new BigPoint(P, enemyJ.position));
-                    enId = 0;
-                    for (int j = enemies.size() - 1; j >= 0; j--) if (enemies.get(j) == enemyJ) enId = j;
-                    enemyJ.damageWithBuff(DAMAGE, "null", 0, 0, TURRET, true, "normal", new PVector(0,0), enId);
+                    BIG_POINTS.add(new BigPoint(P, enemyJ.position));
+                    enemy.damageWithoutBuff(DAMAGE, TURRET, "electricity", new PVector(0,0), true);
                     hitEnemies.add(enemyJ);
                     x++;
                 }
             }
-            for (int i = 0; i < bigPoints.size() - 1; i++) bigPoints.get(i).getPoints(bigPoints.get(i + 1).position);
+            for (int i = 0; i < BIG_POINTS.size() - 1; i++) BIG_POINTS.get(i).getPoints(BIG_POINTS.get(i + 1).position);
         }
     }
 
@@ -126,7 +127,7 @@ public class Arc {
         return e;
     }
 
-    private static class BigPoint {
+    private class BigPoint {
 
         private final PApplet P;
 
@@ -138,9 +139,9 @@ public class Arc {
             this.P = p;
         }
 
-        void getPoints(PVector pointA) {
+        private void getPoints(PVector pointA) {
             PVector pointB = position;
-            points = new PVector[(int) P.random(3,maxPoints)];
+            points = new PVector[(int) P.random(3, MAX_POINTS)];
             float lineLength = sqrt(sq(0.0f)+sq(pointB.y-pointA.y));
             float d = lineLength / points.length+1;
             for (int i = 1; i < points.length; i++) {
@@ -149,7 +150,8 @@ public class Arc {
                 e.setMag(di);
                 e.x *= -1;
                 e.y *= -1;
-                points[i] = new PVector(e.x+pointA.x+ P.random(-variation,variation),e.y+pointA.y+ P.random(-variation,variation));
+                points[i] = new PVector(e.x+pointA.x+ P.random(-VARIATION, VARIATION),e.y+pointA.y+ P.random(-VARIATION, VARIATION));
+                particles.add(new BuffParticle(P, points[i].x, points[i].y, P.random(360), "electricity"));
             }
         }
     }
