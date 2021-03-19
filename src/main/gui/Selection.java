@@ -156,12 +156,12 @@ public class Selection { //what tower is selected
                 break;
             case "miscCannon":
                 P.text("Luggage", 1000, 241);
-                P.text("Blaster", 1000, 266);
+                P.text("Launcher", 1000, 266);
                 offset = 25;
                 break;
             case "miscCannonLaundry":
                 P.text("Dirty Luggage", 1000, 241);
-                P.text("Blaster", 1000, 266);
+                P.text("Launcher", 1000, 266);
                 offset = 25;
                 setTextPurple("Toxic splatters", offset);
                 break;
@@ -191,7 +191,7 @@ public class Selection { //what tower is selected
                 break;
             case "dynamiteLauncher":
                 P.text("Dynamite", 1000, 241);
-                P.text("Launcher", 1000, 266);
+                P.text("Flinger", 1000, 266);
                 offset = 25;
                 setTextPurple("Large splash", offset);
                 break;
@@ -229,6 +229,9 @@ public class Selection { //what tower is selected
                 P.text("Energy Blaster", 1000, 241);
                 setTextPurple("Splash", offset);
                 break;
+            case "nuclearBlaster":
+                P.text("Nuclear Blaster", 1000, 241);
+                setTextPurple("Huge splash", offset);
             case "magicMissleer":
                 P.text("Magic Missileer", 1000, 241);
                 setTextPurple("Three homing missiles", offset);
@@ -243,7 +246,7 @@ public class Selection { //what tower is selected
                 break;
             case "nightmare":
                 P.text("Nightmare", 1000, 241);
-                P.text("Blaster", 1000, 266);
+                P.text("Shotgun", 1000, 266);
                 offset = 25;
                 setTextPurple("Shotgun", offset);
                 setTextPurple("Decay", offset + 20);
