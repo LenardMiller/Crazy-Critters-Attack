@@ -61,7 +61,7 @@ public abstract class Projectile {
         hitTime = 0;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        sprite = staticSprites.get("nullPj");
+        sprite = staticSprites.get("boltPj");
         velocity = PVector.fromAngle(angle - HALF_PI);
         hasTrail = false;
         trail = "null";

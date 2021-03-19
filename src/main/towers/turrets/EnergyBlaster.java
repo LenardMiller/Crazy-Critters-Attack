@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.misc.Tile;
 import main.projectiles.EnergyBlast;
+import main.projectiles.NuclearBlast;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -14,6 +15,7 @@ public class EnergyBlaster extends Turret{
 
     private int effectRadius;
     private boolean bigExplosion;
+    private boolean nuclear;
 
     public EnergyBlaster(PApplet p, Tile tile) {
         super(p,tile);
@@ -25,7 +27,7 @@ public class EnergyBlaster extends Turret{
         hit = false;
         delay = 4.2f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
-        damage = 60;
+        damage = 100;
         pjSpeed = 1000;
         range = 300;
         numFireFrames = 14; //14
@@ -40,7 +42,7 @@ public class EnergyBlaster extends Turret{
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("energyBlasterFire");
-        fireParticle = "nuclear";
+        fireParticle = "energy";
         barrelLength = 40;
         loadSprites();
         debrisType = "darkMetal";
@@ -56,7 +58,11 @@ public class EnergyBlaster extends Turret{
     }
 
     protected void spawnProjectile(PVector position, float angle) {
-        projectiles.add(new EnergyBlast(p,position.x,position.y, angle, this, damage, effectRadius, bigExplosion));
+        if (nuclear) {
+            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, damage, effectRadius));
+        } else {
+            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, damage, effectRadius, bigExplosion));
+        }
     }
 
     private void setUpgrades(){
@@ -74,16 +80,16 @@ public class EnergyBlaster extends Turret{
         upgradeTitles[2] = "NUKE";
 
         upgradeTitles[3] = "Better Range";
-        upgradeTitles[4] = "Fantastic Range";
+        upgradeTitles[4] = "Sniper";
         upgradeTitles[5] = "Big Succ";
         //description
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "firerate";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "+Explosion";
-        upgradeDescB[1] = "radius and";
-        upgradeDescC[1] = "damage";
+        upgradeDescA[1] = "Increase";
+        upgradeDescB[1] = "explosion";
+        upgradeDescC[1] = "radius";
 
         upgradeDescA[2] = "big";
         upgradeDescB[2] = "boomers";
@@ -94,9 +100,9 @@ public class EnergyBlaster extends Turret{
         upgradeDescB[3] = "range";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "Further";
-        upgradeDescB[4] = "increase";
-        upgradeDescC[4] = "range";
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "range and";
+        upgradeDescC[4] = "damage";
 
         upgradeDescA[5] = "idk, black";
         upgradeDescB[5] = "hole or";
@@ -119,13 +125,14 @@ public class EnergyBlaster extends Turret{
                     break;
                 case 1:
                     effectRadius += 25;
-                    damage += 30;
                     bigExplosion = true;
                     break;
                 case 2:
-                    effectRadius += 75;
+                    effectRadius = 50;
                     name = "nuclearBlaster";
+                    fireParticle = "nuclear";
                     debrisType = "metal";
+                    nuclear = true;
                     loadSprites();
                     break;
             }
@@ -136,6 +143,7 @@ public class EnergyBlaster extends Turret{
                     break;
                 case 4:
                     range += 35;
+                    damage += 100;
                     break;
                 case 5:
                     damage += 500;

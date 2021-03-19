@@ -57,6 +57,7 @@ public class SpriteLoader {
         getSprite(p,"metalExDebris","PT","explosionDebris/metal/",4);
         getSprite(p,"glueExDebris","PT","explosionDebris/glue/",4);
         getSprite(p,"fireExDebris","PT","explosionDebris/fire/",4);
+        getSprite(p,"nuclearExDebris","PT","explosionDebris/nuclear/",4);
         getSprite(p,"greenMagicBuff","PT","buff/greenMagic/",8);
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         getSprite(p,"railgunBlast","PT","railgunBlast/",11);
@@ -309,8 +310,8 @@ public class SpriteLoader {
         staticSprites.put("reinforcedBoltPj",p.loadImage("sprites/projectiles/reinforcedBolt.png"));
         staticSprites.put("devPj",p.loadImage("sprites/projectiles/dev.png"));
         staticSprites.put("energyPj",p.loadImage("sprites/projectiles/energy.png"));
+        staticSprites.put("nuclearPj",p.loadImage("sprites/projectiles/nuclear.png"));
         staticSprites.put("magicMisslePj",p.loadImage("sprites/projectiles/magicMissle.png"));
-        staticSprites.put("nullPj",p.loadImage("sprites/projectiles/null.png"));
         staticSprites.put("pebblePj",p.loadImage("sprites/projectiles/pebble.png"));
         staticSprites.put("rockPj",p.loadImage("sprites/projectiles/rock.png"));
         staticSprites.put("needlePj",p.loadImage("sprites/projectiles/needle.png"));
