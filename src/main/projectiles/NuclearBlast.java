@@ -14,7 +14,7 @@ public class NuclearBlast extends Projectile {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(10, 18);
-        radius = 14;
+        radius = 22;
         maxSpeed = 1000;
         speed = maxSpeed;
         this.damage = damage;
