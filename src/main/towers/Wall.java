@@ -12,6 +12,10 @@ import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public class Wall extends Tower {
 
+    public static final int BUY_PRICE = 25;
+
+    public final int[] UPGRADE_HP;
+
     private final CornerSpriteDS WOOD;
     private final CornerSpriteDS STONE;
     private final CornerSpriteDS METAL;
@@ -28,6 +32,8 @@ public class Wall extends Tower {
     private PImage rSSprite;
 
     private final PImage[][] UPGRADE_SPRITES;
+    private final String[] UPGRADE_NAMES;
+
     private PImage[] sprite;
 
     public Wall(PApplet p, Tile tile) {
@@ -43,7 +49,7 @@ public class Wall extends Tower {
         damageSound = sounds.get(debrisType + "Damage");
         breakSound = sounds.get(debrisType + "Break");
         placeSound = sounds.get(debrisType + "PlaceShort");
-        price = 25;
+        price = BUY_PRICE;
         value = price;
         nextLevelB = 0;
 
@@ -55,6 +61,8 @@ public class Wall extends Tower {
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         UPGRADE_SPRITES = new PImage[4][4];
+        UPGRADE_NAMES = new String[4];
+        UPGRADE_HP = new int[4];
         setUpgrades();
         updateTowerArray();
 
@@ -140,35 +148,25 @@ public class Wall extends Tower {
         UPGRADE_SPRITES[1] = animatedSprites.get("metalWallTW");
         UPGRADE_SPRITES[2] = animatedSprites.get("crystalWallTW");
         UPGRADE_SPRITES[3] = animatedSprites.get("ultimateWallTW");
+        //names
+        UPGRADE_NAMES[0] = "stone";
+        UPGRADE_NAMES[1] = "metal";
+        UPGRADE_NAMES[2] = "crystal";
+        UPGRADE_NAMES[3] = "titanium";
+        //hp
+        UPGRADE_HP[0] = 75;
+        UPGRADE_HP[1] = 125;
+        UPGRADE_HP[2] = 250;
+        UPGRADE_HP[3] = 500;
     }
 
     public void upgrade(int id) {
         price += upgradePrices[nextLevelB];
         sprite = UPGRADE_SPRITES[nextLevelB];
-
         int oldMax = maxHp;
-        switch (nextLevelB) {
-            case 0:
-                maxHp += 75;
-                name = "stoneWall";
-                debrisType = "stone";
-                break;
-            case 1:
-                maxHp += 125;
-                name = "metalWall";
-                debrisType = "metal";
-                break;
-            case 2:
-                maxHp += 250;
-                name = "crystalWall";
-                debrisType = "crystal";
-                break;
-            case 3:
-                maxHp += 500;
-                name = "titaniumWall";
-                debrisType = "ultimate";
-                break;
-        }
+        maxHp += UPGRADE_HP[nextLevelB];
+        name = UPGRADE_NAMES[nextLevelB] + "Wall";
+        debrisType = UPGRADE_NAMES[nextLevelB];
         hp = (int)(hp/(float)oldMax * maxHp);
 
         damageSound = sounds.get(debrisType + "Damage");

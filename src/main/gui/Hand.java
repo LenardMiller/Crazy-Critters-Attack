@@ -146,7 +146,7 @@ public class Hand {
             P.fill(235);
             P.noStroke();
             P.rect(900, 212, 200, 707);
-            boolean canAfford = money >= 25;
+            boolean canAfford = money >= Wall.BUY_PRICE;
             if (canAfford) P.fill(195, 232, 188);
             else P.fill(230, 181, 181);
             P.rect(905, 247, 190, 119);
@@ -159,15 +159,15 @@ public class Hand {
             P.text("Wall", 1000, 301);
             P.textFont(mediumFont);
             P.text("50 HP", 1000, 331);
-            if (canAfford) P.text("$25", 1000, 356);
+            if (canAfford) P.text("$" + Wall.BUY_PRICE, 1000, 356);
             else {
-                strikethroughText(P, "$25", new PVector(1000, 356), new Color(150, 0, 0),
+                strikethroughText(P, "$" + Wall.BUY_PRICE, new PVector(1000, 356), new Color(150, 0, 0),
                         mediumFont.getSize(), CENTER);
             }
         }
         if (displayInfo.equals("upgradeWall")) {
-            Tower tower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
-            if (tower.nextLevelB > tower.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
+            Wall wall = (Wall) tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+            if (wall.nextLevelB > wall.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
             else {
                 P.fill(235);
                 P.noStroke();
@@ -180,15 +180,15 @@ public class Hand {
                 P.fill(0);
                 P.text("Selected:", 1000, 241);
                 P.textFont(largeFont);
-                if (tower.nextLevelB > 0) {
-                    P.text(tower.upgradeTitles[tower.nextLevelB - 1], 1000, 276); //if not base level
+                if (wall.nextLevelB > 0) {
+                    P.text(wall.upgradeTitles[wall.nextLevelB - 1], 1000, 276); //if not base level
                 } else P.text("Wooden", 1000, 276);
                 P.text("Wall", 1000, 301);
                 P.textFont(mediumFont);
-                P.text(tower.hp + " hp", 1000, 331);
-                P.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
+                P.text(wall.hp + " hp", 1000, 331);
+                P.text("Sell for: $" + (int) (0.8f * (float) wall.value), 1000, 356);
                 //upgrade info
-                boolean canAfford = money >= tower.upgradePrices[tower.nextLevelB];
+                boolean canAfford = money >= wall.upgradePrices[wall.nextLevelB];
                 if (canAfford) P.fill(195, 232, 188);
                 else P.fill(230, 181, 181);
                 P.rect(905, 401, 190, 119);
@@ -196,28 +196,13 @@ public class Hand {
                 P.fill(0);
                 P.text("Upgrade:", 1000, 395);
                 P.textFont(largeFont);
-                P.text(tower.upgradeTitles[tower.nextLevelB], 1000, 430);
+                P.text(wall.upgradeTitles[wall.nextLevelB], 1000, 430);
                 P.text("Wall", 1000, 455);
                 P.textFont(mediumFont);
-                int hpDisplay = 0;
-                switch (tower.name) {
-                    case "woodWall":
-                        hpDisplay = 75;
-                        break;
-                    case "stoneWall":
-                        hpDisplay = 125;
-                        break;
-                    case "metalWall":
-                        hpDisplay = 250;
-                        break;
-                    case "crystalWall":
-                        hpDisplay = 500;
-                        break;
-                }
-                P.text("+" + hpDisplay + " HP", 1000, 485);
-                if (canAfford) P.text("$" + tower.upgradePrices[tower.nextLevelB], 1000, 510);
+                P.text("+" + wall.UPGRADE_HP[wall.nextLevelB] + " HP", 1000, 485);
+                if (canAfford) P.text("$" + wall.upgradePrices[wall.nextLevelB], 1000, 510);
                 else {
-                    strikethroughText(P, "$" + tower.upgradePrices[tower.nextLevelB], new PVector(1000, 510),
+                    strikethroughText(P, "$" + wall.upgradePrices[wall.nextLevelB], new PVector(1000, 510),
                             new Color(150, 0, 0), mediumFont.getSize(), CENTER);
                 }
             }
@@ -334,7 +319,7 @@ public class Hand {
             case "wall":
                 heldSprite = staticSprites.get("woodWallTW");
                 offset = new PVector(0, 0);
-                price = 25;
+                price = Wall.BUY_PRICE;
                 break;
             case "null":
                 heldSprite = null;

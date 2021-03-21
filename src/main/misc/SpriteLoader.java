@@ -238,7 +238,7 @@ public class SpriteLoader {
         getSprite(p,"stoneWall","TW","Stone/",4);
         getSprite(p,"metalWall","TW","Metal/",4);
         getSprite(p,"crystalWall","TW","Crystal/",4);
-        getSprite(p,"ultimateWall","TW","Ultimate/",4);
+        getSprite(p,"titaniumWall","TW","Titanium/",4);
         //machines
         getMachineSprite(p,"stoneDrill",new int[]{12,12,13,20});
         getMachineSprite(p, "metalDrill", new int[]{8,8,9,11});
@@ -303,7 +303,7 @@ public class SpriteLoader {
         staticSprites.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));
         staticSprites.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));
         staticSprites.put("stonePt",p.loadImage("sprites/particles/debris/stone.png"));
-        staticSprites.put("ultimatePt",p.loadImage("sprites/particles/debris/ultimate.png"));
+        staticSprites.put("titaniumPt",p.loadImage("sprites/particles/debris/titanium.png"));
         staticSprites.put("woodPt",p.loadImage("sprites/particles/debris/wood.png"));
         staticSprites.put("darkMetalPt",p.loadImage("sprites/particles/debris/darkMetal.png"));
         staticSprites.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
@@ -415,7 +415,7 @@ public class SpriteLoader {
             if (i == 1) name = "Stone";
             if (i == 2) name = "Metal";
             if (i == 3) name = "Crystal";
-            if (i == 4) name = "Ultimate";
+            if (i == 4) name = "Titanium";
             String idA = "null";
             String idB = "null";
             String idC = "null";
