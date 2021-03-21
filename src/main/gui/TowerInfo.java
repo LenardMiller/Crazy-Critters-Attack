@@ -1,4 +1,4 @@
-package main.misc;
+package main.gui;
 
 import processing.core.PApplet;
 
@@ -10,9 +10,10 @@ public class TowerInfo {
 
     public TowerInfo() {}
 
-    private static void loadStyle(PApplet p) {
+    private static int loadStyle(PApplet p) {
         p.textAlign(LEFT);
         p.textFont(mediumFont);
+        return 910;
     }
 
     private static int space(int lineNumber) {
@@ -20,8 +21,7 @@ public class TowerInfo {
     }
 
     public static void slingshotInfo(PApplet p) {
-        loadStyle(p);
-        int x = 910;
+        int x = loadStyle(p);
         p.text("Fires a single pebble", x, space(0));
         p.text("at the nearest", x, space(1));
         p.text("enemy.  Decent", x, space(2));
@@ -33,8 +33,7 @@ public class TowerInfo {
     }
 
     public static void randomCannonInfo(PApplet p) {
-        loadStyle(p);
-        int x = 910;
+        int x = loadStyle(p);
         p.text("Rapidly fires old", x, space(0));
         p.text("luggage at the", x, space(1));
         p.text("nearest enemy.", x, space(2));
@@ -46,21 +45,20 @@ public class TowerInfo {
     }
 
     public static void crossbowInfo(PApplet p) {
-        loadStyle(p);
-        int x = 910;
+        int x = loadStyle(p);
         p.text("Fires a powerful bolt", x, space(0));
-        p.text("at the furthest enemy", x, space(1));
-        p.text("at a long distance.", x, space(2));
+        p.text("at the farthest", x, space(1));
+        p.text("enemy in its range.", x, space(2));
         p.text("Very high damage", x, space(3));
-        p.text("and range,  but low", x, space(4));
-        p.text("rate of fire.", x, space(5));
+        p.text("and range with some", x, space(4));
+        p.text("piercing,  but low", x, space(5));
+        p.text("rate of fire.", x, space(6));
         p.textAlign(CENTER);
-        p.text("[Z]", 1000, space(7));
+        p.text("[Z]", 1000, space(8));
     }
 
     public static void cannonInfo(PApplet p) {
-        loadStyle(p);
-        int x = 910;
+        int x = loadStyle(p);
         p.text("Fires a cannonball", x, space(0));
         p.text("at the nearest", x, space(1));
         p.text("enemy.  Moderate", x, space(2));
@@ -72,8 +70,7 @@ public class TowerInfo {
     }
 
     public static void gluerInfo(PApplet p) {
-        loadStyle(p);
-        int x = 910;
+        int x = loadStyle(p);
         p.text("Fires a glob of", x, space(0));
         p.text("glue at the nearest", x, space(1));
         p.text("unglued enemy.", x, space(2));
@@ -85,8 +82,7 @@ public class TowerInfo {
     }
 
     public static void seismicInfo(PApplet p) {
-        loadStyle(p);
-        int x = 910;
+        int x = loadStyle(p);
         p.text("Sends a shockwave", x, space(0));
         p.text("towards the nearest", x, space(1));
         p.text("enemy.  Does low", x, space(2));
@@ -94,5 +90,19 @@ public class TowerInfo {
         p.text("hit several enemies.", x, space(4));
         p.textAlign(CENTER);
         p.text("[X]", 1000, space(6));
+    }
+
+    public static void energyBlasterInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Fires an explosive", x, space(0));
+        p.text("energy ball at the", x, space(1));
+        p.text("farthest enemy in its", x, space(2));
+        p.text("range.  Has long", x, space(3));
+        p.text("range,  some splash", x, space(4));
+        p.text("and high damage,", x, space(5));
+        p.text("but a long reload", x, space(6));
+        p.text("time.", x, space(7));
+        p.textAlign(CENTER);
+        p.text("[E]", 1000, space(9));
     }
 }

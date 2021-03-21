@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.TowerInfo.*;
+import static main.gui.TowerInfo.*;
 import static processing.core.PConstants.CENTER;
 
 public class TowerBuy extends Button {
@@ -130,6 +130,7 @@ public class TowerBuy extends Button {
                     break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);
+                    energyBlasterInfo(p);
                     break;
                 case "magicMissleer":
                     p.text("Magic Missileer", x, 241);
