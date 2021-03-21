@@ -19,7 +19,7 @@ public class DarkBlast extends Projectile {
         this.damage = damage;
         this.angle = angle;
         sprite = staticSprites.get("darkPj");
-        hitSound = sounds.get("energyImpact");
+        hitSound = sounds.get("darkImpact");
         hasTrail = true;
         this.effectRadius = effectRadius;
         type = "dark";

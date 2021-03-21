@@ -123,7 +123,7 @@ public class CaveWaves {
         waves[26] = wavePreset(p, 85, 35, bigAlbinoBug);
         waves[26].addSpawns(bigAlbinoBug, 10);
 
-        waves[27] = wavePreset(p, 100, 15, bat);
+        waves[27] = wavePreset(p, 80, 15, bat);
         waves[27].addSpawns(bat, 50);
         waves[27].addSpawns(albinoButterfly, 50);
 

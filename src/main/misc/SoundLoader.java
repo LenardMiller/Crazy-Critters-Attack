@@ -39,6 +39,7 @@ public class SoundLoader {
         sounds.put("squishImpact", new SoundFile(p, "sounds/projectiles/squishImpact.wav"));
         sounds.put("fireImpact", new SoundFile(p, "sounds/projectiles/fireImpact.wav"));
         sounds.put("energyImpact", new SoundFile(p, "sounds/projectiles/energyImpact.wav"));
+        sounds.put("darkImpact", new SoundFile(p, "sounds/projectiles/darkImpact.wav"));
         //turrets
         sounds.put("woodPlace", new SoundFile(p, "sounds/turrets/woodPlace.wav"));
         sounds.put("stonePlace", new SoundFile(p, "sounds/turrets/stonePlace.wav"));
