@@ -33,7 +33,7 @@ public class EnergyBlaster extends Turret{
         range = 300;
         betweenFireFrames = down60ToFramerate(2);
         spriteType = 0;
-        effectRadius = 25;
+        effectRadius = 35;
         bigExplosion = false;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
@@ -113,7 +113,7 @@ public class EnergyBlaster extends Turret{
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[6];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[13];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[3];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[30];
     }
 
     protected void upgradeSpecial(int id) {
@@ -123,7 +123,7 @@ public class EnergyBlaster extends Turret{
                     delay -= 0.6f;
                     break;
                 case 1:
-                    effectRadius += 25;
+                    effectRadius += 15;
                     bigExplosion = true;
                     break;
                 case 2:
