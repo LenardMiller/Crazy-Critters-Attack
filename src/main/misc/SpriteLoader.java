@@ -35,6 +35,7 @@ public class SpriteLoader {
         getSprite(p,"stunBuff","PT","buff/stun/",8);
         getSprite(p,"electricityBuff","PT","buff/electricity/",8);
         getSprite(p,"nuclearBuff","PT","buff/nuclear/",8);
+        getSprite(p,"darkBuff","PT","buff/dark/",8);
         getSprite(p,"greenOuchEnemy","PT","enemy/greenOuch/",11);
         getSprite(p,"greyPuffEnemy","PT","enemy/greyPuff/",11);
         getSprite(p,"greenPuffEnemy","PT","enemy/greenPuff/",10);
@@ -313,6 +314,7 @@ public class SpriteLoader {
         staticSprites.put("devPj",p.loadImage("sprites/projectiles/dev.png"));
         staticSprites.put("energyPj",p.loadImage("sprites/projectiles/energy.png"));
         staticSprites.put("nuclearPj",p.loadImage("sprites/projectiles/nuclear.png"));
+        staticSprites.put("darkPj",p.loadImage("sprites/projectiles/dark.png"));
         staticSprites.put("magicMisslePj",p.loadImage("sprites/projectiles/magicMissle.png"));
         staticSprites.put("pebblePj",p.loadImage("sprites/projectiles/pebble.png"));
         staticSprites.put("rockPj",p.loadImage("sprites/projectiles/rock.png"));

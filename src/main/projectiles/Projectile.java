@@ -12,7 +12,6 @@ import processing.sound.SoundFile;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.Utilities.up60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public abstract class Projectile {
@@ -91,8 +90,8 @@ public abstract class Projectile {
 
     protected void trail() { //leaves a trail of particles
         if (hasTrail) {
-            int num = up60ToFramerate(p.random(0, 3));
-            if (num == 0) particles.add(new BuffParticle(p, position.x, position.y, p.random(0, 360), trail));
+            if (p.random(0, 3) < 1) particles.add(new BuffParticle(p, position.x, position.y,
+                    p.random(0, 360), trail));
         }
     }
 

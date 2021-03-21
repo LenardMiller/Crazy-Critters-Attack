@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
+import main.projectiles.DarkBlast;
 import main.projectiles.EnergyBlast;
 import main.projectiles.NuclearBlast;
 import processing.core.PApplet;
@@ -56,6 +57,8 @@ public class EnergyBlaster extends Turret{
     protected void spawnProjectile(PVector position, float angle) {
         if (nuclear) {
             projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, damage, effectRadius));
+        } else if (dark) {
+            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, damage, effectRadius));
         } else {
             projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, damage, effectRadius, bigExplosion));
         }
@@ -145,6 +148,7 @@ public class EnergyBlaster extends Turret{
                     range += 40;
                     damage += 500;
                     name = "darkBlaster";
+                    fireParticle = "dark";
                     dark = true;
                     loadSprites();
                     break;

@@ -146,6 +146,10 @@ public class Corpse {
                 tintFinal = new Color(60, 60, 60);
                 part = "nuclear";
                 break;
+            case "dark":
+                tintFinal = new Color(79, 0, 128);
+                part = "dark";
+                break;
             default:
                 tintFinal = new Color(255,255,255);
                 doSpecialEffects = false;
