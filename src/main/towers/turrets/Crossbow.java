@@ -4,7 +4,6 @@ import main.misc.Tile;
 import main.projectiles.Bolt;
 import main.projectiles.ReinforcedBolt;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -27,10 +26,6 @@ public class Crossbow extends Turret {
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 1400;
         range = 320;
-        numFireFrames = 13;
-        numLoadFrames = 81;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         frame = 0;
         loadDelay = 0;

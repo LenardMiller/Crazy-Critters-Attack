@@ -4,7 +4,6 @@ import main.misc.Tile;
 import main.projectiles.EnergyBlast;
 import main.projectiles.NuclearBlast;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -16,6 +15,7 @@ public class EnergyBlaster extends Turret{
     private int effectRadius;
     private boolean bigExplosion;
     private boolean nuclear;
+    private boolean dark;
 
     public EnergyBlaster(PApplet p, Tile tile) {
         super(p,tile);
@@ -30,11 +30,7 @@ public class EnergyBlaster extends Turret{
         damage = 100;
         pjSpeed = 1000;
         range = 300;
-        numFireFrames = 14; //14
         betweenFireFrames = down60ToFramerate(2);
-        numLoadFrames = 42; //42
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         effectRadius = 25;
         bigExplosion = false;
@@ -146,7 +142,11 @@ public class EnergyBlaster extends Turret{
                     damage += 100;
                     break;
                 case 5:
+                    range += 40;
                     damage += 500;
+                    name = "darkBlaster";
+                    dark = true;
+                    loadSprites();
                     break;
             }
         }

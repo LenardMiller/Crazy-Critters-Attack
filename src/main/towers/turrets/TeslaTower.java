@@ -3,7 +3,6 @@ package main.towers.turrets;
 import main.misc.Tile;
 import main.projectiles.Arc;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -29,12 +28,6 @@ public class TeslaTower extends Turret {
         arcLength = 3;
         pjSpeed = -1;
         range = 200;
-        numFireFrames = 6;
-        numLoadFrames = 5;
-        numIdleFrames = 18;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
         betweenIdleFrames = down60ToFramerate(3);
         spriteType = 0;
         loadSprites();

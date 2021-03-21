@@ -6,7 +6,6 @@ import main.projectiles.Glue;
 import main.projectiles.SpikeyGlue;
 import main.projectiles.SplatterGlue;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -29,11 +28,7 @@ public class Gluer extends Turret {
         delay = 2.5f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 400;
-        numFireFrames = 5;
         betweenFireFrames = down60ToFramerate(1);
-        numLoadFrames = 7;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         frame = 0;
         loadDelay = 0;

@@ -34,14 +34,7 @@ public class WaveMotion extends Turret {
         damage = 2;
         pjSpeed = -1;
         range = 0; //0
-        numFireFrames = 18;
-        numLoadFrames = 80;
-        numIdleFrames = 14;
-        betweenBeamTimer = 0;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
-        beam = new PImage[numFireFrames];
+        beam = new PImage[0];
         currentBeamFrame = 19;
         betweenIdleFrames = 3;
         betweenFireFrames = 4;
@@ -89,7 +82,7 @@ public class WaveMotion extends Turret {
         p.tint(255);
         p.popMatrix();
         //beam
-        if (currentBeamFrame < numFireFrames) {
+        if (currentBeamFrame < fireFrames.length) {
             PVector s = new PVector();
             PVector e = new PVector();
             for (int i = 0; i <= beamLength; i++) {

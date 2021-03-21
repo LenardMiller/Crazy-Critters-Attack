@@ -35,9 +35,6 @@ public abstract class Turret extends Tower {
     public String[] upgradeDescC;
 
     protected int offset;
-    protected int numFireFrames;
-    protected int numLoadFrames;
-    protected int numIdleFrames;
     protected int spriteType;
     protected int frame;
     protected int frameTimer;
@@ -70,15 +67,9 @@ public abstract class Turret extends Tower {
         delay = 4;
         pjSpeed = 500;
         range = 0;
-        numFireFrames = 1;
-        numLoadFrames = 1;
-        numIdleFrames = 1;
         debrisType = null;
         barrelLength = 0;
         fireParticle = "null";
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
         spriteArray = new ArrayList<>();
         spriteType = 0;
         effectLevel = 0;
@@ -199,13 +190,12 @@ public abstract class Turret extends Tower {
     protected void spawnProjectile(PVector position, float angle) {}
 
     protected void loadSprites() {
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
         sBase = staticSprites.get(name + "BaseTR");
         sIdle = staticSprites.get(name + "IdleTR");
         fireFrames = animatedSprites.get(name + "FireTR");
         loadFrames = animatedSprites.get(name + "LoadTR");
-        if (numIdleFrames > 1) idleFrames = animatedSprites.get(name + "IdleTR");
+        if (animatedSprites.get(name + "IdleTR") != null) idleFrames = animatedSprites.get(name + "IdleTR");
+        else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
     }
 
     public void main() { //need to check target
@@ -228,8 +218,8 @@ public abstract class Turret extends Tower {
             if (tintColor < 255) tintColor += 20;
             if (spriteType == 0) { //idle
                 sprite = sIdle;
-                if (numIdleFrames > 1) {
-                    if (frame < numIdleFrames) {
+                if (idleFrames.length > 1) {
+                    if (frame < idleFrames.length) {
                         sprite = idleFrames[frame];
                         if (frameTimer >= betweenIdleFrames) {
                             frame++;
@@ -241,15 +231,15 @@ public abstract class Turret extends Tower {
                     }
                 }
             } else if (spriteType == 1) { //fire
-                if (frame < numFireFrames - 1) { //if not done, keep going
+                if (frame < fireFrames.length - 1) { //if not done, keep going
                     if (frameTimer >= betweenFireFrames) {
                         frame++;
                         frameTimer = 0;
                         sprite = fireFrames[frame];
                     } else frameTimer++;
                 } else { //if done, switch to load
-                    if (numLoadFrames > 0) {
-                        int oldSize = numLoadFrames;
+                    if (loadFrames.length > 0) {
+                        int oldSize = loadFrames.length;
                         int newSize = secondsToFrames(delay);
                         spriteArray = new ArrayList<>();
                         if (oldSize > newSize) { //decreasing size
@@ -314,13 +304,9 @@ public abstract class Turret extends Tower {
         if (id == 0) {
             value += upgradePrices[nextLevelA];
             nextLevelA++;
-//            placeSound.stop();
-//            placeSound.play(p.random(0.8f, 1.2f), volume);
         } else if (id == 1) {
             value += upgradePrices[nextLevelB];
             nextLevelB++;
-//            placeSound.stop();
-//            placeSound.play(p.random(0.8f, 1.2f), volume);
         }
         //icons
         if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
@@ -332,7 +318,7 @@ public abstract class Turret extends Tower {
         placeSound.play(p.random(0.8f, 1.2f), volume);
         spawnParticles();
         //prevent having fire animations longer than delays
-        while (delay <= numFireFrames * betweenFireFrames + numIdleFrames) betweenFireFrames--;
+        while (delay <= fireFrames.length * betweenFireFrames + idleFrames.length) betweenFireFrames--;
     }
 
     protected void upgradeSpecial(int id) {

@@ -3,7 +3,6 @@ package main.towers.turrets;
 import main.misc.Tile;
 import main.projectiles.Flame;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -25,15 +24,9 @@ public class Flamethrower extends Turret {
         delay += p.random(-(delay / 10f), delay / 10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 300;
         range = 250;
-        numFireFrames = 4;
-        numLoadFrames = 1;
-        numIdleFrames = 4;
         effectLevel = 50;
         effectDuration = 5;
         betweenIdleFrames = 1;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
         spriteType = 0;
         frame = 0;
         loadDelay = 0;

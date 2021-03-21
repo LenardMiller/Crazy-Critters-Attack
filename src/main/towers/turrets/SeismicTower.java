@@ -5,7 +5,6 @@ import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.Shockwave;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -29,11 +28,7 @@ public class SeismicTower extends Turret {
         delay = 2.5f; //default: 200 frames
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 400;
-        numFireFrames = 14;
         betweenFireFrames = down60ToFramerate(1);
-        numLoadFrames = 20;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         frame = 0;
         loadDelay = 0;
@@ -249,8 +244,6 @@ public class SeismicTower extends Turret {
                     shockwaveWidth = 720;
                     delay = 0.3f;
                     name = "seismicSlammer";
-                    numFireFrames = 3;
-                    numLoadFrames = 9;
                     loadSprites();
                     break;
             }

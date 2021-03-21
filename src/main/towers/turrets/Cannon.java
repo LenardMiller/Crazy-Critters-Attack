@@ -5,7 +5,6 @@ import main.projectiles.CannonBall;
 import main.projectiles.Dynamite;
 import main.projectiles.FragBall;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -29,11 +28,7 @@ public class Cannon extends Turret {
         delay = 4;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 850;
-        numFireFrames = 6;
         betweenFireFrames = down60ToFramerate(1);
-        numLoadFrames = 18;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         frame = 0;
         loadDelay = 0;
@@ -137,7 +132,6 @@ public class Cannon extends Turret {
                     placeSound = sounds.get("woodPlace");
                     barrelLength = 0;
                     loadSprites();
-                    numLoadFrames = 80;
                     break;
             }
         } if (id == 1) {

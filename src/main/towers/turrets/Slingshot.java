@@ -5,7 +5,6 @@ import main.projectiles.Gravel;
 import main.projectiles.Pebble;
 import main.projectiles.Rock;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -27,10 +26,6 @@ public class Slingshot extends Turret {
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 700;
         range = 230;
-        numFireFrames = 34;
-        numLoadFrames = 59;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         damage = 15; //15
         damageSound = sounds.get("woodDamage");

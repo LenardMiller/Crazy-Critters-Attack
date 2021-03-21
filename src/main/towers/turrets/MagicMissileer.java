@@ -3,7 +3,6 @@ package main.towers.turrets;
 import main.misc.Tile;
 import main.projectiles.MagicMissile;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -24,12 +23,6 @@ public class MagicMissileer extends Turret{
         damage = 15;
         pjSpeed = 300;
         range = 0; //0 degrees
-        numFireFrames = 8;
-        numLoadFrames = 26;
-        numIdleFrames = 8;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
         betweenIdleFrames = down60ToFramerate(8);
         spriteType = 0;
         loadSprites();

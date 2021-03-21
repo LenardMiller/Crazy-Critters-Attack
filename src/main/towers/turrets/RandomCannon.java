@@ -5,7 +5,6 @@ import main.particles.BuffParticle;
 import main.projectiles.Laundry;
 import main.projectiles.MiscProjectile;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -28,11 +27,7 @@ public class RandomCannon extends Turret {
         delay = 0.4f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 700;
-        numFireFrames = 5;
         betweenFireFrames = down60ToFramerate(8);
-        numLoadFrames = 1;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         frame = 0;
         loadDelay = 0;

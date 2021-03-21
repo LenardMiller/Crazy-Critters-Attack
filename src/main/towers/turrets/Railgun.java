@@ -36,15 +36,9 @@ public class Railgun extends Turret {
         damage = 5000;
         pjSpeed = -1;
         range = 800; //0
-        numFireFrames = 15;
-        numLoadFrames = 9;
-        numIdleFrames = 6;
         NUM_VAPOR_FRAMES = 15;
         BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);
         betweenVaporTimer = 0;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
         vaporTrail = new PImage[NUM_VAPOR_FRAMES];
         vaporEndSprites = new PImage[11];
         currentVaporFrame = 16;

@@ -4,7 +4,6 @@ import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.Needle;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -26,10 +25,6 @@ public class Nightmare extends Turret {
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
         pjSpeed = 1000;
         range = 200;
-        numFireFrames = 14;
-        numLoadFrames = 22;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
         spriteType = 0;
         frame = 0;
         loadDelay = 0;
