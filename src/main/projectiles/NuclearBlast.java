@@ -17,7 +17,7 @@ public class NuclearBlast extends Projectile {
         radius = 22;
         maxSpeed = 1000;
         speed = maxSpeed;
-        this.damage = damage;
+        this.damage = damage/2; //because applies damage from splash and shockwave
         this.angle = angle;
         sprite = staticSprites.get("nuclearPj");
         hitSound = sounds.get("hugeExplosion");
@@ -33,7 +33,7 @@ public class NuclearBlast extends Projectile {
             particles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "fire", p.random(500, 1000)));
             particles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "metal", p.random(500, 1000)));
         }
-        shockwaves.add(new Shockwave(p, position.x, position.y, 200, 0, 720, damage, turret, false, true));
+        shockwaves.add(new Shockwave(p, position.x, position.y, effectRadius, 0, 720, damage, turret, false, true));
         projectiles.remove(this);
     }
 }
