@@ -10,6 +10,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
@@ -144,7 +146,8 @@ public class Hand {
             P.fill(235);
             P.noStroke();
             P.rect(900, 212, 200, 707);
-            if (money >= 25) P.fill(195, 232, 188);
+            boolean canAfford = money >= 25;
+            if (canAfford) P.fill(195, 232, 188);
             else P.fill(230, 181, 181);
             P.rect(905, 247, 190, 119);
             P.textAlign(CENTER);
@@ -156,7 +159,11 @@ public class Hand {
             P.text("Wall", 1000, 301);
             P.textFont(mediumFont);
             P.text("50 HP", 1000, 331);
-            P.text("$25", 1000, 356);
+            if (canAfford) P.text("$25", 1000, 356);
+            else {
+                strikethroughText(P, "$25", new PVector(1000, 356), new Color(150, 0, 0),
+                        mediumFont.getSize(), CENTER);
+            }
         }
         if (displayInfo.equals("upgradeWall")) {
             Tower tower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
@@ -181,7 +188,8 @@ public class Hand {
                 P.text(tower.hp + " hp", 1000, 331);
                 P.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
                 //upgrade info
-                if (money >= tower.upgradePrices[tower.nextLevelB]) P.fill(195, 232, 188);
+                boolean canAfford = money >= tower.upgradePrices[tower.nextLevelB];
+                if (canAfford) P.fill(195, 232, 188);
                 else P.fill(230, 181, 181);
                 P.rect(905, 401, 190, 119);
                 P.textFont(mediumLargeFont);
@@ -207,7 +215,11 @@ public class Hand {
                         break;
                 }
                 P.text("+" + hpDisplay + " HP", 1000, 485);
-                P.text("$" + tower.upgradePrices[tower.nextLevelB], 1000, 510);
+                if (canAfford) P.text("$" + tower.upgradePrices[tower.nextLevelB], 1000, 510);
+                else {
+                    strikethroughText(P, "$" + tower.upgradePrices[tower.nextLevelB], new PVector(1000, 510),
+                            new Color(150, 0, 0), mediumFont.getSize(), CENTER);
+                }
             }
         }
         if (displayInfo.equals("maxWallUpgrade")) {

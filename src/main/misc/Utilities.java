@@ -280,7 +280,41 @@ public class Utilities {
         p.rect(highlightPosition.x, highlightPosition.y - ((textSize/2) - padding), textWidth + padding, textSize);
         p.fill(textColor.getRGB(), textColor.getAlpha());
         p.text(text, position.x, position.y);
+
         p.rectMode(CORNER);
+    }
+
+    /**
+     * Displays text with a strikethrough.
+     * @param p the PApplet
+     * @param text text to display
+     * @param position where text is displayed
+     * @param textColor color of text and strikethrough, RGB
+     * @param textSize size of text
+     * @param textAlign what alignment to use, defaults to center
+     */
+    public static void strikethroughText(PApplet p, String text, PVector position, Color textColor, float textSize,
+                                         int textAlign) {
+        if (textAlign != LEFT && textAlign != RIGHT) textAlign = CENTER;
+
+        p.textAlign(textAlign);
+        p.textSize(textSize);
+        p.strokeWeight(textSize/10);
+
+        float textWidth = p.textWidth(text);
+        PVector center = new PVector(position.x, position.y);
+        if (textAlign == LEFT) center = new PVector(position.x + (textWidth/2), position.y);
+        if (textAlign == RIGHT) center = new PVector(position.x - (textWidth/2), position.y);
+        PVector leftPoint = new PVector(center.x - (textWidth/2), center.y - textSize/2);
+        PVector rightPoint = new PVector(center.x + (textWidth/2), center.y - textSize/2);
+
+        p.fill(textColor.getRGB());
+        p.stroke(textColor.getRGB());
+        p.text(text, position.x, position.y);
+        p.line(leftPoint.x, leftPoint.y, rightPoint.x, rightPoint.y);
+
+        p.strokeWeight(1);
+        p.noStroke();
     }
 
     /**
@@ -305,14 +339,23 @@ public class Utilities {
         p.text(text, position.x, position.y);
     }
 
+    /**
+     * @return seconds * framerate
+     */
     public static int secondsToFrames(float numberOfSeconds) {
         return (int) (numberOfSeconds * FRAMERATE);
     }
 
+    /**
+     * @return (frames / 60) * framerate
+     */
     public static int down60ToFramerate(float frames) {
         return (int) ((frames / 60f) * FRAMERATE);
     }
 
+    /**
+     * @return frames * (60 / framerate)
+     */
     public static int up60ToFramerate(float frames) {
         return (int) (frames * (60 / (float) FRAMERATE));
     }
@@ -350,6 +393,11 @@ public class Utilities {
         return new Color(red, green, blue);
     }
 
+    /**
+     * randomizes the input by a proportion.
+     * @param p the PApplet
+     * @param by proportion to randomize by
+     */
     public static float randomizeBy(PApplet p, float input, float by) {
         return input + p.random(-input * by, input * by);
     }

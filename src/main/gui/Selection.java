@@ -4,11 +4,13 @@ import main.gui.guiObjects.buttons.UpgradeTower;
 import main.towers.Tower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
+import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import java.awt.*;
 
 import static main.Main.*;
+import static main.misc.Utilities.strikethroughText;
 
 public class Selection { //what tower is selected
 
@@ -353,17 +355,21 @@ public class Selection { //what tower is selected
     }
 
     private void displayUpgrade(int offsetC, int nextLevel, UpgradeTower upgradeButton) {
-        //upgrade Zero / A
         Color fillColor;
         P.textAlign(CENTER);
         if (turret.name.contains("magicMissleer")) offsetC += 45;
         if (!upgradeButton.greyed && nextLevel < turret.upgradePrices.length) {
-            if (money >= turret.upgradePrices[nextLevel]) fillColor = new Color(11, 56, 0);
+            boolean canAfford = money >= turret.upgradePrices[nextLevel];
+            if (canAfford) fillColor = new Color(11, 56, 0);
             else fillColor = new Color(75, 0, 0);
-            P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+            P.fill(fillColor.getRGB());
             P.textFont(largeFont);
             P.text(turret.upgradeTitles[nextLevel], 1000, 585 + offsetC);
-            P.text("$" + turret.upgradePrices[nextLevel], 1000, 693 + offsetC);
+            if (canAfford) P.text("$" + turret.upgradePrices[nextLevel], 1000, 693 + offsetC);
+            else {
+                strikethroughText(P, "$" + turret.upgradePrices[nextLevel], new PVector(1000, 693 + offsetC),
+                        fillColor, largeFont.getSize(), CENTER);
+            }
             P.textFont(mediumFont);
             P.textAlign(LEFT);
             P.text(turret.upgradeDescA[nextLevel], 910, 615 + offsetC);

@@ -3,8 +3,11 @@ package main.gui.guiObjects.buttons;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.gui.TowerInfo.*;
+import static main.misc.Utilities.strikethroughText;
 import static processing.core.PConstants.CENTER;
 
 public class TowerBuy extends Button {
@@ -166,8 +169,11 @@ public class TowerBuy extends Button {
     private void displayPrice(int offset, int x) {
         p.textAlign(CENTER);
         p.textFont(mediumFont);
-        if (money < price) p.fill(255,0,0);
-        p.text("$" + price, x, 271 + offset);
+        if (money < price) {
+            strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0),
+                    mediumFont.getSize(), CENTER);
+        }
+        else p.text("$" + price, x, 271 + offset);
     }
 
     public void action() {
