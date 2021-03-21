@@ -14,7 +14,7 @@ public class BuffParticle extends Particle {
         size = new PVector(7, 7);
         maxSpeed = 15;
         speed = maxSpeed;
-        angle2 = angle;
+        displayAngle = angle;
         angularVelocity = p.random(-300, 300); //degrees mode
         betweenFrames = down60ToFramerate(p.random(3,6));
         numFrames = 8;

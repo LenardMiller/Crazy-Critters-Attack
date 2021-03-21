@@ -15,7 +15,7 @@ public class LargeExplosion extends Particle {
         size = new PVector(50,50);
         maxSpeed = 0;
         speed = maxSpeed;
-        angle2 = angle;
+        displayAngle = angle;
         angularVelocity = 0; //degrees mode
         betweenFrames = down60ToFramerate(1);
         numFrames = 17;

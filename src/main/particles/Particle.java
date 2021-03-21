@@ -23,7 +23,7 @@ public abstract class Particle {
     public PVector position;
     public PVector size;
 
-    protected float angle2;
+    protected float displayAngle;
     protected float angularVelocity;
     protected boolean dead;
     protected int lifespan;
@@ -40,7 +40,7 @@ public abstract class Particle {
         position = new PVector(x, y);
         size = new PVector(5, 5);
         speed = 60;
-        angle2 = angle;
+        displayAngle = angle;
         angularVelocity = 0; //degrees mode
         lifespan = secondsToFrames(1);
         lifespan += (PApplet.round(p.random(-(lifespan / 4f), lifespan / 4f))); //injects 10% randomness so all don't die at once
@@ -66,32 +66,30 @@ public abstract class Particle {
             if (!paused) {
                 if (bfTimer >= betweenFrames) {
                     if (currentSprite == numFrames - 1) dead = true;
-                    else {
-                        currentSprite++;
-                    }
+                    else currentSprite++;
                     bfTimer = 0;
                 } else bfTimer++;
-                angle2 += radians(secondsToFrames(angularVelocity));
+                displayAngle += radians(secondsToFrames(angularVelocity));
             }
             p.pushMatrix();
             p.translate(position.x, position.y);
-            p.rotate(angle2);
+            p.rotate(displayAngle);
             p.image(sprites[currentSprite], -size.x / 2, -size.y / 2);
         } else {
             if (!paused) {
                 delayTime++;
-                angle2 += radians(secondsToFrames(angularVelocity));
+                displayAngle += radians(secondsToFrames(angularVelocity));
             }
             if (delayTime > delay) dead = true;
             p.pushMatrix();
             p.translate(position.x, position.y);
-            p.rotate(angle2);
+            p.rotate(displayAngle);
             p.image(sprite, -size.x / 2, -size.y / 2);
         }
         p.popMatrix();
     }
 
-    private void move() {
+    protected void move() {
         velocity.setMag(speed/FRAMERATE);
         position.add(velocity);
     }

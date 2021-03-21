@@ -349,4 +349,8 @@ public class Utilities {
         blue = (int) incrementTo(blue, by, target.getBlue());
         return new Color(red, green, blue);
     }
+
+    public static float randomizeBy(PApplet p, float input, float by) {
+        return input + p.random(-input * by, input * by);
+    }
 }

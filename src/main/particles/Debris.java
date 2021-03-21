@@ -14,7 +14,7 @@ public class Debris extends Particle {
         size = new PVector(5, 5);
         maxSpeed = p.random(100,200);
         speed = maxSpeed;
-        angle2 = angle;
+        displayAngle = angle;
         angularVelocity = p.random(-900,900); //degrees mode
         lifespan = secondsToFrames(p.random(0.05f, 0.25f));
         numFrames = 1;

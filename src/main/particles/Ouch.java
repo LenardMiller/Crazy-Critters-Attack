@@ -14,7 +14,7 @@ public class Ouch extends Particle {
         size = new PVector(5, 5);
         maxSpeed = 15;
         speed = maxSpeed;
-        angle2 = angle;
+        displayAngle = angle;
         angularVelocity = 0; //degrees mode
         betweenFrames = down60ToFramerate(p.random(0,3));
         currentSprite = 0;

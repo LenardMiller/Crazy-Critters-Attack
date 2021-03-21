@@ -14,7 +14,7 @@ public class MediumExplosion extends Particle {
         size = new PVector(30,30);
         maxSpeed = 0;
         speed = maxSpeed;
-        angle2 = angle;
+        displayAngle = angle;
         angularVelocity = 0; //degrees mode
         numFrames = 18;
         currentSprite = 0;

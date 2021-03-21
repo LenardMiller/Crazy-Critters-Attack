@@ -1,7 +1,6 @@
 package main.projectiles;
 
-import main.particles.ExplosionDebris;
-import main.particles.MediumExplosion;
+import main.particles.Vortex;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -28,11 +27,15 @@ public class DarkBlast extends Projectile {
     }
 
     public void die() {
-        int num = (int) (p.random(10, 16));
-        for (int j = num; j >= 0; j--) {
-            particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "energy", maxSpeed = p.random(0.5f, 2.5f)));
+        int numRings = effectRadius/5;
+        for (int i = 0; i < numRings; i++) {
+            for (int j = 0; j < p.random(10, 16); j++) {
+                float radius = (effectRadius/ (float) numRings) * i;
+                PVector displacement = PVector.fromAngle(p.random(TWO_PI));
+                displacement.setMag(radius);
+                particles.add(new Vortex(p, new PVector(position.x, position.y), displacement, "dark", radius));
+            }
         }
-        particles.add(new MediumExplosion(p, position.x, position.y, p.random(0, 360), "energy"));
         projectiles.remove(this);
     }
 }

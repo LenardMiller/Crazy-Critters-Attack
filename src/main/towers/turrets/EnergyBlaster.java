@@ -127,6 +127,7 @@ public class EnergyBlaster extends Turret{
                     bigExplosion = true;
                     break;
                 case 2:
+                    damage += 200;
                     effectRadius = 50;
                     name = "nuclearBlaster";
                     fireParticle = "nuclear";
@@ -146,7 +147,7 @@ public class EnergyBlaster extends Turret{
                     break;
                 case 5:
                     range += 40;
-                    damage += 500;
+                    damage += 1500;
                     name = "darkBlaster";
                     fireParticle = "dark";
                     dark = true;

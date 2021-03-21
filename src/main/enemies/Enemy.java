@@ -374,8 +374,8 @@ public abstract class Enemy {
                     Main.particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
                 }
             }
+            currentTintColor = new Color(maxTintColor.getRGB());
         }
-        currentTintColor = new Color(maxTintColor.getRGB());
     }
 
     private boolean recentlyHit() {

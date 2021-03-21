@@ -175,7 +175,7 @@ public class KeyBinds {
         }
         //other stuff
         if (displayPathLines) debug = !debug;
-        if (addMoney) money += 25;
+        if (addMoney) money += 100;
         if (loseMoney) money = 0;
         if (switchMode) {
             levelBuilder = !levelBuilder;
