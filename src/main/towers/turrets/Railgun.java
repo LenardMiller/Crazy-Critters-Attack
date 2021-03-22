@@ -44,7 +44,7 @@ public class Railgun extends Turret {
         currentVaporFrame = 16;
         betweenIdleFrames = 3;
         betweenFireFrames = 3;
-        spriteType = 0;
+        state = 0;
         vaporTrail = animatedSprites.get("railgunVaporTrailTR");
         vaporEndSprites = animatedSprites.get("railgunBlastPT");
         loadSprites();

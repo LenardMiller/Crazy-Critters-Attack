@@ -29,7 +29,7 @@ public class SeismicTower extends Turret {
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 400;
         betweenFireFrames = down60ToFramerate(1);
-        spriteType = 0;
+        state = 0;
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
@@ -58,12 +58,12 @@ public class SeismicTower extends Turret {
 
     protected void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null && spriteType != 1 && shockwaveWidth < 360) aim(targetEnemy);
-        if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
-            spriteType = 1;
+        if (targetEnemy != null && state != 1 && shockwaveWidth < 360) aim(targetEnemy);
+        if (state == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
+            state = 1;
             frame = 0;
         }
-        if (spriteType == 1 && frame == fireFrames.length - 1) fire(barrelLength, fireParticle);
+        if (state == 1 && frame == fireFrames.length - 1) fire(barrelLength, fireParticle);
     }
 
     protected void getTargetEnemy() {

@@ -15,7 +15,7 @@ public class Burning extends Buff {
     public Burning(PApplet p, int enId, float damage, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 4;
-        effectDelay = secondsToFrames(0.2f); //frames
+        effectDelay = secondsToFrames(0.2f);
         lifeDuration = secondsToFrames(duration);
         this.DAMAGE = (int) damage;
         particle = "fire";

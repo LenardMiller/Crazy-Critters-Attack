@@ -29,7 +29,7 @@ public class TeslaTower extends Turret {
         pjSpeed = -1;
         range = 200;
         betweenIdleFrames = down60ToFramerate(3);
-        spriteType = 0;
+        state = 0;
         loadSprites();
         debrisType = "metal";
         price = TESLATOWER_PRICE;
@@ -49,8 +49,8 @@ public class TeslaTower extends Turret {
 
     protected void checkTarget() {
         getTargetEnemy();
-        if (spriteType == 0 && targetEnemy != null) { //if done animating
-            spriteType = 1;
+        if (state == 0 && targetEnemy != null) { //if done animating
+            state = 1;
             frame = 0;
             fire();
         }

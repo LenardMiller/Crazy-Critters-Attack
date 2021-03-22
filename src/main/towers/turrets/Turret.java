@@ -36,7 +36,7 @@ public abstract class Turret extends Tower {
     public String[] upgradeDescC;
 
     protected int offset;
-    protected int spriteType;
+    protected int state;
     protected int frame;
     protected int frameTimer;
     protected int betweenIdleFrames;
@@ -72,7 +72,7 @@ public abstract class Turret extends Tower {
         barrelLength = 0;
         fireParticle = "null";
         spriteArray = new ArrayList<>();
-        spriteType = 0;
+        state = 0;
         effectLevel = 0;
         effectDuration = 0;
         frame = 0;
@@ -93,9 +93,9 @@ public abstract class Turret extends Tower {
 
     protected void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
-        if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
-            spriteType = 1;
+        if (targetEnemy != null && state != 1) aim(targetEnemy);
+        if (state == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
+            state = 1;
             frame = 0;
             fire(barrelLength, fireParticle);
         }
@@ -169,20 +169,20 @@ public abstract class Turret extends Tower {
     protected void fire(float barrelLength, String particleType) {
         fireSound.stop();
         fireSound.play(p.random(0.8f, 1.2f), volume);
-        float angleB = angle;
+        float displayAngle = angle;
         PVector projectileSpawn = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector angleVector = PVector.fromAngle(angleB-HALF_PI);
+        PVector angleVector = PVector.fromAngle(displayAngle-HALF_PI);
         float particleCount = p.random(1,5);
         angleVector.setMag(barrelLength); //barrel length
         projectileSpawn.add(angleVector);
-        spawnProjectile(projectileSpawn, angleB);
+        spawnProjectile(projectileSpawn, displayAngle);
         if (particleType != null && !particleType.equals("null")) {
             for (int i = 0; i < particleCount; i++) {
-                PVector spa2 = PVector.fromAngle(angleB - HALF_PI + radians(p.random(-20, 20)));
+                PVector spa2 = PVector.fromAngle(displayAngle - HALF_PI + radians(p.random(-20, 20)));
                 spa2.setMag(-5);
                 PVector spp2 = new PVector(projectileSpawn.x, projectileSpawn.y);
                 spp2.add(spa2);
-                particles.add(new BuffParticle(p, spp2.x, spp2.y, angleB + radians(p.random(-45, 45)), particleType));
+                particles.add(new BuffParticle(p, spp2.x, spp2.y, displayAngle + radians(p.random(-45, 45)), particleType));
             }
         }
     }
@@ -233,7 +233,7 @@ public abstract class Turret extends Tower {
                 particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greyPuff"));
             }
             if (tintColor < 255) tintColor += 20;
-            if (spriteType == 0) { //idle
+            if (state == 0) { //idle
                 sprite = sIdle;
                 if (idleFrames.length > 1) {
                     if (frame < idleFrames.length) {
@@ -247,7 +247,7 @@ public abstract class Turret extends Tower {
                         sprite = idleFrames[frame];
                     }
                 }
-            } else if (spriteType == 1) { //fire
+            } else if (state == 1) { //fire
                 if (frame < fireFrames.length - 1) { //if not done, keep going
                     if (frameTimer >= betweenFireFrames) {
                         frame++;
@@ -272,16 +272,16 @@ public abstract class Turret extends Tower {
                         }
                     }
                     frame = 0;
-                    spriteType = 2;
+                    state = 2;
                 }
-            } else if (spriteType == 2) { //load
+            } else if (state == 2) { //load
                 frame++;
                 if (frame < spriteArray.size() && spriteArray.get(frame) < loadFrames.length) {
                     sprite = loadFrames[spriteArray.get(frame)];
                 } else { //if time runs out, switch to idle
                     frame = 0;
                     sprite = sIdle;
-                    spriteType = 0;
+                    state = 0;
                 }
             }
             if (hit) { //change to red if under attack

@@ -38,7 +38,7 @@ public class WaveMotion extends Turret {
         currentBeamFrame = 19;
         betweenIdleFrames = 3;
         betweenFireFrames = 4;
-        spriteType = 0;
+        state = 0;
         beam = animatedSprites.get("waveMotionBeamTR");
         loadSprites();
         debrisType = "darkMetal";

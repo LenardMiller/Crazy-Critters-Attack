@@ -222,7 +222,7 @@ public class SpriteLoader {
         getSprite(p,"magicMissleerIdle","TR","magicMissleer/idle/",8);
         getSprite(p,"nightmareFire","TR","nightmare/fire/",14);
         getSprite(p,"nightmareLoad","TR","nightmare/load/",22);
-        getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",4);
+        getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",2);
         getSprite(p,"flamethrowerLoad","TR","flamethrower/load/",1);
         getSprite(p,"flamethrowerIdle","TR","flamethrower/idle/",4);
         getSprite(p,"railgunFire","TR","railgun/fire/",15);

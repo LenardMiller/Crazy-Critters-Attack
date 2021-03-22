@@ -26,7 +26,7 @@ public class Crossbow extends Turret {
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 1400;
         range = 320;
-        spriteType = 0;
+        state = 0;
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;

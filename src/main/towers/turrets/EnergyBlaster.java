@@ -32,7 +32,7 @@ public class EnergyBlaster extends Turret{
         pjSpeed = 1000;
         range = 300;
         betweenFireFrames = down60ToFramerate(2);
-        spriteType = 0;
+        state = 0;
         effectRadius = 35;
         bigExplosion = false;
         damageSound = sounds.get("metalDamage");

@@ -24,7 +24,7 @@ public class MagicMissileer extends Turret{
         pjSpeed = 300;
         range = 0; //0 degrees
         betweenIdleFrames = down60ToFramerate(8);
-        spriteType = 0;
+        state = 0;
         loadSprites();
         debrisType = "crystal";
         price = 300;
@@ -40,8 +40,8 @@ public class MagicMissileer extends Turret{
 
     protected void checkTarget() {
         getTargetEnemy();
-        if (spriteType == 0 && targetEnemy != null) { //if done animating
-            spriteType = 1;
+        if (state == 0 && targetEnemy != null) { //if done animating
+            state = 1;
             frame = 0;
             fire();
         }

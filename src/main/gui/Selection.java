@@ -265,7 +265,6 @@ public class Selection { //what tower is selected
             case "flamethrower":
                 P.text("Flamethrower", 1000, 241);
                 setTextPurple("Fire", offset);
-                setTextPurple("Slow rotation", offset + 20);
                 break;
             case "railgun":
                 P.text("Railgun", 1000, 241);
@@ -287,7 +286,7 @@ public class Selection { //what tower is selected
         //damage
         P.text("Damage: " + turret.damage, 910, 296 + offset);
         //firerate (delay)
-        P.text("Load time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
+        P.text("Reload time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
         //velocity
         if (speed < 0) P.text("Instant", 910, 336 + offset);
         else if (speed < 500) P.text("Low velocity", 910, 336 + offset);
