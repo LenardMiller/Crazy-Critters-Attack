@@ -65,12 +65,13 @@ public abstract class Enemy {
 
     private int attackCount;
     private int idleTime;
+    private int moveFrame;
+    private int pathRequestWaitTimer;
+    private float targetAngle;
     private boolean attackCue;
     private boolean targetMachine;
     private boolean overkill;
     private boolean attacking;
-    private float targetAngle;
-    private int moveFrame;
     private Tower targetTower;
     private PImage[] moveFrames;
     private PImage sprite;
@@ -128,12 +129,19 @@ public abstract class Enemy {
                 attack();
                 stealthMode = false;
             }
+
+            //prevent wandering
+            if (points.size() == 0) pathRequestWaitTimer++;
+            if (pathRequestWaitTimer > FRAMERATE) {
+                requestPath(i);
+                pathRequestWaitTimer = 0;
+            }
         }
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         displayPassB();
         //prevent from going offscreen
-        if (position.x >= GRID_WIDTH - 100 || position.x <= -100 || position.y >= GRID_HEIGHT - 100 || position.y <= -100)
-            dead = true;
+//        if (position.x >= GRID_WIDTH - 100 || position.x <= -100 || position.y >= GRID_HEIGHT - 100 || position.y <= -100)
+//            dead = true;
         //if health is 0, die
         if (hp <= 0) dead = true;
         if (dead) die(i);
@@ -446,7 +454,6 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
-    //todo: fix enemies sometimes wandering off if there are a lot of them
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
