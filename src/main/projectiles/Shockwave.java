@@ -68,10 +68,10 @@ public class Shockwave {
         a = randomAngle();
         pos = randomPosition(a);
         particles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
-        a = randomAngle();
-        pos = randomPosition(a);
-        particles.add(new BuffParticle(P, pos.x, pos.y, a, "nuclear"));
         if (NUKE_MODE) {
+            a = randomAngle();
+            pos = randomPosition(a);
+            particles.add(new BuffParticle(P, pos.x, pos.y, a, "nuclear"));
             for (int i = 0; i < P.random(2, 5); i++) {
                 a = randomAngle();
                 pos = randomPosition(a);
