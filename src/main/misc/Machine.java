@@ -163,11 +163,11 @@ public class Machine {
                 for (int i = 0; i < up60ToFramerate(3); i++) {
                     particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 } if (up60ToFramerate(p.random(0, 8)) == 0) {
-                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, maxHp * 10, maxHp, 1000, (int) p.random(1, 4), true));
+                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, maxHp * 10, maxHp, 1000, (int) p.random(50, 200), true));
                 }
             }
         }
-        if (deathFrame == 4.6f) for (Tile tile : machTiles) tile.setBgC(debris + "DebrisBGC_TL");
+        if (deathFrame == secondsToFrames(3)) for (Tile tile : machTiles) tile.setBgC(debris + "DebrisBGC_TL");
     }
 
     public void damage(int dmg) {
