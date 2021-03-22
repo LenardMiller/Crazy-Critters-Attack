@@ -454,6 +454,7 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
+    //todo: enemies are still wandering off and doing weird things :(
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);

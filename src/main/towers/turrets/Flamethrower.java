@@ -1,6 +1,8 @@
 package main.towers.turrets;
 
+import main.misc.FadeSoundLoop;
 import main.misc.Tile;
+import main.particles.BuffParticle;
 import main.projectiles.Flame;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -9,6 +11,8 @@ import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Flamethrower extends Turret {
+
+    private final FadeSoundLoop FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
 
     public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
@@ -28,7 +32,7 @@ public class Flamethrower extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 10;
+        damage = 2;
         loadSprites();
         debrisType = "metal";
         price = FLAMETHROWER_PRICE;
@@ -37,7 +41,6 @@ public class Flamethrower extends Turret {
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
-        fireSound = sounds.get("fireImpact");
         fireParticle = null;
         barrelLength = 24;
         setUpgrades();
@@ -58,9 +61,25 @@ public class Flamethrower extends Turret {
         }
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
-        projectiles.add(new Flame(p, position.x, position.y, angle, this, damage, effectLevel, effectDuration,
+    protected void fire(float barrelLength, String particleType) {
+        FIRE_SOUND_LOOP.setTargetVolume(volume);
+        float displayAngle = angle;
+        PVector projectileSpawn = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
+        PVector angleVector = PVector.fromAngle(displayAngle-HALF_PI);
+        float particleCount = p.random(1,5);
+        angleVector.setMag(barrelLength);
+        projectileSpawn.add(angleVector);
+        projectiles.add(new Flame(p, projectileSpawn.x, projectileSpawn.y, displayAngle, this, damage, effectLevel, effectDuration,
                 (int) (range - barrelLength - 100), false));
+        if (particleType != null && !particleType.equals("null")) {
+            for (int i = 0; i < particleCount; i++) {
+                PVector spa2 = PVector.fromAngle(displayAngle - HALF_PI + radians(p.random(-20, 20)));
+                spa2.setMag(-5);
+                PVector spp2 = new PVector(projectileSpawn.x, projectileSpawn.y);
+                spp2.add(spa2);
+                particles.add(new BuffParticle(p, spp2.x, spp2.y, displayAngle + radians(p.random(-45, 45)), particleType));
+            }
+        }
     }
 
     private void setUpgrades() {
@@ -119,10 +138,10 @@ public class Flamethrower extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    range += 25;
+                    range += 20;
                     break;
                 case 1:
-                    range += 50;
+                    range += 30;
                     break;
                 case 2:
                     range += 125;
@@ -131,16 +150,16 @@ public class Flamethrower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    damage += 10;
+                    damage += 1;
                     break;
                 case 4:
                     effectDuration += 2;
                     effectLevel += 5;
                     break;
                 case 5:
-                    damage += 50;
+                    damage = 35;
                     effectDuration += 5;
-                    effectLevel += 20;
+                    effectLevel = 100;
                     break;
             }
         }

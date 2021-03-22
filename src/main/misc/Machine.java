@@ -40,7 +40,7 @@ public class Machine {
     private final SoundFile DAMAGE_SOUND;
     private final SoundFile BREAK_SOUND;
     private final SoundFile EXPLODE_SOUND;
-    private final SoundLoop EXPLODE_LOOP;
+    private final StartStopSoundLoop EXPLODE_LOOP;
 
     public Machine(PApplet p, PVector position, String name, String debris, int betweenFrames, int maxHp) {
         this.p = p;
@@ -55,7 +55,7 @@ public class Machine {
         DAMAGE_SOUND = sounds.get(debris + "Damage");
         BREAK_SOUND = sounds.get(debris + "Break");
         EXPLODE_SOUND = sounds.get("smallExplosion");
-        EXPLODE_LOOP = soundLoops.get("smallExplosion");
+        EXPLODE_LOOP = startStopSoundLoops.get("smallExplosion");
         sprites = animatedSprites.get(name);
         tintColor = 255;
         updateNodes();

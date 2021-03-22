@@ -110,7 +110,8 @@ public class Main extends PApplet {
     public static HashMap<String, PImage> staticSprites = new HashMap<>();
     public static HashMap<String, PImage[]> animatedSprites = new HashMap<>();
     public static HashMap<String, SoundFile> sounds = new HashMap<>();
-    public static HashMap<String, SoundLoop> soundLoops = new HashMap<>();
+    public static HashMap<String, StartStopSoundLoop> startStopSoundLoops = new HashMap<>();
+    public static HashMap<String, FadeSoundLoop> fadeSoundLoops = new HashMap<>();
 
     //pathfinding stuff
     public static int defaultSize = 1;
@@ -233,7 +234,8 @@ public class Main extends PApplet {
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
         //looping sounds
-        for (SoundLoop soundLoop : soundLoops.values()) soundLoop.continueLoop();
+        for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
+        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;

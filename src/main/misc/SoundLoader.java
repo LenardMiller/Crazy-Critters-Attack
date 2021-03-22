@@ -3,14 +3,14 @@ package main.misc;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
 
-import static main.Main.soundLoops;
-import static main.Main.sounds;
+import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
 public class SoundLoader {
 
     public SoundLoader() {}
 
-    public static void loadSounds(PApplet p) {
+    public static void loadSounds(PApplet p) { //todo: load dynamically?
         //enemy
         sounds.put("squish", new SoundFile(p, "sounds/enemies/squish.wav"));
         sounds.put("squash", new SoundFile(p, "sounds/enemies/squash.wav"));
@@ -67,6 +67,7 @@ public class SoundLoader {
         sounds.put("stonePlaceShort", new SoundFile(p, "sounds/walls/stonePlaceShort.wav"));
         sounds.put("metalPlaceShort", new SoundFile(p, "sounds/walls/metalPlaceShort.wav"));
         //loops
-        soundLoops.put("smallExplosion", new SoundLoop(p, "sounds/loops/smallExplosion", 60));
+        startStopSoundLoops.put("smallExplosion", new StartStopSoundLoop(p, "smallExplosion/", secondsToFrames(1), false));
+        fadeSoundLoops.put("flamethrower", new FadeSoundLoop(p, "flamethrower", FRAMERATE/6));
     }
 }
