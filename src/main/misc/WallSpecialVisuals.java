@@ -1,6 +1,8 @@
 package main.misc;
 
 import main.towers.Tower;
+import main.towers.Wall;
+import main.towers.turrets.Turret;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class WallSpecialVisuals {
             Tower tower = tiles.get(i).tower;
             if (tower != null) {
                 towers.add(tower);
-                if (!tower.turret) tower.updateSprite();
+                if (tower instanceof Wall) tower.updateSprite();
             }
         }
     }
@@ -36,7 +38,7 @@ public class WallSpecialVisuals {
             int y = (int) (bgTile.position.y / 50);
             Tile towerTile = tiles.get(x + 1, y + 1);
             if (towerTile != null) {
-                if (towerTile.tower == null || towerTile.tower.turret) {
+                if (towerTile.tower == null || towerTile.tower instanceof Turret) {
                     bgTile.setBgW(null);
                 }
             }

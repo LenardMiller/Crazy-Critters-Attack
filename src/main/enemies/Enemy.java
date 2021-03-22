@@ -532,7 +532,7 @@ public abstract class Enemy {
                 for (int yn = 0; yn < kSize; yn++) {
                     if (!(x + xn >= nodeGrid.length || y + yn >= nodeGrid[x].length)) {
                         Node nodeB = nodeGrid[x + xn][y + yn];
-                        if (nodeB.tower != null && !(flying && !nodeB.tower.turret)) towers.add(nodeB.tower);
+                        if (nodeB.tower != null && !(flying && !(nodeB.tower instanceof Turret))) towers.add(nodeB.tower);
                     } else {
                         clear = false;
                         break;

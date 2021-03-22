@@ -75,7 +75,7 @@ public class Hand {
         Tile tileObstacle = tiles.get((roundTo(P.mouseX, 50) / 50), (roundTo(P.mouseY, 50) / 50));
         if (tileTower == null) implacable = true;
         else if (!held.equals("wall")) implacable = (tileTower.tower != null);
-        else implacable = (tileTower.tower != null && tileTower.tower.turret);
+        else implacable = (tileTower.tower instanceof Turret);
         if (tileObstacle != null && (tileObstacle.obstacle != null || tileObstacle.machine)) implacable = true;
         if (price > money) implacable = true;
     }
@@ -108,7 +108,7 @@ public class Hand {
     private void checkDisplay() {
         Tile tile = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
         if (held.equals("wall")) {
-            if (tile != null && tile.tower != null && !tile.tower.turret) { //if wall
+            if (tile != null && tile.tower instanceof Wall) { //if wall
                 if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && tile.tower.nextLevelB < currentLevel) { //if upgradeable
                     heldSprite = staticSprites.get("upgradeTW");
                     implacable = money < tile.tower.upgradePrices[tile.tower.nextLevelB];
@@ -336,7 +336,7 @@ public class Hand {
     private void remove() {
         Tile tile = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
         if (held.equals("wall")) {
-            if (tile != null && tile.tower != null && !tile.tower.turret) tile.tower.sell();
+            if (tile != null && tile.tower instanceof Wall) tile.tower.sell();
         }
     }
 
@@ -360,7 +360,7 @@ public class Hand {
         else if (held.equals("railgun") && alive) tile.tower = new Railgun(P, tile);
         else if (held.equals("waveMotion") && alive) tile.tower = new WaveMotion(P, tile);
         else if (held.equals("wall") && alive) {
-            if (tile.tower != null && !tile.tower.turret) { //upgrade
+            if (tile.tower instanceof Wall) { //upgrade
                 if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                     money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
                     tile.tower.upgrade(0);

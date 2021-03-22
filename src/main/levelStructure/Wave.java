@@ -2,6 +2,7 @@ package main.levelStructure;
 
 import main.enemies.*;
 import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -52,7 +53,7 @@ public class Wave {
 
     public void end() {
         for (Tower tower : towers) {
-            if (tower.turret) tower.heal(1);
+            if (tower instanceof Turret) tower.heal(1);
             else tower.heal(0.2f);
         }
         sounds.get("waveEnd").stop();

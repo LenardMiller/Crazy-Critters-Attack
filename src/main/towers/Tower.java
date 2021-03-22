@@ -11,7 +11,6 @@ import processing.sound.SoundFile;
 import static main.Main.*;
 import static main.misc.Utilities.updateNodes;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public abstract class Tower {
 
@@ -23,7 +22,6 @@ public abstract class Tower {
     public int value;
     public int[] upgradePrices;
     public boolean hit;
-    public boolean turret;
     public boolean visualize;
     public PVector size;
     public PApplet p;
@@ -53,7 +51,6 @@ public abstract class Tower {
         tintColor = 255;
         debrisType = "wood";
         price = 0;
-        turret = false;
         visualize = false;
         nextLevelB = 0;
         upgradeTitles = new String[4];
@@ -65,12 +62,6 @@ public abstract class Tower {
     public void main() {
         if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
-        if (turret) {
-            if (inputHandler.leftMousePressedPulse && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x
-                    && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive && !paused) { //clicked on
-                selection.swapSelected(tile.id);
-            }
-        }
     }
 
     public void displayPassA() {
@@ -119,12 +110,8 @@ public abstract class Tower {
             selection.name = "null";
             inGameGui.flashA = 255;
         }
-        else if (!selection.name.equals("null")) selection.swapSelected(selection.turret.tile.id);
+        else if (!selection.name.equals("null")) selection.swapSelected(selection.id);
         if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
-        if (!turret) {
-            updateWallTiles();
-            connectWallQueues++;
-        }
         updateNodes();
     }
 

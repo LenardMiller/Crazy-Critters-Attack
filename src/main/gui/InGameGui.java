@@ -5,6 +5,8 @@ import main.gui.guiObjects.UpgradeIcon;
 import main.gui.guiObjects.buttons.*;
 import processing.core.PApplet;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.up60ToFramerate;
 
@@ -23,6 +25,12 @@ public class InGameGui {
     public GuiObject upgradeIconA, upgradeIconB;
     public Play playButton;
 
+    public static final Color FLASH_COLOR = new Color(255, 255, 255);
+    public static final Color MAIN_PANEL_COLOR = new Color(235, 235, 235);
+    public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
+    public static final Color TOWERBUY_PANEL_COLOR = new Color(130, 130, 130);
+    public static final Color MAIN_TEXT_COLOR = new Color(0);
+
     public InGameGui(PApplet p) {
         this.P = p;
         build();
@@ -36,14 +44,13 @@ public class InGameGui {
                 break;
             }
         }
-        selection.turretOverlay();
-        P.fill(235); //big white bg
+        P.fill(MAIN_PANEL_COLOR.getRGB()); //big white bg
         P.rect(900,212,200,688);
         levels[currentLevel].display();
-        P.fill(200); //money bg
+        P.fill(MONEY_PANEL_COLOR.getRGB()); //money bg
         P.rect(BOARD_WIDTH, 175, BOARD_WIDTH + 200, 37);
         openMenuButton.main();
-        P.fill(130); //towerbuy bg
+        P.fill(TOWERBUY_PANEL_COLOR.getRGB()); //towerbuy bg
         P.rect(900,21,200,127);
         wallBuyButton.main();
 //        addMoneyButton.main();
@@ -65,14 +72,14 @@ public class InGameGui {
         upgradeIconB.main();
         if (isTowers) selection.main();
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
-        P.fill(255, flashA); //flash
+        P.fill(FLASH_COLOR.getRGB(), flashA); //flash
         P.noStroke();
         P.rect(900,212,200,688);
         if (!paused) flashA -= up60ToFramerate(25);
     }
 
     public void drawText(PApplet p, int x) {
-        p.fill(255);
+        p.fill(MAIN_TEXT_COLOR.getRGB());
         p.textFont(largeFont);
         p.textAlign(LEFT);
         if (debug) {
@@ -91,7 +98,7 @@ public class InGameGui {
         p.fill(0);
         p.text("Walls", 1000, 170);
         p.textFont(largeFont);
-        p.fill(0);
+        p.fill(MAIN_TEXT_COLOR.getRGB());
         p.textAlign(RIGHT);
         p.text(nfc(money), p.width - x, 211-5);
     }

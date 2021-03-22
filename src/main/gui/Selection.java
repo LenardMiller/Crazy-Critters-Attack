@@ -18,11 +18,14 @@ public class Selection { //what tower is selected
 
     public String name;
     public int id;
-    public Turret turret;
     public boolean towerJustPlaced;
     private int purpleCount;
     private final SoundFile CLICK_IN;
     private final SoundFile CLICK_OUT;
+
+    private final Color STAT_TEXT_COLOR = new Color(255, 0, 0);
+    private final Color SPECIAL_TEXT_COLOR = new Color(100, 0, 200);
+    private final Color EFFECT_TEXT_COLOR = new Color(0, 200, 50);
 
     public Selection(PApplet p) {
         this.P = p;
@@ -50,9 +53,9 @@ public class Selection { //what tower is selected
                     inGameGui.flashA = 255;
                 } else towerJustPlaced = false;
             }
-            turret = (Turret) tiles.get(id).tower;
+            Turret turret = (Turret) tiles.get(id).tower;
             hand.held = "null";
-            if (turret.turret) {
+            if (turret != null) {
                 for (int i = tiles.size() - 1; i >= 0; i--) {
                     if (tiles.get(i).tower != null) tiles.get(i).tower.visualize = false;
                 }
@@ -61,32 +64,20 @@ public class Selection { //what tower is selected
                 inGameGui.sellButton.active = true;
                 inGameGui.upgradeButtonB.active = true;
                 inGameGui.upgradeIconB.active = true;
-                if (turret.turret) {
-                    inGameGui.targetButton.active = true;
-                    turret.visualize = true;
-                    inGameGui.upgradeButtonA.active = true;
-                    inGameGui.upgradeButtonB.position.y = 735;
-                    inGameGui.upgradeButtonA.position.y = 585;
-                    inGameGui.upgradeIconA.active = true;
-                    inGameGui.upgradeIconA.position.y = 565;
-                    inGameGui.upgradeIconB.position.y = 715;
-                }
+                inGameGui.targetButton.active = true;
+                turret.visualize = true;
+                inGameGui.upgradeButtonA.active = true;
+                inGameGui.upgradeButtonB.position.y = 735;
+                inGameGui.upgradeButtonA.position.y = 585;
+                inGameGui.upgradeIconA.active = true;
+                inGameGui.upgradeIconA.position.y = 565;
+                inGameGui.upgradeIconB.position.y = 715;
                 if (turret.name.equals("magicMissleer") || turret.name.equals("magicMissleerFour")) {
                     inGameGui.targetButton.active = false;
                     inGameGui.upgradeButtonB.position.y += 45;
                     inGameGui.upgradeButtonA.position.y += 45;
                     inGameGui.upgradeIconA.position.y += 45;
                     inGameGui.upgradeIconB.position.y += 45;
-                }
-                if (!turret.turret) {
-                    inGameGui.targetButton.active = false;
-                    inGameGui.upgradeButtonA.active = false;
-                    inGameGui.upgradeButtonB.position.y = 630;
-                    inGameGui.upgradeIconA.active = false;
-                    inGameGui.upgradeIconB.position.y = 610;
-                    if (turret.nextLevelB < turret.upgradeTitles.length) {
-                        inGameGui.upgradeIconB.sprite = turret.upgradeIcons[turret.nextLevelB];
-                    } else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
                 }
             }
         }
@@ -115,7 +106,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    public void turretOverlay() {
+    public void turretOverlay(Turret turret) {
         if (!name.equals("null") && tiles.get(id).tower != null) {
             //display range and square
             P.fill(255, 25);
@@ -131,18 +122,31 @@ public class Selection { //what tower is selected
         int speed = turret.pjSpeed;
         int offset = 0;
         purpleCount = 0;
-        String priority = "first";
 
+        turretOverlay(turret);
+        background(turret);
+        offset = nameAndSpecial(offset, turret);
+        info(offset, speed, turret);
+        stats(turret);
+        upgradeIcons(turret);
+        upgradeButton(-45, turret.nextLevelA, inGameGui.upgradeButtonA, turret);
+        upgradeButton(105, turret.nextLevelB, inGameGui.upgradeButtonB, turret);
+        priorityButton(turret);
+        sellButton(turret);
+    }
+
+    private void background(Turret turret) {
         //bg
-        P.fill(235);
+        P.fill(InGameGui.MAIN_PANEL_COLOR.getRGB());
         P.noStroke();
         //different size bg so buttons fit
         P.rect(900, 212, 200, 298);
         if (turret.name.equals("magicMissleer") || turret.name.equals("magicMissleerFour")) P.rect(900, 212, 200, 343);
+    }
 
-        //name and special features
+    private int nameAndSpecial(int offset, Turret turret) {
         P.textAlign(CENTER);
-        P.fill(0);
+        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB());
         P.textFont(largeFont);
         switch (turret.name) {
             case "slingshot":
@@ -271,90 +275,71 @@ public class Selection { //what tower is selected
                 setTextPurple("Infinite pierce", offset);
                 break;
         }
+        return offset;
+    }
 
-        //stats todo: fix
+    private void info(int offset, int speed, Turret turret) {
+        //health
+        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB());
+        P.textFont(mediumFont);
+        P.textAlign(LEFT);
+        P.text("Health: " + turret.hp + "/" + turret.maxHp, 910, 276 + offset);
+        //damage
+        P.text("Damage: " + turret.damage, 910, 296 + offset);
+        //firerate (delay)
+        P.text("Load time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
+        //velocity
+        if (speed < 0) P.text("Instant", 910, 336 + offset);
+        else if (speed < 500) P.text("Low velocity", 910, 336 + offset);
+        else if (speed < 1000) P.text("Medium velocity", 910, 336 + offset);
+        else P.text("High velocity", 910, 336 + offset);
+        if (turret.pierce > 0) {
+            P.fill(SPECIAL_TEXT_COLOR.getRGB());
+            P.text("Pierce: " + turret.pierce, 910, 356 + offset + 20 * purpleCount);
+            offset += 20;
+        }
+        //effects
+        if (turret.effectLevel != 0 || turret.effectDuration != 0) {
+            P.fill(EFFECT_TEXT_COLOR.getRGB());
+            int x = 0;
+            if (turret.effectLevel == 0) x = 20;
+            else {
+                if (turret.effectLevel % 1 == 0) {
+                    P.text("Effect Level: " + (int) turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
+                } else {
+                    P.text("Effect Level: " + turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
+                }
+            }
+            float effectDuration = turret.effectDuration;
+            if (effectDuration % 1 == 0) {
+                P.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
+            } else {
+                P.text("Effect Duration: " + effectDuration + "s", 910, 376 + - x + 20 * purpleCount + offset);
+            }
+        }
+    }
+
+    private void stats(Turret turret) { //todo: fix
         int offsetB = 0;
         if (turret.name.contains("magicMissleer")) offsetB = 45;
-        P.fill(255, 0, 0);
+        P.fill(STAT_TEXT_COLOR.getRGB());
         P.textAlign(LEFT);
         P.textFont(mediumFont);
         if (turret.killsTotal != 1) P.text(turret.killsTotal + " kills", 910, 475 + offsetB);
         else P.text(turret.killsTotal + " kill", 910, 475 + offsetB);
         P.text(turret.damageTotal + " total damage", 910, 500 + offsetB);
+    }
 
-        //priority
-        P.textFont(largeFont);
-        P.textAlign(CENTER);
-        if (turret.priority == 0) priority = "close";
-        else if (turret.priority == 1) priority = "far";
-        else if (turret.priority == 2) priority = "strong";
-        if (turret.turret && !turret.name.contains("magicMissleer")) {
-            P.fill(75, 45, 0);
-            P.text("Priority: " + priority, 1000, 843);
-        }
-
-        //upgrade icons
+    private void upgradeIcons(Turret turret) {
         if (!inGameGui.upgradeButtonA.greyed) {
             inGameGui.upgradeIconA.sprite = turret.upgradeIcons[turret.nextLevelA];
         } else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
         if (!inGameGui.upgradeButtonB.greyed && turret.nextLevelB < turret.upgradeIcons.length) {
             inGameGui.upgradeIconB.sprite = turret.upgradeIcons[turret.nextLevelB];
         } else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
-
-        displayUpgrade(-45, turret.nextLevelA, inGameGui.upgradeButtonA);
-        displayUpgrade(105, turret.nextLevelB, inGameGui.upgradeButtonB);
-
-        //sell
-        P.fill(75, 0, 0);
-        P.textFont(largeFont);
-        P.textAlign(CENTER);
-        P.text("Sell for: $" + floor(turret.value * .8f), 1000, 888);
-
-        //health
-        P.fill(0);
-        P.textFont(mediumFont);
-        P.textAlign(LEFT);
-        P.text("Health: " + turret.hp + "/" + turret.maxHp, 910, 276 + offset);
-
-        //data
-        if (turret.turret) {
-            //damage
-            P.text("Damage: " + turret.damage, 910, 296 + offset);
-            //firerate (delay)
-            P.text("Load time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
-            //velocity
-            if (speed < 0) P.text("Instant", 910, 336 + offset);
-            else if (speed < 500) P.text("Low velocity", 910, 336 + offset);
-            else if (speed < 1000) P.text("Medium velocity", 910, 336 + offset);
-            else P.text("High velocity", 910, 336 + offset);
-            if (turret.pierce > 0) {
-                P.fill(100, 0, 200);
-                P.text("Pierce: " + turret.pierce, 910, 356 + offset + 20 * purpleCount);
-                offset += 20;
-            }
-            //effects
-            if (turret.effectLevel != 0 || turret.effectDuration != 0) {
-                P.fill(0, 200, 50);
-                int x = 0;
-                if (turret.effectLevel == 0) x = 20;
-                else {
-                    if (turret.effectLevel % 1 == 0) {
-                        P.text("Effect Level: " + (int) turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
-                    } else {
-                        P.text("Effect Level: " + turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
-                    }
-                }
-                float effectDuration = turret.effectDuration;
-                if (effectDuration % 1 == 0) {
-                    P.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
-                } else {
-                    P.text("Effect Duration: " + effectDuration + "s", 910, 376 + - x + 20 * purpleCount + offset);
-                }
-            }
-        }
     }
 
-    private void displayUpgrade(int offsetC, int nextLevel, UpgradeTower upgradeButton) {
+    private void upgradeButton(int offsetC, int nextLevel, UpgradeTower upgradeButton, Turret turret) {
         Color fillColor;
         P.textAlign(CENTER);
         if (turret.name.contains("magicMissleer")) offsetC += 45;
@@ -406,10 +391,30 @@ public class Selection { //what tower is selected
         }
     }
 
+    private void priorityButton(Turret turret) {
+        String priority = "close";
+        P.textFont(largeFont);
+        P.textAlign(CENTER);
+        if (turret.priority == 0) priority = "close";
+        else if (turret.priority == 1) priority = "far";
+        else if (turret.priority == 2) priority = "strong";
+        if (!turret.name.contains("magicMissleer")) {
+            P.fill(75, 45, 0);
+            P.text("Priority: " + priority, 1000, 843);
+        }
+    }
+
+    private void sellButton(Turret turret) {
+        P.fill(75, 0, 0);
+        P.textFont(largeFont);
+        P.textAlign(CENTER);
+        P.text("Sell for: $" + floor(turret.value * .8f), 1000, 888);
+    }
+
     private void setTextPurple(String s, int offset) {
         P.textFont(mediumFont);
         P.textAlign(LEFT);
-        P.fill(100, 0, 200);
+        P.fill(SPECIAL_TEXT_COLOR.getRGB());
         P.text(s, 910, 356 + offset);
         purpleCount++;
     }

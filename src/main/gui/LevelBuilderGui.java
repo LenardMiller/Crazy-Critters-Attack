@@ -15,7 +15,7 @@ public class LevelBuilderGui {
     }
 
     public void display() {
-        P.fill(235); //big white bg
+        P.fill(InGameGui.MAIN_PANEL_COLOR.getRGB()); //big white bg
         P.rect(900, 0, 200, 900);
         for (TileSelect tileSelectButton : tileSelectButtons) tileSelectButton.main();
     }

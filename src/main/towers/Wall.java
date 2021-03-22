@@ -96,8 +96,8 @@ public class Wall extends Tower {
     private String shadowType() {
         int x = (int)tile.position.x/50;
         int y = (int)tile.position.y/50;
-        boolean t = y > 0 && tiles.get(x,y-1).tower != null && !tiles.get(x,y-1).tower.turret;
-        boolean l = x > 0 && tiles.get(x-1,y).tower != null && !tiles.get(x-1,y).tower.turret;
+        boolean t = y > 0 && tiles.get(x,y-1).tower != null && tiles.get(x,y-1).tower instanceof Wall;
+        boolean l = x > 0 && tiles.get(x-1,y).tower != null && tiles.get(x-1,y).tower instanceof Wall;
         if (!t && !l) return "Both";
         if (!l) return "BL";
         if (!t) return "TR";

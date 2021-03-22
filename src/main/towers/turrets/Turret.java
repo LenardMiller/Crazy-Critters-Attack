@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public abstract class Turret extends Tower {
 
@@ -78,7 +79,6 @@ public abstract class Turret extends Tower {
         loadDelay = 0;
         betweenIdleFrames = 0;
         loadDelayTime = 0;
-        turret = true;
         loadSprites();
         upgradePrices = new int[6];
         upgradeTitles = new String[6];
@@ -198,7 +198,7 @@ public abstract class Turret extends Tower {
         else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
     }
 
-    public void main() { //need to check target
+    public void main() {
         if (hp <= 0) {
             die(false);
             tile.tower = null;
@@ -208,6 +208,23 @@ public abstract class Turret extends Tower {
                 && p.mouseY > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
+    }
+
+    public void die(boolean sold) {
+        breakSound.stop();
+        breakSound.play(p.random(0.8f, 1.2f), volume);
+        spawnParticles();
+        tile.tower = null;
+        updateTowerArray();
+        if (selection.id == tile.id) {
+            selection.name = "null";
+            inGameGui.flashA = 255;
+        }
+        else if (!selection.name.equals("null")) selection.swapSelected(selection.id);
+        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
+        updateWallTiles();
+        connectWallQueues++;
+        updateNodes();
     }
 
     public void displayPassB() {

@@ -17,6 +17,8 @@ import main.pathfinding.Node;
 import main.projectiles.Arc;
 import main.projectiles.Projectile;
 import main.towers.Tower;
+import main.towers.Wall;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
@@ -368,10 +370,10 @@ public class Main extends PApplet {
         }
         if (enemies.isEmpty()) buffs = new ArrayList<>();
         //towers
-        for (Tower tower : towers) if (tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassB();
-        for (Tower tower : towers) if (tower.turret) tower.displayPassB();
+        for (Tower tower : towers) if (tower instanceof Turret) tower.displayPassA();
+        for (Tower tower : towers) if (tower instanceof Wall) tower.displayPassA();
+        for (Tower tower : towers) if (tower instanceof Wall) tower.displayPassB();
+        for (Tower tower : towers) if (tower instanceof Turret) tower.displayPassB();
         for (Tower tower : towers) tower.main();
         //projectiles
         for (Projectile projectile : projectiles) projectile.displayPassA();
