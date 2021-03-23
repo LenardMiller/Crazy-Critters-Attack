@@ -2,7 +2,6 @@ package main.towers.turrets;
 
 import main.misc.FadeSoundLoop;
 import main.misc.Tile;
-import main.particles.BuffParticle;
 import main.projectiles.Flame;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -13,6 +12,8 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 public class Flamethrower extends Turret {
 
     private final FadeSoundLoop FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
+
+    private int count;
 
     public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
@@ -43,6 +44,7 @@ public class Flamethrower extends Turret {
         placeSound = sounds.get("metalPlace");
         fireParticle = null;
         barrelLength = 24;
+        count = 1;
         setUpgrades();
         updateTowerArray();
 
@@ -63,22 +65,14 @@ public class Flamethrower extends Turret {
 
     protected void fire(float barrelLength, String particleType) {
         FIRE_SOUND_LOOP.setTargetVolume(volume);
-        float displayAngle = angle;
-        PVector projectileSpawn = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector angleVector = PVector.fromAngle(displayAngle-HALF_PI);
-        float particleCount = p.random(1,5);
-        angleVector.setMag(barrelLength);
-        projectileSpawn.add(angleVector);
-        projectiles.add(new Flame(p, projectileSpawn.x, projectileSpawn.y, displayAngle, this, damage, effectLevel, effectDuration,
-                (int) (range - barrelLength - 100), false));
-        if (particleType != null && !particleType.equals("null")) {
-            for (int i = 0; i < particleCount; i++) {
-                PVector spa2 = PVector.fromAngle(displayAngle - HALF_PI + radians(p.random(-20, 20)));
-                spa2.setMag(-5);
-                PVector spp2 = new PVector(projectileSpawn.x, projectileSpawn.y);
-                spp2.add(spa2);
-                particles.add(new BuffParticle(p, spp2.x, spp2.y, displayAngle + radians(p.random(-45, 45)), particleType));
-            }
+        for (int i = 0; i < count; i++) {
+            float fireAngle = angle + i*(TWO_PI/count);
+            PVector projectileSpawn = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+            PVector angleVector = PVector.fromAngle(fireAngle - HALF_PI);
+            angleVector.setMag(barrelLength);
+            projectileSpawn.add(angleVector);
+            projectiles.add(new Flame(p, projectileSpawn.x, projectileSpawn.y, fireAngle, this, damage, effectLevel, effectDuration,
+              (int) (range - barrelLength - 100), false));
         }
     }
 
@@ -94,7 +88,7 @@ public class Flamethrower extends Turret {
         //titles
         upgradeTitles[0] = "Better range";
         upgradeTitles[1] = "Betterer Range";
-        upgradeTitles[2] = "Fireball";
+        upgradeTitles[2] = "Multifire";
 
         upgradeTitles[3] = "More Damage";
         upgradeTitles[4] = "Fire Strength";
@@ -108,8 +102,8 @@ public class Flamethrower extends Turret {
         upgradeDescB[1] = "range";
         upgradeDescC[1] = "again";
 
-        upgradeDescA[2] = "explosive";
-        upgradeDescB[2] = "fireball";
+        upgradeDescA[2] = "Multifire";
+        upgradeDescB[2] = "";
         upgradeDescC[2] = "";
 
 
@@ -144,7 +138,7 @@ public class Flamethrower extends Turret {
                     range += 30;
                     break;
                 case 2:
-                    range += 125;
+                    count = 6;
                     break;
             }
         } if (id == 1) {
