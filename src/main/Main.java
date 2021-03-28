@@ -23,6 +23,7 @@ import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.Sound;
 import processing.sound.SoundFile;
 
 import java.io.IOException;
@@ -43,6 +44,7 @@ public class Main extends PApplet {
     public static KeyDS keysPressed = new KeyDS();
     public static InputHandler inputHandler;
     public static KeyBinds keyBinds;
+    public static Sound sound;
 
     public static Machine machine;
     public static ArrayList<main.towers.Tower> towers;
@@ -144,6 +146,7 @@ public class Main extends PApplet {
     public void setup() {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
+        sound = new Sound(this);
         //fonts
         veryLargeFont = createFont("STHeitiSC-Light", 48);
         largeFont = createFont("STHeitiSC-Light", 24);
@@ -155,6 +158,7 @@ public class Main extends PApplet {
         loadAnimatedSprites(this);
         //loads sounds
         loadSounds(this);
+        sound.volume(0.25f);
         //load input
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
