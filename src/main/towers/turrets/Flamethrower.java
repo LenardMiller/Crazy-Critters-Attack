@@ -7,6 +7,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Flamethrower extends Turret {
@@ -49,8 +50,7 @@ public class Flamethrower extends Turret {
         updateTowerArray();
 
         spawnParticles();
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     protected void checkTarget() {
@@ -64,7 +64,7 @@ public class Flamethrower extends Turret {
     }
 
     protected void fire(float barrelLength, String particleType) {
-        FIRE_SOUND_LOOP.setTargetVolume(volume);
+        FIRE_SOUND_LOOP.setTargetVolume(1);
         for (int i = 0; i < count; i++) {
             float fireAngle = angle + i*(TWO_PI/count);
             PVector projectileSpawn = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);

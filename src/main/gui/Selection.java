@@ -10,6 +10,7 @@ import processing.sound.SoundFile;
 import java.awt.*;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSound;
 import static main.misc.Utilities.strikethroughText;
 
 public class Selection { //what tower is selected
@@ -48,8 +49,7 @@ public class Selection { //what tower is selected
         if (!paused) {
             if (this.id != id || name.equals("null")) {
                 if (!towerJustPlaced) {
-                    CLICK_IN.stop();
-                    CLICK_IN.play(1, volume);
+                    playSound(CLICK_IN, 1, 1);
                     inGameGui.flashA = 255;
                 } else towerJustPlaced = false;
             }
@@ -91,8 +91,7 @@ public class Selection { //what tower is selected
                     P.mouseY < tower.tile.position.y - tower.size.y) && alive && !paused) {
                 if (!name.equals("null") && !towerJustPlaced) {
                     inGameGui.flashA = 255;
-                    CLICK_OUT.stop();
-                    CLICK_OUT.play(1, volume);
+                    playSound(CLICK_OUT, 1, 1);
                 }
                 name = "null";
                 inGameGui.sellButton.active = false;

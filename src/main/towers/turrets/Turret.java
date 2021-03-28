@@ -167,8 +167,7 @@ public abstract class Turret extends Tower {
     }
 
     protected void fire(float barrelLength, String particleType) {
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, fireSound, 1);
         float displayAngle = angle;
         PVector projectileSpawn = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector angleVector = PVector.fromAngle(displayAngle-HALF_PI);
@@ -211,8 +210,7 @@ public abstract class Turret extends Tower {
     }
 
     public void die(boolean sold) {
-        breakSound.stop();
-        breakSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         tile.tower = null;
         updateTowerArray();
@@ -331,8 +329,7 @@ public abstract class Turret extends Tower {
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
 
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, placeSound, 1);
         spawnParticles();
         //prevent having fire animations longer than delays
         while (delay <= fireFrames.length * betweenFireFrames + idleFrames.length) betweenFireFrames--;

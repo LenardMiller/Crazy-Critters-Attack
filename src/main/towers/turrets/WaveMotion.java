@@ -7,8 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.findAngle;
-import static main.misc.Utilities.findSlope;
+import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class WaveMotion extends Turret {
@@ -49,8 +48,7 @@ public class WaveMotion extends Turret {
         updateTowerArray();
 
         spawnParticles();
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     protected void fire() {

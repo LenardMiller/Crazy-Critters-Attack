@@ -8,6 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Slingshot extends Turret {
@@ -43,13 +44,11 @@ public class Slingshot extends Turret {
         updateTowerArray();
 
         spawnParticles();
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     protected void fire(float barrelLength, String particleType) {
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, fireSound, 1);
         if (painful) projectiles.add(new Rock(p, tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
         if (gravel) {
             float offset = 0.03f;

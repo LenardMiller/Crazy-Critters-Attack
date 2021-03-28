@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSound;
 
 public class WallBuy extends Button {
 
@@ -36,10 +37,7 @@ public class WallBuy extends Button {
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
                 p.mouseY > position.y-size.y/2 && alive && active && !paused) {
             sprite = spriteHover;
-            if (inputHandler.leftMousePressedPulse) {
-                clickIn.stop();
-                clickIn.play(1, volume);
-            }
+            if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
             if (inputHandler.leftMouseReleasedPulse && timer > 20) {
                 timer = 0;

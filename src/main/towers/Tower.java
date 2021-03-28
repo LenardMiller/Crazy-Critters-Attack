@@ -9,6 +9,7 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.Utilities.updateNodes;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
@@ -82,8 +83,7 @@ public abstract class Tower {
     public void damage(int dmg) { //if it touches an enemy, animate and loose health
         hp -= dmg;
         hit = true;
-        damageSound.stop();
-        damageSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, damageSound, 1);
         int num = (int)(p.random(1,4));
         for (int i = num; i >= 0; i--){ //spray debris
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
@@ -94,15 +94,13 @@ public abstract class Tower {
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, placeSound, 1);
         spawnParticles();
         updateNodes();
     }
 
     public void die(boolean sold) {
-        breakSound.stop();
-        breakSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         tile.tower = null;
         updateTowerArray();

@@ -88,7 +88,6 @@ public class Main extends PApplet {
     public static boolean paused = false;
     public static boolean dev = true;
     public static int connectWallQueues;
-    public static float volume = 0.25f;
 
     public static final int FRAMERATE = 30;
 

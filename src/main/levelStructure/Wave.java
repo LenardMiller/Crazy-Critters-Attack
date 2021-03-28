@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static main.Main.*;
-import static main.misc.Utilities.randomSpawnPosition;
-import static main.misc.Utilities.secondsToFrames;
+import static main.misc.Utilities.*;
 
 public class Wave {
 
@@ -56,8 +55,7 @@ public class Wave {
             if (tower instanceof Turret) tower.heal(1);
             else tower.heal(0.2f);
         }
-        sounds.get("waveEnd").stop();
-        sounds.get("waveEnd").play(1, volume);
+        playSound(sounds.get("waveEnd"), 1, 1);
         money += levels[currentLevel].reward;
     }
 

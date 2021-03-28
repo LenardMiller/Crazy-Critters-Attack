@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSound;
 import static main.misc.Utilities.updateNodes;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
 import static main.misc.WallSpecialVisuals.updateWallTiles;
@@ -39,7 +40,7 @@ public class KeyBinds {
         boolean teslaTower = addHotkey('c', TESLATOWER_PRICE);
 
         if (pause) {
-            sounds.get("clickOut").play(1, volume);
+            playSound(sounds.get("clickOut"), 1, 1);
             updateNodes();
             updateWallTiles();
             updateWallTileConnections();

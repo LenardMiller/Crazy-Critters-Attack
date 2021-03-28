@@ -11,8 +11,7 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import static main.Main.*;
-import static main.misc.Utilities.secondsToFrames;
-import static main.misc.Utilities.up60ToFramerate;
+import static main.misc.Utilities.*;
 
 public class Machine {
 
@@ -136,8 +135,7 @@ public class Machine {
 
     private void deathAnim() {
         if (deathFrame == 0) {
-            BREAK_SOUND.stop();
-            BREAK_SOUND.play(1, volume);
+            playSoundRandomSpeed(p, BREAK_SOUND, 1);
         } if (deathFrame < secondsToFrames(2.6f)) {
             for (Tile tile : machTiles) {
                 int x = (int) tile.position.x;
@@ -146,13 +144,12 @@ public class Machine {
                     particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 if (up60ToFramerate(p.random(0, 6)) == 0) {
                     if ((int) p.random(0, 5) == 0) {
-                        EXPLODE_SOUND.stop();
-                        EXPLODE_SOUND.play(p.random(0.8f, 1.2f), volume);
+                        playSoundRandomSpeed(p, EXPLODE_SOUND, 1);
                     } particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 }
             }
         } else {
-            EXPLODE_LOOP.startLoop(1, volume);
+            EXPLODE_LOOP.startLoop(1, 1);
             for (Tile tile : machTiles) {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
@@ -177,12 +174,8 @@ public class Machine {
         if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
         if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
         if (hp <= hpSegment) damageState = 3;
-        if (damageState > 0) {
-            sprites = animatedSprites.get(name + "d" + damageState);
-//            currentFrame = 0;
-        }
-        DAMAGE_SOUND.stop();
-        DAMAGE_SOUND.play(p.random(0.8f, 1.2f), volume);
+        if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
+        playSoundRandomSpeed(p, DAMAGE_SOUND, 1);
         for (Tile tile : machTiles) {
             int x = (int) tile.position.x;
             int y = (int) tile.position.y;
@@ -190,8 +183,7 @@ public class Machine {
                 particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
             }
             if ((int) p.random(0, 2 * ((float) hp / (float) hpSegment)) == 0) {
-                EXPLODE_SOUND.stop();
-                EXPLODE_SOUND.play(p.random(0.8f, 1.2f), volume);
+                playSoundRandomSpeed(p, EXPLODE_SOUND, 1);
                 particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
             }
         }

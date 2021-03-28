@@ -6,6 +6,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSound;
 
 public class SelectLevel extends Button {
 
@@ -35,15 +36,11 @@ public class SelectLevel extends Button {
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
                 p.mouseY > position.y-size.y/2 && LevelSelectGui.delay < 0) {
             sprite = spriteHover;
-            if (inputHandler.leftMousePressedPulse) {
-                clickIn.stop();
-                clickIn.play(1, volume);
-            }
+            if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
             if (holdable && p.mousePressed && p.mouseButton == LEFT) action();
             else if (inputHandler.leftMouseReleasedPulse) {
-                clickOut.stop();
-                clickOut.play(1, volume);
+                playSound(clickOut, 1, 1);
                 action();
                 sprite = spritePressed;
             }

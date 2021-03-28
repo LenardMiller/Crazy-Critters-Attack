@@ -6,6 +6,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.Utilities.updateNodes;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTiles;
@@ -74,8 +75,7 @@ public class Wall extends Tower {
         loadSprites();
 
         spawnParticles();
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     public void main(){
@@ -174,8 +174,7 @@ public class Wall extends Tower {
         placeSound = sounds.get(debrisType + "PlaceShort");
 
         spawnParticles();
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        playSoundRandomSpeed(p, placeSound, 1);
 
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];

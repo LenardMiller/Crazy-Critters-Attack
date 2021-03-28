@@ -4,6 +4,7 @@ import main.pathfinding.Node;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.SoundFile;
 
 import java.awt.*;
 
@@ -400,5 +401,16 @@ public class Utilities {
      */
     public static float randomizeBy(PApplet p, float input, float by) {
         return input + p.random(-input * by, input * by);
+    }
+
+    public static void playSound(SoundFile sound, float speed, float volume) {
+        if (sound != null) {
+            sound.stop();
+            sound.play(speed, volume);
+        }
+    }
+
+    public static void playSoundRandomSpeed(PApplet p, SoundFile sound, float volume) {
+        playSound(sound, p.random(0.8f, 1.2f), volume);
     }
 }

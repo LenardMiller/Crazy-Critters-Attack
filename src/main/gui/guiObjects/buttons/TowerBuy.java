@@ -7,6 +7,7 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.gui.TowerInfo.*;
+import static main.misc.Utilities.playSound;
 import static main.misc.Utilities.strikethroughText;
 import static processing.core.PConstants.CENTER;
 
@@ -91,10 +92,7 @@ public class TowerBuy extends Button {
                 && p.mouseY > (position.y-size.y/2)-d-1 && active || depressed) && !paused && alive) {
             if (depressed) sprite = spritePressed;
             else sprite = spriteHover;
-            if (inputHandler.leftMousePressedPulse && !depressed) {
-                clickIn.stop();
-                clickIn.play(1, volume);
-            }
+            if (inputHandler.leftMousePressedPulse && !depressed) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
             p.fill(235);
             p.noStroke();

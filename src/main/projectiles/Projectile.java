@@ -12,6 +12,7 @@ import processing.sound.SoundFile;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static processing.core.PConstants.HALF_PI;
 
 public abstract class Projectile {
@@ -79,7 +80,7 @@ public abstract class Projectile {
         collideEn();
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||
                 position.y + size.y < -100 || position.x + size.x < -100) {
-            particles.remove(this);
+            projectiles.remove(this);
         }
         if (dead) die();
     }
@@ -125,7 +126,7 @@ public abstract class Projectile {
             Enemy enemy = enemies.get(enemyId);
             if (enemyAlreadyHit(enemy)) continue;
             if (intersectingEnemy(enemy) && pierce > -1) {
-                playHitSound();
+                playSoundRandomSpeed(p, hitSound, 1);
                 PVector applyVelocity = velocity;
                 if (effectRadius > 0) applyVelocity = new PVector(0, 0);
                 enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, causeEnemyParticles, type, applyVelocity, enemyId);
@@ -149,13 +150,6 @@ public abstract class Projectile {
 
     private PVector fromExplosionCenter(Enemy enemy) {
         return PVector.fromAngle(Utilities.findAngle(enemy.position, position) + HALF_PI);
-    }
-
-    private void playHitSound() {
-        if (hitSound != null) {
-            hitSound.stop();
-            hitSound.play(p.random(0.8f, 1.2f), volume);
-        }
     }
 
     private boolean enemyAlreadyHit(Enemy enemy) {
