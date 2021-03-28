@@ -6,11 +6,11 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static main.Main.nodeSize;
 import static main.Main.nodeGrid;
+import static main.Main.nodeSize;
 import static main.pathfinding.UpdateNode.updateNode;
 
-public class PathRequest {
+public class PathRequest { //todo: make more efficient with less full resets
 
     public int id;
     public Enemy enemy;
