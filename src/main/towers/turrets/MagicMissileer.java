@@ -16,9 +16,9 @@ public class MagicMissileer extends Turret{
         super(p,tile);
         name = "magicMissleer";
         size = new PVector(50,50);
+        hasPriority = false;
         maxHp = 20;
         hp = maxHp;
-        hit = false;
         delay = 3.3f; //200 frames
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 15;

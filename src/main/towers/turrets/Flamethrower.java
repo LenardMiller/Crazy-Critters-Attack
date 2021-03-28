@@ -76,7 +76,7 @@ public class Flamethrower extends Turret {
 
     protected void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null && state != 1 && count == 1) aim(targetEnemy);
+        if (targetEnemy != null && count == 1) aim(targetEnemy);
         if (state == 0 && targetEnemy != null) { //if done animating
             state = 1;
             frame = 0;
@@ -125,7 +125,7 @@ public class Flamethrower extends Turret {
         //prices
         upgradePrices[0] = 400;
         upgradePrices[1] = 500;
-        upgradePrices[2] = 1500;
+        upgradePrices[2] = 1000;
 
         upgradePrices[3] = 500;
         upgradePrices[4] = 600;
@@ -133,7 +133,7 @@ public class Flamethrower extends Turret {
         //titles
         upgradeTitles[0] = "Better range";
         upgradeTitles[1] = "Betterer Range";
-        upgradeTitles[2] = "Multifire";
+        upgradeTitles[2] = "Flame Wheel";
 
         upgradeTitles[3] = "More Damage";
         upgradeTitles[4] = "Fire Strength";
@@ -147,9 +147,9 @@ public class Flamethrower extends Turret {
         upgradeDescB[1] = "range";
         upgradeDescC[1] = "again";
 
-        upgradeDescA[2] = "Multifire";
-        upgradeDescB[2] = "";
-        upgradeDescC[2] = "";
+        upgradeDescA[2] = "Rotating";
+        upgradeDescB[2] = "spiral of";
+        upgradeDescC[2] = "fire";
 
 
         upgradeDescA[3] = "Increase";
@@ -183,7 +183,11 @@ public class Flamethrower extends Turret {
                     range += 30;
                     break;
                 case 2:
-                    count = 6;
+                    count = 8;
+                    name = "flamewheel";
+                    hasPriority = false;
+                    selection.swapSelected(id);
+                    loadSprites();
                     break;
             }
         } if (id == 1) {

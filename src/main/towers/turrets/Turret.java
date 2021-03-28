@@ -20,14 +20,15 @@ import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public abstract class Turret extends Tower {
 
+    public boolean hasPriority;
     public int pjSpeed;
     public int range;
-    public float effectDuration;
     public int priority;
     public int pierce;
     public int killsTotal;
     public int damageTotal;
     public int damage;
+    public float effectDuration;
     public float effectLevel;
     public float delay;
     public float angle;
@@ -59,6 +60,7 @@ public abstract class Turret extends Tower {
     protected Turret(PApplet p, Tile tile) {
         super(p, tile);
         this.p = p;
+        hasPriority = true;
         offset = 0;
         name = null;
         size = new PVector(50, 50);

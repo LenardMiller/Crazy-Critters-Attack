@@ -225,6 +225,9 @@ public class SpriteLoader {
         getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",2);
         getSprite(p,"flamethrowerLoad","TR","flamethrower/load/",1);
         getSprite(p,"flamethrowerIdle","TR","flamethrower/idle/",4);
+        getSprite(p,"flamewheelFire","TR","/flamethrower/flamewheel/fire/",2);
+        getSprite(p,"flamewheelLoad","TR","/flamethrower/flamewheel/load/",1);
+        getSprite(p,"flamewheelIdle","TR","/flamethrower/flamewheel/idle/",4);
         getSprite(p,"railgunFire","TR","railgun/fire/",15);
         getSprite(p,"railgunLoad","TR","railgun/load/",9);
         getSprite(p,"railgunIdle","TR","railgun/idle/",6);
@@ -396,6 +399,7 @@ public class SpriteLoader {
         staticSprites.put("flamethrowerBaseTR",p.loadImage("sprites/towers/turrets/flamethrower/base.png"));
         staticSprites.put("flamethrowerFullTR",p.loadImage("sprites/towers/turrets/flamethrower/full.png"));
         staticSprites.put("flamethrowerIdleTR",p.loadImage("sprites/towers/turrets/flamethrower/idle.png"));
+        staticSprites.put("flamewheelBaseTR",p.loadImage("sprites/towers/turrets/flamethrower/flamewheel/base.png"));
         staticSprites.put("railgunBaseTR",p.loadImage("sprites/towers/turrets/railgun/base.png"));
         staticSprites.put("railgunFullTR",p.loadImage("sprites/towers/turrets/railgun/full.png"));
         staticSprites.put("railgunIdleTR",p.loadImage("sprites/towers/turrets/railgun/idle.png"));

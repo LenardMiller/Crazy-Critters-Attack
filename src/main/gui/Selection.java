@@ -72,7 +72,7 @@ public class Selection { //what tower is selected
                 inGameGui.upgradeIconA.active = true;
                 inGameGui.upgradeIconA.position.y = 565;
                 inGameGui.upgradeIconB.position.y = 715;
-                if (turret.name.equals("magicMissleer") || turret.name.equals("magicMissleerFour")) {
+                if (!turret.hasPriority) {
                     inGameGui.targetButton.active = false;
                     inGameGui.upgradeButtonB.position.y += 45;
                     inGameGui.upgradeButtonA.position.y += 45;
@@ -140,7 +140,7 @@ public class Selection { //what tower is selected
         P.noStroke();
         //different size bg so buttons fit
         P.rect(900, 212, 200, 298);
-        if (turret.name.equals("magicMissleer") || turret.name.equals("magicMissleerFour")) P.rect(900, 212, 200, 343);
+        if (!turret.hasPriority) P.rect(900, 212, 200, 343);
     }
 
     private int nameAndSpecial(int offset, Turret turret) {
@@ -265,6 +265,11 @@ public class Selection { //what tower is selected
                 P.text("Flamethrower", 1000, 241);
                 setTextPurple("Fire", offset);
                 break;
+            case "flamewheel":
+                P.text("Flame Wheel", 1000, 241);
+                setTextPurple("Fire", offset);
+                setTextPurple("Spiral", offset + 20);
+                break;
             case "railgun":
                 P.text("Railgun", 1000, 241);
                 break;
@@ -319,7 +324,7 @@ public class Selection { //what tower is selected
 
     private void stats(Turret turret) { //todo: fix
         int offsetB = 0;
-        if (turret.name.contains("magicMissleer")) offsetB = 45;
+        if (!turret.hasPriority) offsetB = 45;
         P.fill(STAT_TEXT_COLOR.getRGB());
         P.textAlign(LEFT);
         P.textFont(mediumFont);
@@ -340,7 +345,7 @@ public class Selection { //what tower is selected
     private void upgradeButton(int offsetC, int nextLevel, UpgradeTower upgradeButton, Turret turret) {
         Color fillColor;
         P.textAlign(CENTER);
-        if (turret.name.contains("magicMissleer")) offsetC += 45;
+        if (!turret.hasPriority) offsetC += 45;
         if (!upgradeButton.greyed && nextLevel < turret.upgradePrices.length) {
             boolean canAfford = money >= turret.upgradePrices[nextLevel];
             if (canAfford) fillColor = new Color(11, 56, 0);
@@ -396,7 +401,7 @@ public class Selection { //what tower is selected
         if (turret.priority == 0) priority = "close";
         else if (turret.priority == 1) priority = "far";
         else if (turret.priority == 2) priority = "strong";
-        if (!turret.name.contains("magicMissleer")) {
+        if (turret.hasPriority) {
             P.fill(75, 45, 0);
             P.text("Priority: " + priority, 1000, 843);
         }
