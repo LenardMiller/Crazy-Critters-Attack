@@ -3,7 +3,7 @@ package main.misc;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
 
-import static main.misc.Utilities.incrementTo;
+import static main.misc.Utilities.incrementByTo;
 
 public class FadeSoundLoop {
 
@@ -24,7 +24,7 @@ public class FadeSoundLoop {
     }
 
     public void main() {
-        volume = incrementTo(volume, 0.05f, targetVolume);
+        volume = incrementByTo(volume, 0.05f, targetVolume);
         SOUND_FILE.amp(volume);
         if (timer > MIN_LENGTH) {
             targetVolume = 0.01f;

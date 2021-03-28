@@ -7,13 +7,15 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.incrementByTo;
 import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Flamethrower extends Turret {
 
-    private final FadeSoundLoop FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
+    private final FadeSoundLoop FIRE_SOUND_LOOP;
 
+    private float rotationSpeed;
     private int count;
 
     public Flamethrower(PApplet p, Tile tile) {
@@ -46,6 +48,7 @@ public class Flamethrower extends Turret {
         fireParticle = null;
         barrelLength = 24;
         count = 1;
+        FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
         setUpgrades();
         updateTowerArray();
 
@@ -53,13 +56,55 @@ public class Flamethrower extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    public void main() {
+        if (hp <= 0) {
+            die(false);
+            tile.tower = null;
+        }
+        if (enemies.size() > 0 && alive && !paused) checkTarget();
+        if (!paused) {
+            if (targetEnemy != null && enemies.size() > 0) {
+                rotationSpeed = incrementByTo(rotationSpeed, 0.002f, 1 / (1 + sqrt(5) / 2));
+            } else rotationSpeed = incrementByTo(rotationSpeed, 0.002f, 0);
+            if (count > 1) angle += rotationSpeed;
+        }
+        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y
+          && p.mouseY > tile.position.y - size.y && alive && !paused) {
+            selection.swapSelected(tile.id);
+        }
+    }
+
     protected void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null) aim(targetEnemy);
+        if (targetEnemy != null && state != 1 && count == 1) aim(targetEnemy);
         if (state == 0 && targetEnemy != null) { //if done animating
             state = 1;
             frame = 0;
             fire(barrelLength, fireParticle);
+        }
+    }
+
+    protected void displayPassB2() {
+        //shadow
+        for (int i = 0; i < count; i++) {
+            float rotateAngle = angle + i*(TWO_PI/count);
+            p.pushMatrix();
+            p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
+            p.rotate(rotateAngle);
+            p.tint(0, 60);
+            if (sprite != null) p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+            p.popMatrix();
+        }
+        //main
+        for (int i = 0; i < count; i++) {
+            float rotateAngle = angle + i*(TWO_PI/count);
+            p.pushMatrix();
+            p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+            p.rotate(rotateAngle);
+            p.tint(255, tintColor, tintColor);
+            if (sprite != null) p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+            p.popMatrix();
+            p.tint(255);
         }
     }
 
@@ -80,7 +125,7 @@ public class Flamethrower extends Turret {
         //prices
         upgradePrices[0] = 400;
         upgradePrices[1] = 500;
-        upgradePrices[2] = 1750;
+        upgradePrices[2] = 1500;
 
         upgradePrices[3] = 500;
         upgradePrices[4] = 600;

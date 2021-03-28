@@ -368,7 +368,7 @@ public class Utilities {
      * @param target value to approach
      * @return a value closer to but not overshooting the target
      */
-    public static float incrementTo(float input, float by, float target) {
+    public static float incrementByTo(float input, float by, float target) {
         if (input == target) return target;
         if (input < target) {
             return Math.min(input + by, target);
@@ -388,9 +388,9 @@ public class Utilities {
         int red = input.getRed();
         int green = input.getGreen();
         int blue = input.getBlue();
-        red = (int) incrementTo(red, by, target.getRed());
-        green = (int) incrementTo(green, by, target.getGreen());
-        blue = (int) incrementTo(blue, by, target.getBlue());
+        red = (int) incrementByTo(red, by, target.getRed());
+        green = (int) incrementByTo(green, by, target.getGreen());
+        blue = (int) incrementByTo(blue, by, target.getBlue());
         return new Color(red, green, blue);
     }
 
