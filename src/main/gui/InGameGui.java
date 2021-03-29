@@ -19,7 +19,7 @@ public class InGameGui {
     public OpenMenu openMenuButton;
     public WallBuy wallBuyButton;
     public SellTower sellButton;
-    public TargetPriority targetButton;
+    public TargetPriority priorityButton;
     public UpgradeTower upgradeButtonA, upgradeButtonB;
     public GuiObject moneyIcon;
     public GuiObject upgradeIconA, upgradeIconB;
@@ -58,14 +58,14 @@ public class InGameGui {
         playButton.main(); //display is in Level
         if (!isTowers || selection.name.equals("null")) {
             sellButton.active = false;
-            targetButton.active = false;
+            priorityButton.active = false;
             upgradeButtonA.active = false;
             upgradeButtonB.active = false;
             upgradeIconA.active = false;
             upgradeIconB.active = false;
         }
         sellButton.main();
-        targetButton.main();
+        priorityButton.main();
         upgradeButtonA.main();
         upgradeButtonB.main();
         upgradeIconA.main();
@@ -149,7 +149,7 @@ public class InGameGui {
         upgradeButtonB = new UpgradeTower(P,1000,630,"null",false, 1);
         upgradeIconA = new UpgradeIcon(P,1030,610,"null",false);
         upgradeIconB = new UpgradeIcon(P,1030,610,"null",false);
-        targetButton = new TargetPriority(P,1000,832.5f,"null",false);
+        priorityButton = new TargetPriority(P,1000,832.5f,"null",false);
         sellButton = new SellTower(P,1000,877.5f,"null",false);
     }
 

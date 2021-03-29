@@ -90,7 +90,6 @@ public class Corpse {
             lifespan--;
             if (lifespan <= 0) corpses.remove(i);
         }
-        display();
     }
 
     private void move() {
@@ -101,7 +100,7 @@ public class Corpse {
         POSITION.add(VELOCITY);
     }
 
-    private void display() {
+    public void display() {
         PImage sprite = SPRITES[frame];
         if (!paused) {
             if (ANIMATED && frame < SPRITES.length - 1) {

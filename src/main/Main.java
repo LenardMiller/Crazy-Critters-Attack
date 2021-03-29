@@ -361,6 +361,7 @@ public class Main extends PApplet {
             particle.main(underParticles, i);
         }
         //corpses
+        for (Corpse corpse : corpses) corpse.display();
         for (int i = corpses.size() - 1; i >= 0; i--) {
             Corpse corpse = corpses.get(i);
             corpse.main(i);

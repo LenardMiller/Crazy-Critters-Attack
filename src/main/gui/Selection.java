@@ -64,7 +64,7 @@ public class Selection { //what tower is selected
                 inGameGui.sellButton.active = true;
                 inGameGui.upgradeButtonB.active = true;
                 inGameGui.upgradeIconB.active = true;
-                inGameGui.targetButton.active = true;
+                inGameGui.priorityButton.active = true;
                 turret.visualize = true;
                 inGameGui.upgradeButtonA.active = true;
                 inGameGui.upgradeButtonB.position.y = 735;
@@ -73,7 +73,7 @@ public class Selection { //what tower is selected
                 inGameGui.upgradeIconA.position.y = 565;
                 inGameGui.upgradeIconB.position.y = 715;
                 if (!turret.hasPriority) {
-                    inGameGui.targetButton.active = false;
+                    inGameGui.priorityButton.active = false;
                     inGameGui.upgradeButtonB.position.y += 45;
                     inGameGui.upgradeButtonA.position.y += 45;
                     inGameGui.upgradeIconA.position.y += 45;
@@ -95,7 +95,7 @@ public class Selection { //what tower is selected
                 }
                 name = "null";
                 inGameGui.sellButton.active = false;
-                inGameGui.targetButton.active = false;
+                inGameGui.priorityButton.active = false;
                 inGameGui.upgradeButtonA.active = false;
                 inGameGui.upgradeButtonB.active = false;
                 inGameGui.upgradeIconA.active = false;
