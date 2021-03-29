@@ -31,7 +31,7 @@ public abstract class Shockwave {
     protected String buff;
     protected String damageType;
 
-    public Shockwave(PApplet p, float centerX, float centerY, int maxRadius, float angle, float width, int damage,
+    public Shockwave(PApplet p, float centerX, float centerY, int startingRadius, int maxRadius, float angle, float width, int damage,
                      Turret turret) {
         this.P = p;
 
@@ -45,6 +45,7 @@ public abstract class Shockwave {
         UNTOUCHED_ENEMIES = new ArrayList<>();
         UNTOUCHED_ENEMIES.addAll(enemies);
         SPEED = 400;
+        radius = startingRadius;
     }
 
     public void main() {

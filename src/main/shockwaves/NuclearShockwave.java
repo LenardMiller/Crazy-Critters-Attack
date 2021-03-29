@@ -11,7 +11,7 @@ public class NuclearShockwave extends Shockwave {
 
     public NuclearShockwave(PApplet p, float centerX, float centerY, int maxRadius, float angle, float width, int damage,
                             Turret turret) {
-        super(p, centerX, centerY, maxRadius, angle, width, damage, turret);
+        super(p, centerX, centerY, 0, maxRadius, angle, width, damage, turret);
 
         damageType = "burning";
     }

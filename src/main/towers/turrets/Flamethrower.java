@@ -122,7 +122,7 @@ public class Flamethrower extends Turret {
         else {
             playSoundRandomSpeed(p, sounds.get("fireImpact"), 1);
             shockwaves.add(new FireShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-              range, 0, 720, damage, this, effectLevel, effectDuration));
+              (int) barrelLength, range, 0, 720, damage, this, effectLevel, effectDuration));
         }
     }
 
@@ -190,7 +190,7 @@ public class Flamethrower extends Turret {
                 case 2:
                     count = 8;
                     delay = 0.5f;
-                    damage = 100;
+                    damage *= 20;
                     name = "flamewheel";
                     hasPriority = false;
                     selection.swapSelected(this);
@@ -200,7 +200,7 @@ public class Flamethrower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    damage += 1;
+                    damage += damage / 2;
                     break;
                 case 4:
                     effectDuration += 2;

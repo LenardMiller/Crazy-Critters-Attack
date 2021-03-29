@@ -17,9 +17,9 @@ public class SeismicShockwave extends Shockwave {
 
     private final boolean SEISMIC_SENSE;
 
-    public SeismicShockwave(PApplet p, float centerX, float centerY, int maxRadius, float angle, float width, int damage,
+    public SeismicShockwave(PApplet p, float centerX, float centerY, int startingRadius, int maxRadius, float angle, float width, int damage,
                             Turret turret, boolean seismicSense) {
-        super(p, centerX, centerY, maxRadius, angle, width, damage, turret);
+        super(p, centerX, centerY, startingRadius, maxRadius, angle, width, damage, turret);
 
         SEISMIC_SENSE = seismicSense;
     }
