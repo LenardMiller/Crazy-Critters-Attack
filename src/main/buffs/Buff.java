@@ -26,8 +26,8 @@ public abstract class Buff {
         this.p = p;
 
         particleChance = 8;
-        effectDelay = secondsToFrames(1); //frames
-        lifeDuration = secondsToFrames(10); //frames
+        effectDelay = secondsToFrames(1);
+        lifeDuration = secondsToFrames(10);
         particle = "null";
         name = "null";
         this.enId = enId;
@@ -64,10 +64,13 @@ public abstract class Buff {
      */
     protected void display() {
         if (particle != null) {
-            Enemy enemy = enemies.get(enId);
-            int num = (int) (p.random(0, particleChance));
-            if (num == 0) {
-                particles.add(new BuffParticle(p, (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), p.random(0, 360), particle));
+            if (enId < 0) buffs.remove(this);
+            else {
+                Enemy enemy = enemies.get(enId);
+                int num = (int) (p.random(0, particleChance));
+                if (num == 0) {
+                    particles.add(new BuffParticle(p, (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), p.random(0, 360), particle));
+                }
             }
         }
     }

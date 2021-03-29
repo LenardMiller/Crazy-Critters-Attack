@@ -5,6 +5,7 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.buffs;
 import static main.Main.enemies;
 import static main.misc.Utilities.secondsToFrames;
 
@@ -24,8 +25,11 @@ public class Burning extends Buff {
     }
 
     public void effect() { //small damage fast
-        Enemy enemy = enemies.get(enId);
-        enemy.barTrans = 255;
-        enemy.damageWithoutBuff(DAMAGE,turret, "fire", new PVector(0,0), false);
+        if (enId < 0) buffs.remove(this);
+        else {
+            Enemy enemy = enemies.get(enId);
+            enemy.barTrans = 255;
+            enemy.damageWithoutBuff(DAMAGE, turret, "fire", new PVector(0, 0), false);
+        }
     }
 }

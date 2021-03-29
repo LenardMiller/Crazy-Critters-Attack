@@ -20,15 +20,15 @@ public abstract class Shockwave {
     protected final int SPEED;
     protected final float ANGLE;
     protected final float WIDTH;
-    protected final float EFFECT_DURATION;
-    protected final float EFFECT_LEVEL;
     protected final PVector CENTER;
     protected final ArrayList<Enemy> UNTOUCHED_ENEMIES;
     protected final Turret TURRET;
-    protected final String BUFF;
     protected final PApplet P;
 
     protected int radius;
+    protected float effectDuration;
+    protected float effectLevel;
+    protected String buff;
     protected String damageType;
 
     public Shockwave(PApplet p, float centerX, float centerY, int maxRadius, float angle, float width, int damage,
@@ -41,14 +41,9 @@ public abstract class Shockwave {
         WIDTH = radians(width); //from edge to center of AOE
         DAMAGE = damage;
         TURRET = turret;
-        damageType = null;
-        BUFF = null;
-        EFFECT_DURATION = 0;
-        EFFECT_LEVEL = 0;
 
         UNTOUCHED_ENEMIES = new ArrayList<>();
         UNTOUCHED_ENEMIES.addAll(enemies);
-        radius = 0;
         SPEED = 400;
     }
 
@@ -79,9 +74,8 @@ public abstract class Shockwave {
             float dist = findDistBetween(enemy.position, CENTER);
             if (abs(angleDif) < WIDTH / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
-                enemy.damageWithBuff(DAMAGE, BUFF, EFFECT_LEVEL, EFFECT_DURATION, TURRET, true, damageType,
+                enemy.damageWithBuff(DAMAGE, buff, effectLevel, effectDuration, TURRET, true, damageType,
                   direction, -1);
-                enemy.damageWithoutBuff(DAMAGE, TURRET, damageType, direction, true);
                 UNTOUCHED_ENEMIES.remove(enemy);
             }
         }

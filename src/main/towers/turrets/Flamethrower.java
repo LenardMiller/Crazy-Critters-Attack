@@ -3,6 +3,7 @@ package main.towers.turrets;
 import main.misc.FadeSoundLoop;
 import main.misc.Tile;
 import main.projectiles.Flame;
+import main.shockwaves.FireShockwave;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -109,15 +110,19 @@ public class Flamethrower extends Turret {
     }
 
     protected void fire(float barrelLength, String particleType) {
-        FIRE_SOUND_LOOP.setTargetVolume(1);
-        for (int i = 0; i < count; i++) {
-            float fireAngle = angle + i*(TWO_PI/count);
+        if (count == 1) {
+            FIRE_SOUND_LOOP.setTargetVolume(1);
             PVector projectileSpawn = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
-            PVector angleVector = PVector.fromAngle(fireAngle - HALF_PI);
+            PVector angleVector = PVector.fromAngle(angle - HALF_PI);
             angleVector.setMag(barrelLength);
             projectileSpawn.add(angleVector);
-            projectiles.add(new Flame(p, projectileSpawn.x, projectileSpawn.y, fireAngle, this, damage, effectLevel, effectDuration,
+            projectiles.add(new Flame(p, projectileSpawn.x, projectileSpawn.y, angle, this, damage, effectLevel, effectDuration,
               (int) (range - barrelLength - 100), false));
+        }
+        else {
+            playSoundRandomSpeed(p, sounds.get("fireImpact"), 1);
+            shockwaves.add(new FireShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
+              range, 0, 720, damage, this, effectLevel, effectDuration));
         }
     }
 
@@ -184,6 +189,8 @@ public class Flamethrower extends Turret {
                     break;
                 case 2:
                     count = 8;
+                    delay = 0.5f;
+                    damage = 100;
                     name = "flamewheel";
                     hasPriority = false;
                     selection.swapSelected(this);
