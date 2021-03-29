@@ -303,7 +303,6 @@ public class SpriteLoader {
         staticSprites.put("currentLineIc",p.loadImage("sprites/guiObjects/currentLine.png"));
         //particles
         staticSprites.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
-        staticSprites.put("devWoodPt",p.loadImage("sprites/particles/debris/devWood.png"));
         staticSprites.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));
         staticSprites.put("stonePt",p.loadImage("sprites/particles/debris/stone.png"));
         staticSprites.put("titaniumPt",p.loadImage("sprites/particles/debris/titanium.png"));

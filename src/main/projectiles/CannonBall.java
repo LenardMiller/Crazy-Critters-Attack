@@ -28,7 +28,7 @@ public class CannonBall extends Projectile {
         int num = (int) (p.random(10, 16));
         for (int j = num; j >= 0; j--) {
             particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "metal",
-                    maxSpeed = p.random(0.5f, 2.5f)));
+              p.random(100,200)));
         }
         particles.add(new MediumExplosion(p, position.x, position.y, p.random(0, 360), "puff"));
         projectiles.remove(this);

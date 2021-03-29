@@ -53,12 +53,14 @@ public abstract class Particle {
     }
 
     public void main(ArrayList<Particle> particles, int i) {
-        if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) { //if crossed edge, delete
-            dead = true;
-        }
+        if (crossedEdge()) dead = true;
         if (dead) particles.remove(i);
         display();
         if (!paused) move();
+    }
+
+    private boolean crossedEdge() {
+        return position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100;
     }
 
     protected void display() {

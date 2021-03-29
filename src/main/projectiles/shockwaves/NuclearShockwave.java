@@ -19,9 +19,6 @@ public class NuclearShockwave extends Shockwave {
     protected void display() {
         float a = randomAngle();
         PVector pos = randomPosition(a);
-        particles.add(new ExplosionDebris(P, pos.x, pos.y, a, "fire", P.random(0.5f, 2.5f)));
-        a = randomAngle();
-        pos = randomPosition(a);
         particles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));
         a = randomAngle();
         pos = randomPosition(a);
@@ -33,13 +30,19 @@ public class NuclearShockwave extends Shockwave {
             a = randomAngle();
             pos = randomPosition(a);
             boolean small = radius < MAX_RADIUS / 4 || P.random(4) < 3;
-            int num = (int) P.random(16, 42);
-            if (small) num = (int) P.random(8, 21);
-            for (int j = 0; j < num; j++) {
-                particles.add(new ExplosionDebris(P, pos.x, pos.y, P.random(0, 360), "fire", P.random(1.5f, 4.5f)));
-            }
             if (small) particles.add(new LargeExplosion(P, pos.x, pos.y, P.random(0, 360), "fire"));
             else particles.add(new MediumExplosion(P, pos.x, pos.y, P.random(0, 360), "fire"));
+        }
+        for (int i = 0; i < P.random(1, 4); i++) {
+            a = randomAngle();
+            pos = randomPosition(a);
+            particles.add(new ExplosionDebris(P, pos.x, pos.y, a, "metal", P.random(100,200)));
+            a = randomAngle();
+            pos = randomPosition(a);
+            particles.add(new ExplosionDebris(P, pos.x, pos.y, a, "nuclear", P.random(100,200)));
+            a = randomAngle();
+            pos = randomPosition(a);
+            particles.add(new ExplosionDebris(P, pos.x, pos.y, a, "fire", P.random(100,200)));
         }
     }
 }

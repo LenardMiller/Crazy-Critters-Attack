@@ -84,7 +84,7 @@ public abstract class Tower {
         hp -= dmg;
         hit = true;
         playSoundRandomSpeed(p, damageSound, 1);
-        int num = (int)(p.random(1,4));
+        int num = (int)(p.random(4,10));
         for (int i = num; i >= 0; i--){ //spray debris
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
