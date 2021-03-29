@@ -63,16 +63,21 @@ public class Flamethrower extends Turret {
             tile.tower = null;
         }
         if (enemies.size() > 0 && alive && !paused) checkTarget();
-        if (!paused) {
-            if (targetEnemy != null && enemies.size() > 0) {
-                rotationSpeed = incrementByTo(rotationSpeed, 0.002f, 1 / (1 + sqrt(5) / 2));
-            } else rotationSpeed = incrementByTo(rotationSpeed, 0.002f, 0);
-            if (count > 1) angle += rotationSpeed;
-        }
+        if (!paused && count > 1) rotateWheel();
         if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y
           && p.mouseY > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
+    }
+
+    private void rotateWheel() {
+        float maxSpeed = 0.5f;
+        float spoolSpeed = 0.001f;
+        if (targetEnemy != null && enemies.size() > 0) {
+            rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, maxSpeed);
+        } else rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, 0);
+        angle += rotationSpeed;
+        delay = 5 * abs(rotationSpeed - maxSpeed);
     }
 
     protected void checkTarget() {
@@ -130,11 +135,11 @@ public class Flamethrower extends Turret {
         //prices
         upgradePrices[0] = 400;
         upgradePrices[1] = 500;
-        upgradePrices[2] = 1000;
+        upgradePrices[2] = 1500;
 
         upgradePrices[3] = 500;
         upgradePrices[4] = 600;
-        upgradePrices[5] = 2250;
+        upgradePrices[5] = 2500;
         //titles
         upgradeTitles[0] = "Better range";
         upgradeTitles[1] = "Betterer Range";
@@ -152,9 +157,9 @@ public class Flamethrower extends Turret {
         upgradeDescB[1] = "range";
         upgradeDescC[1] = "again";
 
-        upgradeDescA[2] = "Rotating";
-        upgradeDescB[2] = "spiral of";
-        upgradeDescC[2] = "fire";
+        upgradeDescA[2] = "Waves";
+        upgradeDescB[2] = "of fire";
+        upgradeDescC[2] = "";
 
 
         upgradeDescA[3] = "Increase";
@@ -189,8 +194,7 @@ public class Flamethrower extends Turret {
                     break;
                 case 2:
                     count = 8;
-                    delay = 0.5f;
-                    damage *= 20;
+                    damage *= 10;
                     name = "flamewheel";
                     hasPriority = false;
                     selection.swapSelected(this);

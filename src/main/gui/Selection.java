@@ -268,8 +268,8 @@ public class Selection { //what tower is selected
                 break;
             case "flamewheel":
                 P.text("Flame Wheel", 1000, 241);
-                setTextPurple("Fire", offset);
-                setTextPurple("Spiral", offset);
+                setTextPurple("Fire waves", offset);
+                setTextPurple("Spools up", offset);
                 break;
             case "railgun":
                 P.text("Railgun", 1000, 241);
