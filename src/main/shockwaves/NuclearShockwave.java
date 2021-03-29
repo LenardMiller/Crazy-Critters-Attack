@@ -1,4 +1,4 @@
-package main.projectiles.shockwaves;
+package main.shockwaves;
 
 import main.particles.*;
 import main.towers.turrets.Turret;

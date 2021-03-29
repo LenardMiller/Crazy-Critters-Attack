@@ -16,7 +16,7 @@ import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
 import main.projectiles.Arc;
 import main.projectiles.Projectile;
-import main.projectiles.shockwaves.Shockwave;
+import main.shockwaves.Shockwave;
 import main.towers.Tower;
 import main.towers.Wall;
 import main.towers.turrets.Turret;

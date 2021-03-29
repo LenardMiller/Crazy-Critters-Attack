@@ -3,7 +3,7 @@ package main.towers.turrets;
 import main.enemies.Enemy;
 import main.misc.Tile;
 import main.particles.BuffParticle;
-import main.projectiles.shockwaves.SeismicShockwave;
+import main.shockwaves.SeismicShockwave;
 import processing.core.PApplet;
 import processing.core.PVector;
 
