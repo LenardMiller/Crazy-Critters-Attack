@@ -1,6 +1,5 @@
 package main.gui.guiObjects.buttons;
 
-import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -26,8 +25,7 @@ public class SellTower extends Button {
     }
 
     public void action(){ //kills tower and gives value
-        Tower tower = tiles.get(selection.id).tower;
-        tower.sell();
+        selection.turret.sell();
         active = false;
         inGameGui.priorityButton.active = false;
         inGameGui.upgradeButtonA.active = false;

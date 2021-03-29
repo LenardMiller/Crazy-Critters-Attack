@@ -1,7 +1,6 @@
 package main.gui;
 
 import main.gui.guiObjects.buttons.UpgradeTower;
-import main.towers.Tower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -18,7 +17,7 @@ public class Selection { //what tower is selected
     private final PApplet P;
 
     public String name;
-    public int id;
+    public Turret turret;
     public boolean towerJustPlaced;
     private int purpleCount;
     private final SoundFile CLICK_IN;
@@ -38,7 +37,7 @@ public class Selection { //what tower is selected
     public void main() {
         clickOff();
         //don't display if nothing held
-        if (!name.equals("null") && tiles.get(id).tower != null) display();
+        if (!name.equals("null") && turret != null) display();
     }
 
     /**
@@ -47,25 +46,29 @@ public class Selection { //what tower is selected
      */
     public void swapSelected(int id) {
         if (!paused) {
-            if (this.id != id || name.equals("null")) {
+            Turret turret = (Turret) tiles.get(id).tower;
+            if (this.turret != turret || name.equals("null")) {
                 if (!towerJustPlaced) {
                     playSound(CLICK_IN, 1, 1);
                     inGameGui.flashA = 255;
                 } else towerJustPlaced = false;
             }
-            Turret turret = (Turret) tiles.get(id).tower;
+            swapSelected(turret);
+        }
+    }
+
+    public void swapSelected(Turret turret) {
+        if (!paused) {
             hand.held = "null";
             if (turret != null) {
-                for (int i = tiles.size() - 1; i >= 0; i--) {
-                    if (tiles.get(i).tower != null) tiles.get(i).tower.visualize = false;
-                }
-                this.id = id;
+                if (this.turret != null) this.turret.visualize = false;
+                this.turret = turret;
                 name = turret.name;
+                turret.visualize = true;
                 inGameGui.sellButton.active = true;
                 inGameGui.upgradeButtonB.active = true;
                 inGameGui.upgradeIconB.active = true;
                 inGameGui.priorityButton.active = true;
-                turret.visualize = true;
                 inGameGui.upgradeButtonA.active = true;
                 inGameGui.upgradeButtonB.position.y = 735;
                 inGameGui.upgradeButtonA.position.y = 585;
@@ -84,11 +87,10 @@ public class Selection { //what tower is selected
     }
 
     private void clickOff() { //desselect, hide stuff
-        Tower tower = tiles.get(id).tower;
-        if (tower != null) {
-            if (inputHandler.leftMousePressedPulse && P.mouseX < 900 && (P.mouseX > tower.tile.position.x ||
-                    P.mouseX < tower.tile.position.x - tower.size.x || P.mouseY > tower.tile.position.y ||
-                    P.mouseY < tower.tile.position.y - tower.size.y) && alive && !paused) {
+        if (turret != null) {
+            if (inputHandler.leftMousePressedPulse && P.mouseX < 900 && (P.mouseX > turret.tile.position.x ||
+                    P.mouseX < turret.tile.position.x - turret.size.x || P.mouseY > turret.tile.position.y ||
+                    P.mouseY < turret.tile.position.y - turret.size.y) && alive && !paused) {
                 if (!name.equals("null") && !towerJustPlaced) {
                     inGameGui.flashA = 255;
                     playSound(CLICK_OUT, 1, 1);
@@ -100,13 +102,13 @@ public class Selection { //what tower is selected
                 inGameGui.upgradeButtonB.active = false;
                 inGameGui.upgradeIconA.active = false;
                 inGameGui.upgradeIconB.active = false;
-                tower.visualize = false;
+                turret.visualize = false;
             }
         }
     }
 
-    public void turretOverlay(Turret turret) {
-        if (!name.equals("null") && tiles.get(id).tower != null) {
+    public void turretOverlay() {
+        if (!name.equals("null") && turret != null) {
             //display range and square
             P.fill(255, 25);
             P.stroke(255);
@@ -117,24 +119,23 @@ public class Selection { //what tower is selected
     }
 
     private void display() {
-        Turret turret = (Turret) tiles.get(id).tower;
         int speed = turret.pjSpeed;
         int offset = 0;
         purpleCount = 0;
 
-        turretOverlay(turret);
-        background(turret);
-        offset = nameAndSpecial(offset, turret);
-        info(offset, speed, turret);
-        stats(turret);
-        upgradeIcons(turret);
-        upgradeButton(-45, turret.nextLevelA, inGameGui.upgradeButtonA, turret);
-        upgradeButton(105, turret.nextLevelB, inGameGui.upgradeButtonB, turret);
-        priorityButton(turret);
-        sellButton(turret);
+        turretOverlay();
+        background();
+        offset = nameAndSpecial(offset);
+        info(offset, speed);
+        stats();
+        upgradeIcons();
+        upgradeButton(-45, turret.nextLevelA, inGameGui.upgradeButtonA);
+        upgradeButton(105, turret.nextLevelB, inGameGui.upgradeButtonB);
+        priorityButton();
+        sellButton();
     }
 
-    private void background(Turret turret) {
+    private void background() {
         //bg
         P.fill(InGameGui.MAIN_PANEL_COLOR.getRGB());
         P.noStroke();
@@ -143,7 +144,7 @@ public class Selection { //what tower is selected
         if (!turret.hasPriority) P.rect(900, 212, 200, 343);
     }
 
-    private int nameAndSpecial(int offset, Turret turret) {
+    private int nameAndSpecial(int offset) {
         P.textAlign(CENTER);
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB());
         P.textFont(largeFont);
@@ -192,7 +193,7 @@ public class Selection { //what tower is selected
             case "fragCannon":
                 P.text("Frag Cannon", 1000, 241);
                 setTextPurple("Small splash", offset);
-                setTextPurple("Shrapnel", offset + 20);
+                setTextPurple("Shrapnel", offset);
                 break;
             case "dynamiteLauncher":
                 P.text("Dynamite", 1000, 241);
@@ -207,12 +208,12 @@ public class Selection { //what tower is selected
             case "splashGluer":
                 P.text("Gluer Splasher", 1000, 241);
                 setTextPurple("Slows", offset);
-                setTextPurple("Splatter", offset + 20);
+                setTextPurple("Splatter", offset);
                 break;
             case "shatterGluer":
                 P.text("Gluer Spiker", 1000, 241);
                 setTextPurple("Slows", offset);
-                setTextPurple("Releases spikes", offset + 20);
+                setTextPurple("Releases spikes", offset);
                 break;
             case "seismic":
                 P.text("Seismic Tower", 1000, 241);
@@ -221,14 +222,14 @@ public class Selection { //what tower is selected
             case "seismicSniper":
                 P.text("Seismic Sniper", 1000, 241);
                 setTextPurple("Shockwave", offset);
-                setTextPurple("Stuns stealth", offset + 20);
+                setTextPurple("Stuns stealth", offset);
                 break;
             case "seismicSlammer":
                 P.text("Seismic", 1000, 241);
                 P.text("Slammer", 1000, 266);
                 offset = 25;
                 setTextPurple("Shockwave", offset);
-                setTextPurple("360 degrees", offset + 20);
+                setTextPurple("360 degrees", offset);
                 break;
             case "energyBlaster":
                 P.text("Energy Blaster", 1000, 241);
@@ -259,7 +260,7 @@ public class Selection { //what tower is selected
                 P.text("Shotgun", 1000, 266);
                 offset = 25;
                 setTextPurple("Shotgun", offset);
-                setTextPurple("Decay", offset + 20);
+                setTextPurple("Decay", offset);
                 break;
             case "flamethrower":
                 P.text("Flamethrower", 1000, 241);
@@ -268,7 +269,7 @@ public class Selection { //what tower is selected
             case "flamewheel":
                 P.text("Flame Wheel", 1000, 241);
                 setTextPurple("Fire", offset);
-                setTextPurple("Spiral", offset + 20);
+                setTextPurple("Spiral", offset);
                 break;
             case "railgun":
                 P.text("Railgun", 1000, 241);
@@ -281,7 +282,7 @@ public class Selection { //what tower is selected
         return offset;
     }
 
-    private void info(int offset, int speed, Turret turret) {
+    private void info(int offset, int speed) {
         //health
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB());
         P.textFont(mediumFont);
@@ -322,7 +323,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    private void stats(Turret turret) { //todo: fix
+    private void stats() { //todo: fix
         int offsetB = 0;
         if (!turret.hasPriority) offsetB = 45;
         P.fill(STAT_TEXT_COLOR.getRGB());
@@ -333,7 +334,7 @@ public class Selection { //what tower is selected
         P.text(turret.damageTotal + " total damage", 910, 500 + offsetB);
     }
 
-    private void upgradeIcons(Turret turret) {
+    private void upgradeIcons() {
         if (!inGameGui.upgradeButtonA.greyed) {
             inGameGui.upgradeIconA.sprite = turret.upgradeIcons[turret.nextLevelA];
         } else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
@@ -342,7 +343,7 @@ public class Selection { //what tower is selected
         } else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
     }
 
-    private void upgradeButton(int offsetC, int nextLevel, UpgradeTower upgradeButton, Turret turret) {
+    private void upgradeButton(int offsetC, int nextLevel, UpgradeTower upgradeButton) {
         Color fillColor;
         P.textAlign(CENTER);
         if (!turret.hasPriority) offsetC += 45;
@@ -394,7 +395,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    private void priorityButton(Turret turret) {
+    private void priorityButton() {
         String priority = "close";
         P.textFont(largeFont);
         P.textAlign(CENTER);
@@ -407,7 +408,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    private void sellButton(Turret turret) {
+    private void sellButton() {
         P.fill(75, 0, 0);
         P.textFont(largeFont);
         P.textAlign(CENTER);
@@ -418,7 +419,7 @@ public class Selection { //what tower is selected
         P.textFont(mediumFont);
         P.textAlign(LEFT);
         P.fill(SPECIAL_TEXT_COLOR.getRGB());
-        P.text(s, 910, 356 + offset);
+        P.text(s, 910, 356 + offset + 20 * purpleCount);
         purpleCount++;
     }
 }

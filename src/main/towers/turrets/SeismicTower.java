@@ -245,7 +245,7 @@ public class SeismicTower extends Turret {
                     delay = 0.3f;
                     name = "seismicSlammer";
                     hasPriority = false;
-                    selection.swapSelected(id);
+                    selection.swapSelected(this);
                     loadSprites();
                     break;
             }

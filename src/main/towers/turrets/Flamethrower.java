@@ -186,7 +186,7 @@ public class Flamethrower extends Turret {
                     count = 8;
                     name = "flamewheel";
                     hasPriority = false;
-                    selection.swapSelected(id);
+                    selection.swapSelected(this);
                     loadSprites();
                     break;
             }
