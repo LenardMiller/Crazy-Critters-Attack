@@ -16,6 +16,7 @@ import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
 import main.projectiles.Arc;
 import main.projectiles.Projectile;
+import main.projectiles.shockwaves.Shockwave;
 import main.towers.Tower;
 import main.towers.Wall;
 import main.towers.turrets.Turret;
@@ -53,7 +54,7 @@ public class Main extends PApplet {
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles, underParticles;
     public static ArrayList<main.projectiles.Arc> arcs;
-    public static ArrayList<main.projectiles.Shockwave> shockwaves;
+    public static ArrayList<Shockwave> shockwaves;
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;
     public static ArrayList<Buff> buffs;

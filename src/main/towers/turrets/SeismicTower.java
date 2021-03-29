@@ -3,7 +3,7 @@ package main.towers.turrets;
 import main.enemies.Enemy;
 import main.misc.Tile;
 import main.particles.BuffParticle;
-import main.projectiles.Shockwave;
+import main.projectiles.shockwaves.SeismicShockwave;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -146,12 +146,12 @@ public class SeismicTower extends Turret {
                 fireParticles(a);
                 a += TWO_PI / 6;
             }
-            shockwaves.add(new Shockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-                    range, angle, shockwaveWidth, damage, this, false, false));
+            shockwaves.add(new SeismicShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
+                    range, angle, shockwaveWidth, damage, this, false));
         } else {
             fireParticles(a);
-            shockwaves.add(new Shockwave(p, position.x, position.y, range, angle, shockwaveWidth, damage, this,
-                    seismicSense, false));
+            shockwaves.add(new SeismicShockwave(p, position.x, position.y, range, angle, shockwaveWidth, damage, this,
+                    seismicSense));
         }
     }
 

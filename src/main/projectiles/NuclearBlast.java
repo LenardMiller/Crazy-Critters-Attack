@@ -1,6 +1,7 @@
 package main.projectiles;
 
 import main.particles.ExplosionDebris;
+import main.projectiles.shockwaves.NuclearShockwave;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -33,7 +34,7 @@ public class NuclearBlast extends Projectile {
             particles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "fire", p.random(500, 1000)));
             particles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "metal", p.random(500, 1000)));
         }
-        shockwaves.add(new Shockwave(p, position.x, position.y, effectRadius, 0, 720, damage, turret, false, true));
+        shockwaves.add(new NuclearShockwave(p, position.x, position.y, effectRadius, 0, 720, damage, turret));
         projectiles.remove(this);
     }
 }
