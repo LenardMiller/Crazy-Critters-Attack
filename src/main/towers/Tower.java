@@ -11,6 +11,7 @@ import processing.sound.SoundFile;
 import static main.Main.*;
 import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.Utilities.updateNodes;
+import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public abstract class Tower {
@@ -42,7 +43,7 @@ public abstract class Tower {
     protected Tower(PApplet p, Tile tile) {
         this.p = p;
         this.tile = tile;
-        tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1).setBgC(null);
+        tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1).setBreakable(null);
 
         name = "null";
         size = new PVector(120, 37);
@@ -103,13 +104,14 @@ public abstract class Tower {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         tile.tower = null;
-        updateTowerArray();
         if (selection.turret == this) {
             selection.name = "null";
             inGameGui.flashA = 255;
         }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
-        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
+        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(debrisType + "DebrisBGC_TL");
+        updateFlooring();
+        updateTowerArray();
         updateNodes();
     }
 

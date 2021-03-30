@@ -307,38 +307,38 @@ public class Main extends PApplet {
         }
         //main background
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayA();
+            tiles.get(i).displayBaseAndFlooring();
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWName != null) {
-                if (tile.bgWName.equals("metalWall")) {
-                    tile.drawBgWICorners();
+            if (tile.flooringName != null) {
+                if (tile.flooringName.equals("metalWall")) {
+                    tile.displayFlooringInsideCorners();
                 }
             }
-            tile.drawBgWOCorners("metalWall");
+            tile.displayFlooringOutsideCorners("metalWall");
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWName != null) {
-                if (tile.bgWName.equals("crystalWall")) {
-                    tile.drawBgWICorners();
+            if (tile.flooringName != null) {
+                if (tile.flooringName.equals("crystalWall")) {
+                    tile.displayFlooringInsideCorners();
                 }
             }
-            tile.drawBgWOCorners("crystalWall");
+            tile.displayFlooringOutsideCorners("crystalWall");
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWName != null) {
-                if (tile.bgWName.equals("titaniumWall")) {
-                    tile.drawBgWICorners();
+            if (tile.flooringName != null) {
+                if (tile.flooringName.equals("titaniumWall")) {
+                    tile.displayFlooringInsideCorners();
                 }
             }
-            tile.drawBgWOCorners("titaniumWall");
+            tile.displayFlooringOutsideCorners("titaniumWall");
         }
         //obstacle shadows, background c
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayB();
+            tiles.get(i).displayBreakableAndShadow();
         }
         //pathfinding debug
         if (debug) {
@@ -420,7 +420,7 @@ public class Main extends PApplet {
         hand.main();
         //obstacles
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayC();
+            tiles.get(i).displayObstacle();
         }
         //flying enemies
         for (Enemy enemy : enemies) if (enemy.flying) enemy.displayPassA();

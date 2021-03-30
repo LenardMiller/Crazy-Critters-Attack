@@ -164,7 +164,7 @@ public class Machine {
                 }
             }
         }
-        if (deathFrame == secondsToFrames(3)) for (Tile tile : machTiles) tile.setBgC(debris + "DebrisBGC_TL");
+        if (deathFrame == secondsToFrames(3)) for (Tile tile : machTiles) tile.setBreakable(debris + "DebrisBGC_TL");
     }
 
     public void damage(int dmg) {

@@ -3,7 +3,6 @@ package main.gui;
 import main.enemies.Enemy;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.misc.Tile;
-import main.towers.Tower;
 import main.towers.Wall;
 import main.towers.turrets.*;
 import processing.core.PApplet;
@@ -14,8 +13,8 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
+import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public class Hand {
 
@@ -44,16 +43,15 @@ public class Hand {
 
     public void main() {
         if (paused && !held.equals("null")) setHeld("null");
-        if (!levelBuilder) checkPlaceable();
+        if (!levelBuilder) {
+            checkPlaceable();
+            checkDisplay();
+        }
         else implacable = false;
         if (inputHandler.rightMousePressedPulse) remove();
         if (clickOnSidebar() || rclickNotWall()) clearHand();
-        if (!levelBuilder) checkDisplay();
-        checkPlaceableEnemies();
         displayHeld();
-        if (inputHandler.leftMousePressedPulse) {
-            tryPlace();
-        }
+        if (inputHandler.leftMousePressedPulse) tryPlace();
     }
 
     private void tryPlace() {
@@ -86,16 +84,10 @@ public class Hand {
         Tile tileTower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
         Tile tileObstacle = tiles.get((roundTo(P.mouseX, 50) / 50), (roundTo(P.mouseY, 50) / 50));
         if (tileTower == null) implacable = true;
-        else if (!held.equals("wall")) implacable = (tileTower.tower != null);
-        else implacable = (tileTower.tower instanceof Turret);
+        else if (!held.equals("wall")) implacable = tileTower.tower != null;
+        else implacable = tileTower.tower instanceof Turret && !enemyNearby();
         if (tileObstacle != null && (tileObstacle.obstacle != null || tileObstacle.machine)) implacable = true;
         if (price > money) implacable = true;
-    }
-
-    private void checkPlaceableEnemies() {
-        if (held.equals("wall") && enemyNearby()) {
-            implacable = true;
-        }
     }
 
     private boolean enemyNearby() {
@@ -123,7 +115,7 @@ public class Hand {
             if (tile != null && tile.tower instanceof Wall) {
                 if (upgradable(tile)) {
                     heldSprite = staticSprites.get("upgradeTW");
-                    implacable = money < tile.tower.upgradePrices[tile.tower.nextLevelB];
+                    if (money < tile.tower.upgradePrices[tile.tower.nextLevelB]) implacable = true;
                     displayInfo = "upgradeWall";
                 } else {
                     if (currentLevel > 0) heldSprite = staticSprites.get("upgradeTW");
@@ -190,6 +182,7 @@ public class Hand {
 
     private void upgradeWallInfo() {
         Wall wall = (Wall) tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+        if (wall == null) return;
         if (wall.nextLevelB > wall.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
         else {
             P.fill(235);
@@ -232,7 +225,8 @@ public class Hand {
     }
 
     private void maxWallUpgradeInfo() {
-        Tower tower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+        Wall wall = (Wall) tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+        if (wall == null) return;
         P.fill(235);
         P.noStroke();
         P.rect(900, 212, 200, 707);
@@ -245,11 +239,11 @@ public class Hand {
         P.text("Selected:", 1000, 241);
         P.textFont(largeFont);
         if (currentLevel == 0) P.text("Wooden", 1000, 276);
-        else P.text(tower.upgradeTitles[currentLevel - 1], 1000, 276);
+        else P.text(wall.upgradeTitles[currentLevel - 1], 1000, 276);
         P.text("Wall", 1000, 301);
         P.textFont(mediumFont);
-        P.text(tower.hp + " hp", 1000, 331);
-        P.text("Sell for: $" + (int) (0.8f * (float) tower.value), 1000, 356);
+        P.text(wall.hp + " hp", 1000, 331);
+        P.text("Sell for: $" + (int) (0.8f * (float) wall.value), 1000, 356);
     }
 
     private void universalWallInfo() {
@@ -392,7 +386,7 @@ public class Hand {
                 money += price; //cancel out price change later
             } else {
                 tile.tower = new Wall(P, tile);
-                updateWallTiles();
+                updateFlooring();
                 connectWallQueues++;
             }
             changeHeld = false;
@@ -400,10 +394,10 @@ public class Hand {
         if (held.contains("TL")) {
             tile = tiles.get((roundTo(P.mouseX, 50) / 50), (roundTo(P.mouseY, 50) / 50));
             changeHeld = false;
-            if (held.contains("BGA")) tile.setBgA(held);
-            if (held.contains("BGB")) tile.setBgB(held);
-            if (held.contains("BGW")) tile.setBgW(held);
-            if (held.contains("BGC")) tile.setBgC(held);
+            if (held.contains("BGA")) tile.setBase(held);
+            if (held.contains("BGB")) tile.setDecoration(held);
+            if (held.contains("BGW")) tile.setFlooring(held);
+            if (held.contains("BGC")) tile.setBreakable(held);
             if (held.contains("Ob")) tile.setObstacle(held);
             if (held.contains("Ma")) {
                 tile.machine = !tile.machine;

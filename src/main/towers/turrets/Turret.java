@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
+import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public abstract class Turret extends Tower {
 
@@ -221,8 +221,8 @@ public abstract class Turret extends Tower {
             inGameGui.flashA = 255;
         }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
-        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
-        updateWallTiles();
+        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(debrisType + "DebrisBGC_TL");
+        updateFlooring();
         connectWallQueues++;
         updateNodes();
     }

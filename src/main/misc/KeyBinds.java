@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import static main.Main.*;
 import static main.misc.Utilities.playSound;
 import static main.misc.Utilities.updateNodes;
+import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
-import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public class KeyBinds {
 
@@ -42,7 +42,7 @@ public class KeyBinds {
         if (pause) {
             playSound(sounds.get("clickOut"), 1, 1);
             updateNodes();
-            updateWallTiles();
+            updateFlooring();
             updateWallTileConnections();
             connectWallQueues++;
             paused = !paused;

@@ -28,9 +28,9 @@ public class DataControl extends ClassLoader {
             JSONObject saveObject = new JSONObject();
             saveObject.setString("type", "tile");
             saveObject.setInt("id", i);
-            saveObject.setString("bgA", tile.bgAName);
-            saveObject.setString("bgB", tile.bgBName);
-            saveObject.setString("bgC", tile.bgCName);
+            saveObject.setString("bgA", tile.baseName);
+            saveObject.setString("bgB", tile.decorationName);
+            saveObject.setString("bgC", tile.breakableName);
             saveObject.setString("obstacle", tile.obstacleName);
             saveObject.setBoolean("machine", tile.machine);
             saveArray.setJSONObject(i, saveObject);
@@ -92,9 +92,9 @@ public class DataControl extends ClassLoader {
             String bgC = loadObject.getString("bgC");
             String obstacle = loadObject.getString("obstacle");
             boolean machine = loadObject.getBoolean("machine");
-            if (bgA != null) tile.setBgA(bgA);
-            if (bgB != null) tile.setBgB(bgB);
-            if (bgC != null) tile.setBgC(bgC);
+            if (bgA != null) tile.setBase(bgA);
+            if (bgB != null) tile.setDecoration(bgB);
+            if (bgC != null) tile.setBreakable(bgC);
             if (obstacle != null) tile.setObstacle(obstacle);
             tile.machine = machine;
         }

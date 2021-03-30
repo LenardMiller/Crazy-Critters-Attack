@@ -8,8 +8,8 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.Utilities.updateNodes;
+import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public class Wall extends Tower {
 
@@ -56,7 +56,7 @@ public class Wall extends Tower {
 
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setBgW(name);
+        tiles.get(x-1,y-1).setFlooring(name);
 
         upgradePrices = new int[4];
         upgradeTitles = new String[4];
@@ -114,9 +114,11 @@ public class Wall extends Tower {
 
         p.tint(255,tintColor,tintColor);
         float hpRatio = (float)hp/(float)maxHp;
-        int crack = abs(ceil((hpRatio*4)-1)-3);
-        if (crack < 4) p.image(sprite[crack],x,y);
-        else p.image(sprite[3],x,y);
+        if (!debug) {
+            int crack = abs(ceil((hpRatio * 4) - 1) - 3);
+            if (crack < 4) p.image(sprite[crack],x,y);
+            else p.image(sprite[3],x,y);
+        }
         //sides
         if (tSSprite != null) p.image(tSSprite,x,y);
         if (rSSprite != null) p.image(rSSprite,x,y);
@@ -181,8 +183,8 @@ public class Wall extends Tower {
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setBgW(name);
-        updateWallTiles();
+        tiles.get(x-1,y-1).setFlooring(name);
+        updateFlooring();
         updateNodes();
     }
 

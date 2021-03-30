@@ -29,9 +29,91 @@ public class WallSpecialVisuals {
 
     /**
      * Updates wall flooring.
+     * Goes through every tile over and over again,
+     * if there are 4 tiles with flooring nearby set flooring to that,
+     * until it does nothing in a whole loop.
      */
-    public static void updateWallTiles() {
-        //remove
+    public static void updateFlooring() {
+        boolean didSomething;
+        do {
+            didSomething = false;
+            String[][] typeGrid = getTypeGrid();
+            for (int x = 0; x < 18; x++) {
+                for (int y = 0; y < 18; y++) {
+                    Tile tile = tiles.get(x, y);
+                    int[] typesTouching = getTypesTouching(typeGrid, x, y);
+                    int numFlooringTilesTouching = 0;
+                    for (int numOfType : typesTouching) numFlooringTilesTouching += numOfType;
+                    if (numFlooringTilesTouching >= 4) didSomething = tile.updateFlooring(getMostCommonType(typesTouching));
+                }
+            }
+        } while (didSomething);
+    }
+
+    /**
+     * @param typeGrid a grid of the flooring types of all tiles
+     * @param x x position to check
+     * @param y y position to check
+     * @return the number of floorings of each type touching the tile at checked position
+     */
+    private static int[] getTypesTouching(String[][] typeGrid, int x, int y) {
+        int[] nameCount = new int[5];
+        nameCount[0] = countType(typeGrid, x, y, "woodWall");
+        nameCount[1] = countType(typeGrid, x, y, "stoneWall");
+        nameCount[2] = countType(typeGrid, x, y, "metalWall");
+        nameCount[3] = countType(typeGrid, x, y, "crystalWall");
+        nameCount[4] = countType(typeGrid, x, y, "titaniumWall");
+        return nameCount;
+    }
+
+    /**
+     * @param nameCount the number of floorings of each type touching the tile
+     * @return the most common type of flooring
+     */
+    private static String getMostCommonType(int[] nameCount) {
+        int mostCommonTypeId = getMostCommonNameId(nameCount);
+        String type = "woodWall";
+        if (mostCommonTypeId == 1) type = "stoneWall";
+        if (mostCommonTypeId == 2) type = "metalWall";
+        if (mostCommonTypeId == 3) type = "crystalWall";
+        if (mostCommonTypeId == 4) type = "titaniumWall";
+        return type;
+    }
+
+    /**
+     * @param nameCount the number of floorings of each type touching the tile
+     * @return a numeric id associated with the most common type of flooring
+     */
+    private static int getMostCommonNameId(int[] nameCount) {
+        int mostCommonName = 0;
+        int numNamesOfMostCommonName = 0;
+        for (int i = 0; i < 5; i++) {
+            if (nameCount[i] >= numNamesOfMostCommonName) {
+                numNamesOfMostCommonName = nameCount[i];
+                mostCommonName = i;
+            }
+        }
+        return mostCommonName;
+    }
+
+    /**
+     * @return a grid of the flooring types of every tile
+     */
+    private static String[][] getTypeGrid() {
+        String[][] nameGrid = new String[18][18];
+        for (int x = 0; x < 18; x++) {
+            for (int y = 0; y < 18; y++) {
+                Tile tile = tiles.get(x, y);
+                if (tile.flooring != null) nameGrid[x][y] = tile.flooringName;
+            }
+        }
+        return nameGrid;
+    }
+
+    /**
+     * clears wall flooring.
+     */
+    private static void removeWallTiles() {
         for (int i = 0; i < tiles.size(); i++) {
             Tile bgTile = tiles.get(i);
             int x = (int) (bgTile.position.x / 50);
@@ -39,53 +121,7 @@ public class WallSpecialVisuals {
             Tile towerTile = tiles.get(x + 1, y + 1);
             if (towerTile != null) {
                 if (towerTile.tower == null || towerTile.tower instanceof Turret) {
-                    bgTile.setBgW(null);
-                }
-            }
-        }
-        boolean change = true;
-        while (change) {
-            //create special grid
-            String[][] nameGrid = new String[18][18];
-            for (int x = 0; x < 18; x++) {
-                for (int y = 0; y < 18; y++) {
-                    Tile tile = tiles.get(x, y);
-                    if (tile.bgW != null) nameGrid[x][y] = tile.bgWName;
-                }
-            }
-            //place
-            change = false;
-            for (int x = 0; x < 18; x++) {
-                for (int y = 0; y < 18; y++) {
-                    Tile tile = tiles.get(x, y);
-                    if (tile.bgW == null) {
-                        int[] n = new int[5];
-                        n[0] = countN(nameGrid, x, y, "woodWall");
-                        n[1] = countN(nameGrid, x, y, "stoneWall");
-                        n[2] = countN(nameGrid, x, y, "metalWall");
-                        n[3] = countN(nameGrid, x, y, "crystalWall");
-                        n[4] = countN(nameGrid, x, y, "titaniumWall");
-                        int sum = 0;
-                        for (int i : n) sum += i;
-                        if (sum >= 4) {
-                            int count = 0;
-                            int l = 0;
-                            for (int i = 0; i < 5; i++) {
-                                if (n[i] >= count) {
-                                    count = n[i];
-                                    l = i;
-                                }
-                            }
-                            String name = "";
-                            if (l == 0) name = "woodWall";
-                            if (l == 1) name = "stoneWall";
-                            if (l == 2) name = "metalWall";
-                            if (l == 3) name = "crystalWall";
-                            if (l == 4) name = "titaniumWall";
-                            tile.setBgW(name);
-                            change = true;
-                        }
-                    }
+                    bgTile.setFlooring(null);
                 }
             }
         }
@@ -99,7 +135,7 @@ public class WallSpecialVisuals {
      * @param name wall name
      * @return the number of touching walls with the same name
      */
-    private static int countN(String[][] nameGrid, int x, int y, String name) {
+    private static int countType(String[][] nameGrid, int x, int y, String name) {
         int r = 0;
         if (x > 0 && y > 0) if (name.equals(nameGrid[x - 1][y - 1])) r++;
         if (y > 0) if (name.equals(nameGrid[x][y - 1])) r++;
@@ -118,10 +154,10 @@ public class WallSpecialVisuals {
     public static void updateWallTileConnections() {
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWName != null && !tile.bgWName.equals("stoneWall") && !tile.bgWName.equals("woodWall")) {
-                tile.connectBgWICorners();
+            if (tile.flooringName != null && !tile.flooringName.equals("stoneWall") && !tile.flooringName.equals("woodWall")) {
+                tile.connectFlooringInsideCorners();
             }
-            tile.connectBgWOCorners();
+            tile.connectFlooringOutsideCorners();
         }
     }
 
