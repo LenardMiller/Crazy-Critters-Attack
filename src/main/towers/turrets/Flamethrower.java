@@ -5,6 +5,7 @@ import main.misc.Tile;
 import main.projectiles.Flame;
 import main.shockwaves.FireShockwave;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -15,9 +16,13 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 public class Flamethrower extends Turret {
 
     private final FadeSoundLoop FIRE_SOUND_LOOP;
+    private final PImage[] CORE_SPRITES;
+    private final int BETWEEN_CORE_FRAMES;
 
     private float rotationSpeed;
     private int count;
+    private int coreFrame;
+    private int coreFrameTimer;
 
     public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
@@ -30,7 +35,7 @@ public class Flamethrower extends Turret {
         delay = 0;
         pjSpeed = 300;
         range = 200;
-        effectLevel = 5;
+        effectLevel = 6;
         effectDuration = 5;
         betweenIdleFrames = 0;
         state = 0;
@@ -46,6 +51,8 @@ public class Flamethrower extends Turret {
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
+        CORE_SPRITES = animatedSprites.get("flamewheelCoreTR");
+        BETWEEN_CORE_FRAMES = 4;
         fireParticle = null;
         barrelLength = 24;
         count = 1;
@@ -73,7 +80,7 @@ public class Flamethrower extends Turret {
     private void rotateWheel() {
         float maxSpeed = 0.5f;
         float spoolSpeed = 0.001f;
-        if (targetEnemy != null && enemies.size() > 0) {
+        if (targetEnemy != null && enemies.size() > 0 && alive) {
             rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, maxSpeed);
         } else rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, 0);
         angle += rotationSpeed;
@@ -111,6 +118,24 @@ public class Flamethrower extends Turret {
             if (sprite != null) p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
             p.popMatrix();
             p.tint(255);
+        }
+        if (count > 1) {
+            int coreOffset = -57;
+            p.tint(0, 60);
+            p.image(CORE_SPRITES[coreFrame], tile.position.x + 2 + coreOffset, tile.position.y + 2 + coreOffset);
+            p.tint(255, tintColor, tintColor);
+            p.image(CORE_SPRITES[coreFrame], tile.position.x + coreOffset, tile.position.y + coreOffset);
+            p.tint(255);
+            if (!paused) animateCore();
+        }
+    }
+
+    private void animateCore() {
+        coreFrameTimer++;
+        if (coreFrameTimer >= BETWEEN_CORE_FRAMES) {
+            coreFrameTimer = 0;
+            if (coreFrame < CORE_SPRITES.length-1) coreFrame++;
+            else coreFrame = 0;
         }
     }
 
@@ -197,6 +222,7 @@ public class Flamethrower extends Turret {
                     damage *= 10;
                     name = "flamewheel";
                     hasPriority = false;
+                    effectLevel += 7;
                     selection.swapSelected(this);
                     loadSprites();
                     break;
@@ -208,7 +234,7 @@ public class Flamethrower extends Turret {
                     break;
                 case 4:
                     effectDuration += 2;
-                    effectLevel += 5;
+                    effectLevel += 7;
                     break;
                 case 5:
                     damage = 35;
