@@ -36,6 +36,8 @@ public class SpriteLoader {
         getSprite(p,"electricityBuff","PT","buff/electricity/",8);
         getSprite(p,"nuclearBuff","PT","buff/nuclear/",8);
         getSprite(p,"darkBuff","PT","buff/dark/",8);
+        getSprite(p,"blueSmokeBuff","PT","buff/blueSmoke/",8);
+        getSprite(p,"blueGreenFireBuff","PT","buff/blueGreenFire/",8);
         getSprite(p,"greenOuchEnemy","PT","enemy/greenOuch/",11);
         getSprite(p,"greyPuffEnemy","PT","enemy/greyPuff/",11);
         getSprite(p,"greenPuffEnemy","PT","enemy/greenPuff/",10);
@@ -74,6 +76,7 @@ public class SpriteLoader {
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
         getSprite(p,"flame","PJ","flame/",23);
+        getSprite(p,"blueFlame","PJ","blueFlame/",23);
         //enemies
         getSprite(p,"treeGiantAttack","EN","treeGiant/attack/",63);
         getSprite(p,"treeGiantMove","EN","treeGiant/move/",91);

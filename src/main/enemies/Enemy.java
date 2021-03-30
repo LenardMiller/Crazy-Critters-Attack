@@ -301,6 +301,9 @@ public abstract class Enemy {
                 case "burning":
                     buff = new Burning(p, id, effectLevel, effectDuration, turret);
                     break;
+                case "blueBurning":
+                    buff = new BlueBurning(p, id, effectLevel, effectDuration, turret);
+                    break;
                 case "bleeding":
                     buff = new Bleeding(p, id, turret);
                     break;

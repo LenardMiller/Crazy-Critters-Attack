@@ -121,6 +121,10 @@ public class Corpse {
                 tintFinal = new Color(60,60,60);
                 part = "fire";
                 break;
+            case "blueBurning":
+                tintFinal = new Color(0, 14, 64);
+                part = "blueGreenFire";
+                break;
             case "decay":
                 tintFinal = new Color(0,0,0);
                 part = "decay";

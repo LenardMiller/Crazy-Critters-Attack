@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.misc.FadeSoundLoop;
 import main.misc.Tile;
+import main.projectiles.BlueFlame;
 import main.projectiles.Flame;
 import main.shockwaves.FireShockwave;
 import processing.core.PApplet;
@@ -23,6 +24,8 @@ public class Flamethrower extends Turret {
     private int count;
     private int coreFrame;
     private int coreFrameTimer;
+    private boolean magic;
+    private boolean wheel;
 
     public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
@@ -70,7 +73,7 @@ public class Flamethrower extends Turret {
             tile.tower = null;
         }
         if (enemies.size() > 0 && alive && !paused) checkTarget();
-        if (!paused && count > 1) rotateWheel();
+        if (!paused && wheel) rotateWheel();
         if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y
           && p.mouseY > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
@@ -89,7 +92,7 @@ public class Flamethrower extends Turret {
 
     protected void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null && count == 1) aim(targetEnemy);
+        if (targetEnemy != null && !wheel) aim(targetEnemy);
         if (state == 0 && targetEnemy != null) { //if done animating
             state = 1;
             frame = 0;
@@ -119,7 +122,7 @@ public class Flamethrower extends Turret {
             p.popMatrix();
             p.tint(255);
         }
-        if (count > 1) {
+        if (wheel) {
             int coreOffset = -57;
             p.tint(0, 60);
             p.image(CORE_SPRITES[coreFrame], tile.position.x + 2 + coreOffset, tile.position.y + 2 + coreOffset);
@@ -140,14 +143,16 @@ public class Flamethrower extends Turret {
     }
 
     protected void fire(float barrelLength, String particleType) {
-        if (count == 1) {
+        if (!wheel) {
             FIRE_SOUND_LOOP.setTargetVolume(1);
             PVector projectileSpawn = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
             PVector angleVector = PVector.fromAngle(angle - HALF_PI);
             angleVector.setMag(barrelLength);
             projectileSpawn.add(angleVector);
-            projectiles.add(new Flame(p, projectileSpawn.x, projectileSpawn.y, angle, this, damage, effectLevel, effectDuration,
-              (int) (range - barrelLength - 100), false));
+            if (magic) projectiles.add(new BlueFlame(p, projectileSpawn.x, projectileSpawn.y, angle, this, damage,
+              effectLevel, effectDuration, (int) (range - barrelLength - 100), false));
+            else projectiles.add(new Flame(p, projectileSpawn.x, projectileSpawn.y, angle, this, damage, effectLevel,
+              effectDuration, (int) (range - barrelLength - 100), false));
         }
         else {
             playSoundRandomSpeed(p, sounds.get("fireImpact"), 1);
@@ -218,6 +223,7 @@ public class Flamethrower extends Turret {
                     range += 30;
                     break;
                 case 2:
+                    wheel = true;
                     count = 8;
                     damage *= 10;
                     name = "flamewheel";
@@ -237,6 +243,9 @@ public class Flamethrower extends Turret {
                     effectLevel += 7;
                     break;
                 case 5:
+                    name = "magicFlamethrower";
+                    magic = true;
+                    pjSpeed = 150;
                     damage = 35;
                     effectDuration += 5;
                     effectLevel = 100;
