@@ -105,7 +105,7 @@ public class SeismicTower extends Turret {
         targetEnemy = e;
     }
 
-    public void displayPassB2() {
+    public void displayMain() {
         int hammerCount = 6;
         //shadow
         p.pushMatrix();

@@ -56,7 +56,7 @@ public class MagicMissileer extends Turret{
         }
     }
 
-    public void displayPassB2() {
+    public void displayMain() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);

@@ -66,7 +66,7 @@ public abstract class Tower {
         value = (int)(((float)hp / (float)maxHp) * price);
     }
 
-    public void displayPassA() {
+    public void displayBase() {
         if (hit) { //change to red if under attack
             tintColor = 0;
             hit = false;
@@ -79,7 +79,7 @@ public abstract class Tower {
         if (tintColor < 255 && !paused) tintColor += 20;
     }
 
-    public void displayPassB() {}
+    public void controlAnimation() {}
 
     public void damage(int dmg) { //if it touches an enemy, animate and loose health
         hp -= dmg;

@@ -379,10 +379,10 @@ public class Main extends PApplet {
         }
         if (enemies.isEmpty()) buffs = new ArrayList<>();
         //towers
-        for (Tower tower : towers) if (tower instanceof Turret) tower.displayPassA();
-        for (Tower tower : towers) if (tower instanceof Wall) tower.displayPassA();
-        for (Tower tower : towers) if (tower instanceof Wall) tower.displayPassB();
-        for (Tower tower : towers) if (tower instanceof Turret) tower.displayPassB();
+        for (Tower tower : towers) if (tower instanceof Turret) tower.displayBase();
+        for (Tower tower : towers) if (tower instanceof Wall) tower.displayBase();
+        for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
+        for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
         for (Tower tower : towers) tower.main();
         //projectiles
         for (Projectile projectile : projectiles) projectile.displayPassA();

@@ -227,7 +227,7 @@ public abstract class Turret extends Tower {
         updateNodes();
     }
 
-    public void displayPassB() {
+    public void controlAnimation() {
         if (!paused) {
             if (hp < maxHp && p.random(0, 30) < 1) {
                 particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greyPuff"));
@@ -289,10 +289,10 @@ public abstract class Turret extends Tower {
                 hit = false;
             }
         }
-        displayPassB2();
+        displayMain();
     }
 
-    protected void displayPassB2() {
+    protected void displayMain() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -310,7 +310,7 @@ public abstract class Turret extends Tower {
         p.tint(255);
     }
 
-    public void displayPassA() {
+    public void displayBase() {
         p.tint(255, tintColor, tintColor);
         p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.tint(255, 255, 255);

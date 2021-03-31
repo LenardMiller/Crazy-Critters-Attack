@@ -83,7 +83,7 @@ public class Wall extends Tower {
         value = (int)(((float)hp / (float)maxHp) * price);
     }
 
-    public void displayPassA() {
+    public void displayBase() {
         float x = tile.position.x-size.x;
         float y = tile.position.y-size.y;
         p.tint(0,60);
@@ -104,7 +104,7 @@ public class Wall extends Tower {
         else return null;
     }
 
-    public void displayPassB() {
+    public void controlAnimation() {
         if (hit) { //change to red if under attack
             tintColor = 0;
             hit = false;

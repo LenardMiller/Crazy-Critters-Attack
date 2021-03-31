@@ -100,7 +100,7 @@ public class Flamethrower extends Turret {
         }
     }
 
-    protected void displayPassB2() {
+    protected void displayMain() {
         //shadow
         for (int i = 0; i < count; i++) {
             float rotateAngle = angle + i*(TWO_PI/count);
