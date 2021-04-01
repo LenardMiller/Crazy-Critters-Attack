@@ -169,7 +169,7 @@ public class Flamethrower extends Turret {
 
         upgradePrices[3] = 500;
         upgradePrices[4] = 600;
-        upgradePrices[5] = 2500;
+        upgradePrices[5] = 3000;
         //titles
         upgradeTitles[0] = "Better range";
         upgradeTitles[1] = "Betterer Range";
