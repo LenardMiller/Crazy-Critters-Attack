@@ -177,7 +177,7 @@ public class Flamethrower extends Turret {
 
         upgradeTitles[3] = "More Damage";
         upgradeTitles[4] = "Fire Strength";
-        upgradeTitles[5] = "Sapphire Fire";
+        upgradeTitles[5] = "Blue Fire";
         //description
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "range";
@@ -249,6 +249,7 @@ public class Flamethrower extends Turret {
                     damage = 35;
                     effectDuration += 5;
                     effectLevel = 100;
+                    loadSprites();
                     break;
             }
         }

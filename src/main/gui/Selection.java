@@ -271,6 +271,11 @@ public class Selection { //what tower is selected
                 setTextPurple("Fire waves", offset);
                 setTextPurple("Spools up", offset);
                 break;
+            case "magicFlamethrower":
+                P.text("Flame Conjurer", 1000, 241);
+                setTextPurple("Blue fire", offset);
+                setTextPurple("Infinite pierce", offset);
+                break;
             case "railgun":
                 P.text("Railgun", 1000, 241);
                 break;
