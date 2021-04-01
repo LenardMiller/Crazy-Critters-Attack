@@ -126,7 +126,7 @@ public class Selection { //what tower is selected
         turretOverlay();
         background();
         offset = nameAndSpecial(offset);
-        info(offset, speed);
+        displayInfo(offset, speed);
         stats();
         upgradeIcons();
         upgradeButton(-45, turret.nextLevelA, inGameGui.upgradeButtonA);
@@ -287,8 +287,9 @@ public class Selection { //what tower is selected
         return offset;
     }
 
-    private void info(int offset, int speed) {
+    private void displayInfo(int offset, int speed) {
         //health
+        turret.refreshHpBar();
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB());
         P.textFont(mediumFont);
         P.textAlign(LEFT);

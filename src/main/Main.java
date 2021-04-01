@@ -423,15 +423,15 @@ public class Main extends PApplet {
             tiles.get(i).displayObstacle();
         }
         //flying enemies
-        for (Enemy enemy : enemies) if (enemy.flying) enemy.displayPassA();
+        enemies.stream().filter(enemy -> enemy.flying).forEach(Enemy::displayPassA);
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
             if (enemy.flying) enemy.main(i);
         }
         //enemy hp bars
-        for (Enemy enemy : enemies) {
-            if (enemy.hp > 0 && !enemy.stealthMode) enemy.hpBar();
-        }
+        enemies.stream().filter(enemy -> enemy.hp > 0 && !enemy.stealthMode).forEach(Enemy::hpBar);
+        //tower hp bars
+        towers.forEach(Tower::displayHpBar);
         //machine hp bar
         machine.hpBar();
     }

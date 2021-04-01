@@ -8,9 +8,10 @@ import processing.core.PImage;
 import processing.core.PVector;
 import processing.sound.SoundFile;
 
+import java.awt.*;
+
 import static main.Main.*;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.Utilities.updateNodes;
+import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
@@ -35,6 +36,7 @@ public abstract class Tower {
     public PImage[] upgradeIcons;
 
     protected int tintColor;
+    protected int barAlpha;
     protected String debrisType;
     protected SoundFile damageSound;
     protected SoundFile breakSound;
@@ -81,8 +83,24 @@ public abstract class Tower {
 
     public void controlAnimation() {}
 
-    public void damage(int dmg) { //if it touches an enemy, animate and loose health
-        hp -= dmg;
+    public void displayHpBar() {
+        p.fill(new Color(0, 255, 0).getRGB(), barAlpha);
+        float barWidth = size.x * (hp / (float) maxHp);
+        if (hp > 0) p.rect(tile.position.x - size.x, tile.position.y, barWidth, -5);
+        barAlpha = (int) incrementByTo(barAlpha, 3, 0);
+    }
+
+    public void refreshHpBar() {
+        barAlpha = 255;
+    }
+
+    /**
+     * If it touches an enemy, animate and loose health.
+     * @param damage amount of damage taken
+     */
+    public void damage(int damage) {
+        barAlpha = 255;
+        hp -= damage;
         hit = true;
         playSoundRandomSpeed(p, damageSound, 1);
         int num = (int)(p.random(4,10));

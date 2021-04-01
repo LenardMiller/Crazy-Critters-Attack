@@ -181,7 +181,7 @@ public class Hand {
     }
 
     private void upgradeWallInfo() {
-        Wall wall = (Wall) tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+        Wall wall = getWall();
         if (wall == null) return;
         if (wall.nextLevelB > wall.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
         else {
@@ -225,7 +225,7 @@ public class Hand {
     }
 
     private void maxWallUpgradeInfo() {
-        Wall wall = (Wall) tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+        Wall wall = getWall();
         if (wall == null) return;
         P.fill(235);
         P.noStroke();
@@ -244,6 +244,12 @@ public class Hand {
         P.textFont(mediumFont);
         P.text(wall.hp + " hp", 1000, 331);
         P.text("Sell for: $" + (int) (0.8f * (float) wall.value), 1000, 356);
+    }
+
+    private Wall getWall() {
+        Wall wall = (Wall) tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
+        if (wall != null) wall.refreshHpBar();
+        return wall;
     }
 
     private void universalWallInfo() {
