@@ -85,7 +85,13 @@ public class Hand {
         Tile tileObstacle = tiles.get((roundTo(P.mouseX, 50) / 50), (roundTo(P.mouseY, 50) / 50));
         if (tileTower == null) implacable = true;
         else if (!held.equals("wall")) implacable = tileTower.tower != null;
-        if (enemyNearby()) return true;
+        if (enemyNearby()) {
+            if (debug) {
+                P.fill(255, 0, 0);
+                P.ellipse(P.mouseX, P.mouseY, 10, 10);
+            }
+            return true;
+        }
         if (tileObstacle != null && (tileObstacle.obstacle != null || tileObstacle.machine)) return true;
         if (price > money) return true;
         return implacable;
