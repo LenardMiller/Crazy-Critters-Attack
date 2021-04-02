@@ -123,7 +123,6 @@ public class Selection { //what tower is selected
         int offset = 0;
         purpleCount = 0;
 
-        turretOverlay();
         background();
         offset = nameAndSpecial(offset);
         displayInfo(offset, speed);
