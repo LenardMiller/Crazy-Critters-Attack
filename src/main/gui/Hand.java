@@ -109,11 +109,11 @@ public class Hand {
                             roundTo(P.mouseX, 50) + 25,
                             roundTo(P.mouseY, 50) + 25
                     )
-            ) > MIN_ENEMY_DISTANCE * enemy.pfSize) {
-                return false;
+            ) < MIN_ENEMY_DISTANCE * enemy.pfSize) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private void checkDisplay() {
