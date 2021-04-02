@@ -58,6 +58,7 @@ public class Main extends PApplet {
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;
     public static ArrayList<Buff> buffs;
+    public static ArrayList<PopupText> popupTexts;
 
     public static int currentLevel;
     public static Level[] levels;
@@ -159,7 +160,7 @@ public class Main extends PApplet {
         //loads sprites
         loadStaticSprites(this);
         loadAnimatedSprites(this);
-        //loads sounds
+        //sound stuff
         loadSounds(this);
         sound.volume(0.25f);
         //load input
@@ -193,6 +194,7 @@ public class Main extends PApplet {
         towerBuyButtons = new ArrayList<>();
         tileSelectButtons = new ArrayList<>();
         buffs = new ArrayList<>();
+        popupTexts = new ArrayList<>();
         //pathfinding stuff
         nodeSize = 25;
         nodeGrid = new Node[GRID_WIDTH / nodeSize][GRID_HEIGHT / nodeSize];
@@ -283,6 +285,9 @@ public class Main extends PApplet {
         if (paused) pauseGui.display();
         hand.displayHeldInfo();
         //text
+        for (int i = popupTexts.size()-1; i >= 0; i--) {
+            popupTexts.get(i).main();
+        }
         textAlign(LEFT);
         if (!levelBuilder) inGameGui.drawText(this, 10);
         //levels

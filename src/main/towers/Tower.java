@@ -99,7 +99,7 @@ public abstract class Tower {
      * @param damage amount of damage taken
      */
     public void damage(int damage) {
-        barAlpha = 255;
+        refreshHpBar();
         hp -= damage;
         hit = true;
         playSoundRandomSpeed(p, damageSound, 1);
@@ -135,6 +135,7 @@ public abstract class Tower {
 
     public void heal(float relativeAmount) {
         if (hp < maxHp) {
+            refreshHpBar();
             for (int i = 0; i < 5; i++) {
                 particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
             }

@@ -2,6 +2,7 @@ package main.enemies;
 
 import main.Main;
 import main.buffs.*;
+import main.gui.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;
 import main.particles.Ouch;
@@ -149,6 +150,8 @@ public abstract class Enemy {
 
     private void die(int i) {
         Main.money += moneyDrop;
+        popupTexts.add(new PopupText(p, smallFont.getSize(), new Color(255, 255, 0),
+          new PVector(position.x, position.y), "+$" + moneyDrop));
 
         String type = lastDamageType;
         for (Buff buff : buffs) {

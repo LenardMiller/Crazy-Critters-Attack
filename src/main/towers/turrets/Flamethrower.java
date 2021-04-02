@@ -245,6 +245,7 @@ public class Flamethrower extends Turret {
                 case 5:
                     name = "magicFlamethrower";
                     magic = true;
+                    debrisType = "darkMetal";
                     pjSpeed = 150;
                     damage = 35;
                     effectDuration += 5;

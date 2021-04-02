@@ -1,6 +1,7 @@
 package main.levelStructure;
 
 import main.enemies.*;
+import main.gui.PopupText;
 import main.towers.Tower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -57,6 +58,8 @@ public class Wave {
         }
         playSound(sounds.get("waveEnd"), 1, 1);
         money += levels[currentLevel].reward;
+        popupTexts.add(new PopupText(P, smallFont.getSize(), new Color(255, 255, 0),
+          new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), "+$" + levels[currentLevel].reward));
     }
 
     /**
