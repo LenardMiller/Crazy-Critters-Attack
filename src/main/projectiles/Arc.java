@@ -66,7 +66,7 @@ public class Arc {
             }
             P.line(points[1].x,points[1].y,pointA.x,pointA.y);
         }
-        if (!paused) alpha -= up60ToFramerate(10);
+        if (!paused) alpha -= up60ToFramerate(8);
     }
 
     private void zap(Enemy blacklistedEnemy) {

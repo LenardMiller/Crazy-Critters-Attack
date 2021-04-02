@@ -1,6 +1,7 @@
 package main.gui;
 
 import main.gui.guiObjects.buttons.UpgradeTower;
+import main.towers.turrets.TeslaTower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -252,7 +253,13 @@ public class Selection { //what tower is selected
                 break;
             case "tesla":
                 P.text("Tesla Tower", 1000, 241);
-                setTextPurple("Chain lightning", offset);
+                setTextPurple("Jumping electricity", offset);
+                break;
+            case "lightning":
+                P.text("Lighting Caller", 1000, 241);
+                setTextPurple("Jumping electricity", offset);
+                setTextPurple("Multiple arcs", offset);
+                setTextPurple("Splash", offset);
                 break;
             case "nightmare":
                 P.text("Nightmare", 1000, 241);
@@ -300,7 +307,7 @@ public class Selection { //what tower is selected
         if (turret.delay <= 0) P.text("Instant reload", 910, 316 + offset);
         else P.text("Reload time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
         //velocity
-        if (speed < 0) P.text("Instant", 910, 336 + offset);
+        if (speed < 0) P.text("Instant travel", 910, 336 + offset);
         else if (speed < 500) P.text("Low velocity", 910, 336 + offset);
         else if (speed < 1000) P.text("Medium velocity", 910, 336 + offset);
         else P.text("High velocity", 910, 336 + offset);
@@ -327,6 +334,12 @@ public class Selection { //what tower is selected
             } else {
                 P.text("Effect Duration: " + effectDuration + "s", 910, 376 + - x + 20 * purpleCount + offset);
             }
+        }
+        //electricity
+        if (turret instanceof TeslaTower) {
+            TeslaTower tesla = (TeslaTower) turret;
+            P.fill(new Color(100, 150, 255).getRGB());
+            P.text("Jumps: " + tesla.arcLength, 910, 356 + 20 * purpleCount + offset);
         }
     }
 

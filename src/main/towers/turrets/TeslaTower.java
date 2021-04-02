@@ -13,7 +13,8 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class TeslaTower extends Turret {
 
-    private int arcLength;
+    public int arcLength;
+
     private int arcDistance;
     private boolean lightning;
 
@@ -27,7 +28,7 @@ public class TeslaTower extends Turret {
         delay = 3.6f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 60;
-        arcDistance = 200;
+        arcDistance = 100;
         arcLength = 2;
         pjSpeed = -1;
         range = 200;
@@ -97,29 +98,29 @@ public class TeslaTower extends Turret {
         //price
         upgradePrices[0] = 300;
         upgradePrices[1] = 400;
-        upgradePrices[2] = 2000;
+        upgradePrices[2] = 3000;
 
         upgradePrices[3] = 250;
         upgradePrices[4] = 500;
         upgradePrices[5] = 2500;
         //titles
-        upgradeTitles[0] = "Chain";
-        upgradeTitles[1] = "More Chain";
-        upgradeTitles[2] = "lightning";
+        upgradeTitles[0] = "Chaining";
+        upgradeTitles[1] = "More Chaining";
+        upgradeTitles[2] = "Lightning";
 
         upgradeTitles[3] = "Battery Size";
         upgradeTitles[4] = "Shocking";
-        upgradeTitles[5] = "zap";
+        upgradeTitles[5] = "High Energy";
         //description
         upgradeDescA[0] = "Increase";
-        upgradeDescB[0] = "arc";
+        upgradeDescB[0] = "jump";
         upgradeDescC[0] = "distance";
 
         upgradeDescA[1] = "Increase";
-        upgradeDescB[1] = "arc";
+        upgradeDescB[1] = "jump";
         upgradeDescC[1] = "distance";
 
-        upgradeDescA[2] = "calls";
+        upgradeDescA[2] = "Calls";
         upgradeDescB[2] = "lightning";
         upgradeDescC[2] = "";
 
@@ -128,7 +129,7 @@ public class TeslaTower extends Turret {
         upgradeDescB[3] = "recharge";
         upgradeDescC[3] = "rate";
 
-        upgradeDescA[4] = "+10";
+        upgradeDescA[4] = "Increase";
         upgradeDescB[4] = "damage";
         upgradeDescC[4] = "";
 
