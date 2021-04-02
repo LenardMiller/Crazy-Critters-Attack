@@ -73,18 +73,18 @@ public class Arc {
         BIG_POINTS.add(new BigPoint(P, START_POSITION));
         ArrayList<Enemy> hitEnemies = new ArrayList<>();
         if (blacklistedEnemy != null) hitEnemies.add(blacklistedEnemy);
-        Enemy enemy = getTargetEnemy(START_POSITION, PRIORITY, hitEnemies);
-        if (enemy != null) {
-            enemy.damageWithoutBuff(DAMAGE, TURRET, "electricity", new PVector(0,0), true);
-            hitEnemies.add(enemy);
-            BIG_POINTS.add(new BigPoint(P, new PVector(enemy.position.x, enemy.position.y)));
-            int x = 2;
+        Enemy mainEnemy = getTargetEnemy(START_POSITION, PRIORITY, hitEnemies);
+        if (mainEnemy != null) {
+            mainEnemy.damageWithoutBuff(DAMAGE, TURRET, "electricity", new PVector(0,0), true);
+            hitEnemies.add(mainEnemy);
+            BIG_POINTS.add(new BigPoint(P, new PVector(mainEnemy.position.x, mainEnemy.position.y)));
+            int x = 2; //no clue
             for (int i = 1; i < MAX_LENGTH; i++) {
-                Enemy enemyJ = getTargetEnemy(BIG_POINTS.get(x - 1).position, 0, hitEnemies);
-                if (enemyJ != null) {
-                    BIG_POINTS.add(new BigPoint(P, enemyJ.position));
-                    enemy.damageWithoutBuff(DAMAGE, TURRET, "electricity", new PVector(0,0), true);
-                    hitEnemies.add(enemyJ);
+                Enemy jumpEnemy = getTargetEnemy(BIG_POINTS.get(x - 1).position, 0, hitEnemies);
+                if (jumpEnemy != null) {
+                    BIG_POINTS.add(new BigPoint(P, jumpEnemy.position));
+                    jumpEnemy.damageWithoutBuff(DAMAGE, TURRET, "electricity", new PVector(0,0), true);
+                    hitEnemies.add(jumpEnemy);
                     x++;
                 }
             }
