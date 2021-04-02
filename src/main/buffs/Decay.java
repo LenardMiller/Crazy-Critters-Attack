@@ -25,7 +25,7 @@ public class Decay extends Buff {
 
     public void effect() {
         Enemy enemy = enemies.get(enId);
-        enemy.barTrans = 255;
+        enemy.barAlpha = 255;
         enemy.damageWithoutBuff(DAMAGE,turret, "decay", new PVector(0,0), false);
         effectTimer = p.frameCount + effectDelay;
     }

@@ -22,7 +22,7 @@ public class Poisoned extends Buff {
 
     public void effect(){ //a bit of damage a second
         Enemy enemy = enemies.get(enId);
-        enemy.barTrans = 255;
+        enemy.barAlpha = 255;
         enemy.damageWithoutBuff(25,turret, "poison", new PVector(0,0), false);
     }
 }

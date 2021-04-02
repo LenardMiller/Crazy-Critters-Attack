@@ -10,6 +10,8 @@ import processing.core.PImage;
 import processing.core.PVector;
 import processing.sound.SoundFile;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.*;
 
@@ -107,10 +109,20 @@ public class Machine {
 
     public void hpBar() {
         if (hp < maxHp && hp > 0) {
-            p.fill(0, 255, 0);
-            p.noStroke();
-            if (barHorizontal) p.rect(barPosition.x, barPosition.y, barSize.x * (hp/(float)maxHp), barSize.y);
-            else p.rect(barPosition.x, barPosition.y, barSize.x, barSize.y * (hp/(float)maxHp));
+            Color barColor = new Color(0, 255, 0);
+            p.stroke(barColor.getRGB());
+            if (barHorizontal) {
+                p.fill(barColor.getRGB());
+                p.rect(barPosition.x, barPosition.y, barSize.x * (hp / (float) maxHp), barSize.y);
+                p.noFill();
+                p.rect(barPosition.x, barPosition.y, barSize.x, barSize.y);
+            }
+            else {
+                p.fill(barColor.getRGB());
+                p.rect(barPosition.x, barPosition.y, barSize.x, barSize.y * (hp / (float) maxHp));
+                p.noFill();
+                p.rect(barPosition.x, barPosition.y, barSize.x, barSize.y);
+            }
         }
     }
 

@@ -84,8 +84,12 @@ public abstract class Tower {
     public void controlAnimation() {}
 
     public void displayHpBar() {
-        p.fill(new Color(0, 255, 0).getRGB(), barAlpha);
+        Color barColor = new Color(0, 255, 0);
+        p.stroke(barColor.getRGB(), barAlpha);
         float barWidth = size.x * (hp / (float) maxHp);
+        p.noFill();
+        p.rect(tile.position.x - size.x, tile.position.y, size.y, -5);
+        p.fill(barColor.getRGB(), barAlpha);
         if (hp > 0) p.rect(tile.position.x - size.x, tile.position.y, barWidth, -5);
         barAlpha = (int) incrementByTo(barAlpha, 3, 0);
     }

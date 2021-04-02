@@ -32,7 +32,7 @@ public abstract class Enemy {
     public float speed;
     public float angle;
     public float radius;
-    public int barTrans;
+    public int barAlpha;
     public int hp;
     public int maxHp;
     public int attackFrame;
@@ -94,7 +94,7 @@ public abstract class Enemy {
         damage = 1;
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
-        barTrans = 0;
+        barAlpha = 0;
         hitParticle = "redOuch";
         name = "";
         attackStartFrame = 0;
@@ -369,7 +369,7 @@ public abstract class Enemy {
     }
 
     private void damageEffect(boolean particles) {
-        barTrans = 255;
+        barAlpha = 255;
         if (particles) {
             int num = pfSize;
             int chance = 5;
@@ -392,9 +392,13 @@ public abstract class Enemy {
     }
 
     public void hpBar() {
-        p.fill(255, 0, 0, barTrans);
-        p.noStroke();
-        p.rect(position.x - size.x / 2 - 10, position.y + size.y / 2 + 6, (size.x + 20) * (((float) hp) / ((float) maxHp)), 6);
+        Color barColor = new Color(255, 0, 0);
+        float barWidth = size.x * (hp / (float) maxHp);
+        p.stroke(barColor.getRGB(), barAlpha);
+        p.noFill();
+        p.rect(position.x - size.x / 2, position.y + size.y / 2 + 6, size.x, 6);
+        p.fill(barColor.getRGB(), barAlpha);
+        p.rect(position.x - size.x / 2, position.y + size.y / 2 + 6, barWidth, 6);
     }
 
     protected void loadStuff() {
