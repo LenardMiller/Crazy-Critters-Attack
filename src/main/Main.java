@@ -278,16 +278,16 @@ public class Main extends PApplet {
         minCost = minCost(maxCost);
         //objects
         drawObjects();
+        //text
+        for (int i = popupTexts.size()-1; i >= 0; i--) {
+            popupTexts.get(i).main();
+        }
         //gui stuff
         noStroke();
         if (!levelBuilder) inGameGui.display();
         else levelBuilderGui.display();
         if (paused) pauseGui.display();
         hand.displayHeldInfo();
-        //text
-        for (int i = popupTexts.size()-1; i >= 0; i--) {
-            popupTexts.get(i).main();
-        }
         textAlign(LEFT);
         if (!levelBuilder) inGameGui.drawText(this, 10);
         //levels

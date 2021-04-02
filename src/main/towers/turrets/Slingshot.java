@@ -26,7 +26,7 @@ public class Slingshot extends Turret {
         delay = 1.6f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 700;
-        range = 230;
+        range = 250;
         state = 0;
         damage = 15; //15
         damageSound = sounds.get("woodDamage");

@@ -43,27 +43,27 @@ public class ForestWaves {
         Color hordeFill = new Color(143, 86, 59);
         Color hordeText = new Color(47, 28, 1);
 
-        waves[0] = new Wave(p, 55, 25, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
+        waves[0] = new Wave(p, 70, 40, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
         waves[0].addSpawns("smolBug",3);
 
-        waves[1] = new Wave(p, 50, 20, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
+        waves[1] = new Wave(p, 70, 40, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
         waves[1].addSpawns("smolBug", 5);
 
-        waves[2] = new Wave(p, 45, 18, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
+        waves[2] = new Wave(p, 50, 30, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
         waves[2].addSpawns("smolBug", 8);
 
-        waves[3] = new Wave(p, 45, 18, midBugFill, midBugAccent, midBugText, "Bugs");
+        waves[3] = new Wave(p, 50, 30, midBugFill, midBugAccent, midBugText, "Bugs");
         waves[3].addSpawns("smolBug", 5);
         waves[3].addSpawns("midBug", 3);
 
-        waves[4] = new Wave(p, 50, 20, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
+        waves[4] = new Wave(p, 60, 35, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
         waves[4].addSpawns("smolBug", 15);
 
-        waves[5] = new Wave(p, 50, 20, midBugFill, midBugAccent, midBugText, "Bugs");
+        waves[5] = new Wave(p, 60, 35, midBugFill, midBugAccent, midBugText, "Bugs");
         waves[5].addSpawns("smolBug", 10);
         waves[5].addSpawns("midBug", 5);
 
-        waves[6] = new Wave(p, 40, 15, midBugFill, midBugAccent, midBugText, "Bugs");
+        waves[6] = new Wave(p, 40, 25, midBugFill, midBugAccent, midBugText, "Bugs");
         waves[6].addSpawns("smolBug", 10);
         waves[6].addSpawns("midBug", 5);
 
@@ -143,7 +143,7 @@ public class ForestWaves {
         waves[24].addSpawns("littleWorm", 5);
         waves[24].addSpawns("snake", 20);
 
-        waves[25] = new Wave(p, 45, 18, treeGiantFill, treeGiantAccent, treeGiantText, "Tree Giant");
+        waves[25] = new Wave(p, 45, 1, treeGiantFill, treeGiantAccent, treeGiantText, "Tree Giant");
         waves[25].addSpawns("treeGiant", 1);
 
         waves[26] = new Wave(p, 50, 20, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");

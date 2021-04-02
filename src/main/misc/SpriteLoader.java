@@ -212,7 +212,7 @@ public class SpriteLoader {
         getSprite(p,"miscCannonLoad","TR","miscCannon/load/",1);
         getSprite(p,"miscCannonLaundryFire","TR","miscCannon/laundry/fire/",5);
         getSprite(p,"miscCannonLaundryLoad","TR","miscCannon/laundry/load/",1);
-        getSprite(p,"miscCannonBarrelFire","TR","miscCannon/barrel/fire/",5);
+        getSprite(p,"miscCannonBarrelFire","TR","miscCannon/barrel/fire/",3);
         getSprite(p,"miscCannonBarrelLoad","TR","miscCannon/barrel/load/",1);
         getSprite(p,"energyBlasterFire","TR","energyBlaster/fire/",14);
         getSprite(p,"energyBlasterLoad","TR","energyBlaster/load/",42);

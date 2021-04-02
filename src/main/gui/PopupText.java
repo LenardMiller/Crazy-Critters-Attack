@@ -6,6 +6,7 @@ import processing.core.PVector;
 
 import java.awt.*;
 
+import static main.Main.paused;
 import static main.Main.popupTexts;
 import static main.misc.Utilities.incrementByTo;
 
@@ -44,7 +45,7 @@ public class PopupText {
 
     public void main() {
         display();
-        update();
+        if (!paused) update();
     }
 
     private void display() {
