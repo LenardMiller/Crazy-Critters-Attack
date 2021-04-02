@@ -44,6 +44,7 @@ public class Wave {
         P = p;
         LENGTH = secondsToFrames(length);
         SPAWN_LENGTH = secondsToFrames(spawnLength);
+        if (SPAWN_LENGTH >= LENGTH) System.out.println("ERROR: Wave spawn length should always be shorter than its length!");
         FILL_COLOR = fillColor;
         ACCENT_COLOR = accentColor;
         TEXT_COLOR = textColor;

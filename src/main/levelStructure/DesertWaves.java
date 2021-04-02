@@ -105,7 +105,7 @@ public class DesertWaves {
         waves[13] = new Wave(p, 65, 10, wormFill, wormAccent, wormText, "Worms");
         waves[13].addSpawns("littleWorm", 5);
 
-        waves[14] = new Wave(p, 40, 20, bigBugFill, bigBugAccent, bigBugText, "Big Bug");
+        waves[14] = new Wave(p, 40, 1, bigBugFill, bigBugAccent, bigBugText, "Big Bug");
         waves[14].addSpawns("bigBug", 1);
 
         waves[15] = new Wave(p, 65, 10, wormFill, wormAccent, wormText, "Worms");
@@ -158,7 +158,7 @@ public class DesertWaves {
         waves[27].addSpawns("emperor", 3);
         waves[27].addSpawns("midWorm", 5);
 
-        waves[28] = new Wave(p, 60, 10, sidewinderFill, sidewinderAccent, sidewinderText, "Sidewinders");
+        waves[28] = new Wave(p, 45, 10, sidewinderFill, sidewinderAccent, sidewinderText, "Sidewinders");
         waves[28].addSpawns("sidewinder", 30);
         waves[28].addSpawns("scorpion", 3);
 
