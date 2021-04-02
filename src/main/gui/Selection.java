@@ -126,7 +126,7 @@ public class Selection { //what tower is selected
         background();
         offset = nameAndSpecial(offset);
         displayInfo(offset, speed);
-        stats();
+        displayStats();
         upgradeIcons();
         upgradeButton(-45, turret.nextLevelA, inGameGui.upgradeButtonA);
         upgradeButton(105, turret.nextLevelB, inGameGui.upgradeButtonB);
@@ -294,9 +294,11 @@ public class Selection { //what tower is selected
         P.textAlign(LEFT);
         P.text("Health: " + turret.hp + "/" + turret.maxHp, 910, 276 + offset);
         //damage
-        P.text("Damage: " + turret.damage, 910, 296 + offset);
+        if (turret.damage <= 0) P.text("No damage", 910, 296 + offset);
+        else P.text("Damage: " + turret.damage, 910, 296 + offset);
         //firerate (delay)
-        P.text("Reload time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
+        if (turret.delay <= 0) P.text("Instant reload", 910, 316 + offset);
+        else P.text("Reload time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
         //velocity
         if (speed < 0) P.text("Instant", 910, 336 + offset);
         else if (speed < 500) P.text("Low velocity", 910, 336 + offset);
@@ -328,7 +330,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    private void stats() { //todo: fix
+    private void displayStats() { //todo: fix
         int offsetB = 0;
         if (!turret.hasPriority) offsetB = 45;
         P.fill(STAT_TEXT_COLOR.getRGB());
