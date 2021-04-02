@@ -10,9 +10,9 @@ import static main.Main.particles;
 
 public class FireShockwave extends Shockwave {
 
-    public FireShockwave(PApplet p, float centerX, float centerY, int startingRadius, int maxRadius, float angle,
-                         float width, int damage, Turret turret, float effectLevel, float effectDuration) {
-        super(p, centerX, centerY, startingRadius, maxRadius, angle, width, damage, turret);
+    public FireShockwave(PApplet p, float centerX, float centerY, int startingRadius, int maxRadius, int damage,
+                         Turret turret, float effectLevel, float effectDuration) {
+        super(p, centerX, centerY, startingRadius, maxRadius, 0, 720, damage, turret);
 
         damageType = "burning";
         buff = "burning";
@@ -20,7 +20,7 @@ public class FireShockwave extends Shockwave {
         this.effectLevel = effectLevel;
     }
 
-    protected void display() {
+    protected void spawnParticles() {
         float a;
         PVector pos;
         a = randomAngle();

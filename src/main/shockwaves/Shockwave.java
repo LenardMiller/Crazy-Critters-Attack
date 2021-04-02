@@ -51,13 +51,13 @@ public abstract class Shockwave {
     public void main() {
         if (!paused) {
             radius += SPEED/FRAMERATE;
-            display();
+            spawnParticles();
         }
         if (radius > MAX_RADIUS) shockwaves.remove(this);
         damageEnemies();
     }
 
-    protected void display() {}
+    protected void spawnParticles() {}
 
     protected float randomAngle() {
         return P.random(ANGLE - (WIDTH / 2), ANGLE + (WIDTH / 2));

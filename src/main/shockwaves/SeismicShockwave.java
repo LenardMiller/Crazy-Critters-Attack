@@ -24,7 +24,7 @@ public class SeismicShockwave extends Shockwave {
         SEISMIC_SENSE = seismicSense;
     }
 
-    protected void display() {
+    protected void spawnParticles() {
         float a = randomAngle();
         PVector pos = randomPosition(a);
         particles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));

@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.misc.Tile;
 import main.projectiles.Arc;
+import main.shockwaves.LightningShockwave;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -14,6 +15,7 @@ public class TeslaTower extends Turret {
 
     private int arcLength;
     private int arcDistance;
+    private boolean lightning;
 
     public TeslaTower(PApplet p, Tile tile) {
         super(p,tile);
@@ -58,8 +60,18 @@ public class TeslaTower extends Turret {
 
     protected void fire() {
         fireSound.play();
-        PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
-        arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, arcDistance, priority));
+        if (lightning) {
+            PVector position = new PVector(targetEnemy.position.x, targetEnemy.position.y);
+            shockwaves.add(new LightningShockwave(p, position.x, position.y, 100,
+              damage, this));
+            for (int i = 0; i < p.random(3, 6); i++) {
+                arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, arcDistance,
+                  (int) p.random(-1, 3)));
+            }
+        } else {
+            PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
+            arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, arcDistance, priority));
+        }
     }
 
     public void displayMain() {
@@ -142,6 +154,10 @@ public class TeslaTower extends Turret {
                     break;
                 case 2:
                     range = 1000;
+                    damage += 500;
+                    delay += 2;
+                    lightning = true;
+                    name = "lightning";
                     break;
             }
         } if (id == 1) {
@@ -153,7 +169,7 @@ public class TeslaTower extends Turret {
                     damage += 30;
                     break;
                 case 5:
-                    delay = 0.05f;
+                    delay = 0;
                     break;
             }
         }

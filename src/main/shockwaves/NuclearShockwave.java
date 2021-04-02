@@ -9,14 +9,13 @@ import static main.Main.particles;
 
 public class NuclearShockwave extends Shockwave {
 
-    public NuclearShockwave(PApplet p, float centerX, float centerY, int maxRadius, float angle, float width, int damage,
-                            Turret turret) {
-        super(p, centerX, centerY, 0, maxRadius, angle, width, damage, turret);
+    public NuclearShockwave(PApplet p, float centerX, float centerY, int maxRadius, int damage, Turret turret) {
+        super(p, centerX, centerY, 0, maxRadius, 0, 720, damage, turret);
 
         damageType = "burning";
     }
 
-    protected void display() {
+    protected void spawnParticles() {
         float a = randomAngle();
         PVector pos = randomPosition(a);
         particles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));

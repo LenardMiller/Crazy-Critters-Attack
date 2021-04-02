@@ -157,7 +157,7 @@ public class Flamethrower extends Turret {
         else {
             playSoundRandomSpeed(p, sounds.get("fireImpact"), 1);
             shockwaves.add(new FireShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-              (int) barrelLength, range, 0, 720, damage, this, effectLevel, effectDuration));
+              (int) barrelLength, range, damage, this, effectLevel, effectDuration));
         }
     }
 
