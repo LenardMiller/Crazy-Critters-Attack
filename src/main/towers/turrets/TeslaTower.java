@@ -62,13 +62,12 @@ public class TeslaTower extends Turret {
         fireSound.play();
         if (lightning) {
             PVector position = new PVector(targetEnemy.position.x, targetEnemy.position.y);
-            shockwaves.add(new LightningShockwave(p, position.x, position.y, arcDistance / 4,
-              damage, this));
+            shockwaves.add(new LightningShockwave(p, position.x, position.y, arcDistance / 4, damage, this));
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, arcDistance, i, targetEnemy));
+                arcs.add(new Arc(p, position.x, position.y, this, damage/2, arcLength, arcDistance, i, targetEnemy));
             }
             for (int i = 0; i < p.random(5, 10); i++) {
-                arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, arcDistance/4, -1));
+                arcs.add(new Arc(p, position.x, position.y, this, 0, arcLength, arcDistance/4, -1));
             }
         } else {
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
@@ -156,7 +155,7 @@ public class TeslaTower extends Turret {
                     break;
                 case 2:
                     range = 1000;
-                    damage += 500;
+                    damage += 1000;
                     delay += 2;
                     lightning = true;
                     name = "lightning";
