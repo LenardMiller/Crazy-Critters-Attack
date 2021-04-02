@@ -26,7 +26,7 @@ public class TowerInfo {
         p.text("at the nearest", x, space(1));
         p.text("enemy.  Decent", x, space(2));
         p.text("mid-range tower,", x, space(3));
-        p.text("and the most", x, space(4));
+        p.text("and very", x, space(4));
         p.text("cost-efficient.", x, space(5));
         p.textAlign(CENTER);
         p.text("[Q]", 1000, space(7));
@@ -104,5 +104,18 @@ public class TowerInfo {
         p.text("time.", x, space(7));
         p.textAlign(CENTER);
         p.text("[E]", 1000, space(9));
+    }
+
+    public static void flamethrowerInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Sprays an unending", x, space(0));
+        p.text("column of fire at", x, space(1));
+        p.text("the nearest enemy.", x, space(2));
+        p.text("Has very short range", x, space(3));
+        p.text("but very high DPS,", x, space(4));
+        p.text("and some damage", x, space(5));
+        p.text("over time.", x, space(6));
+        p.textAlign(CENTER);
+        p.text("[D]", 1000, space(8));
     }
 }
