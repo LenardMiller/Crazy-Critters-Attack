@@ -24,11 +24,11 @@ public class TeslaTower extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 3.3f;
+        delay = 3.6f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
-        damage = 30;
+        damage = 60;
         arcDistance = 200;
-        arcLength = 3;
+        arcLength = 2;
         pjSpeed = -1;
         range = 200;
         betweenIdleFrames = down60ToFramerate(3);
@@ -95,13 +95,13 @@ public class TeslaTower extends Turret {
 
     private void setUpgrades(){
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 200;
+        upgradePrices[0] = 300;
+        upgradePrices[1] = 400;
+        upgradePrices[2] = 2000;
 
-        upgradePrices[3] = 50;
-        upgradePrices[4] = 100;
-        upgradePrices[5] = 200;
+        upgradePrices[3] = 250;
+        upgradePrices[4] = 500;
+        upgradePrices[5] = 2500;
         //titles
         upgradeTitles[0] = "Chain";
         upgradeTitles[1] = "More Chain";
@@ -167,7 +167,7 @@ public class TeslaTower extends Turret {
                     delay -= 0.6f;
                     break;
                 case 4:
-                    damage += 30;
+                    damage += 60;
                     break;
                 case 5:
                     delay = 0;
