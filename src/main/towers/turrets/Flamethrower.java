@@ -210,7 +210,7 @@ public class Flamethrower extends Turret {
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[11];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[14];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[31];
     }
 
     protected void upgradeSpecial(int id) {
