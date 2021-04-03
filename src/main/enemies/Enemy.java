@@ -271,7 +271,7 @@ public abstract class Enemy {
      * @param turret turret that caused the damage, nullable
      * @param displayParticles if should create particles
      * @param damageType determines what effect to apply to corpse
-     * @param direction determines where parts will be flung
+     * @param direction determines where parts will be flung, (0, 0) for everywhere
      * @param id id of this enemy, set to -1 if unknown
      */
     public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, Turret turret,
@@ -344,7 +344,7 @@ public abstract class Enemy {
      * @param damage amount of damage to be applied
      * @param turret the turret that caused the damage, nullable
      * @param damageType determines what effect to apply to corpse
-     * @param direction where parts will be flung
+     * @param direction where parts will be flung, (0, 0) for everywhere
      * @param displayParticles whether it should spawn particles
      */
     public void damageWithoutBuff(int damage, Turret turret, String damageType, PVector direction, boolean displayParticles) {

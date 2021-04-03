@@ -75,6 +75,7 @@ public abstract class Shockwave {
             float dist = findDistBetween(enemy.position, CENTER);
             if (abs(angleDif) < WIDTH / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
+                if (dist <= enemy.radius) direction = new PVector(0, 0);
                 enemy.damageWithBuff(DAMAGE, buff, effectLevel, effectDuration, TURRET, true, damageType,
                   direction, -1);
                 UNTOUCHED_ENEMIES.remove(enemy);
