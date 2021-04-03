@@ -457,6 +457,10 @@ public abstract class Enemy {
         }
     }
 
+    public boolean onScreen() {
+        return position.x > 0 && position.x < 900 && position.y > 0 && position.y < 900;
+    }
+
     //pathfinding -----------------------------------------------------------------
     //todo: enemies are still wandering off and doing weird things :(
 

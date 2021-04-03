@@ -50,7 +50,6 @@ public class Arc {
         zap(blacklistedEnemy);
     }
 
-
         public void main() {
         for (int k = 0; k < BIG_POINTS.size()-1; k++) {
             P.stroke(LINE_COLOR.getRGB(), alpha);
@@ -121,6 +120,7 @@ public class Arc {
                         break;
                     }
                 if (repeat) continue;
+                if (!enemy.onScreen()) continue;
                 float x = abs(position.x - enemy.position.x);
                 float y = abs(position.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
