@@ -44,7 +44,7 @@ public class Hand {
     public void main() {
         if (paused && !held.equals("null")) setHeld("null");
         if (!levelBuilder) {
-            implacable = checkPlaceable();
+            implacable = isNotPlaceable();
             checkDisplay();
         }
         else implacable = false;
@@ -79,12 +79,14 @@ public class Hand {
         return inputHandler.leftMousePressedPulse && P.mouseX > BOARD_WIDTH;
     }
 
-    private boolean checkPlaceable() {
-        boolean implacable = false;
+    private boolean isNotPlaceable() {
         Tile tileTower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
         Tile tileObstacle = tiles.get((roundTo(P.mouseX, 50) / 50), (roundTo(P.mouseY, 50) / 50));
-        if (tileTower == null) implacable = true;
-        else if (!held.equals("wall")) implacable = tileTower.tower != null;
+        if (tileTower != null && tileTower.tower != null) {
+            if (held.equals("wall")) {
+                if (!(tileTower.tower instanceof Wall)) return true;
+            } else return true;
+        }
         if (enemyNearby()) {
             if (debug) {
                 P.fill(255, 0, 0);
@@ -93,8 +95,7 @@ public class Hand {
             return true;
         }
         if (tileObstacle != null && (tileObstacle.obstacle != null || tileObstacle.machine)) return true;
-        if (price > money) return true;
-        return implacable;
+        return price > money;
     }
 
     private boolean enemyNearby() {
