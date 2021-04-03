@@ -66,13 +66,18 @@ public class TeslaTower extends Turret {
     protected void fire() {
         if (lightning) {
             THUNDER_SOUND.playRandom(1);
-            PVector position = new PVector(targetEnemy.position.x, targetEnemy.position.y);
-            shockwaves.add(new LightningShockwave(p, position.x, position.y, arcDistance / 4, damage, this));
+            PVector targetPosition = new PVector(targetEnemy.position.x, targetEnemy.position.y);
+            PVector myPosition = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+            shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, arcDistance / 4, damage, this));
+            //damaging arcs
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, position.x, position.y, this, damage/2, arcLength, arcDistance, i, targetEnemy));
-            }
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, damage/2, arcLength, arcDistance, i, targetEnemy));
+            } //decorative arcs
             for (int i = 0; i < p.random(5, 10); i++) {
-                arcs.add(new Arc(p, position.x, position.y, this, 0, arcLength, arcDistance/4, -1));
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, 0, arcLength, arcDistance/4, -1));
+            } //decorative self arcs
+            for (int i = 0; i < 3; i++) {
+                arcs.add(new Arc(p, myPosition.x, myPosition.y, this, 0, arcLength, arcDistance/8, -1));
             }
         } else {
             playSoundRandomSpeed(p, fireSound, 1);
@@ -87,14 +92,16 @@ public class TeslaTower extends Turret {
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
         p.rotate(angle);
         p.tint(0,60);
-        p.image(fireFrames[0],-size.x/2-offset,-size.y/2-offset);
+        //using this sprite so that static doesn't have a shadow
+        p.image(loadFrames[0],-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         //main
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
         p.tint(255, tintColor, tintColor);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        if (sprite != null) p.image(sprite, -size.x / 2 - offset, -size.y / 2 - offset);
+        else p.image(loadFrames[loadFrames.length - 1],-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         p.tint(255);
     }
@@ -165,6 +172,8 @@ public class TeslaTower extends Turret {
                     delay += 2;
                     lightning = true;
                     name = "lightning";
+                    betweenFireFrames = 2;
+                    loadSprites();
                     break;
             }
         } if (id == 1) {
