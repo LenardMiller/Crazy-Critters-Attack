@@ -17,6 +17,9 @@ import main.pathfinding.Node;
 import main.projectiles.Arc;
 import main.projectiles.Projectile;
 import main.shockwaves.Shockwave;
+import main.sound.FadeSoundLoop;
+import main.sound.SoundWithAlts;
+import main.sound.StartStopSoundLoop;
 import main.towers.Tower;
 import main.towers.Wall;
 import main.towers.turrets.Turret;
@@ -117,6 +120,7 @@ public class Main extends PApplet {
     public static HashMap<String, SoundFile> sounds = new HashMap<>();
     public static HashMap<String, StartStopSoundLoop> startStopSoundLoops = new HashMap<>();
     public static HashMap<String, FadeSoundLoop> fadeSoundLoops = new HashMap<>();
+    public static HashMap<String, SoundWithAlts> soundsWithAlts = new HashMap<>();
 
     //pathfinding stuff
     public static int defaultSize = 1;

@@ -1,10 +1,10 @@
 package main.towers.turrets;
 
-import main.misc.FadeSoundLoop;
 import main.misc.Tile;
 import main.projectiles.BlueFlame;
 import main.projectiles.Flame;
 import main.shockwaves.FireShockwave;
+import main.sound.FadeSoundLoop;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;

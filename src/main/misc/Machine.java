@@ -5,6 +5,7 @@ import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;
 import main.particles.Ouch;
 import main.projectiles.Flame;
+import main.sound.StartStopSoundLoop;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;

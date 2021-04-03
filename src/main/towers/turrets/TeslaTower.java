@@ -3,6 +3,7 @@ package main.towers.turrets;
 import main.misc.Tile;
 import main.projectiles.Arc;
 import main.shockwaves.LightningShockwave;
+import main.sound.SoundWithAlts;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -18,6 +19,8 @@ public class TeslaTower extends Turret {
     private int arcDistance;
     private boolean lightning;
 
+    private final SoundWithAlts THUNDER_SOUND;
+
     public TeslaTower(PApplet p, Tile tile) {
         super(p,tile);
         name = "tesla";
@@ -28,10 +31,10 @@ public class TeslaTower extends Turret {
         delay = 3.6f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 60;
-        arcDistance = 100;
         arcLength = 2;
         pjSpeed = -1;
         range = 200;
+        arcDistance = range;
         betweenIdleFrames = down60ToFramerate(3);
         state = 0;
         loadSprites();
@@ -43,6 +46,7 @@ public class TeslaTower extends Turret {
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("teslaFire");
+        THUNDER_SOUND = soundsWithAlts.get("thunder");
         setUpgrades();
         updateTowerArray();
 
@@ -60,8 +64,8 @@ public class TeslaTower extends Turret {
     }
 
     protected void fire() {
-        fireSound.play();
         if (lightning) {
+            THUNDER_SOUND.playRandom(1);
             PVector position = new PVector(targetEnemy.position.x, targetEnemy.position.y);
             shockwaves.add(new LightningShockwave(p, position.x, position.y, arcDistance / 4, damage, this));
             for (int i = 0; i < 3; i++) {
@@ -71,6 +75,7 @@ public class TeslaTower extends Turret {
                 arcs.add(new Arc(p, position.x, position.y, this, 0, arcLength, arcDistance/4, -1));
             }
         } else {
+            playSoundRandomSpeed(p, fireSound, 1);
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
             arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, arcDistance, priority));
         }
@@ -151,7 +156,7 @@ public class TeslaTower extends Turret {
             switch (nextLevelA) {
                 case 0:
                 case 1:
-                    arcDistance += 100;
+                    arcDistance += 50;
                     arcLength++;
                     break;
                 case 2:
