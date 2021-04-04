@@ -16,7 +16,6 @@ public class TeslaTower extends Turret {
 
     public int arcLength;
 
-    private int arcDistance;
     private boolean lightning;
 
     private final SoundWithAlts THUNDER_SOUND;
@@ -34,7 +33,6 @@ public class TeslaTower extends Turret {
         arcLength = 2;
         pjSpeed = -1;
         range = 200;
-        arcDistance = range;
         betweenIdleFrames = down60ToFramerate(3);
         state = 0;
         loadSprites();
@@ -68,21 +66,21 @@ public class TeslaTower extends Turret {
             THUNDER_SOUND.playRandom(1);
             PVector targetPosition = new PVector(targetEnemy.position.x, targetEnemy.position.y);
             PVector myPosition = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
-            shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, arcDistance / 4, damage, this));
+            shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, range / 2, damage, this));
             //damaging arcs
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, damage/2, arcLength, arcDistance, i, targetEnemy));
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, damage / 2, arcLength, range, i, targetEnemy));
             } //decorative arcs
             for (int i = 0; i < p.random(5, 10); i++) {
-                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, 0, arcLength, arcDistance/4, -1));
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, 0, arcLength, range / 3, -1));
             } //decorative self arcs
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, myPosition.x, myPosition.y, this, 0, arcLength, arcDistance/8, -1));
+                arcs.add(new Arc(p, myPosition.x, myPosition.y, this, 0, arcLength, range / 4, -1));
             }
         } else {
             playSoundRandomSpeed(p, fireSound, 1);
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
-            arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, arcDistance, priority));
+            arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, range, priority));
         }
     }
 
@@ -163,7 +161,6 @@ public class TeslaTower extends Turret {
             switch (nextLevelA) {
                 case 0:
                 case 1:
-                    arcDistance += 50;
                     arcLength++;
                     break;
                 case 2:
