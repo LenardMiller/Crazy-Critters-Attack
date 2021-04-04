@@ -4,10 +4,12 @@ import main.gui.guiObjects.GuiObject;
 import main.gui.guiObjects.UpgradeIcon;
 import main.gui.guiObjects.buttons.*;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import java.awt.*;
 
 import static main.Main.*;
+import static main.misc.Utilities.highlightedText;
 import static main.misc.Utilities.up60ToFramerate;
 
 public class InGameGui {
@@ -79,19 +81,19 @@ public class InGameGui {
         if (!paused) flashA -= up60ToFramerate(25);
     }
 
+    public void drawDebugText(PApplet p, int padding) {
+        highlightedText(p, "enemies: " + enemies.size(), new PVector(padding, 30), LEFT);
+        highlightedText(p, "towers: " + towers.size(), new PVector(padding, 60), LEFT);
+        highlightedText(p, "projectiles: " + projectiles.size(), new PVector(padding, 90), LEFT);
+        highlightedText(p, "particles: " + particles.size(), new PVector(padding, 120), LEFT);
+        highlightedText(p, "X: " + p.mouseX + " Y: " + p.mouseY, new PVector(padding, BOARD_HEIGHT - padding), LEFT);
+        highlightedText(p, round(p.frameRate) + " fps", new PVector(BOARD_WIDTH - padding, 30), RIGHT);
+    }
+
     public void drawText(PApplet p, int x) {
         p.fill(MAIN_TEXT_COLOR.getRGB());
         p.textFont(largeFont);
         p.textAlign(LEFT);
-        if (debug) {
-            p.text("enemies: " + enemies.size(), x, 30);
-            p.text("towers: " + towers.size(), x, 60);
-            p.text("projectiles: " + projectiles.size(), x, 90);
-            p.text("particles: " + particles.size(), x, 120);
-            p.text("X: " + p.mouseX + " Y: " + p.mouseY, x, BOARD_HEIGHT - x);
-            p.textAlign(RIGHT);
-            p.text(round(p.frameRate) + " fps", BOARD_WIDTH - x, 30);
-        }
         p.fill(200);
         p.textFont(mediumFont);
         p.textAlign(CENTER);

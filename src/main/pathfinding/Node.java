@@ -116,7 +116,8 @@ public class Node {
         Tile towerTile = tiles.get(tX+1, tY+1);
         tower = null;
         if (towerTile != null) tower = towerTile.tower;
-        Tile obsTile = tiles.get(tX,tY);
+        Tile obsTile = null;
+        if (position.x >= 0 && position.y >= 0) obsTile = tiles.get(tX,tY);
         if (obsTile != null) {
             isNotTraversable = obsTile.obstacle != null;
             if (obsTile.machine) {

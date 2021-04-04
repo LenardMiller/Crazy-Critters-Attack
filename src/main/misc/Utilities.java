@@ -277,6 +277,17 @@ public class Utilities {
     }
 
     /**
+     * Displays text with a rectangle backing.
+     * @param p the PApplet
+     * @param text text to be displayed
+     * @param position position for text to be displayed
+     * @param textAlign what alignment to use, defaults to center
+     */
+    public static void highlightedText(PApplet p, String text, PVector position, int textAlign) {
+        highlightedText(p, text, position, new Color(255, 255, 255), new Color(0, 0, 0, 175), 25, textAlign);
+    }
+
+    /**
      * Displays text with a strikethrough.
      * @param p the PApplet
      * @param text text to display

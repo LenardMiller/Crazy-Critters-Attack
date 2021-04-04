@@ -299,11 +299,11 @@ public class Main extends PApplet {
         if (!debug) {
             if (!levelBuilder) inGameGui.display();
             else levelBuilderGui.display();
-        }
+            hand.displayHeldInfo();
+            textAlign(LEFT);
+            if (!levelBuilder) inGameGui.drawText(this, 10);
+        } else inGameGui.drawDebugText(this, 10);
         if (paused) pauseGui.display();
-        hand.displayHeldInfo();
-        textAlign(LEFT);
-        if (!levelBuilder) inGameGui.drawText(this, 10);
         //levels
         if (playingLevel) levels[currentLevel].main();
     }
