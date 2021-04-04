@@ -6,8 +6,8 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
+import static main.Main.NODE_SIZE;
 import static main.Main.nodeGrid;
-import static main.Main.nodeSize;
 import static main.pathfinding.UpdateNode.updateNode;
 
 public class PathRequest { //todo: make more efficient with less full resets
@@ -31,7 +31,7 @@ public class PathRequest { //todo: make more efficient with less full resets
 
         enemy.points = new ArrayList<>();
         PVector pfPosition = new PVector(enemy.position.x-((enemy.pfSize-1)*12.5f)+100,enemy.position.y-((enemy.pfSize-1)*12.5f)+100);
-        PVector roundedPosition = catchOutOfBounds((int)((pfPosition.x)/ nodeSize), (int)((pfPosition.y)/ nodeSize));
+        PVector roundedPosition = catchOutOfBounds((int)((pfPosition.x)/ NODE_SIZE), (int)((pfPosition.y)/ NODE_SIZE));
         nodeGrid[(int) roundedPosition.x][(int) roundedPosition.y].setStart((int) roundedPosition.x-4, (int) roundedPosition.y-4);
         Main.start.findGHF();
         updateNode(Main.start,this);

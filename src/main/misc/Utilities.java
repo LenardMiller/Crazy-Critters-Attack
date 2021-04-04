@@ -22,7 +22,7 @@ public class Utilities {
     public static void updateNodes() {
         for (Node[] nodes : nodeGrid) {
             for (Node node : nodes) {
-                node.setNotEnd((int) (node.position.x / nodeSize), (int) (node.position.y / nodeSize));
+                node.setNotEnd((int) (node.position.x / NODE_SIZE), (int) (node.position.y / NODE_SIZE));
                 node.checkTile();
             }
         }
@@ -112,22 +112,13 @@ public class Utilities {
      * @return a random spawnpoint
      */
     public static PVector randomSpawnPosition(PApplet p) {
-        float z = p.random(0, 4);
-        float low = -90;
-        float high = 990;
-        boolean l = z >= 0 && z < 1;
-        boolean r = z >= 1 && z < 2;
-        boolean u = z >= 2 && z < 3;
-        boolean d = z >= 3 && z <= 4;
-        float x = 0;
-        float y = 0;
-        if (l) x = low;
-        if (r) x = high;
-        if (u) y = low;
-        if (d) y = high;
-        if (l || r) y = p.random(low, high);
-        if (u || d) x = p.random(low, high);
-        return new PVector(x, y);
+        int side = (int) p.random(4); //clockwise from top
+        float centerOfBuffer = ((GRID_HEIGHT / 2f) - (BOARD_HEIGHT / 2f)) / 2f;
+        float distAlongSide = p.random(-centerOfBuffer, BOARD_HEIGHT + centerOfBuffer);
+        if (side == 0) return new PVector(distAlongSide, -centerOfBuffer); //top
+        if (side == 1) return new PVector(BOARD_WIDTH + centerOfBuffer, distAlongSide); //right
+        if (side == 2) return new PVector(distAlongSide, BOARD_HEIGHT + centerOfBuffer); //bottom
+        return new PVector(-centerOfBuffer, distAlongSide); //left
     }
 
     /**

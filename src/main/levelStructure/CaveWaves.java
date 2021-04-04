@@ -214,7 +214,7 @@ public class CaveWaves {
         waves[48].addSpawns(bigBat, 5);
         waves[38].addSpawns(bat, 60);
 
-        waves[49] = wavePreset(p, 400, 35, wtf);
+        waves[49] = wavePreset(p, 400, 20, wtf);
         waves[49].addSpawns(wtf, 5);
 
         for (Wave wave : waves) wave.load();

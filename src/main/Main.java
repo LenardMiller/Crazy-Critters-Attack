@@ -102,8 +102,10 @@ public class Main extends PApplet {
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
+    public static final int TILE_SIZE = 50;
     public static final int GRID_WIDTH = 1100;
     public static final int GRID_HEIGHT = 1100;
+    public static final int NODE_SIZE = 25;
 
     public static final int SLINGSHOT_PRICE = 75;
     public static final int RANDOMCANNON_PRICE = 150;
@@ -123,13 +125,12 @@ public class Main extends PApplet {
     public static HashMap<String, SoundWithAlts> soundsWithAlts = new HashMap<>();
 
     //pathfinding stuff
-    public static int defaultSize = 1;
+    public static final int DEFAULT_SIZE = 1;
     public static Node[][] nodeGrid;
     public static HeapNode openNodes;
     public static Node start;
     public static Node[] end;
     public static AStar path;
-    public static int nodeSize;
     public static float maxCost, minCost;
 
     public static void main(String[] args) {
@@ -183,9 +184,9 @@ public class Main extends PApplet {
     public static void resetGame(PApplet p) {
         //creates object data structures
         tiles = new Tile.TileDS();
-        for (int y = 0; y <= (BOARD_HEIGHT / 50); y++) {
-            for (int x = 0; x <= (BOARD_WIDTH / 50); x++) {
-                tiles.add(new Tile(p, new PVector(x * 50, y * 50), tiles.size()), x, y);
+        for (int y = 0; y <= BOARD_HEIGHT / TILE_SIZE; y++) {
+            for (int x = 0; x <= BOARD_WIDTH / TILE_SIZE; x++) {
+                tiles.add(new Tile(p, new PVector(x * TILE_SIZE, y * TILE_SIZE), tiles.size()), x, y);
             }
         }
         enemies = new ArrayList<>();
@@ -200,19 +201,18 @@ public class Main extends PApplet {
         buffs = new ArrayList<>();
         popupTexts = new ArrayList<>();
         //pathfinding stuff
-        nodeSize = 25;
-        nodeGrid = new Node[GRID_WIDTH / nodeSize][GRID_HEIGHT / nodeSize];
-        for (int x = 0; x < GRID_WIDTH / nodeSize; x++) {
-            for (int y = 0; y < GRID_HEIGHT / nodeSize; y++) {
-                nodeGrid[x][y] = new Node(p, new PVector((nodeSize * x)-100, (nodeSize * y)-100));
+        nodeGrid = new Node[GRID_WIDTH / NODE_SIZE][GRID_HEIGHT / NODE_SIZE];
+        for (int x = 0; x < GRID_WIDTH / NODE_SIZE; x++) {
+            for (int y = 0; y < GRID_HEIGHT / NODE_SIZE; y++) {
+                nodeGrid[x][y] = new Node(p, new PVector((NODE_SIZE * x)-100, (NODE_SIZE * y)-100));
             }
         }
         path = new AStar();
-        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nodeSize)));
+        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / NODE_SIZE)));
         //create end nodes
         end = new Node[0];
         //create start node
-        nodeGrid[1][(GRID_WIDTH / nodeSize) / 2].setStart(1, (GRID_HEIGHT / nodeSize) / 2);
+        nodeGrid[1][(GRID_WIDTH / NODE_SIZE) / 2].setStart(1, (GRID_HEIGHT / NODE_SIZE) / 2);
         start.findGHF();
         for (Node node : end) node.findGHF();
         updateTowerArray();
@@ -240,6 +240,13 @@ public class Main extends PApplet {
      * Everything else, run every frame.
      */
     public void draw() {
+        float buffer = 0;
+        if (debug) {
+            pushMatrix();
+            scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
+            buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
+            translate(buffer, buffer);
+        }
         background(50, 50, 50);
         tint(255);
         //screens
@@ -257,6 +264,7 @@ public class Main extends PApplet {
             key.pressedPulse = false;
             key.releasedPulse = false;
         }
+        if (debug && buffer != 0) popMatrix();
     }
 
     /**
@@ -288,8 +296,10 @@ public class Main extends PApplet {
         }
         //gui stuff
         noStroke();
-        if (!levelBuilder) inGameGui.display();
-        else levelBuilderGui.display();
+        if (!debug) {
+            if (!levelBuilder) inGameGui.display();
+            else levelBuilderGui.display();
+        }
         if (paused) pauseGui.display();
         hand.displayHeldInfo();
         textAlign(LEFT);
@@ -357,7 +367,7 @@ public class Main extends PApplet {
                 }
             }
             fill(0,0,255);
-            rect(start.position.x,start.position.y, nodeSize, nodeSize);
+            rect(start.position.x,start.position.y, NODE_SIZE, NODE_SIZE);
         }
         //under particle culling
         int up = underParticles.size();
@@ -381,7 +391,7 @@ public class Main extends PApplet {
         //machine
         machine.main();
         //enemies
-        for (Enemy enemy : enemies) if (!enemy.flying) enemy.displayPassA();
+        for (Enemy enemy : enemies) if (!enemy.flying) enemy.displayShadow();
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
             if (!enemy.flying) enemy.main(i);
@@ -432,7 +442,7 @@ public class Main extends PApplet {
             tiles.get(i).displayObstacle();
         }
         //flying enemies
-        enemies.stream().filter(enemy -> enemy.flying).forEach(Enemy::displayPassA);
+        enemies.stream().filter(enemy -> enemy.flying).forEach(Enemy::displayShadow);
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
             if (enemy.flying) enemy.main(i);
