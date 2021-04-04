@@ -8,7 +8,7 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class Wtf extends Enemy {
 
-    public Wtf(PApplet p, float x, float y) { //todo: sometimes doesn't spawn right???
+    public Wtf(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(100,100);
         pfSize = 4;

@@ -12,7 +12,7 @@ public class SpriteLoader {
 
     /**
      * Loads animations.
-     * todo: load dynamically
+     * todo: load dynamically?
      * @param p the PApplet
      */
     public static void loadAnimatedSprites(PApplet p) {

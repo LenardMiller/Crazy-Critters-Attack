@@ -149,7 +149,6 @@ public class Main extends PApplet {
     /**
      * From Processing.
      * Primary initialization,
-     * todo: fullscreen aaaaaa
      * run once at program start
      */
     public void setup() {
