@@ -66,16 +66,16 @@ public class TeslaTower extends Turret {
             THUNDER_SOUND.playRandom(1);
             PVector targetPosition = new PVector(targetEnemy.position.x, targetEnemy.position.y);
             PVector myPosition = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
-            shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, range / 2, damage, this));
+            shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, 100, damage, this));
             //damaging arcs
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, damage / 2, arcLength, range, i, targetEnemy));
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, damage / 2, arcLength, 200, i, targetEnemy));
             } //decorative arcs
             for (int i = 0; i < p.random(5, 10); i++) {
-                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, 0, arcLength, range / 3, -1));
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, 0, arcLength, 100, -1));
             } //decorative self arcs
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, myPosition.x, myPosition.y, this, 0, arcLength, range / 4, -1));
+                arcs.add(new Arc(p, myPosition.x, myPosition.y, this, 0, arcLength, 50, -1));
             }
         } else {
             playSoundRandomSpeed(p, fireSound, 1);
