@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.playSound;
-import static main.misc.Utilities.updateNodes;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
+import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class KeyBinds {
 

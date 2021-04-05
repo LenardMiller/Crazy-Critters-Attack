@@ -11,9 +11,11 @@ import processing.sound.SoundFile;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.misc.Utilities.*;
+import static main.misc.Utilities.incrementByTo;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public abstract class Tower {
 

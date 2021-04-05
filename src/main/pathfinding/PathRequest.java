@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static main.Main.NODE_SIZE;
 import static main.Main.nodeGrid;
-import static main.pathfinding.UpdateNode.updateNode;
+import static main.pathfinding.PathfindingUtilities.updateNode;
 
 public class PathRequest {
 

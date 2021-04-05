@@ -8,7 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.pathfinding.UpdateNode.updateNode;
+import static main.pathfinding.PathfindingUtilities.updateNode;
 
 public class Node {
 

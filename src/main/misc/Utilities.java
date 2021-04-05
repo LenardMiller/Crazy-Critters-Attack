@@ -1,7 +1,5 @@
 package main.misc;
 
-import main.enemies.Enemy;
-import main.pathfinding.Node;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -10,56 +8,8 @@ import processing.sound.SoundFile;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.pathfinding.UpdateClearance.updateClearance;
-import static main.pathfinding.UpdateNode.updateNode;
 
 public class Utilities {
-
-    /**
-     * For pathfinding.
-     * Refreshes all pathfinding nodes
-     */
-    public static void updateNodes() {
-        for (Node[] nodes : nodeGrid) {
-            for (Node node : nodes) {
-                node.setNotEnd((int) (node.position.x / NODE_SIZE), (int) (node.position.y / NODE_SIZE));
-                node.checkTile();
-            }
-        }
-        updateClearance();
-        updateNode(start, null);
-        enemies.forEach(Enemy::setCombatPoints);
-    }
-
-    /**
-     * For pathfinding.
-     * Calculates the maximum cost of a path.
-     * @return the path's maximum cost
-     */
-    public static float maxCost() {
-        float maxCost = 0;
-        for (Node[] nodes : nodeGrid) {
-            for (Node node : nodes) {
-                if (node.totalCost > maxCost && (node.isOpen || node.isClosed)) maxCost = node.totalCost;
-            }
-        }
-        return maxCost;
-    }
-
-    /**
-     * For pathfinding.
-     * Calculates the minimum cost of a path.
-     * @return the path's minimum cost
-     */
-    public static float minCost(float maxCost) {
-        float minCost = maxCost;
-        for (Node[] nodes : nodeGrid) {
-            for (Node node : nodes) {
-                if (node.totalCost < minCost && (node.isOpen || node.isClosed)) minCost = node.totalCost;
-            }
-        }
-        return minCost;
-    }
 
     /**
      * Finds the slope of a line.

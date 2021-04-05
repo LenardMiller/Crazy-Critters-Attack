@@ -15,6 +15,7 @@ import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class Hand {
 
