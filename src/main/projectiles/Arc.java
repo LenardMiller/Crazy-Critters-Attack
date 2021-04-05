@@ -26,15 +26,38 @@ public class Arc {
     private final PVector START_POSITION;
     private final Turret TURRET;
     private final Color LINE_COLOR;
+    private final String PARTICLE_TYPE;
 
     public int alpha;
 
+    /**
+     * Used by Tesla Tower.
+     */
     public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance, int priority) {
-        this(p, startX, startY, turret, damage, maxLength, maxDistance, priority, null);
+        this(p, startX, startY, turret, damage, maxLength, maxDistance, priority, null,
+          new Color(215, 242, 248), "electricity");
+    }
+
+    /**
+     * Used by Lightning Caller.
+     */
+    public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
+               int priority, Enemy blacklistedEnemy) {
+        this(p, startX, startY, turret, damage, maxLength, maxDistance, priority, blacklistedEnemy,
+          new Color(215, 242, 248), "electricity");
+    }
+
+    /**
+     * Used by High Power Tesla Tower.
+     */
+    public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
+               int priority, Color lineColor, String particle) {
+        this(p, startX, startY, turret, damage, maxLength, maxDistance, priority, null,
+          lineColor, particle);
     }
 
     public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
-               int priority, Enemy blacklistedEnemy) {
+               int priority, Enemy blacklistedEnemy, Color lineColor, String particleType) {
         this.P = p;
         START_POSITION = new PVector(startX,startY);
         this.TURRET = turret;
@@ -46,7 +69,8 @@ public class Arc {
         alpha = 255;
         VARIATION = 25;
         MAX_POINTS = 10;
-        LINE_COLOR = new Color(215, 242, 248);
+        LINE_COLOR = lineColor;
+        PARTICLE_TYPE = particleType;
         zap(blacklistedEnemy);
     }
 
@@ -74,7 +98,7 @@ public class Arc {
         if (blacklistedEnemy != null) hitEnemies.add(blacklistedEnemy);
         Enemy mainEnemy = getTargetEnemy(START_POSITION, PRIORITY, hitEnemies);
         if (mainEnemy != null) {
-            mainEnemy.damageWithoutBuff(DAMAGE, TURRET, "electricity", new PVector(0,0), true);
+            mainEnemy.damageWithoutBuff(DAMAGE, TURRET, PARTICLE_TYPE, new PVector(0,0), true);
             hitEnemies.add(mainEnemy);
             BIG_POINTS.add(new BigPoint(P, new PVector(mainEnemy.position.x, mainEnemy.position.y)));
             int x = 2; //no clue
@@ -82,7 +106,7 @@ public class Arc {
                 Enemy jumpEnemy = getTargetEnemy(BIG_POINTS.get(x - 1).position, 0, hitEnemies);
                 if (jumpEnemy != null) {
                     BIG_POINTS.add(new BigPoint(P, jumpEnemy.position));
-                    jumpEnemy.damageWithoutBuff(DAMAGE, TURRET, "electricity", new PVector(0,0), true);
+                    jumpEnemy.damageWithoutBuff(DAMAGE, TURRET, PARTICLE_TYPE, new PVector(0,0), true);
                     hitEnemies.add(jumpEnemy);
                     x++;
                 }
@@ -169,7 +193,7 @@ public class Arc {
                 e.x *= -1;
                 e.y *= -1;
                 points[i] = new PVector(e.x+pointA.x+ P.random(-VARIATION, VARIATION),e.y+pointA.y+ P.random(-VARIATION, VARIATION));
-                particles.add(new BuffParticle(P, points[i].x, points[i].y, P.random(360), "electricity"));
+                particles.add(new BuffParticle(P, points[i].x, points[i].y, P.random(360), PARTICLE_TYPE));
             }
         }
     }

@@ -7,6 +7,8 @@ import main.sound.SoundWithAlts;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.playSoundRandomSpeed;
@@ -17,6 +19,7 @@ public class TeslaTower extends Turret {
     public int arcLength;
 
     private boolean lightning;
+    private boolean highPower;
 
     private final SoundWithAlts THUNDER_SOUND;
 
@@ -77,7 +80,13 @@ public class TeslaTower extends Turret {
             for (int i = 0; i < 3; i++) {
                 arcs.add(new Arc(p, myPosition.x, myPosition.y, this, 0, arcLength, 50, -1));
             }
-        } else {
+        } else if (highPower) {
+            playSoundRandomSpeed(p, fireSound, 1);
+            PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
+            arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, range, priority,
+              new Color(255, 0, 0), "energy"));
+        }
+        else {
             playSoundRandomSpeed(p, fireSound, 1);
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
             arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, range, priority));
@@ -183,6 +192,10 @@ public class TeslaTower extends Turret {
                     break;
                 case 5:
                     delay = 0;
+                    highPower = true;
+                    name = "highPowerTesla";
+                    debrisType = "darkMetal";
+                    loadSprites();
                     break;
             }
         }

@@ -260,6 +260,11 @@ public class Selection { //what tower is selected
                 setTextPurple("Jumping electricity", offset);
                 setTextPurple("Multiple arcs", offset);
                 setTextPurple("Splash", offset);
+            case "highPowerTesla":
+                P.text("High Power", 1000, 241);
+                P.text("Tesla Tower", 1000, 266);
+                offset += 25;
+                setTextPurple("Jumping electricity", offset);
                 break;
             case "nightmare":
                 P.text("Nightmare", 1000, 241);
