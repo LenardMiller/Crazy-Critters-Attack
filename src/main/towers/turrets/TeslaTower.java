@@ -63,7 +63,7 @@ public class TeslaTower extends Turret {
 
     protected void fire() {
         if (lightning) {
-            THUNDER_SOUND.playRandom(1);
+            THUNDER_SOUND.playRandomWithRandomSpeed(1);
             PVector targetPosition = new PVector(targetEnemy.position.x, targetEnemy.position.y);
             PVector myPosition = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
             shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, 100, damage, this));

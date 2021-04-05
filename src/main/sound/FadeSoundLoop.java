@@ -15,6 +15,12 @@ public class FadeSoundLoop {
 
     public float targetVolume;
 
+    /**
+     * A constantly playing loop that fades to audible then back to inaudible.
+     * @param p the PApplet
+     * @param name identifier
+     * @param minLength how long it will run before automatically stopping
+     */
     public FadeSoundLoop(PApplet p, String name, int minLength) {
         SOUND_FILE = new SoundFile(p, "sounds/loops/" + name + ".wav");
         MIN_LENGTH = minLength;
@@ -32,6 +38,9 @@ public class FadeSoundLoop {
         timer++;
     }
 
+    /**
+     * @param targetVolume will slowly increment in volume to this
+     */
     public void setTargetVolume(float targetVolume) {
         this.targetVolume = targetVolume;
         timer = 0;
