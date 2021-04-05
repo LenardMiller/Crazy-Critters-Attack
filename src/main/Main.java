@@ -35,12 +35,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
-import static main.misc.SoundLoader.loadSounds;
 import static main.misc.SpriteLoader.loadAnimatedSprites;
 import static main.misc.SpriteLoader.loadStaticSprites;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
 import static main.pathfinding.PathfindingUtilities.*;
+import static main.sound.SoundLoader.loadSounds;
 
 public class Main extends PApplet {
 
@@ -103,9 +103,6 @@ public class Main extends PApplet {
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
     public static final int TILE_SIZE = 50;
-    public static final int GRID_WIDTH = 1100;
-    public static final int GRID_HEIGHT = 1100;
-    public static final int NODE_SIZE = 25;
 
     public static final int SLINGSHOT_PRICE = 75;
     public static final int RANDOMCANNON_PRICE = 150;
@@ -119,12 +116,16 @@ public class Main extends PApplet {
 
     public static HashMap<String, PImage> staticSprites = new HashMap<>();
     public static HashMap<String, PImage[]> animatedSprites = new HashMap<>();
+
     public static HashMap<String, SoundFile> sounds = new HashMap<>();
     public static HashMap<String, StartStopSoundLoop> startStopSoundLoops = new HashMap<>();
     public static HashMap<String, FadeSoundLoop> fadeSoundLoops = new HashMap<>();
     public static HashMap<String, SoundWithAlts> soundsWithAlts = new HashMap<>();
 
     //pathfinding stuff
+    public static final int GRID_WIDTH = 1100;
+    public static final int GRID_HEIGHT = 1100;
+    public static final int NODE_SIZE = 25;
     public static final int DEFAULT_SIZE = 1;
     public static Node[][] nodeGrid;
     public static HeapNode openNodes;

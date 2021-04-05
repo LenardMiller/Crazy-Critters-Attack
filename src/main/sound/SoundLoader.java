@@ -1,8 +1,5 @@
-package main.misc;
+package main.sound;
 
-import main.sound.FadeSoundLoop;
-import main.sound.SoundWithAlts;
-import main.sound.StartStopSoundLoop;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
 
