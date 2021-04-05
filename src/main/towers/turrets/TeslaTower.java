@@ -193,6 +193,7 @@ public class TeslaTower extends Turret {
                 case 5:
                     delay = 0;
                     highPower = true;
+                    betweenIdleFrames = 3;
                     name = "highPowerTesla";
                     debrisType = "darkMetal";
                     loadSprites();

@@ -188,6 +188,7 @@ public class SpriteLoader {
         getSprite(p,"lightningFire","TR","tesla/lightning/fire/",4);
         getSprite(p,"lightningLoad","TR","tesla/lightning/load/",16);
         getSprite(p,"lightningIdle","TR","tesla/lightning/idle/",18);
+        getSprite(p,"highPowerTeslaIdle","TR","tesla/highPower/idle/",6);
         getSprite(p,"highPowerTeslaFire","TR","tesla/highPower/fire/",4);
         getSprite(p,"highPowerTeslaLoad","TR","tesla/highPower/load/",1);
         getSprite(p,"crossbowFire","TR","crossbow/fire/",13);
@@ -402,10 +403,8 @@ public class SpriteLoader {
         staticSprites.put("slingshotGravelIdleTR",p.loadImage("sprites/towers/turrets/slingshot/gravel/idle.png"));
         staticSprites.put("teslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/base.png"));
         staticSprites.put("teslaFullTR",p.loadImage("sprites/towers/turrets/tesla/full.png"));
-        staticSprites.put("teslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/idle.png"));
         staticSprites.put("lightningBaseTR",p.loadImage("sprites/towers/turrets/tesla/lightning/base.png"));
         staticSprites.put("highPowerTeslaBaseTR",p.loadImage("sprites/towers/turrets/tesla/highPower/base.png"));
-        staticSprites.put("highPowerTeslaIdleTR",p.loadImage("sprites/towers/turrets/tesla/highPower/idle.png"));
         staticSprites.put("nightmareBaseTR",p.loadImage("sprites/towers/turrets/nightmare/base.png"));
         staticSprites.put("nightmareFullTR",p.loadImage("sprites/towers/turrets/nightmare/full.png"));
         staticSprites.put("nightmareIdleTR",p.loadImage("sprites/towers/turrets/nightmare/idle.png"));
