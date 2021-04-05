@@ -26,6 +26,7 @@ public abstract class Tower {
     public int[] upgradePrices;
     public boolean hit;
     public boolean visualize;
+    public boolean alive;
     public PVector size;
     public PApplet p;
     public Tile tile;
@@ -47,6 +48,7 @@ public abstract class Tower {
         this.tile = tile;
         tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1).setBreakable(null);
 
+        alive = true;
         name = "null";
         size = new PVector(120, 37);
         this.maxHp = 1;
@@ -119,12 +121,12 @@ public abstract class Tower {
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
         playSoundRandomSpeed(p, placeSound, 1);
         spawnParticles();
-        updateNodes();
     }
 
     public void die(boolean sold) {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
+        alive = false;
         tile.tower = null;
         if (selection.turret == this) {
             selection.name = "null";

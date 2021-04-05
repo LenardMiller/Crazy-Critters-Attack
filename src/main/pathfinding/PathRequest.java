@@ -10,7 +10,7 @@ import static main.Main.NODE_SIZE;
 import static main.Main.nodeGrid;
 import static main.pathfinding.UpdateNode.updateNode;
 
-public class PathRequest { //todo: make more efficient with less full resets
+public class PathRequest {
 
     public int id;
     public Enemy enemy;
@@ -38,7 +38,7 @@ public class PathRequest { //todo: make more efficient with less full resets
         Main.path.done = false;
         Main.path.find(id); //points are added here
         enemy.swapPoints(false);
-        if (enemy.points.size() > 0) enemy.cleanTurnPoints(); //and subtracted here
+        if (enemy.points.size() > 0) enemy.setCombatPoints(); //and subtracted here
     }
 
     private PVector catchOutOfBounds(int x, int y) {

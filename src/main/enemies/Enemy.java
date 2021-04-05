@@ -440,14 +440,14 @@ public abstract class Enemy {
         //all attackCount stuff prevents attacking multiple times
         if (!dmg) attackCount = 0;
         if (attackCount > 1) dmg = false;
-        if (targetTower != null) {
+        if (targetTower != null && targetTower.alive) {
             if (pfSize > 2) { //angle towards tower correctly
                 PVector t = new PVector(targetTower.tile.position.x - 25, targetTower.tile.position.y - 25);
                 targetAngle = findAngleBetween(t, position);
             }
             moveFrame = 0;
             if (dmg) targetTower.damage(damage);
-        }
+        } else attacking = false;
         if (targetMachine) {
             moveFrame = 0;
             if (dmg) machine.damage(damage);
@@ -463,7 +463,6 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
-    //todo: enemies are still wandering off and doing weird things :(
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
@@ -502,37 +501,26 @@ public abstract class Enemy {
         }
     }
 
-    public void cleanTurnPoints() {
+    public void setCombatPoints() {
+        //remove
+        for (TurnPoint point : points) {
+            point.combat = false;
+            point.towers = null;
+            point.machine = false;
+        }
+        //add
         ArrayList<TurnPoint> pointsD = new ArrayList<>(points);
-        //handle combat points
-        boolean combatPoints = false;
         for (TurnPoint point : pointsD) {
             point.towers = clearanceTowers(point);
             point.machine = clearanceMachine(point);
-            if (point.towers.size() > 0 || point.machine) combatPoints = true;
         }
-        if (combatPoints) {
-            TurnPoint backPoint = backPoint();
-            backPoint.combat = true;
-            if (backPoint.towers != null && backPoint.towers.size() > 0) { //what the hell is this for??
-                backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
-            } else backPoint.tower = null;
-        }
-        //remove extra white points
-        TurnPoint startpoint = pointsD.get(pointsD.size() - 1);
-        if (!startpoint.combat && !attacking) pointsD.remove(startpoint);
-        for (int i = 0; i < pointsD.size() - 2; i++) {
-            TurnPoint pointA = pointsD.get(i);
-            TurnPoint pointB = pointsD.get(i + 1);
-            TurnPoint pointC = pointsD.get(i + 2);
-            float angleAB = findAngleBetween(pointA.position, pointB.position);
-            float angleBC = findAngleBetween(pointB.position, pointC.position);
-            if (angleAB == angleBC && !pointB.combat) {
-                pointsD.remove(pointB);
-                i--;
-            }
-            if (i + 1 == pointsD.size() + 2) break;
-        }
+        //iterate backwards based on enemy size
+        TurnPoint backPoint = backPoint();
+        backPoint.combat = true;
+        if (backPoint.towers != null && backPoint.towers.size() > 0) { //what the hell is this for??
+            backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
+        } else backPoint.tower = null;
+
         points = new ArrayList<>();
         points.addAll(pointsD);
     }

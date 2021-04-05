@@ -41,7 +41,6 @@ public class KeyBinds {
 
         if (pause) {
             playSound(sounds.get("clickOut"), 1, 1);
-            updateNodes();
             updateFlooring();
             updateWallTileConnections();
             connectWallQueues++;

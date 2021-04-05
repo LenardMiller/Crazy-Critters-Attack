@@ -1,5 +1,6 @@
 package main.misc;
 
+import main.enemies.Enemy;
 import main.pathfinding.Node;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -11,7 +12,6 @@ import java.awt.*;
 import static main.Main.*;
 import static main.pathfinding.UpdateClearance.updateClearance;
 import static main.pathfinding.UpdateNode.updateNode;
-import static main.pathfinding.UpdatePath.updatePath;
 
 public class Utilities {
 
@@ -28,7 +28,7 @@ public class Utilities {
         }
         updateClearance();
         updateNode(start, null);
-        updatePath();
+        enemies.forEach(Enemy::setCombatPoints);
     }
 
     /**

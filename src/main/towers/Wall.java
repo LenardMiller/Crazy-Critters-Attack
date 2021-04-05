@@ -7,7 +7,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.Utilities.updateNodes;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
@@ -185,7 +184,6 @@ public class Wall extends Tower {
         int y = (int)(tile.position.y / 50);
         tiles.get(x-1,y-1).setFlooring(name);
         updateFlooring();
-        updateNodes();
     }
 
     public void updateSprite() {
