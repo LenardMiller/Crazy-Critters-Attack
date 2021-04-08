@@ -38,7 +38,7 @@ public class PathRequest {
         Main.path.done = false;
         Main.path.find(id); //points are added here
         enemy.swapPoints(false);
-        if (enemy.points.size() > 0) enemy.setCombatPoints(); //and subtracted here
+        if (enemy.points.size() > 0) enemy.resetCombatPoints(); //and subtracted here
     }
 
     private PVector catchOutOfBounds(int x, int y) {

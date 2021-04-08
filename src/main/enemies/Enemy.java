@@ -132,7 +132,7 @@ public abstract class Enemy {
             }
 
             //prevent wandering
-            if (points.size() == 0) pathRequestWaitTimer++;
+            if (points.size() == 0 && !attacking) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
@@ -447,7 +447,7 @@ public abstract class Enemy {
             }
             moveFrame = 0;
             if (dmg) targetTower.damage(damage);
-        } else attacking = false;
+        } else if (!targetMachine) attacking = false;
         if (targetMachine) {
             moveFrame = 0;
             if (dmg) machine.damage(damage);
@@ -467,13 +467,11 @@ public abstract class Enemy {
     protected boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
         PVector p = point.position;
-        boolean intersecting;
         float tpSize;
         if (point.combat) tpSize = speed/FRAMERATE;
         else tpSize = 15;
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
-        intersecting = (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) && (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
-        return intersecting;
+        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) && (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
     }
 
     public void requestPath(int i) {
@@ -501,7 +499,7 @@ public abstract class Enemy {
         }
     }
 
-    public void setCombatPoints() {
+    public void resetCombatPoints() {
         //remove
         for (TurnPoint point : points) {
             point.combat = false;
