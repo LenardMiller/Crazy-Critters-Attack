@@ -162,7 +162,7 @@ public class TeslaTower extends Turret {
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[10];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[34];
     }
 
     protected void upgradeSpecial(int id) {
