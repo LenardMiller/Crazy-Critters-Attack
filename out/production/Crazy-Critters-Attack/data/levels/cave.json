@@ -2276,11 +2276,11 @@
     "type": "tile"
   },
   {
-    "betweenFrames": 2,
+    "betweenFrames": 4,
     "barHorizontal": true,
     "maxHp": 500,
     "hp": 500,
-    "barY": 500,
+    "barY": 497,
     "barX": 350,
     "type": "machine",
     "x": 450,

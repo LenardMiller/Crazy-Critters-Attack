@@ -2,12 +2,11 @@ package main.towers.turrets;
 
 import main.misc.Tile;
 import main.projectiles.Arc;
+import main.projectiles.RedArc;
 import main.shockwaves.LightningShockwave;
 import main.sound.SoundWithAlts;
 import processing.core.PApplet;
 import processing.core.PVector;
-
-import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
@@ -83,8 +82,7 @@ public class TeslaTower extends Turret {
         } else if (highPower) {
             playSoundRandomSpeed(p, fireSound, 1);
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
-            arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, range, priority,
-              new Color(255, 0, 0), "energy"));
+            arcs.add(new RedArc(p, position.x, position.y, this, damage, arcLength, range, priority));
         }
         else {
             playSoundRandomSpeed(p, fireSound, 1);

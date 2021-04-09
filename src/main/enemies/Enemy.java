@@ -514,10 +514,12 @@ public abstract class Enemy {
         }
         //iterate backwards based on enemy size
         TurnPoint backPoint = backPoint();
-        backPoint.combat = true;
-        if (backPoint.towers != null && backPoint.towers.size() > 0) { //what the hell is this for??
-            backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
-        } else backPoint.tower = null;
+        if (backPoint != null) {
+            backPoint.combat = true;
+            if (backPoint.towers != null && backPoint.towers.size() > 0) { //what the hell is this for??
+                backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
+            } else backPoint.tower = null;
+        }
 
         points = new ArrayList<>();
         points.addAll(pointsD);
