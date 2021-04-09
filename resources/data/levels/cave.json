@@ -916,7 +916,7 @@
     "bgA": "stone"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 143,
     "type": "tile",
     "bgA": "stone"
@@ -1014,7 +1014,7 @@
     "bgA": "stone"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 159,
     "type": "tile",
     "bgA": "stone"
@@ -1032,7 +1032,7 @@
     "bgA": "stone"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 162,
     "type": "tile",
     "bgA": "stone"
@@ -1134,7 +1134,7 @@
     "bgA": "stone"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 178,
     "type": "tile",
     "bgA": "stone"
@@ -2276,19 +2276,19 @@
     "type": "tile"
   },
   {
-    "betweenFrames": 4,
+    "betweenFrames": 2,
     "barHorizontal": true,
     "maxHp": 500,
     "hp": 500,
     "barY": 500,
-    "barX": 400,
+    "barX": 350,
     "type": "machine",
     "x": 450,
-    "name": "metalDrillMA",
-    "y": 450,
+    "name": "crystalDrillMA",
+    "y": 425,
     "debris": "metal",
     "id": 361,
     "barSizeY": 6,
-    "barSizeX": 100
+    "barSizeX": 150
   }
 ]

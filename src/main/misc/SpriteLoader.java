@@ -255,8 +255,9 @@ public class SpriteLoader {
         getSprite(p,"crystalWall","TW","Crystal/",4);
         getSprite(p,"titaniumWall","TW","Titanium/",4);
         //machines
-        getMachineSprite(p,"stoneDrill",new int[]{12,12,13,20});
-        getMachineSprite(p, "metalDrill", new int[]{8,8,9,11});
+        getMachineSprite(p,"stoneDrill", new int[]{12, 12, 13 ,20});
+        getMachineSprite(p, "metalDrill", new int[]{8, 8, 9, 11});
+        getMachineSprite(p, "crystalDrill", new int[]{8, 8, 8, 8});
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {

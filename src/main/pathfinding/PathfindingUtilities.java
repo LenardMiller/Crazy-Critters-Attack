@@ -147,7 +147,9 @@ public class PathfindingUtilities {
         }
         updateClearance();
         updateNode(start, null);
-        enemies.forEach(Enemy::resetCombatPoints);
+        for (Enemy enemy : enemies) {
+            enemy.setCombatPoints();
+        }
     }
 
     /**

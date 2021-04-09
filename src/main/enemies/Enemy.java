@@ -499,7 +499,7 @@ public abstract class Enemy {
         }
     }
 
-    public void resetCombatPoints() {
+    public void setCombatPoints() {
         //remove
         for (TurnPoint point : points) {
             point.combat = false;
