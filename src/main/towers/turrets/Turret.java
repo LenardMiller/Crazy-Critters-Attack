@@ -216,6 +216,7 @@ public abstract class Turret extends Tower {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         tile.tower = null;
+        alive = false;
         updateTowerArray();
         if (selection.turret == this) {
             selection.name = "null";
