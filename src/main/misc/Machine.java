@@ -92,7 +92,7 @@ public class Machine {
         }
         p.tint(255, tintColor, tintColor);
         p.imageMode(CENTER);
-        if (deathFrame < secondsToFrames(3)) p.image(sprites[currentFrame], position.x, position.y);
+        if (deathFrame < secondsToFrames(4)) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
         if (dead && !paused) deathFrame++;
@@ -177,7 +177,7 @@ public class Machine {
                 }
             }
         }
-        if (deathFrame == secondsToFrames(3)) for (Tile tile : machTiles) tile.setBreakable(debris + "DebrisBGC_TL");
+        if (deathFrame == secondsToFrames(4)) for (Tile tile : machTiles) tile.setBreakable(debris + "DebrisBGC_TL");
     }
 
     public void damage(int dmg) {
