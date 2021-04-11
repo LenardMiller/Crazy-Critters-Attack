@@ -235,11 +235,11 @@ public class SpriteLoader {
         getSprite(p,"flamethrowerFire","TR","flamethrower/fire/",2);
         getSprite(p,"flamethrowerLoad","TR","flamethrower/load/",1);
         getSprite(p,"flamethrowerIdle","TR","flamethrower/idle/",4);
-        getSprite(p,"flamewheelFire","TR","/flamethrower/flamewheel/fire/",7);
-        getSprite(p,"flamewheelLoad","TR","/flamethrower/flamewheel/load/",1);
-        getSprite(p,"flamewheelCore","TR","/flamethrower/flamewheel/core/",6);
-        getSprite(p,"magicFlamethrowerFire","TR","/flamethrower/magic/fire/",2);
-        getSprite(p,"magicFlamethrowerLoad","TR","/flamethrower/magic/load/",1);
+        getSprite(p,"flamewheelFire","TR","flamethrower/flamewheel/fire/",7);
+        getSprite(p,"flamewheelLoad","TR","flamethrower/flamewheel/load/",1);
+        getSprite(p,"flamewheelCore","TR","flamethrower/flamewheel/core/",6);
+        getSprite(p,"magicFlamethrowerFire","TR","flamethrower/magic/fire/",2);
+        getSprite(p,"magicFlamethrowerLoad","TR","flamethrower/magic/load/",1);
         getSprite(p,"railgunFire","TR","railgun/fire/",15);
         getSprite(p,"railgunLoad","TR","railgun/load/",9);
         getSprite(p,"railgunIdle","TR","railgun/idle/",6);
