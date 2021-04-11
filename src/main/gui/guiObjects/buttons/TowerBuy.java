@@ -138,6 +138,7 @@ public class TowerBuy extends Button {
                     break;
                 case "tesla":
                     p.text("Tesla Tower", x, 241);
+                    teslaTowerInfo(p);
                     break;
                 case "nightmare":
                     p.text("Nightmare", x, 241);

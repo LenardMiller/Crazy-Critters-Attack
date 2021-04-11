@@ -118,4 +118,16 @@ public class TowerInfo {
         p.textAlign(CENTER);
         p.text("[D]", 1000, space(8));
     }
+
+    public static void teslaTowerInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Creates an electric", x, space(0));
+        p.text("arc that can jump", x, space(1));
+        p.text("from enemy to", x, space(2));
+        p.text("enemy.  Short range,", x, space(3));
+        p.text("but arcs can jump", x, space(4));
+        p.text("quite far.", x, space(5));
+        p.textAlign(CENTER);
+        p.text("[C]", 1000, space(8));
+    }
 }
