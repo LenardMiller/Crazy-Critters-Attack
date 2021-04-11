@@ -2,17 +2,16 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.misc.Tile;
-import main.particles.BuffParticle;
 import main.projectiles.Glue;
 import main.projectiles.SpikeyGlue;
 import main.projectiles.SplatterGlue;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static processing.core.PConstants.HALF_PI;
 
 public class Gluer extends Turret {
 
@@ -27,27 +26,25 @@ public class Gluer extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 150; //default: 150 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 7;
-        numFireFrames = 5;
-        betweenFireFrames = 1;
-        numLoadFrames = 7;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        spriteType = 0;
+        delay = 2.5f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 400;
+        betweenFireFrames = down60ToFramerate(1);
+        state = 0;
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 0;
         range = 300;
-        effectDuration = 360;
+        effectDuration = 3;
         effectLevel = 0.7f;
         spikey = false;
-        damageSound = soundsH.get("stoneDamage");
-        breakSound = soundsH.get("stoneBreak");
-        placeSound = soundsH.get("stonePlace");
-        fireSound = soundsH.get("glueFire");
+        damageSound = sounds.get("stoneDamage");
+        breakSound = sounds.get("stoneBreak");
+        placeSound = sounds.get("stonePlace");
+        fireSound = sounds.get("glueFire");
+        fireParticle = "glue";
+        barrelLength = 28;
         loadSprites();
         debrisType = "stone";
         price = GLUER_PRICE;
@@ -56,32 +53,17 @@ public class Gluer extends Turret {
         setUpgrades();
         updateTowerArray();
 
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    public void fire() {
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
-        float angleB = angle;
-        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);float particleCount = p.random(1,5);
-        spa.setMag(28); //barrel length
-        spp.add(spa);
-        String part = "glue";
-        if (spikey) projectiles.add(new SpikeyGlue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
-        else if (splatter) projectiles.add(new SplatterGlue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
-        else projectiles.add(new Glue(p,spp.x,spp.y, angleB, this, damage, effectLevel, effectDuration));
-        for (int i = 0; i < particleCount; i++) {
-            PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
-            spa2.setMag(-5);
-            PVector spp2 = new PVector(spp.x,spp.y);
-            spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),part));
-        }
+    protected void spawnProjectile(PVector position, float angle) {
+        if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
+        else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
+        else projectiles.add(new Glue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
     }
 
-    void getTargetEnemy() {
+    protected void getTargetEnemy() {
         //0: close
         //1: far
         //2: strong
@@ -156,40 +138,38 @@ public class Gluer extends Turret {
         upgradeDescB[3] = "glue";
         upgradeDescC[3] = "strength";
 
-        upgradeDescA[4] = "Increase";
-        upgradeDescB[4] = "glue";
+        upgradeDescA[4] = "Glue";
+        upgradeDescB[4] = "does";
         upgradeDescC[4] = "damage";
 
         upgradeDescA[5] = "Release";
         upgradeDescB[5] = "spikes on";
         upgradeDescC[5] = "death";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[25];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[28];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[25];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[28];
 
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[27];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[26];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[27];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[26];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
                     range += 30;
                     break;
                 case 1:
-                    effectDuration += 180;
-                    if (nextLevelB > 5) nextLevelA++;
+                    effectDuration += 1;
                     break;
                 case 2:
-                    effectDuration += 180;
+                    effectDuration += 1;
                     range += 30;
                     splatter = true;
                     name = "splashGluer";
                     loadSprites();
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -199,7 +179,6 @@ public class Gluer extends Turret {
                     break;
                 case 4:
                     damage = 35;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     damage += 65;
@@ -207,8 +186,10 @@ public class Gluer extends Turret {
                     spikey = true;
                     name = "shatterGluer";
                     debrisType = "metal";
+                    placeSound = sounds.get("metalPlace");
+                    damageSound = sounds.get("metalDamage");
+                    breakSound = sounds.get("metalBreak");
                     loadSprites();
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

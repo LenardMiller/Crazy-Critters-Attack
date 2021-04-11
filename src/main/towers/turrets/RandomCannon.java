@@ -5,10 +5,11 @@ import main.particles.BuffParticle;
 import main.projectiles.Laundry;
 import main.projectiles.MiscProjectile;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static processing.core.PConstants.HALF_PI;
 
@@ -24,24 +25,20 @@ public class RandomCannon extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 25; //default: 25 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 12;
-        numFireFrames = 5;
-        betweenFireFrames = 4;
-        numLoadFrames = 1;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        spriteType = 0;
+        delay = 0.4f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 700;
+        betweenFireFrames = down60ToFramerate(8);
+        state = 0;
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 10;
         range = 200;
-        damageSound = soundsH.get("woodDamage");
-        breakSound = soundsH.get("woodBreak");
-        placeSound = soundsH.get("woodPlace");
-        fireSound = soundsH.get("luggageBlaster");
+        damageSound = sounds.get("woodDamage");
+        breakSound = sounds.get("woodBreak");
+        placeSound = sounds.get("woodPlace");
+        fireSound = sounds.get("luggageBlaster");
         loadSprites();
         debrisType = "wood";
         price = RANDOMCANNON_PRICE;
@@ -50,13 +47,12 @@ public class RandomCannon extends Turret {
         setUpgrades();
         updateTowerArray();
 
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    public void fire() {
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
+    protected void fire(float barrelLength, String particleType) {
+        playSoundRandomSpeed(p, fireSound, 1);
         float angleB = angle;
         int spriteType = (int)(p.random(0,5.99f));
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
@@ -69,7 +65,7 @@ public class RandomCannon extends Turret {
         else spa.setMag(18);
         spp.add(spa);
         String part = "smoke";
-        if (laundry && p.random(0,3) < 1) {
+        if (laundry && p.random(0,3) < 1) { //this is why this is here
             projectiles.add(new Laundry(p,spp.x,spp.y, angleB, this, damage));
             part = "poison";
         }
@@ -85,12 +81,12 @@ public class RandomCannon extends Turret {
 
     private void setUpgrades() {
         //price
-        upgradePrices[0] = 125;
+        upgradePrices[0] = 150;
         upgradePrices[1] = 150;
-        upgradePrices[2] = 500;
+        upgradePrices[2] = 600;
         upgradePrices[3] = 75;
         upgradePrices[4] = 125;
-        upgradePrices[5] = 600;
+        upgradePrices[5] = 500;
         //titles
         upgradeTitles[0] = "Damage Up";
         upgradeTitles[1] = "Faster Firing";
@@ -99,7 +95,7 @@ public class RandomCannon extends Turret {
         upgradeTitles[4] = "Longest Range";
         upgradeTitles[5] = "Dirty Laundry";
         //description
-        upgradeDescA[0] = "+15";
+        upgradeDescA[0] = "increase";
         upgradeDescB[0] = "damage";
         upgradeDescC[0] = "";
 
@@ -123,35 +119,33 @@ public class RandomCannon extends Turret {
         upgradeDescB[5] = "splatters";
         upgradeDescC[5] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[10];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[15];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[12];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[10];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[15];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[12];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    damage += 15;
+                    damage += 10;
                     break;
                 case 1:
-                    delay -= 10;
-                    if (nextLevelB > 5) nextLevelA++;
+                    delay -= 0.15f;
                     break;
                 case 2:
-                    damageSound = soundsH.get("stoneDamage");
-                    breakSound = soundsH.get("stoneBreak");
-                    placeSound = soundsH.get("stonePlace");
+                    damageSound = sounds.get("stoneDamage");
+                    breakSound = sounds.get("stoneBreak");
+                    placeSound = sounds.get("stonePlace");
                     debrisType = "stone";
                     barrel = true;
-                    delay = 6;
+                    delay = 0;
                     damage -= 5;
                     name = "miscCannonBarrel";
                     loadSprites();
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -161,16 +155,14 @@ public class RandomCannon extends Turret {
                     break;
                 case 4:
                     range += 30;
-                    if (nextLevelA > 2) nextLevelB++;
                     break;
                 case 5:
                     laundry = true;
                     damage += 10;
-                    effectDuration = 360;
+                    effectDuration = 6;
                     effectLevel = 25;
                     name = "miscCannonLaundry";
                     loadSprites();
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

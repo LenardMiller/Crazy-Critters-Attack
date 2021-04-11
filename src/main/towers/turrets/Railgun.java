@@ -7,6 +7,8 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Railgun extends Turret {
@@ -30,28 +32,22 @@ public class Railgun extends Turret {
         hp = maxHp;
         offset = 6;
         hit = false;
-        delay = 500; //500 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
+        delay = 8;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 5000;
         pjSpeed = -1;
         range = 800; //0
-        numFireFrames = 15;
-        numLoadFrames = 9;
-        numIdleFrames = 6;
         NUM_VAPOR_FRAMES = 15;
-        BETWEEN_VAPOR_FRAMES = 3;
+        BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);
         betweenVaporTimer = 0;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
         vaporTrail = new PImage[NUM_VAPOR_FRAMES];
         vaporEndSprites = new PImage[11];
         currentVaporFrame = 16;
         betweenIdleFrames = 3;
         betweenFireFrames = 3;
-        spriteType = 0;
-        vaporTrail = spritesAnimH.get("railgunVaporTrailTR");
-        vaporEndSprites = spritesAnimH.get("railgunBlastPT");
+        state = 0;
+        vaporTrail = animatedSprites.get("railgunVaporTrailTR");
+        vaporEndSprites = animatedSprites.get("railgunBlastPT");
         loadSprites();
         debrisType = "ultimate";
         price = 400;
@@ -59,9 +55,12 @@ public class Railgun extends Turret {
         priority = 2; //strong
         setUpgrades();
         updateTowerArray();
+
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    public void fire() {
+    protected void fire() {
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(30);
@@ -77,10 +76,10 @@ public class Railgun extends Turret {
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
 
-        targetEnemy.damageSimple(damage,this, "normal", PVector.fromAngle(vaporAngle - HALF_PI), true);
+        targetEnemy.damageWithoutBuff(damage,this, "normal", PVector.fromAngle(vaporAngle - HALF_PI), true);
     }
 
-    public void displayPassB2() {
+    public void displayMain() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -144,13 +143,13 @@ public class Railgun extends Turret {
         upgradeDescC[2] = "";
         upgradeDescC[3] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
     }
 
-    public void upgradeSpecial() {}
+    protected void upgradeSpecial() {}
 
     public void updateSprite() {}
 }

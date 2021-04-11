@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import static main.Main.*;
-import static processing.core.PApplet.*;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class DataControl extends ClassLoader {
 
@@ -28,9 +28,9 @@ public class DataControl extends ClassLoader {
             JSONObject saveObject = new JSONObject();
             saveObject.setString("type", "tile");
             saveObject.setInt("id", i);
-            saveObject.setString("bgA", tile.bgAName);
-            saveObject.setString("bgB", tile.bgBName);
-            saveObject.setString("bgC", tile.bgCName);
+            saveObject.setString("bgA", tile.baseName);
+            saveObject.setString("bgB", tile.decorationName);
+            saveObject.setString("bgC", tile.breakableName);
             saveObject.setString("obstacle", tile.obstacleName);
             saveObject.setBoolean("machine", tile.machine);
             saveArray.setJSONObject(i, saveObject);
@@ -47,6 +47,11 @@ public class DataControl extends ClassLoader {
         saveObject.setString("name", machine.name);
         saveObject.setString("debris", machine.debris);
         saveObject.setInt("betweenFrames", machine.betweenFrames);
+        saveObject.setFloat("barX", machine.barPosition.x);
+        saveObject.setFloat("barY", machine.barPosition.y);
+        saveObject.setFloat("barSizeX", machine.barSize.x);
+        saveObject.setFloat("barSizeY", machine.barSize.y);
+        saveObject.setBoolean("barHorizontal", machine.barHorizontal);
         saveArray.setJSONObject(i, saveObject);
 
         String name = "Save-"+month()+"-"+day()+"-"+year()+"-"+hour() +"-"+minute()+"-"+second();
@@ -87,9 +92,9 @@ public class DataControl extends ClassLoader {
             String bgC = loadObject.getString("bgC");
             String obstacle = loadObject.getString("obstacle");
             boolean machine = loadObject.getBoolean("machine");
-            if (bgA != null) tile.setBgA(bgA);
-            if (bgB != null) tile.setBgB(bgB);
-            if (bgC != null) tile.setBgC(bgC);
+            if (bgA != null) tile.setBase(bgA);
+            if (bgB != null) tile.setDecoration(bgB);
+            if (bgC != null) tile.setBreakable(bgC);
             if (obstacle != null) tile.setObstacle(obstacle);
             tile.machine = machine;
         }
@@ -102,8 +107,16 @@ public class DataControl extends ClassLoader {
         int y = loadObject.getInt("y");
         String machineName = loadObject.getString("name");
         String debris = loadObject.getString("debris");
-        int betweenFrames = loadObject.getInt("betweenFrames");
+        int betweenFrames = down60ToFramerate(loadObject.getInt("betweenFrames"));
+        float barX = loadObject.getFloat("barX");
+        float barY = loadObject.getFloat("barY");
+        float barSizeX = loadObject.getFloat("barSizeX");
+        float barSizeY = loadObject.getFloat("barSizeY");
+        boolean barHorizontal = loadObject.getBoolean("barHorizontal");
         machine = new Machine(p,new PVector(x,y), machineName, debris, betweenFrames, maxHp);
         machine.hp = hp;
+        machine.barPosition = new PVector(barX, barY);
+        machine.barSize = new PVector(barSizeX, barSizeY);
+        machine.barHorizontal = barHorizontal;
     }
 }

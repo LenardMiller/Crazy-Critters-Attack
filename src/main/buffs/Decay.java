@@ -6,15 +6,16 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.enemies;
+import static main.misc.Utilities.secondsToFrames;
 
 public class Decay extends Buff {
 
     private final int DAMAGE;
 
-    public Decay(PApplet p, int enId, float damage, int duration, Turret turret) {
+    public Decay(PApplet p, int enId, float damage, float duration, Turret turret) {
         super(p,enId,turret);
-        effectDelay = 6; //frames
-        lifeDuration = duration; //frames
+        effectDelay = secondsToFrames(0.1f); //frames
+        lifeDuration = secondsToFrames(duration); //frames
         particle = "decay";
         name = "decay";
         this.DAMAGE = (int) damage;
@@ -24,8 +25,8 @@ public class Decay extends Buff {
 
     public void effect() {
         Enemy enemy = enemies.get(enId);
-        enemy.barTrans = 255;
-        enemy.damageSimple(DAMAGE,turret, "decay", new PVector(0,0), false);
+        enemy.barAlpha = 255;
+        enemy.damageWithoutBuff(DAMAGE,turret, "decay", new PVector(0,0), false);
         effectTimer = p.frameCount + effectDelay;
     }
 }

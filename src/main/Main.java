@@ -5,6 +5,7 @@ import main.enemies.Enemy;
 import main.gui.*;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
+import main.levelStructure.CaveWaves;
 import main.levelStructure.DesertWaves;
 import main.levelStructure.ForestWaves;
 import main.levelStructure.Level;
@@ -15,23 +16,31 @@ import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
 import main.projectiles.Arc;
 import main.projectiles.Projectile;
+import main.shockwaves.Shockwave;
+import main.sound.FadeSoundLoop;
+import main.sound.SoundWithAlts;
+import main.sound.StartStopSoundLoop;
 import main.towers.Tower;
+import main.towers.Wall;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.Sound;
 import processing.sound.SoundFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static main.misc.MiscMethods.*;
-import static main.misc.SoundLoader.loadSounds;
-import static main.misc.SpriteLoader.loadSprites;
-import static main.misc.SpriteLoader.loadSpritesAnim;
+import static java.lang.Character.toLowerCase;
+import static main.misc.SpriteLoader.loadAnimatedSprites;
+import static main.misc.SpriteLoader.loadStaticSprites;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
+import static main.pathfinding.PathfindingUtilities.*;
+import static main.sound.SoundLoader.loadSounds;
 
 public class Main extends PApplet {
 
@@ -39,6 +48,7 @@ public class Main extends PApplet {
     public static KeyDS keysPressed = new KeyDS();
     public static InputHandler inputHandler;
     public static KeyBinds keyBinds;
+    public static Sound sound;
 
     public static Machine machine;
     public static ArrayList<main.towers.Tower> towers;
@@ -47,10 +57,11 @@ public class Main extends PApplet {
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles, underParticles;
     public static ArrayList<main.projectiles.Arc> arcs;
-    public static ArrayList<main.projectiles.Shockwave> shockwaves;
+    public static ArrayList<Shockwave> shockwaves;
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;
     public static ArrayList<Buff> buffs;
+    public static ArrayList<PopupText> popupTexts;
 
     public static int currentLevel;
     public static Level[] levels;
@@ -84,14 +95,14 @@ public class Main extends PApplet {
     public static boolean paused = false;
     public static boolean dev = false;
     public static int connectWallQueues;
-    public static float volume = 0.25f;
 
-    public static final int FRAMERATE = 60;
+    public static final int FRAMERATE = 30;
+    public static final int SOFT_PARTICLE_CAP = 1500;
+    public static final int HARD_PARTICLE_CAP = 3000;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
-    public static final int GRID_WIDTH = 1100;
-    public static final int GRID_HEIGHT = 1100;
+    public static final int TILE_SIZE = 50;
 
     public static final int SLINGSHOT_PRICE = 75;
     public static final int RANDOMCANNON_PRICE = 150;
@@ -99,20 +110,28 @@ public class Main extends PApplet {
     public static final int CANNON_PRICE = 300;
     public static final int GLUER_PRICE = 300;
     public static final int SEISMIC_PRICE = 400;
+    public static final int ENERGYBLASTER_PRICE = 650;
+    public static final int FLAMETHROWER_PRICE = 700;
+    public static final int TESLATOWER_PRICE = 800;
 
-    public static HashMap<String, PImage> spritesH = new HashMap<>();
-    public static HashMap<String, PImage[]> spritesAnimH = new HashMap<>();
-    public static HashMap<String, SoundFile> soundsH = new HashMap<>();
-    public static HashMap<String, SoundLoop> soundLoopsH = new HashMap<>();
+    public static HashMap<String, PImage> staticSprites = new HashMap<>();
+    public static HashMap<String, PImage[]> animatedSprites = new HashMap<>();
+
+    public static HashMap<String, SoundFile> sounds = new HashMap<>();
+    public static HashMap<String, StartStopSoundLoop> startStopSoundLoops = new HashMap<>();
+    public static HashMap<String, FadeSoundLoop> fadeSoundLoops = new HashMap<>();
+    public static HashMap<String, SoundWithAlts> soundsWithAlts = new HashMap<>();
 
     //pathfinding stuff
-    public static int defaultSize = 1;
+    public static final int GRID_WIDTH = 1100;
+    public static final int GRID_HEIGHT = 1100;
+    public static final int NODE_SIZE = 25;
+    public static final int DEFAULT_SIZE = 1;
     public static Node[][] nodeGrid;
     public static HeapNode openNodes;
     public static Node start;
     public static Node[] end;
     public static AStar path;
-    public static int nodeSize;
     public static float maxCost, minCost;
 
     public static void main(String[] args) {
@@ -125,7 +144,7 @@ public class Main extends PApplet {
      * run once at program start
      */
     public void settings() {
-        size(GRID_WIDTH, BOARD_HEIGHT); //todo: openGL?
+        size(GRID_WIDTH, BOARD_HEIGHT);
     }
 
     /**
@@ -136,6 +155,7 @@ public class Main extends PApplet {
     public void setup() {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
+        sound = new Sound(this);
         //fonts
         veryLargeFont = createFont("STHeitiSC-Light", 48);
         largeFont = createFont("STHeitiSC-Light", 24);
@@ -143,20 +163,19 @@ public class Main extends PApplet {
         mediumFont = createFont("STHeitiSC-Light", 18);
         smallFont = createFont("STHeitiSC-Light", 12);
         //loads sprites
-        loadSprites(this);
-        loadSpritesAnim(this);
-        //loads sounds
+        loadStaticSprites(this);
+        loadAnimatedSprites(this);
+        //sound stuff
         loadSounds(this);
+        sound.volume(0.25f);
         //load input
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
         keyBinds.loadKeyBinds();
         //set level count
-        levels = new Level[2];
+        levels = new Level[3];
         //guis
         levelSelectGui = new LevelSelectGui(this);
-
-        resetGame(this);
     }
 
     /**
@@ -165,9 +184,9 @@ public class Main extends PApplet {
     public static void resetGame(PApplet p) {
         //creates object data structures
         tiles = new Tile.TileDS();
-        for (int y = 0; y <= (BOARD_HEIGHT / 50); y++) {
-            for (int x = 0; x <= (BOARD_WIDTH / 50); x++) {
-                tiles.add(new Tile(p, new PVector(x * 50, y * 50), tiles.size()), x, y);
+        for (int y = 0; y <= BOARD_HEIGHT / TILE_SIZE; y++) {
+            for (int x = 0; x <= BOARD_WIDTH / TILE_SIZE; x++) {
+                tiles.add(new Tile(p, new PVector(x * TILE_SIZE, y * TILE_SIZE), tiles.size()), x, y);
             }
         }
         enemies = new ArrayList<>();
@@ -180,20 +199,20 @@ public class Main extends PApplet {
         towerBuyButtons = new ArrayList<>();
         tileSelectButtons = new ArrayList<>();
         buffs = new ArrayList<>();
+        popupTexts = new ArrayList<>();
         //pathfinding stuff
-        nodeSize = 25;
-        nodeGrid = new Node[GRID_WIDTH / nodeSize][GRID_HEIGHT / nodeSize];
-        for (int x = 0; x < GRID_WIDTH / nodeSize; x++) {
-            for (int y = 0; y < GRID_HEIGHT / nodeSize; y++) {
-                nodeGrid[x][y] = new Node(p, new PVector((nodeSize * x)-100, (nodeSize * y)-100));
+        nodeGrid = new Node[GRID_WIDTH / NODE_SIZE][GRID_HEIGHT / NODE_SIZE];
+        for (int x = 0; x < GRID_WIDTH / NODE_SIZE; x++) {
+            for (int y = 0; y < GRID_HEIGHT / NODE_SIZE; y++) {
+                nodeGrid[x][y] = new Node(p, new PVector((NODE_SIZE * x)-100, (NODE_SIZE * y)-100));
             }
         }
         path = new AStar();
-        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / nodeSize)));
+        openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / NODE_SIZE)));
         //create end nodes
         end = new Node[0];
         //create start node
-        nodeGrid[1][(GRID_WIDTH / nodeSize) / 2].setStart(1, (GRID_HEIGHT / nodeSize) / 2);
+        nodeGrid[1][(GRID_WIDTH / NODE_SIZE) / 2].setStart(1, (GRID_HEIGHT / NODE_SIZE) / 2);
         start.findGHF();
         for (Node node : end) node.findGHF();
         updateTowerArray();
@@ -201,6 +220,7 @@ public class Main extends PApplet {
         playingLevel = false;
         levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
+        levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 450, 100, "stone");
         DataControl.load(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();
@@ -220,12 +240,21 @@ public class Main extends PApplet {
      * Everything else, run every frame.
      */
     public void draw() {
+        float buffer = 0;
+        if (debug) {
+            pushMatrix();
+            scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
+            buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
+            translate(buffer, buffer);
+        }
         background(50, 50, 50);
+        tint(255);
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
         //looping sounds
-        for (SoundLoop soundLoop : soundLoopsH.values()) soundLoop.continueLoop();
+        for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
+        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;
@@ -235,6 +264,7 @@ public class Main extends PApplet {
             key.pressedPulse = false;
             key.releasedPulse = false;
         }
+        if (debug && buffer != 0) popMatrix();
     }
 
     /**
@@ -252,7 +282,7 @@ public class Main extends PApplet {
         }
         keyBinds.inGameKeys();
         //pathfinding
-        if (path.reqQ.size() > 0) {
+        if (!path.reqQ.isEmpty()) {
             path.reqQ.get(0).getPath();
             path.reqQ.remove(0);
         }
@@ -260,15 +290,20 @@ public class Main extends PApplet {
         minCost = minCost(maxCost);
         //objects
         drawObjects();
+        //text
+        for (int i = popupTexts.size()-1; i >= 0; i--) {
+            popupTexts.get(i).main();
+        }
         //gui stuff
         noStroke();
-        if (!levelBuilder) inGameGui.display();
-        else levelBuilderGui.display();
+        if (!debug) {
+            if (!levelBuilder) inGameGui.display();
+            else levelBuilderGui.display();
+            hand.displayHeldInfo();
+            textAlign(LEFT);
+            if (!levelBuilder) inGameGui.drawText(this, 10);
+        } else inGameGui.drawDebugText(this, 10);
         if (paused) pauseGui.display();
-        hand.displayHeldInfo();
-        //text
-        textAlign(LEFT);
-        if (!levelBuilder) inGameGui.drawText(this, 10);
         //levels
         if (playingLevel) levels[currentLevel].main();
     }
@@ -291,38 +326,38 @@ public class Main extends PApplet {
         }
         //main background
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayA();
+            tiles.get(i).displayBaseAndFlooring();
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWName != null) {
-                if (tile.bgWName.equals("metalWall")) {
-                    tile.drawBgWICorners();
+            if (tile.flooringName != null) {
+                if (tile.flooringName.equals("metalWall")) {
+                    tile.displayFlooringInsideCorners();
                 }
             }
-            tile.drawBgWOCorners("metalWall");
+            tile.displayFlooringOutsideCorners("metalWall");
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWName != null) {
-                if (tile.bgWName.equals("crystalWall")) {
-                    tile.drawBgWICorners();
+            if (tile.flooringName != null) {
+                if (tile.flooringName.equals("crystalWall")) {
+                    tile.displayFlooringInsideCorners();
                 }
             }
-            tile.drawBgWOCorners("crystalWall");
+            tile.displayFlooringOutsideCorners("crystalWall");
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.bgWName != null) {
-                if (tile.bgWName.equals("titaniumWall")) {
-                    tile.drawBgWICorners();
+            if (tile.flooringName != null) {
+                if (tile.flooringName.equals("titaniumWall")) {
+                    tile.displayFlooringInsideCorners();
                 }
             }
-            tile.drawBgWOCorners("titaniumWall");
+            tile.displayFlooringOutsideCorners("titaniumWall");
         }
         //obstacle shadows, background c
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayB();
+            tiles.get(i).displayBreakableAndShadow();
         }
         //pathfinding debug
         if (debug) {
@@ -332,22 +367,23 @@ public class Main extends PApplet {
                 }
             }
             fill(0,0,255);
-            rect(start.position.x,start.position.y, nodeSize, nodeSize);
+            rect(start.position.x,start.position.y, NODE_SIZE, NODE_SIZE);
         }
         //under particle culling
         int up = underParticles.size();
-        int up2 = up-800;
-        if (up > 800) for (int i = 0; i < up; i++) if (random(0,up2) < 5) {
+        int up2 = up-SOFT_PARTICLE_CAP;
+        if (up > SOFT_PARTICLE_CAP) for (int i = 0; i < up; i++) if (random(0,up2) < 5) {
             if (i < underParticles.size()) underParticles.remove(i);
             else break;
         }
-        if (up > 1200) underParticles = new ArrayList<>();
+        if (up > HARD_PARTICLE_CAP) underParticles = new ArrayList<>();
         //under particles
         for (int i = underParticles.size()-1; i >= 0; i--) {
             Particle particle = underParticles.get(i);
             particle.main(underParticles, i);
         }
         //corpses
+        for (Corpse corpse : corpses) corpse.display();
         for (int i = corpses.size() - 1; i >= 0; i--) {
             Corpse corpse = corpses.get(i);
             corpse.main(i);
@@ -355,17 +391,17 @@ public class Main extends PApplet {
         //machine
         machine.main();
         //enemies
-        for (Enemy enemy : enemies) enemy.displayPassA();
+        for (Enemy enemy : enemies) if (!enemy.flying) enemy.displayShadow();
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
-            enemy.main(i);
+            if (!enemy.flying) enemy.main(i);
         }
-        if (enemies.size() == 0) buffs = new ArrayList<>();
+        if (enemies.isEmpty()) buffs = new ArrayList<>();
         //towers
-        for (Tower tower : towers) if (tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassA();
-        for (Tower tower : towers) if (!tower.turret) tower.displayPassB();
-        for (Tower tower : towers) if (tower.turret) tower.displayPassB();
+        for (Tower tower : towers) if (tower instanceof Turret) tower.displayBase();
+        for (Tower tower : towers) if (tower instanceof Wall) tower.displayBase();
+        for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
+        for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
         for (Tower tower : towers) tower.main();
         //projectiles
         for (Projectile projectile : projectiles) projectile.displayPassA();
@@ -383,12 +419,12 @@ public class Main extends PApplet {
         for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).main();
         //particle culling
         int p = particles.size();
-        int p2 = p-800;
-        if (p > 800) for (int i = 0; i < p; i++) if (random(0,p2) < 5) {
+        int p2 = p-SOFT_PARTICLE_CAP;
+        if (p > SOFT_PARTICLE_CAP) for (int i = 0; i < p; i++) if (random(0,p2) < 5) {
             if (i < particles.size()) particles.remove(i);
             else break;
         }
-        if (p > 1200) particles = new ArrayList<>();
+        if (p > HARD_PARTICLE_CAP) particles = new ArrayList<>();
         //particles
         for (int i = particles.size()-1; i >= 0; i--) {
             Particle particle = particles.get(i);
@@ -403,15 +439,30 @@ public class Main extends PApplet {
         hand.main();
         //obstacles
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayC();
+            tiles.get(i).displayObstacle();
+        }
+        //flying enemies
+        enemies.stream().filter(enemy -> enemy.flying).forEach(Enemy::displayShadow);
+        for (int i = enemies.size() - 1; i >= 0; i--) {
+            Enemy enemy = enemies.get(i);
+            if (enemy.flying) enemy.main(i);
         }
         //enemy hp bars
-        for (Enemy enemy : enemies) {
-            if (enemy.hp > 0 && !enemy.stealthMode) enemy.hpBar();
-        }
+        enemies.stream().filter(enemy -> enemy.hp > 0 && !enemy.stealthMode).forEach(Enemy::hpBar);
+        //tower hp bars
+        towers.forEach(Tower::displayHpBar);
+        //machine hp bar
+        machine.hpBar();
     }
 
+    /**
+     * Checks if a key is pressed.
+     * Also includes overrides.
+     */
     public void keyPressed() {
+        if (!dev) key = toLowerCase(key);
+        if (keyCode == 27) key = '|';
+        if (keyCode == 9) key = '?';
         inputHandler.key(true);
     }
 

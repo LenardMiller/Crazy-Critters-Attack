@@ -3,7 +3,8 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
+import static main.Main.animatedSprites;
+import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class LargeExplosion extends Particle {
@@ -14,12 +15,12 @@ public class LargeExplosion extends Particle {
         size = new PVector(50,50);
         maxSpeed = 0;
         speed = maxSpeed;
-        angleTwo = angle;
+        displayAngle = angle;
         angularVelocity = 0; //degrees mode
-        betweenFrames = 1;
+        betweenFrames = down60ToFramerate(1);
         numFrames = 17;
         currentSprite = 0;
-        sprites = spritesAnimH.get(type + "LargeExplosionPT");
+        sprites = animatedSprites.get(type + "LargeExplosionPT");
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 }

@@ -3,7 +3,7 @@ package main.towers.turrets;
 import main.enemies.Enemy;
 import main.misc.CompressArray;
 import main.misc.Tile;
-import main.particles.Debris;
+import main.particles.BuffParticle;
 import main.particles.Ouch;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -14,62 +14,74 @@ import processing.sound.SoundFile;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
+import static main.misc.Utilities.*;
+import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public abstract class Turret extends Tower {
 
-    PImage sBase;
-    PImage sIdle;
-    int offset;
-    int pjSpeed;
-    int numFireFrames;
-    int numLoadFrames;
-    int numIdleFrames;
-    PImage[] fireFrames;
-    PImage[] loadFrames;
-    PImage[] idleFrames;
-    int spriteType;
-    int frame;
-    int frameTimer;
-    int betweenIdleFrames;
-    int betweenFireFrames;
-    float loadDelay;
-    float loadDelayTime;
+    public boolean hasPriority;
+    public int pjSpeed;
+    public int range;
+    public int priority;
+    public int pierce;
+    public int killsTotal;
+    public int damageTotal;
+    public int damage;
+    public float effectDuration;
+    public float effectLevel;
+    public float delay;
+    public float angle;
+    public String[] upgradeDescA;
+    public String[] upgradeDescB;
+    public String[] upgradeDescC;
+
+    protected int offset;
+    protected int state;
+    protected int frame;
+    protected int frameTimer;
+    protected int betweenIdleFrames;
+    protected int betweenFireFrames;
+    protected float loadDelay;
+    protected float loadDelayTime;
+    protected float targetAngle;
+    protected float barrelLength;
+    protected String fireParticle;
+    protected PImage sIdle;
+    protected PImage sBase;
+    protected PImage[] fireFrames;
+    protected PImage[] loadFrames;
+    protected PImage[] idleFrames;
+    protected Enemy targetEnemy;
+    protected SoundFile fireSound;
+
     private ArrayList<Integer> spriteArray;
-    Enemy targetEnemy;
 
-    float targetAngle;
-    SoundFile fireSound;
-
-    Turret(PApplet p, Tile tile) {
+    protected Turret(PApplet p, Tile tile) {
         super(p, tile);
         this.p = p;
+        hasPriority = true;
         offset = 0;
         name = null;
         size = new PVector(50, 50);
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 240;
-        pjSpeed = 2;
+        delay = 4;
+        pjSpeed = 500;
         range = 0;
-        numFireFrames = 1;
-        numLoadFrames = 1;
-        numIdleFrames = 1;
         debrisType = null;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
+        barrelLength = 0;
+        fireParticle = "null";
         spriteArray = new ArrayList<>();
-        spriteType = 0;
+        state = 0;
         effectLevel = 0;
         effectDuration = 0;
         frame = 0;
         loadDelay = 0;
         betweenIdleFrames = 0;
         loadDelayTime = 0;
-        turret = true;
         loadSprites();
         upgradePrices = new int[6];
         upgradeTitles = new String[6];
@@ -82,17 +94,17 @@ public abstract class Turret extends Tower {
         updateTowerArray();
     }
 
-    public void checkTarget() {
+    protected void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null && spriteType != 1) aim(targetEnemy);
-        if (spriteType == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
-            spriteType = 1;
+        if (targetEnemy != null && state != 1) aim(targetEnemy);
+        if (state == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
+            state = 1;
             frame = 0;
-            fire();
+            fire(barrelLength, fireParticle);
         }
     }
 
-    void getTargetEnemy() {
+    protected void getTargetEnemy() {
         //0: close
         //1: far
         //2: strong
@@ -106,7 +118,7 @@ public abstract class Turret extends Tower {
                 float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));
-                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < range) {
+                if (enemy.onScreen() && dist < range) {
                     if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
                         finalDist = dist;
@@ -129,7 +141,7 @@ public abstract class Turret extends Tower {
         targetEnemy = e;
     }
 
-    public void aim(Enemy enemy) {
+    protected void aim(Enemy enemy) {
         PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
         PVector target = enemy.position;
 
@@ -143,7 +155,7 @@ public abstract class Turret extends Tower {
 
         targetAngle = clampAngle(findAngle(position, target));
         angle = clampAngle(angle);
-        angle += angleDifference(targetAngle, angle) / 10;
+        angle += angleDifference(targetAngle, angle) / (FRAMERATE/6f);
 
         if (abs(targetAngle - angle) < 0.05) angle = targetAngle; //snap to prevent getting stuck
 
@@ -157,22 +169,38 @@ public abstract class Turret extends Tower {
         }
     }
 
-    public void fire() {
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
+    protected void fire(float barrelLength, String particleType) {
+        playSoundRandomSpeed(p, fireSound, 1);
+        float displayAngle = angle;
+        PVector projectileSpawn = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
+        PVector angleVector = PVector.fromAngle(displayAngle-HALF_PI);
+        float particleCount = p.random(1,5);
+        angleVector.setMag(barrelLength); //barrel length
+        projectileSpawn.add(angleVector);
+        spawnProjectile(projectileSpawn, displayAngle);
+        if (particleType != null && !particleType.equals("null")) {
+            for (int i = 0; i < particleCount; i++) {
+                PVector spa2 = PVector.fromAngle(displayAngle - HALF_PI + radians(p.random(-20, 20)));
+                spa2.setMag(-5);
+                PVector spp2 = new PVector(projectileSpawn.x, projectileSpawn.y);
+                spp2.add(spa2);
+                particles.add(new BuffParticle(p, spp2.x, spp2.y, displayAngle + radians(p.random(-45, 45)), particleType));
+            }
+        }
     }
 
-    public void loadSprites() {
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        sBase = spritesH.get(name + "BaseTR");
-        sIdle = spritesH.get(name + "IdleTR");
-        fireFrames = spritesAnimH.get(name + "FireTR");
-        loadFrames = spritesAnimH.get(name + "LoadTR");
-        if (numIdleFrames > 1) idleFrames = spritesAnimH.get(name + "IdleTR");
+    protected void spawnProjectile(PVector position, float angle) {}
+
+    protected void loadSprites() {
+        sBase = staticSprites.get(name + "BaseTR");
+        sIdle = staticSprites.get(name + "IdleTR");
+        fireFrames = animatedSprites.get(name + "FireTR");
+        loadFrames = animatedSprites.get(name + "LoadTR");
+        if (animatedSprites.get(name + "IdleTR") != null) idleFrames = animatedSprites.get(name + "IdleTR");
+        else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
     }
 
-    public void main() { //need to check target
+    public void main() {
         if (hp <= 0) {
             die(false);
             tile.tower = null;
@@ -184,16 +212,33 @@ public abstract class Turret extends Tower {
         }
     }
 
-    public void displayPassB() {
+    public void die(boolean sold) {
+        playSoundRandomSpeed(p, breakSound, 1);
+        spawnParticles();
+        tile.tower = null;
+        alive = false;
+        updateTowerArray();
+        if (selection.turret == this) {
+            selection.name = "null";
+            inGameGui.flashA = 255;
+        }
+        else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
+        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(debrisType + "DebrisBGC_TL");
+        updateFlooring();
+        connectWallQueues++;
+        updateNodes();
+    }
+
+    public void controlAnimation() {
         if (!paused) {
             if (hp < maxHp && p.random(0, 30) < 1) {
                 particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greyPuff"));
             }
             if (tintColor < 255) tintColor += 20;
-            if (spriteType == 0) { //idle
+            if (state == 0) { //idle
                 sprite = sIdle;
-                if (numIdleFrames > 1) {
-                    if (frame < numIdleFrames) {
+                if (idleFrames.length > 1) {
+                    if (frame < idleFrames.length) {
                         sprite = idleFrames[frame];
                         if (frameTimer >= betweenIdleFrames) {
                             frame++;
@@ -204,17 +249,17 @@ public abstract class Turret extends Tower {
                         sprite = idleFrames[frame];
                     }
                 }
-            } else if (spriteType == 1) { //fire
-                if (frame < numFireFrames - 1) { //if not done, keep going
+            } else if (state == 1) { //fire
+                if (frame < fireFrames.length - 1) { //if not done, keep going
                     if (frameTimer >= betweenFireFrames) {
                         frame++;
                         frameTimer = 0;
                         sprite = fireFrames[frame];
                     } else frameTimer++;
                 } else { //if done, switch to load
-                    if (numLoadFrames > 0) {
-                        int oldSize = numLoadFrames;
-                        int newSize = delay;
+                    if (loadFrames.length > 0) {
+                        int oldSize = loadFrames.length;
+                        int newSize = secondsToFrames(delay);
                         spriteArray = new ArrayList<>();
                         if (oldSize > newSize) { //decreasing size
                             //creates the new spriteArray
@@ -229,16 +274,16 @@ public abstract class Turret extends Tower {
                         }
                     }
                     frame = 0;
-                    spriteType = 2;
+                    state = 2;
                 }
-            } else if (spriteType == 2) { //load
+            } else if (state == 2) { //load
                 frame++;
                 if (frame < spriteArray.size() && spriteArray.get(frame) < loadFrames.length) {
                     sprite = loadFrames[spriteArray.get(frame)];
                 } else { //if time runs out, switch to idle
                     frame = 0;
                     sprite = sIdle;
-                    spriteType = 0;
+                    state = 0;
                 }
             }
             if (hit) { //change to red if under attack
@@ -246,10 +291,10 @@ public abstract class Turret extends Tower {
                 hit = false;
             }
         }
-        displayPassB2();
+        displayMain();
     }
 
-    public void displayPassB2() {
+    protected void displayMain() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -267,7 +312,7 @@ public abstract class Turret extends Tower {
         p.tint(255);
     }
 
-    public void displayPassA() {
+    public void displayBase() {
         p.tint(255, tintColor, tintColor);
         p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.tint(255, 255, 255);
@@ -276,32 +321,24 @@ public abstract class Turret extends Tower {
     public void upgrade(int id) {
         upgradeSpecial(id);
         if (id == 0) {
-            placeSound.stop();
-            placeSound.play(p.random(0.8f, 1.2f), volume);
-        } else if (id == 1) {
-            placeSound.stop();
-            placeSound.play(p.random(0.8f, 1.2f), volume);
-        }
-        if (id == 0) {
             value += upgradePrices[nextLevelA];
             nextLevelA++;
         } else if (id == 1) {
             value += upgradePrices[nextLevelB];
             nextLevelB++;
         }
+        //icons
         if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
-        else inGameGui.upgradeIconA.sprite = spritesAnimH.get("upgradeIC")[0];
+        else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-        //shower debris
-        int num = (int) (p.random(30, 50));
-        for (int j = num; j >= 0; j--) {
-            particles.add(new Debris(p, (tile.position.x - size.x / 2) + p.random((size.x / 2) * -1, size.x / 2), (tile.position.y - size.y / 2) + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), debrisType));
-        }
+        else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
+
+        playSoundRandomSpeed(p, placeSound, 1);
+        spawnParticles();
         //prevent having fire animations longer than delays
-        while (delay <= numFireFrames * betweenFireFrames + numIdleFrames) betweenFireFrames--;
+        while (delay <= fireFrames.length * betweenFireFrames + idleFrames.length) betweenFireFrames--;
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
     }
 }  

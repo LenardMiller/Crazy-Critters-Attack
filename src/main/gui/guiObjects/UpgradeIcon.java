@@ -3,7 +3,7 @@ package main.gui.guiObjects;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
+import static main.Main.animatedSprites;
 
 public class UpgradeIcon extends GuiObject {
 
@@ -13,6 +13,6 @@ public class UpgradeIcon extends GuiObject {
         position = new PVector(x, y);
         size = new PVector(25, 25);
         //this variable is the only reason this gets its own class
-        sprite = spritesAnimH.get("upgradeIC")[0];
+        sprite = animatedSprites.get("upgradeIC")[0];
     }
 }

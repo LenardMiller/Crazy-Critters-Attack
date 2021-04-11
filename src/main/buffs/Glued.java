@@ -9,16 +9,17 @@ import processing.core.PImage;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
 public class Glued extends Buff {
 
     private final float SPEED_MODIFIER;
 
-    public Glued(PApplet p, int enId, float speedMod, int duration, Turret turret) {
+    public Glued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
-        effectDelay = 12; //frames
-        lifeDuration = duration;
+        effectDelay = secondsToFrames(0.2f); //frames
+        lifeDuration = secondsToFrames(duration);
         this.SPEED_MODIFIER = speedMod;
         particle = "glue";
         name = "glued";
@@ -26,7 +27,7 @@ public class Glued extends Buff {
         slowAttacking();
     }
 
-    private void slowAttacking() { //slowing enemy attacking done once
+    protected void slowAttacking() { //slowing enemy attacking done once
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
@@ -57,7 +58,7 @@ public class Glued extends Buff {
         }
     }
 
-    void end(int i){ //ends if at end of lifespan
+    protected void end(int i){ //ends if at end of lifespan
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
         if (!paused) lifeTimer++;
@@ -65,8 +66,10 @@ public class Glued extends Buff {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
                 enemy.speed = enemy.maxSpeed; //set movement speed back to default
                 //set attack speed back to default
-                enemy.attackFrames = spritesAnimH.get(enemy.name + "AttackEN");
+                enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
                 if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
+                //set damage frames back to default
+                System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
             }
             buffs.remove(i);
         }

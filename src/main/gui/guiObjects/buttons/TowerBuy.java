@@ -3,8 +3,12 @@ package main.gui.guiObjects.buttons;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
-import static main.misc.TowerInfo.*;
+import static main.gui.TowerInfo.*;
+import static main.misc.Utilities.playSound;
+import static main.misc.Utilities.strikethroughText;
 import static processing.core.PConstants.CENTER;
 
 public class TowerBuy extends Button {
@@ -46,12 +50,18 @@ public class TowerBuy extends Button {
                 price = SEISMIC_PRICE;
                 break;
             case "tesla":
+                price = TESLATOWER_PRICE;
+                break;
             case "energyBlaster":
+                price = ENERGYBLASTER_PRICE;
+                break;
             case "magicMissleer":
                 price = 300;
                 break;
             case "nightmare":
             case "flamethrower":
+                price = FLAMETHROWER_PRICE;
+                break;
             case "railgun":
                 price = 400;
                 break;
@@ -66,7 +76,7 @@ public class TowerBuy extends Button {
             if (!TOWER_TYPE.equals("null")) hover();
             display();
             if (money < price) {
-                p.tint(255, 0, 0, 100);
+                p.tint(255, 0, 0, 200);
                 p.image(sprite, position.x - size.x / 2, position.y - size.y / 2);
                 p.tint(255);
             }
@@ -82,10 +92,7 @@ public class TowerBuy extends Button {
                 && p.mouseY > (position.y-size.y/2)-d-1 && active || depressed) && !paused && alive) {
             if (depressed) sprite = spritePressed;
             else sprite = spriteHover;
-            if (inputHandler.leftMousePressedPulse && !depressed) {
-                clickIn.stop();
-                clickIn.play(1, volume);
-            }
+            if (inputHandler.leftMousePressedPulse && !depressed) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
             p.fill(235);
             p.noStroke();
@@ -124,12 +131,14 @@ public class TowerBuy extends Button {
                     break;
                 case "energyBlaster":
                     p.text("Energy Blaster", x, 241);
+                    energyBlasterInfo(p);
                     break;
                 case "magicMissleer":
                     p.text("Magic Missileer", x, 241);
                     break;
                 case "tesla":
                     p.text("Tesla Tower", x, 241);
+                    teslaTowerInfo(p);
                     break;
                 case "nightmare":
                     p.text("Nightmare", x, 241);
@@ -138,6 +147,7 @@ public class TowerBuy extends Button {
                     break;
                 case "flamethrower":
                     p.text("Flamethrower", x, 241);
+                    flamethrowerInfo(p);
                     break;
                 case "railgun":
                     p.text("Railgun", x, 241);
@@ -159,8 +169,11 @@ public class TowerBuy extends Button {
     private void displayPrice(int offset, int x) {
         p.textAlign(CENTER);
         p.textFont(mediumFont);
-        if (money < price) p.fill(255,0,0);
-        p.text("$" + price, x, 271 + offset);
+        if (money < price) {
+            strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0),
+                    mediumFont.getSize(), CENTER);
+        }
+        else p.text("$" + price, x, 271 + offset);
     }
 
     public void action() {

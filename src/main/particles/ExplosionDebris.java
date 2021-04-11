@@ -3,7 +3,8 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
+import static main.Main.animatedSprites;
+import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class ExplosionDebris extends Particle{
@@ -13,12 +14,12 @@ public class ExplosionDebris extends Particle{
         size = new PVector(9, 9);
         this.maxSpeed = maxSpeed;
         speed = maxSpeed;
-        angleTwo = angle;
-        angularVelocity = 5; //degrees mode
-        betweenFrames = (int)p.random(2,5);
+        displayAngle = angle;
+        angularVelocity = 300; //degrees mode
+        betweenFrames = down60ToFramerate(p.random(2,5));
         numFrames = 4;
         currentSprite = 0;
-        sprites = spritesAnimH.get(type + "ExDebrisPT");
+        sprites = animatedSprites.get(type + "ExDebrisPT");
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 }

@@ -4,10 +4,10 @@ import main.misc.Tile;
 import main.particles.BuffParticle;
 import main.projectiles.Needle;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Nightmare extends Turret {
@@ -22,22 +22,20 @@ public class Nightmare extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 210; //210
+        delay = 3.5f;
         delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 18;
+        pjSpeed = 1000;
         range = 200;
-        numFireFrames = 14;
-        numLoadFrames = 22;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        spriteType = 0;
+        state = 0;
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 100;
         numProjectiles = 3;
         effectLevel = 50;
-        effectDuration = 220;
+        effectDuration = 3.6f;
+        fireParticle = "decay";
+        barrelLength = 20;
         loadSprites();
         debrisType = "darkMetal";
         price = 300;
@@ -45,9 +43,12 @@ public class Nightmare extends Turret {
         priority = 2; //strong
         setUpgrades();
         updateTowerArray();
+
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    public void fire(){ //needed to change projectile fired
+    protected void fire(float barrelLength, String particleType) {
         for (int i = 0; i < numProjectiles; i++) {
             float angleB = angle;
             PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
@@ -63,7 +64,6 @@ public class Nightmare extends Turret {
                 particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"decay"));
             }
         }
-
     }
 
     private void setUpgrades(){
@@ -103,16 +103,16 @@ public class Nightmare extends Turret {
         upgradeDescC[2] = "";
         upgradeDescC[3] = "duration";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[4];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[3];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[4];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[3];
     }
 
-    public void upgradeSpecial() {
+    protected void upgradeSpecial() {
         if (nextLevelA == 1) numProjectiles = 5;
         if (nextLevelB == 1) {
-            effectDuration += 60;
+            effectDuration += 1;
             effectLevel += 3;
         }
     }

@@ -14,17 +14,16 @@ public class Pebble extends Projectile{
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 5;
-        maxSpeed = 12;
+        maxSpeed = 700;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
-        sprite = spritesH.get("pebblePj");
-        hitSound = soundsH.get("mediumImpact");
+        sprite = staticSprites.get("pebblePj");
+        hitSound = sounds.get("mediumImpact");
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greyPuff"));
+        projectiles.remove(this);
     }
 }

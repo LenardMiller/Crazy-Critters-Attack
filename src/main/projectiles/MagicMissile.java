@@ -7,7 +7,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.*;
+import static main.misc.Utilities.*;
 import static processing.core.PConstants.HALF_PI;
 
 public class MagicMissile extends Projectile {
@@ -23,12 +23,11 @@ public class MagicMissile extends Projectile {
         position = new PVector(x, y);
         size = new PVector(6, 20);
         radius = 14;
-        maxSpeed = 5;
+        maxSpeed = 300;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
-        sprite = spritesH.get("magicMisslePj");
+        sprite = staticSprites.get("magicMisslePj");
         hasTrail = true;
         trail = "greenMagic";
         this.priority = priority;
@@ -85,12 +84,12 @@ public class MagicMissile extends Projectile {
 
     public void move() {
         if (enemies.size() > 0) checkTarget();
-        velocity.setMag(speed);
+        velocity.setMag(speed/FRAMERATE);
         position.add(velocity);
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greenPuff"));
+        projectiles.remove(this);
     }
 }

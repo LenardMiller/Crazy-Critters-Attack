@@ -1,7 +1,6 @@
 package main.buffs;
 
 import main.enemies.Enemy;
-import main.misc.CompressArray;
 import main.particles.BuffParticle;
 import main.projectiles.GlueSpike;
 import main.towers.turrets.Turret;
@@ -9,22 +8,18 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
-public class SpikeyGlued extends Buff {
-
-    private final float SPEED_MODIFIER;
+public class SpikeyGlued extends Glued {
 
     private final Spike[] SPIKES;
 
-    public SpikeyGlued(PApplet p, int enId, float speedMod, int duration, Turret turret) {
-        super(p,enId,turret);
+    public SpikeyGlued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
+        super(p,enId,speedMod,duration,turret);
         particleChance = 8;
-        effectDelay = 12; //frames
-        lifeDuration = duration;
-        this.SPEED_MODIFIER = speedMod;
+        effectDelay = secondsToFrames(0.2f); //frames
+        lifeDuration = secondsToFrames(duration);
         particle = "glue";
         name = "glued";
         this.enId = enId;
@@ -40,53 +35,9 @@ public class SpikeyGlued extends Buff {
     }
 
     /**
-     * slows enemy attacking, done once
-    */
-    private void slowAttacking() {
-        Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * ((1 + SPEED_MODIFIER) / 2);
-        if (enemy.speed > newSpeed) { //prevent speeding up enemy
-            //setup
-            enemy.speed = newSpeed;
-            int oldSize = enemy.attackFrames.length;
-            int newSize = (int) (1f / (SPEED_MODIFIER * (1f / (float) oldSize)));
-            ArrayList<Integer> expandedInts = new ArrayList<>();
-            //run expansion algorithm
-            compress = new CompressArray(oldSize - 1, newSize, expandedInts);
-            compress.main();
-            expandedInts = compress.compArray;
-            //change damage frames
-            System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
-            for (int i = 0; i < enemy.tempAttackDmgFrames.length; i++) {
-                for (int j = 0; j < expandedInts.size(); j++) {
-                    if (expandedInts.get(j) == enemy.attackDmgFrames[i]) enemy.tempAttackDmgFrames[i] = j;
-                }
-            }
-            //create expanded image array
-            PImage[] expandedPImages = new PImage[expandedInts.size()];
-            for (int i = 0; i < expandedInts.size(); i++) {
-                expandedPImages[i] = enemy.attackFrames[expandedInts.get(i)];
-            }
-            //profit
-            enemy.attackFrames = expandedPImages;
-        }
-    }
-
-    /**
-     * slows enemy movement, done every frame
-     */
-    public void effect() {
-        Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
-        if (enemy.speed > newSpeed) { //prevent speeding up enemy
-            enemy.speed = newSpeed;
-        }
-    }
-
-    /**
      * particles around enemy
      */
-    void display() {
+    protected void display() {
         if (particle != null) {
             Enemy enemy = enemies.get(enId);
             int num = (int) (p.random(0, particleChance));
@@ -97,27 +48,6 @@ public class SpikeyGlued extends Buff {
             }
         }
         for (Spike spike : SPIKES) spike.display(enemies.get(enId).position);
-    }
-
-    /**
-     * ends if at end of lifespan
-     * @param i buff id
-     */
-    void end(int i) {
-        Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
-        if (!paused) lifeTimer++;
-        if (lifeTimer > lifeDuration) {
-            if (enemy.speed == newSpeed) { //prevent speeding up enemy
-                enemy.speed = enemy.maxSpeed; //set movement speed back to default
-                //set attack speed back to default
-                enemy.attackFrames = spritesAnimH.get(enemy.name + "AttackEN");
-                if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
-                //set damage frames back to default
-                System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
-            }
-            buffs.remove(i);
-        }
     }
 
     /**
@@ -145,14 +75,14 @@ public class SpikeyGlued extends Buff {
          * @param y y pos relative to enemy
          * @param angle rotation relative to screen
          */
-        Spike(float x, float y, float angle) {
+        private Spike(float x, float y, float angle) {
             POSITION = new PVector(x,y);
             this.ANGLE = radians(angle);
-            SPRITE = spritesH.get("glueSpikePj");
+            SPRITE = staticSprites.get("glueSpikePj");
             SIZE = new PVector(7,7);
         }
 
-        void display(PVector absPosition) {
+        private void display(PVector absPosition) {
             p.pushMatrix();
             p.translate(absPosition.x + POSITION.x, absPosition.y + POSITION.y);
             p.rotate(ANGLE);

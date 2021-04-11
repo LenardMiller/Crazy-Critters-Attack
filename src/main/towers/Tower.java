@@ -8,73 +8,59 @@ import processing.core.PImage;
 import processing.core.PVector;
 import processing.sound.SoundFile;
 
+import java.awt.*;
+
 import static main.Main.*;
-import static main.misc.MiscMethods.updateNodes;
+import static main.misc.Utilities.incrementByTo;
+import static main.misc.Utilities.playSoundRandomSpeed;
+import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.misc.WallSpecialVisuals.updateWallTiles;
+import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public abstract class Tower {
 
-    public PApplet p;
-
-    public Tile tile;
-
-    public int damageTotal;
-    public int killsTotal;
-    public String name;
-    public float angle;
-    public int delay;
-    public float range;
-    public PVector size;
     public int maxHp;
     public int hp;
-    public int damage;
-    public boolean hit;
-    public PImage sprite;
-    public Object updateSprite;
-    protected int tintColor;
-    protected String debrisType;
-    public int price;
-    public int value;
-    public float effectLevel;
-    public int effectDuration;
-    public boolean turret;
-    public boolean visualize;
-    public int priority;
     public int nextLevelA;
     public int nextLevelB;
+    public int price;
+    public int value;
+    public int[] upgradePrices;
+    public boolean hit;
+    public boolean visualize;
+    public boolean alive;
+    public PVector size;
+    public PApplet p;
+    public Tile tile;
+    public Object updateSprite;
+    public PImage sprite;
+    public String name;
+    public String[] upgradeTitles;
+    public PImage[] upgradeIcons;
+
+    protected int tintColor;
+    protected int barAlpha;
+    protected String debrisType;
     protected SoundFile damageSound;
     protected SoundFile breakSound;
     protected SoundFile placeSound;
 
-    public int[] upgradePrices;
-    public String[] upgradeTitles;
-    public String[] upgradeDescA;
-    public String[] upgradeDescB;
-    public String[] upgradeDescC;
-    public PImage[] upgradeIcons;
-
-    public Tower(PApplet p, Tile tile) {
+    protected Tower(PApplet p, Tile tile) {
         this.p = p;
         this.tile = tile;
-        tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1).setBgC(null);
+        tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1).setBreakable(null);
 
+        alive = true;
         name = "null";
         size = new PVector(120, 37);
-        delay = 0;
-        range = 0;
         this.maxHp = 1;
         hp = maxHp;
         hit = false;
         tintColor = 255;
-        debrisType = "null";
+        debrisType = "wood";
         price = 0;
-        turret = false;
         visualize = false;
         nextLevelB = 0;
-        upgradeDescA = new String[4];
-        upgradeDescB = new String[4];
-        upgradeDescC = new String[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         updateNodes();
@@ -84,15 +70,9 @@ public abstract class Tower {
     public void main() {
         if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
-        if (turret) {
-            if (inputHandler.leftMousePressedPulse && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x
-                    && p.mouseY < tile.position.y && p.mouseY > tile.position.y - size.y && alive && !paused) { //clicked on
-                selection.swapSelected(tile.id);
-            }
-        }
     }
 
-    public void displayPassA() {
+    public void displayBase() {
         if (hit) { //change to red if under attack
             tintColor = 0;
             hit = false;
@@ -105,14 +85,33 @@ public abstract class Tower {
         if (tintColor < 255 && !paused) tintColor += 20;
     }
 
-    public void displayPassB() {}
+    public void controlAnimation() {}
 
-    public void damage(int dmg) { //if it touches an enemy, animate and loose health
-        hp -= dmg;
+    public void displayHpBar() {
+        Color barColor = new Color(0, 255, 0);
+        p.stroke(barColor.getRGB(), barAlpha / 2f);
+        float barWidth = size.x * (hp / (float) maxHp);
+        p.noFill();
+        p.rect(tile.position.x - size.x, tile.position.y, size.y, -5);
+        p.fill(barColor.getRGB(), barAlpha);
+        if (hp > 0) p.rect(tile.position.x - size.x, tile.position.y, barWidth, -5);
+        barAlpha = (int) incrementByTo(barAlpha, 3, 0);
+    }
+
+    public void refreshHpBar() {
+        barAlpha = 255;
+    }
+
+    /**
+     * If it touches an enemy, animate and loose health.
+     * @param damage amount of damage taken
+     */
+    public void damage(int damage) {
+        refreshHpBar();
+        hp -= damage;
         hit = true;
-        damageSound.stop();
-        damageSound.play(p.random(0.8f, 1.2f), volume);
-        int num = (int)(p.random(1,4));
+        playSoundRandomSpeed(p, damageSound, 1);
+        int num = (int)(p.random(4,10));
         for (int i = num; i >= 0; i--){ //spray debris
             particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
@@ -121,52 +120,36 @@ public abstract class Tower {
     public void upgrade(int id) {
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
-        int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--) {
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
-        }
-        updateNodes();
+        else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
+        playSoundRandomSpeed(p, placeSound, 1);
+        spawnParticles();
     }
 
     public void die(boolean sold) {
-        breakSound.stop();
-        breakSound.play(p.random(0.8f, 1.2f), volume);
-        int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--) {
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
-        }
+        playSoundRandomSpeed(p, breakSound, 1);
+        spawnParticles();
+        alive = false;
         tile.tower = null;
-        updateTowerArray();
-        if (selection.id == tile.id) {
+        if (selection.turret == this) {
             selection.name = "null";
             inGameGui.flashA = 255;
         }
-        else if (!selection.name.equals("null")) selection.swapSelected(selection.tower.tile.id);
-        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBgC(debrisType + "DebrisBGC_TL");
-        if (!turret) {
-            updateWallTiles();
-            connectWallQueues++;
-        }
+        else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
+        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(debrisType + "DebrisBGC_TL");
+        updateFlooring();
+        updateTowerArray();
         updateNodes();
     }
 
-    public void heal() {
+    public void heal(float relativeAmount) {
         if (hp < maxHp) {
+            refreshHpBar();
             for (int i = 0; i < 5; i++) {
                 particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
             }
         }
-        hp = maxHp;
-    }
-
-    public void repair() {
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
-        money -= ceil((float)(price) - (float)(value));
-        heal();
+        hp += relativeAmount*maxHp;
+        if (hp > maxHp) hp = maxHp;
     }
 
     public void sell() {
@@ -175,4 +158,20 @@ public abstract class Tower {
     }
 
     public abstract void updateSprite();
+
+    protected void spawnParticles() {
+        PVector center = new PVector(tile.position.x-size.x/2, tile.position.y-size.y/2);
+        int num = (int) p.random(30,50); //shower debris
+        for (int j = num; j >= 0; j--) {
+            PVector deviation = new PVector(p.random(-size.x/2,size.x/2), p.random(-size.y/2,size.y/2));
+            PVector spawnPos = PVector.add(center, deviation);
+            particles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), debrisType));
+        }
+        num = (int) p.random(6, 12);
+        for (int k = num; k >= 0; k--) {
+            PVector deviation = new PVector(p.random(-size.x/2,size.x/2), p.random(-size.y/2,size.y/2));
+            PVector spawnPos = PVector.add(center, deviation);
+            particles.add(new Ouch(p, spawnPos.x, spawnPos.y, p.random(360), "greyPuff"));
+        }
+    }
 }

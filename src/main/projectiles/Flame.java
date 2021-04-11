@@ -7,11 +7,15 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
+import static main.misc.Utilities.findDistBetween;
 
 public class Flame extends Projectile {
 
     private final PImage[] SPRITES;
+    private final PVector SPAWN_POSITION;
     private final int TIMER;
+    private final int RANGE;
 
     private int currentSprite;
     private int delay;
@@ -19,32 +23,37 @@ public class Flame extends Projectile {
     private int fireChance;
     private int smokeChance;
 
-    public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectLevel, int effectDuration, int timer) {
+    public Flame(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel,
+                 float effectDuration, int range, boolean sound) {
         super(p, x, y, angle, turret);
+        SPAWN_POSITION = new PVector(x, y);
         position = new PVector(x, y);
         size = new PVector(25, 25);
         spawnRange = 0;
         radius = 5;
-        maxSpeed = 5;
+        maxSpeed = 300;
         speed = maxSpeed;
         this.damage = damage;
         pierce = 900;
         this.effectLevel = effectLevel;
         this.effectDuration = effectDuration;
         this.angle = angle;
-        this.TIMER = timer;
+        TIMER = down60ToFramerate(2);
+        RANGE = range;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
-        SPRITES = spritesAnimH.get("flamePJ");
+        SPRITES = animatedSprites.get("flamePJ");
         buff = "burning";
-        splashEn = false;
+        type = "burning";
+        causeEnemyParticles = false;
         fireChance = 8;
         smokeChance = 100;
-        hitSound = soundsH.get("fireImpact");
+        if (sound) hitSound = sounds.get("fireImpact");
+        else hitSound = null;
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
+        projectiles.remove(this);
     }
 
     /**
@@ -78,7 +87,7 @@ public class Flame extends Projectile {
                 delay = 0;
             }
             //control
-            if (currentSprite > 9 && speed > 0) speed /= 1.1;
+            if (findDistBetween(SPAWN_POSITION, position) > RANGE) speed *= 0.9f;
             if (pierce < 900) speed = 0;
             if (currentSprite >= SPRITES.length) dead = true;
         }

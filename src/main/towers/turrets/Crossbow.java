@@ -4,15 +4,14 @@ import main.misc.Tile;
 import main.projectiles.Bolt;
 import main.projectiles.ReinforcedBolt;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Crossbow extends Turret {
 
-    private int pierce;
     private boolean multishot;
     private boolean reinforced;
 
@@ -24,24 +23,20 @@ public class Crossbow extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 270;
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        pjSpeed = 24;
+        delay = 4.5f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        pjSpeed = 1400;
         range = 320;
-        numFireFrames = 13;
-        numLoadFrames = 81;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        spriteType = 0;
+        state = 0;
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
         damage = 30;
-        pierce = 2;
-        damageSound = soundsH.get("woodDamage");
-        breakSound = soundsH.get("woodBreak");
-        placeSound = soundsH.get("woodPlace");
-        fireSound = soundsH.get("crossbow");
+        pierce = 1;
+        damageSound = sounds.get("woodDamage");
+        breakSound = sounds.get("woodBreak");
+        placeSound = sounds.get("woodPlace");
+        fireSound = sounds.get("crossbow");
         loadSprites();
         debrisType = "wood";
         price = CROSSBOW_PRICE;
@@ -51,13 +46,12 @@ public class Crossbow extends Turret {
         setUpgrades();
         updateTowerArray();
 
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    public void fire(){ //needed to change projectile fired
-        fireSound.stop();
-        fireSound.play(p.random(0.8f, 1.2f), volume);
+    protected void fire(float barrelLength, String particleType) {
+        playSoundRandomSpeed(p, fireSound, 1);
         if (multishot) {
             float offset = 0.07f;
             int count = 7;
@@ -112,15 +106,16 @@ public class Crossbow extends Turret {
         upgradeDescB[5] = "multiple";
         upgradeDescC[5] = "bolts";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[9];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[18];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[6];
-        upgradeIcons[4] = spritesAnimH.get("upgradeIC")[10];
-        upgradeIcons[5] = spritesAnimH.get("upgradeIC")[19];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[9];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[18];
+
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[19];
     }
 
-    public void upgradeSpecial(int id) {
+    protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
@@ -128,15 +123,13 @@ public class Crossbow extends Turret {
                     break;
                 case 1:
                     damage += 20;
-                    if (nextLevelB > 5) nextLevelA++;
                     break;
                 case 2:
                     damage += 300;
-                    pierce += 100;
+                    pierce += 5;
                     reinforced = true;
                     name = "crossbowReinforced";
                     loadSprites();
-                    if (nextLevelB == 5) nextLevelB++;
                     break;
             }
         } if (id == 1) {
@@ -145,15 +138,13 @@ public class Crossbow extends Turret {
                     range += 30;
                     break;
                 case 4:
-                    delay -= 70;
-                    if (nextLevelA > 2) nextLevelB++;
+                    delay -= 1.1f;
                     break;
                 case 5:
                     multishot = true;
                     name = "crossbowMultishot";
-                    fireSound = soundsH.get("shotbow");
+                    fireSound = sounds.get("shotbow");
                     loadSprites();
-                    if (nextLevelA == 2) nextLevelA++;
                     break;
             }
         }

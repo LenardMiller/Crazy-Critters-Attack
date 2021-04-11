@@ -7,8 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.findAngle;
-import static main.misc.MiscMethods.findSlope;
+import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class WaveMotion extends Turret {
@@ -29,24 +28,17 @@ public class WaveMotion extends Turret {
         hp = maxHp;
         offset = 0;
         hit = false;
-        delay = 400; //400 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
+        delay = 6.6f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 2;
         pjSpeed = -1;
         range = 0; //0
-        numFireFrames = 18;
-        numLoadFrames = 80;
-        numIdleFrames = 14;
-        betweenBeamTimer = 0;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
-        beam = new PImage[numFireFrames];
+        beam = new PImage[0];
         currentBeamFrame = 19;
         betweenIdleFrames = 3;
         betweenFireFrames = 4;
-        spriteType = 0;
-        beam = spritesAnimH.get("waveMotionBeamTR");
+        state = 0;
+        beam = animatedSprites.get("waveMotionBeamTR");
         loadSprites();
         debrisType = "darkMetal";
         price = 500;
@@ -54,9 +46,12 @@ public class WaveMotion extends Turret {
         priority = 2; //strong
         setUpgrades();
         updateTowerArray();
+
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    public void fire() {
+    protected void fire() {
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(35);
@@ -75,7 +70,7 @@ public class WaveMotion extends Turret {
         beamPartLength.setMag(24);
     }
 
-    public void displayPassB2() {
+    public void displayMain() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -85,7 +80,7 @@ public class WaveMotion extends Turret {
         p.tint(255);
         p.popMatrix();
         //beam
-        if (currentBeamFrame < numFireFrames) {
+        if (currentBeamFrame < fireFrames.length) {
             PVector s = new PVector();
             PVector e = new PVector();
             for (int i = 0; i <= beamLength; i++) {
@@ -144,9 +139,9 @@ public class WaveMotion extends Turret {
             if (Float.isNaN(distFromEnemyToBeam)) distFromEnemyToBeam = 1;
             distFromEnemyToBeam -= enemy.radius / 2;
             if (distFromEnemyToBeam < 1) distFromEnemyToBeam = 1;
-            if (distFromEnemyToBeam < 10) enemy.damageSimple(damage, this, "burning", new PVector(0,0), false);
-            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageSimple(damage, this, "burning", new PVector(0,0), false);
-            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageSimple(damage, this, "burning", new PVector(0,0), false);
+            if (distFromEnemyToBeam < 10) enemy.damageWithoutBuff(damage, this, "burning", new PVector(0,0), false);
+            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageWithoutBuff(damage, this, "burning", new PVector(0,0), false);
+            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageWithoutBuff(damage, this, "burning", new PVector(0,0), false);
         }
     }
 
@@ -177,10 +172,10 @@ public class WaveMotion extends Turret {
         upgradeDescC[2] = "";
         upgradeDescC[3] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[0];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[0];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
     }
 
     public void upgradeSpecial() {}

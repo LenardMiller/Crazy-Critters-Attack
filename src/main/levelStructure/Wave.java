@@ -1,7 +1,9 @@
 package main.levelStructure;
 
 import main.enemies.*;
+import main.gui.PopupText;
 import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -10,13 +12,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.randomSpawnPosition;
+import static main.misc.Utilities.*;
 
 public class Wave {
 
     private final PApplet P;
-    private final Color PRIMARY;
-    private final Color SECONDARY;
+    private final Color FILL_COLOR;
+    private final Color ACCENT_COLOR;
+    private final Color TEXT_COLOR;
     private final String TITLE;
     final int SPAWN_LENGTH;
     public final int LENGTH;
@@ -37,21 +40,27 @@ public class Wave {
 
     public ArrayList<String> spawns;
 
-    public Wave(PApplet p, int length, int spawnLength, Color primary, Color secondary, String title) {
-        this.P = p;
-        this.LENGTH = length;
-        this.SPAWN_LENGTH = spawnLength;
-        this.PRIMARY = primary;
-        this.SECONDARY = secondary;
-        this.TITLE = title;
+    public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
+        P = p;
+        LENGTH = secondsToFrames(length);
+        SPAWN_LENGTH = secondsToFrames(spawnLength);
+        if (SPAWN_LENGTH >= LENGTH) System.out.println("ERROR: Wave spawn length should always be shorter than its length!");
+        FILL_COLOR = fillColor;
+        ACCENT_COLOR = accentColor;
+        TEXT_COLOR = textColor;
+        TITLE = title;
         spawns = new ArrayList<>();
     }
 
     public void end() {
-        for (Tower tower : towers) if (tower.turret) tower.heal();
-        soundsH.get("waveEnd").stop();
-        soundsH.get("waveEnd").play(1, volume);
+        for (Tower tower : towers) {
+            if (tower instanceof Turret) tower.heal(1);
+            else tower.heal(0.25f);
+        }
+        playSound(sounds.get("waveEnd"), 1, 1);
         money += levels[currentLevel].reward;
+        popupTexts.add(new PopupText(P, smallFont.getSize(), new Color(255, 255, 0),
+          new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), "+$" + levels[currentLevel].reward));
     }
 
     /**
@@ -83,21 +92,20 @@ public class Wave {
 
     /**
      * Draws wave icons.
-     * todo: fix jiggle text
      * @param y displacement of icons
      * @param id current wave id
      */
-    public void display(float y, int id) {
-        P.tint(PRIMARY.getRed(), PRIMARY.getGreen(), PRIMARY.getBlue());
-        P.image(spritesH.get("wavePrimaryIc"), 890, y);
-        P.tint(SECONDARY.getRed(), SECONDARY.getGreen(), SECONDARY.getBlue());
-        P.image(spritesH.get("waveSecondaryIc"), 890, y);
+    public void display(int y, int id) {
+        P.tint(FILL_COLOR.getRGB());
+        P.image(staticSprites.get("wavePrimaryIc"), 890, y);
+        P.tint(ACCENT_COLOR.getRGB());
+        P.image(staticSprites.get("waveSecondaryIc"), 890, y);
         P.tint(255);
-        P.fill(SECONDARY.getRed(), SECONDARY.getGreen(), SECONDARY.getBlue());
+
+        P.fill(TEXT_COLOR.getRGB());
         P.textAlign(CENTER);
         P.textFont(largeFont);
         P.text(TITLE, 1000, y + 110);
-        P.textAlign(CENTER);
         P.textFont(veryLargeFont);
         P.text(id, 1000, y + 70);
     }
@@ -147,6 +155,33 @@ public class Wave {
                 break;
             case "bigWorm":
                 e = new BigWorm(P, pos.x, pos.y);
+                break;
+            case "albinoBug":
+                e = new AlbinoBug(P, pos.x, pos.y);
+                break;
+            case "bigAlbinoBug":
+                e = new BigAlbinoBug(P, pos.x, pos.y);
+                break;
+            case "albinoButterfly":
+                e = new AlbinoButterfly(P, pos.x, pos.y);
+                break;
+            case "smallGolem":
+                e = new SmallGolem(P, pos.x, pos.y);
+                break;
+            case "midGolem":
+                e = new Golem(P, pos.x, pos.y);
+                break;
+            case "bigGolem":
+                e = new GiantGolem(P, pos.x, pos.y);
+                break;
+            case "bat":
+                e = new Bat(P, pos.x, pos.y);
+                break;
+            case "bigBat":
+                e = new GiantBat(P, pos.x, pos.y);
+                break;
+            case "wtf":
+                e = new Wtf(P, pos.x, pos.y);
                 break;
         }
         return e;

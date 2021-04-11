@@ -7,6 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class MiscProjectile extends Projectile {
 
@@ -17,20 +18,19 @@ public class MiscProjectile extends Projectile {
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 5;
-        maxSpeed = 12;
+        maxSpeed = 700;
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         angleTwo = angle;
-        angularVelocity = 15; //degrees mode
-        sprites = spritesAnimH.get("miscPJ");
+        angularVelocity = down60ToFramerate(p.random(-15, 15)); //degrees mode
+        sprites = animatedSprites.get("miscPJ");
         sprite = sprites[spriteType];
-        hitSound = soundsH.get("smallImpact");
+        hitSound = sounds.get("smallImpact");
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greyPuff"));
+        projectiles.remove(this);
     }
 }

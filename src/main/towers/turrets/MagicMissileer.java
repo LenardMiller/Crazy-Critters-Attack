@@ -3,10 +3,11 @@ package main.towers.turrets;
 import main.misc.Tile;
 import main.projectiles.MagicMissile;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class MagicMissileer extends Turret{
@@ -15,22 +16,16 @@ public class MagicMissileer extends Turret{
         super(p,tile);
         name = "magicMissleer";
         size = new PVector(50,50);
+        hasPriority = false;
         maxHp = 20;
         hp = maxHp;
-        hit = false;
-        delay = 200; //200 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
+        delay = 3.3f; //200 frames
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 15;
-        pjSpeed = 5;
+        pjSpeed = 300;
         range = 0; //0 degrees
-        numFireFrames = 8;
-        numLoadFrames = 26;
-        numIdleFrames = 8;
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        idleFrames = new PImage[numIdleFrames];
-        betweenIdleFrames = 8;
-        spriteType = 0;
+        betweenIdleFrames = down60ToFramerate(8);
+        state = 0;
         loadSprites();
         debrisType = "crystal";
         price = 300;
@@ -38,18 +33,21 @@ public class MagicMissileer extends Turret{
         priority = 2; //strong
         setUpgrades();
         updateTowerArray();
+
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    public void checkTarget() {
+    protected void checkTarget() {
         getTargetEnemy();
-        if (spriteType == 0 && targetEnemy != null) { //if done animating
-            spriteType = 1;
+        if (state == 0 && targetEnemy != null) { //if done animating
+            state = 1;
             frame = 0;
             fire();
         }
     }
 
-    public void fire() { //needed to change projectile fired
+    protected void fire() {
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 0,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 1,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 2,tile.position));
@@ -58,7 +56,7 @@ public class MagicMissileer extends Turret{
         }
     }
 
-    public void displayPassB2() {
+    public void displayMain() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -118,13 +116,13 @@ public class MagicMissileer extends Turret{
         upgradeDescC[2] = "";
         upgradeDescC[3] = "";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[8];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[13];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[14];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[13];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[14];
     }
 
-    public void upgradeSpecial() {}
+    protected void upgradeSpecial() {}
 
     public void updateSprite() {}
 }

@@ -5,17 +5,19 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.buffs;
 import static main.Main.enemies;
+import static main.misc.Utilities.secondsToFrames;
 
 public class Burning extends Buff {
 
     private final int DAMAGE;
 
-    public Burning(PApplet p, int enId, float damage, int duration, Turret turret) {
+    public Burning(PApplet p, int enId, float damage, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 4;
-        effectDelay = 12; //frames
-        lifeDuration = duration;
+        effectDelay = secondsToFrames(0.2f);
+        lifeDuration = secondsToFrames(duration);
         this.DAMAGE = (int) damage;
         particle = "fire";
         name = "burning";
@@ -23,11 +25,11 @@ public class Burning extends Buff {
     }
 
     public void effect() { //small damage fast
-        Enemy enemy = enemies.get(enId);
-        if (enemy.tintColor > 100){
-            enemy.tintColor = 100;
+        if (enId < 0) buffs.remove(this);
+        else {
+            Enemy enemy = enemies.get(enId);
+            enemy.barAlpha = 255;
+            enemy.damageWithoutBuff(DAMAGE, turret, "fire", new PVector(0, 0), false);
         }
-        enemy.barTrans = 255;
-        enemy.damageSimple(DAMAGE,turret, "fire", new PVector(0,0), false);
     }
 }

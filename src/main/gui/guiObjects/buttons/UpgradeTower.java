@@ -1,6 +1,6 @@
 package main.gui.guiObjects.buttons;
 
-import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -13,16 +13,17 @@ public class UpgradeTower extends Button {
     private final PImage SPRITE_GREY;
 
     public int id;
+    public boolean greyed;
 
     public UpgradeTower(PApplet p, float x, float y, String type, boolean active, int id) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 150);
-        spriteIdle = spritesAnimH.get("upgradeBT")[0]; //green out
-        spritePressed = spritesAnimH.get("upgradeBT")[1]; //green in
-        spriteHover = spritesAnimH.get("upgradeBT")[2]; //hover
-        SPRITE_RED = spritesAnimH.get("upgradeBT")[3]; //red
-        SPRITE_GREY = spritesAnimH.get("upgradeBT")[4]; //grey
+        spriteIdle = animatedSprites.get("upgradeBT")[0]; //green out
+        spritePressed = animatedSprites.get("upgradeBT")[1]; //green in
+        spriteHover = animatedSprites.get("upgradeBT")[2]; //hover
+        SPRITE_RED = animatedSprites.get("upgradeBT")[3]; //red
+        SPRITE_GREY = animatedSprites.get("upgradeBT")[4]; //grey
         sprite = spriteIdle;
         this.id = id;
     }
@@ -30,13 +31,28 @@ public class UpgradeTower extends Button {
     public void main() {
         if (active) {
             if (towers.size() > 0) {
-                Tower tower = tiles.get(selection.id).tower;
-                int nextLevel;
-                if (id == 0) nextLevel = tower.nextLevelA;
-                else nextLevel = tower.nextLevelB;
-                if (tower.upgradeTitles.length == nextLevel && id == 1 || tower.upgradeTitles.length / 2 == nextLevel && id == 0)
+                Turret turret = selection.turret;
+                int thisNextLevel;
+                int thisMax;
+                int otherNextLevel;
+                int otherMax;
+                if (id == 0) {
+                    thisNextLevel = turret.nextLevelA;
+                    thisMax = turret.upgradeTitles.length / 2;
+                    otherNextLevel = turret.nextLevelB;
+                    otherMax = turret.upgradeTitles.length;
+                } else {
+                    thisNextLevel = turret.nextLevelB;
+                    thisMax = turret.upgradeTitles.length;
+                    otherNextLevel = turret.nextLevelA;
+                    otherMax = turret.upgradeTitles.length / 2;
+                }
+                greyed = false;
+                if (thisNextLevel == thisMax || (otherNextLevel == otherMax && thisNextLevel == thisMax-1)) {
+                    greyed = true;
                     sprite = SPRITE_GREY;
-                else if (tower.upgradePrices[nextLevel] > money) sprite = SPRITE_RED;
+                }
+                else if (turret.upgradePrices[thisNextLevel] > money) sprite = SPRITE_RED;
                 else hover();
                 display();
             } else active = false;
@@ -44,12 +60,12 @@ public class UpgradeTower extends Button {
     }
 
     public void action() {
-        Tower tower = tiles.get(selection.id).tower;
+        Turret turret = selection.turret;
         int nextLevel;
-        if (id == 0) nextLevel = tower.nextLevelA;
-        else nextLevel = tower.nextLevelB;
-        money -= tower.upgradePrices[nextLevel];
-        tower.upgrade(id);
+        if (id == 0) nextLevel = turret.nextLevelA;
+        else nextLevel = turret.nextLevelB;
+        money -= turret.upgradePrices[nextLevel];
+        turret.upgrade(id);
         inGameGui.flashA = 255;
     }
 }

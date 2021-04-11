@@ -8,6 +8,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class GlueSpike extends Projectile {
 
@@ -19,15 +20,14 @@ public class GlueSpike extends Projectile {
         position = new PVector(x, y);
         size = new PVector(7, 7);
         radius = 5;
-        maxSpeed = 10 + p.random(-3, 3);
+        maxSpeed = 600 + p.random(-150, 150);
         speed = maxSpeed;
         this.damage = damage;
-        pierce = 1;
         this.angle = angle;
         angularVelocity = 0;
-        sprite = spritesH.get("glueSpikePj");
-        hitSound = soundsH.get("smallImpact");
-        LIFESPAN = 15;
+        sprite = staticSprites.get("glueSpikePj");
+        hitSound = sounds.get("smallImpact");
+        LIFESPAN = down60ToFramerate(15);
     }
 
     public void main(ArrayList<Projectile> projectiles, int i) {
@@ -41,12 +41,12 @@ public class GlueSpike extends Projectile {
         if (lifeTimer > LIFESPAN) dead = true;
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||
                 position.y + size.y < -100 || position.x + size.x < -100 || dead) {
-            die(i);
+            die();
         }
     }
 
-    public void die(int i) {
-        projectiles.remove(i);
+    public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"gluePuff"));
+        projectiles.remove(this);
     }
 }

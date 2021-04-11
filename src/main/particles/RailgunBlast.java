@@ -3,7 +3,8 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
+import static main.Main.animatedSprites;
+import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class RailgunBlast extends Particle {
@@ -13,11 +14,11 @@ public class RailgunBlast extends Particle {
         size = new PVector(25, 25);
         maxSpeed = 0;
         speed = maxSpeed;
-        angleTwo = angle;
+        displayAngle = angle;
         angularVelocity = 0; //degrees mode
-        betweenFrames = 4;
+        betweenFrames = down60ToFramerate(4);
         currentSprite = 0;
-        sprites = spritesAnimH.get("railgunBlastPT");
+        sprites = animatedSprites.get("railgunBlastPT");
         velocity = PVector.fromAngle(angle-HALF_PI);
         numFrames = sprites.length;
     }

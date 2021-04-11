@@ -43,7 +43,7 @@ public class LevelSelectGui {
             P.text("Level " + (i+1), levelSelectButtons[i].position.x, levelSelectButtons[i].position.y + offsetY);
         }
         exitGame.main();
-        P.text("Quit (esc)", exitGame.position.x, exitGame.position.y + offsetY);
+        P.text("Quit", exitGame.position.x, exitGame.position.y + offsetY);
     }
 
     private void build() {

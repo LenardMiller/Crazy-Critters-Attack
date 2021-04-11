@@ -2,11 +2,13 @@ package main.misc;
 
 import main.pathfinding.Node;
 import main.towers.Tower;
+import main.towers.Wall;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.roundTo;
 
 public class Tile {
 
@@ -15,22 +17,22 @@ public class Tile {
     public PVector position;
     public int id;
     public Tower tower;
-    public PImage bgA;
-    public String bgAName;
-    public PImage bgW;
-    public PImage bgB;
-    public String bgBName;
-    public PImage bgC;
-    public String bgCName;
+    public PImage base;
+    public String baseName;
+    public PImage flooring;
+    public String flooringName;
+    public PImage decoration;
+    public String decorationName;
+    public PImage breakable;
+    public String breakableName;
     public PImage obstacle;
     public String obstacleName;
     private int obstacleShadowLength;
-    public PImage[] bgAEdges;
-    public PImage[] bgWEdges;
-    private PImage[] bgWOCorners;
-    private String[] bgWOCornerNames;
-    private PImage[] bgWICorners;
-    public String bgWName;
+    public PImage[] baseEdges;
+    public PImage[] flooringEdges;
+    private PImage[] flooringOutsideCorners;
+    private String[] flooringOutsideCornerNames;
+    private PImage[] flooringInsideCorners;
     private boolean drawMain;
     public boolean machine;
 
@@ -40,34 +42,33 @@ public class Tile {
         this.position = position;
         this.id = id;
         obstacleShadowLength = 3;
-        bgAEdges = new PImage[4];
-        bgWEdges = new PImage[4];
-        bgWOCorners = new PImage[4];
-        bgWOCornerNames = new String[4];
-        bgWICorners = new PImage[4];
+        baseEdges = new PImage[4];
+        flooringEdges = new PImage[4];
+        flooringOutsideCorners = new PImage[4];
+        flooringOutsideCornerNames = new String[4];
+        flooringInsideCorners = new PImage[4];
     }
 
     public void main() {
         if (tower != null) tower.main();
     }
 
-    public void displayA() {
-        if (bgA != null) P.image(bgA, position.x, position.y);
-        tileBgA();
-        if (bgB != null) P.image(bgB, position.x, position.y);
-        if (bgWEdges != null) connectBgWEdges();
-        if (bgWName != null) {
-            if (!isConcrete(bgWName)) {
+    public void displayBaseAndFlooring() {
+        if (base != null) P.image(base, position.x, position.y);
+        tileBase();
+        if (decoration != null) P.image(decoration, position.x, position.y);
+        if (flooringEdges != null) connectFlooringEdges();
+        if (flooringName != null) {
+            if (!isConcrete(flooringName)) {
                 if (debug) P.tint(255,0,255);
-                P.image(bgW, position.x, position.y);
+                P.image(flooring, position.x, position.y);
                 if (debug) P.tint(255);
             }
         }
-//        if (bgC != null) p.image(bgC, position.x, position.y);
     }
 
-    public void displayB() {
-        if (bgC != null) P.image(bgC, position.x, position.y);
+    public void displayBreakableAndShadow() {
+        if (breakable != null) P.image(breakable, position.x, position.y);
         if (obstacle != null) {
             P.tint(0, 60);
             P.image(obstacle, position.x + obstacleShadowLength, position.y + obstacleShadowLength);
@@ -75,159 +76,160 @@ public class Tile {
         }
     }
 
-    public void displayC() {
+    public void displayObstacle() {
+        P.tint(255);
         if (obstacle != null) P.image(obstacle, position.x, position.y);
     }
 
-    private void tileBgA() {
+    private void tileBase() {
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
         if (y != 0) {
             Tile tile = tiles.get(x, y - 1);
-            if (bgAName != null && !bgAName.equals(tile.bgAName) && tile.bgAEdges[0] != null)
-                P.image(tile.bgAEdges[0], position.x, position.y);
+            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[0] != null)
+                P.image(tile.baseEdges[0], position.x, position.y);
         }
         if (x != 0) {
             Tile tile = tiles.get(x - 1, y);
-            if (bgAName != null && !bgAName.equals(tile.bgAName) && tile.bgAEdges[3] != null)
-                P.image(tile.bgAEdges[3], position.x, position.y);
+            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[3] != null)
+                P.image(tile.baseEdges[3], position.x, position.y);
         }
         if (y != 18) {
             Tile tile = tiles.get(x, y + 1);
-            if (bgAName != null && !bgAName.equals(tile.bgAName) && tile.bgAEdges[2] != null)
-                P.image(tile.bgAEdges[2], position.x, position.y);
+            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[2] != null)
+                P.image(tile.baseEdges[2], position.x, position.y);
         }
         if (x != 18) {
             Tile tile = tiles.get(x + 1, y);
-            if (bgAName != null && !bgAName.equals(tile.bgAName) && tile.bgAEdges[1] != null)
-                P.image(tile.bgAEdges[1], position.x, position.y);
+            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[1] != null)
+                P.image(tile.baseEdges[1], position.x, position.y);
         }
     }
 
-    private void connectBgWEdges() {
+    private void connectFlooringEdges() {
         if (debug) P.tint(0,255,0);
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
         if (y != 0) {
             Tile tile = tiles.get(x, y - 1);
-            if (isConnected(0, tile)) P.image(tile.bgWEdges[0], position.x, position.y);
-            if (bgWEdges[0] != null && isConcrete(tile.bgWName)) P.image(bgWEdges[0], position.x, position.y);
+            if (isConnected(0, tile)) P.image(tile.flooringEdges[0], position.x, position.y);
+            if (flooringEdges[0] != null && isConcrete(tile.flooringName)) P.image(flooringEdges[0], position.x, position.y);
         } if (x != 0) {
             Tile tile = tiles.get(x - 1, y);
-            if (isConnected(3, tile)) P.image(tile.bgWEdges[3], position.x, position.y);
-            if (bgWEdges[3] != null && isConcrete(tile.bgWName)) P.image(bgWEdges[3], position.x, position.y);
+            if (isConnected(3, tile)) P.image(tile.flooringEdges[3], position.x, position.y);
+            if (flooringEdges[3] != null && isConcrete(tile.flooringName)) P.image(flooringEdges[3], position.x, position.y);
         } if (y != 18) {
             Tile tile = tiles.get(x, y + 1);
-            if (isConnected(2, tile)) P.image(tile.bgWEdges[2], position.x, position.y);
-            if (bgWEdges[2] != null && isConcrete(tile.bgWName)) P.image(bgWEdges[2], position.x, position.y);
+            if (isConnected(2, tile)) P.image(tile.flooringEdges[2], position.x, position.y);
+            if (flooringEdges[2] != null && isConcrete(tile.flooringName)) P.image(flooringEdges[2], position.x, position.y);
         } if (x != 18) {
             Tile tile = tiles.get(x + 1, y);
-            if (isConnected(1, tile)) P.image(tile.bgWEdges[1], position.x, position.y);
-            if (bgWEdges[1] != null && isConcrete(tile.bgWName)) P.image(bgWEdges[1], position.x, position.y);
+            if (isConnected(1, tile)) P.image(tile.flooringEdges[1], position.x, position.y);
+            if (flooringEdges[1] != null && isConcrete(tile.flooringName)) P.image(flooringEdges[1], position.x, position.y);
         }
         if (debug) P.tint(255);
     }
 
     private boolean isConnected(int i, Tile tile) {
-        if (bgWName != null && tile.bgWName != null) {
-            if (!isConcrete(bgWName)) {
-                return bgWName.equals(tile.bgWName) && tile.bgWEdges[i] != null;
-            } else return tile.bgWEdges[i] != null;
+        if (flooringName != null && tile.flooringName != null) {
+            if (!isConcrete(flooringName)) {
+                return flooringName.equals(tile.flooringName) && tile.flooringEdges[i] != null;
+            } else return tile.flooringEdges[i] != null;
         } else return false;
     }
 
-    public void connectBgWICorners() {
-        bgWICorners = new PImage[4];
+    public void connectFlooringInsideCorners() {
+        flooringInsideCorners = new PImage[4];
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
         drawMain = true;
         if (x != 18 && y != 0) {
-            if (doubleDiagonalIn(x, y, 1, -1, bgWName)) { //tri
-                bgWICorners[0] = spritesH.get(bgWName + "BGW_TRI_TL");
+            if (doubleDiagonalIn(x, y, 1, -1, flooringName)) { //tri
+                flooringInsideCorners[0] = staticSprites.get(flooringName + "BGW_TRI_TL");
                 drawMain = false;
             }
         } if (x != 18 && y != 18) {
-            if (doubleDiagonalIn(x, y, 1, 1, bgWName)) { //bri
-                bgWICorners[1] = spritesH.get(bgWName + "BGW_BRI_TL");
+            if (doubleDiagonalIn(x, y, 1, 1, flooringName)) { //bri
+                flooringInsideCorners[1] = staticSprites.get(flooringName + "BGW_BRI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 18) {
-            if (doubleDiagonalIn(x, y, -1, 1, bgWName)) { //bli
-                bgWICorners[2] = spritesH.get(bgWName + "BGW_BLI_TL");
+            if (doubleDiagonalIn(x, y, -1, 1, flooringName)) { //bli
+                flooringInsideCorners[2] = staticSprites.get(flooringName + "BGW_BLI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 0) {
-            if (doubleDiagonalIn(x, y, -1, -1, bgWName)) { //tli
-                bgWICorners[3] = spritesH.get(bgWName + "BGW_TLI_TL");
+            if (doubleDiagonalIn(x, y, -1, -1, flooringName)) { //tli
+                flooringInsideCorners[3] = staticSprites.get(flooringName + "BGW_TLI_TL");
                 drawMain = false;
             }
         }
-        String s = checkMissing(x,y, bgWName);
+        String s = checkMissing(x,y, flooringName);
         if (s != null) { //s
             int i = 0;
             if (s.equals("BRI")) i = 1;
             if (s.equals("BLI")) i = 2;
             if (s.equals("TLI")) i = 3;
-            bgWICorners[i] = spritesH.get(bgWName + "BGW_" + s + "_TL");
+            flooringInsideCorners[i] = staticSprites.get(flooringName + "BGW_" + s + "_TL");
             drawMain = false;
         }
         if (countTouchingVN(x,y) > 2) drawMain = true;
     }
 
-    public void drawBgWICorners() {
-        if (isConcrete(bgWName)) {
-            if (drawMain) P.image(bgW, position.x, position.y);
+    public void displayFlooringInsideCorners() {
+        if (isConcrete(flooringName)) {
+            if (drawMain) P.image(flooring, position.x, position.y);
             for (int i = 0; i < 4; i++) {
-                if (bgWICorners[i] != null) {
+                if (flooringInsideCorners[i] != null) {
                     if (debug) P.tint(255,0,0);
-                    P.image(bgWICorners[i], position.x, position.y);
+                    P.image(flooringInsideCorners[i], position.x, position.y);
                     if (debug) P.tint(255);
                 }
             }
         }
     }
 
-    public void drawBgWOCorners(String name) {
+    public void displayFlooringOutsideCorners(String name) {
         for (int i = 0; i < 4; i++) {
-            if (bgWOCorners[i] != null) {
-                if (bgWOCornerNames[i].equals(name)) {
+            if (flooringOutsideCorners[i] != null) {
+                if (flooringOutsideCornerNames[i].equals(name)) {
                     if (debug) P.tint(0,0,255);
-                    P.image(bgWOCorners[i], position.x, position.y);
+                    P.image(flooringOutsideCorners[i], position.x, position.y);
                     if (debug) P.tint(255);
                 }
             }
         }
     }
 
-    public void connectBgWOCorners() {
-        bgWOCorners = new PImage[4];
-        bgWOCornerNames = new String[4];
+    public void connectFlooringOutsideCorners() {
+        flooringOutsideCorners = new PImage[4];
+        flooringOutsideCornerNames = new String[4];
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
         if (debug) P.tint(0,0,255);
         if (x != 18 && y != 0) { //tro
             String n = doubleDiagonalOut(x,y,1,-1);
             if (n != null) {
-                bgWOCorners[0] = spritesH.get(n + "BGW_TRO_TL");
-                bgWOCornerNames[0] = n;
+                flooringOutsideCorners[0] = staticSprites.get(n + "BGW_TRO_TL");
+                flooringOutsideCornerNames[0] = n;
             }
         } if (x != 18 && y != 18) { //bro
             String n = doubleDiagonalOut(x,y,1,1);
             if (n != null) {
-                bgWOCorners[1] = spritesH.get(n + "BGW_BRO_TL");
-                bgWOCornerNames[1] = n;
+                flooringOutsideCorners[1] = staticSprites.get(n + "BGW_BRO_TL");
+                flooringOutsideCornerNames[1] = n;
             }
         } if (x != 0 && y != 18) { //blo
             String n = doubleDiagonalOut(x,y,-1,1);
             if (n != null) {
-                bgWOCorners[2] = spritesH.get(n + "BGW_BLO_TL");
-                bgWOCornerNames[2] = n;
+                flooringOutsideCorners[2] = staticSprites.get(n + "BGW_BLO_TL");
+                flooringOutsideCornerNames[2] = n;
             }
         } if (x != 0 && y != 0) { //tlo
             String n = doubleDiagonalOut(x,y,-1,-1);
             if (n != null) {
-                bgWOCorners[3] = spritesH.get(n + "BGW_TLO_TL");
-                bgWOCornerNames[3] = n;
+                flooringOutsideCorners[3] = staticSprites.get(n + "BGW_TLO_TL");
+                flooringOutsideCornerNames[3] = n;
             }
         }
         if (debug) P.tint(255);
@@ -259,25 +261,25 @@ public class Tile {
         Tile tileM = tiles.get(x+dx,y+dy);
         Tile tileX = tiles.get(x+dx,y);
         Tile tileY = tiles.get(x,y+dy);
-        if (tileX.bgWName != null && tileX.bgWName.equals(name)) return true;
-        if (tileY.bgWName != null && tileY.bgWName.equals(name)) return true;
-        return tileM.bgWName != null && tileM.bgWName.equals(name);
+        if (tileX.flooringName != null && tileX.flooringName.equals(name)) return true;
+        if (tileY.flooringName != null && tileY.flooringName.equals(name)) return true;
+        return tileM.flooringName != null && tileM.flooringName.equals(name);
     }
 
     private int countTouchingVN(int x, int y) {
         int r = 0;
         if (y > 0) {
             Tile tile = tiles.get(x,y-1);
-            if (tile.bgWName != null && tile.bgWName.equals(bgWName)) r++;
+            if (tile.flooringName != null && tile.flooringName.equals(flooringName)) r++;
         } if (x > 0) {
             Tile tile = tiles.get(x-1,y);
-            if (tile.bgWName != null && tile.bgWName.equals(bgWName)) r++;
+            if (tile.flooringName != null && tile.flooringName.equals(flooringName)) r++;
         } if (x < 17) {
             Tile tile = tiles.get(x+1,y);
-            if (tile.bgWName != null && tile.bgWName.equals(bgWName)) r++;
+            if (tile.flooringName != null && tile.flooringName.equals(flooringName)) r++;
         } if (y < 17) {
             Tile tile = tiles.get(x,y+1);
-            if (tile.bgWName != null && tile.bgWName.equals(bgWName)) r++;
+            if (tile.flooringName != null && tile.flooringName.equals(flooringName)) r++;
         }
         return r;
     }
@@ -285,10 +287,10 @@ public class Tile {
     private String doubleDiagonalOut(int x, int y, int dx, int dy) {
         Tile tileA = tiles.get(x + dx, y);
         Tile tileB = tiles.get(x, y + dy);
-        if (!isConcrete(tileA.bgWName)) return null;
-        if (!isConcrete(tileA.bgWName)) return null;
-        if (!tileA.bgWName.equals(tileB.bgWName)) return null;
-        else return tileA.bgWName;
+        if (!isConcrete(tileA.flooringName)) return null;
+        if (!isConcrete(tileA.flooringName)) return null;
+        if (!tileA.flooringName.equals(tileB.flooringName)) return null;
+        else return tileA.flooringName;
     }
 
     private boolean doubleDiagonalIn(int x, int y, int dx, int dy, String name) {
@@ -298,11 +300,11 @@ public class Tile {
         int cx = x - dx;
         int cy = y - dy;
         if (cx <= 18 && cx >= 0 && cy <= 18 && cy >= 0) tileC = tiles.get(cx, cy);
-        if (tileA.bgWName == null) return false;
-        if (tileB.bgWName == null) return false;
-        if (!tileA.bgWName.equals(name)) return false;
-        if (tileC != null && tileC.bgWName != null && tileC.bgWName.equals(tileA.bgWName)) return false;
-        return tileB.bgWName.equals(name);
+        if (tileA.flooringName == null) return false;
+        if (tileB.flooringName == null) return false;
+        if (!tileA.flooringName.equals(name)) return false;
+        if (tileC != null && tileC.flooringName != null && tileC.flooringName.equals(tileA.flooringName)) return false;
+        return tileB.flooringName.equals(name);
     }
 
     private boolean isConcrete(String name) {
@@ -313,70 +315,82 @@ public class Tile {
         return m || c || t;
     }
 
-    public void setBgA(String name) {
+    public void setBase(String name) {
         name = name.replace("BGA_TL", "");
-        bgAName = name;
-        bgA = spritesH.get(name + "BGA_TL");
-        bgAEdges[0] = spritesH.get(name + "BGA_T_TL");
-        bgAEdges[1] = spritesH.get(name + "BGA_R_TL");
-        bgAEdges[2] = spritesH.get(name + "BGA_B_TL");
-        bgAEdges[3] = spritesH.get(name + "BGA_L_TL");
+        baseName = name;
+        base = staticSprites.get(name + "BGA_TL");
+        baseEdges[0] = staticSprites.get(name + "BGA_T_TL");
+        baseEdges[1] = staticSprites.get(name + "BGA_R_TL");
+        baseEdges[2] = staticSprites.get(name + "BGA_B_TL");
+        baseEdges[3] = staticSprites.get(name + "BGA_L_TL");
     }
 
-    public void setBgW(String name) {
-        bgWEdges = new PImage[4];
+    /**
+     * If there is no wall on top and new type is not same as current type, set flooring.
+     * @param name type of flooring
+     * @return if there wasn't a wall on top
+     */
+    public boolean updateFlooring(String name) {
+        Tower tower = tiles.get((roundTo(position.x, 50)/50) + 1, (roundTo(position.y, 50)/50) + 1).tower;
+        if (name.equals(flooringName)) return false;
+        if (tower instanceof Wall) return false;
+        else {
+            setFlooring(name);
+            return true;
+        }
+    }
+
+    public void setFlooring(String name) {
+        flooringEdges = new PImage[4];
         if (name == null) {
-            bgW = null;
-            bgWName = null;
+            flooring = null;
+            flooringName = null;
         } else {
-            if (bgCName != null) {
-                if (!bgCName.contains("Debris")) {
-                    bgC = null;
-                    bgCName = null;
+            if (breakableName != null) {
+                if (!breakableName.contains("Debris")) {
+                    breakable = null;
+                    breakableName = null;
                 }
             }
             name = name.replace("BGW_TL", "");
             name = name.replace("ultimate", "titanium");
-            bgWName = name;
-            if (spritesH.get(name + "BGW_TL") != bgW) {
-                bgW = spritesH.get(name + "BGW_TL");
+            flooringName = name;
+            if (staticSprites.get(name + "BGW_TL") != flooring) {
+                flooring = staticSprites.get(name + "BGW_TL");
                 if (name.contains("woodWall") || name.contains("stoneWall")) {
-                    bgWEdges[0] = spritesH.get(name + "BGW_T_TL");
-                    bgWEdges[1] = spritesH.get(name + "BGW_R_TL");
-                    bgWEdges[2] = spritesH.get(name + "BGW_B_TL");
-                    bgWEdges[3] = spritesH.get(name + "BGW_L_TL");
+                    flooringEdges[0] = staticSprites.get(name + "BGW_T_TL");
+                    flooringEdges[1] = staticSprites.get(name + "BGW_R_TL");
+                    flooringEdges[2] = staticSprites.get(name + "BGW_B_TL");
+                    flooringEdges[3] = staticSprites.get(name + "BGW_L_TL");
                 }
-            } else {
-                bgW = null;
-                bgWName = null;
             }
         }
     }
 
-    public void setBgB(String name) {
-        if (spritesH.get(name) != bgB) {
-            bgB = spritesH.get(name);
-            bgBName = name;
+    public void setDecoration(String name) {
+        if (staticSprites.get(name) != decoration) {
+            decoration = staticSprites.get(name);
+            decorationName = name;
         } else {
-            bgB = null;
-            bgBName = null;
+            decoration = null;
+            decorationName = null;
         }
     }
 
-    public void setBgC(String name) {
+    public void setBreakable(String name) {
         if (name != null) name = name.replace("ultimate","titanium");
-        if (spritesH.get(name) != bgC) {
-            bgC = spritesH.get(name);
-            bgCName = name;
+        if (staticSprites.get(name) != breakable) {
+            breakable = staticSprites.get(name);
+            breakableName = name;
         } else {
-            bgC = null;
-            bgCName = null;
+            breakable = null;
+            breakableName = null;
         }
     }
 
     public void setObstacle(String name) {
-        if (spritesH.get(name) != obstacle) {
-            obstacle = spritesH.get(name);
+        if (staticSprites.get(name) != obstacle) {
+            obstacle = staticSprites.get(name);
             obstacleName = name;
             if (name.contains("smallTree")) obstacleShadowLength = 3;
             if (containsCorners(name,"tree")) obstacleShadowLength = 8;

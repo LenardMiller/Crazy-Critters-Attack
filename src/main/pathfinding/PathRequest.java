@@ -6,9 +6,9 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static main.Main.nodeSize;
+import static main.Main.NODE_SIZE;
 import static main.Main.nodeGrid;
-import static main.pathfinding.UpdateNode.updateNode;
+import static main.pathfinding.PathfindingUtilities.updateNode;
 
 public class PathRequest {
 
@@ -31,14 +31,14 @@ public class PathRequest {
 
         enemy.points = new ArrayList<>();
         PVector pfPosition = new PVector(enemy.position.x-((enemy.pfSize-1)*12.5f)+100,enemy.position.y-((enemy.pfSize-1)*12.5f)+100);
-        PVector roundedPosition = catchOutOfBounds((int)((pfPosition.x)/ nodeSize), (int)((pfPosition.y)/ nodeSize));
+        PVector roundedPosition = catchOutOfBounds((int)((pfPosition.x)/ NODE_SIZE), (int)((pfPosition.y)/ NODE_SIZE));
         nodeGrid[(int) roundedPosition.x][(int) roundedPosition.y].setStart((int) roundedPosition.x-4, (int) roundedPosition.y-4);
         Main.start.findGHF();
         updateNode(Main.start,this);
         Main.path.done = false;
         Main.path.find(id); //points are added here
         enemy.swapPoints(false);
-        if (enemy.points.size() > 0) enemy.cleanTurnPoints(); //and subtracted here
+        if (enemy.points.size() > 0) enemy.setCombatPoints(); //and subtracted here
     }
 
     private PVector catchOutOfBounds(int x, int y) {

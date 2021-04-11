@@ -1,17 +1,20 @@
 package main.towers;
 
 import main.misc.Tile;
-import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.MiscMethods.updateNodes;
+import static main.misc.Utilities.playSoundRandomSpeed;
+import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.misc.WallSpecialVisuals.updateWallTiles;
 
 public class Wall extends Tower {
+
+    public static final int BUY_PRICE = 25;
+
+    public final int[] UPGRADE_HP;
 
     private final CornerSpriteDS WOOD;
     private final CornerSpriteDS STONE;
@@ -29,6 +32,8 @@ public class Wall extends Tower {
     private PImage rSSprite;
 
     private final PImage[][] UPGRADE_SPRITES;
+    private final String[] UPGRADE_NAMES;
+
     private PImage[] sprite;
 
     public Wall(PApplet p, Tile tile) {
@@ -39,23 +44,25 @@ public class Wall extends Tower {
         maxHp = 50;
         hp = maxHp;
         hit = false;
-        sprite = spritesAnimH.get("woodWallTW");
+        sprite = animatedSprites.get("woodWallTW");
         debrisType = "wood";
-        damageSound = soundsH.get(debrisType + "Damage");
-        breakSound = soundsH.get(debrisType + "Break");
-        placeSound = soundsH.get(debrisType + "PlaceShort");
-        price = 25;
+        damageSound = sounds.get(debrisType + "Damage");
+        breakSound = sounds.get(debrisType + "Break");
+        placeSound = sounds.get(debrisType + "PlaceShort");
+        price = BUY_PRICE;
         value = price;
         nextLevelB = 0;
 
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setBgW(name);
+        tiles.get(x-1,y-1).setFlooring(name);
 
         upgradePrices = new int[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         UPGRADE_SPRITES = new PImage[4][4];
+        UPGRADE_NAMES = new String[4];
+        UPGRADE_HP = new int[4];
         setUpgrades();
         updateTowerArray();
 
@@ -66,8 +73,8 @@ public class Wall extends Tower {
         ULTIMATE = new CornerSpriteDS();
         loadSprites();
 
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     public void main(){
@@ -75,12 +82,12 @@ public class Wall extends Tower {
         value = (int)(((float)hp / (float)maxHp) * price);
     }
 
-    public void displayPassA() {
+    public void displayBase() {
         float x = tile.position.x-size.x;
         float y = tile.position.y-size.y;
         p.tint(0,60);
         String sT = shadowType();
-        if (sT != null) p.image(spritesH.get("shadow" + sT + "TW"), x, y);
+        if (sT != null) p.image(staticSprites.get("shadow" + sT + "TW"), x, y);
         else p.image(sprite[0],x+5,y+5);
         p.tint(255);
     }
@@ -88,15 +95,15 @@ public class Wall extends Tower {
     private String shadowType() {
         int x = (int)tile.position.x/50;
         int y = (int)tile.position.y/50;
-        boolean t = y > 0 && tiles.get(x,y-1).tower != null && !tiles.get(x,y-1).tower.turret;
-        boolean l = x > 0 && tiles.get(x-1,y).tower != null && !tiles.get(x-1,y).tower.turret;
+        boolean t = y > 0 && tiles.get(x,y-1).tower != null && tiles.get(x,y-1).tower instanceof Wall;
+        boolean l = x > 0 && tiles.get(x-1,y).tower != null && tiles.get(x-1,y).tower instanceof Wall;
         if (!t && !l) return "Both";
         if (!l) return "BL";
         if (!t) return "TR";
         else return null;
     }
 
-    public void displayPassB() {
+    public void controlAnimation() {
         if (hit) { //change to red if under attack
             tintColor = 0;
             hit = false;
@@ -106,9 +113,11 @@ public class Wall extends Tower {
 
         p.tint(255,tintColor,tintColor);
         float hpRatio = (float)hp/(float)maxHp;
-        int crack = abs(ceil((hpRatio*4)-1)-3);
-        if (crack < 4) p.image(sprite[crack],x,y);
-        else p.image(sprite[3],x,y);
+        if (!debug) {
+            int crack = abs(ceil((hpRatio * 4) - 1) - 3);
+            if (crack < 4) p.image(sprite[crack],x,y);
+            else p.image(sprite[3],x,y);
+        }
         //sides
         if (tSSprite != null) p.image(tSSprite,x,y);
         if (rSSprite != null) p.image(rSSprite,x,y);
@@ -126,68 +135,55 @@ public class Wall extends Tower {
 
     private void setUpgrades(){
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 225;
-        upgradePrices[3] = 500;
+        upgradePrices[0] = 100;
+        upgradePrices[1] = 500;
+        upgradePrices[2] = 1500;
+        upgradePrices[3] = 5000;
         //titles
         upgradeTitles[0] = "Stone";
         upgradeTitles[1] = "Metal";
         upgradeTitles[2] = "Crystal";
         upgradeTitles[3] = "Titanium";
         //sprites
-        UPGRADE_SPRITES[0] = spritesAnimH.get("stoneWallTW");
-        UPGRADE_SPRITES[1] = spritesAnimH.get("metalWallTW");
-        UPGRADE_SPRITES[2] = spritesAnimH.get("crystalWallTW");
-        UPGRADE_SPRITES[3] = spritesAnimH.get("ultimateWallTW");
+        UPGRADE_SPRITES[0] = animatedSprites.get("stoneWallTW");
+        UPGRADE_SPRITES[1] = animatedSprites.get("metalWallTW");
+        UPGRADE_SPRITES[2] = animatedSprites.get("crystalWallTW");
+        UPGRADE_SPRITES[3] = animatedSprites.get("ultimateWallTW");
+        //names
+        UPGRADE_NAMES[0] = "stone";
+        UPGRADE_NAMES[1] = "metal";
+        UPGRADE_NAMES[2] = "crystal";
+        UPGRADE_NAMES[3] = "titanium";
+        //hp
+        UPGRADE_HP[0] = 75;
+        UPGRADE_HP[1] = 125;
+        UPGRADE_HP[2] = 250;
+        UPGRADE_HP[3] = 500;
     }
 
     public void upgrade(int id) {
         price += upgradePrices[nextLevelB];
         sprite = UPGRADE_SPRITES[nextLevelB];
+        int oldMax = maxHp;
+        maxHp += UPGRADE_HP[nextLevelB];
+        name = UPGRADE_NAMES[nextLevelB] + "Wall";
+        debrisType = UPGRADE_NAMES[nextLevelB];
+        hp = (int)(hp/(float)oldMax * maxHp);
 
-        switch (nextLevelB) {
-            case 0:
-                maxHp += 75;
-                name = "stoneWall";
-                debrisType = "stone";
-                break;
-            case 1:
-                maxHp += 125;
-                name = "metalWall";
-                debrisType = "metal";
-                break;
-            case 2:
-                maxHp += 250;
-                name = "crystalWall";
-                debrisType = "crystal";
-                break;
-            case 3:
-                maxHp += 500;
-                name = "titaniumWall";
-                debrisType = "ultimate";
-                break;
-        } hp = maxHp;
+        damageSound = sounds.get(debrisType + "Damage");
+        breakSound = sounds.get(debrisType + "Break");
+        placeSound = sounds.get(debrisType + "PlaceShort");
 
-        damageSound = soundsH.get(debrisType + "Damage");
-        breakSound = soundsH.get(debrisType + "Break");
-        placeSound = soundsH.get(debrisType + "PlaceShort");
-
-        placeSound.stop();
-        placeSound.play(p.random(0.8f, 1.2f), volume);
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
 
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else inGameGui.upgradeIconB.sprite = spritesAnimH.get("upgradeIC")[0];
-        int num = (int)(p.random(30,50)); //shower debris
-        for (int j = num; j >= 0; j--){
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
-        }
+        else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setBgW(name);
-        updateWallTiles();
-        updateNodes();
+        tiles.get(x-1,y-1).setFlooring(name);
+        updateFlooring();
     }
 
     public void updateSprite() {
@@ -319,14 +315,14 @@ public class Wall extends Tower {
                         if (c == 0) idC = "c";
                         if (c == 1) idC = "v";
                         String id = idA+idB+idC;
-                        spriteDS.add(spritesH.get(name + id + "WallTW"),idA,idB,idC);
+                        spriteDS.add(staticSprites.get(name + id + "WallTW"),idA,idB,idC);
                     }
                 }
             }
-            spriteDS.t = spritesH.get(name + "TWallTW");
-            spriteDS.b = spritesH.get(name + "BWallTW");
-            spriteDS.l = spritesH.get(name + "LWallTW");
-            spriteDS.r = spritesH.get(name + "RWallTW");
+            spriteDS.t = staticSprites.get(name + "TWallTW");
+            spriteDS.b = staticSprites.get(name + "BWallTW");
+            spriteDS.l = staticSprites.get(name + "LWallTW");
+            spriteDS.r = staticSprites.get(name + "RWallTW");
         }
     }
 

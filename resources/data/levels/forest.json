@@ -2262,6 +2262,11 @@
     "name": "stoneDrillMA",
     "y": 425,
     "debris": "wood",
+    "barX": 400,
+    "barY": 450,
+    "barSizeX": 100,
+    "barSizeY": 6,
+    "barHorizontal": true,
     "id": 361,
     "type": "machine"
   }

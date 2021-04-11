@@ -6,27 +6,28 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
 public abstract class Buff {
 
-    public PApplet p;
-
-    int effectDelay;
-    public int effectTimer;
-    int lifeTimer;
-    int lifeDuration;
-    int particleChance;
-    public String particle;
     public int enId;
+    public int effectTimer;
+    public PApplet p;
+    public String particle;
     public String name;
     public Turret turret;
 
-    Buff(PApplet p, int enId, Turret turret){
+    protected int effectDelay;
+    protected int lifeTimer;
+    protected int lifeDuration;
+    protected int particleChance;
+
+    protected Buff(PApplet p, int enId, Turret turret){
         this.p = p;
 
         particleChance = 8;
-        effectDelay = 60; //frames
-        lifeDuration = 600; //frames
+        effectDelay = secondsToFrames(1);
+        lifeDuration = secondsToFrames(10);
         particle = "null";
         name = "null";
         this.enId = enId;
@@ -49,7 +50,7 @@ public abstract class Buff {
      * Ends if at end of lifespan.
      * @param i buff id
      */
-    void end(int i) {
+    protected void end(int i) {
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) buffs.remove(i);
     }
@@ -61,12 +62,15 @@ public abstract class Buff {
     /**
      * Particles around enemy.
      */
-    void display() {
+    protected void display() {
         if (particle != null) {
-            Enemy enemy = enemies.get(enId);
-            int num = (int) (p.random(0, particleChance));
-            if (num == 0) {
-                particles.add(new BuffParticle(p, (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), p.random(0, 360), particle));
+            if (enId < 0) buffs.remove(this);
+            else {
+                Enemy enemy = enemies.get(enId);
+                int num = (int) (p.random(0, particleChance));
+                if (num == 0) {
+                    particles.add(new BuffParticle(p, (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), p.random(0, 360), particle));
+                }
             }
         }
     }

@@ -1,20 +1,23 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
-import main.particles.BuffParticle;
+import main.projectiles.DarkBlast;
 import main.projectiles.EnergyBlast;
+import main.projectiles.NuclearBlast;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static processing.core.PConstants.HALF_PI;
 
 public class EnergyBlaster extends Turret{
 
     private int effectRadius;
     private boolean bigExplosion;
+    private boolean nuclear;
+    private boolean dark;
 
     public EnergyBlaster(PApplet p, Tile tile) {
         super(p,tile);
@@ -24,91 +27,134 @@ public class EnergyBlaster extends Turret{
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 240; //240 frames
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
-        damage = 30;
-        pjSpeed = 16;
-        range = 6; //5 degrees
-        numFireFrames = 14; //14
-        betweenFireFrames = 2;
-        numLoadFrames = 42; //42
-        fireFrames = new PImage[numFireFrames];
-        loadFrames = new PImage[numLoadFrames];
-        spriteType = 0;
+        delay = 4.2f;
+        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        damage = 100;
+        pjSpeed = 1000;
+        range = 300;
+        betweenFireFrames = down60ToFramerate(2);
+        state = 0;
         effectRadius = 35;
         bigExplosion = false;
+        damageSound = sounds.get("metalDamage");
+        breakSound = sounds.get("metalBreak");
+        placeSound = sounds.get("metalPlace");
+        fireSound = sounds.get("energyBlasterFire");
+        fireParticle = "energy";
+        barrelLength = 40;
         loadSprites();
         debrisType = "darkMetal";
-        price = 300;
+        price = ENERGYBLASTER_PRICE;
         value = price;
         priority = 2; //strong
         setUpgrades();
         updateTowerArray();
+
+        spawnParticles();
+        playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    public void fire() { //needed to change projectile fired
-        float angleB = angle;
-        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);
-        spa.setMag(40);
-        spp.add(spa);
-        projectiles.add(new EnergyBlast(p,spp.x,spp.y, angleB, this, damage, effectRadius, bigExplosion));
-        for (int i = 0; i < 5; i++) {
-            PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
-            spa2.setMag(-2);
-            PVector spp2 = new PVector(spp.x,spp.y);
-            spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"energy"));
+    protected void spawnProjectile(PVector position, float angle) {
+        if (nuclear) {
+            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, damage, effectRadius));
+        } else if (dark) {
+            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, damage, effectRadius));
+        } else {
+            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, damage, effectRadius, bigExplosion));
         }
     }
 
     private void setUpgrades(){
-//        //delay (firerate)
-//        upgradeDelay[0] = 0;
-//        upgradeDelay[1] = 0;
-//        upgradeDelay[2] = -25;
-//        upgradeDelay[3] = -35;
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 50;
-        upgradePrices[3] = 100;
-//        //error (accuracy)
-//        upgradeRange[0] = -2;
-//        upgradeRange[1] = 0;
-//        upgradeRange[2] = 0;
-//        upgradeRange[3] = 0;
+        upgradePrices[0] = 350;
+        upgradePrices[1] = 400;
+        upgradePrices[2] = 4000;
+
+        upgradePrices[3] = 250;
+        upgradePrices[4] = 600;
+        upgradePrices[5] = 6500;
         //titles
-        upgradeTitles[0] = "More Precise";
-        upgradeTitles[1] = "Splashier";
-        upgradeTitles[2] = "Faster Firing";
-        upgradeTitles[3] = "Yet Faster Firing";
-        //desc line one
+        upgradeTitles[0] = "Faster Reload";
+        upgradeTitles[1] = "Big Blasts";
+        upgradeTitles[2] = "Nuclear Blasts";
+
+        upgradeTitles[3] = "Longer Range";
+        upgradeTitles[4] = "Sniping";
+        upgradeTitles[5] = "Dark Vortex";
+        //description
         upgradeDescA[0] = "Increase";
-        upgradeDescA[1] = "increase";
-        upgradeDescA[2] = "Increase";
-        upgradeDescA[3] = "further";
-        //desc line two
-        upgradeDescB[0] = "accuracy";
-        upgradeDescB[1] = "explosion";
-        upgradeDescB[2] = "firerate";
-        upgradeDescB[3] = "increase";
-        //desc line three
+        upgradeDescB[0] = "firerate";
         upgradeDescC[0] = "";
+
+        upgradeDescA[1] = "Increase";
+        upgradeDescB[1] = "explosion";
         upgradeDescC[1] = "radius";
-        upgradeDescC[2] = "";
-        upgradeDescC[3] = "firerate";
+
+        upgradeDescA[2] = "Huge";
+        upgradeDescB[2] = "explosion";
+        upgradeDescC[2] = "radius";
+
+
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "range";
+        upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "range and";
+        upgradeDescC[4] = "damage";
+
+        upgradeDescA[5] = "Massively";
+        upgradeDescB[5] = "increase";
+        upgradeDescC[5] = "damage";
         //icons
-        upgradeIcons[0] = spritesAnimH.get("upgradeIC")[5];
-        upgradeIcons[1] = spritesAnimH.get("upgradeIC")[12];
-        upgradeIcons[2] = spritesAnimH.get("upgradeIC")[7];
-        upgradeIcons[3] = spritesAnimH.get("upgradeIC")[10];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[21];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[29];
+
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[13];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[30];
     }
 
-    public void upgradeSpecial() {
-        if (nextLevelA == 1) {
-            effectRadius += 25;
-            bigExplosion = true;
+    protected void upgradeSpecial(int id) {
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    delay -= 0.6f;
+                    break;
+                case 1:
+                    effectRadius += 15;
+                    bigExplosion = true;
+                    break;
+                case 2:
+                    damage += 300;
+                    delay -= 0.6f;
+                    effectRadius = 200;
+                    name = "nuclearBlaster";
+                    fireParticle = "nuclear";
+                    debrisType = "metal";
+                    nuclear = true;
+                    loadSprites();
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    range += 35;
+                    break;
+                case 4:
+                    range += 35;
+                    damage += 100;
+                    break;
+                case 5:
+                    range += 45;
+                    damage += 2500;
+                    name = "darkBlaster";
+                    fireParticle = "dark";
+                    dark = true;
+                    loadSprites();
+                    break;
+            }
         }
     }
 

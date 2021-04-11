@@ -1,11 +1,10 @@
 package main.gui.guiObjects.buttons;
 
-import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.*;
-import static main.Main.spritesAnimH;
+import static main.Main.animatedSprites;
+import static main.Main.selection;
 
 public class TargetPriority extends Button {
 
@@ -13,9 +12,9 @@ public class TargetPriority extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 45);
-        spriteIdle = spritesAnimH.get("targetPriorityBT")[0];
-        spritePressed = spritesAnimH.get("targetPriorityBT")[1];
-        spriteHover = spritesAnimH.get("targetPriorityBT")[2];
+        spriteIdle = animatedSprites.get("targetPriorityBT")[0];
+        spritePressed = animatedSprites.get("targetPriorityBT")[1];
+        spriteHover = animatedSprites.get("targetPriorityBT")[2];
         sprite = spriteIdle;
     }
 
@@ -27,11 +26,8 @@ public class TargetPriority extends Button {
     }
 
     public void action(){
-        Tower tower = tiles.get(selection.id).tower; //switch selected tower's priority
-        if (tower.priority < 2){
-            tower.priority += 1;
-        } else{ //roll over
-            tower.priority = 0;
-        }
+        //roll over
+        if (selection.turret.priority < 2) selection.turret.priority += 1;
+        else selection.turret.priority = 0;
     }
 }

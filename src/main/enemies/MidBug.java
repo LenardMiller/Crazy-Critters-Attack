@@ -3,7 +3,8 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.soundsH;
+import static main.Main.sounds;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class MidBug extends Enemy {
     public MidBug(PApplet p, float x, float y) {
@@ -11,7 +12,7 @@ public class MidBug extends Enemy {
         size = new PVector(25,25);
         pfSize = 1; //1
         radius = 13;
-        maxSpeed = .5f;
+        maxSpeed = 30;
         speed = maxSpeed;
         moneyDrop = 20;
         damage = 3;
@@ -19,14 +20,14 @@ public class MidBug extends Enemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "midBug";
-        betweenWalkFrames = 4;
-        betweenAttackFrames = 2;
+        betweenWalkFrames = down60ToFramerate(6);
+        betweenAttackFrames = down60ToFramerate(2);
         attackStartFrame = 34; //attack start
         attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(14,14);
-        overkillSound = soundsH.get("squish");
-        dieSound = soundsH.get("crunch");
-        loadSprites();
+        overkillSound = sounds.get("squish");
+        dieSound = sounds.get("crunch");
+        loadStuff();
     }
 }

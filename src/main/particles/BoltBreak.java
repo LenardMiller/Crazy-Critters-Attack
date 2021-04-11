@@ -3,7 +3,8 @@ package main.particles;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.spritesAnimH;
+import static main.Main.animatedSprites;
+import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class BoltBreak extends Particle {
@@ -13,11 +14,11 @@ public class BoltBreak extends Particle {
         size = new PVector(14, 40);
         maxSpeed = 0;
         speed = maxSpeed;
-        angleTwo = angle;
+        displayAngle = angle;
         angularVelocity = 0; //degrees mode
-        betweenFrames = (int)p.random(0,5);
+        betweenFrames = down60ToFramerate(p.random(0,5));
         currentSprite = 0;
-        sprites = spritesAnimH.get("boltBreakPT");
+        sprites = animatedSprites.get("boltBreakPT");
         velocity = PVector.fromAngle(angle-HALF_PI);
         numFrames = sprites.length;
     }

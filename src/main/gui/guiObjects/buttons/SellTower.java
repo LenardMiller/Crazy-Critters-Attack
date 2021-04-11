@@ -1,6 +1,5 @@
 package main.gui.guiObjects.buttons;
 
-import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -12,9 +11,9 @@ public class SellTower extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 45);
-        spriteIdle = spritesAnimH.get("sellTowerBT")[0];
-        spritePressed = spritesAnimH.get("sellTowerBT")[1];
-        spriteHover = spritesAnimH.get("sellTowerBT")[2];
+        spriteIdle = animatedSprites.get("sellTowerBT")[0];
+        spritePressed = animatedSprites.get("sellTowerBT")[1];
+        spriteHover = animatedSprites.get("sellTowerBT")[2];
         sprite = spriteIdle;
     }
 
@@ -26,10 +25,9 @@ public class SellTower extends Button {
     }
 
     public void action(){ //kills tower and gives value
-        Tower tower = tiles.get(selection.id).tower;
-        tower.sell();
+        selection.turret.sell();
         active = false;
-        inGameGui.targetButton.active = false;
+        inGameGui.priorityButton.active = false;
         inGameGui.upgradeButtonA.active = false;
         inGameGui.upgradeButtonB.active = false;
         inGameGui.upgradeIconA.active = false;

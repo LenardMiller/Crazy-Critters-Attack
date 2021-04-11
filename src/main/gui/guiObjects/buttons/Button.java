@@ -7,43 +7,37 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSound;
 
 public abstract class Button extends GuiObject {
 
-    PImage spriteIdle;
-    PImage spritePressed;
-    PImage spriteHover;
-    String spriteLocation;
-    boolean holdable;
-    SoundFile clickIn;
-    SoundFile clickOut;
+    protected boolean holdable;
+    protected PImage spriteIdle;
+    protected PImage spritePressed;
+    protected PImage spriteHover;
+    protected String spriteLocation;
+    protected SoundFile clickIn;
+    protected SoundFile clickOut;
 
-    public Button(PApplet p, float x, float y, String type, boolean active){
+    protected Button(PApplet p, float x, float y, String type, boolean active){
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(25, 25);
         sprite = spriteIdle;
         holdable = false;
-        clickIn = soundsH.get("clickIn");
-        clickOut = soundsH.get("clickOut");
+        clickIn = sounds.get("clickIn");
+        clickOut = sounds.get("clickOut");
     }
 
-    /**
-     * If mouse over, push in.
-     */
     public void hover(){
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
                 p.mouseY > position.y-size.y/2 && alive && !paused) {
             sprite = spriteHover;
-            if (inputHandler.leftMousePressedPulse) {
-                clickIn.stop();
-                clickIn.play(1, volume);
-            }
+            if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
             if (holdable && p.mousePressed && p.mouseButton == LEFT) action();
             else if (inputHandler.leftMouseReleasedPulse) {
-                clickOut.stop();
-                clickOut.play(1, volume);
+                playSound(clickOut, 1, 1);
                 action();
                 sprite = spritePressed;
             }

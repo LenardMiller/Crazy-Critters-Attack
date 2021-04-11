@@ -8,14 +8,15 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.secondsToFrames;
 
 public class Bleeding extends Buff {
 
     public Bleeding(PApplet p, int enId, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
-        effectDelay = 12; //frames
-        lifeDuration = 360;
+        effectDelay = secondsToFrames(0.2f); //frames
+        lifeDuration = secondsToFrames(6);
         particle = null;
         name = "bleeding";
         this.enId = enId;
@@ -23,11 +24,11 @@ public class Bleeding extends Buff {
 
     public void effect() { //small damage fast
         Enemy enemy = enemies.get(enId);
-        enemy.barTrans = 255;
-        enemy.damageSimple(15, turret, "none", new PVector(0,0), false);
+        enemy.barAlpha = 255;
+        enemy.damageWithoutBuff(15, turret, "none", new PVector(0,0), false);
     }
 
-    void display() { //particles around enemy
+    protected void display() { //particles around enemy
         Enemy enemy = enemies.get(enId);
         int num = (int)(p.random(0, particleChance));
         if (num == 0) {
