@@ -81,7 +81,7 @@ public class RandomCannon extends Turret {
 
     private void setUpgrades() {
         //price
-        upgradePrices[0] = 125;
+        upgradePrices[0] = 150;
         upgradePrices[1] = 150;
         upgradePrices[2] = 600;
         upgradePrices[3] = 75;
@@ -95,7 +95,7 @@ public class RandomCannon extends Turret {
         upgradeTitles[4] = "Longest Range";
         upgradeTitles[5] = "Dirty Laundry";
         //description
-        upgradeDescA[0] = "+15";
+        upgradeDescA[0] = "increase";
         upgradeDescB[0] = "damage";
         upgradeDescC[0] = "";
 
@@ -131,7 +131,7 @@ public class RandomCannon extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    damage += 15;
+                    damage += 10;
                     break;
                 case 1:
                     delay -= 0.15f;

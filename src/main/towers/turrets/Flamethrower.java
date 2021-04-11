@@ -165,7 +165,7 @@ public class Flamethrower extends Turret {
         //prices
         upgradePrices[0] = 400;
         upgradePrices[1] = 500;
-        upgradePrices[2] = 2500;
+        upgradePrices[2] = 3500;
 
         upgradePrices[3] = 500;
         upgradePrices[4] = 600;
@@ -246,6 +246,7 @@ public class Flamethrower extends Turret {
                     name = "magicFlamethrower";
                     magic = true;
                     debrisType = "darkMetal";
+                    range += 30;
                     pjSpeed = 150;
                     damage = 60;
                     effectDuration += 5;

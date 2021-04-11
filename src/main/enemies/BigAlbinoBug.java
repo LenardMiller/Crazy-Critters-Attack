@@ -16,7 +16,7 @@ public class BigAlbinoBug extends Enemy{
         maxSpeed = 18;
         speed = maxSpeed;
         moneyDrop = 100;
-        damage = 15;
+        damage = 25;
         maxHp = 2500;
         hp = maxHp;
         hitParticle = "glowOuch";
