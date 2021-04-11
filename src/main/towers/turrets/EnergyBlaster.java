@@ -68,11 +68,11 @@ public class EnergyBlaster extends Turret{
         //price
         upgradePrices[0] = 350;
         upgradePrices[1] = 400;
-        upgradePrices[2] = 1500;
+        upgradePrices[2] = 4000;
 
         upgradePrices[3] = 250;
         upgradePrices[4] = 600;
-        upgradePrices[5] = 2500;
+        upgradePrices[5] = 7500;
         //titles
         upgradeTitles[0] = "Faster Reload";
         upgradeTitles[1] = "Big Blasts";

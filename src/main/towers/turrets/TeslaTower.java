@@ -115,11 +115,11 @@ public class TeslaTower extends Turret {
         //price
         upgradePrices[0] = 300;
         upgradePrices[1] = 400;
-        upgradePrices[2] = 2000;
+        upgradePrices[2] = 5000;
 
         upgradePrices[3] = 250;
         upgradePrices[4] = 500;
-        upgradePrices[5] = 3000;
+        upgradePrices[5] = 4000;
         //titles
         upgradeTitles[0] = "Farther Jumping";
         upgradeTitles[1] = "Farther Jumping";
