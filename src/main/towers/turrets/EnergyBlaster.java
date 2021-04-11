@@ -68,7 +68,7 @@ public class EnergyBlaster extends Turret{
         //price
         upgradePrices[0] = 350;
         upgradePrices[1] = 400;
-        upgradePrices[2] = 2000;
+        upgradePrices[2] = 1500;
 
         upgradePrices[3] = 250;
         upgradePrices[4] = 600;
@@ -148,7 +148,7 @@ public class EnergyBlaster extends Turret{
                     break;
                 case 5:
                     range += 45;
-                    damage += 1500;
+                    damage += 2500;
                     name = "darkBlaster";
                     fireParticle = "dark";
                     dark = true;

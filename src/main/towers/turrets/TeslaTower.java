@@ -71,7 +71,7 @@ public class TeslaTower extends Turret {
             shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, 100, damage, this));
             //damaging arcs
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, damage / 2, arcLength, 200, i, targetEnemy));
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, damage / 2, arcLength, 300, i, targetEnemy));
             } //decorative arcs
             for (int i = 0; i < p.random(5, 10); i++) {
                 arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, 0, arcLength, 100, -1));
@@ -115,11 +115,11 @@ public class TeslaTower extends Turret {
         //price
         upgradePrices[0] = 300;
         upgradePrices[1] = 400;
-        upgradePrices[2] = 3000;
+        upgradePrices[2] = 2500;
 
         upgradePrices[3] = 250;
         upgradePrices[4] = 500;
-        upgradePrices[5] = 2500;
+        upgradePrices[5] = 3000;
         //titles
         upgradeTitles[0] = "Farther Jumping";
         upgradeTitles[1] = "Farther Jumping";
