@@ -368,35 +368,35 @@ public class Tile {
     }
 
     public void setDecoration(String name) {
-        if (staticSprites.get(name) != decoration) {
-            decoration = staticSprites.get(name);
-            decorationName = name;
-        } else {
+        if (name == null || staticSprites.get(name) == decoration) {
             decoration = null;
             decorationName = null;
+        } else {
+            decoration = staticSprites.get(name);
+            decorationName = name;
         }
     }
 
     public void setBreakable(String name) {
         if (name != null) name = name.replace("ultimate","titanium");
-        if (staticSprites.get(name) != breakable) {
-            breakable = staticSprites.get(name);
-            breakableName = name;
-        } else {
+        if (name == null || staticSprites.get(name) == breakable) {
             breakable = null;
             breakableName = null;
+        } else {
+            breakable = staticSprites.get(name);
+            breakableName = name;
         }
     }
 
     public void setObstacle(String name) {
-        if (staticSprites.get(name) != obstacle) {
+        if (name == null || staticSprites.get(name) == obstacle) {
+            obstacle = null;
+            obstacleName = null;
+        } else {
             obstacle = staticSprites.get(name);
             obstacleName = name;
             if (name.contains("smallTree")) obstacleShadowLength = 3;
             if (containsCorners(name,"tree")) obstacleShadowLength = 8;
-        } else {
-            obstacle = null;
-            obstacleName = null;
         }
     }
 

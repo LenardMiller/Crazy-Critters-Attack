@@ -93,7 +93,7 @@ public class Main extends PApplet {
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
     public static boolean paused = false;
-    public static boolean dev = false;
+    public static boolean dev = true;
     public static int connectWallQueues;
 
     public static final int FRAMERATE = 30;
@@ -221,7 +221,7 @@ public class Main extends PApplet {
         levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
         levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 450, 100, "stone");
-        DataControl.load(p, levels[currentLevel].layout);
+        DataControl.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();
         //gui stuff

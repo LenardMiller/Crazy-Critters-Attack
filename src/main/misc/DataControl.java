@@ -72,26 +72,27 @@ public class DataControl extends ClassLoader {
      * @param p the PApplet
      * @param name the filename, sans extension.
      */
-    public static void load(PApplet p, String name) {
+    public static void loadLayout(PApplet p, String name) {
         //run from terminal
         String filePath = new File("").getAbsolutePath();
         //run from intelliJ
         if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
             filePath = "resources";
         }
-        File loadFile = new File(filePath+"/data/"+name+".json");
+        File loadFile = new File(filePath+"/data/"+name+"/clean.json");
         JSONArray loadArray = loadJSONArray(loadFile);
+
         alive = true;
         //tiles
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
             tile.machine = false;
-            JSONObject loadObject = loadArray.getJSONObject(i);
-            String bgA = loadObject.getString("bgA");
-            String bgB = loadObject.getString("bgB");
-            String bgC = loadObject.getString("bgC");
-            String obstacle = loadObject.getString("obstacle");
-            boolean machine = loadObject.getBoolean("machine");
+            JSONObject loadedTile = loadArray.getJSONObject(i);
+            String bgA = loadedTile.getString("bgA");
+            String bgB = loadedTile.getString("bgB");
+            String bgC = loadedTile.getString("bgC");
+            String obstacle = loadedTile.getString("obstacle");
+            boolean machine = loadedTile.getBoolean("machine");
             if (bgA != null) tile.setBase(bgA);
             if (bgB != null) tile.setDecoration(bgB);
             if (bgC != null) tile.setBreakable(bgC);
@@ -118,5 +119,26 @@ public class DataControl extends ClassLoader {
         machine.barPosition = new PVector(barX, barY);
         machine.barSize = new PVector(barSizeX, barSizeY);
         machine.barHorizontal = barHorizontal;
+    }
+
+    public static void loadTile(Tile tile) {
+        //run from terminal
+        String filePath = new File("").getAbsolutePath();
+        //run from intelliJ
+        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
+            filePath = "resources";
+        }
+        File loadFile = new File(filePath+"/data/"+levels[currentLevel].layout+"/polluted.json");
+        JSONArray loadArray = loadJSONArray(loadFile);
+
+        JSONObject loadedTile = loadArray.getJSONObject(tile.id);
+        String bgA = loadedTile.getString("bgA");
+        String bgB = loadedTile.getString("bgB");
+        String bgC = loadedTile.getString("bgC");
+        String obstacle = loadedTile.getString("obstacle");
+        if (bgA != null) tile.setBase(bgA);
+        tile.setDecoration(bgB);
+        tile.setBreakable(bgC);
+        tile.setObstacle(obstacle);
     }
 }
