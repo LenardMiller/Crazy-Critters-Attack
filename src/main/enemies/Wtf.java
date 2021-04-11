@@ -16,8 +16,8 @@ public class Wtf extends Enemy {
         maxSpeed = 18;
         speed = maxSpeed;
         moneyDrop = 2500;
-        damage = 35;
-        maxHp = 60000;
+        damage = 75;
+        maxHp = 100000;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "wtf";
@@ -25,7 +25,7 @@ public class Wtf extends Enemy {
         attackStartFrame = 0; //attack start
         attackDmgFrames = new int[]{11};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(10);
+        betweenAttackFrames = down60ToFramerate(8);
         corpseLifespan = 12;
         corpseSize = size;
         partSize = new PVector(100,100);

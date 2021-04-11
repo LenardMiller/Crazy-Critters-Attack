@@ -45,7 +45,7 @@ public class Flamethrower extends Turret {
         frame = 0;
         loadDelay = 0;
         loadDelayTime = 0;
-        damage = 2;
+        damage = 4;
         loadSprites();
         debrisType = "metal";
         price = FLAMETHROWER_PRICE;

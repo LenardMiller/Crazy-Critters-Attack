@@ -16,8 +16,8 @@ public class SmallGolem extends Enemy{
         maxSpeed = 30;
         speed = maxSpeed;
         moneyDrop = 30;
-        damage = 4;
-        maxHp = 80; //Hp <---------------------------
+        damage = 5;
+        maxHp = 120; //Hp <---------------------------
         hp = maxHp;
         hitParticle = "lichenOuch";
         name = "smallGolem";

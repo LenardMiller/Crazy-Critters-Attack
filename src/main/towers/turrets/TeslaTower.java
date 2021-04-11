@@ -115,7 +115,7 @@ public class TeslaTower extends Turret {
         //price
         upgradePrices[0] = 300;
         upgradePrices[1] = 400;
-        upgradePrices[2] = 2500;
+        upgradePrices[2] = 2000;
 
         upgradePrices[3] = 250;
         upgradePrices[4] = 500;
@@ -190,6 +190,8 @@ public class TeslaTower extends Turret {
                     break;
                 case 5:
                     delay = 0;
+                    range += 100;
+                    damage += 100;
                     highPower = true;
                     betweenIdleFrames = 3;
                     name = "highPowerTesla";
