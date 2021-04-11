@@ -308,7 +308,7 @@ public class Selection { //what tower is selected
         P.text("Health: " + turret.hp + "/" + turret.maxHp, 910, 276 + offset);
         //damage
         if (turret.damage <= 0) P.text("No damage", 910, 296 + offset);
-        else P.text("Damage: " + turret.damage, 910, 296 + offset);
+        else P.text("Damage: " + nfc(turret.damage), 910, 296 + offset);
         //firerate (delay)
         if (turret.delay <= 0) P.text("Instant reload", 910, 316 + offset);
         else P.text("Reload time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
@@ -355,9 +355,9 @@ public class Selection { //what tower is selected
         P.fill(STAT_TEXT_COLOR.getRGB());
         P.textAlign(LEFT);
         P.textFont(mediumFont);
-        if (turret.killsTotal != 1) P.text(turret.killsTotal + " kills", 910, 475 + offsetB);
-        else P.text(turret.killsTotal + " kill", 910, 475 + offsetB);
-        P.text(turret.damageTotal + " total damage", 910, 500 + offsetB);
+        if (turret.killsTotal != 1) P.text(nfc(turret.killsTotal) + " kills", 910, 475 + offsetB);
+        else P.text(nfc(turret.killsTotal) + " kill", 910, 475 + offsetB);
+        P.text(nfc(turret.damageTotal) + " dmg total", 910, 500 + offsetB);
     }
 
     private void upgradeIcons() {
@@ -380,9 +380,9 @@ public class Selection { //what tower is selected
             P.fill(fillColor.getRGB());
             P.textFont(largeFont);
             P.text(turret.upgradeTitles[nextLevel], 1000, 585 + offsetC);
-            if (canAfford) P.text("$" + turret.upgradePrices[nextLevel], 1000, 693 + offsetC);
+            if (canAfford) P.text("$" + nfc(turret.upgradePrices[nextLevel]), 1000, 693 + offsetC);
             else {
-                strikethroughText(P, "$" + turret.upgradePrices[nextLevel], new PVector(1000, 693 + offsetC),
+                strikethroughText(P, "$" + nfc(turret.upgradePrices[nextLevel]), new PVector(1000, 693 + offsetC),
                         fillColor, largeFont.getSize(), CENTER);
             }
             P.textFont(mediumFont);
@@ -438,7 +438,7 @@ public class Selection { //what tower is selected
         P.fill(75, 0, 0);
         P.textFont(largeFont);
         P.textAlign(CENTER);
-        P.text("Sell for: $" + floor(turret.value * .8f), 1000, 888);
+        P.text("Sell for: $" + nfc(floor(turret.value * .8f)), 1000, 888);
     }
 
     private void setTextPurple(String s, int offset) {
