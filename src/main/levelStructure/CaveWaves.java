@@ -22,7 +22,7 @@ public class CaveWaves {
         String wtf = "wtf";
         String horde = "horde";
 
-        waves[0] = wavePreset(p, 55, 20, albinoBug);
+        waves[0] = wavePreset(p, 75, 40, albinoBug);
         waves[0].addSpawns(albinoBug, 5);
 
         waves[1] = wavePreset(p, 55, 20, albinoBug);
