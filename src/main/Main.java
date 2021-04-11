@@ -67,7 +67,6 @@ public class Main extends PApplet {
     public static Level[] levels;
 
     public static CompressArray compress;
-    public static Polluter polluter;
 
     public static Hand hand;
     public static Selection selection;
@@ -223,7 +222,6 @@ public class Main extends PApplet {
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
         levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 450, 100, "stone");
         DataControl.loadLayout(p, levels[currentLevel].layout);
-        polluter = new Polluter(p, 5);
         money = levels[currentLevel].startingCash;
         updateNodes();
         //gui stuff
@@ -322,7 +320,6 @@ public class Main extends PApplet {
      */
     private void drawObjects() {
         //tiles
-        if (playingLevel && !paused) polluter.main();
         if (connectWallQueues > 0) { //else
             connectWallQueues = 0;
             updateWallTileConnections();

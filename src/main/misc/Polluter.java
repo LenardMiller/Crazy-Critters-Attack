@@ -13,12 +13,14 @@ public class Polluter {
     private final PApplet P;
     private final ArrayList<Tile> CLEAN_TILES;
     private final int BETWEEN_POLLUTES;
+    private final String NAME;
 
     private int polluteTimer;
 
-    public Polluter(PApplet p, float secondsBetweenPollutes) {
+    public Polluter(PApplet p, float secondsBetweenPollutes, String name) {
         P = p;
         BETWEEN_POLLUTES = (int) secondsBetweenPollutes * FRAMERATE;
+        NAME = name;
 
         CLEAN_TILES = new ArrayList<>();
         for (int i = 0; i < tiles.size(); i++) {
@@ -37,7 +39,7 @@ public class Polluter {
     private void pollute() {
         if (CLEAN_TILES.size() == 0) return;
         int id = (int) P.random(CLEAN_TILES.size());
-        loadTile(CLEAN_TILES.get(id));
+        loadTile(CLEAN_TILES.get(id), NAME);
         CLEAN_TILES.remove(id);
     }
 }

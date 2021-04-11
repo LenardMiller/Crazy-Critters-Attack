@@ -1,5 +1,6 @@
 package main.levelStructure;
 
+import main.misc.Polluter;
 import processing.core.PApplet;
 
 import static main.Main.*;
@@ -15,6 +16,7 @@ public class Level {
     public int startingCash;
     public int reward;
     public String groundType;
+    private Polluter polluter;
 
     public Level(PApplet p, Wave[] waves, String layout, int startingCash, int reward, String groundType) {
         this.P = p;
@@ -30,8 +32,12 @@ public class Level {
     public void main() {
         if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
+            polluter = wave.polluter;
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
-            else if (!paused && alive) wave.spawnEnemies();
+            else if (!paused && alive) {
+                wave.spawnEnemies();
+                if (polluter != null) polluter.main();
+            }
             if (wave.spawnLengthTimer > wave.SPAWN_LENGTH && enemies.size() == 0 && !paused && alive) {
                 wave.lengthTimer += wave.LENGTH / 500;
             }

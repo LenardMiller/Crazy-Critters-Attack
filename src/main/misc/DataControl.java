@@ -121,14 +121,14 @@ public class DataControl extends ClassLoader {
         machine.barHorizontal = barHorizontal;
     }
 
-    public static void loadTile(Tile tile) {
+    public static void loadTile(Tile tile, String name) {
         //run from terminal
         String filePath = new File("").getAbsolutePath();
         //run from intelliJ
         if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
             filePath = "resources";
         }
-        File loadFile = new File(filePath+"/data/"+levels[currentLevel].layout+"/polluted.json");
+        File loadFile = new File(filePath+"/data/"+name+".json");
         JSONArray loadArray = loadJSONArray(loadFile);
 
         JSONObject loadedTile = loadArray.getJSONObject(tile.id);
