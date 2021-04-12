@@ -44,12 +44,14 @@ public class Slider {
         borderColor = new Color(0);
     }
 
-    public float main() {
+    public float main(float input) {
+        progress = (int) PApplet.map(input, MIN_OUTPUT, MAX_OUTPUT, 0, MAX_PROGRESS);
         displaySlider();
         displayText();
         hover();
 
-        return PApplet.map(progress, 0, MAX_PROGRESS, MIN_OUTPUT, MAX_OUTPUT);
+        if (held) return PApplet.map(progress, 0, MAX_PROGRESS, MIN_OUTPUT, MAX_OUTPUT);
+        return input;
     }
 
     private void hover() {

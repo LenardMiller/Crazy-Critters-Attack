@@ -32,7 +32,7 @@ public class SettingsGui {
           new Color(50, 50, 50), 48, CENTER);
 
         //buttons
-        volume = volumeSlider.main();
+        volume = volumeSlider.main(volume);
         P.fill(200);
         P.textFont(mediumFont);
         int offsetY = 7;
