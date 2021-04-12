@@ -1,6 +1,7 @@
 package main.gui;
 
 import main.gui.guiObjects.Slider;
+import main.gui.guiObjects.buttons.ResetSettings;
 import main.gui.guiObjects.buttons.SettingsMenuScreen;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -18,6 +19,7 @@ public class SettingsGui {
 
     private SettingsMenuScreen returnButton;
     private Slider volumeSlider;
+    private ResetSettings resetSettings;
 
     public SettingsGui(PApplet p) {
         P = p;
@@ -36,10 +38,13 @@ public class SettingsGui {
         int offsetY = 7;
         returnButton.main();
         P.text("Return [ESC]", returnButton.position.x, returnButton.position.y + offsetY);
+        resetSettings.main();
+        P.text("Reset to Defaults", resetSettings.position.x, resetSettings.position.y + offsetY);
     }
 
     private void build() {
         returnButton = new SettingsMenuScreen(P, P.width/2f, (P.height/2f) + 175);
         volumeSlider = new Slider(P, "Volume", new PVector(P.width / 2f, P.height / 2f), volume, 0.01f, 1);
+        resetSettings = new ResetSettings(P, P.width/2f, (P.height/2f) + 125);
     }
 }
