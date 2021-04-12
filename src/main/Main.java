@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
+import static main.misc.DataControl.loadSettings;
 import static main.misc.SpriteLoader.loadAnimatedSprites;
 import static main.misc.SpriteLoader.loadStaticSprites;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
@@ -159,6 +160,7 @@ public class Main extends PApplet {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
+        loadSettings(this);
         //fonts
         veryLargeFont = createFont("STHeitiSC-Light", 48);
         largeFont = createFont("STHeitiSC-Light", 24);

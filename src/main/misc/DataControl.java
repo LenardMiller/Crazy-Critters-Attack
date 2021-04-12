@@ -89,6 +89,18 @@ public class DataControl extends ClassLoader {
         saveWriter.close();
     }
 
+    public static void loadSettings(PApplet p) {
+        //run from terminal
+        String filePath = new File("").getAbsolutePath();
+        //run from intelliJ
+        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
+            filePath = "resources";
+        }
+        File loadFile = new File(filePath+"/data/settings.json");
+        JSONObject loadObject = loadJSONObject(loadFile);
+        volume = loadObject.getFloat("volume");
+    }
+
     /**
      * Loads level data from a JSON file.
      * @param p the PApplet
