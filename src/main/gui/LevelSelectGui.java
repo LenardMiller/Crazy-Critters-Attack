@@ -2,6 +2,7 @@ package main.gui;
 
 import main.gui.guiObjects.buttons.ExitGame;
 import main.gui.guiObjects.buttons.SelectLevel;
+import main.gui.guiObjects.buttons.SettingsMenuScreen;
 import processing.core.PApplet;
 
 import static main.Main.*;
@@ -11,6 +12,7 @@ public class LevelSelectGui {
     private final PApplet P;
 
     private static SelectLevel[] levelSelectButtons;
+    private static SettingsMenuScreen settingsMenu;
     private static ExitGame exitGame;
 
     /**
@@ -42,17 +44,20 @@ public class LevelSelectGui {
             levelSelectButtons[i].main();
             P.text("Level " + (i+1), levelSelectButtons[i].position.x, levelSelectButtons[i].position.y + offsetY);
         }
+        settingsMenu.main();
+        P.text("Settings", settingsMenu.position.x, settingsMenu.position.y + offsetY);
         exitGame.main();
         P.text("Quit", exitGame.position.x, exitGame.position.y + offsetY);
     }
 
     private void build() {
-        levelSelectButtons = new SelectLevel[levels.length];
-        exitGame = new ExitGame(P, P.width/2f, P.height-100, "null", true);
 
+        levelSelectButtons = new SelectLevel[levels.length];
+        settingsMenu = new SettingsMenuScreen(P, P.width/2f, P.height-100 - 50);
+        exitGame = new ExitGame(P, P.width/2f, P.height-100);
         float factor = (levelSelectButtons.length/2f) - 0.5f;
         for (int i = 0; i < levelSelectButtons.length; i++) {
-            levelSelectButtons[i] = new SelectLevel(P, P.width/2f, P.height/2f + (i-factor)*50, "null", true, i);
+            levelSelectButtons[i] = new SelectLevel(P, P.width/2f, P.height/2f + (i-factor)*50, i);
         }
     }
 }

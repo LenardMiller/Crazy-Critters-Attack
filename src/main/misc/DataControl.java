@@ -20,7 +20,7 @@ public class DataControl extends ClassLoader {
      * Saves level data to a JSON file.
      * @throws IOException catch if file is missing
      */
-    public static void save() throws IOException {
+    public static void saveLayout() throws IOException {
         JSONArray saveArray = new JSONArray();
         //tiles
         for (int i = 0; i < tiles.size(); i++) {
@@ -68,18 +68,52 @@ public class DataControl extends ClassLoader {
     }
 
     /**
-     * Loads level data from a JSON file.
+     * Saves settings to a JSON file
      * @param p the PApplet
-     * @param name the filename, sans extension.
+     * @throws IOException if the file doesn't exist
      */
-    public static void loadLayout(PApplet p, String name) {
+    public static void saveSettings(PApplet p) throws IOException {
+        JSONObject saveObject = new JSONObject();
+        saveObject.setFloat("volume", globalVolume);
+
+        String name = "settings";
         //run from terminal
         String filePath = new File("").getAbsolutePath();
         //run from intelliJ
         if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
             filePath = "resources";
         }
-        File loadFile = new File(filePath+"/data/"+name+"/clean.json");
+        new File(filePath + "/data/saves/" + name + ".json");
+        FileWriter saveWriter = new FileWriter("resources/data/" + name + ".json");
+        saveWriter.write(saveObject.toString());
+        saveWriter.close();
+    }
+
+    public static void loadSettings(PApplet p) {
+        //run from terminal
+        String filePath = new File("").getAbsolutePath();
+        //run from intelliJ
+        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
+            filePath = "resources";
+        }
+        File loadFile = new File(filePath+"/data/settings.json");
+        JSONObject loadObject = loadJSONObject(loadFile);
+        globalVolume = loadObject.getFloat("volume");
+    }
+
+    /**
+     * Loads level data from a JSON file.
+     * @param p the PApplet
+     * @param file the filename, sans extension.
+     */
+    public static void loadLayout(PApplet p, String file) {
+        //run from terminal
+        String filePath = new File("").getAbsolutePath();
+        //run from intelliJ
+        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
+            filePath = "resources";
+        }
+        File loadFile = new File(filePath+"/data/"+file+"/clean.json");
         JSONArray loadArray = loadJSONArray(loadFile);
 
         alive = true;
@@ -121,14 +155,19 @@ public class DataControl extends ClassLoader {
         machine.barHorizontal = barHorizontal;
     }
 
-    public static void loadTile(Tile tile, String name) {
+    /**
+     * Loads data about a single tile from JSON
+     * @param tile Tile to load data about
+     * @param file file to load data from, no extension
+     */
+    public static void loadTile(Tile tile, String file) {
         //run from terminal
         String filePath = new File("").getAbsolutePath();
         //run from intelliJ
         if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
             filePath = "resources";
         }
-        File loadFile = new File(filePath+"/data/"+name+".json");
+        File loadFile = new File(filePath+"/data/"+file+".json");
         JSONArray loadArray = loadJSONArray(loadFile);
 
         JSONObject loadedTile = loadArray.getJSONObject(tile.id);

@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
+import static main.misc.DataControl.loadSettings;
 import static main.misc.SpriteLoader.loadAnimatedSprites;
 import static main.misc.SpriteLoader.loadStaticSprites;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
@@ -74,6 +75,7 @@ public class Main extends PApplet {
     public static LevelBuilderGui levelBuilderGui;
     public static PauseGui pauseGui;
     public static LevelSelectGui levelSelectGui;
+    public static SettingsGui settingsGui;
 
     //can't be final because created by PApplet
     public static PFont veryLargeFont;
@@ -87,13 +89,15 @@ public class Main extends PApplet {
      */
     public static int screen = 1;
     public static int money = 100;
+    public static float globalVolume = 0.25f;
     public static boolean alive = true;
     public static boolean won = false;
     public static boolean debug = false;
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
     public static boolean paused = false;
-    public static boolean dev = false;
+    public static boolean settings = false;
+    public static boolean dev = true;
     public static int connectWallQueues;
 
     public static final int FRAMERATE = 30;
@@ -156,6 +160,7 @@ public class Main extends PApplet {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
+        loadSettings(this);
         //fonts
         veryLargeFont = createFont("STHeitiSC-Light", 48);
         largeFont = createFont("STHeitiSC-Light", 24);
@@ -167,7 +172,6 @@ public class Main extends PApplet {
         loadAnimatedSprites(this);
         //sound stuff
         loadSounds(this);
-        sound.volume(0.25f);
         //load input
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
@@ -176,6 +180,7 @@ public class Main extends PApplet {
         levels = new Level[3];
         //guis
         levelSelectGui = new LevelSelectGui(this);
+        settingsGui = new SettingsGui(this);
     }
 
     /**
@@ -252,7 +257,10 @@ public class Main extends PApplet {
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
-        //looping sounds
+        if (settings) settingsGui.display();
+        keyBinds.menuKeys();
+        //sound stuff
+        sound.volume(globalVolume);
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
         for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
         //reset mouse pulses
@@ -303,7 +311,12 @@ public class Main extends PApplet {
             textAlign(LEFT);
             if (!levelBuilder) inGameGui.drawText(this, 10);
         } else inGameGui.drawDebugText(this, 10);
-        if (paused) pauseGui.display();
+        if (paused) {
+            if (!alive) fill(50, 0, 0, 50);
+            else fill(0, 0, 0, 50);
+            rect(0, 0, width, height);
+        }
+        if (paused && !settings) pauseGui.display();
         //levels
         if (playingLevel) levels[currentLevel].main();
     }
@@ -312,7 +325,7 @@ public class Main extends PApplet {
      * Stuff for the level select screen.
      */
     private void drawLevelSelect() {
-        levelSelectGui.display();
+        if (!settings) levelSelectGui.display();
     }
 
     /**
