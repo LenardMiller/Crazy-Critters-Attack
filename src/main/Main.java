@@ -89,7 +89,7 @@ public class Main extends PApplet {
      */
     public static int screen = 1;
     public static int money = 100;
-    public static float volume = 0.25f;
+    public static float globalVolume = 0.25f;
     public static boolean alive = true;
     public static boolean won = false;
     public static boolean debug = false;
@@ -260,7 +260,7 @@ public class Main extends PApplet {
         if (settings) settingsGui.display();
         keyBinds.menuKeys();
         //sound stuff
-        sound.volume(volume);
+        sound.volume(globalVolume);
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
         for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
         //reset mouse pulses

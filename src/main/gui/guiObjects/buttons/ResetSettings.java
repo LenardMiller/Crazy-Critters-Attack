@@ -43,6 +43,6 @@ public class ResetSettings extends Button {
     }
 
     public void action() {
-        volume = 0.25f;
+        globalVolume = 0.25f;
     }
 }

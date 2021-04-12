@@ -74,7 +74,7 @@ public class DataControl extends ClassLoader {
      */
     public static void saveSettings(PApplet p) throws IOException {
         JSONObject saveObject = new JSONObject();
-        saveObject.setFloat("volume", volume);
+        saveObject.setFloat("volume", globalVolume);
 
         String name = "settings";
         //run from terminal
@@ -98,7 +98,7 @@ public class DataControl extends ClassLoader {
         }
         File loadFile = new File(filePath+"/data/settings.json");
         JSONObject loadObject = loadJSONObject(loadFile);
-        volume = loadObject.getFloat("volume");
+        globalVolume = loadObject.getFloat("volume");
     }
 
     /**
