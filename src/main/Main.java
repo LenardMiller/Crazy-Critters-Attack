@@ -74,6 +74,7 @@ public class Main extends PApplet {
     public static LevelBuilderGui levelBuilderGui;
     public static PauseGui pauseGui;
     public static LevelSelectGui levelSelectGui;
+    public static SettingsGui settingsGui;
 
     //can't be final because created by PApplet
     public static PFont veryLargeFont;
@@ -177,6 +178,7 @@ public class Main extends PApplet {
         levels = new Level[3];
         //guis
         levelSelectGui = new LevelSelectGui(this);
+        settingsGui = new SettingsGui(this);
     }
 
     /**
@@ -253,6 +255,7 @@ public class Main extends PApplet {
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
+        if (settings) settingsGui.display();
         //looping sounds
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
         for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
