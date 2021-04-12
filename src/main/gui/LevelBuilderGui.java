@@ -70,6 +70,10 @@ public class LevelBuilderGui {
         placeButton(2, 11, "smallYellowTreeOb");
         placeButton(3, 11, "yellowLeavesBGC");
         placeButton(0, 12, "deadDandelionsBGC");
+        placeButton(1, 12, "yellowGrassPatchBGB");
+        placeButton(2, 12, "deadCactus0Ob");
+        placeButton(3, 12, "deadCactus1Ob");
+        placeButton(0, 13, "deadCactus2Ob");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");

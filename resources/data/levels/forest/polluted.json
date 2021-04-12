@@ -253,6 +253,7 @@
     "machine": false,
     "id": 38,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -358,6 +359,7 @@
     "machine": false,
     "id": 54,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -461,6 +463,7 @@
     "machine": false,
     "id": 70,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -533,6 +536,7 @@
     "machine": false,
     "id": 81,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -834,6 +838,7 @@
     "machine": false,
     "id": 129,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -926,6 +931,7 @@
     "machine": false,
     "id": 144,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "dirt"
   },
   {
@@ -1004,6 +1010,7 @@
     "machine": false,
     "id": 157,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "dirt"
   },
   {
@@ -1087,6 +1094,7 @@
     "machine": false,
     "id": 171,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -1166,6 +1174,7 @@
     "machine": false,
     "id": 184,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -1270,6 +1279,7 @@
     "machine": false,
     "id": 201,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "dirt"
   },
   {
@@ -1368,6 +1378,7 @@
     "machine": false,
     "id": 217,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "dirt"
   },
   {
@@ -1406,6 +1417,7 @@
     "machine": false,
     "id": 223,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -1733,6 +1745,7 @@
     "machine": false,
     "id": 275,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -1816,6 +1829,7 @@
     "machine": false,
     "id": 288,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass"
   },
   {
@@ -2024,6 +2038,7 @@
     "machine": false,
     "id": 320,
     "type": "tile",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "grass",
     "bgC": "deadDandelionsBGC_TL"
   },

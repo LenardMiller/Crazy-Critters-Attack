@@ -59,7 +59,7 @@
     "id": 9,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus2Ob_TL"
+    "obstacle": "deadCactus2Ob_TL"
   },
   {
     "machine": false,
@@ -157,7 +157,7 @@
     "id": 25,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus1Ob_TL"
+    "obstacle": "deadCactus1Ob_TL"
   },
   {
     "machine": false,
@@ -181,7 +181,7 @@
     "machine": false,
     "id": 29,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -195,7 +195,7 @@
     "id": 31,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus0Ob_TL"
+    "obstacle": "deadCactus0Ob_TL"
   },
   {
     "machine": false,
@@ -243,7 +243,7 @@
     "machine": false,
     "id": 39,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -287,7 +287,7 @@
     "id": 46,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus0Ob_TL"
+    "obstacle": "deadCactus0Ob_TL"
   },
   {
     "machine": false,
@@ -875,7 +875,7 @@
     "id": 144,
     "type": "tile",
     "bgA": "sand",
-    "bgC": "dandelionsBGC_TL"
+    "bgC": "deadDandelionsBGC_TL"
   },
   {
     "machine": false,
@@ -946,7 +946,7 @@
     "machine": false,
     "id": 156,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -1270,7 +1270,7 @@
     "machine": false,
     "id": 210,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -1471,7 +1471,7 @@
     "id": 243,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus2Ob_TL"
+    "obstacle": "deadCactus2Ob_TL"
   },
   {
     "machine": false,
@@ -1495,7 +1495,7 @@
     "id": 247,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus0Ob_TL"
+    "obstacle": "deadCactus0Ob_TL"
   },
   {
     "machine": false,
@@ -1515,7 +1515,7 @@
     "id": 250,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus2Ob_TL"
+    "obstacle": "deadCactus2Ob_TL"
   },
   {
     "machine": false,
@@ -1576,7 +1576,7 @@
     "id": 260,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus1Ob_TL"
+    "obstacle": "deadCactus1Ob_TL"
   },
   {
     "machine": false,
@@ -1588,7 +1588,7 @@
     "machine": false,
     "id": 262,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -1613,7 +1613,7 @@
     "id": 266,
     "type": "tile",
     "bgA": "sand",
-    "bgC": "dandelionsBGC_TL"
+    "bgC": "deadDandelionsBGC_TL"
   },
   {
     "machine": false,
@@ -1740,7 +1740,7 @@
     "id": 287,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus0Ob_TL"
+    "obstacle": "deadCactus0Ob_TL"
   },
   {
     "machine": false,
@@ -1825,7 +1825,7 @@
     "id": 301,
     "type": "tile",
     "bgA": "sand",
-    "bgC": "dandelionsBGC_TL"
+    "bgC": "deadDandelionsBGC_TL"
   },
   {
     "machine": false,
@@ -1848,7 +1848,7 @@
     "machine": false,
     "id": 305,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -1868,7 +1868,7 @@
     "id": 308,
     "type": "tile",
     "bgA": "sand",
-    "obstacle": "cactus1Ob_TL"
+    "obstacle": "deadCactus1Ob_TL"
   },
   {
     "machine": false,
@@ -1880,7 +1880,7 @@
     "machine": false,
     "id": 310,
     "type": "tile",
-    "bgB": "grassPatchBGB_TL",
+    "bgB": "yellowGrassPatchBGB_TL",
     "bgA": "sand"
   },
   {
@@ -2166,19 +2166,19 @@
     "type": "tile"
   },
   {
-    "betweenFrames": 4,
+    "betweenFrames": 2,
+    "barHorizontal": true,
     "maxHp": 500,
     "hp": 500,
+    "barY": 500,
+    "barX": 400,
+    "type": "machine",
     "x": 450,
     "name": "metalDrillMA",
     "y": 450,
     "debris": "stone",
-    "barX": 400,
-    "barY": 500,
-    "barSizeX": 100,
-    "barSizeY": 6,
-    "barHorizontal": true,
     "id": 361,
-    "type": "machine"
+    "barSizeY": 6,
+    "barSizeX": 100
   }
 ]

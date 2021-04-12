@@ -476,6 +476,7 @@ public class SpriteLoader {
         //BGB
         staticSprites.put("dirtPatchBGB_TL",p.loadImage("sprites/tiles/BGB/dirtPatch.png"));
         staticSprites.put("grassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/grassPatch.png"));
+        staticSprites.put("yellowGrassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/yellowGrassPatch.png"));
         staticSprites.put("grassCornerBL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/bl.png"));
         staticSprites.put("grassCornerBR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/br.png"));
         staticSprites.put("grassCornerTL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tl.png"));
@@ -536,6 +537,9 @@ public class SpriteLoader {
         staticSprites.put("cactus0Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/0.png"));
         staticSprites.put("cactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/1.png"));
         staticSprites.put("cactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/2.png"));
+        staticSprites.put("deadCactus0Ob_TL",p.loadImage("sprites/tiles/obstacles/deadCactus/0.png"));
+        staticSprites.put("deadCactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/deadCactus/1.png"));
+        staticSprites.put("deadCactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/deadCactus/2.png"));
         staticSprites.put("caveWallBaseOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/base.png"));
         staticSprites.put("caveWallLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/l.png"));
         staticSprites.put("caveWallROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/r.png"));
