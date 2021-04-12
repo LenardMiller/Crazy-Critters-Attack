@@ -23,6 +23,7 @@ public class SettingsGui {
     public void display() {
         shadowedText(P, "Settings", new PVector(P.width / 2f, 100), new Color(255, 255, 255),
           new Color(50, 50, 50), 48, CENTER);
+
         returnButton.main();
     }
 

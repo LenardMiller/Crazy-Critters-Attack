@@ -95,7 +95,7 @@ public class Main extends PApplet {
     public static boolean levelBuilder = false;
     public static boolean paused = false;
     public static boolean settings = false;
-    public static boolean dev = false;
+    public static boolean dev = true;
     public static int connectWallQueues;
 
     public static final int FRAMERATE = 30;
@@ -307,6 +307,11 @@ public class Main extends PApplet {
             textAlign(LEFT);
             if (!levelBuilder) inGameGui.drawText(this, 10);
         } else inGameGui.drawDebugText(this, 10);
+        if (paused) {
+            if (!alive) fill(50, 0, 0, 50);
+            else fill(0, 0, 0, 50);
+            rect(0, 0, width, height);
+        }
         if (paused && !settings) pauseGui.display();
         //levels
         if (playingLevel) levels[currentLevel].main();

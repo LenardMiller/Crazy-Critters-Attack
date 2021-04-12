@@ -29,10 +29,6 @@ public class PauseGui {
     }
 
     public void display() {
-        //dark
-        if (!alive) P.fill(50, 0, 0, 50);
-        else P.fill(0, 0, 0, 50);
-        P.rect(0, 0, P.width, P.height);
         //big text
         PVector position = new PVector(P.width/2f, 300);
         if (!alive) shadowedText(P, "Game Over", position, new Color(255, 0, 0),
