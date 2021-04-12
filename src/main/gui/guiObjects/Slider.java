@@ -49,7 +49,7 @@ public class Slider {
         P.rectMode(CENTER);
         P.line(POSITION.x - (MAX_PROGRESS / 2f), POSITION.y, POSITION.x + (MAX_PROGRESS / 2f), POSITION.y);
         P.strokeWeight(2);
-        P.rect(POSITION.x + MAX_PROGRESS - (MAX_PROGRESS / 2f), POSITION.y, 20, 20);
+        P.rect(POSITION.x + progress - (MAX_PROGRESS / 2f), POSITION.y, 20, 20);
         P.strokeWeight(1);
         P.rectMode(PConstants.CORNER);
     }
