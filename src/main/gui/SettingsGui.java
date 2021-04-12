@@ -34,13 +34,12 @@ public class SettingsGui {
         P.fill(200);
         P.textFont(mediumFont);
         int offsetY = 7;
-        System.out.println(volume);
         returnButton.main();
         P.text("Return [ESC]", returnButton.position.x, returnButton.position.y + offsetY);
     }
 
     private void build() {
         returnButton = new SettingsMenuScreen(P, P.width/2f, (P.height/2f) + 175);
-        volumeSlider = new Slider(P, "Volume", new PVector(P.width / 2f, P.height), volume, 0.01f, 1);
+        volumeSlider = new Slider(P, "Volume", new PVector(P.width / 2f, P.height / 2f), volume, 0.01f, 1);
     }
 }
