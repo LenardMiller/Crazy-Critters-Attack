@@ -83,7 +83,7 @@ public class Main extends PApplet {
     public static PFont smallFont;
 
     /**
-     * in-game, level select, settings
+     * in-game, level select
      */
     public static int screen = 1;
     public static int money = 100;
@@ -93,6 +93,7 @@ public class Main extends PApplet {
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
     public static boolean paused = false;
+    public static boolean settings = false;
     public static boolean dev = false;
     public static int connectWallQueues;
 
@@ -303,7 +304,7 @@ public class Main extends PApplet {
             textAlign(LEFT);
             if (!levelBuilder) inGameGui.drawText(this, 10);
         } else inGameGui.drawDebugText(this, 10);
-        if (paused) pauseGui.display();
+        if (paused && !settings) pauseGui.display();
         //levels
         if (playingLevel) levels[currentLevel].main();
     }
@@ -312,7 +313,7 @@ public class Main extends PApplet {
      * Stuff for the level select screen.
      */
     private void drawLevelSelect() {
-        levelSelectGui.display();
+        if (!settings) levelSelectGui.display();
     }
 
     /**

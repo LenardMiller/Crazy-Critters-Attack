@@ -43,6 +43,6 @@ public class SettingsMenuScreen extends Button {
     }
 
     public void action() {
-        screen = 2;
+        settings = !settings;
     }
 }
