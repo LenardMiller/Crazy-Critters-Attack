@@ -55,13 +55,7 @@ public class DataControl extends ClassLoader {
         saveArray.setJSONObject(i, saveObject);
 
         String name = "Save-"+month()+"-"+day()+"-"+year()+"-"+hour() +"-"+minute()+"-"+second();
-        //run from terminal
-        String filePath = new File("").getAbsolutePath();
-        //run from intelliJ
-        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
-            filePath = "resources";
-        }
-        new File(filePath + "/data/saves/" + name + ".json");
+        new File(filePath() + "/data/saves/" + name + ".json");
         FileWriter saveWriter = new FileWriter("resources/data/saves/" + name + ".json");
         saveWriter.write(saveArray.toString());
         saveWriter.close();
@@ -76,13 +70,7 @@ public class DataControl extends ClassLoader {
         saveObject.setFloat("volume", globalVolume);
 
         String name = "settings";
-        //run from terminal
-        String filePath = new File("").getAbsolutePath();
-        //run from intelliJ
-        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
-            filePath = "resources";
-        }
-        new File(filePath + "/data/saves/" + name + ".json");
+        new File(filePath() + "/data/saves/" + name + ".json");
         FileWriter saveWriter = new FileWriter("resources/data/" + name + ".json");
         saveWriter.write(saveObject.toString());
         saveWriter.close();
