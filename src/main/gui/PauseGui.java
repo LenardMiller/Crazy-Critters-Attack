@@ -1,9 +1,6 @@
 package main.gui;
 
-import main.gui.guiObjects.buttons.ExitGame;
-import main.gui.guiObjects.buttons.LevelSelectScreen;
-import main.gui.guiObjects.buttons.RestartLevel;
-import main.gui.guiObjects.buttons.ResumeGame;
+import main.gui.guiObjects.buttons.*;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -19,6 +16,7 @@ public class PauseGui {
     public static ResumeGame resumeGame;
     public static RestartLevel restartLevel;
     public static LevelSelectScreen levelSelect;
+    public static SettingsMenuScreen settingsMenuScreen;
     public static ExitGame exitGame;
 
     /**
@@ -56,6 +54,8 @@ public class PauseGui {
         P.text("Restart", restartLevel.position.x, restartLevel.position.y + offsetY);
         levelSelect.main();
         P.text("Level Select", levelSelect.position.x, levelSelect.position.y + offsetY);
+        settingsMenuScreen.main();
+        P.text("Settings", settingsMenuScreen.position.x, settingsMenuScreen.position.y + offsetY);
         exitGame.main();
         P.text("Quit", exitGame.position.x, exitGame.position.y + offsetY);
     }
@@ -67,6 +67,7 @@ public class PauseGui {
         resumeGame = new ResumeGame(P, P.width/2f, (P.height/2f) - 75);
         restartLevel = new RestartLevel(P, P.width/2f, P.height/2f - 25);
         levelSelect = new LevelSelectScreen(P, P.width/2f, (P.height/2f) + 25);
-        exitGame = new ExitGame(P, P.width/2f, (P.height/2f) + 75);
+        settingsMenuScreen = new SettingsMenuScreen(P, P.width/2f, (P.height/2f) + 75);
+        exitGame = new ExitGame(P, P.width/2f, (P.height/2f) + 125);
     }
 }
