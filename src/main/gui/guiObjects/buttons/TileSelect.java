@@ -11,7 +11,7 @@ public class TileSelect extends Button {
     private final String TYPE;
     private final PImage TILE_SPRITE;
 
-    public TileSelect(PApplet p, float x, float y, String type, boolean active){
+    public TileSelect(PApplet p, float x, float y, String type, boolean active) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(50, 50);
@@ -29,6 +29,7 @@ public class TileSelect extends Button {
             sl = "erase";
             TILE_SPRITE = p.loadImage("sprites/guiObjects/buttons/tileSelect/erase/icon.png");
         } else TILE_SPRITE = staticSprites.get(type + "_TL");
+        if (TILE_SPRITE == null) System.out.println(type);
         spriteLocation = "sprites/guiObjects/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
         spriteIdle = p.loadImage(spriteLocation + "000.png");
         spritePressed = p.loadImage(spriteLocation + "001.png");

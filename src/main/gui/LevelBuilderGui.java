@@ -44,15 +44,15 @@ public class LevelBuilderGui {
         placeButton(0, 5, "cactus0Ob");
         placeButton(1, 5, "cactus1Ob");
         placeButton(2, 5, "cactus2Ob");
-        placeButton(3, 5, "glowshrooms1BGC");
+        placeButton(3, 5, "glowshrooms0BGC");
         placeButton(0, 6, "caveWallTLOb");
         placeButton(1, 6, "caveWallTOb");
         placeButton(2, 6, "caveWallTROb");
-        placeButton(3, 6, "glowshrooms2BGC");
+        placeButton(3, 6, "glowshrooms1BGC");
         placeButton(0, 7, "caveWallLOb");
         placeButton(1, 7, "caveWallBaseOb");
         placeButton(2, 7, "caveWallROb");
-        placeButton(3, 7, "glowshrooms3BGC");
+        placeButton(3, 7, "glowshrooms2BGC");
         placeButton(0, 8, "caveWallBLOb");
         placeButton(1, 8, "caveWallBOb");
         placeButton(2, 8, "caveWallBROb");
@@ -74,6 +74,10 @@ public class LevelBuilderGui {
         placeButton(2, 12, "deadCactus0Ob");
         placeButton(3, 12, "deadCactus1Ob");
         placeButton(0, 13, "deadCactus2Ob");
+        placeButton(1, 13, "deadGlowshrooms0BGC");
+        placeButton(2, 13, "deadGlowshrooms1BGC");
+        placeButton(3, 13, "deadGlowshrooms2BGC");
+        placeButton(0, 14, "deadLichenBGB");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");

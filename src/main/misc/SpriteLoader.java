@@ -482,6 +482,7 @@ public class SpriteLoader {
         staticSprites.put("grassCornerTL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tl.png"));
         staticSprites.put("grassCornerTR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tr.png"));
         staticSprites.put("lichenBGB_TL",p.loadImage("sprites/tiles/BGB/lichen.png"));
+        staticSprites.put("deadLichenBGB_TL",p.loadImage("sprites/tiles/BGB/deadLichen.png"));
         //BGW
         staticSprites.put("woodWallBGW_TL",p.loadImage("sprites/tiles/BGW/woodWall/base.png"));
         staticSprites.put("stoneWallBGW_TL",p.loadImage("sprites/tiles/BGW/stoneWall/base.png"));
@@ -518,9 +519,12 @@ public class SpriteLoader {
         staticSprites.put("yellowLeavesBGC_TL",p.loadImage("sprites/tiles/BGC/yellowLeaves.png"));
         staticSprites.put("dandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/dandelions.png"));
         staticSprites.put("deadDandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/deadDandelions.png"));
-        staticSprites.put("glowshrooms1BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms1.png"));
-        staticSprites.put("glowshrooms2BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms2.png"));
-        staticSprites.put("glowshrooms3BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms3.png"));
+        staticSprites.put("glowshrooms0BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms/0.png"));
+        staticSprites.put("glowshrooms1BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms/1.png"));
+        staticSprites.put("glowshrooms2BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms/2.png"));
+        staticSprites.put("deadGlowshrooms0BGC_TL",p.loadImage("sprites/tiles/BGC/deadGlowshrooms/0.png"));
+        staticSprites.put("deadGlowshrooms1BGC_TL",p.loadImage("sprites/tiles/BGC/deadGlowshrooms/1.png"));
+        staticSprites.put("deadGlowshrooms2BGC_TL",p.loadImage("sprites/tiles/BGC/deadGlowshrooms/2.png"));
         staticSprites.put("woodDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/wood.png"));
         staticSprites.put("stoneDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/stone.png"));
         staticSprites.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));

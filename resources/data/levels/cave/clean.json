@@ -304,7 +304,8 @@
     "machine": false,
     "id": 46,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms0BGC_TL"
   },
   {
     "machine": false,
@@ -584,7 +585,8 @@
     "machine": false,
     "id": 90,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms2BGC_TL"
   },
   {
     "machine": false,
@@ -1609,7 +1611,8 @@
     "machine": false,
     "id": 254,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms0BGC_TL"
   },
   {
     "machine": false,
@@ -1811,7 +1814,8 @@
     "machine": false,
     "id": 286,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms0BGC_TL"
   },
   {
     "machine": false,
@@ -2026,7 +2030,8 @@
     "machine": false,
     "id": 318,
     "type": "tile",
-    "bgA": "stone"
+    "bgA": "stone",
+    "bgC": "glowshrooms0BGC_TL"
   },
   {
     "machine": false,
@@ -2276,7 +2281,7 @@
     "type": "tile"
   },
   {
-    "betweenFrames": 4,
+    "betweenFrames": 2,
     "barHorizontal": true,
     "maxHp": 500,
     "hp": 500,
