@@ -2,6 +2,7 @@ package main.levelStructure;
 
 import main.enemies.*;
 import main.gui.PopupText;
+import main.misc.Polluter;
 import main.towers.Tower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -23,6 +24,8 @@ public class Wave {
     private final String TITLE;
     final int SPAWN_LENGTH;
     public final int LENGTH;
+
+    public Polluter polluter;
 
     private int betweenSpawns;
     /**

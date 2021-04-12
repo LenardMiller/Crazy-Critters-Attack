@@ -9,6 +9,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.roundTo;
+import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class Tile {
 
@@ -368,35 +369,37 @@ public class Tile {
     }
 
     public void setDecoration(String name) {
-        if (staticSprites.get(name) != decoration) {
-            decoration = staticSprites.get(name);
-            decorationName = name;
-        } else {
+        if (name == null) {
             decoration = null;
             decorationName = null;
+        } else {
+            decoration = staticSprites.get(name);
+            decorationName = name;
         }
     }
 
     public void setBreakable(String name) {
         if (name != null) name = name.replace("ultimate","titanium");
-        if (staticSprites.get(name) != breakable) {
-            breakable = staticSprites.get(name);
-            breakableName = name;
-        } else {
+        if (name == null) {
             breakable = null;
             breakableName = null;
+        } else {
+            breakable = staticSprites.get(name);
+            breakableName = name;
         }
     }
 
     public void setObstacle(String name) {
-        if (staticSprites.get(name) != obstacle) {
+        if (name == null) {
+            if (obstacleName != null) updateNodes();
+            obstacle = null;
+            obstacleName = null;
+        } else {
+            if (obstacleName == null) updateNodes();
             obstacle = staticSprites.get(name);
             obstacleName = name;
             if (name.contains("smallTree")) obstacleShadowLength = 3;
             if (containsCorners(name,"tree")) obstacleShadowLength = 8;
-        } else {
-            obstacle = null;
-            obstacleName = null;
         }
     }
 
