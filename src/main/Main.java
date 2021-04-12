@@ -160,7 +160,7 @@ public class Main extends PApplet {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
-        loadSettings(this);
+        loadSettings();
         //fonts
         veryLargeFont = createFont("STHeitiSC-Light", 48);
         largeFont = createFont("STHeitiSC-Light", 24);

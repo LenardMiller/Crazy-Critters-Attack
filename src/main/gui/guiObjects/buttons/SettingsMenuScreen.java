@@ -44,7 +44,7 @@ public class SettingsMenuScreen extends Button {
     }
 
     public void action() {
-        if (settings) closeSettingsMenu(p);
+        if (settings) closeSettingsMenu();
         else settings = true;
     }
 }

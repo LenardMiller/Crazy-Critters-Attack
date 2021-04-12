@@ -69,10 +69,9 @@ public class DataControl extends ClassLoader {
 
     /**
      * Saves settings to a JSON file
-     * @param p the PApplet
      * @throws IOException if the file doesn't exist
      */
-    public static void saveSettings(PApplet p) throws IOException {
+    public static void saveSettings() throws IOException {
         JSONObject saveObject = new JSONObject();
         saveObject.setFloat("volume", globalVolume);
 
@@ -89,15 +88,20 @@ public class DataControl extends ClassLoader {
         saveWriter.close();
     }
 
-    public static void loadSettings(PApplet p) {
+    private static String filePath() {
         //run from terminal
         String filePath = new File("").getAbsolutePath();
         //run from intelliJ
         if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
             filePath = "resources";
         }
-        File loadFile = new File(filePath+"/data/settings.json");
+        return filePath;
+    }
+
+    public static void loadSettings() {
+        File loadFile = new File(filePath()+"/data/settings.json");
         JSONObject loadObject = loadJSONObject(loadFile);
+
         globalVolume = loadObject.getFloat("volume");
     }
 
@@ -107,13 +111,7 @@ public class DataControl extends ClassLoader {
      * @param file the filename, sans extension.
      */
     public static void loadLayout(PApplet p, String file) {
-        //run from terminal
-        String filePath = new File("").getAbsolutePath();
-        //run from intelliJ
-        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
-            filePath = "resources";
-        }
-        File loadFile = new File(filePath+"/data/"+file+"/clean.json");
+        File loadFile = new File(filePath()+"/data/"+file+"/clean.json");
         JSONArray loadArray = loadJSONArray(loadFile);
 
         alive = true;
@@ -161,13 +159,7 @@ public class DataControl extends ClassLoader {
      * @param file file to load data from, no extension
      */
     public static void loadTile(Tile tile, String file) {
-        //run from terminal
-        String filePath = new File("").getAbsolutePath();
-        //run from intelliJ
-        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
-            filePath = "resources";
-        }
-        File loadFile = new File(filePath+"/data/"+file+".json");
+        File loadFile = new File(filePath()+"/data/"+file+".json");
         JSONArray loadArray = loadJSONArray(loadFile);
 
         JSONObject loadedTile = loadArray.getJSONObject(tile.id);

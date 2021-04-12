@@ -29,7 +29,7 @@ public class KeyBinds {
         if (pause) {
             if (screen == 0) { //in game
                 playSound(sounds.get("clickOut"), 1, 1);
-                if (settings) closeSettingsMenu(p);
+                if (settings) closeSettingsMenu();
                 else paused = !paused;
             } else if (screen == 1) { //level select
                 if (settings) {

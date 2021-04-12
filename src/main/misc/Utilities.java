@@ -380,10 +380,10 @@ public class Utilities {
         playSound(sound, p.random(0.8f, 1.2f), volume);
     }
 
-    public static void closeSettingsMenu(PApplet p) {
+    public static void closeSettingsMenu() {
         settings = false;
         try {
-            saveSettings(p);
+            saveSettings();
         } catch (IOException e) {
             e.printStackTrace();
         }
