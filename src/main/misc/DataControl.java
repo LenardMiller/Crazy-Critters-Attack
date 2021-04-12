@@ -14,7 +14,15 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class DataControl extends ClassLoader {
 
-    public DataControl() {}
+    private static String filePath() {
+        //run from terminal
+        String filePath = new File("").getAbsolutePath();
+        //run from intelliJ
+        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
+            filePath = "resources";
+        }
+        return filePath;
+    }
 
     /**
      * Saves level data to a JSON file.
@@ -71,19 +79,9 @@ public class DataControl extends ClassLoader {
 
         String name = "settings";
         new File(filePath() + "/data/saves/" + name + ".json");
-        FileWriter saveWriter = new FileWriter("resources/data/" + name + ".json");
+        FileWriter saveWriter = new FileWriter(filePath() + "/data/" + name + ".json");
         saveWriter.write(saveObject.toString());
         saveWriter.close();
-    }
-
-    private static String filePath() {
-        //run from terminal
-        String filePath = new File("").getAbsolutePath();
-        //run from intelliJ
-        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
-            filePath = "resources";
-        }
-        return filePath;
     }
 
     public static void loadSettings() {
