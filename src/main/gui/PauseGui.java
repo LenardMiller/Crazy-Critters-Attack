@@ -43,8 +43,8 @@ public class PauseGui {
         int offsetY = 7;
         if (alive) {
             resumeGame.main();
-            if (won) P.text("Hide Menu (ESC)", resumeGame.position.x, resumeGame.position.y + offsetY);
-            else P.text("Resume (ESC)", resumeGame.position.x, resumeGame.position.y + offsetY);
+            if (won) P.text("Hide Menu [ESC]", resumeGame.position.x, resumeGame.position.y + offsetY);
+            else P.text("Resume [ESC]", resumeGame.position.x, resumeGame.position.y + offsetY);
         }
         restartLevel.main();
         P.text("Restart", restartLevel.position.x, restartLevel.position.y + offsetY);
