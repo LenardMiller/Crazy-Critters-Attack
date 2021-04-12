@@ -64,9 +64,9 @@ public class PauseGui {
      * Creates buttons
      */
     private void build() {
-        resumeGame = new ResumeGame(P, P.width/2f, (P.height/2f) - 75, "null", true);
-        restartLevel = new RestartLevel(P, P.width/2f, P.height/2f - 25, "null", true);
-        levelSelect = new LevelSelectScreen(P, P.width/2f, (P.height/2f) + 25, "null", true);
-        exitGame = new ExitGame(P, P.width/2f, (P.height/2f) + 75, "null", true);
+        resumeGame = new ResumeGame(P, P.width/2f, (P.height/2f) - 75);
+        restartLevel = new RestartLevel(P, P.width/2f, P.height/2f - 25);
+        levelSelect = new LevelSelectScreen(P, P.width/2f, (P.height/2f) + 25);
+        exitGame = new ExitGame(P, P.width/2f, (P.height/2f) + 75);
     }
 }

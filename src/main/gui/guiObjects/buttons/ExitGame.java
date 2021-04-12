@@ -8,8 +8,8 @@ import static main.misc.Utilities.playSound;
 
 public class ExitGame extends Button {
 
-    public ExitGame(PApplet p, float x, float y, String type, boolean active) {
-        super(p, x, y, type, active);
+    public ExitGame(PApplet p, float x, float y) {
+        super(p, x, y, "null", true);
         position = new PVector(x, y);
         size = new PVector(200, 42);
         spriteIdle = animatedSprites.get("genericButtonBT")[0];

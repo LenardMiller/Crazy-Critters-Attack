@@ -1,15 +1,14 @@
 package main.gui.guiObjects.buttons;
 
-import main.Main;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.playSound;
 
-public class RestartLevel extends Button {
+public class SettingsMenuScreen extends Button {
 
-    public RestartLevel(PApplet p, float x, float y) {
+    public SettingsMenuScreen(PApplet p, float x, float y) {
         super(p, x, y, "null", true);
         position = new PVector(x, y);
         size = new PVector(200, 42);
@@ -44,7 +43,6 @@ public class RestartLevel extends Button {
     }
 
     public void action() {
-        paused = false;
-        Main.resetGame(p);
+        screen = 2;
     }
 }

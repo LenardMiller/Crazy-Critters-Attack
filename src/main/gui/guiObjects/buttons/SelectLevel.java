@@ -12,8 +12,8 @@ public class SelectLevel extends Button {
 
     private final int LEVEL;
 
-    public SelectLevel(PApplet p, float x, float y, String type, boolean active, int level) {
-        super(p, x, y, type, active);
+    public SelectLevel(PApplet p, float x, float y, int level) {
+        super(p, x, y, "null", true);
         position = new PVector(x, y);
         size = new PVector(200, 42);
         spriteIdle = animatedSprites.get("genericButtonBT")[0];

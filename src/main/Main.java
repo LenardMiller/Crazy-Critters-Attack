@@ -83,7 +83,7 @@ public class Main extends PApplet {
     public static PFont smallFont;
 
     /**
-     * in-game, level select
+     * in-game, level select, settings
      */
     public static int screen = 1;
     public static int money = 100;
