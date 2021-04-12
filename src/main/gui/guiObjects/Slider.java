@@ -27,6 +27,7 @@ public class Slider {
     private final float MIN_OUTPUT;
     private final float MAX_OUTPUT;
 
+    private boolean held;
     private int progress;
     private Color fillColor;
     private Color borderColor;
@@ -52,16 +53,27 @@ public class Slider {
     }
 
     private void hover() {
-        if (mouseNear()) {
+        if (mouseNear() || held) {
             if (inputHandler.leftMousePressedPulse) playSound(CLICK_IN, 1, 1);
+            if (held && inputHandler.leftMouseReleasedPulse) playSound(CLICK_OUT, 1, 1);
             if (P.mousePressed && P.mouseButton == LEFT) {
                 fillColor = new Color(50, 50, 50);
-            } else fillColor = new Color(100, 100, 100);
-            borderColor = new Color(200, 200, 200);
+                progress = updateProgressBasedOnMouseX();
+                held = true;
+            } else {
+                fillColor = new Color(100, 100, 100);
+                held = false;
+            } borderColor = new Color(200, 200, 200);
         } else {
             fillColor = new Color(100, 100, 100);
             borderColor = new Color(0, 0, 0);
         }
+    }
+
+    private int updateProgressBasedOnMouseX() {
+        int scaledMouseX = (int) (P.mouseX - POSITION.x + MAX_PROGRESS/2);
+        if (scaledMouseX < 0) return 0;
+        return Math.min(scaledMouseX, MAX_PROGRESS);
     }
 
     private boolean mouseNear() {
