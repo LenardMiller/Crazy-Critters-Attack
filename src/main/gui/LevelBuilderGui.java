@@ -36,7 +36,7 @@ public class LevelBuilderGui {
         placeButton(0, 3, "treeTLOb");
         placeButton(1, 3, "treeTROb");
         placeButton(2, 3, "smallTreeOb");
-
+        //blank
         placeButton(1, 4, "treeBROb");
         placeButton(0, 4, "treeBLOb");
         placeButton(2, 4, "sandBGA");

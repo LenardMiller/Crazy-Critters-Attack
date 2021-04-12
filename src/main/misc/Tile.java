@@ -9,6 +9,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.roundTo;
+import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class Tile {
 
@@ -390,9 +391,11 @@ public class Tile {
 
     public void setObstacle(String name) {
         if (name == null) {
+            if (obstacleName != null) updateNodes();
             obstacle = null;
             obstacleName = null;
         } else {
+            if (obstacleName == null) updateNodes();
             obstacle = staticSprites.get(name);
             obstacleName = name;
             if (name.contains("smallTree")) obstacleShadowLength = 3;
