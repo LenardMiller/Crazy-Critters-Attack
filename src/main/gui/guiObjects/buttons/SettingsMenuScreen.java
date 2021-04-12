@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.closeSettingsMenu;
 import static main.misc.Utilities.playSound;
 
 public class SettingsMenuScreen extends Button {
@@ -43,6 +44,7 @@ public class SettingsMenuScreen extends Button {
     }
 
     public void action() {
-        settings = !settings;
+        if (settings) closeSettingsMenu(p);
+        else settings = true;
     }
 }

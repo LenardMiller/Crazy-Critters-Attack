@@ -6,8 +6,10 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import java.awt.*;
+import java.io.IOException;
 
 import static main.Main.*;
+import static main.misc.DataControl.saveSettings;
 
 public class Utilities {
 
@@ -376,5 +378,14 @@ public class Utilities {
      */
     public static void playSoundRandomSpeed(PApplet p, SoundFile sound, float volume) {
         playSound(sound, p.random(0.8f, 1.2f), volume);
+    }
+
+    public static void closeSettingsMenu(PApplet p) {
+        settings = false;
+        try {
+            saveSettings(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.closeSettingsMenu;
 import static main.misc.Utilities.playSound;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
 
@@ -28,7 +29,7 @@ public class KeyBinds {
         if (pause) {
             if (screen == 0) { //in game
                 playSound(sounds.get("clickOut"), 1, 1);
-                if (settings) settings = false;
+                if (settings) closeSettingsMenu(p);
                 else paused = !paused;
             } else if (screen == 1) { //level select
                 if (settings) {
@@ -188,7 +189,7 @@ public class KeyBinds {
         if (switchMode) {
             levelBuilder = !levelBuilder;
             hand.setHeld("null");
-        } if (saveTiles) DataControl.save();
+        } if (saveTiles) DataControl.saveLayout();
         if (increaseWave && canWave(1)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);
         if (decreaseWave && canWave(-1)) levels[currentLevel].setWave(levels[currentLevel].currentWave - 1);
         if (increaseWave5 && canWave(5)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 5);
