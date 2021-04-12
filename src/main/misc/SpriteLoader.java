@@ -460,9 +460,10 @@ public class SpriteLoader {
         }
         //tiles
         //BGA
-        staticSprites.put("stoneBGA_TL",p.loadImage("sprites/tiles/BGA/stone/base.png"));
-        staticSprites.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt/base.png"));
-        staticSprites.put("sandBGA_TL", p.loadImage("sprites/tiles/BGA/sand/base.png"));
+        staticSprites.put("yellowGrassBGA_TL",p.loadImage("sprites/tiles/BGA/yellowGrass.png"));
+        staticSprites.put("stoneBGA_TL",p.loadImage("sprites/tiles/BGA/stone.png"));
+        staticSprites.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt.png"));
+        staticSprites.put("sandBGA_TL", p.loadImage("sprites/tiles/BGA/sand.png"));
         staticSprites.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
         for (int i = 0; i < 1; i++) {
             String name;
@@ -513,7 +514,9 @@ public class SpriteLoader {
         staticSprites.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
         staticSprites.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
         staticSprites.put("leavesBGC_TL",p.loadImage("sprites/tiles/BGC/leaves.png"));
+        staticSprites.put("yellowLeavesBGC_TL",p.loadImage("sprites/tiles/BGC/yellowLeaves.png"));
         staticSprites.put("dandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/dandelions.png"));
+        staticSprites.put("deadDandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/deadDandelions.png"));
         staticSprites.put("glowshrooms1BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms1.png"));
         staticSprites.put("glowshrooms2BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms2.png"));
         staticSprites.put("glowshrooms3BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms3.png"));
@@ -525,6 +528,7 @@ public class SpriteLoader {
         staticSprites.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png"));
         //obstacles
         staticSprites.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
+        staticSprites.put("smallYellowTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallYellowTree.png"));
         staticSprites.put("treeBLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/bl.png"));
         staticSprites.put("treeBROb_TL",p.loadImage("sprites/tiles/obstacles/tree/br.png"));
         staticSprites.put("treeTLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/tl.png"));

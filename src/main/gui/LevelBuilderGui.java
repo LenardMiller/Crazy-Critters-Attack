@@ -26,6 +26,7 @@ public class LevelBuilderGui {
         placeButton(1, 0, "grassBGA");
         placeButton(2, 4, "sandBGA");
         placeButton(3, 4, "stoneBGA");
+        placeButton(1, 11, "yellowGrassBGA");
         //bgB
         placeButton(0, 1, "dirtPatchBGB");
         placeButton(1, 1, "grassPatchBGB");
@@ -42,6 +43,8 @@ public class LevelBuilderGui {
         placeButton(3, 5, "glowshrooms1BGC");
         placeButton(3, 6, "glowshrooms2BGC");
         placeButton(3, 7, "glowshrooms3BGC");
+        placeButton(3, 11, "yellowLeavesBGC");
+        placeButton(0, 12, "deadDandelionsBGC");
         //obstacles
         placeButton(2, 3, "smallTreeOb");
         placeButton(0, 4, "treeBLOb");
@@ -69,6 +72,7 @@ public class LevelBuilderGui {
         placeButton(3, 9, "caveWallBLDOb");
         placeButton(2, 9, "caveWallBRDOb");
         placeButton(0, 11, "caveWallPillarOb");
+        placeButton(2, 11, "smallYellowTreeOb");
         //machine
         placeButton(3, 3, "Ma");
     }
