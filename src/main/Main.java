@@ -256,6 +256,7 @@ public class Main extends PApplet {
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
         if (settings) settingsGui.display();
+        keyBinds.menuKeys();
         //looping sounds
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
         for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();

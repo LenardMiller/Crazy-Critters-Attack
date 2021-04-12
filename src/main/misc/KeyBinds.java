@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.playSound;
-import static main.misc.WallSpecialVisuals.updateFlooring;
-import static main.misc.WallSpecialVisuals.updateWallTileConnections;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class KeyBinds {
@@ -24,8 +22,24 @@ public class KeyBinds {
         KeyBinds.p = p;
     }
 
-    public void inGameKeys() {
+    public void menuKeys() {
         boolean pause = keysPressed.getPressedPulse('|');
+
+        if (pause) {
+            if (screen == 0) { //in game
+                playSound(sounds.get("clickOut"), 1, 1);
+                if (settings) settings = false;
+                else paused = !paused;
+            } else if (screen == 1) { //level select
+                if (settings) {
+                    playSound(sounds.get("clickOut"), 1, 1);
+                    settings = false;
+                }
+            }
+        }
+    }
+
+    public void inGameKeys() {
         boolean play = keysPressed.getPressedPulse(' ');
         //hotkeys
         boolean wall = addHotkey('?', 0);
@@ -39,13 +53,7 @@ public class KeyBinds {
         boolean flamethrower = addHotkey('d', FLAMETHROWER_PRICE);
         boolean teslaTower = addHotkey('c', TESLATOWER_PRICE);
 
-        if (pause) {
-            playSound(sounds.get("clickOut"), 1, 1);
-            updateFlooring();
-            updateWallTileConnections();
-            connectWallQueues++;
-            paused = !paused;
-        }
+
         if (play) {
             if (!playingLevel) {
                 playingLevel = true;
