@@ -368,7 +368,7 @@ public class Tile {
     }
 
     public void setDecoration(String name) {
-        if (name == null || staticSprites.get(name) == decoration) {
+        if (name == null) {
             decoration = null;
             decorationName = null;
         } else {
@@ -379,7 +379,7 @@ public class Tile {
 
     public void setBreakable(String name) {
         if (name != null) name = name.replace("ultimate","titanium");
-        if (name == null || staticSprites.get(name) == breakable) {
+        if (name == null) {
             breakable = null;
             breakableName = null;
         } else {
@@ -389,7 +389,7 @@ public class Tile {
     }
 
     public void setObstacle(String name) {
-        if (name == null || staticSprites.get(name) == obstacle) {
+        if (name == null) {
             obstacle = null;
             obstacleName = null;
         } else {

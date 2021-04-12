@@ -417,8 +417,11 @@ public class Hand {
             if (held.contains("Ma")) {
                 tile.machine = !tile.machine;
                 machine.updateNodes();
-            }
-            connectWallQueues++;
+            } if (held.contains("Na")) {
+                tile.setDecoration(null);
+                tile.setBreakable(null);
+                tile.setObstacle(null);
+            } connectWallQueues++;
         }
         if (!held.equals("null")) money -= price;
         if (changeHeld) held = "null";

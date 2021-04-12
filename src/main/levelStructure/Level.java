@@ -32,7 +32,7 @@ public class Level {
     public void main() {
         if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
-            polluter = wave.polluter;
+            if (wave.polluter != null) polluter = wave.polluter;
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
             else if (!paused && alive) {
                 wave.spawnEnemies();
