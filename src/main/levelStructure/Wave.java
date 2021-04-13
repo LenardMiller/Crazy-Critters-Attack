@@ -79,7 +79,7 @@ public class Wave {
      * Calculates the time between spawns.
      */
     void load() {
-        betweenSpawns = SPAWN_LENGTH / spawns.size();
+        if (spawns.size() > 0) betweenSpawns = SPAWN_LENGTH / spawns.size();
     }
 
     void addSpawns(String enemy, int count) {
