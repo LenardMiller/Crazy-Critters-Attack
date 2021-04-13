@@ -459,11 +459,12 @@ public class SpriteLoader {
             staticSprites.put(name + "RWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
         }
         //tiles
-        //BGA
+        //BGA / base
         staticSprites.put("yellowGrassBGA_TL",p.loadImage("sprites/tiles/BGA/yellowGrass.png"));
         staticSprites.put("stoneBGA_TL",p.loadImage("sprites/tiles/BGA/stone.png"));
         staticSprites.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt.png"));
         staticSprites.put("sandBGA_TL", p.loadImage("sprites/tiles/BGA/sand.png"));
+        staticSprites.put("snowBGA_TL", p.loadImage("sprites/tiles/BGA/snow.png"));
         staticSprites.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
         for (int i = 0; i < 1; i++) {
             String name;
@@ -473,7 +474,7 @@ public class SpriteLoader {
             staticSprites.put(name + "BGA_B_TL", p.loadImage("sprites/tiles/BGA/" + name + "/b.png"));
             staticSprites.put(name + "BGA_L_TL", p.loadImage("sprites/tiles/BGA/" + name + "/l.png"));
         }
-        //BGB
+        //BGB / decoration
         staticSprites.put("dirtPatchBGB_TL",p.loadImage("sprites/tiles/BGB/dirtPatch.png"));
         staticSprites.put("grassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/grassPatch.png"));
         staticSprites.put("yellowGrassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/yellowGrassPatch.png"));
@@ -483,7 +484,7 @@ public class SpriteLoader {
         staticSprites.put("grassCornerTR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tr.png"));
         staticSprites.put("lichenBGB_TL",p.loadImage("sprites/tiles/BGB/lichen.png"));
         staticSprites.put("deadLichenBGB_TL",p.loadImage("sprites/tiles/BGB/deadLichen.png"));
-        //BGW
+        //BGW / flooring
         staticSprites.put("woodWallBGW_TL",p.loadImage("sprites/tiles/BGW/woodWall/base.png"));
         staticSprites.put("stoneWallBGW_TL",p.loadImage("sprites/tiles/BGW/stoneWall/base.png"));
         staticSprites.put("metalWallBGW_TL",p.loadImage("sprites/tiles/BGW/metalWall/base.png"));
@@ -512,7 +513,7 @@ public class SpriteLoader {
             staticSprites.put(name + "BGW_TRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tri.png"));
             staticSprites.put(name + "BGW_TRO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tro.png"));
         }
-        //BGC
+        //BGC / breakables
         staticSprites.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
         staticSprites.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
         staticSprites.put("leavesBGC_TL",p.loadImage("sprites/tiles/BGC/leaves.png"));

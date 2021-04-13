@@ -78,6 +78,7 @@ public class LevelBuilderGui {
         placeButton(2, 13, "deadGlowshrooms1BGC");
         placeButton(3, 13, "deadGlowshrooms2BGC");
         placeButton(0, 14, "deadLichenBGB");
+        placeButton(1, 14, "snowBGA");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");
