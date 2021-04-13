@@ -58,7 +58,7 @@ public class Wave {
     public void end() {
         for (Tower tower : towers) {
             if (tower instanceof Turret) tower.heal(1);
-            else tower.heal(0.25f);
+            else tower.heal(0.35f);
         }
         playSound(sounds.get("waveEnd"), 1, 1);
         money += levels[currentLevel].reward;
