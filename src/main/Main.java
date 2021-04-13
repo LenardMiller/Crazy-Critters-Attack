@@ -310,7 +310,7 @@ public class Main extends PApplet {
             hand.displayHeldInfo();
             textAlign(LEFT);
             if (!levelBuilder) inGameGui.drawText(this, 10);
-        } else inGameGui.drawDebugText(this, 10);
+        } if (dev) inGameGui.drawDebugText(this, 10);
         if (paused) {
             if (!alive) fill(50, 0, 0, 50);
             else fill(0, 0, 0, 50);
