@@ -12,7 +12,6 @@ import processing.core.PImage;
 import processing.core.PVector;
 import processing.sound.SoundFile;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 import static main.Main.*;
@@ -228,10 +227,10 @@ public abstract class Turret extends Tower {
         int moneyGain;
         if (!sold) {
             moneyGain = (int) (value * 0.4);
+            System.out.println(moneyGain);
             tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(debrisType + "DebrisBGC_TL");
         } else moneyGain = (int) (value * 0.8);
-        popupTexts.add(new PopupText(p, 12, new Color(255, 255, 0),
-          new PVector(tile.position.x - 25, tile.position.y - 25), "+$" + moneyGain));
+        popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
         updateFlooring();
         connectWallQueues++;

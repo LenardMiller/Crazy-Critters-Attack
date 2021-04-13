@@ -9,6 +9,7 @@ import java.awt.*;
 import static main.Main.paused;
 import static main.Main.popupTexts;
 import static main.misc.Utilities.incrementByTo;
+import static processing.core.PApplet.nfc;
 
 public class PopupText {
 
@@ -41,6 +42,16 @@ public class PopupText {
         firstPhase = true;
         alpha = 255;
         movementSpeed = 1;
+    }
+
+    /**
+     * Money popup, 12 size, yellow, +$amount
+     * @param p the PApplet
+     * @param position where to spawn
+     * @param amount what amount of money gained
+     */
+    public PopupText(PApplet p, PVector position, int amount) {
+        this(p, 12, new Color(255, 255, 0), position, "+$" + nfc(amount));
     }
 
     public void main() {

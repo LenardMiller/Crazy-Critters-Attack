@@ -69,8 +69,8 @@ public abstract class Tower {
     }
 
     public void main() {
-        if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
+        if (hp <= 0) die(false);
     }
 
     public void displayBase() {
@@ -141,8 +141,7 @@ public abstract class Tower {
             moneyGain = (int) (value * 0.4);
             tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(debrisType + "DebrisBGC_TL");
         } else moneyGain = (int) (value * 0.8);
-        popupTexts.add(new PopupText(p, 12, new Color(255, 255, 0),
-          new PVector(tile.position.x - 25, tile.position.y - 25), "+$" + moneyGain));
+        if (moneyGain > 0) popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
         updateFlooring();
         updateTowerArray();

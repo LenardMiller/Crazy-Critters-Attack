@@ -62,8 +62,7 @@ public class Wave {
         }
         playSound(sounds.get("waveEnd"), 1, 1);
         money += levels[currentLevel].reward;
-        popupTexts.add(new PopupText(P, smallFont.getSize(), new Color(255, 255, 0),
-          new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), "+$" + levels[currentLevel].reward));
+        popupTexts.add(new PopupText(P, new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), levels[currentLevel].reward));
     }
 
     /**
