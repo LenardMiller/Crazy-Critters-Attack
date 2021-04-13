@@ -5,10 +5,7 @@ import main.enemies.Enemy;
 import main.gui.*;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
-import main.levelStructure.CaveWaves;
-import main.levelStructure.DesertWaves;
-import main.levelStructure.ForestWaves;
-import main.levelStructure.Level;
+import main.levelStructure.*;
 import main.misc.*;
 import main.particles.Particle;
 import main.pathfinding.AStar;
@@ -177,7 +174,7 @@ public class Main extends PApplet {
         keyBinds = new KeyBinds(this);
         keyBinds.loadKeyBinds();
         //set level count
-        levels = new Level[3];
+        levels = new Level[4];
         //guis
         levelSelectGui = new LevelSelectGui(this);
         settingsGui = new SettingsGui(this);
@@ -225,7 +222,8 @@ public class Main extends PApplet {
         playingLevel = false;
         levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
-        levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 450, 100, "stone");
+        levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 500, 100, "stone");
+        levels[3] = new Level(p, GlacierWaves.genGlacierWaves(p), "levels/glacier", 1000, 150, "dirt");
         DataControl.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();

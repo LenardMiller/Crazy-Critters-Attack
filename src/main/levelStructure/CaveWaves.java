@@ -7,8 +7,6 @@ import java.awt.*;
 
 public class CaveWaves {
 
-    public CaveWaves() {}
-
     public static Wave[] genCaveWaves(PApplet p) {
         Wave[] waves = new Wave[50];
 

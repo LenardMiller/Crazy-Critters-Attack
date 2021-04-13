@@ -43,6 +43,16 @@ public class Wave {
 
     public ArrayList<String> spawns;
 
+    /**
+     * A wave of enemies
+     * @param p the PApplet
+     * @param length how long it lasts in seconds
+     * @param spawnLength how long it spawns enemies in seconds, must be less than length
+     * @param fillColor main icon color
+     * @param accentColor border color
+     * @param textColor color of title and number
+     * @param title main enemy of wave
+     */
     public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
         P = p;
         LENGTH = secondsToFrames(length);
