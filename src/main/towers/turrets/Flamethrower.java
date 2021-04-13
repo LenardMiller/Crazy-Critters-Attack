@@ -225,7 +225,7 @@ public class Flamethrower extends Turret {
                 case 2:
                     wheel = true;
                     count = 8;
-                    damage *= 10;
+                    damage *= 100;
                     name = "flamewheel";
                     hasPriority = false;
                     effectLevel += 7;
@@ -248,7 +248,7 @@ public class Flamethrower extends Turret {
                     debrisType = "darkMetal";
                     range += 30;
                     pjSpeed = 150;
-                    damage = 60;
+                    damage = 100;
                     effectDuration += 5;
                     effectLevel = 100;
                     loadSprites();

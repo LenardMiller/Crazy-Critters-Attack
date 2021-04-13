@@ -172,7 +172,7 @@ public class TeslaTower extends Turret {
                     break;
                 case 2:
                     range = 1000;
-                    damage += 1000;
+                    damage += 1600;
                     delay += 2;
                     lightning = true;
                     name = "lightning";
