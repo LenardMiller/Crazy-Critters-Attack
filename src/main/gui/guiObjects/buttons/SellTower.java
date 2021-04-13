@@ -25,7 +25,7 @@ public class SellTower extends Button {
     }
 
     public void action(){ //kills tower and gives value
-        selection.turret.sell();
+        selection.turret.die(true);
         active = false;
         inGameGui.priorityButton.active = false;
         inGameGui.upgradeButtonA.active = false;

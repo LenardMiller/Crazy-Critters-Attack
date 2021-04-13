@@ -368,7 +368,7 @@ public class Hand {
     private void remove() {
         Tile tile = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
         if (held.equals("wall")) {
-            if (tile != null && tile.tower instanceof Wall) tile.tower.sell();
+            if (tile != null && tile.tower instanceof Wall) tile.tower.die(true);
         }
     }
 

@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
 import main.enemies.Enemy;
+import main.gui.PopupText;
 import main.misc.CompressArray;
 import main.misc.Tile;
 import main.particles.BuffParticle;
@@ -11,6 +12,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 import processing.sound.SoundFile;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static main.Main.*;
@@ -223,7 +225,14 @@ public abstract class Turret extends Tower {
             inGameGui.flashA = 255;
         }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
-        if (!sold) tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(debrisType + "DebrisBGC_TL");
+        int moneyGain;
+        if (!sold) {
+            moneyGain = (int) (value * 0.4);
+            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(debrisType + "DebrisBGC_TL");
+        } else moneyGain = (int) (value * 0.8);
+        popupTexts.add(new PopupText(p, 12, new Color(255, 255, 0),
+          new PVector(tile.position.x - 25, tile.position.y - 25), "+$" + moneyGain));
+        money += moneyGain;
         updateFlooring();
         connectWallQueues++;
         updateNodes();
