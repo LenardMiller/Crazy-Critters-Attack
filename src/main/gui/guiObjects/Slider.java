@@ -95,8 +95,10 @@ public class Slider {
 
     private void displaySlider() {
         P.strokeWeight(5);
-        P.stroke(0);
         P.rectMode(CENTER);
+        P.fill(100, 200);
+        P.rect(POSITION.x, POSITION.y, MAX_PROGRESS + BOX_SIZE, BOX_SIZE);
+        P.stroke(0);
         P.line(POSITION.x - (MAX_PROGRESS / 2f), POSITION.y, POSITION.x + (MAX_PROGRESS / 2f), POSITION.y);
         P.strokeWeight(2);
         P.fill(fillColor.getRGB());
