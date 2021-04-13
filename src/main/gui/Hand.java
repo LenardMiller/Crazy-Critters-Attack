@@ -83,19 +83,14 @@ public class Hand {
     private boolean isNotPlaceable() {
         Tile tileTower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
         Tile tileObstacle = tiles.get((roundTo(P.mouseX, 50) / 50), (roundTo(P.mouseY, 50) / 50));
+        if (tileObstacle == null) return true;
         if (tileTower != null && tileTower.tower != null) {
             if (held.equals("wall")) {
                 if (!(tileTower.tower instanceof Wall)) return true;
             } else return true;
         }
-        if (enemyNearby()) {
-            if (debug) {
-                P.fill(255, 0, 0);
-                P.ellipse(P.mouseX, P.mouseY, 10, 10);
-            }
-            return true;
-        }
-        if (tileObstacle != null && (tileObstacle.obstacle != null || tileObstacle.machine)) return true;
+        if (enemyNearby()) return true;
+        if (tileObstacle.obstacle != null || tileObstacle.machine) return true;
         return price > money;
     }
 
