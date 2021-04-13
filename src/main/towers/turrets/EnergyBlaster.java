@@ -29,7 +29,7 @@ public class EnergyBlaster extends Turret{
         hit = false;
         delay = 4.2f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
-        damage = 100;
+        damage = 350;
         pjSpeed = 1000;
         range = 300;
         betweenFireFrames = down60ToFramerate(2);

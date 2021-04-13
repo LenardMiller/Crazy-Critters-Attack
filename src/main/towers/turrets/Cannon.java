@@ -26,7 +26,7 @@ public class Cannon extends Turret {
         maxHp = 20;
         hp = maxHp;
         hit = false;
-        delay = 4;
+        delay = 3.2f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         pjSpeed = 850;
         betweenFireFrames = down60ToFramerate(1);
