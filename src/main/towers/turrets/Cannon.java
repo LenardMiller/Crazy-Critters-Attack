@@ -77,13 +77,13 @@ public class Cannon extends Turret {
         upgradeTitles[4] = "Rapid reload";
         upgradeTitles[5] = "Frags";
         //description
-        upgradeDescA[0] = "+20";
+        upgradeDescA[0] = "boost";
         upgradeDescB[0] = "damage";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "+30";
+        upgradeDescA[1] = "boost";
         upgradeDescB[1] = "damage";
-        upgradeDescC[1] = "";
+        upgradeDescC[1] = "some more";
 
         upgradeDescA[2] = "Creates";
         upgradeDescB[2] = "huge";
@@ -116,7 +116,7 @@ public class Cannon extends Turret {
                     damage += 20;
                     break;
                 case 1:
-                    damage += 30;
+                    damage += 40;
                     break;
                 case 2:
                     damage += 300;
