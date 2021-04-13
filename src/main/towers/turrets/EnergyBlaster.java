@@ -29,7 +29,7 @@ public class EnergyBlaster extends Turret{
         hit = false;
         delay = 4.2f;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
-        damage = 100;
+        damage = 350;
         pjSpeed = 1000;
         range = 300;
         betweenFireFrames = down60ToFramerate(2);
@@ -127,9 +127,9 @@ public class EnergyBlaster extends Turret{
                     bigExplosion = true;
                     break;
                 case 2:
-                    damage += 300;
-                    delay -= 0.6f;
-                    effectRadius = 200;
+                    damage += 550;
+                    delay -= 1f;
+                    effectRadius = 300;
                     name = "nuclearBlaster";
                     fireParticle = "nuclear";
                     debrisType = "metal";
@@ -147,8 +147,8 @@ public class EnergyBlaster extends Turret{
                     damage += 100;
                     break;
                 case 5:
-                    range += 45;
-                    damage += 2500;
+                    range += 65;
+                    damage += 3050;
                     name = "darkBlaster";
                     fireParticle = "dark";
                     dark = true;

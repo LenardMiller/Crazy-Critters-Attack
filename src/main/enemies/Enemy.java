@@ -150,8 +150,7 @@ public abstract class Enemy {
 
     private void die(int i) {
         Main.money += moneyDrop;
-        popupTexts.add(new PopupText(p, smallFont.getSize(), new Color(255, 255, 0),
-          new PVector(position.x, position.y), "+$" + moneyDrop));
+        popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
 
         String type = lastDamageType;
         for (Buff buff : buffs) {

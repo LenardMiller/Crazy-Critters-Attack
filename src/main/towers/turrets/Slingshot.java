@@ -122,6 +122,7 @@ public class Slingshot extends Turret {
                 case 2:
                     gravel = true;
                     damage -= 10;
+                    range += 50;
                     name = "slingshotGravel";
                     loadSprites();
                     break;

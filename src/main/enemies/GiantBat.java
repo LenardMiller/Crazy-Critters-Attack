@@ -17,7 +17,7 @@ public class GiantBat extends Enemy {
         speed = maxSpeed;
         moneyDrop = 500;
         damage = 5;
-        maxHp = 15000; //Hp
+        maxHp = 10000; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "giantBat";

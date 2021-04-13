@@ -124,7 +124,7 @@ public class CaveWaves {
         waves[25].addSpawns(midGolem, 10);
 
         waves[26] = wavePreset(p, 85, 35, bigAlbinoBug);
-        waves[26].addSpawns(bigAlbinoBug, 10);
+        waves[26].addSpawns(bigAlbinoBug, 20);
 
         waves[27] = wavePreset(p, 80, 15, bat);
         waves[27].addSpawns(bat, 50);
@@ -173,11 +173,11 @@ public class CaveWaves {
         waves[38].addSpawns(smallGolem, 5);
 
         waves[39] = wavePreset(p, 100, 35, bigGolem);
-        waves[39].addSpawns(bigGolem, 5);
+        waves[39].addSpawns(bigGolem, 10);
         waves[39].addSpawns(bigAlbinoBug, 30);
 
         waves[40] = wavePreset(p, 100, 15, bigBat);
-        waves[40].addSpawns(bigBat, 3);
+        waves[40].addSpawns(bigBat, 5);
         waves[40].addSpawns(bat, 10);
 
         waves[41] = wavePreset(p, 100, 15, bigBat);
@@ -185,11 +185,11 @@ public class CaveWaves {
         waves[41].addSpawns(bigAlbinoBug, 30);
 
         waves[42] = wavePreset(p, 100, 30, bigGolem);
-        waves[42].addSpawns(bigGolem, 5);
+        waves[42].addSpawns(bigGolem, 10);
         waves[42].addSpawns(bigAlbinoBug, 30);
 
         waves[43] = wavePreset(p, 100, 35, bigBat);
-        waves[43].addSpawns(bigBat, 5);
+        waves[43].addSpawns(bigBat, 10);
         waves[43].addSpawns(bigGolem, 3);
 
         waves[44] = wavePreset(p, 150, 1, wtf);
@@ -199,7 +199,7 @@ public class CaveWaves {
         waves[45].addSpawns(bigAlbinoBug, 40);
         waves[45].addSpawns(midGolem, 50);
         waves[45].addSpawns(smallGolem, 50);
-        waves[45].addSpawns(bigGolem, 5);
+        waves[45].addSpawns(bigGolem, 10);
 
         waves[46] = wavePreset(p, 150, 1, wtf);
         waves[46].addSpawns(wtf, 1);
@@ -214,12 +214,13 @@ public class CaveWaves {
         waves[48].addSpawns(bigAlbinoBug, 35);
         waves[48].addSpawns(bigGolem, 15);
         waves[48].addSpawns(midGolem, 50);
-        waves[48].addSpawns(bigBat, 5);
+        waves[48].addSpawns(bigBat, 15);
         waves[38].addSpawns(bat, 60);
 
         waves[49] = wavePreset(p, 150, 20, wtf);
         waves[49].addSpawns(bigAlbinoBug, 40);
-        waves[49].addSpawns(wtf, 5);
+        waves[49].addSpawns(bigBat, 10);
+        waves[49].addSpawns(wtf, 10);
 
         for (Wave wave : waves) wave.load();
         return waves;
