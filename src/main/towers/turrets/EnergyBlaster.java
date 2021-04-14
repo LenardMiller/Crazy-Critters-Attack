@@ -129,7 +129,7 @@ public class EnergyBlaster extends Turret{
                 case 2:
                     damage += 550;
                     delay -= 1f;
-                    effectRadius = 300;
+                    effectRadius = 200;
                     name = "nuclearBlaster";
                     fireParticle = "nuclear";
                     debrisType = "metal";
