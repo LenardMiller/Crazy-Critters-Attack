@@ -27,19 +27,19 @@ public class SeismicShockwave extends Shockwave {
     protected void spawnParticles() {
         float a = randomAngle();
         PVector pos = randomPosition(a);
-        particles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));
+        underParticles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));
         a = randomAngle();
         pos = randomPosition(a);
-        particles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
+        underParticles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
         for (int i = 0; i < P.random(5, 12); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            particles.add(new Debris(P, pos.x, pos.y, a, levels[currentLevel].groundType));
+            underParticles.add(new Debris(P, pos.x, pos.y, a, levels[currentLevel].groundType));
         }
         for (int i = 0; i < P.random(3, 6); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            particles.add(new ExplosionDebris(P, pos.x, pos.y, a, "metal", P.random(100,200)));
+            underParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "metal", P.random(100,200)));
         }
     }
 

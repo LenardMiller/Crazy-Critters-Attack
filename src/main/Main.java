@@ -397,7 +397,7 @@ public class Main extends PApplet {
             else break;
         }
         if (up > HARD_PARTICLE_CAP) underParticles = new ArrayList<>();
-        //under particles todo: add shockwaves
+        //under particles
         for (int i = underParticles.size()-1; i >= 0; i--) {
             Particle particle = underParticles.get(i);
             particle.main(underParticles, i);
