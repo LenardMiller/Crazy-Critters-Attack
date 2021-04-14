@@ -423,18 +423,6 @@ public class Main extends PApplet {
         for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
         for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
         for (Tower tower : towers) tower.main();
-        //projectiles todo: above obstacles
-        for (Projectile projectile : projectiles) projectile.displayPassA();
-        for (int i = 0; i < projectiles.size(); i++) {
-            Projectile projectile = projectiles.get(i);
-            projectile.main(projectiles, i);
-        }
-        //arcs
-        for (int i = arcs.size()-1; i >= 0; i--) {
-            Arc arc = arcs.get(i);
-            arc.main();
-            if (arc.alpha <= 0) arcs.remove(i);
-        }
         //shockwaves
         for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).main();
         //particle culling
@@ -455,11 +443,21 @@ public class Main extends PApplet {
             Buff buff = buffs.get(i);
             buff.main(i);
         }
-        //currently held
-        hand.main();
         //obstacles
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).displayObstacle();
+        }
+        //projectiles
+        for (Projectile projectile : projectiles) projectile.displayPassA();
+        for (int i = 0; i < projectiles.size(); i++) {
+            Projectile projectile = projectiles.get(i);
+            projectile.main(projectiles, i);
+        }
+        //arcs
+        for (int i = arcs.size()-1; i >= 0; i--) {
+            Arc arc = arcs.get(i);
+            arc.main();
+            if (arc.alpha <= 0) arcs.remove(i);
         }
         //flying enemies
         enemies.stream().filter(enemy -> enemy.flying).forEach(Enemy::displayShadow);
@@ -467,6 +465,8 @@ public class Main extends PApplet {
             Enemy enemy = enemies.get(i);
             if (enemy.flying) enemy.main(i);
         }
+        //currently held
+        hand.main();
     }
 
     /**
