@@ -302,7 +302,6 @@ public class Selection { //what tower is selected
 
     private void displayInfo(int offset, int speed) {
         //health
-        turret.refreshHpBar();
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB());
         P.textFont(mediumFont);
         P.textAlign(LEFT);

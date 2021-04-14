@@ -251,9 +251,7 @@ public class Hand {
     }
 
     private Wall getWall() {
-        Wall wall = (Wall) tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower; //should be a wall I hope
-        if (wall != null) wall.refreshHpBar();
-        return wall;
+        return (Wall) tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower;
     }
 
     private void universalWallInfo() {

@@ -88,7 +88,7 @@ public abstract class Tower {
 
     public void controlAnimation() {}
 
-    public void displayHpBar() { //todo: keep on when damaged
+    public void displayHpBar() {
         Color barColor = new Color(0, 255, 0);
         p.stroke(barColor.getRGB(), barAlpha / 2f);
         float barWidth = size.x * (hp / (float) maxHp);
@@ -96,7 +96,7 @@ public abstract class Tower {
         p.rect(tile.position.x - size.x, tile.position.y, size.y, -5);
         p.fill(barColor.getRGB(), barAlpha);
         if (hp > 0) p.rect(tile.position.x - size.x, tile.position.y, barWidth, -5);
-        barAlpha = (int) incrementByTo(barAlpha, 3, 0);
+        if (hp == maxHp) barAlpha = (int) incrementByTo(barAlpha, 3, 0);
     }
 
     public void refreshHpBar() {

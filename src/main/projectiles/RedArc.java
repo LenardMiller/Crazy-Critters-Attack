@@ -7,7 +7,7 @@ import processing.core.PVector;
 
 import java.awt.*;
 
-public class RedArc extends Arc { //todo: make nicer looking
+public class RedArc extends Arc {
 
     public RedArc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
                   int priority) {
