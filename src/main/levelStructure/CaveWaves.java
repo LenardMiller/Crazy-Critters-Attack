@@ -20,6 +20,7 @@ public class CaveWaves {
         String bigBat = "bigBat";
         String wtf = "wtf";
         String horde = "horde";
+        String megaHorde = "megaHorde";
 
         waves[0] = wavePreset(p, 65, 30, albinoBug);
         waves[0].addSpawns(albinoBug, 5);
@@ -208,12 +209,12 @@ public class CaveWaves {
         waves[47].addSpawns(bigAlbinoBug, 20);
         waves[47].addSpawns(albinoBug, 15);
 
-        waves[48] = wavePreset(p, 150, 65, horde);
-        waves[48].addSpawns(bigAlbinoBug, 35);
-        waves[48].addSpawns(bigGolem, 15);
-        waves[48].addSpawns(midGolem, 50);
-        waves[48].addSpawns(bigBat, 15);
-        waves[38].addSpawns(bat, 60);
+        waves[48] = wavePreset(p, 250, 100, megaHorde);
+        waves[48].addSpawns(bigAlbinoBug, 50);
+        waves[48].addSpawns(bigGolem, 25);
+        waves[48].addSpawns(midGolem, 75);
+        waves[48].addSpawns(bigBat, 30);
+        waves[38].addSpawns(bat, 75);
 
         waves[49] = wavePreset(p, 150, 20, wtf);
         waves[49].addSpawns(bigAlbinoBug, 40);
@@ -225,6 +226,9 @@ public class CaveWaves {
     }
 
     private static Wave wavePreset(PApplet p, int length, int spawnLength, String type) {
+        String megaHorde = "megaHorde";
+        String megaHordeTitle = "Mega Horde";
+
         String horde = "horde";
         String hordeTitle = "Horde";
         Color hordeAccent = new Color(187, 189, 177);
@@ -286,6 +290,7 @@ public class CaveWaves {
         Color wtfText = new Color(33, 42, 95);
 
         if (type.equals(horde)) return new Wave(p, length, spawnLength, hordeFill, hordeAccent, hordeText, hordeTitle);
+        if (type.equals(megaHorde)) return new Wave(p, length, spawnLength, hordeFill, hordeAccent, hordeText, megaHordeTitle);
         if (type.equals(albinoBug)) return new Wave(p, length, spawnLength, albinoBugFill, albinoBugAccent, albinoBugText, albinoBugTitle);
         if (type.equals(bigAlbinoBug)) return new Wave(p, length, spawnLength, bigAlbinoBugFill, bigAlbinoBugAccent, bigAlbinoBugText, bigAlbinoBugTitle);
         if (type.equals(albinoButterfly)) return new Wave(p, length, spawnLength, albinoButterflyFill, albinoButterflyAccent, albinoButterflyText, albinoButterflyTitle);
