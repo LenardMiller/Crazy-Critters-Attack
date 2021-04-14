@@ -71,10 +71,18 @@ public class Level {
                 waves[currentWave-1].display(212, currentWave);
             }
         }
-        P.tint(0,60);
-        P.image(staticSprites.get("currentLineIc"),891,212+125-1); //todo: make bigger
-        P.tint(255);
-        P.image(staticSprites.get("currentLineIc"),891-1,212+125-1-1);
+//        P.tint(0,60);
+//        P.image(staticSprites.get("currentLineIc"),891,212+125-1);
+//        P.tint(255);
+//        P.image(staticSprites.get("currentLineIc"),891-1,212+125-1-1);
+        P.strokeWeight(10);
+        P.stroke(100, 0, 0);
+        P.line(P.width - 200, 336, P.width, 336);
+        P.strokeWeight(4);
+        P.stroke(255, 0, 0);
+        P.line(P.width - 207, 336, P.width, 336);
+        P.strokeWeight(1);
+        P.noStroke();
         inGameGui.playButton.display((int)playY);
     }
 }
