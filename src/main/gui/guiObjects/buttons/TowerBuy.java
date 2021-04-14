@@ -160,7 +160,7 @@ public class TowerBuy extends Button {
                     break;
             }
             displayPrice(offset, x);
-            if (inputHandler.leftMousePressedPulse && alive) {
+            if (inputHandler.leftMousePressedPulse && alive && !paused) {
                 action();
                 if (money >= price) sprite = spritePressed;
             }

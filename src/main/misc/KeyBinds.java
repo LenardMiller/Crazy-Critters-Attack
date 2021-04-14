@@ -27,7 +27,7 @@ public class KeyBinds {
         boolean pause = keysPressed.getPressedPulse('|');
 
         if (pause) {
-            if (screen == 0) { //in game todo: don't close wall menu
+            if (screen == 0) { //in game
                 playSound(sounds.get("clickOut"), 1, 1);
                 if (settings) closeSettingsMenu();
                 else paused = !paused;
