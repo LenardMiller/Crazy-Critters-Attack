@@ -15,8 +15,10 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Gluer extends Turret {
 
-    boolean spikey;
-    boolean splatter;
+    public int gluedTotal;
+
+    private boolean spikey;
+    private boolean splatter;
 
     public Gluer(PApplet p, Tile tile) {
         super(p,tile);

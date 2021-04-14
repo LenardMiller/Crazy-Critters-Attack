@@ -1,13 +1,16 @@
 package main.projectiles;
 
+import main.enemies.Enemy;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
 import main.particles.Ouch;
+import main.towers.turrets.Gluer;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.playSoundRandomSpeed;
 
 public class SplatterGlue extends Projectile {
 
@@ -40,5 +43,35 @@ public class SplatterGlue extends Projectile {
         }
         particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "glue"));
         projectiles.remove(this);
+    }
+
+    public void collideEn() {
+        for (int enemyId = 0; enemyId < enemies.size(); enemyId++) {
+            Enemy enemy = enemies.get(enemyId);
+            if (enemyAlreadyHit(enemy)) continue;
+            if (intersectingEnemy(enemy) && pierce > -1) {
+                playSoundRandomSpeed(p, hitSound, 1);
+                PVector applyVelocity = velocity;
+                if (effectRadius > 0) applyVelocity = new PVector(0, 0);
+                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, causeEnemyParticles, type, applyVelocity, enemyId);
+                hitEnemies.add(enemy);
+                Gluer gluer = (Gluer) turret;
+                gluer.gluedTotal++;
+                pierce--;
+                //splash
+                for (int splashEnemyId = enemies.size() - 1; splashEnemyId >= 0; splashEnemyId--) {
+                    Enemy splashEnemy = enemies.get(splashEnemyId);
+                    if (enemyAlreadyHit(splashEnemy)) continue;
+                    if (nearEnemy(splashEnemy)) {
+                        applyVelocity = fromExplosionCenter(splashEnemy);
+                        if (intersectingEnemy(splashEnemy)) applyVelocity = new PVector(0, 0);
+                        gluer.gluedTotal++;
+                        splashEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret,
+                          causeEnemyParticles, type, applyVelocity, splashEnemyId);
+                    }
+                }
+            }
+            if (pierce < 0) dead = true;
+        }
     }
 }

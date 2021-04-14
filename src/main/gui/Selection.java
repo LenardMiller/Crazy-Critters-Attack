@@ -1,6 +1,7 @@
 package main.gui;
 
 import main.gui.guiObjects.buttons.UpgradeTower;
+import main.towers.turrets.Gluer;
 import main.towers.turrets.TeslaTower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -349,12 +350,16 @@ public class Selection { //what tower is selected
         }
     }
 
-    private void displayStats() { //todo: fix todo: count glued
+    private void displayStats() { //todo: fix
         int offsetB = 0;
         if (!turret.hasPriority) offsetB = 45;
         P.fill(STAT_TEXT_COLOR.getRGB());
         P.textAlign(LEFT);
         P.textFont(mediumFont);
+        if (turret instanceof Gluer) {
+            Gluer gluer = (Gluer) turret;
+            P.text(nfc(gluer.gluedTotal) + " glued", 910, 450 + offsetB);
+        }
         if (turret.killsTotal != 1) P.text(nfc(turret.killsTotal) + " kills", 910, 475 + offsetB);
         else P.text(nfc(turret.killsTotal) + " kill", 910, 475 + offsetB);
         P.text(nfc(turret.damageTotal) + " dmg total", 910, 500 + offsetB);

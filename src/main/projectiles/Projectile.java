@@ -148,11 +148,11 @@ public abstract class Projectile {
         }
     }
 
-    private PVector fromExplosionCenter(Enemy enemy) {
+    PVector fromExplosionCenter(Enemy enemy) {
         return PVector.fromAngle(Utilities.findAngle(enemy.position, position) + HALF_PI);
     }
 
-    private boolean enemyAlreadyHit(Enemy enemy) {
+    boolean enemyAlreadyHit(Enemy enemy) {
         for (Enemy hitEnemy : hitEnemies) {
             if (hitEnemy == enemy) {
                 return true;
@@ -161,7 +161,7 @@ public abstract class Projectile {
         return false;
     }
 
-    private boolean intersectingEnemy(Enemy enemy) {
+    boolean intersectingEnemy(Enemy enemy) {
         boolean touchingX = abs(enemy.position.x - position.x) < radius + enemy.radius;
         boolean touchingY = abs(enemy.position.y - position.y) < radius + enemy.radius;
         return touchingX && touchingY;
