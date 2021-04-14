@@ -1,6 +1,6 @@
 package main.towers;
 
-import main.gui.PopupText;
+import main.gui.guiObjects.PopupText;
 import main.misc.Tile;
 import main.particles.Debris;
 import main.particles.Ouch;

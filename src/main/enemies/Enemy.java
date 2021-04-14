@@ -2,7 +2,7 @@ package main.enemies;
 
 import main.Main;
 import main.buffs.*;
-import main.gui.PopupText;
+import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;
 import main.particles.Ouch;

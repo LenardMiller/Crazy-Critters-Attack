@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.enemies.Enemy;
-import main.gui.PopupText;
+import main.gui.guiObjects.PopupText;
 import main.misc.CompressArray;
 import main.misc.Tile;
 import main.particles.BuffParticle;
