@@ -459,79 +459,79 @@ public class SpriteLoader {
             staticSprites.put(name + "RWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
         }
         //tiles
-        //BGA / base
-        staticSprites.put("yellowGrassBGA_TL",p.loadImage("sprites/tiles/BGA/yellowGrass.png"));
-        staticSprites.put("stoneBGA_TL",p.loadImage("sprites/tiles/BGA/stone.png"));
-        staticSprites.put("dirtBGA_TL",p.loadImage("sprites/tiles/BGA/dirt.png"));
-        staticSprites.put("sandBGA_TL", p.loadImage("sprites/tiles/BGA/sand.png"));
-        staticSprites.put("snowBGA_TL", p.loadImage("sprites/tiles/BGA/snow.png"));
-        staticSprites.put("grassBGA_TL",p.loadImage("sprites/tiles/BGA/grass/base.png"));
+        //base
+        staticSprites.put("yellowGrassBGA_TL",p.loadImage("sprites/tiles/base/yellowGrass.png"));
+        staticSprites.put("stoneBGA_TL",p.loadImage("sprites/tiles/base/stone.png"));
+        staticSprites.put("dirtBGA_TL",p.loadImage("sprites/tiles/base/dirt.png"));
+        staticSprites.put("sandBGA_TL", p.loadImage("sprites/tiles/base/sand.png"));
+        staticSprites.put("snowBGA_TL", p.loadImage("sprites/tiles/base/snow.png"));
+        staticSprites.put("grassBGA_TL",p.loadImage("sprites/tiles/base/grass/base.png"));
         for (int i = 0; i < 1; i++) {
             String name;
             name = "grass";
-            staticSprites.put(name + "BGA_T_TL", p.loadImage("sprites/tiles/BGA/" + name + "/t.png"));
-            staticSprites.put(name + "BGA_R_TL", p.loadImage("sprites/tiles/BGA/" + name + "/r.png"));
-            staticSprites.put(name + "BGA_B_TL", p.loadImage("sprites/tiles/BGA/" + name + "/b.png"));
-            staticSprites.put(name + "BGA_L_TL", p.loadImage("sprites/tiles/BGA/" + name + "/l.png"));
+            staticSprites.put(name + "BGA_T_TL", p.loadImage("sprites/tiles/base/" + name + "/t.png"));
+            staticSprites.put(name + "BGA_R_TL", p.loadImage("sprites/tiles/base/" + name + "/r.png"));
+            staticSprites.put(name + "BGA_B_TL", p.loadImage("sprites/tiles/base/" + name + "/b.png"));
+            staticSprites.put(name + "BGA_L_TL", p.loadImage("sprites/tiles/base/" + name + "/l.png"));
         }
-        //BGB / decoration
-        staticSprites.put("dirtPatchBGB_TL",p.loadImage("sprites/tiles/BGB/dirtPatch.png"));
-        staticSprites.put("grassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/grassPatch.png"));
-        staticSprites.put("yellowGrassPatchBGB_TL",p.loadImage("sprites/tiles/BGB/yellowGrassPatch.png"));
-        staticSprites.put("grassCornerBL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/bl.png"));
-        staticSprites.put("grassCornerBR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/br.png"));
-        staticSprites.put("grassCornerTL_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tl.png"));
-        staticSprites.put("grassCornerTR_BGB_TL",p.loadImage("sprites/tiles/BGB/grassCorners/tr.png"));
-        staticSprites.put("lichenBGB_TL",p.loadImage("sprites/tiles/BGB/lichen.png"));
-        staticSprites.put("deadLichenBGB_TL",p.loadImage("sprites/tiles/BGB/deadLichen.png"));
-        //BGW / flooring
-        staticSprites.put("woodWallBGW_TL",p.loadImage("sprites/tiles/BGW/woodWall/base.png"));
-        staticSprites.put("stoneWallBGW_TL",p.loadImage("sprites/tiles/BGW/stoneWall/base.png"));
-        staticSprites.put("metalWallBGW_TL",p.loadImage("sprites/tiles/BGW/metalWall/base.png"));
-        staticSprites.put("crystalWallBGW_TL",p.loadImage("sprites/tiles/BGW/crystalWall/base.png"));
-        staticSprites.put("titaniumWallBGW_TL",p.loadImage("sprites/tiles/BGW/titaniumWall/base.png"));
+        //decoration
+        staticSprites.put("dirtPatchBGB_TL",p.loadImage("sprites/tiles/decoration/dirtPatch.png"));
+        staticSprites.put("grassPatchBGB_TL",p.loadImage("sprites/tiles/decoration/grassPatch.png"));
+        staticSprites.put("yellowGrassPatchBGB_TL",p.loadImage("sprites/tiles/decoration/yellowGrassPatch.png"));
+        staticSprites.put("grassCornerBL_BGB_TL",p.loadImage("sprites/tiles/decoration/grassCorners/bl.png"));
+        staticSprites.put("grassCornerBR_BGB_TL",p.loadImage("sprites/tiles/decoration/grassCorners/br.png"));
+        staticSprites.put("grassCornerTL_BGB_TL",p.loadImage("sprites/tiles/decoration/grassCorners/tl.png"));
+        staticSprites.put("grassCornerTR_BGB_TL",p.loadImage("sprites/tiles/decoration/grassCorners/tr.png"));
+        staticSprites.put("lichenBGB_TL",p.loadImage("sprites/tiles/decoration/lichen.png"));
+        staticSprites.put("deadLichenBGB_TL",p.loadImage("sprites/tiles/decoration/deadLichen.png"));
+        //flooring
+        staticSprites.put("woodWallBGW_TL",p.loadImage("sprites/tiles/flooring/woodWall/base.png"));
+        staticSprites.put("stoneWallBGW_TL",p.loadImage("sprites/tiles/flooring/stoneWall/base.png"));
+        staticSprites.put("metalWallBGW_TL",p.loadImage("sprites/tiles/flooring/metalWall/base.png"));
+        staticSprites.put("crystalWallBGW_TL",p.loadImage("sprites/tiles/flooring/crystalWall/base.png"));
+        staticSprites.put("titaniumWallBGW_TL",p.loadImage("sprites/tiles/flooring/titaniumWall/base.png"));
         for (int i = 0; i < 2; i++) { //simple connections
             String name = null;
             if (i == 0) name = "woodWall";
             if (i == 1) name = "stoneWall";
-            staticSprites.put(name + "BGW_T_TL", p.loadImage("sprites/tiles/BGW/" + name + "/t.png"));
-            staticSprites.put(name + "BGW_R_TL", p.loadImage("sprites/tiles/BGW/" + name + "/r.png"));
-            staticSprites.put(name + "BGW_B_TL", p.loadImage("sprites/tiles/BGW/" + name + "/b.png"));
-            staticSprites.put(name + "BGW_L_TL", p.loadImage("sprites/tiles/BGW/" + name + "/l.png"));
+            staticSprites.put(name + "BGW_T_TL", p.loadImage("sprites/tiles/flooring/" + name + "/t.png"));
+            staticSprites.put(name + "BGW_R_TL", p.loadImage("sprites/tiles/flooring/" + name + "/r.png"));
+            staticSprites.put(name + "BGW_B_TL", p.loadImage("sprites/tiles/flooring/" + name + "/b.png"));
+            staticSprites.put(name + "BGW_L_TL", p.loadImage("sprites/tiles/flooring/" + name + "/l.png"));
         }
         for (int i = 0; i < 3; i++) { //diagonal double connections
             String name = null;
             if (i == 0) name = "metalWall";
             if (i == 1) name = "crystalWall";
             if (i == 2) name = "titaniumWall";
-            staticSprites.put(name + "BGW_BLI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bli.png"));
-            staticSprites.put(name + "BGW_BLO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/blo.png"));
-            staticSprites.put(name + "BGW_BRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bri.png"));
-            staticSprites.put(name + "BGW_BRO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/bro.png"));
-            staticSprites.put(name + "BGW_TLI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tli.png"));
-            staticSprites.put(name + "BGW_TLO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tlo.png"));
-            staticSprites.put(name + "BGW_TRI_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tri.png"));
-            staticSprites.put(name + "BGW_TRO_TL", p.loadImage("sprites/tiles/BGW/" + name + "/tro.png"));
+            staticSprites.put(name + "BGW_BLI_TL", p.loadImage("sprites/tiles/flooring/" + name + "/bli.png"));
+            staticSprites.put(name + "BGW_BLO_TL", p.loadImage("sprites/tiles/flooring/" + name + "/blo.png"));
+            staticSprites.put(name + "BGW_BRI_TL", p.loadImage("sprites/tiles/flooring/" + name + "/bri.png"));
+            staticSprites.put(name + "BGW_BRO_TL", p.loadImage("sprites/tiles/flooring/" + name + "/bro.png"));
+            staticSprites.put(name + "BGW_TLI_TL", p.loadImage("sprites/tiles/flooring/" + name + "/tli.png"));
+            staticSprites.put(name + "BGW_TLO_TL", p.loadImage("sprites/tiles/flooring/" + name + "/tlo.png"));
+            staticSprites.put(name + "BGW_TRI_TL", p.loadImage("sprites/tiles/flooring/" + name + "/tri.png"));
+            staticSprites.put(name + "BGW_TRO_TL", p.loadImage("sprites/tiles/flooring/" + name + "/tro.png"));
         }
-        //BGC / breakables
-        staticSprites.put("rockBGC_TL",p.loadImage("sprites/tiles/BGC/rock.png"));
-        staticSprites.put("smallRockBGC_TL",p.loadImage("sprites/tiles/BGC/smallRock.png"));
-        staticSprites.put("leavesBGC_TL",p.loadImage("sprites/tiles/BGC/leaves.png"));
-        staticSprites.put("yellowLeavesBGC_TL",p.loadImage("sprites/tiles/BGC/yellowLeaves.png"));
-        staticSprites.put("dandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/dandelions.png"));
-        staticSprites.put("deadDandelionsBGC_TL",p.loadImage("sprites/tiles/BGC/deadDandelions.png"));
-        staticSprites.put("glowshrooms0BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms/0.png"));
-        staticSprites.put("glowshrooms1BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms/1.png"));
-        staticSprites.put("glowshrooms2BGC_TL",p.loadImage("sprites/tiles/BGC/glowshrooms/2.png"));
-        staticSprites.put("deadGlowshrooms0BGC_TL",p.loadImage("sprites/tiles/BGC/deadGlowshrooms/0.png"));
-        staticSprites.put("deadGlowshrooms1BGC_TL",p.loadImage("sprites/tiles/BGC/deadGlowshrooms/1.png"));
-        staticSprites.put("deadGlowshrooms2BGC_TL",p.loadImage("sprites/tiles/BGC/deadGlowshrooms/2.png"));
-        staticSprites.put("woodDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/wood.png"));
-        staticSprites.put("stoneDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/stone.png"));
-        staticSprites.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/metal.png"));
-        staticSprites.put("darkMetalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/darkMetal.png"));
-        staticSprites.put("crystalDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/crystal.png"));
-        staticSprites.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/BGC/debris/titanium.png"));
+        //breakables
+        staticSprites.put("rockBGC_TL",p.loadImage("sprites/tiles/breakables/rock.png"));
+        staticSprites.put("smallRockBGC_TL",p.loadImage("sprites/tiles/breakables/smallRock.png"));
+        staticSprites.put("leavesBGC_TL",p.loadImage("sprites/tiles/breakables/leaves.png"));
+        staticSprites.put("yellowLeavesBGC_TL",p.loadImage("sprites/tiles/breakables/yellowLeaves.png"));
+        staticSprites.put("dandelionsBGC_TL",p.loadImage("sprites/tiles/breakables/dandelions.png"));
+        staticSprites.put("deadDandelionsBGC_TL",p.loadImage("sprites/tiles/breakables/deadDandelions.png"));
+        staticSprites.put("glowshrooms0BGC_TL",p.loadImage("sprites/tiles/breakables/glowshrooms/0.png"));
+        staticSprites.put("glowshrooms1BGC_TL",p.loadImage("sprites/tiles/breakables/glowshrooms/1.png"));
+        staticSprites.put("glowshrooms2BGC_TL",p.loadImage("sprites/tiles/breakables/glowshrooms/2.png"));
+        staticSprites.put("deadGlowshrooms0BGC_TL",p.loadImage("sprites/tiles/breakables/deadGlowshrooms/0.png"));
+        staticSprites.put("deadGlowshrooms1BGC_TL",p.loadImage("sprites/tiles/breakables/deadGlowshrooms/1.png"));
+        staticSprites.put("deadGlowshrooms2BGC_TL",p.loadImage("sprites/tiles/breakables/deadGlowshrooms/2.png"));
+        staticSprites.put("woodDebrisBGC_TL",p.loadImage("sprites/tiles/breakables/debris/wood.png"));
+        staticSprites.put("stoneDebrisBGC_TL",p.loadImage("sprites/tiles/breakables/debris/stone.png"));
+        staticSprites.put("metalDebrisBGC_TL",p.loadImage("sprites/tiles/breakables/debris/metal.png"));
+        staticSprites.put("darkMetalDebrisBGC_TL",p.loadImage("sprites/tiles/breakables/debris/darkMetal.png"));
+        staticSprites.put("crystalDebrisBGC_TL",p.loadImage("sprites/tiles/breakables/debris/crystal.png"));
+        staticSprites.put("titaniumDebrisBGC_TL",p.loadImage("sprites/tiles/breakables/debris/titanium.png"));
         //obstacles
         staticSprites.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         staticSprites.put("smallYellowTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallYellowTree.png"));
