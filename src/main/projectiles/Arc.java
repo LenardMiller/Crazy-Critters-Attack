@@ -18,7 +18,7 @@ public class Arc {
     private final int MAX_LENGTH;
     private final int MAX_DISTANCE;
     private final int PRIORITY;
-    private final ArrayList<BigPoint> BIG_POINTS;
+    private final ArrayList<StartEndPoints> BIG_POINTS;
     private final PApplet P;
     private final PVector START_POSITION;
     private final Turret TURRET;
@@ -82,19 +82,19 @@ public class Arc {
     }
 
     private void zap(Enemy blacklistedEnemy) {
-        BIG_POINTS.add(new BigPoint(P, START_POSITION));
+        BIG_POINTS.add(new StartEndPoints(P, START_POSITION));
         ArrayList<Enemy> hitEnemies = new ArrayList<>();
         if (blacklistedEnemy != null) hitEnemies.add(blacklistedEnemy);
         Enemy mainEnemy = getTargetEnemy(START_POSITION, PRIORITY, hitEnemies);
         if (mainEnemy != null) {
             damageEnemy(mainEnemy, DAMAGE, TURRET);
             hitEnemies.add(mainEnemy);
-            BIG_POINTS.add(new BigPoint(P, new PVector(mainEnemy.position.x, mainEnemy.position.y)));
+            BIG_POINTS.add(new StartEndPoints(P, new PVector(mainEnemy.position.x, mainEnemy.position.y)));
             int x = 2; //no clue
             for (int i = 1; i < MAX_LENGTH; i++) {
                 Enemy jumpEnemy = getTargetEnemy(BIG_POINTS.get(x - 1).position, 0, hitEnemies);
                 if (jumpEnemy != null) {
-                    BIG_POINTS.add(new BigPoint(P, jumpEnemy.position));
+                    BIG_POINTS.add(new StartEndPoints(P, jumpEnemy.position));
                     damageEnemy(jumpEnemy, DAMAGE, TURRET);
                     hitEnemies.add(jumpEnemy);
                     x++;
@@ -107,7 +107,7 @@ public class Arc {
             PVector position = PVector.fromAngle(angle);
             position = position.setMag(mag);
             position.add(START_POSITION);
-            BIG_POINTS.add(new BigPoint(P, new PVector(position.x, position.y)));
+            BIG_POINTS.add(new StartEndPoints(P, new PVector(position.x, position.y)));
             for (int i = 0; i < BIG_POINTS.size() - 1; i++) BIG_POINTS.get(i).getPoints(BIG_POINTS.get(i + 1).position);
         }
     }
@@ -162,14 +162,14 @@ public class Arc {
         return e;
     }
 
-    private class BigPoint {
+    private class StartEndPoints {
 
         private final PApplet P;
 
         PVector position;
         PVector[] points;
 
-        private BigPoint(PApplet p, PVector position) {
+        private StartEndPoints(PApplet p, PVector position) {
             this.position = position;
             this.P = p;
         }
@@ -177,7 +177,7 @@ public class Arc {
         private void getPoints(PVector pointA) {
             PVector pointB = position;
             points = new PVector[(int) P.random(3, maxPoints)];
-            float lineLength = sqrt(sq(0.0f)+sq(pointB.y-pointA.y));
+            float lineLength = sqrt(sq(pointB.x-pointA.x)+sq(pointB.y-pointA.y));
             float d = lineLength / points.length+1;
             for (int i = 1; i < points.length; i++) {
                 float di = d*(i);
