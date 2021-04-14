@@ -143,6 +143,7 @@ public class Main extends PApplet {
      * From Processing.
      * Just controls window size and renderer type,
      * run once at program start
+     * todo: try for fullscreen
      */
     public void settings() {
         size(GRID_WIDTH, BOARD_HEIGHT);
@@ -222,6 +223,7 @@ public class Main extends PApplet {
         playingLevel = false;
         levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
+        //todo: draw better mushrooms
         levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 500, 100, "stone");
         levels[3] = new Level(p, GlacierWaves.genGlacierWaves(p), "levels/glacier", 1000, 150, "dirt");
         DataControl.loadLayout(p, levels[currentLevel].layout);
@@ -388,7 +390,7 @@ public class Main extends PApplet {
             else break;
         }
         if (up > HARD_PARTICLE_CAP) underParticles = new ArrayList<>();
-        //under particles
+        //under particles todo: add shockwaves
         for (int i = underParticles.size()-1; i >= 0; i--) {
             Particle particle = underParticles.get(i);
             particle.main(underParticles, i);
@@ -414,7 +416,7 @@ public class Main extends PApplet {
         for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
         for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
         for (Tower tower : towers) tower.main();
-        //projectiles
+        //projectiles todo: above obstacles
         for (Projectile projectile : projectiles) projectile.displayPassA();
         for (int i = 0; i < projectiles.size(); i++) {
             Projectile projectile = projectiles.get(i);

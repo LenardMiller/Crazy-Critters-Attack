@@ -108,7 +108,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    public void turretOverlay() {
+    public void turretOverlay() { //todo: don't overlap hp bars
         if (!name.equals("null") && turret != null) {
             //display range and square
             P.fill(255, 25);
@@ -349,7 +349,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    private void displayStats() { //todo: fix
+    private void displayStats() { //todo: fix todo: count glued
         int offsetB = 0;
         if (!turret.hasPriority) offsetB = 45;
         P.fill(STAT_TEXT_COLOR.getRGB());
@@ -380,6 +380,7 @@ public class Selection { //what tower is selected
             P.fill(fillColor.getRGB());
             P.textFont(largeFont);
             P.text(turret.upgradeTitles[nextLevel], 1000, 585 + offsetC);
+            //todo: align right
             if (canAfford) P.text("$" + nfc(turret.upgradePrices[nextLevel]), 1000, 693 + offsetC);
             else {
                 strikethroughText(P, "$" + nfc(turret.upgradePrices[nextLevel]), new PVector(1000, 693 + offsetC),
@@ -427,7 +428,7 @@ public class Selection { //what tower is selected
         P.textAlign(CENTER);
         if (turret.priority == 0) priority = "close";
         else if (turret.priority == 1) priority = "far";
-        else if (turret.priority == 2) priority = "strong";
+        else if (turret.priority == 2) priority = "strong"; //todo: max hp
         if (turret.hasPriority) {
             P.fill(75, 45, 0);
             P.text("Priority: " + priority, 1000, 843);

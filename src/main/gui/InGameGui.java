@@ -50,13 +50,12 @@ public class InGameGui {
         P.fill(MAIN_PANEL_COLOR.getRGB()); //big white bg
         P.rect(900,212,200,688);
         levels[currentLevel].display();
-        P.fill(MONEY_PANEL_COLOR.getRGB()); //money bg
+        P.fill(MONEY_PANEL_COLOR.getRGB()); //money bg todo: border or smthn
         P.rect(BOARD_WIDTH, 175, BOARD_WIDTH + 200, 37);
         openMenuButton.main();
         P.fill(TOWERBUY_PANEL_COLOR.getRGB()); //towerbuy bg
         P.rect(900,21,200,127);
         wallBuyButton.main();
-//        addMoneyButton.main();
         moneyIcon.main();
         playButton.main(); //display is in Level
         if (!isTowers || selection.name.equals("null")) {
@@ -145,7 +144,6 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(2),"null",true));
         }
         wallBuyButton = new WallBuy(P,BOARD_WIDTH+100,172-12,"null",true);
-//        addMoneyButton = new AddMoney(p,BOARD_WIDTH + 16.5f,211-16.5f,"null",true);
         moneyIcon = new GuiObject(P,BOARD_WIDTH, 211-29,"moneyIc",true);
         playButton = new Play(P,1000,274.5f,"null",true);
         upgradeButtonA = new UpgradeTower(P,1000,480,"null",false, 0);

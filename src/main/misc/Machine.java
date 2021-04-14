@@ -80,7 +80,7 @@ public class Machine {
         }
     }
 
-    public void main() {
+    public void main() { //todo: regen
         if (hp <= 0 && !dead) die();
         display();
     }

@@ -32,6 +32,16 @@ public class Slider {
     private Color fillColor;
     private Color borderColor;
 
+    /**
+     * A nice little slider to control a value.
+     * todo: start at center
+     * @param p the PApplet
+     * @param name text to display above
+     * @param position where is it?
+     * @param start what the value starts as
+     * @param min minimum output
+     * @param max maximum output
+     */
     public Slider(PApplet p, String name, PVector position, float start, float min, float max) {
         P = p;
         NAME = name;
@@ -44,6 +54,10 @@ public class Slider {
         borderColor = new Color(0);
     }
 
+    /**
+     * @param input what value to change
+     * @return new value
+     */
     public float main(float input) {
         progress = (int) PApplet.map(input, MIN_OUTPUT, MAX_OUTPUT, 0, MAX_PROGRESS);
         displaySlider();

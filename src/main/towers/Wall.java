@@ -36,7 +36,7 @@ public class Wall extends Tower {
 
     private PImage[] sprite;
 
-    public Wall(PApplet p, Tile tile) {
+    public Wall(PApplet p, Tile tile) { //todo: make flooring nicer?
         super(p,tile);
 
         name = "woodWall";

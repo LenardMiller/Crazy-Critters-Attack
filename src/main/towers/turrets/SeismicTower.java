@@ -18,7 +18,7 @@ public class SeismicTower extends Turret {
     private float shockwaveWidth;
     private boolean seismicSense;
 
-    public SeismicTower(PApplet p, Tile tile) {
+    public SeismicTower(PApplet p, Tile tile) { //todo: can't hit flying
         super(p,tile);
         name = "seismic";
         size = new PVector(50,50);

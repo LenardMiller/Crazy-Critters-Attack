@@ -26,7 +26,7 @@ public class SettingsGui {
         build();
     }
 
-    public void display() {
+    public void display() { //todo: keybinds page
         PVector position = new PVector(P.width/2f, 300);
         shadowedText(P, "Settings", position, new Color(255, 255, 255),
           new Color(50, 50, 50), 48, CENTER);

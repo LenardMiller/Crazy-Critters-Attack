@@ -88,7 +88,7 @@ public abstract class Tower {
 
     public void controlAnimation() {}
 
-    public void displayHpBar() {
+    public void displayHpBar() { //todo: keep on when damaged
         Color barColor = new Color(0, 255, 0);
         p.stroke(barColor.getRGB(), barAlpha / 2f);
         float barWidth = size.x * (hp / (float) maxHp);

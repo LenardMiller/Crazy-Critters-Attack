@@ -29,7 +29,7 @@ public class Level {
         startWave = 0;
     }
 
-    public void main() {
+    public void main() { //todo: hold space to skip
         if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
             if (wave.polluter != null) polluter = wave.polluter;
@@ -72,7 +72,7 @@ public class Level {
             }
         }
         P.tint(0,60);
-        P.image(staticSprites.get("currentLineIc"),891,212+125-1);
+        P.image(staticSprites.get("currentLineIc"),891,212+125-1); //todo: make bigger
         P.tint(255);
         P.image(staticSprites.get("currentLineIc"),891-1,212+125-1-1);
         inGameGui.playButton.display((int)playY);
