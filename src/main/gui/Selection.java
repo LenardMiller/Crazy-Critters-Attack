@@ -428,7 +428,7 @@ public class Selection { //what tower is selected
         P.textAlign(CENTER);
         if (turret.priority == 0) priority = "close";
         else if (turret.priority == 1) priority = "far";
-        else if (turret.priority == 2) priority = "strong"; //todo: max hp
+        else if (turret.priority == 2) priority = "max HP";
         if (turret.hasPriority) {
             P.fill(75, 45, 0);
             P.text("Priority: " + priority, 1000, 843);
