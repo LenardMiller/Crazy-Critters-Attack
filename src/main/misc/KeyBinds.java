@@ -54,7 +54,6 @@ public class KeyBinds {
         boolean flamethrower = addHotkey('d', FLAMETHROWER_PRICE);
         boolean teslaTower = addHotkey('c', TESLATOWER_PRICE);
 
-
         if (play) {
             if (!playingLevel) {
                 playingLevel = true;

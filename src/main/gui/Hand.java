@@ -43,16 +43,16 @@ public class Hand {
     }
 
     public void main() {
-        if (paused && !held.equals("null")) setHeld("null");
         if (!levelBuilder) {
             implacable = isNotPlaceable();
             checkDisplay();
         }
         else implacable = false;
-        if (inputHandler.rightMousePressedPulse) remove();
-        if (clickOnSidebar() || rclickNotWall()) clearHand();
-        displayHeld();
-        if (inputHandler.leftMousePressedPulse) tryPlace();
+        if (!paused) {
+            if (inputHandler.rightMousePressedPulse) remove();
+            if ((clickOnSidebar() || rclickNotWall())) clearHand();
+            if (inputHandler.leftMousePressedPulse) tryPlace();
+        } displayHeld();
     }
 
     private void tryPlace() {
