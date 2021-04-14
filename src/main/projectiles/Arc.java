@@ -18,8 +18,6 @@ public class Arc {
     private final int MAX_LENGTH;
     private final int MAX_DISTANCE;
     private final int PRIORITY;
-    private final int MAX_POINTS;
-    private final int VARIATION;
     private final ArrayList<BigPoint> BIG_POINTS;
     private final PApplet P;
     private final PVector START_POSITION;
@@ -28,6 +26,9 @@ public class Arc {
 
     protected Color lineColor;
     protected String particleType;
+    protected int maxPoints;
+    protected int variation;
+    protected int weight;
 
     public int alpha;
 
@@ -38,6 +39,9 @@ public class Arc {
         this(p, startX, startY, turret, damage, maxLength, maxDistance, priority, null);
     }
 
+    /**
+     * Used by lightning caller.
+     */
     public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
                int priority, Enemy blacklistedEnemy) {
         this.P = p;
@@ -49,8 +53,9 @@ public class Arc {
         this.PRIORITY = priority;
         BIG_POINTS = new ArrayList<>();
         alpha = 255;
-        VARIATION = 25;
-        MAX_POINTS = 10;
+        variation = 25;
+        maxPoints = 10;
+        weight = 1;
         lineColor = new Color(215, 242, 248);
         particleType = "electricity";
         BLACKLISTED_ENEMY = blacklistedEnemy;
@@ -58,9 +63,10 @@ public class Arc {
 
         public void main() {
             if (alpha == 255) zap(BLACKLISTED_ENEMY);
+            P.stroke(lineColor.getRGB(), alpha);
+            P.fill(255);
+            P.strokeWeight(weight);
             for (int k = 0; k < BIG_POINTS.size()-1; k++) {
-                P.stroke(lineColor.getRGB(), alpha);
-                P.fill(255);
                 PVector pointB = BIG_POINTS.get(k).position;
                 PVector pointA = BIG_POINTS.get(k+1).position;
                 PVector[] points = BIG_POINTS.get(k).points;
@@ -71,7 +77,7 @@ public class Arc {
                     if (debug) P.ellipse(points[i].x,points[i].y,5,5);
                 }
                 P.line(points[1].x,points[1].y,pointA.x,pointA.y);
-            }
+            } P.strokeWeight(1);
         if (!paused) alpha -= up60ToFramerate(8);
     }
 
@@ -170,7 +176,7 @@ public class Arc {
 
         private void getPoints(PVector pointA) {
             PVector pointB = position;
-            points = new PVector[(int) P.random(3, MAX_POINTS)];
+            points = new PVector[(int) P.random(3, maxPoints)];
             float lineLength = sqrt(sq(0.0f)+sq(pointB.y-pointA.y));
             float d = lineLength / points.length+1;
             for (int i = 1; i < points.length; i++) {
@@ -179,7 +185,7 @@ public class Arc {
                 e.setMag(di);
                 e.x *= -1;
                 e.y *= -1;
-                points[i] = new PVector(e.x+pointA.x+ P.random(-VARIATION, VARIATION),e.y+pointA.y+ P.random(-VARIATION, VARIATION));
+                points[i] = new PVector(e.x+pointA.x+ P.random(-variation, variation),e.y+pointA.y+ P.random(-variation, variation));
                 particles.add(new BuffParticle(P, points[i].x, points[i].y, P.random(360), particleType));
             }
         }

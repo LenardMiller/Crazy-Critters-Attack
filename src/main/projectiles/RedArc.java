@@ -14,6 +14,9 @@ public class RedArc extends Arc { //todo: make nicer looking
         super(p, startX, startY, turret, damage, maxLength, maxDistance, priority);
         lineColor = new Color(255, 0, 0);
         particleType = "energy";
+        maxPoints = 30;
+        variation = 15;
+        weight = 3;
     }
 
     protected void damageEnemy(Enemy enemy, int damage, Turret turret) {
