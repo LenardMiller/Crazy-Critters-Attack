@@ -80,7 +80,7 @@ public class Machine {
         }
     }
 
-    public void main() { //todo: regen
+    public void main() {
         if (hp <= 0 && !dead) die();
         display();
     }
@@ -205,5 +205,10 @@ public class Machine {
     public void die() {
         dead = true;
         alive = false;
+    }
+
+    public void heal(float amount) {
+        hp += amount * maxHp;
+        if (hp > maxHp) hp = maxHp;
     }
 }
