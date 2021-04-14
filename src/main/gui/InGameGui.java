@@ -50,9 +50,11 @@ public class InGameGui {
         P.fill(MAIN_PANEL_COLOR.getRGB()); //big white bg
         P.rect(900,212,200,688);
         levels[currentLevel].display();
-        P.fill(MONEY_PANEL_COLOR.getRGB()); //money bg todo: border or smthn
-        P.rect(BOARD_WIDTH, 175, BOARD_WIDTH + 200, 37);
+        P.stroke(0);
+        P.fill(MONEY_PANEL_COLOR.getRGB()); //money bg
+        P.rect(BOARD_WIDTH, 176, 198, 35);
         openMenuButton.main();
+        P.noStroke();
         P.fill(TOWERBUY_PANEL_COLOR.getRGB()); //towerbuy bg
         P.rect(900,21,200,127);
         wallBuyButton.main();
