@@ -17,10 +17,10 @@ public class TileSelect extends Button {
         size = new PVector(50, 50);
         this.TYPE = type;
         String sl = "";
-        if (type.contains("BGA")) sl = "BGA";
-        if (type.contains("BGW")) sl = "BGW";
-        if (type.contains("BGB")) sl = "BGB";
-        if (type.contains("BGC")) sl = "BGC";
+        if (type.contains("Ba")) sl = "Ba";
+        if (type.contains("Fl")) sl = "Fl";
+        if (type.contains("De")) sl = "De";
+        if (type.contains("Br")) sl = "Br";
         if (type.contains("Ob")) sl = "obstacle";
         if (type.contains("Ma")) {
             sl = "machine";

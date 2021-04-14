@@ -36,9 +36,9 @@ public class DataControl extends ClassLoader {
             JSONObject saveObject = new JSONObject();
             saveObject.setString("type", "tile");
             saveObject.setInt("id", i);
-            saveObject.setString("bgA", tile.baseName);
-            saveObject.setString("bgB", tile.decorationName);
-            saveObject.setString("bgC", tile.breakableName);
+            saveObject.setString("Ba", tile.baseName);
+            saveObject.setString("De", tile.decorationName);
+            saveObject.setString("Br", tile.breakableName);
             saveObject.setString("obstacle", tile.obstacleName);
             saveObject.setBoolean("machine", tile.machine);
             saveArray.setJSONObject(i, saveObject);
@@ -106,14 +106,14 @@ public class DataControl extends ClassLoader {
             Tile tile = tiles.get(i);
             tile.machine = false;
             JSONObject loadedTile = loadArray.getJSONObject(i);
-            String bgA = loadedTile.getString("bgA");
-            String bgB = loadedTile.getString("bgB");
-            String bgC = loadedTile.getString("bgC");
+            String Ba = loadedTile.getString("Ba");
+            String De = loadedTile.getString("De");
+            String Br = loadedTile.getString("Br");
             String obstacle = loadedTile.getString("obstacle");
             boolean machine = loadedTile.getBoolean("machine");
-            if (bgA != null) tile.setBase(bgA);
-            if (bgB != null) tile.setDecoration(bgB);
-            if (bgC != null) tile.setBreakable(bgC);
+            if (Ba != null) tile.setBase(Ba);
+            if (De != null) tile.setDecoration(De);
+            if (Br != null) tile.setBreakable(Br);
             if (obstacle != null) tile.setObstacle(obstacle);
             tile.machine = machine;
         }
@@ -149,13 +149,13 @@ public class DataControl extends ClassLoader {
         JSONArray loadArray = loadJSONArray(loadFile);
 
         JSONObject loadedTile = loadArray.getJSONObject(tile.id);
-        String bgA = loadedTile.getString("bgA");
-        String bgB = loadedTile.getString("bgB");
-        String bgC = loadedTile.getString("bgC");
+        String Ba = loadedTile.getString("Ba");
+        String De = loadedTile.getString("De");
+        String Br = loadedTile.getString("Br");
         String obstacle = loadedTile.getString("obstacle");
-        if (bgA != null) tile.setBase(bgA);
-        tile.setDecoration(bgB);
-        tile.setBreakable(bgC);
+        if (Ba != null) tile.setBase(Ba);
+        tile.setDecoration(De);
+        tile.setBreakable(Br);
         tile.setObstacle(obstacle);
     }
 }

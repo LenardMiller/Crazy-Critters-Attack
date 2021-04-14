@@ -146,22 +146,22 @@ public class Tile {
         drawMain = true;
         if (x != 18 && y != 0) {
             if (doubleDiagonalIn(x, y, 1, -1, flooringName)) { //tri
-                flooringInsideCorners[0] = staticSprites.get(flooringName + "BGW_TRI_TL");
+                flooringInsideCorners[0] = staticSprites.get(flooringName + "Fl_TRI_TL");
                 drawMain = false;
             }
         } if (x != 18 && y != 18) {
             if (doubleDiagonalIn(x, y, 1, 1, flooringName)) { //bri
-                flooringInsideCorners[1] = staticSprites.get(flooringName + "BGW_BRI_TL");
+                flooringInsideCorners[1] = staticSprites.get(flooringName + "Fl_BRI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 18) {
             if (doubleDiagonalIn(x, y, -1, 1, flooringName)) { //bli
-                flooringInsideCorners[2] = staticSprites.get(flooringName + "BGW_BLI_TL");
+                flooringInsideCorners[2] = staticSprites.get(flooringName + "Fl_BLI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 0) {
             if (doubleDiagonalIn(x, y, -1, -1, flooringName)) { //tli
-                flooringInsideCorners[3] = staticSprites.get(flooringName + "BGW_TLI_TL");
+                flooringInsideCorners[3] = staticSprites.get(flooringName + "Fl_TLI_TL");
                 drawMain = false;
             }
         }
@@ -171,7 +171,7 @@ public class Tile {
             if (s.equals("BRI")) i = 1;
             if (s.equals("BLI")) i = 2;
             if (s.equals("TLI")) i = 3;
-            flooringInsideCorners[i] = staticSprites.get(flooringName + "BGW_" + s + "_TL");
+            flooringInsideCorners[i] = staticSprites.get(flooringName + "Fl_" + s + "_TL");
             drawMain = false;
         }
         if (countTouchingVN(x,y) > 2) drawMain = true;
@@ -211,25 +211,25 @@ public class Tile {
         if (x != 18 && y != 0) { //tro
             String n = doubleDiagonalOut(x,y,1,-1);
             if (n != null) {
-                flooringOutsideCorners[0] = staticSprites.get(n + "BGW_TRO_TL");
+                flooringOutsideCorners[0] = staticSprites.get(n + "Fl_TRO_TL");
                 flooringOutsideCornerNames[0] = n;
             }
         } if (x != 18 && y != 18) { //bro
             String n = doubleDiagonalOut(x,y,1,1);
             if (n != null) {
-                flooringOutsideCorners[1] = staticSprites.get(n + "BGW_BRO_TL");
+                flooringOutsideCorners[1] = staticSprites.get(n + "Fl_BRO_TL");
                 flooringOutsideCornerNames[1] = n;
             }
         } if (x != 0 && y != 18) { //blo
             String n = doubleDiagonalOut(x,y,-1,1);
             if (n != null) {
-                flooringOutsideCorners[2] = staticSprites.get(n + "BGW_BLO_TL");
+                flooringOutsideCorners[2] = staticSprites.get(n + "Fl_BLO_TL");
                 flooringOutsideCornerNames[2] = n;
             }
         } if (x != 0 && y != 0) { //tlo
             String n = doubleDiagonalOut(x,y,-1,-1);
             if (n != null) {
-                flooringOutsideCorners[3] = staticSprites.get(n + "BGW_TLO_TL");
+                flooringOutsideCorners[3] = staticSprites.get(n + "Fl_TLO_TL");
                 flooringOutsideCornerNames[3] = n;
             }
         }
@@ -317,13 +317,13 @@ public class Tile {
     }
 
     public void setBase(String name) {
-        name = name.replace("BGA_TL", "");
+        name = name.replace("Ba_TL", "");
         baseName = name;
-        base = staticSprites.get(name + "BGA_TL");
-        baseEdges[0] = staticSprites.get(name + "BGA_T_TL");
-        baseEdges[1] = staticSprites.get(name + "BGA_R_TL");
-        baseEdges[2] = staticSprites.get(name + "BGA_B_TL");
-        baseEdges[3] = staticSprites.get(name + "BGA_L_TL");
+        base = staticSprites.get(name + "Ba_TL");
+        baseEdges[0] = staticSprites.get(name + "Ba_T_TL");
+        baseEdges[1] = staticSprites.get(name + "Ba_R_TL");
+        baseEdges[2] = staticSprites.get(name + "Ba_B_TL");
+        baseEdges[3] = staticSprites.get(name + "Ba_L_TL");
     }
 
     /**
@@ -353,16 +353,16 @@ public class Tile {
                     breakableName = null;
                 }
             }
-            name = name.replace("BGW_TL", "");
+            name = name.replace("Fl_TL", "");
             name = name.replace("ultimate", "titanium");
             flooringName = name;
-            if (staticSprites.get(name + "BGW_TL") != flooring) {
-                flooring = staticSprites.get(name + "BGW_TL");
+            if (staticSprites.get(name + "Fl_TL") != flooring) {
+                flooring = staticSprites.get(name + "Fl_TL");
                 if (name.contains("woodWall") || name.contains("stoneWall")) {
-                    flooringEdges[0] = staticSprites.get(name + "BGW_T_TL");
-                    flooringEdges[1] = staticSprites.get(name + "BGW_R_TL");
-                    flooringEdges[2] = staticSprites.get(name + "BGW_B_TL");
-                    flooringEdges[3] = staticSprites.get(name + "BGW_L_TL");
+                    flooringEdges[0] = staticSprites.get(name + "Fl_T_TL");
+                    flooringEdges[1] = staticSprites.get(name + "Fl_R_TL");
+                    flooringEdges[2] = staticSprites.get(name + "Fl_B_TL");
+                    flooringEdges[3] = staticSprites.get(name + "Fl_L_TL");
                 }
             }
         }
