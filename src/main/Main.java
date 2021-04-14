@@ -312,6 +312,12 @@ public class Main extends PApplet {
             textAlign(LEFT);
             if (!levelBuilder) inGameGui.drawText(this, 10);
         } if (dev) inGameGui.drawDebugText(this, 10);
+        //enemy hp bars
+        enemies.stream().filter(enemy -> enemy.hp > 0 && !enemy.stealthMode).forEach(Enemy::hpBar);
+        //tower hp bars
+        towers.forEach(Tower::displayHpBar);
+        //machine hp bar
+        machine.hpBar();
         if (paused) {
             if (!alive) fill(50, 0, 0, 50);
             else fill(0, 0, 0, 50);
@@ -461,12 +467,6 @@ public class Main extends PApplet {
             Enemy enemy = enemies.get(i);
             if (enemy.flying) enemy.main(i);
         }
-        //enemy hp bars
-        enemies.stream().filter(enemy -> enemy.hp > 0 && !enemy.stealthMode).forEach(Enemy::hpBar);
-        //tower hp bars
-        towers.forEach(Tower::displayHpBar);
-        //machine hp bar
-        machine.hpBar();
     }
 
     /**

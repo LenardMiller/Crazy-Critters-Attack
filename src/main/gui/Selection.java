@@ -108,7 +108,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    public void turretOverlay() { //todo: don't overlap hp bars
+    public void turretOverlay() {
         if (!name.equals("null") && turret != null) {
             //display range and square
             P.fill(255, 25);
