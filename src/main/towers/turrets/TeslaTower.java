@@ -150,7 +150,7 @@ public class TeslaTower extends Turret {
         upgradeDescB[4] = "damage";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "vastly"; //todo: cap
+        upgradeDescA[5] = "Vastly";
         upgradeDescB[5] = "increase";
         upgradeDescC[5] = "firerate";
         //icons
