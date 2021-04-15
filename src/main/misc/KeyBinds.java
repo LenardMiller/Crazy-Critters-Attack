@@ -47,16 +47,16 @@ public class KeyBinds {
     public void inGameKeys() {
         boolean play = keysPressed.getPressedPulse(' ');
         //hotkeys
-        boolean wall = addHotkey('?', 0);
-        boolean slingshot = addHotkey('q', SLINGSHOT_PRICE);
-        boolean luggageBlaster = addHotkey('a', RANDOMCANNON_PRICE);
-        boolean crossbow = addHotkey('z', CROSSBOW_PRICE);
-        boolean cannon = addHotkey('w', CANNON_PRICE);
-        boolean gluer = addHotkey('s', GLUER_PRICE);
-        boolean seismicTower = addHotkey('x', SEISMIC_PRICE);
-        boolean energyBlaster = addHotkey('e', ENERGYBLASTER_PRICE);
-        boolean flamethrower = addHotkey('d', FLAMETHROWER_PRICE);
-        boolean teslaTower = addHotkey('c', TESLATOWER_PRICE);
+        boolean wall = addHotkey(new char[]{'?'}, 0);
+        boolean slingshot = addHotkey(new char[]{'q', 'Q'}, SLINGSHOT_PRICE);
+        boolean luggageBlaster = addHotkey(new char[]{'a', 'A'}, RANDOMCANNON_PRICE);
+        boolean crossbow = addHotkey(new char[]{'z', 'Z'}, CROSSBOW_PRICE);
+        boolean cannon = addHotkey(new char[]{'w', 'W'}, CANNON_PRICE);
+        boolean gluer = addHotkey(new char[]{'s', 'S'}, GLUER_PRICE);
+        boolean seismicTower = addHotkey(new char[]{'x', 'X'}, SEISMIC_PRICE);
+        boolean energyBlaster = addHotkey(new char[]{'e', 'E'}, ENERGYBLASTER_PRICE);
+        boolean flamethrower = addHotkey(new char[]{'d', 'Q'}, FLAMETHROWER_PRICE);
+        boolean teslaTower = addHotkey(new char[]{'c', 'C'}, TESLATOWER_PRICE);
 
         if (play) {
             if (!playingLevel) {
@@ -88,8 +88,10 @@ public class KeyBinds {
         }
     }
 
-    private boolean addHotkey(char key, int price) {
-        return keysPressed.getPressedPulse(key) && alive && !paused && money >= price;
+    private boolean addHotkey(char[] keys, int price) {
+        boolean pressed = false;
+        for (char key : keys) if (keysPressed.getPressedPulse(key)) pressed = true;
+        return pressed && alive && !paused && money >= price;
     }
 
     public void spawnKeys() {
