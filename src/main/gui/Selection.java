@@ -39,7 +39,10 @@ public class Selection { //what tower is selected
     public void main() {
         clickOff();
         //don't display if nothing held
-        if (!name.equals("null") && turret != null) display();
+        if (!name.equals("null") && turret != null) {
+            keyBinds.selectionKeys();
+            display();
+        }
     }
 
     /**
@@ -452,5 +455,25 @@ public class Selection { //what tower is selected
         P.fill(SPECIAL_TEXT_COLOR.getRGB());
         P.text(s, 910, 356 + offset + 20 * purpleCount);
         purpleCount++;
+    }
+
+    public void priorityRight() {
+        playSound(selection.CLICK_OUT, 1, 1);
+        if (turret.priority == 2) turret.priority = 0;
+        else turret.priority++;
+    }
+
+    public void priorityLeft() {
+        playSound(selection.CLICK_OUT, 1, 1);
+        if (turret.priority == 0) turret.priority = 2;
+        else turret.priority--;
+    }
+
+    public void upgradeBottom() {
+        turret.upgrade(1);
+    }
+
+    public void upgradeTop() {
+        turret.upgrade(0);
     }
 }

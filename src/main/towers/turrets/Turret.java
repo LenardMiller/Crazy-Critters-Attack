@@ -25,6 +25,9 @@ public abstract class Turret extends Tower {
     public boolean hasPriority;
     public int pjSpeed;
     public int range;
+    /**
+     * Close, far, maxHP
+     */
     public int priority;
     public int pierce;
     public int killsTotal;
@@ -326,14 +329,24 @@ public abstract class Turret extends Tower {
     }
 
     public void upgrade(int id) {
-        upgradeSpecial(id);
+        int price = 0;
         if (id == 0) {
-            value += upgradePrices[nextLevelA];
+            price = upgradePrices[nextLevelA];
+            if (price > money) return;
+            if (nextLevelA > 2) return;
+            if (nextLevelB == 6 && nextLevelA == 2) return;
             nextLevelA++;
         } else if (id == 1) {
-            value += upgradePrices[nextLevelB];
+            price = upgradePrices[nextLevelB];
+            if (price > money) return;
+            if (nextLevelB > 5) return;
+            if (nextLevelB == 5 && nextLevelA == 3) return;
             nextLevelB++;
         }
+        inGameGui.flashA = 255;
+        money -= price;
+        value += price;
+        upgradeSpecial(id);
         //icons
         if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
         else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];

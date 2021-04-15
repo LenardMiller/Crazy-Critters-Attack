@@ -40,8 +40,16 @@ public class KeyBinds {
         }
     }
 
-    public String selectionKeys() {
-        return "";
+    public void selectionKeys() {
+        boolean upgradeTop = keysPressed.getPressedPulse('^');
+        boolean upgradeBottom = keysPressed.getPressedPulse('&');
+        boolean priorityRight = keysPressed.getPressedPulse('>');
+        boolean priorityLeft = keysPressed.getPressedPulse('<');
+
+        if (upgradeTop) selection.upgradeTop();
+        if (upgradeBottom) selection.upgradeBottom();
+        if (priorityLeft) selection.priorityLeft();
+        if (priorityRight) selection.priorityRight();
     }
 
     public void inGameKeys() {

@@ -61,11 +61,6 @@ public class UpgradeTower extends Button {
 
     public void action() {
         Turret turret = selection.turret;
-        int nextLevel;
-        if (id == 0) nextLevel = turret.nextLevelA;
-        else nextLevel = turret.nextLevelB;
-        money -= turret.upgradePrices[nextLevel];
         turret.upgrade(id);
-        inGameGui.flashA = 255;
     }
 }
