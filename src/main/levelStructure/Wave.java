@@ -71,7 +71,7 @@ public class Wave {
             if (tower instanceof Turret) tower.heal(1);
             else tower.heal(0.35f);
         }
-        machine.heal(0.1f);
+        machine.heal(0.05f);
         playSound(sounds.get("waveEnd"), 1, 1);
         money += levels[currentLevel].reward;
         popupTexts.add(new PopupText(P, new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), levels[currentLevel].reward));
