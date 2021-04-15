@@ -45,11 +45,13 @@ public class KeyBinds {
         boolean upgradeBottom = keysPressed.getPressedPulse('&');
         boolean priorityRight = keysPressed.getPressedPulse('>');
         boolean priorityLeft = keysPressed.getPressedPulse('<');
+        boolean delete = keysPressed.getPressedPulse('*');
 
         if (upgradeTop) selection.upgradeTop();
         if (upgradeBottom) selection.upgradeBottom();
         if (priorityLeft) selection.priorityLeft();
         if (priorityRight) selection.priorityRight();
+        if (delete) selection.sell();
     }
 
     public void inGameKeys() {
@@ -98,6 +100,7 @@ public class KeyBinds {
 
     private boolean addHotkey(char[] keys, int price) {
         boolean pressed = false;
+        //I forgot this is actually unnecessary, but I'm too lazy to revert it
         for (char key : keys) if (keysPressed.getPressedPulse(key)) pressed = true;
         return pressed && alive && !paused && money >= price;
     }

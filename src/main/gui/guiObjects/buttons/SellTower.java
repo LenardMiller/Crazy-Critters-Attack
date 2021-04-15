@@ -3,7 +3,8 @@ package main.gui.guiObjects.buttons;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.*;
+import static main.Main.animatedSprites;
+import static main.Main.selection;
 
 public class SellTower extends Button {
 
@@ -24,15 +25,8 @@ public class SellTower extends Button {
         }
     }
 
-    public void action(){ //kills tower and gives value
-        selection.turret.die(true);
+    public void action() { //kills tower and gives value
         active = false;
-        inGameGui.priorityButton.active = false;
-        inGameGui.upgradeButtonA.active = false;
-        inGameGui.upgradeButtonB.active = false;
-        inGameGui.upgradeIconA.active = false;
-        inGameGui.upgradeIconB.active = false;
-        selection.name = "null";
-        inGameGui.flashA = 255;
+        selection.sell();
     }
 }

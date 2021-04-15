@@ -476,4 +476,15 @@ public class Selection { //what tower is selected
     public void upgradeTop() {
         turret.upgrade(0);
     }
+
+    public void sell() {
+        selection.turret.die(true);
+        inGameGui.priorityButton.active = false;
+        inGameGui.upgradeButtonA.active = false;
+        inGameGui.upgradeButtonB.active = false;
+        inGameGui.upgradeIconA.active = false;
+        inGameGui.upgradeIconB.active = false;
+        selection.name = "null";
+        inGameGui.flashA = 255;
+    }
 }
