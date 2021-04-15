@@ -208,7 +208,21 @@ public class Machine {
     }
 
     public void heal(float amount) {
+        if (hp < maxHp) {
+            for (Tile tile : machTiles) {
+                int x = (int) tile.position.x;
+                int y = (int) tile.position.y;
+                for (int i = 0; i < 5; i++) {
+                    particles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greenPuff"));
+                }
+            }
+        }
         hp += amount * maxHp;
+        int hpSegment = maxHp / 4;
+        if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
+        if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
+        if (hp <= hpSegment) damageState = 3;
+        if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
         if (hp > maxHp) hp = maxHp;
     }
 }
