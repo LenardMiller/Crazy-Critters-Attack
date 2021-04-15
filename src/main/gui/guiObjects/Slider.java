@@ -24,6 +24,7 @@ public class Slider {
     private final PApplet P;
     private final String NAME;
     private final PVector POSITION;
+    private final float DEFAULT;
     private final float MIN_OUTPUT;
     private final float MAX_OUTPUT;
 
@@ -34,11 +35,10 @@ public class Slider {
 
     /**
      * A nice little slider to control a value.
-     * todo: start at center
      * @param p the PApplet
      * @param name text to display above
      * @param position where is it?
-     * @param start what the value starts as
+     * @param start what the value starts as and where the middle is
      * @param min minimum output
      * @param max maximum output
      */
@@ -46,10 +46,11 @@ public class Slider {
         P = p;
         NAME = name;
         POSITION = position;
+        DEFAULT = start;
         MIN_OUTPUT = min;
         MAX_OUTPUT = max;
 
-        progress = (int) PApplet.map(start, min, max, 0, MAX_PROGRESS);
+        progress = MAX_PROGRESS / 2;
         fillColor = new Color(100, 100, 100);
         borderColor = new Color(0);
     }
@@ -59,13 +60,24 @@ public class Slider {
      * @return new value
      */
     public float main(float input) {
-        progress = (int) PApplet.map(input, MIN_OUTPUT, MAX_OUTPUT, 0, MAX_PROGRESS);
+        //braces have to be here, dunno why
+        if (input == DEFAULT) {
+            progress = MAX_PROGRESS / 2;
+        } if (input < DEFAULT) {
+            progress = (int) PApplet.map(input, MIN_OUTPUT, DEFAULT, 0, MAX_PROGRESS / 2f);
+        } if (input > DEFAULT) {
+            progress = (int) PApplet.map(input, DEFAULT, MAX_OUTPUT, MAX_PROGRESS / 2f, MAX_PROGRESS);
+        }
+
         displaySlider();
         displayText();
         hover();
 
-        if (held) return PApplet.map(progress, 0, MAX_PROGRESS, MIN_OUTPUT, MAX_OUTPUT);
-        return input;
+        if (held) {
+            if (progress == MAX_PROGRESS / 2) return DEFAULT;
+            if (progress < MAX_PROGRESS / 2) return PApplet.map(progress, 0, MAX_PROGRESS / 2f, MIN_OUTPUT, DEFAULT);
+            return PApplet.map(progress, MAX_PROGRESS / 2f, MAX_PROGRESS, DEFAULT, MAX_OUTPUT);
+        } return input;
     }
 
     private void hover() {

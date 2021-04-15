@@ -33,6 +33,7 @@ public class SettingsGui {
 
         //buttons
         globalVolume = volumeSlider.main(globalVolume);
+        System.out.println(globalVolume);
         P.fill(200);
         P.textFont(mediumFont);
         int offsetY = 7;
