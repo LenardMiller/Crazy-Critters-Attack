@@ -474,8 +474,12 @@ public class Main extends PApplet {
      */
     public void keyPressed() {
         if (!dev) key = toLowerCase(key);
-        if (keyCode == 27) key = '|';
-        if (keyCode == 9) key = '?';
+        if (keyCode == 9) key = '?'; //tab
+        if (keyCode == 27) key = '|'; //esc
+        if (keyCode == 37) key = '<'; //left
+        if (keyCode == 38) key = '^'; //up
+        if (keyCode == 39) key = '>'; //right
+        if (keyCode == 40) key = '&'; //down
         inputHandler.key(true);
     }
 

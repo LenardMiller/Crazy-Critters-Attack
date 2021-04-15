@@ -40,6 +40,10 @@ public class KeyBinds {
         }
     }
 
+    public String selectionKeys() {
+        return "";
+    }
+
     public void inGameKeys() {
         boolean play = keysPressed.getPressedPulse(' ');
         //hotkeys
