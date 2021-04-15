@@ -59,6 +59,8 @@ public class KeyBinds {
                 playingLevel = true;
                 Level level = levels[currentLevel];
                 level.currentWave = 0;
+            } else {
+                levels[currentLevel].advance();
             }
         }
         //hotkeys

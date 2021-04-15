@@ -27,6 +27,7 @@ public class Wave {
 
     public Polluter polluter;
 
+    public boolean unskippable;
     private int betweenSpawns;
     /**
      * Time until wave end

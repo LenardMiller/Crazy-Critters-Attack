@@ -29,7 +29,7 @@ public class Level {
         startWave = 0;
     }
 
-    public void main() { //todo: hold space to skip
+    public void main() {
         if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
             if (wave.polluter != null) polluter = wave.polluter;
@@ -45,6 +45,14 @@ public class Level {
             if (!won) paused = true; //prevent stuck on pause
             won = true;
         }
+    }
+
+    public void advance() {
+        if (currentWave >= waves.length) return;
+        Wave cw = waves[currentWave];
+        if (cw.spawns.size() > 0) return;
+        if (cw.unskippable) return;
+        levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);
     }
 
     public void setWave(int waveNum) {
