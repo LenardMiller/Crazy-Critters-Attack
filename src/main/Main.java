@@ -224,7 +224,6 @@ public class Main extends PApplet {
         playingLevel = false;
         levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
-        //todo: draw better mushrooms
         levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 500, 100, "stone");
         levels[3] = new Level(p, GlacierWaves.genGlacierWaves(p), "levels/glacier", 1000, 150, "dirt");
         DataControl.loadLayout(p, levels[currentLevel].layout);
