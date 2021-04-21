@@ -1,8 +1,8 @@
 package main.towers.turrets;
 
+import main.arcs.Arc;
+import main.arcs.RedArc;
 import main.misc.Tile;
-import main.projectiles.Arc;
-import main.projectiles.RedArc;
 import main.shockwaves.LightningShockwave;
 import main.sound.SoundWithAlts;
 import processing.core.PApplet;

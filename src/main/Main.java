@@ -1,5 +1,6 @@
 package main;
 
+import main.arcs.Arc;
 import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.gui.*;
@@ -12,7 +13,6 @@ import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
-import main.projectiles.Arc;
 import main.projectiles.Projectile;
 import main.shockwaves.Shockwave;
 import main.sound.FadeSoundLoop;
@@ -55,7 +55,7 @@ public class Main extends PApplet {
     public static ArrayList<main.misc.Corpse> corpses;
     public static ArrayList<main.projectiles.Projectile> projectiles;
     public static ArrayList<main.particles.Particle> particles, underParticles;
-    public static ArrayList<main.projectiles.Arc> arcs;
+    public static ArrayList<Arc> arcs;
     public static ArrayList<Shockwave> shockwaves;
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;

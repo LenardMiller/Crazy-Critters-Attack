@@ -1,4 +1,4 @@
-package main.projectiles;
+package main.arcs;
 
 import main.enemies.Enemy;
 import main.towers.turrets.Turret;

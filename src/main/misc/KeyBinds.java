@@ -1,5 +1,6 @@
 package main.misc;
 
+import main.arcs.Arc;
 import main.enemies.*;
 import main.levelStructure.Level;
 import main.projectiles.*;
