@@ -127,6 +127,10 @@ public class SpriteLoader {
         getSprite(p,"snakeMove","EN","snake/move/",10);
         getSprite(p,"snakeDie","EN","snake/die/",3);
         getSprite(p,"snakeParts","EN","snake/parts/",3);
+        getSprite(p,"snowSnakeAttack","EN","snowSnake/attack/",15);
+        getSprite(p,"snowSnakeMove","EN","snowSnake/move/",10);
+        getSprite(p,"snowSnakeDie","EN","snowSnake/die/",3);
+        getSprite(p,"snowSnakeParts","EN","snowSnake/parts/",3);
         getSprite(p,"sidewinderAttack","EN","sidewinder/attack/",15);
         getSprite(p,"sidewinderMove","EN","sidewinder/move/",10);
         getSprite(p,"sidewinderDie","EN","sidewinder/die/",3);
