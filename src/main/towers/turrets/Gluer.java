@@ -59,12 +59,14 @@ public class Gluer extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
         if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
         else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
         else projectiles.add(new Glue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
     }
 
+    @Override
     protected void getTargetEnemy() {
         //0: close
         //1: far
@@ -157,6 +159,7 @@ public class Gluer extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[26];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -196,6 +199,4 @@ public class Gluer extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }

@@ -142,6 +142,7 @@ public class Flamethrower extends Turret {
         }
     }
 
+    @Override
     protected void fire(float barrelLength, String particleType) {
         if (!wheel) {
             FIRE_SOUND_LOOP.setTargetVolume(1);
@@ -149,15 +150,23 @@ public class Flamethrower extends Turret {
             PVector angleVector = PVector.fromAngle(angle - HALF_PI);
             angleVector.setMag(barrelLength);
             projectileSpawn.add(angleVector);
-            if (magic) projectiles.add(new BlueFlame(p, projectileSpawn.x, projectileSpawn.y, angle, this, damage,
-              effectLevel, effectDuration, (int) (range - barrelLength - 100), false));
-            else projectiles.add(new Flame(p, projectileSpawn.x, projectileSpawn.y, angle, this, damage, effectLevel,
-              effectDuration, (int) (range - barrelLength - 100), false));
+            spawnProjectiles(projectileSpawn, angle);
         }
         else {
             playSoundRandomSpeed(p, sounds.get("fireImpact"), 1);
             shockwaves.add(new FireShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
               (int) barrelLength, range, damage, this, effectLevel, effectDuration));
+        }
+    }
+
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
+        if (magic) {
+            projectiles.add(new BlueFlame(p, position.x, position.y, angle, this, damage,
+              effectLevel, effectDuration, (int) (range - barrelLength - 100), false));
+        } else {
+            projectiles.add(new Flame(p, position.x, position.y, angle, this, damage, effectLevel,
+              effectDuration, (int) (range - barrelLength - 100), false));
         }
     }
 

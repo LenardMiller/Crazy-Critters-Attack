@@ -47,19 +47,25 @@ public class Slingshot extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     protected void fire(float barrelLength, String particleType) {
         playSoundRandomSpeed(p, fireSound, 1);
-        if (painful) projectiles.add(new Rock(p, tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+        spawnProjectiles(new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2), angle);
+    }
+
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
+        if (painful) projectiles.add(new Rock(p, position.x, position.y, angle, this, damage));
         if (gravel) {
             float offset = 0.03f;
             int count = 8;
             float a = angle - (floor(count / 2f) * offset);
             for (int i = 0; i < count; i++) {
-                projectiles.add(new Gravel(p, tile.position.x-size.x/2,tile.position.y-size.y/2, a, this, damage));
+                projectiles.add(new Gravel(p, position.x, position.y, a, this, damage));
                 a += offset;
             }
         }
-        if (!painful && !gravel) projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+        if (!painful && !gravel) projectiles.add(new Pebble(p,position.x, position.y, angle, this, damage));
     }
 
     private void setUpgrades(){
@@ -151,6 +157,4 @@ public class Slingshot extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }

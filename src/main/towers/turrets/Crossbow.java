@@ -50,19 +50,25 @@ public class Crossbow extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     protected void fire(float barrelLength, String particleType) {
         playSoundRandomSpeed(p, fireSound, 1);
+        spawnProjectiles(new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2), angle);
+    }
+
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
         if (multishot) {
             float offset = 0.07f;
             int count = 7;
             float a = angle - (floor(count / 2f) * offset);
             for (int i = 0; i < count; i++) {
-                projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, a, this, damage, pierce));
+                projectiles.add(new Bolt(p, position.x, position.y, a, this, damage, pierce));
                 a += offset;
             }
         } else {
-            if (reinforced) projectiles.add(new ReinforcedBolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
-            else projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
+            if (reinforced) projectiles.add(new ReinforcedBolt(p,position.x, position.y, angle, this, damage, pierce));
+            else projectiles.add(new Bolt(p,position.x, position.y, angle, this, damage, pierce));
         }
     }
 
@@ -115,6 +121,7 @@ public class Crossbow extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[19];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {

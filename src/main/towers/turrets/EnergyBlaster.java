@@ -54,7 +54,8 @@ public class EnergyBlaster extends Turret{
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
         if (nuclear) {
             projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, damage, effectRadius));
         } else if (dark) {
@@ -116,6 +117,7 @@ public class EnergyBlaster extends Turret{
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[30];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {

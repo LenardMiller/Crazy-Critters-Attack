@@ -10,7 +10,7 @@ import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
-public class MagicMissileer extends Turret{
+public class MagicMissileer extends Turret {
 
     public MagicMissileer(PApplet p, Tile tile) {
         super(p,tile);
@@ -38,6 +38,7 @@ public class MagicMissileer extends Turret{
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     protected void checkTarget() {
         getTargetEnemy();
         if (state == 0 && targetEnemy != null) { //if done animating
@@ -47,7 +48,8 @@ public class MagicMissileer extends Turret{
         }
     }
 
-    protected void fire() {
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 0,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 1,tile.position));
         projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 2,tile.position));
@@ -56,6 +58,11 @@ public class MagicMissileer extends Turret{
         }
     }
 
+    protected void fire() {
+        spawnProjectiles(new PVector(0,0), angle);
+    }
+
+    @Override
     public void displayMain() {
         //shadow
         p.pushMatrix();
@@ -73,6 +80,9 @@ public class MagicMissileer extends Turret{
         p.popMatrix();
         p.tint(255);
     }
+
+    @Override
+    protected void upgradeSpecial(int id) {}
 
     private void setUpgrades() {
 //        //damage
@@ -121,8 +131,4 @@ public class MagicMissileer extends Turret{
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[14];
     }
-
-    protected void upgradeSpecial() {}
-
-    public void updateSprite() {}
 }

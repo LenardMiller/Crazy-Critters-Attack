@@ -51,6 +51,9 @@ public class WaveMotion extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {}
+
     protected void fire() {
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
@@ -70,6 +73,7 @@ public class WaveMotion extends Turret {
         beamPartLength.setMag(24);
     }
 
+    @Override
     public void displayMain() {
         //shadow
         p.pushMatrix();
@@ -110,6 +114,9 @@ public class WaveMotion extends Turret {
         p.popMatrix();
         p.tint(255);
     }
+
+    @Override
+    protected void upgradeSpecial(int id) {}
 
     private void beamDamage(PVector start, PVector end) {
         for (Enemy enemy : enemies) {
@@ -177,8 +184,4 @@ public class WaveMotion extends Turret {
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
     }
-
-    public void upgradeSpecial() {}
-
-    public void updateSprite() {}
 }

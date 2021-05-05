@@ -77,11 +77,13 @@ public class Wall extends Tower {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     public void main(){
         if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
     }
 
+    @Override
     public void displayBase() {
         float x = tile.position.x-size.x;
         float y = tile.position.y-size.y;
@@ -103,6 +105,7 @@ public class Wall extends Tower {
         else return null;
     }
 
+    @Override
     public void controlAnimation() {
         if (hit) { //change to red if under attack
             tintColor = 0;
@@ -161,6 +164,7 @@ public class Wall extends Tower {
         UPGRADE_HP[3] = 500;
     }
 
+    @Override
     public void upgrade(int id) {
         price += upgradePrices[nextLevelB];
         sprite = UPGRADE_SPRITES[nextLevelB];
@@ -186,6 +190,7 @@ public class Wall extends Tower {
         updateFlooring();
     }
 
+    @Override
     public void updateSprite() {
         Tile searchTile;
         boolean tl;

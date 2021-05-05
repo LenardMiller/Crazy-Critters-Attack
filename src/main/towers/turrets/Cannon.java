@@ -55,7 +55,8 @@ public class Cannon extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
         if (frags) projectiles.add(new FragBall(p,position.x,position.y, angle, this, damage, effectRadius));
         else if (dynamite) projectiles.add(new Dynamite(p,position.x,position.y, angle, this, damage, effectRadius));
         else projectiles.add(new CannonBall(p,position.x,position.y, angle, this, damage, effectRadius));
@@ -109,6 +110,7 @@ public class Cannon extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[24];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -156,6 +158,4 @@ public class Cannon extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }

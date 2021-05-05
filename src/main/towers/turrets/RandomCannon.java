@@ -54,28 +54,34 @@ public class RandomCannon extends Turret {
     protected void fire(float barrelLength, String particleType) {
         playSoundRandomSpeed(p, fireSound, 1);
         float angleB = angle;
-        int spriteType = (int)(p.random(0,5.99f));
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);float particleCount = p.random(1,5);
+        PVector spa = PVector.fromAngle(angleB-HALF_PI);
         if (barrel) {
-            particleCount = 1;
             angleB += p.random(-0.1f,0.1f);
             spa.setMag(27);
         }
         else spa.setMag(18);
         spp.add(spa);
+        spawnProjectiles(spp, angleB);
+    }
+
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
+        float particleCount = p.random(1,5);
+        if (barrel) particleCount = 1;
         String part = "smoke";
+        int spriteType = (int)(p.random(0,5.99f));
         if (laundry && p.random(0,3) < 1) { //this is why this is here
-            projectiles.add(new Laundry(p,spp.x,spp.y, angleB, this, damage));
+            projectiles.add(new Laundry(p,position.x,position.y, angle, this, damage));
             part = "poison";
         }
-        else projectiles.add(new MiscProjectile(p,spp.x,spp.y, angleB, this, spriteType, damage));
+        else projectiles.add(new MiscProjectile(p,position.x,position.y, angle, this, spriteType, damage));
         for (int i = 0; i < particleCount; i++) {
-            PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
+            PVector spa2 = PVector.fromAngle(angle-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
-            PVector spp2 = new PVector(spp.x,spp.y);
+            PVector spp2 = new PVector(position.x,position.y);
             spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),part));
+            particles.add(new BuffParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),part));
         }
     }
 

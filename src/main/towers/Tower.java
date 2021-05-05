@@ -68,25 +68,11 @@ public abstract class Tower {
         updateTowerArray();
     }
 
-    public void main() {
-        value = (int)(((float)hp / (float)maxHp) * price);
-        if (hp <= 0) die(false);
-    }
+    public abstract void main();
 
-    public void displayBase() {
-        if (hit) { //change to red if under attack
-            tintColor = 0;
-            hit = false;
-        }
-        p.tint(0,60);
-        p.image(sprite,tile.position.x-size.x,tile.position.y-size.y);
-        p.tint(255,tintColor,tintColor);
-        p.image(sprite,tile.position.x-size.x+2,tile.position.y-size.y+2);
-        p.tint(255);
-        if (tintColor < 255 && !paused) tintColor += 20;
-    }
+    public abstract void displayBase();
 
-    public void controlAnimation() {}
+    public abstract void controlAnimation();
 
     public void displayHpBar() {
         Color barColor = new Color(0, 255, 0);
@@ -118,13 +104,7 @@ public abstract class Tower {
         }
     }
 
-    public void upgrade(int id) {
-        nextLevelB++;
-        if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
-        playSoundRandomSpeed(p, placeSound, 1);
-        spawnParticles();
-    }
+    public abstract void upgrade(int id);
 
     public void die(boolean sold) {
         playSoundRandomSpeed(p, breakSound, 1);
@@ -159,7 +139,7 @@ public abstract class Tower {
         if (hp > maxHp) hp = maxHp;
     }
 
-    public abstract void updateSprite();
+    public void updateSprite() {}
 
     protected void spawnParticles() {
         PVector center = new PVector(tile.position.x-size.x/2, tile.position.y-size.y/2);

@@ -60,6 +60,9 @@ public class Railgun extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {}
+
     protected void fire() {
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
@@ -79,6 +82,7 @@ public class Railgun extends Turret {
         targetEnemy.damageWithoutBuff(damage,this, "normal", PVector.fromAngle(vaporAngle - HALF_PI), true);
     }
 
+    @Override
     public void displayMain() {
         //shadow
         p.pushMatrix();
@@ -116,6 +120,9 @@ public class Railgun extends Turret {
         p.tint(255);
     }
 
+    @Override
+    protected void upgradeSpecial(int id) {}
+
     private void setUpgrades(){
         //price
         upgradePrices[0] = 0;
@@ -148,8 +155,4 @@ public class Railgun extends Turret {
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
     }
-
-    protected void upgradeSpecial() {}
-
-    public void updateSprite() {}
 }

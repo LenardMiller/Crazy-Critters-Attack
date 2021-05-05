@@ -56,6 +56,7 @@ public class SeismicTower extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     protected void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null && state != 1 && shockwaveWidth < 360) aim(targetEnemy);
@@ -66,6 +67,7 @@ public class SeismicTower extends Turret {
         if (state == 1 && frame == fireFrames.length - 1) fire(barrelLength, fireParticle);
     }
 
+    @Override
     protected void getTargetEnemy() {
         //0: close
         //1: far
@@ -105,6 +107,7 @@ public class SeismicTower extends Turret {
         targetEnemy = e;
     }
 
+    @Override
     public void displayMain() {
         int hammerCount = 6;
         //shadow
@@ -138,7 +141,8 @@ public class SeismicTower extends Turret {
         p.tint(255);
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
         float a = angle;
         if (shockwaveWidth >= 360) {
             a = 0;
@@ -227,6 +231,7 @@ public class SeismicTower extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[22];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -274,6 +279,4 @@ public class SeismicTower extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }

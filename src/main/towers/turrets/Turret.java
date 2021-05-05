@@ -181,7 +181,7 @@ public abstract class Turret extends Tower {
         float particleCount = p.random(1,5);
         angleVector.setMag(barrelLength); //barrel length
         projectileSpawn.add(angleVector);
-        spawnProjectile(projectileSpawn, displayAngle);
+        spawnProjectiles(projectileSpawn, displayAngle);
         if (particleType != null && !particleType.equals("null")) {
             for (int i = 0; i < particleCount; i++) {
                 PVector spa2 = PVector.fromAngle(displayAngle - HALF_PI + radians(p.random(-20, 20)));
@@ -193,7 +193,7 @@ public abstract class Turret extends Tower {
         }
     }
 
-    protected void spawnProjectile(PVector position, float angle) {}
+    protected abstract void spawnProjectiles(PVector position, float angle);
 
     protected void loadSprites() {
         sBase = staticSprites.get(name + "BaseTR");
@@ -204,6 +204,7 @@ public abstract class Turret extends Tower {
         else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
     }
 
+    @Override
     public void main() {
         if (hp <= 0) {
             die(false);
@@ -216,6 +217,7 @@ public abstract class Turret extends Tower {
         }
     }
 
+    @Override
     public void die(boolean sold) {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
@@ -239,6 +241,7 @@ public abstract class Turret extends Tower {
         updateNodes();
     }
 
+    @Override
     public void controlAnimation() {
         if (!paused) {
             if (hp < maxHp && p.random(0, 30) < 1) {
@@ -322,12 +325,14 @@ public abstract class Turret extends Tower {
         p.tint(255);
     }
 
+    @Override
     public void displayBase() {
         p.tint(255, tintColor, tintColor);
         p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.tint(255, 255, 255);
     }
 
+    @Override
     public void upgrade(int id) {
         int price = 0;
         if (id == 0) {
@@ -359,6 +364,5 @@ public abstract class Turret extends Tower {
         while (delay <= fireFrames.length * betweenFireFrames + idleFrames.length) betweenFireFrames--;
     }
 
-    protected void upgradeSpecial(int id) {
-    }
+    protected abstract void upgradeSpecial(int id);
 }  

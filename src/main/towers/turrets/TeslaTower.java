@@ -54,6 +54,7 @@ public class TeslaTower extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     protected void checkTarget() {
         getTargetEnemy();
         if (state == 0 && targetEnemy != null) { //if done animating
@@ -62,6 +63,9 @@ public class TeslaTower extends Turret {
             fire();
         }
     }
+
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {}
 
     protected void fire() {
         if (lightning) {
@@ -91,6 +95,7 @@ public class TeslaTower extends Turret {
         }
     }
 
+    @Override
     public void displayMain() {
         //shadow
         p.pushMatrix();
@@ -163,6 +168,7 @@ public class TeslaTower extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[34];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -202,6 +208,4 @@ public class TeslaTower extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }
