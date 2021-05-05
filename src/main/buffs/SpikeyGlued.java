@@ -2,7 +2,7 @@ package main.buffs;
 
 import main.enemies.Enemy;
 import main.particles.BuffParticle;
-import main.projectiles.GlueSpike;
+import main.projectiles.fragments.GlueSpike;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;

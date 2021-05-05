@@ -2,9 +2,9 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.misc.Tile;
-import main.projectiles.Glue;
-import main.projectiles.SpikeyGlue;
-import main.projectiles.SplatterGlue;
+import main.projectiles.glue.Glue;
+import main.projectiles.glue.SpikeyGlue;
+import main.projectiles.glue.SplatterGlue;
 import processing.core.PApplet;
 import processing.core.PVector;
 

@@ -2,6 +2,7 @@ package main.projectiles;
 
 import main.particles.ExplosionDebris;
 import main.particles.MediumExplosion;
+import main.projectiles.fragments.Frag;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;

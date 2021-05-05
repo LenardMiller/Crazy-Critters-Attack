@@ -1,9 +1,8 @@
-package main.projectiles;
+package main.projectiles.glue;
 
 import main.enemies.Enemy;
-import main.particles.ExplosionDebris;
-import main.particles.LargeExplosion;
 import main.particles.Ouch;
+import main.projectiles.Projectile;
 import main.towers.turrets.Gluer;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -12,9 +11,9 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.playSoundRandomSpeed;
 
-public class SplatterGlue extends Projectile {
+public class Glue extends Projectile {
 
-    public SplatterGlue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, float effectDuration) {
+    public Glue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, float effectDuration) {
         super(p, x, y, angle, turret);
         this.effectLevel = effectLevel;
         this.effectDuration = effectDuration;
@@ -29,8 +28,6 @@ public class SplatterGlue extends Projectile {
         sprite = staticSprites.get("gluePj");
         hasTrail = true;
         trail = "glue";
-        type = "glue";
-        effectRadius = 60;
         hitSound = sounds.get("squishImpact");
         buff = "glued";
     }
@@ -38,11 +35,6 @@ public class SplatterGlue extends Projectile {
     @Override
     public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"gluePuff"));
-        int num = (int) (p.random(16, 42));
-        for (int j = num; j >= 0; j--) {
-            particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "glue", p.random(100,200)));
-        }
-        particles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "glue"));
         projectiles.remove(this);
     }
 
@@ -67,7 +59,6 @@ public class SplatterGlue extends Projectile {
                     if (nearEnemy(splashEnemy)) {
                         applyVelocity = fromExplosionCenter(splashEnemy);
                         if (intersectingEnemy(splashEnemy)) applyVelocity = new PVector(0, 0);
-                        gluer.gluedTotal++;
                         splashEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret,
                           causeEnemyParticles, type, applyVelocity, splashEnemyId);
                     }

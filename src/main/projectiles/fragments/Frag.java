@@ -1,6 +1,7 @@
-package main.projectiles;
+package main.projectiles.fragments;
 
 import main.particles.Ouch;
+import main.projectiles.Projectile;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -12,8 +13,8 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class Frag extends Projectile {
 
-    private final int LIFESPAN;
-    private int lifeTimer;
+    protected int lifespan;
+    protected int lifeTimer;
 
     public Frag(PApplet p, float x, float y, float angle, Turret turret, int damage) {
         super(p, x, y, angle, turret);
@@ -27,7 +28,7 @@ public class Frag extends Projectile {
         angularVelocity = down60ToFramerate(p.random(-15,15));
         sprite = staticSprites.get("darkMetalPt");
         hitSound = sounds.get("smallImpact");
-        LIFESPAN = down60ToFramerate(15);
+        lifespan = down60ToFramerate(15);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class Frag extends Projectile {
         }
         displayPassB();
         collideEn();
-        if (lifeTimer > LIFESPAN) dead = true;
+        if (lifeTimer > lifespan) dead = true;
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||
                 position.y + size.y < -100 || position.x + size.x < -100 || dead) {
             die();
