@@ -1,6 +1,9 @@
 package main.levelStructure;
 
 import main.enemies.*;
+import main.enemies.burrowingEnemies.BigWorm;
+import main.enemies.burrowingEnemies.LittleWorm;
+import main.enemies.burrowingEnemies.MidWorm;
 import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
 import main.towers.Tower;
