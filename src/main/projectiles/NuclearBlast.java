@@ -28,6 +28,7 @@ public class NuclearBlast extends Projectile {
         trail = "nuclear";
     }
 
+    @Override
     public void die() {
         for (int i = 0; i < p.random(10,15); i++) {
             particles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "nuclear", p.random(500, 1000)));

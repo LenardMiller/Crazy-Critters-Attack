@@ -85,9 +85,7 @@ public abstract class Projectile {
         if (dead) die();
     }
 
-    public void die() {
-        projectiles.remove(this);
-    }
+    public abstract void die();
 
     protected void trail() { //leaves a trail of particles
         if (hasTrail) {

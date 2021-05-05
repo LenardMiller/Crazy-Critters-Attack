@@ -31,11 +31,13 @@ public class SpikeyGlue extends Projectile {
         buff = "spikeyGlued";
     }
 
+    @Override
     public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"gluePuff"));
         projectiles.remove(this);
     }
 
+    @Override
     public void collideEn() {
         for (int enemyId = 0; enemyId < enemies.size(); enemyId++) {
             Enemy enemy = enemies.get(enemyId);

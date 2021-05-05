@@ -30,6 +30,7 @@ public class GlueSpike extends Projectile {
         LIFESPAN = down60ToFramerate(15);
     }
 
+    @Override
     public void main(ArrayList<Projectile> projectiles, int i) {
         if (!paused) {
             lifeTimer++;
@@ -45,6 +46,7 @@ public class GlueSpike extends Projectile {
         }
     }
 
+    @Override
     public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"gluePuff"));
         projectiles.remove(this);

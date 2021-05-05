@@ -25,6 +25,7 @@ public class Rock extends Projectile {
         buff = "bleeding";
     }
 
+    @Override
     public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greyPuff"));
         projectiles.remove(this);

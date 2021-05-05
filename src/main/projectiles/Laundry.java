@@ -35,6 +35,7 @@ public class Laundry extends Projectile {
         hitSound = sounds.get("squishImpact");
     }
 
+    @Override
     public void die() {
         particles.add(new Ouch(p, position.x, position.y, p.random(0, 360), "poisonPuff"));
         int num = (int) (p.random(16, 42));

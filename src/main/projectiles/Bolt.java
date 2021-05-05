@@ -23,6 +23,7 @@ public class Bolt extends Projectile {
         hitSound = sounds.get("whooshImpact");
     }
 
+    @Override
     public void die() {
         particles.add(new BoltBreak(p,position.x,position.y,angleTwo));
         projectiles.remove(this);

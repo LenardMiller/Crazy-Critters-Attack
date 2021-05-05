@@ -82,12 +82,14 @@ public class MagicMissile extends Projectile {
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 
+    @Override
     public void move() {
         if (enemies.size() > 0) checkTarget();
         velocity.setMag(speed/FRAMERATE);
         position.add(velocity);
     }
 
+    @Override
     public void die() {
         particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greenPuff"));
         projectiles.remove(this);

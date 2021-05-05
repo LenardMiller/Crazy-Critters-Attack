@@ -27,6 +27,7 @@ public class Dynamite extends Projectile {
         this.effectRadius = effectRadius;
     }
 
+    @Override
     public void die() {
         int num = (int) (p.random(16, 42));
         for (int j = num; j >= 0; j--) {

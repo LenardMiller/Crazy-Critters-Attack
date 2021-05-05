@@ -26,6 +26,7 @@ public class DarkBlast extends Projectile {
         trail = "dark";
     }
 
+    @Override
     public void die() {
         int numRings = effectRadius/5;
         for (int i = 0; i < numRings; i++) {

@@ -51,6 +51,7 @@ public class BlueFlame extends Projectile {
         else hitSound = null;
     }
 
+    @Override
     public void die() {
         projectiles.remove(this);
     }
@@ -58,8 +59,10 @@ public class BlueFlame extends Projectile {
     /**
      * no shadow
      */
+    @Override
     public void displayPassA() {}
 
+    @Override
     public void displayPassB() {
         if (!paused) {
             delay++;

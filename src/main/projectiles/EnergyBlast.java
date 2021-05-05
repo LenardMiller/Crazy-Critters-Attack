@@ -31,6 +31,7 @@ public class EnergyBlast extends Projectile {
         this.BIG_EXPLOSION = bigExplosion;
     }
 
+    @Override
     public void die() {
         if (!BIG_EXPLOSION) {
             int num = (int) (p.random(10, 16));

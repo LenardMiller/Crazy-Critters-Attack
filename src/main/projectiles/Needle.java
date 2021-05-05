@@ -26,6 +26,7 @@ public class Needle extends Projectile {
         buff = "decay";
     }
 
+    @Override
     public void main(ArrayList<Projectile> projectiles, int i) {
         trail();
         displayPassB();
@@ -37,6 +38,7 @@ public class Needle extends Projectile {
         if (dead) die();
     }
 
+    @Override
     public void die() {
         particles.add(new Ouch(p,position.x,position.y,angleTwo,"greyPuff"));
         projectiles.remove(this);
