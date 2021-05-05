@@ -6,7 +6,7 @@ import processing.core.PVector;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
-public class BigBug extends Enemy{
+public class BigBug extends Enemy {
 
     public BigBug(PApplet p, float x, float y) {
         super(p,x,y);

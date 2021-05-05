@@ -8,7 +8,7 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class SmallGolem extends Enemy{
 
-    public SmallGolem(PApplet p, float x, float y){
+    public SmallGolem(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(25,25);
         pfSize = 1; //1

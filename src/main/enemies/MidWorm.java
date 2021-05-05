@@ -36,6 +36,7 @@ public class MidWorm extends Enemy {
         loadStuff();
     }
 
+    @Override
     protected void move() {
         if (stealthMode && (int)p.random(0,12) == 0)
             particles.add(new Debris(p, p.random(position.x - radius, position.x + radius), p.random(position.y - radius, position.y + radius), p.random(0, 360), levels[currentLevel].groundType));

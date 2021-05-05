@@ -6,7 +6,7 @@ import processing.core.PVector;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
-public class Emperor extends Enemy{
+public class Emperor extends Enemy {
 
     public Emperor(PApplet p, float x, float y) {
         super(p,x,y);
