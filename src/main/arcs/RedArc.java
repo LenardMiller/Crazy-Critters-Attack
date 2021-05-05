@@ -19,6 +19,7 @@ public class RedArc extends Arc {
         weight = 3;
     }
 
+    @Override
     protected void damageEnemy(Enemy enemy, int damage, Turret turret) {
         enemy.damageWithoutBuff(damage, turret, particleType, new PVector(0,0), false);
     }
