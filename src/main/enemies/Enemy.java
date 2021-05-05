@@ -2,6 +2,8 @@ package main.enemies;
 
 import main.Main;
 import main.buffs.*;
+import main.buffs.glued.Glued;
+import main.buffs.glued.SpikeyGlued;
 import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;

@@ -1,4 +1,4 @@
-package main.buffs;
+package main.buffs.glued;
 
 import main.enemies.Enemy;
 import main.particles.BuffParticle;

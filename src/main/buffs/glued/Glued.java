@@ -1,5 +1,6 @@
-package main.buffs;
+package main.buffs.glued;
 
+import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.misc.CompressArray;
 import main.towers.turrets.Turret;
