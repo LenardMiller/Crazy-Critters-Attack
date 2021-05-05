@@ -55,9 +55,7 @@ public abstract class Buff {
         if (lifeTimer > lifeDuration) buffs.remove(i);
     }
 
-    public void effect() {
-        System.out.print(enId + " ");
-    }
+    public abstract void effect();
 
     /**
      * Particles around enemy.

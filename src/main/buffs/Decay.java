@@ -23,6 +23,7 @@ public class Decay extends Buff {
         this.turret = turret;
     }
 
+    @Override
     public void effect() {
         Enemy enemy = enemies.get(enId);
         enemy.barAlpha = 255;

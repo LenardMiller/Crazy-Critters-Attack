@@ -50,6 +50,7 @@ public class Glued extends Buff {
         }
     }
 
+    @Override
     public void effect() { //slowing enemy movement done every frame
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
@@ -58,6 +59,7 @@ public class Glued extends Buff {
         }
     }
 
+    @Override
     protected void end(int i){ //ends if at end of lifespan
         Enemy enemy = enemies.get(enId);
         float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;

@@ -18,11 +18,13 @@ public class Stunned extends Buff {
         this.enId = enId;
     }
 
+    @Override
     public void effect() { //slowing enemy movement done every frame
         if (enemies.get(enId) != null) enemies.get(enId).immobilized = true;
         else buffs.remove(this);
     }
 
+    @Override
     protected void end(int i){ //ends if at end of lifespan
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) {

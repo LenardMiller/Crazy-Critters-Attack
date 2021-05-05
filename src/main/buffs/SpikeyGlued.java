@@ -37,6 +37,7 @@ public class SpikeyGlued extends Glued {
     /**
      * particles around enemy
      */
+    @Override
     protected void display() {
         if (particle != null) {
             Enemy enemy = enemies.get(enId);
@@ -53,6 +54,7 @@ public class SpikeyGlued extends Glued {
     /**
      * shoots a bunch of glue spikes
      */
+    @Override
     public void dieEffect() {
         int numSpikes = 24;
         int spikeDamage = 100;
