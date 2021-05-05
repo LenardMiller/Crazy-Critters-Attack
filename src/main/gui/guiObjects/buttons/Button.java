@@ -44,10 +44,9 @@ public abstract class Button extends GuiObject {
         } else sprite = spriteIdle;
     }
 
-    public void action(){ //prints "Boink!"
-        System.out.println("Boink!");
-    }
+    public abstract void action();
 
+    @Override
     public void main(){
         if (active){
             hover();

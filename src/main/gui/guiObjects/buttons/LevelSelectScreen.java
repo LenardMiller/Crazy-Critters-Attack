@@ -20,6 +20,7 @@ public class LevelSelectScreen extends Button {
         sprite = spriteIdle;
     }
 
+    @Override
     public void main(){
         hover();
         display();
@@ -29,6 +30,7 @@ public class LevelSelectScreen extends Button {
      * If mouse over, push in.
      * Works if paused or dead.
      */
+    @Override
     public void hover(){
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
                 p.mouseY > position.y-size.y/2) {
@@ -44,6 +46,7 @@ public class LevelSelectScreen extends Button {
         } else sprite = spriteIdle;
     }
 
+    @Override
     public void action() {
         Main.resetGame(p);
         paused = false;

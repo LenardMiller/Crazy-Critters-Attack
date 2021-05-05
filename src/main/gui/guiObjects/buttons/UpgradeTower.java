@@ -28,6 +28,7 @@ public class UpgradeTower extends Button {
         this.id = id;
     }
 
+    @Override
     public void main() {
         if (active) {
             if (towers.size() > 0) {
@@ -59,6 +60,7 @@ public class UpgradeTower extends Button {
         }
     }
 
+    @Override
     public void action() {
         Turret turret = selection.turret;
         turret.upgrade(id);

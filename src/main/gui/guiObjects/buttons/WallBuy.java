@@ -22,6 +22,7 @@ public class WallBuy extends Button {
         depressed = false;
     }
 
+    @Override
     public void main(){
         timer++;
         if (active){
@@ -33,6 +34,7 @@ public class WallBuy extends Button {
     /**
      * If hovered or depressed.
      */
+    @Override
     public void hover() {
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
                 p.mouseY > position.y-size.y/2 && alive && active && !paused) {
@@ -49,6 +51,7 @@ public class WallBuy extends Button {
         if (!hand.displayInfo.equals("null")) sprite = spritePressed;
     }
 
+    @Override
     public void action() {
         depressed = !depressed;
         selection.name = "null";

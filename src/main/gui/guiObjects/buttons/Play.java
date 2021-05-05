@@ -25,6 +25,7 @@ public class Play extends Button {
         sprite = spriteIdle;
     }
 
+    @Override
     public void main() {
         if (active && selection.name.equals("null") && hand.held.equals("null")) {
             if (!playingLevel) hover();
@@ -41,6 +42,7 @@ public class Play extends Button {
         p.text("Play",1000,y+30);
     }
 
+    @Override
     public void action() {
         if (p.frameCount > timer) {
             playingLevel = true;

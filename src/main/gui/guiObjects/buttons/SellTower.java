@@ -18,13 +18,15 @@ public class SellTower extends Button {
         sprite = spriteIdle;
     }
 
-    public void main(){
-        if (active){
+    @Override
+    public void main() {
+        if (active) {
             hover();
             display();
         }
     }
 
+    @Override
     public void action() { //kills tower and gives value
         active = false;
         selection.sell();

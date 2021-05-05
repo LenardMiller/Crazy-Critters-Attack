@@ -18,6 +18,7 @@ public class TargetPriority extends Button {
         sprite = spriteIdle;
     }
 
+    @Override
     public void main(){
         if (active){
             hover();
@@ -25,6 +26,7 @@ public class TargetPriority extends Button {
         }
     }
 
+    @Override
     public void action(){
         //roll over
         if (selection.turret.priority < 2) selection.turret.priority += 1;

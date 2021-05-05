@@ -36,6 +36,7 @@ public class TileSelect extends Button {
         sprite = spriteIdle;
     }
 
+    @Override
     public void main() {
         if (active){
             hover();
@@ -43,6 +44,7 @@ public class TileSelect extends Button {
         }
     }
 
+    @Override
     public void display() {
         p.image(TILE_SPRITE,position.x-size.x/2,position.y-size.y/2);
         p.image(sprite,position.x-size.x/2,position.y-size.y/2);
@@ -51,6 +53,7 @@ public class TileSelect extends Button {
     /**
      * If hovered or depressed.
      */
+    @Override
     public void hover() {
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
                 p.mouseY > position.y-size.y/2 && alive && active && !paused) {
@@ -60,6 +63,7 @@ public class TileSelect extends Button {
         else sprite = spriteIdle;
     }
 
+    @Override
     public void action() {
         if (hand.held.equals(TYPE)) hand.setHeld("null");
         hand.setHeld(TYPE + "_TL");

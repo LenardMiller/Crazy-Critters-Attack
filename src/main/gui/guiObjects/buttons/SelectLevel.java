@@ -23,6 +23,7 @@ public class SelectLevel extends Button {
         this.LEVEL = level;
     }
 
+    @Override
     public void main(){
         hover();
         display();
@@ -32,6 +33,7 @@ public class SelectLevel extends Button {
      * If mouse over, push in.
      * Works if paused or dead.
      */
+    @Override
     public void hover(){
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
                 p.mouseY > position.y-size.y/2 && LevelSelectGui.delay < 0) {
@@ -47,6 +49,7 @@ public class SelectLevel extends Button {
         } else sprite = spriteIdle;
     }
 
+    @Override
     public void action() {
         currentLevel = LEVEL;
         Main.resetGame(p);

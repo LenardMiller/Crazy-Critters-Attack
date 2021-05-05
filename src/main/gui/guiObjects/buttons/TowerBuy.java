@@ -71,6 +71,7 @@ public class TowerBuy extends Button {
         }
     }
 
+    @Override
     public void main() {
         if (active) {
             if (!TOWER_TYPE.equals("null")) hover();
@@ -91,6 +92,7 @@ public class TowerBuy extends Button {
         return  ((matchPosition && !paused) || depressed) && alive;
     }
 
+    @Override
     public void hover() {
         if (hovered()) {
             if (depressed) sprite = spritePressed;
@@ -179,6 +181,7 @@ public class TowerBuy extends Button {
         else p.text("$" + price, x, 271 + offset);
     }
 
+    @Override
     public void action() {
         if (money < price) depressed = false;
         else depressed = !depressed;
