@@ -8,6 +8,7 @@ import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class BoltBreak extends Particle {
+
     public BoltBreak(PApplet p, float x, float y, float angle) {
         super(p, x, y, angle);
         position = new PVector(x, y);

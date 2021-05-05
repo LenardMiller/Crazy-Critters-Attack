@@ -28,7 +28,7 @@ public class Vortex extends Particle {
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 
-
+    @Override
     protected void move() {
         angle += angularVelocity;
         displayAngle = angle;

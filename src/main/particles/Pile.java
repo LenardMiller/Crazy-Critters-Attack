@@ -24,6 +24,7 @@ public class Pile extends Particle {
         angularVelocity = 0;
     }
 
+    @Override
     protected void display() {
         if (lifespan <= 0) dead = true;
         p.tint(255,255*((float)lifespan / secondsToFrames(8)));

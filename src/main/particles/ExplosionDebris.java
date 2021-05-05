@@ -7,7 +7,8 @@ import static main.Main.animatedSprites;
 import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
-public class ExplosionDebris extends Particle{
+public class ExplosionDebris extends Particle {
+
     public ExplosionDebris(PApplet p, float x, float y, float angle, String type, float maxSpeed) {
         super(p, x, y, angle);
         position = new PVector(x, y);
