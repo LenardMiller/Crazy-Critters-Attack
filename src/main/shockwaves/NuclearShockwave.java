@@ -15,6 +15,7 @@ public class NuclearShockwave extends Shockwave {
         damageType = "burning";
     }
 
+    @Override
     protected void spawnParticles() {
         float a = randomAngle();
         PVector pos = randomPosition(a);

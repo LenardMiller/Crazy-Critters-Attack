@@ -24,6 +24,7 @@ public class SeismicShockwave extends Shockwave {
         SEISMIC_SENSE = seismicSense;
     }
 
+    @Override
     protected void spawnParticles() {
         float a = randomAngle();
         PVector pos = randomPosition(a);
@@ -43,6 +44,7 @@ public class SeismicShockwave extends Shockwave {
         }
     }
 
+    @Override
     protected void damageEnemies() {
         for (int i = 0; i < UNTOUCHED_ENEMIES.size(); i++) {
             Enemy enemy = UNTOUCHED_ENEMIES.get(i);

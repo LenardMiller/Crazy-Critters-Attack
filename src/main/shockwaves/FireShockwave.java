@@ -20,6 +20,7 @@ public class FireShockwave extends Shockwave {
         this.effectLevel = effectLevel;
     }
 
+    @Override
     protected void spawnParticles() {
         float a;
         PVector pos;
