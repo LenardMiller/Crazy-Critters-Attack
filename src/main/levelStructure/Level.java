@@ -79,6 +79,7 @@ public class Level {
                 waves[currentWave-1].display(212, currentWave);
             }
         }
+        inGameGui.playButton.display((int)playY);
 //        P.tint(0,60);
 //        P.image(staticSprites.get("currentLineIc"),891,212+125-1);
 //        P.tint(255);
@@ -91,6 +92,5 @@ public class Level {
         P.line(BOARD_WIDTH - 7, 336, BOARD_WIDTH + 200, 336);
         P.strokeWeight(1);
         P.noStroke();
-        inGameGui.playButton.display((int)playY);
     }
 }
