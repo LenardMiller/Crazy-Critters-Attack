@@ -211,8 +211,8 @@ public abstract class Turret extends Tower {
             tile.tower = null;
         }
         if (enemies.size() > 0 && alive && !paused) checkTarget();
-        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y
-                && p.mouseY > tile.position.y - size.y && alive && !paused) {
+        if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
+                && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
     }
