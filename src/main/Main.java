@@ -265,8 +265,7 @@ public class Main extends PApplet {
         }
         background(50);
         tint(255);
-        if (fullscreen) matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
-        else matrixMousePosition = new PVector(mouseX, mouseY);
+        matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
