@@ -118,37 +118,37 @@ public class KeyBinds {
         boolean needle = keysPressed.getPressedPulse('u') && alive;
         boolean flame = keysPressed.getPressed('i') && alive;
         //enemies
-        boolean en1 = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en2 = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en3 = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en4 = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en5 = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en6 = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en7 = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en8 = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en9 = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en1b = keysPressed.getPressedPulse('!') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en1 = keysPressed.getPressedPulse('1') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en2 = keysPressed.getPressedPulse('2') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en3 = keysPressed.getPressedPulse('3') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en4 = keysPressed.getPressedPulse('4') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en5 = keysPressed.getPressedPulse('5') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en6 = keysPressed.getPressedPulse('6') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en7 = keysPressed.getPressedPulse('7') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en8 = keysPressed.getPressedPulse('8') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en9 = keysPressed.getPressedPulse('9') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en1b = keysPressed.getPressedPulse('!') && alive && matrixMousePosition.x < BOARD_WIDTH;
         //projectiles
-        if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 50000));
-        if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, null, 20, 2));
-        if (miscProjectile) projectiles.add(new MiscProjectile(p, p.mouseX, p.mouseY, 0, null, round(p.random(0, 5)), 6));
-        if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 20, false));
-        if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 30, true));
-        if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
-        if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
-        if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,150));
-        if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5, false));
+        if (pebble) projectiles.add(new Pebble(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 50000));
+        if (bolt) projectiles.add(new Bolt(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 2));
+        if (miscProjectile) projectiles.add(new MiscProjectile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, round(p.random(0, 5)), 6));
+        if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 20, false));
+        if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 30, true));
+        if (magicMissle) projectiles.add(new MagicMissile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 0, new PVector(matrixMousePosition.x,matrixMousePosition.y)));
+        if (arc) arcs.add(new Arc(p, matrixMousePosition.x, matrixMousePosition.y, null, 35, 5, 500, 0));
+        if (needle) projectiles.add(new Needle(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1,150));
+        if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new SnowSnake(p, p.mouseX, p.mouseY));
-        if (en2) enemies.add(new Wolf(p, p.mouseX, p.mouseY));
-        if (en3) enemies.add(new AlbinoButterfly(p, p.mouseX, p.mouseY));
-        if (en4) enemies.add(new Bat(p, p.mouseX, p.mouseY));
-        if (en5) enemies.add(new GiantBat(p, p.mouseX, p.mouseY));
-        if (en6) enemies.add(new SmallGolem(p, p.mouseX, p.mouseY));
-        if (en7) enemies.add(new Golem(p, p.mouseX, p.mouseY));
-        if (en8) enemies.add(new GiantGolem(p, p.mouseX, p.mouseY));
-        if (en9) enemies.add(new Wtf(p, p.mouseX, p.mouseY));
-        if (en1b) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
+        if (en1) enemies.add(new SnowSnake(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en2) enemies.add(new Wolf(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en3) enemies.add(new AlbinoButterfly(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en4) enemies.add(new Bat(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en5) enemies.add(new GiantBat(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en6) enemies.add(new SmallGolem(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en7) enemies.add(new Golem(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en8) enemies.add(new GiantGolem(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en9) enemies.add(new Wtf(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en1b) enemies.add(new Dummy(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
