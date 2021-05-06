@@ -343,6 +343,7 @@ public class Main extends PApplet {
         popMatrix();
         //black bars
         fill(0);
+        noStroke();
         rect(0, 0, matrixOffset, height);
         rect(width - matrixOffset, 0, matrixOffset, height);
         //pause
