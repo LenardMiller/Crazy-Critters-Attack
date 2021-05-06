@@ -31,14 +31,14 @@ public class PauseGui {
     public void display() {
         //big text
         PVector position = new PVector(P.width/2f, 300);
-        if (!alive) shadowedText(P, "Game Over", position, new Color(255, 0, 0),
-                new Color(50, 0, 0), 48, CENTER);
-        else if (won) shadowedText(P, "You Win!", position, new Color(255, 255, 0),
-                new Color(125, 50, 0), 48, CENTER);
-        else shadowedText(P, "Paused", position, new Color(255, 255, 255),
-                    new Color(50, 50, 50), 48, CENTER);
+        if (!alive) shadowedText(P, "Game Over", position, new Color(255, 0, 0, 254),
+                new Color(50, 0, 0, 254), 48, CENTER);
+        else if (won) shadowedText(P, "You Win!", position, new Color(255, 255, 0, 254),
+                new Color(125, 50, 0, 254), 48, CENTER);
+        else shadowedText(P, "Paused", position, new Color(255, 255, 255, 254),
+                    new Color(50, 50, 50, 254), 48, CENTER);
         //buttons
-        P.fill(200);
+        P.fill(200, 254);
         P.textFont(mediumFont);
         int offsetY = 7;
         if (alive) {

@@ -162,11 +162,11 @@ public class Main extends PApplet {
         sound = new Sound(this);
         loadSettings();
         //fonts
-        veryLargeFont = createFont("STHeitiSC-Light", 48);
-        largeFont = createFont("STHeitiSC-Light", 24);
-        mediumLargeFont = createFont("STHeitiSC-Light", 21);
-        mediumFont = createFont("STHeitiSC-Light", 18);
-        smallFont = createFont("STHeitiSC-Light", 12);
+        veryLargeFont = createFont("STHeitiSC-Light", 48, true);
+        largeFont = createFont("STHeitiSC-Light", 24, true);
+        mediumLargeFont = createFont("STHeitiSC-Light", 21, true);
+        mediumFont = createFont("STHeitiSC-Light", 18, true);
+        smallFont = createFont("STHeitiSC-Light", 12, true);
         //loads sprites
         loadStaticSprites(this);
         loadAnimatedSprites(this);
