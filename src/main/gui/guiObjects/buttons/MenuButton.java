@@ -50,6 +50,9 @@ public class MenuButton extends Button {
         pressed = true;
     }
 
+    /**
+     * @return whether the mouse was recently pressed, resets pressed
+     */
     public boolean isPressed() {
         boolean wasPressed = pressed;
         pressed = false;
