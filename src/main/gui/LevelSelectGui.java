@@ -46,6 +46,7 @@ public class LevelSelectGui {
 
     private void checkButtonsPressed() {
         if (settingsMenu.isPressed()) {
+            SettingsGui.delay = 1;
             if (settings) closeSettingsMenu();
             else settings = true;
         } if (exitGame.isPressed()) {

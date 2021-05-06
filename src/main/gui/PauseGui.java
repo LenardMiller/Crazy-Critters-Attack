@@ -87,6 +87,7 @@ public class PauseGui {
             LevelSelectGui.delay = 1;
             screen = 1;
         } if (settingsMenuScreen.isPressed()) {
+            SettingsGui.delay = 1;
             if (settings) closeSettingsMenu();
             else settings = true;
         } if (exitGame.isPressed()) {

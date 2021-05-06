@@ -1,5 +1,6 @@
 package main.gui;
 
+import main.gui.guiObjects.MenuCheckbox;
 import main.gui.guiObjects.Slider;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
@@ -14,11 +15,16 @@ import static processing.core.PConstants.CENTER;
 
 public class SettingsGui {
 
+    private static final int buffer = 150;
+
     private final PApplet P;
 
     private MenuButton returnButton;
     private Slider volumeSlider;
+    private MenuCheckbox fullscreenCheck;
     private MenuButton resetSettings;
+
+    public static int delay;
 
     public SettingsGui(PApplet p) {
         P = p;
@@ -26,19 +32,24 @@ public class SettingsGui {
     }
 
     private void build() {
-        returnButton = new MenuButton(P, P.width/2f, (P.height/2f) + 175);
-        volumeSlider = new Slider(P, "Global Volume", new PVector(P.width / 2f, P.height / 2f),
-          globalVolume, 0.01f, 0.25f, 1);
-        resetSettings = new MenuButton(P, P.width/2f, (P.height/2f) + 125);
+        volumeSlider = new Slider(P, "Global Volume", new PVector(P.width / 2f, buffer + 100),
+          0.01f, 0.25f, 1);
+        fullscreenCheck = new MenuCheckbox(P, "Fullscreen*", new PVector((P.width / 2f - 100), buffer + 150));
+        resetSettings = new MenuButton(P, P.width/2f, P.height - buffer - 50);
+        returnButton = new MenuButton(P, P.width/2f, P.height - buffer);
     }
 
     public void main() {
-        display();
-        checkInputs();
+        if (delay < 0) {
+            display();
+            checkInputs();
+        }
+        delay--;
     }
 
     private void checkInputs() {
         globalVolume = volumeSlider.main(globalVolume);
+        fullscreen = fullscreenCheck.main(fullscreen);
         if (returnButton.isPressed()) {
             if (settings) closeSettingsMenu();
             else settings = true;
@@ -48,8 +59,8 @@ public class SettingsGui {
         }
     }
 
-    private void display() { //todo: keybinds page, todo: add fullscreen
-        PVector position = new PVector(P.width / 2f, 300);
+    private void display() { //todo: keybinds page
+        PVector position = new PVector(P.width / 2f, buffer);
         shadowedText(P, "Settings", position, new Color(255, 255, 255, 254),
           new Color(50, 50, 50, 254), 48, CENTER);
 

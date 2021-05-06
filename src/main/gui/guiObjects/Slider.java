@@ -38,11 +38,10 @@ public class Slider {
      * @param p the PApplet
      * @param name text to display above
      * @param position where is it?
-     * @param start what the value starts as and where the middle is
      * @param min minimum output
      * @param max maximum output
      */
-    public Slider(PApplet p, String name, PVector position, float start, float min, float mid, float max) {
+    public Slider(PApplet p, String name, PVector position, float min, float mid, float max) {
         P = p;
         NAME = name;
         POSITION = position;
@@ -120,6 +119,7 @@ public class Slider {
     }
 
     private void displaySlider() {
+        P.noStroke();
         P.strokeWeight(5);
         P.rectMode(CENTER);
         P.fill(100, 200);
