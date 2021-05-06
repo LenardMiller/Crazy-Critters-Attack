@@ -68,7 +68,7 @@ public class PopupText {
         Color textColor = new Color(TEXT_COLOR.getRed(), TEXT_COLOR.getGreen(), TEXT_COLOR.getBlue(), a);
         if (alpha > HIGHLIGHT_COLOR.getAlpha()) a = HIGHLIGHT_COLOR.getAlpha();
         Color highlightColor = new Color(HIGHLIGHT_COLOR.getRed(), HIGHLIGHT_COLOR.getGreen(), HIGHLIGHT_COLOR.getBlue(), a);
-        highlightedText(P, TEXT, new PVector(POSITION.x, POSITION.y - (SIZE / 2f) - displacement), textColor, highlightColor, SIZE, CENTER);
+        highlightedText(P, TEXT, new PVector((int) POSITION.x, (int) (POSITION.y - (SIZE / 2f) - displacement)), textColor, highlightColor, SIZE, CENTER);
     }
 
     private void update() {
