@@ -341,6 +341,10 @@ public class Main extends PApplet {
         if (playingLevel) levels[currentLevel].main();
         //matrix
         popMatrix();
+        //black bars
+        fill(0);
+        rect(0, 0, matrixOffset, height);
+        rect(width - matrixOffset, 0, matrixOffset, height);
         //pause
         if (paused && !settings) pauseGui.display();
     }
