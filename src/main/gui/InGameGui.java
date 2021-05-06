@@ -104,7 +104,7 @@ public class InGameGui {
         p.textFont(largeFont);
         p.fill(MAIN_TEXT_COLOR.getRGB());
         p.textAlign(RIGHT);
-        p.text(nfc(money), p.width - x, 211-5);
+        p.text(nfc(money), BOARD_WIDTH + 200 - x, 211-5);
     }
 
     private void build() {

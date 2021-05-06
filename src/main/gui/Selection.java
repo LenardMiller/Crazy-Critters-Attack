@@ -388,9 +388,9 @@ public class Selection { //what tower is selected
             P.textFont(largeFont);
             P.text(turret.upgradeTitles[nextLevel], 1000, 585 + offsetC);
             P.textAlign(RIGHT);
-            if (canAfford) P.text("$" + nfc(turret.upgradePrices[nextLevel]), P.width - 20, 693 + offsetC);
+            if (canAfford) P.text("$" + nfc(turret.upgradePrices[nextLevel]), BOARD_WIDTH + 200 - 20, 693 + offsetC);
             else {
-                strikethroughText(P, "$" + nfc(turret.upgradePrices[nextLevel]), new PVector(P.width - 20, 693 + offsetC),
+                strikethroughText(P, "$" + nfc(turret.upgradePrices[nextLevel]), new PVector(BOARD_WIDTH + 200 - 20, 693 + offsetC),
                         fillColor, largeFont.getSize(), RIGHT);
             }
             P.textFont(mediumFont);

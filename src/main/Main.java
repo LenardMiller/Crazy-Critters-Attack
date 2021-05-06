@@ -148,6 +148,7 @@ public class Main extends PApplet {
      */
     public void settings() {
         size(GRID_WIDTH, BOARD_HEIGHT);
+        fullScreen();
     }
 
     /**

@@ -85,10 +85,10 @@ public class Level {
 //        P.image(staticSprites.get("currentLineIc"),891-1,212+125-1-1);
         P.strokeWeight(10);
         P.stroke(100, 0, 0);
-        P.line(P.width - 200, 336, P.width, 336);
+        P.line(BOARD_WIDTH, 336, BOARD_WIDTH + 200, 336);
         P.strokeWeight(4);
         P.stroke(255, 0, 0);
-        P.line(P.width - 207, 336, P.width, 336);
+        P.line(BOARD_WIDTH - 7, 336, BOARD_WIDTH + 200, 336);
         P.strokeWeight(1);
         P.noStroke();
         inGameGui.playButton.display((int)playY);
