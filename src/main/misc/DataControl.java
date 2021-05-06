@@ -76,6 +76,7 @@ public class DataControl extends ClassLoader {
     public static void saveSettings() throws IOException {
         JSONObject saveObject = new JSONObject();
         saveObject.setFloat("volume", globalVolume);
+        saveObject.setBoolean("fullscreen", fullscreen);
 
         String name = "settings";
         new File(filePath() + "/data/saves/" + name + ".json");
@@ -89,6 +90,7 @@ public class DataControl extends ClassLoader {
         JSONObject loadObject = loadJSONObject(loadFile);
 
         globalVolume = loadObject.getFloat("volume");
+        fullscreen = loadObject.getBoolean("fullscreen");
     }
 
     /**

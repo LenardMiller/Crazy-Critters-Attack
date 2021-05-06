@@ -35,6 +35,7 @@ public class Slider {
 
     /**
      * A nice little slider to control a value.
+     * todo: unfuck up
      * @param p the PApplet
      * @param name text to display above
      * @param position where is it?

@@ -88,6 +88,7 @@ public class Main extends PApplet {
     public static int screen = 1;
     public static int money = 100;
     public static float globalVolume = 0.25f;
+    public static boolean fullscreen;
     public static boolean alive = true;
     public static boolean won = false;
     public static boolean debug = false;
@@ -137,6 +138,7 @@ public class Main extends PApplet {
     public static float maxCost, minCost;
 
     public static void main(String[] args) {
+        loadSettings();
         PApplet.main("main.Main", args);
     }
 
@@ -147,8 +149,10 @@ public class Main extends PApplet {
      */
     public void settings() {
         size(GRID_WIDTH, BOARD_HEIGHT);
-        fullScreen();
-        noSmooth();
+        if (fullscreen) {
+            fullScreen();
+            noSmooth();
+        }
     }
 
     /**
@@ -160,7 +164,6 @@ public class Main extends PApplet {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
-        loadSettings();
         //fonts
         veryLargeFont = createFont("STHeitiSC-Light", 48, true);
         largeFont = createFont("STHeitiSC-Light", 24, true);

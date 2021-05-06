@@ -26,7 +26,7 @@ public class SettingsGui {
         build();
     }
 
-    public void display() { //todo: keybinds page
+    public void display() { //todo: keybinds page, todo: make buttons better, todo: add fullscreen
         PVector position = new PVector(P.width/2f, 300);
         shadowedText(P, "Settings", position, new Color(255, 255, 255, 254),
           new Color(50, 50, 50, 254), 48, CENTER);
