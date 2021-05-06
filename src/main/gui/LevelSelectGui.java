@@ -75,7 +75,8 @@ public class LevelSelectGui {
         P.textFont(mediumFont);
         int offsetY = 7;
         for (int i = 0; i < levelSelectButtons.length; i++) {
-            levelSelectButtons[i].main();
+            levelSelectButtons[i].display();
+            if (delay < 0) levelSelectButtons[i].hover();
             P.text("Level " + (i+1), levelSelectButtons[i].position.x, levelSelectButtons[i].position.y + offsetY);
         }
         settingsMenu.main();
