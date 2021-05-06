@@ -44,7 +44,7 @@ public class PopupText {
         TEXT = text;
 
         firstPhase = true;
-        alpha = 255;
+        alpha = 254;
         movementSpeed = 1;
     }
 
