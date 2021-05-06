@@ -324,11 +324,12 @@ public class Main extends PApplet {
             else fill(0, 0, 0, 50);
             rect(0, 0, width, height);
         }
-        if (paused && !settings) pauseGui.display();
         //levels
         if (playingLevel) levels[currentLevel].main();
 
         popMatrix();
+
+        if (paused && !settings) pauseGui.display();
     }
 
     /**
