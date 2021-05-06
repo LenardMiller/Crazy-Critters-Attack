@@ -169,7 +169,7 @@ public class Hand {
         else P.fill(230, 181, 181);
         P.rect(905, 247, 190, 119);
         P.textAlign(CENTER);
-        P.fill(0);
+        P.fill(0, 254);
         P.textFont(mediumLargeFont);
         P.text("Placing:", 1000, 241);
         P.textFont(largeFont);
@@ -189,15 +189,15 @@ public class Hand {
         if (wall == null) return;
         if (wall.nextLevelB > wall.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
         else {
-            P.fill(235);
+            P.fill(235, 254);
             P.noStroke();
             P.rect(900, 212, 200, 707);
             P.textAlign(CENTER);
             //tower info
-            P.fill(231, 232, 190);
+            P.fill(231, 232, 190, 254);
             P.rect(905, 247, 190, 119);
             P.textFont(mediumLargeFont);
-            P.fill(0);
+            P.fill(0, 254);
             P.text("Selected:", 1000, 241);
             P.textFont(largeFont);
             if (wall.nextLevelB > 0) {
@@ -209,11 +209,11 @@ public class Hand {
             P.text("Sell for: $" + (int) (0.8f * (float) wall.value), 1000, 356);
             //upgrade info
             boolean canAfford = money >= wall.upgradePrices[wall.nextLevelB];
-            if (canAfford) P.fill(195, 232, 188);
-            else P.fill(230, 181, 181);
+            if (canAfford) P.fill(195, 232, 188, 254);
+            else P.fill(230, 181, 181, 254);
             P.rect(905, 401, 190, 119);
             P.textFont(mediumLargeFont);
-            P.fill(0);
+            P.fill(0, 254);
             P.text("Upgrade:", 1000, 395);
             P.textFont(largeFont);
             P.text(wall.upgradeTitles[wall.nextLevelB], 1000, 430);
@@ -239,7 +239,7 @@ public class Hand {
         P.fill(231, 232, 190);
         P.rect(905, 247, 190, 119);
         P.textFont(mediumLargeFont);
-        P.fill(0);
+        P.fill(0, 254);
         P.text("Selected:", 1000, 241);
         P.textFont(largeFont);
         if (currentLevel == 0) P.text("Wooden", 1000, 276);
@@ -257,7 +257,7 @@ public class Hand {
     private void universalWallInfo() {
         P.fill(200);
         P.rect(905, 700, 190, 195);
-        P.fill(0);
+        P.fill(0, 254);
         P.textFont(mediumFont);
         P.textAlign(LEFT);
         P.text("LClick to place", 910, 720);

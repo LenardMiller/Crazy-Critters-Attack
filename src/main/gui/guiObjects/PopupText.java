@@ -55,7 +55,7 @@ public class PopupText {
      * @param amount what amount of money gained
      */
     public PopupText(PApplet p, PVector position, int amount) {
-        this(p, 16, new Color(255, 255, 0), new Color(100, 50, 0, 150), position, "+$" + nfc(amount));
+        this(p, 16, new Color(255, 255, 0, 254), new Color(100, 50, 0, 150), position, "+$" + nfc(amount));
     }
 
     public void main() {

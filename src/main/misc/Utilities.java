@@ -236,7 +236,7 @@ public class Utilities {
      * @param textAlign what alignment to use, defaults to center
      */
     public static void highlightedText(PApplet p, String text, PVector position, int textAlign) {
-        highlightedText(p, text, position, new Color(255, 255, 255), new Color(0, 0, 0, 175), 25, textAlign);
+        highlightedText(p, text, position, new Color(255, 255, 255, 254), new Color(0, 0, 0, 175), 25, textAlign);
     }
 
     /**
@@ -263,8 +263,8 @@ public class Utilities {
         PVector leftPoint = new PVector(center.x - (textWidth/2), center.y - textSize/2);
         PVector rightPoint = new PVector(center.x + (textWidth/2), center.y - textSize/2);
 
-        p.fill(textColor.getRGB());
-        p.stroke(textColor.getRGB());
+        p.fill(textColor.getRGB(), textColor.getAlpha());
+        p.stroke(textColor.getRGB(), textColor.getAlpha());
         p.text(text, position.x, position.y);
         p.line(leftPoint.x, leftPoint.y, rightPoint.x, rightPoint.y);
 

@@ -32,12 +32,12 @@ public class LevelSelectGui {
     public void display() {
         delay--;
         //big text
-        P.fill(255);
+        P.fill(255, 254);
         P.textFont(veryLargeFont);
         P.textAlign(P.CENTER);
         P.text("Level Select [wip]", P.width/2f, 300);
         //buttons
-        P.fill(200);
+        P.fill(200, 254);
         P.textFont(mediumFont);
         int offsetY = 7;
         for (int i = 0; i < levelSelectButtons.length; i++) {
@@ -51,7 +51,6 @@ public class LevelSelectGui {
     }
 
     private void build() {
-
         levelSelectButtons = new SelectLevel[levels.length];
         settingsMenu = new SettingsMenuScreen(P, P.width/2f, P.height-100 - 50);
         exitGame = new ExitGame(P, P.width/2f, P.height-100);

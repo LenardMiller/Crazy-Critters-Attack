@@ -34,7 +34,7 @@ public class Play extends Button {
     }
 
     public void display(int y) {
-        p.fill(20,20,50);
+        p.fill(20,20,50, 254);
         y += (size.x/2) - 12.5;
         p.image(sprite,position.x-size.x/2,y);
         p.textAlign(CENTER);

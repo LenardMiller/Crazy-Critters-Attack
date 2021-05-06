@@ -119,7 +119,7 @@ public class Wave {
         P.image(staticSprites.get("waveSecondaryIc"), 890, y);
         P.tint(255);
 
-        P.fill(TEXT_COLOR.getRGB());
+        P.fill(TEXT_COLOR.getRGB(), 254);
         P.textAlign(CENTER);
         P.textFont(largeFont);
         P.text(TITLE, 1000, y + 110);

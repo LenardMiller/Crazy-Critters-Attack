@@ -13,6 +13,7 @@ public class TowerInfo {
     private static int loadStyle(PApplet p) {
         p.textAlign(LEFT);
         p.textFont(mediumFont);
+        p.fill(0, 254);
         return 910;
     }
 

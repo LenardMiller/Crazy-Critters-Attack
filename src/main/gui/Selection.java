@@ -150,7 +150,7 @@ public class Selection { //what tower is selected
 
     private int nameAndSpecial(int offset) {
         P.textAlign(CENTER);
-        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB());
+        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         P.textFont(largeFont);
         switch (turret.name) {
             case "slingshot":
@@ -305,7 +305,7 @@ public class Selection { //what tower is selected
 
     private void displayInfo(int offset, int speed) {
         //health
-        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB());
+        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         P.textFont(mediumFont);
         P.textAlign(LEFT);
         P.text("Health: " + turret.hp + "/" + turret.maxHp, 910, 276 + offset);
@@ -321,13 +321,13 @@ public class Selection { //what tower is selected
         else if (speed < 1000) P.text("Medium velocity", 910, 336 + offset);
         else P.text("High velocity", 910, 336 + offset);
         if (turret.pierce > 0) {
-            P.fill(SPECIAL_TEXT_COLOR.getRGB());
+            P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
             P.text("Pierce: " + turret.pierce, 910, 356 + offset + 20 * purpleCount);
             offset += 20;
         }
         //effects
         if (turret.effectLevel != 0 || turret.effectDuration != 0) {
-            P.fill(EFFECT_TEXT_COLOR.getRGB());
+            P.fill(EFFECT_TEXT_COLOR.getRGB(), 254);
             int x = 0;
             if (turret.effectLevel == 0) x = 20;
             else {
@@ -347,7 +347,7 @@ public class Selection { //what tower is selected
         //electricity
         if (turret instanceof TeslaTower) {
             TeslaTower tesla = (TeslaTower) turret;
-            P.fill(new Color(100, 150, 255).getRGB());
+            P.fill(new Color(100, 150, 255).getRGB(), 254);
             P.text("Jumps: " + tesla.arcLength, 910, 356 + 20 * purpleCount + offset);
         }
     }
@@ -355,7 +355,7 @@ public class Selection { //what tower is selected
     private void displayStats() { //todo: fix
         int offsetB = 0;
         if (!turret.hasPriority) offsetB = 45;
-        P.fill(STAT_TEXT_COLOR.getRGB());
+        P.fill(STAT_TEXT_COLOR.getRGB(), 254);
         P.textAlign(LEFT);
         P.textFont(mediumFont);
         if (turret instanceof Gluer) {
@@ -383,8 +383,8 @@ public class Selection { //what tower is selected
         if (!upgradeButton.greyed && nextLevel < turret.upgradePrices.length) {
             boolean canAfford = money >= turret.upgradePrices[nextLevel];
             if (canAfford) fillColor = new Color(11, 56, 0);
-            else fillColor = new Color(75, 0, 0);
-            P.fill(fillColor.getRGB());
+            else fillColor = new Color(75, 0, 0, 254);
+            P.fill(fillColor.getRGB(), fillColor.getAlpha());
             P.textFont(largeFont);
             P.text(turret.upgradeTitles[nextLevel], 1000, 585 + offsetC);
             P.textAlign(RIGHT);
@@ -399,8 +399,8 @@ public class Selection { //what tower is selected
             P.text(turret.upgradeDescB[nextLevel], 910, 635 + offsetC);
             P.text(turret.upgradeDescC[nextLevel], 910, 655 + offsetC);
         } else {
-            fillColor = new Color(15);
-            P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+            fillColor = new Color(15, 15, 15, 254);
+            P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getAlpha());
             P.textFont(largeFont);
             P.text("N/A", 1000, 585 + offsetC);
             P.textFont(mediumFont);
@@ -408,7 +408,7 @@ public class Selection { //what tower is selected
             P.text("No more", 910, 615 + offsetC);
             P.text("upgrades", 910, 635 + offsetC);
         }
-        P.stroke(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+        P.stroke(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getAlpha());
         if (turret.nextLevelB > 5 || turret.nextLevelA > 2) {
             //little x
             P.line(950, 685 + offsetC, 960, 685 + offsetC + 10);
@@ -417,13 +417,13 @@ public class Selection { //what tower is selected
         if (upgradeButton == inGameGui.upgradeButtonA) { //A
             for (int i = 0; i < 3; i++) {
                 if (nextLevel <= i) P.noFill();
-                else P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+                else P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getAlpha());
                 P.rect(910 + (20 * i), 685 + offsetC, 10, 10);
             }
         } else { //B
             for (int i = 3; i < 6; i++) {
                 if (nextLevel <= i) P.noFill();
-                else P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue());
+                else P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getAlpha());
                 P.rect(910 + (20 * (i-3)), 685 + offsetC, 10, 10);
             }
         }
@@ -437,13 +437,13 @@ public class Selection { //what tower is selected
         else if (turret.priority == 1) priority = "far";
         else if (turret.priority == 2) priority = "max HP";
         if (turret.hasPriority) {
-            P.fill(75, 45, 0);
+            P.fill(75, 45, 0, 254);
             P.text("Priority: " + priority, 1000, 843);
         }
     }
 
     private void sellButton() {
-        P.fill(75, 0, 0);
+        P.fill(75, 0, 0, 254);
         P.textFont(largeFont);
         P.textAlign(CENTER);
         P.text("Sell for: $" + nfc(floor(turret.value * .8f)), 1000, 888);
@@ -452,7 +452,7 @@ public class Selection { //what tower is selected
     private void setTextPurple(String s, int offset) {
         P.textFont(mediumFont);
         P.textAlign(LEFT);
-        P.fill(SPECIAL_TEXT_COLOR.getRGB());
+        P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
         P.text(s, 910, 356 + offset + 20 * purpleCount);
         purpleCount++;
     }
