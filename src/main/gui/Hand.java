@@ -223,7 +223,7 @@ public class Hand {
             if (canAfford) P.text("$" + wall.upgradePrices[wall.nextLevelB], 1000, 510);
             else {
                 strikethroughText(P, "$" + wall.upgradePrices[wall.nextLevelB], new PVector(1000, 510),
-                  new Color(150, 0, 0), mediumFont.getSize(), CENTER);
+                  new Color(150, 0, 0, 254), mediumFont.getSize(), CENTER);
             }
         }
     }
