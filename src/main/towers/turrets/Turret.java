@@ -334,6 +334,7 @@ public abstract class Turret extends Tower {
 
     @Override
     public void upgrade(int id) {
+        upgradeSpecial(id);
         int price = 0;
         if (id == 0) {
             price = upgradePrices[nextLevelA];
@@ -351,7 +352,6 @@ public abstract class Turret extends Tower {
         inGameGui.flashA = 255;
         money -= price;
         value += price;
-        upgradeSpecial(id);
         //icons
         if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
         else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];

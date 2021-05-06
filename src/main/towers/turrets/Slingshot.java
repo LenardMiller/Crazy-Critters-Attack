@@ -116,6 +116,7 @@ public class Slingshot extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[16];
     }
 
+    @Override
     public void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {

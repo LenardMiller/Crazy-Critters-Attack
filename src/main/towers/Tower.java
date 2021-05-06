@@ -61,7 +61,6 @@ public abstract class Tower {
         debrisType = "wood";
         price = 0;
         visualize = false;
-        nextLevelB = 0;
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
         updateNodes();
