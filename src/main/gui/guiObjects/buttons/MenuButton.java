@@ -43,8 +43,7 @@ public class MenuButton extends Button {
     }
 
     /**
-     * we've got you surrounded, implement action()!
-     * i hate abstract methods! i hate abstract methods!
+     * This makes sense for some reason, but I forgot why
      */
     @Override
     public void action() {
