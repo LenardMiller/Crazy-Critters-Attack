@@ -150,6 +150,7 @@ public class Main extends PApplet {
      * Just controls window size and renderer type,
      * run once at program start
      */
+    @Override
     public void settings() {
         size(GRID_WIDTH, BOARD_HEIGHT);
         if (fullscreen) {
@@ -163,6 +164,7 @@ public class Main extends PApplet {
      * Primary initialization,
      * run once at program start
      */
+    @Override
     public void setup() {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
@@ -254,6 +256,7 @@ public class Main extends PApplet {
      * From Processing.
      * Everything else, run every frame.
      */
+    @Override
     public void draw() {
         if (debug) {
             scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
@@ -262,7 +265,8 @@ public class Main extends PApplet {
         }
         background(50);
         tint(255);
-        matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
+        if (fullscreen) matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
+        else matrixMousePosition = new PVector(mouseX, mouseY);
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
