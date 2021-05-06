@@ -77,12 +77,12 @@ public class Hand {
     }
 
     private boolean clickOnSidebar() {
-        return inputHandler.leftMousePressedPulse && P.mouseX > BOARD_WIDTH;
+        return inputHandler.leftMousePressedPulse && matrixMousePosition.x > BOARD_WIDTH;
     }
 
     private boolean isNotPlaceable() {
-        Tile tileTower = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
-        Tile tileObstacle = tiles.get((roundTo(P.mouseX, 50) / 50), (roundTo(P.mouseY, 50) / 50));
+        Tile tileTower = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
+        Tile tileObstacle = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
         if (tileObstacle == null) return true;
         if (tileTower != null && tileTower.tower != null) {
             if (held.equals("wall")) {
@@ -103,8 +103,8 @@ public class Hand {
                             roundTo(enemy.position.y, 50) + 25
                     ),
                     new PVector (
-                            roundTo(P.mouseX, 50) + 25,
-                            roundTo(P.mouseY, 50) + 25
+                            roundTo(matrixMousePosition.x, 50) + 25,
+                            roundTo(matrixMousePosition.y, 50) + 25
                     )
             ) < MIN_ENEMY_DISTANCE * enemy.pfSize) {
                 return true;
@@ -114,7 +114,7 @@ public class Hand {
     }
 
     private void checkDisplay() {
-        Tile tile = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
+        Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower instanceof Wall) {
                 if (upgradable(tile)) {
@@ -148,7 +148,7 @@ public class Hand {
             //red if implacable
             if (implacable) P.tint(255, 0, 0, 150);
             else P.tint(255, 150);
-            P.image(heldSprite, (roundTo(P.mouseX, 50)) - (25f / 2) - offset.x + 13, roundTo(P.mouseY, 50) - (25f / 2) - offset.y + 13);
+            P.image(heldSprite, (roundTo(matrixMousePosition.x, 50)) - (25f / 2) - offset.x + 13, roundTo(matrixMousePosition.y, 50) - (25f / 2) - offset.y + 13);
             P.tint(255);
         }
     }
@@ -251,7 +251,7 @@ public class Hand {
     }
 
     private Wall getWall() {
-        return (Wall) tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1).tower;
+        return (Wall) tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1).tower;
     }
 
     private void universalWallInfo() {
@@ -359,7 +359,7 @@ public class Hand {
     }
 
     private void remove() {
-        Tile tile = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
+        Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower instanceof Wall) tile.tower.die(true);
         }
@@ -369,7 +369,7 @@ public class Hand {
      * Puts down tower and subtracts price.
      */
     private void place() {
-        Tile tile = tiles.get((roundTo(P.mouseX, 50) / 50) + 1, (roundTo(P.mouseY, 50) / 50) + 1);
+        Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
         boolean changeHeld = true;
         if (held.equals("slingshot") && alive) tile.tower = new Slingshot(P, tile);
         else if (held.equals("crossbow") && alive) tile.tower = new Crossbow(P, tile);
@@ -400,7 +400,7 @@ public class Hand {
             changeHeld = false;
         }
         if (held.contains("TL")) {
-            tile = tiles.get((roundTo(P.mouseX, 50) / 50), (roundTo(P.mouseY, 50) / 50));
+            tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
             changeHeld = false;
             if (held.contains("BGA")) tile.setBase(held);
             if (held.contains("BGB")) tile.setDecoration(held);
