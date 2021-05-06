@@ -44,7 +44,8 @@ public class SettingsGui {
 
     private void build() {
         returnButton = new SettingsMenuScreen(P, P.width/2f, (P.height/2f) + 175);
-        volumeSlider = new Slider(P, "Global Volume", new PVector(P.width / 2f, P.height / 2f), globalVolume, 0.01f, 1);
+        volumeSlider = new Slider(P, "Global Volume", new PVector(P.width / 2f, P.height / 2f),
+          globalVolume, 0.01f, 0.25f, 1);
         resetSettings = new ResetSettings(P, P.width/2f, (P.height/2f) + 125);
     }
 }

@@ -35,7 +35,6 @@ public class Slider {
 
     /**
      * A nice little slider to control a value.
-     * todo: unfuck up
      * @param p the PApplet
      * @param name text to display above
      * @param position where is it?
@@ -43,11 +42,11 @@ public class Slider {
      * @param min minimum output
      * @param max maximum output
      */
-    public Slider(PApplet p, String name, PVector position, float start, float min, float max) {
+    public Slider(PApplet p, String name, PVector position, float start, float min, float mid, float max) {
         P = p;
         NAME = name;
         POSITION = position;
-        DEFAULT = start;
+        DEFAULT = mid;
         MIN_OUTPUT = min;
         MAX_OUTPUT = max;
 
