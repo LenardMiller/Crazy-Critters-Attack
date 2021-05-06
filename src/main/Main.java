@@ -269,7 +269,7 @@ public class Main extends PApplet {
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
-        if (settings) settingsGui.display();
+        if (settings) settingsGui.main();
         keyBinds.menuKeys();
         //sound stuff
         sound.volume(globalVolume);
@@ -347,14 +347,14 @@ public class Main extends PApplet {
         rect(0, 0, matrixOffset, height);
         rect(width - matrixOffset, 0, matrixOffset, height);
         //pause
-        if (paused && !settings) pauseGui.display();
+        if (paused && !settings) pauseGui.main();
     }
 
     /**
      * Stuff for the level select screen.
      */
     private void drawLevelSelect() {
-        if (!settings) levelSelectGui.display();
+        if (!settings) levelSelectGui.main();
     }
 
     /**

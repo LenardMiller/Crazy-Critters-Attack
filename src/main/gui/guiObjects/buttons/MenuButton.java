@@ -3,12 +3,16 @@ package main.gui.guiObjects.buttons;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.*;
+import static main.Main.animatedSprites;
+import static main.Main.inputHandler;
 import static main.misc.Utilities.playSound;
+import static processing.core.PConstants.LEFT;
 
-public class ExitGame extends Button {
+public class MenuButton extends Button {
 
-    public ExitGame(PApplet p, float x, float y) {
+    private boolean pressed;
+
+    public MenuButton(PApplet p, float x, float y) {
         super(p, x, y, "null", true);
         position = new PVector(x, y);
         size = new PVector(200, 42);
@@ -18,12 +22,6 @@ public class ExitGame extends Button {
         sprite = spriteIdle;
     }
 
-    @Override
-    public void main(){
-        hover();
-        display();
-    }
-
     /**
      * If mouse over, push in.
      * Works if paused or dead.
@@ -31,7 +29,7 @@ public class ExitGame extends Button {
     @Override
     public void hover(){
         if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
-                p.mouseY > position.y-size.y/2) {
+          p.mouseY > position.y-size.y/2) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
@@ -44,9 +42,18 @@ public class ExitGame extends Button {
         } else sprite = spriteIdle;
     }
 
+    /**
+     * we've got you surrounded, implement action()!
+     * i hate abstract methods! i hate abstract methods!
+     */
     @Override
     public void action() {
-        paused = false;
-        p.exit();
+        pressed = true;
+    }
+
+    public boolean isPressed() {
+        boolean wasPressed = pressed;
+        pressed = false;
+        return wasPressed;
     }
 }

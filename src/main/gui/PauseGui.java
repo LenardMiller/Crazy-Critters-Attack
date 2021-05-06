@@ -1,23 +1,25 @@
 package main.gui;
 
-import main.gui.guiObjects.buttons.*;
+import main.Main;
+import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.awt.*;
 
 import static main.Main.*;
+import static main.misc.Utilities.closeSettingsMenu;
 import static main.misc.Utilities.shadowedText;
 
 public class PauseGui {
 
     private final PApplet P;
 
-    public static ResumeGame resumeGame;
-    public static RestartLevel restartLevel;
-    public static LevelSelectScreen levelSelect;
-    public static SettingsMenuScreen settingsMenuScreen;
-    public static ExitGame exitGame;
+    public static MenuButton resumeGame;
+    public static MenuButton restartLevel;
+    public static MenuButton levelSelect;
+    public static MenuButton settingsMenuScreen;
+    public static MenuButton exitGame;
 
     /**
      * Creates the pause menu.
@@ -28,7 +30,23 @@ public class PauseGui {
         build();
     }
 
-    public void display() {
+    /**
+     * Creates buttons
+     */
+    private void build() {
+        resumeGame = new MenuButton(P, P.width/2f, (P.height/2f) - 75);
+        restartLevel = new MenuButton(P, P.width/2f, P.height/2f - 25);
+        levelSelect = new MenuButton(P, P.width/2f, (P.height/2f) + 25);
+        settingsMenuScreen = new MenuButton(P, P.width/2f, (P.height/2f) + 75);
+        exitGame = new MenuButton(P, P.width/2f, (P.height/2f) + 125);
+    }
+
+    public void main() {
+        display();
+        checkButtonsPressed();
+    }
+
+    private void display() {
         //big text
         PVector position = new PVector(P.width/2f, 300);
         if (!alive) shadowedText(P, "Game Over", position, new Color(255, 0, 0, 254),
@@ -56,14 +74,24 @@ public class PauseGui {
         P.text("Quit", exitGame.position.x, exitGame.position.y + offsetY);
     }
 
-    /**
-     * Creates buttons
-     */
-    private void build() {
-        resumeGame = new ResumeGame(P, P.width/2f, (P.height/2f) - 75);
-        restartLevel = new RestartLevel(P, P.width/2f, P.height/2f - 25);
-        levelSelect = new LevelSelectScreen(P, P.width/2f, (P.height/2f) + 25);
-        settingsMenuScreen = new SettingsMenuScreen(P, P.width/2f, (P.height/2f) + 75);
-        exitGame = new ExitGame(P, P.width/2f, (P.height/2f) + 125);
+    private void checkButtonsPressed() {
+        if (resumeGame.isPressed()) {
+            paused = !paused;
+        } if (restartLevel.isPressed()) {
+            paused = false;
+            Main.resetGame(P);
+        } if (levelSelect.isPressed()) {
+            Main.resetGame(P);
+            paused = false;
+            alive = true;
+            LevelSelectGui.delay = 1;
+            screen = 1;
+        } if (settingsMenuScreen.isPressed()) {
+            if (settings) closeSettingsMenu();
+            else settings = true;
+        } if (exitGame.isPressed()) {
+            paused = false;
+            P.exit();
+        }
     }
 }

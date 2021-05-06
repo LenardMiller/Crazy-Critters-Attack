@@ -1,19 +1,19 @@
 package main.gui;
 
-import main.gui.guiObjects.buttons.ExitGame;
-import main.gui.guiObjects.buttons.SelectLevel;
-import main.gui.guiObjects.buttons.SettingsMenuScreen;
+import main.Main;
+import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
 
 import static main.Main.*;
+import static main.misc.Utilities.closeSettingsMenu;
 
 public class LevelSelectGui {
 
     private final PApplet P;
 
-    private static SelectLevel[] levelSelectButtons;
-    private static SettingsMenuScreen settingsMenu;
-    private static ExitGame exitGame;
+    private static MenuButton[] levelSelectButtons;
+    private static MenuButton settingsMenu;
+    private static MenuButton exitGame;
 
     /**
      * Exists so LevelSelectScreen and SelectLevel aren't pressed at the same time
@@ -29,7 +29,41 @@ public class LevelSelectGui {
         build();
     }
 
-    public void display() {
+    private void build() {
+        levelSelectButtons = new MenuButton[levels.length];
+        settingsMenu = new MenuButton(P, P.width/2f, P.height-100 - 50);
+        exitGame = new MenuButton(P, P.width/2f, P.height-100);
+        float factor = (levelSelectButtons.length/2f) - 0.5f;
+        for (int i = 0; i < levelSelectButtons.length; i++) {
+            levelSelectButtons[i] = new MenuButton(P, P.width/2f, P.height/2f + (i-factor)*50);
+        }
+    }
+
+    public void main() {
+        display();
+        checkButtonsPressed();
+    }
+
+    private void checkButtonsPressed() {
+        if (settingsMenu.isPressed()) {
+            if (settings) closeSettingsMenu();
+            else settings = true;
+        } if (exitGame.isPressed()) {
+            paused = false;
+            P.exit();
+        }
+        for (int i = 0; i < levelSelectButtons.length; i++) {
+            if (levelSelectButtons[i].isPressed()) {
+                currentLevel = i;
+                Main.resetGame(P);
+                paused = false;
+                alive = true;
+                screen = 0;
+            }
+        }
+    }
+
+    private void display() {
         delay--;
         //big text
         P.fill(255, 254);
@@ -48,15 +82,5 @@ public class LevelSelectGui {
         P.text("Settings", settingsMenu.position.x, settingsMenu.position.y + offsetY);
         exitGame.main();
         P.text("Quit", exitGame.position.x, exitGame.position.y + offsetY);
-    }
-
-    private void build() {
-        levelSelectButtons = new SelectLevel[levels.length];
-        settingsMenu = new SettingsMenuScreen(P, P.width/2f, P.height-100 - 50);
-        exitGame = new ExitGame(P, P.width/2f, P.height-100);
-        float factor = (levelSelectButtons.length/2f) - 0.5f;
-        for (int i = 0; i < levelSelectButtons.length; i++) {
-            levelSelectButtons[i] = new SelectLevel(P, P.width/2f, P.height/2f + (i-factor)*50, i);
-        }
     }
 }
