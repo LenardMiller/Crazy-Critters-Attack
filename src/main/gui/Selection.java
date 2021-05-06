@@ -144,8 +144,8 @@ public class Selection { //what tower is selected
         P.fill(InGameGui.MAIN_PANEL_COLOR.getRGB());
         P.noStroke();
         //different size bg so buttons fit
-        P.rect(900, 212, 200, 298);
-        if (!turret.hasPriority) P.rect(900, 212, 200, 343);
+        P.rect(900, 212, 200, 299);
+        if (!turret.hasPriority) P.rect(900, 212, 200, 344);
     }
 
     private int nameAndSpecial(int offset) {
