@@ -144,11 +144,11 @@ public class Main extends PApplet {
      * From Processing.
      * Just controls window size and renderer type,
      * run once at program start
-     * todo: try for fullscreen
      */
     public void settings() {
         size(GRID_WIDTH, BOARD_HEIGHT);
         fullScreen();
+        noSmooth();
     }
 
     /**
@@ -248,7 +248,6 @@ public class Main extends PApplet {
     public void draw() {
         float buffer = 0;
         if (debug) {
-            pushMatrix();
             scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
             buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
             translate(buffer, buffer);
@@ -273,13 +272,15 @@ public class Main extends PApplet {
             key.pressedPulse = false;
             key.releasedPulse = false;
         }
-        if (debug && buffer != 0) popMatrix();
     }
 
     /**
      * Stuff for the main game screen.
      */
     private void drawInGame() {
+        pushMatrix();
+        float setScale = height / (float) BOARD_HEIGHT;
+        scale(setScale);
         //keys
         if (dev) {
             try {
@@ -326,6 +327,8 @@ public class Main extends PApplet {
         if (paused && !settings) pauseGui.display();
         //levels
         if (playingLevel) levels[currentLevel].main();
+
+        popMatrix();
     }
 
     /**
