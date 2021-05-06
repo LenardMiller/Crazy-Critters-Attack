@@ -97,6 +97,9 @@ public class Main extends PApplet {
     public static boolean paused = false;
     public static boolean settings = false;
     public static boolean dev = true;
+    public static float matrixScale;
+    public static float matrixOffset;
+    public static PVector matrixMousePosition;
     public static int connectWallQueues;
 
     public static final int FRAMERATE = 30;
@@ -184,6 +187,9 @@ public class Main extends PApplet {
         //guis
         levelSelectGui = new LevelSelectGui(this);
         settingsGui = new SettingsGui(this);
+        //matrix
+        matrixScale = height / (float) BOARD_HEIGHT;
+        matrixOffset = (width - (GRID_WIDTH * matrixScale)) / 2;
     }
 
     /**
@@ -256,6 +262,7 @@ public class Main extends PApplet {
         }
         background(50);
         tint(255);
+        matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
@@ -281,8 +288,7 @@ public class Main extends PApplet {
      */
     private void drawInGame() {
         pushMatrix();
-        float matrixScale = height / (float) BOARD_HEIGHT;
-        float matrixOffset = (width - (GRID_WIDTH * matrixScale)) / 2;
+
         translate(matrixOffset, 0);
         scale(matrixScale);
         //keys
@@ -330,9 +336,9 @@ public class Main extends PApplet {
         }
         //levels
         if (playingLevel) levels[currentLevel].main();
-
+        //matrix
         popMatrix();
-
+        //pause
         if (paused && !settings) pauseGui.display();
     }
 
