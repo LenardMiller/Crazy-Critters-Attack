@@ -246,13 +246,12 @@ public class Main extends PApplet {
      * Everything else, run every frame.
      */
     public void draw() {
-        float buffer = 0;
         if (debug) {
             scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
-            buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
+            float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
             translate(buffer, buffer);
         }
-        background(50, 50, 50);
+        background(50);
         tint(255);
         //screens
         if (screen == 0) drawInGame();
@@ -279,8 +278,10 @@ public class Main extends PApplet {
      */
     private void drawInGame() {
         pushMatrix();
-        float setScale = height / (float) BOARD_HEIGHT;
-        scale(setScale);
+        float matrixScale = height / (float) BOARD_HEIGHT;
+        float matrixOffset = (width - (GRID_WIDTH * matrixScale)) / 2;
+        translate(matrixOffset, 0);
+        scale(matrixScale);
         //keys
         if (dev) {
             try {
