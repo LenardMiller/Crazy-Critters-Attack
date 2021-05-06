@@ -382,7 +382,7 @@ public class Selection { //what tower is selected
         if (!turret.hasPriority) offsetC += 45;
         if (!upgradeButton.greyed && nextLevel < turret.upgradePrices.length) {
             boolean canAfford = money >= turret.upgradePrices[nextLevel];
-            if (canAfford) fillColor = new Color(11, 56, 0);
+            if (canAfford) fillColor = new Color(11, 56, 0, 254);
             else fillColor = new Color(75, 0, 0, 254);
             P.fill(fillColor.getRGB(), fillColor.getAlpha());
             P.textFont(largeFont);

@@ -103,7 +103,7 @@ public class TowerBuy extends Button {
             p.noStroke();
             p.rect(900,212,200,707);
             p.textAlign(CENTER);
-            p.fill(0);
+            p.fill(0, 254);
             p.textFont(largeFont); //displays info about tower
             int x = 1000;
             int offset = 0;
@@ -175,7 +175,7 @@ public class TowerBuy extends Button {
         p.textAlign(CENTER);
         p.textFont(mediumFont);
         if (money < price) {
-            strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0),
+            strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0, 254),
                     mediumFont.getSize(), CENTER);
         }
         else p.text("$" + price, x, 271 + offset);
