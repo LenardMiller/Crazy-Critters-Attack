@@ -133,6 +133,7 @@ public class RandomCannon extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[12];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
