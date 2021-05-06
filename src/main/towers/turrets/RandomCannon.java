@@ -147,9 +147,9 @@ public class RandomCannon extends Turret {
                     breakSound = sounds.get("stoneBreak");
                     placeSound = sounds.get("stonePlace");
                     debrisType = "stone";
+                    damage += 10;
                     barrel = true;
                     delay = 0;
-                    damage -= 5;
                     name = "miscCannonBarrel";
                     loadSprites();
                     break;
