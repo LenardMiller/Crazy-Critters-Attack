@@ -181,6 +181,8 @@ public class SpriteLoader {
         getSprite(p,"wtfParts","EN","wtf/parts/",12);
         getSprite(p,"wolfMove","EN","wolf/move/",4);
         getSprite(p,"wolfAttack","EN","wolf/attack/",14);
+        getSprite(p,"wolfDie","EN","wolf/die/",4);
+        getSprite(p,"wolfParts","EN","wolf/parts/",7);
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);

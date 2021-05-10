@@ -28,7 +28,7 @@ public class Wolf extends Enemy {
         betweenWalkFrames = down60ToFramerate(10);
         attackFrame = attackStartFrame;
         corpseSize = size;
-        partSize = new PVector(9,9);
+        partSize = new PVector(25,25);
         overkillSound = sounds.get("hissSquish");
         dieSound = sounds.get("hiss");
         loadStuff();
