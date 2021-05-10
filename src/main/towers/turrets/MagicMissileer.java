@@ -31,6 +31,7 @@ public class MagicMissileer extends Turret {
         loadSprites();
         fireSound = sounds.get("magicMissleer");
         placeSound = sounds.get("crystalPlace");
+        damageSound = sounds.get("crystalDamage");
         debrisType = "crystal";
         price = MAGICMISSILEER_PRICE;
         value = price;
