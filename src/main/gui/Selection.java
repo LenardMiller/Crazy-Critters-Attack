@@ -249,7 +249,9 @@ public class Selection { //what tower is selected
                 setTextPurple("Splash", offset);
                 break;
             case "magicMissleer":
-                P.text("Magic Missileer", 1000, 241);
+                P.text("Magic Missile", 1000, 241);
+                P.text("Launcher", 1000, 266);
+                offset = 25;
                 setTextPurple("Homing", offset);
                 break;
             case "tesla":
