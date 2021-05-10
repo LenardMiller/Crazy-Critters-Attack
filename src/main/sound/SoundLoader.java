@@ -28,6 +28,8 @@ public class SoundLoader {
         sounds.put("squeakSquish", new SoundFile(p, "sounds/enemies/squeakSquish.wav"));
         sounds.put("bigSqueak", new SoundFile(p, "sounds/enemies/bigSqueak.wav"));
         sounds.put("bigSqueakSquash", new SoundFile(p, "sounds/enemies/bigSqueakSquash.wav"));
+        sounds.put("bark", new SoundFile(p, "sounds/enemies/bark.wav"));
+        sounds.put("barkSquish", new SoundFile(p, "sounds/enemies/barkSquish.wav"));
         //misc
         sounds.put("smallExplosion", new SoundFile(p, "sounds/misc/smallExplosion.wav"));
         sounds.put("hugeExplosion", new SoundFile(p, "sounds/misc/hugeExplosion.wav"));
