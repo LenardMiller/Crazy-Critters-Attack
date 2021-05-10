@@ -81,30 +81,12 @@ public class MagicMissileer extends Turret {
         p.tint(255);
     }
 
-    @Override
-    protected void upgradeSpecial(int id) {}
-
     private void setUpgrades() {
-//        //damage
-//        upgradeDamage[0] = 10;
-//        upgradeDamage[1] = 10;
-//        upgradeDamage[2] = 0;
-//        upgradeDamage[3] = 0;
-//        //delay (firerate)
-//        upgradeDelay[0] = 0;
-//        upgradeDelay[1] = 0;
-//        upgradeDelay[2] = -45;
-//        upgradeDelay[3] = 0;
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 100;
         upgradePrices[2] = 50;
         upgradePrices[3] = 200;
-//        //names
-//        upgradeNames[0] = name;
-//        upgradeNames[1] = name;
-//        upgradeNames[2] = name;
-//        upgradeNames[3] = "magicMissleerFour";
         //titles
         upgradeTitles[0] = "Magic Power";
         upgradeTitles[1] = "Mega Magic";
@@ -130,5 +112,28 @@ public class MagicMissileer extends Turret {
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[13];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[14];
+    }
+
+    @Override
+    protected void upgradeSpecial(int id) {
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+            }
+        }
     }
 }
