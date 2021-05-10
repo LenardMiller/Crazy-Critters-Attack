@@ -84,8 +84,7 @@ public class KeyBinds {
             if (wall) {
                 if (hand.held.equals("wall")) hand.setHeld("null");
                 else hand.setHeld("wall");
-            }
-            if (slingshot) hand.setHeld("slingshot");
+            } if (slingshot) hand.setHeld("slingshot");
             if (luggageBlaster) hand.setHeld("miscCannon");
             if (crossbow) hand.setHeld("crossbow");
             if (currentLevel > 0) {
