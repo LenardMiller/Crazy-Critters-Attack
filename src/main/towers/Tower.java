@@ -33,7 +33,6 @@ public abstract class Tower {
     public PVector size;
     public PApplet p;
     public Tile tile;
-    public Object updateSprite;
     public PImage sprite;
     public String name;
     public String[] upgradeTitles;

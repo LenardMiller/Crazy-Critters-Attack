@@ -29,6 +29,7 @@ public class MagicMissileer extends Turret {
         betweenIdleFrames = down60ToFramerate(8);
         state = 0;
         loadSprites();
+        fireSound = sounds.get("magicMissleer");
         debrisType = "crystal";
         price = 300;
         value = price;
@@ -60,7 +61,8 @@ public class MagicMissileer extends Turret {
         }
     }
 
-    protected void fire() {
+    private void fire() {
+        playSoundRandomSpeed(p, fireSound, 1);
         spawnProjectiles(new PVector(0,0), angle);
     }
 
