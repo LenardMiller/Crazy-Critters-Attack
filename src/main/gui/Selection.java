@@ -115,7 +115,7 @@ public class Selection { //what tower is selected
     public void turretOverlay() {
         if (!name.equals("null") && turret != null) {
             //display range and square
-            P.fill(255, 25);
+            P.fill(100, 25);
             P.stroke(255);
             P.rect(turret.tile.position.x - turret.size.x, turret.tile.position.y - turret.size.y, turret.size.y, turret.size.y);
             P.circle(turret.tile.position.x - (turret.size.x / 2), turret.tile.position.y - (turret.size.y / 2), turret.range * 2);
