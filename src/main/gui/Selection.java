@@ -2,6 +2,7 @@ package main.gui;
 
 import main.gui.guiObjects.buttons.UpgradeTower;
 import main.towers.turrets.Gluer;
+import main.towers.turrets.MagicMissileer;
 import main.towers.turrets.TeslaTower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -345,6 +346,12 @@ public class Selection { //what tower is selected
             TeslaTower tesla = (TeslaTower) turret;
             P.fill(new Color(100, 150, 255).getRGB(), 254);
             P.text("Jumps: " + tesla.arcLength, 910, 356 + 20 * purpleCount + offset);
+        }
+        //missle count
+        if (turret instanceof MagicMissileer) {
+            MagicMissileer magicMissileer = (MagicMissileer) turret;
+            if (magicMissileer.additionalMissile) setTextPurple("Four missiles", offset);
+            else setTextPurple("Three missiles", offset);
         }
     }
 

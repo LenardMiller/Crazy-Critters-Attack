@@ -12,7 +12,7 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class MagicMissileer extends Turret {
 
-    boolean additionalMissile;
+    public boolean additionalMissile;
 
     public MagicMissileer(PApplet p, Tile tile) {
         super(p,tile);
@@ -93,8 +93,8 @@ public class MagicMissileer extends Turret {
         upgradePrices[4] = 100;
         upgradePrices[5] = 200;
         //titles
-        upgradeTitles[0] = "Magic Power";
-        upgradeTitles[1] = "Mega Magic";
+        upgradeTitles[0] = "More range";
+        upgradeTitles[1] = "More magic";
         upgradeTitles[2] = "shatter?";
 
         upgradeTitles[3] = "Faster Firing";
@@ -118,8 +118,8 @@ public class MagicMissileer extends Turret {
         upgradeDescB[3] = "firerate";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "Fire";
-        upgradeDescB[4] = "an additional";
+        upgradeDescA[4] = "Fire an";
+        upgradeDescB[4] = "additional";
         upgradeDescC[4] = "missile";
 
         upgradeDescA[5] = "Fire";
