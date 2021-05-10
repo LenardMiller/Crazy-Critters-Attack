@@ -47,6 +47,7 @@ public class SoundLoader {
         sounds.put("woodPlace", new SoundFile(p, "sounds/turrets/woodPlace.wav"));
         sounds.put("stonePlace", new SoundFile(p, "sounds/turrets/stonePlace.wav"));
         sounds.put("metalPlace", new SoundFile(p, "sounds/turrets/metalPlace.wav"));
+        sounds.put("crystalPlace", new SoundFile(p, "sounds/turrets/crystalPlace.wav"));
         sounds.put("slingshot", new SoundFile(p, "sounds/turrets/slingshot.wav"));
         sounds.put("crossbow", new SoundFile(p, "sounds/turrets/crossbow.wav"));
         sounds.put("shotbow", new SoundFile(p, "sounds/turrets/shotbow.wav"));
@@ -70,6 +71,7 @@ public class SoundLoader {
         sounds.put("metalBreak", new SoundFile(p, "sounds/walls/metalBreak.wav"));
         sounds.put("stonePlaceShort", new SoundFile(p, "sounds/walls/stonePlaceShort.wav"));
         sounds.put("metalPlaceShort", new SoundFile(p, "sounds/walls/metalPlaceShort.wav"));
+        sounds.put("crystalPlaceShort", new SoundFile(p, "sounds/walls/crystalPlaceShort.wav"));
         //loops
         startStopSoundLoops.put("smallExplosion", new StartStopSoundLoop(p, "smallExplosion/", secondsToFrames(1), false));
         fadeSoundLoops.put("flamethrower", new FadeSoundLoop(p, "flamethrower", FRAMERATE/6));

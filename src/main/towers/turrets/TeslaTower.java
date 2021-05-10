@@ -182,6 +182,8 @@ public class TeslaTower extends Turret {
                     damage += 1600;
                     delay += 2;
                     lightning = true;
+                    debrisType = "crystal";
+                    placeSound = sounds.get("crystalPlace");
                     name = "lightning";
                     betweenFireFrames = 2;
                     loadSprites();
