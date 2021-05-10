@@ -249,11 +249,7 @@ public class Selection { //what tower is selected
                 break;
             case "magicMissleer":
                 P.text("Magic Missileer", 1000, 241);
-                setTextPurple("Three homing missiles", offset);
-                break;
-            case "magicMissleerFour":
-                P.text("Magic Missileer", 1000, 241);
-                setTextPurple("Four homing missiles", offset);
+                setTextPurple("Homing", offset);
                 break;
             case "tesla":
                 P.text("Tesla Tower", 1000, 241);
