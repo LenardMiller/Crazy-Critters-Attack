@@ -31,6 +31,7 @@ public class MagicMissile extends Projectile {
         hasTrail = true;
         trail = "greenMagic";
         this.priority = priority;
+        hitSound = sounds.get("magicImpact");
     }
 
     private void checkTarget() {
