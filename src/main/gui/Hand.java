@@ -314,7 +314,7 @@ public class Hand {
             case "magicMissleer":
                 heldSprite = staticSprites.get("magicMissleerFullTR");
                 offset = new PVector(0, 0);
-                price = 150;
+                price = MAGICMISSILEER_PRICE;
                 break;
             case "tesla":
                 heldSprite = staticSprites.get("teslaFullTR");

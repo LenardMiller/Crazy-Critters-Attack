@@ -68,6 +68,7 @@ public class KeyBinds {
         boolean energyBlaster = addHotkey(new char[]{'e', 'E'}, ENERGYBLASTER_PRICE);
         boolean flamethrower = addHotkey(new char[]{'d', 'Q'}, FLAMETHROWER_PRICE);
         boolean teslaTower = addHotkey(new char[]{'c', 'C'}, TESLATOWER_PRICE);
+        boolean magicMissileer = addHotkey(new char[]{'r', 'R'}, MAGICMISSILEER_PRICE);
 
         if (play) {
             if (!playingLevel) {
@@ -95,6 +96,8 @@ public class KeyBinds {
                 if (energyBlaster) hand.setHeld("energyBlaster");
                 if (flamethrower) hand.setHeld("flamethrower");
                 if (teslaTower) hand.setHeld("tesla");
+            } if (currentLevel > 2) {
+                if (magicMissileer) hand.setHeld("magicMissileer");
             }
         }
     }
