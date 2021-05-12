@@ -33,6 +33,7 @@ public class Level {
         if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
             if (wave.polluter != null) polluter = wave.polluter;
+            if (wave.groundType != null) groundType = wave.groundType;
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
             else if (!paused && alive) {
                 wave.spawnEnemies();

@@ -332,7 +332,7 @@ public class SpriteLoader {
         staticSprites.put("darkMetalPt",p.loadImage("sprites/particles/debris/darkMetal.png"));
         staticSprites.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         staticSprites.put("sandPt",p.loadImage("sprites/particles/debris/sand.png"));
-        staticSprites.put("snowPt",p.loadImage("sprites/particles/debris/snowa.png"));
+        staticSprites.put("snowPt",p.loadImage("sprites/particles/debris/snow.png"));
         //projectiles
         staticSprites.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
         staticSprites.put("cannonBallPj",p.loadImage("sprites/projectiles/cannonBall.png"));

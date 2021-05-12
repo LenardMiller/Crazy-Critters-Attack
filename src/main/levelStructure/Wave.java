@@ -29,6 +29,7 @@ public class Wave {
     public final int LENGTH;
 
     public Polluter polluter;
+    public String groundType;
 
     public boolean unskippable;
     private int betweenSpawns;
