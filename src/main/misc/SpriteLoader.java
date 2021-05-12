@@ -74,6 +74,7 @@ public class SpriteLoader {
         getSprite(p,"dirtPile","PT","pile/dirt/", 4);
         getSprite(p,"sandPile","PT","pile/sand/", 4);
         getSprite(p,"stonePile","PT","pile/stone/", 4);
+        getSprite(p,"snowPile","PT","pile/snow/", 4);
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
         getSprite(p,"flame","PJ","flame/",23);
@@ -331,6 +332,7 @@ public class SpriteLoader {
         staticSprites.put("darkMetalPt",p.loadImage("sprites/particles/debris/darkMetal.png"));
         staticSprites.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         staticSprites.put("sandPt",p.loadImage("sprites/particles/debris/sand.png"));
+        staticSprites.put("snowPt",p.loadImage("sprites/particles/debris/snowa.png"));
         //projectiles
         staticSprites.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
         staticSprites.put("cannonBallPj",p.loadImage("sprites/projectiles/cannonBall.png"));

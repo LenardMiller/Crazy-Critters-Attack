@@ -6,9 +6,9 @@ import processing.core.PVector;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
-public class LittleWorm extends BurrowingEnemy {
+public class Worm extends BurrowingEnemy {
 
-    public LittleWorm(PApplet p, float x, float y) {
+    public Worm(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(25,25);
         pfSize = 1;

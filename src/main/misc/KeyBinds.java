@@ -2,6 +2,7 @@ package main.misc;
 
 import main.arcs.Arc;
 import main.enemies.*;
+import main.enemies.burrowingEnemies.Worm;
 import main.levelStructure.Level;
 import main.projectiles.*;
 import main.towers.Tower;
@@ -143,7 +144,7 @@ public class KeyBinds {
         //enemies
         if (en1) enemies.add(new SnowSnake(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en2) enemies.add(new Wolf(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en3) enemies.add(new AlbinoButterfly(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en3) enemies.add(new Worm(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en4) enemies.add(new Bat(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en5) enemies.add(new GiantBat(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new SmallGolem(p, matrixMousePosition.x, matrixMousePosition.y));

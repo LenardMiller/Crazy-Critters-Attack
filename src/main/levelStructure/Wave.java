@@ -2,8 +2,8 @@ package main.levelStructure;
 
 import main.enemies.*;
 import main.enemies.burrowingEnemies.BigWorm;
-import main.enemies.burrowingEnemies.LittleWorm;
 import main.enemies.burrowingEnemies.MidWorm;
+import main.enemies.burrowingEnemies.Worm;
 import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
 import main.towers.Tower;
@@ -153,7 +153,7 @@ public class Wave {
                 e = new Snake(P, pos.x, pos.y);
                 break;
             case "littleWorm":
-                e = new LittleWorm(P, pos.x, pos.y);
+                e = new Worm(P, pos.x, pos.y);
                 break;
             case "butterfly":
                 e = new Butterfly(P, pos.x, pos.y);
