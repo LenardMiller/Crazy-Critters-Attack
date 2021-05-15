@@ -177,10 +177,10 @@ public abstract class Turret extends Tower {
         playSoundRandomSpeed(p, fireSound, 1);
         float displayAngle = angle;
         PVector projectileSpawn = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector angleVector = PVector.fromAngle(displayAngle-HALF_PI);
+        PVector barrel = PVector.fromAngle(displayAngle-HALF_PI);
         float particleCount = p.random(1,5);
-        angleVector.setMag(barrelLength); //barrel length
-        projectileSpawn.add(angleVector);
+        barrel.setMag(barrelLength); //barrel length
+        projectileSpawn.add(barrel);
         spawnProjectiles(projectileSpawn, displayAngle);
         if (particleType != null && !particleType.equals("null")) {
             for (int i = 0; i < particleCount; i++) {

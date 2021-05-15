@@ -49,7 +49,8 @@ public class Railgun extends Turret {
         vaporTrail = animatedSprites.get("railgunVaporTrailTR");
         vaporEndSprites = animatedSprites.get("railgunBlastPT");
         loadSprites();
-        debrisType = "ultimate";
+        debrisType = "titanium";
+        barrelLength = 30;
         price = 400;
         value = price;
         priority = 2; //strong
@@ -61,23 +62,26 @@ public class Railgun extends Turret {
     }
 
     @Override
-    protected void spawnProjectiles(PVector position, float angle) {}
-
-    protected void fire() {
-        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angle-HALF_PI);
-        spa.setMag(30);
-        spp.add(spa);
-        particles.add(new RailgunBlast(p,spp.x,spp.y,0));
-
+    protected void spawnProjectiles(PVector position, float angle) {
+        particles.add(new RailgunBlast(p,position.x,position.y,0));
         currentVaporFrame = 0;
-        vaporStart = spp;
+        vaporStart = position;
         PVector vaporEnd = targetEnemy.position;
         vaporAngle = angle;
         float c = sqrt(sq(vaporEnd.x-vaporStart.x)+sq(vaporEnd.y-vaporStart.y));
         vaporLength = (int)(c/24);
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
+    }
+
+    @Override
+    protected void fire(float barrelLength, String particleType) {
+        PVector projectileSpawn = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
+        PVector barrel = PVector.fromAngle(angle-HALF_PI);
+        barrel.setMag(barrelLength);
+        projectileSpawn.add(barrel);
+
+        spawnProjectiles(projectileSpawn, angle);
 
         targetEnemy.damageWithoutBuff(damage,this, "normal", PVector.fromAngle(vaporAngle - HALF_PI), true);
     }
@@ -93,6 +97,18 @@ public class Railgun extends Turret {
         p.tint(255);
         p.popMatrix();
         //vaporTrail
+        displayVaporTrail();
+        //main
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+        p.rotate(angle);
+        p.tint(255, tintColor, tintColor);
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        p.popMatrix();
+        p.tint(255);
+    }
+
+    private void displayVaporTrail() {
         if (currentVaporFrame < NUM_VAPOR_FRAMES) {
             for (int i = 0; i <= vaporLength; i++) {
                 p.pushMatrix();
@@ -110,14 +126,6 @@ public class Railgun extends Turret {
                 betweenVaporTimer = 0;
             }
         }
-        //main
-        p.pushMatrix();
-        p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
-        p.rotate(angle);
-        p.tint(255, tintColor, tintColor);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
-        p.popMatrix();
-        p.tint(255);
     }
 
     @Override
