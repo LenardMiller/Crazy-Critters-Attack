@@ -41,7 +41,7 @@ public class RandomCannon extends Turret {
         fireSound = sounds.get("luggageBlaster");
         loadSprites();
         debrisType = "wood";
-        price = RANDOMCANNON_PRICE;
+        price = RANDOM_CANNON_PRICE;
         value = price;
         priority = 0; //close
         setUpgrades();

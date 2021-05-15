@@ -44,7 +44,7 @@ public class EnergyBlaster extends Turret{
         barrelLength = 40;
         loadSprites();
         debrisType = "darkMetal";
-        price = ENERGYBLASTER_PRICE;
+        price = ENERGY_BLASTER_PRICE;
         value = price;
         priority = 2; //strong
         setUpgrades();

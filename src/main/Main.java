@@ -111,15 +111,16 @@ public class Main extends PApplet {
     public static final int TILE_SIZE = 50;
 
     public static final int SLINGSHOT_PRICE = 75;
-    public static final int RANDOMCANNON_PRICE = 150;
+    public static final int RANDOM_CANNON_PRICE = 150;
     public static final int CROSSBOW_PRICE = 200;
     public static final int CANNON_PRICE = 300;
     public static final int GLUER_PRICE = 300;
     public static final int SEISMIC_PRICE = 400;
-    public static final int ENERGYBLASTER_PRICE = 650;
+    public static final int ENERGY_BLASTER_PRICE = 650;
     public static final int FLAMETHROWER_PRICE = 700;
-    public static final int TESLATOWER_PRICE = 800;
-    public static final int MAGICMISSILEER_PRICE = 1000;
+    public static final int TESLA_TOWER_PRICE = 800;
+    public static final int MAGIC_MISSILEER_PRICE = 1000;
+    public static final int ICE_TOWER_PRICE = 1250;
 
     public static HashMap<String, PImage> staticSprites = new HashMap<>();
     public static HashMap<String, PImage[]> animatedSprites = new HashMap<>();

@@ -39,7 +39,7 @@ public class TeslaTower extends Turret {
         state = 0;
         loadSprites();
         debrisType = "metal";
-        price = TESLATOWER_PRICE;
+        price = TESLA_TOWER_PRICE;
         value = price;
         priority = 0; //close
         damageSound = sounds.get("metalDamage");

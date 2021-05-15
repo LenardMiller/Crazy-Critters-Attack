@@ -63,15 +63,15 @@ public class KeyBinds {
         //hotkeys
         boolean wall = addHotkey(new char[]{'?'}, 0);
         boolean slingshot = addHotkey(new char[]{'q', 'Q'}, SLINGSHOT_PRICE);
-        boolean luggageBlaster = addHotkey(new char[]{'a', 'A'}, RANDOMCANNON_PRICE);
+        boolean luggageBlaster = addHotkey(new char[]{'a', 'A'}, RANDOM_CANNON_PRICE);
         boolean crossbow = addHotkey(new char[]{'z', 'Z'}, CROSSBOW_PRICE);
         boolean cannon = addHotkey(new char[]{'w', 'W'}, CANNON_PRICE);
         boolean gluer = addHotkey(new char[]{'s', 'S'}, GLUER_PRICE);
         boolean seismicTower = addHotkey(new char[]{'x', 'X'}, SEISMIC_PRICE);
-        boolean energyBlaster = addHotkey(new char[]{'e', 'E'}, ENERGYBLASTER_PRICE);
+        boolean energyBlaster = addHotkey(new char[]{'e', 'E'}, ENERGY_BLASTER_PRICE);
         boolean flamethrower = addHotkey(new char[]{'d', 'Q'}, FLAMETHROWER_PRICE);
-        boolean teslaTower = addHotkey(new char[]{'c', 'C'}, TESLATOWER_PRICE);
-        boolean magicMissileer = addHotkey(new char[]{'r', 'R'}, MAGICMISSILEER_PRICE);
+        boolean teslaTower = addHotkey(new char[]{'c', 'C'}, TESLA_TOWER_PRICE);
+        boolean magicMissileer = addHotkey(new char[]{'r', 'R'}, MAGIC_MISSILEER_PRICE);
 
         if (play) {
             if (!playingLevel) {

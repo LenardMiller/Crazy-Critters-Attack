@@ -289,7 +289,7 @@ public class Hand {
             case "miscCannon":
                 heldSprite = staticSprites.get("miscCannonFullTR");
                 offset = new PVector(0, 0);
-                price = RANDOMCANNON_PRICE;
+                price = RANDOM_CANNON_PRICE;
                 break;
             case "cannon":
                 heldSprite = staticSprites.get("cannonFullTR");
@@ -309,17 +309,17 @@ public class Hand {
             case "energyBlaster":
                 heldSprite = staticSprites.get("energyBlasterFullTR");
                 offset = new PVector(13, 13);
-                price = ENERGYBLASTER_PRICE;
+                price = ENERGY_BLASTER_PRICE;
                 break;
             case "magicMissleer":
                 heldSprite = staticSprites.get("magicMissleerFullTR");
                 offset = new PVector(0, 0);
-                price = MAGICMISSILEER_PRICE;
+                price = MAGIC_MISSILEER_PRICE;
                 break;
             case "tesla":
                 heldSprite = staticSprites.get("teslaFullTR");
                 offset = new PVector(0, 0);
-                price = TESLATOWER_PRICE;
+                price = TESLA_TOWER_PRICE;
                 break;
             case "nightmare":
                 heldSprite = staticSprites.get("nightmareFullTR");

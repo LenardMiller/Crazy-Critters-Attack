@@ -38,7 +38,7 @@ public class TowerBuy extends Button {
                 price = CROSSBOW_PRICE;
                 break;
             case "miscCannon":
-                price = RANDOMCANNON_PRICE;
+                price = RANDOM_CANNON_PRICE;
                 break;
             case "cannon":
                 price = CANNON_PRICE;
@@ -50,13 +50,13 @@ public class TowerBuy extends Button {
                 price = SEISMIC_PRICE;
                 break;
             case "tesla":
-                price = TESLATOWER_PRICE;
+                price = TESLA_TOWER_PRICE;
                 break;
             case "energyBlaster":
-                price = ENERGYBLASTER_PRICE;
+                price = ENERGY_BLASTER_PRICE;
                 break;
             case "magicMissleer":
-                price = MAGICMISSILEER_PRICE;
+                price = MAGIC_MISSILEER_PRICE;
                 break;
             case "nightmare":
             case "flamethrower":
