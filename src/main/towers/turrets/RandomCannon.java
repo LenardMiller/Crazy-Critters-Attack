@@ -24,6 +24,7 @@ public class RandomCannon extends Turret {
         betweenFireFrames = down60ToFramerate(8);
         damage = 10;
         range = 200;
+        barrelLength = 18;
         damageSound = sounds.get("woodDamage");
         breakSound = sounds.get("woodBreak");
         placeSound = sounds.get("woodPlace");
@@ -38,27 +39,17 @@ public class RandomCannon extends Turret {
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void fire(float barrelLength, String particleType) {
-        playSoundRandomSpeed(p, fireSound, 1);
-        float angleB = angle;
-        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angleB-HALF_PI);
-        if (barrel) {
-            angleB += p.random(-0.1f,0.1f);
-            spa.setMag(27);
-        }
-        else spa.setMag(18);
-        spp.add(spa);
-        spawnProjectiles(spp, angleB);
-    }
-
+    /**
+     * Overrides fireParticle
+     */
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
+        if (barrel) angle += p.random(-0.1f, 0.1f);
         float particleCount = p.random(1,5);
         if (barrel) particleCount = 1;
         String part = "smoke";
         int spriteType = (int)(p.random(0,5.99f));
-        if (laundry && p.random(0,3) < 1) { //this is why this is here
+        if (laundry && p.random(0,3) < 1) {
             projectiles.add(new Laundry(p,position.x,position.y, angle, this, damage));
             part = "poison";
         }
@@ -139,6 +130,7 @@ public class RandomCannon extends Turret {
                     damage += 10;
                     barrel = true;
                     delay = 0;
+                    barrelLength = 27;
                     name = "miscCannonBarrel";
                     loadSprites();
                     break;

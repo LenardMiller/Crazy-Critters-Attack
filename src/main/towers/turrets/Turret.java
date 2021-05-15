@@ -69,10 +69,8 @@ public abstract class Turret extends Tower {
         size = new PVector(50, 50);
         maxHp = 20;
         hp = maxHp;
-        hit = false;
         delay = 4;
         pjSpeed = 500;
-        fireParticle = "null";
         spriteArray = new ArrayList<>();
         upgradePrices = new int[6];
         upgradeTitles = new String[6];

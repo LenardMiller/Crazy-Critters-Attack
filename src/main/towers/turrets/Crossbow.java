@@ -40,12 +40,6 @@ public class Crossbow extends Turret {
     }
 
     @Override
-    protected void fire(float barrelLength, String particleType) {
-        playSoundRandomSpeed(p, fireSound, 1);
-        spawnProjectiles(new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2), angle);
-    }
-
-    @Override
     protected void spawnProjectiles(PVector position, float angle) {
         if (multishot) {
             float offset = 0.07f;
