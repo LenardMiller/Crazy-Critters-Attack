@@ -6,9 +6,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.*;
 
 public class MagicMissileer extends Turret {
 
@@ -19,16 +17,11 @@ public class MagicMissileer extends Turret {
         name = "magicMissleer";
         size = new PVector(50,50);
         hasPriority = false;
-        maxHp = 20;
-        hp = maxHp;
-        delay = 3.3f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 3.3f);
         damage = 150;
         pjSpeed = 300;
         range = 300;
         betweenIdleFrames = down60ToFramerate(8);
-        state = 0;
-        loadSprites();
         fireSound = sounds.get("magicMissleer");
         placeSound = sounds.get("crystalPlace");
         damageSound = sounds.get("crystalDamage");
@@ -37,9 +30,9 @@ public class MagicMissileer extends Turret {
         price = MAGIC_MISSILEER_PRICE;
         value = price;
         priority = 2; //strong
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -88,7 +81,8 @@ public class MagicMissileer extends Turret {
         p.tint(255);
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void setUpgrades() {
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 100;

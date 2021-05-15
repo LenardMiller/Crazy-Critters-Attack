@@ -9,9 +9,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.*;
 
 public class TeslaTower extends Turret {
 
@@ -25,31 +23,23 @@ public class TeslaTower extends Turret {
     public TeslaTower(PApplet p, Tile tile) {
         super(p,tile);
         name = "tesla";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 3;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 3);
         damage = 250;
         arcLength = 3;
         pjSpeed = -1;
         range = 200;
         betweenIdleFrames = down60ToFramerate(3);
-        state = 0;
-        loadSprites();
         debrisType = "metal";
         price = TESLA_TOWER_PRICE;
         value = price;
-        priority = 0; //close
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("teslaFire");
         THUNDER_SOUND = soundsWithAlts.get("thunder");
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -116,7 +106,8 @@ public class TeslaTower extends Turret {
         p.tint(255);
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 600;
         upgradePrices[1] = 700;

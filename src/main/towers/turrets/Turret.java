@@ -66,35 +66,22 @@ public abstract class Turret extends Tower {
         super(p, tile);
         this.p = p;
         hasPriority = true;
-        offset = 0;
-        name = null;
         size = new PVector(50, 50);
         maxHp = 20;
         hp = maxHp;
         hit = false;
         delay = 4;
         pjSpeed = 500;
-        range = 0;
-        debrisType = null;
-        barrelLength = 0;
         fireParticle = "null";
         spriteArray = new ArrayList<>();
-        state = 0;
-        effectLevel = 0;
-        effectDuration = 0;
-        frame = 0;
-        loadDelay = 0;
-        betweenIdleFrames = 0;
-        loadDelayTime = 0;
-        loadSprites();
         upgradePrices = new int[6];
         upgradeTitles = new String[6];
         upgradeDescA = new String[6];
         upgradeDescB = new String[6];
         upgradeDescC = new String[6];
         upgradeIcons = new PImage[6];
-        nextLevelA = 0;
         nextLevelB = upgradeTitles.length / 2;
+
         updateTowerArray();
     }
 
@@ -363,6 +350,8 @@ public abstract class Turret extends Tower {
         //prevent having fire animations longer than delays
         while (delay <= fireFrames.length * betweenFireFrames + idleFrames.length) betweenFireFrames--;
     }
+
+    protected abstract void setUpgrades();
 
     protected abstract void upgradeSpecial(int id);
 }  

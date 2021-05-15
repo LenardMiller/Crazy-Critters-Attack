@@ -12,7 +12,6 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.incrementByTo;
 import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Flamethrower extends Turret {
 
@@ -30,27 +29,15 @@ public class Flamethrower extends Turret {
     public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
         name = "flamethrower";
-        size = new PVector(50, 50);
         offset = 7;
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 0;
         pjSpeed = 300;
         range = 200;
         effectLevel = 6;
         effectDuration = 5;
-        betweenIdleFrames = 0;
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
         damage = 10;
-        loadSprites();
         debrisType = "metal";
         price = FLAMETHROWER_PRICE;
         value = price;
-        priority = 0; //close
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
@@ -60,9 +47,9 @@ public class Flamethrower extends Turret {
         barrelLength = 24;
         count = 1;
         FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -170,7 +157,8 @@ public class Flamethrower extends Turret {
         }
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void setUpgrades() {
         //prices
         upgradePrices[0] = 400;
         upgradePrices[1] = 500;

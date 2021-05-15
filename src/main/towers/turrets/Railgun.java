@@ -9,7 +9,6 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class Railgun extends Turret {
 
@@ -27,36 +26,30 @@ public class Railgun extends Turret {
     public Railgun(PApplet p, Tile tile) {
         super(p,tile);
         name = "railgun";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
         offset = 6;
         hit = false;
         delay = 8;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 5000;
         pjSpeed = -1;
-        range = 800; //0
+        range = 800;
         NUM_VAPOR_FRAMES = 15;
         BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);
-        betweenVaporTimer = 0;
         vaporTrail = new PImage[NUM_VAPOR_FRAMES];
         vaporEndSprites = new PImage[11];
         currentVaporFrame = 16;
         betweenIdleFrames = 3;
         betweenFireFrames = 3;
-        state = 0;
         vaporTrail = animatedSprites.get("railgunVaporTrailTR");
         vaporEndSprites = animatedSprites.get("railgunBlastPT");
-        loadSprites();
         debrisType = "titanium";
         barrelLength = 30;
         price = 400;
         value = price;
         priority = 2; //strong
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -131,7 +124,8 @@ public class Railgun extends Turret {
     @Override
     protected void upgradeSpecial(int id) {}
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 0;
         upgradePrices[1] = 0;

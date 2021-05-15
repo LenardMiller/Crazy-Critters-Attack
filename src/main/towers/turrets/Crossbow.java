@@ -8,7 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
 
 public class Crossbow extends Turret {
 
@@ -19,33 +19,22 @@ public class Crossbow extends Turret {
         super(p,tile);
         offset = 2;
         name = "crossbow";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 4.5f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 4.5f);
         pjSpeed = 1400;
         range = 320;
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
         damage = 30;
         pierce = 1;
         damageSound = sounds.get("woodDamage");
         breakSound = sounds.get("woodBreak");
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("crossbow");
-        loadSprites();
         debrisType = "wood";
         price = CROSSBOW_PRICE;
         value = price;
         priority = 1; //last
-        multishot = false;
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -72,7 +61,8 @@ public class Crossbow extends Turret {
         }
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 75;
         upgradePrices[1] = 175;

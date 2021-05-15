@@ -8,7 +8,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class WaveMotion extends Turret {
 
@@ -23,30 +22,22 @@ public class WaveMotion extends Turret {
     public WaveMotion(PApplet p, Tile tile) {
         super(p,tile);
         name = "waveMotion";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        offset = 0;
-        hit = false;
-        delay = 6.6f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 6.6f);
         damage = 2;
         pjSpeed = -1;
-        range = 0; //0
+        range = 500;
         beam = new PImage[0];
         currentBeamFrame = 19;
         betweenIdleFrames = 3;
         betweenFireFrames = 4;
-        state = 0;
         beam = animatedSprites.get("waveMotionBeamTR");
-        loadSprites();
         debrisType = "darkMetal";
         price = 500;
         value = price;
         priority = 2; //strong
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -152,7 +143,8 @@ public class WaveMotion extends Turret {
         }
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 0;
         upgradePrices[1] = 0;

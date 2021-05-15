@@ -8,9 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.*;
 
 public class EnergyBlaster extends Turret{
 
@@ -23,33 +21,25 @@ public class EnergyBlaster extends Turret{
         super(p,tile);
         offset = 13;
         name = "energyBlaster";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 4.2f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 4.2f);
         damage = 350;
         pjSpeed = 1000;
         range = 300;
         betweenFireFrames = down60ToFramerate(2);
-        state = 0;
         effectRadius = 35;
-        bigExplosion = false;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("energyBlasterFire");
         fireParticle = "energy";
         barrelLength = 40;
-        loadSprites();
         debrisType = "darkMetal";
         price = ENERGY_BLASTER_PRICE;
         value = price;
         priority = 2; //strong
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -65,7 +55,8 @@ public class EnergyBlaster extends Turret{
         }
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 350;
         upgradePrices[1] = 400;

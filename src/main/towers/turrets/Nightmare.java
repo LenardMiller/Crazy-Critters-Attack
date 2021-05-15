@@ -8,7 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
 
 public class Nightmare extends Turret {
 
@@ -18,18 +18,9 @@ public class Nightmare extends Turret {
     public Nightmare(PApplet p, Tile tile) {
         super(p,tile);
         name = "nightmare";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 3.5f;
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 3.5f);
         pjSpeed = 1000;
         range = 200;
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
         damage = 100;
         numProjectiles = 3;
         effectLevel = 50;
@@ -41,9 +32,8 @@ public class Nightmare extends Turret {
         price = 300;
         value = price;
         priority = 2; //strong
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -74,7 +64,8 @@ public class Nightmare extends Turret {
     @Override
     protected void upgradeSpecial(int id) {}
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
 //        //delay (firerate)
 //        upgradeDelay[0] = -45;
 //        upgradeDelay[1] = 0;

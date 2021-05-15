@@ -9,7 +9,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
 
 public class Slingshot extends Turret {
 
@@ -19,30 +19,20 @@ public class Slingshot extends Turret {
     public Slingshot(PApplet p, Tile tile) {
         super(p,tile);
         name = "slingshot";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 1.6f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 1.6f);
         pjSpeed = 700;
         range = 250;
-        state = 0;
         damage = 15; //15
         damageSound = sounds.get("woodDamage");
         breakSound = sounds.get("woodBreak");
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("slingshot");
-        loadSprites();
         debrisType = "wood";
         price = SLINGSHOT_PRICE;
         value = price;
-        priority = 0; //first
-        painful = false;
-        gravel = false;
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -68,7 +58,8 @@ public class Slingshot extends Turret {
         if (!painful && !gravel) projectiles.add(new Pebble(p,position.x, position.y, angle, this, damage));
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 75;

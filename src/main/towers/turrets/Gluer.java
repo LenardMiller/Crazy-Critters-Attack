@@ -9,9 +9,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.*;
 
 public class Gluer extends Turret {
 
@@ -23,38 +21,24 @@ public class Gluer extends Turret {
     public Gluer(PApplet p, Tile tile) {
         super(p,tile);
         name = "gluer";
-        size = new PVector(50,50);
-        offset = 0;
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 2.5f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 2.5f);
         pjSpeed = 400;
         betweenFireFrames = down60ToFramerate(1);
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
-        damage = 0;
         range = 300;
         effectDuration = 3;
         effectLevel = 0.7f;
-        spikey = false;
         damageSound = sounds.get("stoneDamage");
         breakSound = sounds.get("stoneBreak");
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("glueFire");
         fireParticle = "glue";
         barrelLength = 28;
-        loadSprites();
         debrisType = "stone";
         price = GLUER_PRICE;
         value = price;
-        priority = 0; //close
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -107,7 +91,8 @@ public class Gluer extends Turret {
         targetEnemy = e;
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void setUpgrades() {
         //price
         upgradePrices[0] = 125;
         upgradePrices[1] = 150;

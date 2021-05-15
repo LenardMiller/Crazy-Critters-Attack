@@ -8,9 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.*;
 import static processing.core.PConstants.HALF_PI;
 
 public class SeismicTower extends Turret {
@@ -21,37 +19,24 @@ public class SeismicTower extends Turret {
     public SeismicTower(PApplet p, Tile tile) { //todo: can't hit flying
         super(p,tile);
         name = "seismic";
-        size = new PVector(50,50);
         offset = 4;
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 2.5f; //default: 200 frames
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 2.5f);
         pjSpeed = 400;
         betweenFireFrames = down60ToFramerate(1);
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
         damage = 50;
         range = 225;
         shockwaveWidth = 60;
-        seismicSense = false;
         damageSound = sounds.get("stoneDamage");
         breakSound = sounds.get("stoneBreak");
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("seismicSlam");
-        fireParticle = null;
         barrelLength = 29;
-        loadSprites();
         debrisType = "stone";
         price = SEISMIC_PRICE;
         value = price;
-        priority = 0; //close
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -183,7 +168,8 @@ public class SeismicTower extends Turret {
         }
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void setUpgrades() {
         //price
         upgradePrices[0] = 200;
         upgradePrices[1] = 200;

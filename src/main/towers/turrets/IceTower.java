@@ -14,15 +14,14 @@ public class IceTower extends Turret {
         super(p, tile);
         name = "iceTower";
         delay = randomizeDelay(p, 6);
-        damage = 0;
         pjSpeed = -1;
         range = 300;
-        loadSprites();
         debrisType = "metal";
         price = ICE_TOWER_PRICE;
         value = price;
-        setUpgrades();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -32,7 +31,8 @@ public class IceTower extends Turret {
 
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void setUpgrades() {
 
     }
 

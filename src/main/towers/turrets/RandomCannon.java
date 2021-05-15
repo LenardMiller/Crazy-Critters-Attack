@@ -8,9 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.*;
 import static processing.core.PConstants.HALF_PI;
 
 public class RandomCannon extends Turret {
@@ -21,32 +19,21 @@ public class RandomCannon extends Turret {
     public RandomCannon(PApplet p, Tile tile) {
         super(p,tile);
         name = "miscCannon";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 0.4f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 0.4f);
         pjSpeed = 700;
         betweenFireFrames = down60ToFramerate(8);
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
         damage = 10;
         range = 200;
         damageSound = sounds.get("woodDamage");
         breakSound = sounds.get("woodBreak");
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("luggageBlaster");
-        loadSprites();
         debrisType = "wood";
         price = RANDOM_CANNON_PRICE;
         value = price;
-        priority = 0; //close
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
@@ -85,7 +72,8 @@ public class RandomCannon extends Turret {
         }
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void setUpgrades() {
         //price
         upgradePrices[0] = 150;
         upgradePrices[1] = 150;
