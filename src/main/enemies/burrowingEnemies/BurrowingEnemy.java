@@ -31,6 +31,8 @@ public abstract class BurrowingEnemy extends Enemy {
         speed = maxSpeed;
     }
 
+    //todo: reveal animation
+
     private PVector randomPosition() {
         float x = p.random(position.x - (size.x / 2), position.x + (size.x / 2));
         float y = p.random(position.y - (size.y / 2), position.y + (size.y / 2));
