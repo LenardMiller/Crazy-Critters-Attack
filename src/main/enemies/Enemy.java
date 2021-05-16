@@ -4,6 +4,8 @@ import main.Main;
 import main.buffs.*;
 import main.buffs.glued.Glued;
 import main.buffs.glued.SpikeyGlued;
+import main.buffs.stunned.Frozen;
+import main.buffs.stunned.Stunned;
 import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;

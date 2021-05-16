@@ -1,4 +1,4 @@
-package main.buffs;
+package main.buffs.stunned;
 
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
