@@ -40,7 +40,7 @@ public class IceTower extends Turret {
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
-        fireSound = sounds.get("energyBlasterFire");
+        fireSound = sounds.get("iceFire");
         price = ICE_TOWER_PRICE;
         value = price;
 
