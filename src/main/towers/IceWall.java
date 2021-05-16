@@ -46,7 +46,7 @@ public class IceWall extends Wall {
     }
 
     @Override
-    public void main(){
+    public void main() {
         if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
         if (!paused && alive) {
@@ -59,6 +59,7 @@ public class IceWall extends Wall {
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy enemy = enemies.get(i);
                 if (enemy.flying) continue;
+                if (enemy.pfSize > 2) continue;
                 if (intersecting(enemy.position)) {
                     enemy.damageWithBuff(0, "frozen", 1, 0.2f, null,
                       false, "frozen", new PVector(0, 0), i);
