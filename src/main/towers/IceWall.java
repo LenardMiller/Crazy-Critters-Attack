@@ -57,13 +57,14 @@ public class IceWall extends Wall {
         float x = tile.position.x-size.x;
         float y = tile.position.y-size.y;
 
-        p.tint(255,tintColor,tintColor);
+        p.tint(255, tintColor, tintColor, 150);
         float hpRatio = (float)hp/(float)maxHp;
         if (!debug) {
             int crack = abs(ceil((hpRatio * 4) - 1) - 3);
             if (crack < 4) p.image(sprite[crack],x,y);
             else p.image(sprite[3],x,y);
         }
+        p.tint(255, tintColor, tintColor);
         //sides
         if (tSSprite != null) p.image(tSSprite,x,y);
         if (rSSprite != null) p.image(rSSprite,x,y);
