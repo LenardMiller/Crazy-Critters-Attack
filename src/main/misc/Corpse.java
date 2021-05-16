@@ -177,7 +177,7 @@ public class Corpse {
     }
 
     private void buffParticles(String part) {
-        if (!paused) {
+        if (!paused && part != null) {
             float chance = 0;
             //prevent divide by 0
             if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));

@@ -21,7 +21,7 @@ public class IceTower extends Turret {
         name = "iceTower";
         delay = randomizeDelay(p, 10);
         pjSpeed = -1;
-        range = 300;
+        range = 250;
         barrelLength = 30;
         offset = 6;
         wallHp = 50;
@@ -57,39 +57,80 @@ public class IceTower extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 0;
-        upgradePrices[1] = 0;
-        upgradePrices[2] = 0;
-        upgradePrices[3] = 0;
+        upgradePrices[0] = 50;
+        upgradePrices[1] = 100;
+        upgradePrices[2] = 200;
+
+        upgradePrices[3] = 50;
+        upgradePrices[4] = 100;
+        upgradePrices[5] = 200;
         //titles
-        upgradeTitles[0] = "";
-        upgradeTitles[1] = "";
-        upgradeTitles[2] = "";
-        upgradeTitles[3] = "";
-        //desc line one
-        upgradeDescA[0] = "";
-        upgradeDescA[1] = "";
-        upgradeDescA[2] = "";
-        upgradeDescA[3] = "";
-        //desc line two
-        upgradeDescB[0] = "";
-        upgradeDescB[1] = "";
-        upgradeDescB[2] = "";
-        upgradeDescB[3] = "";
-        //desc line three
-        upgradeDescC[0] = "";
-        upgradeDescC[1] = "";
-        upgradeDescC[2] = "";
+        upgradeTitles[0] = "Longer Lasting";
+        upgradeTitles[1] = "Stronger Ice";
+        upgradeTitles[2] = "Auto Defence";
+
+        upgradeTitles[3] = "Increase Range";
+        upgradeTitles[4] = "Faster Freezing";
+        upgradeTitles[5] = "Superfreeze";
+        //descriptions
+        upgradeDescA[0] = "Ice";
+        upgradeDescB[0] = "lasts";
+        upgradeDescC[0] = "longer";
+
+        upgradeDescA[1] = "Increase";
+        upgradeDescB[1] = "ice";
+        upgradeDescC[1] = "HP";
+
+        upgradeDescA[2] = "Automatically";
+        upgradeDescB[2] = "reinforce";
+        upgradeDescC[2] = "defences";
+
+
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "range";
         upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "firerate";
+        upgradeDescC[4] = "";
+
+        upgradeDescA[5] = "Freeze";
+        upgradeDescB[5] = "bigger";
+        upgradeDescC[5] = "enemies";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[25];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[27];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[34];
+
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[28];
     }
 
     @Override
     protected void upgradeSpecial(int id) {
-
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    wallTimeUntilDamage *= 2;
+                    break;
+                case 1:
+                    wallHp *= 2;
+                    break;
+                case 2:
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    range += 50;
+                    break;
+                case 4:
+                    delay -= 3;
+                    break;
+                case 5:
+                    break;
+            }
+        }
     }
 }
