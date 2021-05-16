@@ -13,6 +13,8 @@ import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class IceTower extends Turret {
 
+    private int wallHp;
+
     public IceTower(PApplet p, Tile tile) {
         super(p, tile);
         name = "iceTower";
@@ -21,6 +23,7 @@ public class IceTower extends Turret {
         range = 300;
         barrelLength = 30;
         offset = 6;
+        wallHp = 50;
         debrisType = "metal";
         price = ICE_TOWER_PRICE;
         value = price;
@@ -37,7 +40,7 @@ public class IceTower extends Turret {
 
         Tile tile = tiles.get((roundTo(targetEnemy.position.x, 50) / 50) + 1, (roundTo(targetEnemy.position.y, 50) / 50) + 1);
         if (tile.tower == null) {
-            tile.tower = new IceWall(p, tile);
+            tile.tower = new IceWall(p, tile, hp);
             Wall wall = (Wall) tile.tower;
             wall.placeEffects();
             updateNodes();

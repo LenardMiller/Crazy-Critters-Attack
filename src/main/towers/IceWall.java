@@ -11,11 +11,11 @@ public class IceWall extends Wall {
 
     private final CornerSpriteDS ICE;
 
-    public IceWall(PApplet p, Tile tile) {
+    public IceWall(PApplet p, Tile tile, int maxHp) {
         super(p,tile);
 
         name = "iceWall";
-        maxHp = 50;
+        this.maxHp = maxHp;
         hp = maxHp;
         sprite = animatedSprites.get("iceWallTW");
         debrisType = "crystal";
