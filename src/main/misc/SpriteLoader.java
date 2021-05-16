@@ -260,7 +260,7 @@ public class SpriteLoader {
         getSprite(p,"iceTowerFire","TR","iceTower/fire/",15);
         getSprite(p,"iceTowerLoad","TR","iceTower/load/",9);
         getSprite(p,"iceTowerIdle","TR","iceTower/idle/",6);
-        getSprite(p,"iceTowerVaporTrail","TR","iceTower/vaporTrail/",15);
+        getSprite(p,"iceTowerVaporTrail","TR","iceTower/vaporTrail/",4);
         getSprite(p,"waveMotionFire","TR","waveMotion/fire/",18);
         getSprite(p,"waveMotionLoad","TR","waveMotion/load/",80);
         getSprite(p,"waveMotionIdle","TR","waveMotion/idle/",14);

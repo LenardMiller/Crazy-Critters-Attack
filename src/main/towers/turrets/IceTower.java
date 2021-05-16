@@ -1,7 +1,6 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
-import main.particles.RailgunBlast;
 import main.towers.IceWall;
 import main.towers.Wall;
 import processing.core.PApplet;
@@ -18,8 +17,7 @@ public class IceTower extends Turret {
     private int wallHp;
     private int wallTimeUntilDamage;
 
-    private PImage[] vaporTrail;
-    private PImage[] vaporEndSprites;
+    private final PImage[] VAPOR_TRAIL;
     private final int BETWEEN_VAPOR_FRAMES;
     private int betweenVaporTimer;
     private int currentVaporFrame;
@@ -50,8 +48,7 @@ public class IceTower extends Turret {
         currentVaporFrame = 16;
         betweenIdleFrames = 3;
         betweenFireFrames = 3;
-        vaporTrail = animatedSprites.get("railgunVaporTrailTR");
-        vaporEndSprites = animatedSprites.get("railgunBlastPT");
+        VAPOR_TRAIL = animatedSprites.get("iceTowerVaporTrailTR");
 
         loadSprites();
         setUpgrades();
@@ -61,7 +58,6 @@ public class IceTower extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        particles.add(new RailgunBlast(p,position.x,position.y,0));
         currentVaporFrame = 0;
         vaporStart = position;
         PVector vaporEnd = targetEnemy.position;
@@ -106,15 +102,16 @@ public class IceTower extends Turret {
     }
 
     private void displayVaporTrail() {
-        if (currentVaporFrame < vaporTrail.length) {
+        if (currentVaporFrame < VAPOR_TRAIL.length) {
             for (int i = 0; i <= vaporLength; i++) {
                 p.pushMatrix();
                 float x = vaporStart.x + (vaporPartLength.x*i);
                 float y = vaporStart.y + (vaporPartLength.y*i);
                 p.translate(x, y);
                 p.rotate(vaporAngle);
-                p.image(vaporTrail[currentVaporFrame], -2, 0);
-                if (i == vaporLength && currentVaporFrame < 11) p.image(vaporEndSprites[currentVaporFrame], -13, -15);
+                float alpha = 255 * ((VAPOR_TRAIL.length - currentVaporFrame) / (float) VAPOR_TRAIL.length);
+                p.tint(255, alpha);
+                p.image(VAPOR_TRAIL[currentVaporFrame], -2, 0);
                 p.popMatrix();
             }
             if (betweenVaporTimer < BETWEEN_VAPOR_FRAMES) betweenVaporTimer++;
