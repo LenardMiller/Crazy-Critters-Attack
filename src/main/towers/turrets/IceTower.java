@@ -14,6 +14,7 @@ import static main.pathfinding.PathfindingUtilities.updateNodes;
 public class IceTower extends Turret {
 
     private int wallHp;
+    private int wallTimeUntilDamage;
 
     public IceTower(PApplet p, Tile tile) {
         super(p, tile);
@@ -24,6 +25,7 @@ public class IceTower extends Turret {
         barrelLength = 30;
         offset = 6;
         wallHp = 50;
+        wallTimeUntilDamage = 30;
         debrisType = "metal";
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
@@ -44,7 +46,7 @@ public class IceTower extends Turret {
 
         Tile tile = tiles.get((roundTo(targetEnemy.position.x, 50) / 50) + 1, (roundTo(targetEnemy.position.y, 50) / 50) + 1);
         if (tile.tower == null) {
-            tile.tower = new IceWall(p, tile, wallHp);
+            tile.tower = new IceWall(p, tile, wallHp, wallTimeUntilDamage);
             Wall wall = (Wall) tile.tower;
             wall.placeEffects();
             updateNodes();

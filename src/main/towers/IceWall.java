@@ -12,13 +12,17 @@ import static main.misc.WallSpecialVisuals.updateTowerArray;
 public class IceWall extends Wall {
 
     private final CornerSpriteDS ICE;
+    private final int TIME_UNTIL_DAMAGE;
 
-    public IceWall(PApplet p, Tile tile, int maxHp) {
+    private int damageTimer;
+
+    public IceWall(PApplet p, Tile tile, int maxHp, int timeUntilDamage) {
         super(p,tile);
 
         name = "iceWall";
         this.maxHp = maxHp;
         hp = maxHp;
+        TIME_UNTIL_DAMAGE = timeUntilDamage;
         sprite = animatedSprites.get("iceWallTW");
         debrisType = "crystal";
         damageSound = sounds.get("crystalDamage");
@@ -44,7 +48,12 @@ public class IceWall extends Wall {
     public void main(){
         if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
-        if (!paused) {
+        if (!paused && alive) {
+            damageTimer++;
+            if (damageTimer >= TIME_UNTIL_DAMAGE) {
+                hp -= maxHp / 10;
+                damageTimer = 0;
+            }
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy enemy = enemies.get(i);
                 if (intersecting(enemy.position)) {
