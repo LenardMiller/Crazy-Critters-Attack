@@ -1,13 +1,12 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
+import main.towers.Wall;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.ICE_TOWER_PRICE;
-import static main.Main.animatedSprites;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.Utilities.randomizeDelay;
+import static main.Main.*;
+import static main.misc.Utilities.*;
 
 public class IceTower extends Turret {
 
@@ -32,6 +31,9 @@ public class IceTower extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         targetEnemy.damageWithoutBuff(damage, this, "ice", PVector.fromAngle(angle), true);
+
+        Tile tile = tiles.get((roundTo(position.x, 50) / 50) + 1, (roundTo(position.y, 50) / 50) + 1);
+        tile.tower = new Wall(p, tile);
     }
 
     @Override
