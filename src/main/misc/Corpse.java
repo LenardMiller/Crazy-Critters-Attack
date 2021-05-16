@@ -153,6 +153,10 @@ public class Corpse {
                 tintFinal = new Color(79, 0, 128);
                 part = "dark";
                 break;
+            case "frozen":
+                tintFinal = new Color(150, 225, 255);
+                part = null;
+                break;
             default:
                 tintFinal = new Color(255,255,255);
                 doSpecialEffects = false;
