@@ -230,7 +230,7 @@ public abstract class Enemy {
     }
 
     public void displayShadow() {
-        if (!paused) animate();
+        if (!paused && !immobilized) animate();
         p.pushMatrix();
         p.tint(0, 60);
         int x = 1;
@@ -327,6 +327,9 @@ public abstract class Enemy {
                     break;
                 case "stunned":
                     buff = new Stunned(p, id, turret);
+                    break;
+                case "frozen":
+                    buff = new Frozen(p, id, turret);
                     break;
                 default:
                     buff = null;

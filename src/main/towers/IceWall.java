@@ -1,7 +1,9 @@
 package main.towers;
 
+import main.enemies.Enemy;
 import main.misc.Tile;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateFlooring;
@@ -42,6 +44,21 @@ public class IceWall extends Wall {
     public void main(){
         if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
+        if (!paused) {
+            for (int i = 0; i < enemies.size(); i++) {
+                Enemy enemy = enemies.get(i);
+                if (intersecting(enemy.position)) {
+                    enemy.damageWithBuff(0, "frozen", 1, 0.2f, null,
+                      false, "frozen", new PVector(0, 0), i);
+                }
+            }
+        }
+    }
+
+    private boolean intersecting(PVector other) {
+        boolean matchX = other.x >= tile.position.x - size.x && other.x <= tile.position.x;
+        boolean matchY = other.y >= tile.position.y - size.y && other.y <= tile.position.y;
+        return matchX && matchY;
     }
 
     @Override
