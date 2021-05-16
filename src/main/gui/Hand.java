@@ -3,6 +3,7 @@ package main.gui;
 import main.enemies.Enemy;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.misc.Tile;
+import main.towers.IceWall;
 import main.towers.Wall;
 import main.towers.turrets.*;
 import processing.core.PApplet;
@@ -242,6 +243,7 @@ public class Hand {
         P.text("Selected:", 1000, 241);
         P.textFont(largeFont);
         if (currentLevel == 0) P.text("Wooden", 1000, 276);
+        else if (wall instanceof IceWall) P.text("Ice", 1000, 276);
         else P.text(wall.upgradeTitles[currentLevel - 1], 1000, 276);
         P.text("Wall", 1000, 301);
         P.textFont(mediumFont);
