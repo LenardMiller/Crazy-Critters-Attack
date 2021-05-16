@@ -56,6 +56,8 @@ public class Wall extends Tower {
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
         tiles.get(x-1,y-1).setFlooring(name);
+        updateFlooring();
+        connectWallQueues++;
 
         upgradePrices = new int[4];
         upgradeTitles = new String[4];

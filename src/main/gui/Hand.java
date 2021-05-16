@@ -13,7 +13,6 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
-import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
 
@@ -398,11 +397,7 @@ public class Hand {
                     connectWallQueues++;
                 }
                 money += price; //cancel out price change later
-            } else {
-                tile.tower = new Wall(P, tile);
-                updateFlooring();
-                connectWallQueues++;
-            }
+            } else tile.tower = new Wall(P, tile);
             changeHeld = false;
         }
         if (held.contains("TL")) {

@@ -7,6 +7,8 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
+import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class IceTower extends Turret {
 
@@ -32,8 +34,12 @@ public class IceTower extends Turret {
     protected void spawnProjectiles(PVector position, float angle) {
         targetEnemy.damageWithoutBuff(damage, this, "ice", PVector.fromAngle(angle), true);
 
-        Tile tile = tiles.get((roundTo(position.x, 50) / 50) + 1, (roundTo(position.y, 50) / 50) + 1);
-        tile.tower = new Wall(p, tile);
+        Tile tile = tiles.get((roundTo(targetEnemy.position.x, 50) / 50) + 1, (roundTo(targetEnemy.position.y, 50) / 50) + 1);
+        if (tile.tower == null) {
+            tile.tower = new Wall(p, tile);
+            updateNodes();
+            updateTowerArray();
+        }
     }
 
     @Override
