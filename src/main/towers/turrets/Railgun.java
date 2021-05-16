@@ -65,16 +65,6 @@ public class Railgun extends Turret {
         vaporLength = (int)(c/24);
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
-    }
-
-    @Override
-    protected void fire(float barrelLength, String particleType) {
-        PVector projectileSpawn = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector barrel = PVector.fromAngle(angle-HALF_PI);
-        barrel.setMag(barrelLength);
-        projectileSpawn.add(barrel);
-
-        spawnProjectiles(projectileSpawn, angle);
 
         targetEnemy.damageWithoutBuff(damage,this, "normal", PVector.fromAngle(vaporAngle - HALF_PI), true);
     }

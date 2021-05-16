@@ -28,7 +28,7 @@ public class IceTower extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-
+        targetEnemy.damageWithoutBuff(damage, this, "ice", PVector.fromAngle(angle), true);
     }
 
     @Override
