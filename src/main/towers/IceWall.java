@@ -18,8 +18,8 @@ public class IceWall extends Wall {
         name = "iceWall";
         maxHp = 50;
         hp = maxHp;
-        sprite = animatedSprites.get("woodWallTW");
-        debrisType = "wood";
+        sprite = animatedSprites.get("iceWallTW");
+        debrisType = "crystal";
         damageSound = sounds.get(debrisType + "Damage");
         breakSound = sounds.get(debrisType + "Break");
         placeSound = sounds.get(debrisType + "PlaceShort");

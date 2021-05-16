@@ -271,6 +271,7 @@ public class SpriteLoader {
         getSprite(p,"metalWall","TW","Metal/",4);
         getSprite(p,"crystalWall","TW","Crystal/",4);
         getSprite(p,"titaniumWall","TW","Titanium/",4);
+        getSprite(p,"iceWall","TW","Ice/",4);
         //machines
         getMachineSprite(p,"stoneDrill", new int[]{12, 12, 13, 20});
         getMachineSprite(p, "metalDrill", new int[]{8, 8, 9, 11});
@@ -450,13 +451,14 @@ public class SpriteLoader {
         staticSprites.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
         staticSprites.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
         staticSprites.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             String name = "null";
             if (i == 0) name = "Wood";
             if (i == 1) name = "Stone";
             if (i == 2) name = "Metal";
             if (i == 3) name = "Crystal";
             if (i == 4) name = "Titanium";
+            if (i == 5) name = "Ice";
             String idA = "null";
             String idB = "null";
             String idC = "null";
@@ -511,10 +513,12 @@ public class SpriteLoader {
         staticSprites.put("metalWallFl_TL",p.loadImage("sprites/tiles/flooring/metalWall/base.png"));
         staticSprites.put("crystalWallFl_TL",p.loadImage("sprites/tiles/flooring/crystalWall/base.png"));
         staticSprites.put("titaniumWallFl_TL",p.loadImage("sprites/tiles/flooring/titaniumWall/base.png"));
-        for (int i = 0; i < 2; i++) { //simple connections
+        staticSprites.put("iceWallFl_TL",p.loadImage("sprites/tiles/flooring/iceWall/base.png"));
+        for (int i = 0; i < 3; i++) { //simple connections
             String name = null;
             if (i == 0) name = "woodWall";
             if (i == 1) name = "stoneWall";
+            if (i == 2) name = "iceWall";
             staticSprites.put(name + "Fl_T_TL", p.loadImage("sprites/tiles/flooring/" + name + "/t.png"));
             staticSprites.put(name + "Fl_R_TL", p.loadImage("sprites/tiles/flooring/" + name + "/r.png"));
             staticSprites.put(name + "Fl_B_TL", p.loadImage("sprites/tiles/flooring/" + name + "/b.png"));
