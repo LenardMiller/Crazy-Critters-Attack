@@ -374,10 +374,8 @@ public abstract class Enemy {
     }
 
     private void damageEffect(boolean particles) {
-        if (hp < maxHp) {
-            barAlpha = 255;
-            particles = false;
-        }
+        if (hp == maxHp) return;
+        barAlpha = 255;
         if (particles) {
             int num = pfSize;
             int chance = 5;
