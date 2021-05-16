@@ -53,6 +53,7 @@ public class IceWall extends Wall {
             if (damageTimer >= TIME_UNTIL_DAMAGE) {
                 hp -= maxHp / 10;
                 damageTimer = 0;
+                refreshHpBar();
             }
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy enemy = enemies.get(i);
