@@ -6,6 +6,7 @@ import main.enemies.burrowingEnemies.MidWorm;
 import main.enemies.burrowingEnemies.Worm;
 import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
+import main.towers.IceWall;
 import main.towers.Tower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -73,7 +74,7 @@ public class Wave {
     public void end() {
         for (Tower tower : towers) {
             if (tower instanceof Turret) tower.heal(1);
-            else tower.heal(0.35f);
+            else if (!(tower instanceof IceWall)) tower.heal(0.35f);
         }
         machine.heal(0.05f);
         playSound(sounds.get("waveEnd"), 1, 1);
