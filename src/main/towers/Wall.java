@@ -53,12 +53,6 @@ public class Wall extends Tower {
         value = price;
         nextLevelB = 0;
 
-        int x = (int)(tile.position.x / 50);
-        int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setFlooring(name);
-        updateFlooring();
-        connectWallQueues++;
-
         upgradePrices = new int[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
@@ -79,6 +73,11 @@ public class Wall extends Tower {
     public void placeEffects() {
         playSoundRandomSpeed(p, placeSound, 1);
         spawnParticles();
+        int x = (int)(tile.position.x / 50);
+        int y = (int)(tile.position.y / 50);
+        tiles.get(x-1,y-1).setFlooring(name);
+        updateFlooring();
+        connectWallQueues++;
     }
 
     @Override

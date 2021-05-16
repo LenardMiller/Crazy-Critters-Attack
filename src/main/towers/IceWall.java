@@ -6,7 +6,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.WallSpecialVisuals.updateFlooring;
+import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
 public class IceWall extends Wall {
@@ -32,16 +32,17 @@ public class IceWall extends Wall {
         value = 0;
         nextLevelB = 4;
 
-        int x = (int)(tile.position.x / 50);
-        int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setFlooring(name);
-        updateFlooring();
-        connectWallQueues++;
-
         updateTowerArray();
 
         ICE = new CornerSpriteDS();
         loadSprites();
+    }
+
+    @Override
+    public void placeEffects() {
+        playSoundRandomSpeed(p, placeSound, 1);
+        spawnParticles();
+        connectWallQueues++;
     }
 
     @Override

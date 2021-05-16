@@ -514,12 +514,10 @@ public class SpriteLoader {
         staticSprites.put("metalWallFl_TL",p.loadImage("sprites/tiles/flooring/metalWall/base.png"));
         staticSprites.put("crystalWallFl_TL",p.loadImage("sprites/tiles/flooring/crystalWall/base.png"));
         staticSprites.put("titaniumWallFl_TL",p.loadImage("sprites/tiles/flooring/titaniumWall/base.png"));
-        staticSprites.put("iceWallFl_TL",p.loadImage("sprites/tiles/flooring/iceWall/base.png"));
-        for (int i = 0; i < 3; i++) { //simple connections
+        for (int i = 0; i < 2; i++) { //simple connections
             String name = null;
             if (i == 0) name = "woodWall";
             if (i == 1) name = "stoneWall";
-            if (i == 2) name = "iceWall";
             staticSprites.put(name + "Fl_T_TL", p.loadImage("sprites/tiles/flooring/" + name + "/t.png"));
             staticSprites.put(name + "Fl_R_TL", p.loadImage("sprites/tiles/flooring/" + name + "/r.png"));
             staticSprites.put(name + "Fl_B_TL", p.loadImage("sprites/tiles/flooring/" + name + "/b.png"));

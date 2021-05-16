@@ -1,6 +1,7 @@
 package main.misc;
 
 import main.pathfinding.Node;
+import main.towers.IceWall;
 import main.towers.Tower;
 import main.towers.Wall;
 import processing.core.PApplet;
@@ -334,6 +335,7 @@ public class Tile {
     public boolean updateFlooring(String name) {
         Tower tower = tiles.get((roundTo(position.x, 50)/50) + 1, (roundTo(position.y, 50)/50) + 1).tower;
         if (name.equals(flooringName)) return false;
+        if (tower instanceof IceWall) return true;
         if (tower instanceof Wall) return false;
         else {
             setFlooring(name);
