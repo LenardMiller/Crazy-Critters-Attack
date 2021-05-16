@@ -4,7 +4,6 @@ import main.misc.Tile;
 import processing.core.PApplet;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 
@@ -20,9 +19,9 @@ public class IceWall extends Wall {
         hp = maxHp;
         sprite = animatedSprites.get("iceWallTW");
         debrisType = "crystal";
-        damageSound = sounds.get(debrisType + "Damage");
-        breakSound = sounds.get(debrisType + "Break");
-        placeSound = sounds.get(debrisType + "PlaceShort");
+        damageSound = sounds.get("crystalDamage");
+        breakSound = sounds.get("crystalBreak");
+        placeSound = sounds.get("crystalPlaceShort");
         price = 0;
         value = 0;
         nextLevelB = 4;
@@ -37,9 +36,6 @@ public class IceWall extends Wall {
 
         ICE = new CornerSpriteDS();
         loadSprites();
-
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

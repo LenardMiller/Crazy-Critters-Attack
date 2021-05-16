@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.misc.Tile;
 import main.towers.IceWall;
+import main.towers.Wall;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -37,6 +38,8 @@ public class IceTower extends Turret {
         Tile tile = tiles.get((roundTo(targetEnemy.position.x, 50) / 50) + 1, (roundTo(targetEnemy.position.y, 50) / 50) + 1);
         if (tile.tower == null) {
             tile.tower = new IceWall(p, tile);
+            Wall wall = (Wall) tile.tower;
+            wall.placeEffects();
             updateNodes();
             updateTowerArray();
         }

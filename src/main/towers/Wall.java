@@ -74,9 +74,11 @@ public class Wall extends Tower {
         CRYSTAL = new CornerSpriteDS();
         ULTIMATE = new CornerSpriteDS();
         loadSprites();
+    }
 
-        spawnParticles();
+    public void placeEffects() {
         playSoundRandomSpeed(p, placeSound, 1);
+        spawnParticles();
     }
 
     @Override

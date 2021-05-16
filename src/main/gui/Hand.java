@@ -397,7 +397,11 @@ public class Hand {
                     connectWallQueues++;
                 }
                 money += price; //cancel out price change later
-            } else tile.tower = new Wall(P, tile);
+            } else {
+                tile.tower = new Wall(P, tile);
+                Wall wall = (Wall) tile.tower;
+                wall.placeEffects();
+            }
             changeHeld = false;
         }
         if (held.contains("TL")) {
