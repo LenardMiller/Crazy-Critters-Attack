@@ -51,7 +51,7 @@ public class IceTower extends Turret {
             wall.placeEffects();
             updateNodes();
             updateTowerArray();
-        }
+        } else if (tile.tower instanceof IceWall) tile.tower.heal(1);
     }
 
     @Override
