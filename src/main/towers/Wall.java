@@ -22,19 +22,19 @@ public class Wall extends Tower {
     private final CornerSpriteDS CRYSTAL;
     private final CornerSpriteDS ULTIMATE;
 
-    private PImage tlCSprite;
-    private PImage trCSprite;
-    private PImage blCSprite;
-    private PImage brCSprite;
-    private PImage tSSprite;
-    private PImage bSSprite;
-    private PImage lSSprite;
-    private PImage rSSprite;
+    protected PImage tlCSprite;
+    protected PImage trCSprite;
+    protected PImage blCSprite;
+    protected PImage brCSprite;
+    protected PImage tSSprite;
+    protected PImage bSSprite;
+    protected PImage lSSprite;
+    protected PImage rSSprite;
 
     private final PImage[][] UPGRADE_SPRITES;
     private final String[] UPGRADE_NAMES;
 
-    private PImage[] sprite;
+    protected PImage[] sprite;
 
     public Wall(PApplet p, Tile tile) { //todo: make flooring nicer?
         super(p,tile);
@@ -333,7 +333,7 @@ public class Wall extends Tower {
         }
     }
 
-    private static class CornerSpriteDS {
+    protected static class CornerSpriteDS {
 
         CornerSpriteDSItem[] items;
         PImage t;
