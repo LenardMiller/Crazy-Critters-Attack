@@ -291,7 +291,13 @@ public class Selection { //what tower is selected
                 setTextPurple("Blue fire", offset);
                 setTextPurple("Infinite pierce", offset);
                 break;
+            case "iceTower":
+                P.text("Ice Tower", 1000, 241);
+                setTextPurple("Perfect accuracy", offset);
+                setTextPurple("Encases enemies", offset);
+                break;
             case "railgun":
+                setTextPurple("Perfect accuracy", offset);
                 P.text("Railgun", 1000, 241);
                 break;
             case "waveMotion":

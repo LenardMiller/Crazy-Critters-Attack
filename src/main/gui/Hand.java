@@ -331,6 +331,11 @@ public class Hand {
                 offset = new PVector(7, 7);
                 price = FLAMETHROWER_PRICE;
                 break;
+            case "iceTower":
+                heldSprite = staticSprites.get("iceTowerFullTR");
+                offset = new PVector(6, 6);
+                price = ICE_TOWER_PRICE;
+                break;
             case "railgun":
                 heldSprite = staticSprites.get("railgunFullTR");
                 offset = new PVector(6, 6);
@@ -382,6 +387,7 @@ public class Hand {
         else if (held.equals("tesla") && alive) tile.tower = new TeslaTower(P, tile);
         else if (held.equals("nightmare") && alive) tile.tower = new Nightmare(P, tile);
         else if (held.equals("flamethrower") && alive) tile.tower = new Flamethrower(P, tile);
+        else if (held.equals("iceTower") && alive) tile.tower = new IceTower(P, tile);
         else if (held.equals("railgun") && alive) tile.tower = new Railgun(P, tile);
         else if (held.equals("waveMotion") && alive) tile.tower = new WaveMotion(P, tile);
         else if (held.equals("wall") && alive) {
