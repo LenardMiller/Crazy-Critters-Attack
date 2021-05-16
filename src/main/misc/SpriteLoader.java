@@ -333,6 +333,7 @@ public class SpriteLoader {
         staticSprites.put("waveSecondaryIc",p.loadImage("sprites/guiObjects/waveSecondary.png"));
         staticSprites.put("currentLineIc",p.loadImage("sprites/guiObjects/currentLine.png"));
         //particles
+        staticSprites.put("icePt",p.loadImage("sprites/particles/debris/ice.png"));
         staticSprites.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
         staticSprites.put("metalPt",p.loadImage("sprites/particles/debris/metal.png"));
         staticSprites.put("stonePt",p.loadImage("sprites/particles/debris/stone.png"));
@@ -557,6 +558,7 @@ public class SpriteLoader {
         staticSprites.put("darkMetalDebrisBr_TL",p.loadImage("sprites/tiles/breakables/debris/darkMetal.png"));
         staticSprites.put("crystalDebrisBr_TL",p.loadImage("sprites/tiles/breakables/debris/crystal.png"));
         staticSprites.put("titaniumDebrisBr_TL",p.loadImage("sprites/tiles/breakables/debris/titanium.png"));
+        staticSprites.put("iceDebrisBr_TL",p.loadImage("sprites/tiles/breakables/debris/ice.png"));
         //obstacles
         staticSprites.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         staticSprites.put("smallYellowTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallYellowTree.png"));
