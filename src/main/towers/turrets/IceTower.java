@@ -25,6 +25,10 @@ public class IceTower extends Turret {
         offset = 6;
         wallHp = 50;
         debrisType = "metal";
+        damageSound = sounds.get("metalDamage");
+        breakSound = sounds.get("metalBreak");
+        placeSound = sounds.get("metalPlace");
+        fireSound = sounds.get("energyBlasterFire");
         price = ICE_TOWER_PRICE;
         value = price;
 
@@ -40,7 +44,7 @@ public class IceTower extends Turret {
 
         Tile tile = tiles.get((roundTo(targetEnemy.position.x, 50) / 50) + 1, (roundTo(targetEnemy.position.y, 50) / 50) + 1);
         if (tile.tower == null) {
-            tile.tower = new IceWall(p, tile, hp);
+            tile.tower = new IceWall(p, tile, wallHp);
             Wall wall = (Wall) tile.tower;
             wall.placeEffects();
             updateNodes();
