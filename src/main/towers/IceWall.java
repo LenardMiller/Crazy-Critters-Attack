@@ -58,6 +58,7 @@ public class IceWall extends Wall {
             }
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy enemy = enemies.get(i);
+                if (enemy.flying) continue;
                 if (intersecting(enemy.position)) {
                     enemy.damageWithBuff(0, "frozen", 1, 0.2f, null,
                       false, "frozen", new PVector(0, 0), i);
