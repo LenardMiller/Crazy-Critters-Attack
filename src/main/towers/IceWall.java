@@ -33,7 +33,6 @@ public class IceWall extends Wall {
         nextLevelB = 4;
 
         updateTowerArray();
-
         ICE = new CornerSpriteDS();
         loadSprites();
     }

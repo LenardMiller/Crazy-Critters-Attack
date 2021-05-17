@@ -14,8 +14,10 @@ import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class IceTower extends Turret {
 
-    private int wallHp;
-    private int wallTimeUntilDamage;
+    public int wallHp;
+    public int wallTimeUntilDamage;
+
+    public int frozenTotal;
 
     private final PImage[] VAPOR_TRAIL;
     private final int BETWEEN_VAPOR_FRAMES;
@@ -76,7 +78,11 @@ public class IceTower extends Turret {
             wall.placeEffects();
             updateNodes();
             updateTowerArray();
-        } else if (tile.tower instanceof IceWall) tile.tower.heal(1);
+            frozenTotal++;
+        } else if (tile.tower instanceof IceWall) {
+            tile.tower.heal(1);
+            frozenTotal++;
+        }
     }
 
     @Override

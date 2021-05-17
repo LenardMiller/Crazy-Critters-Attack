@@ -1,10 +1,7 @@
 package main.gui;
 
 import main.gui.guiObjects.buttons.UpgradeTower;
-import main.towers.turrets.Gluer;
-import main.towers.turrets.MagicMissileer;
-import main.towers.turrets.TeslaTower;
-import main.towers.turrets.Turret;
+import main.towers.turrets.*;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.sound.SoundFile;
@@ -355,6 +352,13 @@ public class Selection { //what tower is selected
             P.fill(new Color(100, 150, 255).getRGB(), 254);
             P.text("Jumps: " + tesla.arcLength, 910, 356 + 20 * purpleCount + offset);
         }
+        //ice
+        if (turret instanceof IceTower) {
+            IceTower ice = (IceTower) turret;
+            P.fill(new Color(100, 150, 255).getRGB(), 254);
+            P.text("Ice HP: " + ice.wallHp, 910, 356 + 20 * purpleCount + offset);
+            P.text("Ice duration: " + ((ice.wallTimeUntilDamage / FRAMERATE) * 10) + "s", 910, 376 + 20 * purpleCount + offset);
+        }
         //missle count
         if (turret instanceof MagicMissileer) {
             MagicMissileer magicMissileer = (MagicMissileer) turret;
@@ -371,11 +375,15 @@ public class Selection { //what tower is selected
         P.textFont(mediumFont);
         if (turret instanceof Gluer) {
             Gluer gluer = (Gluer) turret;
-            P.text(nfc(gluer.gluedTotal) + " glued", 910, 450 + offsetB);
+            P.text(nfc(gluer.gluedTotal) + " enemies glued", 910, 450 + offsetB);
+        }
+        if (turret instanceof IceTower) {
+            IceTower ice = (IceTower) turret;
+            P.text(nfc(ice.frozenTotal) + " walls created", 910, 450 + offsetB);
         }
         if (turret.killsTotal != 1) P.text(nfc(turret.killsTotal) + " kills", 910, 475 + offsetB);
         else P.text(nfc(turret.killsTotal) + " kill", 910, 475 + offsetB);
-        P.text(nfc(turret.damageTotal) + " dmg total", 910, 500 + offsetB);
+        P.text(nfc(turret.damageTotal) + " total damage", 910, 500 + offsetB);
     }
 
     private void upgradeIcons() {
