@@ -207,32 +207,34 @@ public abstract class Enemy {
     }
 
     private void animate() { //handle animation states
-        if (attacking) {
-            if (attackFrame >= attackFrames.length) attackFrame = 0;
-            sprite = attackFrames[attackFrame];
-            idleTime++;
-            if (attackFrame < attackFrames.length - 1) {
-                if (idleTime >= betweenAttackFrames) {
-                    attackFrame += 1;
-                    idleTime = 0;
-                }
-            } else attackFrame = 0;
-        } else {
-            idleTime++;
-            if (moveFrame < moveFrames.length - 1) {
-                if (idleTime >= betweenWalkFrames) {
-                    moveFrame++;
-                    idleTime = 0;
-                }
-            } else moveFrame = 0;
-            sprite = moveFrames[moveFrame];
+        if (!immobilized) {
+            if (attacking) {
+                if (attackFrame >= attackFrames.length) attackFrame = 0;
+                sprite = attackFrames[attackFrame];
+                idleTime++;
+                if (attackFrame < attackFrames.length - 1) {
+                    if (idleTime >= betweenAttackFrames) {
+                        attackFrame += 1;
+                        idleTime = 0;
+                    }
+                } else attackFrame = 0;
+            } else {
+                idleTime++;
+                if (moveFrame < moveFrames.length - 1) {
+                    if (idleTime >= betweenWalkFrames) {
+                        moveFrame++;
+                        idleTime = 0;
+                    }
+                } else moveFrame = 0;
+                sprite = moveFrames[moveFrame];
+            }
         }
         //shift back to normal
         currentTintColor = incrementColorTo(currentTintColor, up60ToFramerate(20), new Color(255, 255, 255));
     }
 
     public void displayShadow() {
-        if (!paused && !immobilized) animate();
+        if (!paused) animate();
         p.pushMatrix();
         p.tint(0, 60);
         int x = 1;
