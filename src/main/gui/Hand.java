@@ -334,7 +334,7 @@ public class Hand {
                 break;
             case "iceTower":
                 heldSprite = staticSprites.get("iceTowerFullTR");
-                offset = new PVector(6, 6);
+                offset = new PVector(0, 0);
                 price = ICE_TOWER_PRICE;
                 break;
             case "railgun":

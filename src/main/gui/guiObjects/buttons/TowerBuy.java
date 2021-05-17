@@ -158,7 +158,7 @@ public class TowerBuy extends Button {
                     flamethrowerInfo(p);
                     break;
                 case "iceTower":
-                    p.text("Ice Tower", x, 241);
+                    p.text("Freeze Ray", x, 241);
                     break;
                 case "railgun":
                     p.text("Railgun", x, 241);

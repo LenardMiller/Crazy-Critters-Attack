@@ -257,9 +257,9 @@ public class SpriteLoader {
         getSprite(p,"railgunLoad","TR","railgun/load/",9);
         getSprite(p,"railgunIdle","TR","railgun/idle/",6);
         getSprite(p,"railgunVaporTrail","TR","railgun/vaporTrail/",15);
-        getSprite(p,"iceTowerFire","TR","iceTower/fire/",15);
-        getSprite(p,"iceTowerLoad","TR","iceTower/load/",9);
-        getSprite(p,"iceTowerIdle","TR","iceTower/idle/",6);
+        getSprite(p,"iceTowerFire","TR","iceTower/fire/",4);
+        getSprite(p,"iceTowerLoad","TR","iceTower/load/",16);
+        getSprite(p,"iceTowerIdle","TR","iceTower/idle/",2);
         getSprite(p,"iceTowerVaporTrail","TR","iceTower/vaporTrail/",4);
         getSprite(p,"waveMotionFire","TR","waveMotion/fire/",18);
         getSprite(p,"waveMotionLoad","TR","waveMotion/load/",80);
@@ -441,7 +441,6 @@ public class SpriteLoader {
         staticSprites.put("railgunIdleTR",p.loadImage("sprites/towers/turrets/railgun/idle.png"));
         staticSprites.put("iceTowerBaseTR",p.loadImage("sprites/towers/turrets/iceTower/base.png"));
         staticSprites.put("iceTowerFullTR",p.loadImage("sprites/towers/turrets/iceTower/full.png"));
-        staticSprites.put("iceTowerIdleTR",p.loadImage("sprites/towers/turrets/iceTower/idle.png"));
         staticSprites.put("waveMotionBaseTR",p.loadImage("sprites/towers/turrets/waveMotion/base.png"));
         staticSprites.put("waveMotionFullTR",p.loadImage("sprites/towers/turrets/waveMotion/full.png"));
         staticSprites.put("waveMotionIdleTR",p.loadImage("sprites/towers/turrets/waveMotion/idle.png"));

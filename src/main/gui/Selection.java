@@ -289,7 +289,7 @@ public class Selection { //what tower is selected
                 setTextPurple("Infinite pierce", offset);
                 break;
             case "iceTower":
-                P.text("Ice Tower", 1000, 241);
+                P.text("Freeze Ray", 1000, 241);
                 setTextPurple("Perfect accuracy", offset);
                 setTextPurple("Encases enemies", offset);
                 break;
@@ -357,7 +357,7 @@ public class Selection { //what tower is selected
             IceTower ice = (IceTower) turret;
             P.fill(new Color(100, 150, 255).getRGB(), 254);
             P.text("Ice HP: " + ice.wallHp, 910, 356 + 20 * purpleCount + offset);
-            P.text("Ice duration: " + ((ice.wallTimeUntilDamage / FRAMERATE) * 10) + "s", 910, 376 + 20 * purpleCount + offset);
+            P.text("Ice lifespan: " + ((ice.wallTimeUntilDamage / FRAMERATE) * 10) + "s", 910, 376 + 20 * purpleCount + offset);
         }
         //missle count
         if (turret instanceof MagicMissileer) {

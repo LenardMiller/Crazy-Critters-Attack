@@ -185,7 +185,10 @@ public abstract class Turret extends Tower {
         sIdle = staticSprites.get(name + "IdleTR");
         fireFrames = animatedSprites.get(name + "FireTR");
         loadFrames = animatedSprites.get(name + "LoadTR");
-        if (animatedSprites.get(name + "IdleTR") != null) idleFrames = animatedSprites.get(name + "IdleTR");
+        if (animatedSprites.get(name + "IdleTR") != null) {
+            idleFrames = animatedSprites.get(name + "IdleTR");
+            sIdle = idleFrames[0];
+        }
         else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
     }
 

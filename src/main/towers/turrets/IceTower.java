@@ -35,7 +35,7 @@ public class IceTower extends Turret {
         pjSpeed = -1;
         range = 250;
         barrelLength = 30;
-        offset = 6;
+        offset = 0;
         wallHp = 50;
         wallTimeUntilDamage = 30;
         debrisType = "metal";
@@ -48,7 +48,7 @@ public class IceTower extends Turret {
 
         BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);
         currentVaporFrame = 16;
-        betweenIdleFrames = 3;
+        betweenIdleFrames = 5;
         betweenFireFrames = 3;
         VAPOR_TRAIL = animatedSprites.get("iceTowerVaporTrailTR");
 
@@ -92,7 +92,7 @@ public class IceTower extends Turret {
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
         p.rotate(angle);
         p.tint(0,60);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        if (sprite != null) p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.tint(255);
         p.popMatrix();
         //vaporTrail
@@ -102,7 +102,8 @@ public class IceTower extends Turret {
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
         p.tint(255, tintColor, tintColor);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        if (sprite != null) p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        else System.out.println("missing!");
         p.popMatrix();
         p.tint(255);
     }
