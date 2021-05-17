@@ -315,6 +315,12 @@ public class Main extends PApplet {
         minCost = minCost(maxCost);
         //objects
         drawObjects();
+        //enemy hp bars
+        enemies.stream().filter(enemy -> enemy.hp > 0 && !enemy.stealthMode).forEach(Enemy::hpBar);
+        //tower hp bars
+        towers.forEach(Tower::displayHpBar);
+        //machine hp bar
+        machine.hpBar();
         //text
         for (int i = popupTexts.size()-1; i >= 0; i--) {
             popupTexts.get(i).main();
@@ -328,12 +334,7 @@ public class Main extends PApplet {
             textAlign(LEFT);
             if (!levelBuilder) inGameGui.drawText(this, 10);
         } if (dev) inGameGui.drawDebugText(this, 10);
-        //enemy hp bars
-        enemies.stream().filter(enemy -> enemy.hp > 0 && !enemy.stealthMode).forEach(Enemy::hpBar);
-        //tower hp bars
-        towers.forEach(Tower::displayHpBar);
-        //machine hp bar
-        machine.hpBar();
+
         if (paused) {
             if (!alive) fill(50, 0, 0, 50);
             else fill(0, 0, 0, 50);
