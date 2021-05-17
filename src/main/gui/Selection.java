@@ -375,14 +375,16 @@ public class Selection { //what tower is selected
         P.textFont(mediumFont);
         if (turret instanceof Gluer) {
             Gluer gluer = (Gluer) turret;
+            if (gluer.gluedTotal == 1) P.text("1 enemy glued", 910, 450 + offsetB);
             P.text(nfc(gluer.gluedTotal) + " enemies glued", 910, 450 + offsetB);
         }
         if (turret instanceof IceTower) {
             IceTower ice = (IceTower) turret;
+            if (ice.frozenTotal == 1) P.text("1 wall created", 910, 450 + offsetB);
             P.text(nfc(ice.frozenTotal) + " walls created", 910, 450 + offsetB);
         }
         if (turret.killsTotal != 1) P.text(nfc(turret.killsTotal) + " kills", 910, 475 + offsetB);
-        else P.text(nfc(turret.killsTotal) + " kill", 910, 475 + offsetB);
+        else P.text("1 kill", 910, 475 + offsetB);
         P.text(nfc(turret.damageTotal) + " total damage", 910, 500 + offsetB);
     }
 
