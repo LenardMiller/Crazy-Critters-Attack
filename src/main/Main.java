@@ -335,7 +335,8 @@ public class Main extends PApplet {
             if (!levelBuilder) inGameGui.drawText(this, 10);
         } if (dev) inGameGui.drawDebugText(this, 10);
 
-        if (paused) {
+        if (paused) { //grey stuff
+            noStroke();
             if (!alive) fill(50, 0, 0, 50);
             else fill(0, 0, 0, 50);
             rect(0, 0, width, height);
