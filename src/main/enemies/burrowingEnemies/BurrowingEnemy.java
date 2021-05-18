@@ -17,10 +17,10 @@ public abstract class BurrowingEnemy extends Enemy {
     @Override
     protected void move() {
         if (stealthMode) {
-            if (p.random(15) < pfSize * pfSize) {
-                PVector particalPosition = randomPosition();
-                particles.add(new Debris(p, particalPosition.x, particalPosition.y, p.random(0, 360), levels[currentLevel].groundType));
-            } if (p.random(50) < pfSize * pfSize) {
+            if (p.random(10) < pfSize * pfSize) {
+                PVector particlePosition = randomPosition();
+                particles.add(new Debris(p, particlePosition.x, particlePosition.y, p.random(0, 360), levels[currentLevel].groundType));
+            } if (p.random(25) < pfSize * pfSize) {
                 PVector particalPosition = randomPosition();
                 underParticles.add(new Pile(p, particalPosition.x, particalPosition.y, 0, levels[currentLevel].groundType));
             }
