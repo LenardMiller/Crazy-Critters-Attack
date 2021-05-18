@@ -293,7 +293,6 @@ public class Main extends PApplet {
      */
     private void drawInGame() {
         pushMatrix();
-
         translate(matrixOffset, 0);
         scale(matrixScale);
         //keys
@@ -315,16 +314,12 @@ public class Main extends PApplet {
         minCost = minCost(maxCost);
         //objects
         drawObjects();
-        //enemy hp bars
-        enemies.stream().filter(enemy -> enemy.hp > 0 && !enemy.stealthMode).forEach(Enemy::hpBar);
-        //tower hp bars
-        towers.forEach(Tower::displayHpBar);
-        //machine hp bar
+        //hp bars
+        for (Enemy enemy : enemies) if (enemy.hp > 0 && !enemy.stealthMode) enemy.hpBar();
+        for (Tower tower : towers) tower.displayHpBar();
         machine.hpBar();
         //text
-        for (int i = popupTexts.size()-1; i >= 0; i--) {
-            popupTexts.get(i).main();
-        }
+        for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).main();
         //gui stuff
         noStroke();
         if (!debug) {
