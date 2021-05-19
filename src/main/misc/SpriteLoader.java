@@ -189,6 +189,7 @@ public class SpriteLoader {
         getSprite(p,"sharkDie","EN","shark/die/",3);
         getSprite(p,"sharkParts","EN","shark/parts/",4);
         getSprite(p,"velociraptorMove","EN","velociraptor/move/",12);
+        getSprite(p,"velociraptorAttack","EN","velociraptor/attack/",15);
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
