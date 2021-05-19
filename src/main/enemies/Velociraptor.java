@@ -1,0 +1,36 @@
+package main.enemies;
+
+import processing.core.PApplet;
+import processing.core.PVector;
+
+import static main.Main.sounds;
+import static main.misc.Utilities.down60ToFramerate;
+
+public class Velociraptor extends Enemy {
+
+    public Velociraptor(PApplet p, float x, float y) {
+        super(p,x,y);
+        size = new PVector(100,100);
+        pfSize = 3;
+        radius = 25;
+        maxSpeed = 60;
+        speed = maxSpeed;
+        moneyDrop = 200;
+        damage = 20;
+        maxHp = 750; //Hp
+        hp = maxHp;
+        hitParticle = "redOuch";
+        name = "velociraptor";
+        attackStartFrame = 0;
+        attackDmgFrames = new int[]{8};
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
+        betweenAttackFrames = down60ToFramerate(5);
+        betweenWalkFrames = down60ToFramerate(10);
+        attackFrame = attackStartFrame;
+        corpseSize = size;
+        partSize = new PVector(25,25);
+        overkillSound = sounds.get("barkSquish");
+        dieSound = sounds.get("bark");
+        loadStuff();
+    }
+}
