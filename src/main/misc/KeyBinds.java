@@ -1,5 +1,6 @@
 package main.misc;
 
+import main.Main;
 import main.arcs.Arc;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.Shark;
@@ -69,7 +70,8 @@ public class KeyBinds {
         boolean energyBlaster = addHotkey(new char[]{'e', 'E'}, ENERGY_BLASTER_PRICE);
         boolean flamethrower = addHotkey(new char[]{'d', 'Q'}, FLAMETHROWER_PRICE);
         boolean teslaTower = addHotkey(new char[]{'c', 'C'}, TESLA_TOWER_PRICE);
-        boolean magicMissileer = addHotkey(new char[]{'r', 'R'}, MAGIC_MISSILEER_PRICE);
+        boolean iceTower = addHotkey(new char[]{'f', 'F'}, ICE_TOWER_PRICE);
+        boolean magicMissileer = addHotkey(new char[]{'v', 'V'}, MAGIC_MISSILEER_PRICE);
 
         if (play) {
             if (!playingLevel) {
@@ -97,6 +99,7 @@ public class KeyBinds {
                 if (flamethrower) hand.setHeld("flamethrower");
                 if (teslaTower) hand.setHeld("tesla");
             } if (currentLevel > 2) {
+                if (iceTower) hand.setHeld("iceTower");
                 if (magicMissileer) hand.setHeld("magicMissileer");
             }
         }
@@ -104,7 +107,7 @@ public class KeyBinds {
 
     private boolean addHotkey(char[] keys, int price) {
         boolean pressed = false;
-        //I forgot this is actually unnecessary, but I'm too lazy to revert it
+        //this is important, don't remove it
         for (char key : keys) if (keysPressed.getPressedPulse(key)) pressed = true;
         return pressed && alive && !paused && money >= price;
     }
@@ -164,12 +167,13 @@ public class KeyBinds {
         boolean killEnemies = keysPressed.getPressedPulse('c') && alive;
         boolean overkillEnemies = keysPressed.getPressedPulse('C') && alive;
         //other stuff
-        boolean displayPathLines = keysPressed.getReleasedPulse('g');
+        boolean displayDebug = keysPressed.getReleasedPulse('g');
+        boolean displaySpawnAreas = keysPressed.getReleasedPulse('G');
         boolean loseMoney = keysPressed.getPressedPulse('-');
         boolean addMoney = keysPressed.getPressed('=');
-        boolean switchMode = keysPressed.getPressedPulse('b');
+        boolean levelBuilder = keysPressed.getPressedPulse('b');
         boolean saveTiles = keysPressed.getPressedPulse('z');
-        boolean increaseWave = keysPressed.getPressedPulse(']');
+        boolean increaseWave = keysPressed.getPressedPulse(']'); //only works when game playing
         boolean decreaseWave = keysPressed.getPressedPulse('[');
         boolean increaseWave5 = keysPressed.getPressedPulse('}');
         boolean decreaseWave5 = keysPressed.getPressedPulse('{');
@@ -205,11 +209,12 @@ public class KeyBinds {
             }
         }
         //other stuff
-        if (displayPathLines) debug = !debug;
+        if (displayDebug) debug = !debug;
+        if (displaySpawnAreas) showSpawn = !showSpawn;
         if (addMoney) money += 100;
         if (loseMoney) money = 0;
-        if (switchMode) {
-            levelBuilder = !levelBuilder;
+        if (levelBuilder) {
+            Main.levelBuilder = !Main.levelBuilder;
             hand.setHeld("null");
         } if (saveTiles) DataControl.saveLayout();
         if (increaseWave && canWave(1)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);

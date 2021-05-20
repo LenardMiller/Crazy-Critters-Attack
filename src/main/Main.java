@@ -92,6 +92,7 @@ public class Main extends PApplet {
     public static boolean alive = true;
     public static boolean won = false;
     public static boolean debug = false;
+    public static boolean showSpawn = false;
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
     public static boolean paused = false;
@@ -260,7 +261,7 @@ public class Main extends PApplet {
      */
     @Override
     public void draw() {
-        if (debug) {
+        if (showSpawn) {
             scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
             float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
             translate(buffer, buffer);
@@ -322,7 +323,7 @@ public class Main extends PApplet {
         for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).main();
         //gui stuff
         noStroke();
-        if (!debug) {
+        if (!showSpawn) {
             if (!levelBuilder) inGameGui.display();
             else levelBuilderGui.display();
             hand.displayHeldInfo();
@@ -341,10 +342,12 @@ public class Main extends PApplet {
         //matrix
         popMatrix();
         //black bars
-        fill(0);
-        noStroke();
-        rect(0, 0, matrixOffset, height);
-        rect(width - matrixOffset, 0, matrixOffset, height);
+        if (!showSpawn) {
+            fill(0);
+            noStroke();
+            rect(0, 0, matrixOffset, height);
+            rect(width - matrixOffset, 0, matrixOffset, height);
+        }
         //pause
         if (paused && !settings) pauseGui.main();
     }
