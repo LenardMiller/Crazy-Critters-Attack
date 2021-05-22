@@ -1,5 +1,6 @@
 package main.towers;
 
+import main.gui.InGameGui;
 import main.gui.guiObjects.PopupText;
 import main.misc.Tile;
 import main.particles.Debris;
@@ -92,13 +93,15 @@ public abstract class Tower {
 
     public void displayHpBar() {
         Color barColor = new Color(0, 255, 0);
+        if (boostedMaxHp() > 0) barColor = InGameGui.BOOSTED_TEXT_COLOR;
         p.stroke(barColor.getRGB(), barAlpha / 2f);
-        float barWidth = size.x * (hp / (float) maxHp);
+        float barWidth = size.x * (hp / (float) getMaxHp());
         p.noFill();
         p.rect(tile.position.x - size.x, tile.position.y, size.y, -5);
         p.fill(barColor.getRGB(), barAlpha);
         if (hp > 0) p.rect(tile.position.x - size.x, tile.position.y, barWidth, -5);
-        if (hp == maxHp) barAlpha = (int) incrementByTo(barAlpha, 3, 0);
+        if (hp == getMaxHp()) barAlpha = (int) incrementByTo(barAlpha, 3, 0);
+        else refreshHpBar();
     }
 
     public void refreshHpBar() {
@@ -145,14 +148,14 @@ public abstract class Tower {
     }
 
     public void heal(float relativeAmount) {
-        if (hp < maxHp) {
+        if (hp < getMaxHp()) {
             refreshHpBar();
             for (int i = 0; i < 5; i++) {
                 particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
             }
         }
-        hp += relativeAmount*maxHp;
-        if (hp > maxHp) hp = maxHp;
+        hp += relativeAmount * getMaxHp();
+        if (hp > getMaxHp()) hp = getMaxHp();
     }
 
     public void updateSprite() {}
@@ -171,5 +174,17 @@ public abstract class Tower {
             PVector spawnPos = PVector.add(center, deviation);
             particles.add(new Ouch(p, spawnPos.x, spawnPos.y, p.random(360), "greyPuff"));
         }
+    }
+
+    public int boostedMaxHp() {
+        int hp = 0;
+        for (Booster.Boost boost : boosts) {
+            hp += maxHp * boost.health;
+        }
+        return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp + boostedMaxHp();
     }
 }

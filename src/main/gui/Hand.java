@@ -205,7 +205,9 @@ public class Hand {
             } else P.text("Wooden", 1000, 276);
             P.text("Wall", 1000, 301);
             P.textFont(mediumFont);
+            if (wall.hp > wall.maxHp) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
             P.text(wall.hp + " hp", 1000, 331);
+            P.fill(0, 254);
             P.text("Sell for: $" + (int) (0.8f * (float) wall.value), 1000, 356);
             //upgrade info
             boolean canAfford = money >= wall.upgradePrices[wall.nextLevelB];

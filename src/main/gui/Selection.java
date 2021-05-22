@@ -324,18 +324,27 @@ public class Selection { //what tower is selected
 
     private void displayInfo(int offset, int speed) {
         //health
-        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         P.textFont(mediumFont);
         P.textAlign(LEFT);
-        P.text("Health: " + turret.hp + "/" + turret.maxHp, 910, 276 + offset);
+        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
+        if (turret.boostedMaxHp() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
+        P.text("Health: " + turret.hp + "/" + turret.getMaxHp(), 910, 276 + offset);
+        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         //booster
         if (turret instanceof Booster) {
-            Booster booster = (Booster) turret;
-            if (booster.boost.damage > 0) {
-                P.text("Damage: +" + nf(booster.boost.damage * 100) + "%", 910, 296 + offset);
+            Booster.Boost boost = ((Booster) turret).boost;
+            int x = 910;
+            int y = 296;
+            P.text("Boosts:", x, y + offset);
+            offset += 20;
+            if (boost.health > 0) {
+                P.text("Health: +" + nf(boost.health * 100) + "%", x, y + offset);
                 offset += 20;
-            } if (booster.boost.range > 0) {
-                P.text("Range: +" + nf(booster.boost.range * 100) + "%", 910, 296 + offset);
+            } if (boost.range > 0) {
+                P.text("Range: +" + nf(boost.range * 100) + "%", x, y + offset);
+                offset += 20;
+            } if (boost.damage > 0) {
+                P.text("Damage: +" + nf(boost.damage * 100) + "%", x, y + offset);
                 offset += 20;
             }
             return;

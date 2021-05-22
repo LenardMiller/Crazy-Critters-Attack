@@ -119,7 +119,7 @@ public class Wall extends Tower {
         float y = tile.position.y-size.y;
 
         p.tint(255,tintColor,tintColor);
-        float hpRatio = (float)hp/(float)maxHp;
+        float hpRatio = (float)hp/(float)getMaxHp();
         if (!debug) {
             int crack = abs(ceil((hpRatio * 4) - 1) - 3);
             if (crack < 4) p.image(sprite[crack],x,y);

@@ -27,7 +27,7 @@ public class Booster extends Turret {
         hasPriority = false;
 
         boost = new Boost();
-        boost.damage = 0.1f;
+        boost.health = 0.1f;
 
         loadSprites();
         setUpgrades();
@@ -108,7 +108,7 @@ public class Booster extends Turret {
         upgradeTitles[1] = "Increase Area";
         upgradeTitles[2] = "";
 
-        upgradeTitles[3] = "";
+        upgradeTitles[3] = "Boost Damage";
         upgradeTitles[4] = "";
         upgradeTitles[5] = "";
         //descriptions
@@ -125,9 +125,9 @@ public class Booster extends Turret {
         upgradeDescC[2] = "";
 
 
-        upgradeDescA[3] = "";
-        upgradeDescB[3] = "";
-        upgradeDescC[3] = "";
+        upgradeDescA[3] = "Boost";
+        upgradeDescB[3] = "tower";
+        upgradeDescC[3] = "damage";
 
         upgradeDescA[4] = "";
         upgradeDescB[4] = "";
@@ -141,7 +141,7 @@ public class Booster extends Turret {
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[21];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[0];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[0];
     }
@@ -162,6 +162,7 @@ public class Booster extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
+                    boost.damage = 0.1f;
                     break;
                 case 4:
                     break;
@@ -218,6 +219,7 @@ public class Booster extends Turret {
 
     public static class Boost {
 
+        public float health;
         public float damage;
         public float range;
 
