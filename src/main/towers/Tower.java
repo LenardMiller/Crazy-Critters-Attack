@@ -154,4 +154,43 @@ public abstract class Tower {
             particles.add(new Ouch(p, spawnPos.x, spawnPos.y, p.random(360), "greyPuff"));
         }
     }
+
+    protected void getBoosted() {
+        for (int i = 0; i < 8; i++) {
+            int checkX = -1;
+            int checkY = -1;
+            switch (i) {
+                case 1:
+                    checkX = 0;
+                    break;
+                case 2:
+                    checkX = 1;
+                    break;
+                case 3:
+                    checkY = 0;
+                    break;
+                case 4:
+                    checkX = 1;
+                    checkY = 0;
+                    break;
+                case 5:
+                    checkY = 1;
+                    break;
+                case 6:
+                    checkX = 0;
+                    checkY = 1;
+                    break;
+                case 7:
+                    checkX = 1;
+                    checkY = 1;
+                    break;
+            }
+            PVector pos = tile.getGridPosition();
+            int x = (int) pos.x + checkX - 1;
+            int y = (int) pos.y + checkY - 1;
+            Tower tower = tiles.get(x, y).tower;
+            p.fill(255);
+            p.rect(x * 50, y * 50, 50, 50);
+        }
+    }
 }

@@ -426,6 +426,12 @@ public class Tile {
         return nodeGrid[x][y];
     }
 
+    public PVector getGridPosition() {
+        int x = (int) (position.x / 50);
+        int y = (int) (position.y / 50);
+        return new PVector(x, y);
+    }
+
     public static class TileDS {
 
         public TileDSItem[] items;

@@ -9,11 +9,13 @@ import static main.misc.Utilities.playSoundRandomSpeed;
 
 public class Booster extends Turret {
 
+    public float damageBoost;
+
     public Booster(PApplet p, Tile tile) {
         super(p, tile);
         name = "booster";
         delay = -1;
-        range = 75;
+        range = 1;
         pjSpeed = -1;
         debrisType = "crystal";
         damageSound = sounds.get("crystalDamage");
@@ -21,6 +23,8 @@ public class Booster extends Turret {
         placeSound = sounds.get("crystalPlace");
         price = BOOSTER_PRICE;
         value = price;
+
+        damageBoost = 0.1f;
 
         loadSprites();
         setUpgrades();
