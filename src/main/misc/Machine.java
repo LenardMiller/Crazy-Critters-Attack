@@ -92,6 +92,11 @@ public class Machine {
         }
         p.tint(255, tintColor, tintColor);
         p.imageMode(CENTER);
+        if (p.frameCount > frameTimer && !dead && !paused) {
+            if (currentFrame < sprites.length - 1) currentFrame++;
+            else currentFrame = 0;
+            frameTimer = p.frameCount + betweenFrames;
+        }
         if (deathFrame < secondsToFrames(4)) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
@@ -100,11 +105,6 @@ public class Machine {
         else if (deathFrame < secondsToFrames(5) && !paused) deathAnim();
         else EXPLODE_LOOP.stopLoop();
         if (deathFrame > secondsToFrames(8)) paused = true;
-        if (p.frameCount > frameTimer && !dead && !paused) {
-            if (currentFrame < sprites.length - 1) currentFrame++;
-            else currentFrame = 0;
-            frameTimer = p.frameCount + betweenFrames;
-        }
         if (tintColor < 255 && !paused) tintColor += 20;
     }
 

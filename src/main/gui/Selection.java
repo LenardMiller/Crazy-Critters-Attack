@@ -350,7 +350,6 @@ public class Selection { //what tower is selected
                 offset += 20;
             } if (boost.firerate > 0) {
                 P.text("Firerate: +" + nf(boost.firerate * 100) + "%", x, y + offset);
-                offset += 20;
             }
             return;
         }
