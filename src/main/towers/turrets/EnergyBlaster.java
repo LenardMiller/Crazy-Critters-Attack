@@ -47,11 +47,11 @@ public class EnergyBlaster extends Turret{
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         if (nuclear) {
-            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, damage, effectRadius));
+            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
         } else if (dark) {
-            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, damage, effectRadius));
+            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
         } else {
-            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, damage, effectRadius, bigExplosion));
+            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, bigExplosion));
         }
     }
 

@@ -49,11 +49,19 @@ public class MagicMissileer extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 0,tile.position));
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 1,tile.position));
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, 2,tile.position));
+        projectiles.add(new MagicMissile(p, p.random(tile.position.x-size.x,tile.position.x),
+          p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
+          getDamage(), 0,tile.position));
+        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
+          p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
+          getDamage(), 1,tile.position));
+        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
+          p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
+          getDamage(), 2,tile.position));
         if (additionalMissile) {
-            projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this, damage, (int)(p.random(0,2.99f)),tile.position));
+            projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
+              p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
+              getDamage(), (int)(p.random(0,2.99f)),tile.position));
         }
     }
 

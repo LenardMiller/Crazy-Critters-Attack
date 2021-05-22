@@ -51,7 +51,7 @@ public class Nightmare extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        projectiles.add(new Needle(p, position.x, position.y, angle, this, damage, effectLevel, effectDuration));
+        projectiles.add(new Needle(p, position.x, position.y, angle, this, getDamage(), effectLevel, effectDuration));
         for (int j = 0; j < 3; j++) {
             PVector spa2 = PVector.fromAngle(angle-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-2);

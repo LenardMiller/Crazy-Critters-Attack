@@ -69,7 +69,7 @@ public class IceTower extends Turret {
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
 
-        targetEnemy.damageWithoutBuff(damage, this, "ice", PVector.fromAngle(angle), damage > 0);
+        targetEnemy.damageWithoutBuff(getDamage(), this, "ice", PVector.fromAngle(angle), damage > 0);
 
         Tile tile = tiles.get((roundTo(targetEnemy.position.x, 50) / 50) + 1, (roundTo(targetEnemy.position.y, 50) / 50) + 1);
         if (tile.tower == null) {

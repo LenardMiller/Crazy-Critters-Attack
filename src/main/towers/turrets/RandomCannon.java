@@ -50,10 +50,10 @@ public class RandomCannon extends Turret {
         String part = "smoke";
         int spriteType = (int)(p.random(0,5.99f));
         if (laundry && p.random(0,3) < 1) {
-            projectiles.add(new Laundry(p,position.x,position.y, angle, this, damage));
+            projectiles.add(new Laundry(p,position.x,position.y, angle, this, getDamage()));
             part = "poison";
         }
-        else projectiles.add(new MiscProjectile(p,position.x,position.y, angle, this, spriteType, damage));
+        else projectiles.add(new MiscProjectile(p,position.x,position.y, angle, this, spriteType, getDamage()));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angle-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);

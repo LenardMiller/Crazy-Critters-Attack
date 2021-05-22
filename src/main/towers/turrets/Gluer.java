@@ -45,9 +45,9 @@ public class Gluer extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
-        else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
-        else projectiles.add(new Glue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
+        if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
+        else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
+        else projectiles.add(new Glue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
     }
 
     @Override

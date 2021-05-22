@@ -44,9 +44,9 @@ public class Cannon extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        if (frags) projectiles.add(new FragBall(p,position.x,position.y, angle, this, damage, effectRadius));
-        else if (dynamite) projectiles.add(new Dynamite(p,position.x,position.y, angle, this, damage, effectRadius));
-        else projectiles.add(new CannonBall(p,position.x,position.y, angle, this, damage, effectRadius));
+        if (frags) projectiles.add(new FragBall(p,position.x,position.y, angle, this, getDamage(), effectRadius));
+        else if (dynamite) projectiles.add(new Dynamite(p,position.x,position.y, angle, this, getDamage(), effectRadius));
+        else projectiles.add(new CannonBall(p,position.x,position.y, angle, this, getDamage(), effectRadius));
     }
 
     @Override

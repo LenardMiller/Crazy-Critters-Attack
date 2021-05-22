@@ -313,7 +313,8 @@ public class Selection { //what tower is selected
         P.text("Health: " + turret.hp + "/" + turret.maxHp, 910, 276 + offset);
         //damage
         if (turret.damage <= 0) P.text("No damage", 910, 296 + offset);
-        else P.text("Damage: " + nfc(turret.damage), 910, 296 + offset);
+        else P.text("Damage: " + nfc(turret.damage) +
+          (turret.boostedDamage() > 0 ? " + " + nfc(turret.boostedDamage()) : ""), 910, 296 + offset);
         //firerate (delay)
         if (turret.delay <= 0) P.text("Instant reload", 910, 316 + offset);
         else P.text("Reload time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);

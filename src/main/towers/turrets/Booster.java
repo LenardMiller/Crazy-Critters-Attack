@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -9,7 +10,7 @@ import static main.misc.Utilities.playSoundRandomSpeed;
 
 public class Booster extends Turret {
 
-    public float damageBoost;
+    public Boost boost;
 
     public Booster(PApplet p, Tile tile) {
         super(p, tile);
@@ -24,7 +25,8 @@ public class Booster extends Turret {
         price = BOOSTER_PRICE;
         value = price;
 
-        damageBoost = 0.1f;
+        boost = new Boost();
+        boost.damage = 0.1f;
 
         loadSprites();
         setUpgrades();
@@ -50,6 +52,7 @@ public class Booster extends Turret {
             die(false);
             tile.tower = null;
         }
+        giveBoost();
         if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
           && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
@@ -133,5 +136,55 @@ public class Booster extends Turret {
                     break;
             }
         }
+    }
+
+    private void giveBoost() {
+        for (int i = 0; i < 8; i++) {
+            int checkX = -1;
+            int checkY = -1;
+            switch (i) {
+                case 0:
+                    if (range < 2) continue;
+                    break;
+                case 1:
+                    checkX = 0;
+                    break;
+                case 2:
+                    if (range < 2) continue;
+                    checkX = 1;
+                    break;
+                case 3:
+                    checkY = 0;
+                    break;
+                case 4:
+                    checkX = 1;
+                    checkY = 0;
+                    break;
+                case 5:
+                    if (range < 2) continue;
+                    checkY = 1;
+                    break;
+                case 6:
+                    checkX = 0;
+                    checkY = 1;
+                    break;
+                case 7:
+                    if (range < 2) continue;
+                    checkX = 1;
+                    checkY = 1;
+                    break;
+            }
+            PVector pos = tile.getGridPosition();
+            int x = (int) pos.x + checkX;
+            int y = (int) pos.y + checkY;
+            Tower tower = tiles.get(x, y).tower;
+            if (tower == null || tower instanceof Booster) continue;
+            tower.addBoost(boost);
+        }
+    }
+
+    public static class Boost {
+
+        float damage;
     }
 }

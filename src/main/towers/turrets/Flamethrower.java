@@ -142,18 +142,18 @@ public class Flamethrower extends Turret {
         else {
             playSoundRandomSpeed(p, sounds.get("fireImpact"), 1);
             shockwaves.add(new FireShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-              (int) barrelLength, range, damage, this, effectLevel, effectDuration));
+              (int) barrelLength, range, getDamage(), this, effectLevel, effectDuration));
         }
     }
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         if (magic) {
-            projectiles.add(new BlueFlame(p, position.x, position.y, angle, this, damage,
+            projectiles.add(new BlueFlame(p, position.x, position.y, angle, this, getDamage(),
               effectLevel, effectDuration, (int) (range - barrelLength - 100), false));
         } else {
-            projectiles.add(new Flame(p, position.x, position.y, angle, this, damage, effectLevel,
-              effectDuration, (int) (range - barrelLength - 100), false));
+            projectiles.add(new Flame(p, position.x, position.y, angle, this, getDamage(),
+              effectLevel, effectDuration, (int) (range - barrelLength - 100), false));
         }
     }
 
