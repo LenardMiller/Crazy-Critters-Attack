@@ -3,6 +3,7 @@ package main.towers;
 import main.gui.InGameGui;
 import main.gui.guiObjects.PopupText;
 import main.misc.Tile;
+import main.particles.BuffParticle;
 import main.particles.Debris;
 import main.particles.Ouch;
 import main.towers.turrets.Booster;
@@ -78,18 +79,7 @@ public abstract class Tower {
 
     public abstract void controlAnimation();
 
-    public void addBoost(Booster.Boost boost) {
-        boostTimer = 0;
-        for (Booster.Boost b : boosts) if (b == boost) return;
-        boosts.add(boost);
-    }
 
-    protected void updateBoosts() {
-        if (!paused) {
-            boostTimer++;
-            if (boostTimer > FRAMERATE / 3) boosts = new ArrayList<>();
-        }
-    }
 
     public void displayHpBar() {
         Color barColor = new Color(0, 255, 0);
@@ -177,6 +167,26 @@ public abstract class Tower {
     }
 
     //boosts
+
+    public void addBoost(Booster.Boost boost) {
+        boostTimer = 0;
+        for (Booster.Boost b : boosts) if (b == boost) return;
+        boosts.add(boost);
+    }
+
+    protected void updateBoosts() {
+        if (!paused) {
+            displayBoost();
+            boostTimer++;
+            if (boostTimer > FRAMERATE / 3) boosts = new ArrayList<>();
+        }
+    }
+
+    protected void displayBoost() {
+        if (boosts.size() > 0 && p.random(0, 30) < 1 && !(this instanceof IceWall)) {
+            particles.add(new BuffParticle(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "orangeMagic"));
+        }
+    }
 
     public int boostedMaxHp() {
         int h = 0;
