@@ -183,7 +183,8 @@ public abstract class Tower {
     }
 
     protected void displayBoost() {
-        if (boosts.size() > 0 && p.random(30) < 1 && !(this instanceof IceWall)) {
+        if (this instanceof IceWall) return;
+        if (boosts.size() > 0 && p.random(30) < 1) {
             particles.add(new BuffParticle(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
         }

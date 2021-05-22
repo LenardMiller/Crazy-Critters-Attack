@@ -106,11 +106,11 @@ public class Booster extends Turret {
         //titles
         upgradeTitles[0] = "Boost Range";
         upgradeTitles[1] = "Increase Area";
-        upgradeTitles[2] = "";
+        upgradeTitles[2] = "Money Boost";
 
         upgradeTitles[3] = "Boost Damage";
         upgradeTitles[4] = "Boost Firerate";
-        upgradeTitles[5] = "";
+        upgradeTitles[5] = "Explosives";
         //descriptions
         upgradeDescA[0] = "Boost";
         upgradeDescB[0] = "tower";
@@ -120,8 +120,8 @@ public class Booster extends Turret {
         upgradeDescB[1] = "more";
         upgradeDescC[1] = "towers";
 
-        upgradeDescA[2] = "";
-        upgradeDescB[2] = "";
+        upgradeDescA[2] = "Increase";
+        upgradeDescB[2] = "income";
         upgradeDescC[2] = "";
 
 
@@ -133,17 +133,17 @@ public class Booster extends Turret {
         upgradeDescB[4] = "tower";
         upgradeDescC[4] = "firerate";
 
-        upgradeDescA[5] = "";
-        upgradeDescB[5] = "";
-        upgradeDescC[5] = "";
+        upgradeDescA[5] = "Destroyed";
+        upgradeDescB[5] = "towers";
+        upgradeDescC[5] = "explode";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[21];
-        upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[14];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[23];
     }
 
     @Override
@@ -151,7 +151,7 @@ public class Booster extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    boost.range = 0.2f;
+                    boost.range = 0.1f;
                     break;
                 case 1:
                     range++;
