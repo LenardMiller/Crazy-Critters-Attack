@@ -356,12 +356,12 @@ public class Selection { //what tower is selected
         }
         //damage
         if (turret.boostedDamage() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
-        if (turret.damage <= 0) P.text("No damage", 910, 296 + offset);
+        if (turret.getDamage() <= 0) P.text("No damage", 910, 296 + offset);
         else P.text("Damage: " + nfc(turret.getDamage()), 910, 296 + offset);
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         //firerate (delay)
         if (turret.boostedFirerate() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
-        if (turret.delay <= 0) P.text("Instant reload", 910, 316 + offset);
+        if (turret.getDelay() <= 0) P.text("Instant reload", 910, 316 + offset);
         else P.text("Reload time: " + nf(turret.getDelay(), 1, 1) + "s", 910, 316 + offset);
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         //velocity
