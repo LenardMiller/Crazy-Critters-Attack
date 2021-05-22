@@ -269,6 +269,7 @@ public class SpriteLoader {
         getSprite(p,"waveMotionLoad","TR","waveMotion/load/",80);
         getSprite(p,"waveMotionIdle","TR","waveMotion/idle/",14);
         getSprite(p,"waveMotionBeam","TR","waveMotion/beam/",18);
+        getSprite(p,"boosterIdle","TR","booster/idle/",8);
         //walls
         getSprite(p,"woodWall","TW","Wood/",4);
         getSprite(p,"stoneWall","TW","Stone/",4);
@@ -448,6 +449,8 @@ public class SpriteLoader {
         staticSprites.put("waveMotionBaseTR",p.loadImage("sprites/towers/turrets/waveMotion/base.png"));
         staticSprites.put("waveMotionFullTR",p.loadImage("sprites/towers/turrets/waveMotion/full.png"));
         staticSprites.put("waveMotionIdleTR",p.loadImage("sprites/towers/turrets/waveMotion/idle.png"));
+        staticSprites.put("boosterBaseTR",p.loadImage("sprites/towers/turrets/booster/base.png"));
+        staticSprites.put("boosterFullTR",p.loadImage("sprites/towers/turrets/booster/full.png"));
         //walls
         staticSprites.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
         staticSprites.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));

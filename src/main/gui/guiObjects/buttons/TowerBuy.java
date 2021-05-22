@@ -65,6 +65,9 @@ public class TowerBuy extends Button {
             case "iceTower":
                 price = ICE_TOWER_PRICE;
                 break;
+            case "booster":
+                price = BOOSTER_PRICE;
+                break;
             case "railgun":
                 price = 400;
                 break;
@@ -159,6 +162,9 @@ public class TowerBuy extends Button {
                     break;
                 case "iceTower":
                     p.text("Freeze Ray", x, 241);
+                    break;
+                case "booster":
+                    p.text("Booster", x, 241);
                     break;
                 case "railgun":
                     p.text("Railgun", x, 241);
