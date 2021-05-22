@@ -365,7 +365,7 @@ public abstract class Turret extends Tower {
         return d;
     }
 
-    protected int getDamage() {
+    public int getDamage() {
         return damage + boostedDamage();
     }
 }  

@@ -24,6 +24,7 @@ public class Booster extends Turret {
         placeSound = sounds.get("crystalPlace");
         price = BOOSTER_PRICE;
         value = price;
+        hasPriority = false;
 
         boost = new Boost();
         boost.damage = 0.1f;
@@ -63,6 +64,36 @@ public class Booster extends Turret {
     protected void spawnProjectiles(PVector position, float angle) {}
 
     @Override
+    public void upgrade(int id) {
+        upgradeSpecial(id);
+        int price = 0;
+        if (id == 0) {
+            price = upgradePrices[nextLevelA];
+            if (price > money) return;
+            if (nextLevelA > 2) return;
+            if (nextLevelB == 6 && nextLevelA == 2) return;
+            nextLevelA++;
+        } else if (id == 1) {
+            price = upgradePrices[nextLevelB];
+            if (price > money) return;
+            if (nextLevelB > 5) return;
+            if (nextLevelB == 5 && nextLevelA == 3) return;
+            nextLevelB++;
+        }
+        inGameGui.flashA = 255;
+        money -= price;
+        value += price;
+        //icons
+        if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
+        else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
+        if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
+
+        playSoundRandomSpeed(p, placeSound, 1);
+        spawnParticles();
+    }
+
+    @Override
     protected void setUpgrades() {
         //price
         upgradePrices[0] = 50;
@@ -74,7 +105,7 @@ public class Booster extends Turret {
         upgradePrices[5] = 200;
         //titles
         upgradeTitles[0] = "";
-        upgradeTitles[1] = "";
+        upgradeTitles[1] = "Increase Area";
         upgradeTitles[2] = "";
 
         upgradeTitles[3] = "";
@@ -85,9 +116,9 @@ public class Booster extends Turret {
         upgradeDescB[0] = "";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "";
-        upgradeDescB[1] = "";
-        upgradeDescC[1] = "";
+        upgradeDescA[1] = "Affect";
+        upgradeDescB[1] = "more";
+        upgradeDescC[1] = "towers";
 
         upgradeDescA[2] = "";
         upgradeDescB[2] = "";
@@ -107,7 +138,7 @@ public class Booster extends Turret {
         upgradeDescC[5] = "";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[5];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
@@ -122,6 +153,7 @@ public class Booster extends Turret {
                 case 0:
                     break;
                 case 1:
+                    range++;
                     break;
                 case 2:
                     break;
@@ -185,6 +217,7 @@ public class Booster extends Turret {
 
     public static class Boost {
 
-        float damage;
+        public float damage;
+
     }
 }

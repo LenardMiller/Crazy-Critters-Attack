@@ -32,6 +32,7 @@ public class InGameGui {
     public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
     public static final Color TOWERBUY_PANEL_COLOR = new Color(130, 130, 130);
     public static final Color MAIN_TEXT_COLOR = new Color(0);
+    public static final Color BOOSTED_TEXT_COLOR = new Color(255, 132, 0);
 
     public InGameGui(PApplet p) {
         this.P = p;

@@ -115,7 +115,20 @@ public class Selection { //what tower is selected
             //display range and square
             P.fill(100, 25);
             P.stroke(255);
-            P.rect(turret.tile.position.x - turret.size.x, turret.tile.position.y - turret.size.y, turret.size.y, turret.size.y);
+            float x = turret.tile.position.x - turret.size.x;
+            float y = turret.tile.position.y - turret.size.y;
+            if (turret instanceof Booster) {
+                if (turret.range == 1) {
+                    P.rect(x, y - 50, 50, 150);
+                    P.rect(x - 50, y, 150, 50);
+                } else {
+                    P.rect(x, y, turret.size.y, turret.size.y);
+                    P.rect(x - 50, y - 50, 150, 150);
+                }
+                P.noStroke();
+                return;
+            }
+            P.rect(x, y, turret.size.y, turret.size.y);
             P.circle(turret.tile.position.x - (turret.size.x / 2), turret.tile.position.y - (turret.size.y / 2), turret.range * 2);
             P.noStroke();
         }
@@ -301,6 +314,9 @@ public class Selection { //what tower is selected
                 P.text("Death Beam", 1000, 241);
                 setTextPurple("Infinite pierce", offset);
                 break;
+            case "booster":
+                P.text("Booster", 1000, 241);
+                break;
         }
         return offset;
     }
@@ -311,10 +327,22 @@ public class Selection { //what tower is selected
         P.textFont(mediumFont);
         P.textAlign(LEFT);
         P.text("Health: " + turret.hp + "/" + turret.maxHp, 910, 276 + offset);
+        //booster
+        if (turret instanceof Booster) {
+            Booster booster = (Booster) turret;
+            if (booster.boost.damage > 0) {
+                P.text("Damage: +" + nf(booster.boost.damage * 100) + "%", 910, 296 + offset);
+                offset += 20;
+            }
+            return;
+        }
         //damage
         if (turret.damage <= 0) P.text("No damage", 910, 296 + offset);
-        else P.text("Damage: " + nfc(turret.damage) +
-          (turret.boostedDamage() > 0 ? " + " + nfc(turret.boostedDamage()) : ""), 910, 296 + offset);
+        else {
+            if (turret.boostedDamage() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
+            P.text("Damage: " + nfc(turret.getDamage()), 910, 296 + offset);
+            P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
+        }
         //firerate (delay)
         if (turret.delay <= 0) P.text("Instant reload", 910, 316 + offset);
         else P.text("Reload time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
@@ -369,6 +397,7 @@ public class Selection { //what tower is selected
     }
 
     private void displayStats() { //todo: fix
+        if (turret instanceof Booster) return;
         int offsetB = 0;
         if (!turret.hasPriority) offsetB = 45;
         P.fill(STAT_TEXT_COLOR.getRGB(), 254);
