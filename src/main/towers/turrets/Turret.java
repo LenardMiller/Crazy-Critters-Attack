@@ -233,8 +233,9 @@ public abstract class Turret extends Tower {
     @Override
     public void controlAnimation() {
         if (!paused) {
-            if (hp < getMaxHp() && p.random(0, 30) < 1) {
-                particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greyPuff"));
+            if (hp < getMaxHp() && p.random(30) < 1) {
+                particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x),
+                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "greyPuff"));
             }
             if (tintColor < 255) tintColor += 20;
             if (state == 0) { //idle
