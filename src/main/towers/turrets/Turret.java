@@ -363,7 +363,8 @@ public abstract class Turret extends Tower {
     public int boostedDamage() {
         int d = 0;
         for (Booster.Boost boost : boosts) {
-            d += damage * boost.damage;
+            int d2 = (int) (damage * boost.damage);
+            if (d2 > d) d = d2;
         }
         return d;
     }
@@ -375,7 +376,8 @@ public abstract class Turret extends Tower {
     public int boostedRange() {
         int r = 0;
         for (Booster.Boost boost : boosts) {
-            r += range * boost.range;
+            int r2 = (int) (range * boost.range);
+            if (r2 > r) r = r2;
         }
         return r;
     }
@@ -387,7 +389,8 @@ public abstract class Turret extends Tower {
     public float boostedFirerate() {
         float f = 0;
         for (Booster.Boost boost : boosts) {
-            f += delay * boost.firerate;
+            float f2 = delay * boost.firerate;
+            if (f2 > f) f = f2;
         }
         return f;
     }

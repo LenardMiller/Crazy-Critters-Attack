@@ -193,7 +193,8 @@ public abstract class Tower {
     public int boostedMaxHp() {
         int h = 0;
         for (Booster.Boost boost : boosts) {
-            h += maxHp * boost.health;
+            int h2 = (int) (maxHp * boost.health);
+            if (h2 > h) h = h2;
         }
         return h;
     }
