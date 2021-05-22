@@ -165,7 +165,7 @@ public class Booster extends Turret {
                     boost.damage = 0.1f;
                     break;
                 case 4:
-                    boost.firerate = 0.1f;
+                    boost.firerate = 0.2f;
                     break;
                 case 5:
                     break;
