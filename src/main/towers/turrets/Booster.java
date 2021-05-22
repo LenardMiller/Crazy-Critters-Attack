@@ -27,7 +27,7 @@ public class Booster extends Turret {
         hasPriority = false;
 
         boost = new Boost();
-        boost.health = 0.1f;
+        boost.health = 0.2f;
 
         loadSprites();
         setUpgrades();
@@ -151,7 +151,7 @@ public class Booster extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    boost.range = 0.1f;
+                    boost.range = 0.2f;
                     break;
                 case 1:
                     range++;
@@ -162,7 +162,7 @@ public class Booster extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    boost.damage = 0.1f;
+                    boost.damage = 0.2f;
                     break;
                 case 4:
                     boost.firerate = 0.2f;
