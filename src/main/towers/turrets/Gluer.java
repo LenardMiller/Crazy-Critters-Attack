@@ -66,7 +66,7 @@ public class Gluer extends Turret {
                 float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));
-                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < range) {
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < getRange()) {
                     if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
                         finalDist = dist;

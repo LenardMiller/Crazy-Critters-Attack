@@ -129,7 +129,8 @@ public class Selection { //what tower is selected
                 return;
             }
             P.rect(x, y, turret.size.y, turret.size.y);
-            P.circle(turret.tile.position.x - (turret.size.x / 2), turret.tile.position.y - (turret.size.y / 2), turret.range * 2);
+            if (turret.boostedRange() > 0) P.stroke(InGameGui.BOOSTED_TEXT_COLOR.getRGB());
+            P.circle(turret.tile.position.x - (turret.size.x / 2), turret.tile.position.y - (turret.size.y / 2), turret.getRange() * 2);
             P.noStroke();
         }
     }
@@ -332,6 +333,9 @@ public class Selection { //what tower is selected
             Booster booster = (Booster) turret;
             if (booster.boost.damage > 0) {
                 P.text("Damage: +" + nf(booster.boost.damage * 100) + "%", 910, 296 + offset);
+                offset += 20;
+            } if (booster.boost.range > 0) {
+                P.text("Range: +" + nf(booster.boost.range * 100) + "%", 910, 296 + offset);
                 offset += 20;
             }
             return;

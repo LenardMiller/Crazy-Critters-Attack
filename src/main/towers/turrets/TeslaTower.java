@@ -76,12 +76,12 @@ public class TeslaTower extends Turret {
         } else if (highPower) {
             playSoundRandomSpeed(p, fireSound, 1);
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
-            arcs.add(new RedArc(p, position.x, position.y, this, getDamage(), arcLength, range, priority));
+            arcs.add(new RedArc(p, position.x, position.y, this, getDamage(), arcLength, getRange(), priority));
         }
         else {
             playSoundRandomSpeed(p, fireSound, 1);
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
-            arcs.add(new Arc(p, position.x, position.y, this, getDamage(), arcLength, range, priority));
+            arcs.add(new Arc(p, position.x, position.y, this, getDamage(), arcLength, getRange(), priority));
         }
     }
 

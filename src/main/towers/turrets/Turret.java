@@ -107,7 +107,7 @@ public abstract class Turret extends Tower {
                 float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));
-                if (enemy.onScreen() && dist < range) {
+                if (enemy.onScreen() && dist < getRange()) {
                     if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
                         finalDist = dist;
@@ -368,4 +368,16 @@ public abstract class Turret extends Tower {
     public int getDamage() {
         return damage + boostedDamage();
     }
-}  
+
+    public int boostedRange() {
+        int r = 0;
+        for (Booster.Boost boost : boosts) {
+            r += range * boost.range;
+        }
+        return r;
+    }
+
+    public int getRange() {
+        return range + boostedRange();
+    }
+}
