@@ -176,12 +176,14 @@ public abstract class Tower {
         }
     }
 
+    //boosts
+
     public int boostedMaxHp() {
-        int hp = 0;
+        int h = 0;
         for (Booster.Boost boost : boosts) {
-            hp += maxHp * boost.health;
+            h += maxHp * boost.health;
         }
-        return hp;
+        return h;
     }
 
     public int getMaxHp() {

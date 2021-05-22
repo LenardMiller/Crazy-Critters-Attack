@@ -335,7 +335,9 @@ public class Selection { //what tower is selected
             Booster.Boost boost = ((Booster) turret).boost;
             int x = 910;
             int y = 296;
+            P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
             P.text("Boosts:", x, y + offset);
+            P.fill(0, 254);
             offset += 20;
             if (boost.health > 0) {
                 P.text("Health: +" + nf(boost.health * 100) + "%", x, y + offset);
@@ -346,19 +348,22 @@ public class Selection { //what tower is selected
             } if (boost.damage > 0) {
                 P.text("Damage: +" + nf(boost.damage * 100) + "%", x, y + offset);
                 offset += 20;
+            } if (boost.firerate > 0) {
+                P.text("Firerate: +" + nf(boost.firerate * 100) + "%", x, y + offset);
+                offset += 20;
             }
             return;
         }
         //damage
+        if (turret.boostedDamage() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
         if (turret.damage <= 0) P.text("No damage", 910, 296 + offset);
-        else {
-            if (turret.boostedDamage() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
-            P.text("Damage: " + nfc(turret.getDamage()), 910, 296 + offset);
-            P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
-        }
+        else P.text("Damage: " + nfc(turret.getDamage()), 910, 296 + offset);
+        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         //firerate (delay)
+        if (turret.boostedFirerate() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
         if (turret.delay <= 0) P.text("Instant reload", 910, 316 + offset);
-        else P.text("Reload time: " + nf(turret.delay, 1, 1) + "s", 910, 316 + offset);
+        else P.text("Reload time: " + nf(turret.getDelay(), 1, 1) + "s", 910, 316 + offset);
+        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         //velocity
         if (speed < 0) P.text("Instant travel", 910, 336 + offset);
         else if (speed < 500) P.text("Low velocity", 910, 336 + offset);

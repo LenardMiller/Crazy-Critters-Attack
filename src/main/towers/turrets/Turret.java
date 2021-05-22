@@ -261,7 +261,7 @@ public abstract class Turret extends Tower {
                 } else { //if done, switch to load
                     if (loadFrames.length > 0) {
                         int oldSize = loadFrames.length;
-                        int newSize = secondsToFrames(delay);
+                        int newSize = secondsToFrames(getDelay());
                         spriteArray = new ArrayList<>();
                         if (oldSize > newSize) { //decreasing size
                             //creates the new spriteArray
@@ -350,12 +350,14 @@ public abstract class Turret extends Tower {
         playSoundRandomSpeed(p, placeSound, 1);
         spawnParticles();
         //prevent having fire animations longer than delays
-        while (delay <= fireFrames.length * betweenFireFrames + idleFrames.length) betweenFireFrames--;
+        while (getDelay() <= fireFrames.length * betweenFireFrames + idleFrames.length && betweenFireFrames > 0) betweenFireFrames--;
     }
 
     protected abstract void setUpgrades();
 
     protected abstract void upgradeSpecial(int id);
+
+    //boosts
 
     public int boostedDamage() {
         int d = 0;
@@ -379,5 +381,17 @@ public abstract class Turret extends Tower {
 
     public int getRange() {
         return range + boostedRange();
+    }
+
+    public float boostedFirerate() {
+        float f = 0;
+        for (Booster.Boost boost : boosts) {
+            f += delay * boost.firerate;
+        }
+        return f;
+    }
+
+    public float getDelay() {
+        return delay - boostedFirerate();
     }
 }
