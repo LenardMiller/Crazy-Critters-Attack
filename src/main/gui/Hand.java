@@ -382,35 +382,68 @@ public class Hand {
     private void place() {
         Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
         boolean changeHeld = true;
-        if (held.equals("slingshot") && alive) tile.tower = new Slingshot(P, tile);
-        else if (held.equals("crossbow") && alive) tile.tower = new Crossbow(P, tile);
-        else if (held.equals("miscCannon") && alive) tile.tower = new RandomCannon(P, tile);
-        else if (held.equals("cannon") && alive) tile.tower = new Cannon(P, tile);
-        else if (held.equals("gluer") && alive) tile.tower = new Gluer(P, tile);
-        else if (held.equals("seismic") && alive) tile.tower = new SeismicTower(P, tile);
-        else if (held.equals("energyBlaster") && alive) tile.tower = new EnergyBlaster(P, tile);
-        else if (held.equals("magicMissleer") && alive) tile.tower = new MagicMissileer(P, tile);
-        else if (held.equals("tesla") && alive) tile.tower = new TeslaTower(P, tile);
-        else if (held.equals("nightmare") && alive) tile.tower = new Nightmare(P, tile);
-        else if (held.equals("flamethrower") && alive) tile.tower = new Flamethrower(P, tile);
-        else if (held.equals("iceTower") && alive) tile.tower = new IceTower(P, tile);
-        else if (held.equals("booster") && alive) tile.tower = new Booster(P, tile);
-        else if (held.equals("railgun") && alive) tile.tower = new Railgun(P, tile);
-        else if (held.equals("waveMotion") && alive) tile.tower = new WaveMotion(P, tile);
-        else if (held.equals("wall") && alive) {
-            if (tile.tower instanceof Wall) { //upgrade
-                if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
-                    money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
-                    tile.tower.upgrade(0);
-                    connectWallQueues++;
+        if (!alive) return;
+        switch (held) {
+            case "slingshot":
+                tile.tower = new Slingshot(P, tile);
+                break;
+            case "crossbow":
+                tile.tower = new Crossbow(P, tile);
+                break;
+            case "miscCannon":
+                tile.tower = new RandomCannon(P, tile);
+                break;
+            case "cannon":
+                tile.tower = new Cannon(P, tile);
+                break;
+            case "gluer":
+                tile.tower = new Gluer(P, tile);
+                break;
+            case "seismic":
+                tile.tower = new SeismicTower(P, tile);
+                break;
+            case "energyBlaster":
+                tile.tower = new EnergyBlaster(P, tile);
+                break;
+            case "magicMissleer":
+                tile.tower = new MagicMissileer(P, tile);
+                break;
+            case "tesla":
+                tile.tower = new TeslaTower(P, tile);
+                break;
+            case "nightmare":
+                tile.tower = new Nightmare(P, tile);
+                break;
+            case "flamethrower":
+                tile.tower = new Flamethrower(P, tile);
+                break;
+            case "iceTower":
+                tile.tower = new IceTower(P, tile);
+                break;
+            case "booster":
+                tile.tower = new Booster(P, tile);
+                break;
+            case "railgun":
+                tile.tower = new Railgun(P, tile);
+                break;
+            case "waveMotion":
+                tile.tower = new WaveMotion(P, tile);
+                break;
+            case "wall":
+                if (tile.tower instanceof Wall) { //upgrade
+                    if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
+                        money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
+                        tile.tower.upgrade(0);
+                        connectWallQueues++;
+                    }
+                    money += price; //cancel out price change later
+                } else {
+                    tile.tower = new Wall(P, tile);
+                    Wall wall = (Wall) tile.tower;
+                    wall.placeEffects();
                 }
-                money += price; //cancel out price change later
-            } else {
-                tile.tower = new Wall(P, tile);
-                Wall wall = (Wall) tile.tower;
-                wall.placeEffects();
-            }
-            changeHeld = false;
+                changeHeld = false;
+                break;
         }
         if (held.contains("TL")) {
             tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
