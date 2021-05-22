@@ -97,6 +97,7 @@ public class Machine {
             else currentFrame = 0;
             frameTimer = p.frameCount + betweenFrames;
         }
+        if (currentFrame >= sprites.length) currentFrame = 0;
         if (deathFrame < secondsToFrames(4)) p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
