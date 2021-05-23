@@ -43,7 +43,6 @@ public abstract class Enemy {
     public int pfSize;
     public int[] attackDmgFrames;
     public int[] tempAttackDmgFrames;
-    public boolean flying;
     public boolean immobilized;
     public boolean stealthMode;
     public ArrayList<TurnPoint> points;
@@ -109,7 +108,6 @@ public abstract class Enemy {
         pfSize = 1;
         stealthy = false;
         stealthMode = false;
-        flying = false;
         attackCount = 0;
         corpseSize = size;
         partSize = size;
@@ -534,7 +532,7 @@ public abstract class Enemy {
         points.addAll(pointsD);
     }
 
-    private ArrayList<Tower> clearanceTowers(TurnPoint point) {
+    protected ArrayList<Tower> clearanceTowers(TurnPoint point) {
         //returns all towers in enemy "bubble"?
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
@@ -546,7 +544,7 @@ public abstract class Enemy {
                 for (int yn = 0; yn < kSize; yn++) {
                     if (!(x + xn >= nodeGrid.length || y + yn >= nodeGrid[x].length)) {
                         Node nodeB = nodeGrid[x + xn][y + yn];
-                        if (nodeB.tower != null && !(flying && !(nodeB.tower instanceof Turret))) towers.add(nodeB.tower);
+                        if (nodeB.tower != null) towers.add(nodeB.tower);
                     } else {
                         clear = false;
                         break;

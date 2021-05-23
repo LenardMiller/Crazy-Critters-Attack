@@ -1,4 +1,4 @@
-package main.enemies;
+package main.enemies.flyingEnemies;
 
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -6,7 +6,7 @@ import processing.core.PVector;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
-public class Butterfly extends Enemy {
+public class Butterfly extends FlyingEnemy {
 
     public Butterfly(PApplet p, float x, float y) {
         super(p,x,y);
@@ -26,7 +26,6 @@ public class Butterfly extends Enemy {
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(5);
         attackFrame = attackStartFrame;
-        flying = true;
         corpseSize = new PVector(25,25);
         partSize = new PVector(18,18);
         betweenCorpseFrames = down60ToFramerate(4);

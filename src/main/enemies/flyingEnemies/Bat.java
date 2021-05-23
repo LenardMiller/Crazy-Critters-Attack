@@ -1,4 +1,4 @@
-package main.enemies;
+package main.enemies.flyingEnemies;
 
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -6,7 +6,7 @@ import processing.core.PVector;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
-public class Bat extends Enemy {
+public class Bat extends FlyingEnemy {
 
     public Bat(PApplet p, float x, float y) {
         super(p,x,y);
@@ -26,7 +26,6 @@ public class Bat extends Enemy {
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(10);
         attackFrame = attackStartFrame;
-        flying = true;
         corpseSize = new PVector(50,50);
         partSize = new PVector(23, 23);
         betweenWalkFrames = down60ToFramerate(7);

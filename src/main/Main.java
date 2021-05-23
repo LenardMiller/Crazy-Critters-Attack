@@ -3,6 +3,7 @@ package main;
 import main.arcs.Arc;
 import main.buffs.Buff;
 import main.enemies.Enemy;
+import main.enemies.flyingEnemies.FlyingEnemy;
 import main.gui.*;
 import main.gui.guiObjects.PopupText;
 import main.gui.guiObjects.buttons.TileSelect;
@@ -436,10 +437,10 @@ public class Main extends PApplet {
         //machine
         machine.main();
         //enemies
-        for (Enemy enemy : enemies) if (!enemy.flying) enemy.displayShadow();
+        for (Enemy enemy : enemies) if (!(enemy instanceof FlyingEnemy)) enemy.displayShadow();
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
-            if (!enemy.flying) enemy.main(i);
+            if (!(enemy instanceof FlyingEnemy)) enemy.main(i);
         }
         if (enemies.isEmpty()) buffs = new ArrayList<>();
         //towers
@@ -485,10 +486,12 @@ public class Main extends PApplet {
             if (arc.alpha <= 0) arcs.remove(i);
         }
         //flying enemies
-        enemies.stream().filter(enemy -> enemy.flying).forEach(Enemy::displayShadow);
+        for (Enemy enemy1 : enemies) {
+            if (enemy1 instanceof FlyingEnemy) enemy1.displayShadow();
+        }
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
-            if (enemy.flying) enemy.main(i);
+            if (enemy instanceof FlyingEnemy) enemy.main(i);
         }
         //currently held
         hand.main();

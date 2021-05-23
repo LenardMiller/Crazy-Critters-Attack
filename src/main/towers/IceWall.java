@@ -1,6 +1,7 @@
 package main.towers;
 
 import main.enemies.Enemy;
+import main.enemies.flyingEnemies.FlyingEnemy;
 import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -57,7 +58,7 @@ public class IceWall extends Wall {
             }
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy enemy = enemies.get(i);
-                if (enemy.flying) continue;
+                if (enemy instanceof FlyingEnemy) continue;
                 if (enemy.pfSize > 2) continue;
                 if (intersecting(enemy.position)) {
                     enemy.damageWithBuff(0, "frozen", 1, 0.2f, null,
