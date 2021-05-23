@@ -17,9 +17,11 @@ public abstract class FlyingEnemy extends Enemy {
         super(p, x, y);
     }
 
+    /**
+     * returns all towers in enemy "bubble"?
+     */
     @Override
     protected ArrayList<Tower> clearanceTowers(TurnPoint point) {
-        //returns all towers in enemy "bubble"?
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
         int kSize = 1;

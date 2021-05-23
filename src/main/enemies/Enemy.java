@@ -532,8 +532,10 @@ public abstract class Enemy {
         points.addAll(pointsD);
     }
 
+    /**
+     * returns all towers in enemy "bubble"?
+     */
     protected ArrayList<Tower> clearanceTowers(TurnPoint point) {
-        //returns all towers in enemy "bubble"?
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
         int kSize = 1;
