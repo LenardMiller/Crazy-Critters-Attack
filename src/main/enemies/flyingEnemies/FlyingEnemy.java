@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import static main.Main.nodeGrid;
 
-public class FlyingEnemy extends Enemy {
+public abstract class FlyingEnemy extends Enemy {
 
     public FlyingEnemy(PApplet p, float x, float y) {
         super(p, x, y);
