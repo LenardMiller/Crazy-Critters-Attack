@@ -9,7 +9,6 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.secondsToFrames;
 
 public class SpikeyGlued extends Glued {
 
@@ -17,14 +16,6 @@ public class SpikeyGlued extends Glued {
 
     public SpikeyGlued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
         super(p,enId,speedMod,duration,turret);
-        particleChance = 8;
-        effectDelay = secondsToFrames(0.2f); //frames
-        lifeDuration = secondsToFrames(duration);
-        particle = "glue";
-        name = "glued";
-        this.enId = enId;
-        slowAttacking();
-
         SPIKES = new Spike[enemies.get(enId).pfSize * 3];
         for (int i = 0; i < SPIKES.length; i++) {
             Enemy enemy = enemies.get(enId);

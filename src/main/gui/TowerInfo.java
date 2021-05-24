@@ -77,9 +77,12 @@ public class TowerInfo {
         p.text("unglued enemy.", x, space(2));
         p.text("Slows movement", x, space(3));
         p.text("and attack speed,", x, space(4));
-        p.text("does no damage.", x, space(5));
+        p.text("but does no", x, space(5));
+        p.text("damage.  More", x, space(6));
+        p.text("strongly affects", x, space(7));
+        p.text("flying enemies.", x, space(8));
         p.textAlign(CENTER);
-        p.text("[S]", 1000, space(7));
+        p.text("[S]", 1000, space(10));
     }
 
     public static void seismicInfo(PApplet p) {

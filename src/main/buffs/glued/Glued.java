@@ -2,6 +2,7 @@ package main.buffs.glued;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
+import main.enemies.flyingEnemies.FlyingEnemy;
 import main.misc.CompressArray;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -21,6 +22,7 @@ public class Glued extends Buff {
         particleChance = 8;
         effectDelay = secondsToFrames(0.2f); //frames
         lifeDuration = secondsToFrames(duration);
+        if (enemies.get(enId) instanceof FlyingEnemy) speedMod /= 2; //more strongly effects flying enemies
         this.SPEED_MODIFIER = speedMod;
         particle = "glue";
         name = "glued";

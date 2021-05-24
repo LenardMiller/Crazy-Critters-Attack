@@ -88,8 +88,12 @@ public class Main extends PApplet {
      */
     public static int screen = 1;
     public static int money = 100;
+    public static int connectWallQueues;
     public static float globalVolume = 0.25f;
+    public static float matrixScale;
+    public static float matrixOffset;
     public static boolean fullscreen;
+    public static boolean hasVerticalBars;
     public static boolean alive = true;
     public static boolean won = false;
     public static boolean debug = false;
@@ -99,11 +103,7 @@ public class Main extends PApplet {
     public static boolean paused = false;
     public static boolean settings = false;
     public static boolean dev = true;
-    public static float matrixScale;
-    public static float matrixOffset;
     public static PVector matrixMousePosition;
-    public static int connectWallQueues;
-    public static boolean hasVerticalBars;
 
     public static final int FRAMERATE = 30;
     public static final int SOFT_PARTICLE_CAP = 1500;
