@@ -131,4 +131,40 @@ public class TowerInfo {
         p.textAlign(CENTER);
         p.text("[C]", 1000, space(8));
     }
+
+    public static void boosterInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Boosts the stats of", x, space(0));
+        p.text("nearby towers.", x, space(1));
+        p.text("Effect does not", x, space(2));
+        p.text("stack.", x, space(3));
+        p.textAlign(CENTER);
+        p.text("[R]", 1000, space(5));
+    }
+
+    public static void iceTowerInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Freezes the nearest", x, space(0));
+        p.text("enemy in a block", x, space(1));
+        p.text("of ice.  Smaller", x, space(2));
+        p.text("enemies are", x, space(3));
+        p.text("completely", x, space(4));
+        p.text("immobilized.  Ice", x, space(5));
+        p.text("melts over time.", x, space(6));
+        p.textAlign(CENTER);
+        p.text("[F]", 1000, space(8));
+    }
+
+    public static void magicMissileerInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Fires three magic", x, space(0));
+        p.text("missiles that home", x, space(1));
+        p.text("in on different", x, space(2));
+        p.text("enemies.  Short", x, space(3));
+        p.text("range and low", x, space(4));
+        p.text("firerate but missiles", x, space(5));
+        p.text("can travel very far.", x, space(6));
+        p.textAlign(CENTER);
+        p.text("[V]", 1000, space(8));
+    }
 }

@@ -70,6 +70,7 @@ public class KeyBinds {
         boolean energyBlaster = addHotkey(new char[]{'e', 'E'}, ENERGY_BLASTER_PRICE);
         boolean flamethrower = addHotkey(new char[]{'d', 'Q'}, FLAMETHROWER_PRICE);
         boolean teslaTower = addHotkey(new char[]{'c', 'C'}, TESLA_TOWER_PRICE);
+        boolean booster = addHotkey(new char[]{'r', 'R'}, BOOSTER_PRICE);
         boolean iceTower = addHotkey(new char[]{'f', 'F'}, ICE_TOWER_PRICE);
         boolean magicMissileer = addHotkey(new char[]{'v', 'V'}, MAGIC_MISSILEER_PRICE);
 
@@ -99,6 +100,7 @@ public class KeyBinds {
                 if (flamethrower) hand.setHeld("flamethrower");
                 if (teslaTower) hand.setHeld("tesla");
             } if (currentLevel > 2) {
+                if (booster) hand.setHeld("booster");
                 if (iceTower) hand.setHeld("iceTower");
                 if (magicMissileer) hand.setHeld("magicMissileer");
             }

@@ -146,6 +146,7 @@ public class TowerBuy extends Button {
                     break;
                 case "magicMissleer":
                     p.text("Magic Missileer", x, 241);
+                    magicMissileerInfo(p);
                     break;
                 case "tesla":
                     p.text("Tesla Tower", x, 241);
@@ -162,9 +163,11 @@ public class TowerBuy extends Button {
                     break;
                 case "iceTower":
                     p.text("Freeze Ray", x, 241);
+                    iceTowerInfo(p);
                     break;
                 case "booster":
                     p.text("Booster", x, 241);
+                    boosterInfo(p);
                     break;
                 case "railgun":
                     p.text("Railgun", x, 241);
