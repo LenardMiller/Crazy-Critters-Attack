@@ -20,10 +20,10 @@ public class Booster extends Turret {
         delay = -1;
         range = 1;
         pjSpeed = -1;
-        debrisType = "crystal";
-        damageSound = sounds.get("crystalDamage");
-        breakSound = sounds.get("crystalBreak");
-        placeSound = sounds.get("crystalPlace");
+        debrisType = "darkMetal";
+        damageSound = sounds.get("metalDamage");
+        breakSound = sounds.get("metalBreak");
+        placeSound = sounds.get("metalPlace");
         betweenIdleFrames = 4;
         price = BOOSTER_PRICE;
         value = price;
