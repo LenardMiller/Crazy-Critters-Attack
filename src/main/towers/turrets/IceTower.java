@@ -174,7 +174,7 @@ public class IceTower extends Turret {
         upgradeDescC[5] = "enemies";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[35];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[27];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[36];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[34];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
