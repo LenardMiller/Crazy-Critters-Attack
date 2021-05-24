@@ -16,8 +16,9 @@ public class Tile {
 
     private final PApplet P;
 
-    public PVector position;
+    public boolean machine;
     public int id;
+    public PVector position;
     public Tower tower;
     public PImage base;
     public String baseName;
@@ -29,14 +30,15 @@ public class Tile {
     public String breakableName;
     public PImage obstacle;
     public String obstacleName;
+
+    PImage[] baseEdges;
+    PImage[] flooringEdges;
+
     private int obstacleShadowLength;
-    public PImage[] baseEdges;
-    public PImage[] flooringEdges;
+    private boolean drawMain;
     private PImage[] flooringOutsideCorners;
     private String[] flooringOutsideCornerNames;
     private PImage[] flooringInsideCorners;
-    private boolean drawMain;
-    public boolean machine;
 
     public Tile(PApplet p, PVector position, int id) {
         this.P = p;
@@ -88,24 +90,27 @@ public class Tile {
         int y = (int) (position.y / 50);
         if (y != 0) {
             Tile tile = tiles.get(x, y - 1);
-            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[0] != null)
-                P.image(tile.baseEdges[0], position.x, position.y);
+            if (canTile(0, tile)) P.image(tile.baseEdges[0], position.x, position.y);
         }
         if (x != 0) {
             Tile tile = tiles.get(x - 1, y);
-            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[3] != null)
-                P.image(tile.baseEdges[3], position.x, position.y);
+            if (canTile(3, tile)) P.image(tile.baseEdges[3], position.x, position.y);
         }
         if (y != 18) {
             Tile tile = tiles.get(x, y + 1);
-            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[2] != null)
-                P.image(tile.baseEdges[2], position.x, position.y);
+            if (canTile(2, tile)) P.image(tile.baseEdges[2], position.x, position.y);
         }
         if (x != 18) {
             Tile tile = tiles.get(x + 1, y);
-            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[1] != null)
-                P.image(tile.baseEdges[1], position.x, position.y);
+            if (canTile(1, tile)) P.image(tile.baseEdges[1], position.x, position.y);
         }
+    }
+
+    private boolean canTile(int i, Tile tile) {
+        if (baseName == null) return false;
+        boolean nameDoesNotMatch = !baseName.equals(tile.baseName);
+        boolean neighborTiles = tile.baseEdges[i] != null;
+        return nameDoesNotMatch && neighborTiles;
     }
 
     private void connectFlooringEdges() {
