@@ -145,7 +145,9 @@ public class TowerBuy extends Button {
                     energyBlasterInfo(p);
                     break;
                 case "magicMissleer":
-                    p.text("Magic Missileer", x, 241);
+                    p.text("Magic Missile", x, 241);
+                    p.text("Launcher", x, 266);
+                    offset = 25;
                     magicMissileerInfo(p);
                     break;
                 case "tesla":
