@@ -340,16 +340,16 @@ public class Selection { //what tower is selected
             P.fill(0, 254);
             offset += 20;
             if (boost.health > 0) {
-                P.text("Health: +" + nf(boost.health * 100) + "%", x, y + offset);
+                P.text("Health: +" + (int) (boost.health * 100) + "%", x, y + offset);
                 offset += 20;
             } if (boost.range > 0) {
-                P.text("Range: +" + nf(boost.range * 100) + "%", x, y + offset);
+                P.text("Range: +" + (int) (boost.range * 100) + "%", x, y + offset);
                 offset += 20;
             } if (boost.damage > 0) {
-                P.text("Damage: +" + nf(boost.damage * 100) + "%", x, y + offset);
+                P.text("Damage: +" + (int) (boost.damage * 100) + "%", x, y + offset);
                 offset += 20;
             } if (boost.firerate > 0) {
-                P.text("Firerate: +" + nf(boost.firerate * 100) + "%", x, y + offset);
+                P.text("Firerate: +" + (int) (boost.firerate * 100) + "%", x, y + offset);
             }
             return;
         }
