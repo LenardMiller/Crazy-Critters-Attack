@@ -99,7 +99,7 @@ public class DataControl extends ClassLoader {
      * @param file the filename, sans extension.
      */
     public static void loadLayout(PApplet p, String file) {
-        File loadFile = new File(filePath()+"/data/"+file+"/clean.json");
+        File loadFile = new File(filePath()+"/data/"+file+"/base.json");
         JSONArray loadArray = loadJSONArray(loadFile);
 
         alive = true;

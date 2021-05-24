@@ -39,7 +39,7 @@ public class LevelBuilderGui {
         placeButton(0, 3, "treeTLOb");
         placeButton(1, 3, "treeTROb");
         placeButton(2, 3, "smallTreeOb");
-        //blank
+        placeButton(3, 3, "snowBa");
 
         placeButton(0, 4, "treeBLOb");
         placeButton(1, 4, "treeBROb");
@@ -92,7 +92,6 @@ public class LevelBuilderGui {
         placeButton(3, 13, "deadGlowshrooms2Br");
 
         placeButton(0, 14, "deadLichenDe");
-        placeButton(1, 14, "snowBa");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");
