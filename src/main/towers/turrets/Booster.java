@@ -30,7 +30,7 @@ public class Booster extends Turret {
         hasPriority = false;
 
         boost = new Boost();
-        boost.health = 0.2f;
+        boost.health = 0.25f;
 
         loadSprites();
         setUpgrades();
