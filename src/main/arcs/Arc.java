@@ -186,7 +186,7 @@ public class Arc {
                 e.x *= -1;
                 e.y *= -1;
                 points[i] = new PVector(e.x+pointA.x+ P.random(-variation, variation),e.y+pointA.y+ P.random(-variation, variation));
-                particles.add(new BuffParticle(P, points[i].x, points[i].y, P.random(360), particleType));
+                topParticles.add(new BuffParticle(P, points[i].x, points[i].y, P.random(360), particleType));
             }
         }
     }

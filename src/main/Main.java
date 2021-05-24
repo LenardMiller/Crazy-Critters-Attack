@@ -55,7 +55,7 @@ public class Main extends PApplet {
     public static ArrayList<Enemy> enemies;
     public static ArrayList<main.misc.Corpse> corpses;
     public static ArrayList<main.projectiles.Projectile> projectiles;
-    public static ArrayList<main.particles.Particle> particles, underParticles;
+    public static ArrayList<main.particles.Particle> topParticles, midParticles, bottomParticles;
     public static ArrayList<Arc> arcs;
     public static ArrayList<Shockwave> shockwaves;
     public static ArrayList<TowerBuy> towerBuyButtons;
@@ -213,8 +213,9 @@ public class Main extends PApplet {
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         corpses = new ArrayList<>();
-        particles = new ArrayList<>();
-        underParticles = new ArrayList<>();
+        topParticles = new ArrayList<>();
+        midParticles = new ArrayList<>();
+        bottomParticles = new ArrayList<>();
         arcs = new ArrayList<>();
         shockwaves = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
@@ -415,18 +416,10 @@ public class Main extends PApplet {
             fill(0,0,255);
             rect(start.position.x,start.position.y, NODE_SIZE, NODE_SIZE);
         }
-        //under particle culling
-        int up = underParticles.size();
-        int up2 = up-SOFT_PARTICLE_CAP;
-        if (up > SOFT_PARTICLE_CAP) for (int i = 0; i < up; i++) if (random(0,up2) < 5) {
-            if (i < underParticles.size()) underParticles.remove(i);
-            else break;
-        }
-        if (up > HARD_PARTICLE_CAP) underParticles = new ArrayList<>();
-        //under particles
-        for (int i = underParticles.size()-1; i >= 0; i--) {
-            Particle particle = underParticles.get(i);
-            particle.main(underParticles, i);
+        //bottom particles
+        for (int i = bottomParticles.size()-1; i >= 0; i--) {
+            Particle particle = bottomParticles.get(i);
+            particle.main(bottomParticles, i);
         }
         //corpses
         for (Corpse corpse : corpses) corpse.display();
@@ -443,35 +436,46 @@ public class Main extends PApplet {
             if (!(enemy instanceof FlyingEnemy)) enemy.main(i);
         }
         if (enemies.isEmpty()) buffs = new ArrayList<>();
-        //towers
+        //turret bases & walls
         for (Tower tower : towers) if (tower instanceof Turret) tower.displayBase();
         for (Tower tower : towers) if (tower instanceof Wall) tower.displayBase();
         for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
+        //mid particles
+        for (int i = midParticles.size()-1; i >= 0; i--) {
+            Particle particle = midParticles.get(i);
+            particle.main(midParticles, i);
+        }
+        //turret top
         for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
         for (Tower tower : towers) tower.main();
         //shockwaves
         for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).main();
         //particle culling
-        int p = particles.size() + underParticles.size();
+        int p = topParticles.size() + midParticles.size() + bottomParticles.size();
         int p2 = p-SOFT_PARTICLE_CAP;
         if (p > SOFT_PARTICLE_CAP) {
-            for (int i = particles.size() - 1; i >= 0; i--) {
+            for (int i = topParticles.size() - 1; i >= 0; i--) {
                 if (random(0,p2) < 5) {
-                    if (i < particles.size()) particles.remove(i);
+                    if (i < topParticles.size()) topParticles.remove(i);
                 }
-            } for (int i = underParticles.size() - 1; i >= 0; i--) {
+            } for (int i = bottomParticles.size() - 1; i >= 0; i--) {
                 if (random(0,p2) < 5) {
-                    if (i < underParticles.size()) underParticles.remove(i);
+                    if (i < bottomParticles.size()) bottomParticles.remove(i);
+                }
+            } for (int i = midParticles.size() - 1; i >= 0; i--) {
+                if (random(0,p2) < 5) {
+                    if (i < midParticles.size()) midParticles.remove(i);
                 }
             }
         } if (p > HARD_PARTICLE_CAP) {
-            particles = new ArrayList<>();
-            underParticles = new ArrayList<>();
+            topParticles = new ArrayList<>();
+            midParticles = new ArrayList<>();
+            bottomParticles = new ArrayList<>();
         }
-        //particles
-        for (int i = particles.size()-1; i >= 0; i--) {
-            Particle particle = particles.get(i);
-            particle.main(particles, i);
+        //top particles
+        for (int i = topParticles.size()-1; i >= 0; i--) {
+            Particle particle = topParticles.get(i);
+            particle.main(topParticles, i);
         }
         //buffs
         for (int i = buffs.size() - 1; i >= 0; i--) {

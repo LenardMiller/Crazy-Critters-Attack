@@ -138,7 +138,7 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if ((int) p.random(0, r) == 0)
-                    particles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greyPuff"));
+                    topParticles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greyPuff"));
             }
         }
     }
@@ -155,11 +155,11 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if (up60ToFramerate(p.random(0, 3)) == 0)
-                    particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 if (up60ToFramerate(p.random(0, 6)) == 0) {
                     if ((int) p.random(0, 5) == 0) {
                         playSoundRandomSpeed(p, EXPLODE_SOUND, 1);
-                    } particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                    } topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 }
             }
         } else {
@@ -168,11 +168,11 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if (up60ToFramerate(p.random(0, 4)) == 0)
-                    particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                    topParticles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 if (up60ToFramerate((int) p.random(0, 2)) == 0)
-                    particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                    topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 for (int i = 0; i < up60ToFramerate(3); i++) {
-                    particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 } if (up60ToFramerate(p.random(0, 8)) == 0) {
                     projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, maxHp * 10, maxHp, 1000, (int) p.random(50, 200), true));
                 }
@@ -194,11 +194,11 @@ public class Machine {
             int x = (int) tile.position.x;
             int y = (int) tile.position.y;
             for (int i = 0; i < 5; i++) {
-                particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
             }
             if ((int) p.random(0, 2 * ((float) hp / (float) hpSegment)) == 0) {
                 playSoundRandomSpeed(p, EXPLODE_SOUND, 1);
-                particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
             }
         }
     }
@@ -214,7 +214,7 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 for (int i = 0; i < 5; i++) {
-                    particles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greenPuff"));
+                    topParticles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greenPuff"));
                 }
             }
         }

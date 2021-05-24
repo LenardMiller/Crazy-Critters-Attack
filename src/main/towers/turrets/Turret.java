@@ -173,7 +173,7 @@ public abstract class Turret extends Tower {
                 spa2.setMag(-5);
                 PVector spp2 = new PVector(projectileSpawn.x, projectileSpawn.y);
                 spp2.add(spa2);
-                particles.add(new BuffParticle(p, spp2.x, spp2.y, displayAngle + radians(p.random(-45, 45)), particleType));
+                topParticles.add(new BuffParticle(p, spp2.x, spp2.y, displayAngle + radians(p.random(-45, 45)), particleType));
             }
         }
     }
@@ -234,7 +234,7 @@ public abstract class Turret extends Tower {
     public void controlAnimation() {
         if (!paused) {
             if (hp < getMaxHp() && p.random(30) < 1) {
-                particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x),
+                topParticles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "greyPuff"));
             }
             if (tintColor < 255) tintColor += 20;

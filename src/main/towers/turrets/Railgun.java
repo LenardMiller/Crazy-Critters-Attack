@@ -56,7 +56,7 @@ public class Railgun extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        particles.add(new RailgunBlast(p,position.x,position.y,0));
+        topParticles.add(new RailgunBlast(p,position.x,position.y,0));
         currentVaporFrame = 0;
         vaporStart = position;
         PVector vaporEnd = targetEnemy.position;

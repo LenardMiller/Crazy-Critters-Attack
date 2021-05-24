@@ -25,7 +25,7 @@ public class GlueSpike extends Frag {
 
     @Override
     public void die() {
-        particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"gluePuff"));
+        topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"gluePuff"));
         projectiles.remove(this);
     }
 }

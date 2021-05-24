@@ -31,9 +31,9 @@ public class NuclearBlast extends Projectile {
     @Override
     public void die() {
         for (int i = 0; i < p.random(10,15); i++) {
-            particles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "nuclear", p.random(500, 1000)));
-            particles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "fire", p.random(500, 1000)));
-            particles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "metal", p.random(500, 1000)));
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "nuclear", p.random(500, 1000)));
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "fire", p.random(500, 1000)));
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "metal", p.random(500, 1000)));
         }
         shockwaves.add(new NuclearShockwave(p, position.x, position.y, effectRadius, damage, turret));
         projectiles.remove(this);

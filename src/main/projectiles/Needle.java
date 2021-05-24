@@ -40,7 +40,7 @@ public class Needle extends Projectile {
 
     @Override
     public void die() {
-        particles.add(new Ouch(p,position.x,position.y,angleTwo,"greyPuff"));
+        topParticles.add(new Ouch(p,position.x,position.y,angleTwo,"greyPuff"));
         projectiles.remove(this);
     }
 }

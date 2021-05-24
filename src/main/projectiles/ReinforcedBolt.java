@@ -25,7 +25,7 @@ public class ReinforcedBolt extends Projectile {
 
     @Override
     public void die() {
-        particles.add(new BoltBreak(p,position.x,position.y,angleTwo));
+        topParticles.add(new BoltBreak(p,position.x,position.y,angleTwo));
         projectiles.remove(this);
     }
 }

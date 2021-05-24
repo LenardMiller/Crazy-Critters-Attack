@@ -6,7 +6,7 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.particles;
+import static main.Main.topParticles;
 
 public class FireShockwave extends Shockwave {
 
@@ -26,14 +26,14 @@ public class FireShockwave extends Shockwave {
         PVector pos;
         a = randomAngle();
         pos = randomPosition(a);
-        particles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
+        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
         a = randomAngle();
         pos = randomPosition(a);
-        particles.add(new BuffParticle(P, pos.x, pos.y, a, "fire"));
+        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "fire"));
         for (int i = 0; i < P.random(5, 10); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            particles.add(new ExplosionDebris(P, pos.x, pos.y, a, "fire", P.random(100,200)));
+            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "fire", P.random(100,200)));
         }
     }
 }

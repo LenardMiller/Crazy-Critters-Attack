@@ -92,7 +92,7 @@ public class MagicMissile extends Projectile {
 
     @Override
     public void die() {
-        particles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greenPuff"));
+        topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greenPuff"));
         projectiles.remove(this);
     }
 }

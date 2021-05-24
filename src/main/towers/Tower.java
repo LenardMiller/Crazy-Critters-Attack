@@ -109,7 +109,7 @@ public abstract class Tower {
         playSoundRandomSpeed(p, damageSound, 1);
         int num = (int)(p.random(4,10));
         for (int i = num; i >= 0; i--){ //spray debris
-            particles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            topParticles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
         }
     }
 
@@ -141,7 +141,7 @@ public abstract class Tower {
         if (hp < getMaxHp()) {
             refreshHpBar();
             for (int i = 0; i < 5; i++) {
-                particles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
+                topParticles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
             }
         }
         hp += relativeAmount * getMaxHp();
@@ -156,13 +156,13 @@ public abstract class Tower {
         for (int j = num; j >= 0; j--) {
             PVector deviation = new PVector(p.random(-size.x/2,size.x/2), p.random(-size.y/2,size.y/2));
             PVector spawnPos = PVector.add(center, deviation);
-            particles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), debrisType));
+            topParticles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), debrisType));
         }
         num = (int) p.random(6, 12);
         for (int k = num; k >= 0; k--) {
             PVector deviation = new PVector(p.random(-size.x/2,size.x/2), p.random(-size.y/2,size.y/2));
             PVector spawnPos = PVector.add(center, deviation);
-            particles.add(new Ouch(p, spawnPos.x, spawnPos.y, p.random(360), "greyPuff"));
+            topParticles.add(new Ouch(p, spawnPos.x, spawnPos.y, p.random(360), "greyPuff"));
         }
     }
 
@@ -185,7 +185,7 @@ public abstract class Tower {
     protected void displayBoost() {
         if (this instanceof IceWall) return;
         if (boosts.size() > 0 && p.random(30) < 1) {
-            particles.add(new BuffParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+            topParticles.add(new BuffParticle(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
         }
     }

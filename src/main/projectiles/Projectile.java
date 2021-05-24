@@ -89,7 +89,7 @@ public abstract class Projectile {
 
     protected void trail() { //leaves a trail of particles
         if (hasTrail) {
-            if (p.random(0, 3) > 1) particles.add(new BuffParticle(p, position.x, position.y,
+            if (p.random(0, 3) > 1) topParticles.add(new BuffParticle(p, position.x, position.y,
                     p.random(0, 360), trail));
         }
     }

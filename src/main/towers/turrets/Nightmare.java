@@ -57,7 +57,7 @@ public class Nightmare extends Turret {
             spa2.setMag(-2);
             PVector spp2 = new PVector(position.x,position.y);
             spp2.add(spa2);
-            particles.add(new BuffParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),"decay"));
+            topParticles.add(new BuffParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),"decay"));
         }
     }
 

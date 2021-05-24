@@ -87,7 +87,8 @@ public class InGameGui {
         highlightedText(p, "enemies: " + enemies.size(), new PVector(padding, 30), LEFT);
         highlightedText(p, "towers: " + towers.size(), new PVector(padding, 60), LEFT);
         highlightedText(p, "projectiles: " + projectiles.size(), new PVector(padding, 90), LEFT);
-        highlightedText(p, "particles: " + particles.size(), new PVector(padding, 120), LEFT);
+        int particleCount = topParticles.size() + midParticles.size() + bottomParticles.size();
+        highlightedText(p, "particles: " + particleCount, new PVector(padding, 120), LEFT);
         highlightedText(p, "MX: " + (int) matrixMousePosition.x + ", MY: " + (int) matrixMousePosition.y, new PVector(padding, BOARD_HEIGHT - padding - 30), LEFT);
         if (fullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
           new PVector(padding, BOARD_HEIGHT - padding), LEFT);

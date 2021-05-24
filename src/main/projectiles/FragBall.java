@@ -29,9 +29,9 @@ public class FragBall extends Projectile {
     public void die() {
         int num = (int) (p.random(10, 16));
         for (int j = num; j >= 0; j--) {
-            particles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "metal", p.random(100,200)));
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "metal", p.random(100,200)));
         }
-        particles.add(new MediumExplosion(p, position.x, position.y, p.random(0, 360), "puff"));
+        topParticles.add(new MediumExplosion(p, position.x, position.y, p.random(0, 360), "puff"));
         int numFrags = 24;
         for (int j = 0; j < numFrags; j++)
             projectiles.add(new Frag(p, position.x, position.y, p.random(0, 360), turret, damage / 4));

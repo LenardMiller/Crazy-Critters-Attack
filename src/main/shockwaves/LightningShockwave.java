@@ -21,19 +21,19 @@ public class LightningShockwave extends Shockwave {
     protected void spawnParticles() {
         float a = randomAngle();
         PVector pos = randomPosition(a);
-        particles.add(new BuffParticle(P, pos.x, pos.y, a, "electricity"));
+        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "electricity"));
         a = randomAngle();
         pos = randomPosition(a);
-        particles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
+        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
         for (int i = 0; i < P.random(5, 12); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            particles.add(new Debris(P, pos.x, pos.y, a, levels[currentLevel].groundType));
+            topParticles.add(new Debris(P, pos.x, pos.y, a, levels[currentLevel].groundType));
         }
         for (int i = 0; i < P.random(5, 10); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            particles.add(new ExplosionDebris(P, pos.x, pos.y, a, "electricity", P.random(100,200)));
+            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "electricity", P.random(100,200)));
         }
     }
 }
