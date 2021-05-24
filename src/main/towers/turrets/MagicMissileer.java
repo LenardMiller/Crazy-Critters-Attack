@@ -17,10 +17,10 @@ public class MagicMissileer extends Turret {
         name = "magicMissleer";
         size = new PVector(50,50);
         hasPriority = false;
-        delay = randomizeDelay(p, 3.3f);
+        delay = randomizeDelay(p, 6.6f);
         damage = 150;
         pjSpeed = 300;
-        range = 300;
+        range = 250;
         betweenIdleFrames = down60ToFramerate(8);
         fireSound = sounds.get("magicMissleer");
         placeSound = sounds.get("crystalPlace");
@@ -147,7 +147,7 @@ public class MagicMissileer extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    range += 100;
+                    range += 75;
                     break;
                 case 1:
                     damage += 100;
