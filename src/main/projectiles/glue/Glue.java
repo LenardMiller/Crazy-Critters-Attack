@@ -39,7 +39,7 @@ public class Glue extends Projectile {
     }
 
     @Override
-    public void collideEn() {
+    public void checkCollision() {
         for (int enemyId = 0; enemyId < enemies.size(); enemyId++) {
             Enemy enemy = enemies.get(enemyId);
             if (enemyAlreadyHit(enemy)) continue;

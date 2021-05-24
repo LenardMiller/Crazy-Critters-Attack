@@ -71,13 +71,13 @@ public abstract class Projectile {
         effectDuration = 0;
     }
 
-    public void main(ArrayList<Projectile> projectiles, int i) {
+    public void main() {
         displayPassB();
         if (!paused) {
             trail();
             move();
         }
-        collideEn();
+        checkCollision();
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||
                 position.y + size.y < -100 || position.x + size.x < -100) {
             projectiles.remove(this);
@@ -119,7 +119,7 @@ public abstract class Projectile {
         position.add(velocity);
     }
 
-    public void collideEn() {
+    public void checkCollision() {
         for (int enemyId = 0; enemyId < enemies.size(); enemyId++) {
             Enemy enemy = enemies.get(enemyId);
             if (enemyAlreadyHit(enemy)) continue;

@@ -31,7 +31,7 @@ public class Needle extends Projectile {
         trail();
         displayPassB();
         move();
-        collideEn();
+        checkCollision();
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) {
             dead = true;
         }

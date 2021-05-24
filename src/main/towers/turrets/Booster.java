@@ -42,10 +42,6 @@ public class Booster extends Turret {
     protected void loadSprites() {
         sBase = staticSprites.get(name + "BaseTR");
         sIdle = staticSprites.get(name + "IdleTR");
-        if (false) { //idk, I may need this at some point
-            fireFrames = animatedSprites.get(name + "FireTR");
-            loadFrames = animatedSprites.get(name + "LoadTR");
-        }
         idleFrames = animatedSprites.get(name + "IdleTR");
         sIdle = idleFrames[0];
     }
