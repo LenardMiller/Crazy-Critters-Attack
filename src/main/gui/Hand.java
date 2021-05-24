@@ -450,10 +450,10 @@ public class Hand {
         if (held.contains("TL")) {
             tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
             changeHeld = false;
-            if (held.contains("BGA")) tile.setBase(held);
-            if (held.contains("BGB")) tile.setDecoration(held);
-            if (held.contains("BGW")) tile.setFlooring(held);
-            if (held.contains("BGC")) tile.setBreakable(held);
+            if (held.contains("Ba")) tile.setBase(held);
+            if (held.contains("De")) tile.setDecoration(held);
+            if (held.contains("Fl")) tile.setFlooring(held);
+            if (held.contains("Br")) tile.setBreakable(held);
             if (held.contains("Ob")) tile.setObstacle(held);
             if (held.contains("Ma")) {
                 tile.machine = !tile.machine;
