@@ -148,17 +148,17 @@ public class IceTower extends Turret {
         upgradeTitles[4] = "Faster Freezing";
         upgradeTitles[5] = "Superfreeze";
         //descriptions
-        upgradeDescA[0] = "Ice";
-        upgradeDescB[0] = "lasts";
-        upgradeDescC[0] = "longer";
+        upgradeDescA[0] = "Ice lasts";
+        upgradeDescB[0] = "longer";
+        upgradeDescC[0] = "";
 
         upgradeDescA[1] = "Increase";
-        upgradeDescB[1] = "ice";
-        upgradeDescC[1] = "HP";
+        upgradeDescB[1] = "ice HP";
+        upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "Automatically";
-        upgradeDescB[2] = "reinforce";
-        upgradeDescC[2] = "defences";
+        upgradeDescA[2] = "Reinforces";
+        upgradeDescB[2] = "defences";
+        upgradeDescC[2] = "with ice";
 
 
         upgradeDescA[3] = "Increase";

@@ -31,8 +31,8 @@ public abstract class Shockwave {
     protected String buff;
     protected String damageType;
 
-    public Shockwave(PApplet p, float centerX, float centerY, int startingRadius, int maxRadius, float angle, float width, int damage,
-                     Turret turret) {
+    public Shockwave(PApplet p, float centerX, float centerY, int startingRadius, int maxRadius, float angle,
+                     float width, int damage, Turret turret) {
         this.P = p;
 
         CENTER = new PVector(centerX, centerY);
