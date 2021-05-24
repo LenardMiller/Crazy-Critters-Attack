@@ -76,14 +76,8 @@ public abstract class Shockwave {
             if (abs(angleDif) < WIDTH / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
                 if (dist <= enemy.radius) direction = new PVector(0, 0);
-                if (enemy.stealthMode) {
-                    enemy.damageWithBuff(DAMAGE, "stunned", 0, 60, TURRET,
-                      true, damageType, direction, -1);
-                    enemy.damageWithBuff(0, buff, effectLevel, effectDuration, TURRET, true,
-                      damageType, direction, -1);
-                }
-                else enemy.damageWithBuff(DAMAGE, buff, effectLevel, effectDuration, TURRET, true,
-                  damageType, direction, -1);
+                enemy.damageWithBuff(DAMAGE, buff, effectLevel, effectDuration, TURRET, true, damageType,
+                  direction, -1);
                 UNTOUCHED_ENEMIES.remove(enemy);
             }
         }
