@@ -17,7 +17,7 @@ public class SpriteLoader {
      */
     public static void loadAnimatedSprites(PApplet p) {
         //icons & buttons
-        getSprite(p,"upgrade","IC","upgrades/",35);
+        getSprite(p,"upgrade","IC","upgrades/",36);
         getSprite(p,"upgrade","BT","upgradeButton/",5);
         getSprite(p,"sellTower","BT","sellTower/",3);
         getSprite(p,"targetPriority","BT","targetPriority/",3);
