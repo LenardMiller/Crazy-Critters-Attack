@@ -24,7 +24,7 @@ public class TowerBuy extends Button {
         position = new PVector(x, y);
         size = new PVector(35, 35);
         TOWER_TYPE = type;
-        spriteLocation = "sprites/guiObjects/buttons/towerBuy/" + TOWER_TYPE + "/"; //still uses old system because it is only created at beginning of game
+        spriteLocation = "sprites/gui/buttons/towerBuy/" + TOWER_TYPE + "/"; //still uses old system because it is only created at beginning of game
         spriteIdle = p.loadImage(spriteLocation + "000.png");
         spritePressed = p.loadImage(spriteLocation + "001.png");
         spriteHover = p.loadImage(spriteLocation + "002.png");

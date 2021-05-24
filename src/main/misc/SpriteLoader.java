@@ -289,10 +289,10 @@ public class SpriteLoader {
         String mainFolder = "";
         switch (type) {
             case "IC":
-                mainFolder = "guiObjects/";
+                mainFolder = "gui/";
                 break;
             case "BT":
-                mainFolder = "guiObjects/buttons/";
+                mainFolder = "gui/buttons/";
                 break;
             case "PT":
                 mainFolder = "particles/";
@@ -335,10 +335,10 @@ public class SpriteLoader {
 
     public static void loadStaticSprites(PApplet p) {
         //icons
-        staticSprites.put("moneyIc",p.loadImage("sprites/guiObjects/money.png"));
-        staticSprites.put("wavePrimaryIc",p.loadImage("sprites/guiObjects/wavePrimary.png"));
-        staticSprites.put("waveSecondaryIc",p.loadImage("sprites/guiObjects/waveSecondary.png"));
-        staticSprites.put("currentLineIc",p.loadImage("sprites/guiObjects/currentLine.png"));
+        staticSprites.put("moneyIc",p.loadImage("sprites/gui/money.png"));
+        staticSprites.put("wavePrimaryIc",p.loadImage("sprites/gui/wavePrimary.png"));
+        staticSprites.put("waveSecondaryIc",p.loadImage("sprites/gui/waveSecondary.png"));
+        staticSprites.put("currentLineIc",p.loadImage("sprites/gui/currentLine.png"));
         //particles
         staticSprites.put("icePt",p.loadImage("sprites/particles/debris/ice.png"));
         staticSprites.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
