@@ -496,11 +496,20 @@ public class SpriteLoader {
         staticSprites.put("stoneBa_TL",p.loadImage("sprites/tiles/base/stone.png"));
         staticSprites.put("dirtBa_TL",p.loadImage("sprites/tiles/base/dirt.png"));
         staticSprites.put("sandBa_TL", p.loadImage("sprites/tiles/base/sand.png"));
-        staticSprites.put("snowBa_TL", p.loadImage("sprites/tiles/base/snow.png"));
+        staticSprites.put("snowBa_TL", p.loadImage("sprites/tiles/base/snow/base.png"));
         staticSprites.put("grassBa_TL",p.loadImage("sprites/tiles/base/grass/base.png"));
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 2; i++) {
             String name;
-            name = "grass";
+            switch (i) {
+                case 0:
+                    name = "grass";
+                    break;
+                case 1:
+                    name = "snow";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + i);
+            }
             staticSprites.put(name + "Ba_T_TL", p.loadImage("sprites/tiles/base/" + name + "/t.png"));
             staticSprites.put(name + "Ba_R_TL", p.loadImage("sprites/tiles/base/" + name + "/r.png"));
             staticSprites.put(name + "Ba_B_TL", p.loadImage("sprites/tiles/base/" + name + "/b.png"));
