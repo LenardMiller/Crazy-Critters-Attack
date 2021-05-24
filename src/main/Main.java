@@ -103,6 +103,7 @@ public class Main extends PApplet {
     public static float matrixOffset;
     public static PVector matrixMousePosition;
     public static int connectWallQueues;
+    public static boolean hasVerticalBars;
 
     public static final int FRAMERATE = 30;
     public static final int SOFT_PARTICLE_CAP = 1500;
@@ -195,8 +196,16 @@ public class Main extends PApplet {
         levelSelectGui = new LevelSelectGui(this);
         settingsGui = new SettingsGui(this);
         //matrix
-        matrixScale = height / (float) BOARD_HEIGHT;
-        matrixOffset = (width - (GRID_WIDTH * matrixScale)) / 2;
+        float screenRatio = width / (float) height;
+        float boardRatio = BOARD_WIDTH / (float) BOARD_HEIGHT;
+        hasVerticalBars = boardRatio < screenRatio;
+        if (hasVerticalBars) {
+            matrixScale = height / (float) BOARD_HEIGHT;
+            matrixOffset = (width - (GRID_WIDTH * matrixScale)) / 2;
+        } else {
+            matrixScale = width / (float) BOARD_WIDTH;
+            matrixOffset = (height - (BOARD_HEIGHT * matrixScale)) / 2;
+        }
     }
 
     /**
@@ -271,7 +280,11 @@ public class Main extends PApplet {
         }
         background(50);
         tint(255);
-        matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
+        if (hasVerticalBars) {
+            matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
+        } else {
+            matrixMousePosition = new PVector(mouseX / matrixScale, (mouseY - matrixOffset) / matrixScale);
+        }
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
@@ -297,7 +310,8 @@ public class Main extends PApplet {
      */
     private void drawInGame() {
         pushMatrix();
-        translate(matrixOffset, 0);
+        if (hasVerticalBars) translate(matrixOffset, 0);
+        else translate(0, matrixOffset);
         scale(matrixScale);
         //keys
         if (dev) {
@@ -348,8 +362,13 @@ public class Main extends PApplet {
         if (!showSpawn) {
             fill(0);
             noStroke();
-            rect(0, 0, matrixOffset, height);
-            rect(width - matrixOffset, 0, matrixOffset, height);
+            if (hasVerticalBars) {
+                rect(0, 0, matrixOffset, height);
+                rect(width - matrixOffset, 0, matrixOffset, height);
+            } else {
+                rect(0, 0, width, matrixOffset);
+                rect(0, height - matrixOffset, width, matrixOffset);
+            }
         }
         //pause
         if (paused && !settings) pauseGui.main();
