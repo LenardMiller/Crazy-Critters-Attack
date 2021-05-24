@@ -13,7 +13,7 @@ import static main.Main.nodeGrid;
 
 public abstract class FlyingEnemy extends Enemy {
 
-    public FlyingEnemy(PApplet p, float x, float y) {
+    protected FlyingEnemy(PApplet p, float x, float y) {
         super(p, x, y);
     }
 

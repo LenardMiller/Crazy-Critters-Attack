@@ -204,7 +204,10 @@ public abstract class Enemy {
         if (points.size() > 0) position.add(m);
     }
 
-    private void animate() { //handle animation states
+    /**
+     * handle animation states
+     */
+    private void animate() {
         if (!immobilized) {
             if (attacking) {
                 if (attackFrame >= attackFrames.length) attackFrame = 0;

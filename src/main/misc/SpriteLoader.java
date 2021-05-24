@@ -67,6 +67,7 @@ public class SpriteLoader {
         getSprite(p,"orangeMagicBuff","PT","buff/orangeMagic/",8);
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         getSprite(p,"railgunBlast","PT","railgunBlast/",11);
+        getSprite(p,"orangeBubble","PT","orangeBubble/",10);
         getSprite(p,"greenOuchPile","PT", "pile/greenOuch/", 4);
         getSprite(p,"redOuchPile","PT", "pile/redOuch/", 4);
         getSprite(p,"glowOuchPile","PT", "pile/glowOuch/", 4);
@@ -270,7 +271,7 @@ public class SpriteLoader {
         getSprite(p,"waveMotionLoad","TR","waveMotion/load/",80);
         getSprite(p,"waveMotionIdle","TR","waveMotion/idle/",14);
         getSprite(p,"waveMotionBeam","TR","waveMotion/beam/",18);
-        getSprite(p,"boosterIdle","TR","booster/idle/",8);
+        getSprite(p,"boosterIdle","TR","booster/idle/",4);
         //walls
         getSprite(p,"woodWall","TW","Wood/",4);
         getSprite(p,"stoneWall","TW","Stone/",4);

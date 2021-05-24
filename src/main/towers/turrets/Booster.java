@@ -1,6 +1,8 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
+import main.particles.BuffParticle;
+import main.particles.OrangeBubble;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -22,6 +24,7 @@ public class Booster extends Turret {
         damageSound = sounds.get("crystalDamage");
         breakSound = sounds.get("crystalBreak");
         placeSound = sounds.get("crystalPlace");
+        betweenIdleFrames = 4;
         price = BOOSTER_PRICE;
         value = price;
         hasPriority = false;
@@ -53,15 +56,29 @@ public class Booster extends Turret {
             die(false);
             tile.tower = null;
         }
-        giveBoost();
+        if (!paused) {
+            giveBoost();
+            spawnProjectiles(new PVector(tile.position.x - 25, tile.position.y - 25), p.random(360));
+        }
         if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
           && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
     }
 
+    /**
+     * Now spawns particles
+     */
     @Override
-    protected void spawnProjectiles(PVector position, float angle) {}
+    protected void spawnProjectiles(PVector position, float angle) {
+        if (p.random(15) < 1) {
+            particles.add(new BuffParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+              p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
+            float speed = p.random(25, 35);
+            if (range > 1) speed = p.random(35, 50);
+            underParticles.add(new OrangeBubble(p, position.x, position.y, speed));
+        }
+    }
 
     @Override
     public void upgrade(int id) {
