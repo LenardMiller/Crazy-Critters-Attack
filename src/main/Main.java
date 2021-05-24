@@ -472,11 +472,6 @@ public class Main extends PApplet {
             midParticles = new ArrayList<>();
             bottomParticles = new ArrayList<>();
         }
-        //top particles
-        for (int i = topParticles.size()-1; i >= 0; i--) {
-            Particle particle = topParticles.get(i);
-            particle.main(topParticles, i);
-        }
         //buffs
         for (int i = buffs.size() - 1; i >= 0; i--) {
             Buff buff = buffs.get(i);
@@ -505,6 +500,11 @@ public class Main extends PApplet {
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
             if (enemy instanceof FlyingEnemy) enemy.main(i);
+        }
+        //top particles
+        for (int i = topParticles.size()-1; i >= 0; i--) {
+            Particle particle = topParticles.get(i);
+            particle.main(topParticles, i);
         }
         //currently held
         hand.main();

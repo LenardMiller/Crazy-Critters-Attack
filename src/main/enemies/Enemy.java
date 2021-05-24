@@ -390,7 +390,7 @@ public abstract class Enemy {
             }
             if (p.random(0, 6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
-                    Main.topParticles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+                    midParticles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
                 }
             }
             currentTintColor = new Color(maxTintColor.getRGB());
