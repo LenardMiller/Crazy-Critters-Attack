@@ -31,6 +31,7 @@ public class Tile {
     public PImage obstacle;
     public String obstacleName;
 
+    int baseHierarchy;
     PImage[] baseEdges;
     PImage[] flooringEdges;
 
@@ -59,7 +60,7 @@ public class Tile {
 
     public void displayBaseAndFlooring() {
         if (base != null) P.image(base, position.x, position.y);
-        tileBase();
+        spillBaseEdges();
         if (decoration != null) P.image(decoration, position.x, position.y);
         if (flooringEdges != null) connectFlooringEdges();
         if (flooringName != null) {
@@ -85,32 +86,41 @@ public class Tile {
         if (obstacle != null) P.image(obstacle, position.x, position.y);
     }
 
-    private void tileBase() {
+    /**
+     * Spills the edges of the base into surrounding tiles
+     */
+    private void spillBaseEdges() {
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
         if (y != 0) {
             Tile tile = tiles.get(x, y - 1);
-            if (canTile(0, tile)) P.image(tile.baseEdges[0], position.x, position.y);
+            if (canSpill(0, tile)) P.image(tile.baseEdges[0], position.x, position.y);
         }
         if (x != 0) {
             Tile tile = tiles.get(x - 1, y);
-            if (canTile(3, tile)) P.image(tile.baseEdges[3], position.x, position.y);
+            if (canSpill(3, tile)) P.image(tile.baseEdges[3], position.x, position.y);
         }
         if (y != 18) {
             Tile tile = tiles.get(x, y + 1);
-            if (canTile(2, tile)) P.image(tile.baseEdges[2], position.x, position.y);
+            if (canSpill(2, tile)) P.image(tile.baseEdges[2], position.x, position.y);
         }
         if (x != 18) {
             Tile tile = tiles.get(x + 1, y);
-            if (canTile(1, tile)) P.image(tile.baseEdges[1], position.x, position.y);
+            if (canSpill(1, tile)) P.image(tile.baseEdges[1], position.x, position.y);
         }
     }
 
-    private boolean canTile(int i, Tile tile) {
+    /**
+     * @param i what edge to check
+     * @param tile neighbor tile to check
+     * @return whether this tile can spill its base
+     */
+    private boolean canSpill(int i, Tile tile) {
         if (baseName == null) return false;
         boolean nameDoesNotMatch = !baseName.equals(tile.baseName);
-        boolean neighborTiles = tile.baseEdges[i] != null;
-        return nameDoesNotMatch && neighborTiles;
+        boolean tileTypeCanSpill = tile.baseEdges[i] != null;
+        boolean higherHierarchy = baseHierarchy < tile.baseHierarchy;
+        return nameDoesNotMatch && tileTypeCanSpill && higherHierarchy;
     }
 
     private void connectFlooringEdges() {
@@ -322,6 +332,10 @@ public class Tile {
         return m || c || t;
     }
 
+    /**
+     * Sets the base layer of the tile.
+     * @param name name of base
+     */
     public void setBase(String name) {
         name = name.replace("Ba_TL", "");
         baseName = name;
@@ -330,6 +344,27 @@ public class Tile {
         baseEdges[1] = staticSprites.get(name + "Ba_R_TL");
         baseEdges[2] = staticSprites.get(name + "Ba_B_TL");
         baseEdges[3] = staticSprites.get(name + "Ba_L_TL");
+        //update hierarchies as tiles are added
+        switch (name) {
+            case "snow":
+                baseHierarchy = 5;
+                break;
+            case "grass":
+                baseHierarchy = 4;
+                break;
+            case "yellowGrass":
+                baseHierarchy = 3;
+                break;
+            case "dirt":
+                baseHierarchy = 2;
+                break;
+            case "sand":
+                baseHierarchy = 1;
+                break;
+            case "stone":
+                baseHierarchy = 0;
+                break;
+        }
     }
 
     /**
