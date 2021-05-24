@@ -452,13 +452,22 @@ public class Main extends PApplet {
         //shockwaves
         for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).main();
         //particle culling
-        int p = particles.size();
+        int p = particles.size() + underParticles.size();
         int p2 = p-SOFT_PARTICLE_CAP;
-        if (p > SOFT_PARTICLE_CAP) for (int i = 0; i < p; i++) if (random(0,p2) < 5) {
-            if (i < particles.size()) particles.remove(i);
-            else break;
+        if (p > SOFT_PARTICLE_CAP) {
+            for (int i = particles.size() - 1; i >= 0; i--) {
+                if (random(0,p2) < 5) {
+                    if (i < particles.size()) particles.remove(i);
+                }
+            } for (int i = underParticles.size() - 1; i >= 0; i--) {
+                if (random(0,p2) < 5) {
+                    if (i < underParticles.size()) underParticles.remove(i);
+                }
+            }
+        } if (p > HARD_PARTICLE_CAP) {
+            particles = new ArrayList<>();
+            underParticles = new ArrayList<>();
         }
-        if (p > HARD_PARTICLE_CAP) particles = new ArrayList<>();
         //particles
         for (int i = particles.size()-1; i >= 0; i--) {
             Particle particle = particles.get(i);
