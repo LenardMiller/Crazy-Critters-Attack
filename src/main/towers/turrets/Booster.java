@@ -179,7 +179,7 @@ public class Booster extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    boost.damage = 0.2f;
+                    boost.damage = 0.3f;
                     break;
                 case 4:
                     boost.firerate = 0.2f;

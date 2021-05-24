@@ -156,7 +156,7 @@ public class SeismicTower extends Turret {
             spa2.setMag(-5);
             PVector spp2 = new PVector(spp.x, spp.y);
             spp2.add(spa2);
-            topParticles.add(new BuffParticle(p, spp2.x, spp2.y, a + radians(p.random(-45, 45)), part));
+            midParticles.add(new BuffParticle(p, spp2.x, spp2.y, a + radians(p.random(-45, 45)), part));
         }
         particleCount = p.random(1, 5);
         for (int i = 0; i < particleCount; i++) {
@@ -164,7 +164,7 @@ public class SeismicTower extends Turret {
             spa2.setMag(-5);
             PVector spp2 = new PVector(spp.x, spp.y);
             spp2.add(spa2);
-            topParticles.add(new BuffParticle(p, spp2.x, spp2.y, p.random(0, 360), part));
+            midParticles.add(new BuffParticle(p, spp2.x, spp2.y, p.random(0, 360), part));
         }
     }
 
