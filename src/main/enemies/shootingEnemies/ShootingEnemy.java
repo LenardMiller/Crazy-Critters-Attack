@@ -28,13 +28,8 @@ public abstract class ShootingEnemy extends Enemy {
             targetAngle = clampAngle(targetAngle);
             angle += angleDifference(targetAngle, angle) / 10;
 
-            if (state == 0) {
-                stealthMode = stealthy;
-                move();
-            } else if (state == 1) {
-                attack();
-                stealthMode = false;
-            }
+            if (state == 0) move();
+            else if (state == 1) attack();
 
             //prevent wandering
             if (points.size() == 0 && state != 1) pathRequestWaitTimer++;
@@ -49,4 +44,6 @@ public abstract class ShootingEnemy extends Enemy {
         if (hp <= 0) dead = true;
         if (dead) die(i);
     }
+
+    protected abstract void fire();
 }

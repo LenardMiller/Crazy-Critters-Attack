@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.damagingThings.shockwaves.SeismicShockwave;
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;
 import main.particles.MiscParticle;
 import processing.core.PApplet;
@@ -63,7 +64,7 @@ public class SeismicTower extends Turret {
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
-            if (!enemy.stealthMode || seismicSense) {
+            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy) || seismicSense) {
                 float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));

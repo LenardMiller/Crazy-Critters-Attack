@@ -26,7 +26,6 @@ public class Shark extends BurrowingEnemy {
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(5);
         attackFrame = attackStartFrame;
-        stealthy = true;
         partSize = new PVector(20, 20);
         corpseSize = new PVector(25,25);
         overkillSound = sounds.get("squish");

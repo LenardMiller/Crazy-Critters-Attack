@@ -36,6 +36,10 @@ public abstract class Enemy {
     public float speed;
     public float angle;
     public float radius;
+    /**
+     * moving, attacking, (shooting/burrowing)
+     */
+    public int state;
     public int barAlpha;
     public int hp;
     public int maxHp;
@@ -44,7 +48,6 @@ public abstract class Enemy {
     public int[] attackDmgFrames;
     public int[] tempAttackDmgFrames;
     public boolean immobilized;
-    public boolean stealthMode;
     public ArrayList<TurnPoint> points;
     public PImage[] attackFrames;
     public String hitParticle;
@@ -53,10 +56,6 @@ public abstract class Enemy {
     public PVector position;
     public PVector size;
 
-    /**
-     * moving, attacking, (shooting/burrowing)
-     */
-    protected int state;
     protected int moneyDrop;
     protected int damage;
     protected int betweenWalkFrames;
@@ -66,10 +65,12 @@ public abstract class Enemy {
     protected int corpseLifespan;
     protected int pathRequestWaitTimer;
     protected float targetAngle;
-    protected boolean stealthy;
+    protected boolean overkill;
     protected PApplet p;
+    protected PVector partsDirection;
     protected PVector corpseSize;
     protected PVector partSize;
+    protected Color currentTintColor;
     protected SoundFile overkillSound;
     protected SoundFile dieSound;
 
@@ -78,12 +79,9 @@ public abstract class Enemy {
     private int moveFrame;
     private boolean attackCue;
     private boolean targetMachine;
-    private boolean overkill;
     private Tower targetTower;
     private PImage[] moveFrames;
     private PImage sprite;
-    private PVector partsDirection;
-    private Color currentTintColor;
     private Color maxTintColor;
 
     protected Enemy(PApplet p, float x, float y) {
@@ -109,8 +107,6 @@ public abstract class Enemy {
         tempAttackDmgFrames = new int[attackDmgFrames.length];
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         pfSize = 1;
-        stealthy = false;
-        stealthMode = false;
         attackCount = 0;
         corpseSize = size;
         partSize = size;
@@ -128,13 +124,8 @@ public abstract class Enemy {
             targetAngle = clampAngle(targetAngle);
             angle += angleDifference(targetAngle, angle) / 10;
 
-            if (state == 0) {
-                stealthMode = stealthy;
-                move();
-            } else if (state == 1) {
-                attack();
-                stealthMode = false;
-            }
+            if (state == 0) move();
+            else if (state == 1) attack();
 
             //prevent wandering
             if (points.size() == 0 && state != 1) pathRequestWaitTimer++;
@@ -160,25 +151,23 @@ public abstract class Enemy {
         }
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
-        if (!stealthMode) {
-            if (overkill) {
-                for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
-                    float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
-                    corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
-                            currentTintColor ,p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)),
-                            0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
-                }
-                for (int k = 0; k < sq(pfSize); k++) {
-                    bottomParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
-                            (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
-                            0, hitParticle));
-                }
-            } else
-                corpses.add(new Corpse(p, position, corpseSize,
-                        angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
-                        currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
-                        "none", 0, true));
-        }
+        if (overkill) {
+            for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
+                float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
+                corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
+                        currentTintColor ,p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)),
+                        0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
+            }
+            for (int k = 0; k < sq(pfSize); k++) {
+                bottomParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
+                        (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
+                        0, hitParticle));
+            }
+        } else
+            corpses.add(new Corpse(p, position, corpseSize,
+                    angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
+                    currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
+                    "none", 0, true));
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
@@ -193,7 +182,7 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    private PVector adjustPartVelocityToFramerate(PVector partVelocity) {
+    protected PVector adjustPartVelocityToFramerate(PVector partVelocity) {
         return partVelocity.setMag(partVelocity.mag() * up60ToFramerate(1));
     }
 

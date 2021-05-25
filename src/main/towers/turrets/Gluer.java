@@ -4,6 +4,7 @@ import main.damagingThings.projectiles.glue.Glue;
 import main.damagingThings.projectiles.glue.SpikeyGlue;
 import main.damagingThings.projectiles.glue.SplatterGlue;
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;
 import main.particles.MiscParticle;
 import processing.core.PApplet;
@@ -67,7 +68,7 @@ public class Gluer extends Turret {
         Enemy e = null;
         for (Enemy enemy : enemies) {
             float newSpeed = enemy.maxSpeed * effectLevel;
-            if (!enemy.stealthMode && enemy.speed > newSpeed) { //make sure effect would actually slow down enemy
+            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy) && enemy.speed > newSpeed) { //make sure effect would actually slow down enemy
                 float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));

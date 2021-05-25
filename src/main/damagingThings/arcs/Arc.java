@@ -1,6 +1,7 @@
 package main.damagingThings.arcs;
 
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -127,7 +128,7 @@ public class Arc {
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
-            if (!enemy.stealthMode) {
+            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy)) {
                 boolean repeat = false;
                 //prevent hitting enemy twice
                 for (Enemy enemyRepeat : enemiesRepeat)

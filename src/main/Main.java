@@ -5,6 +5,7 @@ import main.damagingThings.arcs.Arc;
 import main.damagingThings.projectiles.Projectile;
 import main.damagingThings.shockwaves.Shockwave;
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.gui.*;
 import main.gui.guiObjects.PopupText;
@@ -333,7 +334,9 @@ public class Main extends PApplet {
         //objects
         drawObjects();
         //hp bars
-        for (Enemy enemy : enemies) if (enemy.hp > 0 && !enemy.stealthMode) enemy.hpBar();
+        for (Enemy enemy : enemies) {
+            if (enemy.hp > 0 && !(enemy instanceof BurrowingEnemy && enemy.state == 0)) enemy.hpBar();
+        }
         for (Tower tower : towers) tower.displayHpBar();
         machine.hpBar();
         //text

@@ -1,6 +1,7 @@
 package main.damagingThings.projectiles;
 
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -49,7 +50,7 @@ public class MagicMissile extends Projectile {
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
-            if (!enemy.stealthMode) {
+            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy)) {
                 float x = abs(SPAWN_POSITION.x - enemy.position.x);
                 float y = abs(SPAWN_POSITION.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));

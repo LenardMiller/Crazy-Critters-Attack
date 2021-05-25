@@ -1,6 +1,7 @@
 package main.damagingThings.shockwaves;
 
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
@@ -53,7 +54,7 @@ public class SeismicShockwave extends Shockwave {
             float dist = findDistBetween(enemy.position, CENTER);
             if (abs(angleDif) < WIDTH / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
-                if (enemy.stealthMode && SEISMIC_SENSE) {
+                if ((enemy.state == 0 && enemy instanceof BurrowingEnemy) && SEISMIC_SENSE) {
                     enemy.damageWithBuff(DAMAGE, "stunned", 0, 60, TURRET,
                       true, damageType, direction, -1);
                 }
