@@ -1,9 +1,9 @@
 package main.towers.turrets;
 
+import main.damagingThings.shockwaves.SeismicShockwave;
 import main.enemies.Enemy;
 import main.misc.Tile;
 import main.particles.MiscParticle;
-import main.shockwaves.SeismicShockwave;
 import processing.core.PApplet;
 import processing.core.PVector;
 

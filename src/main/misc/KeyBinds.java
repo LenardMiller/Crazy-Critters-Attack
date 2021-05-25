@@ -1,13 +1,13 @@
 package main.misc;
 
 import main.Main;
-import main.arcs.Arc;
+import main.damagingThings.arcs.Arc;
+import main.damagingThings.projectiles.*;
+import main.damagingThings.projectiles.enemyProjeciles.Snowball;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.Shark;
 import main.enemies.flyingEnemies.Butterfly;
 import main.levelStructure.Level;
-import main.projectiles.*;
-import main.projectiles.enemyProjeciles.Snowball;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;

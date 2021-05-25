@@ -1,9 +1,9 @@
 package main.towers.turrets;
 
-import main.arcs.Arc;
-import main.arcs.RedArc;
+import main.damagingThings.arcs.Arc;
+import main.damagingThings.arcs.RedArc;
+import main.damagingThings.shockwaves.LightningShockwave;
 import main.misc.Tile;
-import main.shockwaves.LightningShockwave;
 import main.sound.SoundWithAlts;
 import processing.core.PApplet;
 import processing.core.PVector;

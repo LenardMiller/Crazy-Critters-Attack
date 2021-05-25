@@ -1,9 +1,9 @@
 package main.towers.turrets;
 
+import main.damagingThings.projectiles.Gravel;
+import main.damagingThings.projectiles.Pebble;
+import main.damagingThings.projectiles.Rock;
 import main.misc.Tile;
-import main.projectiles.Gravel;
-import main.projectiles.Pebble;
-import main.projectiles.Rock;
 import processing.core.PApplet;
 import processing.core.PVector;
 

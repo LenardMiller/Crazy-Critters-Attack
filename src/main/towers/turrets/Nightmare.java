@@ -1,8 +1,8 @@
 package main.towers.turrets;
 
+import main.damagingThings.projectiles.Needle;
 import main.misc.Tile;
 import main.particles.MiscParticle;
-import main.projectiles.Needle;
 import processing.core.PApplet;
 import processing.core.PVector;
 

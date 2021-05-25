@@ -1,8 +1,8 @@
 package main.buffs.glued;
 
+import main.damagingThings.projectiles.fragments.GlueSpike;
 import main.enemies.Enemy;
 import main.particles.MiscParticle;
-import main.projectiles.fragments.GlueSpike;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
