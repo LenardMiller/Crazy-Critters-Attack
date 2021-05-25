@@ -53,6 +53,10 @@ public abstract class Enemy {
     public PVector position;
     public PVector size;
 
+    /**
+     * moving, attacking, (shooting/burrowing)
+     */
+    protected int state;
     protected int moneyDrop;
     protected int damage;
     protected int betweenWalkFrames;
@@ -60,6 +64,8 @@ public abstract class Enemy {
     protected int attackStartFrame;
     protected int betweenCorpseFrames;
     protected int corpseLifespan;
+    protected int pathRequestWaitTimer;
+    protected float targetAngle;
     protected boolean stealthy;
     protected PApplet p;
     protected PVector corpseSize;
@@ -70,12 +76,9 @@ public abstract class Enemy {
     private int attackCount;
     private int idleTime;
     private int moveFrame;
-    private int pathRequestWaitTimer;
-    private float targetAngle;
     private boolean attackCue;
     private boolean targetMachine;
     private boolean overkill;
-    private boolean attacking;
     private Tower targetTower;
     private PImage[] moveFrames;
     private PImage sprite;
@@ -125,16 +128,16 @@ public abstract class Enemy {
             targetAngle = clampAngle(targetAngle);
             angle += angleDifference(targetAngle, angle) / 10;
 
-            if (!attacking) {
+            if (state == 0) {
                 stealthMode = stealthy;
                 move();
-            } else {
+            } else if (state == 1) {
                 attack();
                 stealthMode = false;
             }
 
             //prevent wandering
-            if (points.size() == 0 && !attacking) pathRequestWaitTimer++;
+            if (points.size() == 0 && state != 1) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
@@ -142,15 +145,12 @@ public abstract class Enemy {
         }
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         displayMain();
-        //prevent from going offscreen
-//        if (position.x >= GRID_WIDTH - 100 || position.x <= -100 || position.y >= GRID_HEIGHT - 100 || position.y <= -100)
-//            dead = true;
         //if health is 0, die
         if (hp <= 0) dead = true;
         if (dead) die(i);
     }
 
-    private void die(int i) {
+    protected void die(int i) {
         Main.money += moneyDrop;
         popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
 
@@ -209,7 +209,7 @@ public abstract class Enemy {
      */
     private void animate() {
         if (!immobilized) {
-            if (attacking) {
+            if (state == 1) {
                 if (attackFrame >= attackFrames.length) attackFrame = 0;
                 sprite = attackFrames[attackFrame];
                 idleTime++;
@@ -219,7 +219,7 @@ public abstract class Enemy {
                         idleTime = 0;
                     }
                 } else attackFrame = 0;
-            } else {
+            } else if (state == 0) {
                 idleTime++;
                 if (moveFrame < moveFrames.length - 1) {
                     if (idleTime >= betweenWalkFrames) {
@@ -457,13 +457,13 @@ public abstract class Enemy {
             }
             moveFrame = 0;
             if (dmg) targetTower.damage(damage);
-        } else if (!targetMachine) attacking = false;
+        } else if (!targetMachine) state = 0;
         if (targetMachine) {
             moveFrame = 0;
             if (dmg) machine.damage(damage);
         }
         if (!attackCue && attackFrame == attackStartFrame) {
-            attacking = false;
+            state = 0;
             attackFrame = attackStartFrame;
         }
     }
@@ -493,7 +493,7 @@ public abstract class Enemy {
             TurnPoint intersectingPoint = points.get(points.size() - 1);
             if (remove) {
                 if (intersectingPoint.combat) {
-                    attacking = true;
+                    state = 1;
                     attackCue = true;
                     targetTower = intersectingPoint.tower;
                     targetMachine = intersectingPoint.machine;
