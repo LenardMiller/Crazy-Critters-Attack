@@ -64,24 +64,24 @@ public abstract class Enemy {
     protected int betweenCorpseFrames;
     protected int corpseLifespan;
     protected int pathRequestWaitTimer;
+    protected int moveFrame;
+    protected int idleTime;
     protected float targetAngle;
     protected boolean overkill;
     protected PApplet p;
     protected PVector partsDirection;
     protected PVector corpseSize;
     protected PVector partSize;
+    protected PImage[] moveFrames;
+    protected PImage sprite;
     protected Color currentTintColor;
     protected SoundFile overkillSound;
     protected SoundFile dieSound;
 
     private int attackCount;
-    private int idleTime;
-    private int moveFrame;
     private boolean attackCue;
     private boolean targetMachine;
     private Tower targetTower;
-    private PImage[] moveFrames;
-    private PImage sprite;
     private Color maxTintColor;
 
     protected Enemy(PApplet p, float x, float y) {
@@ -196,7 +196,7 @@ public abstract class Enemy {
     /**
      * handle animation states
      */
-    private void animate() {
+    protected void animate() {
         if (!immobilized) {
             if (state == 1) {
                 if (attackFrame >= attackFrames.length) attackFrame = 0;
