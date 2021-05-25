@@ -1,7 +1,7 @@
 package main.buffs;
 
 import main.enemies.Enemy;
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
@@ -67,7 +67,7 @@ public abstract class Buff {
                 Enemy enemy = enemies.get(enId);
                 int num = (int) (p.random(0, particleChance));
                 if (num == 0) {
-                    topParticles.add(new BuffParticle(p, (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), p.random(0, 360), particle));
+                    topParticles.add(new MiscParticle(p, (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), p.random(0, 360), particle));
                 }
             }
         }

@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.projectiles.CannonBall;
 import main.projectiles.Dynamite;
 import main.projectiles.FragBall;
@@ -46,7 +46,7 @@ public class Cannon extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         for (int i = 0; i < p.random(3, 5); i++) {
-            midParticles.add(new BuffParticle(p, position.x, position.y,
+            midParticles.add(new MiscParticle(p, position.x, position.y,
               angle + radians(p.random(-45, 45)), "smoke"));
         }
         if (frags) projectiles.add(new FragBall(p,position.x,position.y, angle, this, getDamage(), effectRadius));

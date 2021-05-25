@@ -19,7 +19,7 @@ public class Ouch extends Particle {
         angularVelocity = 0; //degrees mode
         betweenFrames = down60ToFramerate(p.random(0,3));
         currentSprite = 0;
-        sprites = animatedSprites.get(type + "EnemyPT");
+        sprites = animatedSprites.get(type + "PT");
         velocity = PVector.fromAngle(angle-HALF_PI);
         numFrames = sprites.length;
     }

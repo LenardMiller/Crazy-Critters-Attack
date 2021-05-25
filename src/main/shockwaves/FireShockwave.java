@@ -1,7 +1,7 @@
 package main.shockwaves;
 
-import main.particles.BuffParticle;
 import main.particles.ExplosionDebris;
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -26,10 +26,10 @@ public class FireShockwave extends Shockwave {
         PVector pos;
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
+        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "fire"));
+        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "fire"));
         for (int i = 0; i < P.random(5, 10); i++) {
             a = randomAngle();
             pos = randomPosition(a);

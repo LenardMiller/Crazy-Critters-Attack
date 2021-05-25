@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.particles.OrangeBubble;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -68,7 +68,7 @@ public class Booster extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         if (p.random(15) < 1) {
-            topParticles.add(new BuffParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+            topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
             float speed = p.random(25, 35);
             if (range > 1) speed = p.random(35, 50);

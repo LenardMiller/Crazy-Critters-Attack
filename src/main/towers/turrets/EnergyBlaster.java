@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.projectiles.DarkBlast;
 import main.projectiles.EnergyBlast;
 import main.projectiles.NuclearBlast;
@@ -50,19 +50,19 @@ public class EnergyBlaster extends Turret{
         if (nuclear) {
             projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
             for (int i = 0; i < p.random(3, 5); i++) {
-                midParticles.add(new BuffParticle(p, position.x, position.y,
+                midParticles.add(new MiscParticle(p, position.x, position.y,
                   angle + radians(p.random(-45, 45)), "nuclear"));
             }
         } else if (dark) {
             projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
             for (int i = 0; i < p.random(3, 5); i++) {
-                midParticles.add(new BuffParticle(p, position.x, position.y,
+                midParticles.add(new MiscParticle(p, position.x, position.y,
                   angle + radians(p.random(-45, 45)), "dark"));
             }
         } else {
             projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, bigExplosion));
             for (int i = 0; i < p.random(3, 5); i++) {
-                midParticles.add(new BuffParticle(p, position.x, position.y,
+                midParticles.add(new MiscParticle(p, position.x, position.y,
                   angle + radians(p.random(-45, 45)), "energy"));
             }
         }

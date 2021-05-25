@@ -3,8 +3,8 @@ package main.towers;
 import main.gui.InGameGui;
 import main.gui.guiObjects.PopupText;
 import main.misc.Tile;
-import main.particles.BuffParticle;
 import main.particles.Debris;
+import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.towers.turrets.Booster;
 import processing.core.PApplet;
@@ -185,7 +185,7 @@ public abstract class Tower {
     protected void displayBoost() {
         if (this instanceof IceWall) return;
         if (boosts.size() > 0 && p.random(30) < 1) {
-            topParticles.add(new BuffParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+            topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
         }
     }

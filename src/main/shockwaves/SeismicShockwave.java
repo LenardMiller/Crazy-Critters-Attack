@@ -1,9 +1,9 @@
 package main.shockwaves;
 
 import main.enemies.Enemy;
-import main.particles.BuffParticle;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;
+import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -31,7 +31,7 @@ public class SeismicShockwave extends Shockwave {
         bottomParticles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));
         a = randomAngle();
         pos = randomPosition(a);
-        bottomParticles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
+        bottomParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
         for (int i = 0; i < P.random(5, 12); i++) {
             a = randomAngle();
             pos = randomPosition(a);

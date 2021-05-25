@@ -1,6 +1,6 @@
 package main.misc;
 
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.particles.Pile;
 import processing.core.PApplet;
@@ -184,7 +184,7 @@ public class Corpse {
             if (!ANIMATED) chance += 16;
             int num = (int) (P.random(0, chance));
             if (num == 0) {
-                midParticles.add(new BuffParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                midParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
                         (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
                         P.random(0, 360), part));
             }

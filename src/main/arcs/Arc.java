@@ -1,7 +1,7 @@
 package main.arcs;
 
 import main.enemies.Enemy;
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -186,7 +186,7 @@ public class Arc {
                 e.x *= -1;
                 e.y *= -1;
                 points[i] = new PVector(e.x+pointA.x+ P.random(-variation, variation),e.y+pointA.y+ P.random(-variation, variation));
-                topParticles.add(new BuffParticle(P, points[i].x, points[i].y, P.random(360), particleType));
+                topParticles.add(new MiscParticle(P, points[i].x, points[i].y, P.random(360), particleType));
             }
         }
     }

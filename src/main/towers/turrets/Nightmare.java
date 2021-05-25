@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.projectiles.Needle;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -57,7 +57,7 @@ public class Nightmare extends Turret {
             spa2.setMag(-2);
             PVector spp2 = new PVector(position.x,position.y);
             spp2.add(spa2);
-            midParticles.add(new BuffParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),"decay"));
+            midParticles.add(new MiscParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),"decay"));
         }
     }
 

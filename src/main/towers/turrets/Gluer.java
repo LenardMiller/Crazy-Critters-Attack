@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.misc.Tile;
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.projectiles.glue.Glue;
 import main.projectiles.glue.SpikeyGlue;
 import main.projectiles.glue.SplatterGlue;
@@ -47,7 +47,7 @@ public class Gluer extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         for (int i = 0; i < p.random(3, 5); i++) {
-            midParticles.add(new BuffParticle(p, position.x, position.y,
+            midParticles.add(new MiscParticle(p, position.x, position.y,
               angle + radians(p.random(-45, 45)), "glue"));
         }
         if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));

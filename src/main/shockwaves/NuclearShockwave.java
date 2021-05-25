@@ -22,10 +22,10 @@ public class NuclearShockwave extends Shockwave {
         topParticles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
+        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "nuclear"));
+        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "nuclear"));
         for (int i = 0; i < P.random(2, 5); i++) {
             a = randomAngle();
             pos = randomPosition(a);

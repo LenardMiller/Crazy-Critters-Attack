@@ -1,8 +1,8 @@
 package main.shockwaves;
 
-import main.particles.BuffParticle;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -21,10 +21,10 @@ public class LightningShockwave extends Shockwave {
     protected void spawnParticles() {
         float a = randomAngle();
         PVector pos = randomPosition(a);
-        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "electricity"));
+        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "electricity"));
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(new BuffParticle(P, pos.x, pos.y, a, "smoke"));
+        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
         for (int i = 0; i < P.random(5, 12); i++) {
             a = randomAngle();
             pos = randomPosition(a);

@@ -2,7 +2,7 @@ package main.projectiles;
 
 import main.enemies.Enemy;
 import main.misc.Utilities;
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -89,7 +89,7 @@ public abstract class Projectile {
 
     protected void trail() { //leaves a trail of particles
         if (hasTrail) {
-            if (p.random(0, 3) > 1) topParticles.add(new BuffParticle(p, position.x, position.y,
+            if (p.random(0, 3) > 1) topParticles.add(new MiscParticle(p, position.x, position.y,
                     p.random(0, 360), trail));
         }
     }
