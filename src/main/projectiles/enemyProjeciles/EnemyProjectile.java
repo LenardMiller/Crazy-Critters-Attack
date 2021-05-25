@@ -21,6 +21,7 @@ public abstract class EnemyProjectile extends Projectile {
 
     private boolean collidingWithTurret() {
         if (turret == null) return false;
+        if (!turret.alive) return false;
         float x = turret.tile.position.x - turret.size.x;
         float y = turret.tile.position.y - turret.size.y;
         boolean matchX = position.x > x && position.x < x + turret.size.x;

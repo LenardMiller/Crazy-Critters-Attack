@@ -368,6 +368,7 @@ public class SpriteLoader {
         staticSprites.put("spikeyGluePj",p.loadImage("sprites/projectiles/spikeyGlue.png"));
         staticSprites.put("glueSpikePj",p.loadImage("sprites/projectiles/glueSpike.png"));
         staticSprites.put("dynamitePj",p.loadImage("sprites/projectiles/dynamite.png"));
+        staticSprites.put("snowballPj",p.loadImage("sprites/projectiles/snowball.png"));
         //turrets
         staticSprites.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
         staticSprites.put("crossbowFullTR",p.loadImage("sprites/towers/turrets/crossbow/full.png"));

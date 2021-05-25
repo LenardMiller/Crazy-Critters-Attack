@@ -6,6 +6,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
 
 public class Pebble extends Projectile{
 
@@ -18,6 +19,7 @@ public class Pebble extends Projectile{
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
+        angularVelocity = down60ToFramerate(p.random(-15,15));
         sprite = staticSprites.get("pebblePj");
         hitSound = sounds.get("mediumImpact");
     }

@@ -7,6 +7,7 @@ import main.enemies.burrowingEnemies.Shark;
 import main.enemies.flyingEnemies.Butterfly;
 import main.levelStructure.Level;
 import main.projectiles.*;
+import main.projectiles.enemyProjeciles.Snowball;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -138,7 +139,7 @@ public class KeyBinds {
         boolean en9 = keysPressed.getPressedPulse('9') && alive && matrixMousePosition.x < BOARD_WIDTH;
         boolean en1b = keysPressed.getPressedPulse('!') && alive && matrixMousePosition.x < BOARD_WIDTH;
         //projectiles
-        if (pebble) projectiles.add(new Pebble(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 50000));
+        if (pebble) projectiles.add(new Snowball(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0, selection.turret));
         if (bolt) projectiles.add(new Bolt(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 2));
         if (miscProjectile) projectiles.add(new MiscProjectile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, round(p.random(0, 5)), 6));
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 20, false));

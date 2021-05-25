@@ -502,7 +502,10 @@ public class Main extends PApplet {
         }
         //projectiles
         for (Projectile projectile : projectiles) projectile.displayPassA();
-        for (Projectile projectile : projectiles) projectile.main();
+        for (int i = projectiles.size() - 1; i >= 0; i--) {
+            Projectile projectile = projectiles.get(i);
+            projectile.main();
+        }
         //arcs
         for (int i = arcs.size()-1; i >= 0; i--) {
             Arc arc = arcs.get(i);
