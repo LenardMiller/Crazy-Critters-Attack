@@ -74,6 +74,7 @@ public abstract class Enemy {
     protected PVector partSize;
     protected PImage[] moveFrames;
     protected PImage sprite;
+    protected Color maxTintColor;
     protected Color currentTintColor;
     protected SoundFile overkillSound;
     protected SoundFile dieSound;
@@ -82,7 +83,6 @@ public abstract class Enemy {
     private boolean attackCue;
     private boolean targetMachine;
     private Tower targetTower;
-    private Color maxTintColor;
 
     protected Enemy(PApplet p, float x, float y) {
         this.p = p;

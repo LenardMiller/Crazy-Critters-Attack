@@ -6,7 +6,7 @@ import main.damagingThings.projectiles.*;
 import main.damagingThings.projectiles.enemyProjeciles.Snowball;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.Shark;
-import main.enemies.flyingEnemies.Butterfly;
+import main.enemies.shootingEnemies.SnowAntlion;
 import main.levelStructure.Level;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -153,7 +153,7 @@ public class KeyBinds {
         if (en2) enemies.add(new Wolf(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en3) enemies.add(new Velociraptor(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en5) enemies.add(new Butterfly(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en5) enemies.add(new SnowAntlion(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new SmallGolem(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en7) enemies.add(new Golem(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en8) enemies.add(new GiantGolem(p, matrixMousePosition.x, matrixMousePosition.y));

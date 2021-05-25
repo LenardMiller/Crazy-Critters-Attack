@@ -32,6 +32,7 @@ public class Utilities {
      * @param p2 the second position
      * @return something
      */
+    @Deprecated
     public static float findAngleBetween(PVector p1, PVector p2) {
         float a = atan2((p1.y - p2.y), p1.x - p2.x);
         if (a < 0) a += TWO_PI;
@@ -74,11 +75,11 @@ public class Utilities {
     }
 
     /**
-     * Returns the angle of a line between two points.
+     * Returns the angle of a line between two points om radians.
      * Compensates for Processing y being inverted.
      * @param v1 the first position
      * @param v2 the second position
-     * @return the angle of a line between the two positions
+     * @return the angle of a line between the two positions in radians
      */
     public static float findAngle(PVector v1, PVector v2) {
         float angle = 0;

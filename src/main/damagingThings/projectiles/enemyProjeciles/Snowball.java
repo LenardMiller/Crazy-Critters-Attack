@@ -14,7 +14,7 @@ public class Snowball extends EnemyProjectile {
         super(p, damage, x, y, angle, turret);
         size = new PVector(10, 10);
         radius = 5;
-        maxSpeed = 700;
+        maxSpeed = 400;
         speed = maxSpeed;
         angularVelocity = down60ToFramerate(p.random(-15,15));
         sprite = staticSprites.get("snowballPj");

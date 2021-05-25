@@ -4,6 +4,7 @@ import main.enemies.Enemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.core.PVector;
 
 import java.awt.*;
 
@@ -23,7 +24,16 @@ public abstract class ShootingEnemy extends Enemy {
     protected ShootingEnemy(PApplet p, float x, float y) {
         super(p, x, y);
         //TEMP
-        target = selection.turret;
+        target = selection.turret; //todo: target turret
+    }
+
+    @Override
+    protected void loadStuff() {
+        attackFrames = animatedSprites.get(name + "AttackEN");
+        moveFrames = animatedSprites.get(name + "MoveEN");
+        shootFrames = animatedSprites.get(name + "ShootEN");
+        maxTintColor = getTintColor();
+        currentTintColor = new Color(255, 255, 255);
     }
 
     @Override
@@ -32,19 +42,18 @@ public abstract class ShootingEnemy extends Enemy {
         swapPoints(false);
 
         if (!paused && !immobilized) {
-            angle = clampAngle(angle);
-            targetAngle = clampAngle(targetAngle);
-            angle += angleDifference(targetAngle, angle) / 10;
-
-            if (target != null) {
-                if (findDistBetween(position, target.tile.position) < range) {
-                    state = 2;
-                }
+            if (state != 2) {
+                angle = clampAngle(angle);
+                targetAngle = clampAngle(targetAngle);
+                angle += angleDifference(targetAngle, angle) / 10;
             }
+
+            if (canTargetTurret()) state = 2;
+            else if (state == 2) state = 0;
 
             if (state == 0) move();
             else if (state == 1) attack();
-            else if (state == 2 && shootFrame == shootFireFrame) fire();
+            else if (state == 2) prepareToFire();
 
             //prevent wandering
             if (points.size() == 0 && state != 1) pathRequestWaitTimer++;
@@ -58,6 +67,12 @@ public abstract class ShootingEnemy extends Enemy {
         //if health is 0, die
         if (hp <= 0) dead = true;
         if (dead) die(i);
+    }
+
+    private boolean canTargetTurret() {
+        if (target == null) return false;
+        boolean closeEnough = findDistBetween(position, target.tile.position) < range;
+        return target.alive && closeEnough;
     }
 
     @Override
@@ -97,5 +112,14 @@ public abstract class ShootingEnemy extends Enemy {
         currentTintColor = incrementColorTo(currentTintColor, up60ToFramerate(20), new Color(255, 255, 255));
     }
 
-    protected abstract void fire();
+    private void prepareToFire() {
+        if (shootFrame != shootFireFrame || idleTime != 1) return;
+        float projectileAngle = findAngle(position,
+          new PVector(target.tile.position.x - 25, target.tile.position.y - 25));
+        angle = degrees(projectileAngle) - 90;
+        PVector projectilePosition = position; //todo: can change
+        fire(projectileAngle, projectilePosition);
+    }
+
+    protected abstract void fire(float projectileAngle, PVector projectilePosition);
 }
