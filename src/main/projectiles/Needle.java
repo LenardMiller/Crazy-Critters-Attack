@@ -5,8 +5,6 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
 import static main.Main.*;
 
 public class Needle extends Projectile {
@@ -27,7 +25,7 @@ public class Needle extends Projectile {
     }
 
     @Override
-    public void main(ArrayList<Projectile> projectiles, int i) {
+    public void main() {
         trail();
         displayPassB();
         move();

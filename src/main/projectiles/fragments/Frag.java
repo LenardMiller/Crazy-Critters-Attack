@@ -6,8 +6,6 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 
@@ -32,7 +30,7 @@ public class Frag extends Projectile {
     }
 
     @Override
-    public void main(ArrayList<Projectile> projectiles, int i) {
+    public void main() {
         if (!paused) {
             lifeTimer++;
             trail();

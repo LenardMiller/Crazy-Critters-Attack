@@ -43,6 +43,7 @@ public class SpriteLoader {
         getSprite(p,"greenPuffEnemy","PT","enemy/greenPuff/",10);
         getSprite(p,"poisonPuffEnemy","PT","enemy/poisonPuff/",10);
         getSprite(p,"gluePuffEnemy","PT","enemy/gluePuff/",10);
+        getSprite(p,"snowPuffEnemy","PT","enemy/snowPuff/",10);
         getSprite(p,"pinkOuchEnemy","PT","enemy/pinkOuch/",11);
         getSprite(p,"redOuchEnemy","PT","enemy/redOuch/",11);
         getSprite(p,"glowOuchEnemy","PT","enemy/glowOuch/",11);
