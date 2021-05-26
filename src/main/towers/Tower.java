@@ -79,7 +79,9 @@ public abstract class Tower {
 
     public abstract void controlAnimation();
 
-
+    public PVector getCenter() {
+        return new PVector(tile.position.x - (size.x / 2), tile.position.y - (size.y / 2));
+    }
 
     public void displayHpBar() {
         Color barColor = new Color(0, 255, 0);

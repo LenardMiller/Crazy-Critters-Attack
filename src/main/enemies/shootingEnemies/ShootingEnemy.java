@@ -1,6 +1,7 @@
 package main.enemies.shootingEnemies;
 
 import main.enemies.Enemy;
+import main.towers.Tower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -24,8 +25,6 @@ public abstract class ShootingEnemy extends Enemy {
 
     protected ShootingEnemy(PApplet p, float x, float y) {
         super(p, x, y);
-        //TEMP
-        target = selection.turret; //todo: target turret
     }
 
     @Override
@@ -43,6 +42,14 @@ public abstract class ShootingEnemy extends Enemy {
         swapPoints(false);
 
         if (!paused && !immobilized) {
+            if (target == null) {
+                for (Tower tower : towers) {
+                    if (tower instanceof Turret) {
+                        if (findDistBetween(tower.getCenter(), position) < range) target = (Turret) tower;
+                    }
+                }
+            }
+
             if (state != 2) {
                 angle = clampAngle(angle);
                 targetAngle = clampAngle(targetAngle);
@@ -72,8 +79,7 @@ public abstract class ShootingEnemy extends Enemy {
 
     private boolean canTargetTurret() {
         if (target == null) return false;
-        boolean closeEnough = findDistBetween(position, target.tile.position) < range;
-        return target.alive && closeEnough;
+        return target.alive;
     }
 
     @Override

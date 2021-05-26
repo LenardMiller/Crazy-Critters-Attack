@@ -20,7 +20,7 @@ public class SnowAntlion extends ShootingEnemy {
         moneyDrop = 10;
         damage = 1;
         maxHp = 20; //Hp <---------------------------
-        range = 85;
+        range = 100;
         barrelLength = 7;
         hp = maxHp;
         hitParticle = "greenOuch";
