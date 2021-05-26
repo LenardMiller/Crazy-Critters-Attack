@@ -1,7 +1,7 @@
 package main.enemies.shootingEnemies;
 
 import main.damagingThings.projectiles.enemyProjeciles.Snowball;
-import main.particles.Ouch;
+import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -43,9 +43,9 @@ public class SnowAntlion extends ShootingEnemy {
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
         projectiles.add(new Snowball(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
-        for (int i = 0; i < 3; i++) {
-            midParticles.add(new Ouch(p, projectilePosition.x, projectilePosition.y,
-              projectileAngle + p.random(-15, 15), "snowPuff"));
+        for (int i = 0; i < 5; i++) {
+            midParticles.add(new Debris(p, projectilePosition.x, projectilePosition.y,
+              projectileAngle + radians(p.random(-15, 15)), "snow"));
         }
     }
 }
