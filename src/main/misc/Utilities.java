@@ -386,7 +386,7 @@ public class Utilities {
         try {
             saveSettings();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("settings file missing!");
         }
     }
 

@@ -162,7 +162,7 @@ public class KeyBinds {
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
-    public void debugKeys() throws IOException {
+    public void debugKeys() {
         //entity stuff
         boolean deleteEnemies = keysPressed.getReleasedPulse('s') && alive;
         boolean killTowers = keysPressed.getReleasedPulse('d') && alive;
@@ -220,7 +220,13 @@ public class KeyBinds {
         if (levelBuilder) {
             Main.levelBuilder = !Main.levelBuilder;
             hand.setHeld("null");
-        } if (saveTiles) DataControl.saveLayout();
+        } if (saveTiles) {
+            try {
+                DataControl.saveLayout();
+            } catch (IOException exception) {
+                System.out.println("Can't save layout!");
+            }
+        }
         if (increaseWave && canWave(1)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);
         if (decreaseWave && canWave(-1)) levels[currentLevel].setWave(levels[currentLevel].currentWave - 1);
         if (increaseWave5 && canWave(5)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 5);

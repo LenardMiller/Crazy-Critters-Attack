@@ -30,7 +30,6 @@ import processing.core.PVector;
 import processing.sound.Sound;
 import processing.sound.SoundFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -316,11 +315,7 @@ public class Main extends PApplet {
         scale(matrixScale);
         //keys
         if (dev) {
-            try {
-                keyBinds.debugKeys();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            keyBinds.debugKeys();
             keyBinds.spawnKeys();
         }
         keyBinds.inGameKeys();
