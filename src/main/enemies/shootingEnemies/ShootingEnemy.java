@@ -16,6 +16,7 @@ public abstract class ShootingEnemy extends Enemy {
     protected int range;
     protected int betweenShootFrames;
     protected int shootFireFrame;
+    protected int barrelLength;
     protected Turret target;
     protected PImage[] shootFrames;
 
@@ -116,8 +117,11 @@ public abstract class ShootingEnemy extends Enemy {
         if (shootFrame != shootFireFrame || idleTime != 1) return;
         float projectileAngle = findAngle(position,
           new PVector(target.tile.position.x - 25, target.tile.position.y - 25));
-        angle = degrees(projectileAngle) - 90;
-        PVector projectilePosition = position; //todo: can change
+        angle = (projectileAngle - HALF_PI);
+        PVector projectilePosition = new PVector(position.x, position.y);
+        PVector barrel = PVector.fromAngle(angle);
+        barrel.setMag(barrelLength); //barrel length
+        projectilePosition.add(barrel);
         fire(projectileAngle, projectilePosition);
     }
 

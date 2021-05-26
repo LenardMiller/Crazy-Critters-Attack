@@ -21,6 +21,7 @@ public class SnowAntlion extends ShootingEnemy {
         damage = 1;
         maxHp = 20; //Hp <---------------------------
         range = 85;
+        barrelLength = 7;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "snowAntlion";
