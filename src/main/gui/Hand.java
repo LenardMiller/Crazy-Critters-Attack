@@ -179,7 +179,7 @@ public class Hand {
         P.text("50 HP", 1000, 331);
         if (canAfford) P.text("$" + Wall.BUY_PRICE, 1000, 356);
         else {
-            strikethroughText(P, "$" + Wall.BUY_PRICE, new PVector(1000, 356), new Color(150, 0, 0),
+            strikethroughText(P, "$" + Wall.BUY_PRICE, new PVector(1000, 356), new Color(150, 0, 0, 254),
               mediumFont.getSize(), CENTER);
         }
     }

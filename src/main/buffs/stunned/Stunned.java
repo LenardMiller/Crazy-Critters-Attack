@@ -21,7 +21,7 @@ public class Stunned extends Buff {
 
     @Override
     public void effect() { //slowing enemy movement done every frame
-        if (enemies.get(enId) != null) enemies.get(enId).immobilized = true;
+        if (enId > -1 && enId < enemies.size()) enemies.get(enId).immobilized = true;
         else buffs.remove(this);
     }
 
