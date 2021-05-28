@@ -8,6 +8,7 @@ import main.enemies.flyingEnemies.AlbinoButterfly;
 import main.enemies.flyingEnemies.Bat;
 import main.enemies.flyingEnemies.Butterfly;
 import main.enemies.flyingEnemies.GiantBat;
+import main.enemies.shootingEnemies.Antlion;
 import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
 import main.towers.IceWall;
@@ -205,6 +206,9 @@ public class Wave {
                 break;
             case "wtf":
                 e = new Wtf(P, pos.x, pos.y);
+                break;
+            case "antlion":
+                e = new Antlion(P, pos.x, pos.y);
                 break;
         }
         return e;

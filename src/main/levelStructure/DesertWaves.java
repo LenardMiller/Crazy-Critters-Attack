@@ -113,6 +113,7 @@ public class DesertWaves {
         waves[15] = new Wave(p, 65, 10, wormFill, wormAccent, wormText, "Worms");
         waves[15].addSpawns("littleWorm", 10);
         waves[15].addSpawns("scorpion", 5);
+        waves[15].addSpawns("antlion", 3);
 
         waves[16] = new Wave(p, 60, 20, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
         waves[16].addSpawns("bigBug", 3);
@@ -138,6 +139,7 @@ public class DesertWaves {
 
         waves[22] = new Wave(p, 65, 25, scorpionFill, scorpionAccent, scorpionText, "Scorpions");
         waves[22].addSpawns("scorpion", 30);
+        waves[22].addSpawns("antlion", 5);
 
         waves[23] = new Wave(p, 85, 35, midWormFill, midWormAccent, midWormText, "Sandworms");
         waves[23].addSpawns("midWorm", 5);
@@ -206,6 +208,7 @@ public class DesertWaves {
         waves[38].addSpawns("emperor", 15);
         waves[38].addSpawns("sidewinder", 15);
         waves[38].addSpawns("scorpion", 30);
+        waves[38].addSpawns("antlion", 10);
 
         waves[39] = new Wave(p, 250, 100, hordeFill, hordeAccent, hordeText, "Mega Horde");
         waves[39].addSpawns("bigBug", 30);
