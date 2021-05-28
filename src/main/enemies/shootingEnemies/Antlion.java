@@ -41,11 +41,11 @@ public class Antlion extends ShootingEnemy {
     }
 
     @Override
-    protected void fire(float projectileAngle, PVector projectilePosition) {
+    protected void fire(float projectileAngle, PVector projectilePosition) { //todo: sandball
         projectiles.add(new Snowball(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
         for (int i = 0; i < 5; i++) {
             midParticles.add(new Debris(p, projectilePosition.x, projectilePosition.y,
-              projectileAngle + radians(p.random(-15, 15)), "snow"));
+              projectileAngle + radians(p.random(-15, 15)), "sand"));
         }
     }
 }
