@@ -1,6 +1,7 @@
 package main.damagingThings.shockwaves;
 
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -77,9 +78,11 @@ public abstract class Shockwave {
             float dist = findDistBetween(enemy.position, CENTER);
             if (abs(angleDif) < WIDTH / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
-                if (dist <= enemy.radius) direction = new PVector(0, 0);
-                enemy.damageWithBuff(DAMAGE, buff, effectLevel, effectDuration, TURRET, true, damageType,
-                  direction, -1);
+                if ((enemy.state == 0 && enemy instanceof BurrowingEnemy)) {
+                    enemy.damageWithBuff(DAMAGE, "stunned", 0, 30, TURRET,
+                      true, damageType, direction, -1);
+                }
+                else enemy.damageWithoutBuff(DAMAGE, TURRET, damageType, direction, true);
                 UNTOUCHED_ENEMIES.remove(enemy);
             }
         }

@@ -137,11 +137,11 @@ public class SeismicTower extends Turret {
                 a += TWO_PI / 6;
             }
             shockwaves.add(new SeismicShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-              (int) barrelLength, getRange(), angle, shockwaveWidth, getDamage(), this, false));
+              (int) barrelLength, getRange(), angle, shockwaveWidth, getDamage(), this));
         } else {
             fireParticles(a);
             shockwaves.add(new SeismicShockwave(p, position.x, position.y, 0, getRange(), angle, shockwaveWidth,
-              getDamage(), this, seismicSense));
+              getDamage(), this));
         }
     }
 
@@ -206,7 +206,7 @@ public class SeismicTower extends Turret {
         upgradeDescB[4] = "damage";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "Stun";
+        upgradeDescA[5] = "Can target";
         upgradeDescB[5] = "burrowing";
         upgradeDescC[5] = "enemies";
         //icons
@@ -258,7 +258,7 @@ public class SeismicTower extends Turret {
                     effectLevel = 0;
                     effectDuration = 2;
                     shockwaveWidth -= 40;
-                    range += 50;
+                    range += 100;
                     damage += 150;
                     name = "seismicSniper";
                     loadSprites();

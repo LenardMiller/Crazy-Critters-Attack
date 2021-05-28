@@ -92,10 +92,11 @@ public class TowerInfo {
         p.text("enemy.  Does low", x, space(2));
         p.text("damage,  but can", x, space(3));
         p.text("hit several enemies.", x, space(4));
-        p.text("Can't hit flying", x, space(5));
-        p.text("enemies.", x, space(6));
+        p.text("Stuns burrowing", x, space(5));
+        p.text("enemies,  but can't", x, space(6));
+        p.text("hit flying enemies.", x, space(7));
         p.textAlign(CENTER);
-        p.text("[X]", 1000, space(8));
+        p.text("[X]", 1000, space(9));
     }
 
     public static void energyBlasterInfo(PApplet p) {
