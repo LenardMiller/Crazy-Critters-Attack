@@ -2,6 +2,7 @@ package main.damagingThings.shockwaves;
 
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.enemies.flyingEnemies.FlyingEnemy;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
@@ -49,6 +50,7 @@ public class SeismicShockwave extends Shockwave {
     protected void damageEnemies() {
         for (int i = 0; i < UNTOUCHED_ENEMIES.size(); i++) {
             Enemy enemy = UNTOUCHED_ENEMIES.get(i);
+            if (enemy instanceof FlyingEnemy) continue;
             float a = findAngle(CENTER, enemy.position);
             float angleDif = ANGLE - a;
             float dist = findDistBetween(enemy.position, CENTER);
