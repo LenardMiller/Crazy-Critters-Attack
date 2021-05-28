@@ -106,13 +106,13 @@ public abstract class ShootingEnemy extends Enemy {
                 sprite = moveFrames[moveFrame];
             } else if (state == 2) {
                 idleTime++;
+                sprite = shootFrames[shootFrame];
                 if (shootFrame < shootFrames.length - 1) {
                     if (idleTime >= betweenShootFrames) {
                         shootFrame++;
                         idleTime = 0;
                     }
                 } else shootFrame = 0;
-                sprite = shootFrames[shootFrame];
             }
         }
         //shift back to normal
@@ -120,7 +120,7 @@ public abstract class ShootingEnemy extends Enemy {
     }
 
     private void prepareToFire() {
-        if (shootFrame != shootFireFrame || idleTime != 1) return;
+        if (shootFrame != shootFireFrame || idleTime != 0) return;
         float projectileAngle = findAngle(position,
           new PVector(target.tile.position.x - 25, target.tile.position.y - 25));
         angle = (projectileAngle - HALF_PI);

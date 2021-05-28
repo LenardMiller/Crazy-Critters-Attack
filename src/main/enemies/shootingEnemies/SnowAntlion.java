@@ -26,12 +26,12 @@ public class SnowAntlion extends ShootingEnemy {
         hitParticle = "greenOuch";
         name = "snowAntlion";
         betweenWalkFrames = down60ToFramerate(10);
-        betweenAttackFrames = down60ToFramerate(4);
-        betweenShootFrames = down60ToFramerate(4);
-        attackStartFrame = 1; //attack start
+        betweenAttackFrames = down60ToFramerate(12);
+        betweenShootFrames = down60ToFramerate(12);
+        attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;
-        attackDmgFrames = new int[]{17};
-        shootFireFrame = 17;
+        attackDmgFrames = new int[]{6};
+        shootFireFrame = 6;
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         corpseSize = size;
         partSize = new PVector(11,11);
