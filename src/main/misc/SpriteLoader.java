@@ -47,6 +47,7 @@ public class SpriteLoader {
         getSprite(p,"poisonPuff","PT","puff/poison/",10);
         getSprite(p,"gluePuff","PT","puff/glue/",10);
         getSprite(p,"snowPuff","PT","puff/snow/",10);
+        getSprite(p,"sandPuff","PT","puff/sand/",10);
 
         getSprite(p,"greenOuch","PT","ouch/green/",11);
         getSprite(p,"pinkOuch","PT","ouch/pink/",11);
@@ -238,6 +239,12 @@ public class SpriteLoader {
         getSprite(p,"snowAntlionMove","EN","snowAntlion/move/",8);
         getSprite(p,"snowAntlionDie","EN","snowAntlion/die/", 4);
         getSprite(p,"snowAntlionParts","EN","snowAntlion/parts/",6);
+
+        getSprite(p,"antlionAttack","EN","antlion/attack/",7);
+        getSprite(p,"antlionShoot","EN","antlion/shoot/",7);
+        getSprite(p,"antlionMove","EN","antlion/move/",8);
+        getSprite(p,"antlionDie","EN","antlion/die/", 4);
+        getSprite(p,"antlionParts","EN","antlion/parts/",6);
 
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
@@ -431,6 +438,7 @@ public class SpriteLoader {
         staticSprites.put("glueSpikePj",p.loadImage("sprites/projectiles/glueSpike.png"));
         staticSprites.put("dynamitePj",p.loadImage("sprites/projectiles/dynamite.png"));
         staticSprites.put("snowballPj",p.loadImage("sprites/projectiles/snowball.png"));
+        staticSprites.put("sandballPj",p.loadImage("sprites/projectiles/sandball.png"));
 
         //turrets
         staticSprites.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));

@@ -1,6 +1,6 @@
 package main.enemies.shootingEnemies;
 
-import main.damagingThings.projectiles.enemyProjeciles.Snowball;
+import main.damagingThings.projectiles.enemyProjeciles.Sandball;
 import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -18,7 +18,7 @@ public class Antlion extends ShootingEnemy {
         maxSpeed = 24;
         speed = maxSpeed;
         moneyDrop = 40;
-        damage = 3;
+        damage = 2;
         maxHp = 50;
         range = 100;
         barrelLength = 7;
@@ -41,8 +41,8 @@ public class Antlion extends ShootingEnemy {
     }
 
     @Override
-    protected void fire(float projectileAngle, PVector projectilePosition) { //todo: sandball
-        projectiles.add(new Snowball(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
+    protected void fire(float projectileAngle, PVector projectilePosition) {
+        projectiles.add(new Sandball(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
         for (int i = 0; i < 5; i++) {
             midParticles.add(new Debris(p, projectilePosition.x, projectilePosition.y,
               projectileAngle + radians(p.random(-15, 15)), "sand"));
