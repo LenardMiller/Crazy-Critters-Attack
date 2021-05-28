@@ -237,7 +237,7 @@ public class SpriteLoader {
         getSprite(p,"snowAntlionShoot","EN","snowAntlion/shoot/",7);
         getSprite(p,"snowAntlionMove","EN","snowAntlion/move/",8);
         getSprite(p,"snowAntlionDie","EN","snowAntlion/die/", 4);
-        getSprite(p,"snowAntlionParts","EN","snowAntlion/parts/",9);
+        getSprite(p,"snowAntlionParts","EN","snowAntlion/parts/",6);
 
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
