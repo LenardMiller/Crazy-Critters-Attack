@@ -25,7 +25,7 @@ public class SnowAntlion extends ShootingEnemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "snowAntlion";
-        betweenWalkFrames = down60ToFramerate(6);
+        betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(4);
         betweenShootFrames = down60ToFramerate(4);
         attackStartFrame = 1; //attack start
