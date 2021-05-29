@@ -92,12 +92,12 @@ public class MagicMissileer extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 1000;
-        upgradePrices[1] = 1750;
+        upgradePrices[0] = 750;
+        upgradePrices[1] = 1250;
         upgradePrices[2] = 1;
 
-        upgradePrices[3] = 1500;
-        upgradePrices[4] = 2500;
+        upgradePrices[3] = 1250;
+        upgradePrices[4] = 1500;
         upgradePrices[5] = 2;
         //titles
         upgradeTitles[0] = "More range";

@@ -74,14 +74,14 @@ public class GlacierWaves {
         waves[16].addSpawns(snowAntlion, 5);
 
         waves[17] = wavePreset(p, 65, 30, velociraptor);
-        waves[17].addSpawns(velociraptor, 5);
+        waves[17].addSpawns(velociraptor, 8);
 
         waves[18] = wavePreset(p, 55, 25, wolf);
         waves[18].addSpawns(wolf, 20);
 
         waves[19] = wavePreset(p, 65, 30, velociraptor);
         waves[19].addSpawns(velociraptor, 5);
-        waves[19].addSpawns(shark, 5);
+        waves[19].addSpawns(shark, 8);
         waves[19].addSpawns(snowAntlion, 5);
 
         for (Wave wave : waves) wave.load();
