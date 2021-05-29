@@ -14,6 +14,7 @@ public class GlacierWaves {
         String wolf = "Wolves";
         String shark = "Snow Sharks";
         String velociraptor = "Velociraptors";
+        String iceEntity = "Ice Entities";
 
         waves[0] = wavePreset(p, 65, 30, wolf);
         waves[0].addSpawns(wolf, 5);
@@ -54,8 +55,8 @@ public class GlacierWaves {
         waves[11] = wavePreset(p, 85, 1, "Velociraptor");
         waves[11].addSpawns(velociraptor, 1);
 
-        waves[12] = wavePreset(p, 25, 1, snowAntlion);
-        waves[12].addSpawns(snowAntlion, 30);
+        waves[12] = wavePreset(p, 55, 20, iceEntity);
+        waves[12].addSpawns(iceEntity, 3);
 
         waves[13] = wavePreset(p, 85, 20, velociraptor);
         waves[13].addSpawns(velociraptor, 3);
@@ -65,24 +66,26 @@ public class GlacierWaves {
         waves[14].addSpawns(shark, 5);
         waves[14].addSpawns(snowAntlion, 5);
 
-        waves[15] = wavePreset(p, 65, 30, wolf);
-        waves[15].addSpawns(wolf, 40);
+        waves[15] = wavePreset(p, 50, 20, iceEntity);
+        waves[15].addSpawns(iceEntity, 5);
 
         waves[16] = wavePreset(p, 85, 40, velociraptor);
         waves[16].addSpawns(velociraptor, 3);
+        waves[16].addSpawns(wolf, 8);
         waves[16].addSpawns(shark, 5);
         waves[16].addSpawns(snowAntlion, 5);
 
         waves[17] = wavePreset(p, 65, 30, velociraptor);
         waves[17].addSpawns(velociraptor, 8);
 
-        waves[18] = wavePreset(p, 55, 25, wolf);
-        waves[18].addSpawns(wolf, 20);
+        waves[18] = wavePreset(p, 65, 25, iceEntity);
+        waves[18].addSpawns(iceEntity, 10);
 
         waves[19] = wavePreset(p, 65, 30, velociraptor);
         waves[19].addSpawns(velociraptor, 5);
+        waves[16].addSpawns(wolf, 10);
         waves[19].addSpawns(shark, 8);
-        waves[19].addSpawns(snowAntlion, 5);
+        waves[19].addSpawns(snowAntlion, 8);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -125,7 +128,15 @@ public class GlacierWaves {
                   new Color(255, 255, 255),
                   new Color(179, 214, 238),
                   new Color(0, 113, 189),
-                  title);
+                  title
+                );
+            case "Ice Entities":
+                return new Wave(p, length, spawnLength,
+                  new Color(123, 250, 250),
+                  new Color(40, 139, 243),
+                  new Color(12, 74, 232),
+                  title
+                );
             default:
                 return new Wave(p, length, spawnLength,
                   new Color(255, 0, 255),

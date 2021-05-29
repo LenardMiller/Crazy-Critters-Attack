@@ -22,9 +22,9 @@ public class IceEntity extends ShootingEnemy {
         radius = 13;
         maxSpeed = 40;
         speed = maxSpeed;
-        moneyDrop = 60;
-        damage = 2;
-        maxHp = 600;
+        moneyDrop = 150;
+        damage = 3;
+        maxHp = 1200;
         range = 150;
         barrelLength = 7;
         hp = maxHp;

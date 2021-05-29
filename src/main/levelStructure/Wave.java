@@ -10,6 +10,7 @@ import main.enemies.flyingEnemies.Bat;
 import main.enemies.flyingEnemies.Butterfly;
 import main.enemies.flyingEnemies.GiantBat;
 import main.enemies.shootingEnemies.Antlion;
+import main.enemies.shootingEnemies.IceEntity;
 import main.enemies.shootingEnemies.SnowAntlion;
 import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
@@ -227,6 +228,9 @@ public class Wave {
             case "Velociraptors":
             case "velociraptor":
                 e = new Velociraptor(P, pos.x, pos.y);
+                break;
+            case "Ice Entities":
+                e = new IceEntity(P, pos.x, pos.y);
                 break;
         }
         return e;
