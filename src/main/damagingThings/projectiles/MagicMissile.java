@@ -29,7 +29,6 @@ public class MagicMissile extends Projectile {
         this.damage = damage;
         this.angle = angle;
         sprite = staticSprites.get("magicMissilePj");
-        hasTrail = true;
         trail = "greenMagic";
         this.priority = priority;
         hitSound = sounds.get("magicImpact");

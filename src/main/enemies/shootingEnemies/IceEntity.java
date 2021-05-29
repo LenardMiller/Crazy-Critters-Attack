@@ -1,7 +1,6 @@
 package main.enemies.shootingEnemies;
 
-import main.damagingThings.projectiles.enemyProjeciles.Snowball;
-import main.particles.Debris;
+import main.damagingThings.projectiles.enemyProjeciles.IceCrystal;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -21,12 +20,12 @@ public class IceEntity extends ShootingEnemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 13;
-        maxSpeed = 30;
+        maxSpeed = 40;
         speed = maxSpeed;
         moneyDrop = 60;
         damage = 2;
-        maxHp = 200;
-        range = 110;
+        maxHp = 600;
+        range = 150;
         barrelLength = 7;
         hp = maxHp;
         hitParticle = "greenOuch";
@@ -51,11 +50,7 @@ public class IceEntity extends ShootingEnemy {
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
         orbitAngleSpeed = 1;
-        projectiles.add(new Snowball(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
-        for (int i = 0; i < 5; i++) {
-            midParticles.add(new Debris(p, projectilePosition.x, projectilePosition.y,
-              projectileAngle + radians(p.random(-15, 15)), "snow"));
-        }
+        projectiles.add(new IceCrystal(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
     }
 
     @Override

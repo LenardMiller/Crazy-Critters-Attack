@@ -36,7 +36,6 @@ public abstract class Projectile {
     protected float angularVelocity;
     protected float effectLevel;
     protected boolean dead;
-    protected boolean hasTrail;
     protected boolean causeEnemyParticles;
     protected PVector velocity;
     protected String trail;
@@ -63,8 +62,7 @@ public abstract class Projectile {
         angularVelocity = 0; //degrees mode
         sprite = staticSprites.get("boltPj");
         velocity = PVector.fromAngle(angle - HALF_PI);
-        hasTrail = false;
-        trail = "null";
+        trail = null;
         buff = "null";
         effectRadius = 0;
         effectLevel = 0;
@@ -88,7 +86,7 @@ public abstract class Projectile {
     public abstract void die();
 
     protected void trail() { //leaves a trail of particles
-        if (hasTrail) {
+        if (trail != null) {
             if (p.random(0, 3) > 1) topParticles.add(new MiscParticle(p, position.x, position.y,
                     p.random(0, 360), trail));
         }

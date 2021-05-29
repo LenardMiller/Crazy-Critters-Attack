@@ -20,7 +20,6 @@ public class SplatterGlue extends Glue {
         speed = maxSpeed;
         angularVelocity = 0;
         sprite = staticSprites.get("gluePj");
-        hasTrail = true;
         trail = "glue";
         type = "glue";
         effectRadius = 60;

@@ -3,6 +3,7 @@ package main.misc;
 import main.Main;
 import main.damagingThings.arcs.Arc;
 import main.damagingThings.projectiles.*;
+import main.damagingThings.projectiles.enemyProjeciles.IceCrystal;
 import main.damagingThings.projectiles.enemyProjeciles.Snowball;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.Shark;
@@ -141,7 +142,7 @@ public class KeyBinds {
         boolean en1b = keysPressed.getPressedPulse('!') && alive && matrixMousePosition.x < BOARD_WIDTH;
         //projectiles
         if (pebble) projectiles.add(new Snowball(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0, selection.turret));
-        if (bolt) projectiles.add(new Bolt(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 2));
+        if (bolt) projectiles.add(new IceCrystal(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0, selection.turret));
         if (miscProjectile) projectiles.add(new MiscProjectile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, round(p.random(0, 5)), 6));
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 20, false));
         if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 30, true));

@@ -29,7 +29,6 @@ public class Laundry extends Projectile {
         sprite = staticSprites.get("laundryPj");
         trail = "poison";
         type = "poison";
-        hasTrail = true;
         effectRadius = 60;
         buff = "poisoned";
         hitSound = sounds.get("squishImpact");

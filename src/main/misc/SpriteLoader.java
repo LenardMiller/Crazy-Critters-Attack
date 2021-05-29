@@ -41,6 +41,7 @@ public class SpriteLoader {
         getSprite(p,"blueGreenFireMisc","PT","misc/blueGreenFire/",8);
         getSprite(p,"greenMagicMisc","PT","misc/greenMagic/",8);
         getSprite(p,"orangeMagicMisc","PT","misc/orangeMagic/",8);
+        getSprite(p,"iceMagicMisc","PT","misc/iceMagic/",8);
 
         getSprite(p,"greyPuff","PT","puff/grey/",11);
         getSprite(p,"greenPuff","PT","puff/green/",10);
@@ -443,6 +444,7 @@ public class SpriteLoader {
         staticSprites.put("dynamitePj",p.loadImage("sprites/projectiles/dynamite.png"));
         staticSprites.put("snowballPj",p.loadImage("sprites/projectiles/snowball.png"));
         staticSprites.put("sandballPj",p.loadImage("sprites/projectiles/sandball.png"));
+        staticSprites.put("iceCrystalPj",p.loadImage("sprites/projectiles/iceCrystal.png"));
 
         //enemies
         staticSprites.put("iceEntityOrbitEn",p.loadImage("sprites/enemies/iceEntity/orbit.png"));

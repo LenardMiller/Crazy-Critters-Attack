@@ -26,7 +26,6 @@ public class Glue extends Projectile {
         this.angle = angle;
         angularVelocity = 0;
         sprite = staticSprites.get("gluePj");
-        hasTrail = true;
         trail = "glue";
         hitSound = sounds.get("squishImpact");
         buff = "glued";
