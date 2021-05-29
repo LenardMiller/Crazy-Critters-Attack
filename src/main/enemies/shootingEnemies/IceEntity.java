@@ -3,12 +3,18 @@ package main.enemies.shootingEnemies;
 import main.damagingThings.projectiles.enemyProjeciles.Snowball;
 import main.particles.Debris;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 
 public class IceEntity extends ShootingEnemy {
+
+    private final PImage ORBIT_SPRITE;
+
+    private float orbitAngle;
+    private float orbitAngleSpeed;
 
     public IceEntity(PApplet p, float x, float y) {
         super(p, x, y);
@@ -25,6 +31,8 @@ public class IceEntity extends ShootingEnemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "iceEntity";
+        ORBIT_SPRITE = staticSprites.get("iceEntityOrbitEn");
+        orbitAngleSpeed = 0.2f;
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(6);
         betweenShootFrames = down60ToFramerate(6);
@@ -42,10 +50,57 @@ public class IceEntity extends ShootingEnemy {
 
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
+        orbitAngleSpeed = 1;
         projectiles.add(new Snowball(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
         for (int i = 0; i < 5; i++) {
             midParticles.add(new Debris(p, projectilePosition.x, projectilePosition.y,
               projectileAngle + radians(p.random(-15, 15)), "snow"));
+        }
+    }
+
+    @Override
+    public void displayShadow() {
+        if (!paused) {
+            animate();
+            if (attackFrame == attackDmgFrames[0]) orbitAngleSpeed = 1;
+            orbitAngle += orbitAngleSpeed;
+            if (orbitAngleSpeed > 0.2) orbitAngleSpeed -= 0.02;
+        }
+        p.pushMatrix();
+        p.tint(0, 60);
+        int x = 1;
+        if (pfSize > 1) x++;
+        p.translate(position.x + x, position.y + x);
+        p.rotate(angle);
+        if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
+        p.rotate(orbitAngle);
+        p.image(ORBIT_SPRITE, -size.x / 2, -size.y / 2);
+        p.tint(255);
+        p.popMatrix();
+    }
+
+    @Override
+    public void displayMain() {
+        if (debug) for (int i = points.size() - 1; i > 0; i--) {
+            points.get(i).display();
+        }
+        p.pushMatrix();
+        p.translate(position.x, position.y);
+        p.rotate(angle);
+        p.tint(currentTintColor.getRGB());
+        if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
+        p.rotate(orbitAngle);
+        p.image(ORBIT_SPRITE, -size.x / 2, -size.y / 2);
+        p.popMatrix();
+        if (debug) {
+            PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
+            p.stroke(0, 0, 255);
+            p.line(pfPosition.x - 10, pfPosition.y, pfPosition.x + 10, pfPosition.y);
+            p.stroke(255, 0, 0);
+            p.line(pfPosition.x, pfPosition.y - 10, pfPosition.x, pfPosition.y + 10);
+            p.noFill();
+            p.stroke(255, 0, 255);
+            p.rect(pfPosition.x - 12.5f, pfPosition.y - 12.5f, pfSize * 25, pfSize * 25);
         }
     }
 }

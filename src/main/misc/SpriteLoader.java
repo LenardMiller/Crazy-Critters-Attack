@@ -432,7 +432,7 @@ public class SpriteLoader {
         staticSprites.put("energyPj",p.loadImage("sprites/projectiles/energy.png"));
         staticSprites.put("nuclearPj",p.loadImage("sprites/projectiles/nuclear.png"));
         staticSprites.put("darkPj",p.loadImage("sprites/projectiles/dark.png"));
-        staticSprites.put("magicMisslePj",p.loadImage("sprites/projectiles/magicMissle.png"));
+        staticSprites.put("magicMissilePj",p.loadImage("sprites/projectiles/magicMissile.png"));
         staticSprites.put("pebblePj",p.loadImage("sprites/projectiles/pebble.png"));
         staticSprites.put("rockPj",p.loadImage("sprites/projectiles/rock.png"));
         staticSprites.put("needlePj",p.loadImage("sprites/projectiles/needle.png"));
@@ -443,6 +443,9 @@ public class SpriteLoader {
         staticSprites.put("dynamitePj",p.loadImage("sprites/projectiles/dynamite.png"));
         staticSprites.put("snowballPj",p.loadImage("sprites/projectiles/snowball.png"));
         staticSprites.put("sandballPj",p.loadImage("sprites/projectiles/sandball.png"));
+
+        //enemies
+        staticSprites.put("iceEntityOrbitEn",p.loadImage("sprites/enemies/iceEntity/orbit.png"));
 
         //turrets
         staticSprites.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
