@@ -24,7 +24,7 @@ public class Velociraptor extends Enemy {
         attackStartFrame = 0;
         attackDmgFrames = new int[]{8};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(5);
+        betweenAttackFrames = down60ToFramerate(8);
         betweenWalkFrames = down60ToFramerate(6);
         attackFrame = attackStartFrame;
         corpseSize = size;

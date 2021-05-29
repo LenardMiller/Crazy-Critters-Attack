@@ -43,7 +43,7 @@ public class GlacierWaves {
         waves[8] = wavePreset(p, 55, 25, wolf);
         waves[8].addSpawns(wolf, 20);
 
-        waves[9] = wavePreset(p, 200, 170, "Mini Horde");
+        waves[9] = wavePreset(p, 150, 120, "Mini Horde");
         waves[9].addSpawns(wolf, 20);
         waves[9].addSpawns(shark, 30);
         waves[9].addSpawns(snowAntlion, 30);
@@ -61,7 +61,7 @@ public class GlacierWaves {
         waves[13].addSpawns(velociraptor, 3);
 
         waves[14] = wavePreset(p, 85, 40, velociraptor);
-        waves[14].addSpawns(velociraptor, 5);
+        waves[14].addSpawns(velociraptor, 3);
         waves[14].addSpawns(shark, 5);
         waves[14].addSpawns(snowAntlion, 5);
 
@@ -69,7 +69,7 @@ public class GlacierWaves {
         waves[15].addSpawns(wolf, 40);
 
         waves[16] = wavePreset(p, 85, 40, velociraptor);
-        waves[16].addSpawns(velociraptor, 5);
+        waves[16].addSpawns(velociraptor, 3);
         waves[16].addSpawns(shark, 5);
         waves[16].addSpawns(snowAntlion, 5);
 
