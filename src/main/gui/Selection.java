@@ -127,6 +127,15 @@ public class Selection { //what tower is selected
                 }
                 P.noStroke();
                 return;
+            } if (turret instanceof SeismicTower) {
+                float width = radians(((SeismicTower) turret).shockwaveWidth / 2);
+                if (width < 6) {
+                    float startX = x + turret.size.x / 2;
+                    float startY = y + turret.size.y / 2;
+                    float angleA = turret.angle - HALF_PI + width;
+                    float angleB = turret.angle - HALF_PI - width;
+                    P.arc(startX, startY, turret.range * 2, turret.range * 2, angleB, angleA, PIE);
+                }
             }
             P.rect(x, y, turret.size.y, turret.size.y);
             if (turret.boostedRange() > 0) P.stroke(InGameGui.BOOSTED_TEXT_COLOR.getRGB());

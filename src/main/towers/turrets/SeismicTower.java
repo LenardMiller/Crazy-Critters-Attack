@@ -14,7 +14,11 @@ import static processing.core.PConstants.HALF_PI;
 
 public class SeismicTower extends Turret {
 
-    private float shockwaveWidth;
+    /**
+     * Degrees
+     */
+    public float shockwaveWidth;
+
     private boolean seismicSense;
 
     public SeismicTower(PApplet p, Tile tile) { //todo: can't hit flying

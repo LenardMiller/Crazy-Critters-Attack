@@ -37,6 +37,9 @@ public abstract class Turret extends Tower {
     public float effectDuration;
     public float effectLevel;
     public float delay;
+    /**
+     * Radians
+     */
     public float angle;
     public String[] upgradeDescA;
     public String[] upgradeDescB;
