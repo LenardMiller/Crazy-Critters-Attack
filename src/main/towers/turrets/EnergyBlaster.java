@@ -71,12 +71,12 @@ public class EnergyBlaster extends Turret{
     @Override
     protected void setUpgrades(){
         //price
-        upgradePrices[0] = 350;
-        upgradePrices[1] = 400;
+        upgradePrices[0] = 500;
+        upgradePrices[1] = 650;
         upgradePrices[2] = 4000;
 
-        upgradePrices[3] = 250;
-        upgradePrices[4] = 600;
+        upgradePrices[3] = 500;
+        upgradePrices[4] = 800;
         upgradePrices[5] = 6500;
         //titles
         upgradeTitles[0] = "Faster Reload";

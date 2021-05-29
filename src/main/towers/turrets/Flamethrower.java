@@ -35,6 +35,7 @@ public class Flamethrower extends Turret {
         effectLevel = 6;
         effectDuration = 5;
         damage = 10;
+        delay = 0;
         debrisType = "metal";
         price = FLAMETHROWER_PRICE;
         value = price;
@@ -162,11 +163,11 @@ public class Flamethrower extends Turret {
     protected void setUpgrades() {
         //prices
         upgradePrices[0] = 400;
-        upgradePrices[1] = 500;
+        upgradePrices[1] = 600;
         upgradePrices[2] = 3500;
 
-        upgradePrices[3] = 500;
-        upgradePrices[4] = 600;
+        upgradePrices[3] = 600;
+        upgradePrices[4] = 700;
         upgradePrices[5] = 5000;
         //titles
         upgradeTitles[0] = "Better range";

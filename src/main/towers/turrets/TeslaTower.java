@@ -27,7 +27,7 @@ public class TeslaTower extends Turret {
         damage = 250;
         arcLength = 3;
         pjSpeed = -1;
-        range = 200;
+        range = 225;
         betweenIdleFrames = down60ToFramerate(3);
         debrisType = "metal";
         price = TESLA_TOWER_PRICE;
