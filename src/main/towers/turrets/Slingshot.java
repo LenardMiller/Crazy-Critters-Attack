@@ -60,7 +60,7 @@ public class Slingshot extends Turret {
         upgradePrices[2] = 400;
         upgradePrices[3] = 75;
         upgradePrices[4] = 100;
-        upgradePrices[5] = 500;
+        upgradePrices[5] = 650;
         //titles
         upgradeTitles[0] = "Long Range";
         upgradeTitles[1] = "Super Range";
@@ -136,7 +136,7 @@ public class Slingshot extends Turret {
                     damage += 30;
                     delay += 0.1f;
                     effectDuration = 6;
-                    effectLevel = 15;
+                    effectLevel = 8;
                     name = "slingshotRock";
                     loadSprites();
                     break;

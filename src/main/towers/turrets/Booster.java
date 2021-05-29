@@ -109,7 +109,7 @@ public class Booster extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 800;
+        upgradePrices[0] = 1000;
         upgradePrices[1] = 1500;
         upgradePrices[2] = 25000;
 
