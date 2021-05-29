@@ -110,11 +110,11 @@ public class Booster extends Turret {
     protected void setUpgrades() {
         //price
         upgradePrices[0] = 1000;
-        upgradePrices[1] = 1500;
+        upgradePrices[1] = 2000;
         upgradePrices[2] = 25000;
 
         upgradePrices[3] = 1200;
-        upgradePrices[4] = 2500;
+        upgradePrices[4] = 2000;
         upgradePrices[5] = 20000;
         //titles
         upgradeTitles[0] = "Boost Range";

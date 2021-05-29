@@ -246,6 +246,10 @@ public class SpriteLoader {
         getSprite(p,"antlionDie","EN","antlion/die/", 4);
         getSprite(p,"antlionParts","EN","antlion/parts/",6);
 
+        getSprite(p,"iceEntityAttack","EN","iceEntity/attack/",16);
+        getSprite(p,"iceEntityShoot","EN","iceEntity/shoot/",16);
+        getSprite(p,"iceEntityMove","EN","iceEntity/move/",1);
+
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
