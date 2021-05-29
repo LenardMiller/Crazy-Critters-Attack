@@ -3,12 +3,14 @@ package main.levelStructure;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.BigWorm;
 import main.enemies.burrowingEnemies.MidWorm;
+import main.enemies.burrowingEnemies.Shark;
 import main.enemies.burrowingEnemies.Worm;
 import main.enemies.flyingEnemies.AlbinoButterfly;
 import main.enemies.flyingEnemies.Bat;
 import main.enemies.flyingEnemies.Butterfly;
 import main.enemies.flyingEnemies.GiantBat;
 import main.enemies.shootingEnemies.Antlion;
+import main.enemies.shootingEnemies.SnowAntlion;
 import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
 import main.towers.IceWall;
@@ -209,6 +211,18 @@ public class Wave {
                 break;
             case "antlion":
                 e = new Antlion(P, pos.x, pos.y);
+                break;
+            case "snowAntlion":
+                e = new SnowAntlion(P, pos.x, pos.y);
+                break;
+            case "wolf":
+                e = new Wolf(P, pos.x, pos.y);
+                break;
+            case "shark":
+                e = new Shark(P, pos.x, pos.y);
+                break;
+            case "velociraptor":
+                e = new Velociraptor(P, pos.x, pos.y);
                 break;
         }
         return e;
