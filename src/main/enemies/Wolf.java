@@ -13,11 +13,11 @@ public class Wolf extends Enemy {
         size = new PVector(50,50);
         pfSize = 2;
         radius = 25;
-        maxSpeed = 50;
+        maxSpeed = 60;
         speed = maxSpeed;
-        moneyDrop = 75;
-        damage = 15;
-        maxHp = 300; //Hp
+        moneyDrop = 50;
+        damage = 8;
+        maxHp = 100; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "wolf";

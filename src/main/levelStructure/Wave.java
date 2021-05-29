@@ -212,15 +212,19 @@ public class Wave {
             case "antlion":
                 e = new Antlion(P, pos.x, pos.y);
                 break;
+            case "Antlions":
             case "snowAntlion":
                 e = new SnowAntlion(P, pos.x, pos.y);
                 break;
+            case "Wolves":
             case "wolf":
                 e = new Wolf(P, pos.x, pos.y);
                 break;
+            case "Snow Sharks":
             case "shark":
                 e = new Shark(P, pos.x, pos.y);
                 break;
+            case "Velociraptors":
             case "velociraptor":
                 e = new Velociraptor(P, pos.x, pos.y);
                 break;

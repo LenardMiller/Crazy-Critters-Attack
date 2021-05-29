@@ -13,11 +13,11 @@ public class Velociraptor extends Enemy {
         size = new PVector(100,100);
         pfSize = 3;
         radius = 25;
-        maxSpeed = 60;
+        maxSpeed = 75;
         speed = maxSpeed;
         moneyDrop = 200;
         damage = 20;
-        maxHp = 750; //Hp
+        maxHp = 10000; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "velociraptor";

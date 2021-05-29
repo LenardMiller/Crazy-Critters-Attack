@@ -15,11 +15,11 @@ public class SnowAntlion extends ShootingEnemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 13;
-        maxSpeed = 24;
+        maxSpeed = 30;
         speed = maxSpeed;
-        moneyDrop = 40;
-        damage = 2;
-        maxHp = 50;
+        moneyDrop = 35;
+        damage = 4;
+        maxHp = 150;
         range = 100;
         barrelLength = 7;
         hp = maxHp;

@@ -13,11 +13,11 @@ public class Shark extends BurrowingEnemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = 36;
+        maxSpeed = 42;
         speed = maxSpeed;
-        moneyDrop = 30;
-        damage = 3;
-        maxHp = 100; //Hp
+        moneyDrop = 40;
+        damage = 8;
+        maxHp = 250; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "shark";
