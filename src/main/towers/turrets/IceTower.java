@@ -132,13 +132,13 @@ public class IceTower extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 200;
+        upgradePrices[0] = 750;
+        upgradePrices[1] = 1200;
+        upgradePrices[2] = 30000;
 
-        upgradePrices[3] = 50;
-        upgradePrices[4] = 100;
-        upgradePrices[5] = 200;
+        upgradePrices[3] = 1000;
+        upgradePrices[4] = 1500;
+        upgradePrices[5] = 25000;
         //titles
         upgradeTitles[0] = "Longer Lasting";
         upgradeTitles[1] = "Stronger Ice";
