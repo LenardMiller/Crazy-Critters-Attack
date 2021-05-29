@@ -56,6 +56,7 @@ public class SpriteLoader {
         getSprite(p,"glowOuch","PT","ouch/glow/",11);
         getSprite(p,"leafOuch","PT","ouch/leaf/",11);
         getSprite(p,"lichenOuch","PT","ouch/lichen/",11);
+        getSprite(p,"iceOuch","PT","ouch/ice/",11);
 
         getSprite(p,"fireMediumExplosion","PT","mediumExplosion/fire/",18);
         getSprite(p,"puffMediumExplosion","PT","mediumExplosion/puff/",18);
@@ -80,6 +81,7 @@ public class SpriteLoader {
         getSprite(p,"glowOuchPile","PT", "pile/glowOuch/", 4);
         getSprite(p,"leafOuchPile","PT", "pile/leafOuch/", 4);
         getSprite(p,"lichenOuchPile","PT", "pile/lichenOuch/", 4);
+        getSprite(p,"iceOuchPile","PT", "pile/iceOuch/", 4);
         getSprite(p,"dirtPile","PT","pile/dirt/", 4);
         getSprite(p,"sandPile","PT","pile/sand/", 4);
         getSprite(p,"stonePile","PT","pile/stone/", 4);

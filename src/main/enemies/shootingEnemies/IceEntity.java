@@ -28,7 +28,7 @@ public class IceEntity extends ShootingEnemy {
         range = 150;
         barrelLength = 7;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = "iceOuch";
         name = "iceEntity";
         ORBIT_SPRITE = staticSprites.get("iceEntityOrbitEn");
         orbitAngleSpeed = 0.2f;
