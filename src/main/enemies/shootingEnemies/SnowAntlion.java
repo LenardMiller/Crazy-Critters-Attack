@@ -19,7 +19,7 @@ public class SnowAntlion extends ShootingEnemy {
         speed = maxSpeed;
         moneyDrop = 40;
         damage = 4;
-        maxHp = 150;
+        maxHp = 200;
         range = 100;
         barrelLength = 7;
         hp = maxHp;

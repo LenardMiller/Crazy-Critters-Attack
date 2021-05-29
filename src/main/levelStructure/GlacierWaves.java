@@ -43,7 +43,7 @@ public class GlacierWaves {
         waves[8] = wavePreset(p, 55, 25, wolf);
         waves[8].addSpawns(wolf, 20);
 
-        waves[9] = wavePreset(p, 100, 60, "Mini Horde");
+        waves[9] = wavePreset(p, 200, 170, "Mini Horde");
         waves[9].addSpawns(wolf, 20);
         waves[9].addSpawns(shark, 30);
         waves[9].addSpawns(snowAntlion, 30);

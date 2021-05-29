@@ -17,14 +17,14 @@ public class Shark extends BurrowingEnemy {
         speed = maxSpeed;
         moneyDrop = 40;
         damage = 8;
-        maxHp = 250; //Hp
+        maxHp = 175; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "shark";
         attackStartFrame = 0;
         attackDmgFrames = new int[]{4};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(5);
+        betweenAttackFrames = down60ToFramerate(10);
         attackFrame = attackStartFrame;
         partSize = new PVector(20, 20);
         corpseSize = new PVector(25,25);
