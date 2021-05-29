@@ -34,7 +34,7 @@ public class Flamethrower extends Turret {
         range = 200;
         effectLevel = 6;
         effectDuration = 5;
-        damage = 10;
+        damage = 20;
         delay = 0;
         debrisType = "metal";
         price = FLAMETHROWER_PRICE;
