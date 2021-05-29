@@ -206,7 +206,7 @@ public class SeismicTower extends Turret {
         upgradeDescB[3] = "range";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "+30";
+        upgradeDescA[4] = "Increase";
         upgradeDescB[4] = "damage";
         upgradeDescC[4] = "";
 

@@ -15,7 +15,7 @@ public class Shark extends BurrowingEnemy {
         radius = 12.5f;
         maxSpeed = 42;
         speed = maxSpeed;
-        moneyDrop = 40;
+        moneyDrop = 75;
         damage = 8;
         maxHp = 175; //Hp
         hp = maxHp;

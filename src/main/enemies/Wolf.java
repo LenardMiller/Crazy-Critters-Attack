@@ -15,7 +15,7 @@ public class Wolf extends Enemy {
         radius = 25;
         maxSpeed = 60;
         speed = maxSpeed;
-        moneyDrop = 35;
+        moneyDrop = 40;
         damage = 8;
         maxHp = 100; //Hp
         hp = maxHp;
