@@ -7,6 +7,7 @@ import main.damagingThings.projectiles.enemyProjeciles.IceCrystal;
 import main.damagingThings.projectiles.enemyProjeciles.Snowball;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.Shark;
+import main.enemies.flyingEnemies.Frost;
 import main.enemies.shootingEnemies.IceEntity;
 import main.enemies.shootingEnemies.IceMonstrosity;
 import main.enemies.shootingEnemies.SnowAntlion;
@@ -159,7 +160,7 @@ public class KeyBinds {
         if (en5) enemies.add(new SnowAntlion(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en7) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en8) enemies.add(new GiantGolem(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en8) enemies.add(new Frost(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en9) enemies.add(new Wtf(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1b) enemies.add(new Dummy(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);

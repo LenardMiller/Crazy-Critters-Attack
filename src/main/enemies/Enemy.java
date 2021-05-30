@@ -141,6 +141,14 @@ public abstract class Enemy {
         if (dead) die(i);
     }
 
+    /**
+     * Adds money with a popup.
+     * Plays death sound.
+     * If overkill, fling bits everywhere, else create a corpse.
+     * Clear buffs.
+     * Remove from array.
+     * @param i id for buff stuff
+     */
     protected void die(int i) {
         Main.money += moneyDrop;
         popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
@@ -223,6 +231,10 @@ public abstract class Enemy {
         currentTintColor = incrementColorTo(currentTintColor, up60ToFramerate(20), new Color(255, 255, 255));
     }
 
+    /**
+     * Displays but tinted black and semi-transparent.
+     * Calls to animate sprite.
+     */
     public void displayShadow() {
         if (!paused) animate();
         p.pushMatrix();
@@ -236,6 +248,9 @@ public abstract class Enemy {
         p.popMatrix();
     }
 
+    /**
+     * Display main sprite
+     */
     public void displayMain() {
         if (debug) for (int i = points.size() - 1; i > 0; i--) {
             points.get(i).display();
@@ -369,28 +384,33 @@ public abstract class Enemy {
         return -1;
     }
 
-    private void damageEffect(boolean particles) {
+    /**
+     * Display hp bar.
+     * Tint.
+     * @param particles whether or not to display hurt particles
+     */
+    protected void damageEffect(boolean particles) {
         if (hp == maxHp) return;
         barAlpha = 255;
         if (particles) {
             int num = pfSize;
             int chance = 5;
-            if (!recentlyHit()) {
+            if (notRecentlyHit()) {
                 num = (int) p.random(pfSize, pfSize * pfSize);
                 chance = 0;
             }
             if (p.random(0, 6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
-                    midParticles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+                    topParticles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
                 }
             }
             currentTintColor = new Color(maxTintColor.getRGB());
         }
     }
 
-    private boolean recentlyHit() {
+    private boolean notRecentlyHit() {
         int totalTintColor = currentTintColor.getRed() + currentTintColor.getGreen() + currentTintColor.getBlue();
-        return totalTintColor < 700;
+        return totalTintColor >= 700;
     }
 
     public void hpBar() {
