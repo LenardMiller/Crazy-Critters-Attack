@@ -31,10 +31,12 @@ public class Frost extends FlyingEnemy {
         hitParticle = "iceOuch";
         name = "frost";
         attackStartFrame = 0;
-        attackDmgFrames = new int[]{5};
         betweenAttackFrames = 25;
         dieSound = sounds.get("frostDie");
         overkillSound = sounds.get("frostDie");
+        attackFrames = animatedSprites.get("wolf" + "AttackEN");
+        moveFrames = animatedSprites.get("wolf" + "MoveEN");
+        attackDmgFrames = new int[]{attackFrames.length - 1};
     }
 
     /**
@@ -73,12 +75,11 @@ public class Frost extends FlyingEnemy {
      */
     @Override
     protected void animate() {
-        int attackLength = 5;
         if (!immobilized) {
             if (state == 1) {
-                if (attackFrame >= attackLength) attackFrame = 0;
+                if (attackFrame >= attackFrames.length) attackFrame = 0;
                 idleTime++;
-                if (attackFrame < attackLength - 1) {
+                if (attackFrame < attackFrames.length - 1) {
                     if (idleTime >= betweenAttackFrames) {
                         attackFrame += 1;
                         idleTime = 0;
@@ -106,7 +107,7 @@ public class Frost extends FlyingEnemy {
             points.get(i).display();
         }
         if (!paused) {
-            if (attackFrame == 4) {
+            if (attackFrame == attackFrames.length - 2) {
                 for (int i = 0; i < 50; i++) {
                     topParticles.add(new Debris(p, position.x, position.y, p.random(360), "ice"));
                 } for (int i = 0; i < 20; i++) {
