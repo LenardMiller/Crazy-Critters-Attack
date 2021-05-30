@@ -8,6 +8,7 @@ import main.damagingThings.projectiles.enemyProjeciles.Snowball;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.Shark;
 import main.enemies.shootingEnemies.IceEntity;
+import main.enemies.shootingEnemies.IceMonstrosity;
 import main.enemies.shootingEnemies.SnowAntlion;
 import main.levelStructure.Level;
 import main.towers.Tower;
@@ -157,7 +158,7 @@ public class KeyBinds {
         if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en5) enemies.add(new SnowAntlion(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en7) enemies.add(new Golem(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en7) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en8) enemies.add(new GiantGolem(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en9) enemies.add(new Wtf(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1b) enemies.add(new Dummy(p, matrixMousePosition.x, matrixMousePosition.y));

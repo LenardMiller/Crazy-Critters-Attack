@@ -255,6 +255,10 @@ public class SpriteLoader {
         getSprite(p,"iceEntityDie","EN","iceEntity/die/",4);
         getSprite(p,"iceEntityParts","EN","iceEntity/parts/",4);
 
+        getSprite(p,"iceMonstrosityAttack","EN","iceMonstrosity/attack/",24);
+        getSprite(p,"iceMonstrosityShoot","EN","iceMonstrosity/shoot/",24);
+        getSprite(p,"iceMonstrosityMove","EN","iceMonstrosity/move/",1);
+
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
@@ -452,6 +456,7 @@ public class SpriteLoader {
 
         //enemies
         staticSprites.put("iceEntityOrbitEn",p.loadImage("sprites/enemies/iceEntity/orbit.png"));
+        staticSprites.put("iceMonstrosityOrbitEn",p.loadImage("sprites/enemies/iceMonstrosity/orbit.png"));
 
         //turrets
         staticSprites.put("crossbowBaseTR",p.loadImage("sprites/towers/turrets/crossbow/base.png"));
