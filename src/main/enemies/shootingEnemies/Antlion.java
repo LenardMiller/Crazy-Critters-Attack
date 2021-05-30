@@ -25,6 +25,7 @@ public class Antlion extends ShootingEnemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "antlion";
+        shootSound = sounds.get("spit");
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(12);
         betweenShootFrames = down60ToFramerate(12);

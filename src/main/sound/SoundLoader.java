@@ -33,6 +33,7 @@ public class SoundLoader {
         sounds.put("dino", new SoundFile(p, "sounds/enemies/dino.wav"));
         sounds.put("dinoSquish", new SoundFile(p, "sounds/enemies/dinoSquish.wav"));
         sounds.put("smallCrystalBreak", new SoundFile(p, "sounds/enemies/smallCrystalBreak.wav"));
+        sounds.put("spit", new SoundFile(p, "sounds/enemies/spit.wav"));
         //misc
         sounds.put("smallExplosion", new SoundFile(p, "sounds/misc/smallExplosion.wav"));
         sounds.put("hugeExplosion", new SoundFile(p, "sounds/misc/hugeExplosion.wav"));
