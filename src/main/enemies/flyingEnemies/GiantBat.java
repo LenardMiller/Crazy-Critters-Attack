@@ -17,7 +17,7 @@ public class GiantBat extends FlyingEnemy {
         speed = maxSpeed;
         moneyDrop = 500;
         damage = 5;
-        maxHp = 10000; //Hp
+        maxHp = 12500; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "giantBat";

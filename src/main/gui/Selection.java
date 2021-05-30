@@ -422,7 +422,7 @@ public class Selection { //what tower is selected
         }
     }
 
-    private void displayStats() { //todo: fix
+    private void displayStats() { //todo: fix (gluer)
         if (turret instanceof Booster) return;
         int offsetB = 0;
         if (!turret.hasPriority) offsetB = 45;

@@ -13,11 +13,11 @@ public class AlbinoButterfly extends FlyingEnemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = 48;
+        maxSpeed = 55;
         speed = maxSpeed;
         moneyDrop = 30;
-        damage = 1;
-        maxHp = 60; //Hp
+        damage = 2;
+        maxHp = 100; //Hp
         hp = maxHp;
         hitParticle = "glowOuch";
         name = "albinoButterfly";

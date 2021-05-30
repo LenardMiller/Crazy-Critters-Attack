@@ -164,7 +164,7 @@ public class Flamethrower extends Turret {
         //prices
         upgradePrices[0] = 400;
         upgradePrices[1] = 600;
-        upgradePrices[2] = 3500;
+        upgradePrices[2] = 4500;
 
         upgradePrices[3] = 600;
         upgradePrices[4] = 700;
@@ -224,7 +224,7 @@ public class Flamethrower extends Turret {
                 case 2:
                     wheel = true;
                     count = 8;
-                    damage *= 50;
+                    damage *= 20;
                     name = "flamewheel";
                     hasPriority = false;
                     effectLevel += 7;
@@ -247,9 +247,9 @@ public class Flamethrower extends Turret {
                     debrisType = "darkMetal";
                     range += 30;
                     pjSpeed = 150;
-                    damage = 100;
-                    effectDuration += 5;
-                    effectLevel = 100;
+                    damage = 250;
+                    effectDuration = 25;
+                    effectLevel = 250;
                     loadSprites();
                     break;
             }

@@ -118,11 +118,11 @@ public class CaveWaves {
         waves[24].addSpawns(midGolem, 40);
         waves[24].addSpawns(bigAlbinoBug, 5);
 
-        waves[25] = wavePreset(p, 65, 25, bigAlbinoBug);
+        waves[25] = wavePreset(p, 50, 20, bigAlbinoBug);
         waves[25].addSpawns(bigAlbinoBug, 10);
         waves[25].addSpawns(midGolem, 10);
 
-        waves[26] = wavePreset(p, 85, 35, bigAlbinoBug);
+        waves[26] = wavePreset(p, 50, 20, bigAlbinoBug);
         waves[26].addSpawns(bigAlbinoBug, 20);
 
         waves[27] = wavePreset(p, 80, 15, bat);
@@ -194,22 +194,22 @@ public class CaveWaves {
         waves[44] = wavePreset(p, 150, 1, "1 wtf");
         waves[44].addSpawns(wtf, 1);
 
-        waves[45] = wavePreset(p, 150, 50, horde);
+        waves[45] = wavePreset(p, 75, 50, horde);
         waves[45].addSpawns(bigAlbinoBug, 40);
         waves[45].addSpawns(midGolem, 50);
         waves[45].addSpawns(smallGolem, 50);
         waves[45].addSpawns(bigGolem, 10);
 
-        waves[46] = wavePreset(p, 150, 1, "1 wtf");
-        waves[46].addSpawns(wtf, 1);
+        waves[46] = wavePreset(p, 150, 1, wtf);
+        waves[46].addSpawns(wtf, 3);
         waves[46].addSpawns(bigAlbinoBug, 15);
 
         waves[47] = wavePreset(p, 150, 15, wtf);
-        waves[47].addSpawns(wtf, 3);
+        waves[47].addSpawns(wtf, 5);
         waves[47].addSpawns(bigAlbinoBug, 20);
         waves[47].addSpawns(albinoBug, 15);
 
-        waves[48] = wavePreset(p, 250, 100, megaHorde);
+        waves[48] = wavePreset(p, 150, 100, megaHorde);
         waves[48].addSpawns(bigAlbinoBug, 50);
         waves[48].addSpawns(bigGolem, 25);
         waves[48].addSpawns(midGolem, 75);
@@ -300,7 +300,7 @@ public class CaveWaves {
         if (type.equals("1 bigGolem")) return new Wave(p, length, spawnLength, bigGolemFill, bigGolemAccent, bigGolemText, "Boulder Golem");
         if (type.equals(bat)) return new Wave(p, length, spawnLength, batFill, batAccent, batText, batTitle);
         if (type.equals(bigBat)) return new Wave(p, length, spawnLength, bigBatFill, bigBatAccent, bigBatText, bigBatTitle);
-        if (type.equals("1 bigBar")) return new Wave(p, length, spawnLength, bigBatFill, bigBatAccent, bigBatText, "Giant Bat");
+        if (type.equals("1 bigBat")) return new Wave(p, length, spawnLength, bigBatFill, bigBatAccent, bigBatText, "Giant Bat");
         if (type.equals(wtf)) return new Wave(p, length, spawnLength, wtfFill, wtfAccent, wtfText, wtfTitle);
         if (type.equals("1 wtf")) return new Wave(p, length, spawnLength, wtfFill, wtfAccent, wtfText, "Colossal Bug");
         System.out.println("Invalid wave type!");

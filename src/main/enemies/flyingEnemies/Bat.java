@@ -13,11 +13,11 @@ public class Bat extends FlyingEnemy {
         size = new PVector(50,50);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = 33;
+        maxSpeed = 45;
         speed = maxSpeed;
         moneyDrop = 50;
         damage = 3;
-        maxHp = 300; //Hp
+        maxHp = 750; //Hp
         hp = maxHp;
         hitParticle = "redOuch";
         name = "bat";
