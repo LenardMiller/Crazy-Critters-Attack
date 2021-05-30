@@ -17,7 +17,6 @@ import static processing.core.PConstants.HALF_PI;
 
 public abstract class Projectile {
 
-
     public int damage;
     public float radius;
     public float maxSpeed;

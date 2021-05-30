@@ -106,7 +106,7 @@ public class Gluer extends Turret {
 
         upgradePrices[3] = 150;
         upgradePrices[4] = 150;
-        upgradePrices[5] = 700;
+        upgradePrices[5] = 1000;
         //titles
         upgradeTitles[0] = "Long Range";
         upgradeTitles[1] = "Long Glue";

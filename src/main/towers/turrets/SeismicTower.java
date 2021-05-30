@@ -21,7 +21,7 @@ public class SeismicTower extends Turret {
 
     private boolean seismicSense;
 
-    public SeismicTower(PApplet p, Tile tile) { //todo: can't hit flying
+    public SeismicTower(PApplet p, Tile tile) {
         super(p,tile);
         name = "seismic";
         offset = 4;

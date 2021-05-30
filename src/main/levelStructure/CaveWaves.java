@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class CaveWaves {
 
-    public static Wave[] genCaveWaves(PApplet p) { //todo: slightly more difficult
+    public static Wave[] genCaveWaves(PApplet p) {
         Wave[] waves = new Wave[50];
 
         String albinoBug = "albinoBug";

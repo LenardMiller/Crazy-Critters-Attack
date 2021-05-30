@@ -278,10 +278,12 @@ public abstract class Enemy {
         partsDirection = direction;
         hp -= damage;
         if (turret != null) {
+            int statDamage = damage;
             if (hp <= 0) {
                 turret.killsTotal++;
-                turret.damageTotal += damage + hp;
-            } else turret.damageTotal += damage;
+                statDamage = damage + hp;
+            }
+            if (statDamage > 0) turret.damageTotal += statDamage;
         }
         int effectTimer = p.frameCount + 10;
         if (buffs.size() > 0) {
