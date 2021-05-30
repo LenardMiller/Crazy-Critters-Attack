@@ -11,7 +11,7 @@ public class SoundLoader {
     public SoundLoader() {}
 
     public static void loadSounds(PApplet p) { //todo: load dynamically?
-        //enemy
+        //enemy todo: attack sounds?
         sounds.put("squish", new SoundFile(p, "sounds/enemies/squish.wav"));
         sounds.put("squash", new SoundFile(p, "sounds/enemies/squash.wav"));
         sounds.put("squashRoar", new SoundFile(p, "sounds/enemies/squashRoar.wav"));
