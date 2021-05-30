@@ -18,6 +18,7 @@ public abstract class ShootingEnemy extends Enemy {
     protected int betweenShootFrames;
     protected int shootFireFrame;
     protected int barrelLength;
+    protected int shootDamage;
     protected Turret target;
     protected PImage[] shootFrames;
 

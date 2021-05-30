@@ -10,10 +10,9 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class IceEntity extends ShootingEnemy {
 
-    private final PImage ORBIT_SPRITE;
-
-    private float orbitAngle;
-    private float orbitAngleSpeed;
+    protected PImage orbitSprite;
+    protected float orbitAngle;
+    protected float orbitAngleSpeed;
 
     public IceEntity(PApplet p, float x, float y) {
         super(p, x, y);
@@ -23,14 +22,15 @@ public class IceEntity extends ShootingEnemy {
         maxSpeed = 40;
         speed = maxSpeed;
         moneyDrop = 150;
-        damage = 3;
+        damage = 6;
+        shootDamage = 3;
         maxHp = 1200;
         range = 150;
         barrelLength = 7;
         hp = maxHp;
         hitParticle = "iceOuch";
         name = "iceEntity";
-        ORBIT_SPRITE = staticSprites.get("iceEntityOrbitEn");
+        orbitSprite = staticSprites.get("iceEntityOrbitEn");
         orbitAngleSpeed = 0.2f;
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(6);
@@ -50,7 +50,7 @@ public class IceEntity extends ShootingEnemy {
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
         orbitAngleSpeed = 1;
-        projectiles.add(new IceCrystal(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
+        projectiles.add(new IceCrystal(p, shootDamage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class IceEntity extends ShootingEnemy {
         p.rotate(angle);
         if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
         p.rotate(orbitAngle);
-        p.image(ORBIT_SPRITE, -size.x / 2, -size.y / 2);
+        p.image(orbitSprite, -size.x / 2, -size.y / 2);
         p.tint(255);
         p.popMatrix();
     }
@@ -85,7 +85,7 @@ public class IceEntity extends ShootingEnemy {
         p.tint(currentTintColor.getRGB());
         if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
         p.rotate(orbitAngle);
-        p.image(ORBIT_SPRITE, -size.x / 2, -size.y / 2);
+        p.image(orbitSprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
         if (debug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
