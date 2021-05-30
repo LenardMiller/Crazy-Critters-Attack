@@ -26,7 +26,7 @@ public class Frost extends FlyingEnemy {
         speed = maxSpeed;
         moneyDrop = 250;
         damage = 4;
-        maxHp = 5000;
+        maxHp = 2500;
         hp = maxHp;
         hitParticle = "iceOuch";
         name = "frost";
@@ -156,7 +156,7 @@ public class Frost extends FlyingEnemy {
                 topParticles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2),
                   position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
             }
+            hitTimer = 0;
         }
-        hitTimer = 0;
     }
 }
