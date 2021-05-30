@@ -35,6 +35,7 @@ public class SoundLoader {
         sounds.put("smallCrystalBreak", new SoundFile(p, "sounds/enemies/smallCrystalBreak.wav"));
         sounds.put("spit", new SoundFile(p, "sounds/enemies/spit.wav"));
         sounds.put("badMagic", new SoundFile(p, "sounds/enemies/badMagic.wav"));
+        sounds.put("frostDie", new SoundFile(p, "sounds/enemies/frostDie.wav"));
         //misc
         sounds.put("smallExplosion", new SoundFile(p, "sounds/misc/smallExplosion.wav"));
         sounds.put("hugeExplosion", new SoundFile(p, "sounds/misc/hugeExplosion.wav"));

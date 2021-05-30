@@ -33,6 +33,8 @@ public class Frost extends FlyingEnemy {
         attackStartFrame = 0;
         attackDmgFrames = new int[]{5};
         betweenAttackFrames = 25;
+        dieSound = sounds.get("frostDie");
+        overkillSound = sounds.get("frostDie");
     }
 
     /**
