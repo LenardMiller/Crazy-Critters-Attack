@@ -137,6 +137,14 @@ public class GlacierWaves {
                   new Color(12, 74, 232),
                   title
                 );
+            case "Ice Monstrosity":
+            case "Ice Monstrosities":
+                return new Wave(p, length, spawnLength,
+                  new Color(12, 74, 232),
+                  new Color(40, 139, 243),
+                  new Color(123, 250, 250),
+                  title
+                );
             default:
                 return new Wave(p, length, spawnLength,
                   new Color(255, 0, 255),
