@@ -5,10 +5,7 @@ import main.enemies.burrowingEnemies.BigWorm;
 import main.enemies.burrowingEnemies.MidWorm;
 import main.enemies.burrowingEnemies.Shark;
 import main.enemies.burrowingEnemies.Worm;
-import main.enemies.flyingEnemies.AlbinoButterfly;
-import main.enemies.flyingEnemies.Bat;
-import main.enemies.flyingEnemies.Butterfly;
-import main.enemies.flyingEnemies.GiantBat;
+import main.enemies.flyingEnemies.*;
 import main.enemies.shootingEnemies.Antlion;
 import main.enemies.shootingEnemies.IceEntity;
 import main.enemies.shootingEnemies.IceMonstrosity;
@@ -236,6 +233,9 @@ public class Wave {
             case "Ice Monstrosity":
             case "Ice Monstrosities":
                 e = new IceMonstrosity(P, pos.x, pos.y);
+                break;
+            case "Frost":
+                e = new Frost(P, pos.x, pos.y);
                 break;
         }
         return e;
