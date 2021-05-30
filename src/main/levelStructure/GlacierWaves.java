@@ -15,6 +15,7 @@ public class GlacierWaves {
         String shark = "Snow Sharks";
         String velociraptor = "Velociraptors";
         String iceEntity = "Ice Entities";
+        String iceMonstrosity = "Ice Monstrosities";
 
         waves[0] = wavePreset(p, 65, 30, wolf);
         waves[0].addSpawns(wolf, 5);
