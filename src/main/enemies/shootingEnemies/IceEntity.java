@@ -64,9 +64,11 @@ public class IceEntity extends ShootingEnemy {
     public void displayShadow() {
         if (!paused) {
             animate();
-            if (attackFrame == attackDmgFrames[0]) orbitAngleSpeed = orbitAngleTopSpeed;
-            orbitAngle += orbitAngleSpeed;
-            if (orbitAngleSpeed > orbitAngleMinSpeed) orbitAngleSpeed -= orbitAngleSpeedChange;
+            if (!immobilized) {
+                if (attackFrame == attackDmgFrames[0]) orbitAngleSpeed = orbitAngleTopSpeed;
+                orbitAngle += orbitAngleSpeed;
+                if (orbitAngleSpeed > orbitAngleMinSpeed) orbitAngleSpeed -= orbitAngleSpeedChange;
+            }
         }
         p.pushMatrix();
         p.tint(0, 60);
