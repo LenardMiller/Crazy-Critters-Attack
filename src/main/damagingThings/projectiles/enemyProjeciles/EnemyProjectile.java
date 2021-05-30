@@ -17,7 +17,10 @@ public abstract class EnemyProjectile extends Projectile {
     @Override
     public void checkCollision() {
         Turret turret = collidingWithTurret();
-        if (turret != null) turret.damage(damage);
+        if (turret != null) {
+            turret.damage(damage);
+            die();
+        }
     }
 
     private Turret collidingWithTurret() {

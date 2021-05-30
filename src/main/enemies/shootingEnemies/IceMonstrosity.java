@@ -6,7 +6,6 @@ import processing.core.PVector;
 
 import static main.Main.projectiles;
 import static main.Main.staticSprites;
-import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PApplet.radians;
 
 public class IceMonstrosity extends IceEntity {
@@ -28,7 +27,6 @@ public class IceMonstrosity extends IceEntity {
         orbitAngleSpeed = orbitAngleMinSpeed;
         orbitAngleTopSpeed = 0.5f;
         orbitAngleSpeedChange = 0.01f;
-        betweenShootFrames = down60ToFramerate(12);
         name = "iceMonstrosity";
         orbitSprite = staticSprites.get("iceMonstrosityOrbitEn");
         corpseSize = size;
