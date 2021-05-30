@@ -34,7 +34,7 @@ public class Frost extends FlyingEnemy {
         betweenAttackFrames = 25;
         dieSound = sounds.get("frostDie");
         overkillSound = sounds.get("frostDie");
-        attackFrames = animatedSprites.get("wolf" + "AttackEN");
+        attackFrames = animatedSprites.get("wolf" + "AttackEN"); //these exist solely because of glue
         moveFrames = animatedSprites.get("wolf" + "MoveEN");
         attackDmgFrames = new int[]{attackFrames.length - 1};
     }

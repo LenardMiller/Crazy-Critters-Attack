@@ -1,15 +1,9 @@
 package main.levelStructure;
 
 import main.enemies.*;
-import main.enemies.burrowingEnemies.BigWorm;
-import main.enemies.burrowingEnemies.MidWorm;
-import main.enemies.burrowingEnemies.Shark;
-import main.enemies.burrowingEnemies.Worm;
+import main.enemies.burrowingEnemies.*;
 import main.enemies.flyingEnemies.*;
-import main.enemies.shootingEnemies.Antlion;
-import main.enemies.shootingEnemies.IceEntity;
-import main.enemies.shootingEnemies.IceMonstrosity;
-import main.enemies.shootingEnemies.SnowAntlion;
+import main.enemies.shootingEnemies.*;
 import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
 import main.towers.IceWall;
@@ -55,6 +49,10 @@ public class Wave {
 
     public ArrayList<String> spawns;
 
+    boolean hasFlying;
+    boolean hasBurrowing;
+    boolean hasShooting;
+
     /**
      * A wave of enemies
      * @param p the PApplet
@@ -96,6 +94,9 @@ public class Wave {
     }
 
     void addSpawns(String enemy, int count) {
+        if (getEnemy(enemy) instanceof FlyingEnemy) hasFlying = true;
+        if (getEnemy(enemy) instanceof BurrowingEnemy) hasBurrowing = true;
+        if (getEnemy(enemy) instanceof ShootingEnemy) hasShooting = true;
         for (int i = 0; i < count; i++) spawns.add(enemy);
         Collections.shuffle(spawns);
     }
@@ -127,12 +128,26 @@ public class Wave {
         P.image(staticSprites.get("waveSecondaryIc"), 890, y);
         P.tint(255);
 
+        //title
         P.fill(TEXT_COLOR.getRGB(), 254);
         P.textAlign(CENTER);
         P.textFont(largeFont);
         P.text(TITLE, 1000, y + 110);
         P.textFont(veryLargeFont);
+        //number
         P.text(id, 1000, y + 70);
+        //enemy types
+        P.textFont(largeFont);
+        P.textAlign(RIGHT);
+        StringBuilder enemyTypes = new StringBuilder();
+        if (hasBurrowing) enemyTypes.append(" B");
+        if (hasFlying) enemyTypes.append(" F");
+        if (hasShooting) enemyTypes.append(" S");
+        P.text(enemyTypes.toString(), 1090, y + 30);
+    }
+
+    private Enemy getEnemy(String name) {
+        return getEnemy(name, new PVector(0,0));
     }
 
     private Enemy getEnemy(String name, PVector pos) {
