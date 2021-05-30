@@ -142,8 +142,8 @@ public class KeyBinds {
         boolean en9 = keysPressed.getPressedPulse('9') && alive && matrixMousePosition.x < BOARD_WIDTH;
         boolean en1b = keysPressed.getPressedPulse('!') && alive && matrixMousePosition.x < BOARD_WIDTH;
         //projectiles
-        if (pebble) projectiles.add(new Snowball(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0, selection.turret));
-        if (bolt) projectiles.add(new IceCrystal(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0, selection.turret));
+        if (pebble) projectiles.add(new Snowball(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0));
+        if (bolt) projectiles.add(new IceCrystal(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0));
         if (miscProjectile) projectiles.add(new MiscProjectile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, round(p.random(0, 5)), 6));
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 20, false));
         if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 30, true));

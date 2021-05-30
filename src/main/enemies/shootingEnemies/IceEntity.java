@@ -50,7 +50,7 @@ public class IceEntity extends ShootingEnemy {
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
         orbitAngleSpeed = 1;
-        projectiles.add(new IceCrystal(p, shootDamage, projectilePosition.x, projectilePosition.y, projectileAngle, target));
+        projectiles.add(new IceCrystal(p, shootDamage, projectilePosition.x, projectilePosition.y, projectileAngle));
     }
 
     @Override

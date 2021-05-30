@@ -1,7 +1,6 @@
 package main.damagingThings.projectiles.enemyProjeciles;
 
 import main.particles.Debris;
-import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -9,8 +8,8 @@ import static main.Main.*;
 
 public class IceCrystal extends EnemyProjectile {
 
-    public IceCrystal(PApplet p, int damage, float x, float y, float angle, Turret turret) {
-        super(p, damage, x, y, angle, turret);
+    public IceCrystal(PApplet p, int damage, float x, float y, float angle) {
+        super(p, damage, x, y, angle);
         size = new PVector(10, 10);
         radius = 5;
         maxSpeed = 600;

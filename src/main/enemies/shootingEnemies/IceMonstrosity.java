@@ -19,7 +19,7 @@ public class IceMonstrosity extends IceEntity {
         speed = maxSpeed;
         moneyDrop = 1000;
         damage = 10;
-        shootDamage = 2;
+        shootDamage = 1;
         maxHp = 5000;
         hp = maxHp;
         range = 150;
@@ -33,9 +33,10 @@ public class IceMonstrosity extends IceEntity {
     protected void fire(float projectileAngle, PVector projectilePosition) {
         orbitAngleSpeed = 1;
         for (int i = 0; i < 5; i++) {
-            float deflection = radians(p.random(-45, 45));
+            int deflectionAmount = i * 10;
+            float deflection = radians(p.random(-deflectionAmount, deflectionAmount));
             projectiles.add(new IceCrystal(p, shootDamage, projectilePosition.x, projectilePosition.y,
-              projectileAngle + deflection, target));
+              projectileAngle + deflection));
         }
     }
 }

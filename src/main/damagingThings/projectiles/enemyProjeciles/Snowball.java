@@ -1,7 +1,6 @@
 package main.damagingThings.projectiles.enemyProjeciles;
 
 import main.particles.Ouch;
-import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -10,8 +9,8 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class Snowball extends EnemyProjectile {
 
-    public Snowball(PApplet p, int damage, float x, float y, float angle, Turret turret) {
-        super(p, damage, x, y, angle, turret);
+    public Snowball(PApplet p, int damage, float x, float y, float angle) {
+        super(p, damage, x, y, angle);
         size = new PVector(10, 10);
         radius = 5;
         maxSpeed = 400;
