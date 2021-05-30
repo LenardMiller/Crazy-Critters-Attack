@@ -186,9 +186,9 @@ public class Machine {
         hit = true;
         int hpSegment = maxHp / 4;
         if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
-        if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
-        if (hp <= hpSegment) damageState = 3;
-        if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
+        else if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
+        else if (hp <= hpSegment) damageState = 3;
+        else if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
         playSoundRandomSpeed(p, DAMAGE_SOUND, 1);
         for (Tile tile : machTiles) {
             int x = (int) tile.position.x;
@@ -220,10 +220,12 @@ public class Machine {
         }
         hp += amount * maxHp;
         int hpSegment = maxHp / 4;
-        if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
-        if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
-        if (hp <= hpSegment) damageState = 3;
+        if (hp > hpSegment * 3) damageState = 0;
+        else if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
+        else if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
+        else if (hp <= hpSegment) damageState = 3;
         if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
+        else sprites = animatedSprites.get(name);
         if (hp > maxHp) hp = maxHp;
     }
 }
