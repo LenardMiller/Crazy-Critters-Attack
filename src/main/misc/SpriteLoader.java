@@ -258,6 +258,7 @@ public class SpriteLoader {
         getSprite(p,"iceMonstrosityAttack","EN","iceMonstrosity/attack/",24);
         getSprite(p,"iceMonstrosityShoot","EN","iceMonstrosity/shoot/",24);
         getSprite(p,"iceMonstrosityMove","EN","iceMonstrosity/move/",1);
+        getSprite(p,"iceMonstrosityDie","EN","iceMonstrosity/die/",4);
 
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
