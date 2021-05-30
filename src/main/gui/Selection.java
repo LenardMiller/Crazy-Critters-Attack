@@ -138,6 +138,11 @@ public class Selection { //what tower is selected
                 }
             }
             P.rect(x, y, turret.size.y, turret.size.y);
+            if (turret.getRange() > 1000) { //prevents lag
+                P.noStroke();
+                P.rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+                return;
+            }
             if (turret.boostedRange() > 0) P.stroke(InGameGui.BOOSTED_TEXT_COLOR.getRGB());
             P.circle(turret.tile.position.x - (turret.size.x / 2), turret.tile.position.y - (turret.size.y / 2), turret.getRange() * 2);
             P.noStroke();
