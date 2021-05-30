@@ -6,6 +6,7 @@ import processing.core.PVector;
 
 import static main.Main.projectiles;
 import static main.Main.staticSprites;
+import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PApplet.radians;
 
 public class IceMonstrosity extends IceEntity {
@@ -15,23 +16,29 @@ public class IceMonstrosity extends IceEntity {
         size = new PVector(50, 50);
         pfSize = 2;
         radius = 25;
-        maxSpeed = 30;
+        maxSpeed = 20;
         speed = maxSpeed;
         moneyDrop = 1000;
         damage = 10;
         shootDamage = 1;
         maxHp = 5000;
         hp = maxHp;
-        range = 150;
+        range = 130;
+        orbitAngleMinSpeed = 0.1f;
+        orbitAngleSpeed = orbitAngleMinSpeed;
+        orbitAngleTopSpeed = 0.5f;
+        orbitAngleSpeedChange = 0.01f;
+        betweenShootFrames = down60ToFramerate(12);
         name = "iceMonstrosity";
         orbitSprite = staticSprites.get("iceMonstrosityOrbitEn");
         corpseSize = size;
+        partSize = new PVector(14, 14);
         loadStuff();
     }
 
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
-        orbitAngleSpeed = 1;
+        orbitAngleSpeed = orbitAngleTopSpeed;
         for (int i = 0; i < 5; i++) {
             int deflectionAmount = i * 10;
             float deflection = radians(p.random(-deflectionAmount, deflectionAmount));

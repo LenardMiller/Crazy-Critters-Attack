@@ -13,6 +13,9 @@ public class IceEntity extends ShootingEnemy {
     protected PImage orbitSprite;
     protected float orbitAngle;
     protected float orbitAngleSpeed;
+    protected float orbitAngleMinSpeed;
+    protected float orbitAngleTopSpeed;
+    protected float orbitAngleSpeedChange;
 
     public IceEntity(PApplet p, float x, float y) {
         super(p, x, y);
@@ -31,7 +34,10 @@ public class IceEntity extends ShootingEnemy {
         hitParticle = "iceOuch";
         name = "iceEntity";
         orbitSprite = staticSprites.get("iceEntityOrbitEn");
-        orbitAngleSpeed = 0.2f;
+        orbitAngleMinSpeed = 0.2f;
+        orbitAngleSpeed = orbitAngleMinSpeed;
+        orbitAngleTopSpeed = 1;
+        orbitAngleSpeedChange = 0.02f;
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(6);
         betweenShootFrames = down60ToFramerate(6);
@@ -49,7 +55,7 @@ public class IceEntity extends ShootingEnemy {
 
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
-        orbitAngleSpeed = 1;
+        orbitAngleSpeed = orbitAngleTopSpeed;
         projectiles.add(new IceCrystal(p, shootDamage, projectilePosition.x, projectilePosition.y, projectileAngle));
     }
 
@@ -57,9 +63,9 @@ public class IceEntity extends ShootingEnemy {
     public void displayShadow() {
         if (!paused) {
             animate();
-            if (attackFrame == attackDmgFrames[0]) orbitAngleSpeed = 1;
+            if (attackFrame == attackDmgFrames[0]) orbitAngleSpeed = orbitAngleTopSpeed;
             orbitAngle += orbitAngleSpeed;
-            if (orbitAngleSpeed > 0.2) orbitAngleSpeed -= 0.02;
+            if (orbitAngleSpeed > orbitAngleMinSpeed) orbitAngleSpeed -= orbitAngleSpeedChange;
         }
         p.pushMatrix();
         p.tint(0, 60);
