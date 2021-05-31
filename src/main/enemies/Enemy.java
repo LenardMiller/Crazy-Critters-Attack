@@ -196,7 +196,9 @@ public abstract class Enemy {
 
     protected void move() {
         PVector m = PVector.fromAngle(angle);
-        m.setMag(speed/FRAMERATE);
+        float pixelsMoved = speed / FRAMERATE;
+        if (intersectCombatPoint()) pixelsMoved /= 3;
+        m.setMag(pixelsMoved);
         //don't move if no path
         if (points.size() > 0) position.add(m);
     }
@@ -492,17 +494,28 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
-    //todo: fix spinning (change speed when near combat point?)
     //todo: fix getting stuck in things
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
         PVector p = point.position;
         float tpSize;
-        if (point.combat) tpSize = speed/FRAMERATE;
+        if (point.combat) tpSize = 3;
         else tpSize = 15;
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
-        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) && (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
+        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) &&
+          (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
+    }
+
+    protected boolean intersectCombatPoint() {
+        TurnPoint point = points.get(points.size() - 1);
+        PVector p = point.position;
+        float tpSize;
+        if (point.combat) tpSize = 15;
+        else return false;
+        PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
+        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) &&
+          (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
     }
 
     public void requestPath(int i) {
