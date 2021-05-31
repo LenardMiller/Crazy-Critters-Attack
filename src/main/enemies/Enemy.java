@@ -79,10 +79,10 @@ public abstract class Enemy {
     protected SoundFile overkillSound;
     protected SoundFile dieSound;
 
-    private int attackCount;
-    private boolean attackCue;
-    private boolean targetMachine;
-    private Tower targetTower;
+    protected int attackCount;
+    protected boolean attackCue;
+    protected boolean targetMachine;
+    protected Tower targetTower;
 
     protected Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -451,6 +451,12 @@ public abstract class Enemy {
         }
     }
 
+    /**
+     * Angles towards target.
+     * Damages target turret or machine.
+     * Messes with state a bit.
+     * Prevents attacking multiple times at once.
+     */
     protected void attack() {
         boolean dmg = false;
         for (int frame : tempAttackDmgFrames) {

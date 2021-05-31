@@ -3,7 +3,6 @@ package main.enemies.flyingEnemies;
 import main.Main;
 import main.buffs.Buff;
 import main.gui.guiObjects.PopupText;
-import main.particles.Debris;
 import main.particles.Floaty;
 import main.particles.MiscParticle;
 import main.particles.Ouch;
@@ -11,6 +10,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.findAngleBetween;
 import static main.misc.Utilities.playSoundRandomSpeed;
 
 public class Frost extends FlyingEnemy {
@@ -31,7 +31,7 @@ public class Frost extends FlyingEnemy {
         hitParticle = "iceOuch";
         name = "frost";
         attackStartFrame = 0;
-        betweenAttackFrames = 25;
+        betweenAttackFrames = 8;
         dieSound = sounds.get("frostDie");
         overkillSound = sounds.get("frostDie");
         attackFrames = animatedSprites.get("wolf" + "AttackEN"); //these exist solely because of glue
@@ -71,6 +71,57 @@ public class Frost extends FlyingEnemy {
     }
 
     /**
+     * Angles towards target.
+     * Damages target turret or machine.
+     * Messes with state a bit.
+     * Prevents attacking multiple times at once.
+     */
+    @Override
+    protected void attack() {
+        boolean dmg = false;
+        for (int frame : tempAttackDmgFrames) {
+            if (attackFrame == frame) {
+                if (betweenAttackFrames > 1) attackCount++;
+                dmg = true;
+                break;
+            }
+        }
+        //all attackCount stuff prevents attacking multiple times
+        if (!dmg) attackCount = 0;
+        if (attackCount > 1) dmg = false;
+        if (targetTower != null && targetTower.alive) {
+            if (pfSize > 2) { //angle towards tower correctly
+                PVector t = new PVector(targetTower.tile.position.x - 25, targetTower.tile.position.y - 25);
+                targetAngle = findAngleBetween(t, position);
+            }
+            moveFrame = 0;
+            if (dmg) {
+                targetTower.damage(damage);
+                spawnAttackParticles();
+            }
+        } else if (!targetMachine) state = 0;
+        if (targetMachine) {
+            moveFrame = 0;
+            if (dmg) {
+                machine.damage(damage);
+                spawnAttackParticles();
+            }
+        }
+        if (!attackCue && attackFrame == attackStartFrame) {
+            state = 0;
+            attackFrame = attackStartFrame;
+        }
+    }
+
+    private void spawnAttackParticles() {
+        for (int i = 0; i < 20; i++) {
+            PVector partPosition = new PVector(position.x, position.y);
+            partPosition.add(PVector.fromAngle(p.random(TWO_PI)).setMag(p.random(radius)));
+            topParticles.add(new MiscParticle(p, partPosition.x, partPosition.y, p.random(360), "iceMagic"));
+        }
+    }
+
+    /**
      * handle animation states, animation disabled
      */
     @Override
@@ -107,15 +158,6 @@ public class Frost extends FlyingEnemy {
             points.get(i).display();
         }
         if (!paused) {
-            if (attackFrame == attackFrames.length - 2) { //todo: fix
-                for (int i = 0; i < 50; i++) {
-                    topParticles.add(new Debris(p, position.x, position.y, p.random(360), "ice"));
-                } for (int i = 0; i < 20; i++) {
-                    PVector partPosition = new PVector(position.x, position.y);
-                    partPosition.add(PVector.fromAngle(p.random(TWO_PI)).setMag(p.random(radius * 2)));
-                    topParticles.add(new MiscParticle(p, partPosition.x, partPosition.y, p.random(360), "iceMagic"));
-                }
-            }
             if (hitTimer < 10) {
                 for (int i = 0; i < 3; i++) {
                     PVector partPosition = new PVector(position.x, position.y);
