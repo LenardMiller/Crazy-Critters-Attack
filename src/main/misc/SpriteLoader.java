@@ -603,12 +603,12 @@ public class SpriteLoader {
         //tiles
         //base
         staticSprites.put("yellowGrassBa_TL",p.loadImage("sprites/tiles/base/yellowGrass.png"));
-        staticSprites.put("stoneBa_TL",p.loadImage("sprites/tiles/base/stone.png"));
+        staticSprites.put("stoneBa_TL",p.loadImage("sprites/tiles/base/stone/base.png"));
         staticSprites.put("dirtBa_TL",p.loadImage("sprites/tiles/base/dirt/base.png"));
         staticSprites.put("sandBa_TL", p.loadImage("sprites/tiles/base/sand.png"));
         staticSprites.put("snowBa_TL", p.loadImage("sprites/tiles/base/snow/base.png"));
         staticSprites.put("grassBa_TL",p.loadImage("sprites/tiles/base/grass/base.png"));
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             String name;
             switch (i) {
                 case 0:
@@ -619,6 +619,9 @@ public class SpriteLoader {
                     break;
                 case 2:
                     name = "dirt";
+                    break;
+                case 3:
+                    name = "stone";
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + i);

@@ -347,22 +347,22 @@ public class Tile {
         //update hierarchies as tiles are added
         switch (name) {
             case "snow":
-                baseHierarchy = 5;
+                baseHierarchy = 6;
                 break;
             case "grass":
-                baseHierarchy = 4;
+                baseHierarchy = 5;
                 break;
             case "yellowGrass":
-                baseHierarchy = 3;
+                baseHierarchy = 4;
                 break;
             case "dirt":
-                baseHierarchy = 2;
+                baseHierarchy = 3;
                 break;
             case "sand":
-                baseHierarchy = 1;
+                baseHierarchy = 2;
                 break;
             case "stone":
-                baseHierarchy = 0;
+                baseHierarchy = 1;
                 break;
         }
     }
