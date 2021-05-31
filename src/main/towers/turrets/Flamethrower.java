@@ -26,7 +26,7 @@ public class Flamethrower extends Turret {
     private boolean magic;
     private boolean wheel;
 
-    public Flamethrower(PApplet p, Tile tile) { //todo: doesn't aim right
+    public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
         name = "flamethrower";
         offset = 7;

@@ -134,6 +134,11 @@ public abstract class Turret extends Tower {
         targetEnemy = e;
     }
 
+    /**
+     * Sets the target angle to match the target.
+     * Leads shots if enemy moving.
+     * @param enemy enemy to aim at
+     */
     protected void aim(Enemy enemy) {
         PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
         PVector target = enemy.position;
@@ -142,7 +147,8 @@ public abstract class Turret extends Tower {
             float dist = PVector.sub(target, position).mag();
             float time = dist / pjSpeed;
             PVector enemyHeading = PVector.fromAngle(enemy.angle);
-            enemyHeading.setMag(enemy.speed * time);
+            if (enemy.state == 0) enemyHeading.setMag(enemy.speed * time); //only lead if enemy moving
+            else enemyHeading.setMag(0);
             target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
         }
 
