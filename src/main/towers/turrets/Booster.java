@@ -164,7 +164,7 @@ public class Booster extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    boost.range = 0.3f;
+                    boost.range = 0.4f;
                     break;
                 case 1:
                     range++;
@@ -175,10 +175,10 @@ public class Booster extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    boost.damage = 0.5f;
+                    boost.damage = 0.6f;
                     break;
                 case 4:
-                    boost.firerate = 0.4f;
+                    boost.firerate = 0.5f;
                     break;
                 case 5:
                     break;
