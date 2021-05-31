@@ -109,12 +109,12 @@ public class Booster extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 1000;
+        upgradePrices[0] = 1500;
         upgradePrices[1] = 2000;
         upgradePrices[2] = 25000;
 
-        upgradePrices[3] = 1200;
-        upgradePrices[4] = 2000;
+        upgradePrices[3] = 2250;
+        upgradePrices[4] = 3000;
         upgradePrices[5] = 20000;
         //titles
         upgradeTitles[0] = "Boost Range";
@@ -164,7 +164,7 @@ public class Booster extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    boost.range = 0.4f;
+                    boost.range = 0.2f;
                     break;
                 case 1:
                     range++;
@@ -175,10 +175,10 @@ public class Booster extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    boost.damage = 0.6f;
+                    boost.damage = 0.3f;
                     break;
                 case 4:
-                    boost.firerate = 0.5f;
+                    boost.firerate = 0.25f;
                     break;
                 case 5:
                     break;
