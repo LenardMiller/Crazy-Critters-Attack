@@ -26,7 +26,7 @@ public class Frost extends FlyingEnemy {
         speed = maxSpeed;
         moneyDrop = 500;
         damage = 4;
-        maxHp = 5000;
+        maxHp = 6500;
         hp = maxHp;
         hitParticle = "iceOuch";
         name = "frost";
