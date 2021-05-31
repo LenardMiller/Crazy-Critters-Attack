@@ -28,7 +28,10 @@ public class TileSelect extends Button {
         } else if (type.contains("Na")) {
             sl = "erase";
             TILE_SPRITE = p.loadImage("sprites/gui/buttons/tileSelect/erase/icon.png");
-        } else TILE_SPRITE = staticSprites.get(type + "_TL");
+        } else if (type.contains("invisible")){
+            TILE_SPRITE = p.loadImage("sprites/gui/buttons/tileSelect/erase/icon.png");
+        }
+        else TILE_SPRITE = staticSprites.get(type + "_TL");
         if (TILE_SPRITE == null) System.out.println(type);
         spriteLocation = "sprites/gui/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
         spriteIdle = p.loadImage(spriteLocation + "000.png");
