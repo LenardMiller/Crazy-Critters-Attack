@@ -159,5 +159,6 @@ public class DataControl extends ClassLoader {
         tile.setDecoration(decoration);
         tile.setBreakable(breakable);
         tile.setObstacle(obstacle);
+        connectWallQueues++;
     }
 }
