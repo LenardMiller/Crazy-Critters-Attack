@@ -147,6 +147,7 @@ public class PathfindingUtilities {
         }
         updateClearance();
         updateNode(start, null);
+        updatePath();
         for (Enemy enemy : enemies) {
             enemy.setCombatPoints();
         }
