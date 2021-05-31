@@ -11,16 +11,13 @@ public class Mammoth extends Enemy {
         pfSize = 4;
         radius = 50;
         maxSpeed = 20;
-        speed = maxSpeed;
         damage = 50;
         maxHp = 100000;
-        hp = maxHp;
         moneyDrop = 2000;
         hitParticle = "redOuch";
         name = "mammoth";
         attackStartFrame = 0;
-        attackDmgFrames = new int[]{8};
-        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
+        attackDmgFrames = new int[]{9};
         betweenWalkFrames = 5;
         betweenAttackFrames = 8;
         loadStuff();

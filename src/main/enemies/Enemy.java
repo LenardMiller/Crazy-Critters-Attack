@@ -426,6 +426,9 @@ public abstract class Enemy {
     }
 
     protected void loadStuff() {
+        hp = maxHp;
+        speed = maxSpeed;
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         attackFrames = animatedSprites.get(name + "AttackEN");
         moveFrames = animatedSprites.get(name + "MoveEN");
         maxTintColor = getTintColor();
