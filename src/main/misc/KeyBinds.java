@@ -161,7 +161,7 @@ public class KeyBinds {
         if (en6) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en7) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en8) enemies.add(new Frost(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en9) enemies.add(new Wtf(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en9) enemies.add(new Mammoth(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1b) enemies.add(new Dummy(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }

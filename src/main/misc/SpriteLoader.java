@@ -263,6 +263,8 @@ public class SpriteLoader {
         getSprite(p,"iceMonstrosityDie","EN","iceMonstrosity/die/",4);
         getSprite(p,"iceMonstrosityParts","EN","iceMonstrosity/parts/",13);
 
+        getSprite(p,"mammothMove","EN","mammoth/move/",36);
+
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
