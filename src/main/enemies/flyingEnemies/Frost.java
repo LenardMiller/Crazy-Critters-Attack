@@ -22,11 +22,11 @@ public class Frost extends FlyingEnemy {
         pfSize = 2;
         size = new PVector(50, 50);
         radius = 25;
-        maxSpeed = 20;
+        maxSpeed = 30;
         speed = maxSpeed;
         moneyDrop = 250;
         damage = 4;
-        maxHp = 2500;
+        maxHp = 5000;
         hp = maxHp;
         hitParticle = "iceOuch";
         name = "frost";

@@ -93,7 +93,7 @@ public class GlacierWaves {
         waves[20].addSpawns(frost, 3);
 
         waves[21] = wavePreset(p, 55, 20, iceEntity);
-        waves[21].addSpawns(iceEntity, 10);
+        waves[21].addSpawns(iceEntity, 20);
 
         waves[22] = wavePreset(p, 65, 30, velociraptor);
         waves[22].addSpawns(velociraptor, 5);
@@ -103,7 +103,7 @@ public class GlacierWaves {
 
         waves[23] = wavePreset(p, 65, 30, frost);
         waves[23].addSpawns(frost, 5);
-        waves[23].addSpawns(iceEntity, 5);
+        waves[23].addSpawns(iceEntity, 10);
 
         waves[24] = wavePreset(p, 50, 20, velociraptor);
         waves[24].addSpawns(velociraptor, 5);
@@ -117,6 +117,7 @@ public class GlacierWaves {
 
         waves[27] = wavePreset(p, 50, 20, iceEntity);
         waves[27].addSpawns(iceEntity, 20);
+        waves[27].addSpawns(snowAntlion, 20);
 
         waves[28] = wavePreset(p, 65, 30, frost);
         waves[28].addSpawns(frost, 5);
