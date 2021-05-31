@@ -8,7 +8,7 @@ import java.awt.*;
 public class GlacierWaves {
 
     public static Wave[] genGlacierWaves(PApplet p) {
-        Wave[] waves = new Wave[30]; //60
+        Wave[] waves = new Wave[32]; //60
 
         String snowAntlion = "Antlions";
         String wolf = "Wolves";
@@ -20,7 +20,7 @@ public class GlacierWaves {
 
         waves[0] = wavePreset(p, 65, 30, wolf);
         waves[0].addSpawns(wolf, 5);
-        waves[0].polluter = new Polluter(p, 5, "levels/glacier/partial");
+        waves[0].polluter = new Polluter(p, 5, "glacier/partial");
 
         waves[1] = wavePreset(p, 55, 25, wolf);
         waves[1].addSpawns(wolf, 5);
@@ -111,9 +111,9 @@ public class GlacierWaves {
         waves[25] = wavePreset(p, 65, 30, velociraptor);
         waves[25].addSpawns(velociraptor, 10);
 
-        waves[26] = wavePreset(p, 50, 5, "Ice Monstrosity");
+        waves[26] = wavePreset(p, 50, 5, iceMonstrosity);
         waves[26].addSpawns(iceEntity, 5);
-        waves[26].addSpawns(iceMonstrosity, 1);
+        waves[26].addSpawns(iceMonstrosity, 3);
 
         waves[27] = wavePreset(p, 50, 20, iceEntity);
         waves[27].addSpawns(iceEntity, 20);
@@ -124,7 +124,21 @@ public class GlacierWaves {
         waves[28].addSpawns(iceEntity, 5);
 
         waves[29] = wavePreset(p, 50, 20, iceMonstrosity);
-        waves[29].addSpawns(iceMonstrosity, 3);
+        waves[29].addSpawns(iceMonstrosity, 5);
+
+        waves[30] = new Wave(p, 20, 20,
+          new Color(0, 155, 255),
+          new Color(143, 86, 59),
+          new Color(89, 86, 82),
+          "???");
+        waves[30].polluter = new Polluter(p, 0, "glacier/melted");
+
+        waves[31] = wavePreset(p, 150, 120, "Horde");
+        waves[31].addSpawns(velociraptor, 10);
+        waves[31].addSpawns(iceMonstrosity, 5);
+        waves[31].addSpawns(iceEntity, 20);
+        waves[31].addSpawns(frost, 10);
+        waves[31].polluter = new Polluter(p, 5, "glacier/final");
 
         for (Wave wave : waves) wave.load();
         return waves;

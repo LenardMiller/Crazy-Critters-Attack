@@ -24,7 +24,7 @@ public class CaveWaves {
 
         waves[0] = wavePreset(p, 65, 30, albinoBug);
         waves[0].addSpawns(albinoBug, 5);
-        waves[0].polluter = new Polluter(p, 5, "levels/cave/polluted");
+        waves[0].polluter = new Polluter(p, 5, "cave/polluted");
 
         waves[1] = wavePreset(p, 55, 20, albinoBug);
         waves[1].addSpawns(albinoBug, 5);

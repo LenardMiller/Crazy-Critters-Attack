@@ -17,7 +17,7 @@ public class IceMonstrosity extends IceEntity {
         radius = 25;
         maxSpeed = 30;
         speed = maxSpeed;
-        moneyDrop = 1000;
+        moneyDrop = 500;
         damage = 10;
         shootDamage = 1;
         maxHp = 10000;

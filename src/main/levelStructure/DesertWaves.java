@@ -54,7 +54,7 @@ public class DesertWaves {
 
         waves[0] = new Wave(p, 55, 20, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
         waves[0].addSpawns("smolBug",6);
-        waves[0].polluter = new Polluter(p, 5, "levels/desert/polluted");
+        waves[0].polluter = new Polluter(p, 5, "desert/polluted");
 
         waves[1] = new Wave(p, 55, 25, midBugFill, midBugAccent, midBugText, "Bugs");
         waves[1].addSpawns("midBug", 3);

@@ -24,7 +24,7 @@ public class Frost extends FlyingEnemy {
         radius = 25;
         maxSpeed = 30;
         speed = maxSpeed;
-        moneyDrop = 250;
+        moneyDrop = 500;
         damage = 4;
         maxHp = 5000;
         hp = maxHp;
