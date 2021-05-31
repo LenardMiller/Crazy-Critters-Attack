@@ -364,6 +364,9 @@ public class Tile {
             case "stone":
                 baseHierarchy = 1;
                 break;
+            case "water":
+                baseHierarchy = 0;
+                break;
         }
     }
 

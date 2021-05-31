@@ -608,6 +608,7 @@ public class SpriteLoader {
         staticSprites.put("sandBa_TL", p.loadImage("sprites/tiles/base/sand.png"));
         staticSprites.put("snowBa_TL", p.loadImage("sprites/tiles/base/snow/base.png"));
         staticSprites.put("grassBa_TL",p.loadImage("sprites/tiles/base/grass/base.png"));
+        staticSprites.put("waterBa_TL",p.loadImage("sprites/tiles/base/water.png"));
         for (int i = 0; i < 4; i++) {
             String name;
             switch (i) {
