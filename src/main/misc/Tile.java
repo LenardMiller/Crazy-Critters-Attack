@@ -379,6 +379,7 @@ public class Tile {
         Tower tower = tiles.get((roundTo(position.x, 50)/50) + 1, (roundTo(position.y, 50)/50) + 1).tower;
         if (name.equals(flooringName)) return false;
         if (tower instanceof IceWall) return true;
+        if (obstacleName != null) return false;
         if (tower instanceof Wall) return false;
         else {
             setFlooring(name);
@@ -440,6 +441,14 @@ public class Tile {
             obstacle = null;
             obstacleName = null;
         } else {
+            int x = (int) getGridPosition().x;
+            int y = (int) getGridPosition().y;
+            if (x < 39 && y < 39 && tiles.get(x + 1, y + 1).tower != null){
+                tiles.get(x + 1, y + 1).tower.die(false);
+            }
+            setDecoration(null);
+            setFlooring(null);
+            setBreakable(null);
             if (obstacleName == null) updateNodes();
             obstacle = staticSprites.get(name);
             obstacleName = name;

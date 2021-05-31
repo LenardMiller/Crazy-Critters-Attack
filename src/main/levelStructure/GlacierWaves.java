@@ -126,10 +126,10 @@ public class GlacierWaves {
         waves[29] = wavePreset(p, 50, 20, iceMonstrosity);
         waves[29].addSpawns(iceMonstrosity, 5);
 
-        waves[30] = new Wave(p, 20, 20,
+        waves[30] = new Wave(p, 20, 15,
           new Color(0, 155, 255),
-          new Color(143, 86, 59),
-          new Color(89, 86, 82),
+          new Color(124, 204, 255),
+          new Color(0, 52, 184),
           "???");
         waves[30].polluter = new Polluter(p, 0, "glacier/melted");
 
