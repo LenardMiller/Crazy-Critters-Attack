@@ -107,7 +107,7 @@ public class Frost extends FlyingEnemy {
             points.get(i).display();
         }
         if (!paused) {
-            if (attackFrame == attackFrames.length - 2) {
+            if (attackFrame == attackFrames.length - 2) { //todo: fix
                 for (int i = 0; i < 50; i++) {
                     topParticles.add(new Debris(p, position.x, position.y, p.random(360), "ice"));
                 } for (int i = 0; i < 20; i++) {

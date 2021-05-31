@@ -486,6 +486,8 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
+    //todo: fix spinning
+    //todo: fix getting stuck in things
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
