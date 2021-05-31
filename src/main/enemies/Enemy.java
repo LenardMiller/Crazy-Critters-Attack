@@ -633,7 +633,6 @@ public abstract class Enemy {
         TurnPoint bp = null;
         for (int i = points.size() - 1; i >= 0; i--) {
             if (points.get(i).towers != null && points.get(i).towers.size() > 0 || points.get(i).machine) {
-//                if (points.get(i).machine) System.out.println("test");
                 points.get(i).combat = true;
                 if (i < points.size() - 1) bp = points.get(i + 1);
                 else bp = points.get(i);
