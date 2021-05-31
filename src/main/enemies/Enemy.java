@@ -486,7 +486,7 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
-    //todo: fix spinning
+    //todo: fix spinning (change speed when near combat point?)
     //todo: fix getting stuck in things
 
     protected boolean intersectTurnPoint() {
