@@ -1,0 +1,2147 @@
+[
+  {
+    "machine": false,
+    "id": 0,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 1,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 2,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 3,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 4,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 5,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 6,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 7,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 8,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 9,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 10,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 11,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 12,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 13,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 14,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 15,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 16,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 17,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 18,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 19,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 20,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 21,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 22,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 23,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 24,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 25,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 26,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 27,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 28,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 29,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 30,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 31,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 32,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 33,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 34,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 35,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 36,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 37,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 38,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 39,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 40,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 41,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 42,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 43,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 44,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 45,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 46,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 47,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 48,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 49,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 50,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 51,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 52,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 53,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 54,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 55,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 56,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 57,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 58,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 59,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 60,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 61,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 62,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 63,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 64,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 65,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 66,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 67,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 68,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 69,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 70,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 71,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 72,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 73,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 74,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 75,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 76,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 77,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 78,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 79,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 80,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 81,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 82,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 83,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 84,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 85,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 86,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 87,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 88,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 89,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 90,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 91,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 92,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 93,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 94,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 95,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 96,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 97,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 98,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 99,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 100,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 101,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 102,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 103,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 104,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 105,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 106,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 107,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 108,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 109,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 110,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 111,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 112,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 113,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 114,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 115,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 116,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 117,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 118,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 119,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 120,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 121,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 122,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 123,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 124,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 125,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 126,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 127,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 128,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 129,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 130,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 131,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 132,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 133,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 134,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 135,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 136,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 137,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 138,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 139,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 140,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 141,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 142,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": true,
+    "id": 143,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 144,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 145,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 146,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 147,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 148,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 149,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 150,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 151,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 152,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 153,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 154,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 155,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 156,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 157,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 158,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": true,
+    "id": 159,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": true,
+    "id": 160,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": true,
+    "id": 161,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": true,
+    "id": 162,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 163,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 164,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 165,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 166,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 167,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 168,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 169,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 170,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 171,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 172,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 173,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 174,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 175,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 176,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 177,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": true,
+    "id": 178,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": true,
+    "id": 179,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": true,
+    "id": 180,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 181,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 182,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 183,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 184,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 185,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 186,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 187,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 188,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 189,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 190,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 191,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 192,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 193,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 194,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 195,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 196,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 197,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 198,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 199,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 200,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 201,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 202,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 203,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 204,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 205,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 206,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 207,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 208,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 209,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 210,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 211,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 212,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 213,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 214,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 215,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 216,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 217,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 218,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 219,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 220,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 221,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 222,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 223,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 224,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 225,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 226,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 227,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 228,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 229,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 230,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 231,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 232,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 233,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 234,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 235,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 236,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 237,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 238,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 239,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 240,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 241,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 242,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 243,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 244,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 245,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 246,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 247,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 248,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 249,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 250,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 251,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 252,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 253,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 254,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 255,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 256,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 257,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 258,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 259,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 260,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 261,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 262,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 263,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 264,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 265,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 266,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 267,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 268,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 269,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 270,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 271,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 272,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 273,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 274,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 275,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 276,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 277,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 278,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 279,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 280,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 281,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 282,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 283,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 284,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 285,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 286,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 287,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 288,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 289,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 290,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 291,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 292,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 293,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 294,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 295,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 296,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 297,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 298,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 299,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 300,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 301,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 302,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 303,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 304,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 305,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 306,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 307,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 308,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 309,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 310,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 311,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 312,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 313,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 314,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 315,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 316,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 317,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 318,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 319,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 320,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 321,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 322,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 323,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 324,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 325,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 326,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 327,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 328,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 329,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 330,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 331,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 332,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 333,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 334,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 335,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 336,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 337,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 338,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 339,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 340,
+    "type": "tile",
+    "base": "snow"
+  },
+  {
+    "machine": false,
+    "id": 341,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 342,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 343,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 344,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 345,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 346,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 347,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 348,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 349,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 350,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 351,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 352,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 353,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 354,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 355,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 356,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 357,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 358,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 359,
+    "type": "tile"
+  },
+  {
+    "machine": false,
+    "id": 360,
+    "type": "tile"
+  },
+  {
+    "betweenFrames": 0,
+    "barHorizontal": true,
+    "maxHp": 500,
+    "hp": 500,
+    "barY": 497,
+    "barX": 350,
+    "type": "machine",
+    "x": 450,
+    "name": "crystalDrillMA",
+    "y": 425,
+    "debris": "metal",
+    "id": 361,
+    "barSizeY": 6,
+    "barSizeX": 150
+  }
+]

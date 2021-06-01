@@ -3,6 +3,8 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.sounds;
+
 public class Mammoth extends Enemy {
 
     public Mammoth(PApplet p, float x, float y) {
@@ -23,6 +25,8 @@ public class Mammoth extends Enemy {
         corpseSize = size;
         corpseLifespan = 12;
         partSize = new PVector(56, 56);
+        dieSound = sounds.get("mammoth");
+        overkillSound = sounds.get("mammothSquash");
         loadStuff();
     }
 }
