@@ -20,6 +20,8 @@ public class Mammoth extends Enemy {
         attackDmgFrames = new int[]{9};
         betweenWalkFrames = 5;
         betweenAttackFrames = 8;
+        corpseSize = size;
+        corpseLifespan = 12;
         loadStuff();
     }
 }
