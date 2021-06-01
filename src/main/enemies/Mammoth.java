@@ -22,6 +22,7 @@ public class Mammoth extends Enemy {
         betweenAttackFrames = 8;
         corpseSize = size;
         corpseLifespan = 12;
+        partSize = new PVector(56, 56);
         loadStuff();
     }
 }
