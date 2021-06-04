@@ -17,6 +17,7 @@ public class GlacierWaves {
         String iceEntity = "Ice Entities";
         String iceMonstrosity = "Ice Monstrosities";
         String frost = "Frost";
+        String mammoth = "Mammoths";
 
         waves[0] = wavePreset(p, 65, 30, wolf);
         waves[0].addSpawns(wolf, 5);
@@ -203,6 +204,14 @@ public class GlacierWaves {
                   new Color(227, 247, 255),
                   new Color(185, 235, 255),
                   new Color(40, 139, 250),
+                  title
+                );
+            case "Mammoth":
+            case "Mammoths":
+                return new Wave(p, length, spawnLength,
+                  new Color(64, 39, 15),
+                  new Color(50, 31, 12),
+                  new Color(185, 181, 158),
                   title
                 );
             default:

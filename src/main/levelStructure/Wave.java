@@ -252,6 +252,10 @@ public class Wave {
             case "Frost":
                 e = new Frost(P, pos.x, pos.y);
                 break;
+            case "Mammoth":
+            case "Mammoths":
+                e = new Mammoth(P, pos.x, pos.y);
+                break;
         }
         return e;
     }
