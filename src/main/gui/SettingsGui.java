@@ -24,10 +24,13 @@ public class SettingsGui {
     private MenuCheckbox fullscreenCheck;
     private MenuButton resetSettings;
 
+    private boolean fullscreenWas;
+
     public static int delay;
 
     public SettingsGui(PApplet p) {
         P = p;
+        fullscreenWas = fullscreen;
         build();
     }
 
@@ -65,9 +68,12 @@ public class SettingsGui {
           new Color(50, 50, 50, 254), 48, CENTER);
 
         //buttons
-        P.fill(200, 254);
-        P.textFont(mediumFont);
+        P.fill(200, 0, 0, 254);
+        P.textFont(largeFont);
         int offsetY = 7;
+        if (fullscreenWas != fullscreen) P.text("Restart required", P.width / 2f, P.height - 250 + offsetY);
+        P.textFont(mediumFont);
+        P.fill(200, 254);
         returnButton.main();
         P.text("Return [ESC]", returnButton.position.x, returnButton.position.y + offsetY);
         resetSettings.main();
