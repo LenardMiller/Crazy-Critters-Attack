@@ -61,6 +61,7 @@ public class Hand {
             selection.towerJustPlaced = true; //prevents selection click sounds from playing
             playSound(sounds.get("clickOut"), 1, 1);
         }
+        if (held.equals("null")) return;
         if (!implacable) place();
         else {
             String errorText = "Can't place there!";
