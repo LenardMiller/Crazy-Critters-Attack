@@ -208,7 +208,7 @@ public abstract class Enemy {
         } else {
             for (int i = 0; i < num * 10; i++) {
                 PVector partPos = getParticlePosition();
-                topParticles.add(new Floaty(p, partPos.x, partPos.y, p.random(100, 250), "smokeCloud"));
+                topParticles.add(new Floaty(p, partPos.x, partPos.y, p.random(50 * pfSize, 100 * pfSize), "smokeCloud"));
             }
         }
         for (int j = num; j >= 0; j--) { //sprays puff
