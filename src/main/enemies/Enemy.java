@@ -511,6 +511,7 @@ public abstract class Enemy {
     }
 
     protected boolean intersectCombatPoint() {
+        if (points.size() == 0f) return false;
         TurnPoint point = points.get(points.size() - 1);
         PVector p = point.position;
         float tpSize;
