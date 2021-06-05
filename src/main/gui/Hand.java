@@ -1,6 +1,7 @@
 package main.gui;
 
 import main.enemies.Enemy;
+import main.gui.guiObjects.PopupText;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.misc.Tile;
 import main.towers.IceWall;
@@ -61,6 +62,14 @@ public class Hand {
             playSound(sounds.get("clickOut"), 1, 1);
         }
         if (!implacable) place();
+        else {
+            String errorText = "Can't place there!";
+            if (price > money) errorText = "Can't afford!";
+            if (enemyNearby()) errorText = "Enemy too close!";
+            popupTexts.add(new PopupText(P, 16, new Color(255, 0, 0, 254),
+              new Color(50, 0, 0, 200), new PVector(matrixMousePosition.x, matrixMousePosition.y),
+              errorText));
+        }
     }
 
     private void clearHand() {
