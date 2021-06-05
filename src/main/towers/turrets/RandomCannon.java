@@ -145,6 +145,7 @@ public class RandomCannon extends Turret {
                     break;
                 case 5:
                     laundry = true;
+                    range += 20;
                     damage += 10;
                     effectDuration = 6;
                     effectLevel = 25;
