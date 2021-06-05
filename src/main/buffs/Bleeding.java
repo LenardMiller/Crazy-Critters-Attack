@@ -34,9 +34,11 @@ public class Bleeding extends Buff {
         Enemy enemy = enemies.get(enId);
         int num = (int)(p.random(0, particleChance));
         if (num == 0) {
-            topParticles.add(new Ouch(p,(float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), p.random(0,360), enemy.hitParticle));
+            if (gore) topParticles.add(new Ouch(p,(float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))),
+              (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), p.random(0,360), enemy.hitParticle));
         } if (p.random(0, particleChance * 4) < 1) {
-            bottomParticles.add(new Pile(p, (float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), 0, enemy.hitParticle));
+            if (gore) bottomParticles.add(new Pile(p, (float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))),
+              (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), 0, enemy.hitParticle));
         }
     }
 }
