@@ -178,7 +178,7 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    private void goreyDeathEffect(String type) {
+    protected void goreyDeathEffect(String type) {
         if (overkill) {
             for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
                 float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
@@ -198,7 +198,7 @@ public abstract class Enemy {
               "none", 0, true));
     }
 
-    private void cleanDeathEffect() {
+    protected void cleanDeathEffect() {
         int num = (int) p.random(pfSize, pfSize * pfSize);
         if (!overkill) {
             for (int i = 0; i < num * 5; i++) {

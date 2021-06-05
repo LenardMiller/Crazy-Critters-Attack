@@ -4,7 +4,6 @@ import main.Main;
 import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
-import main.misc.Corpse;
 import main.particles.Debris;
 import main.particles.Pile;
 import processing.core.PApplet;
@@ -80,23 +79,8 @@ public abstract class BurrowingEnemy extends Enemy {
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
         if (state != 0) {
-            if (overkill) {
-                for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
-                    float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
-                    corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
-                      currentTintColor ,p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)),
-                      0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
-                }
-                for (int k = 0; k < sq(pfSize); k++) {
-                    bottomParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
-                      (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
-                      0, hitParticle));
-                }
-            } else
-                corpses.add(new Corpse(p, position, corpseSize,
-                  angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
-                  currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
-                  "none", 0, true));
+            if (gore) goreyDeathEffect(type);
+            else cleanDeathEffect();
         }
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
