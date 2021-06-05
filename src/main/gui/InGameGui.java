@@ -90,7 +90,8 @@ public class InGameGui {
         int particleCount = topParticles.size() + midParticles.size() + bottomParticles.size();
         highlightedText(p, "particles: " + particleCount, new PVector(padding, 120), LEFT);
         highlightedText(p, "popups: " + popupTexts.size(), new PVector(padding, 150), LEFT);
-        highlightedText(p, "MX: " + (int) matrixMousePosition.x + ", MY: " + (int) matrixMousePosition.y, new PVector(padding, BOARD_HEIGHT - padding - 30), LEFT);
+        highlightedText(p, "MX: " + (int) matrixMousePosition.x + ", MY: " + (int) matrixMousePosition.y,
+          new PVector(padding, BOARD_HEIGHT - padding - 30), LEFT);
         if (fullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
           new PVector(padding, BOARD_HEIGHT - padding), LEFT);
         highlightedText(p, round(p.frameRate) + " fps", new PVector(BOARD_WIDTH - padding, 30), RIGHT);
@@ -105,7 +106,7 @@ public class InGameGui {
         p.textAlign(CENTER);
         p.text("Menu", 1000, 18);
         p.fill(0, 254);
-        p.text("Walls", 1000, 170);
+        p.text("Place Walls", 1000, 170);
         p.textFont(largeFont);
         p.fill(MAIN_TEXT_COLOR.getRGB(), 254);
         p.textAlign(RIGHT);
