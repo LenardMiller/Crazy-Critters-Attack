@@ -103,7 +103,7 @@ public class Main extends PApplet {
     public static boolean levelBuilder = false;
     public static boolean paused = false;
     public static boolean settings = false;
-    public static boolean dev = false;
+    public static boolean dev = true;
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;

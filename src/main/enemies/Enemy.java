@@ -9,6 +9,7 @@ import main.buffs.stunned.Stunned;
 import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;
+import main.particles.Floaty;
 import main.particles.Ouch;
 import main.particles.Pile;
 import main.pathfinding.Node;
@@ -159,23 +160,9 @@ public abstract class Enemy {
         }
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
-        if (overkill) {
-            for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
-                float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
-                corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
-                        currentTintColor ,p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)),
-                        0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
-            }
-            for (int k = 0; k < sq(pfSize); k++) {
-                bottomParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
-                        (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
-                        0, hitParticle));
-            }
-        } else
-            corpses.add(new Corpse(p, position, corpseSize,
-                    angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
-                    currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
-                    "none", 0, true));
+
+        if (gore) goreyDeathEffect(type);
+        else cleanDeathEffect();
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
@@ -188,6 +175,51 @@ public abstract class Enemy {
         }
 
         enemies.remove(i);
+    }
+
+    private void goreyDeathEffect(String type) {
+        if (overkill) {
+            for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
+                float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
+                corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
+                  currentTintColor ,p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)),
+                  0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
+            }
+            for (int k = 0; k < sq(pfSize); k++) {
+                bottomParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
+                  (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
+                  0, hitParticle));
+            }
+        } else
+            corpses.add(new Corpse(p, position, corpseSize,
+              angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
+              currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
+              "none", 0, true));
+    }
+
+    private void cleanDeathEffect() {
+        int num = (int) p.random(pfSize, pfSize * pfSize);
+        if (!overkill) {
+            for (int i = 0; i < num * 5; i++) {
+                PVector partPos = getParticlePosition();
+                topParticles.add(new Floaty(p, partPos.x, partPos.y, p.random(20, 30), "smokeCloud"));
+            }
+        } else {
+            for (int i = 0; i < num * 10; i++) {
+                PVector partPos = getParticlePosition();
+                topParticles.add(new Floaty(p, partPos.x, partPos.y, p.random(100, 250), "smokeCloud"));
+            }
+        }
+        for (int j = num; j >= 0; j--) { //sprays puff
+            PVector partPos = getParticlePosition();
+            topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), "greyPuff"));
+        }
+    }
+
+    private PVector getParticlePosition() {
+        float x = position.x + p.random((size.x / 2) * -1, size.x / 2);
+        float y = position.y + p.random((size.y / 2) * -1, size.y / 2);
+        return new PVector(x, y);
     }
 
     protected PVector adjustPartVelocityToFramerate(PVector partVelocity) {
