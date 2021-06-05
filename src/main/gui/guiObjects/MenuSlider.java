@@ -14,7 +14,7 @@ import static main.misc.Utilities.playSound;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.LEFT;
 
-public class Slider {
+public class MenuSlider {
 
     private static final int MAX_PROGRESS = 200;
     private static final int BOX_SIZE = 20;
@@ -41,7 +41,7 @@ public class Slider {
      * @param min minimum output
      * @param max maximum output
      */
-    public Slider(PApplet p, String name, PVector position, float min, float mid, float max) {
+    public MenuSlider(PApplet p, String name, PVector position, float min, float mid, float max) {
         P = p;
         NAME = name;
         POSITION = position;

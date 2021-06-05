@@ -1,7 +1,7 @@
 package main.gui;
 
 import main.gui.guiObjects.MenuCheckbox;
-import main.gui.guiObjects.Slider;
+import main.gui.guiObjects.MenuSlider;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -18,13 +18,13 @@ public class SettingsGui {
     private static final int buffer = 150;
 
     private final PApplet P;
+    private final boolean fullscreenWas;
 
     private MenuButton returnButton;
-    private Slider volumeSlider;
+    private MenuSlider volumeSlider;
     private MenuCheckbox fullscreenCheck;
+    private MenuCheckbox goreCheck;
     private MenuButton resetSettings;
-
-    private boolean fullscreenWas;
 
     public static int delay;
 
@@ -35,9 +35,10 @@ public class SettingsGui {
     }
 
     private void build() {
-        volumeSlider = new Slider(P, "Global Volume", new PVector(P.width / 2f, buffer + 100),
+        volumeSlider = new MenuSlider(P, "Global Volume", new PVector(P.width / 2f, buffer + 100),
           0.01f, 0.25f, 1);
         fullscreenCheck = new MenuCheckbox(P, "Fullscreen*", new PVector((P.width / 2f - 100), buffer + 150));
+        goreCheck = new MenuCheckbox(P, "Gore", new PVector((P.width / 2f - 100), buffer + 200));
         resetSettings = new MenuButton(P, P.width/2f, P.height - buffer - 50);
         returnButton = new MenuButton(P, P.width/2f, P.height - buffer);
     }
@@ -53,12 +54,14 @@ public class SettingsGui {
     private void checkInputs() {
         globalVolume = volumeSlider.main(globalVolume);
         fullscreen = fullscreenCheck.main(fullscreen);
+        gore = goreCheck.main(gore);
         if (returnButton.isPressed()) {
             if (settings) closeSettingsMenu();
             else settings = true;
         } if (resetSettings.isPressed()) {
             globalVolume = 0.25f;
             fullscreen = true;
+            gore = true;
         }
     }
 

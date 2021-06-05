@@ -93,6 +93,7 @@ public class Main extends PApplet {
     public static float matrixScale;
     public static float matrixOffset;
     public static boolean fullscreen;
+    public static boolean gore;
     public static boolean hasVerticalBars;
     public static boolean alive = true;
     public static boolean won = false;

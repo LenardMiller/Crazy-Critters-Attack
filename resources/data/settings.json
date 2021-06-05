@@ -1,4 +1,5 @@
 {
   "volume": 0.25,
-  "fullscreen": true
+  "fullscreen": true,
+  "gore": true
 }

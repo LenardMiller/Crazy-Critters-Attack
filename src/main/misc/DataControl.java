@@ -77,6 +77,7 @@ public class DataControl extends ClassLoader {
         JSONObject saveObject = new JSONObject();
         saveObject.setFloat("volume", globalVolume);
         saveObject.setBoolean("fullscreen", fullscreen);
+        saveObject.setBoolean("gore", gore);
 
         String name = "settings";
         new File(filePath() + "/data/saves/" + name + ".json");
@@ -91,6 +92,7 @@ public class DataControl extends ClassLoader {
 
         globalVolume = loadObject.getFloat("volume");
         fullscreen = loadObject.getBoolean("fullscreen");
+        gore = loadObject.getBoolean("gore");
     }
 
     /**
