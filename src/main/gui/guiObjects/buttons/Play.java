@@ -40,6 +40,8 @@ public class Play extends Button {
         p.textAlign(CENTER);
         p.textFont(largeFont);
         p.text("Play",1000,y+30);
+        p.textFont(mediumFont);
+        p.text("[SPACE]", 1000, y + size.y - 8);
     }
 
     @Override
