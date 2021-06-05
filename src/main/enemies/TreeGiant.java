@@ -24,7 +24,7 @@ public class TreeGiant extends Enemy {
         attackStartFrame = 0;
         attackDmgFrames = new int[]{28};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(2);
+        betweenAttackFrames = down60ToFramerate(4);
         betweenWalkFrames = down60ToFramerate(3);
         attackFrame = attackStartFrame;
         corpseSize = new PVector(152,152);
