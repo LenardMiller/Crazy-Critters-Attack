@@ -65,7 +65,7 @@ public class Hand {
         else {
             String errorText = "Can't place there!";
             if (price > money) errorText = "Can't afford!";
-            else if (enemyNearby()) errorText = "Enemy too close!";
+            else if (enemyNearby()) errorText = "Critter too close!";
             popupTexts.add(new PopupText(P, 16, new Color(255, 0, 0, 254),
               new Color(50, 0, 0, 200), new PVector(matrixMousePosition.x, matrixMousePosition.y),
               errorText));
