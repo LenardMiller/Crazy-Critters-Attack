@@ -110,7 +110,7 @@ public class MenuSlider {
     }
 
     private void displayText() {
-        highlightedText(P, NAME, new PVector(POSITION.x, POSITION.y - 25), new Color(200, 200, 200, 254),
+        highlightedText(P, NAME, new PVector(POSITION.x, POSITION.y - 25), new Color(255, 255, 255, 254),
           new Color(100, 100, 100, 200), 24, CENTER);
     }
 

@@ -68,12 +68,12 @@ public class MenuCheckbox {
 
     public void displayText() {
         highlightedText(P, NAME, new PVector(POSITION.x + BOX_SIZE, POSITION.y + 8),
-          new Color(200, 200, 200, 254), new Color(100, 100, 100, 200), 24, LEFT);
+          new Color(255, 255, 255, 254), new Color(100, 100, 100, 200), 24, LEFT);
     }
 
     private void displayBox(boolean checked) {
         P.strokeWeight(4);
-        if (checked) P.fill(175);
+        if (checked) P.fill(255);
         else P.fill(50, 125);
         P.stroke(borderColor.getRGB());
         P.rectMode(CENTER);

@@ -9,8 +9,7 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.misc.Utilities.closeSettingsMenu;
-import static main.misc.Utilities.shadowedText;
+import static main.misc.Utilities.*;
 import static processing.core.PConstants.CENTER;
 
 public class SettingsGui {
@@ -71,10 +70,10 @@ public class SettingsGui {
           new Color(50, 50, 50, 254), 48, CENTER);
 
         //buttons
-        P.fill(200, 0, 0, 254);
-        P.textFont(largeFont);
         int offsetY = 7;
-        if (fullscreenWas != fullscreen) P.text("Restart required", P.width / 2f, P.height - 250 + offsetY);
+        if (fullscreenWas != fullscreen) highlightedText(P, "Restart required",
+          new PVector(P.width / 2f, P.height - 250 + offsetY), new Color(255, 0, 0, 254),
+          new Color(50, 0, 0, 200), largeFont.getSize(), CENTER);
         P.textFont(mediumFont);
         P.fill(200, 254);
         returnButton.main();
