@@ -10,6 +10,7 @@ import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;
 import main.particles.Floaty;
+import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.particles.Pile;
 import main.pathfinding.Node;
@@ -435,7 +436,9 @@ public abstract class Enemy {
             }
             if (p.random(0, 6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
-                    topParticles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+                    PVector partPos = getParticlePosition();
+                    if (gore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle));
+                    else topParticles.add(new MiscParticle(p, partPos.x, partPos.y, p.random(0, 360), "stun"));
                 }
             }
             currentTintColor = new Color(maxTintColor.getRGB());
