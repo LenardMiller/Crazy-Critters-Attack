@@ -12,9 +12,9 @@ public class MudFlinger extends ShootingEnemy {
 
     public MudFlinger(PApplet p, float x, float y) {
         super(p, x, y);
-        size = new PVector(25,25);
-        pfSize = 1;
-        radius = 13;
+        size = new PVector(50,50);
+        pfSize = 2;
+        radius = 25;
         maxSpeed = 24;
         speed = maxSpeed;
         moneyDrop = 60;
@@ -27,12 +27,12 @@ public class MudFlinger extends ShootingEnemy {
         name = "mudFlinger";
         shootSound = sounds.get("spit");
         betweenWalkFrames = down60ToFramerate(10);
-        betweenAttackFrames = down60ToFramerate(12);
-        betweenShootFrames = down60ToFramerate(12);
+        betweenAttackFrames = down60ToFramerate(8);
+        betweenShootFrames = down60ToFramerate(8);
         attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;
-        attackDmgFrames = new int[]{6};
-        shootFireFrame = 6;
+        attackDmgFrames = new int[]{9};
+        shootFireFrame = 9;
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         corpseSize = size;
         partSize = new PVector(11,11);
