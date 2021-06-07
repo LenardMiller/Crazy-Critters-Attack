@@ -9,8 +9,8 @@ import processing.sound.SoundFile;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSound;
 import static main.misc.Utilities.strikethroughText;
+import static main.sound.SoundUtlities.playSound;
 
 public class Selection { //what tower is selected
 

@@ -12,7 +12,7 @@ import processing.sound.SoundFile;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSoundRandomSpeed;
+import static main.sound.SoundUtlities.playSoundRandomSpeed;
 import static processing.core.PConstants.HALF_PI;
 
 public abstract class Projectile {

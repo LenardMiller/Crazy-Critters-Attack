@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSound;
+import static main.sound.SoundUtlities.playSound;
 
 public class WallBuy extends Button {
 

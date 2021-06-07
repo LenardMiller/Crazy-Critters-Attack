@@ -9,7 +9,9 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.*;
+import static main.misc.Utilities.down60ToFramerate;
+import static main.misc.Utilities.randomizeDelay;
+import static main.sound.SoundUtlities.playSoundRandomSpeed;
 
 public class Cannon extends Turret {
 

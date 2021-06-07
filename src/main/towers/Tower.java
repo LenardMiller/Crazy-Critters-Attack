@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.incrementByTo;
-import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.sound.SoundUtlities.playSoundRandomSpeed;
 
 public abstract class Tower {
 

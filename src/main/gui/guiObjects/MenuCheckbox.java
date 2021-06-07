@@ -9,7 +9,7 @@ import java.awt.*;
 import static main.Main.inputHandler;
 import static main.Main.sounds;
 import static main.misc.Utilities.highlightedText;
-import static main.misc.Utilities.playSound;
+import static main.sound.SoundUtlities.playSound;
 import static processing.core.PConstants.*;
 
 public class MenuCheckbox {

@@ -10,7 +10,9 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.*;
+import static main.misc.Utilities.angleDifference;
+import static main.misc.Utilities.clampAngle;
+import static main.sound.SoundUtlities.playSoundRandomSpeed;
 
 public abstract class BurrowingEnemy extends Enemy {
 

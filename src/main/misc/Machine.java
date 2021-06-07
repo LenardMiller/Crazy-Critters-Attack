@@ -14,7 +14,9 @@ import processing.sound.SoundFile;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.misc.Utilities.*;
+import static main.misc.Utilities.secondsToFrames;
+import static main.misc.Utilities.up60ToFramerate;
+import static main.sound.SoundUtlities.playSoundRandomSpeed;
 
 public class Machine {
 

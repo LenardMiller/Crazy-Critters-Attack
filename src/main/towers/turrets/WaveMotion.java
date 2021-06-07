@@ -8,6 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
+import static main.sound.SoundUtlities.playSoundRandomSpeed;
 
 public class WaveMotion extends Turret {
 

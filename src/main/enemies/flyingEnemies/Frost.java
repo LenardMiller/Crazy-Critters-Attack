@@ -11,7 +11,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.findAngleBetween;
-import static main.misc.Utilities.playSoundRandomSpeed;
+import static main.sound.SoundUtlities.playSoundRandomSpeed;
 
 public class Frost extends FlyingEnemy {
 

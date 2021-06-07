@@ -7,7 +7,7 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSound;
+import static main.sound.SoundUtlities.playSound;
 
 public abstract class Button extends GuiObject {
 

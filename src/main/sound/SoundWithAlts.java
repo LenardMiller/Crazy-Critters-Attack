@@ -3,7 +3,7 @@ package main.sound;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
 
-import static main.misc.Utilities.playSoundRandomSpeed;
+import static main.sound.SoundUtlities.playSoundRandomSpeed;
 
 public class SoundWithAlts {
 

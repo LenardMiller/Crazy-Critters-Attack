@@ -8,7 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSoundRandomSpeed;
+import static main.sound.SoundUtlities.playSoundRandomSpeed;
 
 public class Booster extends Turret {
 
