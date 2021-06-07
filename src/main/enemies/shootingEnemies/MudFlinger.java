@@ -1,6 +1,6 @@
 package main.enemies.shootingEnemies;
 
-import main.damagingThings.projectiles.enemyProjeciles.Snowball;
+import main.damagingThings.projectiles.enemyProjeciles.MudBall;
 import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -23,7 +23,7 @@ public class MudFlinger extends ShootingEnemy {
         range = 110;
         barrelLength = 7;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = "mudOuch";
         name = "mudFlinger";
         shootSound = sounds.get("spit");
         betweenWalkFrames = down60ToFramerate(10);
@@ -43,10 +43,10 @@ public class MudFlinger extends ShootingEnemy {
 
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
-        projectiles.add(new Snowball(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle));
+        projectiles.add(new MudBall(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle));
         for (int i = 0; i < 5; i++) {
             midParticles.add(new Debris(p, projectilePosition.x, projectilePosition.y,
-              projectileAngle + radians(p.random(-15, 15)), "snow"));
+              projectileAngle + radians(p.random(-15, 15)), "mud"));
         }
     }
 }

@@ -49,6 +49,7 @@ public class SpriteLoader {
         getSprite(p,"gluePuff","PT","puff/glue/",10);
         getSprite(p,"snowPuff","PT","puff/snow/",10);
         getSprite(p,"sandPuff","PT","puff/sand/",10);
+        getSprite(p,"mudPuff","PT","puff/mud/",10);
 
         getSprite(p,"greenOuch","PT","ouch/green/",11);
         getSprite(p,"pinkOuch","PT","ouch/pink/",11);
@@ -57,6 +58,7 @@ public class SpriteLoader {
         getSprite(p,"leafOuch","PT","ouch/leaf/",11);
         getSprite(p,"lichenOuch","PT","ouch/lichen/",11);
         getSprite(p,"iceOuch","PT","ouch/ice/",11);
+        getSprite(p,"mudOuch","PT","ouch/mud/",11);
 
         getSprite(p,"fireMediumExplosion","PT","mediumExplosion/fire/",18);
         getSprite(p,"puffMediumExplosion","PT","mediumExplosion/puff/",18);
@@ -82,6 +84,7 @@ public class SpriteLoader {
         getSprite(p,"leafOuchPile","PT", "pile/leafOuch/", 4);
         getSprite(p,"lichenOuchPile","PT", "pile/lichenOuch/", 4);
         getSprite(p,"iceOuchPile","PT", "pile/iceOuch/", 4);
+        getSprite(p,"mudOuchPile","PT", "pile/mudOuch/", 4);
         getSprite(p,"dirtPile","PT","pile/dirt/", 4);
         getSprite(p,"sandPile","PT","pile/sand/", 4);
         getSprite(p,"stonePile","PT","pile/stone/", 4);
@@ -446,6 +449,7 @@ public class SpriteLoader {
         staticSprites.put("dirtPt",p.loadImage("sprites/particles/debris/dirt.png"));
         staticSprites.put("sandPt",p.loadImage("sprites/particles/debris/sand.png"));
         staticSprites.put("snowPt",p.loadImage("sprites/particles/debris/snow.png"));
+        staticSprites.put("mudPt",p.loadImage("sprites/particles/debris/mud.png"));
 
         //projectiles
         staticSprites.put("boltPj",p.loadImage("sprites/projectiles/bolt.png"));
@@ -466,6 +470,7 @@ public class SpriteLoader {
         staticSprites.put("dynamitePj",p.loadImage("sprites/projectiles/dynamite.png"));
         staticSprites.put("snowballPj",p.loadImage("sprites/projectiles/snowball.png"));
         staticSprites.put("sandballPj",p.loadImage("sprites/projectiles/sandball.png"));
+        staticSprites.put("mudballPj",p.loadImage("sprites/projectiles/mudball.png"));
         staticSprites.put("iceCrystalPj",p.loadImage("sprites/projectiles/iceCrystal.png"));
 
         //enemies
