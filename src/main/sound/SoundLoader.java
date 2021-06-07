@@ -8,8 +8,6 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class SoundLoader {
 
-    public SoundLoader() {}
-
     public static void loadSounds(PApplet p) { //todo: load dynamically?
         //enemy todo: attack sounds?
         sounds.put("squish", new SoundFile(p, "sounds/enemies/squish.wav"));
