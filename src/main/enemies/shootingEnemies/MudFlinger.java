@@ -15,12 +15,12 @@ public class MudFlinger extends ShootingEnemy {
         size = new PVector(50,50);
         pfSize = 2;
         radius = 25;
-        maxSpeed = 24;
+        maxSpeed = 30;
         speed = maxSpeed;
-        moneyDrop = 60;
-        damage = 2;
-        maxHp = 200;
-        range = 110;
+        moneyDrop = 250;
+        damage = 4;
+        maxHp = 15000;
+        range = 250;
         barrelLength = 7;
         hp = maxHp;
         hitParticle = "mudOuch";

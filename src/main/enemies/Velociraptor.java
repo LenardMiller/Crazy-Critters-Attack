@@ -15,7 +15,7 @@ public class Velociraptor extends Enemy {
         radius = 25;
         maxSpeed = 75;
         speed = maxSpeed;
-        moneyDrop = 500;
+        moneyDrop = 200;
         damage = 20;
         maxHp = 4000; //Hp
         hp = maxHp;

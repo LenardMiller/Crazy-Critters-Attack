@@ -152,7 +152,7 @@ public class Flamethrower extends Turret {
     protected void spawnProjectiles(PVector position, float angle) {
         if (magic) {
             projectiles.add(new BlueFlame(p, position.x, position.y, angle, this, getDamage(),
-              effectLevel, effectDuration, (int) (getRange() - barrelLength - 100), false));
+              effectLevel, effectDuration, (int) (getRange() - barrelLength), false));
         } else {
             projectiles.add(new Flame(p, position.x, position.y, angle, this, getDamage(),
               effectLevel, effectDuration, (int) (getRange() - barrelLength - 100), false));

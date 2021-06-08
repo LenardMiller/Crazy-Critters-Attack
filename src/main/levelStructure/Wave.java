@@ -258,10 +258,10 @@ public class Wave {
             case "Mammoths":
                 e = new Mammoth(P, pos.x, pos.y);
                 break;
-            case "Mud Creature":
+            case "Mud Creatures":
                 e = new MudCreature(P, pos.x, pos.y);
                 break;
-            case "Mud Flinger":
+            case "Mud Flingers":
                 e = new MudFlinger(P, pos.x, pos.y);
                 break;
         }

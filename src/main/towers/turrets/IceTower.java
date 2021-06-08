@@ -32,7 +32,7 @@ public class IceTower extends Turret {
     public IceTower(PApplet p, Tile tile) {
         super(p, tile);
         name = "iceTower";
-        delay = randomizeDelay(p, 8);
+        delay = randomizeDelay(p, 12);
         pjSpeed = -1;
         range = 250;
         barrelLength = 30;
@@ -202,7 +202,7 @@ public class IceTower extends Turret {
                     range += 50;
                     break;
                 case 4:
-                    delay -= 3;
+                    delay -= 4;
                     break;
                 case 5:
                     break;

@@ -20,7 +20,7 @@ public class MagicMissileer extends Turret {
         size = new PVector(50,50);
         hasPriority = false;
         delay = randomizeDelay(p, 4.5f);
-        damage = 150;
+        damage = 300;
         pjSpeed = 300;
         range = 200;
         betweenIdleFrames = down60ToFramerate(8);
@@ -152,7 +152,7 @@ public class MagicMissileer extends Turret {
                     range += 50;
                     break;
                 case 1:
-                    damage += 100;
+                    damage += 200;
                     break;
                 case 2:
                     break;
