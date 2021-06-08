@@ -8,7 +8,7 @@ import java.awt.*;
 public class GlacierWaves {
 
     public static Wave[] genGlacierWaves(PApplet p) {
-        Wave[] waves = new Wave[32]; //60
+        Wave[] waves = new Wave[40]; //60
 
         String snowAntlion = "Antlions";
         String wolf = "Wolves";
@@ -18,6 +18,8 @@ public class GlacierWaves {
         String iceMonstrosity = "Ice Monstrosities";
         String frost = "Frost";
         String mammoth = "Mammoths";
+        String mudFlinger = "Mud Flingers";
+        String mudCreature = "Mud Creatures";
 
         waves[0] = wavePreset(p, 65, 30, wolf);
         waves[0].addSpawns(wolf, 5);
@@ -141,6 +143,11 @@ public class GlacierWaves {
         waves[31].addSpawns(frost, 10);
         waves[31].polluter = new Polluter(p, 5, "glacier/final");
 
+        waves[32] = wavePreset(p, 55, 25, velociraptor);
+        waves[32].addSpawns(velociraptor, 20);
+
+
+
         for (Wave wave : waves) wave.load();
         return waves;
     }
@@ -210,8 +217,22 @@ public class GlacierWaves {
             case "Mammoths":
                 return new Wave(p, length, spawnLength,
                   new Color(64, 39, 15),
-                  new Color(50, 31, 12),
+                  new Color(29, 20, 7),
                   new Color(185, 181, 158),
+                  title
+                );
+            case "Mud Creatures":
+                return new Wave(p, length, spawnLength,
+                  new Color(74, 39, 0),
+                  new Color(188, 186, 130),
+                  new Color(23, 13, 0),
+                  title
+                );
+            case "Mud Flingers":
+                return new Wave(p, length, spawnLength,
+                  new Color(74, 39, 0),
+                  new Color(139, 75, 0),
+                  new Color(23, 13, 0),
                   title
                 );
             default:
