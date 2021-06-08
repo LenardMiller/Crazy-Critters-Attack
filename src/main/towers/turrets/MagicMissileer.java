@@ -19,7 +19,7 @@ public class MagicMissileer extends Turret {
         name = "magicMissleer";
         size = new PVector(50,50);
         hasPriority = false;
-        delay = randomizeDelay(p, 4.5f);
+        delay = randomizeDelay(p, 3);
         damage = 300;
         pjSpeed = 300;
         range = 200;
@@ -160,7 +160,7 @@ public class MagicMissileer extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    delay -= 1.5;
+                    delay -= 1;
                     break;
                 case 4:
                     additionalMissile = true;
