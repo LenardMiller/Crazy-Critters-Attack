@@ -142,11 +142,44 @@ public class GlacierWaves {
         waves[31].addSpawns(iceEntity, 20);
         waves[31].addSpawns(frost, 10);
         waves[31].polluter = new Polluter(p, 5, "glacier/final");
+        waves[31].groundType = "mud";
 
         waves[32] = wavePreset(p, 55, 25, velociraptor);
         waves[32].addSpawns(velociraptor, 20);
 
+        waves[33] = wavePreset(p, 55, 25, mudCreature);
+        waves[33].addSpawns(mudCreature, 3);
 
+        waves[34] = wavePreset(p, 55, 25, mudFlinger);
+        waves[34].addSpawns(mudFlinger, 3);
+
+        waves[35] = wavePreset(p, 55, 25, iceMonstrosity);
+        waves[35].addSpawns(frost, 10);
+        waves[35].addSpawns(iceMonstrosity, 10);
+
+        waves[36] = wavePreset(p, 55, 25, mudCreature);
+        waves[36].addSpawns(mudCreature, 5);
+        waves[36].addSpawns(frost, 5);
+
+        waves[37] = wavePreset(p, 45, 15, iceMonstrosity);
+        waves[37].addSpawns(frost, 10);
+        waves[37].addSpawns(iceMonstrosity, 10);
+
+        waves[36] = wavePreset(p, 55, 25, mudFlinger);
+        waves[36].addSpawns(mudFlinger, 5);
+        waves[36].addSpawns(frost, 5);
+
+        waves[37] = wavePreset(p, 55, 25, iceMonstrosity);
+        waves[37].addSpawns(frost, 15);
+        waves[37].addSpawns(iceMonstrosity, 10);
+        waves[37].addSpawns(iceEntity, 40);
+
+        waves[38] = wavePreset(p, 150, 120, "Mud Horde");
+        waves[38].addSpawns(mudCreature, 20);
+        waves[38].addSpawns(mudFlinger, 20);
+
+        waves[39] = wavePreset(p, 85, 1, "Mammoth");
+        waves[39].addSpawns(mammoth, 1);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -209,8 +242,8 @@ public class GlacierWaves {
             case "Frost":
                 return new Wave(p, length, spawnLength,
                   new Color(227, 247, 255),
-                  new Color(185, 235, 255),
-                  new Color(40, 139, 250),
+                  new Color(213, 243, 255),
+                  new Color(141, 235, 255),
                   title
                 );
             case "Mammoth":
@@ -233,6 +266,13 @@ public class GlacierWaves {
                   new Color(74, 39, 0),
                   new Color(139, 75, 0),
                   new Color(23, 13, 0),
+                  title
+                );
+            case "Mud Horde":
+                return new Wave(p, length, spawnLength,
+                  new Color(74, 39, 0),
+                  new Color(0, 155, 255),
+                  new Color(100, 100, 100),
                   title
                 );
             default:
