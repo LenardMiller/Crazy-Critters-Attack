@@ -25,7 +25,7 @@ public class InGameGui {
     public UpgradeTower upgradeButtonA, upgradeButtonB;
     public GuiObject moneyIcon;
     public GuiObject upgradeIconA, upgradeIconB;
-    public Play playButton;
+    public PlayButton playButton;
 
     public static final Color FLASH_COLOR = new Color(255, 255, 255);
     public static final Color MAIN_PANEL_COLOR = new Color(235, 235, 235);
@@ -153,7 +153,7 @@ public class InGameGui {
         }
         wallBuyButton = new WallBuy(P,BOARD_WIDTH+100,172-12,"null",true);
         moneyIcon = new GuiObject(P,BOARD_WIDTH, 211-29,"moneyIc",true);
-        playButton = new Play(P,1000,274.5f,"null",true);
+        playButton = new PlayButton(P,1000,274.5f,"null",true);
         upgradeButtonA = new UpgradeTower(P,1000,480,"null",false, 0);
         upgradeButtonB = new UpgradeTower(P,1000,630,"null",false, 1);
         upgradeIconA = new UpgradeIcon(P,1030,610,"null",false);
