@@ -35,7 +35,7 @@ public class MudFlinger extends ShootingEnemy {
         shootFireFrame = 9;
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         corpseSize = size;
-        partSize = new PVector(11,11);
+        partSize = new PVector(25,25);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
         loadStuff();
