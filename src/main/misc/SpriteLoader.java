@@ -273,6 +273,7 @@ public class SpriteLoader {
         getSprite(p,"mudFlingerMove","EN","mudFlinger/move/",4);
         getSprite(p,"mudFlingerAttack","EN","mudFlinger/attack/",19);
         getSprite(p,"mudFlingerShoot","EN","mudFlinger/attack/",19);
+        getSprite(p,"mudFlingerDie","EN","mudFlinger/die/",4);
 
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
