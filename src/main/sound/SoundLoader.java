@@ -37,6 +37,7 @@ public class SoundLoader {
         sounds.put("mammoth", new SoundFile(p, "sounds/enemies/mammoth.wav"));
         sounds.put("mammothSquash", new SoundFile(p, "sounds/enemies/mammothSquash.wav"));
         sounds.put("mudDie", new SoundFile(p, "sounds/enemies/mudDie.wav"));
+        sounds.put("mudSquish", new SoundFile(p, "sounds/enemies/mudSquish.wav"));
         //misc
         sounds.put("smallExplosion", new SoundFile(p, "sounds/misc/smallExplosion.wav"));
         sounds.put("hugeExplosion", new SoundFile(p, "sounds/misc/hugeExplosion.wav"));

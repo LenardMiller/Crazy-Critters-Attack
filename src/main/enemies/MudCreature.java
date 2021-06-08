@@ -30,7 +30,7 @@ public class MudCreature extends Enemy {
         attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(25,25);
-        overkillSound = sounds.get("barkSquish");
+        overkillSound = sounds.get("mudSquish");
         dieSound = sounds.get("mudDie");
         loadStuff();
     }
