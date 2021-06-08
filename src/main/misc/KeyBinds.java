@@ -155,7 +155,7 @@ public class KeyBinds {
         if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
         if (en1) enemies.add(new MudFlinger(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en2) enemies.add(new Wolf(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en2) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en3) enemies.add(new Velociraptor(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en5) enemies.add(new SnowAntlion(p, matrixMousePosition.x, matrixMousePosition.y));

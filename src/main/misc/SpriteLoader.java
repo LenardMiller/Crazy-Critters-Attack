@@ -276,6 +276,12 @@ public class SpriteLoader {
         getSprite(p,"mudFlingerDie","EN","mudFlinger/die/",4);
         getSprite(p,"mudFlingerParts","EN","mudFlinger/parts/",8);
 
+        getSprite(p,"mudCreatureMove","EN","mudCreature/move/",4);
+        getSprite(p,"mudCreatureAttack","EN","mudCreature/attack/",19);
+        getSprite(p,"mudCreatureShoot","EN","mudCreature/attack/",19);
+        getSprite(p,"mudCreatureDie","EN","mudCreature/die/",4);
+        getSprite(p,"mudCreatureParts","EN","mudCreature/parts/",8);
+
         //turrets
         getSprite(p,"slingshotFire","TR","slingshot/fire/",34);
         getSprite(p,"slingshotLoad","TR","slingshot/load/",59);
