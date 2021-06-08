@@ -7,8 +7,6 @@ import static main.Main.animatedSprites;
 import static main.Main.staticSprites;
 
 public class SpriteLoader {
-    
-    public SpriteLoader() {}
 
     /**
      * Loads animations.

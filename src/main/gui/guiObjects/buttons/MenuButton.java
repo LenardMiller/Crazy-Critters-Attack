@@ -5,7 +5,7 @@ import processing.core.PVector;
 
 import static main.Main.animatedSprites;
 import static main.Main.inputHandler;
-import static main.sound.SoundUtlities.playSound;
+import static main.sound.SoundUtilities.playSound;
 import static processing.core.PConstants.LEFT;
 
 public class MenuButton extends Button {

@@ -10,7 +10,7 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.strikethroughText;
-import static main.sound.SoundUtlities.playSound;
+import static main.sound.SoundUtilities.playSound;
 
 public class Selection { //what tower is selected
 

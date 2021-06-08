@@ -8,7 +8,7 @@ import java.awt.*;
 import static main.Main.*;
 import static main.gui.TowerInfo.*;
 import static main.misc.Utilities.strikethroughText;
-import static main.sound.SoundUtlities.playSound;
+import static main.sound.SoundUtilities.playSound;
 import static processing.core.PConstants.CENTER;
 
 public class TowerBuy extends Button {

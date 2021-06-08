@@ -19,7 +19,7 @@ import java.util.Collections;
 import static main.Main.*;
 import static main.misc.Utilities.randomSpawnPosition;
 import static main.misc.Utilities.secondsToFrames;
-import static main.sound.SoundUtlities.playSound;
+import static main.sound.SoundUtilities.playSound;
 
 public class Wave {
 

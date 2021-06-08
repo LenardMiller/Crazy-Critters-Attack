@@ -20,7 +20,7 @@ import static main.misc.Utilities.incrementByTo;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
-import static main.sound.SoundUtlities.playSoundRandomSpeed;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Tower {
 

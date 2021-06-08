@@ -12,7 +12,7 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
-import static main.sound.SoundUtlities.playSoundRandomSpeed;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class ShootingEnemy extends Enemy {
 

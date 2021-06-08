@@ -8,7 +8,7 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.sound.SoundUtlities.playSoundRandomSpeed;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Wall extends Tower {
 

@@ -210,7 +210,7 @@ public class Main extends PApplet {
     }
 
     /**
-     * Sets all the ingame stuff up.
+     * Sets all the in game stuff up.
      */
     public static void resetGame(PApplet p) {
         //creates object data structures
@@ -532,6 +532,7 @@ public class Main extends PApplet {
      * Checks if a key is pressed.
      * Also includes overrides.
      */
+    @Override
     public void keyPressed() {
         if (!dev) key = toLowerCase(key);
         if (keyCode == 8) key = '*'; //delete
@@ -544,14 +545,17 @@ public class Main extends PApplet {
         inputHandler.key(true);
     }
 
+    @Override
     public void keyReleased() {
         inputHandler.key(false);
     }
 
+    @Override
     public void mousePressed() {
         inputHandler.mouse(true);
     }
 
+    @Override
     public void mouseReleased() {
         inputHandler.mouse(false);
     }

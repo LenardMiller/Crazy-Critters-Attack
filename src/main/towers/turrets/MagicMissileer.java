@@ -8,7 +8,7 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
-import static main.sound.SoundUtlities.playSoundRandomSpeed;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class MagicMissileer extends Turret {
 

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import static main.Main.*;
 import static main.misc.Utilities.closeSettingsMenu;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
-import static main.sound.SoundUtlities.playSound;
+import static main.sound.SoundUtilities.playSound;
 
 public class KeyBinds {
 

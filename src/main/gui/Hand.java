@@ -17,7 +17,7 @@ import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
-import static main.sound.SoundUtlities.playSound;
+import static main.sound.SoundUtilities.playSound;
 
 public class Hand {
 

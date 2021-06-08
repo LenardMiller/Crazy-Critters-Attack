@@ -3,7 +3,7 @@ package main.sound;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
 
-public class SoundUtlities {
+public class SoundUtilities {
 
     /**
      * Stops and starts playing the given sound.

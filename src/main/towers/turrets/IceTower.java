@@ -11,7 +11,7 @@ import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
-import static main.sound.SoundUtlities.playSoundRandomSpeed;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class IceTower extends Turret {
 
