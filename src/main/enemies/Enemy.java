@@ -487,6 +487,8 @@ public abstract class Enemy {
                 return new Color(216, 0, 0);
             case "iceOuch":
                 return new Color(49, 135, 223);
+            case "mudOuch":
+                return new Color(111, 58, 0);
             default:
                 return new Color(255, 0, 0);
         }
