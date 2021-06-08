@@ -32,13 +32,13 @@ public class IceTower extends Turret {
     public IceTower(PApplet p, Tile tile) {
         super(p, tile);
         name = "iceTower";
-        delay = randomizeDelay(p, 12);
+        delay = randomizeDelay(p, 15);
         pjSpeed = -1;
         range = 250;
         barrelLength = 30;
         offset = 0;
-        wallHp = 50;
-        wallTimeUntilDamage = 30;
+        wallHp = 40;
+        wallTimeUntilDamage = 20;
         debrisType = "metal";
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
