@@ -8,13 +8,13 @@ import processing.core.PVector;
 import static main.Main.*;
 import static processing.core.PConstants.CENTER;
 
-public class Play extends Button {
+public class PlayButton extends Button {
 
     private final PImage SPRITE_GREY;
 
     private int timer;
 
-    public Play(PApplet p, float x, float y, String type, boolean active) {
+    public PlayButton(PApplet p, float x, float y, String type, boolean active) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 125);
@@ -41,7 +41,7 @@ public class Play extends Button {
         p.textFont(largeFont);
         p.text("Play",1000,y+30);
         p.textFont(mediumFont);
-        p.text("[SPACE]", 1000, y + size.y - 8);
+        p.text("[SPACE]", 1000, y + size.y - 12);
     }
 
     @Override
