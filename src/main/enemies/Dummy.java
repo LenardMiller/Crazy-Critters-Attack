@@ -13,8 +13,7 @@ public class Dummy extends Enemy {
         size = new PVector(28,28);
         pfSize = 1; //1
         radius = 14;
-        maxSpeed = 0;
-        speed = maxSpeed;
+        speed = 0;
         moneyDrop = 0;
         damage = 0;
         maxHp = 500000; //Hp

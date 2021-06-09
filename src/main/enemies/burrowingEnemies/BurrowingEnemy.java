@@ -58,9 +58,10 @@ public abstract class BurrowingEnemy extends Enemy {
             bottomParticles.add(new Pile(p, particalPosition.x, particalPosition.y, 0, levels[currentLevel].groundType));
         }
         PVector m = PVector.fromAngle(angle);
-        m.setMag(speed/FRAMERATE);
-        position.add(m);
-        speed = maxSpeed;
+        float pixelsMoved = getActualSpeed() / FRAMERATE;
+        m.setMag(pixelsMoved);
+        //don't move if no path
+        if (points.size() > 0) position.add(m);
     }
 
     private PVector randomPosition() {

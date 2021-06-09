@@ -13,8 +13,7 @@ public class SmallGolem extends Enemy{
         size = new PVector(25,25);
         pfSize = 1; //1
         radius = 15;
-        maxSpeed = 30;
-        speed = maxSpeed;
+        speed = 30;
         moneyDrop = 30;
         damage = 5;
         maxHp = 100; //Hp <---------------------------

@@ -13,8 +13,7 @@ public class SmolBug extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 13;
-        maxSpeed = 24;
-        speed = maxSpeed;
+        speed = 24;
         moneyDrop = 10;
         damage = 1;
         maxHp = 20; //Hp <---------------------------

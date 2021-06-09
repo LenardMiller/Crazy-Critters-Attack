@@ -13,8 +13,7 @@ public class Golem extends Enemy {
         size = new PVector(42,42);
         pfSize = 2; //2
         radius = 21;
-        maxSpeed = 24;
-        speed = maxSpeed;
+        speed = 24;
         moneyDrop = 60;
         damage = 8;
         maxHp = 1000; //Hp <---------------------------

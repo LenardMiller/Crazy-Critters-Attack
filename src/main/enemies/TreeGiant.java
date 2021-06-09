@@ -13,8 +13,7 @@ public class TreeGiant extends Enemy {
         size = new PVector(76,76);
         pfSize = 3;
         radius = 30;
-        maxSpeed = 18;
-        speed = maxSpeed;
+        speed = 18;
         moneyDrop = 250;
         damage = 7;
         maxHp = 5000; //Hp

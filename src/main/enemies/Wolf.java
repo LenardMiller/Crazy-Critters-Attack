@@ -13,8 +13,7 @@ public class Wolf extends Enemy {
         size = new PVector(50,50);
         pfSize = 2;
         radius = 25;
-        maxSpeed = 60;
-        speed = maxSpeed;
+        speed = 60;
         moneyDrop = 40;
         damage = 8;
         maxHp = 100; //Hp

@@ -12,7 +12,7 @@ public class Mammoth extends Enemy {
         size = new PVector(100, 100);
         pfSize = 4;
         radius = 50;
-        maxSpeed = 30;
+        speed = 30;
         damage = 80;
         maxHp = 150000;
         moneyDrop = 2500;

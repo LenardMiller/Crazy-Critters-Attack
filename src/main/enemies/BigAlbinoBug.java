@@ -13,8 +13,7 @@ public class BigAlbinoBug extends Enemy {
         size = new PVector(53,53);
         pfSize = 2; //2
         radius = 26;
-        maxSpeed = 18;
-        speed = maxSpeed;
+        speed = 18;
         moneyDrop = 100;
         damage = 15;
         maxHp = 1500;

@@ -13,8 +13,7 @@ public class GiantGolem extends Enemy {
         size = new PVector(76,76);
         pfSize = 3;
         radius = 30;
-        maxSpeed = 24;
-        speed = maxSpeed;
+        speed = 24;
         moneyDrop = 500;
         damage = 18;
         maxHp = 15000; //Hp

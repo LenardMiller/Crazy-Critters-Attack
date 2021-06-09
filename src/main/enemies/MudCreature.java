@@ -13,8 +13,7 @@ public class MudCreature extends Enemy {
         size = new PVector(50,50);
         pfSize = 2;
         radius = 25;
-        maxSpeed = 90;
-        speed = maxSpeed;
+        speed = 90;
         moneyDrop = 350;
         damage = 50;
         maxHp = 10000; //Hp

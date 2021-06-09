@@ -13,8 +13,7 @@ public class Emperor extends Enemy {
         size = new PVector(50,50);
         pfSize = 2; //2
         radius = 25;
-        maxSpeed = 27;
-        speed = maxSpeed;
+        speed = 27;
         moneyDrop = 200;
         damage = 18;
         maxHp = 3000;

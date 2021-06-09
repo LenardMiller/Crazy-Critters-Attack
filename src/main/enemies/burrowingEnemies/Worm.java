@@ -13,8 +13,7 @@ public class Worm extends BurrowingEnemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = 36;
-        speed = maxSpeed;
+        speed = 36;
         moneyDrop = 30;
         damage = 3;
         maxHp = 100; //Hp

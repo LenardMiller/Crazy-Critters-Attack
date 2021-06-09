@@ -22,8 +22,7 @@ public class IceEntity extends ShootingEnemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 13;
-        maxSpeed = 40;
-        speed = maxSpeed;
+        speed = 40;
         moneyDrop = 150;
         damage = 6;
         shootDamage = 3;

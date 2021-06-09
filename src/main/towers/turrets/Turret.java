@@ -148,7 +148,7 @@ public abstract class Turret extends Tower {
             float dist = PVector.sub(target, position).mag();
             float time = dist / pjSpeed;
             PVector enemyHeading = PVector.fromAngle(enemy.angle);
-            if (enemy.state == 0) enemyHeading.setMag(enemy.speed * time); //only lead if enemy moving
+            if (enemy.state == 0) enemyHeading.setMag(enemy.getActualSpeed() * time); //only lead if enemy moving
             else enemyHeading.setMag(0);
             target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
         }

@@ -13,8 +13,7 @@ public class Bat extends FlyingEnemy {
         size = new PVector(50,50);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = 45;
-        speed = maxSpeed;
+        speed = 45;
         moneyDrop = 50;
         damage = 3;
         maxHp = 750; //Hp

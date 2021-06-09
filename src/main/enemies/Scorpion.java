@@ -13,8 +13,7 @@ public class Scorpion extends Enemy {
         size = new PVector(25,25);
         pfSize = 1; //1
         radius = 13;
-        maxSpeed = 39;
-        speed = maxSpeed;
+        speed = 39;
         moneyDrop = 35;
         damage = 4;
         maxHp = 75;

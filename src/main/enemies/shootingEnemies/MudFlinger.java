@@ -15,8 +15,7 @@ public class MudFlinger extends ShootingEnemy {
         size = new PVector(50,50);
         pfSize = 2;
         radius = 25;
-        maxSpeed = 30;
-        speed = maxSpeed;
+        speed = 30;
         moneyDrop = 250;
         damage = 1;
         maxHp = 15000;

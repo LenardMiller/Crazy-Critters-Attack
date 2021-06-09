@@ -13,8 +13,7 @@ public class BigWorm extends BurrowingEnemy {
         size = new PVector(50, 50);
         pfSize = 2;
         radius = 25f;
-        maxSpeed = 24;
-        speed = maxSpeed;
+        speed = 24;
         moneyDrop = 250;
         damage = 15;
         maxHp = 5000; //Hp

@@ -33,10 +33,10 @@ public class Glued extends Buff {
 
     protected void slowAttacking() { //slowing enemy attacking done once
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
+        float newSpeed = enemy.speed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
             //setup
-            enemy.speed = newSpeed;
+            enemy.speedModifier = SPEED_MODIFIER;
             int oldSize = enemy.attackFrames.length;
             int newSize = (int) (1f / (SPEED_MODIFIER * (1f / (float) oldSize)));
             ArrayList<Integer> expandedInts = new ArrayList<>();
@@ -57,20 +57,20 @@ public class Glued extends Buff {
     @Override
     public void effect() { //slowing enemy movement done every frame
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
+        float newSpeed = enemy.speed * SPEED_MODIFIER;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
-            enemy.speed = newSpeed;
+            enemy.speedModifier = SPEED_MODIFIER;
         }
     }
 
     @Override
     protected void end(int i){ //ends if at end of lifespan
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.maxSpeed * SPEED_MODIFIER;
+        float newSpeed = enemy.speed;
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) {
             if (enemy.speed == newSpeed) { //prevent speeding up enemy
-                enemy.speed = enemy.maxSpeed; //set movement speed back to default
+                enemy.speedModifier = 1; //set movement speed back to default
                 //set attack speed back to default
                 enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
                 if (enemy instanceof Frost) enemy.attackFrames = animatedSprites.get("wolf" + "AttackEN");

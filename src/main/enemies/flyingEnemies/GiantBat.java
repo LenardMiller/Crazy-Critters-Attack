@@ -13,8 +13,7 @@ public class GiantBat extends FlyingEnemy {
         size = new PVector(102,102);
         pfSize = 2;
         radius = 25;
-        maxSpeed = 30;
-        speed = maxSpeed;
+        speed = 30;
         moneyDrop = 500;
         damage = 5;
         maxHp = 12500; //Hp

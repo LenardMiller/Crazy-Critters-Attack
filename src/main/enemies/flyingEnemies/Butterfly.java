@@ -13,8 +13,7 @@ public class Butterfly extends FlyingEnemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = 48;
-        speed = maxSpeed;
+        speed = 48;
         moneyDrop = 30;
         damage = 1;
         maxHp = 60; //Hp
