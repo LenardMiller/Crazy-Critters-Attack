@@ -8,7 +8,7 @@ import java.awt.*;
 public class GlacierWaves {
 
     public static Wave[] genGlacierWaves(PApplet p) {
-        Wave[] waves = new Wave[40]; //60
+        Wave[] waves = new Wave[50]; //60
 
         String snowAntlion = "Antlions";
         String wolf = "Wolves";
@@ -20,6 +20,7 @@ public class GlacierWaves {
         String mammoth = "Mammoths";
         String mudFlinger = "Mud Flingers";
         String mudCreature = "Mud Creatures";
+        String bigWorm = "Megaworms";
 
         waves[0] = wavePreset(p, 65, 30, wolf);
         waves[0].addSpawns(wolf, 5);
@@ -177,9 +178,47 @@ public class GlacierWaves {
         waves[38] = wavePreset(p, 150, 120, "Mud Horde");
         waves[38].addSpawns(mudCreature, 30);
         waves[38].addSpawns(mudFlinger, 30);
+        waves[38].addSpawns("littleWorm", 30);
 
         waves[39] = wavePreset(p, 85, 1, "Mammoth");
         waves[39].addSpawns(mammoth, 1);
+
+        waves[40] = wavePreset(p, 65, 30, bigWorm);
+        waves[40].addSpawns(bigWorm, 3);
+        waves[40].addSpawns("midWorm", 10);
+        waves[40].addSpawns("littleWorm", 20);
+
+        waves[41] = wavePreset(p, 55, 25, mudCreature);
+        waves[41].addSpawns(mudCreature, 15);
+
+        waves[42] = wavePreset(p, 65, 1, "Mammoth");
+        waves[42].addSpawns(mammoth, 1);
+
+        waves[43] = wavePreset(p, 55, 25, mudFlinger);
+        waves[43].addSpawns(mudFlinger, 15);
+
+        waves[44] = wavePreset(p, 65, 30, bigWorm);
+        waves[44].addSpawns(bigWorm, 5);
+
+        waves[45] = wavePreset(p, 65, 20, mammoth);
+        waves[45].addSpawns(mammoth, 3);
+        waves[45].addSpawns("midWorm", 5);
+
+        waves[46] = wavePreset(p, 55, 25, mudFlinger);
+        waves[46].addSpawns(mudFlinger, 20);
+
+        waves[47] = wavePreset(p, 55, 25, mudCreature);
+        waves[47].addSpawns(mudCreature, 20);
+
+        waves[48] = wavePreset(p, 55, 25, bigWorm);
+        waves[48].addSpawns(bigWorm, 10);
+        waves[48].addSpawns("midWorm", 20);
+        waves[48].addSpawns("littleWorm", 30);
+
+        waves[49] = wavePreset(p, 150, 120, "Mud Horde");
+        waves[49].addSpawns(mudCreature, 50);
+        waves[49].addSpawns(mudFlinger, 50);
+        waves[49].addSpawns(mammoth, 1);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -273,6 +312,13 @@ public class GlacierWaves {
                   new Color(74, 39, 0),
                   new Color(0, 155, 255),
                   new Color(100, 100, 100),
+                  title
+                );
+            case "Megaworms":
+                return new Wave(p, length, spawnLength,
+                  new Color(255, 255, 255),
+                  new Color(232, 106, 115),
+                  new Color(45, 19, 21),
                   title
                 );
             default:

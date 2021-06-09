@@ -195,6 +195,7 @@ public class Wave {
             case "midWorm":
                 e = new MidWorm(P, pos.x, pos.y);
                 break;
+            case "Megaworms":
             case "bigWorm":
                 e = new BigWorm(P, pos.x, pos.y);
                 break;
