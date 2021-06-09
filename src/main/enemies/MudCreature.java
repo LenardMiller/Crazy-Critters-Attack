@@ -13,11 +13,11 @@ public class MudCreature extends Enemy {
         size = new PVector(50,50);
         pfSize = 2;
         radius = 25;
-        maxSpeed = 80;
+        maxSpeed = 90;
         speed = maxSpeed;
         moneyDrop = 350;
-        damage = 16;
-        maxHp = 15000; //Hp
+        damage = 50;
+        maxHp = 10000; //Hp
         hp = maxHp;
         hitParticle = "mudOuch";
         name = "mudCreature";
