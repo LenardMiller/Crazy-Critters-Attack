@@ -193,7 +193,6 @@ public class TeslaTower extends Turret {
                     break;
                 case 5:
                     delay = 0;
-                    range += 50;
                     damage += 50;
                     highPower = true;
                     betweenIdleFrames = 3;

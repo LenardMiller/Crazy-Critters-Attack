@@ -14,9 +14,9 @@ public class MudCreature extends Enemy {
         pfSize = 2;
         radius = 25;
         speed = 90;
-        moneyDrop = 350;
+        moneyDrop = 200;
         damage = 50;
-        maxHp = 10000; //Hp
+        maxHp = 20000; //Hp
         hp = maxHp;
         hitParticle = "mudOuch";
         name = "mudCreature";
