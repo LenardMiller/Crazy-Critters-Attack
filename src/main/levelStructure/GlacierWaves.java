@@ -143,7 +143,7 @@ public class GlacierWaves {
         waves[31].addSpawns(iceEntity, 20);
         waves[31].addSpawns(frost, 10);
         waves[31].polluter = new Polluter(p, 5, "glacier/final");
-        waves[31].groundType = "mud";
+        waves[31].groundType = "dirt";
 
         waves[32] = wavePreset(p, 55, 25, velociraptor);
         waves[32].addSpawns(velociraptor, 20);
