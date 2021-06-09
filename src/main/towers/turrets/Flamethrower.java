@@ -3,6 +3,7 @@ package main.towers.turrets;
 import main.damagingThings.projectiles.BlueFlame;
 import main.damagingThings.projectiles.Flame;
 import main.damagingThings.shockwaves.FireShockwave;
+import main.enemies.Enemy;
 import main.misc.Tile;
 import main.sound.FadeSoundLoop;
 import processing.core.PApplet;
@@ -10,7 +11,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.incrementByTo;
+import static main.misc.Utilities.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Flamethrower extends Turret {
@@ -86,6 +87,42 @@ public class Flamethrower extends Turret {
             state = 1;
             frame = 0;
             fire(barrelLength, fireParticle);
+        }
+    }
+
+    /**
+     * Sets the target angle to match the target.
+     * Leads shots if enemy moving.
+     * @param enemy enemy to aim at
+     */
+    @Override
+    protected void aim(Enemy enemy) {
+        PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
+        PVector target = enemy.position;
+
+        if (pjSpeed > 0) { //shot leading
+            float dist = PVector.sub(target, position).mag();
+            float time = dist / pjSpeed;
+            if (magic) time = dist / (150 * (range / 200f));
+            PVector enemyHeading = PVector.fromAngle(enemy.angle);
+            if (enemy.state == 0) enemyHeading.setMag(enemy.getActualSpeed() * time); //only lead if enemy moving
+            else enemyHeading.setMag(0);
+            target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
+        }
+
+        targetAngle = clampAngle(findAngle(position, target));
+        angle = clampAngle(angle);
+        angle += angleDifference(targetAngle, angle) / (FRAMERATE/6f);
+
+        if (abs(targetAngle - angle) < 0.05) angle = targetAngle; //snap to prevent getting stuck
+
+        if (visualize && debug) { //cool lines
+            p.stroke(255);
+            p.line(position.x, position.y, target.x, target.y);
+            p.stroke(255, 0, 0, 150);
+            p.line(target.x, p.height, target.x, 0);
+            p.stroke(0, 0, 255, 150);
+            p.line(p.width, target.y, 0, target.y);
         }
     }
 
