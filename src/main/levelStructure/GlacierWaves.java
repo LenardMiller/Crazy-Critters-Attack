@@ -23,7 +23,6 @@ public class GlacierWaves {
 
         waves[0] = wavePreset(p, 65, 30, wolf);
         waves[0].addSpawns(wolf, 5);
-        waves[0].polluter = new Polluter(p, 5, "glacier/partial");
 
         waves[1] = wavePreset(p, 55, 25, wolf);
         waves[1].addSpawns(wolf, 5);
@@ -39,6 +38,7 @@ public class GlacierWaves {
 
         waves[5] = wavePreset(p, 55, 25, wolf);
         waves[5].addSpawns(wolf, 10);
+        waves[5].polluter = new Polluter(p, 5, "glacier/partial");
 
         waves[6] = wavePreset(p, 65, 30, shark);
         waves[6].addSpawns(shark, 5);
