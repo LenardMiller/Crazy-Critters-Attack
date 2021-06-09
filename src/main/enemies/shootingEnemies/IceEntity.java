@@ -22,12 +22,12 @@ public class IceEntity extends ShootingEnemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 13;
-        speed = 40;
+        speed = 30;
         moneyDrop = 150;
         damage = 6;
         shootDamage = 3;
         maxHp = 1200;
-        range = 150;
+        range = 130;
         barrelLength = 0;
         hp = maxHp;
         hitParticle = "iceOuch";

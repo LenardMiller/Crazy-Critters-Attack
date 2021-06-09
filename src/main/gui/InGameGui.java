@@ -95,6 +95,8 @@ public class InGameGui {
         if (fullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
           new PVector(padding, BOARD_HEIGHT - padding), LEFT);
         highlightedText(p, round(p.frameRate) + " fps", new PVector(BOARD_WIDTH - padding, 30), RIGHT);
+        int percentMemoryUsage = (int) ((Runtime.getRuntime().freeMemory() / (float) Runtime.getRuntime().totalMemory()) * 100);
+        highlightedText(p, percentMemoryUsage + "% mem", new PVector(BOARD_WIDTH - padding, 60), RIGHT);
     }
 
     public void drawText(PApplet p, int x) {

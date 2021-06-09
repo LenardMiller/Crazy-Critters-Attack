@@ -15,13 +15,13 @@ public class IceMonstrosity extends IceEntity {
         size = new PVector(50, 50);
         pfSize = 2;
         radius = 25;
-        speed = 30;
+        speed = 20;
         moneyDrop = 500;
         damage = 10;
         shootDamage = 1;
         maxHp = 10000;
         hp = maxHp;
-        range = 130;
+        range = 120;
         orbitAngleMinSpeed = 0.1f;
         orbitAngleSpeed = orbitAngleMinSpeed;
         orbitAngleTopSpeed = 0.5f;

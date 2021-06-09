@@ -113,11 +113,11 @@ public class TeslaTower extends Turret {
         //price
         upgradePrices[0] = 600;
         upgradePrices[1] = 700;
-        upgradePrices[2] = 7000;
+        upgradePrices[2] = 6000;
 
         upgradePrices[3] = 400;
         upgradePrices[4] = 800;
-        upgradePrices[5] = 8000;
+        upgradePrices[5] = 7000;
         //titles
         upgradeTitles[0] = "Farther Jumping";
         upgradeTitles[1] = "Farther Jumping";
@@ -186,10 +186,10 @@ public class TeslaTower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    delay -= 0.6f;
+                    delay -= 1;
                     break;
                 case 4:
-                    damage += 150;
+                    damage += 200;
                     break;
                 case 5:
                     delay = 0;
