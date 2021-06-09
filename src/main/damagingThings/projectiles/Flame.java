@@ -29,7 +29,6 @@ public class Flame extends Projectile {
         SPAWN_POSITION = new PVector(x, y);
         position = new PVector(x, y);
         size = new PVector(25, 25);
-        spawnRange = 0;
         radius = 5;
         maxSpeed = 300;
         speed = maxSpeed;

@@ -12,9 +12,7 @@ import static main.misc.Utilities.down60ToFramerate;
 public class BlueFlame extends Projectile {
 
     private final PImage[] SPRITES;
-    private final PVector SPAWN_POSITION;
     private final int TIMER;
-    private final int RANGE;
 
     private int currentSprite;
     private int delay;
@@ -25,12 +23,11 @@ public class BlueFlame extends Projectile {
     public BlueFlame(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel,
                      float effectDuration, int range, boolean sound) {
         super(p, x, y, angle, turret);
-        SPAWN_POSITION = new PVector(x, y);
         position = new PVector(x, y);
         size = new PVector(25, 25);
-        spawnRange = 0;
         radius = 5;
-        maxSpeed = 150;
+        float ratio = range / 200f;
+        maxSpeed = 150 * ratio;
         speed = maxSpeed;
         this.damage = damage;
         pierce = 900;
@@ -38,7 +35,6 @@ public class BlueFlame extends Projectile {
         this.effectDuration = effectDuration;
         this.angle = angle;
         TIMER = down60ToFramerate(2);
-        RANGE = range;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
         SPRITES = animatedSprites.get("blueFlamePJ");

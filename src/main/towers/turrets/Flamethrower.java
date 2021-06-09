@@ -235,11 +235,11 @@ public class Flamethrower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    damage += damage / 2;
+                    damage += damage;
                     break;
                 case 4:
-                    effectDuration += 2;
-                    effectLevel += 7;
+                    effectDuration += 5;
+                    effectLevel += 10;
                     break;
                 case 5:
                     name = "magicFlamethrower";
