@@ -23,7 +23,7 @@ public class Frost extends FlyingEnemy {
         size = new PVector(50, 50);
         radius = 25;
         speed = 30;
-        moneyDrop = 500;
+        moneyDrop = 300;
         damage = 4;
         maxHp = 6500;
         hp = maxHp;

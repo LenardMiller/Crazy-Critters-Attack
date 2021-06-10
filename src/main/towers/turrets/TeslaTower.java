@@ -26,7 +26,7 @@ public class TeslaTower extends Turret {
         super(p,tile);
         name = "tesla";
         delay = randomizeDelay(p, 3);
-        damage = 250;
+        damage = 300;
         arcLength = 3;
         pjSpeed = -1;
         range = 225;

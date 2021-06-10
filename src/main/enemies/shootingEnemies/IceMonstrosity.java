@@ -16,12 +16,12 @@ public class IceMonstrosity extends IceEntity {
         pfSize = 2;
         radius = 25;
         speed = 20;
-        moneyDrop = 500;
+        moneyDrop = 300;
         damage = 10;
         shootDamage = 1;
         maxHp = 10000;
         hp = maxHp;
-        range = 120;
+        range = 130;
         orbitAngleMinSpeed = 0.1f;
         orbitAngleSpeed = orbitAngleMinSpeed;
         orbitAngleTopSpeed = 0.5f;

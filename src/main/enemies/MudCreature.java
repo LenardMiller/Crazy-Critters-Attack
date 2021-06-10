@@ -15,13 +15,13 @@ public class MudCreature extends Enemy {
         radius = 25;
         speed = 90;
         moneyDrop = 200;
-        damage = 50;
-        maxHp = 20000; //Hp
+        damage = 60;
+        maxHp = 30000; //Hp
         hp = maxHp;
         hitParticle = "mudOuch";
         name = "mudCreature";
         betweenWalkFrames = down60ToFramerate(6);
-        betweenAttackFrames = down60ToFramerate(6);
+        betweenAttackFrames = down60ToFramerate(4);
         attackStartFrame = 0; //attack start
         attackFrame = attackStartFrame;
         attackDmgFrames = new int[]{9};

@@ -25,7 +25,7 @@ public class EnergyBlaster extends Turret{
         offset = 13;
         name = "energyBlaster";
         delay = randomizeDelay(p, 4.2f);
-        damage = 350;
+        damage = 400;
         pjSpeed = 1000;
         range = 300;
         betweenFireFrames = down60ToFramerate(2);
@@ -151,8 +151,8 @@ public class EnergyBlaster extends Turret{
                     range += 35;
                     break;
                 case 4:
-                    range += 35;
-                    damage += 100;
+                    range += 40;
+                    damage += 200;
                     break;
                 case 5:
                     range += 65;
