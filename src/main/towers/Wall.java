@@ -144,8 +144,8 @@ public class Wall extends Tower {
         //price
         upgradePrices[0] = 100;
         upgradePrices[1] = 500;
-        upgradePrices[2] = 1500;
-        upgradePrices[3] = 5000;
+        upgradePrices[2] = 2000;
+        upgradePrices[3] = 8000;
         //titles
         upgradeTitles[0] = "Stone";
         upgradeTitles[1] = "Metal";
