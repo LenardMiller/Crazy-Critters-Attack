@@ -6,7 +6,9 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.pathfinding.PathfindingUtilities.updateNodes;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class IceWall extends Wall {
@@ -70,6 +72,17 @@ public class IceWall extends Wall {
         boolean matchX = other.x >= tile.position.x - size.x && other.x <= tile.position.x;
         boolean matchY = other.y >= tile.position.y - size.y && other.y <= tile.position.y;
         return matchX && matchY;
+    }
+
+    @Override
+    public void die(boolean sold) {
+        playSoundRandomSpeed(p, breakSound, 1);
+        spawnParticles();
+        alive = false;
+        tile.tower = null;
+        updateFlooring();
+        updateTowerArray();
+        updateNodes();
     }
 
     @Override

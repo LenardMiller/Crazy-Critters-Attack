@@ -7,6 +7,7 @@ import main.particles.Debris;
 import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.towers.turrets.Booster;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -195,7 +196,9 @@ public abstract class Tower {
     public int boostedMaxHp() {
         int h = 0;
         for (Booster.Boost boost : boosts) {
-            int h2 = (int) (maxHp * boost.health);
+            float amount = boost.health;
+            if (this instanceof Turret) amount *= 2;
+            int h2 = (int) (maxHp * amount);
             if (h2 > h) h = h2;
         }
         return h;

@@ -17,9 +17,9 @@ public class MudFlinger extends ShootingEnemy {
         radius = 25;
         speed = 30;
         moneyDrop = 500;
-        damage = 2;
+        damage = 3;
         maxHp = 20000;
-        range = 170;
+        range = 180;
         barrelLength = 7;
         hp = maxHp;
         hitParticle = "mudOuch";

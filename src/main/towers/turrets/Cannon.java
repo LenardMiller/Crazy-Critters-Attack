@@ -64,7 +64,7 @@ public class Cannon extends Turret {
         upgradePrices[2] = 850;
         upgradePrices[3] = 150;
         upgradePrices[4] = 250;
-        upgradePrices[5] = 1000;
+        upgradePrices[5] = 1250;
         //titles
         upgradeTitles[0] = "Stronger shot";
         upgradeTitles[1] = "Powerful shot";
@@ -116,7 +116,7 @@ public class Cannon extends Turret {
                     damage += 40;
                     break;
                 case 2:
-                    damage += 300;
+                    damage += 400;
                     effectRadius = 60;
                     pjSpeed = 600;
                     dynamite = true;
