@@ -147,6 +147,7 @@ public class GlacierWaves {
 
         waves[32] = wavePreset(p, 55, 25, velociraptor);
         waves[32].addSpawns(velociraptor, 20);
+        waves[32].addSpawns(bigWorm, 5);
 
         waves[33] = wavePreset(p, 55, 25, mudCreature);
         waves[33].addSpawns(mudCreature, 5);
@@ -195,6 +196,7 @@ public class GlacierWaves {
         waves[42] = wavePreset(p, 65, 1, "Mammoth");
         waves[42].addSpawns(mammoth, 1);
 
+        //at this point there should no more mud flingers/creatures
         waves[43] = wavePreset(p, 55, 25, mudFlinger);
         waves[43].addSpawns(mudFlinger, 25);
 
@@ -203,7 +205,7 @@ public class GlacierWaves {
 
         waves[45] = wavePreset(p, 65, 20, mammoth);
         waves[45].addSpawns(mammoth, 3);
-        waves[45].addSpawns("bigWorm", 10);
+        waves[45].addSpawns(bigWorm, 10);
 
         waves[46] = wavePreset(p, 55, 25, mudFlinger);
         waves[46].addSpawns(mudFlinger, 35);
@@ -213,7 +215,7 @@ public class GlacierWaves {
 
         waves[48] = wavePreset(p, 65, 20, mammoth);
         waves[48].addSpawns(mammoth, 3);
-        waves[48].addSpawns("bigWorm", 10);
+        waves[48].addSpawns(bigWorm, 10);
 
         waves[49] = wavePreset(p, 150, 120, "Mud Horde");
         waves[49].addSpawns(bigWorm, 20);
