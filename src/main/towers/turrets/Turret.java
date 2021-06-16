@@ -236,6 +236,7 @@ public abstract class Turret extends Tower {
         } else moneyGain = (int) (value * 0.8);
         popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
+        if (hasBoostedDeathEffect()) deathEffect();
         updateFlooring();
         connectWallQueues++;
         updateNodes();

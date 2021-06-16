@@ -145,7 +145,7 @@ public abstract class Tower {
         updateNodes();
     }
 
-    private void deathEffect() {
+    protected void deathEffect() {
         int radius = value / 10;
         if (radius < 40) radius = 40;
         shockwaves.add(new FireShockwave(p, tile.position.x - (TILE_SIZE / 2f),
