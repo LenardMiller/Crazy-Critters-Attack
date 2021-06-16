@@ -7,8 +7,6 @@ import static main.Main.*;
 
 public class Level {
 
-    private final PApplet P;
-
     public Wave[] waves;
     public int currentWave;
     public int startWave;
@@ -16,6 +14,9 @@ public class Level {
     public int startingCash;
     public int reward;
     public String groundType;
+
+    private final PApplet P;
+
     private Polluter polluter;
 
     public Level(PApplet p, Wave[] waves, String layout, int startingCash, int reward, String groundType) {

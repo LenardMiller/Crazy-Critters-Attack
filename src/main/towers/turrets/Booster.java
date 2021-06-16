@@ -181,6 +181,7 @@ public class Booster extends Turret {
                     boost.firerate = 0.25f;
                     break;
                 case 5:
+                    boost.deathEffect = true;
                     break;
             }
         }
@@ -237,6 +238,7 @@ public class Booster extends Turret {
         public float damage;
         public float range;
         public float firerate;
+        public boolean deathEffect;
 
     }
 }

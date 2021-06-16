@@ -220,7 +220,7 @@ public class KeyBinds {
         //other stuff
         if (displayDebug) debug = !debug;
         if (displaySpawnAreas) showSpawn = !showSpawn;
-        if (addMoney) money += 100;
+        if (addMoney) money += 1000;
         if (loseMoney) money = 0;
         if (levelBuilder) {
             Main.levelBuilder = !Main.levelBuilder;

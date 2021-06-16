@@ -1,5 +1,8 @@
 package main.towers;
 
+import main.damagingThings.projectiles.Flame;
+import main.damagingThings.shockwaves.FireShockwave;
+import main.damagingThings.shockwaves.NuclearShockwave;
 import main.gui.InGameGui;
 import main.gui.guiObjects.PopupText;
 import main.misc.Tile;
@@ -21,6 +24,7 @@ import static main.misc.Utilities.incrementByTo;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.sound.SoundUtilities.playSound;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Tower {
@@ -135,9 +139,23 @@ public abstract class Tower {
         } else moneyGain = (int) (value * 0.8);
         if (moneyGain > 0) popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
+        if (hasBoostedDeathEffect()) deathEffect();
         updateFlooring();
         updateTowerArray();
         updateNodes();
+    }
+
+    private void deathEffect() {
+        shockwaves.add(new FireShockwave(p, tile.position.x - (TILE_SIZE / 2f),
+          tile.position.y - (TILE_SIZE / 2f), 0, 400, value, null, 15,
+          30));
+        shockwaves.add(new NuclearShockwave(p, tile.position.x - (TILE_SIZE / 2f),
+          tile.position.y - (TILE_SIZE / 2f), 250, value, null));
+        for (int i = 0; i < 16; i++) {
+            projectiles.add(new Flame(p, tile.position.x - (TILE_SIZE / 2f), tile.position.y - (TILE_SIZE / 2f), p.random(360), null,
+              value / 8, 15, 30, (int) p.random(150, 400), true));
+        }
+        playSound(sounds.get("hugeExplosion"), 1, 1);
     }
 
     public void heal(float relativeAmount) {
@@ -206,5 +224,12 @@ public abstract class Tower {
 
     public int getMaxHp() {
         return maxHp + boostedMaxHp();
+    }
+
+    public boolean hasBoostedDeathEffect() {
+        for (Booster.Boost boost : boosts) {
+            if (boost.deathEffect) return true;
+        }
+        return false;
     }
 }
