@@ -146,16 +146,20 @@ public abstract class Tower {
     }
 
     private void deathEffect() {
+        int radius = value / 10;
+        if (radius < 40) radius = 40;
         shockwaves.add(new FireShockwave(p, tile.position.x - (TILE_SIZE / 2f),
-          tile.position.y - (TILE_SIZE / 2f), 0, 400, value, null, 15,
+          tile.position.y - (TILE_SIZE / 2f), 0, radius * 2, value, null, 15,
           30));
         shockwaves.add(new NuclearShockwave(p, tile.position.x - (TILE_SIZE / 2f),
-          tile.position.y - (TILE_SIZE / 2f), 250, value, null));
-        for (int i = 0; i < 16; i++) {
-            projectiles.add(new Flame(p, tile.position.x - (TILE_SIZE / 2f), tile.position.y - (TILE_SIZE / 2f), p.random(360), null,
-              value / 8, 15, 30, (int) p.random(150, 400), true));
+          tile.position.y - (TILE_SIZE / 2f), radius, value, null));
+        for (int i = 0; i < radius / 5; i++) {
+            projectiles.add(new Flame(p, tile.position.x - (TILE_SIZE / 2f), tile.position.y - (TILE_SIZE / 2f),
+              p.random(360), null, value / 8, value / 8f, value / 8f, (int) p.random(radius,
+              radius * 2), true));
         }
-        playSound(sounds.get("hugeExplosion"), 1, 1);
+        if (radius > 200) playSound(sounds.get("hugeExplosion"), 1, 1);
+        else playSound(sounds.get("smallExplosion"), 1, 1);
     }
 
     public void heal(float relativeAmount) {
