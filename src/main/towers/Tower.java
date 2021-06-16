@@ -1,5 +1,6 @@
 package main.towers;
 
+import main.damagingThings.arcs.RedArc;
 import main.damagingThings.projectiles.Flame;
 import main.damagingThings.shockwaves.FireShockwave;
 import main.damagingThings.shockwaves.NuclearShockwave;
@@ -148,15 +149,20 @@ public abstract class Tower {
     protected void deathEffect() {
         int radius = value / 10;
         if (radius < 40) radius = 40;
-        shockwaves.add(new FireShockwave(p, tile.position.x - (TILE_SIZE / 2f),
-          tile.position.y - (TILE_SIZE / 2f), 0, radius * 2, value, null, 15,
+        float x = tile.position.x - (TILE_SIZE / 2f);
+        float y = tile.position.y - (TILE_SIZE / 2f);
+        shockwaves.add(new FireShockwave(p, x, y, 0, radius * 2, value, null, 15,
           30));
-        shockwaves.add(new NuclearShockwave(p, tile.position.x - (TILE_SIZE / 2f),
-          tile.position.y - (TILE_SIZE / 2f), radius, value, null));
+        shockwaves.add(new NuclearShockwave(p, x, y, radius, value, null));
         for (int i = 0; i < radius / 5; i++) {
-            projectiles.add(new Flame(p, tile.position.x - (TILE_SIZE / 2f), tile.position.y - (TILE_SIZE / 2f),
-              p.random(360), null, value / 8, value / 8f, value / 8f, (int) p.random(radius,
-              radius * 2), true));
+            projectiles.add(new Flame(p, x, y, p.random(360), null, value / 8, value / 8f,
+              value / 8f, (int) p.random(radius, radius * 2), true));
+        }
+        int arcCount = 3;
+        if (radius > 300) arcCount = 8;
+        if (radius > 600) arcCount = 16;
+        for (int i = 0; i < arcCount; i++) {
+            arcs.add(new RedArc(p, x, y, null, value / 8, radius / 10, radius * 2, -1));
         }
         if (radius > 200) playSound(sounds.get("hugeExplosion"), 1, 1);
         else playSound(sounds.get("smallExplosion"), 1, 1);
