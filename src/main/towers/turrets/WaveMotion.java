@@ -32,7 +32,7 @@ public class WaveMotion extends Turret {
         betweenIdleFrames = 3;
         betweenFireFrames = 4;
         beam = animatedSprites.get("waveMotionBeamTR");
-        placeSound = sounds.get("metalPlace");
+        placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("metalBreak");
         damageSound = sounds.get("metalDamage");
         fireSound = sounds.get("beam");

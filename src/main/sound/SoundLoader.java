@@ -56,6 +56,7 @@ public class SoundLoader {
         sounds.put("stonePlace", new SoundFile(p, "sounds/turrets/stonePlace.wav"));
         sounds.put("metalPlace", new SoundFile(p, "sounds/turrets/metalPlace.wav"));
         sounds.put("crystalPlace", new SoundFile(p, "sounds/turrets/crystalPlace.wav"));
+        sounds.put("titaniumPlace", new SoundFile(p, "sounds/turrets/titaniumPlace.wav"));
         sounds.put("slingshot", new SoundFile(p, "sounds/turrets/slingshot.wav"));
         sounds.put("crossbow", new SoundFile(p, "sounds/turrets/crossbow.wav"));
         sounds.put("shotbow", new SoundFile(p, "sounds/turrets/shotbow.wav"));
