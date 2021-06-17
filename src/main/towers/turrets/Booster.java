@@ -77,7 +77,8 @@ public class Booster extends Turret {
               p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
             float speed = p.random(25, 35);
             if (range > 1) speed = p.random(35, 50);
-            midParticles.add(new Floaty(p, position.x, position.y, speed, "orangeBubble"));
+            if (name.equals("moneyBooster")) midParticles.add(new Floaty(p, position.x, position.y, speed, "coin"));
+            else midParticles.add(new Floaty(p, position.x, position.y, speed, "orangeBubble"));
         }
         if (p.random(30) < 1 && name.equals("explosiveBooster")) {
             if (p.random(10) < 1) {

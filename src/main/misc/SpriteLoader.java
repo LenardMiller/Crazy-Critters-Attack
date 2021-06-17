@@ -94,6 +94,7 @@ public class SpriteLoader {
         getSprite(p,"orangeBubbleFloaty","PT","floaty/orangeBubble/",10);
         getSprite(p,"frostCloudFloaty","PT","floaty/frostCloud/",10);
         getSprite(p,"smokeCloudFloaty","PT","floaty/smokeCloud/",10);
+        getSprite(p,"coinFloaty","PT","floaty/coin/",10);
 
         //projectiles
         getSprite(p,"misc","PJ","misc/",6);
