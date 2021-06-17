@@ -17,6 +17,7 @@ public class Booster extends Turret {
 
     public static final int MONEY_GAIN = 2500;
 
+    public int totalMoney;
     public Boost boost;
 
     public Booster(PApplet p, Tile tile) {
@@ -104,6 +105,7 @@ public class Booster extends Turret {
 
     public void giveMoney() {
         money += MONEY_GAIN;
+        totalMoney += MONEY_GAIN;
         popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), MONEY_GAIN));
         playSoundRandomSpeed(p, sounds.get("cash"), 1);
     }

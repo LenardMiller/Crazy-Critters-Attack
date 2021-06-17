@@ -446,7 +446,6 @@ public class Selection {
     }
 
     private void displayStats() {
-        if (turret instanceof Booster) return;
         int offsetB = 0;
         if (!turret.hasPriority) offsetB = 45;
         P.fill(STAT_TEXT_COLOR.getRGB(), 254);
@@ -461,6 +460,13 @@ public class Selection {
             IceTower ice = (IceTower) turret;
             if (ice.frozenTotal == 1) P.text("1 wall created", 910, 500 + offsetB);
             else P.text(nfc(ice.frozenTotal) + " walls created", 910, 500 + offsetB);
+            return;
+        }
+        if (turret instanceof Booster) {
+            Booster booster = (Booster) turret;
+            if (booster.name.equals("moneyBooster")) {
+                P.text("$" + nfc(booster.totalMoney) + " total", 910, 500 + offsetB);
+            }
             return;
         }
         if (turret.killsTotal != 1) P.text(nfc(turret.killsTotal) + " kills", 910, 475 + offsetB);
