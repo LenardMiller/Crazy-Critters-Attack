@@ -12,7 +12,7 @@ import static main.Main.*;
 import static main.misc.Utilities.strikethroughText;
 import static main.sound.SoundUtilities.playSound;
 
-public class Selection { //what tower is selected
+public class Selection {
 
     private final PApplet P;
 
@@ -27,6 +27,9 @@ public class Selection { //what tower is selected
     private final Color SPECIAL_TEXT_COLOR = new Color(100, 0, 200);
     private final Color EFFECT_TEXT_COLOR = new Color(0, 200, 50);
 
+    /**
+     * what tower is selected
+     */
     public Selection(PApplet p) {
         this.P = p;
         name = "null";
@@ -332,6 +335,9 @@ public class Selection { //what tower is selected
             case "booster":
                 P.text("Booster", 1000, 241);
                 break;
+            case "explosiveBooster":
+                P.text("Unstable Booster", 1000, 241);
+                break;
         }
         return offset;
     }
@@ -364,6 +370,10 @@ public class Selection { //what tower is selected
                 offset += 20;
             } if (boost.firerate > 0) {
                 P.text("Firerate: +" + (int) (boost.firerate * 100) + "%", x, y + offset);
+                offset += 20;
+            } if (boost.deathEffect) {
+                P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
+                P.text("Explosive towers", x, y + offset);
             }
             return;
         }

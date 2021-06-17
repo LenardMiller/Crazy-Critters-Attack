@@ -136,7 +136,7 @@ public class Booster extends Turret {
 
         upgradeTitles[3] = "Boost Damage";
         upgradeTitles[4] = "Boost Firerate";
-        upgradeTitles[5] = "Explosives";
+        upgradeTitles[5] = "Unstable";
         //descriptions
         upgradeDescA[0] = "Boost";
         upgradeDescB[0] = "tower";
@@ -195,6 +195,8 @@ public class Booster extends Turret {
                     break;
                 case 5:
                     boost.deathEffect = true;
+                    boost.health = 1;
+                    boost.damage = 0.4f;
                     name = "explosiveBooster";
                     loadSprites();
                     break;
