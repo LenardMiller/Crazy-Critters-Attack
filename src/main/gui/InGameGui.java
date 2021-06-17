@@ -23,7 +23,6 @@ public class InGameGui {
     public SellTower sellButton;
     public TargetPriority priorityButton;
     public UpgradeTower upgradeButtonA, upgradeButtonB;
-    public GuiObject moneyIcon;
     public GuiObject upgradeIconA, upgradeIconB;
     public PlayButton playButton;
 
@@ -59,7 +58,6 @@ public class InGameGui {
         P.fill(TOWERBUY_PANEL_COLOR.getRGB()); //towerbuy bg
         P.rect(900,21,200,127);
         wallBuyButton.main();
-        moneyIcon.main();
         playButton.main(); //display is in Level
         if (!isTowers || selection.name.equals("null")) {
             sellButton.active = false;
@@ -112,7 +110,7 @@ public class InGameGui {
         p.textFont(largeFont);
         p.fill(MAIN_TEXT_COLOR.getRGB(), 254);
         p.textAlign(RIGHT);
-        p.text(nfc(money), BOARD_WIDTH + 200 - x, 211-5);
+        p.text("$" + nfc(money), BOARD_WIDTH + 200 - x, 211-5);
     }
 
     private void build() {
@@ -154,7 +152,6 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(2),"null",true));
         }
         wallBuyButton = new WallBuy(P,BOARD_WIDTH+100,172-12,"null",true);
-        moneyIcon = new GuiObject(P,BOARD_WIDTH, 211-29,"moneyIc",true);
         playButton = new PlayButton(P,1000,274.5f,"null",true);
         upgradeButtonA = new UpgradeTower(P,1000,480,"null",false, 0);
         upgradeButtonB = new UpgradeTower(P,1000,630,"null",false, 1);
