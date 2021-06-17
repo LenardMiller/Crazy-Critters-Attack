@@ -228,6 +228,7 @@ public class Booster extends Turret {
                     boost.health = 1;
                     boost.damage = 0.4f;
                     placeSound = sounds.get("titaniumPlace");
+                    breakSound = sounds.get("titaniumBreak");
                     name = "explosiveBooster";
                     loadSprites();
                     break;
