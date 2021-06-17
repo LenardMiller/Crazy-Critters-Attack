@@ -381,7 +381,7 @@ public class Selection {
                 P.text("Explosive towers", x, y + offset);
             } if (turret.name.equals("moneyBooster")) {
                 P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
-                P.text("+$1500 per wave", x, y + offset);
+                P.text("+$" + Booster.MONEY_GAIN + " per wave", x, y + offset);
             }
             return;
         }

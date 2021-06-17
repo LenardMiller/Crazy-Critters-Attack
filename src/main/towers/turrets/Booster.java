@@ -15,6 +15,8 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Booster extends Turret {
 
+    public static final int MONEY_GAIN = 2500;
+
     public Boost boost;
 
     public Booster(PApplet p, Tile tile) {
@@ -71,15 +73,23 @@ public class Booster extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         if (p.random(15) < 1) {
-            topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-              p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
-            if (name.equals("explosiveBooster")) topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-              p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
             float speed = p.random(25, 35);
             if (range > 1) speed = p.random(35, 50);
-            if (name.equals("moneyBooster")) midParticles.add(new Floaty(p, position.x, position.y, speed, "coin"));
-            else if (name.equals("explosiveBooster")) midParticles.add(new Floaty(p, position.x, position.y, speed, "smokeCloud"));
-            else midParticles.add(new Floaty(p, position.x, position.y, speed, "orangeBubble"));
+            if (name.equals("moneyBooster")) {
+                midParticles.add(new Floaty(p, position.x, position.y, speed, "coin"));
+                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "yellowMagic"));
+            } else if (name.equals("explosiveBooster")) {
+                midParticles.add(new Floaty(p, position.x, position.y, speed, "smokeCloud"));
+                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
+                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
+            } else {
+                midParticles.add(new Floaty(p, position.x, position.y, speed, "orangeBubble"));
+                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
+            }
         }
         if (p.random(30) < 1 && name.equals("explosiveBooster")) {
             if (p.random(10) < 1) {
@@ -93,9 +103,8 @@ public class Booster extends Turret {
     }
 
     public void giveMoney() {
-        int moneyGain = 1500;
-        money += moneyGain;
-        popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
+        money += MONEY_GAIN;
+        popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), MONEY_GAIN));
     }
 
     @Override

@@ -39,6 +39,7 @@ public class SpriteLoader {
         getSprite(p,"blueGreenFireMisc","PT","misc/blueGreenFire/",8);
         getSprite(p,"greenMagicMisc","PT","misc/greenMagic/",8);
         getSprite(p,"orangeMagicMisc","PT","misc/orangeMagic/",8);
+        getSprite(p,"yellowMagicMisc","PT","misc/yellowMagic/",8);
         getSprite(p,"iceMagicMisc","PT","misc/iceMagic/",8);
 
         getSprite(p,"greyPuff","PT","puff/grey/",11);
