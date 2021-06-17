@@ -336,7 +336,9 @@ public class Selection {
                 P.text("Booster", 1000, 241);
                 break;
             case "explosiveBooster":
-                P.text("Unstable Booster", 1000, 241);
+                P.text("Unstable", 1000, 241);
+                P.text("Booster", 1000, 266);
+                offset = 25;
                 break;
             case "moneyBooster":
                 P.text("Wealth Booster", 1000, 241);
