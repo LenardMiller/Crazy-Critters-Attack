@@ -196,6 +196,7 @@ public class Booster extends Turret {
                 case 5:
                     boost.deathEffect = true;
                     name = "explosiveBooster";
+                    loadSprites();
                     break;
             }
         }
