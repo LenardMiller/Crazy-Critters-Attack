@@ -169,7 +169,7 @@ public class Booster extends Turret {
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[23];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[37];
     }
 
     @Override
