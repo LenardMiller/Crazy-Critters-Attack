@@ -1,5 +1,7 @@
 package main.towers.turrets;
 
+import main.damagingThings.arcs.OrangeArc;
+import main.damagingThings.arcs.RedArc;
 import main.misc.Tile;
 import main.particles.Floaty;
 import main.particles.MiscParticle;
@@ -70,9 +72,20 @@ public class Booster extends Turret {
         if (p.random(15) < 1) {
             topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
+            if (name.equals("explosiveBooster")) topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+              p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
             float speed = p.random(25, 35);
             if (range > 1) speed = p.random(35, 50);
             midParticles.add(new Floaty(p, position.x, position.y, speed, "orangeBubble"));
+        }
+        if (p.random(30) < 1 && name.equals("explosiveBooster")) {
+            if (p.random(10) < 1) {
+                arcs.add(new RedArc(p, tile.position.x - (size.x / 2), tile.position.y - (size.y / 2),
+                  this, 0, 1, (int) p.random(20, 100), -1));
+            } else {
+                arcs.add(new OrangeArc(p, tile.position.x - (size.x / 2), tile.position.y - (size.y / 2),
+                  this, 0, 1, (int) p.random(20, 100), -1, 5));
+            }
         }
     }
 
@@ -182,6 +195,7 @@ public class Booster extends Turret {
                     break;
                 case 5:
                     boost.deathEffect = true;
+                    name = "explosiveBooster";
                     break;
             }
         }

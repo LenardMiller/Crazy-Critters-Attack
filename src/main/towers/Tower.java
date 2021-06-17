@@ -162,7 +162,8 @@ public abstract class Tower {
         if (radius > 300) arcCount = 8;
         if (radius > 600) arcCount = 16;
         for (int i = 0; i < arcCount; i++) {
-            arcs.add(new OrangeArc(p, x, y, null, value / 8, radius / 10, radius * 2, -1));
+            arcs.add(new OrangeArc(p, x, y, null, value / 8, radius / 10, radius * 2,
+              -1, 50));
         }
         if (radius > 200) playSound(sounds.get("hugeExplosion"), 1, 1);
         else playSound(sounds.get("smallExplosion"), 1, 1);
@@ -218,6 +219,10 @@ public abstract class Tower {
         if (boosts.size() > 0 && p.random(30) < 1) {
             topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
+            if (hasBoostedDeathEffect()) {
+                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
+            }
         }
     }
 
@@ -237,6 +242,7 @@ public abstract class Tower {
     }
 
     public boolean hasBoostedDeathEffect() {
+        if (name.equals("explosiveBooster")) return true;
         for (Booster.Boost boost : boosts) {
             if (boost.deathEffect) return true;
         }

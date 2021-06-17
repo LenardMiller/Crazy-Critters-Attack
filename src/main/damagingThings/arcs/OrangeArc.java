@@ -8,11 +8,11 @@ import java.awt.*;
 public class OrangeArc extends Arc {
 
     public OrangeArc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
-                  int priority) {
+                  int priority, int maxPoints) {
         super(p, startX, startY, turret, damage, maxLength, maxDistance, priority);
-        lineColor = new Color(255, 125, 0);
+        lineColor = new Color(255, 117, 0);
         particleType = "orangeMagic";
-        maxPoints = 50;
+        this.maxPoints = maxPoints;
         variation = 15;
         weight = 3;
     }
