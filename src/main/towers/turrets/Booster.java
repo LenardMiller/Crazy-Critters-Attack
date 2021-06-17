@@ -105,6 +105,7 @@ public class Booster extends Turret {
     public void giveMoney() {
         money += MONEY_GAIN;
         popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), MONEY_GAIN));
+        playSoundRandomSpeed(p, sounds.get("cash"), 1);
     }
 
     @Override

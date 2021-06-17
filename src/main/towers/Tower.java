@@ -26,7 +26,6 @@ import static main.misc.Utilities.incrementByTo;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
-import static main.sound.SoundUtilities.playSound;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Tower {
@@ -170,8 +169,8 @@ public abstract class Tower {
             arcs.add(new RedArc(p, x, y, null, value / 8, radius / 10, radius * 2,
               -1));
         }
-        if (radius > 200) playSound(sounds.get("hugeExplosion"), 1, 1);
-        else playSound(sounds.get("smallExplosion"), 1, 1);
+        if (radius > 200) playSoundRandomSpeed(p, sounds.get("hugeExplosion"), 1);
+        else playSoundRandomSpeed(p, sounds.get("smallExplosion"), 1);
     }
 
     public void heal(float relativeAmount) {

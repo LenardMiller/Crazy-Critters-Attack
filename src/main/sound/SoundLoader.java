@@ -66,6 +66,7 @@ public class SoundLoader {
         sounds.put("teslaFire", new SoundFile(p, "sounds/turrets/teslaFire.wav"));
         sounds.put("magicMissleer", new SoundFile(p, "sounds/turrets/magicMissileer.wav"));
         sounds.put("iceFire", new SoundFile(p, "sounds/turrets/iceFire.wav"));
+        sounds.put("cash", new SoundFile(p, "sounds/turrets/cash.wav"));
         //ui
         sounds.put("waveEnd", new SoundFile(p,"sounds/ui/waveEnd.wav"));
         sounds.put("clickIn", new SoundFile(p, "sounds/ui/clickIn.wav"));
