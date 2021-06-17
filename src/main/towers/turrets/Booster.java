@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.damagingThings.arcs.OrangeArc;
 import main.damagingThings.arcs.RedArc;
+import main.gui.guiObjects.PopupText;
 import main.misc.Tile;
 import main.particles.Floaty;
 import main.particles.MiscParticle;
@@ -87,6 +88,12 @@ public class Booster extends Turret {
                   this, 0, 1, (int) p.random(20, 100), -1, 5));
             }
         }
+    }
+
+    public void giveMoney() {
+        int moneyGain = 1500;
+        money += moneyGain;
+        popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
     }
 
     @Override
@@ -183,6 +190,9 @@ public class Booster extends Turret {
                     range++;
                     break;
                 case 2:
+                    boost.range = 0.3f;
+                    boost.firerate += 0.1f;
+                    name = "moneyBooster";
                     break;
             }
         } if (id == 1) {
@@ -191,7 +201,7 @@ public class Booster extends Turret {
                     boost.damage = 0.3f;
                     break;
                 case 4:
-                    boost.firerate = 0.25f;
+                    boost.firerate += 0.25f;
                     break;
                 case 5:
                     boost.deathEffect = true;

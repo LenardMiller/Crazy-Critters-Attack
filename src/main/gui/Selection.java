@@ -338,6 +338,9 @@ public class Selection {
             case "explosiveBooster":
                 P.text("Unstable Booster", 1000, 241);
                 break;
+            case "moneyBooster":
+                P.text("Wealth Booster", 1000, 241);
+                break;
         }
         return offset;
     }
@@ -374,6 +377,9 @@ public class Selection {
             } if (boost.deathEffect) {
                 P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
                 P.text("Explosive towers", x, y + offset);
+            } if (turret.name.equals("moneyBooster")) {
+                P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
+                P.text("+$1500 per wave", x, y + offset);
             }
             return;
         }

@@ -8,6 +8,7 @@ import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
 import main.towers.IceWall;
 import main.towers.Tower;
+import main.towers.turrets.Booster;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -83,6 +84,9 @@ public class Wave {
             else if (!(tower instanceof IceWall)) tower.heal(0.35f);
         }
         machine.heal(0.05f);
+        for (Tower tower : towers) {
+            if (tower.name.equals("moneyBooster")) ((Booster) tower).giveMoney();
+        }
         playSound(sounds.get("waveEnd"), 1, 1);
         money += levels[currentLevel].reward;
         popupTexts.add(new PopupText(P, new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), levels[currentLevel].reward));
