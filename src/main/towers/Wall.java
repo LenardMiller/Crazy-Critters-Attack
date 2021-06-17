@@ -84,7 +84,7 @@ public class Wall extends Tower {
     public void main() {
         if (hp <= 0) die(false);
         updateBoosts();
-        value = (int)(((float)hp / (float)maxHp) * price);
+        value = (int)(((float)hp / (float)getMaxHp()) * price);
     }
 
     @Override
