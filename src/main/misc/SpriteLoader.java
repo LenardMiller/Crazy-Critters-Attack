@@ -376,6 +376,7 @@ public class SpriteLoader {
 
         getSprite(p,"boosterIdle","TR","booster/idle/",4);
         getSprite(p, "explosiveBoosterIdle", "TR", "booster/explosive/idle/", 8);
+        getSprite(p, "moneyBoosterIdle", "TR", "booster/money/idle/", 4);
 
         //walls
         getSprite(p,"woodWall","TW","Wood/",4);
@@ -586,6 +587,7 @@ public class SpriteLoader {
         staticSprites.put("boosterBaseTR",p.loadImage("sprites/towers/turrets/booster/base.png"));
         staticSprites.put("boosterFullTR",p.loadImage("sprites/towers/turrets/booster/full.png"));
         staticSprites.put("explosiveBoosterBaseTR",p.loadImage("sprites/towers/turrets/booster/explosive/base.png"));
+        staticSprites.put("moneyBoosterBaseTR",p.loadImage("sprites/towers/turrets/booster/money/base.png"));
 
         //walls
         staticSprites.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));

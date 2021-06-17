@@ -194,6 +194,7 @@ public class Booster extends Turret {
                     boost.range = 0.3f;
                     boost.firerate += 0.1f;
                     name = "moneyBooster";
+                    loadSprites();
                     break;
             }
         } if (id == 1) {
