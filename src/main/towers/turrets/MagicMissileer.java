@@ -51,19 +51,27 @@ public class MagicMissileer extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        projectiles.add(new MagicMissile(p, p.random(tile.position.x-size.x,tile.position.x),
-          p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
-          getDamage(), 0,tile.position));
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
-          p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
-          getDamage(), 1,tile.position));
-        projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
-          p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
-          getDamage(), 2,tile.position));
-        if (additionalMissile) {
-            projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
-              p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
-              getDamage(), (int)(p.random(0,2.99f)),tile.position));
+        if (name.equals("magicSwarm")) {
+            for (int i = 0; i < 12; i++) {
+                projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
+                  p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
+                  getDamage(), (int)(p.random(0,2.99f)),tile.position));
+            }
+        } else {
+            projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
+              p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
+              getDamage(), 0, tile.position));
+            projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
+              p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
+              getDamage(), 1, tile.position));
+            projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
+              p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
+              getDamage(), 2, tile.position));
+            if (additionalMissile) {
+                projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
+                  p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
+                  getDamage(), (int) (p.random(0, 2.99f)), tile.position));
+            }
         }
     }
 
@@ -96,19 +104,19 @@ public class MagicMissileer extends Turret {
         //price
         upgradePrices[0] = 750;
         upgradePrices[1] = 1250;
-        upgradePrices[2] = 1;
+        upgradePrices[2] = 25000;
 
         upgradePrices[3] = 1250;
         upgradePrices[4] = 1500;
-        upgradePrices[5] = 2;
+        upgradePrices[5] = 35000;
         //titles
         upgradeTitles[0] = "More range";
         upgradeTitles[1] = "More magic";
-        upgradeTitles[2] = "shatter?";
+        upgradeTitles[2] = "static?";
 
         upgradeTitles[3] = "Faster Firing";
         upgradeTitles[4] = "More Missiles";
-        upgradeTitles[5] = "swarm?";
+        upgradeTitles[5] = "Missile Swarm";
         //descriptions
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "range";
@@ -131,13 +139,13 @@ public class MagicMissileer extends Turret {
         upgradeDescB[4] = "additional";
         upgradeDescC[4] = "missile";
 
-        upgradeDescA[5] = "Fire";
-        upgradeDescB[5] = "many";
-        upgradeDescC[5] = "missles";
+        upgradeDescA[5] = "Fire a";
+        upgradeDescB[5] = "swarm of";
+        upgradeDescC[5] = "missiles";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[8];
-        upgradeIcons[2] = animatedSprites.get("upgradeIC")[24];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[1];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[14];
@@ -166,6 +174,9 @@ public class MagicMissileer extends Turret {
                     additionalMissile = true;
                     break;
                 case 5:
+                    range += 50;
+                    delay -= 0.5f;
+                    name = "magicSwarm";
                     break;
             }
         }

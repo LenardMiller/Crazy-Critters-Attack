@@ -343,6 +343,12 @@ public class Selection {
             case "moneyBooster":
                 P.text("Wealth Booster", 1000, 241);
                 break;
+            case "magicSwarm":
+                P.text("Magic Missile", 1000, 241);
+                P.text("Swarm", 1000, 266);
+                offset = 25;
+                setTextPurple("Homing", offset);
+                setTextPurple("Twelve missiles", offset);
         }
         return offset;
     }
@@ -438,7 +444,7 @@ public class Selection {
             P.text("Ice lifespan: " + ((ice.wallTimeUntilDamage / FRAMERATE) * 10) + "s", 910, 376 + 20 * purpleCount + offset);
         }
         //missle count
-        if (turret instanceof MagicMissileer) {
+        if (turret.name.equals("magicMissileer")) {
             MagicMissileer magicMissileer = (MagicMissileer) turret;
             if (magicMissileer.additionalMissile) setTextPurple("Four missiles", offset);
             else setTextPurple("Three missiles", offset);
