@@ -168,7 +168,7 @@ public class MagicMissileer extends Turret {
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[14];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[34];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[39];
     }
 
     @Override
