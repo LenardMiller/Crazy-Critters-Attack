@@ -194,6 +194,10 @@ public class Booster extends Turret {
                 case 2:
                     boost.range = 0.3f;
                     boost.firerate += 0.1f;
+                    placeSound = sounds.get("crystalPlace");
+                    damageSound = sounds.get("crystalDamage");
+                    breakSound = sounds.get("crystalBreak");
+                    debrisType = "gold";
                     name = "moneyBooster";
                     loadSprites();
                     break;
