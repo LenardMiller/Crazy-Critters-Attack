@@ -14,6 +14,8 @@ public class MagicMissileer extends Turret {
 
     public boolean additionalMissile;
 
+    private float specialAngle;
+
     public MagicMissileer(PApplet p, Tile tile) {
         super(p,tile);
         name = "magicMissleer";
@@ -82,21 +84,38 @@ public class MagicMissileer extends Turret {
 
     @Override
     public void displayMain() {
+        int displacement = 20;
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
         p.rotate(angle);
         p.tint(0,60);
-        p.image(fireFrames[0],-size.x/2-offset,-size.y/2-offset);
+        if (name.equals("magicSwarm")) {
+            for (int i = 0; i < 3; i++) {
+                p.pushMatrix();
+                p.rotate(specialAngle + (i * (TWO_PI / 3)));
+                p.image(fireFrames[5],(-size.x/2-offset) + displacement,-size.y/2-offset);
+                p.popMatrix();
+            }
+        } else p.image(fireFrames[5],-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         //main
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
         p.tint(255, tintColor, tintColor);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        if (name.equals("magicSwarm")) {
+            for (int i = 0; i < 3; i++) {
+                p.pushMatrix();
+                p.rotate(specialAngle + (i * (TWO_PI / 3)));
+                p.image(sprite,(-size.x/2-offset) + displacement,-size.y/2-offset);
+                p.popMatrix();
+            }
+        } else p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         p.tint(255);
+        if (specialAngle < TWO_PI) specialAngle += 0.01f;
+        else specialAngle = 0;
     }
 
     @Override
