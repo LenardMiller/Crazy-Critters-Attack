@@ -23,8 +23,8 @@ public class WaveMotion extends Turret {
     public WaveMotion(PApplet p, Tile tile) {
         super(p,tile);
         name = "waveMotion";
-        delay = randomizeDelay(p, 6.6f);
-        damage = 2;
+        delay = randomizeDelay(p, 15);
+        damage = 1000;
         pjSpeed = -1;
         range = 500;
         beam = new PImage[0];
@@ -32,6 +32,10 @@ public class WaveMotion extends Turret {
         betweenIdleFrames = 3;
         betweenFireFrames = 4;
         beam = animatedSprites.get("waveMotionBeamTR");
+        placeSound = sounds.get("metalPlace");
+        breakSound = sounds.get("metalBreak");
+        damageSound = sounds.get("metalDamage");
+        fireSound = sounds.get("beam");
         debrisType = "darkMetal";
         price = 500;
         value = price;
@@ -46,7 +50,8 @@ public class WaveMotion extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {}
 
-    protected void fire() {
+    @Override
+    protected void fire(float barrelLength, String particleType) {
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(35);
@@ -63,6 +68,8 @@ public class WaveMotion extends Turret {
         beamLength = (int)(c/24);
         beamPartLength = PVector.fromAngle(beamAngle - radians(90));
         beamPartLength.setMag(24);
+
+        playSoundRandomSpeed(p, fireSound, 1);
     }
 
     @Override
@@ -90,11 +97,13 @@ public class WaveMotion extends Turret {
                 if (i == 0) s = new PVector(x,y);
                 if (i == beamLength) e = new PVector(x,y);
             }
-            beamDamage(s,e);
-            if (betweenBeamTimer < betweenFireFrames) betweenBeamTimer++;
-            else {
-                currentBeamFrame++;
-                betweenBeamTimer = 0;
+            if (!paused) {
+                beamDamage(s, e);
+                if (betweenBeamTimer < betweenFireFrames) betweenBeamTimer++;
+                else {
+                    currentBeamFrame++;
+                    betweenBeamTimer = 0;
+                }
             }
         }
         //main
@@ -138,11 +147,11 @@ public class WaveMotion extends Turret {
             if (Float.isNaN(distFromEnemyToBeam)) distFromEnemyToBeam = 1;
             distFromEnemyToBeam -= enemy.radius / 2;
             if (distFromEnemyToBeam < 1) distFromEnemyToBeam = 1;
-            if (distFromEnemyToBeam < 10) enemy.damageWithoutBuff(getDamage(), this, "burning", new PVector(0,0), false);
+            if (distFromEnemyToBeam < 10) enemy.damageWithoutBuff(getDamage(), this, "energy", new PVector(0,0), false);
             else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageWithoutBuff(
-              getDamage(), this, "burning", new PVector(0,0), false);
+              getDamage(), this, "energy", new PVector(0,0), false);
             else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageWithoutBuff(
-              getDamage(), this, "burning", new PVector(0,0), false);
+              getDamage(), this, "energy", new PVector(0,0), false);
         }
     }
 
