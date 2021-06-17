@@ -87,6 +87,7 @@ public class SoundLoader {
         sounds.put("crystalDamage", new SoundFile(p, "sounds/walls/crystalDamage.wav"));
         sounds.put("crystalBreak", new SoundFile(p, "sounds/walls/crystalBreak.wav"));
         sounds.put("titaniumBreak", new SoundFile(p, "sounds/walls/titaniumBreak.wav"));
+        sounds.put("titaniumDamage", new SoundFile(p, "sounds/walls/titaniumDamage.wav"));
         //loops
         startStopSoundLoops.put("smallExplosion", new StartStopSoundLoop(p, "smallExplosion/", secondsToFrames(1), false));
         fadeSoundLoops.put("flamethrower", new FadeSoundLoop(p, "flamethrower", FRAMERATE/6));

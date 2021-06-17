@@ -34,7 +34,7 @@ public class WaveMotion extends Turret {
         beam = animatedSprites.get("waveMotionBeamTR");
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");
-        damageSound = sounds.get("metalDamage");
+        damageSound = sounds.get("titaniumDamage");
         fireSound = sounds.get("beam");
         debrisType = "darkMetal";
         price = 500;
