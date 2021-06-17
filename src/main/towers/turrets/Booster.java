@@ -208,6 +208,7 @@ public class Booster extends Turret {
                     breakSound = sounds.get("crystalBreak");
                     debrisType = "gold";
                     name = "moneyBooster";
+                    betweenIdleFrames = 2;
                     loadSprites();
                     break;
             }

@@ -377,7 +377,7 @@ public class SpriteLoader {
 
         getSprite(p,"boosterIdle","TR","booster/idle/",4);
         getSprite(p, "explosiveBoosterIdle", "TR", "booster/explosive/idle/", 8);
-        getSprite(p, "moneyBoosterIdle", "TR", "booster/money/idle/", 4);
+        getSprite(p, "moneyBoosterIdle", "TR", "booster/money/idle/", 26);
 
         //walls
         getSprite(p,"woodWall","TW","Wood/",4);
