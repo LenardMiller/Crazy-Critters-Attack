@@ -135,7 +135,7 @@ public class IceTower extends Turret {
         //price
         upgradePrices[0] = 750;
         upgradePrices[1] = 1200;
-        upgradePrices[2] = 30000;
+        upgradePrices[2] = 20000;
 
         upgradePrices[3] = 1000;
         upgradePrices[4] = 1500;
