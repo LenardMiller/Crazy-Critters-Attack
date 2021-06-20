@@ -15,7 +15,7 @@ public class MudCreature extends Enemy {
         radius = 25;
         speed = 90;
         moneyDrop = 500;
-        damage = 70;
+        damage = 40;
         maxHp = 20000; //Hp
         hp = maxHp;
         hitParticle = "mudOuch";
