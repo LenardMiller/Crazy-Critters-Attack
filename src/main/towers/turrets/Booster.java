@@ -22,6 +22,8 @@ public class Booster extends Turret {
 
     public Booster(PApplet p, Tile tile) {
         super(p, tile);
+        maxHp = 40;
+        hp = maxHp;
         name = "booster";
         delay = -1;
         range = 1;
@@ -226,6 +228,8 @@ public class Booster extends Turret {
                 case 5:
                     boost.deathEffect = true;
                     boost.health = 1;
+                    maxHp = 60;
+                    hp = maxHp;
                     boost.damage = 0.4f;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
