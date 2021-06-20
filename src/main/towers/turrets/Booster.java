@@ -15,7 +15,7 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Booster extends Turret {
 
-    public static final int MONEY_GAIN = 2500;
+    public static final int MONEY_GAIN = 5000;
 
     public int totalMoney;
     public Boost boost;

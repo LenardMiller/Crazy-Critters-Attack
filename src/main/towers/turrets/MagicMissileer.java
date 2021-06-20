@@ -114,8 +114,10 @@ public class MagicMissileer extends Turret {
         } else p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         p.tint(255);
-        if (specialAngle < TWO_PI) specialAngle += 0.01f;
-        else specialAngle = 0;
+        if (!paused) {
+            if (specialAngle < TWO_PI) specialAngle += 0.01f;
+            else specialAngle = 0;
+        }
     }
 
     @Override
@@ -127,7 +129,7 @@ public class MagicMissileer extends Turret {
 
         upgradePrices[3] = 1250;
         upgradePrices[4] = 1500;
-        upgradePrices[5] = 35000;
+        upgradePrices[5] = 20000;
         //titles
         upgradeTitles[0] = "More range";
         upgradeTitles[1] = "More magic";
