@@ -744,7 +744,7 @@
     "machine": false,
     "id": 121,
     "type": "tile",
-    "base": "dirt"
+    "base": "stone"
   },
   {
     "machine": false,
@@ -854,33 +854,31 @@
     "machine": false,
     "id": 139,
     "type": "tile",
-    "base": "dirt"
+    "base": "stone"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 140,
     "type": "tile",
     "base": "stone"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 141,
     "type": "tile",
-    "obstacle": "invisibleOb_TL",
-    "base": "water"
-  },
-  {
-    "machine": false,
-    "id": 142,
-    "type": "tile",
-    "obstacle": "invisibleOb_TL",
-    "base": "water"
+    "base": "stone"
   },
   {
     "machine": true,
-    "id": 143,
+    "id": 142,
     "type": "tile",
     "base": "stone"
+  },
+  {
+    "machine": false,
+    "id": 143,
+    "type": "tile",
+    "base": "water"
   },
   {
     "machine": false,
@@ -1085,10 +1083,10 @@
     "base": "dirt"
   },
   {
-    "machine": true,
+    "machine": false,
     "id": 178,
     "type": "tile",
-    "base": "stone"
+    "base": "water"
   },
   {
     "machine": true,
@@ -1103,7 +1101,7 @@
     "base": "stone"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 181,
     "type": "tile",
     "base": "stone"
@@ -1201,27 +1199,25 @@
     "machine": false,
     "id": 197,
     "type": "tile",
+    "base": "water"
+  },
+  {
+    "machine": true,
+    "id": 198,
+    "type": "tile",
     "base": "stone"
   },
   {
-    "machine": false,
-    "id": 198,
-    "type": "tile",
-    "obstacle": "invisibleOb_TL",
-    "base": "water"
-  },
-  {
-    "machine": false,
+    "machine": true,
     "id": 199,
     "type": "tile",
-    "obstacle": "invisibleOb_TL",
-    "base": "water"
+    "base": "stone"
   },
   {
     "machine": false,
     "id": 200,
     "type": "tile",
-    "base": "dirt"
+    "base": "stone"
   },
   {
     "machine": false,
@@ -1327,11 +1323,10 @@
     "base": "water"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 218,
     "type": "tile",
-    "obstacle": "invisibleOb_TL",
-    "base": "water"
+    "base": "stone"
   },
   {
     "machine": false,
@@ -2176,19 +2171,19 @@
     "type": "tile"
   },
   {
-    "betweenFrames": 0,
+    "betweenFrames": 4,
     "barHorizontal": true,
     "maxHp": 500,
     "hp": 500,
     "barY": 497,
-    "barX": 350,
+    "barX": 450,
     "type": "machine",
-    "x": 450,
-    "name": "crystalDrillMA",
-    "y": 425,
+    "x": 455,
+    "name": "titaniumDrillMA",
+    "y": 475,
     "debris": "metal",
     "id": 361,
     "barSizeY": 6,
-    "barSizeX": 150
+    "barSizeX": 100
   }
 ]

@@ -723,7 +723,7 @@
     "machine": false,
     "id": 121,
     "type": "tile",
-    "base": "snow"
+    "base": "stone"
   },
   {
     "machine": false,
@@ -830,28 +830,28 @@
     "machine": false,
     "id": 139,
     "type": "tile",
-    "base": "snow"
-  },
-  {
-    "machine": false,
-    "id": 140,
-    "type": "tile",
-    "base": "snow"
-  },
-  {
-    "machine": false,
-    "id": 141,
-    "type": "tile",
-    "base": "snow"
-  },
-  {
-    "machine": false,
-    "id": 142,
-    "type": "tile",
-    "base": "snow"
+    "base": "stone"
   },
   {
     "machine": true,
+    "id": 140,
+    "type": "tile",
+    "base": "stone"
+  },
+  {
+    "machine": true,
+    "id": 141,
+    "type": "tile",
+    "base": "stone"
+  },
+  {
+    "machine": true,
+    "id": 142,
+    "type": "tile",
+    "base": "stone"
+  },
+  {
+    "machine": false,
     "id": 143,
     "type": "tile",
     "base": "snow"
@@ -949,19 +949,19 @@
     "machine": true,
     "id": 159,
     "type": "tile",
-    "base": "snow"
+    "base": "stone"
   },
   {
     "machine": true,
     "id": 160,
     "type": "tile",
-    "base": "snow"
+    "base": "stone"
   },
   {
     "machine": true,
     "id": 161,
     "type": "tile",
-    "base": "snow"
+    "base": "stone"
   },
   {
     "machine": true,
@@ -1059,7 +1059,7 @@
     "base": "snow"
   },
   {
-    "machine": true,
+    "machine": false,
     "id": 178,
     "type": "tile",
     "base": "snow"
@@ -1068,7 +1068,7 @@
     "machine": true,
     "id": 179,
     "type": "tile",
-    "base": "snow"
+    "base": "stone"
   },
   {
     "machine": true,
@@ -1077,7 +1077,7 @@
     "base": "snow"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 181,
     "type": "tile",
     "base": "snow"
@@ -1178,13 +1178,13 @@
     "base": "snow"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 198,
     "type": "tile",
     "base": "snow"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 199,
     "type": "tile",
     "base": "snow"
@@ -1297,7 +1297,7 @@
     "base": "snow"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 218,
     "type": "tile",
     "base": "snow"
@@ -2129,19 +2129,19 @@
     "type": "tile"
   },
   {
-    "betweenFrames": 0,
+    "betweenFrames": 4,
     "barHorizontal": true,
     "maxHp": 500,
     "hp": 500,
     "barY": 497,
-    "barX": 350,
+    "barX": 450,
     "type": "machine",
-    "x": 450,
-    "name": "crystalDrillMA",
-    "y": 425,
+    "x": 455,
+    "name": "titaniumDrillMA",
+    "y": 475,
     "debris": "metal",
     "id": 361,
     "barSizeY": 6,
-    "barSizeX": 150
+    "barSizeX": 100
   }
 ]
