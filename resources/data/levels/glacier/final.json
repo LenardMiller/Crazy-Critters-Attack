@@ -878,6 +878,7 @@
     "machine": false,
     "id": 143,
     "type": "tile",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -1086,6 +1087,7 @@
     "machine": false,
     "id": 178,
     "type": "tile",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -1199,6 +1201,7 @@
     "machine": false,
     "id": 197,
     "type": "tile",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
