@@ -101,6 +101,7 @@ public class Machine {
         }
         if (currentFrame >= sprites.length) currentFrame = 0;
         if (deathFrame < secondsToFrames(4)) p.image(sprites[currentFrame], position.x, position.y);
+//        p.text(damageState, position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
         if (dead && !paused) deathFrame++;
@@ -190,7 +191,7 @@ public class Machine {
         if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
         else if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
         else if (hp <= hpSegment) damageState = 3;
-        else if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
+        if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
         playSoundRandomSpeed(p, DAMAGE_SOUND, 1);
         for (Tile tile : machTiles) {
             int x = (int) tile.position.x;
