@@ -349,6 +349,14 @@ public class Selection {
                 offset = 25;
                 setTextPurple("Homing", offset);
                 setTextPurple("Twelve missiles", offset);
+                break;
+            case "electricMissileer":
+                P.text("Electrified Missile", 1000, 241);
+                P.text("Launcher", 1000, 266);
+                offset = 25;
+                setTextPurple("Homing", offset);
+                setTextPurple("Electrifies enemies", offset);
+                break;
         }
         return offset;
     }
@@ -411,6 +419,25 @@ public class Selection {
             P.text("Pierce: " + turret.pierce, 910, 356 + offset + 20 * purpleCount);
             offset += 20;
         }
+        //electricity
+        if (turret instanceof TeslaTower) {
+            TeslaTower tesla = (TeslaTower) turret;
+            P.fill(new Color(100, 150, 255).getRGB(), 254);
+            P.text("Jumps: " + tesla.arcLength, 910, 356 + 20 * purpleCount + offset);
+        }
+        //ice
+        if (turret instanceof IceTower) {
+            IceTower ice = (IceTower) turret;
+            P.fill(new Color(100, 150, 255).getRGB(), 254);
+            P.text("Ice HP: " + ice.wallHp, 910, 356 + 20 * purpleCount + offset);
+            P.text("Ice lifespan: " + ((ice.wallTimeUntilDamage / FRAMERATE) * 10) + "s", 910, 376 + 20 * purpleCount + offset);
+        }
+        //missle count
+        if (turret.name.equals("magicMissleer") || turret.name.equals("electricMissileer")) {
+            MagicMissileer magicMissileer = (MagicMissileer) turret;
+            if (magicMissileer.additionalMissile) setTextPurple("Four missiles", offset);
+            else setTextPurple("Three missiles", offset);
+        }
         //effects
         if (turret.effectLevel != 0 || turret.effectDuration != 0) {
             P.fill(EFFECT_TEXT_COLOR.getRGB(), 254);
@@ -429,25 +456,6 @@ public class Selection {
             } else {
                 P.text("Effect Duration: " + effectDuration + "s", 910, 376 + - x + 20 * purpleCount + offset);
             }
-        }
-        //electricity
-        if (turret instanceof TeslaTower) {
-            TeslaTower tesla = (TeslaTower) turret;
-            P.fill(new Color(100, 150, 255).getRGB(), 254);
-            P.text("Jumps: " + tesla.arcLength, 910, 356 + 20 * purpleCount + offset);
-        }
-        //ice
-        if (turret instanceof IceTower) {
-            IceTower ice = (IceTower) turret;
-            P.fill(new Color(100, 150, 255).getRGB(), 254);
-            P.text("Ice HP: " + ice.wallHp, 910, 356 + 20 * purpleCount + offset);
-            P.text("Ice lifespan: " + ((ice.wallTimeUntilDamage / FRAMERATE) * 10) + "s", 910, 376 + 20 * purpleCount + offset);
-        }
-        //missle count
-        if (turret.name.equals("magicMissileer")) {
-            MagicMissileer magicMissileer = (MagicMissileer) turret;
-            if (magicMissileer.additionalMissile) setTextPurple("Four missiles", offset);
-            else setTextPurple("Three missiles", offset);
         }
     }
 

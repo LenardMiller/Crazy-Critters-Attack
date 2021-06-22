@@ -1,0 +1,15 @@
+package main.damagingThings.arcs;
+
+import main.towers.turrets.Turret;
+import processing.core.PApplet;
+
+import java.awt.*;
+
+public class YellowArc extends Arc {
+
+    public YellowArc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance, int priority) {
+        super(p, startX, startY, turret, damage, maxLength, maxDistance, priority);
+        lineColor = Color.YELLOW;
+        particleType = "nuclear";
+    }
+}

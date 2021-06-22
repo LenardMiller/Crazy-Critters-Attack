@@ -1,16 +1,19 @@
 package main.buffs;
 
-import main.damagingThings.arcs.Arc;
+import main.damagingThings.arcs.YellowArc;
 import main.enemies.Enemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
+import processing.sound.SoundFile;
 
 import static main.Main.*;
 import static main.misc.Utilities.secondsToFrames;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Electrified extends Buff {
 
     private final int DAMAGE;
+    private final SoundFile SOUND;
 
     public Electrified(PApplet p, int enId, int damage, float duration, Turret turret) {
         super(p, enId, turret);
@@ -18,6 +21,7 @@ public class Electrified extends Buff {
         effectDelay = secondsToFrames(1);
         effectTimer = 0;
         DAMAGE = damage;
+        SOUND = sounds.get("teslaFire");
         lifeDuration = secondsToFrames(duration);
         particle = "nuclear";
         name = "electrified";
@@ -28,8 +32,9 @@ public class Electrified extends Buff {
         if (enId < 0) buffs.remove(this);
         else {
             Enemy enemy = enemies.get(enId);
-            arcs.add(new Arc(p, enemy.position.x, enemy.position.y, turret, DAMAGE, 4, 150,
+            arcs.add(new YellowArc(p, enemy.position.x, enemy.position.y, turret, DAMAGE, 4, 150,
               (int) p.random(0,3)));
+            playSoundRandomSpeed(p, SOUND, 1);
         }
     }
 }

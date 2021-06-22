@@ -342,6 +342,7 @@ public abstract class Enemy {
             if (statDamage > 0) turret.damageTotal += statDamage;
         }
         int effectTimer = p.frameCount + 10;
+        //prevent duplicates
         if (buffs.size() > 0) {
             for (int j = 0; j < buffs.size(); j++) {
                 Buff buff = buffs.get(j);
