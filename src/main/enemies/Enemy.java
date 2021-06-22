@@ -383,6 +383,9 @@ public abstract class Enemy {
                 case "frozen":
                     buff = new Frozen(p, id, turret);
                     break;
+                case "electrified":
+                    buff = new Electrified(p, id, (int) effectLevel, effectDuration, turret);
+                    break;
                 default:
                     buff = null;
                     break;

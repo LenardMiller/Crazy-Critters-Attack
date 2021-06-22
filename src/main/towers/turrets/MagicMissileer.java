@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
-import main.damagingThings.projectiles.MagicMissile;
+import main.damagingThings.projectiles.homing.ElectricMissile;
+import main.damagingThings.projectiles.homing.MagicMissile;
 import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -58,6 +59,21 @@ public class MagicMissileer extends Turret {
                 projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
                   p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
                   getDamage(), (int)(p.random(0,2.99f)),tile.position));
+            }
+        } else if (name.equals("electricMissileer")) {
+            projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
+              p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
+              getDamage(), 0, tile.position, effectDuration, effectLevel));
+            projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
+              p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
+              getDamage(), 1, tile.position, effectDuration, effectLevel));
+            projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
+              p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
+              getDamage(), 2, tile.position, effectDuration, effectLevel));
+            if (additionalMissile) {
+                projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
+                  p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
+                  getDamage(), (int) (p.random(0, 2.99f)), tile.position, effectDuration, effectLevel));
             }
         } else {
             projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
@@ -184,6 +200,9 @@ public class MagicMissileer extends Turret {
                     damage += 400;
                     break;
                 case 2:
+                    effectLevel = 5000;
+                    effectDuration = 10;
+                    name = "electricMissileer";
                     break;
             }
         } if (id == 1) {

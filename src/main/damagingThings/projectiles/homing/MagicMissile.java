@@ -1,5 +1,6 @@
-package main.damagingThings.projectiles;
+package main.damagingThings.projectiles.homing;
 
+import main.damagingThings.projectiles.Projectile;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.particles.Ouch;

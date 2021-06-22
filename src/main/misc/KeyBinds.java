@@ -2,9 +2,13 @@ package main.misc;
 
 import main.Main;
 import main.damagingThings.arcs.Arc;
-import main.damagingThings.projectiles.*;
+import main.damagingThings.projectiles.EnergyBlast;
+import main.damagingThings.projectiles.Flame;
+import main.damagingThings.projectiles.MiscProjectile;
+import main.damagingThings.projectiles.Needle;
 import main.damagingThings.projectiles.enemyProjeciles.IceCrystal;
 import main.damagingThings.projectiles.enemyProjeciles.Snowball;
+import main.damagingThings.projectiles.homing.MagicMissile;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.Shark;
 import main.enemies.flyingEnemies.Frost;
