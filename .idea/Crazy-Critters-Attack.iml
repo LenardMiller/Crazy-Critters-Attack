@@ -8,7 +8,25 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="core" level="project" />
-    <orderEntry type="library" name="sound" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///Applications/Processing 3.app/Contents/Java/core/library" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file:///Applications/Processing 3.app/Contents/Java/core/library" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Documents/Processing/libraries/sound/library" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$USER_HOME$/Documents/Processing/libraries/sound/library" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
