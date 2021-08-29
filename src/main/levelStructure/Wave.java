@@ -141,15 +141,29 @@ public class Wave {
         P.text(TITLE, 1000, y + 110);
         P.textFont(veryLargeFont);
         //number
-        P.text(id, 1000, y + 70);
+        P.text(id, 1000, y + 75);
         //enemy types
-        P.textFont(largeFont);
-        P.textAlign(RIGHT);
+        int letterCount = 0;
+        if (hasBurrowing) letterCount++;
+        if (hasFlying) letterCount++;
+        if (hasShooting) letterCount++;
+
+        P.textFont(mediumLargeFont);
         StringBuilder enemyTypes = new StringBuilder();
-        if (hasBurrowing) enemyTypes.append(" B");
-        if (hasFlying) enemyTypes.append(" F");
-        if (hasShooting) enemyTypes.append(" S");
-        P.text(enemyTypes.toString(), 1090, y + 30);
+        if (hasBurrowing) {
+            if (letterCount > 1) enemyTypes.append(" B");
+            else enemyTypes.append(" Burrowing");
+        } if (hasFlying) {
+            if (letterCount > 1) {
+                if (hasBurrowing) enemyTypes.append(" &");
+                enemyTypes.append(" F");
+            }
+            else enemyTypes.append(" Flying");
+        } if (hasShooting) {
+            if (letterCount > 1) enemyTypes.append(" & S");
+            else enemyTypes.append(" Shooting");
+        }
+        P.text(enemyTypes.toString(), 1000, y + 25);
     }
 
     private Enemy getEnemy(String name) {
