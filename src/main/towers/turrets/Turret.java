@@ -46,8 +46,11 @@ public abstract class Turret extends Tower {
     public String[] upgradeDescB;
     public String[] upgradeDescC;
 
-    protected int offset;
+    /**
+     * 0: Idle, 1: Fire, 2: Load
+     */
     protected int state;
+    protected int offset;
     protected int frame;
     protected int frameTimer;
     protected int betweenIdleFrames;
@@ -65,7 +68,7 @@ public abstract class Turret extends Tower {
     protected Enemy targetEnemy;
     protected SoundFile fireSound;
 
-    private ArrayList<Integer> spriteArray;
+    protected ArrayList<Integer> spriteArray;
 
     protected Turret(PApplet p, Tile tile) {
         super(p, tile);

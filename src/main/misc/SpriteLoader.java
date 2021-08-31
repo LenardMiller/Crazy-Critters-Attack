@@ -348,6 +348,12 @@ public class SpriteLoader {
         getSprite(p,"magicMissleerFire","TR","magicMissleer/fire/",8);
         getSprite(p,"magicMissleerLoad","TR","magicMissleer/load/",26);
         getSprite(p,"magicMissleerIdle","TR","magicMissleer/idle/",8);
+        getSprite(p,"electricMissleerCoreFire","TR","magicMissleer/electric/core/fire/",4);
+        getSprite(p,"electricMissleerInnerRingFire","TR","magicMissleer/electric/innerRing/fire/",4);
+        getSprite(p,"electricMissleerOuterRingFire","TR","magicMissleer/electric/outerRing/fire/",4);
+        getSprite(p,"electricMissleerCoreLoad","TR","magicMissleer/electric/core/load/",10);
+        getSprite(p,"electricMissleerInnerRingLoad","TR","magicMissleer/electric/innerRing/load/",10);
+        getSprite(p,"electricMissleerOuterRingLoad","TR","magicMissleer/electric/outerRing/load/",10);
 
         getSprite(p,"nightmareFire","TR","nightmare/fire/",14);
         getSprite(p,"nightmareLoad","TR","nightmare/load/",22);
@@ -523,6 +529,9 @@ public class SpriteLoader {
         staticSprites.put("magicMissleerBaseTR",p.loadImage("sprites/towers/turrets/magicMissleer/base.png"));
         staticSprites.put("magicMissleerFullTR",p.loadImage("sprites/towers/turrets/magicMissleer/full.png"));
         staticSprites.put("magicMissleerIdleTR",p.loadImage("sprites/towers/turrets/magicMissleer/idle.png"));
+        staticSprites.put("electricMissleerCoreIdleTR",p.loadImage("sprites/towers/turrets/magicMissleer/electric/core/idle.png"));
+        staticSprites.put("electricMissleerInnerRingIdleTR",p.loadImage("sprites/towers/turrets/magicMissleer/electric/innerRing/idle.png"));
+        staticSprites.put("electricMissleerOuterRingIdleTR",p.loadImage("sprites/towers/turrets/magicMissleer/electric/outerRing/idle.png"));
 
         staticSprites.put("gluerBaseTR",p.loadImage("sprites/towers/turrets/gluer/base.png"));
         staticSprites.put("gluerFullTR",p.loadImage("sprites/towers/turrets/gluer/full.png"));

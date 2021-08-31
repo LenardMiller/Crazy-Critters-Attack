@@ -2,13 +2,17 @@ package main.towers.turrets;
 
 import main.damagingThings.projectiles.homing.ElectricMissile;
 import main.damagingThings.projectiles.homing.MagicMissile;
+import main.misc.CompressArray;
 import main.misc.Tile;
+import main.particles.Ouch;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
+import java.util.ArrayList;
+
 import static main.Main.*;
-import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
+import static main.misc.Utilities.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class MagicMissileer extends Turret {
@@ -16,6 +20,44 @@ public class MagicMissileer extends Turret {
     public boolean additionalMissile;
 
     private float specialAngle;
+
+    private enum ElectricComponent {
+        OuterRing(
+                staticSprites.get("electricMissleerOuterRingIdleTR"),
+                animatedSprites.get("electricMissleerOuterRingFireTR"),
+                animatedSprites.get("electricMissleerOuterRingLoadTR")),
+        InnerRing(
+                staticSprites.get("electricMissleerInnerRingIdleTR"),
+                animatedSprites.get("electricMissleerInnerRingFireTR"),
+                animatedSprites.get("electricMissleerInnerRingLoadTR")),
+        Core(
+                staticSprites.get("electricMissleerCoreIdleTR"),
+                animatedSprites.get("electricMissleerCoreFireTR"),
+                animatedSprites.get("electricMissleerCoreLoadTR"));
+
+        final PImage IDLE;
+        final PImage[] FIRE;
+        final PImage[] LOAD;
+
+        ElectricComponent(PImage idle, PImage[] fire, PImage[] load) {
+            IDLE = idle;
+            FIRE = fire;
+            LOAD = load;
+        }
+
+        PImage getSprite(int state, int frame, int compressFrame) {
+            switch (state) {
+                case 0:
+                    return IDLE;
+                case 1:
+                    return FIRE[frame];
+                case 2:
+                    return LOAD[compressFrame];
+                default:
+                    return null;
+            }
+        }
+    }
 
     public MagicMissileer(PApplet p, Tile tile) {
         super(p,tile);
@@ -43,6 +85,28 @@ public class MagicMissileer extends Turret {
     }
 
     @Override
+    protected void loadSprites() {
+        if (name.equals("electricMissleer")) {
+            sBase = staticSprites.get("magicMissleerBaseTR");
+            sIdle = staticSprites.get(name + "IdleTR");
+            idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
+
+            fireFrames = animatedSprites.get(name + "CoreFireTR");
+            loadFrames = animatedSprites.get(name + "CoreLoadTR");
+            return;
+        }
+        sBase = staticSprites.get(name + "BaseTR");
+        sIdle = staticSprites.get(name + "IdleTR");
+        fireFrames = animatedSprites.get(name + "FireTR");
+        loadFrames = animatedSprites.get(name + "LoadTR");
+        if (animatedSprites.get(name + "IdleTR") != null) {
+            idleFrames = animatedSprites.get(name + "IdleTR");
+            sIdle = idleFrames[0];
+        }
+        else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
+    }
+
+    @Override
     protected void checkTarget() {
         getTargetEnemy();
         if (state == 0 && targetEnemy != null) { //if done animating
@@ -60,7 +124,7 @@ public class MagicMissileer extends Turret {
                   p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
                   getDamage(), (int)(p.random(0,2.99f)),tile.position));
             }
-        } else if (name.equals("electricMissileer")) {
+        } else if (name.equals("electricMissleer")) {
             projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
               getDamage(), 0, tile.position, effectDuration, effectLevel));
@@ -113,6 +177,16 @@ public class MagicMissileer extends Turret {
                 p.image(fireFrames[5],(-size.x/2-offset) + displacement,-size.y/2-offset);
                 p.popMatrix();
             }
+        } else if (name.equals("electricMissleer")) {
+            p.image(ElectricComponent.Core.IDLE, (-size.x/2-offset),-size.y/2-offset);
+            p.pushMatrix();
+            p.rotate(specialAngle);
+            p.image(ElectricComponent.InnerRing.IDLE, (-size.x/2-offset),-size.y/2-offset);
+            p.popMatrix();
+            p.pushMatrix();
+            p.rotate(-specialAngle);
+            p.image(ElectricComponent.OuterRing.IDLE, (-size.x/2-offset),-size.y/2-offset);
+            p.popMatrix();
         } else p.image(fireFrames[5],-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         //main
@@ -127,6 +201,19 @@ public class MagicMissileer extends Turret {
                 p.image(sprite,(-size.x/2-offset) + displacement,-size.y/2-offset);
                 p.popMatrix();
             }
+        } else if (name.equals("electricMissleer")) {
+            int compressFrame = 0;
+            if (state == 2) compressFrame = spriteArray.get(frame);
+
+            p.image(ElectricComponent.Core.getSprite(state, frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
+            p.pushMatrix();
+            p.rotate(specialAngle);
+            p.image(ElectricComponent.InnerRing.getSprite(state, frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
+            p.popMatrix();
+            p.pushMatrix();
+            p.rotate(-specialAngle);
+            p.image(ElectricComponent.OuterRing.getSprite(state, frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
+            p.popMatrix();
         } else p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         p.tint(255);
@@ -203,7 +290,8 @@ public class MagicMissileer extends Turret {
                     effectLevel = 5000;
                     effectDuration = 10;
                     damage *= 1.5f;
-                    name = "electricMissileer";
+                    name = "electricMissleer";
+                    loadSprites();
                     break;
             }
         } if (id == 1) {

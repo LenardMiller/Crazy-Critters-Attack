@@ -350,7 +350,7 @@ public class Selection {
                 setTextPurple("Homing", offset);
                 setTextPurple("Twelve missiles", offset);
                 break;
-            case "electricMissileer":
+            case "electricMissleer":
                 P.text("Electrified Missile", 1000, 241);
                 P.text("Launcher", 1000, 266);
                 offset = 25;
