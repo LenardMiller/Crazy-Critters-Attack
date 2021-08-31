@@ -33,7 +33,7 @@ public class Electrified extends Buff {
         else {
             Enemy enemy = enemies.get(enId);
             arcs.add(new YellowArc(p, enemy.position.x, enemy.position.y, turret, DAMAGE, 4, 150,
-              (int) p.random(0,3)));
+              (int) p.random(3)));
             playSoundRandomSpeed(p, SOUND, 1);
         }
     }

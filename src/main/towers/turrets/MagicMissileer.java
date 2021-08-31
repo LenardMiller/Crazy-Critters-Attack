@@ -202,6 +202,7 @@ public class MagicMissileer extends Turret {
                 case 2:
                     effectLevel = 5000;
                     effectDuration = 10;
+                    damage *= 1.5f;
                     name = "electricMissileer";
                     break;
             }
