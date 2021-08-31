@@ -163,6 +163,14 @@ public class MagicMissileer extends Turret {
     }
 
     @Override
+    public void displayBase() {
+        if (name.equals("electricMissleer")) return;
+        p.tint(255, tintColor, tintColor);
+        p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
+        p.tint(255, 255, 255);
+    }
+
+    @Override
     public void displayMain() {
         int displacement = 20;
         //shadow
@@ -218,7 +226,20 @@ public class MagicMissileer extends Turret {
         p.popMatrix();
         p.tint(255);
         if (!paused) {
-            if (specialAngle < TWO_PI) specialAngle += 0.01f;
+            float specialRotationSpeed = 0.01f;
+            if (name.equals("electricMissleer")) {
+                switch (state) {
+                    case 0:
+                        specialRotationSpeed = 0.03f;
+                        break;
+                    case 1:
+                        specialRotationSpeed = 0.03f * (1 - (frame / (float) fireFrames.length));
+                        break;
+                    case 2:
+                        specialRotationSpeed = 0.03f * (frame / (float) spriteArray.size());
+                }
+            }
+            if (specialAngle < TWO_PI) specialAngle += specialRotationSpeed;
             else specialAngle = 0;
         }
     }
@@ -289,7 +310,7 @@ public class MagicMissileer extends Turret {
                 case 2:
                     effectLevel = 5000;
                     effectDuration = 10;
-                    damage *= 1.5f;
+                    damage *= 2.5f;
                     name = "electricMissleer";
                     loadSprites();
                     break;
