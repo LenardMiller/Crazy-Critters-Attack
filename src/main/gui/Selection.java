@@ -454,7 +454,7 @@ public class Selection {
             if (effectDuration % 1 == 0) {
                 P.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
             } else {
-                P.text("Effect Duration: " + effectDuration + "s", 910, 376 + - x + 20 * purpleCount + offset);
+                P.text("Effect Duration: " + effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
             }
         }
     }
