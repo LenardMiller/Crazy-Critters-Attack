@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.damagingThings.arcs.YellowArc;
 import main.damagingThings.projectiles.homing.ElectricMissile;
 import main.damagingThings.projectiles.homing.MagicMissile;
 import main.misc.CompressArray;
@@ -160,6 +161,11 @@ public class MagicMissileer extends Turret {
     private void fire() {
         playSoundRandomSpeed(p, fireSound, 1);
         spawnProjectiles(new PVector(0,0), angle);
+        if (name.equals("electricMissleer")) {
+            for (int i = 0; i < 3; i++) {
+                arcs.add(new YellowArc(p, getCenter().x, getCenter().y, this, 0, 0, (int) p.random(20, 100), -1));
+            }
+        }
     }
 
     @Override
@@ -225,6 +231,7 @@ public class MagicMissileer extends Turret {
         } else p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         p.tint(255);
+
         if (!paused) {
             float specialRotationSpeed = 0.01f;
             if (name.equals("electricMissleer")) {
@@ -238,9 +245,13 @@ public class MagicMissileer extends Turret {
                     case 2:
                         specialRotationSpeed = 0.03f * (frame / (float) spriteArray.size());
                 }
+
+                if (p.random(25) < 1 && state == 0)
+                    arcs.add(new YellowArc(p, getCenter().x, getCenter().y, this, 0, 0, (int) p.random(20, 100), -1));
             }
             if (specialAngle < TWO_PI) specialAngle += specialRotationSpeed;
             else specialAngle = 0;
+
         }
     }
 
