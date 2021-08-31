@@ -55,9 +55,9 @@ public abstract class ShootingEnemy extends Enemy {
             }
 
             if (state != 2) {
-                angle = clampAngle(angle);
-                targetAngle = clampAngle(targetAngle);
-                angle += angleDifference(targetAngle, angle) / 10;
+                angle = normalizeAngle(angle);
+                targetAngle = normalizeAngle(targetAngle);
+                angle += getAngleDifference(targetAngle, angle) / 10;
             }
 
             if (canTargetTurret()) state = 2;

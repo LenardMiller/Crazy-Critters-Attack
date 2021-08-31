@@ -526,6 +526,8 @@ public class Main extends PApplet {
         }
         //currently held
         hand.main();
+        //reset enemy ice checking
+        for (Enemy enemy : enemies) enemy.intersectingIceCount = 0;
     }
 
     /**

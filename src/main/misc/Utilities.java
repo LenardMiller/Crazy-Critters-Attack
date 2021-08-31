@@ -7,8 +7,6 @@ import processing.core.PVector;
 import java.awt.*;
 import java.io.IOException;
 
-import main.misc.IntVector;
-
 import static main.Main.*;
 import static main.misc.DataControl.saveSettings;
 
@@ -125,7 +123,7 @@ public class Utilities {
      * @param a the angle to convert
      * @return an angle between 0 and TWO_PI
      */
-    public static float clampAngle(float a) {
+    public static float normalizeAngle(float a) {
         return a - TWO_PI * floor(a / TWO_PI);
     }
 
@@ -135,10 +133,10 @@ public class Utilities {
      * @param current angle to be compared
      * @return the angle between target and current
      */
-    public static float angleDifference(float target, float current) {
+    public static float getAngleDifference(float target, float current) {
         float diffA = -(current - target);
         float diffB = diffA - TWO_PI;
-        float diffC = clampAngle(diffB);
+        float diffC = normalizeAngle(diffB);
         float f = min(abs(diffA), abs(diffB), abs(diffC));
         if (f == abs(diffA)) return diffA;
         if (f == abs(diffB)) return diffB;
@@ -377,11 +375,37 @@ public class Utilities {
         return input + p.random(-(input/10f),input/10f);
     }
 
+    /**
+     * @param position world position
+     * @return matched to grid + 1
+     */
     public static IntVector worldPositionToTowerGridPosition(PVector position) {
         return new IntVector((roundTo(position.x, 50) / 50) + 1, (roundTo(position.y, 50) / 50) + 1);
     }
 
+    /**
+     * @param position world position
+     * @return matched to grid
+     */
     public static IntVector worldPositionToGridPosition(PVector position) {
         return new IntVector(roundTo(position.x, 50) / 50, roundTo(position.y, 50) / 50);
+    }
+
+    /**
+     * @param angle angle to check
+     * @return if angle is facing towards the left
+     */
+    public static boolean angleIsFacingLeftStandard(float angle) {
+        angle = normalizeAngle(angle);
+        return angle < HALF_PI || angle > PI + HALF_PI;
+    }
+
+    /**
+     * @param angle angle to check
+     * @return if angle is facing towards the top of the screen
+     */
+    public static boolean angleIsFacingUpStandard(float angle) {
+        angle = normalizeAngle(angle);
+        return angle < PI;
     }
 }

@@ -110,9 +110,9 @@ public class Flamethrower extends Turret {
             target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
         }
 
-        targetAngle = clampAngle(findAngle(position, target));
-        angle = clampAngle(angle);
-        angle += angleDifference(targetAngle, angle) / (FRAMERATE/6f);
+        targetAngle = normalizeAngle(findAngle(position, target));
+        angle = normalizeAngle(angle);
+        angle += getAngleDifference(targetAngle, angle) / (FRAMERATE/6f);
 
         if (abs(targetAngle - angle) < 0.05) angle = targetAngle; //snap to prevent getting stuck
 

@@ -10,8 +10,8 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.angleDifference;
-import static main.misc.Utilities.clampAngle;
+import static main.misc.Utilities.getAngleDifference;
+import static main.misc.Utilities.normalizeAngle;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class BurrowingEnemy extends Enemy {
@@ -26,9 +26,9 @@ public abstract class BurrowingEnemy extends Enemy {
         swapPoints(false);
 
         if (!paused && !immobilized) {
-            angle = clampAngle(angle);
-            targetAngle = clampAngle(targetAngle);
-            angle += angleDifference(targetAngle, angle) / 10;
+            angle = normalizeAngle(angle);
+            targetAngle = normalizeAngle(targetAngle);
+            angle += getAngleDifference(targetAngle, angle) / 10;
 
             if (state == 0) move();
             else if (state == 1) attack();

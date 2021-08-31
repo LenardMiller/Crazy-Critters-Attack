@@ -77,9 +77,9 @@ public class MagicMissile extends Projectile {
     }
 
     private void aim(PVector target) {
-        float targetAngle = clampAngle(findAngle(position, target));
-        angle = clampAngle(angle);
-        angle += angleDifference(targetAngle, angle) / 10;
+        float targetAngle = normalizeAngle(findAngle(position, target));
+        angle = normalizeAngle(angle);
+        angle += getAngleDifference(targetAngle, angle) / 10;
         angleTwo = angle;
         velocity = PVector.fromAngle(angle-HALF_PI);
     }

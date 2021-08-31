@@ -54,6 +54,10 @@ public class Tile {
         flooringInsideCorners = new PImage[4];
     }
 
+    public PVector getCenter() {
+        return PVector.sub(position, new PVector(TILE_SIZE / 2f, TILE_SIZE / 2f));
+    }
+
     public void main() {
         if (tower != null) tower.main();
     }

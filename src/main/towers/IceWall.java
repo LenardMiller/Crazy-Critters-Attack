@@ -1,6 +1,7 @@
 package main.towers;
 
 import main.enemies.Enemy;
+import main.misc.CollisionBox;
 import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -59,8 +60,10 @@ public class IceWall extends Wall {
             }
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy enemy = enemies.get(i);
-                if (enemy.pfSize > 2) continue;
-                if (intersecting(enemy.position)) {
+                CollisionBox enemyCollisionBox = new CollisionBox(p, PVector.div(enemy.size, -2), enemy.size);
+                if (enemyCollisionBox.pointIsInsideBox(enemy.position, tile.getCenter())) enemy.intersectingIceCount++;
+                int targetSize = ceil(enemy.pfSize / 2f);
+                if (enemy.intersectingIceCount >= targetSize) {
                     enemy.damageWithBuff(0, "frozen", 1, 0.2f, null,
                       false, "frozen", new PVector(0, 0), i);
                 }

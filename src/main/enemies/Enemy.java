@@ -48,6 +48,7 @@ public abstract class Enemy {
     public int maxHp;
     public int attackFrame;
     public int pfSize;
+    public int intersectingIceCount;
     public int[] attackDmgFrames;
     public int[] tempAttackDmgFrames;
     public boolean immobilized;
@@ -123,9 +124,9 @@ public abstract class Enemy {
         swapPoints(false);
 
         if (!paused && !immobilized) {
-            angle = clampAngle(angle);
-            targetAngle = clampAngle(targetAngle);
-            angle += angleDifference(targetAngle, angle) / 10;
+            angle = normalizeAngle(angle);
+            targetAngle = normalizeAngle(targetAngle);
+            angle += getAngleDifference(targetAngle, angle) / 10;
 
             if (state == 0) move();
             else if (state == 1) attack();

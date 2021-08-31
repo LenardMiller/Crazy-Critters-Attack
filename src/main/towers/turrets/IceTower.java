@@ -81,8 +81,12 @@ public class IceTower extends Turret {
                                     targetEnemy.position,
                                     PVector.div(
                                             targetEnemy.size,
-                                            2)),
-                            new PVector(25, 25)));
+                                            2
+                                    )
+                            ),
+                            new PVector(25, 25)
+                    )
+            );
             for (int x = 0; x < targetSize; x++) {
                 for (int y = 0; y < targetSize; y++) {
                     placeWall(tiles.get(targetTopLeft.x + x, targetTopLeft.y + y));
