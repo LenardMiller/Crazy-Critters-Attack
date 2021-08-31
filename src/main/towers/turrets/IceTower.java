@@ -40,7 +40,7 @@ public class IceTower extends Turret {
         offset = 0;
         wallHp = 40;
         wallTimeUntilDamage = 20;
-        debrisType = "metal";
+        debrisType = "darkMetal";
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");

@@ -321,8 +321,13 @@ public class Selection {
                 break;
             case "iceTower":
                 P.text("Freeze Ray", 1000, 241);
-                setTextPurple("Perfect accuracy", offset);
                 setTextPurple("Encases enemies", offset);
+                break;
+            case "superIceTower":
+                P.text("Super Freeze", 1000, 241);
+                P.text("Ray", 1000, 266);
+                offset = 25;
+                setTextPurple("Encases any enemy", offset);
                 break;
             case "railgun":
                 setTextPurple("Perfect accuracy", offset);
