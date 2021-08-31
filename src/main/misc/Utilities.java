@@ -7,6 +7,8 @@ import processing.core.PVector;
 import java.awt.*;
 import java.io.IOException;
 
+import main.misc.IntVector;
+
 import static main.Main.*;
 import static main.misc.DataControl.saveSettings;
 
@@ -373,5 +375,13 @@ public class Utilities {
      */
     public static float randomizeDelay(PApplet p, float input) {
         return input + p.random(-(input/10f),input/10f);
+    }
+
+    public static IntVector worldPositionToTowerGridPosition(PVector position) {
+        return new IntVector((roundTo(position.x, 50) / 50) + 1, (roundTo(position.y, 50) / 50) + 1);
+    }
+
+    public static IntVector worldPositionToGridPosition(PVector position) {
+        return new IntVector(roundTo(position.x, 50) / 50, roundTo(position.y, 50) / 50);
     }
 }

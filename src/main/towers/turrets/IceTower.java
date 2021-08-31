@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.misc.IntVector;
 import main.misc.Tile;
 import main.towers.IceWall;
 import main.towers.Wall;
@@ -72,7 +73,28 @@ public class IceTower extends Turret {
 
         targetEnemy.damageWithoutBuff(getDamage(), this, "ice", PVector.fromAngle(angle), damage > 0);
 
-        Tile tile = tiles.get((roundTo(targetEnemy.position.x, 50) / 50) + 1, (roundTo(targetEnemy.position.y, 50) / 50) + 1);
+        int targetSize = ceil(targetEnemy.pfSize / 2f);
+        if (name.equals("superIceTower") && targetSize > 1) {
+            IntVector targetTopLeft = worldPositionToTowerGridPosition(
+                    PVector.add(
+                            PVector.sub(
+                                    targetEnemy.position,
+                                    PVector.div(
+                                            targetEnemy.size,
+                                            2)),
+                            new PVector(25, 25)));
+            for (int x = 0; x < targetSize; x++) {
+                for (int y = 0; y < targetSize; y++) {
+                    placeWall(tiles.get(targetTopLeft.x + x, targetTopLeft.y + y));
+                }
+            }
+        } else {
+            Tile tile = tiles.get((roundTo(targetEnemy.position.x, 50) / 50) + 1, (roundTo(targetEnemy.position.y, 50) / 50) + 1);
+            placeWall(tile);
+        }
+    }
+
+    private void placeWall(Tile tile) {
         if (tile.tower == null) {
             tile.tower = new IceWall(p, tile, wallHp, wallTimeUntilDamage);
             Wall wall = (Wall) tile.tower;
@@ -135,19 +157,19 @@ public class IceTower extends Turret {
         //price
         upgradePrices[0] = 750;
         upgradePrices[1] = 1200;
-        upgradePrices[2] = 20000;
+        upgradePrices[2] = 30000;
 
         upgradePrices[3] = 1000;
         upgradePrices[4] = 1500;
-        upgradePrices[5] = 25000;
+        upgradePrices[5] = 20000;
         //titles
         upgradeTitles[0] = "Longer Lasting";
         upgradeTitles[1] = "Stronger Ice";
-        upgradeTitles[2] = "Auto Defence";
+        upgradeTitles[2] = "Superfreeze";
 
         upgradeTitles[3] = "Increase Range";
         upgradeTitles[4] = "Faster Freezing";
-        upgradeTitles[5] = "Superfreeze";
+        upgradeTitles[5] = "Auto Defence";
         //descriptions
         upgradeDescA[0] = "Ice lasts";
         upgradeDescB[0] = "longer";
@@ -157,9 +179,9 @@ public class IceTower extends Turret {
         upgradeDescB[1] = "ice HP";
         upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "Reinforces";
-        upgradeDescB[2] = "defences";
-        upgradeDescC[2] = "with ice";
+        upgradeDescA[2] = "Freeze";
+        upgradeDescB[2] = "bigger";
+        upgradeDescC[2] = "enemies";
 
 
         upgradeDescA[3] = "Increase";
@@ -170,17 +192,17 @@ public class IceTower extends Turret {
         upgradeDescB[4] = "firerate";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "Freeze";
-        upgradeDescB[5] = "bigger";
-        upgradeDescC[5] = "enemies";
+        upgradeDescA[5] = "Reinforces";
+        upgradeDescB[5] = "defences";
+        upgradeDescC[5] = "with ice";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[35];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[36];
-        upgradeIcons[2] = animatedSprites.get("upgradeIC")[34];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[28];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[28];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[34];
     }
 
     @Override
@@ -194,6 +216,7 @@ public class IceTower extends Turret {
                     wallHp *= 2;
                     break;
                 case 2:
+                    name = "superIceTower";
                     break;
             }
         } if (id == 1) {
