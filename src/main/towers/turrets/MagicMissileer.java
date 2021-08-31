@@ -268,7 +268,7 @@ public class MagicMissileer extends Turret {
         //titles
         upgradeTitles[0] = "More range";
         upgradeTitles[1] = "More magic";
-        upgradeTitles[2] = "static?";
+        upgradeTitles[2] = "Electrifying";
 
         upgradeTitles[3] = "Faster Firing";
         upgradeTitles[4] = "More Missiles";
@@ -282,9 +282,9 @@ public class MagicMissileer extends Turret {
         upgradeDescB[1] = "damage";
         upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "split";
-        upgradeDescB[2] = "into";
-        upgradeDescC[2] = "bits";
+        upgradeDescA[2] = "Electrifies";
+        upgradeDescB[2] = "enemies";
+        upgradeDescC[2] = "";
 
 
         upgradeDescA[3] = "Increase";
@@ -301,7 +301,7 @@ public class MagicMissileer extends Turret {
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[8];
-        upgradeIcons[2] = animatedSprites.get("upgradeIC")[1];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[40];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[14];
