@@ -44,7 +44,7 @@ public class SpriteLoader {
 
         getSprite(p,"greyPuff","PT","puff/grey/",11);
         getSprite(p,"greenPuff","PT","puff/green/",10);
-        getSprite(p,"yellowPuff","PT","puff/green/",10);
+        getSprite(p,"yellowPuff","PT","puff/yellow/",10);
         getSprite(p,"poisonPuff","PT","puff/poison/",10);
         getSprite(p,"gluePuff","PT","puff/glue/",10);
         getSprite(p,"snowPuff","PT","puff/snow/",10);

@@ -433,7 +433,7 @@ public class Selection {
             P.text("Ice lifespan: " + ((ice.wallTimeUntilDamage / FRAMERATE) * 10) + "s", 910, 376 + 20 * purpleCount + offset);
         }
         //missle count
-        if (turret.name.equals("magicMissleer") || turret.name.equals("electricMissileer")) {
+        if (turret.name.equals("magicMissleer") || turret.name.equals("electricMissleer")) {
             MagicMissileer magicMissileer = (MagicMissileer) turret;
             if (magicMissileer.additionalMissile) setTextPurple("Four missiles", offset);
             else setTextPurple("Three missiles", offset);
