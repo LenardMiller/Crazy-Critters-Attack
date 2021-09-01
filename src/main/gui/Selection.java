@@ -436,7 +436,8 @@ public class Selection {
             P.fill(new Color(100, 150, 255).getRGB(), 254);
             P.text("Ice HP: " + ice.wallHp, 910, 356 + 20 * purpleCount + offset);
             float lifespan = (ice.wallTimeUntilDamage / (float) FRAMERATE) * 10;
-            P.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 * purpleCount + offset);
+            if (ice.wallTimeUntilDamage == -1) P.text("Ice doesn't decay", 910, 376 + 20 * purpleCount + offset);
+            else P.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 * purpleCount + offset);
         }
         //missile count
         if (turret.name.equals("magicMissleer") || turret.name.equals("electricMissleer")) {

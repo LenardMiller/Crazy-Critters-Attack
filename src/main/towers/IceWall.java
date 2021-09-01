@@ -52,11 +52,13 @@ public class IceWall extends Wall {
         if (hp <= 0) die(false);
         value = (int)(((float)hp / (float)maxHp) * price);
         if (!paused && alive) {
-            damageTimer++;
-            if (damageTimer >= TIME_UNTIL_DAMAGE) {
-                hp -= maxHp / 10;
-                damageTimer = 0;
-                refreshHpBar();
+            if (TIME_UNTIL_DAMAGE != -1) {
+                damageTimer++;
+                if (damageTimer >= TIME_UNTIL_DAMAGE) {
+                    hp -= maxHp / 10;
+                    damageTimer = 0;
+                    refreshHpBar();
+                }
             }
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy enemy = enemies.get(i);
