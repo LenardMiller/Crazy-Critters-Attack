@@ -136,7 +136,7 @@ public class IceTower extends Turret {
             if (targetTile != null) {
                 placeWall(targetTile);
                 playSoundRandomSpeed(p, fireSound, 1);
-            }
+            } else state = 0;
             return;
         }
 
@@ -300,9 +300,16 @@ public class IceTower extends Turret {
                     break;
                 case 2:
                     name = "autoIceTower";
+                    range = 5000;
                     delay -= 5;
                     wallTimeUntilDamage = -1;
                     wallHp *= 2;
+                    angle = 0;
+                    debrisType = "crystal";
+                    placeSound = sounds.get("crystalPlace");
+                    damageSound = sounds.get("crystalDamage");
+                    breakSound = sounds.get("crystalBreak");
+                    loadSprites();
                     break;
             }
         } if (id == 1) {

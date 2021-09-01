@@ -323,6 +323,10 @@ public class Selection {
                 P.text("Freeze Ray", 1000, 241);
                 setTextPurple("Encases enemies", offset);
                 break;
+            case "autoIceTower":
+                P.text("Ice Defender", 1000, 241);
+                setTextPurple("Reinforces defences", offset);
+                break;
             case "superIceTower":
                 P.text("Super Freeze", 1000, 241);
                 P.text("Ray", 1000, 266);
