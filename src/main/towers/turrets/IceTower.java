@@ -126,7 +126,7 @@ public class IceTower extends Turret {
         if (tile == null) return false;
         Tile otherTile = tiles.get(tile.getGridPosition().sub(1));
         if (otherTile == null) return tile.tower == null;
-        return !otherTile.machine && tile.tower == null;
+        return !otherTile.machine && otherTile.obstacleName == null && tile.tower == null;
     }
 
     @Override
@@ -278,11 +278,11 @@ public class IceTower extends Turret {
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[35];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[36];
-        upgradeIcons[2] = animatedSprites.get("upgradeIC")[41];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[34];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[34];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[41];
     }
 
     @Override
@@ -297,8 +297,8 @@ public class IceTower extends Turret {
                     break;
                 case 2:
                     name = "autoIceTower";
-                    delay -= 4;
-                    wallTimeUntilDamage *= 6;
+                    delay -= 5;
+                    wallTimeUntilDamage = 0;
                     wallHp *= 2;
                     break;
             }
@@ -308,7 +308,7 @@ public class IceTower extends Turret {
                     range += 50;
                     break;
                 case 4:
-                    delay -= 4;
+                    delay -= 5;
                     break;
                 case 5:
                     name = "superIceTower";
