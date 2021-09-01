@@ -7,13 +7,13 @@ import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
 public class MidBug extends Enemy {
+
     public MidBug(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(25,25);
         pfSize = 1; //1
         radius = 13;
-        maxSpeed = 30;
-        speed = maxSpeed;
+        speed = 30;
         moneyDrop = 20;
         damage = 3;
         maxHp = 40;

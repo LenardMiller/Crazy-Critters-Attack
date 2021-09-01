@@ -1,6 +1,9 @@
 package main.misc;
 
+import main.particles.MiscParticle;
+import main.particles.Water;
 import main.pathfinding.Node;
+import main.towers.IceWall;
 import main.towers.Tower;
 import main.towers.Wall;
 import processing.core.PApplet;
@@ -15,8 +18,9 @@ public class Tile {
 
     private final PApplet P;
 
-    public PVector position;
+    public boolean machine;
     public int id;
+    public PVector position;
     public Tower tower;
     public PImage base;
     public String baseName;
@@ -28,14 +32,16 @@ public class Tile {
     public String breakableName;
     public PImage obstacle;
     public String obstacleName;
+
+    int baseHierarchy;
+    PImage[] baseEdges;
+    PImage[] flooringEdges;
+
     private int obstacleShadowLength;
-    public PImage[] baseEdges;
-    public PImage[] flooringEdges;
+    private boolean drawMain;
     private PImage[] flooringOutsideCorners;
     private String[] flooringOutsideCornerNames;
     private PImage[] flooringInsideCorners;
-    private boolean drawMain;
-    public boolean machine;
 
     public Tile(PApplet p, PVector position, int id) {
         this.P = p;
@@ -50,13 +56,29 @@ public class Tile {
         flooringInsideCorners = new PImage[4];
     }
 
+    public PVector getCenter() {
+        return PVector.sub(position, new PVector(TILE_SIZE / 2f, TILE_SIZE / 2f));
+    }
+
     public void main() {
         if (tower != null) tower.main();
     }
 
-    public void displayBaseAndFlooring() {
+    public void displayBaseDecorationFlooring() {
         if (base != null) P.image(base, position.x, position.y);
-        tileBase();
+        if (baseName != null && baseName.equals("water") && !paused) {
+            if (P.random(60) < 1) {
+                Tile rightTile = tiles.get(getGridPosition().x + 1, getGridPosition().y);
+                boolean right = rightTile == null || !rightTile.baseName.equals("water");
+                Tile leftTile = tiles.get(getGridPosition().x - 1, getGridPosition().y);
+                boolean left = leftTile == null || !leftTile.baseName.equals("water");
+                PVector topLeftCorner = new PVector(!left ? position.x : position.x + 20, position.y + 7);
+                PVector bottomRightCorner = PVector.add(position, new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
+                PVector spawnPos = new PVector(P.random(topLeftCorner.x, bottomRightCorner.x), P.random(topLeftCorner.y, bottomRightCorner.y));
+                bottomParticles.add(new Water(P, spawnPos.x, spawnPos.y));
+            }
+        }
+        spillBaseEdges();
         if (decoration != null) P.image(decoration, position.x, position.y);
         if (flooringEdges != null) connectFlooringEdges();
         if (flooringName != null) {
@@ -82,29 +104,41 @@ public class Tile {
         if (obstacle != null) P.image(obstacle, position.x, position.y);
     }
 
-    private void tileBase() {
+    /**
+     * Spills the edges of the base into surrounding tiles
+     */
+    private void spillBaseEdges() {
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
         if (y != 0) {
             Tile tile = tiles.get(x, y - 1);
-            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[0] != null)
-                P.image(tile.baseEdges[0], position.x, position.y);
+            if (canSpill(0, tile)) P.image(tile.baseEdges[0], position.x, position.y);
         }
         if (x != 0) {
             Tile tile = tiles.get(x - 1, y);
-            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[3] != null)
-                P.image(tile.baseEdges[3], position.x, position.y);
+            if (canSpill(3, tile)) P.image(tile.baseEdges[3], position.x, position.y);
         }
         if (y != 18) {
             Tile tile = tiles.get(x, y + 1);
-            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[2] != null)
-                P.image(tile.baseEdges[2], position.x, position.y);
+            if (canSpill(2, tile)) P.image(tile.baseEdges[2], position.x, position.y);
         }
         if (x != 18) {
             Tile tile = tiles.get(x + 1, y);
-            if (baseName != null && !baseName.equals(tile.baseName) && tile.baseEdges[1] != null)
-                P.image(tile.baseEdges[1], position.x, position.y);
+            if (canSpill(1, tile)) P.image(tile.baseEdges[1], position.x, position.y);
         }
+    }
+
+    /**
+     * @param i what edge to check
+     * @param tile neighbor tile to check
+     * @return whether this tile can spill its base
+     */
+    private boolean canSpill(int i, Tile tile) {
+        if (baseName == null) return false;
+        boolean nameDoesNotMatch = !baseName.equals(tile.baseName);
+        boolean tileTypeCanSpill = tile.baseEdges[i] != null;
+        boolean higherHierarchy = baseHierarchy < tile.baseHierarchy;
+        return nameDoesNotMatch && tileTypeCanSpill && higherHierarchy;
     }
 
     private void connectFlooringEdges() {
@@ -146,22 +180,22 @@ public class Tile {
         drawMain = true;
         if (x != 18 && y != 0) {
             if (doubleDiagonalIn(x, y, 1, -1, flooringName)) { //tri
-                flooringInsideCorners[0] = staticSprites.get(flooringName + "BGW_TRI_TL");
+                flooringInsideCorners[0] = staticSprites.get(flooringName + "Fl_TRI_TL");
                 drawMain = false;
             }
         } if (x != 18 && y != 18) {
             if (doubleDiagonalIn(x, y, 1, 1, flooringName)) { //bri
-                flooringInsideCorners[1] = staticSprites.get(flooringName + "BGW_BRI_TL");
+                flooringInsideCorners[1] = staticSprites.get(flooringName + "Fl_BRI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 18) {
             if (doubleDiagonalIn(x, y, -1, 1, flooringName)) { //bli
-                flooringInsideCorners[2] = staticSprites.get(flooringName + "BGW_BLI_TL");
+                flooringInsideCorners[2] = staticSprites.get(flooringName + "Fl_BLI_TL");
                 drawMain = false;
             }
         } if (x != 0 && y != 0) {
             if (doubleDiagonalIn(x, y, -1, -1, flooringName)) { //tli
-                flooringInsideCorners[3] = staticSprites.get(flooringName + "BGW_TLI_TL");
+                flooringInsideCorners[3] = staticSprites.get(flooringName + "Fl_TLI_TL");
                 drawMain = false;
             }
         }
@@ -171,7 +205,7 @@ public class Tile {
             if (s.equals("BRI")) i = 1;
             if (s.equals("BLI")) i = 2;
             if (s.equals("TLI")) i = 3;
-            flooringInsideCorners[i] = staticSprites.get(flooringName + "BGW_" + s + "_TL");
+            flooringInsideCorners[i] = staticSprites.get(flooringName + "Fl_" + s + "_TL");
             drawMain = false;
         }
         if (countTouchingVN(x,y) > 2) drawMain = true;
@@ -211,25 +245,25 @@ public class Tile {
         if (x != 18 && y != 0) { //tro
             String n = doubleDiagonalOut(x,y,1,-1);
             if (n != null) {
-                flooringOutsideCorners[0] = staticSprites.get(n + "BGW_TRO_TL");
+                flooringOutsideCorners[0] = staticSprites.get(n + "Fl_TRO_TL");
                 flooringOutsideCornerNames[0] = n;
             }
         } if (x != 18 && y != 18) { //bro
             String n = doubleDiagonalOut(x,y,1,1);
             if (n != null) {
-                flooringOutsideCorners[1] = staticSprites.get(n + "BGW_BRO_TL");
+                flooringOutsideCorners[1] = staticSprites.get(n + "Fl_BRO_TL");
                 flooringOutsideCornerNames[1] = n;
             }
         } if (x != 0 && y != 18) { //blo
             String n = doubleDiagonalOut(x,y,-1,1);
             if (n != null) {
-                flooringOutsideCorners[2] = staticSprites.get(n + "BGW_BLO_TL");
+                flooringOutsideCorners[2] = staticSprites.get(n + "Fl_BLO_TL");
                 flooringOutsideCornerNames[2] = n;
             }
         } if (x != 0 && y != 0) { //tlo
             String n = doubleDiagonalOut(x,y,-1,-1);
             if (n != null) {
-                flooringOutsideCorners[3] = staticSprites.get(n + "BGW_TLO_TL");
+                flooringOutsideCorners[3] = staticSprites.get(n + "Fl_TLO_TL");
                 flooringOutsideCornerNames[3] = n;
             }
         }
@@ -316,14 +350,42 @@ public class Tile {
         return m || c || t;
     }
 
+    /**
+     * Sets the base layer of the tile.
+     * @param name name of base
+     */
     public void setBase(String name) {
-        name = name.replace("BGA_TL", "");
+        name = name.replace("Ba_TL", "");
         baseName = name;
-        base = staticSprites.get(name + "BGA_TL");
-        baseEdges[0] = staticSprites.get(name + "BGA_T_TL");
-        baseEdges[1] = staticSprites.get(name + "BGA_R_TL");
-        baseEdges[2] = staticSprites.get(name + "BGA_B_TL");
-        baseEdges[3] = staticSprites.get(name + "BGA_L_TL");
+        base = staticSprites.get(name + "Ba_TL");
+        baseEdges[0] = staticSprites.get(name + "Ba_T_TL");
+        baseEdges[1] = staticSprites.get(name + "Ba_R_TL");
+        baseEdges[2] = staticSprites.get(name + "Ba_B_TL");
+        baseEdges[3] = staticSprites.get(name + "Ba_L_TL");
+        //update hierarchies as tiles are added
+        switch (name) {
+            case "snow":
+                baseHierarchy = 6;
+                break;
+            case "grass":
+                baseHierarchy = 5;
+                break;
+            case "yellowGrass":
+                baseHierarchy = 4;
+                break;
+            case "dirt":
+                baseHierarchy = 3;
+                break;
+            case "sand":
+                baseHierarchy = 2;
+                break;
+            case "stone":
+                baseHierarchy = 1;
+                break;
+            case "water":
+                baseHierarchy = 0;
+                break;
+        }
     }
 
     /**
@@ -334,6 +396,8 @@ public class Tile {
     public boolean updateFlooring(String name) {
         Tower tower = tiles.get((roundTo(position.x, 50)/50) + 1, (roundTo(position.y, 50)/50) + 1).tower;
         if (name.equals(flooringName)) return false;
+        if (tower instanceof IceWall) return true;
+        if (obstacleName != null) return false;
         if (tower instanceof Wall) return false;
         else {
             setFlooring(name);
@@ -353,16 +417,16 @@ public class Tile {
                     breakableName = null;
                 }
             }
-            name = name.replace("BGW_TL", "");
+            name = name.replace("Fl_TL", "");
             name = name.replace("ultimate", "titanium");
             flooringName = name;
-            if (staticSprites.get(name + "BGW_TL") != flooring) {
-                flooring = staticSprites.get(name + "BGW_TL");
+            if (staticSprites.get(name + "Fl_TL") != flooring) {
+                flooring = staticSprites.get(name + "Fl_TL");
                 if (name.contains("woodWall") || name.contains("stoneWall")) {
-                    flooringEdges[0] = staticSprites.get(name + "BGW_T_TL");
-                    flooringEdges[1] = staticSprites.get(name + "BGW_R_TL");
-                    flooringEdges[2] = staticSprites.get(name + "BGW_B_TL");
-                    flooringEdges[3] = staticSprites.get(name + "BGW_L_TL");
+                    flooringEdges[0] = staticSprites.get(name + "Fl_T_TL");
+                    flooringEdges[1] = staticSprites.get(name + "Fl_R_TL");
+                    flooringEdges[2] = staticSprites.get(name + "Fl_B_TL");
+                    flooringEdges[3] = staticSprites.get(name + "Fl_L_TL");
                 }
             }
         }
@@ -395,6 +459,14 @@ public class Tile {
             obstacle = null;
             obstacleName = null;
         } else {
+            int x = (int) getGridPosition().x;
+            int y = (int) getGridPosition().y;
+            if (x < 39 && y < 39 && tiles.get(x + 1, y + 1).tower != null){
+                tiles.get(x + 1, y + 1).tower.die(false);
+            }
+            setDecoration(null);
+            setFlooring(null);
+            setBreakable(null);
             if (obstacleName == null) updateNodes();
             obstacle = staticSprites.get(name);
             obstacleName = name;
@@ -424,6 +496,12 @@ public class Tile {
         return nodeGrid[x][y];
     }
 
+    public IntVector getGridPosition() {
+        int x = (int) (position.x / 50);
+        int y = (int) (position.y / 50);
+        return new IntVector(x, y);
+    }
+
     public static class TileDS {
 
         public TileDSItem[] items;
@@ -440,6 +518,10 @@ public class Tile {
             Tile r = null;
             for (TileDSItem item : items) if (item.x == x && item.y == y) r = item.tile;
             return r;
+        }
+
+        public Tile get(IntVector gridPosition) {
+            return get(gridPosition.x, gridPosition.y);
         }
 
         public void add(Tile tile, int x, int y) {

@@ -1,10 +1,10 @@
 package main.misc;
 
+import main.damagingThings.projectiles.Flame;
 import main.particles.Debris;
 import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;
 import main.particles.Ouch;
-import main.projectiles.Flame;
 import main.sound.StartStopSoundLoop;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -14,7 +14,9 @@ import processing.sound.SoundFile;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.misc.Utilities.*;
+import static main.misc.Utilities.secondsToFrames;
+import static main.misc.Utilities.up60ToFramerate;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Machine {
 
@@ -92,7 +94,14 @@ public class Machine {
         }
         p.tint(255, tintColor, tintColor);
         p.imageMode(CENTER);
+        if (p.frameCount > frameTimer && !dead && !paused) {
+            if (currentFrame < sprites.length - 1) currentFrame++;
+            else currentFrame = 0;
+            frameTimer = p.frameCount + betweenFrames;
+        }
+        if (currentFrame >= sprites.length) currentFrame = 0;
         if (deathFrame < secondsToFrames(4)) p.image(sprites[currentFrame], position.x, position.y);
+//        p.text(damageState, position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
         if (dead && !paused) deathFrame++;
@@ -100,11 +109,6 @@ public class Machine {
         else if (deathFrame < secondsToFrames(5) && !paused) deathAnim();
         else EXPLODE_LOOP.stopLoop();
         if (deathFrame > secondsToFrames(8)) paused = true;
-        if (p.frameCount > frameTimer && !dead && !paused) {
-            if (currentFrame < sprites.length - 1) currentFrame++;
-            else currentFrame = 0;
-            frameTimer = p.frameCount + betweenFrames;
-        }
         if (tintColor < 255 && !paused) tintColor += 20;
     }
 
@@ -137,7 +141,7 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if ((int) p.random(0, r) == 0)
-                    particles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greyPuff"));
+                    topParticles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greyPuff"));
             }
         }
     }
@@ -154,11 +158,11 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if (up60ToFramerate(p.random(0, 3)) == 0)
-                    particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 if (up60ToFramerate(p.random(0, 6)) == 0) {
                     if ((int) p.random(0, 5) == 0) {
                         playSoundRandomSpeed(p, EXPLODE_SOUND, 1);
-                    } particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                    } topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 }
             }
         } else {
@@ -167,17 +171,17 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if (up60ToFramerate(p.random(0, 4)) == 0)
-                    particles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                    topParticles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 if (up60ToFramerate((int) p.random(0, 2)) == 0)
-                    particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                    topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 for (int i = 0; i < up60ToFramerate(3); i++) {
-                    particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
                 } if (up60ToFramerate(p.random(0, 8)) == 0) {
                     projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, maxHp * 10, maxHp, 1000, (int) p.random(50, 200), true));
                 }
             }
         }
-        if (deathFrame == secondsToFrames(4)) for (Tile tile : machTiles) tile.setBreakable(debris + "DebrisBGC_TL");
+        if (deathFrame == secondsToFrames(4)) for (Tile tile : machTiles) tile.setBreakable(debris + "DebrisBr_TL");
     }
 
     public void damage(int dmg) {
@@ -185,19 +189,19 @@ public class Machine {
         hit = true;
         int hpSegment = maxHp / 4;
         if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
-        if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
-        if (hp <= hpSegment) damageState = 3;
+        else if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
+        else if (hp <= hpSegment) damageState = 3;
         if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
         playSoundRandomSpeed(p, DAMAGE_SOUND, 1);
         for (Tile tile : machTiles) {
             int x = (int) tile.position.x;
             int y = (int) tile.position.y;
             for (int i = 0; i < 5; i++) {
-                particles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
             }
             if ((int) p.random(0, 2 * ((float) hp / (float) hpSegment)) == 0) {
                 playSoundRandomSpeed(p, EXPLODE_SOUND, 1);
-                particles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
             }
         }
     }
@@ -205,5 +209,26 @@ public class Machine {
     public void die() {
         dead = true;
         alive = false;
+    }
+
+    public void heal(float amount) {
+        if (hp < maxHp) {
+            for (Tile tile : machTiles) {
+                int x = (int) tile.position.x;
+                int y = (int) tile.position.y;
+                for (int i = 0; i < 5; i++) {
+                    topParticles.add(new Ouch(p, shuffle(x), shuffle(y), p.random(0, 360), "greenPuff"));
+                }
+            }
+        }
+        hp += amount * maxHp;
+        int hpSegment = maxHp / 4;
+        if (hp > hpSegment * 3) damageState = 0;
+        else if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
+        else if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
+        else if (hp <= hpSegment) damageState = 3;
+        if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
+        else sprites = animatedSprites.get(name);
+        if (hp > maxHp) hp = maxHp;
     }
 }

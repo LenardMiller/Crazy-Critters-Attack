@@ -1,68 +1,64 @@
 package main.towers.turrets;
 
+import main.damagingThings.projectiles.glue.Glue;
+import main.damagingThings.projectiles.glue.SpikeyGlue;
+import main.damagingThings.projectiles.glue.SplatterGlue;
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;
-import main.projectiles.Glue;
-import main.projectiles.SpikeyGlue;
-import main.projectiles.SplatterGlue;
+import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Gluer extends Turret {
 
-    boolean spikey;
-    boolean splatter;
+    public int gluedTotal;
+
+    private boolean spikey;
+    private boolean splatter;
 
     public Gluer(PApplet p, Tile tile) {
         super(p,tile);
         name = "gluer";
-        size = new PVector(50,50);
-        offset = 0;
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 2.5f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 2.5f);
         pjSpeed = 400;
         betweenFireFrames = down60ToFramerate(1);
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
-        damage = 0;
         range = 300;
         effectDuration = 3;
         effectLevel = 0.7f;
-        spikey = false;
         damageSound = sounds.get("stoneDamage");
         breakSound = sounds.get("stoneBreak");
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("glueFire");
         fireParticle = "glue";
         barrelLength = 28;
-        loadSprites();
         debrisType = "stone";
         price = GLUER_PRICE;
         value = price;
-        priority = 0; //close
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
-        if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
-        else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
-        else projectiles.add(new Glue(p,position.x,position.y, angle, this, damage, effectLevel, effectDuration));
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
+        for (int i = 0; i < p.random(3, 5); i++) {
+            midParticles.add(new MiscParticle(p, position.x, position.y,
+              angle + radians(p.random(-45, 45)), "glue"));
+        }
+        if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
+        else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
+        else projectiles.add(new Glue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
     }
 
+    @Override
     protected void getTargetEnemy() {
         //0: close
         //1: far
@@ -73,12 +69,12 @@ public class Gluer extends Turret {
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
-            float newSpeed = enemy.maxSpeed * effectLevel;
-            if (!enemy.stealthMode && enemy.speed > newSpeed) { //make sure effect would actually slow down enemy
+            float newSpeed = enemy.speed * effectLevel;
+            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy) && enemy.speed > newSpeed) { //make sure effect would actually slow down enemy
                 float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));
-                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < range) {
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < getRange()) {
                     if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
                         finalDist = dist;
@@ -103,7 +99,8 @@ public class Gluer extends Turret {
         targetEnemy = e;
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void setUpgrades() {
         //price
         upgradePrices[0] = 125;
         upgradePrices[1] = 150;
@@ -111,7 +108,7 @@ public class Gluer extends Turret {
 
         upgradePrices[3] = 150;
         upgradePrices[4] = 150;
-        upgradePrices[5] = 700;
+        upgradePrices[5] = 1000;
         //titles
         upgradeTitles[0] = "Long Range";
         upgradeTitles[1] = "Long Glue";
@@ -155,6 +152,7 @@ public class Gluer extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[26];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -194,6 +192,4 @@ public class Gluer extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }

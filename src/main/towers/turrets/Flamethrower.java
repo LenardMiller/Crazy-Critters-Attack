@@ -1,18 +1,18 @@
 package main.towers.turrets;
 
+import main.damagingThings.projectiles.BlueFlame;
+import main.damagingThings.projectiles.Flame;
+import main.damagingThings.shockwaves.FireShockwave;
+import main.enemies.Enemy;
 import main.misc.Tile;
-import main.projectiles.BlueFlame;
-import main.projectiles.Flame;
-import main.shockwaves.FireShockwave;
 import main.sound.FadeSoundLoop;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.incrementByTo;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.*;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Flamethrower extends Turret {
 
@@ -30,27 +30,16 @@ public class Flamethrower extends Turret {
     public Flamethrower(PApplet p, Tile tile) {
         super(p, tile);
         name = "flamethrower";
-        size = new PVector(50, 50);
         offset = 7;
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 0;
         pjSpeed = 300;
         range = 200;
         effectLevel = 6;
         effectDuration = 5;
-        betweenIdleFrames = 0;
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
-        damage = 10;
-        loadSprites();
+        damage = 20;
+        delay = 0;
         debrisType = "metal";
         price = FLAMETHROWER_PRICE;
         value = price;
-        priority = 0; //close
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
@@ -60,13 +49,14 @@ public class Flamethrower extends Turret {
         barrelLength = 24;
         count = 1;
         FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     public void main() {
         if (hp <= 0) {
             die(false);
@@ -74,8 +64,8 @@ public class Flamethrower extends Turret {
         }
         if (enemies.size() > 0 && alive && !paused) checkTarget();
         if (!paused && wheel) rotateWheel();
-        if (p.mousePressed && p.mouseX < tile.position.x && p.mouseX > tile.position.x - size.x && p.mouseY < tile.position.y
-          && p.mouseY > tile.position.y - size.y && alive && !paused) {
+        if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
+          && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
     }
@@ -97,6 +87,42 @@ public class Flamethrower extends Turret {
             state = 1;
             frame = 0;
             fire(barrelLength, fireParticle);
+        }
+    }
+
+    /**
+     * Sets the target angle to match the target.
+     * Leads shots if enemy moving.
+     * @param enemy enemy to aim at
+     */
+    @Override
+    protected void aim(Enemy enemy) {
+        PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
+        PVector target = enemy.position;
+
+        if (pjSpeed > 0) { //shot leading
+            float dist = PVector.sub(target, position).mag();
+            float time = dist / pjSpeed;
+            if (magic) time = dist / (150 * (range / 200f));
+            PVector enemyHeading = PVector.fromAngle(enemy.angle);
+            if (enemy.state == 0) enemyHeading.setMag(enemy.getActualSpeed() * time); //only lead if enemy moving
+            else enemyHeading.setMag(0);
+            target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
+        }
+
+        targetAngle = normalizeAngle(findAngle(position, target));
+        angle = normalizeAngle(angle);
+        angle += getAngleDifference(targetAngle, angle) / (FRAMERATE/6f);
+
+        if (abs(targetAngle - angle) < 0.05) angle = targetAngle; //snap to prevent getting stuck
+
+        if (visualize && debug) { //cool lines
+            p.stroke(255);
+            p.line(position.x, position.y, target.x, target.y);
+            p.stroke(255, 0, 0, 150);
+            p.line(target.x, p.height, target.x, 0);
+            p.stroke(0, 0, 255, 150);
+            p.line(p.width, target.y, 0, target.y);
         }
     }
 
@@ -142,6 +168,7 @@ public class Flamethrower extends Turret {
         }
     }
 
+    @Override
     protected void fire(float barrelLength, String particleType) {
         if (!wheel) {
             FIRE_SOUND_LOOP.setTargetVolume(1);
@@ -149,27 +176,36 @@ public class Flamethrower extends Turret {
             PVector angleVector = PVector.fromAngle(angle - HALF_PI);
             angleVector.setMag(barrelLength);
             projectileSpawn.add(angleVector);
-            if (magic) projectiles.add(new BlueFlame(p, projectileSpawn.x, projectileSpawn.y, angle, this, damage,
-              effectLevel, effectDuration, (int) (range - barrelLength - 100), false));
-            else projectiles.add(new Flame(p, projectileSpawn.x, projectileSpawn.y, angle, this, damage, effectLevel,
-              effectDuration, (int) (range - barrelLength - 100), false));
+            spawnProjectiles(projectileSpawn, angle);
         }
         else {
             playSoundRandomSpeed(p, sounds.get("fireImpact"), 1);
             shockwaves.add(new FireShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-              (int) barrelLength, range, damage, this, effectLevel, effectDuration));
+              (int) barrelLength, getRange(), getDamage(), this, effectLevel, effectDuration));
         }
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
+        if (magic) {
+            projectiles.add(new BlueFlame(p, position.x, position.y, angle, this, getDamage(),
+              effectLevel, effectDuration, (int) (getRange() - barrelLength), false));
+        } else {
+            projectiles.add(new Flame(p, position.x, position.y, angle, this, getDamage(),
+              effectLevel, effectDuration, (int) (getRange() - barrelLength - 100), false));
+        }
+    }
+
+    @Override
+    protected void setUpgrades() {
         //prices
         upgradePrices[0] = 400;
-        upgradePrices[1] = 500;
-        upgradePrices[2] = 3500;
+        upgradePrices[1] = 600;
+        upgradePrices[2] = 4000;
 
-        upgradePrices[3] = 500;
-        upgradePrices[4] = 600;
-        upgradePrices[5] = 5000;
+        upgradePrices[3] = 600;
+        upgradePrices[4] = 700;
+        upgradePrices[5] = 6000;
         //titles
         upgradeTitles[0] = "Better range";
         upgradeTitles[1] = "Betterer Range";
@@ -225,7 +261,7 @@ public class Flamethrower extends Turret {
                 case 2:
                     wheel = true;
                     count = 8;
-                    damage *= 50;
+                    damage *= 20;
                     name = "flamewheel";
                     hasPriority = false;
                     effectLevel += 7;
@@ -236,11 +272,11 @@ public class Flamethrower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    damage += damage / 2;
+                    damage += damage;
                     break;
                 case 4:
-                    effectDuration += 2;
-                    effectLevel += 7;
+                    effectDuration += 5;
+                    effectLevel += 10;
                     break;
                 case 5:
                     name = "magicFlamethrower";
@@ -248,9 +284,9 @@ public class Flamethrower extends Turret {
                     debrisType = "darkMetal";
                     range += 30;
                     pjSpeed = 150;
-                    damage = 100;
-                    effectDuration += 5;
-                    effectLevel = 100;
+                    damage = 250;
+                    effectDuration = 25;
+                    effectLevel = 250;
                     loadSprites();
                     break;
             }

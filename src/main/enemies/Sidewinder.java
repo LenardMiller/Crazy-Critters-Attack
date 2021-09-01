@@ -13,8 +13,7 @@ public class Sidewinder extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        maxSpeed = 42;
-        speed = maxSpeed;
+        speed = 42;
         moneyDrop = 20;
         damage = 3;
         maxHp = 60; //Hp

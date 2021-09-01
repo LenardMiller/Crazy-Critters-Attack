@@ -17,25 +17,29 @@ public class TileSelect extends Button {
         size = new PVector(50, 50);
         this.TYPE = type;
         String sl = "";
-        if (type.contains("BGA")) sl = "BGA";
-        if (type.contains("BGW")) sl = "BGW";
-        if (type.contains("BGB")) sl = "BGB";
-        if (type.contains("BGC")) sl = "BGC";
+        if (type.contains("Ba")) sl = "Ba";
+        if (type.contains("Fl")) sl = "Fl";
+        if (type.contains("De")) sl = "De";
+        if (type.contains("Br")) sl = "Br";
         if (type.contains("Ob")) sl = "obstacle";
         if (type.contains("Ma")) {
             sl = "machine";
-            TILE_SPRITE = p.loadImage("sprites/guiObjects/buttons/tileSelect/machine/icon.png");
+            TILE_SPRITE = p.loadImage("sprites/gui/buttons/tileSelect/machine/icon.png");
         } else if (type.contains("Na")) {
             sl = "erase";
-            TILE_SPRITE = p.loadImage("sprites/guiObjects/buttons/tileSelect/erase/icon.png");
-        } else TILE_SPRITE = staticSprites.get(type + "_TL");
+            TILE_SPRITE = p.loadImage("sprites/gui/buttons/tileSelect/erase/icon.png");
+        } else if (type.contains("invisible")){
+            TILE_SPRITE = p.loadImage("sprites/gui/buttons/tileSelect/erase/icon.png");
+        }
+        else TILE_SPRITE = staticSprites.get(type + "_TL");
         if (TILE_SPRITE == null) System.out.println(type);
-        spriteLocation = "sprites/guiObjects/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
+        spriteLocation = "sprites/gui/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
         spriteIdle = p.loadImage(spriteLocation + "000.png");
         spritePressed = p.loadImage(spriteLocation + "001.png");
         sprite = spriteIdle;
     }
 
+    @Override
     public void main() {
         if (active){
             hover();
@@ -43,6 +47,7 @@ public class TileSelect extends Button {
         }
     }
 
+    @Override
     public void display() {
         p.image(TILE_SPRITE,position.x-size.x/2,position.y-size.y/2);
         p.image(sprite,position.x-size.x/2,position.y-size.y/2);
@@ -51,15 +56,17 @@ public class TileSelect extends Button {
     /**
      * If hovered or depressed.
      */
+    @Override
     public void hover() {
-        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
-                p.mouseY > position.y-size.y/2 && alive && active && !paused) {
+        if (matrixMousePosition.x < position.x+size.x/2 && matrixMousePosition.x > position.x-size.x/2 &&
+          matrixMousePosition.y < position.y+size.y/2 && matrixMousePosition.y > position.y-size.y/2 && alive && active && !paused) {
             sprite = spritePressed;
             if (inputHandler.leftMousePressedPulse) action();
         }
         else sprite = spriteIdle;
     }
 
+    @Override
     public void action() {
         if (hand.held.equals(TYPE)) hand.setHeld("null");
         hand.setHeld(TYPE + "_TL");

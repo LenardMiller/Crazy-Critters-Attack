@@ -13,8 +13,7 @@ public class TreeSprite extends Enemy{
         size = new PVector(25,25);
         pfSize = 1; //1
         radius = 15;
-        maxSpeed = 24;
-        speed = maxSpeed;
+        speed = 24;
         moneyDrop = 15;
         damage = 2;
         maxHp = 40; //Hp <---------------------------

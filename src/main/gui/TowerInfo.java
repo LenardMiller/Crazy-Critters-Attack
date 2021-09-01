@@ -13,6 +13,7 @@ public class TowerInfo {
     private static int loadStyle(PApplet p) {
         p.textAlign(LEFT);
         p.textFont(mediumFont);
+        p.fill(0, 254);
         return 910;
     }
 
@@ -76,9 +77,12 @@ public class TowerInfo {
         p.text("unglued enemy.", x, space(2));
         p.text("Slows movement", x, space(3));
         p.text("and attack speed,", x, space(4));
-        p.text("does no damage.", x, space(5));
+        p.text("but does no", x, space(5));
+        p.text("damage.  More", x, space(6));
+        p.text("strongly affects", x, space(7));
+        p.text("flying enemies.", x, space(8));
         p.textAlign(CENTER);
-        p.text("[S]", 1000, space(7));
+        p.text("[S]", 1000, space(10));
     }
 
     public static void seismicInfo(PApplet p) {
@@ -88,15 +92,18 @@ public class TowerInfo {
         p.text("enemy.  Does low", x, space(2));
         p.text("damage,  but can", x, space(3));
         p.text("hit several enemies.", x, space(4));
+        p.text("Stuns burrowing", x, space(5));
+        p.text("enemies,  but can't", x, space(6));
+        p.text("hit flying enemies.", x, space(7));
         p.textAlign(CENTER);
-        p.text("[X]", 1000, space(6));
+        p.text("[X]", 1000, space(9));
     }
 
     public static void energyBlasterInfo(PApplet p) {
         int x = loadStyle(p);
         p.text("Fires an explosive", x, space(0));
         p.text("energy ball at the", x, space(1));
-        p.text("farthest enemy in its", x, space(2));
+        p.text("toughest enemy in its", x, space(2));
         p.text("range.  Has long", x, space(3));
         p.text("range,  some splash", x, space(4));
         p.text("and high damage,", x, space(5));
@@ -129,5 +136,43 @@ public class TowerInfo {
         p.text("quite far.", x, space(5));
         p.textAlign(CENTER);
         p.text("[C]", 1000, space(8));
+    }
+
+    public static void boosterInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Boosts the stats of", x, space(0));
+        p.text("nearby towers.", x, space(1));
+        p.text("Effect does not", x, space(2));
+        p.text("stack.", x, space(3));
+        p.textAlign(CENTER);
+        p.text("[R]", 1000, space(5));
+    }
+
+    public static void iceTowerInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Freezes the nearest", x, space(0));
+        p.text("enemy in a block", x, space(1));
+        p.text("of ice.  Smaller", x, space(2));
+        p.text("enemies are", x, space(3));
+        p.text("completely", x, space(4));
+        p.text("immobilized.  Ice", x, space(5));
+        p.text("melts over time.", x, space(6));
+        p.text("Effective against", x, space(7));
+        p.text("flying enemies.", x, space(8));
+        p.textAlign(CENTER);
+        p.text("[F]", 1000, space(10));
+    }
+
+    public static void magicMissileerInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Fires three magic", x, space(0));
+        p.text("missiles that home", x, space(1));
+        p.text("in on different", x, space(2));
+        p.text("enemies.  Short", x, space(3));
+        p.text("range and low", x, space(4));
+        p.text("firerate but missiles", x, space(5));
+        p.text("can travel very far.", x, space(6));
+        p.textAlign(CENTER);
+        p.text("[V]", 1000, space(8));
     }
 }

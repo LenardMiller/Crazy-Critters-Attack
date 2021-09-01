@@ -8,7 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class WaveMotion extends Turret {
 
@@ -23,35 +23,35 @@ public class WaveMotion extends Turret {
     public WaveMotion(PApplet p, Tile tile) {
         super(p,tile);
         name = "waveMotion";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        offset = 0;
-        hit = false;
-        delay = 6.6f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
-        damage = 2;
+        delay = randomizeDelay(p, 15);
+        damage = 1000;
         pjSpeed = -1;
-        range = 0; //0
+        range = 500;
         beam = new PImage[0];
         currentBeamFrame = 19;
         betweenIdleFrames = 3;
         betweenFireFrames = 4;
-        state = 0;
         beam = animatedSprites.get("waveMotionBeamTR");
-        loadSprites();
+        placeSound = sounds.get("titaniumPlace");
+        breakSound = sounds.get("titaniumBreak");
+        damageSound = sounds.get("titaniumDamage");
+        fireSound = sounds.get("beam");
         debrisType = "darkMetal";
         price = 500;
         value = price;
         priority = 2; //strong
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void fire() {
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {}
+
+    @Override
+    protected void fire(float barrelLength, String particleType) {
         PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
         PVector spa = PVector.fromAngle(angle-HALF_PI);
         spa.setMag(35);
@@ -68,8 +68,11 @@ public class WaveMotion extends Turret {
         beamLength = (int)(c/24);
         beamPartLength = PVector.fromAngle(beamAngle - radians(90));
         beamPartLength.setMag(24);
+
+        playSoundRandomSpeed(p, fireSound, 1);
     }
 
+    @Override
     public void displayMain() {
         //shadow
         p.pushMatrix();
@@ -94,11 +97,13 @@ public class WaveMotion extends Turret {
                 if (i == 0) s = new PVector(x,y);
                 if (i == beamLength) e = new PVector(x,y);
             }
-            beamDamage(s,e);
-            if (betweenBeamTimer < betweenFireFrames) betweenBeamTimer++;
-            else {
-                currentBeamFrame++;
-                betweenBeamTimer = 0;
+            if (!paused) {
+                beamDamage(s, e);
+                if (betweenBeamTimer < betweenFireFrames) betweenBeamTimer++;
+                else {
+                    currentBeamFrame++;
+                    betweenBeamTimer = 0;
+                }
             }
         }
         //main
@@ -110,6 +115,9 @@ public class WaveMotion extends Turret {
         p.popMatrix();
         p.tint(255);
     }
+
+    @Override
+    protected void upgradeSpecial(int id) {}
 
     private void beamDamage(PVector start, PVector end) {
         for (Enemy enemy : enemies) {
@@ -139,13 +147,16 @@ public class WaveMotion extends Turret {
             if (Float.isNaN(distFromEnemyToBeam)) distFromEnemyToBeam = 1;
             distFromEnemyToBeam -= enemy.radius / 2;
             if (distFromEnemyToBeam < 1) distFromEnemyToBeam = 1;
-            if (distFromEnemyToBeam < 10) enemy.damageWithoutBuff(damage, this, "burning", new PVector(0,0), false);
-            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageWithoutBuff(damage, this, "burning", new PVector(0,0), false);
-            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageWithoutBuff(damage, this, "burning", new PVector(0,0), false);
+            if (distFromEnemyToBeam < 10) enemy.damageWithoutBuff(getDamage(), this, "energy", new PVector(0,0), false);
+            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageWithoutBuff(
+              getDamage(), this, "energy", new PVector(0,0), false);
+            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageWithoutBuff(
+              getDamage(), this, "energy", new PVector(0,0), false);
         }
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 0;
         upgradePrices[1] = 0;
@@ -177,8 +188,4 @@ public class WaveMotion extends Turret {
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
     }
-
-    public void upgradeSpecial() {}
-
-    public void updateSprite() {}
 }

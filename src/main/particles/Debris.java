@@ -26,6 +26,7 @@ public class Debris extends Particle {
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 
+    @Override
     protected void display() {
         if (!paused) {
             delayTime++;

@@ -17,10 +17,8 @@ public class DataControl extends ClassLoader {
     private static String filePath() {
         //run from terminal
         String filePath = new File("").getAbsolutePath();
-        //run from intelliJ
-        if (filePath.equals("/Users/blakebabb/Documents/GitHub/Crazy-Critters-Attack")) {
-            filePath = "resources";
-        }
+        //run from intelliJ todo: remove before release
+        filePath = "resources";
         return filePath;
     }
 
@@ -36,9 +34,9 @@ public class DataControl extends ClassLoader {
             JSONObject saveObject = new JSONObject();
             saveObject.setString("type", "tile");
             saveObject.setInt("id", i);
-            saveObject.setString("bgA", tile.baseName);
-            saveObject.setString("bgB", tile.decorationName);
-            saveObject.setString("bgC", tile.breakableName);
+            saveObject.setString("base", tile.baseName);
+            saveObject.setString("decoration", tile.decorationName);
+            saveObject.setString("breakable", tile.breakableName);
             saveObject.setString("obstacle", tile.obstacleName);
             saveObject.setBoolean("machine", tile.machine);
             saveArray.setJSONObject(i, saveObject);
@@ -76,6 +74,8 @@ public class DataControl extends ClassLoader {
     public static void saveSettings() throws IOException {
         JSONObject saveObject = new JSONObject();
         saveObject.setFloat("volume", globalVolume);
+        saveObject.setBoolean("fullscreen", fullscreen);
+        saveObject.setBoolean("gore", gore);
 
         String name = "settings";
         new File(filePath() + "/data/saves/" + name + ".json");
@@ -89,6 +89,8 @@ public class DataControl extends ClassLoader {
         JSONObject loadObject = loadJSONObject(loadFile);
 
         globalVolume = loadObject.getFloat("volume");
+        fullscreen = loadObject.getBoolean("fullscreen");
+        gore = loadObject.getBoolean("gore");
     }
 
     /**
@@ -97,7 +99,7 @@ public class DataControl extends ClassLoader {
      * @param file the filename, sans extension.
      */
     public static void loadLayout(PApplet p, String file) {
-        File loadFile = new File(filePath()+"/data/"+file+"/clean.json");
+        File loadFile = new File(filePath()+"/data/"+file+"/base.json");
         JSONArray loadArray = loadJSONArray(loadFile);
 
         alive = true;
@@ -106,14 +108,14 @@ public class DataControl extends ClassLoader {
             Tile tile = tiles.get(i);
             tile.machine = false;
             JSONObject loadedTile = loadArray.getJSONObject(i);
-            String bgA = loadedTile.getString("bgA");
-            String bgB = loadedTile.getString("bgB");
-            String bgC = loadedTile.getString("bgC");
+            String base = loadedTile.getString("base");
+            String decoration = loadedTile.getString("decoration");
+            String breakable = loadedTile.getString("breakable");
             String obstacle = loadedTile.getString("obstacle");
             boolean machine = loadedTile.getBoolean("machine");
-            if (bgA != null) tile.setBase(bgA);
-            if (bgB != null) tile.setDecoration(bgB);
-            if (bgC != null) tile.setBreakable(bgC);
+            if (base != null) tile.setBase(base);
+            if (decoration != null) tile.setDecoration(decoration);
+            if (breakable != null) tile.setBreakable(breakable);
             if (obstacle != null) tile.setObstacle(obstacle);
             tile.machine = machine;
         }
@@ -149,13 +151,14 @@ public class DataControl extends ClassLoader {
         JSONArray loadArray = loadJSONArray(loadFile);
 
         JSONObject loadedTile = loadArray.getJSONObject(tile.id);
-        String bgA = loadedTile.getString("bgA");
-        String bgB = loadedTile.getString("bgB");
-        String bgC = loadedTile.getString("bgC");
+        String base = loadedTile.getString("base");
+        String decoration = loadedTile.getString("decoration");
+        String breakable = loadedTile.getString("breakable");
         String obstacle = loadedTile.getString("obstacle");
-        if (bgA != null) tile.setBase(bgA);
-        tile.setDecoration(bgB);
-        tile.setBreakable(bgC);
+        if (base != null) tile.setBase(base);
+        tile.setDecoration(decoration);
+        tile.setBreakable(breakable);
         tile.setObstacle(obstacle);
+        connectWallQueues++;
     }
 }

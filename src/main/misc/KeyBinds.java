@@ -1,8 +1,22 @@
 package main.misc;
 
+import main.Main;
+import main.damagingThings.arcs.Arc;
+import main.damagingThings.projectiles.EnergyBlast;
+import main.damagingThings.projectiles.Flame;
+import main.damagingThings.projectiles.MiscProjectile;
+import main.damagingThings.projectiles.Needle;
+import main.damagingThings.projectiles.enemyProjeciles.IceCrystal;
+import main.damagingThings.projectiles.enemyProjeciles.Snowball;
+import main.damagingThings.projectiles.homing.MagicMissile;
 import main.enemies.*;
+import main.enemies.burrowingEnemies.Shark;
+import main.enemies.flyingEnemies.Frost;
+import main.enemies.shootingEnemies.IceEntity;
+import main.enemies.shootingEnemies.IceMonstrosity;
+import main.enemies.shootingEnemies.MudFlinger;
+import main.enemies.shootingEnemies.SnowAntlion;
 import main.levelStructure.Level;
-import main.projectiles.*;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -12,8 +26,8 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.closeSettingsMenu;
-import static main.misc.Utilities.playSound;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.sound.SoundUtilities.playSound;
 
 public class KeyBinds {
 
@@ -40,26 +54,44 @@ public class KeyBinds {
         }
     }
 
+    public void selectionKeys() {
+        boolean upgradeTop = keysPressed.getPressedPulse('^');
+        boolean upgradeBottom = keysPressed.getPressedPulse('&');
+        boolean priorityRight = keysPressed.getPressedPulse('>');
+        boolean priorityLeft = keysPressed.getPressedPulse('<');
+        boolean delete = keysPressed.getPressedPulse('*');
+
+        if (upgradeTop) selection.upgradeTop();
+        if (upgradeBottom) selection.upgradeBottom();
+        if (priorityLeft) selection.priorityLeft();
+        if (priorityRight) selection.priorityRight();
+        if (delete) selection.sell();
+    }
+
     public void inGameKeys() {
         boolean play = keysPressed.getPressedPulse(' ');
         //hotkeys
-        boolean wall = addHotkey('?', 0);
-        boolean slingshot = addHotkey('q', SLINGSHOT_PRICE);
-        boolean luggageBlaster = addHotkey('a', RANDOMCANNON_PRICE);
-        boolean crossbow = addHotkey('z', CROSSBOW_PRICE);
-        boolean cannon = addHotkey('w', CANNON_PRICE);
-        boolean gluer = addHotkey('s', GLUER_PRICE);
-        boolean seismicTower = addHotkey('x', SEISMIC_PRICE);
-        boolean energyBlaster = addHotkey('e', ENERGYBLASTER_PRICE);
-        boolean flamethrower = addHotkey('d', FLAMETHROWER_PRICE);
-        boolean teslaTower = addHotkey('c', TESLATOWER_PRICE);
-
+        boolean wall = addHotkey(new char[]{'?'}, 0);
+        boolean slingshot = addHotkey(new char[]{'q', 'Q'}, SLINGSHOT_PRICE);
+        boolean luggageBlaster = addHotkey(new char[]{'a', 'A'}, RANDOM_CANNON_PRICE);
+        boolean crossbow = addHotkey(new char[]{'z', 'Z'}, CROSSBOW_PRICE);
+        boolean cannon = addHotkey(new char[]{'w', 'W'}, CANNON_PRICE);
+        boolean gluer = addHotkey(new char[]{'s', 'S'}, GLUER_PRICE);
+        boolean seismicTower = addHotkey(new char[]{'x', 'X'}, SEISMIC_PRICE);
+        boolean energyBlaster = addHotkey(new char[]{'e', 'E'}, ENERGY_BLASTER_PRICE);
+        boolean flamethrower = addHotkey(new char[]{'d', 'Q'}, FLAMETHROWER_PRICE);
+        boolean teslaTower = addHotkey(new char[]{'c', 'C'}, TESLA_TOWER_PRICE);
+        boolean booster = addHotkey(new char[]{'r', 'R'}, BOOSTER_PRICE);
+        boolean iceTower = addHotkey(new char[]{'f', 'F'}, ICE_TOWER_PRICE);
+        boolean magicMissileer = addHotkey(new char[]{'v', 'V'}, MAGIC_MISSILEER_PRICE);
 
         if (play) {
             if (!playingLevel) {
                 playingLevel = true;
                 Level level = levels[currentLevel];
                 level.currentWave = 0;
+            } else {
+                levels[currentLevel].advance();
             }
         }
         //hotkeys
@@ -67,8 +99,7 @@ public class KeyBinds {
             if (wall) {
                 if (hand.held.equals("wall")) hand.setHeld("null");
                 else hand.setHeld("wall");
-            }
-            if (slingshot) hand.setHeld("slingshot");
+            } if (slingshot) hand.setHeld("slingshot");
             if (luggageBlaster) hand.setHeld("miscCannon");
             if (crossbow) hand.setHeld("crossbow");
             if (currentLevel > 0) {
@@ -79,12 +110,19 @@ public class KeyBinds {
                 if (energyBlaster) hand.setHeld("energyBlaster");
                 if (flamethrower) hand.setHeld("flamethrower");
                 if (teslaTower) hand.setHeld("tesla");
+            } if (currentLevel > 2) {
+                if (booster) hand.setHeld("booster");
+                if (iceTower) hand.setHeld("iceTower");
+                if (magicMissileer) hand.setHeld("magicMissileer");
             }
         }
     }
 
-    private boolean addHotkey(char key, int price) {
-        return keysPressed.getPressedPulse(key) && alive && !paused && money >= price;
+    private boolean addHotkey(char[] keys, int price) {
+        boolean pressed = false;
+        //this is important, don't remove it
+        for (char key : keys) if (keysPressed.getPressedPulse(key)) pressed = true;
+        return pressed && alive && !paused && money >= price;
     }
 
     public void spawnKeys() {
@@ -99,41 +137,41 @@ public class KeyBinds {
         boolean needle = keysPressed.getPressedPulse('u') && alive;
         boolean flame = keysPressed.getPressed('i') && alive;
         //enemies
-        boolean en1 = keysPressed.getPressedPulse('1') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en2 = keysPressed.getPressedPulse('2') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en3 = keysPressed.getPressedPulse('3') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en4 = keysPressed.getPressedPulse('4') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en5 = keysPressed.getPressedPulse('5') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en6 = keysPressed.getPressedPulse('6') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en7 = keysPressed.getPressedPulse('7') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en8 = keysPressed.getPressedPulse('8') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en9 = keysPressed.getPressedPulse('9') && alive && p.mouseX < BOARD_WIDTH;
-        boolean en1b = keysPressed.getPressedPulse('!') && alive && p.mouseX < BOARD_WIDTH;
+        boolean en1 = keysPressed.getPressedPulse('1') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en2 = keysPressed.getPressedPulse('2') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en3 = keysPressed.getPressedPulse('3') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en4 = keysPressed.getPressedPulse('4') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en5 = keysPressed.getPressedPulse('5') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en6 = keysPressed.getPressedPulse('6') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en7 = keysPressed.getPressedPulse('7') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en8 = keysPressed.getPressedPulse('8') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en9 = keysPressed.getPressedPulse('9') && alive && matrixMousePosition.x < BOARD_WIDTH;
+        boolean en1b = keysPressed.getPressedPulse('!') && alive && matrixMousePosition.x < BOARD_WIDTH;
         //projectiles
-        if (pebble) projectiles.add(new Pebble(p, p.mouseX, p.mouseY, 0, null, 50000));
-        if (bolt) projectiles.add(new Bolt(p, p.mouseX, p.mouseY, 0, null, 20, 2));
-        if (miscProjectile) projectiles.add(new MiscProjectile(p, p.mouseX, p.mouseY, 0, null, round(p.random(0, 5)), 6));
-        if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 20, false));
-        if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, p.mouseX, p.mouseY, 0, null, 20, 30, true));
-        if (magicMissle) projectiles.add(new MagicMissile(p, p.mouseX, p.mouseY, 0, null, 5, 0, new PVector(p.mouseX,p.mouseY)));
-        if (arc) arcs.add(new Arc(p, p.mouseX, p.mouseY, null, 35, 5, 500, 0));
-        if (needle) projectiles.add(new Needle(p, p.mouseX, p.mouseY, 0, null, 5, 1,150));
-        if (flame) projectiles.add(new Flame(p, p.mouseX, p.mouseY, 0, null, 5, 1, 300, 5, false));
+        if (pebble) projectiles.add(new Snowball(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0));
+        if (bolt) projectiles.add(new IceCrystal(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0));
+        if (miscProjectile) projectiles.add(new MiscProjectile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, round(p.random(0, 5)), 6));
+        if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 20, false));
+        if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 30, true));
+        if (magicMissle) projectiles.add(new MagicMissile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 0, new PVector(matrixMousePosition.x,matrixMousePosition.y)));
+        if (arc) arcs.add(new Arc(p, matrixMousePosition.x, matrixMousePosition.y, null, 35, 5, 500, 0));
+        if (needle) projectiles.add(new Needle(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1,150));
+        if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new AlbinoBug(p, p.mouseX, p.mouseY));
-        if (en2) enemies.add(new BigAlbinoBug(p, p.mouseX, p.mouseY));
-        if (en3) enemies.add(new AlbinoButterfly(p, p.mouseX, p.mouseY));
-        if (en4) enemies.add(new Bat(p, p.mouseX, p.mouseY));
-        if (en5) enemies.add(new GiantBat(p, p.mouseX, p.mouseY));
-        if (en6) enemies.add(new SmallGolem(p, p.mouseX, p.mouseY));
-        if (en7) enemies.add(new Golem(p, p.mouseX, p.mouseY));
-        if (en8) enemies.add(new GiantGolem(p, p.mouseX, p.mouseY));
-        if (en9) enemies.add(new Wtf(p, p.mouseX, p.mouseY));
-        if (en1b) enemies.add(new Dummy(p, p.mouseX, p.mouseY));
+        if (en1) enemies.add(new MudFlinger(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en2) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en3) enemies.add(new Velociraptor(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en5) enemies.add(new SnowAntlion(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en6) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en7) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en8) enemies.add(new Frost(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en9) enemies.add(new Mammoth(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en1b) enemies.add(new Dummy(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
-    public void debugKeys() throws IOException {
+    public void debugKeys() {
         //entity stuff
         boolean deleteEnemies = keysPressed.getReleasedPulse('s') && alive;
         boolean killTowers = keysPressed.getReleasedPulse('d') && alive;
@@ -142,12 +180,13 @@ public class KeyBinds {
         boolean killEnemies = keysPressed.getPressedPulse('c') && alive;
         boolean overkillEnemies = keysPressed.getPressedPulse('C') && alive;
         //other stuff
-        boolean displayPathLines = keysPressed.getReleasedPulse('g');
+        boolean displayDebug = keysPressed.getReleasedPulse('g');
+        boolean displaySpawnAreas = keysPressed.getReleasedPulse('G');
         boolean loseMoney = keysPressed.getPressedPulse('-');
         boolean addMoney = keysPressed.getPressed('=');
-        boolean switchMode = keysPressed.getPressedPulse('b');
+        boolean levelBuilder = keysPressed.getPressedPulse('b');
         boolean saveTiles = keysPressed.getPressedPulse('z');
-        boolean increaseWave = keysPressed.getPressedPulse(']');
+        boolean increaseWave = keysPressed.getPressedPulse(']'); //only works when game playing
         boolean decreaseWave = keysPressed.getPressedPulse('[');
         boolean increaseWave5 = keysPressed.getPressedPulse('}');
         boolean decreaseWave5 = keysPressed.getPressedPulse('{');
@@ -183,13 +222,20 @@ public class KeyBinds {
             }
         }
         //other stuff
-        if (displayPathLines) debug = !debug;
-        if (addMoney) money += 100;
+        if (displayDebug) debug = !debug;
+        if (displaySpawnAreas) showSpawn = !showSpawn;
+        if (addMoney) money += 1000;
         if (loseMoney) money = 0;
-        if (switchMode) {
-            levelBuilder = !levelBuilder;
+        if (levelBuilder) {
+            Main.levelBuilder = !Main.levelBuilder;
             hand.setHeld("null");
-        } if (saveTiles) DataControl.saveLayout();
+        } if (saveTiles) {
+            try {
+                DataControl.saveLayout();
+            } catch (IOException exception) {
+                System.out.println("Can't save layout!");
+            }
+        }
         if (increaseWave && canWave(1)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);
         if (decreaseWave && canWave(-1)) levels[currentLevel].setWave(levels[currentLevel].currentWave - 1);
         if (increaseWave5 && canWave(5)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 5);

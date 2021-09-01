@@ -7,13 +7,13 @@ import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
 public class SmolBug extends Enemy {
+
     public SmolBug(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(25,25);
         pfSize = 1;
         radius = 13;
-        maxSpeed = 24;
-        speed = maxSpeed;
+        speed = 24;
         moneyDrop = 10;
         damage = 1;
         maxHp = 20; //Hp <---------------------------

@@ -8,6 +8,7 @@ import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class RailgunBlast extends Particle {
+
     public RailgunBlast(PApplet p, float x, float y, float angle) {
         super(p, x, y, angle);
         position = new PVector(x, y);

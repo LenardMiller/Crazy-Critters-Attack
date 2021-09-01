@@ -24,6 +24,7 @@ public class Burning extends Buff {
         this.enId = enId;
     }
 
+    @Override
     public void effect() { //small damage fast
         if (enId < 0) buffs.remove(this);
         else {

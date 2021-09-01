@@ -8,8 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Railgun extends Turret {
 
@@ -27,48 +26,39 @@ public class Railgun extends Turret {
     public Railgun(PApplet p, Tile tile) {
         super(p,tile);
         name = "railgun";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
         offset = 6;
         hit = false;
         delay = 8;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 5000;
         pjSpeed = -1;
-        range = 800; //0
+        range = 800;
         NUM_VAPOR_FRAMES = 15;
         BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);
-        betweenVaporTimer = 0;
         vaporTrail = new PImage[NUM_VAPOR_FRAMES];
         vaporEndSprites = new PImage[11];
         currentVaporFrame = 16;
         betweenIdleFrames = 3;
         betweenFireFrames = 3;
-        state = 0;
         vaporTrail = animatedSprites.get("railgunVaporTrailTR");
         vaporEndSprites = animatedSprites.get("railgunBlastPT");
-        loadSprites();
-        debrisType = "ultimate";
+        debrisType = "titanium";
+        barrelLength = 30;
         price = 400;
         value = price;
         priority = 2; //strong
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void fire() {
-        PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-        PVector spa = PVector.fromAngle(angle-HALF_PI);
-        spa.setMag(30);
-        spp.add(spa);
-        particles.add(new RailgunBlast(p,spp.x,spp.y,0));
-
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
+        topParticles.add(new RailgunBlast(p,position.x,position.y,0));
         currentVaporFrame = 0;
-        vaporStart = spp;
+        vaporStart = position;
         PVector vaporEnd = targetEnemy.position;
         vaporAngle = angle;
         float c = sqrt(sq(vaporEnd.x-vaporStart.x)+sq(vaporEnd.y-vaporStart.y));
@@ -76,9 +66,10 @@ public class Railgun extends Turret {
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
 
-        targetEnemy.damageWithoutBuff(damage,this, "normal", PVector.fromAngle(vaporAngle - HALF_PI), true);
+        targetEnemy.damageWithoutBuff(getDamage(),this, "normal", PVector.fromAngle(vaporAngle - HALF_PI), true);
     }
 
+    @Override
     public void displayMain() {
         //shadow
         p.pushMatrix();
@@ -89,6 +80,18 @@ public class Railgun extends Turret {
         p.tint(255);
         p.popMatrix();
         //vaporTrail
+        displayVaporTrail();
+        //main
+        p.pushMatrix();
+        p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
+        p.rotate(angle);
+        p.tint(255, tintColor, tintColor);
+        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        p.popMatrix();
+        p.tint(255);
+    }
+
+    private void displayVaporTrail() {
         if (currentVaporFrame < NUM_VAPOR_FRAMES) {
             for (int i = 0; i <= vaporLength; i++) {
                 p.pushMatrix();
@@ -106,17 +109,13 @@ public class Railgun extends Turret {
                 betweenVaporTimer = 0;
             }
         }
-        //main
-        p.pushMatrix();
-        p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
-        p.rotate(angle);
-        p.tint(255, tintColor, tintColor);
-        p.image(sprite,-size.x/2-offset,-size.y/2-offset);
-        p.popMatrix();
-        p.tint(255);
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void upgradeSpecial(int id) {}
+
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 0;
         upgradePrices[1] = 0;
@@ -148,8 +147,4 @@ public class Railgun extends Turret {
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
     }
-
-    protected void upgradeSpecial() {}
-
-    public void updateSprite() {}
 }

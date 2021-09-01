@@ -7,8 +7,8 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.gui.TowerInfo.*;
-import static main.misc.Utilities.playSound;
 import static main.misc.Utilities.strikethroughText;
+import static main.sound.SoundUtilities.playSound;
 import static processing.core.PConstants.CENTER;
 
 public class TowerBuy extends Button {
@@ -18,13 +18,13 @@ public class TowerBuy extends Button {
     public boolean depressed;
     public int price;
 
-    public TowerBuy(PApplet p, float x, float y, String type, boolean active){
+    public TowerBuy(PApplet p, float x, float y, String type, boolean active){ //todo: redo old art
         super(p,x,y,type,active);
         price = 0;
         position = new PVector(x, y);
         size = new PVector(35, 35);
         TOWER_TYPE = type;
-        spriteLocation = "sprites/guiObjects/buttons/towerBuy/" + TOWER_TYPE + "/"; //still uses old system because it is only created at beginning of game
+        spriteLocation = "sprites/gui/buttons/towerBuy/" + TOWER_TYPE + "/"; //still uses old system because it is only created at beginning of game
         spriteIdle = p.loadImage(spriteLocation + "000.png");
         spritePressed = p.loadImage(spriteLocation + "001.png");
         spriteHover = p.loadImage(spriteLocation + "002.png");
@@ -38,7 +38,7 @@ public class TowerBuy extends Button {
                 price = CROSSBOW_PRICE;
                 break;
             case "miscCannon":
-                price = RANDOMCANNON_PRICE;
+                price = RANDOM_CANNON_PRICE;
                 break;
             case "cannon":
                 price = CANNON_PRICE;
@@ -50,17 +50,23 @@ public class TowerBuy extends Button {
                 price = SEISMIC_PRICE;
                 break;
             case "tesla":
-                price = TESLATOWER_PRICE;
+                price = TESLA_TOWER_PRICE;
                 break;
             case "energyBlaster":
-                price = ENERGYBLASTER_PRICE;
+                price = ENERGY_BLASTER_PRICE;
                 break;
             case "magicMissleer":
-                price = 300;
+                price = MAGIC_MISSILEER_PRICE;
                 break;
             case "nightmare":
             case "flamethrower":
                 price = FLAMETHROWER_PRICE;
+                break;
+            case "iceTower":
+                price = ICE_TOWER_PRICE;
+                break;
+            case "booster":
+                price = BOOSTER_PRICE;
                 break;
             case "railgun":
                 price = 400;
@@ -71,6 +77,7 @@ public class TowerBuy extends Button {
         }
     }
 
+    @Override
     public void main() {
         if (active) {
             if (!TOWER_TYPE.equals("null")) hover();
@@ -83,13 +90,17 @@ public class TowerBuy extends Button {
         }
     }
 
-    /**
-     * If hovered or depressed.
-     */
-    public void hover() {
+    private boolean hovered() {
         int d = 2;
-        if ((p.mouseX < (position.x+size.x/2)+d && p.mouseX > (position.x-size.x/2)-d-1 && p.mouseY < (position.y+size.y/2)+d
-                && p.mouseY > (position.y-size.y/2)-d-1 && active || depressed) && !paused && alive) {
+        boolean matchX = matrixMousePosition.x < (position.x+size.x/2)+d && matrixMousePosition.x > (position.x-size.x/2)-d-1;
+        boolean matchY = matrixMousePosition.y < (position.y+size.y/2)+d && matrixMousePosition.y > (position.y-size.y/2)-d-1;
+        boolean matchPosition = matchX && matchY && active;
+        return  ((matchPosition && !paused) || depressed) && alive;
+    }
+
+    @Override
+    public void hover() {
+        if (hovered()) {
             if (depressed) sprite = spritePressed;
             else sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse && !depressed) playSound(clickIn, 1, 1);
@@ -98,7 +109,7 @@ public class TowerBuy extends Button {
             p.noStroke();
             p.rect(900,212,200,707);
             p.textAlign(CENTER);
-            p.fill(0);
+            p.fill(0, 254);
             p.textFont(largeFont); //displays info about tower
             int x = 1000;
             int offset = 0;
@@ -134,7 +145,10 @@ public class TowerBuy extends Button {
                     energyBlasterInfo(p);
                     break;
                 case "magicMissleer":
-                    p.text("Magic Missileer", x, 241);
+                    p.text("Magic Missile", x, 241);
+                    p.text("Launcher", x, 266);
+                    offset = 25;
+                    magicMissileerInfo(p);
                     break;
                 case "tesla":
                     p.text("Tesla Tower", x, 241);
@@ -149,6 +163,14 @@ public class TowerBuy extends Button {
                     p.text("Flamethrower", x, 241);
                     flamethrowerInfo(p);
                     break;
+                case "iceTower":
+                    p.text("Freeze Ray", x, 241);
+                    iceTowerInfo(p);
+                    break;
+                case "booster":
+                    p.text("Booster", x, 241);
+                    boosterInfo(p);
+                    break;
                 case "railgun":
                     p.text("Railgun", x, 241);
                     break;
@@ -157,7 +179,7 @@ public class TowerBuy extends Button {
                     break;
             }
             displayPrice(offset, x);
-            if (inputHandler.leftMousePressedPulse && alive) {
+            if (inputHandler.leftMousePressedPulse && alive && !paused) {
                 action();
                 if (money >= price) sprite = spritePressed;
             }
@@ -170,12 +192,13 @@ public class TowerBuy extends Button {
         p.textAlign(CENTER);
         p.textFont(mediumFont);
         if (money < price) {
-            strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0),
+            strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0, 254),
                     mediumFont.getSize(), CENTER);
         }
         else p.text("$" + price, x, 271 + offset);
     }
 
+    @Override
     public void action() {
         if (money < price) depressed = false;
         else depressed = !depressed;

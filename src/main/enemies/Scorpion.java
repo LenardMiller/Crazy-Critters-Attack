@@ -7,13 +7,13 @@ import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
 public class Scorpion extends Enemy {
+
     public Scorpion(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(25,25);
         pfSize = 1; //1
         radius = 13;
-        maxSpeed = 39;
-        speed = maxSpeed;
+        speed = 39;
         moneyDrop = 35;
         damage = 4;
         maxHp = 75;

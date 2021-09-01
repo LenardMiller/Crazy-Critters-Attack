@@ -11,6 +11,7 @@ import static processing.core.PConstants.HALF_PI;
 import static processing.core.PConstants.TWO_PI;
 
 public class Vortex extends Particle {
+
     public Vortex(PApplet p, PVector center, PVector displacement, String type, float radius) {
         super(p, center.x, center.y, p.random(TWO_PI));
         position = PVector.add(center, displacement);
@@ -28,7 +29,7 @@ public class Vortex extends Particle {
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 
-
+    @Override
     protected void move() {
         angle += angularVelocity;
         displayAngle = angle;

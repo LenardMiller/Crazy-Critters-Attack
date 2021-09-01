@@ -1,16 +1,17 @@
 package main.towers.turrets;
 
+import main.damagingThings.projectiles.CannonBall;
+import main.damagingThings.projectiles.Dynamite;
+import main.damagingThings.projectiles.FragBall;
 import main.misc.Tile;
-import main.projectiles.CannonBall;
-import main.projectiles.Dynamite;
-import main.projectiles.FragBall;
+import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Cannon extends Turret {
 
@@ -21,19 +22,10 @@ public class Cannon extends Turret {
     public Cannon(PApplet p, Tile tile) {
         super(p,tile);
         name = "cannon";
-        size = new PVector(50,50);
         offset = 5;
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 3.2f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 3.2f);
         pjSpeed = 850;
         betweenFireFrames = down60ToFramerate(1);
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
         damage = 40;
         range = 250;
         effectRadius = 25;
@@ -41,34 +33,38 @@ public class Cannon extends Turret {
         breakSound = sounds.get("stoneBreak");
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("smallExplosion");
-        loadSprites();
         debrisType = "stone";
         price = CANNON_PRICE;
         value = price;
-        priority = 0; //close
         fireParticle = "smoke";
         barrelLength = 29;
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
-        if (frags) projectiles.add(new FragBall(p,position.x,position.y, angle, this, damage, effectRadius));
-        else if (dynamite) projectiles.add(new Dynamite(p,position.x,position.y, angle, this, damage, effectRadius));
-        else projectiles.add(new CannonBall(p,position.x,position.y, angle, this, damage, effectRadius));
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
+        for (int i = 0; i < p.random(3, 5); i++) {
+            midParticles.add(new MiscParticle(p, position.x, position.y,
+              angle + radians(p.random(-45, 45)), "smoke"));
+        }
+        if (frags) projectiles.add(new FragBall(p,position.x,position.y, angle, this, getDamage(), effectRadius));
+        else if (dynamite) projectiles.add(new Dynamite(p,position.x,position.y, angle, this, getDamage(), effectRadius));
+        else projectiles.add(new CannonBall(p,position.x,position.y, angle, this, getDamage(), effectRadius));
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void setUpgrades() {
         //price
-        upgradePrices[0] = 175;
-        upgradePrices[1] = 250;
+        upgradePrices[0] = 250;
+        upgradePrices[1] = 400;
         upgradePrices[2] = 850;
         upgradePrices[3] = 150;
-        upgradePrices[4] = 200;
-        upgradePrices[5] = 1000;
+        upgradePrices[4] = 250;
+        upgradePrices[5] = 1250;
         //titles
         upgradeTitles[0] = "Stronger shot";
         upgradeTitles[1] = "Powerful shot";
@@ -109,6 +105,7 @@ public class Cannon extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[24];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -119,7 +116,7 @@ public class Cannon extends Turret {
                     damage += 40;
                     break;
                 case 2:
-                    damage += 300;
+                    damage += 400;
                     effectRadius = 60;
                     pjSpeed = 600;
                     dynamite = true;
@@ -156,6 +153,4 @@ public class Cannon extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }

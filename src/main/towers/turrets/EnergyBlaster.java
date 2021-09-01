@@ -1,16 +1,17 @@
 package main.towers.turrets;
 
+import main.damagingThings.projectiles.DarkBlast;
+import main.damagingThings.projectiles.EnergyBlast;
+import main.damagingThings.projectiles.NuclearBlast;
 import main.misc.Tile;
-import main.projectiles.DarkBlast;
-import main.projectiles.EnergyBlast;
-import main.projectiles.NuclearBlast;
+import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class EnergyBlaster extends Turret{
 
@@ -23,55 +24,61 @@ public class EnergyBlaster extends Turret{
         super(p,tile);
         offset = 13;
         name = "energyBlaster";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 4.2f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
-        damage = 350;
+        delay = randomizeDelay(p, 4.2f);
+        damage = 400;
         pjSpeed = 1000;
         range = 300;
         betweenFireFrames = down60ToFramerate(2);
-        state = 0;
         effectRadius = 35;
-        bigExplosion = false;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("energyBlasterFire");
         fireParticle = "energy";
         barrelLength = 40;
-        loadSprites();
         debrisType = "darkMetal";
-        price = ENERGYBLASTER_PRICE;
+        price = ENERGY_BLASTER_PRICE;
         value = price;
         priority = 2; //strong
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
         if (nuclear) {
-            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, damage, effectRadius));
+            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
+            for (int i = 0; i < p.random(3, 5); i++) {
+                midParticles.add(new MiscParticle(p, position.x, position.y,
+                  angle + radians(p.random(-45, 45)), "nuclear"));
+            }
         } else if (dark) {
-            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, damage, effectRadius));
+            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
+            for (int i = 0; i < p.random(3, 5); i++) {
+                midParticles.add(new MiscParticle(p, position.x, position.y,
+                  angle + radians(p.random(-45, 45)), "dark"));
+            }
         } else {
-            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, damage, effectRadius, bigExplosion));
+            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, bigExplosion));
+            for (int i = 0; i < p.random(3, 5); i++) {
+                midParticles.add(new MiscParticle(p, position.x, position.y,
+                  angle + radians(p.random(-45, 45)), "energy"));
+            }
         }
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
-        upgradePrices[0] = 350;
-        upgradePrices[1] = 400;
+        upgradePrices[0] = 500;
+        upgradePrices[1] = 650;
         upgradePrices[2] = 4000;
 
-        upgradePrices[3] = 250;
-        upgradePrices[4] = 600;
+        upgradePrices[3] = 400;
+        upgradePrices[4] = 800;
         upgradePrices[5] = 6500;
         //titles
         upgradeTitles[0] = "Faster Reload";
@@ -116,6 +123,7 @@ public class EnergyBlaster extends Turret{
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[30];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -129,7 +137,7 @@ public class EnergyBlaster extends Turret{
                 case 2:
                     damage += 550;
                     delay -= 1f;
-                    effectRadius = 300;
+                    effectRadius = 200;
                     name = "nuclearBlaster";
                     fireParticle = "nuclear";
                     debrisType = "metal";
@@ -143,8 +151,8 @@ public class EnergyBlaster extends Turret{
                     range += 35;
                     break;
                 case 4:
-                    range += 35;
-                    damage += 100;
+                    range += 40;
+                    damage += 200;
                     break;
                 case 5:
                     range += 65;

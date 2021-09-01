@@ -7,7 +7,7 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSound;
+import static main.sound.SoundUtilities.playSound;
 
 public abstract class Button extends GuiObject {
 
@@ -29,9 +29,9 @@ public abstract class Button extends GuiObject {
         clickOut = sounds.get("clickOut");
     }
 
-    public void hover(){
-        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
-                p.mouseY > position.y-size.y/2 && alive && !paused) {
+    public void hover() {
+        if (matrixMousePosition.x < position.x+size.x/2 && matrixMousePosition.x > position.x-size.x/2 &&
+          matrixMousePosition.y < position.y+size.y/2 && matrixMousePosition.y > position.y-size.y/2 && alive && !paused) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
@@ -44,10 +44,9 @@ public abstract class Button extends GuiObject {
         } else sprite = spriteIdle;
     }
 
-    public void action(){ //prints "Boink!"
-        System.out.println("Boink!");
-    }
+    public abstract void action();
 
+    @Override
     public void main(){
         if (active){
             hover();

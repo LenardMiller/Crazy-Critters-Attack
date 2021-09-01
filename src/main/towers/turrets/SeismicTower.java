@@ -1,61 +1,54 @@
 package main.towers.turrets;
 
+import main.damagingThings.shockwaves.SeismicShockwave;
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;
-import main.particles.BuffParticle;
-import main.shockwaves.SeismicShockwave;
+import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 import static processing.core.PConstants.HALF_PI;
 
 public class SeismicTower extends Turret {
 
-    private float shockwaveWidth;
+    /**
+     * Degrees
+     */
+    public float shockwaveWidth;
+
     private boolean seismicSense;
 
     public SeismicTower(PApplet p, Tile tile) {
         super(p,tile);
         name = "seismic";
-        size = new PVector(50,50);
         offset = 4;
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 2.5f; //default: 200 frames
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 2.5f);
         pjSpeed = 400;
         betweenFireFrames = down60ToFramerate(1);
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
         damage = 50;
         range = 225;
         shockwaveWidth = 60;
-        seismicSense = false;
         damageSound = sounds.get("stoneDamage");
         breakSound = sounds.get("stoneBreak");
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("seismicSlam");
-        fireParticle = null;
         barrelLength = 29;
-        loadSprites();
         debrisType = "stone";
         price = SEISMIC_PRICE;
         value = price;
-        priority = 0; //close
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
+        loadSprites();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     protected void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null && state != 1 && shockwaveWidth < 360) aim(targetEnemy);
@@ -66,6 +59,7 @@ public class SeismicTower extends Turret {
         if (state == 1 && frame == fireFrames.length - 1) fire(barrelLength, fireParticle);
     }
 
+    @Override
     protected void getTargetEnemy() {
         //0: close
         //1: far
@@ -76,11 +70,11 @@ public class SeismicTower extends Turret {
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
-            if (!enemy.stealthMode || seismicSense) {
+            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy) || seismicSense) {
                 float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));
-                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < range) {
+                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < getRange()) {
                     if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
                         finalDist = dist;
@@ -105,6 +99,7 @@ public class SeismicTower extends Turret {
         targetEnemy = e;
     }
 
+    @Override
     public void displayMain() {
         int hammerCount = 6;
         //shadow
@@ -138,7 +133,8 @@ public class SeismicTower extends Turret {
         p.tint(255);
     }
 
-    protected void spawnProjectile(PVector position, float angle) {
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
         float a = angle;
         if (shockwaveWidth >= 360) {
             a = 0;
@@ -147,11 +143,11 @@ public class SeismicTower extends Turret {
                 a += TWO_PI / 6;
             }
             shockwaves.add(new SeismicShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-              (int) barrelLength, range, angle, shockwaveWidth, damage, this, false));
+              (int) barrelLength, getRange(), angle, shockwaveWidth, getDamage(), this));
         } else {
             fireParticles(a);
-            shockwaves.add(new SeismicShockwave(p, position.x, position.y, 0, range, angle, shockwaveWidth, damage, this,
-                    seismicSense));
+            shockwaves.add(new SeismicShockwave(p, position.x, position.y, 0, getRange(), angle, shockwaveWidth,
+              getDamage(), this));
         }
     }
 
@@ -167,7 +163,7 @@ public class SeismicTower extends Turret {
             spa2.setMag(-5);
             PVector spp2 = new PVector(spp.x, spp.y);
             spp2.add(spa2);
-            particles.add(new BuffParticle(p, spp2.x, spp2.y, a + radians(p.random(-45, 45)), part));
+            midParticles.add(new MiscParticle(p, spp2.x, spp2.y, a + radians(p.random(-45, 45)), part));
         }
         particleCount = p.random(1, 5);
         for (int i = 0; i < particleCount; i++) {
@@ -175,11 +171,12 @@ public class SeismicTower extends Turret {
             spa2.setMag(-5);
             PVector spp2 = new PVector(spp.x, spp.y);
             spp2.add(spa2);
-            particles.add(new BuffParticle(p, spp2.x, spp2.y, p.random(0, 360), part));
+            midParticles.add(new MiscParticle(p, spp2.x, spp2.y, p.random(0, 360), part));
         }
     }
 
-    private void setUpgrades() {
+    @Override
+    protected void setUpgrades() {
         //price
         upgradePrices[0] = 200;
         upgradePrices[1] = 200;
@@ -211,12 +208,12 @@ public class SeismicTower extends Turret {
         upgradeDescB[3] = "range";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "+30";
+        upgradeDescA[4] = "Increase";
         upgradeDescB[4] = "damage";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "Stun";
-        upgradeDescB[5] = "stealthy";
+        upgradeDescA[5] = "Can target";
+        upgradeDescB[5] = "burrowing";
         upgradeDescC[5] = "enemies";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
@@ -227,6 +224,7 @@ public class SeismicTower extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[22];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -266,7 +264,7 @@ public class SeismicTower extends Turret {
                     effectLevel = 0;
                     effectDuration = 2;
                     shockwaveWidth -= 40;
-                    range += 50;
+                    range += 100;
                     damage += 150;
                     name = "seismicSniper";
                     loadSprites();
@@ -274,6 +272,4 @@ public class SeismicTower extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }

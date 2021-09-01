@@ -2,9 +2,15 @@ package main.enemies;
 
 import main.Main;
 import main.buffs.*;
-import main.gui.PopupText;
+import main.buffs.glued.Glued;
+import main.buffs.glued.SpikeyGlued;
+import main.buffs.stunned.Frozen;
+import main.buffs.stunned.Stunned;
+import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;
+import main.particles.Floaty;
+import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.particles.Pile;
 import main.pathfinding.Node;
@@ -22,26 +28,30 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Enemy {
 
     /**
      * measured in pixels per second
      */
-    public float maxSpeed;
     public float speed;
+    public float speedModifier;
     public float angle;
     public float radius;
+    /**
+     * moving, attacking, (shooting/burrowing)
+     */
+    public int state;
     public int barAlpha;
     public int hp;
     public int maxHp;
     public int attackFrame;
     public int pfSize;
+    public int intersectingIceCount;
     public int[] attackDmgFrames;
     public int[] tempAttackDmgFrames;
-    public boolean flying;
     public boolean immobilized;
-    public boolean stealthMode;
     public ArrayList<TurnPoint> points;
     public PImage[] attackFrames;
     public String hitParticle;
@@ -57,28 +67,26 @@ public abstract class Enemy {
     protected int attackStartFrame;
     protected int betweenCorpseFrames;
     protected int corpseLifespan;
-    protected boolean stealthy;
+    protected int pathRequestWaitTimer;
+    protected int moveFrame;
+    protected int idleTime;
+    protected float targetAngle;
+    protected boolean overkill;
     protected PApplet p;
+    protected PVector partsDirection;
     protected PVector corpseSize;
     protected PVector partSize;
+    protected PImage[] moveFrames;
+    protected PImage sprite;
+    protected Color maxTintColor;
+    protected Color currentTintColor;
     protected SoundFile overkillSound;
     protected SoundFile dieSound;
 
-    private int attackCount;
-    private int idleTime;
-    private int moveFrame;
-    private int pathRequestWaitTimer;
-    private float targetAngle;
-    private boolean attackCue;
-    private boolean targetMachine;
-    private boolean overkill;
-    private boolean attacking;
-    private Tower targetTower;
-    private PImage[] moveFrames;
-    private PImage sprite;
-    private PVector partsDirection;
-    private Color currentTintColor;
-    private Color maxTintColor;
+    protected int attackCount;
+    protected boolean attackCue;
+    protected boolean targetMachine;
+    protected Tower targetTower;
 
     protected Enemy(PApplet p, float x, float y) {
         this.p = p;
@@ -88,8 +96,8 @@ public abstract class Enemy {
         size = new PVector(20, 20);
         angle = radians(270);
         radius = 10;
-        maxSpeed = 60;
-        speed = maxSpeed;
+        speed = 60;
+        speedModifier = 1;
         moneyDrop = 1;
         damage = 1;
         maxHp = 20; //Hp <---------------------------
@@ -103,9 +111,6 @@ public abstract class Enemy {
         tempAttackDmgFrames = new int[attackDmgFrames.length];
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         pfSize = 1;
-        stealthy = false;
-        stealthMode = false;
-        flying = false;
         attackCount = 0;
         corpseSize = size;
         partSize = size;
@@ -119,20 +124,15 @@ public abstract class Enemy {
         swapPoints(false);
 
         if (!paused && !immobilized) {
-            angle = clampAngle(angle);
-            targetAngle = clampAngle(targetAngle);
-            angle += angleDifference(targetAngle, angle) / 10;
+            angle = normalizeAngle(angle);
+            targetAngle = normalizeAngle(targetAngle);
+            angle += getAngleDifference(targetAngle, angle) / 10;
 
-            if (!attacking) {
-                stealthMode = stealthy;
-                move();
-            } else {
-                attack();
-                stealthMode = false;
-            }
+            if (state == 0) move();
+            else if (state == 1) attack();
 
             //prevent wandering
-            if (points.size() == 0 && !attacking) pathRequestWaitTimer++;
+            if (points.size() == 0 && state != 1) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
@@ -140,15 +140,20 @@ public abstract class Enemy {
         }
         if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
         displayMain();
-        //prevent from going offscreen
-//        if (position.x >= GRID_WIDTH - 100 || position.x <= -100 || position.y >= GRID_HEIGHT - 100 || position.y <= -100)
-//            dead = true;
         //if health is 0, die
         if (hp <= 0) dead = true;
         if (dead) die(i);
     }
 
-    private void die(int i) {
+    /**
+     * Adds money with a popup.
+     * Plays death sound.
+     * If overkill, fling bits everywhere, else create a corpse.
+     * Clear buffs.
+     * Remove from array.
+     * @param i id for buff stuff
+     */
+    protected void die(int i) {
         Main.money += moneyDrop;
         popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
 
@@ -158,25 +163,9 @@ public abstract class Enemy {
         }
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
-        if (!stealthMode) {
-            if (overkill) {
-                for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
-                    float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
-                    corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
-                            currentTintColor ,p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)),
-                            0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
-                }
-                for (int k = 0; k < sq(pfSize); k++) {
-                    underParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
-                            (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
-                            0, hitParticle));
-                }
-            } else
-                corpses.add(new Corpse(p, position, corpseSize,
-                        angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
-                        currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
-                        "none", 0, true));
-        }
+
+        if (gore) goreyDeathEffect(type);
+        else cleanDeathEffect();
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
             Buff buff = buffs.get(j);
@@ -191,42 +180,103 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    private PVector adjustPartVelocityToFramerate(PVector partVelocity) {
+    protected void goreyDeathEffect(String type) {
+        if (overkill) {
+            for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
+                float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
+                corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
+                  currentTintColor ,p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)),
+                  0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
+            }
+            for (int k = 0; k < sq(pfSize); k++) {
+                bottomParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
+                  (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
+                  0, hitParticle));
+            }
+        } else
+            corpses.add(new Corpse(p, position, corpseSize,
+              angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
+              currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
+              "none", 0, true));
+    }
+
+    protected void cleanDeathEffect() {
+        int num = (int) p.random(pfSize, pfSize * pfSize);
+        if (!overkill) {
+            for (int i = 0; i < num * 5; i++) {
+                PVector partPos = getParticlePosition();
+                topParticles.add(new Floaty(p, partPos.x, partPos.y, p.random(20, 30), "smokeCloud"));
+            }
+        } else {
+            for (int i = 0; i < num * 10; i++) {
+                PVector partPos = getParticlePosition();
+                topParticles.add(new Floaty(p, partPos.x, partPos.y, p.random(50 * pfSize, 100 * pfSize), "smokeCloud"));
+            }
+        }
+        for (int j = num; j >= 0; j--) { //sprays puff
+            PVector partPos = getParticlePosition();
+            topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), "greyPuff"));
+        }
+    }
+
+    private PVector getParticlePosition() {
+        float x = position.x + p.random((size.x / 2) * -1, size.x / 2);
+        float y = position.y + p.random((size.y / 2) * -1, size.y / 2);
+        return new PVector(x, y);
+    }
+
+    protected PVector adjustPartVelocityToFramerate(PVector partVelocity) {
         return partVelocity.setMag(partVelocity.mag() * up60ToFramerate(1));
     }
 
     protected void move() {
         PVector m = PVector.fromAngle(angle);
-        m.setMag(speed/FRAMERATE);
+        float pixelsMoved = getActualSpeed() / FRAMERATE;
+        m.setMag(pixelsMoved);
         //don't move if no path
         if (points.size() > 0) position.add(m);
     }
 
-    private void animate() { //handle animation states
-        if (attacking) {
-            if (attackFrame >= attackFrames.length) attackFrame = 0;
-            sprite = attackFrames[attackFrame];
-            idleTime++;
-            if (attackFrame < attackFrames.length - 1) {
-                if (idleTime >= betweenAttackFrames) {
-                    attackFrame += 1;
-                    idleTime = 0;
-                }
-            } else attackFrame = 0;
-        } else {
-            idleTime++;
-            if (moveFrame < moveFrames.length - 1) {
-                if (idleTime >= betweenWalkFrames) {
-                    moveFrame++;
-                    idleTime = 0;
-                }
-            } else moveFrame = 0;
-            sprite = moveFrames[moveFrame];
+    public float getActualSpeed() {
+        float actualSpeed = speed * speedModifier;
+        if (actualSpeed > 20 && intersectCombatPoint()) actualSpeed = 20;
+        return actualSpeed;
+    }
+
+    /**
+     * handle animation states
+     */
+    protected void animate() {
+        if (!immobilized) {
+            if (state == 1) {
+                if (attackFrame >= attackFrames.length) attackFrame = 0;
+                sprite = attackFrames[attackFrame];
+                idleTime++;
+                if (attackFrame < attackFrames.length - 1) {
+                    if (idleTime >= betweenAttackFrames) {
+                        attackFrame += 1;
+                        idleTime = 0;
+                    }
+                } else attackFrame = 0;
+            } else if (state == 0) {
+                idleTime++;
+                if (moveFrame < moveFrames.length - 1) {
+                    if (idleTime >= betweenWalkFrames) {
+                        moveFrame++;
+                        idleTime = 0;
+                    }
+                } else moveFrame = 0;
+                sprite = moveFrames[moveFrame];
+            }
         }
         //shift back to normal
         currentTintColor = incrementColorTo(currentTintColor, up60ToFramerate(20), new Color(255, 255, 255));
     }
 
+    /**
+     * Displays but tinted black and semi-transparent.
+     * Calls to animate sprite.
+     */
     public void displayShadow() {
         if (!paused) animate();
         p.pushMatrix();
@@ -240,6 +290,9 @@ public abstract class Enemy {
         p.popMatrix();
     }
 
+    /**
+     * Display main sprite
+     */
     public void displayMain() {
         if (debug) for (int i = points.size() - 1; i > 0; i--) {
             points.get(i).display();
@@ -282,12 +335,15 @@ public abstract class Enemy {
         partsDirection = direction;
         hp -= damage;
         if (turret != null) {
+            int statDamage = damage;
             if (hp <= 0) {
                 turret.killsTotal++;
-                turret.damageTotal += damage + hp;
-            } else turret.damageTotal += damage;
+                statDamage = damage + hp;
+            }
+            if (statDamage > 0) turret.damageTotal += statDamage;
         }
         int effectTimer = p.frameCount + 10;
+        //prevent duplicates
         if (buffs.size() > 0) {
             for (int j = 0; j < buffs.size(); j++) {
                 Buff buff = buffs.get(j);
@@ -325,6 +381,12 @@ public abstract class Enemy {
                     break;
                 case "stunned":
                     buff = new Stunned(p, id, turret);
+                    break;
+                case "frozen":
+                    buff = new Frozen(p, id, turret);
+                    break;
+                case "electrified":
+                    buff = new Electrified(p, id, (int) effectLevel, effectDuration, turret);
                     break;
                 default:
                     buff = null;
@@ -368,27 +430,35 @@ public abstract class Enemy {
         return -1;
     }
 
-    private void damageEffect(boolean particles) {
+    /**
+     * Display hp bar.
+     * Tint.
+     * @param particles whether or not to display hurt particles
+     */
+    protected void damageEffect(boolean particles) {
+        if (hp == maxHp) return;
         barAlpha = 255;
         if (particles) {
             int num = pfSize;
             int chance = 5;
-            if (!recentlyHit()) {
+            if (notRecentlyHit()) {
                 num = (int) p.random(pfSize, pfSize * pfSize);
                 chance = 0;
             }
             if (p.random(0, 6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
-                    Main.particles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2), position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+                    PVector partPos = getParticlePosition();
+                    if (gore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle));
+                    else topParticles.add(new MiscParticle(p, partPos.x, partPos.y, p.random(0, 360), "stun"));
                 }
             }
             currentTintColor = new Color(maxTintColor.getRGB());
         }
     }
 
-    private boolean recentlyHit() {
+    private boolean notRecentlyHit() {
         int totalTintColor = currentTintColor.getRed() + currentTintColor.getGreen() + currentTintColor.getBlue();
-        return totalTintColor < 700;
+        return totalTintColor >= 700;
     }
 
     public void hpBar() {
@@ -402,6 +472,8 @@ public abstract class Enemy {
     }
 
     protected void loadStuff() {
+        hp = maxHp;
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         attackFrames = animatedSprites.get(name + "AttackEN");
         moveFrames = animatedSprites.get(name + "MoveEN");
         maxTintColor = getTintColor();
@@ -422,11 +494,21 @@ public abstract class Enemy {
                 return new Color(255, 0, 255);
             case "redOuch":
                 return new Color(216, 0, 0);
+            case "iceOuch":
+                return new Color(49, 135, 223);
+            case "mudOuch":
+                return new Color(111, 58, 0);
             default:
                 return new Color(255, 0, 0);
         }
     }
 
+    /**
+     * Angles towards target.
+     * Damages target turret or machine.
+     * Messes with state a bit.
+     * Prevents attacking multiple times at once.
+     */
     protected void attack() {
         boolean dmg = false;
         for (int frame : tempAttackDmgFrames) {
@@ -446,13 +528,13 @@ public abstract class Enemy {
             }
             moveFrame = 0;
             if (dmg) targetTower.damage(damage);
-        } else if (!targetMachine) attacking = false;
+        } else if (!targetMachine) state = 0;
         if (targetMachine) {
             moveFrame = 0;
             if (dmg) machine.damage(damage);
         }
         if (!attackCue && attackFrame == attackStartFrame) {
-            attacking = false;
+            state = 0;
             attackFrame = attackStartFrame;
         }
     }
@@ -462,15 +544,31 @@ public abstract class Enemy {
     }
 
     //pathfinding -----------------------------------------------------------------
+    //todo: fix attacking multiple things at once
+    //todo: AAAAAA ENEMES ARE WANDERING AGAIN
+    //todo: sometimes get 'stuck'
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
         PVector p = point.position;
         float tpSize;
-        if (point.combat) tpSize = speed/FRAMERATE;
+        if (point.combat) tpSize = 3;
         else tpSize = 15;
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
-        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) && (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
+        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) &&
+          (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
+    }
+
+    protected boolean intersectCombatPoint() {
+        if (points.size() == 0f) return false;
+        TurnPoint point = points.get(points.size() - 1);
+        PVector p = point.position;
+        float tpSize;
+        if (point.combat) tpSize = 15;
+        else return false;
+        PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
+        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) &&
+          (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
     }
 
     public void requestPath(int i) {
@@ -482,7 +580,7 @@ public abstract class Enemy {
             TurnPoint intersectingPoint = points.get(points.size() - 1);
             if (remove) {
                 if (intersectingPoint.combat) {
-                    attacking = true;
+                    state = 1;
                     attackCue = true;
                     targetTower = intersectingPoint.tower;
                     targetMachine = intersectingPoint.machine;
@@ -524,8 +622,10 @@ public abstract class Enemy {
         points.addAll(pointsD);
     }
 
-    private ArrayList<Tower> clearanceTowers(TurnPoint point) {
-        //returns all towers in enemy "bubble"?
+    /**
+     * returns all towers in enemy "bubble"?
+     */
+    protected ArrayList<Tower> clearanceTowers(TurnPoint point) {
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
         int kSize = 1;
@@ -536,7 +636,7 @@ public abstract class Enemy {
                 for (int yn = 0; yn < kSize; yn++) {
                     if (!(x + xn >= nodeGrid.length || y + yn >= nodeGrid[x].length)) {
                         Node nodeB = nodeGrid[x + xn][y + yn];
-                        if (nodeB.tower != null && !(flying && !(nodeB.tower instanceof Turret))) towers.add(nodeB.tower);
+                        if (nodeB.tower != null) towers.add(nodeB.tower);
                     } else {
                         clear = false;
                         break;
@@ -586,7 +686,6 @@ public abstract class Enemy {
         TurnPoint bp = null;
         for (int i = points.size() - 1; i >= 0; i--) {
             if (points.get(i).towers != null && points.get(i).towers.size() > 0 || points.get(i).machine) {
-//                if (points.get(i).machine) System.out.println("test");
                 points.get(i).combat = true;
                 if (i < points.size() - 1) bp = points.get(i + 1);
                 else bp = points.get(i);

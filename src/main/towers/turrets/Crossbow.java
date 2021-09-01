@@ -1,14 +1,14 @@
 package main.towers.turrets;
 
+import main.damagingThings.projectiles.Bolt;
+import main.damagingThings.projectiles.ReinforcedBolt;
 import main.misc.Tile;
-import main.projectiles.Bolt;
-import main.projectiles.ReinforcedBolt;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Crossbow extends Turret {
 
@@ -19,54 +19,44 @@ public class Crossbow extends Turret {
         super(p,tile);
         offset = 2;
         name = "crossbow";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 4.5f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 4.5f);
         pjSpeed = 1400;
         range = 320;
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
         damage = 30;
         pierce = 1;
         damageSound = sounds.get("woodDamage");
         breakSound = sounds.get("woodBreak");
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("crossbow");
-        loadSprites();
         debrisType = "wood";
         price = CROSSBOW_PRICE;
         value = price;
         priority = 1; //last
-        multishot = false;
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void fire(float barrelLength, String particleType) {
-        playSoundRandomSpeed(p, fireSound, 1);
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
         if (multishot) {
             float offset = 0.07f;
             int count = 7;
             float a = angle - (floor(count / 2f) * offset);
             for (int i = 0; i < count; i++) {
-                projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, a, this, damage, pierce));
+                projectiles.add(new Bolt(p, position.x, position.y, a, this, getDamage(), pierce));
                 a += offset;
             }
         } else {
-            if (reinforced) projectiles.add(new ReinforcedBolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
-            else projectiles.add(new Bolt(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage, pierce));
+            if (reinforced) projectiles.add(new ReinforcedBolt(p,position.x, position.y, angle, this, getDamage(), pierce));
+            else projectiles.add(new Bolt(p,position.x, position.y, angle, this, getDamage(), pierce));
         }
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 75;
         upgradePrices[1] = 175;
@@ -115,6 +105,7 @@ public class Crossbow extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[19];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {

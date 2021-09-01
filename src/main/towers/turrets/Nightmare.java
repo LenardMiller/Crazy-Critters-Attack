@@ -1,14 +1,14 @@
 package main.towers.turrets;
 
+import main.damagingThings.projectiles.Needle;
 import main.misc.Tile;
-import main.particles.BuffParticle;
-import main.projectiles.Needle;
+import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Nightmare extends Turret {
 
@@ -18,18 +18,9 @@ public class Nightmare extends Turret {
     public Nightmare(PApplet p, Tile tile) {
         super(p,tile);
         name = "nightmare";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 3.5f;
-        delay += (round(p.random(-(delay/10f),delay/10f))); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 3.5f);
         pjSpeed = 1000;
         range = 200;
-        state = 0;
-        frame = 0;
-        loadDelay = 0;
-        loadDelayTime = 0;
         damage = 100;
         numProjectiles = 3;
         effectLevel = 50;
@@ -41,32 +32,40 @@ public class Nightmare extends Turret {
         price = 300;
         value = price;
         priority = 2; //strong
-        setUpgrades();
-        updateTowerArray();
 
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     protected void fire(float barrelLength, String particleType) {
         for (int i = 0; i < numProjectiles; i++) {
-            float angleB = angle;
             PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
-            PVector spa = PVector.fromAngle(angleB-HALF_PI);
+            PVector spa = PVector.fromAngle(angle-HALF_PI);
             spa.setMag(20);
             spp.add(spa);
-            projectiles.add(new Needle(p, spp.x, spp.y, angleB, this, damage, effectLevel, effectDuration));
-            for (int j = 0; j < 3; j++) {
-                PVector spa2 = PVector.fromAngle(angleB-HALF_PI+radians(p.random(-20,20)));
-                spa2.setMag(-2);
-                PVector spp2 = new PVector(spp.x,spp.y);
-                spp2.add(spa2);
-                particles.add(new BuffParticle(p,spp2.x,spp2.y,angleB+radians(p.random(-45,45)),"decay"));
-            }
+            spawnProjectiles(spp, angle);
         }
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
+        projectiles.add(new Needle(p, position.x, position.y, angle, this, getDamage(), effectLevel, effectDuration));
+        for (int j = 0; j < 3; j++) {
+            PVector spa2 = PVector.fromAngle(angle-HALF_PI+radians(p.random(-20,20)));
+            spa2.setMag(-2);
+            PVector spp2 = new PVector(position.x,position.y);
+            spp2.add(spa2);
+            midParticles.add(new MiscParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),"decay"));
+        }
+    }
+
+    @Override
+    protected void upgradeSpecial(int id) {}
+
+    @Override
+    protected void setUpgrades(){
 //        //delay (firerate)
 //        upgradeDelay[0] = -45;
 //        upgradeDelay[1] = 0;

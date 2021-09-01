@@ -20,6 +20,7 @@ public class Poisoned extends Buff {
         this.enId = enId;
     }
 
+    @Override
     public void effect(){ //a bit of damage a second
         Enemy enemy = enemies.get(enId);
         enemy.barAlpha = 255;

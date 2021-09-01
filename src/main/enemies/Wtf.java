@@ -13,11 +13,10 @@ public class Wtf extends Enemy {
         size = new PVector(100,100);
         pfSize = 4;
         radius = 40;
-        maxSpeed = 18;
-        speed = maxSpeed;
+        speed = 18;
         moneyDrop = 2500;
-        damage = 40;
-        maxHp = 100000;
+        damage = 60;
+        maxHp = 140000;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "wtf";

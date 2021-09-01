@@ -17,6 +17,12 @@ public class Polluter {
 
     private int polluteTimer;
 
+    /**
+     * Swaps out tiles with ones from a given layout file.
+     * @param p the PApplet
+     * @param secondsBetweenPollutes how many seconds between polluting a tile, usually 5
+     * @param name layout name, format: levelName/fileName with no extension
+     */
     public Polluter(PApplet p, float secondsBetweenPollutes, String name) {
         P = p;
         BETWEEN_POLLUTES = (int) secondsBetweenPollutes * FRAMERATE;
@@ -39,7 +45,7 @@ public class Polluter {
     private void pollute() {
         if (CLEAN_TILES.size() == 0) return;
         int id = (int) P.random(CLEAN_TILES.size());
-        loadTile(CLEAN_TILES.get(id), NAME);
+        loadTile(CLEAN_TILES.get(id), "levels/" + NAME);
         CLEAN_TILES.remove(id);
     }
 }

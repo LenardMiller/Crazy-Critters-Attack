@@ -3,7 +3,7 @@ package main.sound;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
 
-import static main.misc.Utilities.playSoundRandomSpeed;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class SoundWithAlts {
 
@@ -11,7 +11,7 @@ public class SoundWithAlts {
     private final SoundFile[] SOUNDS;
 
     /**
-     * A collection of related soundfiles that can be shuffled
+     * A collection of related sound files that can be shuffled
      * @param p the PApplet
      * @param name identifier
      * @param count how many alts there are

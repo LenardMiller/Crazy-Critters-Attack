@@ -6,15 +6,14 @@ import processing.core.PVector;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
-public class Emperor extends Enemy{
+public class Emperor extends Enemy {
 
     public Emperor(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(50,50);
         pfSize = 2; //2
         radius = 25;
-        maxSpeed = 27;
-        speed = maxSpeed;
+        speed = 27;
         moneyDrop = 200;
         damage = 18;
         maxHp = 3000;

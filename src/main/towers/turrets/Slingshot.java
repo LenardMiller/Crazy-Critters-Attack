@@ -1,15 +1,15 @@
 package main.towers.turrets;
 
+import main.damagingThings.projectiles.Gravel;
+import main.damagingThings.projectiles.Pebble;
+import main.damagingThings.projectiles.Rock;
 import main.misc.Tile;
-import main.projectiles.Gravel;
-import main.projectiles.Pebble;
-import main.projectiles.Rock;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Slingshot extends Turret {
 
@@ -19,57 +19,48 @@ public class Slingshot extends Turret {
     public Slingshot(PApplet p, Tile tile) {
         super(p,tile);
         name = "slingshot";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 1.6f;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
+        delay = randomizeDelay(p, 1.6f);
         pjSpeed = 700;
         range = 250;
-        state = 0;
         damage = 15; //15
         damageSound = sounds.get("woodDamage");
         breakSound = sounds.get("woodBreak");
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("slingshot");
-        loadSprites();
         debrisType = "wood";
         price = SLINGSHOT_PRICE;
         value = price;
-        priority = 0; //first
-        painful = false;
-        gravel = false;
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
-    protected void fire(float barrelLength, String particleType) {
-        playSoundRandomSpeed(p, fireSound, 1);
-        if (painful) projectiles.add(new Rock(p, tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {
+        if (painful) projectiles.add(new Rock(p, position.x, position.y, angle, this, getDamage()));
         if (gravel) {
             float offset = 0.03f;
             int count = 8;
             float a = angle - (floor(count / 2f) * offset);
             for (int i = 0; i < count; i++) {
-                projectiles.add(new Gravel(p, tile.position.x-size.x/2,tile.position.y-size.y/2, a, this, damage));
+                projectiles.add(new Gravel(p, position.x, position.y, a, this, getDamage()));
                 a += offset;
             }
         }
-        if (!painful && !gravel) projectiles.add(new Pebble(p,tile.position.x-size.x/2,tile.position.y-size.y/2, angle, this, damage));
+        if (!painful && !gravel) projectiles.add(new Pebble(p,position.x, position.y, angle, this, getDamage()));
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 75;
         upgradePrices[2] = 400;
         upgradePrices[3] = 75;
         upgradePrices[4] = 100;
-        upgradePrices[5] = 500;
+        upgradePrices[5] = 650;
         //titles
         upgradeTitles[0] = "Long Range";
         upgradeTitles[1] = "Super Range";
@@ -110,6 +101,7 @@ public class Slingshot extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[16];
     }
 
+    @Override
     public void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -144,13 +136,11 @@ public class Slingshot extends Turret {
                     damage += 30;
                     delay += 0.1f;
                     effectDuration = 6;
-                    effectLevel = 15;
+                    effectLevel = 8;
                     name = "slingshotRock";
                     loadSprites();
                     break;
             }
         }
     }
-
-    public void updateSprite() {}
 }

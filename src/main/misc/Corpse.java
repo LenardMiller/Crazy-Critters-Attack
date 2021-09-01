@@ -1,6 +1,6 @@
 package main.misc;
 
-import main.particles.BuffParticle;
+import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.particles.Pile;
 import processing.core.PApplet;
@@ -153,6 +153,10 @@ public class Corpse {
                 tintFinal = new Color(79, 0, 128);
                 part = "dark";
                 break;
+            case "frozen":
+                tintFinal = new Color(150, 225, 255);
+                part = null;
+                break;
             default:
                 tintFinal = new Color(255,255,255);
                 doSpecialEffects = false;
@@ -173,14 +177,14 @@ public class Corpse {
     }
 
     private void buffParticles(String part) {
-        if (!paused) {
+        if (!paused && part != null) {
             float chance = 0;
             //prevent divide by 0
             if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
             if (!ANIMATED) chance += 16;
             int num = (int) (P.random(0, chance));
             if (num == 0) {
-                particles.add(new BuffParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                midParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
                         (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
                         P.random(0, 360), part));
             }
@@ -212,7 +216,7 @@ public class Corpse {
                     if (!type.equals("burning") && !type.equals("decay")) { //idk
                         int num = (int) (P.random(0, chance));
                         if (num == 0) {
-                            particles.add(new Ouch(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                            midParticles.add(new Ouch(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
                                     (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1,
                                     (SIZE.x / 2))), P.random(0, 360), BLOOD_PARTICLE));
                         }
@@ -220,7 +224,7 @@ public class Corpse {
                     chance += 10;
                     int num = (int) (P.random(0, chance));
                     if (num == 0) {
-                        underParticles.add(new Pile(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                        bottomParticles.add(new Pile(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
                                 (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1,
                                 (SIZE.x / 2))), 0, BLOOD_PARTICLE));
                     }

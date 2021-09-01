@@ -28,6 +28,7 @@ public class UpgradeTower extends Button {
         this.id = id;
     }
 
+    @Override
     public void main() {
         if (active) {
             if (towers.size() > 0) {
@@ -59,13 +60,9 @@ public class UpgradeTower extends Button {
         }
     }
 
+    @Override
     public void action() {
         Turret turret = selection.turret;
-        int nextLevel;
-        if (id == 0) nextLevel = turret.nextLevelA;
-        else nextLevel = turret.nextLevelB;
-        money -= turret.upgradePrices[nextLevel];
         turret.upgrade(id);
-        inGameGui.flashA = 255;
     }
 }

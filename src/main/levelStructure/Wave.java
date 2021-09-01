@@ -1,9 +1,14 @@
 package main.levelStructure;
 
 import main.enemies.*;
-import main.gui.PopupText;
+import main.enemies.burrowingEnemies.*;
+import main.enemies.flyingEnemies.*;
+import main.enemies.shootingEnemies.*;
+import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
+import main.towers.IceWall;
 import main.towers.Tower;
+import main.towers.turrets.Booster;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -13,7 +18,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static main.Main.*;
-import static main.misc.Utilities.*;
+import static main.misc.Utilities.randomSpawnPosition;
+import static main.misc.Utilities.secondsToFrames;
+import static main.sound.SoundUtilities.playSound;
 
 public class Wave {
 
@@ -26,7 +33,9 @@ public class Wave {
     public final int LENGTH;
 
     public Polluter polluter;
+    public String groundType;
 
+    public boolean unskippable;
     private int betweenSpawns;
     /**
      * Time until wave end
@@ -43,6 +52,20 @@ public class Wave {
 
     public ArrayList<String> spawns;
 
+    boolean hasFlying;
+    boolean hasBurrowing;
+    boolean hasShooting;
+
+    /**
+     * A wave of enemies
+     * @param p the PApplet
+     * @param length how long it lasts in seconds
+     * @param spawnLength how long it spawns enemies in seconds, must be less than length
+     * @param fillColor main icon color
+     * @param accentColor border color
+     * @param textColor color of title and number
+     * @param title main enemy of wave
+     */
     public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
         P = p;
         LENGTH = secondsToFrames(length);
@@ -58,7 +81,11 @@ public class Wave {
     public void end() {
         for (Tower tower : towers) {
             if (tower instanceof Turret) tower.heal(1);
-            else tower.heal(0.35f);
+            else if (!(tower instanceof IceWall)) tower.heal(0.35f);
+        }
+        machine.heal(0.05f);
+        for (Tower tower : towers) {
+            if (tower.name.equals("moneyBooster")) ((Booster) tower).giveMoney();
         }
         playSound(sounds.get("waveEnd"), 1, 1);
         money += levels[currentLevel].reward;
@@ -69,10 +96,13 @@ public class Wave {
      * Calculates the time between spawns.
      */
     void load() {
-        betweenSpawns = SPAWN_LENGTH / spawns.size();
+        if (spawns.size() > 0) betweenSpawns = SPAWN_LENGTH / spawns.size();
     }
 
     void addSpawns(String enemy, int count) {
+        if (getEnemy(enemy) instanceof FlyingEnemy) hasFlying = true;
+        if (getEnemy(enemy) instanceof BurrowingEnemy) hasBurrowing = true;
+        if (getEnemy(enemy) instanceof ShootingEnemy) hasShooting = true;
         for (int i = 0; i < count; i++) spawns.add(enemy);
         Collections.shuffle(spawns);
     }
@@ -104,12 +134,40 @@ public class Wave {
         P.image(staticSprites.get("waveSecondaryIc"), 890, y);
         P.tint(255);
 
-        P.fill(TEXT_COLOR.getRGB());
+        //title
+        P.fill(TEXT_COLOR.getRGB(), 254);
         P.textAlign(CENTER);
         P.textFont(largeFont);
         P.text(TITLE, 1000, y + 110);
         P.textFont(veryLargeFont);
-        P.text(id, 1000, y + 70);
+        //number
+        P.text(id, 1000, y + 75);
+        //enemy types
+        int letterCount = 0;
+        if (hasBurrowing) letterCount++;
+        if (hasFlying) letterCount++;
+        if (hasShooting) letterCount++;
+
+        P.textFont(mediumLargeFont);
+        StringBuilder enemyTypes = new StringBuilder();
+        if (hasBurrowing) {
+            if (letterCount > 1) enemyTypes.append(" B");
+            else enemyTypes.append(" Burrowing");
+        } if (hasFlying) {
+            if (letterCount > 1) {
+                if (hasBurrowing) enemyTypes.append(" &");
+                enemyTypes.append(" F");
+            }
+            else enemyTypes.append(" Flying");
+        } if (hasShooting) {
+            if (letterCount > 1) enemyTypes.append(" & S");
+            else enemyTypes.append(" Shooting");
+        }
+        P.text(enemyTypes.toString(), 1000, y + 25);
+    }
+
+    private Enemy getEnemy(String name) {
+        return getEnemy(name, new PVector(0,0));
     }
 
     private Enemy getEnemy(String name, PVector pos) {
@@ -138,7 +196,7 @@ public class Wave {
                 e = new Snake(P, pos.x, pos.y);
                 break;
             case "littleWorm":
-                e = new LittleWorm(P, pos.x, pos.y);
+                e = new Worm(P, pos.x, pos.y);
                 break;
             case "butterfly":
                 e = new Butterfly(P, pos.x, pos.y);
@@ -155,6 +213,7 @@ public class Wave {
             case "midWorm":
                 e = new MidWorm(P, pos.x, pos.y);
                 break;
+            case "Megaworms":
             case "bigWorm":
                 e = new BigWorm(P, pos.x, pos.y);
                 break;
@@ -184,6 +243,45 @@ public class Wave {
                 break;
             case "wtf":
                 e = new Wtf(P, pos.x, pos.y);
+                break;
+            case "antlion":
+                e = new Antlion(P, pos.x, pos.y);
+                break;
+            case "Antlions":
+            case "snowAntlion":
+                e = new SnowAntlion(P, pos.x, pos.y);
+                break;
+            case "Wolves":
+            case "wolf":
+                e = new Wolf(P, pos.x, pos.y);
+                break;
+            case "Snow Sharks":
+            case "shark":
+                e = new Shark(P, pos.x, pos.y);
+                break;
+            case "Velociraptors":
+            case "velociraptor":
+                e = new Velociraptor(P, pos.x, pos.y);
+                break;
+            case "Ice Entities":
+                e = new IceEntity(P, pos.x, pos.y);
+                break;
+            case "Ice Monstrosity":
+            case "Ice Monstrosities":
+                e = new IceMonstrosity(P, pos.x, pos.y);
+                break;
+            case "Frost":
+                e = new Frost(P, pos.x, pos.y);
+                break;
+            case "Mammoth":
+            case "Mammoths":
+                e = new Mammoth(P, pos.x, pos.y);
+                break;
+            case "Mud Creatures":
+                e = new MudCreature(P, pos.x, pos.y);
+                break;
+            case "Mud Flingers":
+                e = new MudFlinger(P, pos.x, pos.y);
                 break;
         }
         return e;

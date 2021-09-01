@@ -3,7 +3,6 @@ package main.misc;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
-import processing.sound.SoundFile;
 
 import java.awt.*;
 import java.io.IOException;
@@ -32,6 +31,7 @@ public class Utilities {
      * @param p2 the second position
      * @return something
      */
+    @Deprecated
     public static float findAngleBetween(PVector p1, PVector p2) {
         float a = atan2((p1.y - p2.y), p1.x - p2.x);
         if (a < 0) a += TWO_PI;
@@ -74,11 +74,11 @@ public class Utilities {
     }
 
     /**
-     * Returns the angle of a line between two points.
+     * Returns the angle of a line between two points om radians.
      * Compensates for Processing y being inverted.
      * @param v1 the first position
      * @param v2 the second position
-     * @return the angle of a line between the two positions
+     * @return the angle of a line between the two positions in radians
      */
     public static float findAngle(PVector v1, PVector v2) {
         float angle = 0;
@@ -123,7 +123,7 @@ public class Utilities {
      * @param a the angle to convert
      * @return an angle between 0 and TWO_PI
      */
-    public static float clampAngle(float a) {
+    public static float normalizeAngle(float a) {
         return a - TWO_PI * floor(a / TWO_PI);
     }
 
@@ -133,10 +133,10 @@ public class Utilities {
      * @param current angle to be compared
      * @return the angle between target and current
      */
-    public static float angleDifference(float target, float current) {
+    public static float getAngleDifference(float target, float current) {
         float diffA = -(current - target);
         float diffB = diffA - TWO_PI;
-        float diffC = clampAngle(diffB);
+        float diffC = normalizeAngle(diffB);
         float f = min(abs(diffA), abs(diffB), abs(diffC));
         if (f == abs(diffA)) return diffA;
         if (f == abs(diffB)) return diffB;
@@ -236,7 +236,7 @@ public class Utilities {
      * @param textAlign what alignment to use, defaults to center
      */
     public static void highlightedText(PApplet p, String text, PVector position, int textAlign) {
-        highlightedText(p, text, position, new Color(255, 255, 255), new Color(0, 0, 0, 175), 25, textAlign);
+        highlightedText(p, text, position, new Color(255, 255, 255, 254), new Color(0, 0, 0, 175), 25, textAlign);
     }
 
     /**
@@ -263,8 +263,8 @@ public class Utilities {
         PVector leftPoint = new PVector(center.x - (textWidth/2), center.y - textSize/2);
         PVector rightPoint = new PVector(center.x + (textWidth/2), center.y - textSize/2);
 
-        p.fill(textColor.getRGB());
-        p.stroke(textColor.getRGB());
+        p.fill(textColor.getRGB(), textColor.getAlpha());
+        p.stroke(textColor.getRGB(), textColor.getAlpha());
         p.text(text, position.x, position.y);
         p.line(leftPoint.x, leftPoint.y, rightPoint.x, rightPoint.y);
 
@@ -357,35 +357,55 @@ public class Utilities {
         return input + p.random(-input * by, input * by);
     }
 
-    /**
-     * Stops and starts playing the given sound.
-     * @param sound sound to play, won't crash if null
-     * @param speed speed and to pitch to play at, 1 for normal
-     * @param volume volume to play at, 1 for normal
-     */
-    public static void playSound(SoundFile sound, float speed, float volume) {
-        if (sound != null) {
-            sound.stop();
-            sound.play(speed, volume);
-        }
-    }
-
-    /**
-     * Plays the given sound with a 20% pitch and speed variation.
-     * @param p the PApplet
-     * @param sound sound to play, won't crash if null
-     * @param volume volume to play at, 1 for normal
-     */
-    public static void playSoundRandomSpeed(PApplet p, SoundFile sound, float volume) {
-        playSound(sound, p.random(0.8f, 1.2f), volume);
-    }
-
     public static void closeSettingsMenu() {
         settings = false;
         try {
             saveSettings();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("settings file missing!");
         }
+    }
+
+    /**
+     * @param p the PApplet
+     * @param input amount to randomize
+     * @return input =/- a random amount up to 10%
+     */
+    public static float randomizeDelay(PApplet p, float input) {
+        return input + p.random(-(input/20f),input/20f);
+    }
+
+    /**
+     * @param position world position
+     * @return matched to grid + 1
+     */
+    public static IntVector worldPositionToTowerGridPosition(PVector position) {
+        return new IntVector((roundTo(position.x, 50) / 50) + 1, (roundTo(position.y, 50) / 50) + 1);
+    }
+
+    /**
+     * @param position world position
+     * @return matched to grid
+     */
+    public static IntVector worldPositionToGridPosition(PVector position) {
+        return new IntVector(roundTo(position.x, 50) / 50, roundTo(position.y, 50) / 50);
+    }
+
+    /**
+     * @param angle angle to check
+     * @return if angle is facing towards the left
+     */
+    public static boolean angleIsFacingLeftStandard(float angle) {
+        angle = normalizeAngle(angle);
+        return angle < HALF_PI || angle > PI + HALF_PI;
+    }
+
+    /**
+     * @param angle angle to check
+     * @return if angle is facing towards the top of the screen
+     */
+    public static boolean angleIsFacingUpStandard(float angle) {
+        angle = normalizeAngle(angle);
+        return angle < PI;
     }
 }

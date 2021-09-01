@@ -1,17 +1,17 @@
 package main.towers.turrets;
 
+import main.damagingThings.arcs.Arc;
+import main.damagingThings.arcs.RedArc;
+import main.damagingThings.shockwaves.LightningShockwave;
 import main.misc.Tile;
-import main.projectiles.Arc;
-import main.projectiles.RedArc;
-import main.shockwaves.LightningShockwave;
 import main.sound.SoundWithAlts;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.playSoundRandomSpeed;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Utilities.randomizeDelay;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class TeslaTower extends Turret {
 
@@ -25,35 +25,28 @@ public class TeslaTower extends Turret {
     public TeslaTower(PApplet p, Tile tile) {
         super(p,tile);
         name = "tesla";
-        size = new PVector(50,50);
-        maxHp = 20;
-        hp = maxHp;
-        hit = false;
-        delay = 3;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
-        damage = 250;
+        delay = randomizeDelay(p, 3);
+        damage = 300;
         arcLength = 3;
         pjSpeed = -1;
-        range = 200;
+        range = 225;
         betweenIdleFrames = down60ToFramerate(3);
-        state = 0;
-        loadSprites();
         debrisType = "metal";
-        price = TESLATOWER_PRICE;
+        price = TESLA_TOWER_PRICE;
         value = price;
-        priority = 0; //close
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("teslaFire");
         THUNDER_SOUND = soundsWithAlts.get("thunder");
-        setUpgrades();
-        updateTowerArray();
 
+        loadSprites();
+        setUpgrades();
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
     }
 
+    @Override
     protected void checkTarget() {
         getTargetEnemy();
         if (state == 0 && targetEnemy != null) { //if done animating
@@ -63,6 +56,9 @@ public class TeslaTower extends Turret {
         }
     }
 
+    @Override
+    protected void spawnProjectiles(PVector position, float angle) {}
+
     protected void fire() {
         if (lightning) {
             THUNDER_SOUND.playRandomWithRandomSpeed(1);
@@ -71,7 +67,7 @@ public class TeslaTower extends Turret {
             shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, 100, damage, this));
             //damaging arcs
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, damage / 2, arcLength, 300, i, targetEnemy));
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, getDamage() / 2, arcLength, 300, i, targetEnemy));
             } //decorative arcs
             for (int i = 0; i < p.random(5, 10); i++) {
                 arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, 0, arcLength, 100, -1));
@@ -82,15 +78,16 @@ public class TeslaTower extends Turret {
         } else if (highPower) {
             playSoundRandomSpeed(p, fireSound, 1);
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
-            arcs.add(new RedArc(p, position.x, position.y, this, damage, arcLength, range, priority));
+            arcs.add(new RedArc(p, position.x, position.y, this, getDamage(), arcLength, getRange(), priority));
         }
         else {
             playSoundRandomSpeed(p, fireSound, 1);
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
-            arcs.add(new Arc(p, position.x, position.y, this, damage, arcLength, range, priority));
+            arcs.add(new Arc(p, position.x, position.y, this, getDamage(), arcLength, getRange(), priority));
         }
     }
 
+    @Override
     public void displayMain() {
         //shadow
         p.pushMatrix();
@@ -111,11 +108,12 @@ public class TeslaTower extends Turret {
         p.tint(255);
     }
 
-    private void setUpgrades(){
+    @Override
+    protected void setUpgrades(){
         //price
         upgradePrices[0] = 600;
         upgradePrices[1] = 700;
-        upgradePrices[2] = 7000;
+        upgradePrices[2] = 6000;
 
         upgradePrices[3] = 400;
         upgradePrices[4] = 800;
@@ -150,7 +148,7 @@ public class TeslaTower extends Turret {
         upgradeDescB[4] = "damage";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "vastly";
+        upgradeDescA[5] = "Vastly";
         upgradeDescB[5] = "increase";
         upgradeDescC[5] = "firerate";
         //icons
@@ -163,6 +161,7 @@ public class TeslaTower extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[34];
     }
 
+    @Override
     protected void upgradeSpecial(int id) {
         if (id == 0) {
             switch (nextLevelA) {
@@ -172,10 +171,14 @@ public class TeslaTower extends Turret {
                     range += 25;
                     break;
                 case 2:
-                    range = 1000;
+                    range = 5000;
                     damage += 1600;
                     delay += 2;
                     lightning = true;
+                    debrisType = "crystal";
+                    placeSound = sounds.get("crystalPlace");
+                    damageSound = sounds.get("crystalDamage");
+                    breakSound = sounds.get("crystalBreak");
                     name = "lightning";
                     betweenFireFrames = 2;
                     loadSprites();
@@ -184,14 +187,13 @@ public class TeslaTower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    delay -= 0.6f;
+                    delay -= 1;
                     break;
                 case 4:
-                    damage += 150;
+                    damage += 200;
                     break;
                 case 5:
                     delay = 0;
-                    range += 50;
                     damage += 50;
                     highPower = true;
                     betweenIdleFrames = 3;
@@ -202,6 +204,4 @@ public class TeslaTower extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }

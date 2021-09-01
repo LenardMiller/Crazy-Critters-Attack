@@ -7,8 +7,6 @@ import static main.Main.*;
 
 public class Level {
 
-    private final PApplet P;
-
     public Wave[] waves;
     public int currentWave;
     public int startWave;
@@ -16,6 +14,9 @@ public class Level {
     public int startingCash;
     public int reward;
     public String groundType;
+
+    private final PApplet P;
+
     private Polluter polluter;
 
     public Level(PApplet p, Wave[] waves, String layout, int startingCash, int reward, String groundType) {
@@ -33,6 +34,7 @@ public class Level {
         if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
             if (wave.polluter != null) polluter = wave.polluter;
+            if (wave.groundType != null) groundType = wave.groundType;
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
             else if (!paused && alive) {
                 wave.spawnEnemies();
@@ -45,6 +47,14 @@ public class Level {
             if (!won) paused = true; //prevent stuck on pause
             won = true;
         }
+    }
+
+    public void advance() {
+        if (currentWave >= waves.length) return;
+        Wave cw = waves[currentWave];
+        if (cw.spawns.size() > 0) return;
+        if (cw.unskippable) return;
+        levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);
     }
 
     public void setWave(int waveNum) {
@@ -71,10 +81,18 @@ public class Level {
                 waves[currentWave-1].display(212, currentWave);
             }
         }
-        P.tint(0,60);
-        P.image(staticSprites.get("currentLineIc"),891,212+125-1);
-        P.tint(255);
-        P.image(staticSprites.get("currentLineIc"),891-1,212+125-1-1);
         inGameGui.playButton.display((int)playY);
+//        P.tint(0,60);
+//        P.image(staticSprites.get("currentLineIc"),891,212+125-1);
+//        P.tint(255);
+//        P.image(staticSprites.get("currentLineIc"),891-1,212+125-1-1);
+        P.strokeWeight(10);
+        P.stroke(100, 0, 0);
+        P.line(BOARD_WIDTH, 336, BOARD_WIDTH + 200, 336);
+        P.strokeWeight(4);
+        P.stroke(255, 0, 0);
+        P.line(BOARD_WIDTH - 7, 336, BOARD_WIDTH + 200, 336);
+        P.strokeWeight(1);
+        P.noStroke();
     }
 }

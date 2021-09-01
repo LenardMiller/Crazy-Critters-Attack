@@ -1,22 +1,22 @@
 package main;
 
 import main.buffs.Buff;
+import main.damagingThings.arcs.Arc;
+import main.damagingThings.projectiles.Projectile;
+import main.damagingThings.shockwaves.Shockwave;
 import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.enemies.flyingEnemies.FlyingEnemy;
 import main.gui.*;
+import main.gui.guiObjects.PopupText;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
-import main.levelStructure.CaveWaves;
-import main.levelStructure.DesertWaves;
-import main.levelStructure.ForestWaves;
-import main.levelStructure.Level;
+import main.levelStructure.*;
 import main.misc.*;
 import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
-import main.projectiles.Arc;
-import main.projectiles.Projectile;
-import main.shockwaves.Shockwave;
 import main.sound.FadeSoundLoop;
 import main.sound.SoundWithAlts;
 import main.sound.StartStopSoundLoop;
@@ -30,7 +30,6 @@ import processing.core.PVector;
 import processing.sound.Sound;
 import processing.sound.SoundFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -55,9 +54,9 @@ public class Main extends PApplet {
     public static ArrayList<main.towers.Tower> towers;
     public static ArrayList<Enemy> enemies;
     public static ArrayList<main.misc.Corpse> corpses;
-    public static ArrayList<main.projectiles.Projectile> projectiles;
-    public static ArrayList<main.particles.Particle> particles, underParticles;
-    public static ArrayList<main.projectiles.Arc> arcs;
+    public static ArrayList<main.damagingThings.projectiles.Projectile> projectiles;
+    public static ArrayList<main.particles.Particle> topParticles, midParticles, bottomParticles;
+    public static ArrayList<Arc> arcs;
     public static ArrayList<Shockwave> shockwaves;
     public static ArrayList<TowerBuy> towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;
@@ -89,16 +88,23 @@ public class Main extends PApplet {
      */
     public static int screen = 1;
     public static int money = 100;
+    public static int connectWallQueues;
     public static float globalVolume = 0.25f;
+    public static float matrixScale;
+    public static float matrixOffset;
+    public static boolean fullscreen;
+    public static boolean gore;
+    public static boolean hasVerticalBars;
     public static boolean alive = true;
     public static boolean won = false;
     public static boolean debug = false;
+    public static boolean showSpawn = false;
     public static boolean playingLevel = false;
     public static boolean levelBuilder = false;
     public static boolean paused = false;
     public static boolean settings = false;
-    public static boolean dev = false;
-    public static int connectWallQueues;
+    public static boolean dev = true;
+    public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;
     public static final int SOFT_PARTICLE_CAP = 1500;
@@ -109,14 +115,17 @@ public class Main extends PApplet {
     public static final int TILE_SIZE = 50;
 
     public static final int SLINGSHOT_PRICE = 75;
-    public static final int RANDOMCANNON_PRICE = 150;
+    public static final int RANDOM_CANNON_PRICE = 150;
     public static final int CROSSBOW_PRICE = 200;
-    public static final int CANNON_PRICE = 300;
+    public static final int CANNON_PRICE = 400;
     public static final int GLUER_PRICE = 300;
     public static final int SEISMIC_PRICE = 400;
-    public static final int ENERGYBLASTER_PRICE = 650;
-    public static final int FLAMETHROWER_PRICE = 700;
-    public static final int TESLATOWER_PRICE = 800;
+    public static final int ENERGY_BLASTER_PRICE = 1000;
+    public static final int FLAMETHROWER_PRICE = 1250;
+    public static final int TESLA_TOWER_PRICE = 1400;
+    public static final int MAGIC_MISSILEER_PRICE = 2500;
+    public static final int ICE_TOWER_PRICE = 2250;
+    public static final int BOOSTER_PRICE = 2000;
 
     public static HashMap<String, PImage> staticSprites = new HashMap<>();
     public static HashMap<String, PImage[]> animatedSprites = new HashMap<>();
@@ -139,6 +148,7 @@ public class Main extends PApplet {
     public static float maxCost, minCost;
 
     public static void main(String[] args) {
+        loadSettings();
         PApplet.main("main.Main", args);
     }
 
@@ -147,8 +157,13 @@ public class Main extends PApplet {
      * Just controls window size and renderer type,
      * run once at program start
      */
+    @Override
     public void settings() {
         size(GRID_WIDTH, BOARD_HEIGHT);
+        if (fullscreen) {
+            fullScreen();
+            noSmooth();
+        }
     }
 
     /**
@@ -156,17 +171,17 @@ public class Main extends PApplet {
      * Primary initialization,
      * run once at program start
      */
+    @Override
     public void setup() {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
-        loadSettings();
         //fonts
-        veryLargeFont = createFont("STHeitiSC-Light", 48);
-        largeFont = createFont("STHeitiSC-Light", 24);
-        mediumLargeFont = createFont("STHeitiSC-Light", 21);
-        mediumFont = createFont("STHeitiSC-Light", 18);
-        smallFont = createFont("STHeitiSC-Light", 12);
+        veryLargeFont = createFont("STHeitiSC-Light", 48, true);
+        largeFont = createFont("STHeitiSC-Light", 24, true);
+        mediumLargeFont = createFont("STHeitiSC-Light", 21, true);
+        mediumFont = createFont("STHeitiSC-Light", 18, true);
+        smallFont = createFont("STHeitiSC-Light", 12, true);
         //loads sprites
         loadStaticSprites(this);
         loadAnimatedSprites(this);
@@ -177,14 +192,25 @@ public class Main extends PApplet {
         keyBinds = new KeyBinds(this);
         keyBinds.loadKeyBinds();
         //set level count
-        levels = new Level[3];
+        levels = new Level[4];
         //guis
         levelSelectGui = new LevelSelectGui(this);
         settingsGui = new SettingsGui(this);
+        //matrix
+        float screenRatio = width / (float) height;
+        float boardRatio = BOARD_WIDTH / (float) BOARD_HEIGHT;
+        hasVerticalBars = boardRatio < screenRatio;
+        if (hasVerticalBars) {
+            matrixScale = height / (float) BOARD_HEIGHT;
+            matrixOffset = (width - (GRID_WIDTH * matrixScale)) / 2;
+        } else {
+            matrixScale = width / (float) BOARD_WIDTH;
+            matrixOffset = (height - (BOARD_HEIGHT * matrixScale)) / 2;
+        }
     }
 
     /**
-     * Sets all the ingame stuff up.
+     * Sets all the in game stuff up.
      */
     public static void resetGame(PApplet p) {
         //creates object data structures
@@ -197,8 +223,9 @@ public class Main extends PApplet {
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         corpses = new ArrayList<>();
-        particles = new ArrayList<>();
-        underParticles = new ArrayList<>();
+        topParticles = new ArrayList<>();
+        midParticles = new ArrayList<>();
+        bottomParticles = new ArrayList<>();
         arcs = new ArrayList<>();
         shockwaves = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
@@ -225,7 +252,8 @@ public class Main extends PApplet {
         playingLevel = false;
         levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
-        levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 450, 100, "stone");
+        levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 500, 100, "stone");
+        levels[3] = new Level(p, GlacierWaves.genGlacierWaves(p), "levels/glacier", 1500, 200, "snow");
         DataControl.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();
@@ -244,20 +272,24 @@ public class Main extends PApplet {
      * From Processing.
      * Everything else, run every frame.
      */
+    @Override
     public void draw() {
-        float buffer = 0;
-        if (debug) {
-            pushMatrix();
+        if (showSpawn) {
             scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
-            buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
+            float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
             translate(buffer, buffer);
         }
-        background(50, 50, 50);
+        background(50);
         tint(255);
+        if (hasVerticalBars) {
+            matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
+        } else {
+            matrixMousePosition = new PVector(mouseX / matrixScale, (mouseY - matrixOffset) / matrixScale);
+        }
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
-        if (settings) settingsGui.display();
+        if (settings) settingsGui.main();
         keyBinds.menuKeys();
         //sound stuff
         sound.volume(globalVolume);
@@ -272,20 +304,19 @@ public class Main extends PApplet {
             key.pressedPulse = false;
             key.releasedPulse = false;
         }
-        if (debug && buffer != 0) popMatrix();
     }
 
     /**
      * Stuff for the main game screen.
      */
     private void drawInGame() {
+        pushMatrix();
+        if (hasVerticalBars) translate(matrixOffset, 0);
+        else translate(0, matrixOffset);
+        scale(matrixScale);
         //keys
         if (dev) {
-            try {
-                keyBinds.debugKeys();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            keyBinds.debugKeys();
             keyBinds.spawnKeys();
         }
         keyBinds.inGameKeys();
@@ -298,34 +329,55 @@ public class Main extends PApplet {
         minCost = minCost(maxCost);
         //objects
         drawObjects();
-        //text
-        for (int i = popupTexts.size()-1; i >= 0; i--) {
-            popupTexts.get(i).main();
+        //hp bars
+        for (Enemy enemy : enemies) {
+            if (enemy.hp > 0 && !(enemy instanceof BurrowingEnemy && enemy.state == 0)) enemy.hpBar();
         }
+        for (Tower tower : towers) tower.displayHpBar();
+        machine.hpBar();
+        //text
+        for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).main();
         //gui stuff
         noStroke();
-        if (!debug) {
+        if (!showSpawn) {
             if (!levelBuilder) inGameGui.display();
             else levelBuilderGui.display();
             hand.displayHeldInfo();
             textAlign(LEFT);
             if (!levelBuilder) inGameGui.drawText(this, 10);
         } if (dev) inGameGui.drawDebugText(this, 10);
-        if (paused) {
+
+        if (paused) { //grey stuff
+            noStroke();
             if (!alive) fill(50, 0, 0, 50);
             else fill(0, 0, 0, 50);
             rect(0, 0, width, height);
         }
-        if (paused && !settings) pauseGui.display();
         //levels
         if (playingLevel) levels[currentLevel].main();
+        //matrix
+        popMatrix();
+        //black bars
+        if (!showSpawn) {
+            fill(0);
+            noStroke();
+            if (hasVerticalBars) {
+                rect(0, 0, matrixOffset, height);
+                rect(width - matrixOffset, 0, matrixOffset, height);
+            } else {
+                rect(0, 0, width, matrixOffset);
+                rect(0, height - matrixOffset, width, matrixOffset);
+            }
+        }
+        //pause
+        if (paused && !settings) pauseGui.main();
     }
 
     /**
      * Stuff for the level select screen.
      */
     private void drawLevelSelect() {
-        if (!settings) levelSelectGui.display();
+        if (!settings) levelSelectGui.main();
     }
 
     /**
@@ -339,7 +391,7 @@ public class Main extends PApplet {
         }
         //main background
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayBaseAndFlooring();
+            tiles.get(i).displayBaseDecorationFlooring();
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
@@ -382,18 +434,10 @@ public class Main extends PApplet {
             fill(0,0,255);
             rect(start.position.x,start.position.y, NODE_SIZE, NODE_SIZE);
         }
-        //under particle culling
-        int up = underParticles.size();
-        int up2 = up-SOFT_PARTICLE_CAP;
-        if (up > SOFT_PARTICLE_CAP) for (int i = 0; i < up; i++) if (random(0,up2) < 5) {
-            if (i < underParticles.size()) underParticles.remove(i);
-            else break;
-        }
-        if (up > HARD_PARTICLE_CAP) underParticles = new ArrayList<>();
-        //under particles
-        for (int i = underParticles.size()-1; i >= 0; i--) {
-            Particle particle = underParticles.get(i);
-            particle.main(underParticles, i);
+        //bottom particles
+        for (int i = bottomParticles.size()-1; i >= 0; i--) {
+            Particle particle = bottomParticles.get(i);
+            particle.main(bottomParticles, i);
         }
         //corpses
         for (Corpse corpse : corpses) corpse.display();
@@ -404,23 +448,62 @@ public class Main extends PApplet {
         //machine
         machine.main();
         //enemies
-        for (Enemy enemy : enemies) if (!enemy.flying) enemy.displayShadow();
+        for (Enemy enemy : enemies) if (!(enemy instanceof FlyingEnemy)) enemy.displayShadow();
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
-            if (!enemy.flying) enemy.main(i);
+            if (!(enemy instanceof FlyingEnemy)) enemy.main(i);
         }
         if (enemies.isEmpty()) buffs = new ArrayList<>();
-        //towers
+        //turret bases & walls
         for (Tower tower : towers) if (tower instanceof Turret) tower.displayBase();
         for (Tower tower : towers) if (tower instanceof Wall) tower.displayBase();
         for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
+        //mid particles
+        for (int i = midParticles.size()-1; i >= 0; i--) {
+            Particle particle = midParticles.get(i);
+            particle.main(midParticles, i);
+        }
+        //turret top
         for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
         for (Tower tower : towers) tower.main();
+        //shockwaves
+        for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).main();
+        //particle culling
+        int p = topParticles.size() + midParticles.size() + bottomParticles.size();
+        int p2 = p-SOFT_PARTICLE_CAP;
+        if (p > SOFT_PARTICLE_CAP) {
+            for (int i = topParticles.size() - 1; i >= 0; i--) {
+                if (random(0,p2) < 5) {
+                    if (i < topParticles.size()) topParticles.remove(i);
+                }
+            } for (int i = bottomParticles.size() - 1; i >= 0; i--) {
+                if (random(0,p2) < 5) {
+                    if (i < bottomParticles.size()) bottomParticles.remove(i);
+                }
+            } for (int i = midParticles.size() - 1; i >= 0; i--) {
+                if (random(0,p2) < 5) {
+                    if (i < midParticles.size()) midParticles.remove(i);
+                }
+            }
+        } if (p > HARD_PARTICLE_CAP) {
+            topParticles = new ArrayList<>();
+            midParticles = new ArrayList<>();
+            bottomParticles = new ArrayList<>();
+        }
+        //buffs
+        for (int i = buffs.size() - 1; i >= 0; i--) {
+            Buff buff = buffs.get(i);
+            buff.main(i);
+        }
+        //obstacles
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayObstacle();
+        }
         //projectiles
         for (Projectile projectile : projectiles) projectile.displayPassA();
-        for (int i = 0; i < projectiles.size(); i++) {
+        for (int i = projectiles.size() - 1; i >= 0; i--) {
             Projectile projectile = projectiles.get(i);
-            projectile.main(projectiles, i);
+            projectile.main();
         }
         //arcs
         for (int i = arcs.size()-1; i >= 0; i--) {
@@ -428,65 +511,53 @@ public class Main extends PApplet {
             arc.main();
             if (arc.alpha <= 0) arcs.remove(i);
         }
-        //shockwaves
-        for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).main();
-        //particle culling
-        int p = particles.size();
-        int p2 = p-SOFT_PARTICLE_CAP;
-        if (p > SOFT_PARTICLE_CAP) for (int i = 0; i < p; i++) if (random(0,p2) < 5) {
-            if (i < particles.size()) particles.remove(i);
-            else break;
+        //flying enemies
+        for (Enemy enemy1 : enemies) {
+            if (enemy1 instanceof FlyingEnemy) enemy1.displayShadow();
         }
-        if (p > HARD_PARTICLE_CAP) particles = new ArrayList<>();
-        //particles
-        for (int i = particles.size()-1; i >= 0; i--) {
-            Particle particle = particles.get(i);
-            particle.main(particles, i);
+        for (int i = enemies.size() - 1; i >= 0; i--) {
+            Enemy enemy = enemies.get(i);
+            if (enemy instanceof FlyingEnemy) enemy.main(i);
         }
-        //buffs
-        for (int i = buffs.size() - 1; i >= 0; i--) {
-            Buff buff = buffs.get(i);
-            buff.main(i);
+        //top particles
+        for (int i = topParticles.size()-1; i >= 0; i--) {
+            Particle particle = topParticles.get(i);
+            particle.main(topParticles, i);
         }
         //currently held
         hand.main();
-        //obstacles
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayObstacle();
-        }
-        //flying enemies
-        enemies.stream().filter(enemy -> enemy.flying).forEach(Enemy::displayShadow);
-        for (int i = enemies.size() - 1; i >= 0; i--) {
-            Enemy enemy = enemies.get(i);
-            if (enemy.flying) enemy.main(i);
-        }
-        //enemy hp bars
-        enemies.stream().filter(enemy -> enemy.hp > 0 && !enemy.stealthMode).forEach(Enemy::hpBar);
-        //tower hp bars
-        towers.forEach(Tower::displayHpBar);
-        //machine hp bar
-        machine.hpBar();
+        //reset enemy ice checking
+        for (Enemy enemy : enemies) enemy.intersectingIceCount = 0;
     }
 
     /**
      * Checks if a key is pressed.
      * Also includes overrides.
      */
+    @Override
     public void keyPressed() {
         if (!dev) key = toLowerCase(key);
-        if (keyCode == 27) key = '|';
-        if (keyCode == 9) key = '?';
+        if (keyCode == 8) key = '*'; //delete
+        if (keyCode == 9) key = '?'; //tab
+        if (keyCode == 27) key = '|'; //esc
+        if (keyCode == 37) key = '<'; //left
+        if (keyCode == 38) key = '^'; //up
+        if (keyCode == 39) key = '>'; //right
+        if (keyCode == 40) key = '&'; //down
         inputHandler.key(true);
     }
 
+    @Override
     public void keyReleased() {
         inputHandler.key(false);
     }
 
+    @Override
     public void mousePressed() {
         inputHandler.mouse(true);
     }
 
+    @Override
     public void mouseReleased() {
         inputHandler.mouse(false);
     }

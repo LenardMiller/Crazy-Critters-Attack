@@ -7,8 +7,6 @@ import java.awt.*;
 
 public class CaveWaves {
 
-    public CaveWaves() {}
-
     public static Wave[] genCaveWaves(PApplet p) {
         Wave[] waves = new Wave[50];
 
@@ -22,10 +20,11 @@ public class CaveWaves {
         String bigBat = "bigBat";
         String wtf = "wtf";
         String horde = "horde";
+        String megaHorde = "megaHorde";
 
         waves[0] = wavePreset(p, 65, 30, albinoBug);
         waves[0].addSpawns(albinoBug, 5);
-        waves[0].polluter = new Polluter(p, 5, "levels/cave/polluted");
+        waves[0].polluter = new Polluter(p, 5, "cave/polluted");
 
         waves[1] = wavePreset(p, 55, 20, albinoBug);
         waves[1].addSpawns(albinoBug, 5);
@@ -119,11 +118,11 @@ public class CaveWaves {
         waves[24].addSpawns(midGolem, 40);
         waves[24].addSpawns(bigAlbinoBug, 5);
 
-        waves[25] = wavePreset(p, 65, 25, bigAlbinoBug);
+        waves[25] = wavePreset(p, 50, 20, bigAlbinoBug);
         waves[25].addSpawns(bigAlbinoBug, 10);
         waves[25].addSpawns(midGolem, 10);
 
-        waves[26] = wavePreset(p, 85, 35, bigAlbinoBug);
+        waves[26] = wavePreset(p, 50, 20, bigAlbinoBug);
         waves[26].addSpawns(bigAlbinoBug, 20);
 
         waves[27] = wavePreset(p, 80, 15, bat);
@@ -134,7 +133,7 @@ public class CaveWaves {
         waves[28].addSpawns(midGolem, 20);
         waves[28].addSpawns(smallGolem, 10);
 
-        waves[29] = wavePreset(p, 130, 1, bigGolem);
+        waves[29] = wavePreset(p, 130, 1, "1 bigGolem");
         waves[29].addSpawns(bigGolem, 1);
 
         waves[30] = wavePreset(p, 50, 15, bigAlbinoBug);
@@ -163,7 +162,7 @@ public class CaveWaves {
         waves[36] = wavePreset(p, 100, 15, bigGolem);
         waves[36].addSpawns(bigGolem, 5);
 
-        waves[37] = wavePreset(p, 65, 5, bigBat);
+        waves[37] = wavePreset(p, 65, 5, "1 bigBat");
         waves[37].addSpawns(bat, 5);
         waves[37].addSpawns(bigBat, 1);
 
@@ -192,30 +191,30 @@ public class CaveWaves {
         waves[43].addSpawns(bigBat, 10);
         waves[43].addSpawns(bigGolem, 3);
 
-        waves[44] = wavePreset(p, 150, 1, wtf);
+        waves[44] = wavePreset(p, 150, 1, "1 wtf");
         waves[44].addSpawns(wtf, 1);
 
-        waves[45] = wavePreset(p, 150, 50, horde);
+        waves[45] = wavePreset(p, 75, 50, horde);
         waves[45].addSpawns(bigAlbinoBug, 40);
         waves[45].addSpawns(midGolem, 50);
         waves[45].addSpawns(smallGolem, 50);
         waves[45].addSpawns(bigGolem, 10);
 
         waves[46] = wavePreset(p, 150, 1, wtf);
-        waves[46].addSpawns(wtf, 1);
+        waves[46].addSpawns(wtf, 3);
         waves[46].addSpawns(bigAlbinoBug, 15);
 
         waves[47] = wavePreset(p, 150, 15, wtf);
-        waves[47].addSpawns(wtf, 3);
+        waves[47].addSpawns(wtf, 5);
         waves[47].addSpawns(bigAlbinoBug, 20);
         waves[47].addSpawns(albinoBug, 15);
 
-        waves[48] = wavePreset(p, 150, 65, horde);
-        waves[48].addSpawns(bigAlbinoBug, 35);
-        waves[48].addSpawns(bigGolem, 15);
-        waves[48].addSpawns(midGolem, 50);
-        waves[48].addSpawns(bigBat, 15);
-        waves[38].addSpawns(bat, 60);
+        waves[48] = wavePreset(p, 150, 100, megaHorde);
+        waves[48].addSpawns(bigAlbinoBug, 50);
+        waves[48].addSpawns(bigGolem, 25);
+        waves[48].addSpawns(midGolem, 75);
+        waves[48].addSpawns(bigBat, 30);
+        waves[38].addSpawns(bat, 75);
 
         waves[49] = wavePreset(p, 150, 20, wtf);
         waves[49].addSpawns(bigAlbinoBug, 40);
@@ -227,6 +226,9 @@ public class CaveWaves {
     }
 
     private static Wave wavePreset(PApplet p, int length, int spawnLength, String type) {
+        String megaHorde = "megaHorde";
+        String megaHordeTitle = "Mega Horde";
+
         String horde = "horde";
         String hordeTitle = "Horde";
         Color hordeAccent = new Color(187, 189, 177);
@@ -288,15 +290,19 @@ public class CaveWaves {
         Color wtfText = new Color(33, 42, 95);
 
         if (type.equals(horde)) return new Wave(p, length, spawnLength, hordeFill, hordeAccent, hordeText, hordeTitle);
+        if (type.equals(megaHorde)) return new Wave(p, length, spawnLength, hordeFill, hordeAccent, hordeText, megaHordeTitle);
         if (type.equals(albinoBug)) return new Wave(p, length, spawnLength, albinoBugFill, albinoBugAccent, albinoBugText, albinoBugTitle);
         if (type.equals(bigAlbinoBug)) return new Wave(p, length, spawnLength, bigAlbinoBugFill, bigAlbinoBugAccent, bigAlbinoBugText, bigAlbinoBugTitle);
         if (type.equals(albinoButterfly)) return new Wave(p, length, spawnLength, albinoButterflyFill, albinoButterflyAccent, albinoButterflyText, albinoButterflyTitle);
         if (type.equals(smallGolem)) return new Wave(p, length, spawnLength, smallGolemFill, smallGolemAccent, smallGolemText, smallGolemTitle);
         if (type.equals(midGolem)) return new Wave(p, length, spawnLength, midGolemFill, midGolemAccent, midGolemText, midGolemTitle);
         if (type.equals(bigGolem)) return new Wave(p, length, spawnLength, bigGolemFill, bigGolemAccent, bigGolemText, bigGolemTitle);
+        if (type.equals("1 bigGolem")) return new Wave(p, length, spawnLength, bigGolemFill, bigGolemAccent, bigGolemText, "Boulder Golem");
         if (type.equals(bat)) return new Wave(p, length, spawnLength, batFill, batAccent, batText, batTitle);
         if (type.equals(bigBat)) return new Wave(p, length, spawnLength, bigBatFill, bigBatAccent, bigBatText, bigBatTitle);
+        if (type.equals("1 bigBat")) return new Wave(p, length, spawnLength, bigBatFill, bigBatAccent, bigBatText, "Giant Bat");
         if (type.equals(wtf)) return new Wave(p, length, spawnLength, wtfFill, wtfAccent, wtfText, wtfTitle);
+        if (type.equals("1 wtf")) return new Wave(p, length, spawnLength, wtfFill, wtfAccent, wtfText, "Colossal Bug");
         System.out.println("Invalid wave type!");
         return new Wave(p, length, spawnLength, wtfFill, wtfAccent, wtfText, wtfTitle);
     }

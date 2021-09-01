@@ -7,13 +7,13 @@ import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
 public class Dummy extends Enemy {
+
     public Dummy(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(28,28);
         pfSize = 1; //1
         radius = 14;
-        maxSpeed = 0;
-        speed = maxSpeed;
+        speed = 0;
         moneyDrop = 0;
         damage = 0;
         maxHp = 500000; //Hp

@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSound;
+import static main.sound.SoundUtilities.playSound;
 
 public class WallBuy extends Button {
 
@@ -22,6 +22,7 @@ public class WallBuy extends Button {
         depressed = false;
     }
 
+    @Override
     public void main(){
         timer++;
         if (active){
@@ -33,9 +34,10 @@ public class WallBuy extends Button {
     /**
      * If hovered or depressed.
      */
+    @Override
     public void hover() {
-        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
-                p.mouseY > position.y-size.y/2 && alive && active && !paused) {
+        if (matrixMousePosition.x < position.x+size.x/2 && matrixMousePosition.x > position.x-size.x/2 &&
+          matrixMousePosition.y < position.y+size.y/2 && matrixMousePosition.y > position.y-size.y/2 && alive && !paused) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
@@ -49,6 +51,7 @@ public class WallBuy extends Button {
         if (!hand.displayInfo.equals("null")) sprite = spritePressed;
     }
 
+    @Override
     public void action() {
         depressed = !depressed;
         selection.name = "null";

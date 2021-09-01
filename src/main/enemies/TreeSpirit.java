@@ -13,8 +13,7 @@ public class TreeSpirit extends Enemy {
         size = new PVector(42,42);
         pfSize = 2; //2
         radius = 21;
-        maxSpeed = 21;
-        speed = maxSpeed;
+        speed = 21;
         moneyDrop = 30;
         damage = 3;
         maxHp = 500; //Hp <---------------------------

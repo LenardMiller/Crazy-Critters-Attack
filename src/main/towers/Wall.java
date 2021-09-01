@@ -6,9 +6,9 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.playSoundRandomSpeed;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Wall extends Tower {
 
@@ -22,21 +22,21 @@ public class Wall extends Tower {
     private final CornerSpriteDS CRYSTAL;
     private final CornerSpriteDS ULTIMATE;
 
-    private PImage tlCSprite;
-    private PImage trCSprite;
-    private PImage blCSprite;
-    private PImage brCSprite;
-    private PImage tSSprite;
-    private PImage bSSprite;
-    private PImage lSSprite;
-    private PImage rSSprite;
+    protected PImage tlCSprite;
+    protected PImage trCSprite;
+    protected PImage blCSprite;
+    protected PImage brCSprite;
+    protected PImage tSSprite;
+    protected PImage bSSprite;
+    protected PImage lSSprite;
+    protected PImage rSSprite;
 
     private final PImage[][] UPGRADE_SPRITES;
     private final String[] UPGRADE_NAMES;
 
-    private PImage[] sprite;
+    protected PImage[] sprite;
 
-    public Wall(PApplet p, Tile tile) {
+    public Wall(PApplet p, Tile tile) { //todo: make flooring nicer?
         super(p,tile);
 
         name = "woodWall";
@@ -53,10 +53,6 @@ public class Wall extends Tower {
         value = price;
         nextLevelB = 0;
 
-        int x = (int)(tile.position.x / 50);
-        int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setFlooring(name);
-
         upgradePrices = new int[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
@@ -72,16 +68,26 @@ public class Wall extends Tower {
         CRYSTAL = new CornerSpriteDS();
         ULTIMATE = new CornerSpriteDS();
         loadSprites();
+    }
 
-        spawnParticles();
+    public void placeEffects() {
         playSoundRandomSpeed(p, placeSound, 1);
+        spawnParticles();
+        int x = (int)(tile.position.x / 50);
+        int y = (int)(tile.position.y / 50);
+        tiles.get(x-1,y-1).setFlooring(name);
+        updateFlooring();
+        connectWallQueues++;
     }
 
-    public void main(){
+    @Override
+    public void main() {
         if (hp <= 0) die(false);
-        value = (int)(((float)hp / (float)maxHp) * price);
+        updateBoosts();
+        value = (int)(((float)hp / (float)getMaxHp()) * price);
     }
 
+    @Override
     public void displayBase() {
         float x = tile.position.x-size.x;
         float y = tile.position.y-size.y;
@@ -103,6 +109,7 @@ public class Wall extends Tower {
         else return null;
     }
 
+    @Override
     public void controlAnimation() {
         if (hit) { //change to red if under attack
             tintColor = 0;
@@ -112,7 +119,7 @@ public class Wall extends Tower {
         float y = tile.position.y-size.y;
 
         p.tint(255,tintColor,tintColor);
-        float hpRatio = (float)hp/(float)maxHp;
+        float hpRatio = (float)hp/(float)getMaxHp();
         if (!debug) {
             int crack = abs(ceil((hpRatio * 4) - 1) - 3);
             if (crack < 4) p.image(sprite[crack],x,y);
@@ -137,8 +144,8 @@ public class Wall extends Tower {
         //price
         upgradePrices[0] = 100;
         upgradePrices[1] = 500;
-        upgradePrices[2] = 1500;
-        upgradePrices[3] = 5000;
+        upgradePrices[2] = 2000;
+        upgradePrices[3] = 8000;
         //titles
         upgradeTitles[0] = "Stone";
         upgradeTitles[1] = "Metal";
@@ -161,6 +168,7 @@ public class Wall extends Tower {
         UPGRADE_HP[3] = 500;
     }
 
+    @Override
     public void upgrade(int id) {
         price += upgradePrices[nextLevelB];
         sprite = UPGRADE_SPRITES[nextLevelB];
@@ -186,6 +194,7 @@ public class Wall extends Tower {
         updateFlooring();
     }
 
+    @Override
     public void updateSprite() {
         Tile searchTile;
         boolean tl;
@@ -326,7 +335,7 @@ public class Wall extends Tower {
         }
     }
 
-    private static class CornerSpriteDS {
+    protected static class CornerSpriteDS {
 
         CornerSpriteDSItem[] items;
         PImage t;
