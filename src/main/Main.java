@@ -391,7 +391,7 @@ public class Main extends PApplet {
         }
         //main background
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayBaseAndFlooring();
+            tiles.get(i).displayBaseDecorationFlooring();
         }
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);

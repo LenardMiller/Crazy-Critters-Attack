@@ -28,4 +28,10 @@ public class IntVector {
     public static IntVector sub(IntVector iv, int amount) {
         return new IntVector(iv.x - amount, iv.y - amount);
     }
+
+    public IntVector add(int amount) {
+        x += amount;
+        y += amount;
+        return this;
+    }
 }
