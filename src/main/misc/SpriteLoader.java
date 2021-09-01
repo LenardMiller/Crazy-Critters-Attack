@@ -376,6 +376,9 @@ public class SpriteLoader {
         getSprite(p,"iceTowerLoad","TR","iceTower/load/",16);
         getSprite(p,"iceTowerIdle","TR","iceTower/idle/",2);
         getSprite(p,"iceTowerVaporTrail","TR","iceTower/vaporTrail/",4);
+        getSprite(p,"superIceTowerFire","TR","iceTower/super/fire/",4);
+        getSprite(p,"superIceTowerLoad","TR","iceTower/super/load/",16);
+        getSprite(p,"superIceTowerVaporTrail","TR","iceTower/super/vaporTrail/",4);
 
         getSprite(p,"waveMotionFire","TR","waveMotion/fire/",18);
         getSprite(p,"waveMotionLoad","TR","waveMotion/load/",80);
@@ -593,6 +596,8 @@ public class SpriteLoader {
 
         staticSprites.put("iceTowerBaseTR",p.loadImage("sprites/towers/turrets/iceTower/base.png"));
         staticSprites.put("iceTowerFullTR",p.loadImage("sprites/towers/turrets/iceTower/full.png"));
+        staticSprites.put("superIceTowerBaseTR",p.loadImage("sprites/towers/turrets/iceTower/super/base.png"));
+        staticSprites.put("superIceTowerIdleTR",p.loadImage("sprites/towers/turrets/iceTower/super/idle.png"));
 
         staticSprites.put("waveMotionBaseTR",p.loadImage("sprites/towers/turrets/waveMotion/base.png"));
         staticSprites.put("waveMotionFullTR",p.loadImage("sprites/towers/turrets/waveMotion/full.png"));

@@ -221,6 +221,11 @@ public class IceTower extends Turret {
                     break;
                 case 2:
                     name = "superIceTower";
+                    debrisType = "titanium";
+                    placeSound = sounds.get("titaniumPlace");
+                    breakSound = sounds.get("titaniumBreak");
+                    damageSound = sounds.get("titaniumDamage");
+                    loadSprites();
                     break;
             }
         } if (id == 1) {
