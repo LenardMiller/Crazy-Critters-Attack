@@ -148,7 +148,7 @@ public class RandomCannon extends Turret {
                 case 5:
                     laundry = true;
                     range += 20;
-                    damage += 10;
+                    damage += 20;
                     effectDuration = 6;
                     effectLevel = 25;
                     name = "miscCannonLaundry";
