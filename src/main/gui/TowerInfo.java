@@ -103,7 +103,7 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Fires an explosive", x, space(0));
         p.text("energy ball at the", x, space(1));
-        p.text("farthest enemy in its", x, space(2));
+        p.text("toughest enemy in its", x, space(2));
         p.text("range.  Has long", x, space(3));
         p.text("range,  some splash", x, space(4));
         p.text("and high damage,", x, space(5));
