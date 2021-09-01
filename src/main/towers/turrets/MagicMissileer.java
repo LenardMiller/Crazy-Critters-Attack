@@ -321,7 +321,7 @@ public class MagicMissileer extends Turret {
                 case 2:
                     effectLevel = 5000;
                     effectDuration = 10;
-                    damage *= 2.5f;
+                    damage *= 5f;
                     name = "electricMissleer";
                     debrisType = "darkMetal";
                     placeSound = sounds.get("titaniumPlace");

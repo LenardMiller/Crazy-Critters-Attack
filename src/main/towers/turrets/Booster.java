@@ -207,8 +207,8 @@ public class Booster extends Turret {
                     range++;
                     break;
                 case 2:
-                    boost.range = 0.3f;
-                    boost.firerate += 0.1f;
+                    boost.range = 0.4f;
+                    boost.firerate += 0.25f;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -231,7 +231,7 @@ public class Booster extends Turret {
                     boost.health = 1;
                     maxHp = 60;
                     hp = maxHp;
-                    boost.damage = 0.4f;
+                    boost.damage = 0.5f;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");

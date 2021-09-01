@@ -18,7 +18,7 @@ public class Electrified extends Buff {
     public Electrified(PApplet p, int enId, int damage, float duration, Turret turret) {
         super(p, enId, turret);
         particleChance = 4;
-        effectDelay = secondsToFrames(1);
+        effectDelay = secondsToFrames(0.5f);
         effectTimer = 0;
         DAMAGE = damage;
         SOUND = sounds.get("teslaFire");
