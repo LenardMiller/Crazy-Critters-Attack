@@ -41,7 +41,7 @@ public class Selection {
         clickOff();
         //don't display if nothing held
         if (!name.equals("null") && turret != null) {
-            keyBinds.selectionKeys();
+            //keyBinds.selectionKeys();
             display();
         }
     }
