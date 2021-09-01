@@ -71,12 +71,6 @@ public class IceWall extends Wall {
         }
     }
 
-    private boolean intersecting(PVector other) {
-        boolean matchX = other.x >= tile.position.x - size.x && other.x <= tile.position.x;
-        boolean matchY = other.y >= tile.position.y - size.y && other.y <= tile.position.y;
-        return matchX && matchY;
-    }
-
     @Override
     public void die(boolean sold) {
         playSoundRandomSpeed(p, breakSound, 1);

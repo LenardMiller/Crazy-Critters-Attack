@@ -435,7 +435,8 @@ public class Selection {
             IceTower ice = (IceTower) turret;
             P.fill(new Color(100, 150, 255).getRGB(), 254);
             P.text("Ice HP: " + ice.wallHp, 910, 356 + 20 * purpleCount + offset);
-            P.text("Ice lifespan: " + ((ice.wallTimeUntilDamage / FRAMERATE) * 10) + "s", 910, 376 + 20 * purpleCount + offset);
+            float lifespan = (ice.wallTimeUntilDamage / (float) FRAMERATE) * 10;
+            P.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 * purpleCount + offset);
         }
         //missle count
         if (turret.name.equals("magicMissleer") || turret.name.equals("electricMissleer")) {
