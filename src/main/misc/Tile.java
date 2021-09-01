@@ -482,10 +482,10 @@ public class Tile {
         return nodeGrid[x][y];
     }
 
-    public PVector getGridPosition() {
+    public IntVector getGridPosition() {
         int x = (int) (position.x / 50);
         int y = (int) (position.y / 50);
-        return new PVector(x, y);
+        return new IntVector(x, y);
     }
 
     public static class TileDS {
@@ -504,6 +504,10 @@ public class Tile {
             Tile r = null;
             for (TileDSItem item : items) if (item.x == x && item.y == y) r = item.tile;
             return r;
+        }
+
+        public Tile get(IntVector gridPosition) {
+            return get(gridPosition.x, gridPosition.y);
         }
 
         public void add(Tile tile, int x, int y) {

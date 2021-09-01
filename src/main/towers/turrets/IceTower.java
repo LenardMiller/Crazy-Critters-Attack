@@ -1,12 +1,17 @@
 package main.towers.turrets;
 
+import main.Main;
 import main.misc.IntVector;
 import main.misc.Tile;
 import main.towers.IceWall;
+import main.towers.Tower;
 import main.towers.Wall;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
@@ -39,7 +44,7 @@ public class IceTower extends Turret {
         barrelLength = 30;
         offset = 0;
         wallHp = 40;
-        wallTimeUntilDamage = 20;
+        wallTimeUntilDamage = 15;
         debrisType = "darkMetal";
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
@@ -61,7 +66,77 @@ public class IceTower extends Turret {
     }
 
     @Override
+    public void main() {
+        if (hp <= 0) {
+            die(false);
+            tile.tower = null;
+        }
+        updateBoosts();
+        if ((enemies.size() > 0 && alive && !paused) || name.equals("autoIceTower")) checkTarget();
+        if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
+                && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
+            selection.swapSelected(tile.id);
+        }
+    }
+
+    @Override
+    protected void checkTarget() {
+        if (name.equals("autoIceTower")) {
+            if (state == 0) {
+                state = 1;
+                frame = 0;
+                spawnProjectiles(tile.position, 0);
+            }
+            return;
+        }
+        getTargetEnemy();
+        if (targetEnemy != null && state != 1) aim(targetEnemy);
+        if (state == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
+            state = 1;
+            frame = 0;
+            fire(barrelLength, fireParticle);
+        }
+    }
+
+    private Tile selectTargetTile() {
+        ArrayList<Tower> towers = new ArrayList<>();
+        for (Tower tower : Main.towers) if (!(tower instanceof IceWall)) towers.add(tower);
+        Collections.shuffle(towers);
+        Tile tile = null;
+        for (Tower tower : towers) {
+            IntVector wallGridPosition = worldPositionToGridPosition(tower.tile.position);
+            ArrayList<Tile> surroundingTiles = new ArrayList<>();
+            for (int x = -1; x < 2; x++) {
+                for (int y = -1; y < 2; y++) {
+                    surroundingTiles.add(tiles.get(wallGridPosition.x + x, wallGridPosition.y + y));
+                }
+            }
+            Collections.shuffle(surroundingTiles);
+            for (Tile surroundingTile : surroundingTiles) {
+                tile = surroundingTile;
+                if (tilePlaceable(tile)) break;
+            }
+            if (tilePlaceable(tile)) break;
+        }
+        if (tilePlaceable(tile)) return tile;
+        else return null;
+    }
+
+    private boolean tilePlaceable(Tile tile) {
+        if (tile == null) return false;
+        Tile otherTile = tiles.get(tile.getGridPosition().sub(1));
+        if (otherTile == null) return tile.tower == null;
+        return !otherTile.machine && tile.tower == null;
+    }
+
+    @Override
     protected void spawnProjectiles(PVector position, float angle) {
+        if (name.equals("autoIceTower")) {
+            Tile targetTile = selectTargetTile();
+            if (targetTile != null) placeWall(targetTile);
+            return;
+        }
+
         currentVaporFrame = 0;
         vaporStart = position;
         PVector vaporEnd = targetEnemy.position;
@@ -161,19 +236,19 @@ public class IceTower extends Turret {
         //price
         upgradePrices[0] = 750;
         upgradePrices[1] = 1200;
-        upgradePrices[2] = 50000;
+        upgradePrices[2] = 20000;
 
         upgradePrices[3] = 1000;
         upgradePrices[4] = 1500;
-        upgradePrices[5] = 20000;
+        upgradePrices[5] = 50000;
         //titles
         upgradeTitles[0] = "Longer Lasting";
         upgradeTitles[1] = "Stronger Ice";
-        upgradeTitles[2] = "Superfreeze";
+        upgradeTitles[2] = "Auto Defence";
 
         upgradeTitles[3] = "Increase Range";
         upgradeTitles[4] = "Faster Freezing";
-        upgradeTitles[5] = "Auto Defence";
+        upgradeTitles[5] = "Superfreeze";
         //descriptions
         upgradeDescA[0] = "Ice lasts";
         upgradeDescB[0] = "longer";
@@ -183,9 +258,9 @@ public class IceTower extends Turret {
         upgradeDescB[1] = "ice HP";
         upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "Freeze";
-        upgradeDescB[2] = "bigger";
-        upgradeDescC[2] = "enemies";
+        upgradeDescA[2] = "Reinforces";
+        upgradeDescB[2] = "defences";
+        upgradeDescC[2] = "with ice";
 
 
         upgradeDescA[3] = "Increase";
@@ -196,9 +271,10 @@ public class IceTower extends Turret {
         upgradeDescB[4] = "firerate";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "Reinforces";
-        upgradeDescB[5] = "defences";
-        upgradeDescC[5] = "with ice";
+        upgradeDescA[5] = "Freeze";
+        upgradeDescB[5] = "bigger";
+        upgradeDescC[5] = "enemies";
+
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[35];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[36];
@@ -220,12 +296,10 @@ public class IceTower extends Turret {
                     wallHp *= 2;
                     break;
                 case 2:
-                    name = "superIceTower";
-                    debrisType = "titanium";
-                    placeSound = sounds.get("titaniumPlace");
-                    breakSound = sounds.get("titaniumBreak");
-                    damageSound = sounds.get("titaniumDamage");
-                    loadSprites();
+                    name = "autoIceTower";
+                    delay -= 4;
+                    wallTimeUntilDamage *= 6;
+                    wallHp *= 2;
                     break;
             }
         } if (id == 1) {
@@ -237,6 +311,12 @@ public class IceTower extends Turret {
                     delay -= 4;
                     break;
                 case 5:
+                    name = "superIceTower";
+                    debrisType = "titanium";
+                    placeSound = sounds.get("titaniumPlace");
+                    breakSound = sounds.get("titaniumBreak");
+                    damageSound = sounds.get("titaniumDamage");
+                    loadSprites();
                     break;
             }
         }

@@ -3,6 +3,7 @@ package main.towers.turrets;
 import main.damagingThings.arcs.OrangeArc;
 import main.damagingThings.arcs.RedArc;
 import main.gui.guiObjects.PopupText;
+import main.misc.IntVector;
 import main.misc.Tile;
 import main.particles.Floaty;
 import main.particles.MiscParticle;
@@ -277,9 +278,9 @@ public class Booster extends Turret {
                     checkY = 1;
                     break;
             }
-            PVector pos = tile.getGridPosition();
-            int x = (int) pos.x + checkX;
-            int y = (int) pos.y + checkY;
+            IntVector pos = tile.getGridPosition();
+            int x = pos.x + checkX;
+            int y = pos.y + checkY;
             Tower tower = tiles.get(x, y).tower;
             if (tower == null || tower instanceof Booster) continue;
             tower.addBoost(boost);

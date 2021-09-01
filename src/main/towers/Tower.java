@@ -60,7 +60,8 @@ public abstract class Tower {
     protected Tower(PApplet p, Tile tile) {
         this.p = p;
         this.tile = tile;
-        tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1).setBreakable(null);
+        Tile otherTile = tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1);
+        if (otherTile != null) otherTile.setBreakable(null);
 
         boosts = new ArrayList<>();
         alive = true;

@@ -18,4 +18,14 @@ public class IntVector {
     public String toString() {
         return "{" + x + ", " + y + "}";
     }
+
+    public IntVector sub(int amount) {
+        x -= amount;
+        y -= amount;
+        return this;
+    }
+
+    public static IntVector sub(IntVector iv, int amount) {
+        return new IntVector(iv.x - amount, iv.y - amount);
+    }
 }
