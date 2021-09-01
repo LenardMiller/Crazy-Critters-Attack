@@ -301,7 +301,7 @@ public class IceTower extends Turret {
                 case 2:
                     name = "autoIceTower";
                     range = 5000;
-                    delay -= 5;
+                    delay -= 2;
                     wallTimeUntilDamage = -1;
                     wallHp *= 2;
                     angle = 0;
