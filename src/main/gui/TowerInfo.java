@@ -157,8 +157,8 @@ public class TowerInfo {
         p.text("completely", x, space(4));
         p.text("immobilized.  Ice", x, space(5));
         p.text("melts over time.", x, space(6));
-        p.text("Effective against flying", x, space(7));
-        p.text("enemies.", x, space(8));
+        p.text("Effective against", x, space(7));
+        p.text("flying enemies.", x, space(8));
         p.textAlign(CENTER);
         p.text("[F]", 1000, space(10));
     }
