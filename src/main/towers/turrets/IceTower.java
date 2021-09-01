@@ -38,7 +38,7 @@ public class IceTower extends Turret {
     public IceTower(PApplet p, Tile tile) {
         super(p, tile);
         name = "iceTower";
-        delay = randomizeDelay(p, 15);
+        delay = randomizeDelay(p, 13);
         pjSpeed = -1;
         range = 250;
         barrelLength = 30;
@@ -133,7 +133,10 @@ public class IceTower extends Turret {
     protected void spawnProjectiles(PVector position, float angle) {
         if (name.equals("autoIceTower")) {
             Tile targetTile = selectTargetTile();
-            if (targetTile != null) placeWall(targetTile);
+            if (targetTile != null) {
+                placeWall(targetTile);
+                playSoundRandomSpeed(p, fireSound, 1);
+            }
             return;
         }
 
@@ -308,7 +311,7 @@ public class IceTower extends Turret {
                     range += 50;
                     break;
                 case 4:
-                    delay -= 5;
+                    delay -= 3;
                     break;
                 case 5:
                     name = "superIceTower";

@@ -28,9 +28,8 @@ public class IceWall extends Wall {
         TIME_UNTIL_DAMAGE = timeUntilDamage;
         sprite = animatedSprites.get("iceWallTW");
         debrisType = "ice";
-        damageSound = sounds.get("crystalDamage");
-        breakSound = sounds.get("crystalBreak");
-        placeSound = sounds.get("crystalPlaceShort");
+        damageSound = sounds.get("iceDamage");
+        breakSound = sounds.get("iceBreak");
         price = 0;
         value = 0;
         nextLevelB = 4;
@@ -42,7 +41,6 @@ public class IceWall extends Wall {
 
     @Override
     public void placeEffects() {
-        playSoundRandomSpeed(p, placeSound, 1);
         spawnParticles();
         connectWallQueues++;
     }

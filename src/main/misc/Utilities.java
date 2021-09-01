@@ -372,7 +372,7 @@ public class Utilities {
      * @return input =/- a random amount up to 10%
      */
     public static float randomizeDelay(PApplet p, float input) {
-        return input + p.random(-(input/10f),input/10f);
+        return input + p.random(-(input/20f),input/20f);
     }
 
     /**
