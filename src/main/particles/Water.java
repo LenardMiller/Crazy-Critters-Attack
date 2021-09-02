@@ -1,5 +1,6 @@
 package main.particles;
 
+import main.misc.Animator;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -10,12 +11,10 @@ public class Water extends Particle {
 
     public Water(PApplet p, float x, float y) {
         super(p, x, y, 0);
-        position = new PVector(x, y);
         size = new PVector(12, 12);
-        maxSpeed = 0;
-        speed = maxSpeed;
-        betweenFrames = down60ToFramerate(10);
-        sprites = animatedSprites.get("waterPT");
-        numFrames = sprites.length;
+        animation = new Animator(
+                animatedSprites.get("waterPT"),
+                down60ToFramerate(10),
+                false);
     }
 }

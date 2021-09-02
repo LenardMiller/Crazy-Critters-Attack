@@ -1,7 +1,7 @@
 package main.particles;
 
+import main.misc.Animator;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
@@ -18,38 +18,21 @@ public abstract class Particle {
     public float angle;
     public int delay;
     public PApplet p;
-    public PImage sprite;
-    public PImage[] sprites;
     public PVector position;
     public PVector size;
+    public Animator animation;
 
     protected float displayAngle;
     protected float angularVelocity;
     protected boolean dead;
-    protected int lifespan;
-    protected int numFrames;
-    protected int currentSprite;
-    protected int delayTime;
-    protected int betweenFrames;
-    protected int bfTimer;
     protected PVector velocity;
 
     protected Particle(PApplet p, float x, float y, float angle) {
         this.p = p;
 
-        position = new PVector(x, y);
-        size = new PVector(5, 5);
-        speed = 60;
         displayAngle = angle;
-        angularVelocity = 0; //degrees mode
-        lifespan = secondsToFrames(1);
-        lifespan += (PApplet.round(p.random(-(lifespan / 4f), lifespan / 4f))); //injects 10% randomness so all don't die at once
-        numFrames = 1;
-        currentSprite = 0;
-        delay = lifespan / numFrames;
-        sprite = staticSprites.get("nullPt");
+        position = new PVector(x, y);
         velocity = PVector.fromAngle(angle - HALF_PI);
-        betweenFrames = 0;
     }
 
     public void main(ArrayList<Particle> particles, int i) {
@@ -64,30 +47,13 @@ public abstract class Particle {
     }
 
     protected void display() {
-        if (numFrames > 1) {
-            if (!paused) {
-                if (bfTimer >= betweenFrames) {
-                    if (currentSprite == numFrames - 1) dead = true;
-                    else currentSprite++;
-                    bfTimer = 0;
-                } else bfTimer++;
-                displayAngle += radians(secondsToFrames(angularVelocity));
-            }
-            p.pushMatrix();
-            p.translate(position.x, position.y);
-            p.rotate(displayAngle);
-            p.image(sprites[currentSprite], -size.x / 2, -size.y / 2);
-        } else {
-            if (!paused) {
-                delayTime++;
-                displayAngle += radians(secondsToFrames(angularVelocity));
-            }
-            if (delayTime > delay) dead = true;
-            p.pushMatrix();
-            p.translate(position.x, position.y);
-            p.rotate(displayAngle);
-            p.image(sprite, -size.x / 2, -size.y / 2);
-        }
+        animation.update();
+        displayAngle += radians(secondsToFrames(angularVelocity));
+        if (animation.ended()) dead = true;
+        p.pushMatrix();
+        p.translate(position.x, position.y);
+        p.rotate(displayAngle);
+        p.image(animation.getCurrentFrame(), -size.x / 2, -size.y / 2);
         p.popMatrix();
     }
 

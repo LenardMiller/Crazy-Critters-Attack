@@ -1,5 +1,6 @@
 package main.particles;
 
+import main.misc.Animator;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -11,16 +12,10 @@ public class RailgunBlast extends Particle {
 
     public RailgunBlast(PApplet p, float x, float y, float angle) {
         super(p, x, y, angle);
-        position = new PVector(x, y);
         size = new PVector(25, 25);
-        maxSpeed = 0;
-        speed = maxSpeed;
-        displayAngle = angle;
-        angularVelocity = 0; //degrees mode
-        betweenFrames = down60ToFramerate(4);
-        currentSprite = 0;
-        sprites = animatedSprites.get("railgunBlastPT");
-        velocity = PVector.fromAngle(angle-HALF_PI);
-        numFrames = sprites.length;
+        animation = new Animator(
+                animatedSprites.get("railgunBlastPT"),
+                down60ToFramerate(4),
+                false);
     }
 }

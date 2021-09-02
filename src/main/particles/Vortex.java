@@ -1,5 +1,6 @@
 package main.particles;
 
+import main.misc.Animator;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -20,11 +21,10 @@ public class Vortex extends Particle {
         maxSpeed = 150;
         speed = maxSpeed;
         displayAngle = angle;
-        betweenFrames = (int) (radius/5);
-        betweenFrames = (int) randomizeBy(p, betweenFrames, 0.5f);
-        numFrames = 4;
-        currentSprite = 0;
-        sprites = animatedSprites.get(type + "ExDebrisPT");
+        animation = new Animator(
+                animatedSprites.get(type + "ExDebrisPT"),
+                (int) randomizeBy(p, (int) (radius/5), 0.5f),
+                false);
         angularVelocity = (speed/FRAMERATE) / radius;
         velocity = PVector.fromAngle(angle-HALF_PI);
     }

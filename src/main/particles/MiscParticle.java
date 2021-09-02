@@ -1,5 +1,6 @@
 package main.particles;
 
+import main.misc.Animator;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -11,16 +12,13 @@ public class MiscParticle extends Particle {
 
     public MiscParticle(PApplet p, float x, float y, float angle, String type) {
         super(p, x, y, angle);
-        position = new PVector(x, y);
         size = new PVector(7, 7);
         maxSpeed = 15;
         speed = maxSpeed;
-        displayAngle = angle;
         angularVelocity = p.random(-300, 300); //degrees mode
-        betweenFrames = down60ToFramerate(p.random(3,6));
-        numFrames = 8;
-        currentSprite = 0;
-        sprites = animatedSprites.get(type + "MiscPT");
-        velocity = PVector.fromAngle(angle-HALF_PI);
+        animation = new Animator(
+                animatedSprites.get(type + "MiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false);
     }
 }
