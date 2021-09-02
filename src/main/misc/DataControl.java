@@ -15,11 +15,7 @@ import static main.misc.Utilities.down60ToFramerate;
 public class DataControl extends ClassLoader {
 
     private static String filePath() {
-        //run from terminal
-        String filePath = new File("").getAbsolutePath();
-        //run from intelliJ todo: remove before release
-        filePath = "resources";
-        return filePath;
+        return new File("").getAbsolutePath();
     }
 
     /**
@@ -85,7 +81,7 @@ public class DataControl extends ClassLoader {
     }
 
     public static void loadSettings() {
-        File loadFile = new File(filePath()+"/data/settings.json");
+        File loadFile = new File(filePath()+ "/data/settings.json");
         JSONObject loadObject = loadJSONObject(loadFile);
 
         globalVolume = loadObject.getFloat("volume");
@@ -99,7 +95,7 @@ public class DataControl extends ClassLoader {
      * @param file the filename, sans extension.
      */
     public static void loadLayout(PApplet p, String file) {
-        File loadFile = new File(filePath()+"/data/"+file+"/base.json");
+        File loadFile = new File(filePath()+ "/data/" +file+"/base.json");
         JSONArray loadArray = loadJSONArray(loadFile);
 
         alive = true;
@@ -147,7 +143,7 @@ public class DataControl extends ClassLoader {
      * @param file file to load data from, no extension
      */
     public static void loadTile(Tile tile, String file) {
-        File loadFile = new File(filePath()+"/data/"+file+".json");
+        File loadFile = new File(filePath()+ "/data/" +file+".json");
         JSONArray loadArray = loadJSONArray(loadFile);
 
         JSONObject loadedTile = loadArray.getJSONObject(tile.id);
