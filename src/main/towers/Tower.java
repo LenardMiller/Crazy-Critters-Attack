@@ -9,7 +9,6 @@ import main.gui.InGameGui;
 import main.gui.guiObjects.PopupText;
 import main.misc.Tile;
 import main.particles.Debris;
-import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.towers.turrets.Booster;
 import main.towers.turrets.Turret;
@@ -25,6 +24,8 @@ import static main.Main.*;
 import static main.misc.Utilities.incrementByTo;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.particles.Particle.ParticleTypes.Fire;
+import static main.particles.Particle.ParticleTypes.OrangeMagic;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -222,11 +223,15 @@ public abstract class Tower {
     protected void displayBoost() {
         if (this instanceof IceWall) return;
         if (boosts.size() > 0 && p.random(30) < 1) {
-            topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-              p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
+            topParticles.add(OrangeMagic.create(p,
+                    p.random(tile.position.x - size.x, tile.position.x),
+                    p.random(tile.position.y - size.y, tile.position.y),
+                    p.random(360)));
             if (hasBoostedDeathEffect()) {
-                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
+                topParticles.add(Fire.create(p,
+                        p.random(tile.position.x - size.x, tile.position.x),
+                        p.random(tile.position.y - size.y, tile.position.y),
+                        p.random(360)));
             }
         }
     }

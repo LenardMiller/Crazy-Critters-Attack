@@ -3,7 +3,6 @@ package main.enemies.flyingEnemies;
 import main.Main;
 import main.buffs.Buff;
 import main.gui.guiObjects.PopupText;
-import main.particles.MiscParticle;
 import main.particles.Ouch;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -11,6 +10,7 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.findAngleBetween;
 import static main.particles.Particle.ParticleTypes.FrostCloudFloaty;
+import static main.particles.Particle.ParticleTypes.IceMagic;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Frost extends FlyingEnemy {
@@ -116,7 +116,7 @@ public class Frost extends FlyingEnemy {
         for (int i = 0; i < 20; i++) {
             PVector partPosition = new PVector(position.x, position.y);
             partPosition.add(PVector.fromAngle(p.random(TWO_PI)).setMag(p.random(radius)));
-            topParticles.add(new MiscParticle(p, partPosition.x, partPosition.y, p.random(360), "iceMagic"));
+            topParticles.add(IceMagic.create(p, partPosition.x, partPosition.y, p.random(360)));
         }
     }
 

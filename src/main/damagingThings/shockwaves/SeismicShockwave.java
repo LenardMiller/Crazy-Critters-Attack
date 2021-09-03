@@ -1,7 +1,6 @@
 package main.damagingThings.shockwaves;
 
 import main.particles.Debris;
-import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -9,6 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.particles.Particle.ParticleTypes.MetalExplosionDebris;
+import static main.particles.Particle.ParticleTypes.Smoke;
 
 public class SeismicShockwave extends Shockwave {
 
@@ -25,7 +25,7 @@ public class SeismicShockwave extends Shockwave {
         bottomParticles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));
         a = randomAngle();
         pos = randomPosition(a);
-        bottomParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
+        bottomParticles.add(Smoke.create(P, pos.x, pos.y, a));
         for (int i = 0; i < P.random(5, 12); i++) {
             a = randomAngle();
             pos = randomPosition(a);

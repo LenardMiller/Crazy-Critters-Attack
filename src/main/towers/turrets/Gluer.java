@@ -6,7 +6,7 @@ import main.damagingThings.projectiles.glue.SplatterGlue;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;
-import main.particles.MiscParticle;
+import main.particles.Particle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -50,8 +50,8 @@ public class Gluer extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         for (int i = 0; i < p.random(3, 5); i++) {
-            midParticles.add(new MiscParticle(p, position.x, position.y,
-              angle + radians(p.random(-45, 45)), "glue"));
+            midParticles.add(Particle.ParticleTypes.Glue.create(
+                    p, position.x, position.y, angle + radians(p.random(-45, 45))));
         }
         if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
         else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));

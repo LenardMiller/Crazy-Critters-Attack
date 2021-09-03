@@ -4,13 +4,13 @@ import main.damagingThings.projectiles.CannonBall;
 import main.damagingThings.projectiles.Dynamite;
 import main.damagingThings.projectiles.FragBall;
 import main.misc.Tile;
-import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
+import static main.particles.Particle.ParticleTypes.Smoke;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Cannon extends Turret {
@@ -48,8 +48,8 @@ public class Cannon extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         for (int i = 0; i < p.random(3, 5); i++) {
-            midParticles.add(new MiscParticle(p, position.x, position.y,
-              angle + radians(p.random(-45, 45)), "smoke"));
+            midParticles.add(Smoke.create(p, position.x, position.y,
+              angle + radians(p.random(-45, 45))));
         }
         if (frags) projectiles.add(new FragBall(p,position.x,position.y, angle, this, getDamage(), effectRadius));
         else if (dynamite) projectiles.add(new Dynamite(p,position.x,position.y, angle, this, getDamage(), effectRadius));

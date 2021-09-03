@@ -1,6 +1,5 @@
 package main.misc;
 
-import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.particles.Pile;
 import processing.core.PApplet;
@@ -11,6 +10,7 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
+import static main.particles.Particle.ParticleTypes.MiscParticle;
 import static processing.core.PApplet.radians;
 
 public class Corpse {
@@ -184,9 +184,11 @@ public class Corpse {
             if (!ANIMATED) chance += 16;
             int num = (int) (P.random(0, chance));
             if (num == 0) {
-                midParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
-                        (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
-                        P.random(0, 360), part));
+                midParticles.add(MiscParticle.create(P,
+                        (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
+                        (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
+                        P.random(0, 360),
+                        part));
             }
         }
     }

@@ -2,12 +2,12 @@ package main.towers.turrets;
 
 import main.damagingThings.projectiles.Needle;
 import main.misc.Tile;
-import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.randomizeDelay;
+import static main.particles.Particle.ParticleTypes.Decay;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Nightmare extends Turret {
@@ -57,7 +57,7 @@ public class Nightmare extends Turret {
             spa2.setMag(-2);
             PVector spp2 = new PVector(position.x,position.y);
             spp2.add(spa2);
-            midParticles.add(new MiscParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),"decay"));
+            midParticles.add(Decay.create(p,spp2.x,spp2.y,angle+radians(p.random(-45,45))));
         }
     }
 

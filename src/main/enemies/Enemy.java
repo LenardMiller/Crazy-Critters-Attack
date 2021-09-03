@@ -9,7 +9,6 @@ import main.buffs.stunned.Stunned;
 import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;
-import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.particles.Pile;
 import main.pathfinding.Node;
@@ -28,6 +27,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.particles.Particle.ParticleTypes.SmokeCloudFloaty;
+import static main.particles.Particle.ParticleTypes.Stun;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Enemy {
@@ -448,8 +448,8 @@ public abstract class Enemy {
             if (p.random(0, 6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
                     PVector partPos = getParticlePosition();
-                    if (gore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle));
-                    else topParticles.add(new MiscParticle(p, partPos.x, partPos.y, p.random(0, 360), "stun"));
+                    if (gore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(360), hitParticle));
+                    else topParticles.add(Stun.create(p, partPos.x, partPos.y, p.random(360)));
                 }
             }
             currentTintColor = new Color(maxTintColor.getRGB());

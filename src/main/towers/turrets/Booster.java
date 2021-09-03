@@ -5,7 +5,6 @@ import main.damagingThings.arcs.RedArc;
 import main.gui.guiObjects.PopupText;
 import main.misc.IntVector;
 import main.misc.Tile;
-import main.particles.MiscParticle;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -81,18 +80,26 @@ public class Booster extends Turret {
             if (range > 1) speed = p.random(35, 50);
             if (name.equals("moneyBooster")) {
                 midParticles.add(CoinFloaty.create(p, position.x, position.y, p.random(360), speed));
-                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "yellowMagic"));
+                topParticles.add(YellowMagic.create(p,
+                        p.random(tile.position.x - size.x, tile.position.x),
+                        p.random(tile.position.y - size.y, tile.position.y),
+                        p.random(360)));
             } else if (name.equals("explosiveBooster")) {
                 midParticles.add(SmokeCloudFloaty.create(p, position.x, position.y, p.random(360), speed));
-                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
-                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
+                topParticles.add(OrangeMagic.create(p,
+                        p.random(tile.position.x - size.x, tile.position.x),
+                        p.random(tile.position.y - size.y, tile.position.y),
+                        p.random(360)));
+                topParticles.add(Fire.create(p,
+                        p.random(tile.position.x - size.x, tile.position.x),
+                        p.random(tile.position.y - size.y, tile.position.y),
+                        p.random(360)));
             } else {
                 midParticles.add(OrangeBubbleFloaty.create(p, position.x, position.y, p.random(360), speed));
-                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
+                topParticles.add(OrangeMagic.create(p,
+                        p.random(tile.position.x - size.x, tile.position.x),
+                        p.random(tile.position.y - size.y, tile.position.y),
+                        p.random(360)));
             }
         }
         if (p.random(30) < 1 && name.equals("explosiveBooster")) {

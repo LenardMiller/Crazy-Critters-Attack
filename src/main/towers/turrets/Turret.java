@@ -5,7 +5,6 @@ import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.gui.guiObjects.PopupText;
 import main.misc.CompressArray;
 import main.misc.Tile;
-import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.towers.Tower;
 import processing.core.PApplet;
@@ -19,6 +18,7 @@ import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.particles.Particle.ParticleTypes.MiscParticle;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -187,7 +187,8 @@ public abstract class Turret extends Tower {
                 spa2.setMag(-5);
                 PVector spp2 = new PVector(projectileSpawn.x, projectileSpawn.y);
                 spp2.add(spa2);
-                topParticles.add(new MiscParticle(p, spp2.x, spp2.y, displayAngle + radians(p.random(-45, 45)), particleType));
+                topParticles.add(MiscParticle.create(p, spp2.x, spp2.y,
+                        displayAngle + radians(p.random(-45, 45)), particleType));
             }
         }
     }

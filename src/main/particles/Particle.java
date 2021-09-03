@@ -14,8 +14,19 @@ import static processing.core.PConstants.HALF_PI;
 
 public class Particle {
 
-    public interface AnimatorFactory {
+    @FunctionalInterface
+    private interface AnimatorFactory {
         Animator get();
+    }
+
+    @FunctionalInterface
+    private interface FloatFactory {
+        float get();
+    }
+
+    @FunctionalInterface
+    private interface IntFactory {
+        int get();
     }
 
     public enum ParticleTypes {
@@ -125,22 +136,135 @@ public class Particle {
                 animatedSprites.get("orangeBubbleFloatyPT"),
                 down60ToFramerate(4),
                 false
+        )),
+        //Misc (buff)
+        MiscParticle(7, 7, 15, "MiscPT",
+                () -> p.random(-300, 300),
+                () -> down60ToFramerate(p.random(3,6))
+        ),
+        Glue(7, 7, 15, () -> new Animator(
+                animatedSprites.get("glueMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        BlueSmoke(7, 7, 15, () -> new Animator(
+                animatedSprites.get("blueSmokeMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        Fire(7, 7, 15, () -> new Animator(
+                animatedSprites.get("fireMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        Smoke(7, 7, 15, () -> new Animator(
+                animatedSprites.get("smokeMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        Electricity(7, 7, 15, () -> new Animator(
+                animatedSprites.get("electricityMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        Nuclear(7, 7, 15, () -> new Animator(
+                animatedSprites.get("nuclearMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        Stun(7, 7, 15, () -> new Animator(
+                animatedSprites.get("stunMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        IceMagic(7, 7, 15, () -> new Animator(
+                animatedSprites.get("iceMagicMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        OrangeMagic(7, 7, 15, () -> new Animator(
+                animatedSprites.get("orangeMagicMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        GreenMagic(7, 7, 15, () -> new Animator(
+                animatedSprites.get("greenMagicMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        YellowMagic(7, 7, 15, () -> new Animator(
+                animatedSprites.get("yellowMagicMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        Dark(7, 7, 15, () -> new Animator(
+                animatedSprites.get("darkMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        Energy(7, 7, 15, () -> new Animator(
+                animatedSprites.get("energyMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
+        )),
+        Decay(7, 7, 15, () -> new Animator(
+                animatedSprites.get("decayMiscPT"),
+                down60ToFramerate(p.random(3,6)),
+                false
         ));
 
+        private final float SPEED;
+        private final FloatFactory ANGULAR_VELOCITY;
         private final PVector SIZE;
-        private final AnimatorFactory ANIMATOR;
 
-        ParticleTypes(float width, float height, AnimatorFactory animator) {
+        private IntFactory betweenFrames;
+        private String name;
+        private AnimatorFactory animator;
+
+        //0
+        ParticleTypes(float width, float height, float speed, FloatFactory angularVelocity) {
             SIZE = new PVector(width, height);
-            ANIMATOR = animator;
+            SPEED = speed;
+            ANGULAR_VELOCITY = angularVelocity;
+        }
+
+        //1
+        ParticleTypes(float width, float height, float speed, FloatFactory angularVelocity, AnimatorFactory animator) {
+            this(width, height, speed, angularVelocity); //0
+            this.animator = animator;
+        }
+
+        //2
+        ParticleTypes(float width, float height, float speed, AnimatorFactory animator) {
+            this(width, height, speed, () -> 0, animator); //1
+        }
+
+        //3
+        ParticleTypes(float width, float height, AnimatorFactory animator) {
+            this(width, height, 0, () -> 0, animator); //1
+        }
+
+        //4
+        ParticleTypes(float width, float height, float speed, String name, FloatFactory angularVelocity, IntFactory betweenFrames) {
+            this(width, height, speed, angularVelocity); //0
+            this.name = name;
+            this.betweenFrames = betweenFrames;
+        }
+
+        public Particle create(PApplet p, float x, float y, float angle, String type) {
+            return new Particle(p, new PVector(x, y), angle, SIZE.copy(), new Animator(
+                    animatedSprites.get(type + name),
+                    betweenFrames.get(),
+                    false
+            ), SPEED, ANGULAR_VELOCITY.get());
         }
 
         public Particle create(PApplet p, float x, float y, float angle) {
-            return new Particle(p, new PVector(x, y), angle, SIZE.copy(), ANIMATOR.get());
+            return new Particle(p, new PVector(x, y), angle, SIZE.copy(), animator.get(), SPEED, ANGULAR_VELOCITY.get());
         }
 
         public Particle create(PApplet p, float x, float y, float angle, float speed) {
-            return new Particle(p, new PVector(x, y), angle, SIZE.copy(), ANIMATOR.get(), speed);
+            return new Particle(p, new PVector(x, y), angle, SIZE.copy(), animator.get(), speed, ANGULAR_VELOCITY.get());
         }
     }
 
@@ -173,9 +297,10 @@ public class Particle {
         this.animation = animation;
     }
 
-    private Particle(PApplet p, PVector position, float angle, PVector size, Animator animation, float maxSpeed) {
+    private Particle(PApplet p, PVector position, float angle, PVector size, Animator animation, float maxSpeed, float angularVelocity) {
         this(p, position, angle, size, animation);
         this.maxSpeed = maxSpeed;
+        this.angularVelocity = angularVelocity;
         speed = maxSpeed;
     }
 
