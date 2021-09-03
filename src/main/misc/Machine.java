@@ -2,7 +2,6 @@ package main.misc;
 
 import main.damagingThings.projectiles.Flame;
 import main.particles.Debris;
-import main.particles.MediumExplosion;
 import main.particles.Ouch;
 import main.sound.StartStopSoundLoop;
 import processing.core.PApplet;
@@ -16,6 +15,7 @@ import static main.Main.*;
 import static main.misc.Utilities.secondsToFrames;
 import static main.misc.Utilities.up60ToFramerate;
 import static main.particles.Particle.ParticleTypes.LargeFireExplosion;
+import static main.particles.Particle.ParticleTypes.MediumFireExplosion;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Machine {
@@ -162,7 +162,7 @@ public class Machine {
                 if (up60ToFramerate(p.random(0, 6)) == 0) {
                     if ((int) p.random(0, 5) == 0) {
                         playSoundRandomSpeed(p, EXPLODE_SOUND, 1);
-                    } topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                    } topParticles.add(MediumFireExplosion.create(p, shuffle(x), shuffle(y), p.random(360)));
                 }
             }
         } else {
@@ -173,11 +173,11 @@ public class Machine {
                 if (up60ToFramerate(p.random(0, 4)) == 0)
                     topParticles.add(LargeFireExplosion.create(p, shuffle(x), shuffle(y), p.random(360)));
                 if (up60ToFramerate((int) p.random(0, 2)) == 0)
-                    topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                    topParticles.add(MediumFireExplosion.create(p, shuffle(x), shuffle(y), p.random(360)));
                 for (int i = 0; i < up60ToFramerate(3); i++) {
-                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(360), debris));
                 } if (up60ToFramerate(p.random(0, 8)) == 0) {
-                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, maxHp * 10, maxHp, 1000, (int) p.random(50, 200), true));
+                    projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(360), null, maxHp * 10, maxHp, 1000, (int) p.random(50, 200), true));
                 }
             }
         }
@@ -197,11 +197,11 @@ public class Machine {
             int x = (int) tile.position.x;
             int y = (int) tile.position.y;
             for (int i = 0; i < 5; i++) {
-                topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(360), debris));
             }
             if ((int) p.random(0, 2 * ((float) hp / (float) hpSegment)) == 0) {
                 playSoundRandomSpeed(p, EXPLODE_SOUND, 1);
-                topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                topParticles.add(MediumFireExplosion.create(p, shuffle(x), shuffle(y), p.random(360)));
             }
         }
     }

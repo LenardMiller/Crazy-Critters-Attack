@@ -29,6 +29,10 @@ public class Animator {
         this(new PImage[]{sprite}, betweenFrames, loop);
     }
 
+    public Animator(PImage[] animation, boolean loop) {
+        this(animation, 0, loop);
+    }
+
     /**
      * Flip to next image, loop back to start if at end and looping enabled
      */
