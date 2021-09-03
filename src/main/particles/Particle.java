@@ -21,7 +21,7 @@ public class Particle {
     public enum ParticleTypes {
         BoltBreak(14, 40, () -> new Animator(
                 animatedSprites.get("boltBreakPT"),
-                 down60ToFramerate(p.random(0,5)),
+                 down60ToFramerate(p.random(5)),
                 false
         )),
         RailgunBlast(25, 25, () -> new Animator(
@@ -32,6 +32,26 @@ public class Particle {
         Water(12, 12, () -> new Animator(
                 animatedSprites.get("waterPT"),
                 down60ToFramerate(10),
+                false
+        )),
+        ToxicExplosion(50, 50, () -> new Animator(
+                animatedSprites.get("toxicLargeExplosionPT"),
+                down60ToFramerate(1),
+                false
+        )),
+        LargeEnergyExplosion(50, 50, () -> new Animator(
+                animatedSprites.get("energyLargeExplosionPT"),
+                down60ToFramerate(1),
+                false
+        )),
+        GlueExplosion(50, 50, () -> new Animator(
+                animatedSprites.get("glueLargeExplosionPT"),
+                down60ToFramerate(1),
+                false
+        )),
+        LargeFireExplosion(50, 50, () -> new Animator(
+                animatedSprites.get("fireLargeExplosionPT"),
+                down60ToFramerate(1),
                 false
         ));
 

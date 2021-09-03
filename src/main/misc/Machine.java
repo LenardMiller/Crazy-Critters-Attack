@@ -2,7 +2,6 @@ package main.misc;
 
 import main.damagingThings.projectiles.Flame;
 import main.particles.Debris;
-import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;
 import main.particles.Ouch;
 import main.sound.StartStopSoundLoop;
@@ -16,6 +15,7 @@ import java.awt.*;
 import static main.Main.*;
 import static main.misc.Utilities.secondsToFrames;
 import static main.misc.Utilities.up60ToFramerate;
+import static main.particles.Particle.ParticleTypes.LargeFireExplosion;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Machine {
@@ -171,7 +171,7 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if (up60ToFramerate(p.random(0, 4)) == 0)
-                    topParticles.add(new LargeExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
+                    topParticles.add(LargeFireExplosion.create(p, shuffle(x), shuffle(y), p.random(360)));
                 if (up60ToFramerate((int) p.random(0, 2)) == 0)
                     topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 for (int i = 0; i < up60ToFramerate(3); i++) {

@@ -1,7 +1,6 @@
 package main.damagingThings.projectiles;
 
 import main.particles.ExplosionDebris;
-import main.particles.LargeExplosion;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -10,6 +9,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
+import static main.particles.Particle.ParticleTypes.ToxicExplosion;
 
 public class Laundry extends Projectile {
 
@@ -36,12 +36,12 @@ public class Laundry extends Projectile {
 
     @Override
     public void die() {
-        topParticles.add(new Ouch(p, position.x, position.y, p.random(0, 360), "poisonPuff"));
+        topParticles.add(new Ouch(p, position.x, position.y, p.random(360), "poisonPuff"));
         int num = (int) (p.random(16, 42));
         for (int j = num; j >= 0; j--) {
-            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "poison", p.random(100,200)));
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(360), "poison", p.random(100,200)));
         }
-        topParticles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "poison"));
+        topParticles.add(ToxicExplosion.create(p, position.x, position.y, p.random(360)));
         projectiles.remove(this);
     }
 }
