@@ -68,28 +68,58 @@ public class Particle {
         MediumPuffExplosion(30, 30, () -> new Animator(
                 animatedSprites.get("puffMediumExplosionPT"),
                 false
+        )),
+        //Explosion Debris
+        MetalExplosionDebris(9, 9, () -> new Animator(
+                animatedSprites.get("metalExDebrisPT"),
+                down60ToFramerate(p.random(2,5)),
+                false
+        )),
+        FireExplosionDebris(9, 9, () -> new Animator(
+                animatedSprites.get("fireExDebrisPT"),
+                down60ToFramerate(p.random(2,5)),
+                false
+        )),
+        EnergyExplosionDebris(9, 9, () -> new Animator(
+                animatedSprites.get("energyExDebrisPT"),
+                down60ToFramerate(p.random(2,5)),
+                false
+        )),
+        PoisonExplosionDebris(9, 9, () -> new Animator(
+                animatedSprites.get("poisonExDebrisPT"),
+                down60ToFramerate(p.random(2,5)),
+                false
+        )),
+        NuclearExplosionDebris(9, 9, () -> new Animator(
+                animatedSprites.get("nuclearExDebrisPT"),
+                down60ToFramerate(p.random(2,5)),
+                false
+        )),
+        GlueExplosionDebris(9, 9, () -> new Animator(
+                animatedSprites.get("glueExDebrisPT"),
+                down60ToFramerate(p.random(2,5)),
+                false
+        )),
+        ElectricityExplosionDebris(9, 9, () -> new Animator(
+                animatedSprites.get("electricityExDebrisPT"),
+                down60ToFramerate(p.random(2,5)),
+                false
         ));
 
-        private final float MAX_SPEED;
         private final PVector SIZE;
         private final AnimatorFactory ANIMATOR;
 
-        ParticleTypes(float width, float height, float maxSpeed, AnimatorFactory animator) {
-            MAX_SPEED = maxSpeed;
+        ParticleTypes(float width, float height,AnimatorFactory animator) {
             SIZE = new PVector(width, height);
             ANIMATOR = animator;
-        }
-
-        ParticleTypes(float width, float height, AnimatorFactory animator) {
-            this(width, height, 0, animator);
         }
 
         public Particle create(PApplet p, float x, float y, float angle) {
             return new Particle(p, new PVector(x, y), angle, SIZE.copy(), ANIMATOR.get());
         }
 
-        public Particle create(PApplet p, float x, float y, float angle, float maxSpeed) {
-            return new Particle(p, new PVector(x, y), angle, SIZE.copy(), ANIMATOR.get(), maxSpeed);
+        public Particle create(PApplet p, float x, float y, float angle, float speed) {
+            return new Particle(p, new PVector(x, y), angle, SIZE.copy(), ANIMATOR.get(), speed);
         }
     }
 

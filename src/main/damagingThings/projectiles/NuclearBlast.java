@@ -1,12 +1,12 @@
 package main.damagingThings.projectiles;
 
 import main.damagingThings.shockwaves.NuclearShockwave;
-import main.particles.ExplosionDebris;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.particles.Particle.ParticleTypes.*;
 
 public class NuclearBlast extends Projectile {
 
@@ -30,9 +30,9 @@ public class NuclearBlast extends Projectile {
     @Override
     public void die() {
         for (int i = 0; i < p.random(10,15); i++) {
-            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "nuclear", p.random(500, 1000)));
-            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "fire", p.random(500, 1000)));
-            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI), "metal", p.random(500, 1000)));
+            topParticles.add(NuclearExplosionDebris.create(p, position.x, position.y, p.random(TWO_PI), p.random(500, 1000)));
+            topParticles.add(FireExplosionDebris.create(p, position.x, position.y, p.random(TWO_PI), p.random(500, 1000)));
+            topParticles.add(MetalExplosionDebris.create(p, position.x, position.y, p.random(TWO_PI), p.random(500, 1000)));
         }
         shockwaves.add(new NuclearShockwave(p, position.x, position.y, effectRadius, damage, turret));
         projectiles.remove(this);
