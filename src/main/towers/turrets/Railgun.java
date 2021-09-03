@@ -1,13 +1,13 @@
 package main.towers.turrets;
 
 import main.misc.Tile;
-import main.particles.RailgunBlast;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
+import static main.particles.Particle.ParticleTypes.RailgunBlast;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Railgun extends Turret {
@@ -56,7 +56,7 @@ public class Railgun extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        topParticles.add(new RailgunBlast(p,position.x,position.y,0));
+        topParticles.add(RailgunBlast.create(p,position.x,position.y,0));
         currentVaporFrame = 0;
         vaporStart = position;
         PVector vaporEnd = targetEnemy.position;

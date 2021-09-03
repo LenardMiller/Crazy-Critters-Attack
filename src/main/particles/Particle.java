@@ -7,17 +7,53 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.secondsToFrames;
 import static processing.core.PApplet.radians;
 import static processing.core.PConstants.HALF_PI;
 
-public abstract class Particle {
+public class Particle {
+
+    public interface AnimatorFactory {
+        Animator get();
+    }
+
+    public enum ParticleTypes {
+        BoltBreak(14, 40, () -> new Animator(
+                animatedSprites.get("boltBreakPT"),
+                 down60ToFramerate(p.random(0,5)),
+                false
+        )),
+        RailgunBlast(25, 25, () -> new Animator(
+                animatedSprites.get("railgunBlastPT"),
+                down60ToFramerate(4),
+                false
+        )),
+        Water(12, 12, () -> new Animator(
+                animatedSprites.get("waterPT"),
+                down60ToFramerate(10),
+                false
+        ));
+
+        private final PVector SIZE;
+        private final AnimatorFactory ANIMATOR;
+
+        ParticleTypes(float width, float height, AnimatorFactory animator) {
+            SIZE = new PVector(width, height);
+            ANIMATOR = animator;
+        }
+
+        public Particle create(PApplet p, float x, float y, float angle) {
+            return new Particle(p, new PVector(x, y), angle, SIZE, ANIMATOR.get());
+        }
+    }
+
+    public static PApplet p;
 
     public float maxSpeed;
     public float speed;
     public float angle;
     public int delay;
-    public PApplet p;
     public PVector position;
     public PVector size;
     public Animator animation;
@@ -28,11 +64,17 @@ public abstract class Particle {
     protected PVector velocity;
 
     protected Particle(PApplet p, float x, float y, float angle) {
-        this.p = p;
+        Particle.p = p;
 
         displayAngle = angle;
         position = new PVector(x, y);
         velocity = PVector.fromAngle(angle - HALF_PI);
+    }
+
+    protected Particle(PApplet p, PVector position, float angle, PVector size, Animator animation) {
+        this(p, position.x, position.y, angle);
+        this.size = size;
+        this.animation = animation;
     }
 
     public void main(ArrayList<Particle> particles, int i) {
