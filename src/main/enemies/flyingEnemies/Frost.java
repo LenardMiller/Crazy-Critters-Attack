@@ -3,7 +3,6 @@ package main.enemies.flyingEnemies;
 import main.Main;
 import main.buffs.Buff;
 import main.gui.guiObjects.PopupText;
-import main.particles.Floaty;
 import main.particles.MiscParticle;
 import main.particles.Ouch;
 import processing.core.PApplet;
@@ -11,6 +10,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.findAngleBetween;
+import static main.particles.Particle.ParticleTypes.FrostCloudFloaty;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Frost extends FlyingEnemy {
@@ -52,7 +52,7 @@ public class Frost extends FlyingEnemy {
         if (overkill) {
             playSoundRandomSpeed(p, overkillSound, 1);
             for (int j = 0; j < 25; j++) {
-                topParticles.add(new Floaty(p, position.x, position.y, p.random(100, 250), "frostCloud"));
+                topParticles.add(FrostCloudFloaty.create(p, position.x, position.y, p.random(360), p.random(100, 250)));
             }
         }
         else playSoundRandomSpeed(p, dieSound, 1);
@@ -162,13 +162,13 @@ public class Frost extends FlyingEnemy {
                     PVector partPosition = new PVector(position.x, position.y);
                     partPosition.add(PVector.fromAngle(p.random(TWO_PI)).setMag(p.random(radius * 2)));
                     topParticles.add(new Ouch(p, partPosition.x, partPosition.y, p.random(360), "snowPuff"));
-                    topParticles.add(new Floaty(p, position.x, position.y, p.random(40, 70), "frostCloud"));
+                    topParticles.add(FrostCloudFloaty.create(p, position.x, position.y, p.random(360), p.random(40, 70)));
                 }
             } else {
                 PVector partPosition = new PVector(position.x, position.y);
                 partPosition.add(PVector.fromAngle(p.random(TWO_PI)).setMag(p.random(radius)));
                 topParticles.add(new Ouch(p, partPosition.x, partPosition.y, p.random(360), "snowPuff"));
-                topParticles.add(new Floaty(p, position.x, position.y, p.random(25, 35), "frostCloud"));
+                topParticles.add(FrostCloudFloaty.create(p, position.x, position.y, p.random(360), p.random(25, 35)));
             }
         }
         if (debug) {

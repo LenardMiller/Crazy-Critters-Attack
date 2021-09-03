@@ -9,7 +9,6 @@ import main.buffs.stunned.Stunned;
 import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;
-import main.particles.Floaty;
 import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.particles.Pile;
@@ -28,6 +27,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
+import static main.particles.Particle.ParticleTypes.SmokeCloudFloaty;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Enemy {
@@ -205,12 +205,12 @@ public abstract class Enemy {
         if (!overkill) {
             for (int i = 0; i < num * 5; i++) {
                 PVector partPos = getParticlePosition();
-                topParticles.add(new Floaty(p, partPos.x, partPos.y, p.random(20, 30), "smokeCloud"));
+                topParticles.add(SmokeCloudFloaty.create(p, partPos.x, partPos.y, p.random(360), p.random(20, 30)));
             }
         } else {
             for (int i = 0; i < num * 10; i++) {
                 PVector partPos = getParticlePosition();
-                topParticles.add(new Floaty(p, partPos.x, partPos.y, p.random(50 * pfSize, 100 * pfSize), "smokeCloud"));
+                topParticles.add(SmokeCloudFloaty.create(p, partPos.x, partPos.y, p.random(360), p.random(50 * pfSize, 100 * pfSize)));
             }
         }
         for (int j = num; j >= 0; j--) { //sprays puff

@@ -5,13 +5,13 @@ import main.damagingThings.arcs.RedArc;
 import main.gui.guiObjects.PopupText;
 import main.misc.IntVector;
 import main.misc.Tile;
-import main.particles.Floaty;
 import main.particles.MiscParticle;
 import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.particles.Particle.ParticleTypes.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Booster extends Turret {
@@ -80,17 +80,17 @@ public class Booster extends Turret {
             float speed = p.random(25, 35);
             if (range > 1) speed = p.random(35, 50);
             if (name.equals("moneyBooster")) {
-                midParticles.add(new Floaty(p, position.x, position.y, speed, "coin"));
+                midParticles.add(CoinFloaty.create(p, position.x, position.y, p.random(360), speed));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "yellowMagic"));
             } else if (name.equals("explosiveBooster")) {
-                midParticles.add(new Floaty(p, position.x, position.y, speed, "smokeCloud"));
+                midParticles.add(SmokeCloudFloaty.create(p, position.x, position.y, p.random(360), speed));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
             } else {
-                midParticles.add(new Floaty(p, position.x, position.y, speed, "orangeBubble"));
+                midParticles.add(OrangeBubbleFloaty.create(p, position.x, position.y, p.random(360), speed));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
             }
