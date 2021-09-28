@@ -1,5 +1,7 @@
 package main.misc;
 
+import main.particles.MiscParticle;
+import main.particles.Water;
 import main.pathfinding.Node;
 import main.towers.IceWall;
 import main.towers.Tower;
@@ -10,7 +12,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.roundTo;
-import static main.particles.Particle.ParticleTypes.Water;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class Tile {
@@ -74,7 +75,7 @@ public class Tile {
                 PVector topLeftCorner = new PVector(!left ? position.x : position.x + 20, position.y + 7);
                 PVector bottomRightCorner = PVector.add(position, new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
                 PVector spawnPos = new PVector(P.random(topLeftCorner.x, bottomRightCorner.x), P.random(topLeftCorner.y, bottomRightCorner.y));
-                bottomParticles.add(Water.create(P, spawnPos.x, spawnPos.y, 0));
+                bottomParticles.add(new Water(P, spawnPos.x, spawnPos.y));
             }
         }
         spillBaseEdges();

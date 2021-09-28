@@ -1,11 +1,11 @@
 package main.damagingThings.projectiles;
 
+import main.particles.BoltBreak;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.particles.Particle.ParticleTypes.BoltBreak;
 
 public class Bolt extends Projectile {
 
@@ -25,7 +25,7 @@ public class Bolt extends Projectile {
 
     @Override
     public void die() {
-        topParticles.add(BoltBreak.create(p,position.x,position.y,angleTwo));
+        topParticles.add(new BoltBreak(p,position.x,position.y,angleTwo));
         projectiles.remove(this);
     }
 }
