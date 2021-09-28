@@ -44,7 +44,7 @@ public class Particle {
         }
 
         public Particle create(PApplet p, float x, float y, float angle) {
-            return new Particle(p, new PVector(x, y), angle, SIZE.copy(), ANIMATOR.get());
+            return new Particle(p, new PVector(x, y), angle, SIZE, ANIMATOR.get());
         }
     }
 
