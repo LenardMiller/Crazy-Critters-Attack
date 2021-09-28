@@ -1,13 +1,13 @@
 package main.damagingThings.projectiles;
 
 import main.particles.ExplosionDebris;
+import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.particles.Particle.ParticleTypes.LargeEnergyExplosion;
 
 public class EnergyBlast extends Projectile {
 
@@ -43,7 +43,7 @@ public class EnergyBlast extends Projectile {
             for (int j = num; j >= 0; j--) {
                 topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "energy", p.random(100,200)));
             }
-            topParticles.add(LargeEnergyExplosion.create(p, position.x, position.y, p.random(0, 360)));
+            topParticles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "energy"));
         }
         projectiles.remove(this);
     }
