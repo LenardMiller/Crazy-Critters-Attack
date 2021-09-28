@@ -1,12 +1,12 @@
 package main.damagingThings.projectiles;
 
+import main.particles.ExplosionDebris;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.particles.Particle.ParticleTypes.FireExplosionDebris;
 import static main.particles.Particle.ParticleTypes.LargeFireExplosion;
 
 public class Dynamite extends Projectile {
@@ -31,7 +31,7 @@ public class Dynamite extends Projectile {
     public void die() {
         int num = (int) (p.random(16, 42));
         for (int j = num; j >= 0; j--) {
-            topParticles.add(FireExplosionDebris.create(p, position.x, position.y, p.random(0, 360), p.random(300, 500)));
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "fire", p.random(100,200)));
         }
         topParticles.add(LargeFireExplosion.create(p, position.x, position.y, p.random(0, 360)));
         projectiles.remove(this);

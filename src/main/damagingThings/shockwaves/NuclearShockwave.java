@@ -6,7 +6,8 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.topParticles;
-import static main.particles.Particle.ParticleTypes.*;
+import static main.particles.Particle.ParticleTypes.LargeFireExplosion;
+import static main.particles.Particle.ParticleTypes.MediumFireExplosion;
 
 public class NuclearShockwave extends Shockwave {
 
@@ -37,13 +38,13 @@ public class NuclearShockwave extends Shockwave {
         for (int i = 0; i < P.random(1, 4); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(MetalExplosionDebris.create(P, pos.x, pos.y, a, P.random(100, 200)));
+            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "metal", P.random(100,200)));
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(NuclearExplosionDebris.create(P, pos.x, pos.y, a, P.random(100,200)));
+            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "nuclear", P.random(100,200)));
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(FireExplosionDebris.create(P, pos.x, pos.y, a, P.random(100, 200)));
+            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "fire", P.random(100,200)));
         }
     }
 }

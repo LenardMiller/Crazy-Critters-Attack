@@ -1,13 +1,13 @@
 package main.damagingThings.shockwaves;
 
 import main.particles.Debris;
+import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.particles.Particle.ParticleTypes.ElectricityExplosionDebris;
 
 public class LightningShockwave extends Shockwave {
 
@@ -33,7 +33,7 @@ public class LightningShockwave extends Shockwave {
         for (int i = 0; i < P.random(5, 10); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(ElectricityExplosionDebris.create(P, pos.x, pos.y, a, P.random(100,200)));
+            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "electricity", P.random(100,200)));
         }
     }
 }
