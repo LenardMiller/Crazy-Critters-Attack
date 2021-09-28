@@ -1,5 +1,6 @@
 package main.damagingThings.projectiles;
 
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -7,8 +8,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.particles.Particle.ParticleTypes.BlueSmoke;
-import static main.particles.Particle.ParticleTypes.GreenMagic;
 
 public class BlueFlame extends Projectile {
 
@@ -74,17 +73,11 @@ public class BlueFlame extends Projectile {
             }
             int num = (int) (p.random(0, fireChance));
             if (num == 0) {
-                topParticles.add(GreenMagic.create(p,
-                        (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))),
-                        (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))),
-                        p.random(360)));
+                topParticles.add(new MiscParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "greenMagic"));
             }
             num = (int) (p.random(0, smokeChance));
             if (num == 0) {
-                topParticles.add(BlueSmoke.create(p,
-                        (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))),
-                        (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))),
-                        p.random(360)));
+                topParticles.add(new MiscParticle(p, (float) (position.x + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), (float) (position.y + 2.5 + p.random((spawnRange / 2f) * -1, (spawnRange / 2f))), p.random(0, 360), "blueSmoke"));
             }
             //animation
             if (delay > TIMER && p.random(0, 20) > 1) {

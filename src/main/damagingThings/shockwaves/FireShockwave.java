@@ -1,11 +1,12 @@
 package main.damagingThings.shockwaves;
 
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.topParticles;
-import static main.particles.Particle.ParticleTypes.*;
+import static main.particles.Particle.ParticleTypes.FireExplosionDebris;
 
 public class FireShockwave extends Shockwave {
 
@@ -25,10 +26,10 @@ public class FireShockwave extends Shockwave {
         PVector pos;
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(Smoke.create(P, pos.x, pos.y, a));
+        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(Fire.create(P, pos.x, pos.y, a));
+        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "fire"));
         for (int i = 0; i < P.random(5, 10); i++) {
             a = randomAngle();
             pos = randomPosition(a);

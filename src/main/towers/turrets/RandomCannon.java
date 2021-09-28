@@ -3,13 +3,13 @@ package main.towers.turrets;
 import main.damagingThings.projectiles.Laundry;
 import main.damagingThings.projectiles.MiscProjectile;
 import main.misc.Tile;
+import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
-import static main.particles.Particle.ParticleTypes.MiscParticle;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 import static processing.core.PConstants.HALF_PI;
 
@@ -61,7 +61,7 @@ public class RandomCannon extends Turret {
             spa2.setMag(-5);
             PVector spp2 = new PVector(position.x,position.y);
             spp2.add(spa2);
-            midParticles.add(MiscParticle.create(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),part));
+            midParticles.add(new MiscParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),part));
         }
     }
 

@@ -2,6 +2,7 @@ package main.damagingThings.arcs;
 
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.up60ToFramerate;
-import static main.particles.Particle.ParticleTypes.MiscParticle;
 
 public class Arc {
 
@@ -186,7 +186,7 @@ public class Arc {
                 e.x *= -1;
                 e.y *= -1;
                 points[i] = new PVector(e.x + pointA.x + P.random(-variation, variation), e.y + pointA.y + P.random(-variation, variation));
-                topParticles.add(MiscParticle.create(P, points[i].x, points[i].y, P.random(360), particleType));
+                topParticles.add(new MiscParticle(P, points[i].x, points[i].y, P.random(360), particleType));
             }
         }
     }

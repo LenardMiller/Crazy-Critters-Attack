@@ -4,13 +4,13 @@ import main.damagingThings.projectiles.DarkBlast;
 import main.damagingThings.projectiles.EnergyBlast;
 import main.damagingThings.projectiles.NuclearBlast;
 import main.misc.Tile;
+import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
-import static main.particles.Particle.ParticleTypes.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class EnergyBlaster extends Turret{
@@ -52,20 +52,20 @@ public class EnergyBlaster extends Turret{
         if (nuclear) {
             projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
             for (int i = 0; i < p.random(3, 5); i++) {
-                midParticles.add(Nuclear.create(p, position.x, position.y,
-                  angle + radians(p.random(-45, 45))));
+                midParticles.add(new MiscParticle(p, position.x, position.y,
+                  angle + radians(p.random(-45, 45)), "nuclear"));
             }
         } else if (dark) {
             projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
             for (int i = 0; i < p.random(3, 5); i++) {
-                midParticles.add(Dark.create(p, position.x, position.y,
-                        angle + radians(p.random(-45, 45))));
+                midParticles.add(new MiscParticle(p, position.x, position.y,
+                  angle + radians(p.random(-45, 45)), "dark"));
             }
         } else {
             projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, bigExplosion));
             for (int i = 0; i < p.random(3, 5); i++) {
-                midParticles.add(Energy.create(p, position.x, position.y,
-                        angle + radians(p.random(-45, 45))));
+                midParticles.add(new MiscParticle(p, position.x, position.y,
+                  angle + radians(p.random(-45, 45)), "energy"));
             }
         }
     }

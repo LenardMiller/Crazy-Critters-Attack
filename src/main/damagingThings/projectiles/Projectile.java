@@ -2,6 +2,7 @@ package main.damagingThings.projectiles;
 
 import main.enemies.Enemy;
 import main.misc.Utilities;
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -11,7 +12,6 @@ import processing.sound.SoundFile;
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.particles.Particle.ParticleTypes.MiscParticle;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 import static processing.core.PConstants.HALF_PI;
 
@@ -86,8 +86,8 @@ public abstract class Projectile {
 
     protected void trail() { //leaves a trail of particles
         if (trail != null) {
-            if (p.random(3) > 1) topParticles.add(MiscParticle.create(p, position.x, position.y,
-                    p.random(360), trail));
+            if (p.random(0, 3) > 1) topParticles.add(new MiscParticle(p, position.x, position.y,
+                    p.random(0, 360), trail));
         }
     }
 
