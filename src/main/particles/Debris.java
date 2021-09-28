@@ -31,11 +31,14 @@ public class Debris extends Particle {
             animation.update();
             displayAngle += radians(secondsToFrames(angularVelocity));
         }
-        if (animation.ended()) dead = true;
+        if (animation.ended()) {
+            dead = true;
+            return;
+        }
         p.pushMatrix();
         p.translate(position.x, position.y);
         p.rotate(displayAngle);
-        float scale = abs(((animation.getBetweenFramesCounter() - 1) / (float) animation.getBetweenFrames()) - 1);
+        float scale = 1 - abs(animation.getBetweenFramesCounter() / (float) animation.getBetweenFrames());
         p.scale(scale);
         p.image(animation.getCurrentFrame(), -size.x / 2, -size.y / 2);
         p.popMatrix();
