@@ -7,7 +7,6 @@ import processing.core.PVector;
 
 import static main.Main.topParticles;
 import static main.particles.Particle.ParticleTypes.LargeFireExplosion;
-import static main.particles.Particle.ParticleTypes.MediumFireExplosion;
 
 public class NuclearShockwave extends Shockwave {
 
@@ -32,8 +31,8 @@ public class NuclearShockwave extends Shockwave {
             a = randomAngle();
             pos = randomPosition(a);
             boolean small = radius < MAX_RADIUS / 4 || P.random(4) < 3;
-            if (small) topParticles.add(LargeFireExplosion.create(P, pos.x, pos.y, P.random(360)));
-            else topParticles.add(MediumFireExplosion.create(P, pos.x, pos.y, P.random(360)));
+            if (small) topParticles.add(LargeFireExplosion.create(P, pos.x, pos.y, P.random(0, 360)));
+            else topParticles.add(new MediumExplosion(P, pos.x, pos.y, P.random(0, 360), "fire"));
         }
         for (int i = 0; i < P.random(1, 4); i++) {
             a = randomAngle();
