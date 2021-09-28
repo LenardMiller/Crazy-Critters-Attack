@@ -35,7 +35,7 @@ public class Particle {
                 down60ToFramerate(10),
                 false
         )),
-        //Large Explosion
+        //Large Explosions
         ToxicExplosion(50, 50, () -> new Animator(
                 animatedSprites.get("toxicLargeExplosionPT"),
                 down60ToFramerate(1),
@@ -56,7 +56,7 @@ public class Particle {
                 down60ToFramerate(1),
                 false
         )),
-        //Medium Explosion
+        //Medium Explosions
         MediumFireExplosion(30, 30, () -> new Animator(
                 animatedSprites.get("fireMediumExplosionPT"),
                 false
@@ -104,33 +104,12 @@ public class Particle {
                 animatedSprites.get("electricityExDebrisPT"),
                 down60ToFramerate(p.random(2,5)),
                 false
-        )),
-        //Floaty
-        SmokeCloudFloaty(20, 20, () -> new Animator(
-                animatedSprites.get("smokeCloudFloatyPT"),
-                down60ToFramerate(4),
-                false
-        )),
-        FrostCloudFloaty(20, 20, () -> new Animator(
-                animatedSprites.get("frostCloudFloatyPT"),
-                down60ToFramerate(4),
-                false
-        )),
-        CoinFloaty(20, 20, () -> new Animator(
-                animatedSprites.get("coinFloatyPT"),
-                down60ToFramerate(4),
-                false
-        )),
-        OrangeBubbleFloaty(20, 20, () -> new Animator(
-                animatedSprites.get("orangeBubbleFloatyPT"),
-                down60ToFramerate(4),
-                false
         ));
 
         private final PVector SIZE;
         private final AnimatorFactory ANIMATOR;
 
-        ParticleTypes(float width, float height, AnimatorFactory animator) {
+        ParticleTypes(float width, float height,AnimatorFactory animator) {
             SIZE = new PVector(width, height);
             ANIMATOR = animator;
         }
