@@ -334,7 +334,6 @@ public class Selection {
                 setTextPurple("Encases any enemy", offset);
                 break;
             case "railgun":
-                setTextPurple("Perfect accuracy", offset);
                 P.text("Railgun", 1000, 241);
                 break;
             case "waveMotion":

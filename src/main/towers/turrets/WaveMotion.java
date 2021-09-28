@@ -24,7 +24,7 @@ public class WaveMotion extends Turret {
         super(p,tile);
         name = "waveMotion";
         delay = randomizeDelay(p, 15);
-        damage = 1000;
+        damage = 150;
         pjSpeed = -1;
         range = 500;
         beam = new PImage[0];
@@ -37,7 +37,7 @@ public class WaveMotion extends Turret {
         damageSound = sounds.get("titaniumDamage");
         fireSound = sounds.get("beam");
         debrisType = "darkMetal";
-        price = 500;
+        price = WAVE_MOTION_PRICE;
         value = price;
         priority = 2; //strong
 
@@ -131,7 +131,7 @@ public class WaveMotion extends Turret {
             PVector position = new PVector(tile.position.x-25,tile.position.y-25);
             float angleToEnemy = findAngle(enemy.position,position);
             float angleDif = angleToEnemy - angle2;
-            boolean b = angleDif < -HALF_PI && angleDif > -PI + HALF_PI || angleDif > HALF_PI && angleDif < PI + HALF_PI;
+            boolean b = angleDif > HALF_PI && angleDif < PI + HALF_PI;
             boolean q = angle > PI+HALF_PI && angle <= TWO_PI || angle >= 0 && angle < HALF_PI;
             if (q) { //something to do with angle weirdness
                 if (!b) continue;

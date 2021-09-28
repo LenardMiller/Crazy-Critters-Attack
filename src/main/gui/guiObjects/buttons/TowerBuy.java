@@ -30,6 +30,7 @@ public class TowerBuy extends Button {
         spriteHover = p.loadImage(spriteLocation + "002.png");
         sprite = spriteIdle;
         depressed = false;
+        //I am way too lazy to fix this goddamn monstrosity
         switch (type) {
             case "slingshot":
                 price = SLINGSHOT_PRICE;
@@ -59,6 +60,8 @@ public class TowerBuy extends Button {
                 price = MAGIC_MISSILEER_PRICE;
                 break;
             case "nightmare":
+                price = NIGHTMARE_PRICE;
+                break;
             case "flamethrower":
                 price = FLAMETHROWER_PRICE;
                 break;
@@ -69,10 +72,10 @@ public class TowerBuy extends Button {
                 price = BOOSTER_PRICE;
                 break;
             case "railgun":
-                price = 400;
+                price = RAILGUN_PRICE;
                 break;
             case "waveMotion":
-                price = 500;
+                price = WAVE_MOTION_PRICE;
                 break;
         }
     }

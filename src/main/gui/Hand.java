@@ -338,7 +338,7 @@ public class Hand {
             case "nightmare":
                 heldSprite = staticSprites.get("nightmareFullTR");
                 offset = new PVector(0, 0);
-                price = 200;
+                price = NIGHTMARE_PRICE;
                 break;
             case "flamethrower":
                 heldSprite = staticSprites.get("flamethrowerFullTR");
@@ -358,12 +358,12 @@ public class Hand {
             case "railgun":
                 heldSprite = staticSprites.get("railgunFullTR");
                 offset = new PVector(6, 6);
-                price = 200;
+                price = RAILGUN_PRICE;
                 break;
             case "waveMotion":
                 heldSprite = staticSprites.get("waveMotionFullTR");
                 offset = new PVector(0, 0);
-                price = 250;
+                price = WAVE_MOTION_PRICE;
                 break;
             case "wall":
                 heldSprite = staticSprites.get("woodWallTW");

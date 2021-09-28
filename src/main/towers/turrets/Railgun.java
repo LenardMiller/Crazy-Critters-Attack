@@ -44,9 +44,13 @@ public class Railgun extends Turret {
         vaporEndSprites = animatedSprites.get("railgunBlastPT");
         debrisType = "titanium";
         barrelLength = 30;
-        price = 400;
+        price = RAILGUN_PRICE;
         value = price;
         priority = 2; //strong
+
+        placeSound = sounds.get("titaniumPlace");
+        breakSound = sounds.get("titaniumBreak");
+        damageSound = sounds.get("titaniumDamage");
 
         setUpgrades();
         loadSprites();

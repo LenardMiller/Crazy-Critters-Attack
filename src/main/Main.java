@@ -77,11 +77,7 @@ public class Main extends PApplet {
     public static SettingsGui settingsGui;
 
     //can't be final because created by PApplet
-    public static PFont veryLargeFont;
-    public static PFont largeFont;
-    public static PFont mediumLargeFont;
-    public static PFont mediumFont;
-    public static PFont smallFont;
+    public static PFont veryLargeFont, largeFont, mediumLargeFont, mediumFont, smallFont;
 
     /**
      * in-game, level select
@@ -114,18 +110,26 @@ public class Main extends PApplet {
     public static final int BOARD_HEIGHT = 900;
     public static final int TILE_SIZE = 50;
 
-    public static final int SLINGSHOT_PRICE = 75;
-    public static final int RANDOM_CANNON_PRICE = 150;
-    public static final int CROSSBOW_PRICE = 200;
-    public static final int CANNON_PRICE = 400;
-    public static final int GLUER_PRICE = 300;
-    public static final int SEISMIC_PRICE = 400;
-    public static final int ENERGY_BLASTER_PRICE = 1000;
-    public static final int FLAMETHROWER_PRICE = 1250;
-    public static final int TESLA_TOWER_PRICE = 1400;
-    public static final int MAGIC_MISSILEER_PRICE = 2500;
-    public static final int ICE_TOWER_PRICE = 2250;
-    public static final int BOOSTER_PRICE = 2000;
+    public static final int
+            SLINGSHOT_PRICE =       75,
+            RANDOM_CANNON_PRICE =   150,
+            CROSSBOW_PRICE =        200,
+
+            CANNON_PRICE =          400,
+            GLUER_PRICE =           300,
+            SEISMIC_PRICE =         400,
+
+            ENERGY_BLASTER_PRICE =  1000,
+            FLAMETHROWER_PRICE =    1250,
+            TESLA_TOWER_PRICE =     1400,
+
+            MAGIC_MISSILEER_PRICE = 2500,
+            ICE_TOWER_PRICE =       2250,
+            BOOSTER_PRICE =         2000,
+
+            RAILGUN_PRICE =         4000,
+            WAVE_MOTION_PRICE =     5000,
+            NIGHTMARE_PRICE =       4500;
 
     public static HashMap<String, PImage> staticSprites = new HashMap<>();
     public static HashMap<String, PImage[]> animatedSprites = new HashMap<>();
@@ -250,9 +254,9 @@ public class Main extends PApplet {
         updateTowerArray();
         //load level data
         playingLevel = false;
-        levels[0] = new Level(p, ForestWaves.genForestWaves(p), "levels/forest", 125, 50, "dirt");
-        levels[1] = new Level(p, DesertWaves.genDesertWaves(p), "levels/desert", 250, 75, "sand");
-        levels[2] = new Level(p, CaveWaves.genCaveWaves(p), "levels/cave", 500, 100, "stone");
+        levels[0] = new Level(p, ForestWaves.genForestWaves(p),   "levels/forest",  125,  50,  "dirt");
+        levels[1] = new Level(p, DesertWaves.genDesertWaves(p),   "levels/desert",  250,  75,  "sand");
+        levels[2] = new Level(p, CaveWaves.genCaveWaves(p),       "levels/cave",    500,  100, "stone");
         levels[3] = new Level(p, GlacierWaves.genGlacierWaves(p), "levels/glacier", 1500, 200, "snow");
         DataControl.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
@@ -537,8 +541,8 @@ public class Main extends PApplet {
     @Override
     public void keyPressed() {
         if (!dev) key = toLowerCase(key);
-        if (keyCode == 8) key = '*'; //delete
-        if (keyCode == 9) key = '?'; //tab
+        if (keyCode == 8)  key = '*'; //delete
+        if (keyCode == 9)  key = '?'; //tab
         if (keyCode == 27) key = '|'; //esc
         if (keyCode == 37) key = '<'; //left
         if (keyCode == 38) key = '^'; //up
@@ -568,10 +572,11 @@ public class Main extends PApplet {
 
         public boolean rightMouseReleasedPulse;
         public boolean leftMouseReleasedPulse;
-        private boolean rightMousePressed;
-        private boolean leftMousePressed;
         public boolean rightMousePressedPulse;
         public boolean leftMousePressedPulse;
+
+        private boolean rightMousePressed;
+        private boolean leftMousePressed;
 
         /**
          * Handles input from keyboard and mouse.

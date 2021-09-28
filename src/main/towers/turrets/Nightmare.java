@@ -13,7 +13,6 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 public class Nightmare extends Turret {
 
     private int numProjectiles;
-    private int effectLevel;
 
     public Nightmare(PApplet p, Tile tile) {
         super(p,tile);
@@ -23,15 +22,19 @@ public class Nightmare extends Turret {
         range = 200;
         damage = 100;
         numProjectiles = 3;
-        effectLevel = 50;
+        effectLevel = 200;
         effectDuration = 3.6f;
         fireParticle = "decay";
         barrelLength = 20;
         loadSprites();
         debrisType = "darkMetal";
         price = 300;
-        value = price;
+        value = NIGHTMARE_PRICE;
         priority = 2; //strong
+
+        placeSound = sounds.get("titaniumPlace");
+        breakSound = sounds.get("titaniumBreak");
+        damageSound = sounds.get("titaniumDamage");
 
         setUpgrades();
         spawnParticles();
@@ -40,18 +43,20 @@ public class Nightmare extends Turret {
 
     @Override
     protected void fire(float barrelLength, String particleType) {
+        float angleDelta = PApplet.radians(10);
         for (int i = 0; i < numProjectiles; i++) {
+            int num = ceil(i - numProjectiles / 2f);
             PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);
             PVector spa = PVector.fromAngle(angle-HALF_PI);
             spa.setMag(20);
             spp.add(spa);
-            spawnProjectiles(spp, angle);
+            spawnProjectiles(spp, angle + num * angleDelta);
         }
     }
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        projectiles.add(new Needle(p, position.x, position.y, angle, this, getDamage(), effectLevel, effectDuration));
+        projectiles.add(new Needle(p, position.x, position.y, angle, this, getDamage(), (int) effectLevel, effectDuration));
         for (int j = 0; j < 3; j++) {
             PVector spa2 = PVector.fromAngle(angle-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-2);
@@ -66,21 +71,11 @@ public class Nightmare extends Turret {
 
     @Override
     protected void setUpgrades(){
-//        //delay (firerate)
-//        upgradeDelay[0] = -45;
-//        upgradeDelay[1] = 0;
-//        upgradeDelay[2] = 0;
-//        upgradeDelay[3] = 0;
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 100;
         upgradePrices[2] = 50;
         upgradePrices[3] = 100;
-//        //error (accuracy)
-//        upgradeRange[0] = 0;
-//        upgradeRange[1] = 0;
-//        upgradeRange[2] = -4;
-//        upgradeRange[3] = 0;
         //titles
         upgradeTitles[0] = "Firerate";
         upgradeTitles[1] = "More Needles";
