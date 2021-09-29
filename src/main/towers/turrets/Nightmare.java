@@ -35,6 +35,7 @@ public class Nightmare extends Turret {
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");
         damageSound = sounds.get("titaniumDamage");
+        fireSound = sounds.get("nightmareFire");
 
         setUpgrades();
         spawnParticles();
@@ -44,6 +45,7 @@ public class Nightmare extends Turret {
     @Override
     protected void fire(float barrelLength, String particleType) {
         float angleDelta = PApplet.radians(10);
+        playSoundRandomSpeed(p, fireSound, 1);
         for (int i = 0; i < numProjectiles; i++) {
             int num = ceil(i - numProjectiles / 2f);
             PVector spp = new PVector(tile.position.x-size.x/2,tile.position.y-size.y/2);

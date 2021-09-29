@@ -65,6 +65,7 @@ public class SoundLoader {
         sounds.put("cash", new SoundFile(p, "sounds/turrets/cash.wav"));
         sounds.put("beam", new SoundFile(p, "sounds/turrets/beam.wav"));
         sounds.put("railgun", new SoundFile(p, "sounds/turrets/railgun.wav"));
+        sounds.put("nightmareFire", new SoundFile(p, "sounds/turrets/nightmare.wav"));
         //ui
         sounds.put("waveEnd", new SoundFile(p,"sounds/ui/waveEnd.wav"));
         sounds.put("clickIn", new SoundFile(p, "sounds/ui/clickIn.wav"));
