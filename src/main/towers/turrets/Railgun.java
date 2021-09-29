@@ -32,7 +32,7 @@ public class Railgun extends Turret {
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 5000;
         pjSpeed = -1;
-        range = 800;
+        range = 5000;
         NUM_VAPOR_FRAMES = 15;
         BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);
         vaporTrail = new PImage[NUM_VAPOR_FRAMES];
@@ -51,6 +51,7 @@ public class Railgun extends Turret {
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");
         damageSound = sounds.get("titaniumDamage");
+        fireSound = sounds.get("railgun");
 
         setUpgrades();
         loadSprites();
@@ -61,6 +62,8 @@ public class Railgun extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         topParticles.add(new RailgunBlast(p,position.x,position.y,0));
+        playSoundRandomSpeed(p, fireSound, 1);
+
         currentVaporFrame = 0;
         vaporStart = position;
         PVector vaporEnd = targetEnemy.position;
