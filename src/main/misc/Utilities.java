@@ -1,5 +1,6 @@
 package main.misc;
 
+import main.particles.Particle;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -407,5 +408,20 @@ public class Utilities {
     public static boolean angleIsFacingUpStandard(float angle) {
         angle = normalizeAngle(angle);
         return angle < PI;
+    }
+
+    /**
+     * Get a point a random distance and range from another point
+     * @param p the PApplet
+     * @param center point to deflect from
+     * @param range maximum deflection
+     * @return center but deflected to a random angle and range
+     */
+    public static PVector getRandomPointInRange(PApplet p, PVector center, float range) {
+        PVector r = center.copy();
+        PVector deflection = PVector.fromAngle(p.random(TWO_PI));
+        deflection.setMag(p.random(range));
+        r.add(deflection);
+        return r;
     }
 }
