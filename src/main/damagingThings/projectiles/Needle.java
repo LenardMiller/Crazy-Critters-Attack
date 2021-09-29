@@ -21,6 +21,7 @@ public class Needle extends Projectile {
         this.effectDuration = effectDuration;
         this.angle = angle;
         sprite = staticSprites.get("needlePj");
+        trail = "decay";
         buff = "decay";
     }
 
