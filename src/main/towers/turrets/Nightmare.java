@@ -76,33 +76,52 @@ public class Nightmare extends Turret {
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 100;
-        upgradePrices[2] = 50;
-        upgradePrices[3] = 100;
+        upgradePrices[2] = 200;
+
+        upgradePrices[3] = 50;
+        upgradePrices[4] = 100;
+        upgradePrices[5] = 200;
         //titles
         upgradeTitles[0] = "Firerate";
         upgradeTitles[1] = "More Needles";
-        upgradeTitles[2] = "Reduce Spread";
-        upgradeTitles[3] = "Effect Power";
-        //desc line one
+        upgradeTitles[2] = "Needle Wave";
+
+        upgradeTitles[3] = "Reduce Spread";
+        upgradeTitles[4] = "Effect Power";
+        upgradeTitles[5] = "Sticky Needles";
+        //descriptions
         upgradeDescA[0] = "Increase";
-        upgradeDescA[1] = "Fire more";
-        upgradeDescA[2] = "Increase";
-        upgradeDescA[3] = "Increase";
-        //desc line two
         upgradeDescB[0] = "firerate";
-        upgradeDescB[1] = "projectiles";
-        upgradeDescB[2] = "accuracy";
-        upgradeDescB[3] = "damage,";
-        //desc line three
         upgradeDescC[0] = "";
+
+        upgradeDescA[1] = "Fire more";
+        upgradeDescB[1] = "projectiles";
         upgradeDescC[1] = "";
+
+        upgradeDescA[2] = "whoosh";
+        upgradeDescB[2] = "";
         upgradeDescC[2] = "";
-        upgradeDescC[3] = "duration";
+
+
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "accuracy";
+        upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "damage &";
+        upgradeDescC[4] = "duration";
+
+        upgradeDescA[5] = "owie";
+        upgradeDescB[5] = "";
+        upgradeDescC[5] = "";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[4];
-        upgradeIcons[2] = animatedSprites.get("upgradeIC")[5];
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[3];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[4];
+
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[3];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[3];
     }
 
     protected void upgradeSpecial() {
