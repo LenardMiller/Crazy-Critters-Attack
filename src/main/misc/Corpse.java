@@ -214,19 +214,15 @@ public class Corpse {
                     float chance = sq(1 / (speed + 0.01f));
                     chance += 16;
                     if (!type.equals("burning") && !type.equals("decay")) { //idk
-                        int num = (int) (P.random(0, chance));
-                        if (num == 0) {
-                            midParticles.add(new Ouch(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
-                                    (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1,
-                                    (SIZE.x / 2))), P.random(0, 360), BLOOD_PARTICLE));
+                        if (P.random(chance) < 1) {
+                            PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
+                            midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE));
                         }
                     }
                     chance += 10;
-                    int num = (int) (P.random(0, chance));
-                    if (num == 0) {
-                        bottomParticles.add(new Pile(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
-                                (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1,
-                                (SIZE.x / 2))), 0, BLOOD_PARTICLE));
+                    if (P.random(chance) < 0) {
+                        PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.2f);
+                        bottomParticles.add(new Pile(P, pos.x, pos.y, 0, BLOOD_PARTICLE));
                     }
                 }
             }

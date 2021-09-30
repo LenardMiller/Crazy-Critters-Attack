@@ -220,9 +220,7 @@ public abstract class Enemy {
     }
 
     private PVector getParticlePosition() {
-        float x = position.x + p.random((size.x / 2) * -1, size.x / 2);
-        float y = position.y + p.random((size.y / 2) * -1, size.y / 2);
-        return new PVector(x, y);
+        return getRandomPointInRange(p, position, size.mag() * 0.4f);
     }
 
     protected PVector adjustPartVelocityToFramerate(PVector partVelocity) {
@@ -445,7 +443,7 @@ public abstract class Enemy {
                 num = (int) p.random(pfSize, pfSize * pfSize);
                 chance = 0;
             }
-            if (p.random(0, 6) > chance) {
+            if (p.random(6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
                     PVector partPos = getParticlePosition();
                     if (gore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle));
@@ -533,10 +531,7 @@ public abstract class Enemy {
             moveFrame = 0;
             if (dmg) machine.damage(damage);
         }
-        if (!attackCue && attackFrame == attackStartFrame) {
-            state = 0;
-            attackFrame = attackStartFrame;
-        }
+        if (!attackCue && attackFrame == attackStartFrame) state = 0;
     }
 
     public boolean onScreen() {
