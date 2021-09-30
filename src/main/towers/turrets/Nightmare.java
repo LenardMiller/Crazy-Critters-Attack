@@ -129,7 +129,7 @@ public class Nightmare extends Turret {
                     delay -= 1;
                     break;
                 case 1:
-                    numProjectiles += 2;
+                    numProjectiles += 3;
                     break;
                 case 2:
                     numProjectiles += 10;
