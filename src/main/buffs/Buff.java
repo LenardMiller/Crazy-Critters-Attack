@@ -68,7 +68,7 @@ public abstract class Buff {
             else {
                 Enemy enemy = enemies.get(enId);
                 if (p.random(particleChance) < 1) {
-                    PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() / 2);
+                    PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
                     topParticles.add(new MiscParticle(p, pos.x, pos.y, p.random(360), particle));
                 }
             }

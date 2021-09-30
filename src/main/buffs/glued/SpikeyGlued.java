@@ -9,6 +9,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.getRandomPointInRange;
 
 public class SpikeyGlued extends Glued {
 
@@ -19,9 +20,8 @@ public class SpikeyGlued extends Glued {
         SPIKES = new Spike[enemies.get(enId).pfSize * 3];
         for (int i = 0; i < SPIKES.length; i++) {
             Enemy enemy = enemies.get(enId);
-            float x = p.random(-enemy.size.x/3, enemy.size.x/3);
-            float y = p.random(-enemy.size.y/3, enemy.size.y/3);
-            SPIKES[i] = new Spike(x, y, p.random(0,360));
+            PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
+            SPIKES[i] = new Spike(pos.x, pos.y, p.random(0,360));
         }
     }
 
@@ -32,11 +32,9 @@ public class SpikeyGlued extends Glued {
     protected void display() {
         if (particle != null) {
             Enemy enemy = enemies.get(enId);
-            int num = (int) (p.random(0, particleChance));
-            if (num == 0) {
-                topParticles.add(new MiscParticle(p, (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))),
-                        (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))), p.random(0, 360),
-                        particle));
+            if (p.random(particleChance) < 1) {
+                PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
+                topParticles.add(new MiscParticle(p, pos.x, pos.y, p.random(360), particle));
             }
         }
         for (Spike spike : SPIKES) spike.display(enemies.get(enId).position);

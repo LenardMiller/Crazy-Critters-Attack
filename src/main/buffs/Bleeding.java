@@ -8,6 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.getRandomPointInRange;
 import static main.misc.Utilities.secondsToFrames;
 
 public class Bleeding extends Buff {
@@ -31,14 +32,16 @@ public class Bleeding extends Buff {
 
     @Override
     protected void display() { //particles around enemy
+        if (!gore) return;
+
         Enemy enemy = enemies.get(enId);
-        int num = (int)(p.random(0, particleChance));
-        if (num == 0) {
-            if (gore) topParticles.add(new Ouch(p,(float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))),
-              (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), p.random(0,360), enemy.hitParticle));
-        } if (p.random(0, particleChance * 4) < 1) {
-            if (gore) bottomParticles.add(new Pile(p, (float)(enemy.position.x+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))),
-              (float)(enemy.position.y+2.5+p.random((enemy.size.x/2)*-1,(enemy.size.x/2))), 0, enemy.hitParticle));
+
+        if (p.random(particleChance) < 1) {
+            PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
+            topParticles.add(new Ouch(p, pos.x, pos.y, p.random(360), enemy.hitParticle));
+        } if (p.random(particleChance * 4) < 1) {
+            PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.2f);
+            bottomParticles.add(new Pile(p, pos.x, pos.y, 0, enemy.hitParticle));
         }
     }
 }

@@ -8,6 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.getRandomPointInRange;
 import static main.misc.Utilities.secondsToFrames;
 
 public class Decay extends Buff {
@@ -40,15 +41,11 @@ public class Decay extends Buff {
         else {
             Enemy enemy = enemies.get(enId);
             if (p.random(particleChance) < 1) {
-                topParticles.add(new MiscParticle(p,
-                        (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1,
-                                (enemy.size.x / 2))), (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1,
-                        (enemy.size.x / 2))), p.random(0, 360), particle));
-            } if (p.random(particleChance * 2f) < 1) {
-                topParticles.add(new Floaty(p,
-                        (float) (enemy.position.x + 2.5 + p.random((enemy.size.x / 2) * -1, (enemy.size.x / 2))),
-                        (float) (enemy.position.y + 2.5 + p.random((enemy.size.x / 2) * -1,
-                        (enemy.size.x / 2))), p.random(25, 35), "smokeCloud"));
+                PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
+                topParticles.add(new MiscParticle(p, pos.x, pos.y, p.random(360), particle));
+            } if (p.random(particleChance * 2) < 1) {
+                PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.2f);
+                topParticles.add(new Floaty(p, pos.x, pos.y, p.random(25, 35), "smokeCloud"));
             }
         }
     }
