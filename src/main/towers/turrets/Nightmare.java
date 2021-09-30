@@ -69,9 +69,6 @@ public class Nightmare extends Turret {
     }
 
     @Override
-    protected void upgradeSpecial(int id) {}
-
-    @Override
     protected void setUpgrades(){
         //price
         upgradePrices[0] = 50;
@@ -86,7 +83,7 @@ public class Nightmare extends Turret {
         upgradeTitles[1] = "More Needles";
         upgradeTitles[2] = "Needle Wave";
 
-        upgradeTitles[3] = "Reduce Spread";
+        upgradeTitles[3] = "Range";
         upgradeTitles[4] = "Effect Power";
         upgradeTitles[5] = "Sticky Needles";
         //descriptions
@@ -104,7 +101,7 @@ public class Nightmare extends Turret {
 
 
         upgradeDescA[3] = "Increase";
-        upgradeDescB[3] = "accuracy";
+        upgradeDescB[3] = "range";
         upgradeDescC[3] = "";
 
         upgradeDescA[4] = "Increase";
@@ -124,13 +121,34 @@ public class Nightmare extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[3];
     }
 
-    protected void upgradeSpecial() {
-        if (nextLevelA == 1) numProjectiles = 5;
-        if (nextLevelB == 1) {
-            effectDuration += 1;
-            effectLevel += 3;
+    @Override
+    protected void upgradeSpecial(int id) {
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    delay -= 1;
+                    break;
+                case 1:
+                    numProjectiles += 2;
+                    break;
+                case 2:
+                    numProjectiles += 10;
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    range += 100;
+                    break;
+                case 4:
+                    effectDuration += 3;
+                    effectLevel += 200;
+                    break;
+                case 5:
+                    effectDuration += 5;
+                    effectLevel += 1100;
+                    break;
+            }
         }
     }
-
-    public void updateSprite() {}
 }
