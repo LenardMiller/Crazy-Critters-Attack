@@ -158,34 +158,52 @@ public class WaveMotion extends Turret {
     @Override
     protected void setUpgrades(){
         //price
-        upgradePrices[0] = 0;
-        upgradePrices[1] = 0;
-        upgradePrices[2] = 0;
-        upgradePrices[3] = 0;
+        upgradePrices[0] = 50;
+        upgradePrices[1] = 100;
+        upgradePrices[2] = 200;
+
+        upgradePrices[3] = 50;
+        upgradePrices[4] = 100;
+        upgradePrices[5] = 200;
         //titles
         upgradeTitles[0] = "";
         upgradeTitles[1] = "";
         upgradeTitles[2] = "";
+
         upgradeTitles[3] = "";
+        upgradeTitles[4] = "";
+        upgradeTitles[5] = "";
         //desc line one
         upgradeDescA[0] = "";
-        upgradeDescA[1] = "";
-        upgradeDescA[2] = "";
-        upgradeDescA[3] = "";
-        //desc line two
         upgradeDescB[0] = "";
-        upgradeDescB[1] = "";
-        upgradeDescB[2] = "";
-        upgradeDescB[3] = "";
-        //desc line three
         upgradeDescC[0] = "";
+
+        upgradeDescA[1] = "";
+        upgradeDescB[1] = "";
         upgradeDescC[1] = "";
+
+        upgradeDescA[2] = "";
+        upgradeDescB[2] = "";
         upgradeDescC[2] = "";
+
+        upgradeDescA[3] = "";
+        upgradeDescB[3] = "";
         upgradeDescC[3] = "";
+
+        upgradeDescA[4] = "";
+        upgradeDescB[4] = "";
+        upgradeDescC[4] = "";
+
+        upgradeDescA[5] = "";
+        upgradeDescB[5] = "";
+        upgradeDescC[5] = "";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[0];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[0];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
+
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[0];
     }
 }

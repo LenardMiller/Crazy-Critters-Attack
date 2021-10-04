@@ -81,11 +81,11 @@ public class Nightmare extends Turret {
         //titles
         upgradeTitles[0] = "Firerate";
         upgradeTitles[1] = "More Needles";
-        upgradeTitles[2] = "Needle Wave";
+        upgradeTitles[2] = "Dark Cloud";
 
         upgradeTitles[3] = "Range";
         upgradeTitles[4] = "Effect Power";
-        upgradeTitles[5] = "Sticky Needles";
+        upgradeTitles[5] = "Impalement";
         //descriptions
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "firerate";

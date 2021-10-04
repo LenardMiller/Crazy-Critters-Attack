@@ -28,7 +28,7 @@ public class Railgun extends Turret {
         name = "railgun";
         offset = 6;
         hit = false;
-        delay = 8;
+        delay = 10;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
         damage = 5000;
         pjSpeed = -1;
@@ -119,9 +119,6 @@ public class Railgun extends Turret {
     }
 
     @Override
-    protected void upgradeSpecial(int id) {}
-
-    @Override
     protected void setUpgrades(){
         //price
         upgradePrices[0] = 50;
@@ -132,44 +129,74 @@ public class Railgun extends Turret {
         upgradePrices[4] = 100;
         upgradePrices[5] = 200;
         //titles
-        upgradeTitles[0] = "";
-        upgradeTitles[1] = "";
-        upgradeTitles[2] = "";
+        upgradeTitles[0] = "Heat sinks";
+        upgradeTitles[1] = "Coil gun";
+        upgradeTitles[2] = "Remote Strike";
 
-        upgradeTitles[3] = "";
-        upgradeTitles[4] = "";
-        upgradeTitles[5] = "";
+        upgradeTitles[3] = "High energy";
+        upgradeTitles[4] = "Higher energy";
+        upgradeTitles[5] = "Annihilate";
         //desc line one
-        upgradeDescA[0] = "";
-        upgradeDescB[0] = "";
+        upgradeDescA[0] = "Increase";
+        upgradeDescB[0] = "firerate";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "";
-        upgradeDescB[1] = "";
-        upgradeDescC[1] = "";
+        upgradeDescA[1] = "Further";
+        upgradeDescB[1] = "increase";
+        upgradeDescC[1] = "firerate";
 
-        upgradeDescA[2] = "";
-        upgradeDescB[2] = "";
+        upgradeDescA[2] = "pew";
+        upgradeDescB[2] = "pew";
         upgradeDescC[2] = "";
 
-        upgradeDescA[3] = "";
-        upgradeDescB[3] = "";
+
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "damage";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "";
-        upgradeDescB[4] = "";
-        upgradeDescC[4] = "";
+        upgradeDescA[4] = "Further";
+        upgradeDescB[4] = "increase";
+        upgradeDescC[4] = "damage";
 
-        upgradeDescA[5] = "";
-        upgradeDescB[5] = "";
+        upgradeDescA[5] = "not like";
+        upgradeDescB[5] = "the movie";
         upgradeDescC[5] = "";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[10];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[22];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[13];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[40];
+    }
+
+    @Override
+    protected void upgradeSpecial(int id) {
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    delay -= 2;
+                    break;
+                case 1:
+                    delay -= 3;
+                    break;
+                case 2:
+                    delay = 0;
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    damage += 2500;
+                    break;
+                case 4:
+                    damage += 5000;
+                    break;
+                case 5:
+                    damage = 999999;
+                    break;
+            }
+        }
     }
 }
