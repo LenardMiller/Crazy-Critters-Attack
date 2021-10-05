@@ -116,9 +116,6 @@ public class WaveMotion extends Turret {
         p.tint(255);
     }
 
-    @Override
-    protected void upgradeSpecial(int id) {}
-
     private void beamDamage(PVector start, PVector end) {
         for (Enemy enemy : enemies) {
             float enemyXref = enemy.position.x - start.x;
@@ -166,44 +163,75 @@ public class WaveMotion extends Turret {
         upgradePrices[4] = 100;
         upgradePrices[5] = 200;
         //titles
-        upgradeTitles[0] = "";
-        upgradeTitles[1] = "";
-        upgradeTitles[2] = "";
+        upgradeTitles[0] = "Further targeting";
+        upgradeTitles[1] = "Faster recharge";
+        upgradeTitles[2] = "sweep";
 
-        upgradeTitles[3] = "";
-        upgradeTitles[4] = "";
-        upgradeTitles[5] = "";
+        upgradeTitles[3] = "Higher energy";
+        upgradeTitles[4] = "Stable beam";
+        upgradeTitles[5] = "organ melting";
         //desc line one
-        upgradeDescA[0] = "";
-        upgradeDescB[0] = "";
+        upgradeDescA[0] = "Longer";
+        upgradeDescB[0] = "range";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "";
-        upgradeDescB[1] = "";
+        upgradeDescA[1] = "Faster";
+        upgradeDescB[1] = "firing";
         upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "";
+        upgradeDescA[2] = "swoosh";
         upgradeDescB[2] = "";
         upgradeDescC[2] = "";
 
-        upgradeDescA[3] = "";
-        upgradeDescB[3] = "";
+
+        upgradeDescA[3] = "More";
+        upgradeDescB[3] = "damage";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "";
-        upgradeDescB[4] = "";
-        upgradeDescC[4] = "";
+        upgradeDescA[4] = "Sustain";
+        upgradeDescB[4] = "beam";
+        upgradeDescC[4] = "for longer";
 
-        upgradeDescA[5] = "";
+        upgradeDescA[5] = "idk";
         upgradeDescB[5] = "";
         upgradeDescC[5] = "";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[2] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[2] = animatedSprites.get("upgradeIC")[21];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[0];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[0];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[13];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[35];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[3];
+    }
+
+    @Override
+    protected void upgradeSpecial(int id) {
+        if (id == 0) {
+            switch (nextLevelA) {
+                case 0:
+                    range += 200;
+                    break;
+                case 1:
+                    delay -= 4;
+                    break;
+                case 2:
+                    delay = 0;
+                    break;
+            }
+        } if (id == 1) {
+            switch (nextLevelB) {
+                case 3:
+                    damage += 100;
+                    break;
+                case 4:
+                    betweenFireFrames += 2;
+                    break;
+                case 5:
+                    betweenFireFrames = 10;
+                    damage = 1000;
+                    break;
+            }
+        }
     }
 }

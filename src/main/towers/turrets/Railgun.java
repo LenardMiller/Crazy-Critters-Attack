@@ -30,7 +30,7 @@ public class Railgun extends Turret {
         hit = false;
         delay = 10;
         delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
-        damage = 5000;
+        damage = 10000;
         pjSpeed = -1;
         range = 5000;
         NUM_VAPOR_FRAMES = 15;
@@ -188,10 +188,10 @@ public class Railgun extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    damage += 2500;
+                    damage += 5000;
                     break;
                 case 4:
-                    damage += 5000;
+                    damage += 10000;
                     break;
                 case 5:
                     damage = 999999;
