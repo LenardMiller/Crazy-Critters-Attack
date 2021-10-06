@@ -366,7 +366,7 @@ public abstract class Turret extends Tower {
         playSoundRandomSpeed(p, placeSound, 1);
         spawnParticles();
         //prevent having fire animations longer than delays
-        while (getDelay() <= fireFrames.length * betweenFireFrames + idleFrames.length && betweenFireFrames > 0) betweenFireFrames--;
+//        while (getDelay() <= fireFrames.length * betweenFireFrames + idleFrames.length && betweenFireFrames > 0) betweenFireFrames--;
     }
 
     protected abstract void setUpgrades();

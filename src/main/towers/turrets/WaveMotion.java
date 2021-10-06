@@ -225,7 +225,7 @@ public class WaveMotion extends Turret {
                     damage += 100;
                     break;
                 case 4:
-                    betweenFireFrames += 2;
+                    betweenFireFrames += 4;
                     break;
                 case 5:
                     betweenFireFrames = 10;
