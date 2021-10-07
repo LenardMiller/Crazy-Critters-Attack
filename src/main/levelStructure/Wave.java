@@ -180,6 +180,7 @@ public class Wave {
             case "midBug":
                 e = new MidBug(P, pos.x, pos.y);
                 break;
+            case "Big Bugs":
             case "bigBug":
                 e = new BigBug(P, pos.x, pos.y);
                 break;

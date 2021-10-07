@@ -79,9 +79,7 @@ public class Main extends PApplet {
     //can't be final because created by PApplet
     public static PFont veryLargeFont, largeFont, mediumLargeFont, mediumFont, smallFont;
 
-    /**
-     * in-game, level select
-     */
+    /**in-game, level select*/
     public static int screen = 1;
     public static int money = 100;
     public static int connectWallQueues;
@@ -195,8 +193,8 @@ public class Main extends PApplet {
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
         keyBinds.loadKeyBinds();
-        //set level count
-        levels = new Level[4];
+        //set level count, it has to be this way :(
+        levels = new Level[5];
         //guis
         levelSelectGui = new LevelSelectGui(this);
         settingsGui = new SettingsGui(this);
@@ -254,10 +252,16 @@ public class Main extends PApplet {
         updateTowerArray();
         //load level data
         playingLevel = false;
-        levels[0] = new Level(p, ForestWaves.genForestWaves(p),   "levels/forest",  125,  50,  "dirt");
-        levels[1] = new Level(p, DesertWaves.genDesertWaves(p),   "levels/desert",  250,  75,  "sand");
-        levels[2] = new Level(p, CaveWaves.genCaveWaves(p),       "levels/cave",    500,  100, "stone");
-        levels[3] = new Level(p, GlacierWaves.genGlacierWaves(p), "levels/glacier", 1500, 200, "snow");
+        levels[0] = new Level(p, ForestWaves.genForestWaves(p),
+                "levels/forest",  125,  50,  "dirt");
+        levels[1] = new Level(p, DesertWaves.genDesertWaves(p),
+                "levels/desert",  250,  75,  "sand");
+        levels[2] = new Level(p, CaveWaves.genCaveWaves(p),
+                "levels/cave",    500,  100, "stone");
+        levels[3] = new Level(p, GlacierWaves.genGlacierWaves(p),
+                "levels/glacier", 1500, 200, "snow");
+        levels[4] = new Level(p, DeepForestWaves.genDeepForestWaves(p),
+                "levels/forest",  2500, 300, "dirt");
         DataControl.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();

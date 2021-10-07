@@ -8,7 +8,7 @@ import java.awt.*;
 public class GlacierWaves {
 
     public static Wave[] genGlacierWaves(PApplet p) {
-        Wave[] waves = new Wave[50]; //60
+        Wave[] waves = new Wave[50];
 
         String snowAntlion = "Antlions";
         String wolf = "Wolves";
