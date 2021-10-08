@@ -1807,6 +1807,7 @@
     "id": 280,
     "type": "tile",
     "decoration": "grassCornerTL_De_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -1814,6 +1815,7 @@
     "id": 281,
     "type": "tile",
     "breakable": "lilyPad0Br_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -1821,6 +1823,7 @@
     "id": 282,
     "type": "tile",
     "decoration": "grassCornerTR_De_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -1928,12 +1931,14 @@
     "id": 298,
     "type": "tile",
     "decoration": "grassCornerTL_De_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
     "machine": false,
     "id": 299,
     "type": "tile",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -1941,12 +1946,14 @@
     "id": 300,
     "type": "tile",
     "breakable": "rockBr_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
     "machine": false,
     "id": 301,
     "type": "tile",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -2051,6 +2058,7 @@
     "id": 317,
     "type": "tile",
     "breakable": "smallRockBr_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -2058,12 +2066,14 @@
     "id": 318,
     "type": "tile",
     "breakable": "lilyPad2Br_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
     "machine": false,
     "id": 319,
     "type": "tile",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -2071,6 +2081,7 @@
     "id": 320,
     "type": "tile",
     "breakable": "lilyPad1Br_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -2176,12 +2187,14 @@
     "id": 336,
     "type": "tile",
     "decoration": "grassCornerBL_De_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
     "machine": false,
     "id": 337,
     "type": "tile",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {
@@ -2189,6 +2202,7 @@
     "id": 338,
     "type": "tile",
     "decoration": "grassCornerBR_De_TL",
+    "obstacle": "invisibleOb_TL",
     "base": "water"
   },
   {

@@ -468,14 +468,12 @@ public class Tile {
             obstacle = null;
             obstacleName = null;
         } else {
-            int x = (int) getGridPosition().x;
-            int y = (int) getGridPosition().y;
+            int x = getGridPosition().x;
+            int y = getGridPosition().y;
             if (x < 39 && y < 39 && tiles.get(x + 1, y + 1).tower != null){
                 tiles.get(x + 1, y + 1).tower.die(false);
             }
-            setDecoration(null);
             setFlooring(null);
-            setBreakable(null);
             if (obstacleName == null) updateNodes();
             obstacle = staticSprites.get(name);
             obstacleName = name;
