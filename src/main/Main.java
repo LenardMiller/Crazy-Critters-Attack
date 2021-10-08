@@ -55,7 +55,7 @@ public class Main extends PApplet {
     public static ArrayList<Enemy> enemies;
     public static ArrayList<main.misc.Corpse> corpses;
     public static ArrayList<main.damagingThings.projectiles.Projectile> projectiles;
-    public static ArrayList<main.particles.Particle> topParticles, midParticles, bottomParticles;
+    public static ArrayList<main.particles.Particle> topParticles, midParticles, bottomParticles, veryBottomParticles;
     public static ArrayList<Arc> arcs;
     public static ArrayList<Shockwave> shockwaves;
     public static ArrayList<TowerBuy> towerBuyButtons;
@@ -228,6 +228,7 @@ public class Main extends PApplet {
         topParticles = new ArrayList<>();
         midParticles = new ArrayList<>();
         bottomParticles = new ArrayList<>();
+        veryBottomParticles = new ArrayList<>();
         arcs = new ArrayList<>();
         shockwaves = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
@@ -399,8 +400,17 @@ public class Main extends PApplet {
         }
         //main background
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayBaseDecorationFlooring();
+            tiles.get(i).displayBase();
         }
+        //very bottom particles
+        for (int i = veryBottomParticles.size() - 1; i >= 0; i--) {
+            veryBottomParticles.get(i).main(veryBottomParticles, i);
+        }
+        //decoration
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).displayDecorationAndFlooring();
+        }
+        //flooring
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
             if (tile.flooringName != null) {
@@ -480,7 +490,11 @@ public class Main extends PApplet {
         int p = topParticles.size() + midParticles.size() + bottomParticles.size();
         int p2 = p-SOFT_PARTICLE_CAP;
         if (p > SOFT_PARTICLE_CAP) {
-            for (int i = topParticles.size() - 1; i >= 0; i--) {
+            for (int i = veryBottomParticles.size() - 1; i >= 0; i--) {
+                if (random(0,p2) < 5) {
+                    if (i < veryBottomParticles.size()) veryBottomParticles.remove(i);
+                }
+            } for (int i = topParticles.size() - 1; i >= 0; i--) {
                 if (random(0,p2) < 5) {
                     if (i < topParticles.size()) topParticles.remove(i);
                 }

@@ -64,23 +64,7 @@ public class Tile {
         if (tower != null) tower.main();
     }
 
-    public void displayBaseDecorationFlooring() {
-        if (base != null) P.image(base, position.x, position.y);
-        if (baseName != null && baseName.equals("water") && !paused) {
-            if (P.random(60) < 1) {
-                Tile rightTile = tiles.get(getGridPosition().x + 1, getGridPosition().y);
-                boolean right = rightTile == null;
-                if (!right && rightTile.baseName != null) right = !rightTile.baseName.equals("water");
-                Tile leftTile = tiles.get(getGridPosition().x - 1, getGridPosition().y);
-                boolean left = rightTile == null;
-                if (!left && leftTile.baseName != null) left = !leftTile.baseName.equals("water");
-                PVector topLeftCorner = new PVector(!left ? position.x : position.x + 20, position.y + 7);
-                PVector bottomRightCorner = PVector.add(position, new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
-                PVector spawnPos = new PVector(P.random(topLeftCorner.x, bottomRightCorner.x), P.random(topLeftCorner.y, bottomRightCorner.y));
-                bottomParticles.add(new Water(P, spawnPos.x, spawnPos.y));
-            }
-        }
-        spillBaseEdges();
+    public void displayDecorationAndFlooring() {
         if (decoration != null) P.image(decoration, position.x, position.y);
         if (flooringEdges != null) connectFlooringEdges();
         if (flooringName != null) {
@@ -89,6 +73,29 @@ public class Tile {
                 P.image(flooring, position.x, position.y);
                 if (debug) P.tint(255);
             }
+        }
+    }
+
+    public void displayBase() {
+        if (base != null) P.image(base, position.x, position.y);
+        if (baseName != null && baseName.equals("water") && !paused) {
+            spawnRipples();
+        }
+        spillBaseEdges();
+    }
+
+    private void spawnRipples() {
+        if (P.random(60) < 1) {
+            Tile rightTile = tiles.get(getGridPosition().x + 1, getGridPosition().y);
+            boolean right = rightTile == null;
+            if (!right && rightTile.baseName != null) right = !rightTile.baseName.equals("water");
+            Tile leftTile = tiles.get(getGridPosition().x - 1, getGridPosition().y);
+            boolean left = rightTile == null;
+            if (!left && leftTile.baseName != null) left = !leftTile.baseName.equals("water");
+            PVector topLeftCorner = new PVector(!left ? position.x : position.x + 20, position.y + 7);
+            PVector bottomRightCorner = PVector.add(position, new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
+            PVector spawnPos = new PVector(P.random(topLeftCorner.x, bottomRightCorner.x), P.random(topLeftCorner.y, bottomRightCorner.y));
+            veryBottomParticles.add(new Water(P, spawnPos.x, spawnPos.y));
         }
     }
 
