@@ -29,8 +29,8 @@ public class ForestWaves {
         Color snakeText = new Color(50, 0, 0);
 
         Color treeSpiritAccent = new Color(123, 78, 15);
-        Color treeSpiritFill = new Color(20, 183, 83);
-        Color treeSpiritText = new Color(0, 50, 0);
+        Color treeSpiritFill =   new Color(20, 183, 83);
+        Color treeSpiritText =   new Color(0, 50, 0);
 
         Color bigBugAccent = new Color(170, 0, 0);
         Color bigBugFill =   new Color(10, 10, 10);
