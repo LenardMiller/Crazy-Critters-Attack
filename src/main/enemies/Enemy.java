@@ -538,10 +538,9 @@ public abstract class Enemy {
         return position.x > 0 && position.x < 900 && position.y > 0 && position.y < 900;
     }
 
-    //pathfinding -----------------------------------------------------------------
-    //todo: fix attacking multiple things at once
-    //todo: AAAAAA ENEMES ARE WANDERING AGAIN
-    //todo: sometimes get 'stuck'
+    /*pathfinding ------------------------------------------------------------------------------------------------------
+      todo: fix attacking multiple things at once
+      todo: sometimes get 'stuck'*/
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = points.get(points.size() - 1);
@@ -568,6 +567,7 @@ public abstract class Enemy {
 
     public void requestPath(int i) {
         path.reqQ.add(new PathRequest(i, enemies.get(i)));
+        points = new ArrayList<>();
     }
 
     public void swapPoints(boolean remove) {
