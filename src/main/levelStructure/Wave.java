@@ -111,6 +111,8 @@ public class Wave {
         betweenSpawnTimer++;
         spawnLengthTimer++;
         lengthTimer++;
+//        System.out.println("spawnSize: " + spawns.size() + ", spawnLengthTimer: " + spawnLengthTimer +
+//                ", betweenSpawnTimer: " + betweenSpawnTimer + ", betweenSpawns: " + betweenSpawns);
         if (spawns.size() > 0 && betweenSpawnTimer >= betweenSpawns) {
             betweenSpawnTimer = 0;
             String s = spawns.get(spawns.size() - 1);

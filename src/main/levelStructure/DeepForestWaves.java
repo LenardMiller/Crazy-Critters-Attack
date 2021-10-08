@@ -18,18 +18,18 @@ public class DeepForestWaves {
 
         Wave[] waves = new Wave[10];
 
-        waves[0] = wavePreset(p, 50, 40, "Big Bug");
+        waves[0] = wavePreset(p, 80, 40, "Big Bug");
         waves[0].addSpawns(bigBug, 1);
         waves[0].addSpawns(midBug, 10);
         waves[0].addSpawns(smallBug, 20);
         waves[0].addSpawns(butterfly, 5);
         waves[0].addSpawns(smallWorm, 5);
 
-        waves[1] = wavePreset(p, 50, 40, bigBug);
+        waves[1] = wavePreset(p, 80, 40, bigBug);
         waves[1].addSpawns(bigBug, 3);
         waves[1].addSpawns(midBug, 10);
 
-        waves[2] = wavePreset(p, 30, 20, midTree);
+        waves[2] = wavePreset(p, 40, 20, midTree);
         waves[2].addSpawns(smallTree, 20);
         waves[2].addSpawns(midTree, 10);
 
@@ -38,21 +38,21 @@ public class DeepForestWaves {
         waves[3].addSpawns(midBug, 20);
         waves[3].addSpawns(smallWorm, 5);
 
-        waves[4] = wavePreset(p, 60, 40, "Tree Giant");
+        waves[4] = wavePreset(p, 80, 5, "Tree Giant");
         waves[4].addSpawns(treeGiant, 1);
 
-        waves[5] = wavePreset(p, 40, 30, bigBug);
+        waves[5] = wavePreset(p, 60, 30, bigBug);
         waves[5].addSpawns(bigBug, 10);
         waves[5].addSpawns(butterfly, 5);
 
-        waves[6] = wavePreset(p, 40, 30, midTree);
+        waves[6] = wavePreset(p, 60, 30, midTree);
         waves[6].addSpawns(midTree, 40);
 
-        waves[7] = wavePreset(p, 60, 40, treeGiant);
+        waves[7] = wavePreset(p, 80, 40, treeGiant);
         waves[7].addSpawns(treeGiant, 3);
         waves[7].addSpawns(midTree, 10);
 
-        waves[8] = wavePreset(p, 40, 30, bigBug);
+        waves[8] = wavePreset(p, 60, 30, bigBug);
         waves[8].addSpawns(bigBug, 15);
         waves[8].addSpawns(butterfly, 5);
         waves[8].addSpawns(smallWorm, 5);
@@ -67,6 +67,7 @@ public class DeepForestWaves {
         waves[9].addSpawns(smallWorm, 20);
         waves[9].addSpawns(butterfly, 20);
 
+        for (Wave wave : waves) wave.load();
         return waves;
     }
 
