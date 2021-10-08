@@ -191,6 +191,7 @@ public class Wave {
             case "treeSpirit":
                 e = new TreeSpirit(P, pos.x, pos.y);
                 break;
+            case "Tree Giants":
             case "treeGiant":
                 e = new TreeGiant(P, pos.x, pos.y);
                 break;

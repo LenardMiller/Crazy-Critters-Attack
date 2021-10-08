@@ -14,9 +14,9 @@ public class DeepForestWaves {
         String smallWorm = "littleWorm";
         String smallTree = "treeSprite";
         String midTree = "Tree Spirits";
-        String treeGiant = "treeGiant";
+        String treeGiant = "Tree Giants";
 
-        Wave[] waves = new Wave[3];
+        Wave[] waves = new Wave[5];
 
         waves[0] = wavePreset(p, 60, 40, "Big Bug");
         waves[0].addSpawns(bigBug, 1);
@@ -32,6 +32,13 @@ public class DeepForestWaves {
         waves[2] = wavePreset(p, 30, 20, midTree);
         waves[2].addSpawns(smallTree, 20);
         waves[2].addSpawns(midTree, 10);
+
+        waves[3] = wavePreset(p, 40, 30, bigBug);
+        waves[3].addSpawns(bigBug, 5);
+        waves[3].addSpawns(midBug, 20);
+
+        waves[4] = wavePreset(p, 60, 40, "Tree Giant");
+        waves[4].addSpawns(treeGiant, 1);
 
         return waves;
     }
@@ -50,6 +57,13 @@ public class DeepForestWaves {
                         new Color(123, 78, 15),
                         new Color(20, 183, 83),
                         new Color(0, 50, 0),
+                        title);
+            case "Tree Giant":
+            case "Tree Giants":
+                return new Wave(p, length, spawnLength,
+                        new Color(255, 0, 77),
+                        new Color(0, 100, 0),
+                        new Color(32, 255, 32),
                         title);
             default:
                 return new Wave(p, length, spawnLength,

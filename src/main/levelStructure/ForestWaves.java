@@ -37,8 +37,8 @@ public class ForestWaves {
         Color bigBugText =   new Color(255, 0, 0);
 
         Color treeGiantAccent = new Color(255, 0, 77);
-        Color treeGiantFill = new Color(0, 100, 0);
-        Color treeGiantText = new Color(32, 255, 32);
+        Color treeGiantFill =   new Color(0, 100, 0);
+        Color treeGiantText =   new Color(32, 255, 32);
 
         Color hordeAccent = new Color(20, 160, 46);
         Color hordeFill = new Color(143, 86, 59);
