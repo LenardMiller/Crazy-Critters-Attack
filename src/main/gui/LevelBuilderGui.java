@@ -93,6 +93,7 @@ public class LevelBuilderGui {
 
         placeButton(0, 14, "deadLichenDe");
         placeButton(1, 14, "waterBa");
+        placeButton(2, 14, "flowerCyanBr");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");
