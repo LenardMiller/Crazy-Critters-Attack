@@ -41,8 +41,8 @@ public class ForestWaves {
         Color treeGiantText =   new Color(32, 255, 32);
 
         Color hordeAccent = new Color(20, 160, 46);
-        Color hordeFill = new Color(143, 86, 59);
-        Color hordeText = new Color(47, 28, 1);
+        Color hordeFill =   new Color(143, 86, 59);
+        Color hordeText =   new Color(47, 28, 1);
 
         waves[0] = new Wave(p, 70, 40, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
         waves[0].addSpawns("smolBug",3);
