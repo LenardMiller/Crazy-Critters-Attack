@@ -261,7 +261,7 @@ public class Main extends PApplet {
         levels[3] = new Level(p, GlacierWaves.genGlacierWaves(p),
                 "levels/glacier", 1500, 200, "snow");
         levels[4] = new Level(p, DeepForestWaves.genDeepForestWaves(p),
-                "levels/forest",  2500, 300, "dirt");
+                "levels/deepForest",  2500, 300, "dirt");
         DataControl.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateNodes();

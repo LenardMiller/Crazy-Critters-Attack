@@ -241,7 +241,7 @@ public class KeyBinds {
             try {
                 DataControl.saveLayout();
             } catch (IOException exception) {
-                System.out.println("Can't save layout!");
+                exception.printStackTrace();
             }
         }
         if (increaseWave && canWave(1)) levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);
