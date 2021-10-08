@@ -920,25 +920,25 @@
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 140,
     "type": "tile",
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 141,
     "type": "tile",
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 142,
     "type": "tile",
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 143,
     "type": "tile",
     "base": "dirt"
@@ -1038,7 +1038,7 @@
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 159,
     "type": "tile",
     "base": "dirt"
@@ -1056,7 +1056,7 @@
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 162,
     "type": "tile",
     "base": "dirt"
@@ -1162,19 +1162,19 @@
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 179,
     "type": "tile",
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 180,
     "type": "tile",
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 181,
     "type": "tile",
     "base": "dirt"
@@ -1279,13 +1279,13 @@
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 198,
     "type": "tile",
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 199,
     "type": "tile",
     "base": "dirt"
@@ -1403,7 +1403,7 @@
     "base": "dirt"
   },
   {
-    "machine": false,
+    "machine": true,
     "id": 218,
     "type": "tile",
     "base": "dirt"
