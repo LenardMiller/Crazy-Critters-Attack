@@ -13,8 +13,6 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class Decay extends Buff {
 
-    private final int DAMAGE;
-
     public Decay(PApplet p, int enId, float damage, float duration, Turret turret) {
         super(p,enId,turret);
         effectDelay = secondsToFrames(0.1f); //frames
@@ -22,7 +20,7 @@ public class Decay extends Buff {
         particle = "decay";
         name = "decay";
         particleChance = 4;
-        this.DAMAGE = (int) damage;
+        effectLevel = damage;
         this.enId = enId;
         this.turret = turret;
     }
@@ -31,7 +29,7 @@ public class Decay extends Buff {
     public void effect() {
         Enemy enemy = enemies.get(enId);
         enemy.barAlpha = 255;
-        enemy.damageWithoutBuff(DAMAGE,turret, "decay", new PVector(0,0), false);
+        enemy.damageWithoutBuff((int) effectLevel, turret, "decay", new PVector(0,0), false);
         effectTimer = p.frameCount + effectDelay;
     }
 

@@ -11,14 +11,12 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class BlueBurning extends Buff {
 
-    private final int DAMAGE;
-
     public BlueBurning(PApplet p, int enId, float damage, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 4;
         effectDelay = secondsToFrames(0.2f);
         lifeDuration = secondsToFrames(duration);
-        this.DAMAGE = (int) damage;
+        effectLevel = damage;
         name = "blueBurning";
         particle = "blueGreenFire";
         this.enId = enId;
@@ -30,7 +28,7 @@ public class BlueBurning extends Buff {
         else {
             Enemy enemy = enemies.get(enId);
             enemy.barAlpha = 255;
-            enemy.damageWithoutBuff(DAMAGE, turret, "blueBurning", new PVector(0, 0), false);
+            enemy.damageWithoutBuff((int) effectLevel, turret, "blueBurning", new PVector(0, 0), false);
         }
     }
 }

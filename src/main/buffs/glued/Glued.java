@@ -16,15 +16,13 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class Glued extends Buff {
 
-    private final float SPEED_MODIFIER;
-
     public Glued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
         effectDelay = secondsToFrames(0.2f); //frames
         lifeDuration = secondsToFrames(duration);
         if (enemies.get(enId) instanceof FlyingEnemy) speedMod /= 2; //more strongly effects flying enemies
-        this.SPEED_MODIFIER = speedMod;
+        this.effectLevel = speedMod;
         particle = "glue";
         name = "glued";
         this.enId = enId;
@@ -32,13 +30,14 @@ public class Glued extends Buff {
     }
 
     protected void slowAttacking() { //slowing enemy attacking done once
+        reset();
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.speed * SPEED_MODIFIER;
+        float newSpeed = enemy.speed * effectLevel;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
             //setup
-            enemy.speedModifier = SPEED_MODIFIER;
-            int oldSize = enemy.attackFrames.length;
-            int newSize = (int) (1f / (SPEED_MODIFIER * (1f / (float) oldSize)));
+            enemy.speedModifier = effectLevel;
+            int oldSize = enemy.attackFrames.length; //FUUUUUCK!!!!
+            int newSize = (int) (1f / (effectLevel * (1f / (float) oldSize)));
             ArrayList<Integer> expandedInts = new ArrayList<>();
             //run expansion algorithm
             compress = new CompressArray(oldSize - 1, newSize, expandedInts);
@@ -57,28 +56,32 @@ public class Glued extends Buff {
     @Override
     public void effect() { //slowing enemy movement done every frame
         Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.speed * SPEED_MODIFIER;
+        float newSpeed = enemy.speed * effectLevel;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
-            enemy.speedModifier = SPEED_MODIFIER;
+            enemy.speedModifier = effectLevel;
         }
     }
 
     @Override
-    protected void end(int i){ //ends if at end of lifespan
-        Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.speed;
+    protected void update(int i) { //ends if at end of lifespan
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) {
-            if (enemy.speed == newSpeed) { //prevent speeding up enemy
-                enemy.speedModifier = 1; //set movement speed back to default
-                //set attack speed back to default
-                enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
-                if (enemy instanceof Frost) enemy.attackFrames = animatedSprites.get("wolf" + "AttackEN");
-                if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
-                //set damage frames back to default
-                System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
-            }
+            reset();
             buffs.remove(i);
+        }
+    }
+
+    private void reset() {
+        Enemy enemy = enemies.get(enId);
+        float newSpeed = enemy.speed;
+        if (enemy.speed == newSpeed) { //prevent speeding up enemy
+            enemy.speedModifier = 1; //set movement speed back to default
+            //set attack speed back to default
+            enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
+            if (enemy instanceof Frost) enemy.attackFrames = animatedSprites.get("wolf" + "AttackEN");
+            if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
+            //set damage frames back to default
+            System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
         }
     }
 }

@@ -23,6 +23,7 @@ public abstract class Buff {
     protected int lifeTimer;
     protected int lifeDuration;
     protected int particleChance;
+    protected float effectLevel;
 
     protected Buff(PApplet p, int enId, Turret turret){
         this.p = p;
@@ -37,7 +38,7 @@ public abstract class Buff {
     }
 
     public void main(int i){
-        end(i);
+        update(i);
         if (!paused) {
             effectTimer++;
             if (effectTimer > effectDelay){
@@ -52,7 +53,7 @@ public abstract class Buff {
      * Ends if at end of lifespan.
      * @param i buff id
      */
-    protected void end(int i) {
+    protected void update(int i) {
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) buffs.remove(i);
     }
