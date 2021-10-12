@@ -93,6 +93,7 @@ public class SpriteLoader {
         getSprite(p,"boltBreak","PT","boltBreak/",4);
         getSprite(p,"railgunBlast","PT","railgunBlast/",11);
         getSprite(p,"water","PT", "water/", 9);
+        getSprite(p,"dirtyWater","PT", "dirtyWater/", 9);
 
         getSprite(p,"orangeBubbleFloaty","PT","floaty/orangeBubble/",10);
         getSprite(p,"frostCloudFloaty","PT","floaty/frostCloud/",10);
