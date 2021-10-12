@@ -64,24 +64,26 @@ public class Hand {
         }
         if (held.equals("null")) return;
         if (!implacable) place();
-        else {
-            Tile tileTower = tiles.get(
-                    (roundTo(matrixMousePosition.x, 50) / 50) + 1,
-                    (roundTo(matrixMousePosition.y, 50) / 50) + 1);
-            String errorText = "Can't place there!";
-            if (price > money || (
-                            tileTower != null &&
-                            tileTower.tower instanceof Wall &&
-                            tileTower.tower.nextLevelB < tileTower.tower.upgradePrices.length &&
-                            currentLevel < tileTower.tower.nextLevelB &&
-                            money < tileTower.tower.upgradePrices[tileTower.tower.nextLevelB]
-            ))
-                errorText = "Can't afford!";
-            else if (enemyNearby()) errorText = "Critter too close!";
-            popupTexts.add(new PopupText(P, 16, new Color(255, 0, 0, 254),
-              new Color(50, 0, 0, 200), new PVector(matrixMousePosition.x, matrixMousePosition.y),
-              errorText));
-        }
+        else displayWhyCantPlace();
+    }
+
+    private void displayWhyCantPlace() {
+        Tile tileTower = tiles.get(
+                (roundTo(matrixMousePosition.x, 50) / 50) + 1,
+                (roundTo(matrixMousePosition.y, 50) / 50) + 1);
+        String errorText = "Can't place there!";
+        if (price > money || (
+                tileTower != null &&
+                        tileTower.tower instanceof Wall &&
+                        tileTower.tower.nextLevelB < tileTower.tower.upgradePrices.length &&
+                        tileTower.tower.nextLevelB < currentLevel &&
+                        money < tileTower.tower.upgradePrices[tileTower.tower.nextLevelB]
+        ))
+            errorText = "Can't afford!";
+        else if (enemyNearby()) errorText = "Critter too close!";
+        popupTexts.add(new PopupText(P, 16, new Color(255, 0, 0, 254),
+                new Color(50, 0, 0, 200), new PVector(matrixMousePosition.x, matrixMousePosition.y),
+                errorText));
     }
 
     private void clearHand() {
