@@ -31,7 +31,7 @@ public class TeslaTower extends Turret {
         pjSpeed = -1;
         range = 225;
         betweenIdleFrames = down60ToFramerate(3);
-        debrisType = "metal";
+        material = "metal";
         price = TESLA_TOWER_PRICE;
         value = price;
         damageSound = sounds.get("metalDamage");
@@ -175,7 +175,7 @@ public class TeslaTower extends Turret {
                     damage += 1600;
                     delay += 2;
                     lightning = true;
-                    debrisType = "crystal";
+                    material = "crystal";
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -198,7 +198,7 @@ public class TeslaTower extends Turret {
                     highPower = true;
                     betweenIdleFrames = 3;
                     name = "highPowerTesla";
-                    debrisType = "darkMetal";
+                    material = "darkMetal";
                     loadSprites();
                     break;
             }

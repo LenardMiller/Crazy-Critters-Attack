@@ -36,7 +36,7 @@ public class EnergyBlaster extends Turret{
         fireSound = sounds.get("energyBlasterFire");
         fireParticle = "energy";
         barrelLength = 40;
-        debrisType = "darkMetal";
+        material = "darkMetal";
         price = ENERGY_BLASTER_PRICE;
         value = price;
         priority = 2; //strong
@@ -140,7 +140,7 @@ public class EnergyBlaster extends Turret{
                     effectRadius = 200;
                     name = "nuclearBlaster";
                     fireParticle = "nuclear";
-                    debrisType = "metal";
+                    material = "metal";
                     nuclear = true;
                     loadSprites();
                     break;

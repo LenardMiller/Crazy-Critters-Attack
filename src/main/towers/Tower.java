@@ -51,7 +51,7 @@ public abstract class Tower {
     protected int tintColor;
     protected int barAlpha;
     protected int boostTimer;
-    protected String debrisType;
+    protected String material;
     protected SoundFile damageSound;
     protected SoundFile breakSound;
     protected SoundFile placeSound;
@@ -71,7 +71,7 @@ public abstract class Tower {
         hp = maxHp;
         hit = false;
         tintColor = 255;
-        debrisType = "wood";
+        material = "wood";
         price = 0;
         visualize = false;
         upgradeTitles = new String[4];
@@ -118,7 +118,7 @@ public abstract class Tower {
         playSoundRandomSpeed(p, damageSound, 1);
         int num = (int)(p.random(4,10));
         for (int i = num; i >= 0; i--){ //spray debris
-            topParticles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), debrisType));
+            topParticles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), material));
         }
     }
 
@@ -137,7 +137,7 @@ public abstract class Tower {
         int moneyGain;
         if (!sold) {
             moneyGain = (int) (value * 0.4);
-            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(debrisType + "DebrisBr_TL");
+            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(material + "DebrisBr_TL");
         } else moneyGain = (int) (value * 0.8);
         if (moneyGain > 0) popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
@@ -193,7 +193,7 @@ public abstract class Tower {
         for (int j = num; j >= 0; j--) {
             PVector deviation = new PVector(p.random(-size.x/2,size.x/2), p.random(-size.y/2,size.y/2));
             PVector spawnPos = PVector.add(center, deviation);
-            topParticles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), debrisType));
+            topParticles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), material));
         }
         num = (int) p.random(6, 12);
         for (int k = num; k >= 0; k--) {

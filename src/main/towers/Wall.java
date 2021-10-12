@@ -20,7 +20,7 @@ public class Wall extends Tower {
     private final CornerSpriteDS STONE;
     private final CornerSpriteDS METAL;
     private final CornerSpriteDS CRYSTAL;
-    private final CornerSpriteDS ULTIMATE;
+    private final CornerSpriteDS TITANIUM;
 
     protected PImage tlCSprite;
     protected PImage trCSprite;
@@ -45,10 +45,10 @@ public class Wall extends Tower {
         hp = maxHp;
         hit = false;
         sprite = animatedSprites.get("woodWallTW");
-        debrisType = "wood";
-        damageSound = sounds.get(debrisType + "Damage");
-        breakSound = sounds.get(debrisType + "Break");
-        placeSound = sounds.get(debrisType + "PlaceShort");
+        material = "wood";
+        damageSound = sounds.get(material + "Damage");
+        breakSound = sounds.get(material + "Break");
+        placeSound = sounds.get(material + "PlaceShort");
         price = BUY_PRICE;
         value = price;
         nextLevelB = 0;
@@ -66,7 +66,7 @@ public class Wall extends Tower {
         STONE = new CornerSpriteDS();
         METAL = new CornerSpriteDS();
         CRYSTAL = new CornerSpriteDS();
-        ULTIMATE = new CornerSpriteDS();
+        TITANIUM = new CornerSpriteDS();
         loadSprites();
     }
 
@@ -155,7 +155,7 @@ public class Wall extends Tower {
         UPGRADE_SPRITES[0] = animatedSprites.get("stoneWallTW");
         UPGRADE_SPRITES[1] = animatedSprites.get("metalWallTW");
         UPGRADE_SPRITES[2] = animatedSprites.get("crystalWallTW");
-        UPGRADE_SPRITES[3] = animatedSprites.get("ultimateWallTW");
+        UPGRADE_SPRITES[3] = animatedSprites.get("titaniumWallTW");
         //names
         UPGRADE_NAMES[0] = "stone";
         UPGRADE_NAMES[1] = "metal";
@@ -175,12 +175,12 @@ public class Wall extends Tower {
         int oldMax = maxHp;
         maxHp += UPGRADE_HP[nextLevelB];
         name = UPGRADE_NAMES[nextLevelB] + "Wall";
-        debrisType = UPGRADE_NAMES[nextLevelB];
+        material = UPGRADE_NAMES[nextLevelB];
         hp = (int)(hp/(float)oldMax * maxHp);
 
-        damageSound = sounds.get(debrisType + "Damage");
-        breakSound = sounds.get(debrisType + "Break");
-        placeSound = sounds.get(debrisType + "PlaceShort");
+        damageSound = sounds.get(material + "Damage");
+        breakSound = sounds.get(material + "Break");
+        placeSound = sounds.get(material + "PlaceShort");
 
         spawnParticles();
         playSoundRandomSpeed(p, placeSound, 1);
@@ -264,7 +264,7 @@ public class Wall extends Tower {
         if (name.equals("stone") || name.equals("stoneWall")) spriteDS = STONE;
         if (name.equals("metal") || name.equals("metalWall")) spriteDS = METAL;
         if (name.equals("crystal") || name.equals("crystalWall")) spriteDS = CRYSTAL;
-        if (name.equals("ultimate") || name.equals("ultimateWall")) spriteDS = ULTIMATE;
+        if (name.equals("titanium") || name.equals("titaniumWall")) spriteDS = TITANIUM;
         if (tS) tSSprite = spriteDS.t;
         else tSSprite = null;
         if (bS) bSSprite = spriteDS.b;
@@ -307,8 +307,8 @@ public class Wall extends Tower {
                     name = "Crystal";
                     break;
                 case 4:
-                    spriteDS = ULTIMATE;
-                    name = "Ultimate";
+                    spriteDS = TITANIUM;
+                    name = "Titanium";
                     break;
             }
             String idA = "null";
@@ -324,7 +324,8 @@ public class Wall extends Tower {
                         if (c == 0) idC = "c";
                         if (c == 1) idC = "v";
                         String id = idA+idB+idC;
-                        spriteDS.add(staticSprites.get(name + id + "WallTW"),idA,idB,idC);
+                        String fullName = name + id + "WallTW";
+                        spriteDS.add(staticSprites.get(fullName),idA,idB,idC);
                     }
                 }
             }

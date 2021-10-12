@@ -38,7 +38,7 @@ public class SeismicTower extends Turret {
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("seismicSlam");
         barrelLength = 29;
-        debrisType = "stone";
+        material = "stone";
         price = SEISMIC_PRICE;
         value = price;
 
@@ -235,7 +235,7 @@ public class SeismicTower extends Turret {
                     shockwaveWidth += 30;
                     break;
                 case 2:
-                    debrisType = "metal";
+                    material = "metal";
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
@@ -256,7 +256,7 @@ public class SeismicTower extends Turret {
                     damage += 50;
                     break;
                 case 5:
-                    debrisType = "metal";
+                    material = "metal";
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");

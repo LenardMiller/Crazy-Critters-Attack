@@ -31,7 +31,7 @@ public class RandomCannon extends Turret {
         breakSound = sounds.get("woodBreak");
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("luggageBlaster");
-        debrisType = "wood";
+        material = "wood";
         price = RANDOM_CANNON_PRICE;
         value = price;
 
@@ -128,7 +128,7 @@ public class RandomCannon extends Turret {
                     damageSound = sounds.get("stoneDamage");
                     breakSound = sounds.get("stoneBreak");
                     placeSound = sounds.get("stonePlace");
-                    debrisType = "stone";
+                    material = "stone";
                     damage += 10;
                     barrel = true;
                     delay = 0;

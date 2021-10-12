@@ -398,6 +398,7 @@ public class SpriteLoader {
         getSprite(p,"metalWall","TW","Metal/",4);
         getSprite(p,"crystalWall","TW","Crystal/",4);
         getSprite(p,"titaniumWall","TW","Titanium/",4);
+        getSprite(p,"ultimateWall","TW","Titanium/",4);
         getSprite(p,"iceWall","TW","Ice/",4);
 
         //machines
@@ -650,6 +651,7 @@ public class SpriteLoader {
             staticSprites.put(name + "LWallTW", p.loadImage("sprites/towers/walls/" + name + "/l.png"));
             staticSprites.put(name + "RWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
         }
+
         //tiles
         //base
         staticSprites.put("yellowGrassBa_TL",p.loadImage("sprites/tiles/base/yellowGrass.png"));

@@ -27,7 +27,7 @@ public class Nightmare extends Turret {
         fireParticle = "decay";
         barrelLength = 20;
         loadSprites();
-        debrisType = "darkMetal";
+        material = "darkMetal";
         price = 300;
         value = NIGHTMARE_PRICE;
         priority = 2; //strong

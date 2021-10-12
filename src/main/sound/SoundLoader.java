@@ -97,6 +97,7 @@ public class SoundLoader {
         sounds.put("titaniumBreak", new SoundFile(p, "sounds/material/titaniumBreak.wav"));
         sounds.put("titaniumDamage", new SoundFile(p, "sounds/material/titaniumDamage.wav"));
         sounds.put("titaniumPlace", new SoundFile(p, "sounds/material/titaniumPlace.wav"));
+        sounds.put("titaniumPlaceShort", new SoundFile(p, "sounds/material/titaniumPlaceShort.wav"));
         //loops
         startStopSoundLoops.put("smallExplosion", new StartStopSoundLoop(p, "smallExplosion/", secondsToFrames(1), false));
         fadeSoundLoops.put("flamethrower", new FadeSoundLoop(p, "flamethrower", FRAMERATE/6));

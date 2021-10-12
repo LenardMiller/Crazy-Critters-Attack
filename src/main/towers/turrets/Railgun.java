@@ -42,7 +42,7 @@ public class Railgun extends Turret {
         betweenFireFrames = 3;
         vaporTrail = animatedSprites.get("railgunVaporTrailTR");
         vaporEndSprites = animatedSprites.get("railgunBlastPT");
-        debrisType = "titanium";
+        material = "titanium";
         barrelLength = 30;
         price = RAILGUN_PRICE;
         value = price;

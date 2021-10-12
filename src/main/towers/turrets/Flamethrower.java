@@ -37,7 +37,7 @@ public class Flamethrower extends Turret {
         effectDuration = 5;
         damage = 20;
         delay = 0;
-        debrisType = "metal";
+        material = "metal";
         price = FLAMETHROWER_PRICE;
         value = price;
         damageSound = sounds.get("metalDamage");
@@ -281,7 +281,7 @@ public class Flamethrower extends Turret {
                 case 5:
                     name = "magicFlamethrower";
                     magic = true;
-                    debrisType = "darkMetal";
+                    material = "darkMetal";
                     range += 30;
                     pjSpeed = 150;
                     damage = 250;

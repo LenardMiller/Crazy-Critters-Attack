@@ -27,7 +27,7 @@ public class IceWall extends Wall {
         hp = maxHp;
         TIME_UNTIL_DAMAGE = timeUntilDamage;
         sprite = animatedSprites.get("iceWallTW");
-        debrisType = "ice";
+        material = "ice";
         damageSound = sounds.get("iceDamage");
         breakSound = sounds.get("iceBreak");
         price = 0;

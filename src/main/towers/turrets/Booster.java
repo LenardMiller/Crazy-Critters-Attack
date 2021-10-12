@@ -29,7 +29,7 @@ public class Booster extends Turret {
         delay = -1;
         range = 1;
         pjSpeed = -1;
-        debrisType = "darkMetal";
+        material = "darkMetal";
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
@@ -212,7 +212,7 @@ public class Booster extends Turret {
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
-                    debrisType = "gold";
+                    material = "gold";
                     name = "moneyBooster";
                     betweenIdleFrames = 2;
                     loadSprites();

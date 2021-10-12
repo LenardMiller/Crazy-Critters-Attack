@@ -3,14 +3,10 @@ package main.towers.turrets;
 import main.damagingThings.arcs.YellowArc;
 import main.damagingThings.projectiles.homing.ElectricMissile;
 import main.damagingThings.projectiles.homing.MagicMissile;
-import main.misc.CompressArray;
 import main.misc.Tile;
-import main.particles.Ouch;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
-
-import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
@@ -74,7 +70,7 @@ public class MagicMissileer extends Turret {
         placeSound = sounds.get("crystalPlace");
         damageSound = sounds.get("crystalDamage");
         breakSound = sounds.get("crystalBreak");
-        debrisType = "crystal";
+        material = "crystal";
         price = MAGIC_MISSILEER_PRICE;
         value = price;
         priority = 2; //strong
@@ -323,7 +319,7 @@ public class MagicMissileer extends Turret {
                     effectDuration = 10;
                     damage *= 5f;
                     name = "electricMissleer";
-                    debrisType = "darkMetal";
+                    material = "darkMetal";
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");

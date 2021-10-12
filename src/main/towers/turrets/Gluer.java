@@ -37,7 +37,7 @@ public class Gluer extends Turret {
         fireSound = sounds.get("glueFire");
         fireParticle = "glue";
         barrelLength = 28;
-        debrisType = "stone";
+        material = "stone";
         price = GLUER_PRICE;
         value = price;
 
@@ -183,7 +183,7 @@ public class Gluer extends Turret {
                     effectLevel = 0.5f;
                     spikey = true;
                     name = "shatterGluer";
-                    debrisType = "metal";
+                    material = "metal";
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
