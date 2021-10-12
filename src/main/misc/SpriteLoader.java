@@ -699,6 +699,10 @@ public class SpriteLoader {
         staticSprites.put("grassCornerBR_De_TL",p.loadImage("sprites/tiles/decoration/grassCorners/br.png"));
         staticSprites.put("grassCornerTL_De_TL",p.loadImage("sprites/tiles/decoration/grassCorners/tl.png"));
         staticSprites.put("grassCornerTR_De_TL",p.loadImage("sprites/tiles/decoration/grassCorners/tr.png"));
+        staticSprites.put("yellowGrassCornerBL_De_TL",p.loadImage("sprites/tiles/decoration/yellowGrassCorners/bl.png"));
+        staticSprites.put("yellowGrassCornerBR_De_TL",p.loadImage("sprites/tiles/decoration/yellowGrassCorners/br.png"));
+        staticSprites.put("yellowGrassCornerTL_De_TL",p.loadImage("sprites/tiles/decoration/yellowGrassCorners/tl.png"));
+        staticSprites.put("yellowGrassCornerTR_De_TL",p.loadImage("sprites/tiles/decoration/yellowGrassCorners/tr.png"));
         staticSprites.put("lichenDe_TL",p.loadImage("sprites/tiles/decoration/lichen.png"));
         staticSprites.put("deadLichenDe_TL",p.loadImage("sprites/tiles/decoration/deadLichen.png"));
         //flooring
