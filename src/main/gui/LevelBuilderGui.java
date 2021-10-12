@@ -38,66 +38,38 @@ public class LevelBuilderGui {
 
         placeButton(0, 3, "treeTLOb");
         placeButton(1, 3, "treeTROb");
-        placeButton(2, 3, "smallTreeOb");
-        placeButton(3, 3, "snowBa");
+        placeButton(2, 3, "yellowTreeTLOb");
+        placeButton(3, 3, "yellowTreeTROb");
 
         placeButton(0, 4, "treeBLOb");
         placeButton(1, 4, "treeBROb");
-        placeButton(2, 4, "sandBa");
-        placeButton(3, 4, "stoneBa");
+        placeButton(2, 4, "yellowTreeBLOb");
+        placeButton(3, 4, "yellowTreeBROb");
 
-        placeButton(0, 5, "cactus0Ob");
-        placeButton(1, 5, "cactus1Ob");
-        placeButton(2, 5, "cactus2Ob");
-        placeButton(3, 5, "glowshrooms0Br");
+        placeButton(0, 5, "smallTreeOb");
+        placeButton(1, 5, "smallYellowTreeOb");
+        placeButton(2, 5, "yellowLeavesBr");
+        placeButton(3, 5, "deadDandelionsBr");
 
-        placeButton(0, 6, "caveWallTLOb");
-        placeButton(1, 6, "caveWallTOb");
-        placeButton(2, 6, "caveWallTROb");
-        placeButton(3, 6, "glowshrooms1Br");
+        placeButton(0, 6, "waterBa");
+        placeButton(1, 6, "yellowGrassBa");
+        placeButton(2, 6, "yellowGrassCornerBR_De");
+        placeButton(3, 6, "yellowGrassCornerBL_De");
 
-        placeButton(0, 7, "caveWallLOb");
-        placeButton(1, 7, "caveWallBaseOb");
-        placeButton(2, 7, "caveWallROb");
-        placeButton(3, 7, "glowshrooms2Br");
+        placeButton(0, 7, "dirtyWaterBa");
+        placeButton(1, 7, "yellowGrassPatchDe");
+        placeButton(2, 7, "yellowGrassCornerTR_De");
+        placeButton(3, 7, "yellowGrassCornerTL_De");
 
-        placeButton(0, 8, "caveWallBLOb");
-        placeButton(1, 8, "caveWallBOb");
-        placeButton(2, 8, "caveWallBROb");
-        placeButton(3, 8, "lichenDe");
+        placeButton(0, 8, "flowerCyanBr");
+        placeButton(1, 8, "lilyPad0Br");
+        placeButton(2, 8, "lilyPad1Br");
+        placeButton(3, 8, "lilyPad2Br");
 
-        placeButton(0, 9, "caveWallBRCOb");
-        placeButton(1, 9, "caveWallBLCOb");
-        placeButton(2, 9, "caveWallBRDOb");
-        placeButton(3, 9, "caveWallBLDOb");
-
-        placeButton(0, 10, "caveWallTRCOb");
-        placeButton(1, 10, "caveWallTLCOb");
-        placeButton(2, 10, "caveWallTRDOb");
-        placeButton(3, 10, "caveWallTLDOb");
-
-        placeButton(0, 11, "caveWallPillarOb");
-        placeButton(1, 11, "yellowGrassBa");
-        placeButton(2, 11, "smallYellowTreeOb");
-        placeButton(3, 11, "yellowLeavesBr");
-
-        placeButton(0, 12, "deadDandelionsBr");
-        placeButton(1, 12, "yellowGrassPatchDe");
-        placeButton(2, 12, "deadCactus0Ob");
-        placeButton(3, 12, "deadCactus1Ob");
-
-        placeButton(0, 13, "deadCactus2Ob");
-        placeButton(1, 13, "deadGlowshrooms0Br");
-        placeButton(2, 13, "deadGlowshrooms1Br");
-        placeButton(3, 13, "deadGlowshrooms2Br");
-
-        placeButton(0, 14, "deadLichenDe");
-        placeButton(1, 14, "waterBa");
-        placeButton(2, 14, "flowerCyanBr");
-        placeButton(3, 14, "lilyPad0Br");
-
-        placeButton(0, 15, "lilyPad1Br");
-        placeButton(1, 15, "lilyPad2Br");
+        placeButton(0, 9, "deadFlowerCyanBr");
+        placeButton(1, 9, "deadLilyPad0Br");
+        placeButton(2, 9, "deadLilyPad1Br");
+        placeButton(3, 9, "deadLilyPad2Br");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");

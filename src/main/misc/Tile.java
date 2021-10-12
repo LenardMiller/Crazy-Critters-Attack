@@ -77,7 +77,7 @@ public class Tile {
 
     public void displayBase() {
         if (base != null) P.image(base, position.x, position.y);
-        if (baseName != null && baseName.contains("water") && !paused) {
+        if (baseName != null && baseName.equals("water") && !paused) {
             spawnRipples();
         }
         spillBaseEdges();
