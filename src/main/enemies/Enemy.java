@@ -32,16 +32,12 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Enemy {
 
-    /**
-     * measured in pixels per second
-     */
+    /**measured in pixels per second*/
     public float speed;
     public float speedModifier;
     public float angle;
     public float radius;
-    /**
-     * moving, attacking, (shooting/burrowing)
-     */
+    /**moving, attacking, (shooting/burrowing)*/
     public int state;
     public int barAlpha;
     public int hp;
@@ -105,7 +101,7 @@ public abstract class Enemy {
         barAlpha = 0;
         hitParticle = "redOuch";
         name = "";
-        attackStartFrame = 0;
+        attackStartFrame = 0; //todo: get rid of this, I hate it
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
         tempAttackDmgFrames = new int[attackDmgFrames.length];

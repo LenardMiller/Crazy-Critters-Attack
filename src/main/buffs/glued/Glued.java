@@ -36,7 +36,7 @@ public class Glued extends Buff {
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
             //setup
             enemy.speedModifier = effectLevel;
-            int oldSize = enemy.attackFrames.length; //FUUUUUCK!!!!
+            int oldSize = enemy.attackFrames.length;
             int newSize = (int) (1f / (effectLevel * (1f / (float) oldSize)));
             ArrayList<Integer> expandedInts = new ArrayList<>();
             //run expansion algorithm
@@ -49,6 +49,9 @@ public class Glued extends Buff {
                 expandedPImages[i] = enemy.attackFrames[expandedInts.get(i)];
             }
             //profit
+            for (int i = 0; i < enemy.tempAttackDmgFrames.length; i++) {
+                enemy.tempAttackDmgFrames[i] /= effectLevel;
+            }
             enemy.attackFrames = expandedPImages;
         }
     }
@@ -81,7 +84,9 @@ public class Glued extends Buff {
             if (enemy instanceof Frost) enemy.attackFrames = animatedSprites.get("wolf" + "AttackEN");
             if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
             //set damage frames back to default
-            System.arraycopy(enemy.attackDmgFrames, 0, enemy.tempAttackDmgFrames, 0, enemy.tempAttackDmgFrames.length);
+            System.arraycopy(enemy.attackDmgFrames, 0,
+                    enemy.tempAttackDmgFrames, 0,
+                    enemy.tempAttackDmgFrames.length);
         }
     }
 }
