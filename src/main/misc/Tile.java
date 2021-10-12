@@ -1,6 +1,5 @@
 package main.misc;
 
-import main.particles.MiscParticle;
 import main.particles.Water;
 import main.pathfinding.Node;
 import main.towers.IceWall;
@@ -78,7 +77,7 @@ public class Tile {
 
     public void displayBase() {
         if (base != null) P.image(base, position.x, position.y);
-        if (baseName != null && baseName.equals("water") && !paused) {
+        if (baseName != null && baseName.contains("water") && !paused) {
             spawnRipples();
         }
         spillBaseEdges();
@@ -374,24 +373,27 @@ public class Tile {
         //update hierarchies as tiles are added
         switch (name) {
             case "snow":
-                baseHierarchy = 6;
+                baseHierarchy = 7;
                 break;
             case "grass":
-                baseHierarchy = 5;
+                baseHierarchy = 6;
                 break;
             case "yellowGrass":
-                baseHierarchy = 4;
+                baseHierarchy = 5;
                 break;
             case "dirt":
-                baseHierarchy = 3;
+                baseHierarchy = 4;
                 break;
             case "sand":
-                baseHierarchy = 2;
+                baseHierarchy = 3;
                 break;
             case "stone":
-                baseHierarchy = 1;
+                baseHierarchy = 2;
                 break;
             case "water":
+                baseHierarchy = 1;
+                break;
+            case "dirtyWater":
                 baseHierarchy = 0;
                 break;
         }
@@ -479,6 +481,7 @@ public class Tile {
             obstacleName = name;
             if (name.contains("smallTree")) obstacleShadowLength = 3;
             if (containsCorners(name,"tree")) obstacleShadowLength = 8;
+            if (containsCorners(name,"yellowTree")) obstacleShadowLength = 8;
         }
     }
 
