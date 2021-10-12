@@ -70,7 +70,8 @@ public class Hand {
                     (roundTo(matrixMousePosition.y, 50) / 50) + 1);
             String errorText = "Can't place there!";
             if (price > money ||
-                    (tileTower.tower instanceof Wall &&
+                    (tileTower != null &&
+                            tileTower.tower instanceof Wall &&
                             money < tileTower.tower.upgradePrices[tileTower.tower.nextLevelB]))
                 errorText = "Can't afford!";
             else if (enemyNearby()) errorText = "Critter too close!";
