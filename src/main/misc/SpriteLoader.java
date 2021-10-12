@@ -654,14 +654,15 @@ public class SpriteLoader {
 
         //tiles
         //base
-        staticSprites.put("yellowGrassBa_TL",p.loadImage("sprites/tiles/base/yellowGrass.png"));
+        staticSprites.put("yellowGrassBa_TL",p.loadImage("sprites/tiles/base/yellowGrass/base.png"));
         staticSprites.put("stoneBa_TL",p.loadImage("sprites/tiles/base/stone/base.png"));
         staticSprites.put("dirtBa_TL",p.loadImage("sprites/tiles/base/dirt/base.png"));
         staticSprites.put("sandBa_TL", p.loadImage("sprites/tiles/base/sand.png"));
         staticSprites.put("snowBa_TL", p.loadImage("sprites/tiles/base/snow/base.png"));
         staticSprites.put("grassBa_TL",p.loadImage("sprites/tiles/base/grass/base.png"));
-        staticSprites.put("waterBa_TL",p.loadImage("sprites/tiles/base/water.png"));
-        for (int i = 0; i < 4; i++) {
+        staticSprites.put("waterBa_TL",p.loadImage("sprites/tiles/base/water/base.png"));
+        staticSprites.put("dirtyWaterBa_TL",p.loadImage("sprites/tiles/base/dirtyWater.png"));
+        for (int i = 0; i < 6; i++) {
             String name;
             switch (i) {
                 case 0:
@@ -675,6 +676,12 @@ public class SpriteLoader {
                     break;
                 case 3:
                     name = "stone";
+                    break;
+                case 4:
+                    name = "yellowGrass";
+                    break;
+                case 5:
+                    name = "water";
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + i);
@@ -745,9 +752,13 @@ public class SpriteLoader {
         staticSprites.put("iceDebrisBr_TL",p.loadImage("sprites/tiles/breakables/debris/ice.png"));
         staticSprites.put("goldDebrisBr_TL",p.loadImage("sprites/tiles/breakables/debris/gold.png"));
         staticSprites.put("flowerCyanBr_TL",p.loadImage("sprites/tiles/breakables/cyanFlower.png"));
+        staticSprites.put("deadFlowerCyanBr_TL",p.loadImage("sprites/tiles/breakables/deadCyanFlower.png"));
         staticSprites.put("lilyPad0Br_TL",p.loadImage("sprites/tiles/breakables/lilyPads/000.png"));
         staticSprites.put("lilyPad1Br_TL",p.loadImage("sprites/tiles/breakables/lilyPads/001.png"));
         staticSprites.put("lilyPad2Br_TL",p.loadImage("sprites/tiles/breakables/lilyPads/002.png"));
+        staticSprites.put("deadLilyPad0Br_TL",p.loadImage("sprites/tiles/breakables/deadLilyPads/000.png"));
+        staticSprites.put("deadLilyPad1Br_TL",p.loadImage("sprites/tiles/breakables/deadLilyPads/001.png"));
+        staticSprites.put("deadLilyPad2Br_TL",p.loadImage("sprites/tiles/breakables/deadLilyPads/002.png"));
         //obstacles
         staticSprites.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         staticSprites.put("smallYellowTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallYellowTree.png"));
@@ -755,6 +766,10 @@ public class SpriteLoader {
         staticSprites.put("treeBROb_TL",p.loadImage("sprites/tiles/obstacles/tree/br.png"));
         staticSprites.put("treeTLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/tl.png"));
         staticSprites.put("treeTROb_TL",p.loadImage("sprites/tiles/obstacles/tree/tr.png"));
+        staticSprites.put("yellowTreeBLOb_TL",p.loadImage("sprites/tiles/obstacles/yellowTree/bl.png"));
+        staticSprites.put("yellowTreeBROb_TL",p.loadImage("sprites/tiles/obstacles/yellowTree/br.png"));
+        staticSprites.put("yellowTreeTLOb_TL",p.loadImage("sprites/tiles/obstacles/yellowTree/tl.png"));
+        staticSprites.put("yellowTreeTROb_TL",p.loadImage("sprites/tiles/obstacles/yellowTree/tr.png"));
         staticSprites.put("cactus0Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/0.png"));
         staticSprites.put("cactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/1.png"));
         staticSprites.put("cactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/2.png"));
