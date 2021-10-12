@@ -69,10 +69,13 @@ public class Hand {
                     (roundTo(matrixMousePosition.x, 50) / 50) + 1,
                     (roundTo(matrixMousePosition.y, 50) / 50) + 1);
             String errorText = "Can't place there!";
-            if (price > money ||
-                    (tileTower != null &&
+            if (price > money || (
+                            tileTower != null &&
                             tileTower.tower instanceof Wall &&
-                            money < tileTower.tower.upgradePrices[tileTower.tower.nextLevelB]))
+                            tileTower.tower.nextLevelB < tileTower.tower.upgradePrices.length &&
+                            currentLevel < tileTower.tower.nextLevelB &&
+                            money < tileTower.tower.upgradePrices[tileTower.tower.nextLevelB]
+            ))
                 errorText = "Can't afford!";
             else if (enemyNearby()) errorText = "Critter too close!";
             popupTexts.add(new PopupText(P, 16, new Color(255, 0, 0, 254),
@@ -140,7 +143,7 @@ public class Hand {
                     if (money < tile.tower.upgradePrices[tile.tower.nextLevelB]) implacable = true;
                     displayInfo = "upgradeWall";
                 } else {
-                    if (currentLevel > 0) heldSprite = staticSprites.get("upgradeTW");
+                    heldSprite = staticSprites.get("placeTW"); //reset wall sprite
                     implacable = true;
                     displayInfo = "maxWallUpgrade";
                 }
@@ -155,7 +158,8 @@ public class Hand {
     }
 
     private boolean upgradable(Tile tile) {
-        return tile.tower.nextLevelB < tile.tower.upgradeIcons.length && tile.tower.nextLevelB < currentLevel;
+        return tile.tower.nextLevelB < tile.tower.upgradeIcons.length &&
+                tile.tower.nextLevelB < currentLevel;
     }
 
     /**
