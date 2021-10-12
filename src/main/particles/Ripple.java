@@ -7,9 +7,9 @@ import processing.core.PVector;
 import static main.Main.animatedSprites;
 import static main.misc.Utilities.down60ToFramerate;
 
-public class Water extends Particle {
+public class Ripple extends Particle {
 
-    public Water(PApplet p, float x, float y, String type) {
+    public Ripple(PApplet p, float x, float y, String type) {
         super(p, x, y, 0);
         size = new PVector(12, 12);
         animation = new Animator(
