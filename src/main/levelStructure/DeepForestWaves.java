@@ -20,6 +20,7 @@ public class DeepForestWaves {
         Wave[] waves = new Wave[10];
 
         waves[0] = wavePreset(p, 80, 40, "Big Bug");
+        waves[0].polluter = new Polluter(p, 0, "deepForest/yellow");
         waves[0].addSpawns(bigBug, 1);
         waves[0].addSpawns(midBug, 10);
         waves[0].addSpawns(smallBug, 20);
