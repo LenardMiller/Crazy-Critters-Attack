@@ -1,5 +1,6 @@
 package main.levelStructure;
 
+import main.misc.Polluter;
 import processing.core.PApplet;
 
 import java.awt.*;

@@ -757,7 +757,7 @@ public class SpriteLoader {
         staticSprites.put("iceDebrisBr_TL",p.loadImage("sprites/tiles/breakables/debris/ice.png"));
         staticSprites.put("goldDebrisBr_TL",p.loadImage("sprites/tiles/breakables/debris/gold.png"));
         staticSprites.put("flowerCyanBr_TL",p.loadImage("sprites/tiles/breakables/cyanFlower.png"));
-        staticSprites.put("deadFlowerCyanBr_TL",p.loadImage("sprites/tiles/breakables/deadCyanFlower.png"));
+        staticSprites.put("flowerDeadCyanBr_TL",p.loadImage("sprites/tiles/breakables/deadCyanFlower.png"));
         staticSprites.put("lilyPad0Br_TL",p.loadImage("sprites/tiles/breakables/lilyPads/000.png"));
         staticSprites.put("lilyPad1Br_TL",p.loadImage("sprites/tiles/breakables/lilyPads/001.png"));
         staticSprites.put("lilyPad2Br_TL",p.loadImage("sprites/tiles/breakables/lilyPads/002.png"));

@@ -66,7 +66,7 @@ public class LevelBuilderGui {
         placeButton(2, 8, "lilyPad1Br");
         placeButton(3, 8, "lilyPad2Br");
 
-        placeButton(0, 9, "deadFlowerCyanBr");
+        placeButton(0, 9, "flowerDeadCyanBr");
         placeButton(1, 9, "deadLilyPad0Br");
         placeButton(2, 9, "deadLilyPad1Br");
         placeButton(3, 9, "deadLilyPad2Br");
