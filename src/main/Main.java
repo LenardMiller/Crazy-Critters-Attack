@@ -51,17 +51,17 @@ public class Main extends PApplet {
     public static Sound sound;
 
     public static Machine machine;
-    public static ArrayList<main.towers.Tower> towers;
-    public static ArrayList<Enemy> enemies;
-    public static ArrayList<main.misc.Corpse> corpses;
-    public static ArrayList<main.damagingThings.projectiles.Projectile> projectiles;
-    public static ArrayList<main.particles.Particle> topParticles, midParticles, bottomParticles, veryBottomParticles;
-    public static ArrayList<Arc> arcs;
-    public static ArrayList<Shockwave> shockwaves;
-    public static ArrayList<TowerBuy> towerBuyButtons;
+    public static ArrayList<Tower>      towers;
+    public static ArrayList<Enemy>      enemies;
+    public static ArrayList<Corpse>     corpses;
+    public static ArrayList<Projectile> projectiles;
+    public static ArrayList<Particle>   topParticles, midParticles, bottomParticles, veryBottomParticles;
+    public static ArrayList<Arc>        arcs;
+    public static ArrayList<Shockwave>  shockwaves;
+    public static ArrayList<TowerBuy>   towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;
-    public static ArrayList<Buff> buffs;
-    public static ArrayList<PopupText> popupTexts;
+    public static ArrayList<Buff>       buffs;
+    public static ArrayList<PopupText>  popupTexts;
 
     public static int currentLevel;
     public static Level[] levels;
@@ -84,25 +84,15 @@ public class Main extends PApplet {
     public static int money = 100;
     public static int connectWallQueues;
     public static float globalVolume = 0.25f;
-    public static float matrixScale;
-    public static float matrixOffset;
-    public static boolean fullscreen;
-    public static boolean gore;
-    public static boolean hasVerticalBars;
+    public static float matrixScale, matrixOffset;
+    public static boolean
+            won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, gore, hasVerticalBars;
     public static boolean alive = true;
-    public static boolean won = false;
-    public static boolean debug = false;
-    public static boolean showSpawn = false;
-    public static boolean playingLevel = false;
-    public static boolean levelBuilder = false;
-    public static boolean paused = false;
-    public static boolean settings = false;
     public static boolean dev = false; //<--------
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;
-    public static final int SOFT_PARTICLE_CAP = 1500;
-    public static final int HARD_PARTICLE_CAP = 3000;
+    public static final int SOFT_PARTICLE_CAP = 1500, HARD_PARTICLE_CAP = 3000;
 
     public static final int BOARD_WIDTH = 900;
     public static final int BOARD_HEIGHT = 900;
@@ -138,8 +128,7 @@ public class Main extends PApplet {
     public static HashMap<String, SoundWithAlts> soundsWithAlts = new HashMap<>();
 
     //pathfinding stuff
-    public static final int GRID_WIDTH = 1100;
-    public static final int GRID_HEIGHT = 1100;
+    public static final int GRID_WIDTH = 1100, GRID_HEIGHT = 1100;
     public static final int NODE_SIZE = 25;
     public static final int DEFAULT_SIZE = 1;
     public static Node[][] nodeGrid;
@@ -179,11 +168,11 @@ public class Main extends PApplet {
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
         //fonts
-        veryLargeFont = createFont("STHeitiSC-Light", 48, true);
-        largeFont = createFont("STHeitiSC-Light", 24, true);
+        veryLargeFont =   createFont("STHeitiSC-Light", 48, true);
+        largeFont =       createFont("STHeitiSC-Light", 24, true);
         mediumLargeFont = createFont("STHeitiSC-Light", 21, true);
-        mediumFont = createFont("STHeitiSC-Light", 18, true);
-        smallFont = createFont("STHeitiSC-Light", 12, true);
+        mediumFont =      createFont("STHeitiSC-Light", 18, true);
+        smallFont =       createFont("STHeitiSC-Light", 12, true);
         //loads sprites
         loadStaticSprites(this);
         loadAnimatedSprites(this);
