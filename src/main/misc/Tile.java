@@ -486,7 +486,8 @@ public class Tile {
         }
     }
 
-    private boolean containsCorners(String name, String subName) {
+    public static boolean containsCorners(String name, String subName) {
+        if (name == null) return false;
         boolean bl = name.contains(subName + "BL");
         boolean br = name.contains(subName + "BR");
         boolean tl = name.contains(subName + "TL");

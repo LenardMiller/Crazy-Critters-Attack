@@ -1,6 +1,7 @@
 package main.misc;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import java.util.ArrayList;
 
@@ -44,8 +45,23 @@ public class Polluter {
 
     private void pollute() {
         if (CLEAN_TILES.size() == 0) return;
-        int id = (int) P.random(CLEAN_TILES.size());
-        loadTile(CLEAN_TILES.get(id), "levels/" + NAME);
-        CLEAN_TILES.remove(id);
+        Tile tile = CLEAN_TILES.get((int) P.random(CLEAN_TILES.size()));
+        String name = tile.obstacleName;
+        if (Tile.containsCorners(tile.obstacleName, "tree") ||
+                Tile.containsCorners(tile.obstacleName, "yellowTree")) {
+            IntVector tlPos = tile.getGridPosition();
+            if (name.contains("TR")) tlPos = new IntVector(tlPos.x - 1, tlPos.y);
+            else if (name.contains("BR")) tlPos = new IntVector(tlPos.x - 1, tlPos.y - 1);
+            else if (name.contains("BL")) tlPos = new IntVector(tlPos.x, tlPos.y - 1);
+            pollute(tiles.get(tlPos));
+            pollute(tiles.get(new IntVector(tlPos.x + 1, tlPos.y))); //tr
+            pollute(tiles.get(new IntVector(tlPos.x + 1, tlPos.y + 1))); //br
+            pollute(tiles.get(new IntVector(tlPos.x, tlPos.y + 1))); //bl
+        } else pollute(tile);
+    }
+
+    private void pollute(Tile tile) {
+        loadTile(tile, "levels/" + NAME);
+        CLEAN_TILES.remove(tile);
     }
 }
