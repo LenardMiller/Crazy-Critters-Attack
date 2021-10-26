@@ -30,27 +30,21 @@ public class Wave {
     private final Color TEXT_COLOR;
     private final String TITLE;
     final int SPAWN_LENGTH;
-    public final int LENGTH;
+    final int LENGTH;
 
     public Polluter polluter;
     public String groundType;
 
-    public boolean unskippable;
+    boolean unskippable;
     private int betweenSpawns;
-    /**
-     * Time until wave end
-     */
-    public int lengthTimer;
-    /**
-     * Time until next spawn
-     */
+    /**Time until wave end*/
+    int lengthTimer;
+    /**Time until next spawn*/
     private int betweenSpawnTimer;
-    /**
-     * Time until stop spawning
-     */
+    /**Time until stop spawning*/
     int spawnLengthTimer;
 
-    public ArrayList<String> spawns;
+    ArrayList<String> spawns;
 
     boolean hasFlying;
     boolean hasBurrowing;
@@ -70,7 +64,9 @@ public class Wave {
         P = p;
         LENGTH = secondsToFrames(length);
         SPAWN_LENGTH = secondsToFrames(spawnLength);
-        if (SPAWN_LENGTH >= LENGTH) System.out.println("ERROR: Wave spawn length should always be shorter than its length!");
+        if (SPAWN_LENGTH >= LENGTH) {
+            throw new RuntimeException("Wave spawn length should always be shorter than its total length!");
+        }
         FILL_COLOR = fillColor;
         ACCENT_COLOR = accentColor;
         TEXT_COLOR = textColor;
@@ -287,6 +283,9 @@ public class Wave {
                 break;
             case "Mud Flingers":
                 e = new MudFlinger(P, pos.x, pos.y);
+                break;
+            case "Enraged Giant":
+                e = new EnragedGiant(P, pos.x, pos.y);
                 break;
         }
         return e;

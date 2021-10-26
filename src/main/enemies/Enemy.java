@@ -215,7 +215,7 @@ public abstract class Enemy {
         }
     }
 
-    private PVector getParticlePosition() {
+    protected PVector getParticlePosition() {
         return getRandomPointInRange(p, position, size.mag() * 0.4f);
     }
 
@@ -237,9 +237,7 @@ public abstract class Enemy {
         return actualSpeed;
     }
 
-    /**
-     * handle animation states
-     */
+    /**handle animation states*/
     protected void animate() {
         if (!immobilized) {
             if (state == 1) {
@@ -284,9 +282,7 @@ public abstract class Enemy {
         p.popMatrix();
     }
 
-    /**
-     * Display main sprite
-     */
+    /**Display main sprite*/
     public void displayMain() {
         if (debug) for (int i = points.size() - 1; i > 0; i--) {
             points.get(i).display();

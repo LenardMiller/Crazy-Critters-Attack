@@ -15,6 +15,7 @@ public class SpikeyGlued extends Glued {
 
     private final Spike[] SPIKES;
 
+    //todo: these got all fucked up
     public SpikeyGlued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
         super(p,enId,speedMod,duration,turret);
         SPIKES = new Spike[enemies.get(enId).pfSize * 3];
@@ -25,9 +26,7 @@ public class SpikeyGlued extends Glued {
         }
     }
 
-    /**
-     * particles around enemy
-     */
+    /**particles around enemy*/
     @Override
     protected void display() {
         if (particle != null) {
@@ -40,9 +39,7 @@ public class SpikeyGlued extends Glued {
         for (Spike spike : SPIKES) spike.display(enemies.get(enId).position);
     }
 
-    /**
-     * shoots a bunch of glue spikes
-     */
+    /**shoots a bunch of glue spikes*/
     @Override
     public void dieEffect() {
         int numSpikes = 24;
