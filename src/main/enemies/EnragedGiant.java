@@ -15,10 +15,10 @@ public class EnragedGiant extends Enemy {
         size = new PVector(76,76);
         pfSize = 3;
         radius = 30;
-        speed = 40;
+        speed = 50;
         moneyDrop = 600;
-        damage = 10;
-        maxHp = 10000; //Hp
+        damage = 15;
+        maxHp = 15000; //Hp
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "enragedGiant";

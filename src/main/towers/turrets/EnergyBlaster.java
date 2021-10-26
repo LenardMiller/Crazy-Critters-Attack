@@ -24,12 +24,12 @@ public class EnergyBlaster extends Turret{
         super(p,tile);
         offset = 13;
         name = "energyBlaster";
-        delay = randomizeDelay(p, 4.2f);
-        damage = 400;
+        delay = randomizeDelay(p, 5f);
+        damage = 800;
         pjSpeed = 1000;
         range = 300;
         betweenFireFrames = down60ToFramerate(2);
-        effectRadius = 35;
+        effectRadius = 50;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
@@ -128,10 +128,10 @@ public class EnergyBlaster extends Turret{
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    delay -= 0.6f;
+                    delay -= 1.2f;
                     break;
                 case 1:
-                    effectRadius += 15;
+                    effectRadius += 60;
                     bigExplosion = true;
                     break;
                 case 2:
@@ -152,7 +152,7 @@ public class EnergyBlaster extends Turret{
                     break;
                 case 4:
                     range += 40;
-                    damage += 200;
+                    damage += 400;
                     break;
                 case 5:
                     range += 65;

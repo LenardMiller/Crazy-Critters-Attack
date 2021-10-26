@@ -16,9 +16,11 @@ public class DeepForestWaves {
         String smallTree = "treeSprite";
         String midTree = "Tree Spirits";
         String treeGiant = "Tree Giants";
-        String enragedGiant = "Enraged Giant";
+        String enragedGiant = "Enraged Giants";
+        String midWorm = "midWorm";
+        String bigWorm = "Worms";
 
-        Wave[] waves = new Wave[13];
+        Wave[] waves = new Wave[16];
 
         waves[0] = wavePreset(p, 80, 40, "Big Bug");
         waves[0].polluter = new Polluter(p, 5, "deepForest/yellow");
@@ -70,17 +72,30 @@ public class DeepForestWaves {
         waves[9].addSpawns(smallWorm, 20);
         waves[9].addSpawns(butterfly, 20);
 
-        waves[10] = wavePreset(p, 40, 1, enragedGiant);
+        waves[10] = wavePreset(p, 40, 1, "Enraged Giant");
         waves[10].addSpawns(enragedGiant, 1);
 
-        waves[11] = wavePreset(p, 80, 20, "Giants");
-        waves[11].addSpawns(enragedGiant, 1);
-        waves[11].addSpawns(treeGiant, 2);
+        waves[11] = wavePreset(p, 60, 10, bigWorm);
+        waves[11].addSpawns(smallWorm, 20);
+        waves[11].addSpawns(midWorm, 10);
+        waves[11].addSpawns(bigWorm, 5);
 
-        waves[12] = wavePreset(p, 80, 30, "Giants");
-        waves[12].addSpawns(enragedGiant, 2);
-        waves[12].addSpawns(treeGiant, 3);
-        waves[12].addSpawns(bigBug, 3);
+        waves[12] = wavePreset(p, 80, 20, "Giants");
+        waves[12].addSpawns(enragedGiant, 1);
+        waves[12].addSpawns(treeGiant, 2);
+
+        waves[13] = wavePreset(p, 80, 30, "Giants");
+        waves[13].addSpawns(enragedGiant, 2);
+        waves[13].addSpawns(treeGiant, 3);
+        waves[13].addSpawns(bigBug, 3);
+
+        waves[14] = wavePreset(p, 60, 10, bigWorm);
+        waves[14].addSpawns(smallWorm, 20);
+        waves[14].addSpawns(midWorm, 20);
+        waves[14].addSpawns(bigWorm, 15);
+
+        waves[15] = wavePreset(p, 80, 40, enragedGiant);
+        waves[15].addSpawns(enragedGiant, 5);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -114,8 +129,15 @@ public class DeepForestWaves {
                         new Color(20, 160, 46),
                         new Color(47, 28, 1),
                          "Horde");
+            case "Worms":
+                return new Wave(p, length, spawnLength,
+                        new Color(232, 106, 115),
+                        new Color(255, 255, 255),
+                        new Color(45, 19, 21),
+                        title);
             case "Giants":
             case "Enraged Giant":
+            case "Enraged Giants":
                 return new Wave(p, length, spawnLength,
                         new Color(0x689A32),
                         new Color(0x5B4B1C),

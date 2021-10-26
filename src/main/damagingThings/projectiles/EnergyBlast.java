@@ -1,8 +1,10 @@
 package main.damagingThings.projectiles;
 
+import main.misc.Utilities;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -34,16 +36,24 @@ public class EnergyBlast extends Projectile {
     public void die() {
         if (!BIG_EXPLOSION) {
             int num = (int) (p.random(10, 16));
-            for (int j = num; j >= 0; j--) {
-                topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "energy", p.random(100,200)));
+            for (int i = 0; i < num; i++) {
+                PVector pos = Utilities.getRandomPointInRange(p, position, effectRadius);
+                topParticles.add(new MiscParticle(p, pos.x, pos.y, p.random(360), "energy"));
             }
-            topParticles.add(new MediumExplosion(p, position.x, position.y, p.random(0, 360), "energy"));
+            for (int j = num; j >= 0; j--) {
+                topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(360), "energy", p.random(100,200)));
+            }
+            topParticles.add(new MediumExplosion(p, position.x, position.y, p.random(360), "energy"));
         } else {
             int num = (int) (p.random(16, 42));
-            for (int j = num; j >= 0; j--) {
-                topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(0, 360), "energy", p.random(100,200)));
+            for (int i = 0; i < num; i++) {
+                PVector pos = Utilities.getRandomPointInRange(p, position, effectRadius);
+                topParticles.add(new MiscParticle(p, pos.x, pos.y, p.random(360), "energy"));
             }
-            topParticles.add(new LargeExplosion(p, position.x, position.y, p.random(0, 360), "energy"));
+            for (int j = num; j >= 0; j--) {
+                topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(360), "energy", p.random(100,200)));
+            }
+            topParticles.add(new LargeExplosion(p, position.x, position.y, p.random(360), "energy"));
         }
         projectiles.remove(this);
     }

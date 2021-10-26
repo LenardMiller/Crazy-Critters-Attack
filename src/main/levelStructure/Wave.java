@@ -214,6 +214,7 @@ public class Wave {
             case "midWorm":
                 e = new MidWorm(P, pos.x, pos.y);
                 break;
+            case "Worms":
             case "Megaworms":
             case "bigWorm":
                 e = new BigWorm(P, pos.x, pos.y);
@@ -284,6 +285,7 @@ public class Wave {
             case "Mud Flingers":
                 e = new MudFlinger(P, pos.x, pos.y);
                 break;
+            case "Enraged Giants":
             case "Enraged Giant":
                 e = new EnragedGiant(P, pos.x, pos.y);
                 break;
