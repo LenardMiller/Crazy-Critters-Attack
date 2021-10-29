@@ -20,11 +20,9 @@ public class MidWorm extends BurrowingEnemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "midWorm";
-        attackStartFrame = 0;
         attackDmgFrames = new int[]{15};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(4);
-        attackFrame = attackStartFrame;
         partSize = new PVector(9, 9);
         corpseSize = new PVector(25,25);
         overkillSound = sounds.get("squish");

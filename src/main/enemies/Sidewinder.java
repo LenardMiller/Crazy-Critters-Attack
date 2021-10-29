@@ -20,12 +20,10 @@ public class Sidewinder extends Enemy {
         hp = maxHp;
         hitParticle = "redOuch";
         name = "sidewinder";
-        attackStartFrame = 0;
         attackDmgFrames = new int[]{4};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(5);
         betweenWalkFrames = down60ToFramerate(2);
-        attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(9,9);
         overkillSound = sounds.get("hissSquish");

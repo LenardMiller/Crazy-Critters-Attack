@@ -22,8 +22,7 @@ public class MidBug extends Enemy {
         name = "midBug";
         betweenWalkFrames = down60ToFramerate(6);
         betweenAttackFrames = down60ToFramerate(2);
-        attackStartFrame = 34; //attack start
-        attackFrame = attackStartFrame;
+        attackDmgFrames = new int[]{7};
         corpseSize = size;
         partSize = new PVector(14,14);
         overkillSound = sounds.get("squish");

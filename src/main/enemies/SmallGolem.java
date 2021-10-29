@@ -22,8 +22,7 @@ public class SmallGolem extends Enemy{
         name = "smallGolem";
         betweenAttackFrames = down60ToFramerate(2);
         betweenWalkFrames = down60ToFramerate(3);
-        attackStartFrame = 14;
-        attackFrame = attackStartFrame;
+        attackDmgFrames = new int[]{12};
         corpseSize = new PVector(50,50);
         partSize = new PVector(24,24);
         betweenCorpseFrames = down60ToFramerate(5);

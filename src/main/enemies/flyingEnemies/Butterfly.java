@@ -20,11 +20,9 @@ public class Butterfly extends FlyingEnemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "butterfly";
-        attackStartFrame = 0;
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(5);
-        attackFrame = attackStartFrame;
         corpseSize = new PVector(25,25);
         partSize = new PVector(18,18);
         betweenCorpseFrames = down60ToFramerate(4);

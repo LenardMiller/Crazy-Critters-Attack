@@ -22,11 +22,8 @@ public class MudCreature extends Enemy {
         name = "mudCreature";
         betweenWalkFrames = down60ToFramerate(6);
         betweenAttackFrames = down60ToFramerate(4);
-        attackStartFrame = 0; //attack start
-        attackFrame = attackStartFrame;
         attackDmgFrames = new int[]{9};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(25,25);
         overkillSound = sounds.get("mudSquish");

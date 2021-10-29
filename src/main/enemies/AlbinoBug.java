@@ -11,7 +11,7 @@ public class AlbinoBug extends Enemy {
     public AlbinoBug(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(25,25);
-        pfSize = 1; //1
+        pfSize = 1;
         radius = 13;
         speed = 30;
         moneyDrop = 20;
@@ -22,8 +22,7 @@ public class AlbinoBug extends Enemy {
         name = "albinoBug";
         betweenWalkFrames = down60ToFramerate(6);
         betweenAttackFrames = down60ToFramerate(2);
-        attackStartFrame = 34; //attack start
-        attackFrame = attackStartFrame;
+        attackDmgFrames = new int[]{9};
         corpseSize = size;
         partSize = new PVector(14,14);
         overkillSound = sounds.get("squish");

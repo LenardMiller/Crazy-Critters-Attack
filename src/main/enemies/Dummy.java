@@ -21,8 +21,6 @@ public class Dummy extends Enemy {
         hitParticle = "leafOuch";
         name = "dummy";
         betweenWalkFrames = down60ToFramerate(1);
-        attackStartFrame = 0; //attack start
-        attackFrame = attackStartFrame;
         corpseSize = size;
         dieSound = sounds.get("woodBreak");
         overkillSound = sounds.get("wodBreak");

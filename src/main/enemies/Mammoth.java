@@ -18,7 +18,6 @@ public class Mammoth extends Enemy {
         moneyDrop = 2500;
         hitParticle = "redOuch";
         name = "mammoth";
-        attackStartFrame = 0;
         attackDmgFrames = new int[]{9};
         betweenWalkFrames = 5;
         betweenAttackFrames = 5;

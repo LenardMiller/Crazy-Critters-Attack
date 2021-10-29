@@ -28,8 +28,6 @@ public class Antlion extends ShootingEnemy {
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(12);
         betweenShootFrames = down60ToFramerate(12);
-        attackStartFrame = 0; //attack start
-        attackFrame = attackStartFrame;
         attackDmgFrames = new int[]{6};
         shootFireFrame = 6;
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

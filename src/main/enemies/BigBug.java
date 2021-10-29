@@ -21,10 +21,9 @@ public class BigBug extends Enemy {
         hitParticle = "greenOuch";
         name = "bigBug";
         betweenWalkFrames = down60ToFramerate(13);
-        attackStartFrame = 48; //attack start
+        attackDmgFrames = new int[]{9};
         corpseSize = size;
         partSize = new PVector(32,32);
-        attackFrame = attackStartFrame;
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
         loadStuff();

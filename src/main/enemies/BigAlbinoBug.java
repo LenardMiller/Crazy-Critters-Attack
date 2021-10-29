@@ -21,10 +21,9 @@ public class BigAlbinoBug extends Enemy {
         hitParticle = "glowOuch";
         name = "bigAlbinoBug";
         betweenWalkFrames = down60ToFramerate(13);
-        attackStartFrame = 48; //attack start
         corpseSize = size;
+        attackDmgFrames = new int[]{9};
         partSize = new PVector(32,32);
-        attackFrame = attackStartFrame;
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
         loadStuff();

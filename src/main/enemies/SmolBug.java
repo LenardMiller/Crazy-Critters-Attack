@@ -22,8 +22,6 @@ public class SmolBug extends Enemy {
         name = "smolBug";
         betweenWalkFrames = down60ToFramerate(6);
         betweenAttackFrames = down60ToFramerate(4);
-        attackStartFrame = 1; //attack start
-        attackFrame = attackStartFrame;
         attackDmgFrames = new int[]{17};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         corpseSize = size;

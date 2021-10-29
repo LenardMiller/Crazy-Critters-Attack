@@ -22,12 +22,10 @@ public class EnragedGiant extends Enemy {
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "enragedGiant";
-        attackStartFrame = 0;
         attackDmgFrames = new int[]{28};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(1);
         betweenWalkFrames = down60ToFramerate(1);
-        attackFrame = attackStartFrame;
         corpseSize = new PVector(152,152);
         partSize = new PVector(68,68);
         corpseLifespan = 12;

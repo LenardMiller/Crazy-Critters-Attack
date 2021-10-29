@@ -29,7 +29,6 @@ public class Frost extends FlyingEnemy {
         hp = maxHp;
         hitParticle = "iceOuch";
         name = "frost";
-        attackStartFrame = 0;
         betweenAttackFrames = 8;
         dieSound = sounds.get("frostDie");
         overkillSound = sounds.get("frostDie");
@@ -106,10 +105,7 @@ public class Frost extends FlyingEnemy {
                 spawnAttackParticles();
             }
         }
-        if (!attackCue && attackFrame == attackStartFrame) {
-            state = 0;
-            attackFrame = attackStartFrame;
-        }
+        if (!attackCue && attackFrame == 0) state = 0;
     }
 
     private void spawnAttackParticles() {

@@ -20,12 +20,10 @@ public class GiantGolem extends Enemy {
         hp = maxHp;
         hitParticle = "lichenOuch";
         name = "giantGolem";
-        attackStartFrame = 0;
         attackDmgFrames = new int[]{28};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(2);
         betweenWalkFrames = down60ToFramerate(3);
-        attackFrame = attackStartFrame;
         corpseSize = new PVector(152,152);
         partSize = new PVector(68,68);
         corpseLifespan = 12;

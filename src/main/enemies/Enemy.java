@@ -60,7 +60,6 @@ public abstract class Enemy {
     protected int damage;
     protected int betweenWalkFrames;
     protected int betweenAttackFrames;
-    protected int attackStartFrame;
     protected int betweenCorpseFrames;
     protected int corpseLifespan;
     protected int pathRequestWaitTimer;
@@ -101,7 +100,6 @@ public abstract class Enemy {
         barAlpha = 0;
         hitParticle = "redOuch";
         name = "";
-        attackStartFrame = 0; //todo: get rid of this, I hate it
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
         tempAttackDmgFrames = new int[attackDmgFrames.length];
@@ -523,7 +521,7 @@ public abstract class Enemy {
             moveFrame = 0;
             if (dmg) machine.damage(damage);
         }
-        if (!attackCue && attackFrame == attackStartFrame) state = 0;
+        if (!attackCue && attackFrame == 0) state = 0;
     }
 
     public boolean onScreen() {
@@ -531,7 +529,6 @@ public abstract class Enemy {
     }
 
     /*pathfinding ------------------------------------------------------------------------------------------------------
-      todo: fix attacking multiple things at once
       todo: still walk through stuff!!!*/
 
     protected boolean intersectTurnPoint() {

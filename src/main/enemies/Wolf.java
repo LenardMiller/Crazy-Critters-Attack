@@ -20,12 +20,10 @@ public class Wolf extends Enemy {
         hp = maxHp;
         hitParticle = "redOuch";
         name = "wolf";
-        attackStartFrame = 0;
         attackDmgFrames = new int[]{8};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(5);
         betweenWalkFrames = down60ToFramerate(10);
-        attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(25,25);
         overkillSound = sounds.get("barkSquish");

@@ -20,12 +20,10 @@ public class Velociraptor extends Enemy {
         hp = maxHp;
         hitParticle = "redOuch";
         name = "velociraptor";
-        attackStartFrame = 0;
         attackDmgFrames = new int[]{8};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         betweenAttackFrames = down60ToFramerate(6);
         betweenWalkFrames = down60ToFramerate(6);
-        attackFrame = attackStartFrame;
         corpseSize = size;
         partSize = new PVector(45,45);
         overkillSound = sounds.get("dinoSquish");
