@@ -70,33 +70,6 @@ public class CollisionBox {
     }
 
     /**
-     * todo: doesn't always work as expected
-     * @param angle angle to check
-     * @param position position of box
-     * @return angle reflected off sides
-     */
-    public float collideAngleWithInside(float angle, PVector position) {
-        float edgeAngle;
-        float angleOfIncidence;
-        if (position.x > getRightEdge() && angleIsFacingLeftStandard(angle)) {
-            if (!angleIsFacingUpStandard(angle)) return -angle + PI;
-            return angle + HALF_PI;
-        } if (position.x < getLeftEdge() && !angleIsFacingLeftStandard(angle)) {
-            if (angleIsFacingUpStandard(angle)) return angle - HALF_PI;
-            else return -(angle - PI);
-        } if (position.y > getBottomEdge() && angleIsFacingUpStandard(angle)) {
-            edgeAngle = HALF_PI;
-            angleOfIncidence = getAngleDifference(angle, edgeAngle);
-            return -edgeAngle - angleOfIncidence;
-        } if (position.y < getTopEdge() && !angleIsFacingUpStandard(angle)) {
-            edgeAngle = PI + HALF_PI;
-            angleOfIncidence = getAngleDifference(angle, edgeAngle);
-            return -edgeAngle - angleOfIncidence;
-        }
-        return angle;
-    }
-
-    /**
      * Check if a point is inside the box
      * @param position position of box
      * @param point point to check
