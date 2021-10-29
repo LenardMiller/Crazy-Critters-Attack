@@ -15,13 +15,12 @@ public class SpikeyGlued extends Glued {
 
     private final Spike[] SPIKES;
 
-    //todo: these got all fucked up
     public SpikeyGlued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
         super(p,enId,speedMod,duration,turret);
         SPIKES = new Spike[enemies.get(enId).pfSize * 3];
         for (int i = 0; i < SPIKES.length; i++) {
             Enemy enemy = enemies.get(enId);
-            PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
+            PVector pos = getRandomPointInRange(p, new PVector(), enemy.size.mag() * 0.4f);
             SPIKES[i] = new Spike(pos.x, pos.y, p.random(0,360));
         }
     }
