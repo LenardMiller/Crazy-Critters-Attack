@@ -243,7 +243,7 @@ public class IceTower extends Turret {
 
         upgradePrices[3] = 1000;
         upgradePrices[4] = 1500;
-        upgradePrices[5] = 50000;
+        upgradePrices[5] = 35000;
         //titles
         upgradeTitles[0] = "Longer Lasting";
         upgradeTitles[1] = "Stronger Ice";
@@ -301,7 +301,7 @@ public class IceTower extends Turret {
                 case 2:
                     name = "autoIceTower";
                     range = 5000;
-                    delay -= 2;
+                    delay -= 6;
                     wallTimeUntilDamage = -1;
                     wallHp *= 2;
                     angle = 0;
