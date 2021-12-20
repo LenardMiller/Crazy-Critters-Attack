@@ -17,6 +17,7 @@ public class DeepForestWaves {
         String midTree = "Tree Spirits";
         String treeGiant = "Tree Giants";
         String enragedGiant = "Enraged Giants";
+        String mantis = "Mantis";
         String midWorm = "midWorm";
         String bigWorm = "Worms";
 
