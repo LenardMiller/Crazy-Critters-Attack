@@ -371,6 +371,11 @@ public class Tile {
         baseEdges[1] = staticSprites.get(name + "Ba_R_TL");
         baseEdges[2] = staticSprites.get(name + "Ba_B_TL");
         baseEdges[3] = staticSprites.get(name + "Ba_L_TL");
+        //remove debris
+        if (name.equals("water")) {
+            setBreakable(null);
+            setFlooring(null);
+        }
         //update hierarchies as tiles are added
         switch (name) {
             case "snow":
@@ -419,7 +424,7 @@ public class Tile {
 
     public void setFlooring(String name) {
         flooringEdges = new PImage[4];
-        if (name == null) {
+        if (name == null || baseName.equals("water")) {
             flooring = null;
             flooringName = null;
         } else {
