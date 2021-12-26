@@ -21,7 +21,7 @@ public class DeepForestWaves {
         String midWorm = "midWorm";
         String bigWorm = "Worms";
 
-        Wave[] waves = new Wave[16];
+        Wave[] waves = new Wave[19];
 
         waves[0] = wavePreset(p, 80, 40, "Big Bug");
         waves[0].polluter = new Polluter(p, 5, "deepForest/yellow");
@@ -54,49 +54,61 @@ public class DeepForestWaves {
         waves[6] = wavePreset(p, 60, 30, midTree);
         waves[6].addSpawns(midTree, 40);
 
-        waves[7] = wavePreset(p, 80, 40, treeGiant);
-        waves[7].addSpawns(treeGiant, 3);
-        waves[7].addSpawns(midTree, 10);
+        waves[7] = wavePreset(p, 80, 5, mantis);
+        waves[7].addSpawns(mantis, 1);
 
-        waves[8] = wavePreset(p, 60, 30, bigBug);
-        waves[8].addSpawns(bigBug, 15);
-        waves[8].addSpawns(butterfly, 5);
-        waves[8].addSpawns(smallWorm, 5);
+        waves[8] = wavePreset(p, 80, 40, treeGiant);
+        waves[8].addSpawns(treeGiant, 3);
+        waves[8].addSpawns(midTree, 10);
 
-        waves[9] = wavePreset(p, 150, 120, "forestHorde");
-        waves[9].addSpawns(treeGiant, 5);
-        waves[9].addSpawns(midTree, 30);
-        waves[9].addSpawns(smallTree, 10);
-        waves[9].addSpawns(bigBug, 25);
-        waves[9].addSpawns(midBug, 10);
-        waves[9].addSpawns(smallBug, 10);
-        waves[9].addSpawns(smallWorm, 20);
-        waves[9].addSpawns(butterfly, 20);
+        waves[9] = wavePreset(p, 60, 30, bigBug);
+        waves[9].addSpawns(bigBug, 15);
+        waves[9].addSpawns(butterfly, 5);
+        waves[9].addSpawns(smallWorm, 5);
 
-        waves[10] = wavePreset(p, 40, 1, "Enraged Giant");
-        waves[10].addSpawns(enragedGiant, 1);
+        waves[10] = wavePreset(p, 80, 40, mantis);
+        waves[10].addSpawns(mantis, 3);
+        waves[10].addSpawns(bigBug, 5);
+        waves[10].addSpawns(midBug, 20);
 
-        waves[11] = wavePreset(p, 60, 10, bigWorm);
+        waves[11] = wavePreset(p, 150, 120, "forestHorde");
+        waves[11].addSpawns(treeGiant, 5);
+        waves[11].addSpawns(midTree, 30);
+        waves[11].addSpawns(smallTree, 10);
+        waves[11].addSpawns(bigBug, 25);
+        waves[11].addSpawns(midBug, 10);
+        waves[11].addSpawns(smallBug, 10);
         waves[11].addSpawns(smallWorm, 20);
-        waves[11].addSpawns(midWorm, 10);
-        waves[11].addSpawns(bigWorm, 5);
+        waves[11].addSpawns(butterfly, 20);
 
-        waves[12] = wavePreset(p, 80, 20, "Giants");
+        waves[12] = wavePreset(p, 40, 1, "Enraged Giant");
         waves[12].addSpawns(enragedGiant, 1);
-        waves[12].addSpawns(treeGiant, 2);
 
-        waves[13] = wavePreset(p, 80, 30, "Giants");
-        waves[13].addSpawns(enragedGiant, 2);
-        waves[13].addSpawns(treeGiant, 3);
-        waves[13].addSpawns(bigBug, 3);
+        waves[13] = wavePreset(p, 60, 10, bigWorm);
+        waves[13].addSpawns(mantis, 3);
+        waves[13].addSpawns(smallWorm, 20);
+        waves[13].addSpawns(midWorm, 10);
+        waves[13].addSpawns(bigWorm, 5);
 
-        waves[14] = wavePreset(p, 60, 10, bigWorm);
-        waves[14].addSpawns(smallWorm, 20);
-        waves[14].addSpawns(midWorm, 20);
-        waves[14].addSpawns(bigWorm, 15);
+        waves[14] = wavePreset(p, 80, 20, "Giants");
+        waves[14].addSpawns(enragedGiant, 1);
+        waves[14].addSpawns(treeGiant, 2);
 
-        waves[15] = wavePreset(p, 80, 40, enragedGiant);
-        waves[15].addSpawns(enragedGiant, 5);
+        waves[15] = wavePreset(p, 80, 20, mantis);
+        waves[15].addSpawns(mantis, 10);
+
+        waves[16] = wavePreset(p, 80, 30, "Giants");
+        waves[16].addSpawns(enragedGiant, 2);
+        waves[16].addSpawns(treeGiant, 3);
+        waves[16].addSpawns(bigBug, 3);
+
+        waves[17] = wavePreset(p, 60, 10, bigWorm);
+        waves[17].addSpawns(smallWorm, 20);
+        waves[17].addSpawns(midWorm, 20);
+        waves[17].addSpawns(bigWorm, 15);
+
+        waves[18] = wavePreset(p, 80, 40, enragedGiant);
+        waves[18].addSpawns(enragedGiant, 5);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -143,6 +155,12 @@ public class DeepForestWaves {
                         new Color(0x689A32),
                         new Color(0x5B4B1C),
                         new Color(0x6b5823),
+                        title);
+            case "Mantis":
+                return new Wave(p, length, spawnLength,
+                        new Color(0x82D240),
+                        new Color(0xCAEC43),
+                        new Color(0x407E15),
                         title);
             default:
                 return new Wave(p, length, spawnLength,

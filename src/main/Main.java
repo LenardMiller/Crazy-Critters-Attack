@@ -168,11 +168,11 @@ public class Main extends PApplet {
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
         //fonts
-        veryLargeFont =   createFont("STHeitiSC-Light", 48, true);
-        largeFont =       createFont("STHeitiSC-Light", 24, true);
+        veryLargeFont   = createFont("STHeitiSC-Light", 48, true);
+        largeFont       = createFont("STHeitiSC-Light", 24, true);
         mediumLargeFont = createFont("STHeitiSC-Light", 21, true);
-        mediumFont =      createFont("STHeitiSC-Light", 18, true);
-        smallFont =       createFont("STHeitiSC-Light", 12, true);
+        mediumFont      = createFont("STHeitiSC-Light", 18, true);
+        smallFont       = createFont("STHeitiSC-Light", 12, true);
         //loads sprites
         loadStaticSprites(this);
         loadAnimatedSprites(this);
