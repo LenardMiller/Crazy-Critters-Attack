@@ -48,13 +48,13 @@ public class PauseGui {
 
     private void display() {
         //big text
-        PVector position = new PVector(P.width/2f, 300);
+        PVector position = new PVector(P.width / 2f, 300);
         if (!alive) shadowedText(P, "Game Over", position, new Color(255, 0, 0, 254),
-                new Color(50, 0, 0, 254), 48, CENTER);
+                new Color(50, 0, 0, 254), veryLargeFont, CENTER);
         else if (won) shadowedText(P, "You Win!", position, new Color(255, 255, 0, 254),
-                new Color(125, 50, 0, 254), 48, CENTER);
+                new Color(125, 50, 0, 254), veryLargeFont, CENTER);
         else shadowedText(P, "Paused", position, new Color(255, 255, 255, 254),
-                    new Color(50, 50, 50, 254), 48, CENTER);
+                    new Color(50, 50, 50, 254), veryLargeFont, CENTER);
         //buttons
         P.fill(200, 254);
         P.textFont(mediumFont);

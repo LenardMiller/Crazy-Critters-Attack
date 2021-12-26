@@ -2,6 +2,7 @@ package main.misc;
 
 import main.particles.Particle;
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PImage;
 import processing.core.PVector;
 
@@ -287,6 +288,28 @@ public class Utilities {
                                     float textSize, int textAlign) {
         p.textAlign(textAlign);
         p.textSize(textSize);
+        int offset = 2;
+
+        p.fill(darkColor.getRGB(), darkColor.getAlpha());
+        p.text(text, position.x + offset, position.y + offset);
+        p.fill(lightColor.getRGB(), lightColor.getAlpha());
+        p.text(text, position.x, position.y);
+    }
+
+    /**
+     * Displays text with a slight 3d effect
+     * @param p the PApplet
+     * @param text text to be displayed
+     * @param position where text will be displayed
+     * @param lightColor main text color, RGBA
+     * @param darkColor shadow color, RGBA
+     * @param font text font
+     * @param textAlign alignment of text
+     */
+    public static void shadowedText(PApplet p, String text, PVector position, Color lightColor, Color darkColor,
+                                    PFont font, int textAlign) {
+        p.textAlign(textAlign);
+        p.textFont(font);
         int offset = 2;
 
         p.fill(darkColor.getRGB(), darkColor.getAlpha());
