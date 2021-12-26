@@ -150,7 +150,7 @@ public class Main extends PApplet {
      */
     @Override
     public void settings() {
-        size(GRID_WIDTH, BOARD_HEIGHT);
+        size(GRID_WIDTH, BOARD_HEIGHT, P2D);
         if (fullscreen) {
             fullScreen();
             noSmooth();
