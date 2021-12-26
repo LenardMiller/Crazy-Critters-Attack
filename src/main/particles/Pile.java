@@ -24,7 +24,7 @@ public class Pile extends Particle {
     @Override
     protected void display() {
         if (animation.ended()) dead = true;
-        p.tint(255,255* (animation.getBetweenFramesCounter() / (float) animation.getBetweenFrames()));
+        p.tint(255,255 * (1 - animation.getBetweenFramesCounter() / (float) animation.getBetweenFrames()));
         if (!paused) {
             animation.update();
             displayAngle += radians(angularVelocity);
