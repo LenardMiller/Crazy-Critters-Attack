@@ -27,9 +27,7 @@ public abstract class Turret extends Tower {
     public boolean hasPriority;
     public int pjSpeed;
     public int range;
-    /**
-     * Close, far, maxHP
-     */
+    /** Close, far, maxHP */
     public int priority;
     public int pierce;
     public int killsTotal;
@@ -38,17 +36,13 @@ public abstract class Turret extends Tower {
     public float effectDuration;
     public float effectLevel;
     public float delay;
-    /**
-     * Radians
-     */
+    /** Radians */
     public float angle;
     public String[] upgradeDescA;
     public String[] upgradeDescB;
     public String[] upgradeDescC;
 
-    /**
-     * 0: Idle, 1: Fire, 2: Load
-     */
+    /** 0: Idle, 1: Fire, 2: Load */
     protected int state;
     protected int offset;
     protected int frame;
