@@ -151,6 +151,7 @@ public class RandomCannon extends Turret {
                     damage += 20;
                     effectDuration = 6;
                     effectLevel = 25;
+                    betweenFireFrames = 1;
                     name = "miscCannonLaundry";
                     loadSprites();
                     break;

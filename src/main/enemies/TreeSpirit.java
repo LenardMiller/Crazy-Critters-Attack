@@ -16,7 +16,7 @@ public class TreeSpirit extends Enemy {
         speed = 21;
         moneyDrop = 30;
         damage = 3;
-        maxHp = 500; //Hp <---------------------------
+        maxHp = 350; //Hp <---------------------------
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "treeSpirit";

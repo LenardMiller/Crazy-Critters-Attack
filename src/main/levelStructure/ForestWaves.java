@@ -94,8 +94,8 @@ public class ForestWaves {
         waves[12].addSpawns("midBug", 10);
         waves[12].addSpawns("treeSprite",10);
 
-        waves[13] = new Wave(p, 60, 10, snakeFill, snakeAccent, snakeText, "Snakes");
-        waves[13].addSpawns("snake", 20);
+        waves[13] = new Wave(p, 60, 20, snakeFill, snakeAccent, snakeText, "Snakes");
+        waves[13].addSpawns("snake", 30);
 
         waves[14] = new Wave(p, 40, 15, treeSpiritFill, treeSpiritAccent, treeSpiritText, "Tree Spirits");
         waves[14].addSpawns("treeSprite", 5);
@@ -139,7 +139,7 @@ public class ForestWaves {
         waves[23].addSpawns("bigBug", 3);
         waves[23].addSpawns("littleWorm", 5);
 
-        waves[24] = new Wave(p, 50, 20, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
+        waves[24] = new Wave(p, 70, 40, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
         waves[24].addSpawns("midBug", 10);
         waves[24].addSpawns("bigBug", 5);
         waves[24].addSpawns("littleWorm", 5);
@@ -148,7 +148,7 @@ public class ForestWaves {
         waves[25] = new Wave(p, 45, 1, treeGiantFill, treeGiantAccent, treeGiantText, "Tree Giant");
         waves[25].addSpawns("treeGiant", 1);
 
-        waves[26] = new Wave(p, 50, 20, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
+        waves[26] = new Wave(p, 70, 40, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
         waves[26].addSpawns("bigBug", 10);
         waves[26].addSpawns("snake", 10);
 
