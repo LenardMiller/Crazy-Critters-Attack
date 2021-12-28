@@ -46,7 +46,6 @@ public class ForestWaves {
 
         waves[0] = new Wave(p, 70, 40, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
         waves[0].addSpawns("smolBug",3);
-        waves[0].polluter = new Polluter(p, 5, "forest/polluted");
 
         waves[1] = new Wave(p, 70, 40, smolBugFill, smolBugAccent, smolBugText, "Small Bugs");
         waves[1].addSpawns("smolBug", 5);
@@ -62,6 +61,7 @@ public class ForestWaves {
         waves[4].addSpawns("smolBug", 15);
 
         waves[5] = new Wave(p, 60, 35, midBugFill, midBugAccent, midBugText, "Bugs");
+        waves[5].polluter = new Polluter(p, 5, "forest/polluted");
         waves[5].addSpawns("smolBug", 10);
         waves[5].addSpawns("midBug", 5);
 
