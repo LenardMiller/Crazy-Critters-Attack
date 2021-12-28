@@ -447,4 +447,8 @@ public class Utilities {
         r.add(deflection);
         return r;
     }
+
+    public static IntVector getCenter(PApplet p) {
+        return new IntVector(p.width / 2, p.height / 2);
+    }
 }

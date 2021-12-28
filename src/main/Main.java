@@ -74,12 +74,13 @@ public class Main extends PApplet {
     public static PauseGui pauseGui;
     public static LevelSelectGui levelSelectGui;
     public static SettingsGui settingsGui;
+    public static LoadingGui loadingGui;
 
     //can't be final because created by PApplet
     public static PFont veryLargeFont, largeFont, mediumLargeFont, mediumFont, smallFont;
 
-    /**in-game, level select*/
-    public static int screen = 1;
+    /**in-game, level select, loading*/
+    public static int screen = 2;
     public static int money = 100;
     public static int connectWallQueues;
     public static float globalVolume = 0.25f;
@@ -166,22 +167,8 @@ public class Main extends PApplet {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
-        //fonts - this took 2 seconds
-        veryLargeFont   = createFont("STHeitiSC-Light", 48, true);
-        largeFont       = createFont("STHeitiSC-Light", 24, true);
-        mediumLargeFont = createFont("STHeitiSC-Light", 21, true);
-        mediumFont      = createFont("STHeitiSC-Light", 18, true);
-        smallFont       = createFont("STHeitiSC-Light", 12, true);
-        //loads sprites - this took 4 seconds
-        loadGui(this);
-        loadEnemies(this);
-        loadMachines(this);
-        loadParticles(this);
-        loadProjectiles(this);
-        loadTiles(this);
-        loadTurrets(this);
-        //sound stuff
-        loadSounds(this);
+        //fonts
+        veryLargeFont = createFont("STHeitiSC-Light", 48, true);
         //load input
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
@@ -189,8 +176,7 @@ public class Main extends PApplet {
         //set level count, it has to be this way :(
         levels = new Level[5];
         //guis
-        levelSelectGui = new LevelSelectGui(this);
-        settingsGui = new SettingsGui(this);
+        loadingGui = new LoadingGui(this, veryLargeFont);
         //matrix
         float screenRatio = width / (float) height;
         float boardRatio = BOARD_WIDTH / (float) BOARD_HEIGHT;
@@ -291,6 +277,7 @@ public class Main extends PApplet {
         //screens
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
+        if (screen == 2) drawLoading();
         if (settings) settingsGui.main();
         keyBinds.menuKeys();
         //sound stuff
@@ -381,6 +368,8 @@ public class Main extends PApplet {
     private void drawLevelSelect() {
         if (!settings) levelSelectGui.main();
     }
+
+    private void drawLoading() { loadingGui.main(); }
 
     /**
      * Runs all the in-game stuff.
