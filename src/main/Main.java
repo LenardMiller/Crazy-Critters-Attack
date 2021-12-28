@@ -35,8 +35,7 @@ import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
 import static main.misc.DataControl.loadSettings;
-import static main.misc.SpriteLoader.loadAnimatedSprites;
-import static main.misc.SpriteLoader.loadStaticSprites;
+import static main.misc.SpriteLoader.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
 import static main.pathfinding.PathfindingUtilities.*;
@@ -167,15 +166,20 @@ public class Main extends PApplet {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
-        //fonts
+        //fonts - this took 2 seconds
         veryLargeFont   = createFont("STHeitiSC-Light", 48, true);
         largeFont       = createFont("STHeitiSC-Light", 24, true);
         mediumLargeFont = createFont("STHeitiSC-Light", 21, true);
         mediumFont      = createFont("STHeitiSC-Light", 18, true);
         smallFont       = createFont("STHeitiSC-Light", 12, true);
-        //loads sprites
-        loadStaticSprites(this);
-        loadAnimatedSprites(this);
+        //loads sprites - this took 4 seconds
+        loadGui(this);
+        loadEnemies(this);
+        loadMachines(this);
+        loadParticles(this);
+        loadProjectiles(this);
+        loadTiles(this);
+        loadTurrets(this);
         //sound stuff
         loadSounds(this);
         //load input
