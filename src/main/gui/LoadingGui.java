@@ -6,14 +6,12 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 
-import java.awt.*;
-
 import static main.misc.SpriteLoader.*;
 import static main.sound.SoundLoader.loadSounds;
 
 public class LoadingGui {
 
-    private static final int MAX_PROGRESS = 9;
+    private static final int MAX_PROGRESS = 10;
     private static final int DARK_CHANGE = 6;
 
     private final PApplet P;
@@ -62,9 +60,12 @@ public class LoadingGui {
                 loadTurrets(P);
                 break;
             case 8:
-                loadSounds(P);
+                loadWalls(P);
                 break;
             case 9:
+                loadSounds(P);
+                break;
+            case 10:
                 Main.levelSelectGui = new LevelSelectGui(P);
                 Main.settingsGui = new SettingsGui(P);
                 break;

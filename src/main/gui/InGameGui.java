@@ -29,7 +29,7 @@ public class InGameGui {
     public static final Color FLASH_COLOR = new Color(255, 255, 255);
     public static final Color MAIN_PANEL_COLOR = new Color(235, 235, 235);
     public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
-    public static final Color TOWERBUY_PANEL_COLOR = new Color(130, 130, 130);
+    public static final Color TOWER_BUY_PANEL_COLOR = new Color(130, 130, 130);
     public static final Color MAIN_TEXT_COLOR = new Color(0);
     public static final Color BOOSTED_TEXT_COLOR = new Color(255, 132, 0);
 
@@ -52,10 +52,10 @@ public class InGameGui {
         levels[currentLevel].display();
         P.stroke(0);
         P.fill(MONEY_PANEL_COLOR.getRGB()); //money bg
-        P.rect(BOARD_WIDTH, 176, 198, 35);
+        P.rect(BOARD_WIDTH, 176, 199, 36);
         openMenuButton.main();
         P.noStroke();
-        P.fill(TOWERBUY_PANEL_COLOR.getRGB()); //towerbuy bg
+        P.fill(TOWER_BUY_PANEL_COLOR.getRGB()); //tower buy bg
         P.rect(900,21,200,127);
         wallBuyButton.main();
         playButton.main(); //display is in Level
