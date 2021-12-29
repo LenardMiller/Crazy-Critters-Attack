@@ -15,6 +15,19 @@ import static main.pathfinding.PathfindingUtilities.updateNodes;
 
 public class Tile {
 
+    /** lowest at top, highest at bottom */
+    private static final String[] baseHierarchy = {
+            "dirtyWater",
+            "water",
+            "stone",
+            "sand",
+            "dirt",
+            "deadGrass",
+            "yellowGrass",
+            "grass",
+            "snow"
+    };
+
     private final PApplet P;
 
     public boolean machine;
@@ -32,7 +45,7 @@ public class Tile {
     public PImage obstacle;
     public String obstacleName;
 
-    int baseHierarchy;
+    int placeInBaseHierarchy;
     PImage[] baseEdges;
     PImage[] flooringEdges;
 
@@ -146,7 +159,7 @@ public class Tile {
         if (baseName == null) return false;
         boolean nameDoesNotMatch = !baseName.equals(tile.baseName);
         boolean tileTypeCanSpill = tile.baseEdges[i] != null;
-        boolean higherHierarchy = baseHierarchy < tile.baseHierarchy;
+        boolean higherHierarchy = placeInBaseHierarchy < tile.placeInBaseHierarchy;
         return nameDoesNotMatch && tileTypeCanSpill && higherHierarchy;
     }
 
@@ -377,31 +390,11 @@ public class Tile {
             setFlooring(null);
         }
         //update hierarchies as tiles are added
-        switch (name) {
-            case "snow":
-                baseHierarchy = 7;
+        for (int i = 0; i < baseHierarchy.length; i++) {
+            if (name.equals(baseHierarchy[i])) {
+                placeInBaseHierarchy = i;
                 break;
-            case "grass":
-                baseHierarchy = 6;
-                break;
-            case "yellowGrass":
-                baseHierarchy = 5;
-                break;
-            case "dirt":
-                baseHierarchy = 4;
-                break;
-            case "sand":
-                baseHierarchy = 3;
-                break;
-            case "stone":
-                baseHierarchy = 2;
-                break;
-            case "water":
-                baseHierarchy = 1;
-                break;
-            case "dirtyWater":
-                baseHierarchy = 0;
-                break;
+            }
         }
     }
 
