@@ -74,12 +74,18 @@ public class Hand {
         String errorText = "Can't place there!";
         if (price > money || (
                 tileTower != null &&
-                        tileTower.tower instanceof Wall &&
-                        tileTower.tower.nextLevelB < tileTower.tower.upgradePrices.length &&
-                        tileTower.tower.nextLevelB < currentLevel &&
-                        money < tileTower.tower.upgradePrices[tileTower.tower.nextLevelB]
+                tileTower.tower instanceof Wall &&
+                tileTower.tower.nextLevelB < tileTower.tower.upgradePrices.length &&
+                tileTower.tower.nextLevelB < currentLevel &&
+                money < tileTower.tower.upgradePrices[tileTower.tower.nextLevelB]
         ))
             errorText = "Can't afford!";
+        else if (
+                tileTower != null &&
+                tileTower.tower instanceof Wall &&
+                !upgradable(tileTower)
+        )
+            errorText = "Max level!";
         else if (enemyNearby()) errorText = "Critter too close!";
         popupTexts.add(new PopupText(P, 16, new Color(255, 0, 0, 254),
                 new Color(50, 0, 0, 200), new PVector(matrixMousePosition.x, matrixMousePosition.y),
