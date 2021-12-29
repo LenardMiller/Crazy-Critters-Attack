@@ -68,13 +68,13 @@ public abstract class ShootingEnemy extends Enemy {
             else if (state == 2) prepareToFire();
 
             //prevent wandering
-            if (points.size() == 0 && state != 1) pathRequestWaitTimer++;
+            if (trail.size() == 0 && state != 1) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
             }
         }
-        if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
+        if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
         displayMain();
         //if health is 0, die
         if (hp <= 0) dead = true;

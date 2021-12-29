@@ -32,12 +32,12 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Enemy {
 
-    /**measured in pixels per second*/
+    /** measured in pixels per second */
     public float speed;
     public float speedModifier;
     public float angle;
     public float radius;
-    /**moving, attacking, (shooting/burrowing)*/
+    /** moving, attacking, (shooting/burrowing) */
     public int state;
     public int barAlpha;
     public int hp;
@@ -48,7 +48,7 @@ public abstract class Enemy {
     public int[] attackDmgFrames;
     public int[] tempAttackDmgFrames;
     public boolean immobilized;
-    public ArrayList<TurnPoint> points;
+    public ArrayList<TurnPoint> trail;
     public PImage[] attackFrames;
     public String hitParticle;
     public String lastDamageType;
@@ -86,7 +86,7 @@ public abstract class Enemy {
     protected Enemy(PApplet p, float x, float y) {
         this.p = p;
 
-        points = new ArrayList<>();
+        trail = new ArrayList<>();
         position = new PVector(roundTo(x, 25) + 12.5f, roundTo(y, 25) + 12.5f);
         size = new PVector(20, 20);
         angle = radians(270);
@@ -126,13 +126,13 @@ public abstract class Enemy {
             else if (state == 1) attack();
 
             //prevent wandering
-            if (points.size() == 0 && state != 1) pathRequestWaitTimer++;
+            if (trail.size() == 0 && state != 1) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
             }
         }
-        if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
+        if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
         displayMain();
         //if health is 0, die
         if (hp <= 0) dead = true;
@@ -226,7 +226,7 @@ public abstract class Enemy {
         float pixelsMoved = getActualSpeed() / FRAMERATE;
         m.setMag(pixelsMoved);
         //don't move if no path
-        if (points.size() > 0) position.add(m);
+        if (trail.size() > 0) position.add(m);
     }
 
     public float getActualSpeed() {
@@ -235,7 +235,7 @@ public abstract class Enemy {
         return actualSpeed;
     }
 
-    /**handle animation states*/
+    /** handle animation states */
     protected void animate() {
         if (!immobilized) {
             if (state == 1) {
@@ -280,10 +280,10 @@ public abstract class Enemy {
         p.popMatrix();
     }
 
-    /**Display main sprite*/
+    /** Display main sprite */
     public void displayMain() {
-        if (debug) for (int i = points.size() - 1; i > 0; i--) {
-            points.get(i).display();
+        if (debug) for (int i = trail.size() - 1; i > 0; i--) {
+            trail.get(i).display();
         }
         p.pushMatrix();
         p.translate(position.x, position.y);
@@ -532,36 +532,41 @@ public abstract class Enemy {
       todo: still walk through stuff!!!*/
 
     protected boolean intersectTurnPoint() {
-        TurnPoint point = points.get(points.size() - 1);
+        TurnPoint point = trail.get(trail.size() - 1);
         PVector p = point.position;
         float tpSize;
         if (point.combat) tpSize = 3;
         else tpSize = 15;
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
-        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) &&
-          (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
+        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f)
+                    && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f))
+                && (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f)
+                    && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
     }
 
+    /** wtf, why is this a thing */
     protected boolean intersectCombatPoint() {
-        if (points.size() == 0f) return false;
-        TurnPoint point = points.get(points.size() - 1);
+        if (trail.size() == 0f) return false;
+        TurnPoint point = trail.get(trail.size() - 1);
         PVector p = point.position;
         float tpSize;
         if (point.combat) tpSize = 15;
-        else return false;
+        else return false; //this is the only bit thats different
         PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
-        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f) && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f)) &&
-          (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f) && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
+        return (pfPosition.x > p.x - tpSize + (NODE_SIZE / 2f)
+                    && pfPosition.x < p.x + tpSize + (NODE_SIZE / 2f))
+                && (pfPosition.y > p.y - tpSize + (NODE_SIZE / 2f)
+                    && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
     }
 
     public void requestPath(int i) {
-        path.reqQ.add(new PathRequest(i, enemies.get(i)));
-        points = new ArrayList<>();
+        pathFinder.requestQueue.add(new PathRequest(i, enemies.get(i)));
+        trail = new ArrayList<>();
     }
 
     public void swapPoints(boolean remove) {
-        if (points.size() != 0) {
-            TurnPoint intersectingPoint = points.get(points.size() - 1);
+        if (trail.size() != 0) {
+            TurnPoint intersectingPoint = trail.get(trail.size() - 1);
             if (remove) {
                 if (intersectingPoint.combat) {
                     state = 1;
@@ -569,10 +574,10 @@ public abstract class Enemy {
                     targetTower = intersectingPoint.tower;
                     targetMachine = intersectingPoint.machine;
                 } else attackCue = false;
-                points.remove(intersectingPoint);
+                trail.remove(intersectingPoint);
             }
-            if (points.size() != 0) {
-                PVector pointPosition = points.get(points.size() - 1).position;
+            if (trail.size() != 0) {
+                PVector pointPosition = trail.get(trail.size() - 1).position;
                 pointPosition = new PVector(pointPosition.x + 12.5f, pointPosition.y + 12.5f);
                 pointPosition = new PVector(pointPosition.x + ((pfSize - 1) * 12.5f), pointPosition.y + ((pfSize - 1) * 12.5f));
                 targetAngle = findAngleBetween(pointPosition, position);
@@ -582,13 +587,13 @@ public abstract class Enemy {
 
     public void setCombatPoints() {
         //remove
-        for (TurnPoint point : points) {
+        for (TurnPoint point : trail) {
             point.combat = false;
             point.towers = null;
             point.machine = false;
         }
         //add
-        ArrayList<TurnPoint> pointsD = new ArrayList<>(points);
+        ArrayList<TurnPoint> pointsD = new ArrayList<>(trail);
         for (TurnPoint point : pointsD) {
             point.towers = clearanceTowers(point);
             point.machine = clearanceMachine(point);
@@ -602,13 +607,11 @@ public abstract class Enemy {
             } else backPoint.tower = null;
         }
 
-        points = new ArrayList<>();
-        points.addAll(pointsD);
+        trail = new ArrayList<>();
+        trail.addAll(pointsD);
     }
 
-    /**
-     * returns all towers in enemy "bubble"?
-     */
+    /** returns all towers in enemy "bubble"? */
     protected ArrayList<Tower> clearanceTowers(TurnPoint point) {
         ArrayList<Tower> towers = new ArrayList<>();
         boolean clear = true;
@@ -668,13 +671,13 @@ public abstract class Enemy {
 
     private TurnPoint backPoint() {
         TurnPoint bp = null;
-        for (int i = points.size() - 1; i >= 0; i--) {
-            if (points.get(i).towers != null && points.get(i).towers.size() > 0 || points.get(i).machine) {
-                points.get(i).combat = true;
-                if (i < points.size() - 1) bp = points.get(i + 1);
-                else bp = points.get(i);
-                bp.towers = points.get(i).towers;
-                bp.machine = points.get(i).machine;
+        for (int i = trail.size() - 1; i >= 0; i--) {
+            if (trail.get(i).towers != null && trail.get(i).towers.size() > 0 || trail.get(i).machine) {
+                trail.get(i).combat = true;
+                if (i < trail.size() - 1) bp = trail.get(i + 1);
+                else bp = trail.get(i);
+                bp.towers = trail.get(i).towers;
+                bp.machine = trail.get(i).machine;
                 bp.combat = true;
                 bp.back = true;
                 break;

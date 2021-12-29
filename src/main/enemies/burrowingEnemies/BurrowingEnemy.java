@@ -34,13 +34,13 @@ public abstract class BurrowingEnemy extends Enemy {
             else if (state == 1) attack();
 
             //prevent wandering
-            if (points.size() == 0 && state != 1) pathRequestWaitTimer++;
+            if (trail.size() == 0 && state != 1) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
             }
         }
-        if (points.size() != 0 && intersectTurnPoint()) swapPoints(true);
+        if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
         displayMain();
         //if health is 0, die
         if (hp <= 0) dead = true;
@@ -61,7 +61,7 @@ public abstract class BurrowingEnemy extends Enemy {
         float pixelsMoved = getActualSpeed() / FRAMERATE;
         m.setMag(pixelsMoved);
         //don't move if no path
-        if (points.size() > 0) position.add(m);
+        if (trail.size() > 0) position.add(m);
     }
 
     private PVector randomPosition() {

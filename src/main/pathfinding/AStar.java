@@ -6,13 +6,11 @@ import static main.Main.openNodes;
 
 public class AStar {
 
-    public ArrayList<PathRequest> reqQ;
+    public ArrayList<PathRequest> requestQueue;
     public int index;
     public boolean done;
 
-    public AStar() {
-        reqQ = new ArrayList<>();
-    }
+    public AStar() { requestQueue = new ArrayList<>(); }
 
     public void find(int index) {
         this.index = index;

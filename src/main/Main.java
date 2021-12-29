@@ -134,7 +134,7 @@ public class Main extends PApplet {
     public static HeapNode openNodes;
     public static Node start;
     public static Node[] end;
-    public static AStar path;
+    public static AStar pathFinder;
     public static float maxCost, minCost;
 
     public static void main(String[] args) {
@@ -221,7 +221,7 @@ public class Main extends PApplet {
                 nodeGrid[x][y] = new Node(p, new PVector((NODE_SIZE * x)-100, (NODE_SIZE * y)-100));
             }
         }
-        path = new AStar();
+        pathFinder = new AStar();
         openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / NODE_SIZE)));
         //create end nodes
         end = new Node[0];
@@ -310,9 +310,9 @@ public class Main extends PApplet {
         }
         keyBinds.inGameKeys();
         //pathfinding
-        if (!path.reqQ.isEmpty()) {
-            path.reqQ.get(0).getPath();
-            path.reqQ.remove(0);
+        if (!pathFinder.requestQueue.isEmpty()) {
+            pathFinder.requestQueue.get(0).getPath();
+            pathFinder.requestQueue.remove(0);
         }
         maxCost = maxCost();
         minCost = minCost(maxCost);

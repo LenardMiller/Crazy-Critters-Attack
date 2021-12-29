@@ -6,9 +6,7 @@ import static main.Main.*;
 
 public class PathfindingUtilities {
 
-    /**
-     * Updates the clearance of all nodes.
-     */
+    /** Updates the clearance of all nodes. */
     public static void updateClearance() {
         for (int x = 0; x < nodeGrid.length; x++) {
             for (int y = 0; y < nodeGrid[x].length; y++) {
@@ -102,11 +100,8 @@ public class PathfindingUtilities {
         }
     }
 
-    /**
-     * Resets all the paths saved by each enemy.
-     * Currently unused.
-     */
-    public static void updatePath(){
+    /** Resets all the paths saved by each enemy. */
+    public static void updatePath() {
         for (main.pathfinding.Node[] nodes : nodeGrid) {
             for (main.pathfinding.Node node : nodes) {
                 node.reset();
@@ -115,29 +110,27 @@ public class PathfindingUtilities {
         if (enemies.size() > 0) {
             for (int i = enemies.size()-1; i >= 0; i--) {
                 boolean d = false;
-                for (int j = path.reqQ.size()-1; j >= 0; j--) {
-                    if (enemies.get(i) == path.reqQ.get(j).enemy) {
+                for (int j = pathFinder.requestQueue.size()-1; j >= 0; j--) {
+                    if (enemies.get(i) == pathFinder.requestQueue.get(j).enemy) {
                         d = true;
                         break;
                     }
                 }
-                if (!d){
-                    enemies.get(i).requestPath(i);
-                }
+                if (!d) enemies.get(i).requestPath(i);
             }
-        }
-        else {
-            start.setStart((int)(start.position.x/ NODE_SIZE),(int)(start.position.y/ NODE_SIZE));
+        } else {
+            start.setStart(
+                    (int) (start.position.x / NODE_SIZE),
+                    (int) (start.position.y / NODE_SIZE)
+            );
             start.findGHF();
             updateNode(start,null);
-            path.done = false;
-            path.find(-1);
+            pathFinder.done = false;
+            pathFinder.find(-1);
         }
     }
 
-    /**
-     * Refreshes all pathfinding nodes
-     */
+    /** Refreshes all pathfinding nodes */
     public static void updateNodes() {
         for (Node[] nodes : nodeGrid) {
             for (Node node : nodes) {
@@ -148,9 +141,7 @@ public class PathfindingUtilities {
         updateClearance();
         updateNode(start, null);
         updatePath();
-        for (Enemy enemy : enemies) {
-            enemy.setCombatPoints();
-        }
+        for (Enemy enemy : enemies) enemy.setCombatPoints();
     }
 
     /**

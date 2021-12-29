@@ -88,7 +88,7 @@ public class InGameGui {
         int particleCount = topParticles.size() + midParticles.size() + bottomParticles.size() + veryBottomParticles.size();
         highlightedText(p, "particles: " + particleCount, new PVector(padding, 120), LEFT);
         highlightedText(p, "popups: " + popupTexts.size(), new PVector(padding, 150), LEFT);
-        highlightedText(p, "path requests: " + path.reqQ.size(), new PVector(padding, 180), LEFT);
+        highlightedText(p, "path requests: " + pathFinder.requestQueue.size(), new PVector(padding, 180), LEFT);
         highlightedText(p, "MX: " + (int) matrixMousePosition.x + ", MY: " + (int) matrixMousePosition.y,
           new PVector(padding, BOARD_HEIGHT - padding - 30), LEFT);
         if (fullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,

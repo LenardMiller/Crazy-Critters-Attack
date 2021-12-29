@@ -82,8 +82,8 @@ public class IceEntity extends ShootingEnemy {
 
     @Override
     public void displayMain() {
-        if (debug) for (int i = points.size() - 1; i > 0; i--) {
-            points.get(i).display();
+        if (debug) for (int i = trail.size() - 1; i > 0; i--) {
+            trail.get(i).display();
         }
         p.pushMatrix();
         p.translate(position.x, position.y);

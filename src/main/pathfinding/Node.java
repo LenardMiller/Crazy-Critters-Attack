@@ -53,7 +53,7 @@ public class Node {
     public void setStart(int x, int y) {
         x += 4;
         y += 4;
-        if (Main.start != null) Main.start.isStart = false;
+//        if (Main.start != null) Main.start.isStart = false;
         Main.start = nodeGrid[x][y];
         start.isStart = true;
     }
@@ -131,12 +131,12 @@ public class Node {
         isClosed = true;
         isOpen = false;
         if (isEnd) {
-            path.done = true;
+            pathFinder.done = true;
             Enemy enemy = null;
-            if (enemies.size() - 1 > path.index) enemy = enemies.get(path.index);
-            if (path.index != -1 && enemies.size() != 0 && enemy != null) { //points added HERE
-                enemy.points.add(new Enemy.TurnPoint(P, position, tower));
-                enemy.points.add(new Enemy.TurnPoint(P, parent.position, tower));
+            if (enemies.size() - 1 > pathFinder.index) enemy = enemies.get(pathFinder.index);
+            if (pathFinder.index != -1 && enemies.size() != 0 && enemy != null) { //points added HERE
+                enemy.trail.add(new Enemy.TurnPoint(P, position, tower));
+                enemy.trail.add(new Enemy.TurnPoint(P, parent.position, tower));
             }
             setDone();
         } else updateNode(nodeGrid[(int) ((position.x + 100) / NODE_SIZE)][(int) ((position.y + 100) / NODE_SIZE)], request);
@@ -144,10 +144,10 @@ public class Node {
     }
 
     private void setDone() {
-        if (path.index != -1) {
-            if (path.index < enemies.size()) {
-                Enemy enemy = enemies.get(path.index);
-                enemy.points.add(new Enemy.TurnPoint(P, position, tower));
+        if (pathFinder.index != -1) {
+            if (pathFinder.index < enemies.size()) {
+                Enemy enemy = enemies.get(pathFinder.index);
+                enemy.trail.add(new Enemy.TurnPoint(P, position, tower));
             }
         } if (!isStart) parent.setDone();
     }

@@ -2,6 +2,7 @@ package main.pathfinding;
 
 import main.Main;
 import main.enemies.Enemy;
+import main.misc.IntVector;
 import processing.core.PVector;
 
 import java.util.ArrayList;
@@ -22,30 +23,44 @@ public class PathRequest {
         this.size = enemy.pfSize;
     }
 
+    /**
+     * Uses A* to get a path, then converts that into a trail and sends it to the enemy
+     */
     public void getPath() {
+        //reset
         for (Node[] nodes : nodeGrid) {
             for (Node node : nodes) {
                 node.reset();
             }
         }
-
-        enemy.points = new ArrayList<>();
-        PVector pfPosition = new PVector(enemy.position.x-((enemy.pfSize-1)*12.5f)+100,enemy.position.y-((enemy.pfSize-1)*12.5f)+100);
-        PVector roundedPosition = catchOutOfBounds((int)((pfPosition.x)/ NODE_SIZE), (int)((pfPosition.y)/ NODE_SIZE));
-        nodeGrid[(int) roundedPosition.x][(int) roundedPosition.y].setStart((int) roundedPosition.x-4, (int) roundedPosition.y-4);
+        enemy.trail = new ArrayList<>();
+        //put the start in place
+        PVector pfPosition = new PVector(
+                enemy.position.x - ((enemy.pfSize - 1) * 12.5f) + 100,
+                enemy.position.y - ((enemy.pfSize - 1) * 12.5f) + 100
+        );
+        IntVector roundedPosition = catchOutOfBounds(
+                (int) (pfPosition.x / NODE_SIZE),
+                (int) (pfPosition.y / NODE_SIZE)
+        );
+        nodeGrid[roundedPosition.x][roundedPosition.y].setStart(
+                roundedPosition.x - 4, roundedPosition.y - 4
+        );
+        //do the A*
         Main.start.findGHF();
         updateNode(Main.start,this);
-        Main.path.done = false;
-        Main.path.find(id); //points are added here
+        Main.pathFinder.done = false;
+        //add points
+        Main.pathFinder.find(id);
         enemy.swapPoints(false);
-        if (enemy.points.size() > 0) enemy.setCombatPoints(); //and subtracted here
+        if (enemy.trail.size() > 0) enemy.setCombatPoints();
     }
 
-    private PVector catchOutOfBounds(int x, int y) {
+    private IntVector catchOutOfBounds(int x, int y) {
         if (x >= nodeGrid.length) x = nodeGrid.length - 1;
         if (x < 0) x = 0;
         if (y >= nodeGrid[x].length) y = nodeGrid.length - 1;
         if (y < 0) y = 0;
-        return new PVector(x,y);
+        return new IntVector(x,y);
     }
 }

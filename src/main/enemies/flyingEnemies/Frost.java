@@ -149,8 +149,8 @@ public class Frost extends FlyingEnemy {
      */
     @Override
     public void displayMain() {
-        if (debug) for (int i = points.size() - 1; i > 0; i--) {
-            points.get(i).display();
+        if (debug) for (int i = trail.size() - 1; i > 0; i--) {
+            trail.get(i).display();
         }
         if (!paused) {
             if (hitTimer < 10) {
