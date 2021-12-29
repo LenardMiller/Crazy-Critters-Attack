@@ -71,6 +71,7 @@ public class DataControl extends ClassLoader {
         JSONObject saveObject = new JSONObject();
         saveObject.setFloat("volume", globalVolume);
         saveObject.setBoolean("fullscreen", fullscreen);
+        saveObject.setBoolean("useOpenGL", useOpenGL);
         saveObject.setBoolean("gore", gore);
 
         String name = "settings";
@@ -86,6 +87,7 @@ public class DataControl extends ClassLoader {
 
         globalVolume = loadObject.getFloat("volume");
         fullscreen = loadObject.getBoolean("fullscreen");
+        useOpenGL = loadObject.getBoolean("useOpenGL");
         gore = loadObject.getBoolean("gore");
     }
 

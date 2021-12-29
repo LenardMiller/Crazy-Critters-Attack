@@ -18,10 +18,12 @@ public class SettingsGui {
 
     private final PApplet P;
     private final boolean fullscreenWas;
+    private final boolean rendererWas;
 
     private MenuButton returnButton;
     private MenuSlider volumeSlider;
     private MenuCheckbox fullscreenCheck;
+    private MenuCheckbox rendererCheck;
     private MenuCheckbox goreCheck;
     private MenuButton resetSettings;
 
@@ -30,6 +32,7 @@ public class SettingsGui {
     public SettingsGui(PApplet p) {
         P = p;
         fullscreenWas = fullscreen;
+        rendererWas = useOpenGL;
         build();
     }
 
@@ -37,7 +40,8 @@ public class SettingsGui {
         volumeSlider = new MenuSlider(P, "Global Volume", new PVector(P.width / 2f, buffer + 100),
           0.01f, 0.25f, 1);
         fullscreenCheck = new MenuCheckbox(P, "Fullscreen*", new PVector((P.width / 2f - 100), buffer + 150));
-        goreCheck = new MenuCheckbox(P, "Gore", new PVector((P.width / 2f - 100), buffer + 200));
+        rendererCheck = new MenuCheckbox(P, "Use OpenGL*", new PVector((P.width / 2f - 100), buffer + 200));
+        goreCheck = new MenuCheckbox(P, "Gore", new PVector((P.width / 2f - 100), buffer + 250));
         resetSettings = new MenuButton(P, P.width/2f, P.height - buffer - 50);
         returnButton = new MenuButton(P, P.width/2f, P.height - buffer);
     }
@@ -53,6 +57,7 @@ public class SettingsGui {
     private void checkInputs() {
         globalVolume = volumeSlider.main(globalVolume);
         fullscreen = fullscreenCheck.main(fullscreen);
+        useOpenGL = rendererCheck.main(useOpenGL);
         gore = goreCheck.main(gore);
         if (returnButton.isPressed()) {
             if (settings) closeSettingsMenu();
@@ -60,6 +65,7 @@ public class SettingsGui {
         } if (resetSettings.isPressed()) {
             globalVolume = 0.25f;
             fullscreen = true;
+            useOpenGL = false;
             gore = true;
         }
     }
@@ -71,7 +77,7 @@ public class SettingsGui {
 
         //buttons
         int offsetY = 7;
-        if (fullscreenWas != fullscreen) highlightedText(P, "Restart required",
+        if (fullscreenWas != fullscreen || rendererWas != useOpenGL) highlightedText(P, "Restart required",
           new PVector(P.width / 2f, P.height - 250 + offsetY), new Color(255, 0, 0, 254),
           new Color(50, 0, 0, 200), largeFont.getSize(), CENTER);
         P.textFont(mediumFont);

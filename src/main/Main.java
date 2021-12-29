@@ -83,8 +83,9 @@ public class Main extends PApplet {
     public static int connectWallQueues;
     public static float globalVolume = 0.25f;
     public static float matrixScale, matrixOffset;
+    /** initialized to false */
     public static boolean
-            won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, gore, hasVerticalBars;
+            won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, useOpenGL, gore, hasVerticalBars;
     public static boolean alive = true;
     public static boolean dev = true; //<--------
     public static PVector matrixMousePosition;
@@ -148,7 +149,8 @@ public class Main extends PApplet {
      */
     @Override
     public void settings() {
-        size(GRID_WIDTH, BOARD_HEIGHT);
+        if (useOpenGL) size(GRID_WIDTH, BOARD_HEIGHT, P2D);
+        else size(GRID_WIDTH, BOARD_HEIGHT);
         if (fullscreen) {
             fullScreen();
             noSmooth();
