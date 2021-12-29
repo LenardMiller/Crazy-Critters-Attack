@@ -181,13 +181,6 @@ public class Hand {
             else P.tint(255, 150);
             P.image(heldSprite, (roundTo(matrixMousePosition.x, 50)) - (25f / 2) - offset.x + 13, roundTo(matrixMousePosition.y, 50) - (25f / 2) - offset.y + 13);
             P.tint(255);
-//            if (held.equals("wall")) {
-//                for (Enemy enemy : enemies) {
-//                    P.fill(new Color(255, 0, 0, 50).getRGB());
-//                    P.stroke(new Color(255, 0, 0).getRGB());
-//                    P.circle(enemy.position.x, enemy.position.y, (MIN_ENEMY_DISTANCE * enemy.pfSize * 2));
-//                }
-//            }
         }
     }
 

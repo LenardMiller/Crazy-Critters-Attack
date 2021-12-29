@@ -40,7 +40,7 @@ public class IceTower extends Turret {
         name = "iceTower";
         delay = randomizeDelay(p, 13);
         pjSpeed = -1;
-        range = 250;
+        range = 300;
         barrelLength = 30;
         offset = 0;
         wallHp = 40;
@@ -315,7 +315,7 @@ public class IceTower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    range += 50;
+                    range += 100;
                     break;
                 case 4:
                     delay -= 3;

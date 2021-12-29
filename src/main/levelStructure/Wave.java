@@ -289,6 +289,7 @@ public class Wave {
             case "Enraged Giant":
                 e = new EnragedGiant(P, pos.x, pos.y);
                 break;
+            case "Mantises":
             case "Mantis":
                 e = new Mantis(P, pos.x, pos.y);
                 break;
