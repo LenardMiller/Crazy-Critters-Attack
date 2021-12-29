@@ -248,7 +248,7 @@ public class CaveWaves {
         Color bigAlbinoBugText = new Color(211, 211, 211);
 
         String albinoButterfly = "albinoButterfly";
-        String albinoButterflyTitle = "Butterflies";
+        String albinoButterflyTitle = "Moths";
         Color albinoButterflyAccent = new Color(0, 241, 114);
         Color albinoButterflyFill = new Color(211, 211, 211);
         Color albinoButterflyText = new Color(0, 0, 0);

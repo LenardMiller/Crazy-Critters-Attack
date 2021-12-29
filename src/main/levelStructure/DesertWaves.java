@@ -115,8 +115,8 @@ public class DesertWaves {
         waves[15].addSpawns("scorpion", 5);
         waves[15].addSpawns("antlion", 3);
 
-        waves[16] = new Wave(p, 60, 20, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
-        waves[16].addSpawns("bigBug", 3);
+        waves[16] = new Wave(p, 40, 1, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
+        waves[16].addSpawns("bigBug", 1);
 
         waves[17] = new Wave(p, 65, 25, scorpionFill, scorpionAccent, scorpionText, "Scorpions");
         waves[17].addSpawns("scorpion", 20);

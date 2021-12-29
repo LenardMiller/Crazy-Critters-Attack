@@ -23,7 +23,7 @@ public class RandomCannon extends Turret {
         name = "miscCannon";
         delay = randomizeDelay(p, 0.4f);
         pjSpeed = 700;
-        betweenFireFrames = down60ToFramerate(8);
+        betweenFireFrames = down60ToFramerate(5);
         damage = 10;
         range = 200;
         barrelLength = 18;

@@ -21,11 +21,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$USER_HOME$/Documents/Processing/libraries/sound/library" />
+          <root url="file://$MODULE_DIR$/../../Processing/libraries/sound/library" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$USER_HOME$/Documents/Processing/libraries/sound/library" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../Processing/libraries/sound/library" recursive="false" />
       </library>
     </orderEntry>
   </component>

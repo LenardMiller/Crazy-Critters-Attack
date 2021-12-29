@@ -35,11 +35,9 @@ import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
 import static main.misc.DataControl.loadSettings;
-import static main.misc.SpriteLoader.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
 import static main.pathfinding.PathfindingUtilities.*;
-import static main.sound.SoundLoader.loadSounds;
 
 public class Main extends PApplet {
 
@@ -150,7 +148,7 @@ public class Main extends PApplet {
      */
     @Override
     public void settings() {
-        size(GRID_WIDTH, BOARD_HEIGHT, P2D);
+        size(GRID_WIDTH, BOARD_HEIGHT);
         if (fullscreen) {
             fullScreen();
             noSmooth();
