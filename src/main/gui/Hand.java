@@ -86,7 +86,7 @@ public class Hand {
                 !upgradable(tileTower)
         )
             errorText = "Max level!";
-        else if (enemyNearby()) errorText = "Critter too close!";
+        else if (enemyNearby()) errorText = "Critter blocking placement!";
         popupTexts.add(new PopupText(P, 16, new Color(255, 0, 0, 254),
                 new Color(50, 0, 0, 200), new PVector(matrixMousePosition.x, matrixMousePosition.y),
                 errorText));
@@ -126,16 +126,17 @@ public class Hand {
     private boolean enemyNearby() {
         if (enemies.size() == 0) return false;
         for (Enemy enemy : enemies) {
-            if (findDistBetween (
-                    new PVector (
-                            roundTo(enemy.position.x, 50) + 25,
-                            roundTo(enemy.position.y, 50) + 25
-                    ),
-                    new PVector (
+            if (findDistBetween(
+                    enemy.position,
+                    new PVector(
                             roundTo(matrixMousePosition.x, 50) + 25,
                             roundTo(matrixMousePosition.y, 50) + 25
                     )
             ) < MIN_ENEMY_DISTANCE * enemy.pfSize) {
+                if (!hand.held.equals("null")) {
+                    P.fill(255, 0, 0, 100);
+                    P.circle(enemy.position.x, enemy.position.y, (MIN_ENEMY_DISTANCE * enemy.pfSize * 2) - 25);
+                }
                 return true;
             }
         }
