@@ -727,6 +727,7 @@ public class SpriteLoader {
         //obstacles
         staticSprites.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         staticSprites.put("smallYellowTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallYellowTree.png"));
+        staticSprites.put("smallDeadTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallDeadTree.png"));
         staticSprites.put("treeBLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/bl.png"));
         staticSprites.put("treeBROb_TL",p.loadImage("sprites/tiles/obstacles/tree/br.png"));
         staticSprites.put("treeTLOb_TL",p.loadImage("sprites/tiles/obstacles/tree/tl.png"));
@@ -735,6 +736,10 @@ public class SpriteLoader {
         staticSprites.put("yellowTreeBROb_TL",p.loadImage("sprites/tiles/obstacles/yellowTree/br.png"));
         staticSprites.put("yellowTreeTLOb_TL",p.loadImage("sprites/tiles/obstacles/yellowTree/tl.png"));
         staticSprites.put("yellowTreeTROb_TL",p.loadImage("sprites/tiles/obstacles/yellowTree/tr.png"));
+        staticSprites.put("deadTreeBLOb_TL",p.loadImage("sprites/tiles/obstacles/deadTree/bl.png"));
+        staticSprites.put("deadTreeBROb_TL",p.loadImage("sprites/tiles/obstacles/deadTree/br.png"));
+        staticSprites.put("deadTreeTLOb_TL",p.loadImage("sprites/tiles/obstacles/deadTree/tl.png"));
+        staticSprites.put("deadTreeTROb_TL",p.loadImage("sprites/tiles/obstacles/deadTree/tr.png"));
         staticSprites.put("cactus0Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/0.png"));
         staticSprites.put("cactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/1.png"));
         staticSprites.put("cactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/2.png"));

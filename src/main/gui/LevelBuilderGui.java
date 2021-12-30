@@ -79,12 +79,17 @@ public class LevelBuilderGui {
         placeButton(0, 11, "veryDeadLilyPad0Br");
         placeButton(1, 11, "veryDeadLilyPad1Br");
         placeButton(2, 11, "veryDeadLilyPad2Br");
+        placeButton(3, 11, "smallDeadTreeOb");
 
         placeButton(0, 12, "deadGrassCornerBR_De");
         placeButton(1, 12, "deadGrassCornerBL_De");
+        placeButton(2, 12, "deadTreeTLOb");
+        placeButton(3, 12, "deadTreeTROb");
 
         placeButton(0, 13, "deadGrassCornerTR_De");
         placeButton(1, 13, "deadGrassCornerTL_De");
+        placeButton(2, 13, "deadTreeBLOb");
+        placeButton(3, 13, "deadTreeBROb");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");
