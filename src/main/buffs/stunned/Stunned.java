@@ -1,6 +1,8 @@
 package main.buffs.stunned;
 
 import main.buffs.Buff;
+import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
@@ -21,7 +23,11 @@ public class Stunned extends Buff {
 
     @Override
     public void effect() { //slowing enemy movement done every frame
-        if (enId > -1 && enId < enemies.size()) enemies.get(enId).immobilized = true;
+        if (enId > -1 && enId < enemies.size()) {
+            Enemy enemy = enemies.get(enId);
+            enemy.immobilized = true;
+            if (enemy instanceof BurrowingEnemy) enemy.state = 1;
+        }
         else buffs.remove(this);
     }
 

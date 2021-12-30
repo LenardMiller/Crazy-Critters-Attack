@@ -10,6 +10,7 @@ import main.damagingThings.projectiles.enemyProjeciles.IceCrystal;
 import main.damagingThings.projectiles.enemyProjeciles.Snowball;
 import main.damagingThings.projectiles.homing.MagicMissile;
 import main.enemies.*;
+import main.enemies.burrowingEnemies.BigWorm;
 import main.enemies.burrowingEnemies.Shark;
 import main.enemies.flyingEnemies.Frost;
 import main.enemies.shootingEnemies.IceEntity;
@@ -166,7 +167,7 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1,150));
         if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new MudFlinger(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en1) enemies.add(new BigWorm(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en2) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en3) enemies.add(new Velociraptor(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
