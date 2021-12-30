@@ -481,12 +481,13 @@ public class Hand {
         if (held.contains("TL")) {
             tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
             changeHeld = false;
-            if (held.contains("Ba")) tile.setBase(held);
-            else if (held.contains("De")) tile.setDecoration(held);
-            else if (held.contains("Fl")) tile.setFlooring(held);
-            else if (held.contains("Br")) tile.setBreakable(held);
-            else if (held.contains("Ob")) tile.setObstacle(held);
-            else if (held.contains("Ma")) {
+            String shortName = held.replace("_TL", "");
+            if (shortName.contains("Ba")) tile.setBase(held);
+            else if (shortName.endsWith("De")) tile.setDecoration(held);
+            else if (shortName.endsWith("Fl")) tile.setFlooring(held);
+            else if (shortName.endsWith("Br")) tile.setBreakable(held);
+            else if (shortName.endsWith("Ob")) tile.setObstacle(held);
+            else if (shortName.endsWith("Ma")) {
                 tile.machine = !tile.machine;
                 machine.updateNodes();
             } else if (held.contains("Na")) {
