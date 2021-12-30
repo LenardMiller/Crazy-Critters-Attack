@@ -123,7 +123,7 @@ public class TowerBuy extends Button {
                     break;
                 case "miscCannon":
                     p.text("Luggage", x, 241);
-                    p.text("Blaster", x, 266);
+                    p.text("Launcher", x, 266);
                     offset = 25;
                     randomCannonInfo(p);
                     break;

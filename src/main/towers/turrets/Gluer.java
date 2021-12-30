@@ -160,11 +160,11 @@ public class Gluer extends Turret {
                     range += 30;
                     break;
                 case 1:
-                    effectDuration += 1;
+                    effectDuration += 2;
                     break;
                 case 2:
-                    effectDuration += 1;
-                    range += 30;
+                    effectDuration += 2;
+                    range += 50;
                     splatter = true;
                     name = "splashGluer";
                     loadSprites();

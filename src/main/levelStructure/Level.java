@@ -1,7 +1,12 @@
 package main.levelStructure;
 
 import main.misc.Polluter;
+import main.misc.Utilities;
 import processing.core.PApplet;
+import processing.core.PConstants;
+import processing.core.PVector;
+
+import java.awt.*;
 
 import static main.Main.*;
 
@@ -50,10 +55,7 @@ public class Level {
     }
 
     public void advance() {
-        if (currentWave >= waves.length) return;
-        Wave cw = waves[currentWave];
-        if (cw.spawns.size() > 0) return;
-        if (cw.unskippable) return;
+        if (!canBeSkipped()) return;
         levels[currentLevel].setWave(levels[currentLevel].currentWave + 1);
     }
 
@@ -82,10 +84,7 @@ public class Level {
             }
         }
         inGameGui.playButton.display((int)playY);
-//        P.tint(0,60);
-//        P.image(staticSprites.get("currentLineIc"),891,212+125-1);
-//        P.tint(255);
-//        P.image(staticSprites.get("currentLineIc"),891-1,212+125-1-1);
+        //current line
         P.strokeWeight(10);
         P.stroke(100, 0, 0);
         P.line(BOARD_WIDTH, 336, BOARD_WIDTH + 200, 336);
@@ -94,5 +93,16 @@ public class Level {
         P.line(BOARD_WIDTH - 7, 336, BOARD_WIDTH + 200, 336);
         P.strokeWeight(1);
         P.noStroke();
+        //skip text
+        if (canBeSkipped()) Utilities.highlightedText(P, "[SPACE] to skip",
+                new PVector(BOARD_WIDTH + 100, 325),
+                new Color(0xFCFFFFFF, true), new Color(50, 50, 50, 230),
+                mediumFont, PConstants.CENTER);
+    }
+
+    private boolean canBeSkipped() {
+        if (currentWave >= waves.length) return false;
+        Wave cw = waves[currentWave];
+        return !cw.unskippable && cw.spawns.size() == 0;
     }
 }

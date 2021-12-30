@@ -131,7 +131,7 @@ public class EnergyBlaster extends Turret{
                     delay -= 1.2f;
                     break;
                 case 1:
-                    effectRadius += 60;
+                    effectRadius += 50;
                     bigExplosion = true;
                     break;
                 case 2:

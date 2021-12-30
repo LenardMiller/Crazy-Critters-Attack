@@ -104,25 +104,25 @@ public class DesertWaves {
         waves[12] = new Wave(p, 65, 25, scorpionFill, scorpionAccent, scorpionText, "Scorpions");
         waves[12].addSpawns("scorpion", 10);
 
-        waves[13] = new Wave(p, 65, 10, wormFill, wormAccent, wormText, "Worms");
+        waves[13] = new Wave(p, 65, 20, wormFill, wormAccent, wormText, "Worms");
         waves[13].addSpawns("littleWorm", 5);
 
-        waves[14] = new Wave(p, 40, 1, bigBugFill, bigBugAccent, bigBugText, "Big Bug");
+        waves[14] = new Wave(p, 65, 1, bigBugFill, bigBugAccent, bigBugText, "Big Bug");
         waves[14].addSpawns("bigBug", 1);
 
-        waves[15] = new Wave(p, 65, 10, wormFill, wormAccent, wormText, "Worms");
+        waves[15] = new Wave(p, 65, 30, wormFill, wormAccent, wormText, "Worms");
         waves[15].addSpawns("littleWorm", 10);
         waves[15].addSpawns("scorpion", 5);
         waves[15].addSpawns("antlion", 3);
 
-        waves[16] = new Wave(p, 40, 1, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
+        waves[16] = new Wave(p, 40, 1, bigBugFill, bigBugAccent, bigBugText, "Big Bug");
         waves[16].addSpawns("bigBug", 1);
 
         waves[17] = new Wave(p, 65, 25, scorpionFill, scorpionAccent, scorpionText, "Scorpions");
         waves[17].addSpawns("scorpion", 20);
         waves[17].addSpawns("sidewinder", 5);
 
-        waves[18] = new Wave(p, 65, 10, wormFill, wormAccent, wormText, "Worms");
+        waves[18] = new Wave(p, 65, 20, wormFill, wormAccent, wormText, "Worms");
         waves[18].addSpawns("littleWorm", 10);
         waves[18].addSpawns("scorpion", 5);
 

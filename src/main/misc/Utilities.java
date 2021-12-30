@@ -235,6 +235,40 @@ public class Utilities {
      * @param p the PApplet
      * @param text text to be displayed
      * @param position position for text to be displayed
+     * @param textColor color of text, RGBA
+     * @param highlightColor color of highlight, RGBA
+     * @param font text font
+     * @param textAlign what alignment to use, defaults to center
+     */
+    public static void highlightedText(PApplet p, String text, PVector position, Color textColor, Color highlightColor,
+                                       PFont font, int textAlign) {
+        if (textAlign != LEFT && textAlign != RIGHT) textAlign = CENTER;
+
+        p.rectMode(CENTER);
+        p.noStroke();
+        p.textAlign(textAlign);
+        p.textFont(font);
+
+        float textWidth = p.textWidth(text);
+        float padding = font.getSize()/6f;
+        PVector highlightPosition = new PVector(position.x, position.y);
+        if (textAlign == LEFT) highlightPosition = new PVector(position.x + (textWidth/2), position.y);
+        if (textAlign == RIGHT) highlightPosition = new PVector(position.x - (textWidth/2), position.y);
+
+        p.fill(highlightColor.getRGB(), highlightColor.getAlpha());
+        p.rect(highlightPosition.x, highlightPosition.y - ((font.getSize()/2f) - padding),
+                textWidth + padding, font.getSize());
+        p.fill(textColor.getRGB(), textColor.getAlpha());
+        p.text(text, position.x, position.y);
+
+        p.rectMode(CORNER);
+    }
+
+    /**
+     * Displays text with a rectangle backing.
+     * @param p the PApplet
+     * @param text text to be displayed
+     * @param position position for text to be displayed
      * @param textAlign what alignment to use, defaults to center
      */
     public static void highlightedText(PApplet p, String text, PVector position, int textAlign) {

@@ -22,7 +22,7 @@ public class SplatterGlue extends Glue {
         sprite = staticSprites.get("gluePj");
         trail = "glue";
         type = "glue";
-        effectRadius = 60;
+        effectRadius = 100;
         hitSound = sounds.get("squishImpact");
         buff = "glued";
     }
