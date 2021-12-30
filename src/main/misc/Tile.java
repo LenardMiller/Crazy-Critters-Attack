@@ -17,12 +17,14 @@ public class Tile {
 
     /** lowest at top, highest at bottom */
     private static final String[] baseHierarchy = {
+            "sludge",
             "dirtyWater",
             "water",
             "stone",
             "sand",
             "dirt",
             "deadGrass",
+            "brownGrass",
             "yellowGrass",
             "grass",
             "snow"
@@ -93,12 +95,15 @@ public class Tile {
         if (baseName != null && !paused) {
             if (baseName.equals("water")) spawnRipples("water");
             if (baseName.equals("dirtyWater")) spawnRipples("dirtyWater");
+            if (baseName.equals("sludge")) spawnRipples("sludge");
         }
         spillBaseEdges();
     }
 
     private void spawnRipples(String type) {
-        if (P.random(60) < 1) {
+        int chance = 60;
+        if (type.equals("sludge")) chance = 180;
+        if (P.random(chance) < 1) {
             Tile rightTile = tiles.get(getGridPosition().x + 1, getGridPosition().y);
             boolean right = rightTile == null;
             if (!right && rightTile.baseName != null) right = !rightTile.baseName.equals(type);
@@ -479,8 +484,13 @@ public class Tile {
             obstacle = staticSprites.get(name);
             obstacleName = name;
             if (name.contains("smallTree")) obstacleShadowLength = 3;
+            if (name.contains("smallYellowTree")) obstacleShadowLength = 3;
+            if (name.contains("smallBrownTree")) obstacleShadowLength = 3;
+            if (name.contains("smallDeadTree")) obstacleShadowLength = 3;
             if (containsCorners(name,"tree")) obstacleShadowLength = 8;
             if (containsCorners(name,"yellowTree")) obstacleShadowLength = 8;
+            if (containsCorners(name,"brownTree")) obstacleShadowLength = 8;
+            if (containsCorners(name,"deadTree")) obstacleShadowLength = 8;
         }
     }
 

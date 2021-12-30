@@ -20,6 +20,9 @@ public class Ripple extends Particle {
             case "dirtyWater":
                 betweenFrames = 30;
                 break;
+            case "sludge":
+                betweenFrames = 90;
+                break;
             default:
                 betweenFrames = 0;
         }
