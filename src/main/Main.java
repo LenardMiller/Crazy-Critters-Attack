@@ -306,8 +306,10 @@ public class Main extends PApplet {
         if (dev) {
             keyBinds.debugKeys();
             keyBinds.spawnKeys();
+        } else {
+            keyBinds.selectionKeys();
+            keyBinds.inGameKeys();
         }
-        keyBinds.inGameKeys();
         //pathfinding
         if (!pathFinder.requestQueue.isEmpty()) {
             pathFinder.requestQueue.get(0).getPath();

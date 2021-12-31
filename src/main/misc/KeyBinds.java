@@ -56,15 +56,13 @@ public class KeyBinds {
     }
 
     public void selectionKeys() {
-        boolean upgradeTop = keysPressed.getPressedPulse('^');
-        boolean upgradeBottom = keysPressed.getPressedPulse('&');
-        boolean priorityRight = keysPressed.getPressedPulse('>');
-        boolean priorityLeft = keysPressed.getPressedPulse('<');
-        boolean delete = keysPressed.getPressedPulse('*');
+        boolean upgradeTop = keysPressed.getPressedPulse('1');
+        boolean upgradeBottom = keysPressed.getPressedPulse('2');
+        boolean priorityRight = keysPressed.getPressedPulse('3');
+        boolean delete = keysPressed.getPressedPulse('4');
 
         if (upgradeTop) selection.upgradeTop();
         if (upgradeBottom) selection.upgradeBottom();
-        if (priorityLeft) selection.priorityLeft();
         if (priorityRight) selection.priorityRight();
         if (delete) selection.sell();
     }
@@ -100,29 +98,31 @@ public class KeyBinds {
         }
         //hotkeys
         if (!dev) {
-            if (wall) {
-                if (hand.held.equals("wall"))
-                                    hand.setHeld("null");
-                else                hand.setHeld("wall");
-            } if (slingshot)        hand.setHeld("slingshot");
-            if (luggageBlaster)     hand.setHeld("miscCannon");
-            if (crossbow)           hand.setHeld("crossbow");
+            String name = "";
+            if (wall)               name = "wall";
+            if (slingshot)          name = "slingshot";
+            if (luggageBlaster)     name = "miscCannon";
+            if (crossbow)           name = "crossbow";
             if (currentLevel > 0) {
-                if (cannon)         hand.setHeld("cannon");
-                if (gluer)          hand.setHeld("gluer");
-                if (seismicTower)   hand.setHeld("seismic");
+                if (cannon)         name = "cannon";
+                if (gluer)          name = "gluer";
+                if (seismicTower)   name = "seismic";
             } if (currentLevel > 1) {
-                if (energyBlaster)  hand.setHeld("energyBlaster");
-                if (flamethrower)   hand.setHeld("flamethrower");
-                if (teslaTower)     hand.setHeld("tesla");
+                if (energyBlaster)  name = "energyBlaster";
+                if (flamethrower)   name = "flamethrower";
+                if (teslaTower)     name = "tesla";
             } if (currentLevel > 2) {
-                if (booster)        hand.setHeld("booster");
-                if (iceTower)       hand.setHeld("iceTower");
-                if (magicMissileer) hand.setHeld("magicMissleer");
+                if (booster)        name = "booster";
+                if (iceTower)       name = "iceTower";
+                if (magicMissileer) name = "magicMissleer";
             } if (currentLevel > 3) {
-                if (railgun)        hand.setHeld("railgun");
-                if (nightmare)      hand.setHeld("nightmare");
-                if (waveMotion)     hand.setHeld("waveMotion");
+                if (railgun)        name = "railgun";
+                if (nightmare)      name = "nightmare";
+                if (waveMotion)     name = "waveMotion";
+            }
+            if (!name.isEmpty()) {
+                if (hand.held.equals(name)) hand.setHeld("null");
+                else hand.setHeld(name);
             }
         }
     }

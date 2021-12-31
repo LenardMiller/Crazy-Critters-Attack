@@ -27,9 +27,7 @@ public class Selection {
     private final Color SPECIAL_TEXT_COLOR = new Color(100, 0, 200);
     private final Color EFFECT_TEXT_COLOR = new Color(0, 200, 50);
 
-    /**
-     * what tower is selected
-     */
+    /** what tower is selected */
     public Selection(PApplet p) {
         this.P = p;
         name = "null";
@@ -589,26 +587,24 @@ public class Selection {
     }
 
     public void priorityRight() {
+        if (name.equals("null") || turret == null) return;
         playSound(selection.CLICK_OUT, 1, 1);
         if (turret.priority == 2) turret.priority = 0;
         else turret.priority++;
     }
 
-    public void priorityLeft() {
-        playSound(selection.CLICK_OUT, 1, 1);
-        if (turret.priority == 0) turret.priority = 2;
-        else turret.priority--;
-    }
-
     public void upgradeBottom() {
+        if (name.equals("null") || turret == null) return;
         turret.upgrade(1);
     }
 
     public void upgradeTop() {
+        if (name.equals("null") || turret == null) return;
         turret.upgrade(0);
     }
 
     public void sell() {
+        if (name.equals("null") || turret == null) return;
         selection.turret.die(true);
         inGameGui.priorityButton.active = false;
         inGameGui.upgradeButtonA.active = false;
