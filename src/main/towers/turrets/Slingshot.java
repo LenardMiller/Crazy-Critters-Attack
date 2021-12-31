@@ -102,7 +102,7 @@ public class Slingshot extends Turret {
     }
 
     @Override
-    public void upgradeSpecial(int id) {
+    public void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:

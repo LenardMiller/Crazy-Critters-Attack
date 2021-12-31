@@ -104,7 +104,7 @@ public class Gluer extends Turret {
         //price
         upgradePrices[0] = 125;
         upgradePrices[1] = 150;
-        upgradePrices[2] = 500;
+        upgradePrices[2] = 600;
 
         upgradePrices[3] = 150;
         upgradePrices[4] = 150;
@@ -153,7 +153,7 @@ public class Gluer extends Turret {
     }
 
     @Override
-    protected void upgradeSpecial(int id) {
+    protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
@@ -165,6 +165,7 @@ public class Gluer extends Turret {
                 case 2:
                     effectDuration += 2;
                     range += 50;
+                    delay -= 1;
                     splatter = true;
                     name = "splashGluer";
                     loadSprites();

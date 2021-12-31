@@ -115,7 +115,7 @@ public class Booster extends Turret {
 
     @Override
     public void upgrade(int id) {
-        upgradeSpecial(id);
+        upgradeEffect(id);
         int price = 0;
         if (id == 0) {
             price = upgradePrices[nextLevelA];
@@ -197,7 +197,7 @@ public class Booster extends Turret {
     }
 
     @Override
-    protected void upgradeSpecial(int id) {
+    protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:

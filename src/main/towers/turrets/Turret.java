@@ -350,7 +350,7 @@ public abstract class Turret extends Tower {
         inGameGui.flashA = 255;
         money -= price;
         value += price;
-        upgradeSpecial(id);
+        upgradeEffect(id);
         if (id == 0) nextLevelA++;
         else if (id == 1) nextLevelB++;
         //icons
@@ -367,7 +367,7 @@ public abstract class Turret extends Tower {
 
     protected abstract void setUpgrades();
 
-    protected abstract void upgradeSpecial(int id);
+    protected abstract void upgradeEffect(int id);
 
     //boosts
 

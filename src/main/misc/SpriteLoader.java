@@ -337,7 +337,12 @@ public class SpriteLoader {
         getSprite(p,"mantisMove","EN","mantis/move/",8);
         getSprite(p,"mantisAttack","EN","mantis/attack/",16);
         getSprite(p,"mantisDie","EN","mantis/die/",5);
-        getSprite(p,"mantisParts","EN","mantis/parts/",5);
+        getSprite(p,"mantisParts","EN","mantis/parts/",8);
+        //roach
+        getSprite(p,"roachMove","EN","roach/move/",4);
+        getSprite(p,"roachAttack","EN","roach/attack/",11);
+        getSprite(p,"roachDie","EN","roach/die/",4);
+        getSprite(p,"roachParts","EN","roach/parts/",8);
         //orbits
         staticSprites.put("iceEntityOrbitEn",p.loadImage("sprites/enemies/iceEntity/orbit.png"));
         staticSprites.put("iceMonstrosityOrbitEn",p.loadImage("sprites/enemies/iceMonstrosity/orbit.png"));

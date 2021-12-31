@@ -24,7 +24,7 @@ public class Mantis extends Enemy {
         attackDmgFrames = new int[]{12};
         betweenAttackFrames = 1;
         corpseSize = size;
-        partSize = new PVector(32,32);
+        partSize = new PVector(30,30);
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
         loadStuff();

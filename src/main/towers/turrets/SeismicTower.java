@@ -225,7 +225,7 @@ public class SeismicTower extends Turret {
     }
 
     @Override
-    protected void upgradeSpecial(int id) {
+    protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:

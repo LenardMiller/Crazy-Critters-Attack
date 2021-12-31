@@ -20,6 +20,7 @@ public class DeepForestWaves {
         String mantis = "Mantises";
         String midWorm = "midWorm";
         String bigWorm = "Worms";
+        String roach = "Roaches";
 
         Wave[] waves = new Wave[22];
 
@@ -42,6 +43,7 @@ public class DeepForestWaves {
         waves[3].addSpawns(midBug, 10);
 
         waves[4] = wavePreset(p, 40, 20, midTree);
+        waves[4].addSpawns("snake",10);
         waves[4].addSpawns(smallTree, 20);
         waves[4].addSpawns(midTree, 10);
 
@@ -83,6 +85,7 @@ public class DeepForestWaves {
         waves[13].addSpawns(smallTree, 10);
         waves[13].addSpawns(bigBug, 25);
         waves[13].addSpawns(midBug, 10);
+        waves[13].addSpawns("snake", 20);
         waves[13].addSpawns(smallBug, 10);
         waves[13].addSpawns(smallWorm, 20);
         waves[13].addSpawns(butterfly, 20);
@@ -176,6 +179,12 @@ public class DeepForestWaves {
                         new Color(0x82D240),
                         new Color(0xCAEC43),
                         new Color(0x407E15),
+                        title);
+            case "Roaches":
+                return new Wave(p, length, spawnLength,
+                        new Color(0x5C241A),
+                        new Color(0x804E2A),
+                        new Color(0x30130E),
                         title);
             default:
                 return new Wave(p, length, spawnLength,

@@ -89,9 +89,7 @@ public class Wave {
         popupTexts.add(new PopupText(P, new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), reward));
     }
 
-    /**
-     * Calculates the time between spawns.
-     */
+    /** Calculates the time between spawns. */
     void load() {
         if (spawns.size() > 0) betweenSpawns = SPAWN_LENGTH / spawns.size();
     }
@@ -293,6 +291,9 @@ public class Wave {
             case "Mantises":
             case "Mantis":
                 e = new Mantis(P, pos.x, pos.y);
+                break;
+            case "Roaches":
+                e = new Roach(P, pos.x, pos.y);
                 break;
         }
         return e;

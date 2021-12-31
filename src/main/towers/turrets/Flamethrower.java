@@ -249,7 +249,7 @@ public class Flamethrower extends Turret {
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[31];
     }
 
-    protected void upgradeSpecial(int id) {
+    protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
