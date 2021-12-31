@@ -101,7 +101,7 @@ public class Level {
     }
 
     private boolean canBeSkipped() {
-        if (currentWave >= waves.length) return false;
+        if (currentWave >= waves.length - 1) return false;
         Wave cw = waves[currentWave];
         return !cw.unskippable && cw.spawns.size() == 0;
     }
