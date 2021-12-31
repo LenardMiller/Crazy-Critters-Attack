@@ -3,13 +3,9 @@ package main.gui.guiObjects.buttons;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.awt.*;
-
 import static main.Main.*;
 import static main.gui.TowerInfo.*;
-import static main.misc.Utilities.strikethroughText;
 import static main.sound.SoundUtilities.playSound;
-import static processing.core.PConstants.CENTER;
 
 public class TowerBuy extends Button {
 
@@ -98,7 +94,7 @@ public class TowerBuy extends Button {
         boolean matchX = matrixMousePosition.x < (position.x+size.x/2)+d && matrixMousePosition.x > (position.x-size.x/2)-d-1;
         boolean matchY = matrixMousePosition.y < (position.y+size.y/2)+d && matrixMousePosition.y > (position.y-size.y/2)-d-1;
         boolean matchPosition = matchX && matchY && active;
-        return  ((matchPosition && !paused) || depressed) && alive;
+        return ((matchPosition && !paused) || depressed) && alive;
     }
 
     @Override
@@ -108,80 +104,7 @@ public class TowerBuy extends Button {
             else sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse && !depressed) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
-            p.fill(235);
-            p.noStroke();
-            p.rect(900,212,200,707);
-            p.textAlign(CENTER);
-            p.fill(0, 254);
-            p.textFont(largeFont); //displays info about tower
-            int x = 1000;
-            int offset = 0;
-            switch (TOWER_TYPE) {
-                case "slingshot":
-                    p.text("Slingshot", 1000, 241);
-                    slingshotInfo(p);
-                    break;
-                case "miscCannon":
-                    p.text("Luggage", x, 241);
-                    p.text("Launcher", x, 266);
-                    offset = 25;
-                    randomCannonInfo(p);
-                    break;
-                case "crossbow":
-                    p.text("Crossbow", x, 241);
-                    crossbowInfo(p);
-                    break;
-                case "cannon":
-                    p.text("Cannon", x, 241);
-                    cannonInfo(p);
-                    break;
-                case "gluer":
-                    p.text("Gluer", x, 241);
-                    gluerInfo(p);
-                    break;
-                case "seismic":
-                    p.text("Seismic Tower", x, 241);
-                    seismicInfo(p);
-                    break;
-                case "energyBlaster":
-                    p.text("Energy Blaster", x, 241);
-                    energyBlasterInfo(p);
-                    break;
-                case "magicMissleer":
-                    p.text("Magic Missile", x, 241);
-                    p.text("Launcher", x, 266);
-                    offset = 25;
-                    magicMissileerInfo(p);
-                    break;
-                case "tesla":
-                    p.text("Tesla Tower", x, 241);
-                    teslaTowerInfo(p);
-                    break;
-                case "nightmare":
-                    p.text("Nightmare", x, 241);
-                    p.text("Blaster", x, 266);
-                    offset = 25;
-                    break;
-                case "flamethrower":
-                    p.text("Flamethrower", x, 241);
-                    flamethrowerInfo(p);
-                    break;
-                case "iceTower":
-                    p.text("Freeze Ray", x, 241);
-                    iceTowerInfo(p);
-                    break;
-                case "booster":
-                    p.text("Booster", x, 241);
-                    boosterInfo(p);
-                    break;
-                case "railgun":
-                    p.text("Railgun", x, 241);
-                    break;
-                case "waveMotion":
-                    p.text("Death Beam", x, 241);
-                    break;
-            }
-            displayPrice(offset, x);
+            displayTurretInfo(p, TOWER_TYPE);
             if (inputHandler.leftMousePressedPulse && alive && !paused) {
                 action();
                 if (money >= price) sprite = spritePressed;
@@ -189,16 +112,6 @@ public class TowerBuy extends Button {
         }
         else sprite = spriteIdle;
         if (money < price) sprite = spritePressed;
-    }
-
-    private void displayPrice(int offset, int x) {
-        p.textAlign(CENTER);
-        p.textFont(mediumFont);
-        if (money < price) {
-            strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0, 254),
-                    mediumFont.getSize(), CENTER);
-        }
-        else p.text("$" + price, x, 271 + offset);
     }
 
     @Override

@@ -14,6 +14,7 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.*;
+import static main.gui.TowerInfo.displayTurretInfo;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateNodes;
@@ -171,9 +172,7 @@ public class Hand {
                 tile.tower.nextLevelB < currentLevel;
     }
 
-    /**
-     * Shows what's held at reduced opacity
-     */
+    /** Shows what's held at reduced opacity */
     private void displayHeld() {
         if (!held.equals("null") && heldSprite != null && alive) {
             //red if implacable
@@ -189,6 +188,7 @@ public class Hand {
         if (displayInfo.equals("upgradeWall")) upgradeWallInfo();
         if (displayInfo.equals("maxWallUpgrade")) maxWallUpgradeInfo();
         if (!displayInfo.equals("null")) universalWallInfo();
+        if (!held.equals("null") && !held.equals("wall") && !held.endsWith("TL")) displayTurretInfo(P, held);
     }
 
     private void placeWallInfo() {

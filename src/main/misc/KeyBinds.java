@@ -118,7 +118,7 @@ public class KeyBinds {
             } if (currentLevel > 2) {
                 if (booster)        hand.setHeld("booster");
                 if (iceTower)       hand.setHeld("iceTower");
-                if (magicMissileer) hand.setHeld("magicMissileer");
+                if (magicMissileer) hand.setHeld("magicMissleer");
             } if (currentLevel > 3) {
                 if (railgun)        hand.setHeld("railgun");
                 if (nightmare)      hand.setHeld("nightmare");

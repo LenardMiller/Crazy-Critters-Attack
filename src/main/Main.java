@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
+import static main.gui.TowerInfo.displayTurretInfo;
 import static main.misc.DataControl.loadSettings;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
@@ -295,9 +296,7 @@ public class Main extends PApplet {
         }
     }
 
-    /**
-     * Stuff for the main game screen.
-     */
+    /** Stuff for the main game screen. */
     private void drawInGame() {
         pushMatrix();
         if (hasVerticalBars) translate(matrixOffset, 0);
@@ -362,18 +361,14 @@ public class Main extends PApplet {
         if (paused && !settings) pauseGui.main();
     }
 
-    /**
-     * Stuff for the level select screen.
-     */
+    /** Stuff for the level select screen. */
     private void drawLevelSelect() {
         if (!settings) levelSelectGui.main();
     }
 
     private void drawLoading() { loadingGui.main(); }
 
-    /**
-     * Runs all the in-game stuff.
-     */
+    /** Runs all the in-game stuff. */
     private void drawObjects() {
         //tiles
         if (connectWallQueues > 0) { //else

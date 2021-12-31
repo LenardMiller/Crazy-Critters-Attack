@@ -1,8 +1,12 @@
 package main.gui;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 
-import static main.Main.mediumFont;
+import java.awt.*;
+
+import static main.Main.*;
+import static main.misc.Utilities.strikethroughText;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.LEFT;
 
@@ -15,6 +19,109 @@ public class TowerInfo {
         p.textFont(mediumFont);
         p.fill(0, 254);
         return 910;
+    }
+
+    public static void displayTurretInfo(PApplet p, String turretType) {
+        p.fill(235);
+        p.noStroke();
+        p.rect(900,212,200,707);
+        p.textAlign(CENTER);
+        p.fill(0, 254);
+        p.textFont(largeFont); //displays info about tower
+        int x = 1000;
+        int offset = 0;
+        int price = 0;
+        switch (turretType) {
+            case "slingshot":
+                p.text("Slingshot", 1000, 241);
+                slingshotInfo(p);
+                price = SLINGSHOT_PRICE;
+                break;
+            case "miscCannon":
+                p.text("Luggage", x, 241);
+                p.text("Launcher", x, 266);
+                offset = 25;
+                randomCannonInfo(p);
+                price = RANDOM_CANNON_PRICE;
+                break;
+            case "crossbow":
+                p.text("Crossbow", x, 241);
+                crossbowInfo(p);
+                price = CROSSBOW_PRICE;
+                break;
+            case "cannon":
+                p.text("Cannon", x, 241);
+                cannonInfo(p);
+                price = CANNON_PRICE;
+                break;
+            case "gluer":
+                p.text("Gluer", x, 241);
+                gluerInfo(p);
+                price = GLUER_PRICE;
+                break;
+            case "seismic":
+                p.text("Seismic Tower", x, 241);
+                seismicInfo(p);
+                price = SEISMIC_PRICE;
+                break;
+            case "energyBlaster":
+                p.text("Energy Blaster", x, 241);
+                energyBlasterInfo(p);
+                price = ENERGY_BLASTER_PRICE;
+                break;
+            case "magicMissleer":
+                p.text("Magic Missile", x, 241);
+                p.text("Launcher", x, 266);
+                offset = 25;
+                magicMissileerInfo(p);
+                price = MAGIC_MISSILEER_PRICE;
+                break;
+            case "tesla":
+                p.text("Tesla Tower", x, 241);
+                teslaTowerInfo(p);
+                price = TESLA_TOWER_PRICE;
+                break;
+            case "nightmare":
+                p.text("Nightmare", x, 241);
+                p.text("Blaster", x, 266);
+                offset = 25;
+                price = NIGHTMARE_PRICE;
+                break;
+            case "flamethrower":
+                p.text("Flamethrower", x, 241);
+                flamethrowerInfo(p);
+                price = FLAMETHROWER_PRICE;
+                break;
+            case "iceTower":
+                p.text("Freeze Ray", x, 241);
+                iceTowerInfo(p);
+                price = ICE_TOWER_PRICE;
+                break;
+            case "booster":
+                p.text("Booster", x, 241);
+                boosterInfo(p);
+                price = BOOSTER_PRICE;
+                break;
+            case "railgun":
+                p.text("Railgun", x, 241);
+                price = RAILGUN_PRICE;
+                break;
+            case "waveMotion":
+                p.text("Death Beam", x, 241);
+                price = WAVE_MOTION_PRICE;
+                break;
+        }
+        displayPrice(p, price, offset, x);
+    }
+
+    private static void displayPrice(PApplet p, int price, int offset, int x) {
+        p.textAlign(CENTER);
+        p.textFont(mediumFont);
+        if (money < price) {
+            strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0, 254),
+                    mediumFont.getSize(), CENTER);
+        }
+        else p.text("$" + price, x, 271 + offset);
     }
 
     private static int space(int lineNumber) {
