@@ -84,7 +84,7 @@ public class Wave {
             if (tower.name.equals("moneyBooster")) ((Booster) tower).giveMoney();
         }
         playSound(sounds.get("waveEnd"), 1, 1);
-        int reward = (int) (levels[currentLevel].reward + (levels[currentLevel].reward / 10f) * enemies.size());
+        int reward = (int) (levels[currentLevel].reward + levels[currentLevel].reward * 0.2f * enemies.size());
         money += reward;
         popupTexts.add(new PopupText(P, new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), reward));
     }

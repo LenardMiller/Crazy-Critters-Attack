@@ -191,8 +191,7 @@ public class DeepForestWaves {
                         new Color(0),
                         new Color(255, 0, 255),
                         new Color(0),
-                        title
-                );
+                        title);
         }
     }
 }
