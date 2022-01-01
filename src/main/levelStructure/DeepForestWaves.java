@@ -22,7 +22,7 @@ public class DeepForestWaves {
         String bigWorm = "Worms";
         String roach = "Roaches";
 
-        Wave[] waves = new Wave[22];
+        Wave[] waves = new Wave[25];
 
         waves[0] = wavePreset(p, 80, 40, "Bugs");
         waves[0].addSpawns(midBug, 10);
@@ -79,7 +79,7 @@ public class DeepForestWaves {
         waves[12].addSpawns(bigBug, 5);
         waves[12].addSpawns(midBug, 20);
 
-        waves[13] = wavePreset(p, 150, 120, "forestHorde");
+        waves[13] = wavePreset(p, 150, 120, "Horde");
         waves[13].addSpawns(treeGiant, 5);
         waves[13].addSpawns(midTree, 30);
         waves[13].addSpawns(smallTree, 10);
@@ -121,6 +121,20 @@ public class DeepForestWaves {
         waves[21] = wavePreset(p, 80, 20, enragedGiant);
         waves[21].addSpawns(enragedGiant, 5);
 
+        waves[22] = wavePreset(p, 60, 20, roach);
+        waves[22].addSpawns(roach, 20);
+
+        waves[23] = wavePreset(p, 150, 120, "Bug Horde");
+        waves[23].addSpawns(bigBug, 25);
+        waves[23].addSpawns(roach, 35);
+        waves[23].addSpawns(mantis, 20);
+        waves[23].addSpawns(bigWorm, 20);
+        waves[23].addSpawns(butterfly, 20);
+
+        waves[24] = wavePreset(p, 60, 10, roach);
+        waves[24].polluter = new Polluter(p, 4, "deepForest/brown");
+        waves[24].addSpawns(roach, 30);
+
         for (Wave wave : waves) wave.load();
         return waves;
     }
@@ -153,12 +167,13 @@ public class DeepForestWaves {
                         new Color(255, 0, 77),
                         new Color(32, 255, 32),
                         title);
-            case "forestHorde":
+            case "Bug Horde":
+            case "Horde":
                 return new Wave(p, length, spawnLength,
                         new Color(143, 86, 59),
                         new Color(20, 160, 46),
                         new Color(47, 28, 1),
-                         "Horde");
+                         title);
             case "Worms":
                 return new Wave(p, length, spawnLength,
                         new Color(232, 106, 115),
