@@ -568,7 +568,7 @@ public class Selection {
         else if (turret.priority == 3) priority = "least HP";
         if (turret.hasPriority) {
             P.fill(75, 45, 0, 254);
-            P.text("Priority: " + priority, 1000, 843);
+            P.text("Target: " + priority, 1000, 843);
         }
     }
 

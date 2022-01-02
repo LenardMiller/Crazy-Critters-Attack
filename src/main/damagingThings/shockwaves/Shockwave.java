@@ -72,17 +72,15 @@ public abstract class Shockwave {
     protected void damageEnemies() {
         for (int i = 0; i < UNTOUCHED_ENEMIES.size(); i++) {
             Enemy enemy = UNTOUCHED_ENEMIES.get(i);
-            if (enemy instanceof FlyingEnemy) continue;
+            int damage = DAMAGE;
+            if (enemy instanceof FlyingEnemy) damage = 0;
             float a = findAngle(CENTER, enemy.position);
             float angleDif = ANGLE - a;
             float dist = findDistBetween(enemy.position, CENTER);
             if (abs(angleDif) < WIDTH / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
-                if ((enemy.state == 0 && enemy instanceof BurrowingEnemy)) {
-                    enemy.damageWithBuff(DAMAGE, "stunned", 0, 30, TURRET,
-                      true, damageType, direction, -1);
-                }
-                else enemy.damageWithoutBuff(DAMAGE, TURRET, damageType, direction, true);
+                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, TURRET,
+                        true, damageType, direction, -1);
                 UNTOUCHED_ENEMIES.remove(enemy);
             }
         }

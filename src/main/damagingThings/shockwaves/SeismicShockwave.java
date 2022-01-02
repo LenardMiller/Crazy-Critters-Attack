@@ -1,5 +1,8 @@
 package main.damagingThings.shockwaves;
 
+import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.enemies.flyingEnemies.FlyingEnemy;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
@@ -9,6 +12,8 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.Utilities.findAngle;
+import static main.misc.Utilities.findDistBetween;
 
 public class SeismicShockwave extends Shockwave {
 
@@ -35,6 +40,29 @@ public class SeismicShockwave extends Shockwave {
             a = randomAngle();
             pos = randomPosition(a);
             bottomParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "metal", P.random(100,200)));
+        }
+    }
+
+
+    @Override
+    protected void damageEnemies() {
+        for (int i = 0; i < UNTOUCHED_ENEMIES.size(); i++) {
+            Enemy enemy = UNTOUCHED_ENEMIES.get(i);
+            int damage = DAMAGE;
+            if (enemy instanceof FlyingEnemy) damage = 0;
+            float a = findAngle(CENTER, enemy.position);
+            float angleDif = ANGLE - a;
+            float dist = findDistBetween(enemy.position, CENTER);
+            if (abs(angleDif) < WIDTH / 2f && dist < radius) {
+                PVector direction = PVector.fromAngle(a - HALF_PI);
+                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, TURRET,
+                        true, damageType, direction, -1);
+                if ((enemy.state == 0 && enemy instanceof BurrowingEnemy)) {
+                    enemy.damageWithBuff(damage, "stunned", 0, 30, TURRET,
+                            true, damageType, direction, -1);
+                }
+                UNTOUCHED_ENEMIES.remove(enemy);
+            }
         }
     }
 }
