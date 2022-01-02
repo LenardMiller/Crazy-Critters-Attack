@@ -59,44 +59,9 @@ public class Gluer extends Turret {
     }
 
     @Override
-    protected void getTargetEnemy() {
-        //0: close
-        //1: far
-        //2: strong
-        float finalDist;
-        if (priority == 0) finalDist = 1000000;
-        else finalDist = 0;
-        float maxHp = 0;
-        Enemy e = null;
-        for (Enemy enemy : enemies) {
-            float newSpeed = enemy.speed * effectLevel;
-            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy) && enemy.speed > newSpeed) { //make sure effect would actually slow down enemy
-                float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
-                float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
-                float dist = sqrt(sq(x) + sq(y));
-                if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900 && dist < getRange()) {
-                    if (priority == 0 && dist < finalDist) { //close
-                        e = enemy;
-                        finalDist = dist;
-                    }
-                    if (priority == 1 && dist > finalDist) { //far
-                        e = enemy;
-                        finalDist = dist;
-                    }
-                    if (priority == 2) {
-                        if (enemy.maxHp > maxHp) { //strong
-                            e = enemy;
-                            finalDist = dist;
-                            maxHp = enemy.maxHp;
-                        } else if (enemy.maxHp == maxHp && dist < finalDist) { //strong -> close
-                            e = enemy;
-                            finalDist = dist;
-                        }
-                    }
-                }
-            }
-        }
-        targetEnemy = e;
+    protected boolean enemyCanBeAttacked(Enemy enemy) {
+        //make sure effect would actually slow down enemy
+        return !(enemy.state == 0 && enemy instanceof BurrowingEnemy) && enemy.speed > enemy.speed * effectLevel;
     }
 
     @Override

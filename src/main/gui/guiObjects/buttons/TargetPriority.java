@@ -8,7 +8,7 @@ import static main.Main.selection;
 
 public class TargetPriority extends Button {
 
-    public TargetPriority(PApplet p, float x, float y, String type, boolean active){
+    public TargetPriority(PApplet p, float x, float y, String type, boolean active) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 45);
@@ -19,17 +19,15 @@ public class TargetPriority extends Button {
     }
 
     @Override
-    public void main(){
-        if (active){
+    public void main() {
+        if (active) {
             hover();
             display();
         }
     }
 
     @Override
-    public void action(){
-        //roll over
-        if (selection.turret.priority < 2) selection.turret.priority += 1;
-        else selection.turret.priority = 0;
+    public void action() {
+        selection.changePriority();
     }
 }

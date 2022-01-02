@@ -564,7 +564,8 @@ public class Selection {
         P.textAlign(CENTER);
         if (turret.priority == 0) priority = "close";
         else if (turret.priority == 1) priority = "far";
-        else if (turret.priority == 2) priority = "max HP";
+        else if (turret.priority == 2) priority = "most HP";
+        else if (turret.priority == 3) priority = "least HP";
         if (turret.hasPriority) {
             P.fill(75, 45, 0, 254);
             P.text("Priority: " + priority, 1000, 843);
@@ -586,10 +587,10 @@ public class Selection {
         purpleCount++;
     }
 
-    public void priorityRight() {
+    public void changePriority() {
         if (name.equals("null") || turret == null) return;
         playSound(selection.CLICK_OUT, 1, 1);
-        if (turret.priority == 2) turret.priority = 0;
+        if (turret.priority == 3) turret.priority = 0;
         else turret.priority++;
     }
 

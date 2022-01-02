@@ -27,7 +27,7 @@ public abstract class Turret extends Tower {
     public boolean hasPriority;
     public int pjSpeed;
     public int range;
-    /** Close, far, maxHP */
+    /** Close, far, most HP, least HP */
     public int priority;
     public int pierce;
     public int killsTotal;
@@ -49,8 +49,6 @@ public abstract class Turret extends Tower {
     protected int frameTimer;
     protected int betweenIdleFrames;
     protected int betweenFireFrames;
-    protected float loadDelay;
-    protected float loadDelayTime;
     protected float targetAngle;
     protected float barrelLength;
     protected String fireParticle;
@@ -102,10 +100,10 @@ public abstract class Turret extends Tower {
         float finalDist;
         if (priority == 0) finalDist = 1000000;
         else finalDist = 0;
-        float maxHp = 0;
+        float maxHp = -1;
         Enemy e = null;
         for (Enemy enemy : enemies) {
-            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy)) {
+            if (enemyCanBeAttacked(enemy)) {
                 float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));
@@ -113,15 +111,24 @@ public abstract class Turret extends Tower {
                     if (priority == 0 && dist < finalDist) { //close
                         e = enemy;
                         finalDist = dist;
-                    } if (priority == 1 && dist > finalDist) { //far
+                    } else if (priority == 1 && dist > finalDist) { //far
                         e = enemy;
                         finalDist = dist;
-                    } if (priority == 2) {
-                        if (enemy.maxHp > maxHp) { //strong
+                    } else if (priority == 2) {
+                        if (enemy.maxHp > maxHp || maxHp == -1) { //strong
                             e = enemy;
                             finalDist = dist;
                             maxHp = enemy.maxHp;
                         } else if (enemy.maxHp == maxHp && dist < finalDist) { //strong -> close
+                            e = enemy;
+                            finalDist = dist;
+                        }
+                    } else if (priority == 3) {
+                        if (enemy.maxHp < maxHp || maxHp == -1) { //weak
+                            e = enemy;
+                            finalDist = dist;
+                            maxHp = enemy.maxHp;
+                        } else if (enemy.maxHp == maxHp && dist < finalDist) { //weak -> close
                             e = enemy;
                             finalDist = dist;
                         }
@@ -130,6 +137,10 @@ public abstract class Turret extends Tower {
             }
         }
         targetEnemy = e;
+    }
+
+    protected boolean enemyCanBeAttacked(Enemy enemy) {
+        return !(enemy.state == 0 && enemy instanceof BurrowingEnemy);
     }
 
     /**

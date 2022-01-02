@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
-import static main.gui.TowerInfo.displayTurretInfo;
 import static main.misc.DataControl.loadSettings;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.misc.WallSpecialVisuals.updateWallTileConnections;
@@ -75,10 +74,10 @@ public class Main extends PApplet {
     public static SettingsGui settingsGui;
     public static LoadingGui loadingGui;
 
-    //can't be final because created by PApplet
+    /** can't be final because created by PApplet */
     public static PFont veryLargeFont, largeFont, mediumLargeFont, mediumFont, smallFont;
 
-    /**in-game, level select, loading*/
+    /** in-game, level select, loading */
     public static int screen = 2;
     public static int money = 100;
     public static int connectWallQueues;
@@ -88,7 +87,7 @@ public class Main extends PApplet {
     public static boolean
             won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, useOpenGL, gore, hasVerticalBars;
     public static boolean alive = true;
-    public static boolean dev = true; //<--------
+    public static boolean dev = false; //<--------
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;
@@ -191,9 +190,7 @@ public class Main extends PApplet {
         }
     }
 
-    /**
-     * Sets all the in game stuff up.
-     */
+    /** Sets all the in game stuff up. */
     public static void resetGame(PApplet p) {
         //creates object data structures
         tiles = new Tile.TileDS();
@@ -628,9 +625,7 @@ public class Main extends PApplet {
 
         public KeyDSItem[] items;
 
-        /**
-         * Contains all the keys from the keyboard
-         */
+        /** Contains all the keys from the keyboard */
         public KeyDS() {
             items = new KeyDSItem[0];
         }

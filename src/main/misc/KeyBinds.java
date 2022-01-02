@@ -12,10 +12,8 @@ import main.damagingThings.projectiles.homing.MagicMissile;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.BigWorm;
 import main.enemies.burrowingEnemies.Shark;
-import main.enemies.flyingEnemies.Frost;
 import main.enemies.shootingEnemies.IceEntity;
 import main.enemies.shootingEnemies.IceMonstrosity;
-import main.enemies.shootingEnemies.MudFlinger;
 import main.enemies.shootingEnemies.SnowAntlion;
 import main.levelStructure.Level;
 import main.towers.Tower;
@@ -63,7 +61,7 @@ public class KeyBinds {
 
         if (upgradeTop) selection.upgradeTop();
         if (upgradeBottom) selection.upgradeBottom();
-        if (priorityRight) selection.priorityRight();
+        if (priorityRight) selection.changePriority();
         if (delete) selection.sell();
     }
 
