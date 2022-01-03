@@ -135,6 +135,7 @@ public class Hand {
                     )
             ) < MIN_ENEMY_DISTANCE * enemy.pfSize) {
                 if (!hand.held.equals("null")) {
+                    P.noStroke();
                     P.fill(255, 0, 0, 100);
                     P.circle(enemy.position.x, enemy.position.y, (MIN_ENEMY_DISTANCE * enemy.pfSize * 2) - 25);
                 }

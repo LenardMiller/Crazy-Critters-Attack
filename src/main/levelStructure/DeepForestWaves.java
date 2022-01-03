@@ -122,18 +122,18 @@ public class DeepForestWaves {
         waves[21].addSpawns(enragedGiant, 5);
 
         waves[22] = wavePreset(p, 60, 20, roach);
-        waves[22].addSpawns(roach, 20);
+        waves[22].addSpawns(roach, 40);
 
         waves[23] = wavePreset(p, 150, 120, "Bug Horde");
         waves[23].addSpawns(bigBug, 25);
-        waves[23].addSpawns(roach, 35);
-        waves[23].addSpawns(mantis, 20);
+        waves[23].addSpawns(roach, 70);
+        waves[23].addSpawns(mantis, 40);
         waves[23].addSpawns(bigWorm, 20);
         waves[23].addSpawns(butterfly, 20);
 
-        waves[24] = wavePreset(p, 60, 10, roach);
+        waves[24] = wavePreset(p, 40, 10, roach);
         waves[24].polluter = new Polluter(p, 4, "deepForest/brown");
-        waves[24].addSpawns(roach, 30);
+        waves[24].addSpawns(roach, 60);
 
         for (Wave wave : waves) wave.load();
         return waves;

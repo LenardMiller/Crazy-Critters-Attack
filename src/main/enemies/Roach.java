@@ -13,10 +13,10 @@ public class Roach extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12;
-        speed = 40;
-        moneyDrop = 50;
-        damage = 10;
-        maxHp = 1000;
+        speed = 55;
+        moneyDrop = 100;
+        damage = 20;
+        maxHp = 3500;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "roach";

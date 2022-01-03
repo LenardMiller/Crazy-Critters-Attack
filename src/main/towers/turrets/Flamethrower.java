@@ -72,7 +72,7 @@ public class Flamethrower extends Turret {
 
     private void rotateWheel() {
         float maxSpeed = 0.5f;
-        float spoolSpeed = 0.002f;
+        float spoolSpeed = 0.005f;
         if (targetEnemy != null && enemies.size() > 0 && alive) {
             rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, maxSpeed);
         } else rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, 0);
