@@ -23,8 +23,8 @@ public class WaveMotion extends Turret {
     public WaveMotion(PApplet p, Tile tile) {
         super(p,tile);
         name = "waveMotion";
-        delay = randomizeDelay(p, 15);
-        damage = 150;
+        delay = randomizeDelay(p, 7);
+        damage = 500;
         pjSpeed = -1;
         range = 500;
         beam = new PImage[0];
@@ -39,7 +39,7 @@ public class WaveMotion extends Turret {
         material = "darkMetal";
         price = WAVE_MOTION_PRICE;
         value = price;
-        priority = 2; //strong
+        priority = 1; //far
 
         setUpgrades();
         loadSprites();

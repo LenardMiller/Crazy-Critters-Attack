@@ -20,9 +20,9 @@ public class Nightmare extends Turret {
         delay = randomizeDelay(p, 3.5f);
         pjSpeed = 1000;
         range = 200;
-        damage = 100;
-        numProjectiles = 3;
-        effectLevel = 200;
+        damage = 0;
+        numProjectiles = 5;
+        effectLevel = 1000;
         effectDuration = 3.6f;
         fireParticle = "decay";
         barrelLength = 20;
@@ -71,13 +71,13 @@ public class Nightmare extends Turret {
     @Override
     protected void setUpgrades(){
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 200;
+        upgradePrices[0] = 2500;
+        upgradePrices[1] = 6000;
+        upgradePrices[2] = 100000;
 
-        upgradePrices[3] = 50;
-        upgradePrices[4] = 100;
-        upgradePrices[5] = 200;
+        upgradePrices[3] = 2000;
+        upgradePrices[4] = 8000;
+        upgradePrices[5] = 100000;
         //titles
         upgradeTitles[0] = "Firerate";
         upgradeTitles[1] = "More Needles";
@@ -142,7 +142,7 @@ public class Nightmare extends Turret {
                     break;
                 case 4:
                     effectDuration += 3;
-                    effectLevel += 200;
+                    effectLevel += 1000;
                     break;
                 case 5:
                     effectDuration += 5;

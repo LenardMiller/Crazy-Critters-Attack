@@ -8,6 +8,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
+import static main.misc.Utilities.randomizeDelay;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Railgun extends Turret {
@@ -28,9 +29,8 @@ public class Railgun extends Turret {
         name = "railgun";
         offset = 6;
         hit = false;
-        delay = 10;
-        delay += p.random(-(delay/10f),delay/10f); //injects 10% randomness so all don't fire at once
-        damage = 10000;
+        delay = randomizeDelay(p, 10);
+        damage = 100000;
         pjSpeed = -1;
         range = 5000;
         NUM_VAPOR_FRAMES = 15;
@@ -121,13 +121,13 @@ public class Railgun extends Turret {
     @Override
     protected void setUpgrades(){
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
-        upgradePrices[2] = 200;
+        upgradePrices[0] = 3000;
+        upgradePrices[1] = 5000;
+        upgradePrices[2] = 250000;
 
-        upgradePrices[3] = 50;
-        upgradePrices[4] = 100;
-        upgradePrices[5] = 200;
+        upgradePrices[3] = 4000;
+        upgradePrices[4] = 6000;
+        upgradePrices[5] = 300000;
         //titles
         upgradeTitles[0] = "Heat sinks";
         upgradeTitles[1] = "Coil gun";
@@ -188,10 +188,8 @@ public class Railgun extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    damage += 5000;
-                    break;
                 case 4:
-                    damage += 10000;
+                    damage += 50000;
                     break;
                 case 5:
                     damage = 999999;

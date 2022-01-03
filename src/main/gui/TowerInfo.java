@@ -84,6 +84,7 @@ public class TowerInfo {
             case "nightmare":
                 p.text("Nightmare", x, 241);
                 p.text("Blaster", x, 266);
+                nightmareInfo(p);
                 offset = 25;
                 price = NIGHTMARE_PRICE;
                 break;
@@ -104,10 +105,12 @@ public class TowerInfo {
                 break;
             case "railgun":
                 p.text("Railgun", x, 241);
+                railgunInfo(p);
                 price = RAILGUN_PRICE;
                 break;
             case "waveMotion":
                 p.text("Death Beam", x, 241);
+                waveMotionInfo(p);
                 price = WAVE_MOTION_PRICE;
                 break;
         }
@@ -281,5 +284,37 @@ public class TowerInfo {
         p.text("can travel very far.", x, space(6));
         p.textAlign(CENTER);
         p.text("[V]", 1000, space(8));
+    }
+
+    public static void railgunInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Fires a hypersonic", x, space(0));
+        p.text("bolt of plasma at", x, space(1));
+        p.text("the toughest enemy", x, space(2));
+        p.text("onscreen,  doing", x, space(3));
+        p.text("extreme damage.", x, space(4));
+        p.textAlign(CENTER);
+        p.text("[T]", 1000, space(6));
+    }
+
+    public static void nightmareInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Unleashes a flurry of", x, space(0));
+        p.text("cursed needles that", x, space(1));
+        p.text("cause enemies to", x, space(2));
+        p.text("turn to ash.", x, space(3));
+        p.textAlign(CENTER);
+        p.text("[G]", 1000, space(5));
+    }
+
+    public static void waveMotionInfo(PApplet p) {
+        int x = loadStyle(p);
+        p.text("Creates an", x, space(0));
+        p.text("enormous beam of", x, space(1));
+        p.text("energy, cutting a", x, space(2));
+        p.text("path through enemy", x, space(3));
+        p.text("ranks.", x, space(4));
+        p.textAlign(CENTER);
+        p.text("[B]", 1000, space(6));
     }
 }

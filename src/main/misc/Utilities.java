@@ -426,11 +426,11 @@ public class Utilities {
 
     /**
      * @param p the PApplet
-     * @param input amount to randomize
+     * @param seconds amount to randomize
      * @return input =/- a random amount up to 10%
      */
-    public static float randomizeDelay(PApplet p, float input) {
-        return input + p.random(-(input/20f),input/20f);
+    public static float randomizeDelay(PApplet p, float seconds) {
+        return seconds + p.random(-(seconds/20f),seconds/20f);
     }
 
     /**
