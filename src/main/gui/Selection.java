@@ -562,8 +562,8 @@ public class Selection {
         String priority = "close";
         P.textFont(largeFont);
         P.textAlign(CENTER);
-        if (turret.priority == 0) priority = "close";
-        else if (turret.priority == 1) priority = "far";
+        if (turret.priority == 0) priority = "closest";
+        else if (turret.priority == 1) priority = "farthest";
         else if (turret.priority == 2) priority = "most HP";
         else if (turret.priority == 3) priority = "least HP";
         if (turret.hasPriority) {
