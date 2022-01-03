@@ -71,7 +71,7 @@ public class Flamethrower extends Turret {
     }
 
     private void rotateWheel() {
-        float maxSpeed = 0.5f;
+        float maxSpeed = 0.3f;
         float spoolSpeed = 0.005f;
         if (targetEnemy != null && enemies.size() > 0 && alive) {
             rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, maxSpeed);
@@ -201,11 +201,11 @@ public class Flamethrower extends Turret {
         //prices
         upgradePrices[0] = 400;
         upgradePrices[1] = 600;
-        upgradePrices[2] = 4000;
+        upgradePrices[2] = 6000;
 
         upgradePrices[3] = 600;
         upgradePrices[4] = 700;
-        upgradePrices[5] = 6000;
+        upgradePrices[5] = 8000;
         //titles
         upgradeTitles[0] = "Better range";
         upgradeTitles[1] = "Betterer Range";
@@ -261,7 +261,7 @@ public class Flamethrower extends Turret {
                 case 2:
                     wheel = true;
                     count = 8;
-                    damage *= 20;
+                    damage *= 10;
                     name = "flamewheel";
                     hasPriority = false;
                     effectLevel += 7;
@@ -284,7 +284,7 @@ public class Flamethrower extends Turret {
                     material = "darkMetal";
                     range += 30;
                     pjSpeed = 150;
-                    damage = 250;
+                    damage = 200;
                     effectDuration = 25;
                     effectLevel = 250;
                     loadSprites();

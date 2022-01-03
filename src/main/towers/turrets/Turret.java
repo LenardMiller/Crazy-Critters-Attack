@@ -35,6 +35,7 @@ public abstract class Turret extends Tower {
     public int damage;
     public float effectDuration;
     public float effectLevel;
+    /** seconds */
     public float delay;
     /** Radians */
     public float angle;

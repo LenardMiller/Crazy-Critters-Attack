@@ -17,8 +17,8 @@ public class EnragedGiant extends Enemy {
         radius = 30;
         speed = 50;
         moneyDrop = 600;
-        damage = 15;
-        maxHp = 15000; //Hp
+        damage = 20;
+        maxHp = 17000; //Hp
         hp = maxHp;
         hitParticle = "leafOuch";
         name = "enragedGiant";

@@ -21,8 +21,9 @@ public class DeepForestWaves {
         String midWorm = "midWorm";
         String bigWorm = "Worms";
         String roach = "Roaches";
+        String mudCreature = "Mud Creatures";
 
-        Wave[] waves = new Wave[25];
+        Wave[] waves = new Wave[27];
 
         waves[0] = wavePreset(p, 80, 40, "Bugs");
         waves[0].addSpawns(midBug, 10);
@@ -121,19 +122,26 @@ public class DeepForestWaves {
         waves[21] = wavePreset(p, 80, 20, enragedGiant);
         waves[21].addSpawns(enragedGiant, 5);
 
-        waves[22] = wavePreset(p, 60, 20, roach);
+        waves[22] = wavePreset(p, 15, 10, roach);
         waves[22].addSpawns(roach, 40);
 
-        waves[23] = wavePreset(p, 150, 120, "Bug Horde");
+        waves[23] = wavePreset(p, 80, 60, "Bug Horde");
         waves[23].addSpawns(bigBug, 25);
-        waves[23].addSpawns(roach, 70);
+        waves[23].addSpawns(roach, 100);
         waves[23].addSpawns(mantis, 40);
         waves[23].addSpawns(bigWorm, 20);
         waves[23].addSpawns(butterfly, 20);
 
-        waves[24] = wavePreset(p, 40, 10, roach);
-        waves[24].polluter = new Polluter(p, 4, "deepForest/brown");
-        waves[24].addSpawns(roach, 60);
+        waves[24] = wavePreset(p, 50, 20, enragedGiant);
+        waves[24].addSpawns(enragedGiant, 20);
+        waves[24].addSpawns(mantis, 10);
+
+        waves[25] = wavePreset(p, 10, 5, roach);
+        waves[25].polluter = new Polluter(p, 4, "deepForest/brown");
+        waves[25].addSpawns(roach, 60);
+
+        waves[26] = wavePreset(p, 30, 1, mudCreature);
+        waves[26].addSpawns(mudCreature, 5);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -200,6 +208,13 @@ public class DeepForestWaves {
                         new Color(0x5C241A),
                         new Color(0x804E2A),
                         new Color(0x30130E),
+                        title);
+            case "Mud Creature":
+            case "Mud Creatures":
+                return new Wave(p, length, spawnLength,
+                        new Color(74, 39, 0),
+                        new Color(188, 186, 130),
+                        new Color(23, 13, 0),
                         title);
             default:
                 return new Wave(p, length, spawnLength,

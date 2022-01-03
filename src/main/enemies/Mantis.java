@@ -13,7 +13,7 @@ public class Mantis extends Enemy {
         size = new PVector(50,50);
         pfSize = 2; //2
         radius = 25;
-        speed = 30;
+        speed = 40;
         moneyDrop = 300;
         damage = 15;
         maxHp = 7500;
