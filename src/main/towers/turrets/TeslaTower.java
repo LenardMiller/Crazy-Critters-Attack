@@ -194,7 +194,6 @@ public class TeslaTower extends Turret {
                     break;
                 case 5:
                     delay = 0.2f;
-                    damage += 50;
                     highPower = true;
                     betweenIdleFrames = 3;
                     name = "highPowerTesla";

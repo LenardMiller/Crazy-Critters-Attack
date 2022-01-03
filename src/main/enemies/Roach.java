@@ -13,7 +13,7 @@ public class Roach extends Enemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12;
-        speed = 55;
+        speed = 65;
         moneyDrop = 100;
         damage = 10;
         maxHp = 3000;
