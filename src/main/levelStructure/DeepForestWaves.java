@@ -230,6 +230,12 @@ public class DeepForestWaves {
                         new Color(188, 186, 130),
                         new Color(23, 13, 0),
                         title);
+            case "Roots":
+                return new Wave(p, length, spawnLength,
+                        new Color(0x714200),
+                        new Color(0xb76e09),
+                        new Color(0x412600),
+                        title);
             default:
                 return new Wave(p, length, spawnLength,
                         new Color(0),

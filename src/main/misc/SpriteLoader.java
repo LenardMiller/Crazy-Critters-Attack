@@ -61,6 +61,7 @@ public class SpriteLoader {
         getSprite(p,"lichenOuch","PT","ouch/lichen/",11);
         getSprite(p,"iceOuch","PT","ouch/ice/",11);
         getSprite(p,"mudOuch","PT","ouch/mud/",11);
+        getSprite(p,"sapOuch","PT","ouch/sap/",11);
         //medium explosions
         getSprite(p,"fireMediumExplosion","PT","mediumExplosion/fire/",18);
         getSprite(p,"puffMediumExplosion","PT","mediumExplosion/puff/",18);
@@ -82,6 +83,7 @@ public class SpriteLoader {
         //piles
         getSprite(p,"greenOuchPile","PT", "pile/greenOuch/", 4);
         getSprite(p,"redOuchPile","PT", "pile/redOuch/", 4);
+        getSprite(p,"sapOuchPile","PT", "pile/sapOuch/", 4);
         getSprite(p,"glowOuchPile","PT", "pile/glowOuch/", 4);
         getSprite(p,"leafOuchPile","PT", "pile/leafOuch/", 4);
         getSprite(p,"lichenOuchPile","PT", "pile/lichenOuch/", 4);
@@ -343,6 +345,11 @@ public class SpriteLoader {
         getSprite(p,"roachAttack","EN","roach/attack/",11);
         getSprite(p,"roachDie","EN","roach/die/",4);
         getSprite(p,"roachParts","EN","roach/parts/",8);
+        //root
+        getSprite(p,"rootMove","EN","root/move/",1);
+        getSprite(p,"rootAttack","EN","root/attack/",23);
+        getSprite(p,"rootDie","EN","root/die/",3);
+        getSprite(p,"rootParts", "EN", "root/parts/", 3);
         //orbits
         staticSprites.put("iceEntityOrbitEn",p.loadImage("sprites/enemies/iceEntity/orbit.png"));
         staticSprites.put("iceMonstrosityOrbitEn",p.loadImage("sprites/enemies/iceMonstrosity/orbit.png"));
