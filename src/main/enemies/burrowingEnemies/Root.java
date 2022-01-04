@@ -13,8 +13,8 @@ public class Root extends BurrowingEnemy {
         size = new PVector(25,25);
         pfSize = 1;
         radius = 12.5f;
-        speed = 36;
-        moneyDrop = 150;
+        speed = 40;
+        moneyDrop = 100;
         damage = 20;
         maxHp = 10000; //Hp
         hp = maxHp;

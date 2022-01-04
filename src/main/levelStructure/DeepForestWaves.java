@@ -22,8 +22,9 @@ public class DeepForestWaves {
         String bigWorm = "Worms";
         String roach = "Roaches";
         String mudCreature = "Mud Creatures";
+        String root = "Roots";
 
-        Wave[] waves = new Wave[31];
+        Wave[] waves = new Wave[35];
 
         waves[0] = wavePreset(p, 80, 40, "Bugs");
         waves[0].addSpawns(midBug, 10);
@@ -122,7 +123,7 @@ public class DeepForestWaves {
         waves[21] = wavePreset(p, 80, 20, enragedGiant);
         waves[21].addSpawns(enragedGiant, 5);
 
-        waves[22] = wavePreset(p, 80, 20, roach);
+        waves[22] = wavePreset(p, 60, 20, roach);
         waves[22].addSpawns(roach, 40);
 
         waves[23] = wavePreset(p, 240, 200, "Bug Horde");
@@ -156,6 +157,18 @@ public class DeepForestWaves {
 
         waves[30] = wavePreset(p, 50, 10, mudCreature);
         waves[30].addSpawns(mudCreature, 10);
+
+        waves[31] = wavePreset(p, 50, 5, root);
+        waves[31].addSpawns(root, 10);
+
+        waves[32] = wavePreset(p, 30, 10, roach);
+        waves[32].addSpawns(roach, 70);
+
+        waves[33] = wavePreset(p, 50, 5, root);
+        waves[33].addSpawns(root, 20);
+
+        waves[34] = wavePreset(p, 50, 20, mudCreature);
+        waves[34].addSpawns(mudCreature, 20);
 
         for (Wave wave : waves) wave.load();
         return waves;

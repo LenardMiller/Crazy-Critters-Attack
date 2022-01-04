@@ -295,6 +295,9 @@ public class Wave {
             case "Roaches":
                 e = new Roach(P, pos.x, pos.y);
                 break;
+            case "Roots":
+                e = new Root(P, pos.x, pos.y);
+                break;
         }
         return e;
     }
