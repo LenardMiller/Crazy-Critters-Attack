@@ -87,7 +87,7 @@ public class Main extends PApplet {
     public static boolean
             won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, useOpenGL, gore, hasVerticalBars;
     public static boolean alive = true;
-    public static boolean dev = true; //<--------
+    public static boolean dev = false; //<--------
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;
@@ -108,7 +108,7 @@ public class Main extends PApplet {
 
             ENERGY_BLASTER_PRICE =  1000,
             FLAMETHROWER_PRICE =    1250,
-            TESLA_TOWER_PRICE =     1400,
+            TESLA_TOWER_PRICE =     1500,
 
             MAGIC_MISSILEER_PRICE = 3500,
             ICE_TOWER_PRICE =       3000,

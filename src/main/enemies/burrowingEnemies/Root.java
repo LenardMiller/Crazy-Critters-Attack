@@ -15,8 +15,8 @@ public class Root extends BurrowingEnemy {
         radius = 12.5f;
         speed = 40;
         moneyDrop = 100;
-        damage = 20;
-        maxHp = 10000; //Hp
+        damage = 50;
+        maxHp = 50000; //Hp
         hp = maxHp;
         hitParticle = "sapOuch";
         name = "root";
