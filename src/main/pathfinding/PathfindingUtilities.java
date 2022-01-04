@@ -2,6 +2,8 @@ package main.pathfinding;
 
 import main.enemies.Enemy;
 
+import java.util.ArrayList;
+
 import static main.Main.*;
 
 public class PathfindingUtilities {
@@ -107,18 +109,10 @@ public class PathfindingUtilities {
                 node.reset();
             }
         }
+        pathFinder.requestQueue = new ArrayList<>();
         if (enemies.size() > 0) {
             for (int i = enemies.size()-1; i >= 0; i--) {
-                boolean hasPath = false;
-                /* Loops through all paths to find the one that belongs to this enemy.
-                If found, it will skip that enemy. */
-                for (int j = pathFinder.requestQueue.size()-1; j >= 0; j--) {
-                    if (enemies.get(i) == pathFinder.requestQueue.get(j).enemy) {
-                        hasPath = true;
-                        break;
-                    }
-                }
-                if (!hasPath) enemies.get(i).requestPath(i);
+                enemies.get(i).requestPath(i);
             }
         } else {
             start.setStart(

@@ -562,7 +562,7 @@ public abstract class Enemy {
     }
 
     public void requestPath(int i) {
-        pathFinder.requestQueue.add(new PathRequest(i, enemies.get(i)));
+        pathFinder.requestQueue.add(new PathRequest(i, this));
         trail = new ArrayList<>();
     }
 
