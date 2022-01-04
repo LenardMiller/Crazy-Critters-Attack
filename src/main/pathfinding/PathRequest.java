@@ -23,9 +23,7 @@ public class PathRequest {
         this.size = enemy.pfSize;
     }
 
-    /**
-     * Uses A* to get a path, then converts that into a trail and sends it to the enemy
-     */
+    /** Uses A* to get a path, then converts that into a trail and sends it to the enemy */
     public void getPath() {
         //reset
         for (Node[] nodes : nodeGrid) {
