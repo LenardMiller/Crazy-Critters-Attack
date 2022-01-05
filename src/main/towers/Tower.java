@@ -25,7 +25,7 @@ import static main.Main.*;
 import static main.misc.Utilities.incrementByTo;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Tower {
@@ -76,7 +76,7 @@ public abstract class Tower {
         visualize = false;
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
-        updateNodes();
+        updateCombatPoints();
         updateTowerArray();
     }
 
@@ -144,7 +144,7 @@ public abstract class Tower {
         if (hasBoostedDeathEffect()) deathEffect();
         updateFlooring();
         updateTowerArray();
-        updateNodes();
+        updateCombatPoints();
     }
 
     protected void deathEffect() {

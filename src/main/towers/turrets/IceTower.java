@@ -16,7 +16,7 @@ import java.util.Collections;
 import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class IceTower extends Turret {
@@ -181,7 +181,7 @@ public class IceTower extends Turret {
             tile.tower = new IceWall(p, tile, wallHp, wallTimeUntilDamage);
             Wall wall = (Wall) tile.tower;
             wall.placeEffects();
-            updateNodes();
+            updateCombatPoints();
             updateTowerArray();
             frozenTotal++;
         } else if (tile.tower instanceof IceWall) {

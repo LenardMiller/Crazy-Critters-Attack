@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.closeSettingsMenu;
-import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSound;
 
 public class KeyBinds {
@@ -201,20 +201,19 @@ public class KeyBinds {
         if (deleteEnemies) {
             enemies = new ArrayList<>();
             buffs = new ArrayList<>();
-            updateNodes();
         } if (killTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
                 if (tower != null) tower.die(false);
             }
-            updateNodes();
+            updateCombatPoints();
             machine.die();
         } if (hurtTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
                 if (tower != null) tower.hp -= tower.maxHp/5;
             }
-            updateNodes();
+            updateCombatPoints();
             machine.damage(20);
         } if (killProjectiles) projectiles = new ArrayList<>();
         if (killEnemies) {

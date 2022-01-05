@@ -11,7 +11,7 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.roundTo;
-import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.pathfinding.PathfindingUtilities.updateAll;
 
 public class Tile {
 
@@ -470,7 +470,7 @@ public class Tile {
 
     public void setObstacle(String name) {
         if (name == null) {
-            if (obstacleName != null) updateNodes();
+            if (obstacleName != null) updateAll();
             obstacle = null;
             obstacleName = null;
         } else {
@@ -480,7 +480,7 @@ public class Tile {
                 tiles.get(x + 1, y + 1).tower.die(false);
             }
             setFlooring(null);
-            if (obstacleName == null) updateNodes();
+            if (obstacleName == null) updateAll();
             obstacle = staticSprites.get(name);
             obstacleName = name;
             if (name.contains("smallTree")) obstacleShadowLength = 3;

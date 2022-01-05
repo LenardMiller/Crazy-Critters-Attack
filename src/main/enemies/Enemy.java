@@ -530,8 +530,7 @@ public abstract class Enemy {
         return position.x > 0 && position.x < 900 && position.y > 0 && position.y < 900;
     }
 
-    /*pathfinding ------------------------------------------------------------------------------------------------------
-      todo: still walk through stuff!!!*/
+    //pathfinding ------------------------------------------------------------------------------------------------------
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = trail.get(trail.size() - 1);
@@ -587,16 +586,16 @@ public abstract class Enemy {
         }
     }
 
+    /** Reset all combat points to turn points, then recalculate. */
     public void setCombatPoints() {
-        //remove
+        //set not combat
         for (TurnPoint point : trail) {
             point.combat = false;
             point.towers = null;
             point.machine = false;
         }
-        //add
-        ArrayList<TurnPoint> pointsD = new ArrayList<>(trail);
-        for (TurnPoint point : pointsD) {
+        //set combat
+        for (TurnPoint point : trail) {
             point.towers = clearanceTowers(point);
             point.machine = clearanceMachine(point);
         }
@@ -608,24 +607,21 @@ public abstract class Enemy {
                 backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
             } else backPoint.tower = null;
         }
-
-        trail = new ArrayList<>();
-        trail.addAll(pointsD);
     }
 
-    /** returns all towers in enemy "bubble"? */
+    /** returns all towers in point kernel */
     protected ArrayList<Tower> clearanceTowers(TurnPoint point) {
-        ArrayList<Tower> towers = new ArrayList<>();
+        ArrayList<Tower> towersInKernel = new ArrayList<>();
         boolean clear = true;
-        int kSize = 1;
+        int kernelSize = 1;
         int x = (int) (point.position.x + 100) / 25;
         int y = (int) (point.position.y + 100) / 25;
         while (true) {
-            for (int xn = 0; xn < kSize; xn++) {
-                for (int yn = 0; yn < kSize; yn++) {
+            for (int xn = 0; xn < kernelSize; xn++) {
+                for (int yn = 0; yn < kernelSize; yn++) {
                     if (!(x + xn >= nodeGrid.length || y + yn >= nodeGrid[x].length)) {
-                        Node nodeB = nodeGrid[x + xn][y + yn];
-                        if (nodeB.tower != null) towers.add(nodeB.tower);
+                        Node node = nodeGrid[x + xn][y + yn];
+                        if (node.tower != null) towersInKernel.add(node.tower);
                     } else {
                         clear = false;
                         break;
@@ -633,14 +629,16 @@ public abstract class Enemy {
                 }
                 if (!clear) break;
             }
-            if (clear && kSize < pfSize) kSize++;
+            if (clear && kernelSize < pfSize) kernelSize++;
             else break;
         }
         //deletes duplicates
-        CopyOnWriteArrayList<Tower> towersB = new CopyOnWriteArrayList<>(towers);
-        for (int i = 0; i < towersB.size() - 1; i++) if (towersB.get(i) == towersB.get(i++)) towersB.remove(i);
-        towers = new ArrayList<>(towersB);
-        return towers;
+        CopyOnWriteArrayList<Tower> cow = new CopyOnWriteArrayList<>(towersInKernel);
+        for (int i = 0; i < cow.size() - 1; i++) {
+            if (cow.get(i) == cow.get(i++)) cow.remove(i);
+        }
+        towersInKernel = new ArrayList<>(cow);
+        return towersInKernel;
     }
 
     private boolean clearanceMachine(TurnPoint point) {

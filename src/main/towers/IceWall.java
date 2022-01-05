@@ -9,7 +9,7 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class IceWall extends Wall {
@@ -79,7 +79,7 @@ public class IceWall extends Wall {
         tile.tower = null;
         updateFlooring();
         updateTowerArray();
-        updateNodes();
+        updateCombatPoints();
     }
 
     @Override

@@ -103,7 +103,7 @@ public class PathfindingUtilities {
     }
 
     /** Resets all the paths saved by each enemy. */
-    public static void updatePath() {
+    public static void updatePaths() {
         for (main.pathfinding.Node[] nodes : nodeGrid) {
             for (main.pathfinding.Node node : nodes) {
                 node.reset();
@@ -126,17 +126,28 @@ public class PathfindingUtilities {
         }
     }
 
-    /** Refreshes all pathfinding nodes */
-    public static void updateNodes() {
+    private static void refreshNodes() {
         for (Node[] nodes : nodeGrid) {
             for (Node node : nodes) {
                 node.setNotEnd((int) (node.position.x / NODE_SIZE), (int) (node.position.y / NODE_SIZE));
                 node.checkTile();
             }
         }
+    }
+
+    /** Refreshes just combat points for when towers change. */
+    public static void updateCombatPoints() {
+        refreshNodes();
+        updateClearance();
+        for (Enemy enemy : enemies) enemy.setCombatPoints();
+    }
+
+    /** Refreshes all paths for when tiles change. */
+    public static void updateAll() {
+        refreshNodes();
         updateClearance();
         updateNode(start, null);
-        updatePath();
+        updatePaths();
         for (Enemy enemy : enemies) enemy.setCombatPoints();
     }
 

@@ -17,7 +17,7 @@ import static main.Main.*;
 import static main.gui.TowerInfo.displayTurretInfo;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSound;
 
 public class Hand {
@@ -499,7 +499,7 @@ public class Hand {
         }
         if (!held.equals("null")) money -= price;
         if (changeHeld) held = "null";
-        updateNodes();
+        updateCombatPoints();
         updateTowerArray();
     }
 }

@@ -19,7 +19,7 @@ import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.pathfinding.PathfindingUtilities.updateNodes;
+import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Turret extends Tower {
@@ -35,7 +35,7 @@ public abstract class Turret extends Tower {
     public int damage;
     public float effectDuration;
     public float effectLevel;
-    /** seconds */
+    /** Seconds */
     public float delay;
     /** Radians */
     public float angle;
@@ -248,7 +248,7 @@ public abstract class Turret extends Tower {
         if (hasBoostedDeathEffect()) deathEffect();
         updateFlooring();
         connectWallQueues++;
-        updateNodes();
+        updateCombatPoints();
     }
 
     @Override

@@ -242,7 +242,7 @@ public class Main extends PApplet {
                 "levels/deepForest", 2500, 350, "dirt");
         DataControl.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
-        updateNodes();
+        updateAll();
         //gui stuff
         hand = new Hand(p);
         selection = new Selection(p);
