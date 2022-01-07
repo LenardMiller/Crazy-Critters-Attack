@@ -8,6 +8,8 @@ import java.awt.*;
 public class DeepForestWaves {
 
     public static Wave[] genDeepForestWaves(PApplet p) {
+        Wave[] waves = new Wave[35];
+
         String bigBug = "Big Bugs";
         String midBug = "midBug";
         String smallBug = "smolBug";
@@ -23,10 +25,10 @@ public class DeepForestWaves {
         String roach = "Roaches";
         String mudCreature = "Mud Creatures";
         String root = "Roots";
-
-        Wave[] waves = new Wave[35];
+        String mantoid = "Mantoids";
 
         waves[0] = wavePreset(p, 80, 40, "Bugs");
+        waves[0].polluter = new Polluter(p, 4, "deepForest/yellow");
         waves[0].addSpawns(midBug, 10);
         waves[0].addSpawns(smallBug, 20);
         waves[0].addSpawns(butterfly, 5);
@@ -37,7 +39,6 @@ public class DeepForestWaves {
         waves[1].addSpawns(midTree, 3);
 
         waves[2] = wavePreset(p, 60, 1, "Big Bug");
-        waves[2].polluter = new Polluter(p, 4, "deepForest/yellow");
         waves[2].addSpawns(bigBug, 1);
 
         waves[3] = wavePreset(p, 80, 40, bigBug);
@@ -146,14 +147,16 @@ public class DeepForestWaves {
         waves[26] = wavePreset(p, 50, 1, mudCreature);
         waves[26].addSpawns(mudCreature, 3);
 
-        waves[27] = wavePreset(p, 80, 30, mantis);
-        waves[27].addSpawns(mantis, 30);
+        waves[27] = wavePreset(p, 80, 30, mantoid);
+        waves[27].addSpawns(mantoid, 5);
+        waves[27].addSpawns(mantis, 10);
 
         waves[28] = wavePreset(p, 40, 20, roach);
         waves[28].addSpawns(roach, 60);
 
-        waves[29] = wavePreset(p, 40, 20, enragedGiant);
-        waves[29].addSpawns(enragedGiant, 25);
+        waves[29] = wavePreset(p, 40, 20, mantoid);
+        waves[29].addSpawns(mantoid, 5);
+        waves[29].addSpawns(enragedGiant, 10);
 
         waves[30] = wavePreset(p, 50, 10, mudCreature);
         waves[30].addSpawns(mudCreature, 10);
@@ -248,6 +251,12 @@ public class DeepForestWaves {
                         new Color(0x714200),
                         new Color(0xb76e09),
                         new Color(0x412600),
+                        title);
+            case "Mantoids":
+                return new Wave(p, length, spawnLength,
+                        new Color(0xbe3055),
+                        new Color(0xc0ec3d),
+                        new Color(0xfb8e37),
                         title);
             default:
                 return new Wave(p, length, spawnLength,

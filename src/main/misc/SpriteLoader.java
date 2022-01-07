@@ -350,6 +350,11 @@ public class SpriteLoader {
         getSprite(p,"rootAttack","EN","root/attack/",23);
         getSprite(p,"rootDie","EN","root/die/",3);
         getSprite(p,"rootParts", "EN", "root/parts/", 3);
+        //mantoid
+        getSprite(p,"mantoidMove","EN","mantoid/move/",2);
+        getSprite(p,"mantoidAttack","EN","mantoid/attack/",16);
+        getSprite(p,"mantoidDie","EN","mantoid/die/",4);
+        getSprite(p,"mantoidParts","EN","mantoid/parts/",13);
         //orbits
         staticSprites.put("iceEntityOrbitEn",p.loadImage("sprites/enemies/iceEntity/orbit.png"));
         staticSprites.put("iceMonstrosityOrbitEn",p.loadImage("sprites/enemies/iceMonstrosity/orbit.png"));
