@@ -1,7 +1,6 @@
 package main.misc;
 
 import processing.core.PApplet;
-import processing.core.PVector;
 
 import java.util.ArrayList;
 
@@ -13,9 +12,9 @@ public class Polluter {
 
     private final PApplet P;
     private final ArrayList<Tile> CLEAN_TILES;
-    private final int BETWEEN_POLLUTES;
     private final String NAME;
 
+    private int betweenPollutes;
     private int polluteTimer;
 
     /**
@@ -26,7 +25,7 @@ public class Polluter {
      */
     public Polluter(PApplet p, float secondsBetweenPollutes, String name) {
         P = p;
-        BETWEEN_POLLUTES = (int) secondsBetweenPollutes * FRAMERATE;
+        betweenPollutes = (int) secondsBetweenPollutes * FRAMERATE;
         NAME = name;
 
         CLEAN_TILES = new ArrayList<>();
@@ -35,9 +34,13 @@ public class Polluter {
         }
     }
 
+    public void setBetweenPollutes(int betweenPollutes) {
+        this.betweenPollutes = betweenPollutes;
+    }
+
     public void main() {
         polluteTimer++;
-        if (polluteTimer > BETWEEN_POLLUTES) {
+        if (polluteTimer > betweenPollutes) {
             pollute();
             polluteTimer = 0;
         }
