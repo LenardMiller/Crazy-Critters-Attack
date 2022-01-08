@@ -298,6 +298,9 @@ public class Wave {
             case "Roots":
                 e = new Root(P, pos.x, pos.y);
                 break;
+            case "Mantoids":
+                e = new Mantoid(P, pos.x, pos.y);
+                break;
         }
         return e;
     }

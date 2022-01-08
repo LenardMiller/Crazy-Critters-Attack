@@ -12,6 +12,7 @@ import main.damagingThings.projectiles.homing.MagicMissile;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.BigWorm;
 import main.enemies.burrowingEnemies.Shark;
+import main.enemies.flyingEnemies.Mantoid;
 import main.enemies.shootingEnemies.IceEntity;
 import main.enemies.shootingEnemies.IceMonstrosity;
 import main.enemies.shootingEnemies.SnowAntlion;
@@ -167,8 +168,8 @@ public class KeyBinds {
         //enemies
         if (en1) enemies.add(new BigWorm(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en2) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en3) enemies.add(new Velociraptor(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en3) enemies.add(new Mantis(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en4) enemies.add(new Mantoid(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en5) enemies.add(new SnowAntlion(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en7) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));

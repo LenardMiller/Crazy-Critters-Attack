@@ -14,14 +14,14 @@ public class Mantoid extends FlyingEnemy {
         radius = 25;
         speed = 50;
         moneyDrop = 500;
-        damage = 5;
+        damage = 10;
         maxHp = 30000;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "mantoid";
         attackDmgFrames = new int[]{12};
-        betweenWalkFrames = 1;
-        betweenAttackFrames = 1;
+        betweenWalkFrames = 2;
+        betweenAttackFrames = 2;
         corpseSize = size.copy();
         partSize = new PVector(38, 38);
         dieSound = sounds.get("bigCrunch");

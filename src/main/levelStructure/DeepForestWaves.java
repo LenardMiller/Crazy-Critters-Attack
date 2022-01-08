@@ -8,7 +8,7 @@ import java.awt.*;
 public class DeepForestWaves {
 
     public static Wave[] genDeepForestWaves(PApplet p) {
-        Wave[] waves = new Wave[35];
+        Wave[] waves = new Wave[37];
 
         String bigBug = "Big Bugs";
         String midBug = "midBug";
@@ -24,6 +24,7 @@ public class DeepForestWaves {
         String bigWorm = "Worms";
         String roach = "Roaches";
         String mudCreature = "Mud Creatures";
+        String mudFlinger = "Mud Flingers";
         String root = "Roots";
         String mantoid = "Mantoids";
 
@@ -38,6 +39,7 @@ public class DeepForestWaves {
         waves[1].addSpawns(smallTree, 20);
         waves[1].addSpawns(midTree, 3);
 
+        //first big bug
         waves[2] = wavePreset(p, 60, 1, "Big Bug");
         waves[2].addSpawns(bigBug, 1);
 
@@ -55,6 +57,7 @@ public class DeepForestWaves {
         waves[5].addSpawns(midBug, 20);
         waves[5].addSpawns(smallWorm, 5);
 
+        //first tree giant
         waves[6] = wavePreset(p, 80, 1, "Tree Giant");
         waves[6].addSpawns(treeGiant, 1);
 
@@ -65,6 +68,7 @@ public class DeepForestWaves {
         waves[8] = wavePreset(p, 60, 30, midTree);
         waves[8].addSpawns(midTree, 40);
 
+        //first mantis
         waves[9] = wavePreset(p, 80, 1, "Mantis");
         waves[9].addSpawns(mantis, 1);
 
@@ -93,6 +97,7 @@ public class DeepForestWaves {
         waves[13].addSpawns(smallWorm, 20);
         waves[13].addSpawns(butterfly, 20);
 
+        //first enraged giant
         waves[14] = wavePreset(p, 40, 1, "Enraged Giant");
         waves[14].addSpawns(enragedGiant, 1);
 
@@ -125,53 +130,67 @@ public class DeepForestWaves {
         waves[21].polluter = new Polluter(p, 1, "deepForest/yellow");
         waves[21].addSpawns(enragedGiant, 5);
 
+        //first roach
         waves[22] = wavePreset(p, 60, 20, roach);
         waves[22].addSpawns(roach, 40);
 
-        waves[23] = wavePreset(p, 240, 200, "Bug Horde");
-        waves[23].addSpawns(bigBug, 25);
-        waves[23].addSpawns(roach, 100);
-        waves[23].addSpawns(mantis, 40);
-        waves[23].addSpawns(bigWorm, 20);
-        waves[23].addSpawns(butterfly, 20);
-        waves[23].addSpawns("wtf", 1);
+        //first mud creature
+        waves[23] = wavePreset(p, 50, 1, mudCreature);
+        waves[23].addSpawns(mudCreature, 3);
 
-        waves[24] = wavePreset(p, 50, 20, enragedGiant);
-        waves[24].polluter = new Polluter(p, 4, "deepForest/brown");
-        waves[24].addSpawns(enragedGiant, 10);
-        waves[24].addSpawns(mantis, 10);
+        waves[24] = wavePreset(p, 240, 200, "Bug Horde");
+        waves[24].addSpawns(bigBug, 25);
+        waves[24].addSpawns(roach, 100);
+        waves[24].addSpawns(mantis, 40);
+        waves[24].addSpawns(bigWorm, 20);
+        waves[24].addSpawns(butterfly, 20);
+        waves[24].addSpawns("wtf", 1);
 
-        waves[25] = wavePreset(p, 60, 20, roach);
-        waves[25].addSpawns(roach, 50);
+        //first mantoid
+        waves[25] = wavePreset(p, 50, 1, "Mantoid");
+        waves[25].addSpawns(mantoid, 1);
 
-        waves[26] = wavePreset(p, 50, 1, mudCreature);
-        waves[26].addSpawns(mudCreature, 3);
+        waves[26] = wavePreset(p, 50, 20, enragedGiant);
+        waves[26].polluter = new Polluter(p, 4, "deepForest/brown");
+        waves[26].addSpawns(enragedGiant, 10);
+        waves[26].addSpawns(mantis, 10);
 
-        waves[27] = wavePreset(p, 80, 30, mantoid);
-        waves[27].addSpawns(mantoid, 5);
-        waves[27].addSpawns(mantis, 10);
+        //first mud flinger
+        waves[27] = wavePreset(p, 50, 1, mudCreature);
+        waves[27].addSpawns(mudCreature, 5);
+        waves[27].addSpawns(mudFlinger, 1);
 
-        waves[28] = wavePreset(p, 40, 20, roach);
-        waves[28].addSpawns(roach, 60);
+        waves[28] = wavePreset(p, 60, 20, roach);
+        waves[28].addSpawns(roach, 50);
 
-        waves[29] = wavePreset(p, 40, 20, mantoid);
+        waves[29] = wavePreset(p, 80, 30, mantoid);
         waves[29].addSpawns(mantoid, 5);
-        waves[29].addSpawns(enragedGiant, 10);
+        waves[29].addSpawns(mantis, 10);
 
-        waves[30] = wavePreset(p, 50, 10, mudCreature);
-        waves[30].addSpawns(mudCreature, 10);
+        waves[30] = wavePreset(p, 40, 20, roach);
+        waves[30].addSpawns(roach, 60);
 
-        waves[31] = wavePreset(p, 50, 5, root);
-        waves[31].addSpawns(root, 10);
+        waves[31] = wavePreset(p, 40, 20, mantoid);
+        waves[31].addSpawns(mantoid, 5);
+        waves[31].addSpawns(enragedGiant, 10);
 
-        waves[32] = wavePreset(p, 30, 10, roach);
-        waves[32].addSpawns(roach, 70);
+        waves[32] = wavePreset(p, 50, 10, mudCreature);
+        waves[32].addSpawns(mudCreature, 10);
+        waves[32].addSpawns(mudFlinger, 2);
 
         waves[33] = wavePreset(p, 50, 5, root);
-        waves[33].addSpawns(root, 20);
+        waves[33].addSpawns(root, 10);
 
-        waves[34] = wavePreset(p, 50, 20, mudCreature);
-        waves[34].addSpawns(mudCreature, 20);
+        waves[34] = wavePreset(p, 40, 20, mantoid);
+        waves[34].addSpawns(mantoid, 10);
+        waves[34].addSpawns(roach, 60);
+
+        waves[35] = wavePreset(p, 50, 5, root);
+        waves[35].addSpawns(root, 20);
+
+        waves[36] = wavePreset(p, 50, 20, mudCreature);
+        waves[36].addSpawns(mudCreature, 20);
+        waves[36].addSpawns(mudFlinger, 3);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -253,6 +272,7 @@ public class DeepForestWaves {
                         new Color(0x412600),
                         title);
             case "Mantoids":
+            case "Mantoid":
                 return new Wave(p, length, spawnLength,
                         new Color(0xbe3055),
                         new Color(0xc0ec3d),
