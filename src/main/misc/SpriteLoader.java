@@ -58,6 +58,7 @@ public class SpriteLoader {
         getSprite(p,"redOuch","PT","ouch/red/",11);
         getSprite(p,"glowOuch","PT","ouch/glow/",11);
         getSprite(p,"leafOuch","PT","ouch/leaf/",11);
+        getSprite(p,"brownLeafOuch","PT","ouch/brownLeaf/",11);
         getSprite(p,"lichenOuch","PT","ouch/lichen/",11);
         getSprite(p,"iceOuch","PT","ouch/ice/",11);
         getSprite(p,"mudOuch","PT","ouch/mud/",11);

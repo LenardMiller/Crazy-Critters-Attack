@@ -20,8 +20,8 @@ public class Twisted extends Enemy {
         hp = maxHp;
         hitParticle = "brownLeafOuch";
         name = "twisted";
-        betweenAttackFrames = down60ToFramerate(2);
-        betweenWalkFrames = down60ToFramerate(3);
+        betweenAttackFrames = down60ToFramerate(10);
+        betweenWalkFrames = down60ToFramerate(10);
         attackDmgFrames = new int[]{4};
         corpseSize = new PVector(50,50);
         partSize = new PVector(26,26);
