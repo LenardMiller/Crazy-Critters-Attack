@@ -488,6 +488,8 @@ public abstract class Enemy {
                 return new Color(111, 58, 0);
             case "sapOuch":
                 return new Color(0xb76e09);
+            case "brownLeafOuch":
+                return new Color(0xBB5E3B);
             default:
                 return new Color(255, 0, 0);
         }

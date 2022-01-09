@@ -86,6 +86,7 @@ public class SpriteLoader {
         getSprite(p,"sapOuchPile","PT", "pile/sapOuch/", 4);
         getSprite(p,"glowOuchPile","PT", "pile/glowOuch/", 4);
         getSprite(p,"leafOuchPile","PT", "pile/leafOuch/", 4);
+        getSprite(p,"brownLeafOuchPile","PT", "pile/brownLeafOuch/", 4);
         getSprite(p,"lichenOuchPile","PT", "pile/lichenOuch/", 4);
         getSprite(p,"iceOuchPile","PT", "pile/iceOuch/", 4);
         getSprite(p,"mudOuchPile","PT", "pile/mudOuch/", 4);
@@ -355,6 +356,11 @@ public class SpriteLoader {
         getSprite(p,"mantoidAttack","EN","mantoid/attack/",16);
         getSprite(p,"mantoidDie","EN","mantoid/die/",4);
         getSprite(p,"mantoidParts","EN","mantoid/parts/",13);
+        //twisted
+        getSprite(p,"twistedMove","EN","twisted/move/",4);
+        getSprite(p,"twistedAttack","EN","twisted/attack/",7);
+        getSprite(p,"twistedDie","EN","twisted/die/",3);
+        getSprite(p,"twistedParts","EN","twisted/parts/",4);
         //orbits
         staticSprites.put("iceEntityOrbitEn",p.loadImage("sprites/enemies/iceEntity/orbit.png"));
         staticSprites.put("iceMonstrosityOrbitEn",p.loadImage("sprites/enemies/iceMonstrosity/orbit.png"));

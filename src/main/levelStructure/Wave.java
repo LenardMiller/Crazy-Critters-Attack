@@ -168,140 +168,102 @@ public class Wave {
     }
 
     private Enemy getEnemy(String name, PVector pos) {
-        Enemy e = null;
-
         switch (name) {
             case "smolBug":
-                e = new SmolBug(P, pos.x, pos.y);
-                break;
+                return new SmolBug(P, pos.x, pos.y);
             case "midBug":
-                e = new MidBug(P, pos.x, pos.y);
-                break;
+                return new MidBug(P, pos.x, pos.y);
             case "Big Bugs":
             case "bigBug":
-                e = new BigBug(P, pos.x, pos.y);
-                break;
+                return new BigBug(P, pos.x, pos.y);
             case "treeSprite":
-                e = new TreeSprite(P, pos.x, pos.y);
-                break;
+                return new TreeSprite(P, pos.x, pos.y);
             case "Tree Spirits":
             case "treeSpirit":
-                e = new TreeSpirit(P, pos.x, pos.y);
-                break;
+                return new TreeSpirit(P, pos.x, pos.y);
             case "Tree Giants":
             case "treeGiant":
-                e = new TreeGiant(P, pos.x, pos.y);
-                break;
+                return new TreeGiant(P, pos.x, pos.y);
             case "snake":
-                e = new Snake(P, pos.x, pos.y);
-                break;
+                return new Snake(P, pos.x, pos.y);
             case "littleWorm":
-                e = new Worm(P, pos.x, pos.y);
-                break;
+                return new Worm(P, pos.x, pos.y);
             case "butterfly":
-                e = new Butterfly(P, pos.x, pos.y);
-                break;
+                return new Butterfly(P, pos.x, pos.y);
             case "scorpion":
-                e = new Scorpion(P, pos.x, pos.y);
-                break;
+                return new Scorpion(P, pos.x, pos.y);
             case "sidewinder":
-                e = new Sidewinder(P, pos.x, pos.y);
-                break;
+                return new Sidewinder(P, pos.x, pos.y);
             case "emperor":
-                e = new Emperor(P, pos.x, pos.y);
-                break;
+                return new Emperor(P, pos.x, pos.y);
             case "midWorm":
-                e = new MidWorm(P, pos.x, pos.y);
-                break;
+                return new MidWorm(P, pos.x, pos.y);
             case "Worms":
             case "Megaworms":
             case "bigWorm":
-                e = new BigWorm(P, pos.x, pos.y);
-                break;
+                return new BigWorm(P, pos.x, pos.y);
             case "albinoBug":
-                e = new AlbinoBug(P, pos.x, pos.y);
-                break;
+                return new AlbinoBug(P, pos.x, pos.y);
             case "bigAlbinoBug":
-                e = new BigAlbinoBug(P, pos.x, pos.y);
-                break;
+                return new BigAlbinoBug(P, pos.x, pos.y);
             case "albinoButterfly":
-                e = new AlbinoButterfly(P, pos.x, pos.y);
-                break;
+                return new AlbinoButterfly(P, pos.x, pos.y);
             case "smallGolem":
-                e = new SmallGolem(P, pos.x, pos.y);
-                break;
+                return new SmallGolem(P, pos.x, pos.y);
             case "midGolem":
-                e = new Golem(P, pos.x, pos.y);
-                break;
+                return new Golem(P, pos.x, pos.y);
             case "bigGolem":
-                e = new GiantGolem(P, pos.x, pos.y);
-                break;
+                return new GiantGolem(P, pos.x, pos.y);
             case "bat":
-                e = new Bat(P, pos.x, pos.y);
-                break;
+                return new Bat(P, pos.x, pos.y);
             case "bigBat":
-                e = new GiantBat(P, pos.x, pos.y);
-                break;
+                return new GiantBat(P, pos.x, pos.y);
             case "wtf":
-                e = new Wtf(P, pos.x, pos.y);
-                break;
+                return new Wtf(P, pos.x, pos.y);
             case "antlion":
-                e = new Antlion(P, pos.x, pos.y);
-                break;
+                return new Antlion(P, pos.x, pos.y);
             case "Antlions":
             case "snowAntlion":
-                e = new SnowAntlion(P, pos.x, pos.y);
-                break;
+                return new SnowAntlion(P, pos.x, pos.y);
             case "Wolves":
             case "wolf":
-                e = new Wolf(P, pos.x, pos.y);
-                break;
+                return new Wolf(P, pos.x, pos.y);
             case "Snow Sharks":
             case "shark":
-                e = new Shark(P, pos.x, pos.y);
-                break;
+                return new Shark(P, pos.x, pos.y);
             case "Velociraptors":
             case "velociraptor":
-                e = new Velociraptor(P, pos.x, pos.y);
-                break;
+                return new Velociraptor(P, pos.x, pos.y);
             case "Ice Entities":
-                e = new IceEntity(P, pos.x, pos.y);
-                break;
+                return new IceEntity(P, pos.x, pos.y);
             case "Ice Monstrosity":
             case "Ice Monstrosities":
-                e = new IceMonstrosity(P, pos.x, pos.y);
-                break;
+                return new IceMonstrosity(P, pos.x, pos.y);
             case "Frost":
-                e = new Frost(P, pos.x, pos.y);
-                break;
+                return new Frost(P, pos.x, pos.y);
             case "Mammoth":
             case "Mammoths":
-                e = new Mammoth(P, pos.x, pos.y);
-                break;
+                return new Mammoth(P, pos.x, pos.y);
             case "Mud Creatures":
-                e = new MudCreature(P, pos.x, pos.y);
-                break;
+                return new MudCreature(P, pos.x, pos.y);
             case "Mud Flingers":
-                e = new MudFlinger(P, pos.x, pos.y);
-                break;
+                return new MudFlinger(P, pos.x, pos.y);
             case "Enraged Giants":
             case "Enraged Giant":
-                e = new EnragedGiant(P, pos.x, pos.y);
-                break;
+                return new EnragedGiant(P, pos.x, pos.y);
             case "Mantises":
             case "Mantis":
-                e = new Mantis(P, pos.x, pos.y);
-                break;
+                return new Mantis(P, pos.x, pos.y);
             case "Roaches":
-                e = new Roach(P, pos.x, pos.y);
-                break;
+                return new Roach(P, pos.x, pos.y);
             case "Roots":
-                e = new Root(P, pos.x, pos.y);
-                break;
+                return new Root(P, pos.x, pos.y);
             case "Mantoids":
-                e = new Mantoid(P, pos.x, pos.y);
-                break;
+                return new Mantoid(P, pos.x, pos.y);
+            case "Twisted":
+                return new Twisted(P, pos.x, pos.y);
+            default:
+                return null;
         }
-        return e;
     }
 }

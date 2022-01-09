@@ -8,7 +8,7 @@ import java.awt.*;
 public class DeepForestWaves {
 
     public static Wave[] genDeepForestWaves(PApplet p) {
-        Wave[] waves = new Wave[37];
+        Wave[] waves = new Wave[40];
 
         String bigBug = "Big Bugs";
         String midBug = "midBug";
@@ -27,6 +27,7 @@ public class DeepForestWaves {
         String mudFlinger = "Mud Flingers";
         String root = "Roots";
         String mantoid = "Mantoids";
+        String twisted = "Twisted";
 
         waves[0] = wavePreset(p, 80, 40, "Bugs");
         waves[0].polluter = new Polluter(p, 4, "deepForest/yellow");
@@ -170,28 +171,39 @@ public class DeepForestWaves {
         waves[30] = wavePreset(p, 40, 20, roach);
         waves[30].addSpawns(roach, 60);
 
-        waves[31] = wavePreset(p, 40, 20, mantoid);
-        waves[31].addSpawns(mantoid, 5);
-        waves[31].addSpawns(enragedGiant, 10);
+        //first twisted
+        waves[31] = wavePreset(p, 60, 20, twisted);
+        waves[31].addSpawns(twisted, 5);
+        waves[31].addSpawns(roach, 10);
 
-        waves[32] = wavePreset(p, 50, 10, mudCreature);
-        waves[32].addSpawns(mudCreature, 10);
-        waves[32].addSpawns(mudFlinger, 2);
+        waves[32] = wavePreset(p, 40, 20, mantoid);
+        waves[32].addSpawns(mantoid, 5);
+        waves[32].addSpawns(enragedGiant, 10);
+
+        waves[33] = wavePreset(p, 50, 10, mudCreature);
+        waves[33].addSpawns(mudCreature, 10);
+        waves[33].addSpawns(mudFlinger, 2);
 
         //first root
-        waves[33] = wavePreset(p, 50, 5, root);
-        waves[33].addSpawns(root, 10);
+        waves[34] = wavePreset(p, 50, 5, root);
+        waves[34].addSpawns(root, 10);
 
-        waves[34] = wavePreset(p, 40, 20, mantoid);
-        waves[34].addSpawns(mantoid, 10);
-        waves[34].addSpawns(roach, 60);
+        waves[35] = wavePreset(p, 60, 20, twisted);
+        waves[35].addSpawns(twisted, 10);
 
-        waves[35] = wavePreset(p, 50, 5, root);
-        waves[35].addSpawns(root, 20);
+        waves[36] = wavePreset(p, 40, 20, mantoid);
+        waves[36].addSpawns(mantoid, 10);
+        waves[36].addSpawns(roach, 60);
 
-        waves[36] = wavePreset(p, 50, 20, mudCreature);
-        waves[36].addSpawns(mudCreature, 20);
-        waves[36].addSpawns(mudFlinger, 3);
+        waves[37] = wavePreset(p, 60, 20, twisted);
+        waves[37].addSpawns(twisted, 20);
+
+        waves[38] = wavePreset(p, 50, 5, root);
+        waves[38].addSpawns(root, 20);
+
+        waves[39] = wavePreset(p, 50, 20, mudCreature);
+        waves[39].addSpawns(mudCreature, 20);
+        waves[39].addSpawns(mudFlinger, 3);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -278,6 +290,12 @@ public class DeepForestWaves {
                         new Color(0xbe3055),
                         new Color(0xc0ec3d),
                         new Color(0xfb8e37),
+                        title);
+            case "Twisted":
+                return new Wave(p, length, spawnLength,
+                        new Color(219, 105, 67),
+                        new Color(123, 78, 15),
+                        new Color(90, 63, 35),
                         title);
             default:
                 return new Wave(p, length, spawnLength,
