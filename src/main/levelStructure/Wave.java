@@ -29,11 +29,13 @@ public class Wave {
     private final Color ACCENT_COLOR;
     private final Color TEXT_COLOR;
     private final String TITLE;
+
     final int SPAWN_LENGTH;
     final int LENGTH;
 
     public Polluter polluter;
     public String groundType;
+    public int setBetweenPollutesAtEnd;
 
     boolean unskippable;
     private int betweenSpawns;
@@ -72,9 +74,12 @@ public class Wave {
         TEXT_COLOR = textColor;
         TITLE = title;
         spawns = new ArrayList<>();
+
+        setBetweenPollutesAtEnd = -1;
     }
 
     public void end() {
+        if (setBetweenPollutesAtEnd > -1) levels[currentLevel].polluter.setBetweenPollutes(setBetweenPollutesAtEnd);
         for (Tower tower : towers) {
             if (tower instanceof Turret) tower.heal(1);
             else if (!(tower instanceof IceWall)) tower.heal(0.35f);

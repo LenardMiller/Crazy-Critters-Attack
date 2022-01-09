@@ -128,7 +128,7 @@ public class DeepForestWaves {
         waves[20].addSpawns(bigWorm, 15);
 
         waves[21] = wavePreset(p, 80, 20, enragedGiant);
-        waves[21].polluter.setBetweenPollutes(1);
+        waves[21].setBetweenPollutesAtEnd = 1;
         waves[21].addSpawns(enragedGiant, 5);
 
         //first roach

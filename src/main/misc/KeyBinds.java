@@ -170,7 +170,7 @@ public class KeyBinds {
         if (en2) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en3) enemies.add(new Mantis(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en4) enemies.add(new Mantoid(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en5) enemies.add(new SnowAntlion(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en5) enemies.add(new Twisted(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en7) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en8) enemies.add(new TreeGiant(p, matrixMousePosition.x, matrixMousePosition.y));

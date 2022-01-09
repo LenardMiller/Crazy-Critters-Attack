@@ -19,10 +19,9 @@ public class Level {
     public int startingCash;
     public int reward;
     public String groundType;
+    public Polluter polluter;
 
     private final PApplet P;
-
-    private Polluter polluter;
 
     public Level(PApplet p, Wave[] waves, String layout, int startingCash, int reward, String groundType) {
         this.P = p;
