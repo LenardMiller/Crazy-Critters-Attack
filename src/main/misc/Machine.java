@@ -33,7 +33,7 @@ public class Machine {
     private int currentFrame;
     private int frameTimer;
     private int deathFrame;
-    private boolean dead;
+    public boolean dead;
     private PImage[] sprites;
     public Tile[] machTiles;
     private int damageState;

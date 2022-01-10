@@ -72,7 +72,7 @@ public class IceTower extends Turret {
             tile.tower = null;
         }
         updateBoosts();
-        if ((enemies.size() > 0 && alive && !paused) || name.equals("autoIceTower")) checkTarget();
+        if ((enemies.size() > 0 && !machine.dead && !paused) || name.equals("autoIceTower")) checkTarget();
         if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
                 && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
