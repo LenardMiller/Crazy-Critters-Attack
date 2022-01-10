@@ -253,7 +253,7 @@ public class Selection {
             case "seismicSniper":
                 P.text("Seismic Sniper", 1000, 241);
                 setTextPurple("Shockwave", offset);
-                setTextPurple("Stuns stealth", offset);
+                setTextPurple("Stuns burrowing", offset);
                 break;
             case "seismicSlammer":
                 P.text("Seismic", 1000, 241);

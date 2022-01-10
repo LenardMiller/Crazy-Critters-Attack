@@ -30,7 +30,7 @@ public class DeepForestWaves {
         String twisted = "Twisted";
 
         waves[0] = wavePreset(p, 80, 40, "Bugs");
-        waves[0].polluter = new Polluter(p, 4, "deepForest/yellow");
+        waves[0].polluter = new Polluter(p, 3, "deepForest/yellow");
         waves[0].addSpawns(midBug, 10);
         waves[0].addSpawns(smallBug, 20);
         waves[0].addSpawns(butterfly, 5);
@@ -115,6 +115,7 @@ public class DeepForestWaves {
         waves[17].addSpawns(treeGiant, 2);
 
         waves[18] = wavePreset(p, 80, 20, mantis);
+        waves[18].setBetweenPollutesAtEnd = 1;
         waves[18].addSpawns(mantis, 10);
 
         waves[19] = wavePreset(p, 80, 30, "Giants");
@@ -128,7 +129,7 @@ public class DeepForestWaves {
         waves[20].addSpawns(bigWorm, 15);
 
         waves[21] = wavePreset(p, 80, 20, enragedGiant);
-        waves[21].setBetweenPollutesAtEnd = 1;
+        waves[21].polluter = new Polluter(p, 3, "deepForest/brown");
         waves[21].addSpawns(enragedGiant, 5);
 
         //first roach
@@ -152,7 +153,6 @@ public class DeepForestWaves {
         waves[25].addSpawns(mantoid, 1);
 
         waves[26] = wavePreset(p, 50, 20, enragedGiant);
-        waves[26].polluter = new Polluter(p, 4, "deepForest/brown");
         waves[26].addSpawns(enragedGiant, 10);
         waves[26].addSpawns(mantis, 10);
 
