@@ -16,7 +16,7 @@ public class Roach extends Enemy {
         speed = 65;
         moneyDrop = 100;
         damage = 10;
-        maxHp = 3000;
+        maxHp = 5000;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "roach";

@@ -14,14 +14,14 @@ public class Twisted extends Enemy {
         pfSize = 2; //2
         radius = 25;
         speed = 30;
-        moneyDrop = 300;
-        damage = 20;
+        moneyDrop = 500;
+        damage = 40;
         maxHp = 35000; //Hp
         hp = maxHp;
         hitParticle = "brownLeafOuch";
         name = "twisted";
         betweenAttackFrames = down60ToFramerate(10);
-        betweenWalkFrames = down60ToFramerate(10);
+        betweenWalkFrames = down60ToFramerate(20);
         attackDmgFrames = new int[]{4};
         corpseSize = new PVector(50,50);
         partSize = new PVector(26,26);

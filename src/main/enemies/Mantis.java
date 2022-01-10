@@ -16,7 +16,7 @@ public class Mantis extends Enemy {
         speed = 35;
         moneyDrop = 300;
         damage = 12;
-        maxHp = 6000;
+        maxHp = 7500;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "mantis";

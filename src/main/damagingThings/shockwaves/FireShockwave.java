@@ -22,18 +22,20 @@ public class FireShockwave extends Shockwave {
 
     @Override
     protected void spawnParticles() {
-        float a;
-        PVector pos;
-        a = randomAngle();
-        pos = randomPosition(a);
-        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
-        a = randomAngle();
-        pos = randomPosition(a);
-        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "fire"));
-        for (int i = 0; i < P.random(5, 10); i++) {
+        if (P.random(3) < 1) {
+            float a;
+            PVector pos;
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "fire", P.random(100,200)));
+            topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
+            a = randomAngle();
+            pos = randomPosition(a);
+            topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "fire"));
+            for (int i = 0; i < P.random(5, 10); i++) {
+                a = randomAngle();
+                pos = randomPosition(a);
+                topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "fire", P.random(100, 200)));
+            }
         }
     }
 }
