@@ -32,7 +32,10 @@ public class Nightmare extends Turret {
         value = NIGHTMARE_PRICE;
         priority = 2; //strong
         titleLines = new String[]{"Nightmare", "Shotgun"};
-        infoDisplay = (o) -> selection.setTextPurple("Decay", o);
+        infoDisplay = (o) -> {
+            selection.setTextPurple("Decay", o);
+            selection.setTextPurple(numProjectiles + " needles", o);
+        };
 
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");
@@ -60,7 +63,8 @@ public class Nightmare extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        projectiles.add(new Needle(p, position.x, position.y, angle, this, getDamage(), (int) effectLevel, effectDuration));
+        projectiles.add(new Needle(p, position.x, position.y, angle, this, getDamage(), (int) effectLevel,
+                effectDuration, range));
         for (int j = 0; j < 3; j++) {
             PVector spa2 = PVector.fromAngle(angle-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-2);
