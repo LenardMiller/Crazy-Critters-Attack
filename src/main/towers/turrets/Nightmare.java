@@ -31,6 +31,8 @@ public class Nightmare extends Turret {
         price = 300;
         value = NIGHTMARE_PRICE;
         priority = 2; //strong
+        titleLines = new String[]{"Nightmare", "Shotgun"};
+        infoDisplay = (o) -> selection.setTextPurple("Decay", o);
 
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");

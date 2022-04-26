@@ -47,6 +47,7 @@ public class Railgun extends Turret {
         price = RAILGUN_PRICE;
         value = price;
         priority = 2; //strong
+        titleLines = new String[]{"Railgun"};
 
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");

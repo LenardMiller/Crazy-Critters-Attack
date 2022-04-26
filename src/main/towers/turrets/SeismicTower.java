@@ -41,6 +41,8 @@ public class SeismicTower extends Turret {
         material = "stone";
         price = SEISMIC_PRICE;
         value = price;
+        titleLines = new String[]{"Seismic Tower"};
+        infoDisplay = (o) -> selection.setTextPurple("Shockwave", o);
 
         setUpgrades();
         loadSprites();
@@ -209,6 +211,11 @@ public class SeismicTower extends Turret {
                     name = "seismicSlammer";
                     hasPriority = false;
                     selection.swapSelected(this);
+                    titleLines = new String[]{"Seismic", "Slammer"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Shockwave", o);
+                        selection.setTextPurple("360 degrees", o);
+                    };
                     loadSprites();
                     break;
             }
@@ -232,6 +239,11 @@ public class SeismicTower extends Turret {
                     range += 100;
                     damage += 150;
                     name = "seismicSniper";
+                    titleLines = new String[]{"Seismic Sniper"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Shockwave", o);
+                        selection.setTextPurple("Stuns burrowers", o);
+                    };
                     loadSprites();
                     break;
             }

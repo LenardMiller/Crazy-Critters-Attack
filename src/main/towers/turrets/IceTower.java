@@ -10,6 +10,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -52,6 +53,15 @@ public class IceTower extends Turret {
         fireSound = sounds.get("iceFire");
         price = ICE_TOWER_PRICE;
         value = price;
+        titleLines = new String[]{"Freeze Ray"};
+        infoDisplay = (o) -> {
+            selection.setTextPurple("Encases enemies", o);
+            iceWallInfo(o, 1);
+        };
+        statsDisplay = (o) -> {
+            if (frozenTotal == 1) p.text("1 wall created", 910, 500 + offset);
+            else p.text(nfc(frozenTotal) + " walls created", 910, 500 + offset);
+        };
 
         BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);
         currentVaporFrame = 16;
@@ -309,6 +319,11 @@ public class IceTower extends Turret {
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
+                    titleLines = new String[]{"Ice Defender"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Reinforces defences", o);
+                        iceWallInfo(o, 1);
+                    };
                     loadSprites();
                     break;
             }
@@ -326,9 +341,22 @@ public class IceTower extends Turret {
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
+                    titleLines = new String[]{"Super Freeze", "Ray"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Encases any enemy", o);
+                        iceWallInfo(o, 1);
+                    };
                     loadSprites();
                     break;
             }
         }
+    }
+
+    private void iceWallInfo(int offset, int purpleCount) {
+        p.fill(new Color(100, 150, 255).getRGB(), 254);
+        p.text("Ice HP: " + wallHp, 910, 356 + 20 * purpleCount + offset);
+        float lifespan = (wallTimeUntilDamage / (float) FRAMERATE) * 10;
+        if (wallTimeUntilDamage == -1) p.text("Ice doesn't melt", 910, 376 + 20 * purpleCount + offset);
+        else p.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 * purpleCount + offset);
     }
 }

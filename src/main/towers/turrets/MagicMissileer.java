@@ -74,6 +74,11 @@ public class MagicMissileer extends Turret {
         price = MAGIC_MISSILEER_PRICE;
         value = price;
         priority = 2; //strong
+        titleLines = new String[]{"Magic Missile", "Launcher"};
+        infoDisplay = (o) -> {
+            selection.setTextPurple("Homing", o);
+            missileCountInfo(o);
+        };
 
         setUpgrades();
         loadSprites();
@@ -323,6 +328,12 @@ public class MagicMissileer extends Turret {
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
+                    titleLines = new String[]{"Electrified Missile", "Launcher"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Homing", o);
+                        selection.setTextPurple("Electrifies critters", o);
+                        missileCountInfo(o);
+                    };
                     loadSprites();
                     break;
             }
@@ -338,8 +349,18 @@ public class MagicMissileer extends Turret {
                     range += 50;
                     delay -= 0.5f;
                     name = "magicSwarm";
+                    titleLines = new String[]{"Magic Missile", "Swarm"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Homing", o);
+                        selection.setTextPurple("Twelve missiles", o);
+                    };
                     break;
             }
         }
+    }
+
+    private void missileCountInfo(int offset) {
+        if (additionalMissile) selection.setTextPurple("Four missiles", offset);
+        else selection.setTextPurple("Three missiles", offset);
     }
 }

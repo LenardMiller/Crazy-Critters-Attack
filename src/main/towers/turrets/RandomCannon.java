@@ -34,6 +34,7 @@ public class RandomCannon extends Turret {
         material = "wood";
         price = RANDOM_CANNON_PRICE;
         value = price;
+        titleLines = new String[]{"Luggage", "Launcher"};
 
         setUpgrades();
         loadSprites();
@@ -134,6 +135,7 @@ public class RandomCannon extends Turret {
                     delay = 0;
                     barrelLength = 27;
                     name = "miscCannonBarrel";
+                    titleLines = new String[]{"Minibarrel"};
                     loadSprites();
                     break;
             }
@@ -153,6 +155,8 @@ public class RandomCannon extends Turret {
                     effectLevel = 25;
                     betweenFireFrames = 1;
                     name = "miscCannonLaundry";
+                    titleLines = new String[]{"Dirty Luggage", "Launcher"};
+                    infoDisplay = (o) -> selection.setTextPurple("Toxic splatters", o);
                     loadSprites();
                     break;
             }

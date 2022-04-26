@@ -8,6 +8,8 @@ import main.sound.SoundWithAlts;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
@@ -39,6 +41,11 @@ public class TeslaTower extends Turret {
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("teslaFire");
         THUNDER_SOUND = soundsWithAlts.get("thunder");
+        titleLines = new String[]{"Tesla Tower"};
+        infoDisplay = (o) -> {
+            selection.setTextPurple("Jumping electricity", o);
+            jumpInfo(o, 1);
+        };
 
         loadSprites();
         setUpgrades();
@@ -181,6 +188,12 @@ public class TeslaTower extends Turret {
                     breakSound = sounds.get("crystalBreak");
                     name = "lightning";
                     betweenFireFrames = 2;
+                    titleLines = new String[]{"Lightning Caller"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Jumping electricity", o);
+                        selection.setTextPurple("Splash", o);
+                        jumpInfo(o, 2);
+                    };
                     loadSprites();
                     break;
             }
@@ -198,9 +211,19 @@ public class TeslaTower extends Turret {
                     betweenIdleFrames = 3;
                     name = "highPowerTesla";
                     material = "darkMetal";
+                    titleLines = new String[]{"The Demon", "Circuit"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Jumping Electricity", o);
+                        jumpInfo(o, 1);
+                    };
                     loadSprites();
                     break;
             }
         }
+    }
+
+    private void jumpInfo(int offset, int purpleCount) {
+        p.fill(new Color(100, 150, 255).getRGB(), 254);
+        p.text("Jumps: " + arcLength, 910, 356 + 20 * purpleCount + offset);
     }
 }

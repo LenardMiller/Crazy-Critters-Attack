@@ -31,6 +31,8 @@ public class Slingshot extends Turret {
         price = SLINGSHOT_PRICE;
         value = price;
 
+        titleLines = new String[]{"Slingshot"};
+
         loadSprites();
         setUpgrades();
         spawnParticles();
@@ -116,6 +118,8 @@ public class Slingshot extends Turret {
                     damage -= 10;
                     range += 50;
                     name = "slingshotGravel";
+                    titleLines = new String[]{"Gravel Slinger"};
+                    infoDisplay = (o) -> selection.setTextPurple("8 gravel bits", o);
                     loadSprites();
                     break;
             }
@@ -138,6 +142,8 @@ public class Slingshot extends Turret {
                     effectDuration = 6;
                     effectLevel = 8;
                     name = "slingshotRock";
+                    titleLines = new String[]{"Heavy Slingshot"};
+                    infoDisplay = (o) -> selection.setTextPurple("Bleeding", offset);
                     loadSprites();
                     break;
             }

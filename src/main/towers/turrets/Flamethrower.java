@@ -49,6 +49,8 @@ public class Flamethrower extends Turret {
         barrelLength = 24;
         count = 1;
         FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
+        titleLines = new String[]{"Flamethrower"};
+        infoDisplay = (o) -> selection.setTextPurple("Fire", o);
 
         loadSprites();
         setUpgrades();
@@ -266,6 +268,11 @@ public class Flamethrower extends Turret {
                     hasPriority = false;
                     effectLevel += 7;
                     selection.swapSelected(this);
+                    titleLines = new String[]{"Flame Wheel"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Fire waves", o);
+                        selection.setTextPurple("Spools up", o);
+                    };
                     loadSprites();
                     break;
             }
@@ -287,6 +294,11 @@ public class Flamethrower extends Turret {
                     damage = 200;
                     effectDuration = 25;
                     effectLevel = 250;
+                    titleLines = new String[]{"Flame Conjurer"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Blue fire", o);
+                        selection.setTextPurple("Piercing", o);
+                    };
                     loadSprites();
                     break;
             }

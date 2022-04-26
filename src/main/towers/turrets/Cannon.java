@@ -38,6 +38,8 @@ public class Cannon extends Turret {
         value = price;
         fireParticle = "smoke";
         barrelLength = 29;
+        titleLines = new String[]{"Cannon"};
+        infoDisplay = (o) -> selection.setTextPurple("Small splash", o);
 
         loadSprites();
         setUpgrades();
@@ -128,6 +130,8 @@ public class Cannon extends Turret {
                     breakSound = sounds.get("woodBreak");
                     placeSound = sounds.get("woodPlace");
                     barrelLength = 0;
+                    titleLines = new String[]{"Dynamite", "Flinger"};
+                    infoDisplay = (o) -> selection.setTextPurple("Large splash", o);
                     loadSprites();
                     break;
             }
@@ -148,6 +152,11 @@ public class Cannon extends Turret {
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
+                    titleLines = new String[]{"Frag Cannon"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Small splash", o);
+                        selection.setTextPurple("Shrapnel", o);
+                    };
                     loadSprites();
                     break;
             }

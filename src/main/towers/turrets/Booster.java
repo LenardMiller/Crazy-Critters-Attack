@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.damagingThings.arcs.OrangeArc;
 import main.damagingThings.arcs.RedArc;
+import main.gui.Selection;
 import main.gui.guiObjects.PopupText;
 import main.misc.IntVector;
 import main.misc.Tile;
@@ -37,6 +38,42 @@ public class Booster extends Turret {
         price = BOOSTER_PRICE;
         value = price;
         hasPriority = false;
+        titleLines = new String[]{"Booster"};
+
+        infoDisplay = (o) -> {
+            int x = 910;
+            int y = 296;
+            p.textFont(mediumFont);
+            p.textAlign(LEFT);
+            p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
+            p.text("Boosts:", x, y + o);
+            p.fill(0, 254);
+            o += 20;
+            if (boost.health > 0) {
+                p.text("Health: +" + (int) (boost.health * 100) + "%", x, y + o);
+                o += 20;
+            } if (boost.range > 0) {
+                p.text("Range: +" + (int) (boost.range * 100) + "%", x, y + o);
+                o += 20;
+            } if (boost.damage > 0) {
+                p.text("Damage: +" + (int) (boost.damage * 100) + "%", x, y + o);
+                o += 20;
+            } if (boost.firerate > 0) {
+                p.text("Firerate: +" + (int) (boost.firerate * 100) + "%", x, y + o);
+                o += 20;
+            } if (boost.deathEffect) {
+                p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
+                p.text("Explosive towers", x, y + o);
+            } if (name.equals("moneyBooster")) {
+                p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
+                p.text("+$" + Booster.MONEY_GAIN + " per wave", x, y + o);
+            }
+        };
+        statsDisplay = (o) -> {
+            if (name.equals("moneyBooster")) {
+                p.text("$" + nfc(totalMoney) + " total", 910, 500 + o);
+            }
+        };
 
         boost = new Boost();
         boost.health = 0.5f;
@@ -215,6 +252,7 @@ public class Booster extends Turret {
                     material = "gold";
                     name = "moneyBooster";
                     betweenIdleFrames = 2;
+                    titleLines = new String[]{"Wealth Booster"};
                     loadSprites();
                     break;
             }
@@ -236,6 +274,7 @@ public class Booster extends Turret {
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     name = "explosiveBooster";
+                    titleLines = new String[]{"Unstable", "Booster"};
                     loadSprites();
                     break;
             }

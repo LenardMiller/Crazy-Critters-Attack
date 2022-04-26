@@ -40,6 +40,8 @@ public class EnergyBlaster extends Turret{
         price = ENERGY_BLASTER_PRICE;
         value = price;
         priority = 2; //strong
+        titleLines = new String[]{"Energy Blaster"};
+        infoDisplay = (o) -> selection.setTextPurple("Splash", o);
 
         loadSprites();
         setUpgrades();
@@ -142,6 +144,8 @@ public class EnergyBlaster extends Turret{
                     fireParticle = "nuclear";
                     material = "metal";
                     nuclear = true;
+                    titleLines = new String[]{"Nuclear Blaster"};
+                    infoDisplay = (o) -> selection.setTextPurple("Huge splash", o);
                     loadSprites();
                     break;
             }
@@ -160,6 +164,8 @@ public class EnergyBlaster extends Turret{
                     name = "darkBlaster";
                     fireParticle = "dark";
                     dark = true;
+                    titleLines = new String[]{"Dark Blaster"};
+                    infoDisplay = (o) -> selection.setTextPurple("Splash", o);
                     loadSprites();
                     break;
             }

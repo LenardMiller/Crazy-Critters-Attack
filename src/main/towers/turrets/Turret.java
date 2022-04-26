@@ -24,6 +24,16 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Turret extends Tower {
 
+    @FunctionalInterface
+    public interface InfoDisplay {
+        void display(int offset);
+    }
+
+    @FunctionalInterface
+    public interface StatsDisplay {
+        void display(int offset);
+    }
+
     public boolean hasPriority;
     public int pjSpeed;
     public int range;
@@ -42,6 +52,9 @@ public abstract class Turret extends Tower {
     public String[] upgradeDescA;
     public String[] upgradeDescB;
     public String[] upgradeDescC;
+    public String[] titleLines;
+    public InfoDisplay infoDisplay;
+    public StatsDisplay statsDisplay;
 
     /** 0: Idle, 1: Fire, 2: Load */
     protected int state;
@@ -80,6 +93,12 @@ public abstract class Turret extends Tower {
         upgradeDescC = new String[6];
         upgradeIcons = new PImage[6];
         nextLevelB = upgradeTitles.length / 2;
+        infoDisplay = (ignored) -> {};
+        statsDisplay = (o) -> {
+            if (killsTotal != 1) p.text(nfc(killsTotal) + " kills", 910, 475 + o);
+            else p.text("1 kill", 910, 475 + o);
+            p.text(nfc(damageTotal) + " total dmg", 910, 500 + o);
+        };
 
         updateTowerArray();
     }

@@ -23,9 +23,9 @@ public class Selection {
     private final SoundFile CLICK_IN;
     private final SoundFile CLICK_OUT;
 
-    private final Color STAT_TEXT_COLOR = new Color(255, 0, 0);
-    private final Color SPECIAL_TEXT_COLOR = new Color(100, 0, 200);
-    private final Color EFFECT_TEXT_COLOR = new Color(0, 200, 50);
+    public static final Color STAT_TEXT_COLOR = new Color(255, 0, 0);
+    public static final Color SPECIAL_TEXT_COLOR = new Color(100, 0, 200);
+    public static final Color EFFECT_TEXT_COLOR = new Color(0, 200, 50);
 
     /** what tower is selected */
     public Selection(PApplet p) {
@@ -156,7 +156,7 @@ public class Selection {
         purpleCount = 0;
 
         background();
-        offset = nameAndSpecial(offset);
+        offset = nameAndSpecial();
         displayInfo(offset, speed);
         displayStats();
         upgradeIcons();
@@ -175,195 +175,22 @@ public class Selection {
         if (!turret.hasPriority) P.rect(900, 212, 200, 344);
     }
 
-    private int nameAndSpecial(int offset) {
+    public static int displayTitleAndGetOffset(PApplet p, String[] titleLines) {
+        for (int i = 0; i < titleLines.length; i++) {
+            p.text(titleLines[i], 1000, 241 + 25 * i);
+        }
+        if (titleLines.length > 1) return 25;
+        else return 0;
+    }
+
+    private int nameAndSpecial() {
         P.textAlign(CENTER);
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         P.textFont(largeFont);
-        switch (turret.name) {
-            case "slingshot":
-                P.text("Slingshot", 1000, 241);
-                break;
-            case "slingshotRock":
-                P.text("Slingshot MKII", 1000, 241);
-                setTextPurple("Bleeding", offset);
-                break;
-            case "slingshotGravel":
-                P.text("Gravel Slinger", 1000, 241);
-                setTextPurple("8 gravel bits", offset);
-                break;
-            case "miscCannon":
-                P.text("Luggage", 1000, 241);
-                P.text("Launcher", 1000, 266);
-                offset = 25;
-                break;
-            case "miscCannonLaundry":
-                P.text("Dirty Luggage", 1000, 241);
-                P.text("Launcher", 1000, 266);
-                offset = 25;
-                setTextPurple("Toxic splatters", offset);
-                break;
-            case "miscCannonBarrel":
-                P.text("Minibarrel", 1000, 241);
-                break;
-            case "crossbow":
-                P.text("Crossbow", 1000, 241);
-                break;
-            case "crossbowReinforced":
-                P.text("Reinforced", 1000, 241);
-                P.text("Crossbow", 1000, 266);
-                offset = 25;
-                break;
-            case "crossbowMultishot":
-                P.text("Shotbow", 1000, 241);
-                setTextPurple("Seven bolts", offset);
-                break;
-            case "cannon":
-                P.text("Cannon", 1000, 241);
-                setTextPurple("Small splash", offset);
-                break;
-            case "fragCannon":
-                P.text("Frag Cannon", 1000, 241);
-                setTextPurple("Small splash", offset);
-                setTextPurple("Shrapnel", offset);
-                break;
-            case "dynamiteLauncher":
-                P.text("Dynamite", 1000, 241);
-                P.text("Flinger", 1000, 266);
-                offset = 25;
-                setTextPurple("Large splash", offset);
-                break;
-            case "gluer":
-                P.text("Gluer", 1000, 241);
-                setTextPurple("Slows", offset);
-                break;
-            case "splashGluer":
-                P.text("Gluer Splasher", 1000, 241);
-                setTextPurple("Slows", offset);
-                setTextPurple("Splatter", offset);
-                break;
-            case "shatterGluer":
-                P.text("Gluer Spiker", 1000, 241);
-                setTextPurple("Slows", offset);
-                setTextPurple("Releases spikes", offset);
-                break;
-            case "seismic":
-                P.text("Seismic Tower", 1000, 241);
-                setTextPurple("Shockwave", offset);
-                break;
-            case "seismicSniper":
-                P.text("Seismic Sniper", 1000, 241);
-                setTextPurple("Shockwave", offset);
-                setTextPurple("Stuns burrowing", offset);
-                break;
-            case "seismicSlammer":
-                P.text("Seismic", 1000, 241);
-                P.text("Slammer", 1000, 266);
-                offset = 25;
-                setTextPurple("Shockwave", offset);
-                setTextPurple("360 degrees", offset);
-                break;
-            case "energyBlaster":
-                P.text("Energy Blaster", 1000, 241);
-                setTextPurple("Splash", offset);
-                break;
-            case "nuclearBlaster":
-                P.text("Nuclear Blaster", 1000, 241);
-                setTextPurple("Huge splash", offset);
-                break;
-            case "darkBlaster":
-                P.text("Dark Blaster", 1000, 241);
-                setTextPurple("Splash", offset);
-                break;
-            case "magicMissleer":
-                P.text("Magic Missile", 1000, 241);
-                P.text("Launcher", 1000, 266);
-                offset = 25;
-                setTextPurple("Homing", offset);
-                break;
-            case "tesla":
-                P.text("Tesla Tower", 1000, 241);
-                setTextPurple("Jumping electricity", offset);
-                break;
-            case "lightning":
-                P.text("Lighting Caller", 1000, 241);
-                setTextPurple("Jumping electricity", offset);
-                setTextPurple("Multiple arcs", offset);
-                setTextPurple("Splash", offset);
-                break;
-            case "highPowerTesla":
-                P.text("High Power", 1000, 241);
-                P.text("Tesla Tower", 1000, 266);
-                offset += 25;
-                setTextPurple("Jumping electricity", offset);
-                break;
-            case "nightmare":
-                P.text("Nightmare", 1000, 241);
-                P.text("Shotgun", 1000, 266);
-                offset = 25;
-                setTextPurple("Shotgun", offset);
-                setTextPurple("Decay", offset);
-                break;
-            case "flamethrower":
-                P.text("Flamethrower", 1000, 241);
-                setTextPurple("Fire", offset);
-                break;
-            case "flamewheel":
-                P.text("Flame Wheel", 1000, 241);
-                setTextPurple("Fire waves", offset);
-                setTextPurple("Spools up", offset);
-                break;
-            case "magicFlamethrower":
-                P.text("Flame Conjurer", 1000, 241);
-                setTextPurple("Blue fire", offset);
-                setTextPurple("Infinite pierce", offset);
-                break;
-            case "iceTower":
-                P.text("Freeze Ray", 1000, 241);
-                setTextPurple("Encases enemies", offset);
-                break;
-            case "autoIceTower":
-                P.text("Ice Defender", 1000, 241);
-                setTextPurple("Reinforces defences", offset);
-                break;
-            case "superIceTower":
-                P.text("Super Freeze", 1000, 241);
-                P.text("Ray", 1000, 266);
-                offset = 25;
-                setTextPurple("Encases any enemy", offset);
-                break;
-            case "railgun":
-                P.text("Railgun", 1000, 241);
-                break;
-            case "waveMotion":
-                P.text("Death Beam", 1000, 241);
-                setTextPurple("Infinite pierce", offset);
-                break;
-            case "booster":
-                P.text("Booster", 1000, 241);
-                break;
-            case "explosiveBooster":
-                P.text("Unstable", 1000, 241);
-                P.text("Booster", 1000, 266);
-                offset = 25;
-                break;
-            case "moneyBooster":
-                P.text("Wealth Booster", 1000, 241);
-                break;
-            case "magicSwarm":
-                P.text("Magic Missile", 1000, 241);
-                P.text("Swarm", 1000, 266);
-                offset = 25;
-                setTextPurple("Homing", offset);
-                setTextPurple("Twelve missiles", offset);
-                break;
-            case "electricMissleer":
-                P.text("Electrified Missile", 1000, 241);
-                P.text("Launcher", 1000, 266);
-                offset = 25;
-                setTextPurple("Homing", offset);
-                setTextPurple("Electrifies enemies", offset);
-                break;
-        }
+
+        int offset = displayTitleAndGetOffset(P, turret.titleLines);
+        turret.infoDisplay.display(offset);
+
         return offset;
     }
 
@@ -375,46 +202,22 @@ public class Selection {
         if (turret.boostedMaxHp() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
         P.text("Health: " + turret.hp + "/" + turret.getMaxHp(), 910, 276 + offset);
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
-        //booster
-        if (turret instanceof Booster) {
-            Booster.Boost boost = ((Booster) turret).boost;
-            int x = 910;
-            int y = 296;
-            P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
-            P.text("Boosts:", x, y + offset);
-            P.fill(0, 254);
-            offset += 20;
-            if (boost.health > 0) {
-                P.text("Health: +" + (int) (boost.health * 100) + "%", x, y + offset);
-                offset += 20;
-            } if (boost.range > 0) {
-                P.text("Range: +" + (int) (boost.range * 100) + "%", x, y + offset);
-                offset += 20;
-            } if (boost.damage > 0) {
-                P.text("Damage: +" + (int) (boost.damage * 100) + "%", x, y + offset);
-                offset += 20;
-            } if (boost.firerate > 0) {
-                P.text("Firerate: +" + (int) (boost.firerate * 100) + "%", x, y + offset);
-                offset += 20;
-            } if (boost.deathEffect) {
-                P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
-                P.text("Explosive towers", x, y + offset);
-            } if (turret.name.equals("moneyBooster")) {
-                P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
-                P.text("+$" + Booster.MONEY_GAIN + " per wave", x, y + offset);
-            }
-            return;
-        }
+
+        //booster (I can't think of any other way to do this :(
+        if (turret instanceof Booster) return;
+
         //damage
         if (turret.boostedDamage() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
         if (turret.getDamage() <= 0) P.text("No damage", 910, 296 + offset);
         else P.text("Damage: " + nfc(turret.getDamage()), 910, 296 + offset);
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
+
         //firerate (delay)
         if (turret.boostedFirerate() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
         if (turret.getDelay() <= 0) P.text("Instant reload", 910, 316 + offset);
         else P.text("Reload time: " + nf(turret.getDelay(), 1, 1) + "s", 910, 316 + offset);
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
+
         //velocity
         if (speed < 0) P.text("Instant travel", 910, 336 + offset);
         else if (speed < 500) P.text("Low velocity", 910, 336 + offset);
@@ -425,27 +228,7 @@ public class Selection {
             P.text("Pierce: " + turret.pierce, 910, 356 + offset + 20 * purpleCount);
             offset += 20;
         }
-        //electricity
-        if (turret instanceof TeslaTower) {
-            TeslaTower tesla = (TeslaTower) turret;
-            P.fill(new Color(100, 150, 255).getRGB(), 254);
-            P.text("Jumps: " + tesla.arcLength, 910, 356 + 20 * purpleCount + offset);
-        }
-        //ice
-        if (turret instanceof IceTower) {
-            IceTower ice = (IceTower) turret;
-            P.fill(new Color(100, 150, 255).getRGB(), 254);
-            P.text("Ice HP: " + ice.wallHp, 910, 356 + 20 * purpleCount + offset);
-            float lifespan = (ice.wallTimeUntilDamage / (float) FRAMERATE) * 10;
-            if (ice.wallTimeUntilDamage == -1) P.text("Ice doesn't melt", 910, 376 + 20 * purpleCount + offset);
-            else P.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 * purpleCount + offset);
-        }
-        //missile count
-        if (turret.name.equals("magicMissleer") || turret.name.equals("electricMissleer")) {
-            MagicMissileer magicMissileer = (MagicMissileer) turret;
-            if (magicMissileer.additionalMissile) setTextPurple("Four missiles", offset);
-            else setTextPurple("Three missiles", offset);
-        }
+
         //effects
         if (turret.effectLevel != 0 || turret.effectDuration != 0) {
             P.fill(EFFECT_TEXT_COLOR.getRGB(), 254);
@@ -468,32 +251,13 @@ public class Selection {
     }
 
     private void displayStats() {
-        int offsetB = 0;
-        if (!turret.hasPriority) offsetB = 45;
+        int offset = 0;
+        if (!turret.hasPriority) offset = 45;
         P.fill(STAT_TEXT_COLOR.getRGB(), 254);
         P.textAlign(LEFT);
         P.textFont(mediumFont);
-        if (turret instanceof Gluer) {
-            Gluer gluer = (Gluer) turret;
-            if (gluer.gluedTotal == 1) P.text("1 enemy glued", 910, 450 + offsetB);
-            else P.text(nfc(gluer.gluedTotal) + " enemies glued", 910, 450 + offsetB);
-        }
-        if (turret instanceof IceTower) {
-            IceTower ice = (IceTower) turret;
-            if (ice.frozenTotal == 1) P.text("1 wall created", 910, 500 + offsetB);
-            else P.text(nfc(ice.frozenTotal) + " walls created", 910, 500 + offsetB);
-            return;
-        }
-        if (turret instanceof Booster) {
-            Booster booster = (Booster) turret;
-            if (booster.name.equals("moneyBooster")) {
-                P.text("$" + nfc(booster.totalMoney) + " total", 910, 500 + offsetB);
-            }
-            return;
-        }
-        if (turret.killsTotal != 1) P.text(nfc(turret.killsTotal) + " kills", 910, 475 + offsetB);
-        else P.text("1 kill", 910, 475 + offsetB);
-        P.text(nfc(turret.damageTotal) + " total dmg", 910, 500 + offsetB);
+
+        turret.statsDisplay.display(offset);
     }
 
     private void upgradeIcons() {
@@ -579,7 +343,7 @@ public class Selection {
         P.text("Sell for: $" + nfc(floor(turret.value * .8f)), 1000, 888);
     }
 
-    private void setTextPurple(String s, int offset) {
+    public void setTextPurple(String s, int offset) {
         P.textFont(mediumFont);
         P.textAlign(LEFT);
         P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);

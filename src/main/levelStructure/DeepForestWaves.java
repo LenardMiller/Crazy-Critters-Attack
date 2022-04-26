@@ -134,7 +134,7 @@ public class DeepForestWaves {
 
         //first roach
         waves[22] = wavePreset(p, 60, 20, roach);
-        waves[22].addSpawns(roach, 40);
+        waves[22].addSpawns(roach, 30);
 
         //first mud creature
         waves[23] = wavePreset(p, 50, 1, mudCreature);

@@ -32,6 +32,7 @@ public class Crossbow extends Turret {
         price = CROSSBOW_PRICE;
         value = price;
         priority = 1; //last
+        titleLines = new String[]{"Crossbow"};
 
         loadSprites();
         setUpgrades();
@@ -119,6 +120,7 @@ public class Crossbow extends Turret {
                     damage += 300;
                     pierce += 5;
                     reinforced = true;
+                    titleLines = new String[]{"Reinforced", "Crossbow"};
                     name = "crossbowReinforced";
                     loadSprites();
                     break;
@@ -135,6 +137,8 @@ public class Crossbow extends Turret {
                     multishot = true;
                     name = "crossbowMultishot";
                     fireSound = sounds.get("shotbow");
+                    titleLines = new String[]{"Shotbow"};
+                    infoDisplay = (o) -> selection.setTextPurple("Seven bolts", o);
                     loadSprites();
                     break;
             }

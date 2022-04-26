@@ -87,7 +87,8 @@ public class Main extends PApplet {
     public static boolean
             won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, useOpenGL, gore, hasVerticalBars;
     public static boolean alive = true;
-    public static boolean dev = false; //<--------
+    /** controls spawning, level building, infinite money etc. */
+    public static boolean dev = true;
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;

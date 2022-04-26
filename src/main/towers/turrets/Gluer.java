@@ -40,6 +40,18 @@ public class Gluer extends Turret {
         material = "stone";
         price = GLUER_PRICE;
         value = price;
+        titleLines = new String[]{"Gluer"};
+        infoDisplay = (o) -> selection.setTextPurple("Slows", o);
+        statsDisplay = (o) -> {
+            //glue stuff
+            if (gluedTotal == 1) p.text("1 enemy glued", 910, 450 + offset);
+            else p.text(nfc(gluedTotal) + " enemies glued", 910, 450 + offset);
+
+            //default stuff
+            if (killsTotal != 1) p.text(nfc(killsTotal) + " kills", 910, 475 + o);
+            else p.text("1 kill", 910, 475 + o);
+            p.text(nfc(damageTotal) + " total dmg", 910, 500 + o);
+        };
 
         setUpgrades();
         loadSprites();
@@ -133,6 +145,11 @@ public class Gluer extends Turret {
                     delay -= 1;
                     splatter = true;
                     name = "splashGluer";
+                    titleLines = new String[]{"Glue Splasher"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Slows", o);
+                        selection.setTextPurple("Splatter", o);
+                    };
                     loadSprites();
                     break;
             }
@@ -153,6 +170,11 @@ public class Gluer extends Turret {
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
+                    titleLines = new String[]{"Glue Spiker"};
+                    infoDisplay = (o) -> {
+                        selection.setTextPurple("Slows", o);
+                        selection.setTextPurple("Embeds spikes", o);
+                    };
                     loadSprites();
                     break;
             }

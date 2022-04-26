@@ -40,6 +40,8 @@ public class WaveMotion extends Turret {
         price = WAVE_MOTION_PRICE;
         value = price;
         priority = 1; //far
+        titleLines = new String[]{"Death Beam"};
+        infoDisplay = (o) -> selection.setTextPurple("Piercing", o);
 
         setUpgrades();
         loadSprites();
