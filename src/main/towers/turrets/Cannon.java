@@ -71,6 +71,7 @@ public class Cannon extends Turret {
         upgradeTitles[0] = "Stronger shot";
         upgradeTitles[1] = "Powerful shot";
         upgradeTitles[2] = "Dynamite";
+
         upgradeTitles[3] = "Extra range";
         upgradeTitles[4] = "Rapid reload";
         upgradeTitles[5] = "Frags";

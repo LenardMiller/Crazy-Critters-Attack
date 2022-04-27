@@ -135,7 +135,7 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Fires a single pebble", x, space(0));
         p.text("at the nearest", x, space(1));
-        p.text("enemy.  Decent", x, space(2));
+        p.text("critter.  Decent", x, space(2));
         p.text("mid-range tower,", x, space(3));
         p.text("and very", x, space(4));
         p.text("cost-efficient.", x, space(5));
@@ -147,7 +147,7 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Rapidly fires old", x, space(0));
         p.text("luggage at the", x, space(1));
-        p.text("nearest enemy.", x, space(2));
+        p.text("nearest critter.", x, space(2));
         p.text("Potentially very high", x, space(3));
         p.text("DPS,  but has short", x, space(4));
         p.text("range.", x, space(5));
@@ -159,7 +159,7 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Fires a powerful bolt", x, space(0));
         p.text("at the farthest", x, space(1));
-        p.text("enemy in its range.", x, space(2));
+        p.text("critter in its range.", x, space(2));
         p.text("Very high damage", x, space(3));
         p.text("and range with some", x, space(4));
         p.text("piercing,  but low", x, space(5));
@@ -172,7 +172,7 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Fires a cannonball", x, space(0));
         p.text("at the nearest", x, space(1));
-        p.text("enemy.  Moderate", x, space(2));
+        p.text("critter.  Moderate", x, space(2));
         p.text("range and firerate,", x, space(3));
         p.text("good damage with", x, space(4));
         p.text("a bit of splash.", x, space(5));
@@ -184,13 +184,13 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Fires a glob of", x, space(0));
         p.text("glue at the nearest", x, space(1));
-        p.text("unglued enemy.", x, space(2));
+        p.text("unglued critter.", x, space(2));
         p.text("Slows movement", x, space(3));
         p.text("and attack speed,", x, space(4));
         p.text("but does no", x, space(5));
         p.text("damage.  More", x, space(6));
         p.text("strongly affects", x, space(7));
-        p.text("flying enemies.", x, space(8));
+        p.text("flying critters.", x, space(8));
         p.textAlign(CENTER);
         p.text("[S]", 1000, space(10));
     }
@@ -199,12 +199,12 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Sends a shockwave", x, space(0));
         p.text("towards the nearest", x, space(1));
-        p.text("enemy.  Does low", x, space(2));
+        p.text("critter.  Does low", x, space(2));
         p.text("damage,  but can", x, space(3));
-        p.text("hit several enemies.", x, space(4));
+        p.text("hit several critters.", x, space(4));
         p.text("Stuns burrowing", x, space(5));
-        p.text("enemies,  but can't", x, space(6));
-        p.text("hit flying enemies.", x, space(7));
+        p.text("critters,  but can't", x, space(6));
+        p.text("hit flying critters.", x, space(7));
         p.textAlign(CENTER);
         p.text("[X]", 1000, space(9));
     }
@@ -213,7 +213,7 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Fires an explosive", x, space(0));
         p.text("energy ball at the", x, space(1));
-        p.text("toughest enemy in its", x, space(2));
+        p.text("toughest critter in its", x, space(2));
         p.text("range.  Has long", x, space(3));
         p.text("range,  some splash", x, space(4));
         p.text("and high damage,", x, space(5));
@@ -227,7 +227,7 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Sprays an unending", x, space(0));
         p.text("column of fire at", x, space(1));
-        p.text("the nearest enemy.", x, space(2));
+        p.text("the nearest critter.", x, space(2));
         p.text("Has very short range", x, space(3));
         p.text("but very high DPS,", x, space(4));
         p.text("and some damage", x, space(5));
@@ -240,8 +240,8 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Creates an electric", x, space(0));
         p.text("arc that can jump", x, space(1));
-        p.text("from enemy to", x, space(2));
-        p.text("enemy.  Short range,", x, space(3));
+        p.text("from critter to", x, space(2));
+        p.text("critter.  Short range,", x, space(3));
         p.text("but arcs can jump", x, space(4));
         p.text("quite far.", x, space(5));
         p.textAlign(CENTER);
@@ -261,14 +261,14 @@ public class TowerInfo {
     public static void iceTowerInfo(PApplet p) {
         int x = loadStyle(p);
         p.text("Freezes the nearest", x, space(0));
-        p.text("enemy in a block", x, space(1));
+        p.text("critter in a block", x, space(1));
         p.text("of ice.  Smaller", x, space(2));
-        p.text("enemies are", x, space(3));
+        p.text("critters are", x, space(3));
         p.text("completely", x, space(4));
         p.text("immobilized.  Ice", x, space(5));
         p.text("melts over time.", x, space(6));
         p.text("Effective against", x, space(7));
-        p.text("flying enemies.", x, space(8));
+        p.text("flying critters.", x, space(8));
         p.textAlign(CENTER);
         p.text("[F]", 1000, space(10));
     }
@@ -278,7 +278,7 @@ public class TowerInfo {
         p.text("Fires three magic", x, space(0));
         p.text("missiles that home", x, space(1));
         p.text("in on different", x, space(2));
-        p.text("enemies.  Short", x, space(3));
+        p.text("critters.  Short", x, space(3));
         p.text("range and low", x, space(4));
         p.text("firerate but missiles", x, space(5));
         p.text("can travel very far.", x, space(6));
@@ -290,7 +290,7 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Fires a hypersonic", x, space(0));
         p.text("bolt of plasma at", x, space(1));
-        p.text("the toughest enemy", x, space(2));
+        p.text("the toughest critter", x, space(2));
         p.text("onscreen,  doing", x, space(3));
         p.text("extreme damage.", x, space(4));
         p.textAlign(CENTER);
@@ -301,7 +301,7 @@ public class TowerInfo {
         int x = loadStyle(p);
         p.text("Unleashes a flurry of", x, space(0));
         p.text("cursed needles that", x, space(1));
-        p.text("cause enemies to", x, space(2));
+        p.text("cause critters to", x, space(2));
         p.text("turn to ash.", x, space(3));
         p.textAlign(CENTER);
         p.text("[G]", 1000, space(5));
@@ -312,7 +312,7 @@ public class TowerInfo {
         p.text("Creates an", x, space(0));
         p.text("enormous beam of", x, space(1));
         p.text("energy, cutting a", x, space(2));
-        p.text("path through enemy", x, space(3));
+        p.text("path through critter", x, space(3));
         p.text("ranks.", x, space(4));
         p.textAlign(CENTER);
         p.text("[B]", 1000, space(6));

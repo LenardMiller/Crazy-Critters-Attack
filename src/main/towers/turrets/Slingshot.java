@@ -81,7 +81,8 @@ public class Slingshot extends Turret {
 
         upgradeDescA[2] = "Shoots";
         upgradeDescB[2] = "gravel at";
-        upgradeDescC[2] = "enemies";
+        upgradeDescC[2] = "critters";
+
 
         upgradeDescA[3] = "+5";
         upgradeDescB[3] = "damage";

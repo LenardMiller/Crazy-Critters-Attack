@@ -69,6 +69,7 @@ public class Crossbow extends Turret {
         upgradeTitles[0] = "Pointier";
         upgradeTitles[1] = "Sharper";
         upgradeTitles[2] = "Reinforced";
+
         upgradeTitles[3] = "Increase range";
         upgradeTitles[4] = "Faster Firing";
         upgradeTitles[5] = "Barrage";

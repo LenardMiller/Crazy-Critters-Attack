@@ -171,6 +171,7 @@ public class SeismicTower extends Turret {
         upgradeDescB[2] = "encircles";
         upgradeDescC[2] = "tower";
 
+
         upgradeDescA[3] = "Increase";
         upgradeDescB[3] = "range";
         upgradeDescC[3] = "";
@@ -181,7 +182,7 @@ public class SeismicTower extends Turret {
 
         upgradeDescA[5] = "Can target";
         upgradeDescB[5] = "burrowing";
-        upgradeDescC[5] = "enemies";
+        upgradeDescC[5] = "critters";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[20];

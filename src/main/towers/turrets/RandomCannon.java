@@ -95,6 +95,7 @@ public class RandomCannon extends Turret {
         upgradeDescB[2] = "increase";
         upgradeDescC[2] = "firerate";
 
+
         upgradeDescA[3] = "Increase";
         upgradeDescB[3] = "range";
         upgradeDescC[3] = "";

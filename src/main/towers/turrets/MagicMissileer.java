@@ -284,7 +284,7 @@ public class MagicMissileer extends Turret {
         upgradeDescC[1] = "";
 
         upgradeDescA[2] = "Electrifies";
-        upgradeDescB[2] = "enemies";
+        upgradeDescB[2] = "critters";
         upgradeDescC[2] = "";
 
 
