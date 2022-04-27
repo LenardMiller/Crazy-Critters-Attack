@@ -20,7 +20,8 @@ public class WaveMotion extends Turret {
     private float beamAngle;
     private int beamLength;
     private PVector beamPartLength;
-    private StackableSound fireSound;
+
+    private final StackableSound fireSound;
 
     public WaveMotion(PApplet p, Tile tile) {
         super(p,tile);
@@ -32,7 +33,7 @@ public class WaveMotion extends Turret {
         beam = new PImage[0];
         currentBeamFrame = 19;
         betweenIdleFrames = 3;
-        betweenFireFrames = 4;
+        betweenFireFrames = 3;
         beam = animatedSprites.get("waveMotionBeamTR");
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");
@@ -229,7 +230,7 @@ public class WaveMotion extends Turret {
                     damage += 100;
                     break;
                 case 4:
-                    betweenFireFrames += 4;
+                    betweenFireFrames += 2;
                     break;
                 case 5:
                     betweenFireFrames = 10;
