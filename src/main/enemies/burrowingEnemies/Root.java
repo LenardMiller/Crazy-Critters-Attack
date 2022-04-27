@@ -27,6 +27,7 @@ public class Root extends BurrowingEnemy {
         corpseSize = new PVector(25,25);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
+        attackSound = sounds.get("smallWhipCrack");
         loadStuff();
     }
 }

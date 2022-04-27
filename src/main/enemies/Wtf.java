@@ -29,6 +29,7 @@ public class Wtf extends Enemy {
         partSize = new PVector(100,100);
         dieSound = sounds.get("bigCrunchRoar");
         overkillSound = sounds.get("squashRoar");
+        attackSound = sounds.get("bugGrowlSlow");
         loadStuff();
     }
 }

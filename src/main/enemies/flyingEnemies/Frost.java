@@ -35,6 +35,7 @@ public class Frost extends FlyingEnemy {
         attackFrames = animatedSprites.get("wolf" + "AttackEN"); //these exist solely because of glue
         moveFrames = animatedSprites.get("wolf" + "MoveEN");
         attackDmgFrames = new int[]{attackFrames.length - 1};
+        attackSound = sounds.get("frostFreeze");
     }
 
     /**
@@ -95,6 +96,7 @@ public class Frost extends FlyingEnemy {
             moveFrame = 0;
             if (dmg) {
                 targetTower.damage(damage);
+                playSoundRandomSpeed(p, attackSound, 1);
                 spawnAttackParticles();
             }
         } else if (!targetMachine) state = 0;
@@ -102,6 +104,7 @@ public class Frost extends FlyingEnemy {
             moveFrame = 0;
             if (dmg) {
                 machine.damage(damage);
+                playSoundRandomSpeed(p, attackSound, 1);
                 spawnAttackParticles();
             }
         }

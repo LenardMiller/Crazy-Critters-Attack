@@ -12,6 +12,8 @@ import main.damagingThings.projectiles.homing.MagicMissile;
 import main.enemies.*;
 import main.enemies.burrowingEnemies.BigWorm;
 import main.enemies.burrowingEnemies.Shark;
+import main.enemies.flyingEnemies.Bat;
+import main.enemies.flyingEnemies.Frost;
 import main.enemies.flyingEnemies.Mantoid;
 import main.enemies.shootingEnemies.IceEntity;
 import main.enemies.shootingEnemies.IceMonstrosity;
@@ -166,15 +168,15 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1,150, 500));
         if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new BigWorm(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en2) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en3) enemies.add(new Mantis(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en4) enemies.add(new Mantoid(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en5) enemies.add(new Twisted(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en6) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en7) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en8) enemies.add(new TreeGiant(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en9) enemies.add(new EnragedGiant(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en1) enemies.add(new GiantGolem( p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en2) enemies.add(new Wolf(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en3) enemies.add(new Velociraptor(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en4) enemies.add(new Mammoth(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en5) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en6) enemies.add(new Frost(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en7) enemies.add(new Bat(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en8) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en9) enemies.add(new TreeSpirit(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1b) enemies.add(new Dummy(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }

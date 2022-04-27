@@ -45,7 +45,7 @@ public class IceEntity extends ShootingEnemy {
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         corpseSize = size;
         partSize = new PVector(10,10);
-        shootSound = sounds.get("badMagic");
+        attackSound = sounds.get("badMagic");
         overkillSound = sounds.get("smallCrystalBreak");
         dieSound = sounds.get("smallCrystalBreak");
         loadStuff();

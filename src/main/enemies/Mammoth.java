@@ -26,6 +26,7 @@ public class Mammoth extends Enemy {
         partSize = new PVector(56, 56);
         dieSound = sounds.get("mammoth");
         overkillSound = sounds.get("mammothSquash");
+        attackSound = sounds.get("biteGrowlSlow");
         loadStuff();
     }
 }

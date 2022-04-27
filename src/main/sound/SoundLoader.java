@@ -9,7 +9,7 @@ import static main.misc.Utilities.secondsToFrames;
 public class SoundLoader {
 
     public static void loadSounds(PApplet p) { //todo: load dynamically?
-        //enemy todo: attack sounds?
+        //critter die
         sounds.put("squish", new SoundFile(p, "sounds/enemies/squish.wav"));
         sounds.put("squash", new SoundFile(p, "sounds/enemies/squash.wav"));
         sounds.put("squashRoar", new SoundFile(p, "sounds/enemies/squashRoar.wav"));
@@ -31,13 +31,29 @@ public class SoundLoader {
         sounds.put("dino", new SoundFile(p, "sounds/enemies/dino.wav"));
         sounds.put("dinoSquish", new SoundFile(p, "sounds/enemies/dinoSquish.wav"));
         sounds.put("smallCrystalBreak", new SoundFile(p, "sounds/enemies/smallCrystalBreak.wav"));
-        sounds.put("spit", new SoundFile(p, "sounds/enemies/spit.wav"));
-        sounds.put("badMagic", new SoundFile(p, "sounds/enemies/badMagic.wav"));
         sounds.put("frostDie", new SoundFile(p, "sounds/enemies/frostDie.wav"));
         sounds.put("mammoth", new SoundFile(p, "sounds/enemies/mammoth.wav"));
         sounds.put("mammothSquash", new SoundFile(p, "sounds/enemies/mammothSquash.wav"));
         sounds.put("mudDie", new SoundFile(p, "sounds/enemies/mudDie.wav"));
         sounds.put("mudSquish", new SoundFile(p, "sounds/enemies/mudSquish.wav"));
+        //critter attack
+        sounds.put("spit", new SoundFile(p, "sounds/enemies/spit.wav"));
+        sounds.put("badMagic", new SoundFile(p, "sounds/enemies/badMagic.wav"));
+        sounds.put("bugGrowlQuick", new SoundFile(p, "sounds/enemies/bugGrowlQuick.wav"));
+        sounds.put("bugGrowlVeryQuick", new SoundFile(p, "sounds/enemies/bugGrowlVeryQuick.wav"));
+        sounds.put("bugGrowlSlow", new SoundFile(p, "sounds/enemies/bugGrowlSlow.wav"));
+        sounds.put("whipCrack", new SoundFile(p, "sounds/enemies/whipCrack.wav"));
+        sounds.put("smallWhipCrack", new SoundFile(p, "sounds/enemies/smallWhipCrack.wav"));
+        sounds.put("snakeStrike", new SoundFile(p, "sounds/enemies/snakeStrike.wav"));
+        sounds.put("flap", new SoundFile(p, "sounds/enemies/flap.wav"));
+        sounds.put("bite", new SoundFile(p, "sounds/enemies/bite.wav"));
+        sounds.put("biteGrowl", new SoundFile(p, "sounds/enemies/biteGrowl.wav"));
+        sounds.put("biteGrowlSlow", new SoundFile(p, "sounds/enemies/biteGrowlSlow.wav"));
+        sounds.put("swooshPunch", new SoundFile(p, "sounds/enemies/swooshPunch.wav"));
+        sounds.put("swooshPunchSlow", new SoundFile(p, "sounds/enemies/swooshPunchSlow.wav"));
+        sounds.put("dogAttack", new SoundFile(p, "sounds/enemies/dogAttack.wav"));
+        sounds.put("slime", new SoundFile(p, "sounds/enemies/slime.wav"));
+        sounds.put("frostFreeze", new SoundFile(p, "sounds/enemies/frostFreeze.wav"));
         //misc
         sounds.put("smallExplosion", new SoundFile(p, "sounds/misc/smallExplosion.wav"));
         sounds.put("hugeExplosion", new SoundFile(p, "sounds/misc/hugeExplosion.wav"));
@@ -63,7 +79,6 @@ public class SoundLoader {
         sounds.put("magicMissleer", new SoundFile(p, "sounds/turrets/magicMissileer.wav"));
         sounds.put("iceFire", new SoundFile(p, "sounds/turrets/iceFire.wav"));
         sounds.put("cash", new SoundFile(p, "sounds/turrets/cash.wav"));
-//        sounds.put("beam", new SoundFile(p, "sounds/turrets/beam.wav"));
         sounds.put("railgun", new SoundFile(p, "sounds/turrets/railgun.wav"));
         sounds.put("nightmareFire", new SoundFile(p, "sounds/turrets/nightmare.wav"));
         //ui

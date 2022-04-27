@@ -28,6 +28,7 @@ public class Golem extends Enemy {
         betweenCorpseFrames = down60ToFramerate(6);
         dieSound = sounds.get("leaves");
         overkillSound = sounds.get("leavesImpact");
+        attackSound = sounds.get("swooshPunch");
         loadStuff();
     }
 }

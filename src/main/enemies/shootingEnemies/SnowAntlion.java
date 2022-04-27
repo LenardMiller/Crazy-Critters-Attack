@@ -24,7 +24,7 @@ public class SnowAntlion extends ShootingEnemy {
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "snowAntlion";
-        shootSound = sounds.get("spit");
+        attackSound = sounds.get("spit");
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(12);
         betweenShootFrames = down60ToFramerate(12);

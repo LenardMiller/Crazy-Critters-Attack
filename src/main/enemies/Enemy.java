@@ -77,6 +77,7 @@ public abstract class Enemy {
     protected Color currentTintColor;
     protected SoundFile overkillSound;
     protected SoundFile dieSound;
+    protected SoundFile attackSound;
 
     protected int attackCount;
     protected boolean attackCue;
@@ -519,11 +520,21 @@ public abstract class Enemy {
                 targetAngle = findAngleBetween(t, position);
             }
             moveFrame = 0;
-            if (dmg) targetTower.damage(damage);
+            //actually do damage to towers
+            if (dmg) {
+                targetTower.damage(damage);
+                //ignored if no assigned attack sound
+                playSoundRandomSpeed(p, attackSound, 1);
+            }
         } else if (!targetMachine) state = 0;
         if (targetMachine) {
             moveFrame = 0;
-            if (dmg) machine.damage(damage);
+            //actually do damage to machines
+            if (dmg) {
+                machine.damage(damage);
+                //ignored if no assigned attack sound
+                playSoundRandomSpeed(p, attackSound, 1);
+            }
         }
         if (!attackCue && attackFrame == 0) state = 0;
     }

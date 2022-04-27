@@ -28,6 +28,7 @@ public class MudCreature extends Enemy {
         partSize = new PVector(25,25);
         overkillSound = sounds.get("mudSquish");
         dieSound = sounds.get("mudDie");
+        attackSound = sounds.get("slime");
         loadStuff();
     }
 }

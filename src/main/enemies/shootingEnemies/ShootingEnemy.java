@@ -23,7 +23,6 @@ public abstract class ShootingEnemy extends Enemy {
     protected int shootDamage;
     protected Turret target;
     protected PImage[] shootFrames;
-    protected SoundFile shootSound;
 
     private int shootFrame;
 
@@ -132,7 +131,7 @@ public abstract class ShootingEnemy extends Enemy {
         PVector barrel = PVector.fromAngle(angle);
         barrel.setMag(barrelLength); //barrel length
         projectilePosition.add(barrel);
-        playSoundRandomSpeed(p, shootSound, 1);
+        playSoundRandomSpeed(p, attackSound, 1);
         fire(projectileAngle, projectilePosition);
     }
 

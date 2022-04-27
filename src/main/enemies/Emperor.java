@@ -28,6 +28,7 @@ public class Emperor extends Enemy {
         partSize = new PVector(20,20);
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
+        attackSound = sounds.get("whipCrack");
         loadStuff();
     }
 }

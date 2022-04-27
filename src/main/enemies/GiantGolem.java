@@ -29,6 +29,7 @@ public class GiantGolem extends Enemy {
         corpseLifespan = 12;
         dieSound = sounds.get("bigLeaves");
         overkillSound = sounds.get("bigLeavesImpact");
+        attackSound = sounds.get("swooshPunchSlow");
         loadStuff();
     }
 }

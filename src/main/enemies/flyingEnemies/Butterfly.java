@@ -28,6 +28,7 @@ public class Butterfly extends FlyingEnemy {
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
+        attackSound = sounds.get("flap");
         loadStuff();
     }
 }

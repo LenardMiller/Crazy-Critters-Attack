@@ -28,6 +28,7 @@ public class Snake extends Enemy {
         partSize = new PVector(9,9);
         overkillSound = sounds.get("hissSquish");
         dieSound = sounds.get("hiss");
+        attackSound = sounds.get("snakeStrike");
         loadStuff();
     }
 }

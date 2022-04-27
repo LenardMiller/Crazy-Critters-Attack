@@ -24,7 +24,7 @@ public class MudFlinger extends ShootingEnemy {
         hp = maxHp;
         hitParticle = "mudOuch";
         name = "mudFlinger";
-        shootSound = sounds.get("spit");
+        attackSound = sounds.get("spit");
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(8);
         betweenShootFrames = down60ToFramerate(8);

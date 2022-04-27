@@ -26,6 +26,7 @@ public class Mantoid extends FlyingEnemy {
         partSize = new PVector(38, 38);
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
+        attackSound = sounds.get("bugGrowlQuick");
         loadStuff();
     }
 }

@@ -28,6 +28,7 @@ public class SmolBug extends Enemy {
         partSize = new PVector(11,11);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
+        attackSound = sounds.get("bugGrowlVeryQuick");
         loadStuff();
     }
 }

@@ -26,6 +26,7 @@ public class BigBug extends Enemy {
         partSize = new PVector(32,32);
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
+        attackSound = sounds.get("bugGrowlQuick");
         loadStuff();
     }
 }

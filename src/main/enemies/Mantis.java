@@ -27,6 +27,7 @@ public class Mantis extends Enemy {
         partSize = new PVector(30,30);
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
+        attackSound = sounds.get("bugGrowlQuick");
         loadStuff();
     }
 }

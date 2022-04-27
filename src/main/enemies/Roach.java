@@ -27,6 +27,7 @@ public class Roach extends Enemy {
         partSize = new PVector(14,14);
         dieSound = sounds.get("squish");
         overkillSound = sounds.get("crunch");
+        attackSound = sounds.get("bugGrowlVeryQuick");
         loadStuff();
     }
 }

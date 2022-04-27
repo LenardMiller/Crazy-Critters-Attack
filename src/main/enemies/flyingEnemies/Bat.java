@@ -29,6 +29,7 @@ public class Bat extends FlyingEnemy {
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("squeakSquish");
         dieSound = sounds.get("squeak");
+        attackSound = sounds.get("flap");
         loadStuff();
     }
 }

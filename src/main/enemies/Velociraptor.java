@@ -28,6 +28,7 @@ public class Velociraptor extends Enemy {
         partSize = new PVector(45,45);
         overkillSound = sounds.get("dinoSquish");
         dieSound = sounds.get("dino");
+        attackSound = sounds.get("biteGrowl");
         loadStuff();
     }
 }

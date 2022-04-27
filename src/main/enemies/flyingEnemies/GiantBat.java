@@ -29,6 +29,7 @@ public class GiantBat extends FlyingEnemy {
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("bigSqueakSquash");
         dieSound = sounds.get("bigSqueak");
+        attackSound = sounds.get("flap");
         loadStuff();
     }
 }

@@ -28,6 +28,7 @@ public class Wolf extends Enemy {
         partSize = new PVector(25,25);
         overkillSound = sounds.get("barkSquish");
         dieSound = sounds.get("bark");
+        attackSound = sounds.get("dogAttack");
         loadStuff();
     }
 }
