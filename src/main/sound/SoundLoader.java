@@ -63,7 +63,7 @@ public class SoundLoader {
         sounds.put("magicMissleer", new SoundFile(p, "sounds/turrets/magicMissileer.wav"));
         sounds.put("iceFire", new SoundFile(p, "sounds/turrets/iceFire.wav"));
         sounds.put("cash", new SoundFile(p, "sounds/turrets/cash.wav"));
-        sounds.put("beam", new SoundFile(p, "sounds/turrets/beam.wav"));
+//        sounds.put("beam", new SoundFile(p, "sounds/turrets/beam.wav"));
         sounds.put("railgun", new SoundFile(p, "sounds/turrets/railgun.wav"));
         sounds.put("nightmareFire", new SoundFile(p, "sounds/turrets/nightmare.wav"));
         //ui
@@ -103,5 +103,7 @@ public class SoundLoader {
         fadeSoundLoops.put("flamethrower", new FadeSoundLoop(p, "flamethrower", FRAMERATE/6));
         //alts
         soundsWithAlts.put("thunder", new SoundWithAlts(p, "thunder", 3));
+        //stackables
+        stackableSounds.put("beam", new StackableSound(p, "beam", 5));
     }
 }

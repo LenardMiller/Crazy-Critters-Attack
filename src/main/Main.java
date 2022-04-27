@@ -19,6 +19,7 @@ import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
 import main.sound.FadeSoundLoop;
 import main.sound.SoundWithAlts;
+import main.sound.StackableSound;
 import main.sound.StartStopSoundLoop;
 import main.towers.Tower;
 import main.towers.Wall;
@@ -126,6 +127,7 @@ public class Main extends PApplet {
     public static HashMap<String, StartStopSoundLoop> startStopSoundLoops = new HashMap<>();
     public static HashMap<String, FadeSoundLoop> fadeSoundLoops = new HashMap<>();
     public static HashMap<String, SoundWithAlts> soundsWithAlts = new HashMap<>();
+    public static HashMap<String, StackableSound> stackableSounds = new HashMap<>();
 
     //pathfinding stuff
     public static final int GRID_WIDTH = 1100, GRID_HEIGHT = 1100;

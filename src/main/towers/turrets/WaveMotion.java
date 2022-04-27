@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.misc.Tile;
+import main.sound.StackableSound;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -19,6 +20,7 @@ public class WaveMotion extends Turret {
     private float beamAngle;
     private int beamLength;
     private PVector beamPartLength;
+    private StackableSound fireSound;
 
     public WaveMotion(PApplet p, Tile tile) {
         super(p,tile);
@@ -35,7 +37,7 @@ public class WaveMotion extends Turret {
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");
         damageSound = sounds.get("titaniumDamage");
-        fireSound = sounds.get("beam");
+        fireSound = stackableSounds.get("beam");
         material = "darkMetal";
         price = WAVE_MOTION_PRICE;
         value = price;
@@ -71,7 +73,7 @@ public class WaveMotion extends Turret {
         beamPartLength = PVector.fromAngle(beamAngle - radians(90));
         beamPartLength.setMag(24);
 
-        playSoundRandomSpeed(p, fireSound, 1);
+        fireSound.playRandomSpeed(1);
     }
 
     @Override
