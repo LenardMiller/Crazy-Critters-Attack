@@ -1,28 +1,34 @@
 package main.gui.guiObjects.buttons;
 
+import com.sun.istack.internal.Nullable;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.animatedSprites;
-import static main.Main.inputHandler;
+import static main.Main.*;
 import static main.sound.SoundUtilities.playSound;
 import static processing.core.PConstants.LEFT;
 
 public class MenuButton extends Button {
 
+    public static final int TEXT_Y_OFFSET = 7;
+
     private boolean pressed;
-    private Runnable action;
+
+    private final Runnable action;
+    private final String text;
 
     /**
      * A cool little button for use in menus and whatnot.
      * @param p the PApplet
      * @param x x position
      * @param y y position
+     * @param text text to display on button, nullable
      * @param action what to do when pressed, optional, may use isPressed instead.
      */
-    public MenuButton(PApplet p, float x, float y, Runnable action) {
+    public MenuButton(PApplet p, float x, float y, @Nullable String text, Runnable action) {
         super(p, x, y, "null", true);
         this.action = action;
+        this.text = text;
         position = new PVector(x, y);
         size = new PVector(200, 42);
         spriteIdle = animatedSprites.get("genericButtonBT")[0];
@@ -38,7 +44,29 @@ public class MenuButton extends Button {
      * @param y y position
      */
     public MenuButton(PApplet p, float x, float y) {
-        this(p, x, y, () -> {});
+        this(p, x, y, null, () -> {});
+    }
+
+    /**
+     * A cool little button for use in menus and whatnot.
+     * @param p the PApplet
+     * @param x x position
+     * @param y y position
+     * @param action what to do when pressed, optional, may use isPressed instead.
+     */
+    public MenuButton(PApplet p, float x, float y, Runnable action) {
+        this(p, x, y, null, action);
+    }
+
+    /**
+     * A cool little button for use in menus and whatnot.
+     * @param p the PApplet
+     * @param x x position
+     * @param y y position
+     * @param text text to display on button, nullable
+     */
+    public MenuButton(PApplet p, float x, float y, String text) {
+        this(p, x, y, text, () -> {});
     }
 
     /**
@@ -72,5 +100,17 @@ public class MenuButton extends Button {
         boolean wasPressed = pressed;
         pressed = false;
         return wasPressed;
+    }
+
+    @Override
+    public void display() {
+        super.display();
+
+        if (text != null) {
+            p.textAlign(CENTER);
+            p.textFont(mediumFont);
+            p.fill(200, 254);
+            p.text(text, position.x, position.y + TEXT_Y_OFFSET);
+        }
     }
 }

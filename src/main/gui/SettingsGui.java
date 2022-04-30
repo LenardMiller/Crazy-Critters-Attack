@@ -39,16 +39,18 @@ public class SettingsGui {
     private void build() {
         volumeSlider = new MenuSlider(P, "Global Volume", new PVector(P.width / 2f, buffer + 100),
           0.01f, 0.25f, 1);
+
         fullscreenCheck = new MenuCheckbox(P, "Fullscreen*", new PVector((P.width / 2f - 100), buffer + 150));
         rendererCheck = new MenuCheckbox(P, "Use OpenGL*", new PVector((P.width / 2f - 100), buffer + 200));
         goreCheck = new MenuCheckbox(P, "Gore", new PVector((P.width / 2f - 100), buffer + 250));
-        resetSettings = new MenuButton(P, P.width/2f, P.height - buffer - 50, () -> {
+
+        resetSettings = new MenuButton(P, P.width/2f, P.height - buffer - 50, "Reset to Defaults", () -> {
             globalVolume = 0.25f;
             fullscreen = true;
             useOpenGL = false;
             gore = true;
         });
-        returnButton = new MenuButton(P, P.width/2f, P.height - buffer, () -> {
+        returnButton = new MenuButton(P, P.width/2f, P.height - buffer, "Return [ESC]", () -> {
             if (settings) closeSettingsMenu();
             else settings = true;
         });
@@ -82,8 +84,6 @@ public class SettingsGui {
         P.textFont(mediumFont);
         P.fill(200, 254);
         returnButton.main();
-        P.text("Return [ESC]", returnButton.position.x, returnButton.position.y + offsetY);
         resetSettings.main();
-        P.text("Reset to Defaults", resetSettings.position.x, resetSettings.position.y + offsetY);
     }
 }

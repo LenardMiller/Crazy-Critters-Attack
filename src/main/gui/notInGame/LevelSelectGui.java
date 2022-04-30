@@ -30,17 +30,17 @@ public class LevelSelectGui {
 
     private void build() {
         levelSelectButtons = new MenuButton[levels.length];
-        settingsButton = new MenuButton(P, P.width/2f, P.height-100 - 50, () -> {
+        settingsButton = new MenuButton(P, P.width/2f, P.height-100 - 50, "Settings", () -> {
             SettingsGui.delay = 1;
             if (settings) closeSettingsMenu();
             else settings = true;
         });
-        goToTitle = new MenuButton(P, P.width/2f, P.height-100, () -> {
+        goToTitle = new MenuButton(P, P.width/2f, P.height-100, "Back to Title", () -> {
             screen = Screen.Title;
         });
         float factor = (levelSelectButtons.length/2f) - 0.5f;
         for (int i = 0; i < levelSelectButtons.length; i++) {
-            levelSelectButtons[i] = new MenuButton(P, P.width/2f, P.height/2f + (i-factor)*50);
+            levelSelectButtons[i] = new MenuButton(P, P.width/2f, P.height/2f + (i-factor)*50, "level " + (i+1));
         }
     }
 
@@ -71,15 +71,11 @@ public class LevelSelectGui {
         //buttons
         P.fill(200, 254);
         P.textFont(mediumFont);
-        int offsetY = 7;
-        for (int i = 0; i < levelSelectButtons.length; i++) {
-            levelSelectButtons[i].display();
-            if (delay < 0) levelSelectButtons[i].hover();
-            P.text("Level " + (i+1), levelSelectButtons[i].position.x, levelSelectButtons[i].position.y + offsetY);
+        for (MenuButton levelSelectButton : levelSelectButtons) {
+            levelSelectButton.display();
+            if (delay < 0) levelSelectButton.hover();
         }
         settingsButton.main();
-        P.text("Settings", settingsButton.position.x, settingsButton.position.y + offsetY);
         goToTitle.main();
-        P.text("Back to Title", goToTitle.position.x, goToTitle.position.y + offsetY);
     }
 }
