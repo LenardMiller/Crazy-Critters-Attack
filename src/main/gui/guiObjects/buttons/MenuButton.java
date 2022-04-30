@@ -11,15 +11,34 @@ import static processing.core.PConstants.LEFT;
 public class MenuButton extends Button {
 
     private boolean pressed;
+    private Runnable action;
 
-    public MenuButton(PApplet p, float x, float y) {
+    /**
+     * A cool little button for use in menus and whatnot.
+     * @param p the PApplet
+     * @param x x position
+     * @param y y position
+     * @param action what to do when pressed, optional, may use isPressed instead.
+     */
+    public MenuButton(PApplet p, float x, float y, Runnable action) {
         super(p, x, y, "null", true);
+        this.action = action;
         position = new PVector(x, y);
         size = new PVector(200, 42);
         spriteIdle = animatedSprites.get("genericButtonBT")[0];
         spritePressed = animatedSprites.get("genericButtonBT")[1];
         spriteHover = animatedSprites.get("genericButtonBT")[2];
         sprite = spriteIdle;
+    }
+
+    /**
+     * A cool little button for use in menus and whatnot.
+     * @param p the PApplet
+     * @param x x position
+     * @param y y position
+     */
+    public MenuButton(PApplet p, float x, float y) {
+        this(p, x, y, () -> {});
     }
 
     /**
@@ -33,26 +52,22 @@ public class MenuButton extends Button {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
-            if (holdable && p.mousePressed && p.mouseButton == LEFT) action();
+            if (holdable && p.mousePressed && p.mouseButton == LEFT) pressIn();
             else if (inputHandler.leftMouseReleasedPulse) {
                 playSound(clickOut, 1, 1);
-                action();
+                pressIn();
                 sprite = spritePressed;
             }
         } else sprite = spriteIdle;
     }
 
-    /**
-     * This makes sense for some reason, but I forgot why
-     */
     @Override
-    public void action() {
+    public void pressIn() {
         pressed = true;
+        action.run();
     }
 
-    /**
-     * @return whether the mouse was recently pressed, resets pressed
-     */
+    /** @return whether the mouse was recently pressed, resets pressed */
     public boolean isPressed() {
         boolean wasPressed = pressed;
         pressed = false;

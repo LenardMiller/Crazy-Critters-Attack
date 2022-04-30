@@ -38,17 +38,17 @@ public class OpenMenu extends Button {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
-            if (holdable && p.mousePressed && p.mouseButton == LEFT) action();
+            if (holdable && p.mousePressed && p.mouseButton == LEFT) pressIn();
             else if (inputHandler.leftMouseReleasedPulse) {
                 playSound(clickOut, 1, 1);
-                action();
+                pressIn();
                 sprite = spritePressed;
             }
         } else sprite = spriteIdle;
     }
 
     @Override
-    public void action(){
+    public void pressIn(){
         paused = !paused;
     }
 }

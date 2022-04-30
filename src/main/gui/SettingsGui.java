@@ -42,8 +42,16 @@ public class SettingsGui {
         fullscreenCheck = new MenuCheckbox(P, "Fullscreen*", new PVector((P.width / 2f - 100), buffer + 150));
         rendererCheck = new MenuCheckbox(P, "Use OpenGL*", new PVector((P.width / 2f - 100), buffer + 200));
         goreCheck = new MenuCheckbox(P, "Gore", new PVector((P.width / 2f - 100), buffer + 250));
-        resetSettings = new MenuButton(P, P.width/2f, P.height - buffer - 50);
-        returnButton = new MenuButton(P, P.width/2f, P.height - buffer);
+        resetSettings = new MenuButton(P, P.width/2f, P.height - buffer - 50, () -> {
+            globalVolume = 0.25f;
+            fullscreen = true;
+            useOpenGL = false;
+            gore = true;
+        });
+        returnButton = new MenuButton(P, P.width/2f, P.height - buffer, () -> {
+            if (settings) closeSettingsMenu();
+            else settings = true;
+        });
     }
 
     public void main() {
@@ -59,15 +67,6 @@ public class SettingsGui {
         fullscreen = fullscreenCheck.main(fullscreen);
         useOpenGL = rendererCheck.main(useOpenGL);
         gore = goreCheck.main(gore);
-        if (returnButton.isPressed()) {
-            if (settings) closeSettingsMenu();
-            else settings = true;
-        } if (resetSettings.isPressed()) {
-            globalVolume = 0.25f;
-            fullscreen = true;
-            useOpenGL = false;
-            gore = true;
-        }
     }
 
     private void display() { //todo: keybinds page

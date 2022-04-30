@@ -27,7 +27,7 @@ public class SellTower extends Button {
     }
 
     @Override
-    public void action() { //kills tower and gives value
+    public void pressIn() { //kills tower and gives value
         active = false;
         selection.sell();
     }

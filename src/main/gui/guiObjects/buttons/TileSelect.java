@@ -61,13 +61,13 @@ public class TileSelect extends Button {
         if (matrixMousePosition.x < position.x+size.x/2 && matrixMousePosition.x > position.x-size.x/2 &&
           matrixMousePosition.y < position.y+size.y/2 && matrixMousePosition.y > position.y-size.y/2 && alive && active && !paused) {
             sprite = spritePressed;
-            if (inputHandler.leftMousePressedPulse) action();
+            if (inputHandler.leftMousePressedPulse) pressIn();
         }
         else sprite = spriteIdle;
     }
 
     @Override
-    public void action() {
+    public void pressIn() {
         if (hand.held.equals(TYPE)) hand.setHeld("null");
         hand.setHeld(TYPE + "_TL");
     }

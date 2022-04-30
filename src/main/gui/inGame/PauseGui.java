@@ -17,11 +17,11 @@ public class PauseGui {
 
     private final PApplet P;
 
-    public static MenuButton resumeGame;
-    public static MenuButton restartLevel;
-    public static MenuButton levelSelect;
-    public static MenuButton settingsMenuScreen;
-    public static MenuButton exitGame;
+    public static MenuButton resumeButton;
+    public static MenuButton restartButton;
+    public static MenuButton levelSelectButton;
+    public static MenuButton settingsMenuButton;
+    public static MenuButton exitButton;
 
     /**
      * Creates the pause menu.
@@ -36,19 +36,32 @@ public class PauseGui {
      * Creates buttons
      */
     private void build() {
-        resumeGame = new MenuButton(P, P.width/2f, (P.height/2f) - 75);
-        restartLevel = new MenuButton(P, P.width/2f, P.height/2f - 25);
-        levelSelect = new MenuButton(P, P.width/2f, (P.height/2f) + 25);
-        settingsMenuScreen = new MenuButton(P, P.width/2f, (P.height/2f) + 75);
-        exitGame = new MenuButton(P, P.width/2f, (P.height/2f) + 125);
+        resumeButton = new MenuButton(P, P.width/2f, (P.height/2f) - 75, () -> {
+            paused = !paused;
+        });
+        restartButton = new MenuButton(P, P.width/2f, P.height/2f - 25, () -> {
+            paused = false;
+            Game.reset(P);
+        });
+        levelSelectButton = new MenuButton(P, P.width/2f, (P.height/2f) + 25, () -> {
+            Game.reset(P);
+            paused = false;
+            alive = true;
+            LevelSelectGui.delay = 1;
+            screen = Screen.LevelSelect;
+        });
+        settingsMenuButton = new MenuButton(P, P.width/2f, (P.height/2f) + 75, () -> {
+            SettingsGui.delay = 1;
+            if (settings) closeSettingsMenu();
+            else settings = true;
+        });
+        exitButton = new MenuButton(P, P.width/2f, (P.height/2f) + 125, () -> {
+            paused = false;
+            P.exit();
+        });
     }
 
     public void main() {
-        display();
-        checkButtonsPressed();
-    }
-
-    private void display() {
         //big text
         PVector position = new PVector(P.width / 2f, 300);
         if (!alive) shadowedText(P, "Game Over", position, new Color(255, 0, 0, 254),
@@ -62,39 +75,17 @@ public class PauseGui {
         P.textFont(mediumFont);
         int offsetY = 7;
         if (alive) {
-            resumeGame.main();
-            if (won) P.text("Hide Menu [ESC]", resumeGame.position.x, resumeGame.position.y + offsetY);
-            else P.text("Resume [ESC]", resumeGame.position.x, resumeGame.position.y + offsetY);
+            resumeButton.main();
+            if (won) P.text("Hide Menu [ESC]", resumeButton.position.x, resumeButton.position.y + offsetY);
+            else P.text("Resume [ESC]", resumeButton.position.x, resumeButton.position.y + offsetY);
         }
-        restartLevel.main();
-        P.text("Restart", restartLevel.position.x, restartLevel.position.y + offsetY);
-        levelSelect.main();
-        P.text("Level Select", levelSelect.position.x, levelSelect.position.y + offsetY);
-        settingsMenuScreen.main();
-        P.text("Settings", settingsMenuScreen.position.x, settingsMenuScreen.position.y + offsetY);
-        exitGame.main();
-        P.text("Quit", exitGame.position.x, exitGame.position.y + offsetY);
-    }
-
-    private void checkButtonsPressed() {
-        if (resumeGame.isPressed()) {
-            paused = !paused;
-        } if (restartLevel.isPressed()) {
-            paused = false;
-            Game.reset(P);
-        } if (levelSelect.isPressed()) {
-            Game.reset(P);
-            paused = false;
-            alive = true;
-            LevelSelectGui.delay = 1;
-            screen = Screen.LevelSelect;
-        } if (settingsMenuScreen.isPressed()) {
-            SettingsGui.delay = 1;
-            if (settings) closeSettingsMenu();
-            else settings = true;
-        } if (exitGame.isPressed()) {
-            paused = false;
-            P.exit();
-        }
+        restartButton.main();
+        P.text("Restart", restartButton.position.x, restartButton.position.y + offsetY);
+        levelSelectButton.main();
+        P.text("Level Select", levelSelectButton.position.x, levelSelectButton.position.y + offsetY);
+        settingsMenuButton.main();
+        P.text("Settings", settingsMenuButton.position.x, settingsMenuButton.position.y + offsetY);
+        exitButton.main();
+        P.text("Quit", exitButton.position.x, exitButton.position.y + offsetY);
     }
 }

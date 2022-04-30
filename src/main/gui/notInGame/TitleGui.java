@@ -23,30 +23,21 @@ public class TitleGui {
     }
 
     private void build() {
-        playButton = new MenuButton(p, p.width / 2f, p.height * 0.5f);
-        settingsButton = new MenuButton(p, p.width /2f, p.height * 0.6f);
-        exitButton = new MenuButton(p, p.width /2f, p.height * 0.7f);
-    }
-
-    public void main() {
-        display();
-        checkButtonsPressed();
-    }
-
-    private void checkButtonsPressed() {
-        if (settingsButton.isPressed()) {
+        playButton = new MenuButton(p, p.width / 2f, p.height * 0.5f, () -> {
+            Main.screen = Main.Screen.LevelSelect;
+        });
+        settingsButton = new MenuButton(p, p.width /2f, p.height * 0.6f, () -> {
             SettingsGui.delay = 1;
             if (settings) closeSettingsMenu();
             else settings = true;
-        } if (exitButton.isPressed()) {
+        });
+        exitButton = new MenuButton(p, p.width /2f, p.height * 0.7f, () -> {
             paused = false;
             p.exit();
-        } if (playButton.isPressed()) {
-            Main.screen = Main.Screen.LevelSelect;
-        }
+        });
     }
 
-    private void display() {
+    public void main() {
         playButton.main();
         exitButton.main();
         settingsButton.main();

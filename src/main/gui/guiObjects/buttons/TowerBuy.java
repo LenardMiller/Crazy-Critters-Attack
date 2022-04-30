@@ -106,7 +106,7 @@ public class TowerBuy extends Button {
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
             displayTurretInfo(p, TOWER_TYPE);
             if (inputHandler.leftMousePressedPulse && alive && !paused) {
-                action();
+                pressIn();
                 if (money >= price) sprite = spritePressed;
             }
         }
@@ -115,7 +115,7 @@ public class TowerBuy extends Button {
     }
 
     @Override
-    public void action() {
+    public void pressIn() {
         if (money < price) depressed = false;
         else depressed = !depressed;
         //if already holding, stop

@@ -27,7 +27,7 @@ public class TargetPriority extends Button {
     }
 
     @Override
-    public void action() {
+    public void pressIn() {
         selection.changePriority();
     }
 }

@@ -45,7 +45,7 @@ public class PlayButton extends Button {
     }
 
     @Override
-    public void action() {
+    public void pressIn() {
         if (p.frameCount > timer) {
             playingLevel = true;
             Level level = levels[currentLevel];

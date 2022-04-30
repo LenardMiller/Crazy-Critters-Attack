@@ -43,7 +43,7 @@ public class WallBuy extends Button {
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
             if (inputHandler.leftMouseReleasedPulse && timer > 20) {
                 timer = 0;
-                action();
+                pressIn();
                 sprite = spritePressed;
             }
         }
@@ -52,7 +52,7 @@ public class WallBuy extends Button {
     }
 
     @Override
-    public void action() {
+    public void pressIn() {
         depressed = !depressed;
         selection.name = "null";
         //if already holding, stop
