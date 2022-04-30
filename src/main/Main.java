@@ -11,6 +11,10 @@ import main.gui.*;
 import main.gui.guiObjects.PopupText;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
+import main.gui.inGame.*;
+import main.gui.notInGame.LevelSelectGui;
+import main.gui.notInGame.LoadingGui;
+import main.gui.notInGame.TitleGui;
 import main.levelStructure.*;
 import main.misc.*;
 import main.particles.Particle;
@@ -71,14 +75,16 @@ public class Main extends PApplet {
     public static InGameGui inGameGui;
     public static LevelBuilderGui levelBuilderGui;
     public static PauseGui pauseGui;
-    public static LevelSelectGui levelSelectGui;
     public static SettingsGui settingsGui;
+
+    public static LevelSelectGui levelSelectGui;
     public static LoadingGui loadingGui;
+    public static TitleGui titleGui;
 
     /** can't be final because created by PApplet */
     public static PFont veryLargeFont, largeFont, mediumLargeFont, mediumFont, smallFont;
 
-    /** in-game, level select, loading */
+    /** in-game, level select, loading, title */
     public static int screen = 2;
     public static int money = 100;
     public static int connectWallQueues;
@@ -180,6 +186,7 @@ public class Main extends PApplet {
         levels = new Level[5];
         //guis
         loadingGui = new LoadingGui(this, veryLargeFont);
+//        titleGui = new TitleGui(this);
         //matrix
         float screenRatio = width / (float) height;
         float boardRatio = BOARD_WIDTH / (float) BOARD_HEIGHT;
@@ -279,6 +286,7 @@ public class Main extends PApplet {
         if (screen == 0) drawInGame();
         if (screen == 1) drawLevelSelect();
         if (screen == 2) drawLoading();
+        if (screen == 3) drawTitle();
         if (settings) settingsGui.main();
         keyBinds.menuKeys();
         //sound stuff
@@ -369,6 +377,8 @@ public class Main extends PApplet {
     }
 
     private void drawLoading() { loadingGui.main(); }
+
+    private void drawTitle() { if (!settings) titleGui.main(); }
 
     /** Runs all the in-game stuff. */
     private void drawObjects() {

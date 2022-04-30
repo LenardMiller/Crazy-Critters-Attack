@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.gui.TowerInfo.*;
+import static main.gui.inGame.TowerInfo.*;
 import static main.sound.SoundUtilities.playSound;
 
 public class TowerBuy extends Button {

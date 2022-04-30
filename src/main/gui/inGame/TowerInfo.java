@@ -1,4 +1,4 @@
-package main.gui;
+package main.gui.inGame;
 
 import processing.core.PApplet;
 import processing.core.PVector;

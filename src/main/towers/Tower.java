@@ -5,7 +5,7 @@ import main.damagingThings.arcs.RedArc;
 import main.damagingThings.projectiles.Flame;
 import main.damagingThings.shockwaves.FireShockwave;
 import main.damagingThings.shockwaves.NuclearShockwave;
-import main.gui.InGameGui;
+import main.gui.inGame.InGameGui;
 import main.gui.guiObjects.PopupText;
 import main.misc.Tile;
 import main.particles.Debris;

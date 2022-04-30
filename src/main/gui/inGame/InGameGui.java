@@ -1,4 +1,4 @@
-package main.gui;
+package main.gui.inGame;
 
 import main.gui.guiObjects.GuiObject;
 import main.gui.guiObjects.UpgradeIcon;

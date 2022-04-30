@@ -1,6 +1,7 @@
-package main.gui;
+package main.gui.notInGame;
 
 import main.Main;
+import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
 
@@ -13,11 +14,9 @@ public class LevelSelectGui {
 
     private static MenuButton[] levelSelectButtons;
     private static MenuButton settingsMenu;
-    private static MenuButton exitGame;
+    private static MenuButton goToTitle;
 
-    /**
-     * Exists so LevelSelectScreen and SelectLevel aren't pressed at the same time
-     */
+    /** Exists so LevelSelectScreen and SelectLevel aren't pressed at the same time */
     public static int delay;
 
     /**
@@ -32,7 +31,7 @@ public class LevelSelectGui {
     private void build() {
         levelSelectButtons = new MenuButton[levels.length];
         settingsMenu = new MenuButton(P, P.width/2f, P.height-100 - 50);
-        exitGame = new MenuButton(P, P.width/2f, P.height-100);
+        goToTitle = new MenuButton(P, P.width/2f, P.height-100);
         float factor = (levelSelectButtons.length/2f) - 0.5f;
         for (int i = 0; i < levelSelectButtons.length; i++) {
             levelSelectButtons[i] = new MenuButton(P, P.width/2f, P.height/2f + (i-factor)*50);
@@ -49,9 +48,8 @@ public class LevelSelectGui {
             SettingsGui.delay = 1;
             if (settings) closeSettingsMenu();
             else settings = true;
-        } if (exitGame.isPressed()) {
-            paused = false;
-            P.exit();
+        } if (goToTitle.isPressed()) {
+            screen = 3;
         }
         for (int i = 0; i < levelSelectButtons.length; i++) {
             if (levelSelectButtons[i].isPressed()) {
@@ -82,7 +80,7 @@ public class LevelSelectGui {
         }
         settingsMenu.main();
         P.text("Settings", settingsMenu.position.x, settingsMenu.position.y + offsetY);
-        exitGame.main();
-        P.text("Quit", exitGame.position.x, exitGame.position.y + offsetY);
+        goToTitle.main();
+        P.text("Back to Title", goToTitle.position.x, goToTitle.position.y + offsetY);
     }
 }

@@ -1,6 +1,8 @@
-package main.gui;
+package main.gui.inGame;
 
 import main.Main;
+import main.gui.notInGame.LevelSelectGui;
+import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
 import processing.core.PVector;

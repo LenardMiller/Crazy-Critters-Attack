@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.damagingThings.arcs.OrangeArc;
 import main.damagingThings.arcs.RedArc;
-import main.gui.Selection;
+import main.gui.inGame.Selection;
 import main.gui.guiObjects.PopupText;
 import main.misc.IntVector;
 import main.misc.Tile;

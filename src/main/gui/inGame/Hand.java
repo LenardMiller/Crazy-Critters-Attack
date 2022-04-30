@@ -1,4 +1,4 @@
-package main.gui;
+package main.gui.inGame;
 
 import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
@@ -14,7 +14,7 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.gui.TowerInfo.displayTurretInfo;
+import static main.gui.inGame.TowerInfo.displayTurretInfo;
 import static main.misc.Utilities.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;

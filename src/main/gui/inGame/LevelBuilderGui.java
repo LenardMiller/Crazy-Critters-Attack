@@ -1,4 +1,4 @@
-package main.gui;
+package main.gui.inGame;
 
 import main.gui.guiObjects.buttons.TileSelect;
 import processing.core.PApplet;
