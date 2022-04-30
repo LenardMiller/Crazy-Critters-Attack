@@ -14,6 +14,7 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
@@ -23,16 +24,6 @@ import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Turret extends Tower {
-
-    @FunctionalInterface
-    public interface InfoDisplay {
-        void display(int offset);
-    }
-
-    @FunctionalInterface
-    public interface StatsDisplay {
-        void display(int offset);
-    }
 
     public boolean hasPriority;
     public int pjSpeed;
@@ -53,8 +44,8 @@ public abstract class Turret extends Tower {
     public String[] upgradeDescB;
     public String[] upgradeDescC;
     public String[] titleLines;
-    public InfoDisplay infoDisplay;
-    public StatsDisplay statsDisplay;
+    public Consumer<Integer> infoDisplay;
+    public Consumer<Integer> statsDisplay;
 
     /** 0: Idle, 1: Fire, 2: Load */
     protected int state;

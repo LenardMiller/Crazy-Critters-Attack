@@ -189,7 +189,7 @@ public class Selection {
         P.textFont(largeFont);
 
         int offset = displayTitleAndGetOffset(P, turret.titleLines);
-        turret.infoDisplay.display(offset);
+        turret.infoDisplay.accept(offset);
 
         return offset;
     }
@@ -257,7 +257,7 @@ public class Selection {
         P.textAlign(LEFT);
         P.textFont(mediumFont);
 
-        turret.statsDisplay.display(offset);
+        turret.statsDisplay.accept(offset);
     }
 
     private void upgradeIcons() {
