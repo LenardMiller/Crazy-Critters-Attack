@@ -1,6 +1,6 @@
 package main.gui.notInGame;
 
-import main.Main;
+import main.Game;
 import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
@@ -49,15 +49,15 @@ public class LevelSelectGui {
             if (settings) closeSettingsMenu();
             else settings = true;
         } if (goToTitle.isPressed()) {
-            screen = 3;
+            screen = Screen.Title;
         }
         for (int i = 0; i < levelSelectButtons.length; i++) {
             if (levelSelectButtons[i].isPressed()) {
                 currentLevel = i;
-                Main.resetGame(P);
+                Game.reset(P);
                 paused = false;
                 alive = true;
-                screen = 0;
+                screen = Screen.InGame;
             }
         }
     }

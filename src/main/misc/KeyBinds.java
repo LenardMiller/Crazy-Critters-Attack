@@ -43,15 +43,18 @@ public class KeyBinds {
         boolean pause = keysPressed.getPressedPulse('|');
 
         if (pause) {
-            if (screen == 0) { //in game
-                playSound(sounds.get("clickOut"), 1, 1);
-                if (settings) closeSettingsMenu();
-                else paused = !paused;
-            } else if (screen == 1) { //level select
-                if (settings) {
+            switch (screen) {
+                case InGame:
                     playSound(sounds.get("clickOut"), 1, 1);
-                    settings = false;
-                }
+                    if (settings) closeSettingsMenu();
+                    else paused = !paused;
+                    break;
+                case LevelSelect:
+                    if (settings) {
+                        playSound(sounds.get("clickOut"), 1, 1);
+                        settings = false;
+                    }
+                    break;
             }
         }
     }

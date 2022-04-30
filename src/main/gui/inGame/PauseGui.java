@@ -1,6 +1,6 @@
 package main.gui.inGame;
 
-import main.Main;
+import main.Game;
 import main.gui.notInGame.LevelSelectGui;
 import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
@@ -81,13 +81,13 @@ public class PauseGui {
             paused = !paused;
         } if (restartLevel.isPressed()) {
             paused = false;
-            Main.resetGame(P);
+            Game.reset(P);
         } if (levelSelect.isPressed()) {
-            Main.resetGame(P);
+            Game.reset(P);
             paused = false;
             alive = true;
             LevelSelectGui.delay = 1;
-            screen = 1;
+            screen = Screen.LevelSelect;
         } if (settingsMenuScreen.isPressed()) {
             SettingsGui.delay = 1;
             if (settings) closeSettingsMenu();

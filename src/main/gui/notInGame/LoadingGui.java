@@ -1,5 +1,6 @@
 package main.gui.notInGame;
 
+import main.Game;
 import main.Main;
 import main.gui.SettingsGui;
 import main.gui.notInGame.LevelSelectGui;
@@ -71,6 +72,7 @@ public class LoadingGui {
                 Main.levelSelectGui = new LevelSelectGui(P);
                 Main.settingsGui = new SettingsGui(P);
                 Main.titleGui = new TitleGui(P);
+                Main.game = new Game(P);
                 break;
             default:
                 System.out.println("MAX_PROGRESS is too large");
@@ -79,7 +81,7 @@ public class LoadingGui {
         progress = Math.min(progress + 1, MAX_PROGRESS);
         if (progress == MAX_PROGRESS) {
             darkLevel += DARK_CHANGE;
-            if (darkLevel > 255) Main.screen = 3;
+            if (darkLevel > 255) Main.screen = Main.Screen.Title;
         }
     }
 

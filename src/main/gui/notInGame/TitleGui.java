@@ -42,7 +42,7 @@ public class TitleGui {
             paused = false;
             p.exit();
         } if (playButton.isPressed()) {
-            Main.screen = 1;
+            Main.screen = Main.Screen.LevelSelect;
         }
     }
 
