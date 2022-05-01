@@ -10,7 +10,7 @@ import java.awt.*;
 public class RedArc extends Arc {
 
     public RedArc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
-                  int priority) {
+                  Turret.Priority priority) {
         super(p, startX, startY, turret, damage, maxLength, maxDistance, priority);
         lineColor = Color.red;
         particleType = "energy";

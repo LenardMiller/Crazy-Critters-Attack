@@ -25,11 +25,25 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Turret extends Tower {
 
+    public enum Priority {
+        Close("closest", 0),
+        Far("farthest", 1),
+        Strong("most HP", 2),
+        Weak("least hp", 3),
+        None("", -1);
+
+        public final int id;
+        public final String text;
+
+        Priority(String name, int id) {
+            this.text = name;
+            this.id = id;
+        }
+    }
+
     public boolean hasPriority;
     public int pjSpeed;
     public int range;
-    /** Close, far, most HP, least HP */
-    public int priority;
     public int pierce;
     public int killsTotal;
     public int damageTotal;
@@ -46,6 +60,8 @@ public abstract class Turret extends Tower {
     public String[] titleLines;
     public Consumer<Integer> infoDisplay;
     public Consumer<Integer> statsDisplay;
+    /** 0: Close, 1: far, 2: most HP, 3: least HP */
+    public Priority priority = Priority.Close;
 
     /** 0: Idle, 1: Fire, 2: Load */
     protected int state;
@@ -109,7 +125,7 @@ public abstract class Turret extends Tower {
         //1: far
         //2: strong
         float finalDist;
-        if (priority == 0) finalDist = 1000000;
+        if (priority == Priority.Close) finalDist = 1000000;
         else finalDist = 0;
         float maxHp = -1;
         Enemy e = null;
@@ -119,30 +135,36 @@ public abstract class Turret extends Tower {
                 float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
                 float dist = sqrt(sq(x) + sq(y));
                 if (enemy.onScreen() && dist < getRange()) {
-                    if (priority == 0 && dist < finalDist) { //close
-                        e = enemy;
-                        finalDist = dist;
-                    } else if (priority == 1 && dist > finalDist) { //far
-                        e = enemy;
-                        finalDist = dist;
-                    } else if (priority == 2) {
-                        if (enemy.maxHp > maxHp || maxHp == -1) { //strong
+                    switch (priority) {
+                        case Close:
+                            if (dist >= finalDist) break;
                             e = enemy;
                             finalDist = dist;
-                            maxHp = enemy.maxHp;
-                        } else if (enemy.maxHp == maxHp && dist < finalDist) { //strong -> close
+                            break;
+                        case Far:
+                            if (dist <= finalDist) break;
                             e = enemy;
                             finalDist = dist;
-                        }
-                    } else if (priority == 3) {
-                        if (enemy.maxHp < maxHp || maxHp == -1) { //weak
-                            e = enemy;
-                            finalDist = dist;
-                            maxHp = enemy.maxHp;
-                        } else if (enemy.maxHp == maxHp && dist < finalDist) { //weak -> close
-                            e = enemy;
-                            finalDist = dist;
-                        }
+                            break;
+                        case Strong:
+                            if (enemy.maxHp > maxHp || maxHp == -1) { //strong
+                                e = enemy;
+                                finalDist = dist;
+                                maxHp = enemy.maxHp;
+                            } else if (enemy.maxHp == maxHp && dist < finalDist) { //strong -> close
+                                e = enemy;
+                                finalDist = dist;
+                            }
+                            break;
+                        case Weak:
+                            if (enemy.maxHp < maxHp || maxHp == -1) { //weak
+                                e = enemy;
+                                finalDist = dist;
+                                maxHp = enemy.maxHp;
+                            } else if (enemy.maxHp == maxHp && dist < finalDist) { //weak -> close
+                                e = enemy;
+                                finalDist = dist;
+                            }
                     }
                 }
             }

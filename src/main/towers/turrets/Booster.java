@@ -135,10 +135,10 @@ public class Booster extends Turret {
         if (p.random(30) < 1 && name.equals("explosiveBooster")) {
             if (p.random(10) < 1) {
                 arcs.add(new RedArc(p, tile.position.x - (size.x / 2), tile.position.y - (size.y / 2),
-                  this, 0, 1, (int) p.random(20, 100), -1));
+                  this, 0, 1, (int) p.random(20, 100), Priority.None));
             } else {
                 arcs.add(new OrangeArc(p, tile.position.x - (size.x / 2), tile.position.y - (size.y / 2),
-                  this, 0, 1, (int) p.random(20, 100), -1, 5));
+                  this, 0, 1, (int) p.random(20, 100), Priority.None, 5));
             }
         }
     }

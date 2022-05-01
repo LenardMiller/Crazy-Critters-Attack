@@ -164,11 +164,11 @@ public abstract class Tower {
         if (radius > 600) arcCount = 16;
         for (int i = 0; i < arcCount; i++) {
             arcs.add(new OrangeArc(p, x, y, null, value / 8, radius / 10, radius * 2,
-              -1, 50));
+              Turret.Priority.None, 50));
         }
         for (int i = 0; i < arcCount / 3; i++) {
             arcs.add(new RedArc(p, x, y, null, value / 8, radius / 10, radius * 2,
-              -1));
+              Turret.Priority.None));
         }
         if (radius > 200) playSoundRandomSpeed(p, sounds.get("hugeExplosion"), 1);
         else playSoundRandomSpeed(p, sounds.get("smallExplosion"), 1);

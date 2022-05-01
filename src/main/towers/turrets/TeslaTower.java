@@ -74,13 +74,13 @@ public class TeslaTower extends Turret {
             shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, 100, damage, this));
             //damaging arcs
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, getDamage() / 2, arcLength, 300, i, targetEnemy));
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, getDamage() / 2, arcLength, 300, Priority.values()[i], targetEnemy));
             } //decorative arcs
             for (int i = 0; i < p.random(5, 10); i++) {
-                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, 0, arcLength, 100, -1));
+                arcs.add(new Arc(p, targetPosition.x, targetPosition.y, this, 0, arcLength, 100, Priority.None));
             } //decorative self arcs
             for (int i = 0; i < 3; i++) {
-                arcs.add(new Arc(p, myPosition.x, myPosition.y, this, 0, arcLength, 50, -1));
+                arcs.add(new Arc(p, myPosition.x, myPosition.y, this, 0, arcLength, 50, Priority.None));
             }
         } else if (highPower) {
             playSoundRandomSpeed(p, fireSound, 1);

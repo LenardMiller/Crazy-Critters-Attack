@@ -42,7 +42,7 @@ public class WaveMotion extends Turret {
         material = "darkMetal";
         price = WAVE_MOTION_PRICE;
         value = price;
-        priority = 1; //far
+        priority = Priority.Far;
         titleLines = new String[]{"Death Beam"};
         infoDisplay = (o) -> selection.setTextPurple("Piercing", o);
 

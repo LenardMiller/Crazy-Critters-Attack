@@ -24,7 +24,7 @@ public class ElectricMissile extends MagicMissile {
     @Override
     public void die() {
         topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"yellowPuff"));
-        arcs.add(new YellowArc(p, position.x, position.y, turret, 0, 0, 75, -1));
+        arcs.add(new YellowArc(p, position.x, position.y, turret, 0, 0, 75, Turret.Priority.None));
         projectiles.remove(this);
     }
 }

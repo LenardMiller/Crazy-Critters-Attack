@@ -31,7 +31,7 @@ public class Crossbow extends Turret {
         material = "wood";
         price = CROSSBOW_PRICE;
         value = price;
-        priority = 1; //last
+        priority = Priority.Far;
         titleLines = new String[]{"Crossbow"};
 
         loadSprites();

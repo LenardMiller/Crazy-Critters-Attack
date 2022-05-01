@@ -73,7 +73,7 @@ public class MagicMissileer extends Turret {
         material = "crystal";
         price = MAGIC_MISSILEER_PRICE;
         value = price;
-        priority = 2; //strong
+        priority = Priority.Strong;
         titleLines = new String[]{"Magic Missile", "Launcher"};
         infoDisplay = (o) -> {
             selection.setTextPurple("Homing", o);
@@ -164,7 +164,7 @@ public class MagicMissileer extends Turret {
         spawnProjectiles(new PVector(0,0), angle);
         if (name.equals("electricMissleer")) {
             for (int i = 0; i < 3; i++) {
-                arcs.add(new YellowArc(p, getCenter().x, getCenter().y, this, 0, 0, (int) p.random(20, 100), -1));
+                arcs.add(new YellowArc(p, getCenter().x, getCenter().y, this, 0, 0, (int) p.random(20, 100), Priority.None));
             }
         }
     }
@@ -248,7 +248,7 @@ public class MagicMissileer extends Turret {
                 }
 
                 if (p.random(25) < 1 && state == 0)
-                    arcs.add(new YellowArc(p, getCenter().x, getCenter().y, this, 0, 0, (int) p.random(20, 100), -1));
+                    arcs.add(new YellowArc(p, getCenter().x, getCenter().y, this, 0, 0, (int) p.random(20, 100), Priority.None));
             }
             if (specialAngle < TWO_PI) specialAngle += specialRotationSpeed;
             else specialAngle = 0;

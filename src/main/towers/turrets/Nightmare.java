@@ -30,7 +30,7 @@ public class Nightmare extends Turret {
         material = "darkMetal";
         price = 300;
         value = NIGHTMARE_PRICE;
-        priority = 2; //strong
+        priority = Priority.Strong;
         titleLines = new String[]{"Nightmare", "Shotgun"};
         infoDisplay = (o) -> {
             selection.setTextPurple("Decay", o);

@@ -90,7 +90,8 @@ public class Selection {
         }
     }
 
-    private void clickOff() { //desselect, hide stuff
+    /** deselect, hide stuff */
+    private void clickOff() {
         if (turret != null) {
             if (inputHandler.leftMousePressedPulse && matrixMousePosition.x < BOARD_WIDTH && (matrixMousePosition.x > turret.tile.position.x ||
                     matrixMousePosition.x < turret.tile.position.x - turret.size.x || matrixMousePosition.y > turret.tile.position.y ||
@@ -152,7 +153,7 @@ public class Selection {
 
     private void display() {
         int speed = turret.pjSpeed;
-        int offset = 0;
+        int offset;
         purpleCount = 0;
 
         background();
@@ -323,16 +324,11 @@ public class Selection {
     }
 
     private void priorityButton() {
-        String priority = "close";
         P.textFont(largeFont);
         P.textAlign(CENTER);
-        if (turret.priority == 0) priority = "closest";
-        else if (turret.priority == 1) priority = "farthest";
-        else if (turret.priority == 2) priority = "most HP";
-        else if (turret.priority == 3) priority = "least HP";
         if (turret.hasPriority) {
             P.fill(75, 45, 0, 254);
-            P.text("Target: " + priority, 1000, 843);
+            P.text("Target: " + turret.priority.text, 1000, 843);
         }
     }
 
@@ -354,8 +350,8 @@ public class Selection {
     public void changePriority() {
         if (name.equals("null") || turret == null) return;
         playSound(selection.CLICK_OUT, 1, 1);
-        if (turret.priority == 3) turret.priority = 0;
-        else turret.priority++;
+        if (turret.priority == Turret.Priority.Weak) turret.priority = Turret.Priority.Close;
+        else turret.priority = Turret.Priority.values()[turret.priority.id + 1];
     }
 
     public void upgradeBottom() {

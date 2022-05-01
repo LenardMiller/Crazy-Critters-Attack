@@ -39,7 +39,7 @@ public class EnergyBlaster extends Turret{
         material = "darkMetal";
         price = ENERGY_BLASTER_PRICE;
         value = price;
-        priority = 2; //strong
+        priority = Priority.Strong;
         titleLines = new String[]{"Energy Blaster"};
         infoDisplay = (o) -> selection.setTextPurple("Splash", o);
 

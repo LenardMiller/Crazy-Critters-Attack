@@ -18,7 +18,7 @@ public class Arc {
     private final int DAMAGE;
     private final int MAX_LENGTH;
     private final int MAX_DISTANCE;
-    private final int PRIORITY;
+    private final Turret.Priority PRIORITY;
     private final ArrayList<StartEndPoints> BIG_POINTS;
     private final PApplet P;
     private final PVector START_POSITION;
@@ -31,18 +31,14 @@ public class Arc {
     protected int variation;
     protected int weight;
 
-    /**
-     * Used by Tesla Tower.
-     */
-    public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance, int priority) {
+    /** Used by Tesla Tower. */
+    public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance, Turret.Priority priority) {
         this(p, startX, startY, turret, damage, maxLength, maxDistance, priority, null);
     }
 
-    /**
-     * Used by lightning caller.
-     */
+    /** Used by lightning caller. */
     public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
-               int priority, Enemy blacklistedEnemy) {
+               Turret.Priority priority, Enemy blacklistedEnemy) {
         this.P = p;
         START_POSITION = new PVector(startX, startY);
         this.TURRET = turret;
@@ -92,7 +88,7 @@ public class Arc {
             BIG_POINTS.add(new StartEndPoints(P, new PVector(mainEnemy.position.x, mainEnemy.position.y)));
             int x = 2; //no clue
             for (int i = 1; i < MAX_LENGTH; i++) {
-                Enemy jumpEnemy = getTargetEnemy(BIG_POINTS.get(x - 1).position, 0, hitEnemies);
+                Enemy jumpEnemy = getTargetEnemy(BIG_POINTS.get(x - 1).position, Turret.Priority.Close, hitEnemies);
                 if (jumpEnemy != null) {
                     BIG_POINTS.add(new StartEndPoints(P, jumpEnemy.position));
                     damageEnemy(jumpEnemy, DAMAGE, TURRET);
@@ -116,14 +112,14 @@ public class Arc {
         enemy.damageWithoutBuff(damage, turret, particleType, new PVector(0, 0), true);
     }
 
-    private Enemy getTargetEnemy(PVector position, int targeting, ArrayList<Enemy> enemiesRepeat) {
+    private Enemy getTargetEnemy(PVector position, Turret.Priority targeting, ArrayList<Enemy> enemiesRepeat) {
         //-1: none
         //0: close
         //1: far
         //2: strong
-        if (targeting == -1) return null;
+        if (targeting == Turret.Priority.None) return null;
         float dist;
-        if (targeting == 0) dist = 1000000;
+        if (targeting == Turret.Priority.Close) dist = 1000000;
         else dist = 0;
         float maxHp = 0;
         Enemy e = null;
@@ -142,20 +138,26 @@ public class Arc {
                 float y = abs(position.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
                 if (t > MAX_DISTANCE) continue;
-                if (targeting == 0 && t < dist) { //close
-                    e = enemy;
-                    dist = t;
-                }
-                if (targeting == 1 && t > dist) { //far
-                    e = enemy;
-                    dist = t;
-                }
-                if (targeting == 2) if (enemy.maxHp > maxHp) { //strong
-                    e = enemy;
-                    maxHp = enemy.maxHp;
-                } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
-                    e = enemy;
-                    dist = t;
+                switch (PRIORITY) {
+                    case Close:
+                        if (t >= dist) break;
+                        e = enemy;
+                        dist = t;
+                        break;
+                    case Far:
+                        if (t <= dist) break;
+                        e = enemy;
+                        dist = t;
+                        break;
+                    case Strong:
+                        if (enemy.maxHp > maxHp) { //strong
+                            e = enemy;
+                            maxHp = enemy.maxHp;
+                        } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                            e = enemy;
+                            dist = t;
+                        }
+                        break;
                 }
             }
         }

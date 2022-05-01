@@ -20,6 +20,7 @@ import main.enemies.shootingEnemies.IceMonstrosity;
 import main.enemies.shootingEnemies.SnowAntlion;
 import main.levelStructure.Level;
 import main.towers.Tower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -167,7 +168,7 @@ public class KeyBinds {
         if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 20, false));
         if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 30, true));
         if (magicMissle) projectiles.add(new MagicMissile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 0, new PVector(matrixMousePosition.x,matrixMousePosition.y)));
-        if (arc) arcs.add(new Arc(p, matrixMousePosition.x, matrixMousePosition.y, null, 35, 5, 500, 0));
+        if (arc) arcs.add(new Arc(p, matrixMousePosition.x, matrixMousePosition.y, null, 35, 5, 500, Turret.Priority.Close));
         if (needle) projectiles.add(new Needle(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1,150, 500));
         if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
