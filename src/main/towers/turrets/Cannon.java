@@ -1,8 +1,8 @@
 package main.towers.turrets;
 
-import main.damagingThings.projectiles.CannonBall;
-import main.damagingThings.projectiles.Dynamite;
-import main.damagingThings.projectiles.FragBall;
+import main.projectiles.CannonBall;
+import main.projectiles.Dynamite;
+import main.projectiles.FragBall;
 import main.misc.Tile;
 import main.particles.MiscParticle;
 import processing.core.PApplet;

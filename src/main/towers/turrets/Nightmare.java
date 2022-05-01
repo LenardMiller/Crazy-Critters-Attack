@@ -1,6 +1,6 @@
 package main.towers.turrets;
 
-import main.damagingThings.projectiles.Needle;
+import main.projectiles.Needle;
 import main.misc.Tile;
 import main.particles.MiscParticle;
 import processing.core.PApplet;

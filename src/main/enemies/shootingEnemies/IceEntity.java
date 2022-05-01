@@ -1,6 +1,6 @@
 package main.enemies.shootingEnemies;
 
-import main.damagingThings.projectiles.enemyProjeciles.IceCrystal;
+import main.projectiles.enemyProjeciles.IceCrystal;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;

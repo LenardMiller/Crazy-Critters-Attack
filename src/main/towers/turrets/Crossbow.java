@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
-import main.damagingThings.projectiles.Bolt;
-import main.damagingThings.projectiles.ReinforcedBolt;
+import main.projectiles.Bolt;
+import main.projectiles.ReinforcedBolt;
 import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PVector;

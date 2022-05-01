@@ -1,6 +1,6 @@
 package main.misc;
 
-import main.damagingThings.projectiles.Flame;
+import main.projectiles.Flame;
 import main.particles.Debris;
 import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;

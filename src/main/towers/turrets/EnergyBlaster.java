@@ -1,8 +1,8 @@
 package main.towers.turrets;
 
-import main.damagingThings.projectiles.DarkBlast;
-import main.damagingThings.projectiles.EnergyBlast;
-import main.damagingThings.projectiles.NuclearBlast;
+import main.projectiles.DarkBlast;
+import main.projectiles.EnergyBlast;
+import main.projectiles.NuclearBlast;
 import main.misc.Tile;
 import main.particles.MiscParticle;
 import processing.core.PApplet;

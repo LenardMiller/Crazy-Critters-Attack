@@ -1,6 +1,6 @@
 package main.enemies.shootingEnemies;
 
-import main.damagingThings.projectiles.enemyProjeciles.Snowball;
+import main.projectiles.enemyProjeciles.Snowball;
 import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PVector;

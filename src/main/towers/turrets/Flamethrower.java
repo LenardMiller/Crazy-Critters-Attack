@@ -1,8 +1,8 @@
 package main.towers.turrets;
 
-import main.damagingThings.projectiles.BlueFlame;
-import main.damagingThings.projectiles.Flame;
-import main.damagingThings.shockwaves.FireShockwave;
+import main.projectiles.BlueFlame;
+import main.projectiles.Flame;
+import main.projectiles.shockwaves.FireShockwave;
 import main.enemies.Enemy;
 import main.misc.Tile;
 import main.sound.FadeSoundLoop;

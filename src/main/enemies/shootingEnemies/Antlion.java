@@ -1,6 +1,6 @@
 package main.enemies.shootingEnemies;
 
-import main.damagingThings.projectiles.enemyProjeciles.Sandball;
+import main.projectiles.enemyProjeciles.Sandball;
 import main.particles.Debris;
 import processing.core.PApplet;
 import processing.core.PVector;

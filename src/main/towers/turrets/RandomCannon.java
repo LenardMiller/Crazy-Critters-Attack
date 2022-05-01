@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
-import main.damagingThings.projectiles.Laundry;
-import main.damagingThings.projectiles.MiscProjectile;
+import main.projectiles.Laundry;
+import main.projectiles.MiscProjectile;
 import main.misc.Tile;
 import main.particles.MiscParticle;
 import processing.core.PApplet;

@@ -1,8 +1,8 @@
 package main;
 
 import main.buffs.Buff;
-import main.damagingThings.arcs.Arc;
-import main.damagingThings.projectiles.Projectile;
+import main.projectiles.arcs.Arc;
+import main.projectiles.Projectile;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.enemies.flyingEnemies.FlyingEnemy;

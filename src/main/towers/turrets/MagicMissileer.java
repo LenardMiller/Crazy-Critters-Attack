@@ -1,8 +1,8 @@
 package main.towers.turrets;
 
-import main.damagingThings.arcs.YellowArc;
-import main.damagingThings.projectiles.homing.ElectricMissile;
-import main.damagingThings.projectiles.homing.MagicMissile;
+import main.projectiles.arcs.YellowArc;
+import main.projectiles.homing.ElectricMissile;
+import main.projectiles.homing.MagicMissile;
 import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;

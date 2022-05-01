@@ -1,6 +1,6 @@
 package main.buffs;
 
-import main.damagingThings.arcs.YellowArc;
+import main.projectiles.arcs.YellowArc;
 import main.enemies.Enemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;

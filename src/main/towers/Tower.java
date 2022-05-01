@@ -1,10 +1,10 @@
 package main.towers;
 
-import main.damagingThings.arcs.OrangeArc;
-import main.damagingThings.arcs.RedArc;
-import main.damagingThings.projectiles.Flame;
-import main.damagingThings.shockwaves.FireShockwave;
-import main.damagingThings.shockwaves.NuclearShockwave;
+import main.projectiles.arcs.OrangeArc;
+import main.projectiles.arcs.RedArc;
+import main.projectiles.Flame;
+import main.projectiles.shockwaves.FireShockwave;
+import main.projectiles.shockwaves.NuclearShockwave;
 import main.gui.inGame.InGameGui;
 import main.gui.guiObjects.PopupText;
 import main.misc.Tile;

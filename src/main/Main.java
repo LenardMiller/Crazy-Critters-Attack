@@ -1,9 +1,9 @@
 package main;
 
 import main.buffs.Buff;
-import main.damagingThings.arcs.Arc;
-import main.damagingThings.projectiles.Projectile;
-import main.damagingThings.shockwaves.Shockwave;
+import main.projectiles.arcs.Arc;
+import main.projectiles.Projectile;
+import main.projectiles.shockwaves.Shockwave;
 import main.enemies.Enemy;
 import main.gui.*;
 import main.gui.guiObjects.PopupText;

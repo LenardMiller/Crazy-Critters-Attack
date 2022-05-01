@@ -1,8 +1,8 @@
 package main.towers.turrets;
 
-import main.damagingThings.projectiles.glue.Glue;
-import main.damagingThings.projectiles.glue.SpikeyGlue;
-import main.damagingThings.projectiles.glue.SplatterGlue;
+import main.projectiles.glue.Glue;
+import main.projectiles.glue.SpikeyGlue;
+import main.projectiles.glue.SplatterGlue;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;

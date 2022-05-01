@@ -1,6 +1,6 @@
 package main.towers.turrets;
 
-import main.damagingThings.shockwaves.SeismicShockwave;
+import main.projectiles.shockwaves.SeismicShockwave;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;
