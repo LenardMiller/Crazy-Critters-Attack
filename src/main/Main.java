@@ -24,15 +24,13 @@ import main.sound.SoundWithAlts;
 import main.sound.StackableSound;
 import main.sound.StartStopSoundLoop;
 import main.towers.Tower;
-import processing.core.PApplet;
-import processing.core.PFont;
-import processing.core.PImage;
-import processing.core.PVector;
+import processing.core.*;
 import processing.sound.Sound;
 import processing.sound.SoundFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import static java.lang.Character.toLowerCase;
 import static main.misc.DataControl.loadSettings;
@@ -40,7 +38,11 @@ import static main.misc.DataControl.loadSettings;
 public class Main extends PApplet {
 
     public enum Screen {
-        InGame, LevelSelect, Loading, Title;
+        InGame,
+        LevelSelect,
+        Loading,
+        Title,
+        Exit
     }
 
     public static Tile.TileDS tiles;
@@ -122,14 +124,23 @@ public class Main extends PApplet {
             WAVE_MOTION_PRICE =     10000,
             NIGHTMARE_PRICE =       9000;
 
+    //sprites
     public static HashMap<String, PImage> staticSprites = new HashMap<>();
     public static HashMap<String, PImage[]> animatedSprites = new HashMap<>();
 
+    //sound
     public static HashMap<String, SoundFile> sounds = new HashMap<>();
     public static HashMap<String, StartStopSoundLoop> startStopSoundLoops = new HashMap<>();
     public static HashMap<String, FadeSoundLoop> fadeSoundLoops = new HashMap<>();
     public static HashMap<String, SoundWithAlts> soundsWithAlts = new HashMap<>();
     public static HashMap<String, StackableSound> stackableSounds = new HashMap<>();
+
+    //transitions
+    private static final int TRANS_SIZE = 1700;
+    private static final float TRANS_SPEED = 250;
+    private static PVector transCenter;
+    private static PVector transRotation;
+    private static Screen targetScreen;
 
     //pathfinding stuff
     public static final int GRID_WIDTH = 1100, GRID_HEIGHT = 1100;
@@ -141,6 +152,8 @@ public class Main extends PApplet {
     public static Node[] end;
     public static AStar pathFinder;
     public static float maxCost, minCost;
+
+    public static Random random = new Random();
 
     public static void main(String[] args) {
         loadSettings();
@@ -182,7 +195,6 @@ public class Main extends PApplet {
         levels = new Level[5];
         //guis
         loadingGui = new LoadingGui(this, veryLargeFont);
-//        titleGui = new TitleGui(this);
         //matrix
         float screenRatio = width / (float) height;
         float boardRatio = BOARD_WIDTH / (float) BOARD_HEIGHT;
@@ -195,8 +207,6 @@ public class Main extends PApplet {
             matrixOffset = (height - (BOARD_HEIGHT * matrixScale)) / 2;
         }
     }
-
-
 
     /**
      * From Processing.
@@ -230,9 +240,13 @@ public class Main extends PApplet {
             case Title:
                 if (!settings) titleGui.main();
                 break;
+            case Exit:
+                exit();
+                break;
         }
         if (settings) settingsGui.main();
         keyBinds.menuKeys();
+        drawTransition();
         //sound stuff
         sound.volume(globalVolume);
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
@@ -245,6 +259,50 @@ public class Main extends PApplet {
         for (KeyDS.KeyDSItem key : keysPressed.items) {
             key.pressedPulse = false;
             key.releasedPulse = false;
+        }
+    }
+
+    public static void transition(Screen screen, PVector direction) {
+        if (targetScreen == screen) return;
+        direction.add(PVector.fromAngle(random.nextFloat() * PI).setMag(0.1f));
+        transCenter = PVector.add(
+                direction.copy().setMag(TRANS_SIZE * -2),
+                new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f));
+        transRotation = PVector.sub(new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f), transCenter).normalize();
+        targetScreen = screen;
+    }
+
+    private void drawTransition() {
+        if (titleGui == null) return;
+
+        PVector edge = PVector.add(transCenter, transRotation.copy().setMag(TRANS_SIZE));
+        PVector p1 = PVector.add(edge, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE), 1));
+        PVector p2 = PVector.add(p1, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE * 2), 2));
+        PVector p3 = PVector.add(p2, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE * 2), 3));
+        PVector p4 = PVector.add(p3, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE * 2), 4));
+
+        PShape transBox = createShape();
+        transBox.beginShape();
+        transBox.fill(0);
+        transBox.noStroke();
+        transBox.vertex(p1.x, p1.y);
+        transBox.vertex(p2.x, p2.y);
+        transBox.vertex(p3.x, p3.y);
+        transBox.vertex(p4.x, p4.y);
+        transBox.endShape(PConstants.CLOSE);
+
+        shape(transBox, 0, 0);
+
+        transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
+
+        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
+                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
+                && targetScreen != screen) {
+            if (targetScreen == Screen.InGame || screen == Screen.InGame) {
+                Game.reset(this);
+                paused = false;
+            }
+            screen = targetScreen;
         }
     }
 

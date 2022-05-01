@@ -32,9 +32,7 @@ public class PauseGui {
         build();
     }
 
-    /**
-     * Creates buttons
-     */
+    /** Creates buttons */
     private void build() {
         resumeButton = new MenuButton(P, P.width/2f, (P.height/2f) - 75, () -> {
             paused = !paused;
@@ -44,11 +42,9 @@ public class PauseGui {
             Game.reset(P);
         });
         levelSelectButton = new MenuButton(P, P.width/2f, (P.height/2f) + 25, "Level Select", () -> {
-            Game.reset(P);
-            paused = false;
             alive = true;
             LevelSelectGui.delay = 1;
-            screen = Screen.LevelSelect;
+            transition(Screen.LevelSelect, new PVector(-1, 0));
         });
         settingsMenuButton = new MenuButton(P, P.width/2f, (P.height/2f) + 75, "Settings", () -> {
             SettingsGui.delay = 1;
@@ -56,8 +52,7 @@ public class PauseGui {
             else settings = true;
         });
         exitButton = new MenuButton(P, P.width/2f, (P.height/2f) + 125, "Quit", () -> {
-            paused = false;
-            P.exit();
+            transition(Screen.Exit, new PVector(0, 1));
         });
     }
 

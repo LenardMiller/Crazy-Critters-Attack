@@ -485,4 +485,11 @@ public class Utilities {
     public static IntVector getCenter(PApplet p) {
         return new IntVector(p.width / 2, p.height / 2);
     }
+
+    public static PVector turnRight(PVector vec, int times) {
+        for (int i = 0; i < times; i++) {
+            vec = new PVector(vec.y, -vec.x);
+        }
+        return vec;
+    }
 }

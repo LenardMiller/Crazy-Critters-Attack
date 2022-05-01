@@ -3,25 +3,24 @@ package main.gui.notInGame;
 import main.Game;
 import main.Main;
 import main.gui.SettingsGui;
-import main.gui.notInGame.LevelSelectGui;
 import main.misc.Utilities;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
+import processing.core.PVector;
 
+import static main.Main.transition;
 import static main.misc.SpriteLoader.*;
 import static main.sound.SoundLoader.loadSounds;
 
 public class LoadingGui {
 
-    private static final int MAX_PROGRESS = 10;
-    private static final int DARK_CHANGE = 6;
+    private static final int MAX_PROGRESS = 11;
 
     private final PApplet P;
     private final PFont FONT;
 
     private int progress;
-    private float darkLevel = 0;
 
     public LoadingGui(PApplet p, PFont font) {
         P = p;
@@ -74,21 +73,18 @@ public class LoadingGui {
                 Main.titleGui = new TitleGui(P);
                 Main.game = new Game(P);
                 break;
+            case 11:
+                //buffer
+                break;
             default:
                 System.out.println("MAX_PROGRESS is too large");
         }
 
         progress = Math.min(progress + 1, MAX_PROGRESS);
-        if (progress == MAX_PROGRESS) {
-            darkLevel += DARK_CHANGE;
-            if (darkLevel > 255) Main.screen = Main.Screen.Title;
-        }
+        if (progress == MAX_PROGRESS) transition(Main.Screen.Title, new PVector(0, -1));
     }
 
     private void display() {
-        P.fill(50);
-//        P.rect(0, 0, Main.GRID_WIDTH, Main.BOARD_WIDTH);
-
         P.fill(255);
         P.textFont(FONT);
         P.textAlign(PConstants.CENTER);
@@ -101,9 +97,5 @@ public class LoadingGui {
                 100, P.width - 100);
         P.line(100, Utilities.getCenter(P).y + 200, lineEnd, Utilities.getCenter(P).y + 200);
         P.strokeWeight(1);
-
-        P.noStroke();
-        P.fill(0, darkLevel);
-        P.rect(0, 0, P.width, P.height);
     }
 }

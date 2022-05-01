@@ -4,9 +4,9 @@ import main.Main;
 import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
+import processing.core.PVector;
 
-import static main.Main.paused;
-import static main.Main.settings;
+import static main.Main.*;
 import static main.misc.Utilities.closeSettingsMenu;
 
 public class TitleGui {
@@ -24,7 +24,7 @@ public class TitleGui {
 
     private void build() {
         playButton = new MenuButton(p, p.width / 2f, p.height * 0.5f, "Play", () -> {
-            Main.screen = Main.Screen.LevelSelect;
+            transition(Screen.LevelSelect, new PVector(1, 0));
         });
         settingsButton = new MenuButton(p, p.width /2f, p.height * 0.6f, "Settings", () -> {
             SettingsGui.delay = 1;
@@ -32,8 +32,7 @@ public class TitleGui {
             else settings = true;
         });
         exitButton = new MenuButton(p, p.width /2f, p.height * 0.7f, "Quit", () -> {
-            paused = false;
-            p.exit();
+            transition(Screen.Exit, new PVector(0, 1));
         });
     }
 

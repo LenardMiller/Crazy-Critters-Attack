@@ -4,6 +4,7 @@ import main.Game;
 import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.closeSettingsMenu;
@@ -36,7 +37,7 @@ public class LevelSelectGui {
             else settings = true;
         });
         goToTitle = new MenuButton(P, P.width/2f, P.height-100, "Back to Title", () -> {
-            screen = Screen.Title;
+            transition(Screen.Title, new PVector(-1, 0));
         });
         float factor = (levelSelectButtons.length/2f) - 0.5f;
         for (int i = 0; i < levelSelectButtons.length; i++) {
@@ -53,10 +54,9 @@ public class LevelSelectGui {
         for (int i = 0; i < levelSelectButtons.length; i++) {
             if (levelSelectButtons[i].isPressed()) {
                 currentLevel = i;
-                Game.reset(P);
                 paused = false;
                 alive = true;
-                screen = Screen.InGame;
+                transition(Screen.InGame, new PVector(1, 0));
             }
         }
     }
