@@ -14,12 +14,12 @@ import static processing.core.PConstants.HALF_PI;
 
 public class MagicMissile extends Projectile {
     
-    public int priority;
+    public Turret.Priority priority;
     private Enemy targetEnemy;
 
     private final PVector SPAWN_POSITION;
     
-    public MagicMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, int priority, PVector spawnPos) {
+    public MagicMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, Turret.Priority priority, PVector spawnPos) {
         super(p, x, y, angle, turret);
         this.SPAWN_POSITION = spawnPos;
         position = new PVector(x, y);
@@ -45,7 +45,7 @@ public class MagicMissile extends Projectile {
         //1: far
         //2: strong
         float dist;
-        if (priority == 0) dist = 1000000;
+        if (priority == Turret.Priority.Close) dist = 1000000;
         else dist = 0;
         float maxHp = 0;
         Enemy e = null;
@@ -55,20 +55,26 @@ public class MagicMissile extends Projectile {
                 float y = abs(SPAWN_POSITION.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
                 if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900) {
-                    if (priority == 0 && t < dist) { //close
-                        e = enemy;
-                        dist = t;
-                    }
-                    if (priority == 1 && t > dist) { //far
-                        e = enemy;
-                        dist = t;
-                    }
-                    if (priority == 2) if (enemy.maxHp > maxHp) { //strong
-                        e = enemy;
-                        maxHp = enemy.maxHp;
-                    } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
-                        e = enemy;
-                        dist = t;
+                    switch (priority) {
+                        case Close:
+                            if (t >= dist) break;
+                            e = enemy;
+                            dist = t;
+                            break;
+                        case Far:
+                            if (t <= dist) break;
+                            e = enemy;
+                            dist = t;
+                            break;
+                        case Strong:
+                            if (enemy.maxHp > maxHp) { //strong
+                                e = enemy;
+                                maxHp = enemy.maxHp;
+                            } else if (enemy.maxHp == maxHp && t < dist) { //strong -> close
+                                e = enemy;
+                                dist = t;
+                            }
+                            break;
                     }
                 }
             }

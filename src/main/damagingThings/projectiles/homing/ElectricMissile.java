@@ -10,7 +10,7 @@ import static main.Main.*;
 
 public class ElectricMissile extends MagicMissile {
 
-    public ElectricMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, int priority,
+    public ElectricMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, Turret.Priority priority,
                            PVector spawnPos, float effectDuration, float effectLevel) {
         super(p, x, y, angle, turret, damage, priority, spawnPos);
         trail = "nuclear";

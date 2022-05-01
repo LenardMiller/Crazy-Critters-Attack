@@ -124,37 +124,37 @@ public class MagicMissileer extends Turret {
             for (int i = 0; i < 12; i++) {
                 projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
                   p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
-                  getDamage(), (int)(p.random(0,2.99f)),tile.position));
+                  getDamage(), Turret.Priority.values()[(int) p.random(3)], tile.position));
             }
         } else if (name.equals("electricMissleer")) {
             projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), 0, tile.position, effectDuration, effectLevel));
+              getDamage(), Priority.Close, tile.position, effectDuration, effectLevel));
             projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), 1, tile.position, effectDuration, effectLevel));
+              getDamage(), Priority.Far, tile.position, effectDuration, effectLevel));
             projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), 2, tile.position, effectDuration, effectLevel));
+              getDamage(), Priority.Strong, tile.position, effectDuration, effectLevel));
             if (additionalMissile) {
                 projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-                  getDamage(), (int) (p.random(0, 2.99f)), tile.position, effectDuration, effectLevel));
+                  getDamage(), Turret.Priority.values()[(int) p.random(3)], tile.position, effectDuration, effectLevel));
             }
         } else {
             projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), 0, tile.position));
+              getDamage(), Priority.Close, tile.position));
             projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), 1, tile.position));
+              getDamage(), Priority.Far, tile.position));
             projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), 2, tile.position));
+              getDamage(), Priority.Strong, tile.position));
             if (additionalMissile) {
                 projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-                  getDamage(), (int) (p.random(0, 2.99f)), tile.position));
+                  getDamage(),Turret.Priority.values()[(int) p.random(3)], tile.position));
             }
         }
     }
