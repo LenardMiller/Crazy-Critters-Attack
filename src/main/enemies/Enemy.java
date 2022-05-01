@@ -50,6 +50,7 @@ public abstract class Enemy {
     public int pfSize;
     public int intersectingIceCount;
     public int[] attackDmgFrames;
+    /** something to do with glue */
     public int[] tempAttackDmgFrames;
     public boolean immobilized;
     public ArrayList<TurnPoint> trail;

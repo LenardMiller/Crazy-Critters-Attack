@@ -39,15 +39,18 @@ public class Glued extends Buff {
             int oldSize = enemy.attackFrames.length;
             int newSize = (int) (1f / (effectLevel * (1f / (float) oldSize)));
             ArrayList<Integer> expandedInts = new ArrayList<>();
+
             //run expansion algorithm
             compress = new CompressArray(oldSize - 1, newSize, expandedInts);
             compress.main();
             expandedInts = compress.compArray;
+
             //create expanded image array
             PImage[] expandedPImages = new PImage[expandedInts.size()];
             for (int i = 0; i < expandedInts.size(); i++) {
                 expandedPImages[i] = enemy.attackFrames[expandedInts.get(i)];
             }
+
             //profit
             for (int i = 0; i < enemy.tempAttackDmgFrames.length; i++) {
                 enemy.tempAttackDmgFrames[i] /= effectLevel;

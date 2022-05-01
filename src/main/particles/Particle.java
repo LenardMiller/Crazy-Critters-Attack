@@ -47,9 +47,6 @@ public abstract class Particle {
     }
 
     protected void display() {
-        animation.update();
-        displayAngle += radians(secondsToFrames(angularVelocity));
-        if (animation.ended()) dead = true;
         p.pushMatrix();
         p.translate(position.x, position.y);
         p.rotate(displayAngle);
@@ -58,6 +55,10 @@ public abstract class Particle {
     }
 
     protected void move() {
+        animation.update();
+        if (animation.ended()) dead = true;
+        displayAngle += radians(secondsToFrames(angularVelocity));
+
         velocity.setMag(speed/FRAMERATE);
         position.add(velocity);
     }
