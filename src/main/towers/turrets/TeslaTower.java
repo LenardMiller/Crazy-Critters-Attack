@@ -56,8 +56,8 @@ public class TeslaTower extends Turret {
     @Override
     protected void checkTarget() {
         getTargetEnemy();
-        if (state == 0 && targetEnemy != null) { //if done animating
-            state = 1;
+        if (state == State.Idle && targetEnemy != null) { //if done animating
+            state = State.Fire;
             frame = 0;
             fire();
         }

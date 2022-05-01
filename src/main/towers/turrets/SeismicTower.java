@@ -53,12 +53,12 @@ public class SeismicTower extends Turret {
     @Override
     protected void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null && state != 1 && shockwaveWidth < 360) aim(targetEnemy);
-        if (state == 0 && targetEnemy != null && (abs(targetAngle - angle) < 0.02 || shockwaveWidth > 360)) { //if done animating and aimed
-            state = 1;
+        if (targetEnemy != null && state != State.Fire && shockwaveWidth < 360) aim(targetEnemy);
+        if (state == State.Idle && targetEnemy != null && (abs(targetAngle - angle) < 0.02 || shockwaveWidth > 360)) { //if done animating and aimed
+            state = State.Fire;
             frame = 0;
         }
-        if (state == 1 && frame >= fireFrames.length - 1) fire(barrelLength, fireParticle);
+        if (state == State.Fire && frame >= fireFrames.length - 1) fire(barrelLength, fireParticle);
     }
 
     @Override

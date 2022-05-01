@@ -92,17 +92,17 @@ public class IceTower extends Turret {
     @Override
     protected void checkTarget() {
         if (name.equals("autoIceTower")) {
-            if (state == 0) {
-                state = 1;
+            if (state == State.Idle) {
+                state = State.Fire;
                 frame = 0;
                 spawnProjectiles(tile.position, 0);
             }
             return;
         }
         getTargetEnemy();
-        if (targetEnemy != null && state != 1) aim(targetEnemy);
-        if (state == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
-            state = 1;
+        if (targetEnemy != null && state != State.Fire) aim(targetEnemy);
+        if (state == State.Idle && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
+            state = State.Fire;
             frame = 0;
             fire(barrelLength, fireParticle);
         }
@@ -146,7 +146,7 @@ public class IceTower extends Turret {
             if (targetTile != null) {
                 placeWall(targetTile);
                 playSoundRandomSpeed(p, fireSound, 1);
-            } else state = 0;
+            } else state = State.Idle;
             return;
         }
 

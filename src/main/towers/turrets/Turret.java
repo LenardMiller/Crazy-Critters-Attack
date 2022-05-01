@@ -26,19 +26,23 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 public abstract class Turret extends Tower {
 
     public enum Priority {
-        Close("closest", 0),
-        Far("farthest", 1),
-        Strong("most HP", 2),
-        Weak("least hp", 3),
-        None("", -1);
+        Close("closest"),
+        Far("farthest"),
+        Strong("most HP"),
+        Weak("least hp"),
+        None("");
 
-        public final int id;
         public final String text;
 
-        Priority(String name, int id) {
-            this.text = name;
-            this.id = id;
+        Priority(String text) {
+            this.text = text;
         }
+    }
+
+    public enum State {
+        Idle,
+        Fire,
+        Load
     }
 
     public boolean hasPriority;
@@ -60,11 +64,9 @@ public abstract class Turret extends Tower {
     public String[] titleLines;
     public Consumer<Integer> infoDisplay;
     public Consumer<Integer> statsDisplay;
-    /** 0: Close, 1: far, 2: most HP, 3: least HP */
     public Priority priority = Priority.Close;
 
-    /** 0: Idle, 1: Fire, 2: Load */
-    protected int state;
+    protected State state = State.Idle;
     protected int offset;
     protected int frame;
     protected int frameTimer;
@@ -73,7 +75,7 @@ public abstract class Turret extends Tower {
     protected float targetAngle;
     protected float barrelLength;
     protected String fireParticle;
-    protected PImage sIdle;
+    protected PImage idleSprite;
     protected PImage sBase;
     protected PImage[] fireFrames;
     protected PImage[] loadFrames;
@@ -112,9 +114,9 @@ public abstract class Turret extends Tower {
 
     protected void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null && state != 1) aim(targetEnemy);
-        if (state == 0 && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
-            state = 1;
+        if (targetEnemy != null && state != State.Fire) aim(targetEnemy);
+        if (state == State.Idle && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
+            state = State.Fire;
             frame = 0;
             fire(barrelLength, fireParticle);
         }
@@ -234,12 +236,12 @@ public abstract class Turret extends Tower {
 
     protected void loadSprites() {
         sBase = staticSprites.get(name + "BaseTR");
-        sIdle = staticSprites.get(name + "IdleTR");
+        idleSprite = staticSprites.get(name + "IdleTR");
         fireFrames = animatedSprites.get(name + "FireTR");
         loadFrames = animatedSprites.get(name + "LoadTR");
         if (animatedSprites.get(name + "IdleTR") != null) {
             idleFrames = animatedSprites.get(name + "IdleTR");
-            sIdle = idleFrames[0];
+            idleSprite = idleFrames[0];
         }
         else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
     }
@@ -291,56 +293,60 @@ public abstract class Turret extends Tower {
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "greyPuff"));
             }
             if (tintColor < 255) tintColor += 20;
-            if (state == 0) { //idle
-                sprite = sIdle;
-                if (idleFrames.length > 1) {
-                    if (frame < idleFrames.length) {
-                        sprite = idleFrames[frame];
-                        if (frameTimer >= betweenIdleFrames) {
-                            frame++;
-                            frameTimer = 0;
-                        } else frameTimer++;
-                    } else {
-                        frame = 0;
-                        sprite = idleFrames[frame];
-                    }
-                }
-            } else if (state == 1) { //fire
-                if (frame < fireFrames.length - 1) { //if not done, keep going
-                    if (frameTimer >= betweenFireFrames) {
-                        frame++;
-                        frameTimer = 0;
-                        sprite = fireFrames[frame];
-                    } else frameTimer++;
-                } else { //if done, switch to load
-                    if (loadFrames.length > 0) {
-                        int oldSize = loadFrames.length;
-                        int newSize = secondsToFrames(getDelay());
-                        spriteArray = new ArrayList<>();
-                        if (oldSize > newSize) { //decreasing size
-                            //creates the new spriteArray
-                            for (int i = 0; i < oldSize; i++) spriteArray.add(i);
-                            //compression
-                            compress = new CompressArray(oldSize, newSize, spriteArray);
-                            compress.main();
-                        } else { //increasing size
-                            compress = new CompressArray(oldSize - 1, newSize, spriteArray);
-                            compress.main();
-                            spriteArray = compress.compArray;
+            switch (state) {
+                case Idle:
+                    sprite = idleSprite;
+                    if (idleFrames.length > 1) {
+                        if (frame < idleFrames.length) {
+                            sprite = idleFrames[frame];
+                            if (frameTimer >= betweenIdleFrames) {
+                                frame++;
+                                frameTimer = 0;
+                            } else frameTimer++;
+                        } else {
+                            frame = 0;
+                            sprite = idleFrames[frame];
                         }
                     }
-                    frame = 0;
-                    state = 2;
-                }
-            } else if (state == 2) { //load
-                frame++;
-                if (frame < spriteArray.size() && spriteArray.get(frame) < loadFrames.length) {
-                    sprite = loadFrames[spriteArray.get(frame)];
-                } else { //if time runs out, switch to idle
-                    frame = 0;
-                    sprite = sIdle;
-                    state = 0;
-                }
+                    break;
+                case Fire:
+                    if (frame < fireFrames.length - 1) { //if not done, keep going
+                        if (frameTimer >= betweenFireFrames) {
+                            frame++;
+                            frameTimer = 0;
+                            sprite = fireFrames[frame];
+                        } else frameTimer++;
+                    } else { //if done, switch to load
+                        if (loadFrames.length > 0) {
+                            int oldSize = loadFrames.length;
+                            int newSize = secondsToFrames(getDelay());
+                            spriteArray = new ArrayList<>();
+                            if (oldSize > newSize) { //decreasing size
+                                //creates the new spriteArray
+                                for (int i = 0; i < oldSize; i++) spriteArray.add(i);
+                                //compression
+                                compress = new CompressArray(oldSize, newSize, spriteArray);
+                                compress.main();
+                            } else { //increasing size
+                                compress = new CompressArray(oldSize - 1, newSize, spriteArray);
+                                compress.main();
+                                spriteArray = compress.compArray;
+                            }
+                        }
+                        frame = 0;
+                        state = State.Load;
+                    }
+                    break;
+                case Load:
+                    frame++;
+                    if (frame < spriteArray.size() && spriteArray.get(frame) < loadFrames.length) {
+                        sprite = loadFrames[spriteArray.get(frame)];
+                    } else { //if time runs out, switch to idle
+                        frame = 0;
+                        sprite = idleSprite;
+                        state = State.Idle;
+                    }
+                    break;
             }
             if (hit) { //change to red if under attack
                 tintColor = 0;

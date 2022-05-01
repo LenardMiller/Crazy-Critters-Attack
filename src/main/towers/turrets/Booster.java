@@ -87,9 +87,9 @@ public class Booster extends Turret {
     @Override
     protected void loadSprites() {
         sBase = staticSprites.get(name + "BaseTR");
-        sIdle = staticSprites.get(name + "IdleTR");
+        idleSprite = staticSprites.get(name + "IdleTR");
         idleFrames = animatedSprites.get(name + "IdleTR");
-        sIdle = idleFrames[0];
+        idleSprite = idleFrames[0];
     }
 
     @Override

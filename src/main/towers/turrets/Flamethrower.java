@@ -85,8 +85,8 @@ public class Flamethrower extends Turret {
     protected void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null && !wheel) aim(targetEnemy);
-        if (state == 0 && targetEnemy != null) { //if done animating
-            state = 1;
+        if (state == State.Idle && targetEnemy != null) { //if done animating
+            state = State.Fire;
             frame = 0;
             fire(barrelLength, fireParticle);
         }

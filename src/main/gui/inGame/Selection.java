@@ -351,7 +351,7 @@ public class Selection {
         if (name.equals("null") || turret == null) return;
         playSound(selection.CLICK_OUT, 1, 1);
         if (turret.priority == Turret.Priority.Weak) turret.priority = Turret.Priority.Close;
-        else turret.priority = Turret.Priority.values()[turret.priority.id + 1];
+        else turret.priority = Turret.Priority.values()[turret.priority.ordinal() + 1];
     }
 
     public void upgradeBottom() {

@@ -90,7 +90,7 @@ public class MagicMissileer extends Turret {
     protected void loadSprites() {
         if (name.equals("electricMissleer")) {
             sBase = staticSprites.get("magicMissleerBaseTR");
-            sIdle = staticSprites.get(name + "IdleTR");
+            idleSprite = staticSprites.get(name + "IdleTR");
             idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
 
             fireFrames = animatedSprites.get(name + "CoreFireTR");
@@ -98,12 +98,12 @@ public class MagicMissileer extends Turret {
             return;
         }
         sBase = staticSprites.get(name + "BaseTR");
-        sIdle = staticSprites.get(name + "IdleTR");
+        idleSprite = staticSprites.get(name + "IdleTR");
         fireFrames = animatedSprites.get(name + "FireTR");
         loadFrames = animatedSprites.get(name + "LoadTR");
         if (animatedSprites.get(name + "IdleTR") != null) {
             idleFrames = animatedSprites.get(name + "IdleTR");
-            sIdle = idleFrames[0];
+            idleSprite = idleFrames[0];
         }
         else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
     }
@@ -111,8 +111,8 @@ public class MagicMissileer extends Turret {
     @Override
     protected void checkTarget() {
         getTargetEnemy();
-        if (state == 0 && targetEnemy != null) { //if done animating
-            state = 1;
+        if (state == State.Idle && targetEnemy != null) { //if done animating
+            state = State.Fire;
             frame = 0;
             fire();
         }
@@ -218,16 +218,16 @@ public class MagicMissileer extends Turret {
             }
         } else if (name.equals("electricMissleer")) {
             int compressFrame = 0;
-            if (state == 2) compressFrame = spriteArray.get(frame);
+            if (state == State.Fire) compressFrame = spriteArray.get(frame);
 
-            p.image(ElectricComponent.Core.getSprite(state, frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
+            p.image(ElectricComponent.Core.getSprite(state.ordinal(), frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
             p.pushMatrix();
             p.rotate(specialAngle);
-            p.image(ElectricComponent.InnerRing.getSprite(state, frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
+            p.image(ElectricComponent.InnerRing.getSprite(state.ordinal(), frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
             p.popMatrix();
             p.pushMatrix();
             p.rotate(-specialAngle);
-            p.image(ElectricComponent.OuterRing.getSprite(state, frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
+            p.image(ElectricComponent.OuterRing.getSprite(state.ordinal(), frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
             p.popMatrix();
         } else p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
@@ -237,17 +237,17 @@ public class MagicMissileer extends Turret {
             float specialRotationSpeed = 0.01f;
             if (name.equals("electricMissleer")) {
                 switch (state) {
-                    case 0:
+                    case Idle:
                         specialRotationSpeed = 0.03f;
                         break;
-                    case 1:
+                    case Fire:
                         specialRotationSpeed = 0.03f * (1 - (frame / (float) fireFrames.length));
                         break;
-                    case 2:
+                    case Load:
                         specialRotationSpeed = 0.03f * (frame / (float) spriteArray.size());
                 }
 
-                if (p.random(25) < 1 && state == 0)
+                if (p.random(25) < 1 && state == State.Idle)
                     arcs.add(new YellowArc(p, getCenter().x, getCenter().y, this, 0, 0, (int) p.random(20, 100), Priority.None));
             }
             if (specialAngle < TWO_PI) specialAngle += specialRotationSpeed;
