@@ -264,7 +264,7 @@ public class Main extends PApplet {
 
     public static void transition(Screen screen, PVector direction) {
         if (targetScreen == screen) return;
-        direction.add(PVector.fromAngle(random.nextFloat() * PI).setMag(0.1f));
+        direction.add(PVector.fromAngle(random.nextFloat() * TWO_PI).setMag(0.2f));
         transCenter = PVector.add(
                 direction.copy().setMag(TRANS_SIZE * -2),
                 new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f));
