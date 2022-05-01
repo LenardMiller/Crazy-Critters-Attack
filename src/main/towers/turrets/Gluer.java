@@ -73,7 +73,7 @@ public class Gluer extends Turret {
     @Override
     protected boolean enemyCanBeAttacked(Enemy enemy) {
         //make sure effect would actually slow down enemy
-        return !(enemy.state == 0 && enemy instanceof BurrowingEnemy) && enemy.speed > enemy.speed * effectLevel;
+        return !(enemy.state == Enemy.State.Moving && enemy instanceof BurrowingEnemy) && enemy.speed > enemy.speed * effectLevel;
     }
 
     @Override

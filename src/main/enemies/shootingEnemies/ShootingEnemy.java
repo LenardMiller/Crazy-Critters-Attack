@@ -53,21 +53,29 @@ public abstract class ShootingEnemy extends Enemy {
                 }
             }
 
-            if (state != 2) {
+            if (state != State.Special) {
                 angle = normalizeAngle(angle);
                 targetAngle = normalizeAngle(targetAngle);
                 angle += getAngleDifference(targetAngle, angle) / 10;
             }
 
-            if (canTargetTurret()) state = 2;
-            else if (state == 2) state = 0;
+            if (canTargetTurret()) state = State.Special;
+            else if (state == State.Special) state = State.Moving;
 
-            if (state == 0) move();
-            else if (state == 1) attack();
-            else if (state == 2) prepareToFire();
+            switch (state) {
+                case Moving:
+                    move();
+                    break;
+                case Attacking:
+                    attack();
+                    break;
+                case Special:
+                    prepareToFire();
+                    break;
+            }
 
             //prevent wandering
-            if (trail.size() == 0 && state != 1) pathRequestWaitTimer++;
+            if (trail.size() == 0 && state != State.Attacking) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
@@ -88,34 +96,37 @@ public abstract class ShootingEnemy extends Enemy {
     @Override
     protected void animate() {
         if (!immobilized) {
-            if (state == 1) {
-                if (attackFrame >= attackFrames.length) attackFrame = 0;
-                sprite = attackFrames[attackFrame];
-                idleTime++;
-                if (attackFrame < attackFrames.length - 1) {
-                    if (idleTime >= betweenAttackFrames) {
-                        attackFrame += 1;
-                        idleTime = 0;
-                    }
-                } else attackFrame = 0;
-            } else if (state == 0) {
-                idleTime++;
-                if (moveFrame < moveFrames.length - 1) {
-                    if (idleTime >= betweenWalkFrames) {
-                        moveFrame++;
-                        idleTime = 0;
-                    }
-                } else moveFrame = 0;
-                sprite = moveFrames[moveFrame];
-            } else if (state == 2) {
-                idleTime++;
-                sprite = shootFrames[shootFrame];
-                if (shootFrame < shootFrames.length - 1) {
-                    if (idleTime >= betweenShootFrames) {
-                        shootFrame++;
-                        idleTime = 0;
-                    }
-                } else shootFrame = 0;
+            switch (state) {
+                case Attacking:
+                    if (attackFrame >= attackFrames.length) attackFrame = 0;
+                    sprite = attackFrames[attackFrame];
+                    idleTime++;
+                    if (attackFrame < attackFrames.length - 1) {
+                        if (idleTime >= betweenAttackFrames) {
+                            attackFrame += 1;
+                            idleTime = 0;
+                        }
+                    } else attackFrame = 0;
+                    break;
+                case Moving:
+                    idleTime++;
+                    if (moveFrame < moveFrames.length - 1) {
+                        if (idleTime >= betweenWalkFrames) {
+                            moveFrame++;
+                            idleTime = 0;
+                        }
+                    } else moveFrame = 0;
+                    sprite = moveFrames[moveFrame];
+                    break;
+                case Special:
+                    idleTime++;
+                    sprite = shootFrames[shootFrame];
+                    if (shootFrame < shootFrames.length - 1) {
+                        if (idleTime >= betweenShootFrames) {
+                            shootFrame++;
+                            idleTime = 0;
+                        }
+                    } else shootFrame = 0;
             }
         }
         //shift back to normal

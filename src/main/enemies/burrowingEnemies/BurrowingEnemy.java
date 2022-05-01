@@ -30,11 +30,17 @@ public abstract class BurrowingEnemy extends Enemy {
             targetAngle = normalizeAngle(targetAngle);
             angle += getAngleDifference(targetAngle, angle) / 10;
 
-            if (state == 0) move();
-            else if (state == 1) attack();
+            switch (state) {
+                case Moving:
+                    move();
+                    break;
+                case Attacking:
+                    attack();
+                    break;
+            }
 
             //prevent wandering
-            if (trail.size() == 0 && state != 1) pathRequestWaitTimer++;
+            if (trail.size() == 0 && state != State.Attacking) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
@@ -81,7 +87,7 @@ public abstract class BurrowingEnemy extends Enemy {
         }
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
-        if (state != 0) {
+        if (state != State.Moving) {
             if (gore) goreyDeathEffect(type);
             else cleanDeathEffect();
         }

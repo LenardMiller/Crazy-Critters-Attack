@@ -151,7 +151,7 @@ public abstract class Turret extends Tower {
     }
 
     protected boolean enemyCanBeAttacked(Enemy enemy) {
-        return !(enemy.state == 0 && enemy instanceof BurrowingEnemy);
+        return !(enemy.state == Enemy.State.Moving && enemy instanceof BurrowingEnemy);
     }
 
     /**
@@ -167,7 +167,7 @@ public abstract class Turret extends Tower {
             float dist = PVector.sub(target, position).mag();
             float time = dist / pjSpeed;
             PVector enemyHeading = PVector.fromAngle(enemy.angle);
-            if (enemy.state == 0) enemyHeading.setMag(enemy.getActualSpeed() * time); //only lead if enemy moving
+            if (enemy.state == Enemy.State.Moving) enemyHeading.setMag(enemy.getActualSpeed() * time); //only lead if enemy moving
             else enemyHeading.setMag(0);
             target = new PVector(target.x + enemyHeading.x, target.y + enemyHeading.y);
         }

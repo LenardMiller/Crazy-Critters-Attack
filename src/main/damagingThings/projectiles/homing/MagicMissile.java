@@ -50,7 +50,7 @@ public class MagicMissile extends Projectile {
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
-            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy)) {
+            if (!(enemy.state == Enemy.State.Moving && enemy instanceof BurrowingEnemy)) {
                 float x = abs(SPAWN_POSITION.x - enemy.position.x);
                 float y = abs(SPAWN_POSITION.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));

@@ -63,7 +63,7 @@ public class SeismicTower extends Turret {
 
     @Override
     protected boolean enemyCanBeAttacked(Enemy enemy) {
-        return !(enemy.state == 0 && enemy instanceof BurrowingEnemy) || seismicSense;
+        return !(enemy.state == Enemy.State.Moving && enemy instanceof BurrowingEnemy) || seismicSense;
     }
 
     @Override

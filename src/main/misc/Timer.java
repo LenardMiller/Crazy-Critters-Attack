@@ -69,6 +69,12 @@ public class Timer {
         return counter;
     }
 
+    /** @return the current time if betweenCounter == 0, else -1 */
+    public int getInstantaneousTime() {
+        if (betweenCounter == 0) return counter;
+        else return -1;
+    }
+
     /**
      * Checks counter, and resets if true and reset enabled
      * @return if the counter is >= alarm time

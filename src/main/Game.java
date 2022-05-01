@@ -61,7 +61,7 @@ public class Game {
         drawObjects();
         //hp bars
         for (Enemy enemy : enemies) {
-            if (enemy.hp > 0 && !(enemy instanceof BurrowingEnemy && enemy.state == 0)) enemy.hpBar();
+            if (enemy.hp > 0 && !(enemy instanceof BurrowingEnemy && enemy.state == Enemy.State.Moving)) enemy.hpBar();
         }
         for (Tower tower : towers) tower.displayHpBar();
         machine.hpBar();

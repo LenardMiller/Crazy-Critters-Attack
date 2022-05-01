@@ -29,9 +29,7 @@ public class Animator {
         this(new PImage[]{sprite}, betweenFrames, loop);
     }
 
-    /**
-     * Flip to next image, loop back to start if at end and looping enabled
-     */
+    /** Flip to next image, loop back to start if at end and looping enabled */
     public void update() {
         if (LOOP || !ANIMATION_TIMER.triggered(false)) ANIMATION_TIMER.update();
         ANIMATION_TIMER.triggered(LOOP);
@@ -46,9 +44,11 @@ public class Animator {
         return ANIMATION[ANIMATION_TIMER.getCurrentTime()];
     }
 
-    /**
-     * Send back to first frame
-     */
+    public int getInstantaneousTime() {
+        return ANIMATION_TIMER.getInstantaneousTime();
+    }
+
+    /** Send back to first frame */
     public void reset() {
         ANIMATION_TIMER.reset();
     }

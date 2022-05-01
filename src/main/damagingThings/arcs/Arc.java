@@ -128,7 +128,7 @@ public class Arc {
         float maxHp = 0;
         Enemy e = null;
         for (Enemy enemy : enemies) {
-            if (!(enemy.state == 0 && enemy instanceof BurrowingEnemy)) {
+            if (!(enemy.state == Enemy.State.Moving && enemy instanceof BurrowingEnemy)) {
                 boolean repeat = false;
                 //prevent hitting enemy twice
                 for (Enemy enemyRepeat : enemiesRepeat)

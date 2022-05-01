@@ -99,7 +99,7 @@ public class Frost extends FlyingEnemy {
                 playSoundRandomSpeed(p, attackSound, 1);
                 spawnAttackParticles();
             }
-        } else if (!targetMachine) state = 0;
+        } else if (!targetMachine) state = State.Moving;
         if (targetMachine) {
             moveFrame = 0;
             if (dmg) {
@@ -108,7 +108,7 @@ public class Frost extends FlyingEnemy {
                 spawnAttackParticles();
             }
         }
-        if (!attackCue && attackFrame == 0) state = 0;
+        if (!attackCue && attackFrame == 0) state = State.Moving;
     }
 
     private void spawnAttackParticles() {
@@ -125,7 +125,7 @@ public class Frost extends FlyingEnemy {
     @Override
     protected void animate() {
         if (!immobilized) {
-            if (state == 1) {
+            if (state == State.Attacking) {
                 if (attackFrame >= attackFrames.length) attackFrame = 0;
                 idleTime++;
                 if (attackFrame < attackFrames.length - 1) {

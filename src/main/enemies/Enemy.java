@@ -32,13 +32,17 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Enemy {
 
+    public enum State {
+        Moving,
+        Attacking,
+        Special
+    }
+
     /** measured in pixels per second */
     public float speed;
     public float speedModifier;
     public float angle;
     public float radius;
-    /** moving, attacking, (shooting/burrowing) */
-    public int state;
     public int barAlpha;
     public int hp;
     public int maxHp;
@@ -55,6 +59,7 @@ public abstract class Enemy {
     public String name;
     public PVector position;
     public PVector size;
+    public State state = State.Moving;
 
     protected int moneyDrop;
     protected int damage;
@@ -123,11 +128,17 @@ public abstract class Enemy {
             targetAngle = normalizeAngle(targetAngle);
             angle += getAngleDifference(targetAngle, angle) / 10;
 
-            if (state == 0) move();
-            else if (state == 1) attack();
+            switch (state) {
+                case Moving:
+                    move();
+                    break;
+                case Attacking:
+                    attack();
+                    break;
+            }
 
             //prevent wandering
-            if (trail.size() == 0 && state != 1) pathRequestWaitTimer++;
+            if (trail.size() == 0 && state != State.Attacking) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
@@ -239,25 +250,27 @@ public abstract class Enemy {
     /** handle animation states */
     protected void animate() {
         if (!immobilized) {
-            if (state == 1) {
-                if (attackFrame >= attackFrames.length) attackFrame = 0;
-                sprite = attackFrames[attackFrame];
-                idleTime++;
-                if (attackFrame < attackFrames.length - 1) {
-                    if (idleTime >= betweenAttackFrames) {
-                        attackFrame += 1;
-                        idleTime = 0;
-                    }
-                } else attackFrame = 0;
-            } else if (state == 0) {
-                idleTime++;
-                if (moveFrame < moveFrames.length - 1) {
-                    if (idleTime >= betweenWalkFrames) {
-                        moveFrame++;
-                        idleTime = 0;
-                    }
-                } else moveFrame = 0;
-                sprite = moveFrames[moveFrame];
+            switch (state) {
+                case Attacking:
+                    if (attackFrame >= attackFrames.length) attackFrame = 0;
+                    sprite = attackFrames[attackFrame];
+                    idleTime++;
+                    if (attackFrame < attackFrames.length - 1) {
+                        if (idleTime >= betweenAttackFrames) {
+                            attackFrame += 1;
+                            idleTime = 0;
+                        }
+                    } else attackFrame = 0;
+                    break;
+                case Moving:
+                    idleTime++;
+                    if (moveFrame < moveFrames.length - 1) {
+                        if (idleTime >= betweenWalkFrames) {
+                            moveFrame++;
+                            idleTime = 0;
+                        }
+                    } else moveFrame = 0;
+                    sprite = moveFrames[moveFrame];
             }
         }
         //shift back to normal
@@ -526,7 +539,7 @@ public abstract class Enemy {
                 //ignored if no assigned attack sound
                 playSoundRandomSpeed(p, attackSound, 1);
             }
-        } else if (!targetMachine) state = 0;
+        } else if (!targetMachine) state = State.Moving;
         if (targetMachine) {
             moveFrame = 0;
             //actually do damage to machines
@@ -536,7 +549,7 @@ public abstract class Enemy {
                 playSoundRandomSpeed(p, attackSound, 1);
             }
         }
-        if (!attackCue && attackFrame == 0) state = 0;
+        if (!attackCue && attackFrame == 0) state = State.Moving;
     }
 
     public boolean onScreen() {
@@ -583,7 +596,7 @@ public abstract class Enemy {
             TurnPoint intersectingPoint = trail.get(trail.size() - 1);
             if (remove) {
                 if (intersectingPoint.combat) {
-                    state = 1;
+                    state = State.Attacking;
                     attackCue = true;
                     targetTower = intersectingPoint.tower;
                     targetMachine = intersectingPoint.machine;
