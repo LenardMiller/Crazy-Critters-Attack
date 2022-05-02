@@ -136,7 +136,7 @@ public class Main extends PApplet {
     public static HashMap<String, StackableSound> stackableSounds = new HashMap<>();
 
     //transitions
-    private static final int TRANS_SIZE = 1700;
+    private static final int TRANS_SIZE = 2000;
     private static final float TRANS_SPEED = 250;
     private static PVector transCenter;
     private static PVector transRotation;
@@ -247,6 +247,18 @@ public class Main extends PApplet {
         if (settings) settingsGui.main();
         keyBinds.menuKeys();
         drawTransition();
+        //black bars
+        if (!showSpawn) {
+            fill(0);
+            noStroke();
+            if (hasVerticalBars) {
+                rect(0, 0, matrixOffset, height);
+                rect(width - matrixOffset, 0, matrixOffset, height);
+            } else {
+                rect(0, 0, width, matrixOffset);
+                rect(0, height - matrixOffset, width, matrixOffset);
+            }
+        }
         //sound stuff
         sound.volume(globalVolume);
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();

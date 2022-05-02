@@ -87,18 +87,6 @@ public class Game {
         if (playingLevel) levels[currentLevel].main();
         //matrix
         p.popMatrix();
-        //black bars
-        if (!showSpawn) {
-            p.fill(0);
-            p.noStroke();
-            if (hasVerticalBars) {
-                p.rect(0, 0, matrixOffset, p.height);
-                p.rect(p.width - matrixOffset, 0, matrixOffset, p.height);
-            } else {
-                p.rect(0, 0, p.width, matrixOffset);
-                p.rect(0, p.height - matrixOffset, p.width, matrixOffset);
-            }
-        }
         //pause
         if (paused && !settings) pauseGui.main();
     }

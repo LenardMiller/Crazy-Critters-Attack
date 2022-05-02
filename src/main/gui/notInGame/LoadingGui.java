@@ -16,6 +16,7 @@ import static main.sound.SoundLoader.loadSounds;
 public class LoadingGui {
 
     private static final int MAX_PROGRESS = 11;
+    private static final int LINE_EDGE_BUFFER = 400;
 
     private final PApplet P;
     private final PFont FONT;
@@ -94,8 +95,8 @@ public class LoadingGui {
         P.stroke(255);
         float lineEnd = PApplet.map(progress,
                 0, MAX_PROGRESS,
-                100, P.width - 100);
-        P.line(100, Utilities.getCenter(P).y + 200, lineEnd, Utilities.getCenter(P).y + 200);
+                LINE_EDGE_BUFFER, P.width - LINE_EDGE_BUFFER);
+        P.line(LINE_EDGE_BUFFER, Utilities.getCenter(P).y + 200, lineEnd, Utilities.getCenter(P).y + 200);
         P.strokeWeight(1);
     }
 }
