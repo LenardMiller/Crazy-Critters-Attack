@@ -59,7 +59,7 @@ public class KeyBinds {
         boolean upgradeTop = keysPressed.getPressedPulse('1');
         boolean upgradeBottom = keysPressed.getPressedPulse('2');
         boolean priorityRight = keysPressed.getPressedPulse('3');
-        boolean delete = keysPressed.getPressedPulse('4');
+        boolean delete = keysPressed.getPressedPulse('*');
 
         if (upgradeTop) selection.upgradeTop();
         if (upgradeBottom) selection.upgradeBottom();
