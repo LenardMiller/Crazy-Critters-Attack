@@ -30,7 +30,7 @@ public class IceWall extends Wall {
         material = "ice";
         damageSound = sounds.get("iceDamage");
         breakSound = sounds.get("iceBreak");
-        value = 0;
+        basePrice = 0;
         nextLevelB = 4;
 
         updateTowerArray();

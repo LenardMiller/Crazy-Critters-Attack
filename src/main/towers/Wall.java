@@ -5,6 +5,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.util.Arrays;
+
 import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
@@ -15,8 +17,6 @@ public class Wall extends Tower {
     public static final int BUY_PRICE = 25;
 
     public final int[] UPGRADE_HP;
-
-    public int price;
 
     private final CornerSpriteDS WOOD;
     private final CornerSpriteDS STONE;
@@ -51,8 +51,7 @@ public class Wall extends Tower {
         damageSound = sounds.get(material + "Damage");
         breakSound = sounds.get(material + "Break");
         placeSound = sounds.get(material + "PlaceShort");
-        price = BUY_PRICE;
-        value = price;
+        basePrice = BUY_PRICE;
         nextLevelB = 0;
 
         upgradePrices = new int[4];
@@ -89,7 +88,6 @@ public class Wall extends Tower {
     public void main() {
         if (hp <= 0) die(false);
         updateBoosts();
-        value = (int) ((hp / (float) getMaxHp()) * value);
     }
 
     @Override
@@ -145,6 +143,17 @@ public class Wall extends Tower {
         if (tintColor < 255) tintColor += 20;
     }
 
+    @Override
+    public int getValue() {
+        int value = basePrice;
+        for (int i = 0; i < nextLevelB; i++) {
+            value += upgradePrices[i];
+        }
+        // account for damage to wall
+        value *= (int) ((hp / (float) getMaxHp()));
+        return value;
+    }
+
     private void setUpgrades() {
         //price
         upgradePrices[0] = 100;
@@ -175,7 +184,6 @@ public class Wall extends Tower {
 
     @Override
     public void upgrade(int id, boolean quiet) {
-        price += upgradePrices[nextLevelB];
         sprite = UPGRADE_SPRITES[nextLevelB];
         int oldMax = maxHp;
         maxHp += UPGRADE_HP[nextLevelB];

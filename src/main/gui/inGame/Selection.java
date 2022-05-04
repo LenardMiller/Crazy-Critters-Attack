@@ -336,7 +336,7 @@ public class Selection {
         P.fill(75, 0, 0, 254);
         P.textFont(largeFont);
         P.textAlign(CENTER);
-        P.text("Sell for: $" + nfc(floor(turret.value * .8f)), 1000, 888);
+        P.text("Sell for: $" + nfc(floor(turret.getValue() * .8f)), 1000, 888);
     }
 
     public void setTextPurple(String s, int offset) {

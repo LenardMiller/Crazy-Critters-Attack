@@ -9,7 +9,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
-import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class WaveMotion extends Turret {
 
@@ -40,7 +39,7 @@ public class WaveMotion extends Turret {
         damageSound = sounds.get("titaniumDamage");
         fireSound = stackableSounds.get("beam");
         material = "darkMetal";
-        value = WAVE_MOTION_PRICE;
+        basePrice = WAVE_MOTION_PRICE;
         priority = Priority.Far;
         titleLines = new String[]{"Death Beam"};
         infoDisplay = (o) -> selection.setTextPurple("Piercing", o);

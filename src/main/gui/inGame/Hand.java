@@ -240,7 +240,7 @@ public class Hand {
             if (wall.hp > wall.maxHp) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
             P.text(wall.hp + " hp", 1000, 331);
             P.fill(0, 254);
-            P.text("Sell for: $" + (int) (0.8f * (float) wall.value), 1000, 356);
+            P.text("Sell for: $" + (int) (0.8f * (float) wall.getValue()), 1000, 356);
             //upgrade info
             boolean canAfford = money >= wall.upgradePrices[wall.nextLevelB];
             if (canAfford) P.fill(195, 232, 188, 254);
@@ -282,7 +282,7 @@ public class Hand {
         P.text("Wall", 1000, 301);
         P.textFont(mediumFont);
         P.text(wall.hp + " hp", 1000, 331);
-        P.text("Sell for: $" + (int) (0.8f * (float) wall.value), 1000, 356);
+        P.text("Sell for: $" + (int) (0.8f * (float) wall.getValue()), 1000, 356);
     }
 
     private Wall getWall() {
@@ -465,7 +465,7 @@ public class Hand {
             case "wall":
                 if (tile.tower instanceof Wall) { //upgrade
                     Wall wall = (Wall) tile.tower;
-                    if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.price) { //upgrade
+                    if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.upgradePrices[wall.nextLevelB]) { //upgrade
                         money -= wall.upgradePrices[wall.nextLevelB];
                         wall.upgrade(0, false);
                         connectWallQueues++;

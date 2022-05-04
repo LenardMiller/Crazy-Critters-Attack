@@ -13,7 +13,6 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
-import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Gluer extends Turret {
 
@@ -38,7 +37,7 @@ public class Gluer extends Turret {
         fireParticle = "glue";
         barrelLength = 28;
         material = "stone";
-        value = GLUER_PRICE;
+        basePrice = GLUER_PRICE;
         titleLines = new String[]{"Gluer"};
         infoDisplay = (o) -> selection.setTextPurple("Slows", o);
         statsDisplay = (o) -> {

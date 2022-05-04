@@ -11,7 +11,6 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
-import static main.sound.SoundUtilities.playSoundRandomSpeed;
 import static processing.core.PConstants.HALF_PI;
 
 public class SeismicTower extends Turret {
@@ -39,7 +38,7 @@ public class SeismicTower extends Turret {
         fireSound = sounds.get("seismicSlam");
         barrelLength = 29;
         material = "stone";
-        value = SEISMIC_PRICE;
+        basePrice = SEISMIC_PRICE;
         titleLines = new String[]{"Seismic Tower"};
         infoDisplay = (o) -> selection.setTextPurple("Shockwave", o);
     }

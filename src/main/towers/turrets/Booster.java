@@ -35,7 +35,7 @@ public class Booster extends Turret {
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         betweenIdleFrames = 4;
-        value = BOOSTER_PRICE;
+        basePrice = BOOSTER_PRICE;
         hasPriority = false;
         titleLines = new String[]{"Booster"};
 
@@ -162,7 +162,7 @@ public class Booster extends Turret {
         }
         inGameGui.flashA = 255;
         money -= price;
-        value += price;
+        basePrice += price;
         //icons
         if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
         else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];

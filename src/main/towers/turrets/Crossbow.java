@@ -8,7 +8,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.randomizeDelay;
-import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Crossbow extends Turret {
 
@@ -29,7 +28,7 @@ public class Crossbow extends Turret {
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("crossbow");
         material = "wood";
-        value = CROSSBOW_PRICE;
+        basePrice = CROSSBOW_PRICE;
         priority = Priority.Far;
         titleLines = new String[]{"Crossbow"};
     }

@@ -9,7 +9,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.randomizeDelay;
-import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Slingshot extends Turret {
 
@@ -28,7 +27,7 @@ public class Slingshot extends Turret {
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("slingshot");
         material = "wood";
-        value = SLINGSHOT_PRICE;
+        basePrice = SLINGSHOT_PRICE;
 
         titleLines = new String[]{"Slingshot"};
     }

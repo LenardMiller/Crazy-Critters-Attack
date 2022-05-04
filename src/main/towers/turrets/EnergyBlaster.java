@@ -11,7 +11,6 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
-import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class EnergyBlaster extends Turret{
 
@@ -37,7 +36,7 @@ public class EnergyBlaster extends Turret{
         fireParticle = "energy";
         barrelLength = 40;
         material = "darkMetal";
-        value = ENERGY_BLASTER_PRICE;
+        basePrice = ENERGY_BLASTER_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Energy Blaster"};
         infoDisplay = (o) -> selection.setTextPurple("Splash", o);

@@ -10,7 +10,6 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
-import static main.sound.SoundUtilities.playSoundRandomSpeed;
 import static processing.core.PConstants.HALF_PI;
 
 public class RandomCannon extends Turret {
@@ -32,7 +31,7 @@ public class RandomCannon extends Turret {
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("luggageBlaster");
         material = "wood";
-        value = RANDOM_CANNON_PRICE;
+        basePrice = RANDOM_CANNON_PRICE;
         titleLines = new String[]{"Luggage", "Launcher"};
     }
 

@@ -11,7 +11,6 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
-import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Cannon extends Turret {
 
@@ -34,7 +33,7 @@ public class Cannon extends Turret {
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("smallExplosion");
         material = "stone";
-        value = CANNON_PRICE;
+        basePrice = CANNON_PRICE;
         fireParticle = "smoke";
         barrelLength = 29;
         titleLines = new String[]{"Cannon"};

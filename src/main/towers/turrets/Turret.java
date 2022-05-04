@@ -113,6 +113,17 @@ public abstract class Turret extends Tower {
     }
 
     @Override
+    public int getValue() {
+        int value = basePrice;
+        for (int i = 3; i < nextLevelB; i++) {
+            value += upgradePrices[i];
+        } for (int i = 0; i < nextLevelA; i++) {
+            value += upgradePrices[i];
+        }
+        return value;
+    }
+
+    @Override
     public void placeEffect(boolean quiet) {
         loadSprites();
         setUpgrades();
@@ -288,9 +299,9 @@ public abstract class Turret extends Tower {
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;
         if (!sold) {
-            moneyGain = (int) (value * 0.4);
+            moneyGain = (int) (getValue() * 0.4);
             tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(material + "DebrisBr_TL");
-        } else moneyGain = (int) (value * 0.8);
+        } else moneyGain = (int) (getValue() * 0.8);
         popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
         if (hasBoostedDeathEffect()) deathEffect();
@@ -418,7 +429,6 @@ public abstract class Turret extends Tower {
         }
         inGameGui.flashA = 255;
         money -= price;
-        value += price;
         upgradeEffect(id);
         if (id == 0) nextLevelA++;
         else if (id == 1) nextLevelB++;

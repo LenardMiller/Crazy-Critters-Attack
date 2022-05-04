@@ -34,7 +34,7 @@ public abstract class Tower {
     public int hp;
     public int nextLevelA;
     public int nextLevelB;
-    public int value;
+    public int basePrice;
     public int[] upgradePrices;
     public boolean hit;
     public boolean visualize;
@@ -59,7 +59,7 @@ public abstract class Tower {
     protected Tower(PApplet p, Tile tile) {
         this.p = p;
         this.tile = tile;
-        Tile otherTile = tiles.get((int)(tile.position.x/50) - 1,(int)(tile.position.y/50) - 1);
+        Tile otherTile = tiles.get((int) (tile.position.x / 50) - 1,(int) (tile.position.y / 50) - 1);
         if (otherTile != null) otherTile.setBreakable(null);
 
         boosts = new ArrayList<>();
@@ -85,6 +85,8 @@ public abstract class Tower {
     public abstract void displayBase();
 
     public abstract void controlAnimation();
+
+    public abstract int getValue();
 
     public PVector getCenter() {
         return new PVector(tile.position.x - (size.x / 2), tile.position.y - (size.y / 2));
@@ -136,9 +138,9 @@ public abstract class Tower {
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;
         if (!sold) {
-            moneyGain = (int) (value * 0.4);
+            moneyGain = (int) (getValue() * 0.4);
             tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(material + "DebrisBr_TL");
-        } else moneyGain = (int) (value * 0.8);
+        } else moneyGain = (int) (getValue() * 0.8);
         if (moneyGain > 0) popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
         if (hasBoostedDeathEffect()) deathEffect();
@@ -148,26 +150,26 @@ public abstract class Tower {
     }
 
     protected void deathEffect() {
-        int radius = value / 10;
+        int radius = getValue() / 10;
         if (radius < 40) radius = 40;
         float x = tile.position.x - (TILE_SIZE / 2f);
         float y = tile.position.y - (TILE_SIZE / 2f);
-        shockwaves.add(new FireShockwave(p, x, y, 0, radius * 2, value, null, 15,
+        shockwaves.add(new FireShockwave(p, x, y, 0, radius * 2, getValue(), null, 15,
           30));
-        shockwaves.add(new NuclearShockwave(p, x, y, radius, value, null));
+        shockwaves.add(new NuclearShockwave(p, x, y, radius, getValue(), null));
         for (int i = 0; i < radius / 5; i++) {
-            projectiles.add(new Flame(p, x, y, p.random(360), null, value / 8, value / 8f,
-              value / 8f, (int) p.random(radius, radius * 2), true));
+            projectiles.add(new Flame(p, x, y, p.random(360), null, getValue() / 8, getValue() / 8f,
+              getValue() / 8f, (int) p.random(radius, radius * 2), true));
         }
         int arcCount = 3;
         if (radius > 300) arcCount = 8;
         if (radius > 600) arcCount = 16;
         for (int i = 0; i < arcCount; i++) {
-            arcs.add(new OrangeArc(p, x, y, null, value / 8, radius / 10, radius * 2,
+            arcs.add(new OrangeArc(p, x, y, null, getValue() / 8, radius / 10, radius * 2,
               Turret.Priority.None, 50));
         }
         for (int i = 0; i < arcCount / 3; i++) {
-            arcs.add(new RedArc(p, x, y, null, value / 8, radius / 10, radius * 2,
+            arcs.add(new RedArc(p, x, y, null, getValue() / 8, radius / 10, radius * 2,
               Turret.Priority.None));
         }
         if (radius > 200) playSoundRandomSpeed(p, sounds.get("hugeExplosion"), 1);

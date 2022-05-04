@@ -51,7 +51,7 @@ public class IceTower extends Turret {
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("iceFire");
-        value = ICE_TOWER_PRICE;
+        basePrice = ICE_TOWER_PRICE;
         titleLines = new String[]{"Freeze Ray"};
         infoDisplay = (o) -> {
             selection.setTextPurple("Encases enemies", o);
