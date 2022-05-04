@@ -415,69 +415,25 @@ public class Hand {
         Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
         boolean changeHeld = true;
         if (!alive) return;
-        boolean doTurretPlaceEffect = true;
-        switch (held) {
-            case "slingshot":
-                tile.tower = new Slingshot(P, tile);
-                break;
-            case "crossbow":
-                tile.tower = new Crossbow(P, tile);
-                break;
-            case "miscCannon":
-                tile.tower = new RandomCannon(P, tile);
-                break;
-            case "cannon":
-                tile.tower = new Cannon(P, tile);
-                break;
-            case "gluer":
-                tile.tower = new Gluer(P, tile);
-                break;
-            case "seismic":
-                tile.tower = new SeismicTower(P, tile);
-                break;
-            case "energyBlaster":
-                tile.tower = new EnergyBlaster(P, tile);
-                break;
-            case "magicMissleer":
-                tile.tower = new MagicMissileer(P, tile);
-                break;
-            case "tesla":
-                tile.tower = new TeslaTower(P, tile);
-                break;
-            case "nightmare":
-                tile.tower = new Nightmare(P, tile);
-                break;
-            case "flamethrower":
-                tile.tower = new Flamethrower(P, tile);
-                break;
-            case "iceTower":
-                tile.tower = new IceTower(P, tile);
-                break;
-            case "booster":
-                tile.tower = new Booster(P, tile);
-                break;
-            case "railgun":
-                tile.tower = new Railgun(P, tile);
-                break;
-            case "waveMotion":
-                tile.tower = new WaveMotion(P, tile);
-                break;
-            case "wall":
-                if (tile.tower instanceof Wall) { //upgrade
-                    Wall wall = (Wall) tile.tower;
-                    if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.upgradePrices[wall.nextLevelB]) { //upgrade
-                        money -= wall.upgradePrices[wall.nextLevelB];
-                        wall.upgrade(0, false);
-                        connectWallQueues++;
-                    }
-                    money += price; //cancel out price change later
-                } else tile.tower = new Wall(P, tile);
-                changeHeld = false;
-                break;
-            default:
-                doTurretPlaceEffect = false;
+        if (held.equals("wall")) {
+            if (tile.tower instanceof Wall) { //upgrade
+                Wall wall = (Wall) tile.tower;
+                if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.upgradePrices[wall.nextLevelB]) { //upgrade
+                    money -= wall.upgradePrices[wall.nextLevelB];
+                    wall.upgrade(0, false);
+                    connectWallQueues++;
+                }
+                money += price; //cancel out price change later
+            } else tile.tower = new Wall(P, tile);
+            changeHeld = false;
+            tile.tower.placeEffect(false);
+        } else {
+            System.out.println(held.substring(0,1).toUpperCase() + held.substring(1));
+            tile.tower = Turret.get(P, held.substring(0,1).toUpperCase() + held.substring(1), tile);
+            if (tile.tower != null) {
+                tile.tower.placeEffect(false);
+            }
         }
-        if (doTurretPlaceEffect) tile.tower.placeEffect(false);
         if (held.contains("TL")) {
             tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
             changeHeld = false;
