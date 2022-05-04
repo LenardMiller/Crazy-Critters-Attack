@@ -38,8 +38,7 @@ public class PauseGui {
             paused = !paused;
         });
         restartButton = new MenuButton(P, P.width/2f, P.height/2f - 25, "Restart", () -> {
-            paused = false;
-            Game.reset(P);
+            transition(Screen.Restart, new PVector(-1, 0));
         });
         levelSelectButton = new MenuButton(P, P.width/2f, (P.height/2f) + 25, "Level Select", () -> {
             alive = true;

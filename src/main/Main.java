@@ -43,7 +43,8 @@ public class Main extends PApplet {
         Loading,
         Title,
         Exit,
-        PlayOrLevelSelect
+        PlayOrLevelSelect,
+        Restart
     }
 
     public static Tile.TileDS tiles;
@@ -241,8 +242,16 @@ public class Main extends PApplet {
             case Title:
                 if (!settings) titleGui.main();
                 break;
+
+                // immediate action branches
             case Exit:
                 exit();
+                break;
+            case Restart:
+                Game.reset(this);
+                paused = false;
+                screen = Screen.InGame;
+                Saver.wipe();
                 break;
             case PlayOrLevelSelect:
                 try {
