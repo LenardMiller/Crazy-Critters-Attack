@@ -122,7 +122,7 @@ public abstract class Tower {
         }
     }
 
-    public abstract void upgrade(int id);
+    public abstract void upgrade(int id, boolean quiet);
 
     public void die(boolean sold) {
         playSoundRandomSpeed(p, breakSound, 1);

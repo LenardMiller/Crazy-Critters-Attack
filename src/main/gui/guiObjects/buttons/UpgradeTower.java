@@ -63,6 +63,6 @@ public class UpgradeTower extends Button {
     @Override
     public void pressIn() {
         Turret turret = selection.turret;
-        turret.upgrade(id);
+        turret.upgrade(id, false);
     }
 }

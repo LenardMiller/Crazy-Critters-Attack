@@ -70,9 +70,11 @@ public class Wall extends Tower {
         loadSprites();
     }
 
-    public void placeEffects() {
-        playSoundRandomSpeed(p, placeSound, 1);
-        spawnParticles();
+    public void placeEffects(boolean quiet) {
+        if (!quiet) {
+            playSoundRandomSpeed(p, placeSound, 1);
+            spawnParticles();
+        }
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
         tiles.get(x-1,y-1).setFlooring(name);
@@ -140,7 +142,7 @@ public class Wall extends Tower {
         if (tintColor < 255) tintColor += 20;
     }
 
-    private void setUpgrades(){
+    private void setUpgrades() {
         //price
         upgradePrices[0] = 100;
         upgradePrices[1] = 500;
@@ -169,7 +171,7 @@ public class Wall extends Tower {
     }
 
     @Override
-    public void upgrade(int id) {
+    public void upgrade(int id, boolean quiet) {
         price += upgradePrices[nextLevelB];
         sprite = UPGRADE_SPRITES[nextLevelB];
         int oldMax = maxHp;
@@ -182,8 +184,10 @@ public class Wall extends Tower {
         breakSound = sounds.get(material + "Break");
         placeSound = sounds.get(material + "PlaceShort");
 
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
+        if (!quiet) {
+            spawnParticles();
+            playSoundRandomSpeed(p, placeSound, 1);
+        }
 
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];

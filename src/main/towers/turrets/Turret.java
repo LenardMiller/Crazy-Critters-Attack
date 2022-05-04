@@ -382,7 +382,7 @@ public abstract class Turret extends Tower {
     }
 
     @Override
-    public void upgrade(int id) {
+    public void upgrade(int id, boolean quiet) {
         int price = 0;
         if (id == 0) {
             if (nextLevelA >= upgradePrices.length) return;
@@ -409,8 +409,10 @@ public abstract class Turret extends Tower {
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
 
-        playSoundRandomSpeed(p, placeSound, 1);
-        spawnParticles();
+        if (quiet) {
+            playSoundRandomSpeed(p, placeSound, 1);
+            spawnParticles();
+        }
         //prevent having fire animations longer than delays
 //        while (getDelay() <= fireFrames.length * betweenFireFrames + idleFrames.length && betweenFireFrames > 0) betweenFireFrames--;
     }

@@ -151,7 +151,7 @@ public class Booster extends Turret {
     }
 
     @Override
-    public void upgrade(int id) {
+    public void upgrade(int id, boolean quiet) {
         upgradeEffect(id);
         int price = 0;
         if (id == 0) {
@@ -176,8 +176,10 @@ public class Booster extends Turret {
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
 
-        playSoundRandomSpeed(p, placeSound, 1);
-        spawnParticles();
+        if (!quiet) {
+            playSoundRandomSpeed(p, placeSound, 1);
+            spawnParticles();
+        }
     }
 
     @Override

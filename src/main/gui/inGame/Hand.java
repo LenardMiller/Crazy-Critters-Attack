@@ -467,14 +467,14 @@ public class Hand {
                 if (tile.tower instanceof Wall) { //upgrade
                     if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
                         money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
-                        tile.tower.upgrade(0);
+                        tile.tower.upgrade(0, false);
                         connectWallQueues++;
                     }
                     money += price; //cancel out price change later
                 } else {
                     tile.tower = new Wall(P, tile);
                     Wall wall = (Wall) tile.tower;
-                    wall.placeEffects();
+                    wall.placeEffects(false);
                 }
                 changeHeld = false;
                 break;

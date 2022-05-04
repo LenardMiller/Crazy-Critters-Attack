@@ -3,12 +3,15 @@ package main.misc;
 import main.Game;
 import main.Main;
 import main.enemies.Enemy;
+import main.towers.Tower;
+import main.towers.Wall;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static processing.core.PApplet.loadJSONArray;
 import static processing.core.PApplet.loadJSONObject;
@@ -34,6 +37,7 @@ public class Loader {
     public static void load(PApplet p) {
         level(p);
         enemies(p);
+        walls(p);
 
         Main.screen = Main.Screen.InGame;
     }
@@ -67,6 +71,34 @@ public class Loader {
             if (enemy.hp < enemy.maxHp) enemy.showBar = true;
 
             Main.enemies.add(enemy);
+        }
+    }
+
+    private static void walls(PApplet p) {
+        JSONArray array = loadArray("walls");
+
+        for (int i = 0; i < array.size(); i++) {
+            JSONObject object = array.getJSONObject(i);
+            Tile tile = Main.tiles.get(
+                    Utilities.worldPositionToGridPosition(
+                            new PVector(
+                                    object.getFloat("x"),
+                                    object.getFloat("y"))));
+            Wall wall = new Wall(p, tile);
+            tile.tower = wall;
+            for (int j = 0; j < object.getInt("level"); j++) {
+                wall.upgrade(0, true);
+            }
+            wall.hp = object.getInt("hp");
+            wall.placeEffects(true);
+            wall.updateSprite();
+
+            Main.towers.add(wall);
+        }
+
+        ArrayList<Tower> towers = Main.towers;
+        for (Tower tower : towers) {
+            if (tower instanceof Wall) ((Wall) tower).updateSprite();
         }
     }
 

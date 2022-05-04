@@ -2,6 +2,9 @@ package main.misc;
 
 import main.Main;
 import main.enemies.Enemy;
+import main.towers.IceWall;
+import main.towers.Tower;
+import main.towers.Wall;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
@@ -18,9 +21,9 @@ public class Saver {
 
     /* Everything I need to save:
      * How polluted a level is
-     * Enemy position, hp
      * Turret position, hp, level
      * Wall position, hp, level
+     * IceWall position, hp, lifespan
      * Projectile position, rotation?
      */
 
@@ -28,11 +31,14 @@ public class Saver {
     public static void save() {
         level();
         enemies();
+        walls();
     }
 
     /** Clears all the saves */
     public static void wipe() {
         deleteFile("level");
+        deleteFile("enemies");
+        deleteFile("walls");
     }
 
     private static void level() {
@@ -53,6 +59,7 @@ public class Saver {
         for (int i = 0; i < enemies.size(); i++) {
             Enemy enemy = enemies.get(i);
             JSONObject object = new JSONObject();
+
             object.setString("type", enemy.name);
             object.setFloat("x", enemy.position.x);
             object.setFloat("y", enemy.position.y);
@@ -63,6 +70,26 @@ public class Saver {
         }
 
         saveObject(array.toString(), "enemies");
+    }
+
+    private static void walls() {
+        JSONArray array = new JSONArray();
+
+        ArrayList<Tower> walls = new ArrayList<>(Main.towers);
+        walls.removeIf(tower -> !(tower instanceof Wall) || tower instanceof IceWall);
+        for (int i = 0; i < walls.size(); i++) {
+            Wall wall = (Wall) walls.get(i);
+            JSONObject object = new JSONObject();
+
+            object.setInt("level", wall.nextLevelB);
+            object.setInt("hp", wall.hp);
+            object.setFloat("x", wall.tile.position.x);
+            object.setFloat("y", wall.tile.position.y);
+
+            array.setJSONObject(i, object);
+        }
+
+        saveObject(array.toString(), "walls");
     }
 
     private static void saveObject(String object, String name) {

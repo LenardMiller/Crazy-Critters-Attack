@@ -675,6 +675,7 @@ public abstract class Enemy {
     }
 
     //pathfinding ------------------------------------------------------------------------------------------------------
+    //todo: place first turnPoint on top of enemy
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = trail.get(trail.size() - 1);

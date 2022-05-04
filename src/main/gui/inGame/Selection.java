@@ -356,12 +356,12 @@ public class Selection {
 
     public void upgradeBottom() {
         if (name.equals("null") || turret == null) return;
-        turret.upgrade(1);
+        turret.upgrade(1, false);
     }
 
     public void upgradeTop() {
         if (name.equals("null") || turret == null) return;
-        turret.upgrade(0);
+        turret.upgrade(0, false);
     }
 
     public void sell() {
