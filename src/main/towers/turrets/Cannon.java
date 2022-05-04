@@ -40,11 +40,6 @@ public class Cannon extends Turret {
         barrelLength = 29;
         titleLines = new String[]{"Cannon"};
         infoDisplay = (o) -> selection.setTextPurple("Small splash", o);
-
-        loadSprites();
-        setUpgrades();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

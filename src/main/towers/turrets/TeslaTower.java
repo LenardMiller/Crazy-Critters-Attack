@@ -46,11 +46,6 @@ public class TeslaTower extends Turret {
             selection.setTextPurple("Jumping electricity", o);
             jumpInfo(o, 1);
         };
-
-        loadSprites();
-        setUpgrades();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

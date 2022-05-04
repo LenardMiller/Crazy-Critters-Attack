@@ -43,11 +43,6 @@ public class SeismicTower extends Turret {
         value = price;
         titleLines = new String[]{"Seismic Tower"};
         infoDisplay = (o) -> selection.setTextPurple("Shockwave", o);
-
-        setUpgrades();
-        loadSprites();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

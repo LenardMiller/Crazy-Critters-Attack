@@ -41,10 +41,6 @@ public class Nightmare extends Turret {
         breakSound = sounds.get("titaniumBreak");
         damageSound = sounds.get("titaniumDamage");
         fireSound = sounds.get("nightmareFire");
-
-        setUpgrades();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

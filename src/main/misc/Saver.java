@@ -5,6 +5,10 @@ import main.enemies.Enemy;
 import main.towers.IceWall;
 import main.towers.Tower;
 import main.towers.Wall;
+import main.towers.turrets.Booster;
+import main.towers.turrets.Gluer;
+import main.towers.turrets.IceTower;
+import main.towers.turrets.Turret;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
@@ -22,7 +26,6 @@ public class Saver {
     /* Everything I need to save:
      * How polluted a level is
      * Turret position, hp, level
-     * Wall position, hp, level
      * IceWall position, hp, lifespan
      * Projectile position, rotation?
      */
@@ -32,6 +35,7 @@ public class Saver {
         level();
         enemies();
         walls();
+        turrets();
     }
 
     /** Clears all the saves */
@@ -39,6 +43,7 @@ public class Saver {
         deleteFile("level");
         deleteFile("enemies");
         deleteFile("walls");
+        deleteFile("turrets");
     }
 
     private static void level() {
@@ -90,6 +95,39 @@ public class Saver {
         }
 
         saveObject(array.toString(), "walls");
+    }
+
+    private static void turrets() {
+        JSONArray array = new JSONArray();
+
+        ArrayList<Tower> turrets = new ArrayList<>(Main.towers);
+        turrets.removeIf(tower -> !(tower instanceof Turret));
+        for (int i = 0; i < turrets.size(); i++) {
+            Turret turret = (Turret) turrets.get(i);
+            JSONObject object = new JSONObject();
+
+            object.setString("type", turret.getClass().getSimpleName());
+            object.setFloat("x", turret.tile.position.x);
+            object.setFloat("y", turret.tile.position.y);
+            object.setInt("levelA", turret.nextLevelA);
+            object.setInt("levelB", turret.nextLevelB - 3);
+            object.setInt("priority", turret.priority.ordinal());
+            if (turret instanceof IceTower) {
+                object.setInt("frozenTotal", ((IceTower) turret).frozenTotal);
+            } else if (turret instanceof Booster) {
+                object.setInt("moneyTotal", ((Booster) turret).moneyTotal);
+            } else {
+                object.setInt("damageTotal", turret.damageTotal);
+                object.setInt("killsTotal", turret.killsTotal);
+                if (turret instanceof Gluer) {
+                    object.setInt("gluedTotal", ((Gluer) turret).gluedTotal);
+                }
+            }
+
+            array.setJSONObject(i, object);
+        }
+
+        saveObject(array.toString(), "turrets");
     }
 
     private static void saveObject(String object, String name) {

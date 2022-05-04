@@ -19,7 +19,7 @@ public class Booster extends Turret {
 
     public static final int MONEY_GAIN = 5000;
 
-    public int totalMoney;
+    public int moneyTotal;
     public Boost boost;
 
     public Booster(PApplet p, Tile tile) {
@@ -71,17 +71,12 @@ public class Booster extends Turret {
         };
         statsDisplay = (o) -> {
             if (name.equals("moneyBooster")) {
-                p.text("$" + nfc(totalMoney) + " total", 910, 500 + o);
+                p.text("$" + nfc(moneyTotal) + " total", 910, 500 + o);
             }
         };
 
         boost = new Boost();
         boost.health = 0.5f;
-
-        loadSprites();
-        setUpgrades();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override
@@ -90,6 +85,7 @@ public class Booster extends Turret {
         idleSprite = staticSprites.get(name + "IdleTR");
         idleFrames = animatedSprites.get(name + "IdleTR");
         idleSprite = idleFrames[0];
+        sprite = idleSprite;
     }
 
     @Override
@@ -108,9 +104,7 @@ public class Booster extends Turret {
         }
     }
 
-    /**
-     * Now spawns particles
-     */
+    /** Now spawns particles */
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         if (p.random(15) < 1) {
@@ -145,7 +139,7 @@ public class Booster extends Turret {
 
     public void giveMoney() {
         money += MONEY_GAIN;
-        totalMoney += MONEY_GAIN;
+        moneyTotal += MONEY_GAIN;
         popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), MONEY_GAIN));
         playSoundRandomSpeed(p, sounds.get("cash"), 1);
     }

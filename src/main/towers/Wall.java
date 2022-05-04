@@ -70,7 +70,8 @@ public class Wall extends Tower {
         loadSprites();
     }
 
-    public void placeEffects(boolean quiet) {
+    @Override
+    public void placeEffect(boolean quiet) {
         if (!quiet) {
             playSoundRandomSpeed(p, placeSound, 1);
             spawnParticles();
@@ -121,7 +122,7 @@ public class Wall extends Tower {
         float y = tile.position.y-size.y;
 
         p.tint(255,tintColor,tintColor);
-        float hpRatio = (float)hp/(float)getMaxHp();
+        float hpRatio = Math.min(hp / (float) getMaxHp(), 1);
         if (!debug) {
             int crack = abs(ceil((hpRatio * 4) - 1) - 3);
             if (crack < 4) p.image(sprite[crack],x,y);

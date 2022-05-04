@@ -42,11 +42,6 @@ public class EnergyBlaster extends Turret{
         priority = Priority.Strong;
         titleLines = new String[]{"Energy Blaster"};
         infoDisplay = (o) -> selection.setTextPurple("Splash", o);
-
-        loadSprites();
-        setUpgrades();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

@@ -5,6 +5,10 @@ import main.Main;
 import main.enemies.Enemy;
 import main.towers.Tower;
 import main.towers.Wall;
+import main.towers.turrets.Booster;
+import main.towers.turrets.Gluer;
+import main.towers.turrets.IceTower;
+import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.data.JSONArray;
@@ -13,6 +17,8 @@ import processing.data.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 
+import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static processing.core.PApplet.loadJSONArray;
 import static processing.core.PApplet.loadJSONObject;
 
@@ -22,14 +28,6 @@ public class Loader {
         return new File("").getAbsolutePath();
     }
 
-    /* Everything I need to save:
-     * How polluted a level is
-     * Enemy position, hp
-     * Turret position, hp, level
-     * Wall position, hp, level
-     * Projectile position, rotation?
-     */
-
     /**
      * @throws RuntimeException if any of the save files are missing
      * @param p the PApplet
@@ -38,6 +36,7 @@ public class Loader {
         level(p);
         enemies(p);
         walls(p);
+        turrets(p);
 
         Main.screen = Main.Screen.InGame;
     }
@@ -90,7 +89,7 @@ public class Loader {
                 wall.upgrade(0, true);
             }
             wall.hp = object.getInt("hp");
-            wall.placeEffects(true);
+            wall.placeEffect(true);
             wall.updateSprite();
 
             Main.towers.add(wall);
@@ -100,6 +99,44 @@ public class Loader {
         for (Tower tower : towers) {
             if (tower instanceof Wall) ((Wall) tower).updateSprite();
         }
+    }
+
+    private static void turrets(PApplet p) {
+        JSONArray array = loadArray("turrets");
+
+        for (int i = 0; i < array.size(); i++) {
+            JSONObject object = array.getJSONObject(i);
+            Tile tile = Main.tiles.get(
+                    Utilities.worldPositionToGridPosition(
+                            new PVector(
+                                    object.getFloat("x"),
+                                    object.getFloat("y"))));
+            Turret turret = Turret.get(p, object.getString("type"), tile);
+            assert turret != null;
+            for (int j = 0; j < object.getInt("levelA"); j++) {
+                turret.upgrade(0, true);
+            } for (int j = 0; j < object.getInt("levelB"); j++) {
+                turret.upgrade(1, true);
+            }
+            turret.priority = Turret.Priority.values()[object.getInt("priority")];
+            if (turret instanceof IceTower) {
+                ((IceTower) turret).frozenTotal = object.getInt("frozenTotal");
+            } else if (turret instanceof Booster) {
+                ((Booster) turret).moneyTotal = object.getInt("moneyTotal");
+            } else {
+                if (turret instanceof Gluer) {
+                    ((Gluer) turret).gluedTotal = object.getInt("gluedTotal");
+                }
+                turret.killsTotal = object.getInt("killsTotal");
+                turret.damageTotal = object.getInt("damageTotal");
+            }
+
+            turret.placeEffect(true);
+            tile.tower = turret;
+            updateTowerArray();
+        }
+
+        updateCombatPoints();
     }
 
     private static JSONObject loadObject(String name) {

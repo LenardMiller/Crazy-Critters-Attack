@@ -35,11 +35,6 @@ public class RandomCannon extends Turret {
         price = RANDOM_CANNON_PRICE;
         value = price;
         titleLines = new String[]{"Luggage", "Launcher"};
-
-        setUpgrades();
-        loadSprites();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     /**

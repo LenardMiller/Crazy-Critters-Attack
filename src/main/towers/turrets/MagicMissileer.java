@@ -79,11 +79,6 @@ public class MagicMissileer extends Turret {
             selection.setTextPurple("Homing", o);
             missileCountInfo(o);
         };
-
-        setUpgrades();
-        loadSprites();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

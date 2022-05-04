@@ -80,6 +80,8 @@ public abstract class Tower {
         updateTowerArray();
     }
 
+    public abstract void placeEffect(boolean quiet);
+
     public abstract void main();
 
     public abstract void displayBase();
@@ -94,12 +96,12 @@ public abstract class Tower {
         Color barColor = new Color(0, 255, 0);
         if (boostedMaxHp() > 0) barColor = InGameGui.BOOSTED_TEXT_COLOR;
         p.stroke(barColor.getRGB(), barAlpha / 2f);
-        float barWidth = size.x * (hp / (float) getMaxHp());
+        float barWidth = size.x * Math.min(hp / (float) getMaxHp(), 1);
         p.noFill();
         p.rect(tile.position.x - size.x, tile.position.y, size.y, -5);
         p.fill(barColor.getRGB(), barAlpha);
         if (hp > 0) p.rect(tile.position.x - size.x, tile.position.y, barWidth, -5);
-        if (hp == getMaxHp()) barAlpha = (int) incrementByTo(barAlpha, 3, 0);
+        if (hp >= getMaxHp()) barAlpha = (int) incrementByTo(barAlpha, 3, 0);
         else refreshHpBar();
     }
 

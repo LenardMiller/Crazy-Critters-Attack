@@ -112,6 +112,16 @@ public abstract class Turret extends Tower {
         updateTowerArray();
     }
 
+    @Override
+    public void placeEffect(boolean quiet) {
+        loadSprites();
+        setUpgrades();
+        if (!quiet) {
+            spawnParticles();
+            playSoundRandomSpeed(p, placeSound, 1);
+        }
+    }
+
     protected void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null && state != State.Fire) aim(targetEnemy);
@@ -242,8 +252,12 @@ public abstract class Turret extends Tower {
         if (animatedSprites.get(name + "IdleTR") != null) {
             idleFrames = animatedSprites.get(name + "IdleTR");
             idleSprite = idleFrames[0];
+            sprite = idleSprite;
         }
-        else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
+        else {
+            idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
+            sprite = idleFrames[0];
+        }
     }
 
     @Override
@@ -381,6 +395,11 @@ public abstract class Turret extends Tower {
         p.tint(255, 255, 255);
     }
 
+    /**
+     * Upgrades the turret once.
+     * @param id which track to use, 0 for A, 1 for B
+     * @param quiet no particles and sound
+     */
     @Override
     public void upgrade(int id, boolean quiet) {
         int price = 0;
@@ -409,7 +428,7 @@ public abstract class Turret extends Tower {
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
 
-        if (quiet) {
+        if (!quiet) {
             playSoundRandomSpeed(p, placeSound, 1);
             spawnParticles();
         }
@@ -460,5 +479,42 @@ public abstract class Turret extends Tower {
 
     public float getDelay() {
         return delay - boostedFirerate();
+    }
+
+    public static Turret get(PApplet p, String type, Tile tile) {
+        switch (type) {
+            case "Booster":
+                return new Booster(p, tile);
+            case "Cannon":
+                return new Cannon(p, tile);
+            case "Crossbow":
+                return new Crossbow(p, tile);
+            case "EnergyBlaster":
+                return new EnergyBlaster(p, tile);
+            case "FlameThrower":
+                return new Flamethrower(p, tile);
+            case "Gluer":
+                return new Gluer(p, tile);
+            case "IceTower":
+                return new IceTower(p, tile);
+            case "MagicMissileer":
+                return new MagicMissileer(p, tile);
+            case "Nightmare":
+                return new Nightmare(p, tile);
+            case "Railgun":
+                return new Railgun(p, tile);
+            case "RandomCannon":
+                return new RandomCannon(p, tile);
+            case "SeismicTower":
+                return new SeismicTower(p, tile);
+            case "Slingshot":
+                return new Slingshot(p, tile);
+            case "TeslaTower":
+                return new TeslaTower(p, tile);
+            case "WaveMotion":
+                return new WaveMotion(p, tile);
+            default:
+                return null;
+        }
     }
 }

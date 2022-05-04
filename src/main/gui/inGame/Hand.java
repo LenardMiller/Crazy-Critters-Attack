@@ -410,13 +410,12 @@ public class Hand {
         }
     }
 
-    /**
-     * Puts down tower and subtracts price.
-     */
+    /** Puts down tower and subtracts price. */
     private void place() {
         Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
         boolean changeHeld = true;
         if (!alive) return;
+        boolean doTurretPlaceEffect = true;
         switch (held) {
             case "slingshot":
                 tile.tower = new Slingshot(P, tile);
@@ -471,14 +470,13 @@ public class Hand {
                         connectWallQueues++;
                     }
                     money += price; //cancel out price change later
-                } else {
-                    tile.tower = new Wall(P, tile);
-                    Wall wall = (Wall) tile.tower;
-                    wall.placeEffects(false);
-                }
+                } else tile.tower = new Wall(P, tile);
                 changeHeld = false;
                 break;
+            default:
+                doTurretPlaceEffect = false;
         }
+        if (doTurretPlaceEffect) tile.tower.placeEffect(false);
         if (held.contains("TL")) {
             tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
             changeHeld = false;

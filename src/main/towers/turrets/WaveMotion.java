@@ -45,11 +45,6 @@ public class WaveMotion extends Turret {
         priority = Priority.Far;
         titleLines = new String[]{"Death Beam"};
         infoDisplay = (o) -> selection.setTextPurple("Piercing", o);
-
-        setUpgrades();
-        loadSprites();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

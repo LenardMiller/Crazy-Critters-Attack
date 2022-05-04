@@ -51,11 +51,6 @@ public class Flamethrower extends Turret {
         FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
         titleLines = new String[]{"Flamethrower"};
         infoDisplay = (o) -> selection.setTextPurple("Fire", o);
-
-        loadSprites();
-        setUpgrades();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

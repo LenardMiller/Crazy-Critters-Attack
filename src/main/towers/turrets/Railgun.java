@@ -53,11 +53,6 @@ public class Railgun extends Turret {
         breakSound = sounds.get("titaniumBreak");
         damageSound = sounds.get("titaniumDamage");
         fireSound = sounds.get("railgun");
-
-        setUpgrades();
-        loadSprites();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

@@ -40,7 +40,7 @@ public class IceWall extends Wall {
     }
 
     @Override
-    public void placeEffects(boolean quiet) {
+    public void placeEffect(boolean quiet) {
         if (!quiet) spawnParticles();
         connectWallQueues++;
     }

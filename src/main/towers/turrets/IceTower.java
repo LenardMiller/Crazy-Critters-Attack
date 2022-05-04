@@ -68,11 +68,6 @@ public class IceTower extends Turret {
         betweenIdleFrames = 5;
         betweenFireFrames = 3;
         VAPOR_TRAIL = animatedSprites.get("iceTowerVaporTrailTR");
-
-        loadSprites();
-        setUpgrades();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override
@@ -190,7 +185,7 @@ public class IceTower extends Turret {
         if (tile.tower == null) {
             tile.tower = new IceWall(p, tile, wallHp, wallTimeUntilDamage);
             Wall wall = (Wall) tile.tower;
-            wall.placeEffects(false);
+            wall.placeEffect(false);
             updateCombatPoints();
             updateTowerArray();
             frozenTotal++;
@@ -218,7 +213,7 @@ public class IceTower extends Turret {
         p.rotate(angle);
         p.tint(255, tintColor, tintColor);
         if (sprite != null) p.image(sprite,-size.x/2-offset,-size.y/2-offset);
-        else System.out.println("missing!");
+        else System.out.println("Turret sprite missing!");
         p.popMatrix();
         p.tint(255);
     }

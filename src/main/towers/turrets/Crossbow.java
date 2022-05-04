@@ -33,11 +33,6 @@ public class Crossbow extends Turret {
         value = price;
         priority = Priority.Far;
         titleLines = new String[]{"Crossbow"};
-
-        loadSprites();
-        setUpgrades();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

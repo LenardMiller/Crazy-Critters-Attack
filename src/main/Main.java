@@ -95,7 +95,7 @@ public class Main extends PApplet {
             won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, useOpenGL, gore, hasVerticalBars;
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
-    public static boolean dev = false;
+    public static boolean dev = true;
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;
@@ -257,6 +257,7 @@ public class Main extends PApplet {
                 try {
                     Loader.load(this);
                 } catch (RuntimeException ex) {
+                    System.out.println(ex);
                     screen = Screen.LevelSelect;
                 }
                 break;

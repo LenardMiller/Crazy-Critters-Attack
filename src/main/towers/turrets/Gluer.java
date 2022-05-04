@@ -52,11 +52,6 @@ public class Gluer extends Turret {
             else p.text("1 kill", 910, 475 + o);
             p.text(nfc(damageTotal) + " total dmg", 910, 500 + o);
         };
-
-        setUpgrades();
-        loadSprites();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override

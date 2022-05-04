@@ -32,11 +32,6 @@ public class Slingshot extends Turret {
         value = price;
 
         titleLines = new String[]{"Slingshot"};
-
-        loadSprites();
-        setUpgrades();
-        spawnParticles();
-        playSoundRandomSpeed(p, placeSound, 1);
     }
 
     @Override
