@@ -26,9 +26,9 @@ public abstract class BurrowingEnemy extends Enemy {
         swapPoints(false);
 
         if (!paused && !immobilized) {
-            angle = normalizeAngle(angle);
+            rotation = normalizeAngle(rotation);
             targetAngle = normalizeAngle(targetAngle);
-            angle += getAngleDifference(targetAngle, angle) / 10;
+            rotation += getAngleDifference(targetAngle, rotation) / 10;
 
             switch (state) {
                 case Moving:
@@ -63,7 +63,7 @@ public abstract class BurrowingEnemy extends Enemy {
             PVector particalPosition = randomPosition();
             bottomParticles.add(new Pile(p, particalPosition.x, particalPosition.y, 0, levels[currentLevel].groundType));
         }
-        PVector m = PVector.fromAngle(angle);
+        PVector m = PVector.fromAngle(rotation);
         float pixelsMoved = getActualSpeed() / FRAMERATE;
         m.setMag(pixelsMoved);
         //don't move if no path

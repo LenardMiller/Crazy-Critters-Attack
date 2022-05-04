@@ -2,11 +2,15 @@ package main.misc;
 
 import main.Game;
 import main.Main;
+import main.enemies.Enemy;
 import processing.core.PApplet;
+import processing.core.PVector;
+import processing.data.JSONArray;
 import processing.data.JSONObject;
 
 import java.io.File;
 
+import static processing.core.PApplet.loadJSONArray;
 import static processing.core.PApplet.loadJSONObject;
 
 public class Loader {
@@ -29,6 +33,7 @@ public class Loader {
      */
     public static void load(PApplet p) {
         level(p);
+        enemies(p);
 
         Main.screen = Main.Screen.InGame;
     }
@@ -45,7 +50,31 @@ public class Loader {
         Main.paused = true;
     }
 
+    private static void enemies(PApplet p) {
+        JSONArray array = loadArray("enemies");
+
+        for (int i = 0; i < array.size(); i++) {
+            JSONObject object = array.getJSONObject(i);
+            Enemy enemy = Enemy.get(p,
+                    object.getString("type"),
+                    new PVector(
+                            object.getFloat("x"),
+                            object.getFloat("y")
+                    ));
+            assert enemy != null;
+            enemy.rotation = object.getFloat("rotation");
+            enemy.hp = object.getInt("hp");
+            if (enemy.hp < enemy.maxHp) enemy.showBar = true;
+
+            Main.enemies.add(enemy);
+        }
+    }
+
     private static JSONObject loadObject(String name) {
         return loadJSONObject(new File(filePath() + "/data/save/" + name + ".json"));
+    }
+
+    private static JSONArray loadArray(String name) {
+        return loadJSONArray(new File(filePath() + "/data/save/" + name + ".json"));
     }
 }

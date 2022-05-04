@@ -189,7 +189,7 @@ public class Frost extends FlyingEnemy {
     @Override
     protected void damageEffect(boolean particles) {
         if (hp == maxHp) return;
-        barAlpha = 255;
+        showBar = true;
         if (particles) {
             int num = (int) p.random(pfSize, pfSize * pfSize);
             for (int j = num; j >= 0; j--) { //sprays ouch

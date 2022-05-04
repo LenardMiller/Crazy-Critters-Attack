@@ -1,11 +1,15 @@
 package main.enemies;
 
+import com.sun.istack.internal.Nullable;
 import main.Main;
 import main.buffs.*;
 import main.buffs.glued.Glued;
 import main.buffs.glued.SpikeyGlued;
 import main.buffs.stunned.Frozen;
 import main.buffs.stunned.Stunned;
+import main.enemies.burrowingEnemies.*;
+import main.enemies.flyingEnemies.*;
+import main.enemies.shootingEnemies.*;
 import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;
@@ -41,9 +45,9 @@ public abstract class Enemy {
     /** measured in pixels per second */
     public float speed;
     public float speedModifier;
-    public float angle;
+    public float rotation;
     public float radius;
-    public int barAlpha;
+    public boolean showBar;
     public int hp;
     public int maxHp;
     public int attackFrame;
@@ -96,7 +100,7 @@ public abstract class Enemy {
         trail = new ArrayList<>();
         position = new PVector(roundTo(x, 25) + 12.5f, roundTo(y, 25) + 12.5f);
         size = new PVector(20, 20);
-        angle = radians(270);
+        rotation = radians(270);
         radius = 10;
         speed = 60;
         speedModifier = 1;
@@ -104,7 +108,6 @@ public abstract class Enemy {
         damage = 1;
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
-        barAlpha = 0;
         hitParticle = "redOuch";
         name = "";
         betweenWalkFrames = 0;
@@ -125,9 +128,9 @@ public abstract class Enemy {
         swapPoints(false);
 
         if (!paused && !immobilized) {
-            angle = normalizeAngle(angle);
+            rotation = normalizeAngle(rotation);
             targetAngle = normalizeAngle(targetAngle);
-            angle += getAngleDifference(targetAngle, angle) / 10;
+            rotation += getAngleDifference(targetAngle, rotation) / 10;
 
             switch (state) {
                 case Moving:
@@ -191,7 +194,7 @@ public abstract class Enemy {
         if (overkill) {
             for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
                 float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
-                corpses.add(new Corpse(p, position, partSize, angle, adjustPartVelocityToFramerate(partsDirection),
+                corpses.add(new Corpse(p, position, partSize, rotation, adjustPartVelocityToFramerate(partsDirection),
                   currentTintColor ,p.random(radians(-maxRotationSpeed), radians(maxRotationSpeed)),
                   0, corpseLifespan, type, name + "Parts", hitParticle, j, false));
             }
@@ -202,7 +205,7 @@ public abstract class Enemy {
             }
         } else
             corpses.add(new Corpse(p, position, corpseSize,
-              angle + p.random(radians(-5), radians(5)), new PVector(0, 0),
+              rotation + p.random(radians(-5), radians(5)), new PVector(0, 0),
               currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
               "none", 0, true));
     }
@@ -235,7 +238,7 @@ public abstract class Enemy {
     }
 
     protected void move() {
-        PVector m = PVector.fromAngle(angle);
+        PVector m = PVector.fromAngle(rotation);
         float pixelsMoved = getActualSpeed() / FRAMERATE;
         m.setMag(pixelsMoved);
         //don't move if no path
@@ -289,7 +292,7 @@ public abstract class Enemy {
         int x = 1;
         if (pfSize > 1) x++;
         p.translate(position.x + x, position.y + x);
-        p.rotate(angle);
+        p.rotate(rotation);
         if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
         p.tint(255);
         p.popMatrix();
@@ -302,7 +305,7 @@ public abstract class Enemy {
         }
         p.pushMatrix();
         p.translate(position.x, position.y);
-        p.rotate(angle);
+        p.rotate(rotation);
         p.tint(currentTintColor.getRGB());
         if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
@@ -412,7 +415,7 @@ public abstract class Enemy {
      * @param direction where parts will be flung, (0, 0) for everywhere
      * @param displayParticles whether it should spawn particles
      */
-    public void damageWithoutBuff(int damage, Turret turret, String damageType, PVector direction, boolean displayParticles) {
+    public void damageWithoutBuff(int damage, @Nullable Turret turret, String damageType, PVector direction, boolean displayParticles) {
         lastDamageType = damageType;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -440,7 +443,7 @@ public abstract class Enemy {
      */
     protected void damageEffect(boolean particles) {
         if (hp == maxHp) return;
-        barAlpha = 255;
+        showBar = true;
         if (particles) {
             int num = pfSize;
             int chance = 5;
@@ -465,12 +468,13 @@ public abstract class Enemy {
     }
 
     public void hpBar() {
+        if (!showBar) return;
         Color barColor = new Color(255, 0, 0);
         float barWidth = size.x * (hp / (float) maxHp);
-        p.stroke(barColor.getRGB(), barAlpha);
+        p.stroke(barColor.getRGB());
         p.noFill();
         p.rect(position.x - size.x / 2, position.y + size.y / 2 + 6, size.x, 6);
-        p.fill(barColor.getRGB(), barAlpha);
+        p.fill(barColor.getRGB());
         p.rect(position.x - size.x / 2, position.y + size.y / 2 + 6, barWidth, 6);
     }
 
@@ -479,6 +483,7 @@ public abstract class Enemy {
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         attackFrames = animatedSprites.get(name + "AttackEN");
         moveFrames = animatedSprites.get(name + "MoveEN");
+        sprite = moveFrames[0];
         maxTintColor = getTintColor();
         currentTintColor = new Color(255, 255, 255);
     }
@@ -555,6 +560,118 @@ public abstract class Enemy {
 
     public boolean onScreen() {
         return position.x > 0 && position.x < 900 && position.y > 0 && position.y < 900;
+    }
+
+    public static Enemy get(PApplet p, String name, PVector pos) {
+        switch (name) {
+            case "smolBug":
+                return new SmolBug(p, pos.x, pos.y);
+            case "midBug":
+                return new MidBug(p, pos.x, pos.y);
+            case "Big Bugs":
+            case "bigBug":
+                return new BigBug(p, pos.x, pos.y);
+            case "treeSprite":
+                return new TreeSprite(p, pos.x, pos.y);
+            case "Tree Spirits":
+            case "treeSpirit":
+                return new TreeSpirit(p, pos.x, pos.y);
+            case "Tree Giants":
+            case "treeGiant":
+                return new TreeGiant(p, pos.x, pos.y);
+            case "snake":
+                return new Snake(p, pos.x, pos.y);
+            case "littleWorm":
+                return new Worm(p, pos.x, pos.y);
+            case "butterfly":
+                return new Butterfly(p, pos.x, pos.y);
+            case "scorpion":
+                return new Scorpion(p, pos.x, pos.y);
+            case "sidewinder":
+                return new Sidewinder(p, pos.x, pos.y);
+            case "emperor":
+                return new Emperor(p, pos.x, pos.y);
+            case "midWorm":
+                return new MidWorm(p, pos.x, pos.y);
+            case "Worms":
+            case "Megaworms":
+            case "bigWorm":
+                return new BigWorm(p, pos.x, pos.y);
+            case "albinoBug":
+                return new AlbinoBug(p, pos.x, pos.y);
+            case "bigAlbinoBug":
+                return new BigAlbinoBug(p, pos.x, pos.y);
+            case "albinoButterfly":
+                return new AlbinoButterfly(p, pos.x, pos.y);
+            case "smallGolem":
+                return new SmallGolem(p, pos.x, pos.y);
+            case "midGolem":
+                return new Golem(p, pos.x, pos.y);
+            case "bigGolem":
+                return new GiantGolem(p, pos.x, pos.y);
+            case "bat":
+                return new Bat(p, pos.x, pos.y);
+            case "bigBat":
+                return new GiantBat(p, pos.x, pos.y);
+            case "wtf":
+                return new Wtf(p, pos.x, pos.y);
+            case "antlion":
+                return new Antlion(p, pos.x, pos.y);
+            case "Antlions":
+            case "snowAntlion":
+                return new SnowAntlion(p, pos.x, pos.y);
+            case "Wolves":
+            case "wolf":
+                return new Wolf(p, pos.x, pos.y);
+            case "Snow Sharks":
+            case "shark":
+                return new Shark(p, pos.x, pos.y);
+            case "Velociraptors":
+            case "velociraptor":
+                return new Velociraptor(p, pos.x, pos.y);
+            case "Ice Entities":
+            case "iceEntity":
+                return new IceEntity(p, pos.x, pos.y);
+            case "Ice Monstrosity":
+            case "Ice Monstrosities":
+            case "iceMonstrosity":
+                return new IceMonstrosity(p, pos.x, pos.y);
+            case "Frost":
+            case "frost":
+                return new Frost(p, pos.x, pos.y);
+            case "Mammoth":
+            case "Mammoths":
+            case "mammoth":
+                return new Mammoth(p, pos.x, pos.y);
+            case "Mud Creatures":
+            case "mudCreature":
+                return new MudCreature(p, pos.x, pos.y);
+            case "Mud Flingers":
+            case "mudFlinger":
+                return new MudFlinger(p, pos.x, pos.y);
+            case "Enraged Giants":
+            case "Enraged Giant":
+            case "enragedGiant":
+                return new EnragedGiant(p, pos.x, pos.y);
+            case "Mantises":
+            case "Mantis":
+            case "mantis":
+                return new Mantis(p, pos.x, pos.y);
+            case "Roaches":
+            case "roach":
+                return new Roach(p, pos.x, pos.y);
+            case "Roots":
+            case "root":
+                return new Root(p, pos.x, pos.y);
+            case "Mantoids":
+            case "mantoid":
+                return new Mantoid(p, pos.x, pos.y);
+            case "Twisted":
+            case "twisted":
+                return new Twisted(p, pos.x, pos.y);
+            default:
+                return null;
+        }
     }
 
     //pathfinding ------------------------------------------------------------------------------------------------------

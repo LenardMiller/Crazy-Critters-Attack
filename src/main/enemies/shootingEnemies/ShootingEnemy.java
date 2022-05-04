@@ -6,7 +6,6 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
-import processing.sound.SoundFile;
 
 import java.awt.*;
 
@@ -54,9 +53,9 @@ public abstract class ShootingEnemy extends Enemy {
             }
 
             if (state != State.Special) {
-                angle = normalizeAngle(angle);
+                rotation = normalizeAngle(rotation);
                 targetAngle = normalizeAngle(targetAngle);
-                angle += getAngleDifference(targetAngle, angle) / 10;
+                rotation += getAngleDifference(targetAngle, rotation) / 10;
             }
 
             if (canTargetTurret()) state = State.Special;
@@ -137,9 +136,9 @@ public abstract class ShootingEnemy extends Enemy {
         if (shootFrame != shootFireFrame || idleTime != 0) return;
         float projectileAngle = findAngle(position,
           new PVector(target.tile.position.x - 25, target.tile.position.y - 25));
-        angle = (projectileAngle - HALF_PI);
+        rotation = (projectileAngle - HALF_PI);
         PVector projectilePosition = new PVector(position.x, position.y);
-        PVector barrel = PVector.fromAngle(angle);
+        PVector barrel = PVector.fromAngle(rotation);
         barrel.setMag(barrelLength); //barrel length
         projectilePosition.add(barrel);
         playSoundRandomSpeed(p, attackSound, 1);

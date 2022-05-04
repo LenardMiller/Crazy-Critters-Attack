@@ -72,7 +72,7 @@ public class IceEntity extends ShootingEnemy {
         int x = 1;
         if (pfSize > 1) x++;
         p.translate(position.x + x, position.y + x);
-        p.rotate(angle);
+        p.rotate(rotation);
         if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
         p.rotate(orbitAngle);
         p.image(orbitSprite, -size.x / 2, -size.y / 2);
@@ -87,7 +87,7 @@ public class IceEntity extends ShootingEnemy {
         }
         p.pushMatrix();
         p.translate(position.x, position.y);
-        p.rotate(angle);
+        p.rotate(rotation);
         p.tint(currentTintColor.getRGB());
         if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
         p.rotate(orbitAngle);

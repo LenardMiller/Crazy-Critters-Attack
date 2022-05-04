@@ -121,7 +121,7 @@ public class Wave {
             spawns.remove(spawns.size() - 1);
             PVector pos;
             pos = randomSpawnPosition(P);
-            enemies.add(getEnemy(s, pos));
+            enemies.add(Enemy.get(P, s, pos));
             enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
         }
     }
@@ -171,118 +171,6 @@ public class Wave {
     }
 
     private Enemy getEnemy(String name) {
-        return getEnemy(name, new PVector(0,0));
-    }
-
-    private Enemy getEnemy(String name, PVector pos) {
-        switch (name) {
-            case "smolBug":
-                return new SmolBug(P, pos.x, pos.y);
-            case "midBug":
-                return new MidBug(P, pos.x, pos.y);
-            case "Big Bugs":
-            case "bigBug":
-                return new BigBug(P, pos.x, pos.y);
-            case "treeSprite":
-                return new TreeSprite(P, pos.x, pos.y);
-            case "Tree Spirits":
-            case "treeSpirit":
-                return new TreeSpirit(P, pos.x, pos.y);
-            case "Tree Giants":
-            case "treeGiant":
-                return new TreeGiant(P, pos.x, pos.y);
-            case "snake":
-                return new Snake(P, pos.x, pos.y);
-            case "littleWorm":
-                return new Worm(P, pos.x, pos.y);
-            case "butterfly":
-                return new Butterfly(P, pos.x, pos.y);
-            case "scorpion":
-                return new Scorpion(P, pos.x, pos.y);
-            case "sidewinder":
-                return new Sidewinder(P, pos.x, pos.y);
-            case "emperor":
-                return new Emperor(P, pos.x, pos.y);
-            case "midWorm":
-                return new MidWorm(P, pos.x, pos.y);
-            case "Worms":
-            case "Megaworms":
-            case "bigWorm":
-                return new BigWorm(P, pos.x, pos.y);
-            case "albinoBug":
-                return new AlbinoBug(P, pos.x, pos.y);
-            case "bigAlbinoBug":
-                return new BigAlbinoBug(P, pos.x, pos.y);
-            case "albinoButterfly":
-                return new AlbinoButterfly(P, pos.x, pos.y);
-            case "smallGolem":
-                return new SmallGolem(P, pos.x, pos.y);
-            case "midGolem":
-                return new Golem(P, pos.x, pos.y);
-            case "bigGolem":
-                return new GiantGolem(P, pos.x, pos.y);
-            case "bat":
-                return new Bat(P, pos.x, pos.y);
-            case "bigBat":
-                return new GiantBat(P, pos.x, pos.y);
-            case "wtf":
-                return new Wtf(P, pos.x, pos.y);
-            case "antlion":
-                return new Antlion(P, pos.x, pos.y);
-            case "Antlions":
-            case "snowAntlion":
-                return new SnowAntlion(P, pos.x, pos.y);
-            case "Wolves":
-            case "wolf":
-                return new Wolf(P, pos.x, pos.y);
-            case "Snow Sharks":
-            case "shark":
-                return new Shark(P, pos.x, pos.y);
-            case "Velociraptors":
-            case "velociraptor":
-                return new Velociraptor(P, pos.x, pos.y);
-            case "Ice Entities":
-            case "iceEntity":
-                return new IceEntity(P, pos.x, pos.y);
-            case "Ice Monstrosity":
-            case "Ice Monstrosities":
-            case "iceMonstrosity":
-                return new IceMonstrosity(P, pos.x, pos.y);
-            case "Frost":
-            case "frost":
-                return new Frost(P, pos.x, pos.y);
-            case "Mammoth":
-            case "Mammoths":
-            case "mammoth":
-                return new Mammoth(P, pos.x, pos.y);
-            case "Mud Creatures":
-            case "mudCreature":
-                return new MudCreature(P, pos.x, pos.y);
-            case "Mud Flingers":
-            case "mudFlinger":
-                return new MudFlinger(P, pos.x, pos.y);
-            case "Enraged Giants":
-            case "Enraged Giant":
-            case "enragedGiant":
-                return new EnragedGiant(P, pos.x, pos.y);
-            case "Mantises":
-            case "Mantis":
-            case "mantis":
-                return new Mantis(P, pos.x, pos.y);
-            case "Roaches":
-            case "roach":
-                return new Roach(P, pos.x, pos.y);
-            case "Roots":
-            case "root":
-                return new Root(P, pos.x, pos.y);
-            case "Mantoids":
-            case "mantoid":
-                return new Mantoid(P, pos.x, pos.y);
-            case "Twisted":
-            case "twisted":
-                return new Twisted(P, pos.x, pos.y);
-            default:
-                return null;
-        }
+        return Enemy.get(P, name, new PVector(0,0));
     }
 }

@@ -27,7 +27,7 @@ public class BlueBurning extends Buff {
         if (enId < 0) buffs.remove(this);
         else {
             Enemy enemy = enemies.get(enId);
-            enemy.barAlpha = 255;
+            enemy.showBar = true;
             enemy.damageWithoutBuff((int) effectLevel, turret, "blueBurning", new PVector(0, 0), false);
         }
     }
