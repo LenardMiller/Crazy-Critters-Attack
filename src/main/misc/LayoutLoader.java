@@ -12,7 +12,7 @@ import java.io.IOException;
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 
-public class DataControl extends ClassLoader {
+public class LayoutLoader extends ClassLoader {
 
     private static String filePath() {
         return new File("").getAbsolutePath();
@@ -57,7 +57,7 @@ public class DataControl extends ClassLoader {
         saveArray.setJSONObject(i, saveObject);
 
         String name = "Save-"+month()+"-"+day()+"-"+year()+"-"+hour() +"-"+minute()+"-"+second();
-        new File(filePath() + "/data/saves/" + name + ".json");
+        new File(filePath() + "/data/" + name + ".json");
         FileWriter saveWriter = new FileWriter("resources/data/saves/" + name + ".json");
         saveWriter.write(saveArray.toString());
         saveWriter.close();

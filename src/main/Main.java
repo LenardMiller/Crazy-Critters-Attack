@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import static java.lang.Character.toLowerCase;
-import static main.misc.DataControl.loadSettings;
+import static main.misc.LayoutLoader.loadSettings;
 
 public class Main extends PApplet {
 
@@ -42,7 +42,8 @@ public class Main extends PApplet {
         LevelSelect,
         Loading,
         Title,
-        Exit
+        Exit,
+        PlayOrLevelSelect
     }
 
     public static Tile.TileDS tiles;
@@ -242,6 +243,13 @@ public class Main extends PApplet {
                 break;
             case Exit:
                 exit();
+                break;
+            case PlayOrLevelSelect:
+                try {
+                    Loader.load(this);
+                } catch (RuntimeException ex) {
+                    screen = Screen.LevelSelect;
+                }
                 break;
         }
         if (settings) settingsGui.main();

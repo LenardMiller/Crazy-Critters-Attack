@@ -6,6 +6,7 @@ import main.enemies.flyingEnemies.*;
 import main.enemies.shootingEnemies.*;
 import main.gui.guiObjects.PopupText;
 import main.misc.Polluter;
+import main.misc.Saver;
 import main.towers.IceWall;
 import main.towers.Tower;
 import main.towers.turrets.Booster;
@@ -92,6 +93,7 @@ public class Wave {
         int reward = (int) (levels[currentLevel].reward + levels[currentLevel].reward * 0.2f * enemies.size());
         money += reward;
         popupTexts.add(new PopupText(P, new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), reward));
+        Saver.save();
     }
 
     /** Calculates the time between spawns. */
@@ -240,32 +242,44 @@ public class Wave {
             case "velociraptor":
                 return new Velociraptor(P, pos.x, pos.y);
             case "Ice Entities":
+            case "iceEntity":
                 return new IceEntity(P, pos.x, pos.y);
             case "Ice Monstrosity":
             case "Ice Monstrosities":
+            case "iceMonstrosity":
                 return new IceMonstrosity(P, pos.x, pos.y);
             case "Frost":
+            case "frost":
                 return new Frost(P, pos.x, pos.y);
             case "Mammoth":
             case "Mammoths":
+            case "mammoth":
                 return new Mammoth(P, pos.x, pos.y);
             case "Mud Creatures":
+            case "mudCreature":
                 return new MudCreature(P, pos.x, pos.y);
             case "Mud Flingers":
+            case "mudFlinger":
                 return new MudFlinger(P, pos.x, pos.y);
             case "Enraged Giants":
             case "Enraged Giant":
+            case "enragedGiant":
                 return new EnragedGiant(P, pos.x, pos.y);
             case "Mantises":
             case "Mantis":
+            case "mantis":
                 return new Mantis(P, pos.x, pos.y);
             case "Roaches":
+            case "roach":
                 return new Roach(P, pos.x, pos.y);
             case "Roots":
+            case "root":
                 return new Root(P, pos.x, pos.y);
             case "Mantoids":
+            case "mantoid":
                 return new Mantoid(P, pos.x, pos.y);
             case "Twisted":
+            case "twisted":
                 return new Twisted(P, pos.x, pos.y);
             default:
                 return null;

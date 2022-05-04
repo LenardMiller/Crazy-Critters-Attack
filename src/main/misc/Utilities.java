@@ -1,6 +1,5 @@
 package main.misc;
 
-import main.particles.Particle;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
@@ -10,7 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 
 import static main.Main.*;
-import static main.misc.DataControl.saveSettings;
+import static main.misc.LayoutLoader.saveSettings;
 
 public class Utilities {
 

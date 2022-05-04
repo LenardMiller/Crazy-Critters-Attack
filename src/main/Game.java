@@ -9,7 +9,7 @@ import main.enemies.flyingEnemies.FlyingEnemy;
 import main.gui.inGame.*;
 import main.levelStructure.*;
 import main.misc.Corpse;
-import main.misc.DataControl;
+import main.misc.LayoutLoader;
 import main.misc.Tile;
 import main.particles.Particle;
 import main.pathfinding.AStar;
@@ -302,7 +302,7 @@ public class Game {
                 "levels/glacier",    1500, 200, "snow");
         levels[4] = new Level(p, DeepForestWaves.genDeepForestWaves(p),
                 "levels/deepForest", 2500, 350, "dirt");
-        DataControl.loadLayout(p, levels[currentLevel].layout);
+        LayoutLoader.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateAll();
         //gui stuff

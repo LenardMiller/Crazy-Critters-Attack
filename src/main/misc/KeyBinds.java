@@ -239,7 +239,7 @@ public class KeyBinds {
             hand.setHeld("null");
         } if (saveTiles) {
             try {
-                DataControl.saveLayout();
+                LayoutLoader.saveLayout();
             } catch (IOException exception) {
                 exception.printStackTrace();
             }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static main.Main.FRAMERATE;
 import static main.Main.tiles;
-import static main.misc.DataControl.loadTile;
+import static main.misc.LayoutLoader.loadTile;
 
 public class Polluter {
 
