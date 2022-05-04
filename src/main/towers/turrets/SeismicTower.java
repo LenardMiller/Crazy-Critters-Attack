@@ -39,8 +39,7 @@ public class SeismicTower extends Turret {
         fireSound = sounds.get("seismicSlam");
         barrelLength = 29;
         material = "stone";
-        price = SEISMIC_PRICE;
-        value = price;
+        value = SEISMIC_PRICE;
         titleLines = new String[]{"Seismic Tower"};
         infoDisplay = (o) -> selection.setTextPurple("Shockwave", o);
     }

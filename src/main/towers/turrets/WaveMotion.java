@@ -40,8 +40,7 @@ public class WaveMotion extends Turret {
         damageSound = sounds.get("titaniumDamage");
         fireSound = stackableSounds.get("beam");
         material = "darkMetal";
-        price = WAVE_MOTION_PRICE;
-        value = price;
+        value = WAVE_MOTION_PRICE;
         priority = Priority.Far;
         titleLines = new String[]{"Death Beam"};
         infoDisplay = (o) -> selection.setTextPurple("Piercing", o);

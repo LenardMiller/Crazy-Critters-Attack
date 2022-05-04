@@ -28,7 +28,6 @@ public class Nightmare extends Turret {
         barrelLength = 20;
         loadSprites();
         material = "darkMetal";
-        price = 300;
         value = NIGHTMARE_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Nightmare", "Shotgun"};

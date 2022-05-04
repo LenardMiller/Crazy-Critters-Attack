@@ -30,7 +30,6 @@ public class IceWall extends Wall {
         material = "ice";
         damageSound = sounds.get("iceDamage");
         breakSound = sounds.get("iceBreak");
-        price = 0;
         value = 0;
         nextLevelB = 4;
 
@@ -48,7 +47,6 @@ public class IceWall extends Wall {
     @Override
     public void main() {
         if (hp <= 0) die(false);
-        value = (int)(((float)hp / (float)maxHp) * price);
         if (!paused && alive) {
             if (TIME_UNTIL_DAMAGE != -1) {
                 damageTimer++;

@@ -34,8 +34,7 @@ public class TeslaTower extends Turret {
         range = 225;
         betweenIdleFrames = down60ToFramerate(3);
         material = "metal";
-        price = TESLA_TOWER_PRICE;
-        value = price;
+        value = TESLA_TOWER_PRICE;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");

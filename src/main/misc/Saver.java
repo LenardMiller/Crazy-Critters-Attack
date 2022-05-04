@@ -25,7 +25,6 @@ public class Saver {
 
     /* Everything I need to save:
      * How polluted a level is
-     * Turret position, hp, level
      * IceWall position, hp, lifespan
      * Projectile position, rotation?
      */

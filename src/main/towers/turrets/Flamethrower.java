@@ -38,8 +38,7 @@ public class Flamethrower extends Turret {
         damage = 20;
         delay = 0;
         material = "metal";
-        price = FLAMETHROWER_PRICE;
-        value = price;
+        value = FLAMETHROWER_PRICE;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");

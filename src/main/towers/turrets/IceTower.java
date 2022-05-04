@@ -51,8 +51,7 @@ public class IceTower extends Turret {
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("iceFire");
-        price = ICE_TOWER_PRICE;
-        value = price;
+        value = ICE_TOWER_PRICE;
         titleLines = new String[]{"Freeze Ray"};
         infoDisplay = (o) -> {
             selection.setTextPurple("Encases enemies", o);
@@ -181,7 +180,7 @@ public class IceTower extends Turret {
         }
     }
 
-    private void placeWall(Tile tile) {
+    private void placeWall(Tile tile) { //todo: nullpointerexception
         if (tile.tower == null) {
             tile.tower = new IceWall(p, tile, wallHp, wallTimeUntilDamage);
             Wall wall = (Wall) tile.tower;

@@ -38,8 +38,7 @@ public class Gluer extends Turret {
         fireParticle = "glue";
         barrelLength = 28;
         material = "stone";
-        price = GLUER_PRICE;
-        value = price;
+        value = GLUER_PRICE;
         titleLines = new String[]{"Gluer"};
         infoDisplay = (o) -> selection.setTextPurple("Slows", o);
         statsDisplay = (o) -> {

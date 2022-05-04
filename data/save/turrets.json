@@ -1,16 +1,25 @@
 [
   {
+    "moneyTotal": 0,
+    "x": 350,
+    "y": 600,
+    "type": "Booster",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
     "x": 450,
     "y": 600,
-    "damageTotal": 18750,
-    "killsTotal": 117,
+    "damageTotal": 344050,
+    "killsTotal": 210,
     "type": "TeslaTower",
     "levelA": 2,
     "priority": 2,
     "levelB": 3
   },
   {
-    "moneyTotal": 25000,
+    "moneyTotal": 55000,
     "x": 450,
     "y": 650,
     "type": "Booster",
@@ -21,14 +30,14 @@
   {
     "x": 500,
     "y": 650,
-    "frozenTotal": 22,
+    "frozenTotal": 82,
     "type": "IceTower",
-    "levelA": 0,
+    "levelA": 2,
     "priority": 3,
-    "levelB": 0
+    "levelB": 3
   },
   {
-    "gluedTotal": 4,
+    "gluedTotal": 9,
     "x": 550,
     "y": 650,
     "damageTotal": 500,

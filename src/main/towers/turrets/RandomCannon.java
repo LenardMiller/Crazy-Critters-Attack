@@ -32,8 +32,7 @@ public class RandomCannon extends Turret {
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("luggageBlaster");
         material = "wood";
-        price = RANDOM_CANNON_PRICE;
-        value = price;
+        value = RANDOM_CANNON_PRICE;
         titleLines = new String[]{"Luggage", "Launcher"};
     }
 

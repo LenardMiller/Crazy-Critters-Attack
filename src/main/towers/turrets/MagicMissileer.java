@@ -71,8 +71,7 @@ public class MagicMissileer extends Turret {
         damageSound = sounds.get("crystalDamage");
         breakSound = sounds.get("crystalBreak");
         material = "crystal";
-        price = MAGIC_MISSILEER_PRICE;
-        value = price;
+        value = MAGIC_MISSILEER_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Magic Missile", "Launcher"};
         infoDisplay = (o) -> {

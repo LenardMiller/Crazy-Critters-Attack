@@ -29,8 +29,7 @@ public class Crossbow extends Turret {
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("crossbow");
         material = "wood";
-        price = CROSSBOW_PRICE;
-        value = price;
+        value = CROSSBOW_PRICE;
         priority = Priority.Far;
         titleLines = new String[]{"Crossbow"};
     }

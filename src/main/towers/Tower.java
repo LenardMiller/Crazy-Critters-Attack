@@ -34,7 +34,6 @@ public abstract class Tower {
     public int hp;
     public int nextLevelA;
     public int nextLevelB;
-    public int price;
     public int value;
     public int[] upgradePrices;
     public boolean hit;
@@ -72,7 +71,6 @@ public abstract class Tower {
         hit = false;
         tintColor = 255;
         material = "wood";
-        price = 0;
         visualize = false;
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];

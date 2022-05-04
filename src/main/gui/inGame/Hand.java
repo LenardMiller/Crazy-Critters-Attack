@@ -464,9 +464,10 @@ public class Hand {
                 break;
             case "wall":
                 if (tile.tower instanceof Wall) { //upgrade
-                    if (tile.tower.nextLevelB < tile.tower.upgradeIcons.length && money >= tile.tower.price) { //upgrade
-                        money -= tile.tower.upgradePrices[tile.tower.nextLevelB];
-                        tile.tower.upgrade(0, false);
+                    Wall wall = (Wall) tile.tower;
+                    if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.price) { //upgrade
+                        money -= wall.upgradePrices[wall.nextLevelB];
+                        wall.upgrade(0, false);
                         connectWallQueues++;
                     }
                     money += price; //cancel out price change later

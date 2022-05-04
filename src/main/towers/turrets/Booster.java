@@ -35,8 +35,7 @@ public class Booster extends Turret {
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         betweenIdleFrames = 4;
-        price = BOOSTER_PRICE;
-        value = price;
+        value = BOOSTER_PRICE;
         hasPriority = false;
         titleLines = new String[]{"Booster"};
 

@@ -16,6 +16,8 @@ public class Wall extends Tower {
 
     public final int[] UPGRADE_HP;
 
+    public int price;
+
     private final CornerSpriteDS WOOD;
     private final CornerSpriteDS STONE;
     private final CornerSpriteDS METAL;
@@ -87,7 +89,7 @@ public class Wall extends Tower {
     public void main() {
         if (hp <= 0) die(false);
         updateBoosts();
-        value = (int)(((float)hp / (float)getMaxHp()) * price);
+        value = (int) ((hp / (float) getMaxHp()) * value);
     }
 
     @Override

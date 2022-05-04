@@ -34,8 +34,7 @@ public class Cannon extends Turret {
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("smallExplosion");
         material = "stone";
-        price = CANNON_PRICE;
-        value = price;
+        value = CANNON_PRICE;
         fireParticle = "smoke";
         barrelLength = 29;
         titleLines = new String[]{"Cannon"};

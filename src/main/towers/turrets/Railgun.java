@@ -44,8 +44,7 @@ public class Railgun extends Turret {
         vaporEndSprites = animatedSprites.get("railgunBlastPT");
         material = "titanium";
         barrelLength = 30;
-        price = RAILGUN_PRICE;
-        value = price;
+        value = RAILGUN_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Railgun"};
 
