@@ -410,7 +410,8 @@ public class Hand {
         }
     }
 
-    /** Puts down tower and subtracts price. */
+    /** Puts down tower and subtracts price.
+     * Assumes it is possible to do so */
     private void place() {
         Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
         boolean changeHeld = true;
@@ -428,7 +429,7 @@ public class Hand {
             changeHeld = false;
             tile.tower.placeEffect(false);
         } else {
-            System.out.println(held.substring(0,1).toUpperCase() + held.substring(1));
+//            System.out.println(held.substring(0,1).toUpperCase() + held.substring(1));
             tile.tower = Turret.get(P, held.substring(0,1).toUpperCase() + held.substring(1), tile);
             if (tile.tower != null) {
                 tile.tower.placeEffect(false);

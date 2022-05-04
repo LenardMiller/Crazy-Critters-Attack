@@ -29,6 +29,7 @@ import processing.sound.Sound;
 import processing.sound.SoundFile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -257,7 +258,9 @@ public class Main extends PApplet {
                 try {
                     Loader.load(this);
                 } catch (RuntimeException ex) {
-                    System.out.println(ex);
+                    System.out.println("Could not load from saves because:\n    " +
+                            ex + "\n    " +
+                            Arrays.toString(ex.getStackTrace()));
                     screen = Screen.LevelSelect;
                 }
                 break;

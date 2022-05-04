@@ -501,7 +501,7 @@ public abstract class Turret extends Tower {
                 return new Crossbow(p, tile);
             case "EnergyBlaster":
                 return new EnergyBlaster(p, tile);
-            case "FlameThrower":
+            case "Flamethrower":
                 return new Flamethrower(p, tile);
             case "Gluer":
                 return new Gluer(p, tile);

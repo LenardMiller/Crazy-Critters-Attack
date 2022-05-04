@@ -1,0 +1,72 @@
+[
+  {
+    "x": 550,
+    "y": 300,
+    "damageTotal": 50,
+    "killsTotal": 1,
+    "type": "Slingshot",
+    "levelA": 0,
+    "priority": 0,
+    "levelB": 0
+  },
+  {
+    "x": 350,
+    "y": 350,
+    "damageTotal": 180,
+    "killsTotal": 3,
+    "type": "Flamethrower",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "x": 650,
+    "y": 450,
+    "damageTotal": 5,
+    "killsTotal": 1,
+    "type": "Slingshot",
+    "levelA": 0,
+    "priority": 0,
+    "levelB": 0
+  },
+  {
+    "x": 300,
+    "y": 500,
+    "damageTotal": 15,
+    "killsTotal": 0,
+    "type": "Slingshot",
+    "levelA": 0,
+    "priority": 0,
+    "levelB": 0
+  },
+  {
+    "x": 350,
+    "y": 550,
+    "damageTotal": 15,
+    "killsTotal": 0,
+    "type": "Slingshot",
+    "levelA": 0,
+    "priority": 0,
+    "levelB": 0
+  },
+  {
+    "x": 550,
+    "y": 550,
+    "damageTotal": -560,
+    "killsTotal": 4,
+    "type": "Flamethrower",
+    "levelA": 3,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 500,
+    "y": 650,
+    "damageTotal": 15,
+    "killsTotal": 0,
+    "type": "Slingshot",
+    "levelA": 0,
+    "priority": 0,
+    "levelB": 0
+  }
+]

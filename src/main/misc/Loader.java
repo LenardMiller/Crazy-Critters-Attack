@@ -97,7 +97,7 @@ public class Loader {
 
         ArrayList<Tower> towers = Main.towers;
         for (Tower tower : towers) {
-            if (tower instanceof Wall) ((Wall) tower).updateSprite();
+            if (tower instanceof Wall) tower.updateSprite();
         }
     }
 

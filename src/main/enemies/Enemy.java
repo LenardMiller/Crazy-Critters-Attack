@@ -582,6 +582,7 @@ public abstract class Enemy {
             case "snake":
                 return new Snake(p, pos.x, pos.y);
             case "littleWorm":
+            case "worm":
                 return new Worm(p, pos.x, pos.y);
             case "butterfly":
                 return new Butterfly(p, pos.x, pos.y);
