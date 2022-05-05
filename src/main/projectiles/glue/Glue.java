@@ -56,6 +56,7 @@ public class Glue extends Projectile {
                     Enemy splashEnemy = enemies.get(splashEnemyId);
                     if (enemyAlreadyHit(splashEnemy)) continue;
                     if (nearEnemy(splashEnemy)) {
+                        gluer.gluedTotal++;
                         applyVelocity = fromExplosionCenter(splashEnemy);
                         if (intersectingEnemy(splashEnemy)) applyVelocity = new PVector(0, 0);
                         splashEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret,

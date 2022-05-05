@@ -210,10 +210,10 @@ public class DesertWaves {
         waves[38].addSpawns("scorpion", 30);
         waves[38].addSpawns("antlion", 10);
 
-        waves[39] = new Wave(p, 250, 100, hordeFill, hordeAccent, hordeText, "Mega Horde");
-        waves[39].addSpawns("bigBug", 30);
-        waves[39].addSpawns("emperor", 20);
-        waves[39].addSpawns("bigWorm", 7);
+        waves[39] = new Wave(p, 60, 25, hordeFill, hordeAccent, hordeText, "Mega Horde");
+        waves[39].addSpawns("bigBug", 15);
+        waves[39].addSpawns("emperor", 10);
+        waves[39].addSpawns("bigWorm", 4);
 
         for (Wave wave : waves) wave.load();
         return waves;
