@@ -10,11 +10,13 @@ import static main.misc.LayoutLoader.loadTile;
 
 public class Polluter {
 
-    private final PApplet P;
-    private final ArrayList<Tile> CLEAN_TILES;
-    private final String NAME;
+    public final ArrayList<Tile> CLEAN_TILES;
+    public final String NAME;
 
-    private int betweenPollutes;
+    public int betweenPollutes;
+
+    private final PApplet P;
+
     private int polluteTimer;
 
     /**
@@ -31,6 +33,17 @@ public class Polluter {
         CLEAN_TILES = new ArrayList<>();
         for (int i = 0; i < tiles.size(); i++) {
             CLEAN_TILES.add(tiles.get(i));
+        }
+    }
+
+    /**
+     * Jumps the pollution to a certain level, immediately polluting the level that far
+     * @param cleanTilesSize how many clean tiles should be left.
+     */
+    public void setCleanTilesSize(int cleanTilesSize) {
+        int amountToRemove = CLEAN_TILES.size() - cleanTilesSize;
+        for (int i = 0; i < amountToRemove; i++) {
+            pollute();
         }
     }
 

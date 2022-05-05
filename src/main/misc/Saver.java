@@ -2,6 +2,7 @@ package main.misc;
 
 import main.Main;
 import main.enemies.Enemy;
+import main.levelStructure.Level;
 import main.towers.IceWall;
 import main.towers.Tower;
 import main.towers.Wall;
@@ -36,6 +37,7 @@ public class Saver {
         walls();
         turrets();
         iceWalls();
+        pollution();
     }
 
     /** Clears all the saves */
@@ -45,6 +47,7 @@ public class Saver {
         deleteFile("walls");
         deleteFile("turrets");
         deleteFile("iceWalls");
+        deleteFile("pollution");
     }
 
     private static void level() {
@@ -150,6 +153,24 @@ public class Saver {
         }
 
         saveObject(array.toString(), "turrets");
+    }
+
+    private static void pollution() {
+        JSONObject object = new JSONObject();
+
+        Level level = Main.levels[Main.currentLevel];
+        Polluter polluter = level.polluter;
+        if (polluter != null) {
+            object.setBoolean("exists", true);
+            object.setInt("cleanTilesSize", polluter.CLEAN_TILES.size());
+            object.setFloat("secondsBetweenPollutes", polluter.betweenPollutes / (float) Main.FRAMERATE);
+            object.setString("name", polluter.NAME);
+            if (level.lastPolluterName != null) {
+                object.setString("lastPolluterName", level.lastPolluterName);
+            }
+        }
+
+        saveObject(object.toString(), "pollution");
     }
 
     private static void saveObject(String object, String name) {

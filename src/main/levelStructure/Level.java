@@ -7,6 +7,7 @@ import processing.core.PConstants;
 import processing.core.PVector;
 
 import java.awt.*;
+import java.util.Objects;
 
 import static main.Main.*;
 
@@ -20,6 +21,7 @@ public class Level {
     public int reward;
     public String groundType;
     public Polluter polluter;
+    public String lastPolluterName;
 
     private final PApplet P;
 
@@ -37,7 +39,10 @@ public class Level {
     public void main() {
         if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
-            if (wave.polluter != null) polluter = wave.polluter;
+            if (wave.polluter != null) {
+                if (polluter != null && !Objects.equals(wave.polluter.NAME, polluter.NAME)) lastPolluterName = polluter.NAME;
+                polluter = wave.polluter;
+            }
             if (wave.groundType != null) groundType = wave.groundType;
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
             else if (!paused && alive) {

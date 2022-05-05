@@ -3,6 +3,7 @@ package main.misc;
 import main.Game;
 import main.Main;
 import main.enemies.Enemy;
+import main.levelStructure.Level;
 import main.towers.IceWall;
 import main.towers.Tower;
 import main.towers.Wall;
@@ -39,6 +40,7 @@ public class Loader {
         walls(p);
         iceWalls(p);
         turrets(p);
+        pollution(p);
 
         Main.screen = Main.Screen.InGame;
     }
@@ -162,6 +164,23 @@ public class Loader {
         }
 
         updateCombatPoints();
+    }
+
+    private static void pollution(PApplet p) {
+        JSONObject object = loadObject("pollution");
+
+        if (object.getBoolean("exists", false)) {
+            Level level = Main.levels[Main.currentLevel];
+            String lastPolluterName = object.getString("lastPolluterName", null);
+            //makes sure changes from previous polluter shows up
+            if (lastPolluterName != null) {
+                level.polluter = new Polluter(p, 0, lastPolluterName);
+                level.polluter.setCleanTilesSize(0);
+            }
+            level.polluter = new Polluter(p, object.getFloat("secondsBetweenPollutes"), object.getString("name"));
+            level.lastPolluterName = lastPolluterName; //ok if this is null
+            level.polluter.setCleanTilesSize(object.getInt("cleanTilesSize"));
+        }
     }
 
     private static JSONObject loadObject(String name) {
