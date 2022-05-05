@@ -14,8 +14,9 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class IceWall extends Wall {
 
+    public final int TIME_UNTIL_DAMAGE;
+
     private final CornerSpriteDS ICE;
-    private final int TIME_UNTIL_DAMAGE;
 
     private int damageTimer;
 

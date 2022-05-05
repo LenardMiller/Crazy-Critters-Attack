@@ -35,6 +35,7 @@ public class Saver {
         enemies();
         walls();
         turrets();
+        iceWalls();
     }
 
     /** Clears all the saves */
@@ -43,6 +44,7 @@ public class Saver {
         deleteFile("enemies");
         deleteFile("walls");
         deleteFile("turrets");
+        deleteFile("iceWalls");
     }
 
     private static void level() {
@@ -94,6 +96,27 @@ public class Saver {
         }
 
         saveObject(array.toString(), "walls");
+    }
+
+    private static void iceWalls() {
+        JSONArray array = new JSONArray();
+
+        ArrayList<Tower> iceWalls = new ArrayList<>(Main.towers);
+        iceWalls.removeIf(tower -> (!(tower instanceof IceWall)));
+        for (int i = 0; i < iceWalls.size(); i++) {
+            IceWall iceWall = (IceWall) iceWalls.get(i);
+            JSONObject object = new JSONObject();
+
+            object.setInt("maxHp", iceWall.maxHp);
+            object.setInt("hp", iceWall.hp);
+            object.setFloat("x", iceWall.tile.position.x);
+            object.setFloat("y", iceWall.tile.position.y);
+            object.setInt("timeUntilDamage", iceWall.TIME_UNTIL_DAMAGE);
+
+            array.setJSONObject(i, object);
+        }
+
+        saveObject(array.toString(), "iceWalls");
     }
 
     private static void turrets() {

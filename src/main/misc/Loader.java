@@ -3,6 +3,7 @@ package main.misc;
 import main.Game;
 import main.Main;
 import main.enemies.Enemy;
+import main.towers.IceWall;
 import main.towers.Tower;
 import main.towers.Wall;
 import main.towers.turrets.Booster;
@@ -36,6 +37,7 @@ public class Loader {
         level(p);
         enemies(p);
         walls(p);
+        iceWalls(p);
         turrets(p);
 
         Main.screen = Main.Screen.InGame;
@@ -93,6 +95,29 @@ public class Loader {
             wall.updateSprite();
 
             Main.towers.add(wall);
+        }
+
+        ArrayList<Tower> towers = Main.towers;
+        for (Tower tower : towers) {
+            if (tower instanceof Wall) tower.updateSprite();
+        }
+    }
+
+    private static void iceWalls(PApplet p) {
+        JSONArray array = loadArray("iceWalls");
+
+        for (int i = 0; i < array.size(); i++) {
+            JSONObject object = array.getJSONObject(i);
+            Tile tile = Main.tiles.get(
+                    Utilities.worldPositionToGridPosition(
+                            new PVector(
+                                    object.getFloat("x"),
+                                    object.getFloat("y"))));
+            IceWall iceWall = new IceWall(p, tile, object.getInt("maxHp"), object.getInt("timeUntilDamage"));
+            tile.tower = iceWall;
+            iceWall.hp = object.getInt("hp");
+
+            Main.towers.add(iceWall);
         }
 
         ArrayList<Tower> towers = Main.towers;

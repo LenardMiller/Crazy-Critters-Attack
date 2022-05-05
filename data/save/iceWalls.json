@@ -1,0 +1,23 @@
+[
+  {
+    "maxHp": 80,
+    "timeUntilDamage": 30,
+    "hp": 64,
+    "x": 900,
+    "y": 450
+  },
+  {
+    "maxHp": 80,
+    "timeUntilDamage": 30,
+    "hp": 48,
+    "x": 50,
+    "y": 500
+  },
+  {
+    "maxHp": 80,
+    "timeUntilDamage": 30,
+    "hp": 24,
+    "x": 300,
+    "y": 850
+  }
+]
