@@ -15,9 +15,7 @@ import static processing.core.PConstants.HALF_PI;
 
 public class SeismicTower extends Turret {
 
-    /**
-     * Degrees
-     */
+    /** Degrees */
     public float shockwaveWidth;
 
     private boolean seismicSense;
@@ -40,7 +38,10 @@ public class SeismicTower extends Turret {
         material = "stone";
         basePrice = SEISMIC_PRICE;
         titleLines = new String[]{"Seismic Tower"};
-        infoDisplay = (o) -> selection.setTextPurple("Shockwave", o);
+        infoDisplay = (o) -> {
+            selection.setTextPurple("Shockwave", o);
+            selection.setTextPurple("Stuns burrowers", o);
+        };
     }
 
     @Override
@@ -236,6 +237,7 @@ public class SeismicTower extends Turret {
                     titleLines = new String[]{"Seismic Sniper"};
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Shockwave", o);
+                        selection.setTextPurple("Can track burrowers", o);
                         selection.setTextPurple("Stuns burrowers", o);
                     };
                     loadSprites();

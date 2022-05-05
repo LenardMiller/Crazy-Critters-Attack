@@ -517,6 +517,7 @@ public abstract class Turret extends Tower {
             case "MiscCannon":
                 return new RandomCannon(p, tile);
             case "SeismicTower":
+            case "Seismic":
                 return new SeismicTower(p, tile);
             case "Slingshot":
                 return new Slingshot(p, tile);
@@ -525,6 +526,7 @@ public abstract class Turret extends Tower {
             case "WaveMotion":
                 return new WaveMotion(p, tile);
             default:
+                System.out.println("Could not get Turret of name:\n    " + type);
                 return null;
         }
     }

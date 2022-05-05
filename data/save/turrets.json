@@ -1,0 +1,104 @@
+[
+  {
+    "gluedTotal": 34,
+    "x": 400,
+    "y": 400,
+    "damageTotal": 825,
+    "killsTotal": 9,
+    "type": "Gluer",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 450,
+    "y": 400,
+    "damageTotal": 5045,
+    "killsTotal": 94,
+    "type": "Slingshot",
+    "levelA": 3,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 550,
+    "y": 400,
+    "damageTotal": 760,
+    "killsTotal": 6,
+    "type": "SeismicTower",
+    "levelA": 1,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 400,
+    "y": 450,
+    "damageTotal": 2955,
+    "killsTotal": 21,
+    "type": "Crossbow",
+    "levelA": 2,
+    "priority": 1,
+    "levelB": 2
+  },
+  {
+    "x": 550,
+    "y": 450,
+    "damageTotal": 2260,
+    "killsTotal": 30,
+    "type": "RandomCannon",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 400,
+    "y": 500,
+    "damageTotal": 2360,
+    "killsTotal": 34,
+    "type": "RandomCannon",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 550,
+    "y": 500,
+    "damageTotal": 3480,
+    "killsTotal": 27,
+    "type": "Crossbow",
+    "levelA": 2,
+    "priority": 1,
+    "levelB": 2
+  },
+  {
+    "x": 400,
+    "y": 550,
+    "damageTotal": 985,
+    "killsTotal": 8,
+    "type": "SeismicTower",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 1
+  },
+  {
+    "x": 500,
+    "y": 550,
+    "damageTotal": 7830,
+    "killsTotal": 67,
+    "type": "Slingshot",
+    "levelA": 2,
+    "priority": 2,
+    "levelB": 3
+  },
+  {
+    "gluedTotal": 39,
+    "x": 550,
+    "y": 550,
+    "damageTotal": 640,
+    "killsTotal": 8,
+    "type": "Gluer",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 2
+  }
+]
