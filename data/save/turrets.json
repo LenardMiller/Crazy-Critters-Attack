@@ -1,10 +1,62 @@
-[{
-  "x": 450,
-  "y": 500,
-  "damageTotal": 0,
-  "killsTotal": 0,
-  "type": "Slingshot",
-  "levelA": 1,
-  "priority": 0,
-  "levelB": 0
-}]
+[
+  {
+    "x": 400,
+    "y": 450,
+    "damageTotal": 17231,
+    "killsTotal": 70,
+    "type": "RandomCannon",
+    "levelA": 3,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 550,
+    "y": 450,
+    "damageTotal": 26455,
+    "killsTotal": 101,
+    "type": "RandomCannon",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "x": 400,
+    "y": 500,
+    "damageTotal": 30797,
+    "killsTotal": 61,
+    "type": "Crossbow",
+    "levelA": 3,
+    "priority": 2,
+    "levelB": 2
+  },
+  {
+    "x": 450,
+    "y": 500,
+    "damageTotal": 12844,
+    "killsTotal": 158,
+    "type": "Slingshot",
+    "levelA": 3,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 500,
+    "y": 500,
+    "damageTotal": 24018,
+    "killsTotal": 75,
+    "type": "Slingshot",
+    "levelA": 2,
+    "priority": 2,
+    "levelB": 3
+  },
+  {
+    "x": 550,
+    "y": 500,
+    "damageTotal": 20705,
+    "killsTotal": 142,
+    "type": "Crossbow",
+    "levelA": 2,
+    "priority": 1,
+    "levelB": 3
+  }
+]

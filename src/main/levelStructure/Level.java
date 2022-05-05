@@ -1,6 +1,8 @@
 package main.levelStructure;
 
+import main.misc.Loader;
 import main.misc.Polluter;
+import main.misc.Saver;
 import main.misc.Utilities;
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -54,6 +56,7 @@ public class Level {
             }
         } else if (enemies.size() == 0) { //win condition
             if (!won) paused = true; //prevent stuck on pause
+            Saver.wipe();
             won = true;
         }
     }

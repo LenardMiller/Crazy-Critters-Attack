@@ -514,6 +514,7 @@ public abstract class Turret extends Tower {
             case "Railgun":
                 return new Railgun(p, tile);
             case "RandomCannon":
+            case "MiscCannon":
                 return new RandomCannon(p, tile);
             case "SeismicTower":
                 return new SeismicTower(p, tile);
