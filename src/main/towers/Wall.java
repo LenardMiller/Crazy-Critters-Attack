@@ -150,7 +150,7 @@ public class Wall extends Tower {
             value += upgradePrices[i];
         }
         // account for damage to wall
-        value *= (int) ((hp / (float) getMaxHp()));
+        value *= hp / (float) getMaxHp();
         return value;
     }
 

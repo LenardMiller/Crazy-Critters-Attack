@@ -6,6 +6,7 @@ import main.misc.Saver;
 import main.misc.Utilities;
 import processing.core.PApplet;
 import processing.core.PConstants;
+import processing.core.PShape;
 import processing.core.PVector;
 
 import java.awt.*;
@@ -98,13 +99,19 @@ public class Level {
         P.strokeWeight(4);
         P.stroke(255, 0, 0);
         P.line(BOARD_WIDTH - 7, 336, BOARD_WIDTH + 200, 336);
+        //skip text, circle
+        if (canBeSkipped()) {
+            Utilities.highlightedText(P, "[SPACE] to skip",
+                    new PVector(BOARD_WIDTH + 100, 325),
+                    new Color(0xFCFFFFFF, true), new Color(50, 50, 50, 230),
+                    mediumFont, PConstants.CENTER);
+            P.fill(255, 0, 0);
+            P.stroke(100, 0, 0);
+            P.strokeWeight(3);
+            P.triangle(BOARD_WIDTH - 13, 336, BOARD_WIDTH - 20, 331, BOARD_WIDTH - 20, 341);
+        }
         P.strokeWeight(1);
         P.noStroke();
-        //skip text
-        if (canBeSkipped()) Utilities.highlightedText(P, "[SPACE] to skip",
-                new PVector(BOARD_WIDTH + 100, 325),
-                new Color(0xFCFFFFFF, true), new Color(50, 50, 50, 230),
-                mediumFont, PConstants.CENTER);
     }
 
     private boolean canBeSkipped() {
