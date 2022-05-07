@@ -22,16 +22,18 @@ import static main.sound.SoundUtilities.playSound;
 
 public class Hand {
 
-    private final PApplet P;
+    public final float MIN_ENEMY_DISTANCE;
 
     public String held;
-    private PImage heldSprite;
-    private PVector offset;
-    private boolean implacable;
     public String displayInfo;
     public int price;
 
-    public final float MIN_ENEMY_DISTANCE;
+    private final PApplet P;
+
+    private PImage heldSprite;
+    private PVector offset;
+    private boolean implacable;
+    private int setHeldNullTimer;
 
     public Hand(PApplet p) {
         this.P = p;
@@ -46,6 +48,12 @@ public class Hand {
     }
 
     public void main() {
+        if (setHeldNullTimer == 0) {
+            setHeldNullTimer = -1;
+            setHeld("null");
+        } else if (setHeldNullTimer > 0) {
+            setHeldNullTimer--;
+        }
         if (!levelBuilder) {
             implacable = isNotPlaceable();
             checkDisplay();
@@ -454,7 +462,7 @@ public class Hand {
             } connectWallQueues++;
         }
         if (!held.equals("null")) money -= price;
-        if (changeHeld) held = "null";
+        if (changeHeld) setHeldNullTimer = 1;
         updateCombatPoints();
         updateTowerArray();
     }
