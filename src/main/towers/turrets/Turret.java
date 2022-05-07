@@ -522,6 +522,7 @@ public abstract class Turret extends Tower {
             case "Slingshot":
                 return new Slingshot(p, tile);
             case "TeslaTower":
+            case "Tesla":
                 return new TeslaTower(p, tile);
             case "WaveMotion":
                 return new WaveMotion(p, tile);

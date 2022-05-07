@@ -33,7 +33,7 @@ public class DarkBlast extends Projectile {
                 float radius = (effectRadius/ (float) numRings) * i;
                 PVector displacement = PVector.fromAngle(p.random(TWO_PI));
                 displacement.setMag(radius);
-                topParticles.add(new Vortex(p, new PVector(position.x, position.y), displacement, "dark", radius));
+                topParticles.add(new Vortex(p, new PVector(position.x, position.y), displacement, radius));
             }
         }
         projectiles.remove(this);

@@ -13,7 +13,7 @@ import static processing.core.PConstants.TWO_PI;
 
 public class Vortex extends Particle {
 
-    public Vortex(PApplet p, PVector center, PVector displacement, String type, float radius) {
+    public Vortex(PApplet p, PVector center, PVector displacement, float radius) {
         super(p, center.x, center.y, p.random(TWO_PI));
         position = PVector.add(center, displacement);
         angle = findAngle(center, position) + HALF_PI;
@@ -22,15 +22,18 @@ public class Vortex extends Particle {
         speed = maxSpeed;
         displayAngle = angle;
         animation = new Animator(
-                animatedSprites.get(type + "ExDebrisPT"),
-                (int) randomizeBy(p, (int) (radius/5), 0.5f),
+                animatedSprites.get("darkExDebrisPT"),
+                (int) randomizeBy(p, radius / 5, 0.5f),
                 false);
-        angularVelocity = (speed/FRAMERATE) / radius;
+        angularVelocity = (speed / FRAMERATE) / radius;
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
 
     @Override
     protected void move() {
+        animation.update();
+        if (animation.ended()) dead = true;
+
         angle += angularVelocity;
         displayAngle = angle;
         velocity = PVector.fromAngle(angle-HALF_PI);
