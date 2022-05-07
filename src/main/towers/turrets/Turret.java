@@ -508,6 +508,7 @@ public abstract class Turret extends Tower {
             case "IceTower":
                 return new IceTower(p, tile);
             case "MagicMissileer":
+            case "MagicMissleer":
                 return new MagicMissileer(p, tile);
             case "Nightmare":
                 return new Nightmare(p, tile);

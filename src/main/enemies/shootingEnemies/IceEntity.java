@@ -27,7 +27,7 @@ public class IceEntity extends ShootingEnemy {
         damage = 6;
         shootDamage = 3;
         maxHp = 1200;
-        range = 150;
+        range = 120;
         barrelLength = 0;
         hp = maxHp;
         hitParticle = "iceOuch";

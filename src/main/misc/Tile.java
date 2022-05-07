@@ -389,11 +389,6 @@ public class Tile {
         baseEdges[1] = staticSprites.get(name + "Ba_R_TL");
         baseEdges[2] = staticSprites.get(name + "Ba_B_TL");
         baseEdges[3] = staticSprites.get(name + "Ba_L_TL");
-        //remove debris
-        if (name.equals("water")) {
-            setBreakable(null);
-            setFlooring(null);
-        }
         //update hierarchies as tiles are added
         for (int i = 0; i < baseHierarchy.length; i++) {
             if (name.equals(baseHierarchy[i])) {
@@ -480,6 +475,7 @@ public class Tile {
                 tiles.get(x + 1, y + 1).tower.die(false);
             }
             setFlooring(null);
+            setBreakable(null);
             if (obstacleName == null) updateAll();
             obstacle = staticSprites.get(name);
             obstacleName = name;
