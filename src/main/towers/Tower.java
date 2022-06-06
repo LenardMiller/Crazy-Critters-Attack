@@ -143,13 +143,13 @@ public abstract class Tower {
         } else moneyGain = (int) (getValue() * 0.8);
         if (moneyGain > 0) popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
-        if (hasBoostedDeathEffect()) deathEffect();
+        if (hasBoostedDeathEffect()) boostedDeathEffect();
         updateFlooring();
         updateTowerArray();
         updateCombatPoints();
     }
 
-    protected void deathEffect() {
+    protected void boostedDeathEffect() {
         int radius = getValue() / 10;
         if (radius < 40) radius = 40;
         float x = tile.position.x - (TILE_SIZE / 2f);
