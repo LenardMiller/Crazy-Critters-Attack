@@ -1,6 +1,10 @@
 package main.misc;
 
 import main.Main;
+import main.enemies.shootingEnemies.IceEntity;
+import main.enemies.shootingEnemies.IceMonstrosity;
+import main.enemies.shootingEnemies.MudFlinger;
+import main.enemies.shootingEnemies.SnowAntlion;
 import main.projectiles.arcs.Arc;
 import main.projectiles.EnergyBlast;
 import main.projectiles.Flame;
@@ -167,10 +171,10 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1,150, 500));
         if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new GiantGolem( p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en2) enemies.add(new Wolf(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en3) enemies.add(new Velociraptor(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en4) enemies.add(new Mammoth(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en1) enemies.add(new SnowAntlion( p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en2) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en3) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en4) enemies.add(new MudFlinger(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en5) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new Frost(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en7) enemies.add(new Bat(p, matrixMousePosition.x, matrixMousePosition.y));

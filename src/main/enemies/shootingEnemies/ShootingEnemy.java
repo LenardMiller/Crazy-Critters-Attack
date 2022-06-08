@@ -6,6 +6,7 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.SoundFile;
 
 import java.awt.*;
 
@@ -20,6 +21,7 @@ public abstract class ShootingEnemy extends Enemy {
     protected int shootFireFrame;
     protected int barrelLength;
     protected int shootDamage;
+    protected SoundFile shootSound;
     protected Turret target;
     protected PImage[] shootFrames;
 
@@ -141,7 +143,7 @@ public abstract class ShootingEnemy extends Enemy {
         PVector barrel = PVector.fromAngle(rotation);
         barrel.setMag(barrelLength); //barrel length
         projectilePosition.add(barrel);
-        playSoundRandomSpeed(p, attackSound, 1);
+        playSoundRandomSpeed(p, shootSound, 1);
         fire(projectileAngle, projectilePosition);
     }
 

@@ -18,13 +18,15 @@ public class Antlion extends ShootingEnemy {
         speed = 24;
         moneyDrop = 40;
         damage = 2;
+        shootDamage = 2;
         maxHp = 50;
         range = 100;
         barrelLength = 7;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "antlion";
-        attackSound = sounds.get("spit");
+        attackSound = sounds.get("bugGrowlVeryQuick");
+        shootSound = sounds.get("spit");
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(12);
         betweenShootFrames = down60ToFramerate(12);
@@ -40,7 +42,7 @@ public class Antlion extends ShootingEnemy {
 
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
-        projectiles.add(new Sandball(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle));
+        projectiles.add(new Sandball(p, shootDamage, projectilePosition.x, projectilePosition.y, projectileAngle));
         for (int i = 0; i < 5; i++) {
             midParticles.add(new Debris(p, projectilePosition.x, projectilePosition.y,
               projectileAngle + radians(p.random(-15, 15)), "sand"));

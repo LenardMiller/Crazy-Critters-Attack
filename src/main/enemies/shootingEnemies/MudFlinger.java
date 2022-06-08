@@ -25,7 +25,8 @@ public class MudFlinger extends ShootingEnemy {
         hp = maxHp;
         hitParticle = "mudOuch";
         name = "mudFlinger";
-        attackSound = sounds.get("spit");
+        shootSound = sounds.get("spit");
+        attackSound = sounds.get("slime");
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(8);
         betweenShootFrames = down60ToFramerate(8);
@@ -41,7 +42,7 @@ public class MudFlinger extends ShootingEnemy {
 
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
-        projectiles.add(new MudBall(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle));
+        projectiles.add(new MudBall(p, shootDamage, projectilePosition.x, projectilePosition.y, projectileAngle));
         for (int i = 0; i < 5; i++) {
             midParticles.add(new Debris(p, projectilePosition.x, projectilePosition.y,
               projectileAngle + radians(p.random(-15, 15)), "mud"));

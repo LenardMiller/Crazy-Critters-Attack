@@ -18,13 +18,15 @@ public class SnowAntlion extends ShootingEnemy {
         speed = 30;
         moneyDrop = 60;
         damage = 2;
+        shootDamage = 2;
         maxHp = 200;
         range = 110;
         barrelLength = 7;
         hp = maxHp;
         hitParticle = "greenOuch";
         name = "snowAntlion";
-        attackSound = sounds.get("spit");
+        shootSound = sounds.get("spit");
+        attackSound = sounds.get("bugGrowlVeryQuick");
         betweenWalkFrames = down60ToFramerate(10);
         betweenAttackFrames = down60ToFramerate(12);
         betweenShootFrames = down60ToFramerate(12);
@@ -40,7 +42,7 @@ public class SnowAntlion extends ShootingEnemy {
 
     @Override
     protected void fire(float projectileAngle, PVector projectilePosition) {
-        projectiles.add(new Snowball(p, damage, projectilePosition.x, projectilePosition.y, projectileAngle));
+        projectiles.add(new Snowball(p, shootDamage, projectilePosition.x, projectilePosition.y, projectileAngle));
         for (int i = 0; i < 5; i++) {
             midParticles.add(new Debris(p, projectilePosition.x, projectilePosition.y,
               projectileAngle + radians(p.random(-15, 15)), "snow"));
