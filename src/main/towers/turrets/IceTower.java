@@ -41,7 +41,7 @@ public class IceTower extends Turret {
         name = "iceTower";
         delay = randomizeDelay(p, 10);
         pjSpeed = -1;
-        range = 300;
+        range = 350;
         barrelLength = 30;
         offset = 0;
         wallHp = 40;
@@ -243,11 +243,11 @@ public class IceTower extends Turret {
         //price
         upgradePrices[0] = 750;
         upgradePrices[1] = 1200;
-        upgradePrices[2] = 20000;
+        upgradePrices[2] = 30000;
 
         upgradePrices[3] = 1000;
         upgradePrices[4] = 1500;
-        upgradePrices[5] = 35000;
+        upgradePrices[5] = 25000;
         //titles
         upgradeTitles[0] = "Longer Lasting";
         upgradeTitles[1] = "Stronger Ice";
@@ -305,7 +305,7 @@ public class IceTower extends Turret {
                 case 2:
                     name = "autoIceTower";
                     range = 5000;
-                    delay = 3;
+                    delay -= 2;
                     wallTimeUntilDamage = -1;
                     wallHp *= 2;
                     angle = 0;
@@ -324,7 +324,7 @@ public class IceTower extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    range += 100;
+                    range += 50;
                     break;
                 case 4:
                     delay -= 3;

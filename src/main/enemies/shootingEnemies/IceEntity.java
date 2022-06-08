@@ -24,7 +24,7 @@ public class IceEntity extends ShootingEnemy {
         radius = 13;
         speed = 30;
         moneyDrop = 150;
-        damage = 6;
+        damage = 9;
         shootDamage = 3;
         maxHp = 1200;
         range = 120;
