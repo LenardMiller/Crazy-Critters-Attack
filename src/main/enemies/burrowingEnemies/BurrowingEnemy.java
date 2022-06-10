@@ -55,6 +55,7 @@ public abstract class BurrowingEnemy extends Enemy {
 
     @Override
     protected void move() {
+        if (moveSoundLoop != null) moveSoundLoop.increment();
         if (p.random(10) < pfSize * pfSize) {
             PVector particlePosition = randomPosition();
             topParticles.add(new Debris(p, particlePosition.x, particlePosition.y, p.random(0, 360), levels[currentLevel].groundType));

@@ -120,5 +120,7 @@ public class SoundLoader {
         soundsWithAlts.put("thunder", new SoundWithAlts(p, "thunder", 3));
         //stackables
         stackableSounds.put("beam", new StackableSound(p, "beam", 5));
+        //move sounds
+        moveSoundLoops.put("smallBugLoop", new MoveSoundLoop(p, "smallBugLoop", 20));
     }
 }

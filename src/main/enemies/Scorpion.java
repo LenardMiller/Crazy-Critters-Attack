@@ -3,6 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
@@ -29,6 +30,7 @@ public class Scorpion extends Enemy {
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
         attackSound = sounds.get("smallWhipCrack");
+        moveSoundLoop = moveSoundLoops.get("smallBugLoop");
         loadStuff();
     }
 }

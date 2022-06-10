@@ -37,6 +37,7 @@ public class Antlion extends ShootingEnemy {
         partSize = new PVector(11,11);
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
+        moveSoundLoop = moveSoundLoops.get("smallBugLoop");
         loadStuff();
     }
 

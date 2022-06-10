@@ -3,6 +3,7 @@ package main.sound;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
 
+import static java.lang.Math.max;
 import static main.misc.Utilities.incrementByTo;
 
 public class FadeSoundLoop {
@@ -29,10 +30,14 @@ public class FadeSoundLoop {
         //never goes to 0 because that throws errors for some reason :/
     }
 
+    public FadeSoundLoop(PApplet p, String name) {
+        this(p, name, -1);
+    }
+
     public void main() {
         volume = incrementByTo(volume, 0.05f, targetVolume);
         SOUND_FILE.amp(volume);
-        if (timer > MIN_LENGTH) {
+        if (timer > MIN_LENGTH && MIN_LENGTH != -1) {
             targetVolume = 0.01f;
         }
         timer++;
@@ -42,6 +47,7 @@ public class FadeSoundLoop {
      * @param targetVolume will slowly increment in volume to this
      */
     public void setTargetVolume(float targetVolume) {
+        targetVolume = max(targetVolume, 0.01f);
         this.targetVolume = targetVolume;
         timer = 0;
     }

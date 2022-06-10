@@ -19,6 +19,7 @@ import main.particles.Ouch;
 import main.particles.Pile;
 import main.pathfinding.Node;
 import main.pathfinding.PathRequest;
+import main.sound.MoveSoundLoop;
 import main.towers.Tower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -88,6 +89,7 @@ public abstract class Enemy {
     protected SoundFile overkillSound;
     protected SoundFile dieSound;
     protected SoundFile attackSound;
+    protected MoveSoundLoop moveSoundLoop;
 
     protected int attackCount;
     protected boolean attackCue;
@@ -238,6 +240,7 @@ public abstract class Enemy {
     }
 
     protected void move() {
+        if (moveSoundLoop != null) moveSoundLoop.increment();
         PVector m = PVector.fromAngle(rotation);
         float pixelsMoved = getActualSpeed() / FRAMERATE;
         m.setMag(pixelsMoved);

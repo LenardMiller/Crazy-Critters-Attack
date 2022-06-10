@@ -171,7 +171,7 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1,150, 500));
         if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new SnowAntlion( p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en1) enemies.add(new SmolBug( p, matrixMousePosition.x, matrixMousePosition.y));
         if (en2) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en3) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en4) enemies.add(new MudFlinger(p, matrixMousePosition.x, matrixMousePosition.y));

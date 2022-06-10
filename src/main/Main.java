@@ -19,10 +19,7 @@ import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
-import main.sound.FadeSoundLoop;
-import main.sound.SoundWithAlts;
-import main.sound.StackableSound;
-import main.sound.StartStopSoundLoop;
+import main.sound.*;
 import main.towers.Tower;
 import processing.core.*;
 import processing.sound.Sound;
@@ -137,6 +134,7 @@ public class Main extends PApplet {
     public static HashMap<String, FadeSoundLoop> fadeSoundLoops = new HashMap<>();
     public static HashMap<String, SoundWithAlts> soundsWithAlts = new HashMap<>();
     public static HashMap<String, StackableSound> stackableSounds = new HashMap<>();
+    public static HashMap<String, MoveSoundLoop> moveSoundLoops = new HashMap<>();
 
     //transitions
     private static final int TRANS_SIZE = 2000;
@@ -284,6 +282,7 @@ public class Main extends PApplet {
         sound.volume(globalVolume);
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
         for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
+        for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.main();
         //reset mouse pulses
         inputHandler.rightMouseReleasedPulse = false;
         inputHandler.leftMouseReleasedPulse = false;
