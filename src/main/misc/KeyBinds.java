@@ -173,8 +173,8 @@ public class KeyBinds {
         //enemies
         if (en1) enemies.add(new SmolBug( p, matrixMousePosition.x, matrixMousePosition.y));
         if (en2) enemies.add(new BigBug(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en3) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en4) enemies.add(new MudFlinger(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en3) enemies.add(new TreeSpirit(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en4) enemies.add(new TreeGiant(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en5) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new Frost(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en7) enemies.add(new Bat(p, matrixMousePosition.x, matrixMousePosition.y));

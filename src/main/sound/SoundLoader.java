@@ -8,7 +8,7 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class SoundLoader {
 
-    public static void loadSounds(PApplet p) { //todo: load dynamically?
+    public static void loadSounds(PApplet p) {
         //critter die
         sounds.put("squish", new SoundFile(p, "sounds/enemies/squish.wav"));
         sounds.put("squash", new SoundFile(p, "sounds/enemies/squash.wav"));
@@ -123,5 +123,7 @@ public class SoundLoader {
         //move sounds
         moveSoundLoops.put("smallBugLoop", new MoveSoundLoop(p, "smallBugLoop", 20));
         moveSoundLoops.put("bigBugLoop", new MoveSoundLoop(p, "bigBugLoop", 3));
+        moveSoundLoops.put("leafyStepsLoop", new MoveSoundLoop(p, "leafyStepsLoop", 10));
+        moveSoundLoops.put("bigLeafyStepsLoop", new MoveSoundLoop(p, "bigLeafyStepsLoop", 3));
     }
 }

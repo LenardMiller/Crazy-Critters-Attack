@@ -32,6 +32,7 @@ public class EnragedGiant extends Enemy {
         dieSound = sounds.get("bigLeaves");
         overkillSound = sounds.get("bigLeavesImpact");
         attackSound = sounds.get("swooshPunchSlow");
+        moveSoundLoop = moveSoundLoops.get("leafyStepsLoop");
         loadStuff();
     }
 
