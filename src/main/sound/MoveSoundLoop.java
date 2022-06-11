@@ -7,17 +7,17 @@ import static java.lang.Math.min;
 public class MoveSoundLoop {
 
     private final FadeSoundLoop loop;
-    private final float enemyNum;
+    private final float maxEnemyNum;
 
     private int count;
 
-    public MoveSoundLoop(PApplet p, String name, float enemyNum) {
+    public MoveSoundLoop(PApplet p, String name, float maxEnemyNum) {
         loop = new FadeSoundLoop(p, name);
-        this.enemyNum = enemyNum;
+        this.maxEnemyNum = maxEnemyNum;
     }
 
     public void main() {
-        loop.setTargetVolume(min(1, count / enemyNum));
+        loop.setTargetVolume(min(1, count / maxEnemyNum));
         loop.main();
         count = 0;
     }

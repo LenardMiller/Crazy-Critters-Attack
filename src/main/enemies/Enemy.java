@@ -331,7 +331,7 @@ public abstract class Enemy {
      * @param effectLevel level of the buff to be applied
      * @param effectDuration duration of the buff to be applied
      * @param turret turret that caused the damage, nullable
-     * @param displayParticles if should create particles
+     * @param displayParticles if it should create particles
      * @param damageType determines what effect to apply to corpse
      * @param direction determines where parts will be flung, (0, 0) for everywhere
      * @param id id of this enemy, set to -1 if unknown

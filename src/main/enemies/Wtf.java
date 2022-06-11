@@ -3,6 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
@@ -30,6 +31,7 @@ public class Wtf extends Enemy {
         dieSound = sounds.get("bigCrunchRoar");
         overkillSound = sounds.get("squashRoar");
         attackSound = sounds.get("bugGrowlSlow");
+        moveSoundLoop = moveSoundLoops.get("bigBugLoop");
         loadStuff();
     }
 }

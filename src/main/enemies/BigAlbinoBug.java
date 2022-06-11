@@ -3,6 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
@@ -27,6 +28,7 @@ public class BigAlbinoBug extends Enemy {
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
         attackSound = sounds.get("bugGrowlQuick");
+        moveSoundLoop = moveSoundLoops.get("bigBugLoop");
         loadStuff();
     }
 }

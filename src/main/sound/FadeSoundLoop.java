@@ -8,8 +8,8 @@ import static main.misc.Utilities.incrementByTo;
 
 public class FadeSoundLoop {
 
-    private final int MIN_LENGTH;
-    private final SoundFile SOUND_FILE;
+    private final int minLength;
+    private final SoundFile soundFile;
 
     private int timer;
     private float volume;
@@ -23,11 +23,11 @@ public class FadeSoundLoop {
      * @param minLength how long it will run before automatically stopping
      */
     public FadeSoundLoop(PApplet p, String name, int minLength) {
-        SOUND_FILE = new SoundFile(p, "sounds/loops/" + name + ".wav");
-        MIN_LENGTH = minLength;
-        SOUND_FILE.loop(1, 0.001f);
+        soundFile = new SoundFile(p, "sounds/loops/" + name + ".wav");
+        this.minLength = minLength;
+        soundFile.loop(1, 0.001f);
         targetVolume = 0.001f;
-        //never goes to 0 because that throws errors for some reason :/
+        //never goes to 0 because that prints errors for some reason :/
     }
 
     public FadeSoundLoop(PApplet p, String name) {
@@ -36,16 +36,14 @@ public class FadeSoundLoop {
 
     public void main() {
         volume = incrementByTo(volume, 0.05f, targetVolume);
-        SOUND_FILE.amp(volume);
-        if (timer > MIN_LENGTH && MIN_LENGTH != -1) {
+        soundFile.amp(volume);
+        if (timer > minLength && minLength != -1) {
             targetVolume = 0.01f;
         }
         timer++;
     }
 
-    /**
-     * @param targetVolume will slowly increment in volume to this
-     */
+    /** @param targetVolume will slowly increment in volume to this */
     public void setTargetVolume(float targetVolume) {
         targetVolume = max(targetVolume, 0.01f);
         this.targetVolume = targetVolume;

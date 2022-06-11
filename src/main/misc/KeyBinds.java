@@ -172,7 +172,7 @@ public class KeyBinds {
         if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
         if (en1) enemies.add(new SmolBug( p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en2) enemies.add(new IceEntity(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en2) enemies.add(new BigBug(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en3) enemies.add(new IceMonstrosity(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en4) enemies.add(new MudFlinger(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en5) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
@@ -217,7 +217,7 @@ public class KeyBinds {
         } if (hurtTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
-                if (tower != null) tower.hp -= tower.maxHp/5;
+                if (tower != null) tower.hp -= tower.maxHp / 5;
             }
             updateCombatPoints();
             machine.damage(20);
