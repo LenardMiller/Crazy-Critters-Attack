@@ -3,6 +3,7 @@ package main.enemies.flyingEnemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
@@ -30,6 +31,7 @@ public class GiantBat extends FlyingEnemy {
         overkillSound = sounds.get("bigSqueakSquash");
         dieSound = sounds.get("bigSqueak");
         attackSound = sounds.get("flap");
+        moveSoundLoop = moveSoundLoops.get("bigWingbeats");
         loadStuff();
     }
 }

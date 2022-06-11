@@ -3,6 +3,7 @@ package main.enemies.flyingEnemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
@@ -29,6 +30,7 @@ public class Butterfly extends FlyingEnemy {
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
         attackSound = sounds.get("flap");
+        moveSoundLoop = moveSoundLoops.get("smallWingbeats");
         loadStuff();
     }
 }
