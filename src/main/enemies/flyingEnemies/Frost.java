@@ -36,6 +36,7 @@ public class Frost extends FlyingEnemy {
         moveFrames = animatedSprites.get("wolf" + "MoveEN");
         attackDmgFrames = new int[]{attackFrames.length - 1};
         attackSound = sounds.get("frostFreeze");
+        moveSoundLoop = moveSoundLoops.get("ominousWind");
     }
 
     /**

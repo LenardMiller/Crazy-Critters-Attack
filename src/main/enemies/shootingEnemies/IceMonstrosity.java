@@ -4,8 +4,7 @@ import main.projectiles.enemyProjeciles.IceCrystal;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.projectiles;
-import static main.Main.staticSprites;
+import static main.Main.*;
 import static processing.core.PApplet.radians;
 
 public class IceMonstrosity extends IceEntity {
@@ -30,6 +29,7 @@ public class IceMonstrosity extends IceEntity {
         orbitSprite = staticSprites.get("iceMonstrosityOrbitEn");
         corpseSize = size;
         partSize = new PVector(14, 14);
+        moveSoundLoop = moveSoundLoops.get("bigCrystals");
         loadStuff();
     }
 

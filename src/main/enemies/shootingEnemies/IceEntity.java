@@ -49,6 +49,7 @@ public class IceEntity extends ShootingEnemy {
         attackSound = sounds.get("swooshPunch");
         overkillSound = sounds.get("smallCrystalBreak");
         dieSound = sounds.get("smallCrystalBreak");
+        moveSoundLoop = moveSoundLoops.get("crystals");
         loadStuff();
     }
 

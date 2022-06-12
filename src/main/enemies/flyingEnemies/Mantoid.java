@@ -3,6 +3,7 @@ package main.enemies.flyingEnemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 
 public class Mantoid extends FlyingEnemy {
@@ -27,6 +28,7 @@ public class Mantoid extends FlyingEnemy {
         dieSound = sounds.get("bigCrunch");
         overkillSound = sounds.get("squash");
         attackSound = sounds.get("bugGrowlQuick");
+        moveSoundLoop = moveSoundLoops.get("buzz");
         loadStuff();
     }
 }

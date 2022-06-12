@@ -128,5 +128,9 @@ public class SoundLoader {
         moveSoundLoops.put("smallWingbeats", new MoveSoundLoop(p, "smallWingbeats", 20));
         moveSoundLoops.put("wingbeats", new MoveSoundLoop(p, "wingbeats", 10));
         moveSoundLoops.put("bigWingbeats", new MoveSoundLoop(p, "bigWingbeats", 3));
+        moveSoundLoops.put("buzz", new MoveSoundLoop(p, "buzz", 3));
+        moveSoundLoops.put("crystals", new MoveSoundLoop(p, "crystals", 10));
+        moveSoundLoops.put("bigCrystals", new MoveSoundLoop(p, "bigCrystals", 3));
+        moveSoundLoops.put("ominousWind", new MoveSoundLoop(p, "ominousWind", 3));
     }
 }
