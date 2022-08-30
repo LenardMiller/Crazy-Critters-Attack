@@ -1,6 +1,7 @@
 package main.projectiles.fragments;
 
 import main.particles.Ouch;
+import main.sound.SoundUtilities;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -20,11 +21,12 @@ public class GlueSpike extends Frag {
         angularVelocity = 0;
         sprite = staticSprites.get("glueSpikePj");
         hitSound = sounds.get("smallImpact");
-        lifespan = down60ToFramerate(15);
+        lifespan = down60ToFramerate(p.random(12, 17));
     }
 
     @Override
     public void die() {
+        SoundUtilities.playSoundRandomSpeed(p, hitSound, 1);
         topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"gluePuff"));
         projectiles.remove(this);
     }
