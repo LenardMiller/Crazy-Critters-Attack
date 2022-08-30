@@ -120,9 +120,7 @@ public class Frost extends FlyingEnemy {
         }
     }
 
-    /**
-     * handle animation states, animation disabled
-     */
+    /** handle animation states, animation disabled */
     @Override
     protected void animate() {
         if (!immobilized) {
@@ -140,17 +138,13 @@ public class Frost extends FlyingEnemy {
         hitTimer++;
     }
 
-    /**
-     * Calls to animate sprite.
-     */
+    /** Calls to animate sprite. */
     @Override
     public void displayShadow() {
         if (!paused) animate();
     }
 
-    /**
-     * Displays a bunch of particles.
-     */
+    /** Displays a bunch of particles. */
     @Override
     public void displayMain() {
         if (debug) for (int i = trail.size() - 1; i > 0; i--) {

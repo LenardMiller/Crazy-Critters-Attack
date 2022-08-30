@@ -3,6 +3,7 @@ package main.enemies.burrowingEnemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
@@ -28,6 +29,7 @@ public class Shark extends BurrowingEnemy {
         overkillSound = sounds.get("squish");
         dieSound = sounds.get("crunch");
         attackSound = sounds.get("bite");
+        moveSoundLoop = moveSoundLoops.get("littleDig");
         loadStuff();
     }
 }
