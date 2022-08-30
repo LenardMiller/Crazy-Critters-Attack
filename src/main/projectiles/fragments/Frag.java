@@ -2,6 +2,7 @@ package main.projectiles.fragments;
 
 import main.projectiles.Projectile;
 import main.particles.Ouch;
+import main.sound.SoundUtilities;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -26,7 +27,7 @@ public class Frag extends Projectile {
         angularVelocity = down60ToFramerate(p.random(-15,15));
         sprite = staticSprites.get("darkMetalPt");
         hitSound = sounds.get("smallImpact");
-        lifespan = down60ToFramerate(15);
+        lifespan = down60ToFramerate(p.random(12, 17));
     }
 
     @Override
@@ -47,6 +48,7 @@ public class Frag extends Projectile {
 
     @Override
     public void die() {
+        SoundUtilities.playSoundRandomSpeed(p, hitSound, 1);
         projectiles.remove(this);
         topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greyPuff"));
     }

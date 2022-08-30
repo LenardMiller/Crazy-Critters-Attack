@@ -59,6 +59,7 @@ public class SoundLoader {
         sounds.put("frostFreeze", new SoundFile(p, "sounds/enemies/frostFreeze.wav"));
         //misc
         sounds.put("smallExplosion", new SoundFile(p, "sounds/misc/smallExplosion.wav"));
+        sounds.put("mediumExplosion", new SoundFile(p, "sounds/misc/mediumExplosion.wav"));
         sounds.put("hugeExplosion", new SoundFile(p, "sounds/misc/hugeExplosion.wav"));
         //projectiles
         sounds.put("smallImpact", new SoundFile(p, "sounds/projectiles/smallImpact.wav"));
