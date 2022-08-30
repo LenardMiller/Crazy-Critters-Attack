@@ -134,5 +134,7 @@ public class SoundLoader {
         moveSoundLoops.put("ominousWind", new MoveSoundLoop(p, "ominousWind", 3));
         moveSoundLoops.put("bigDig", new MoveSoundLoop(p, "bigDig", 3));
         moveSoundLoops.put("littleDig", new MoveSoundLoop(p, "littleDig", 10));
+        moveSoundLoops.put("bigFootsteps", new MoveSoundLoop(p, "bigFootsteps", 1));
+        moveSoundLoops.put("manyFootsteps", new MoveSoundLoop(p, "manyFootsteps", 5));
     }
 }

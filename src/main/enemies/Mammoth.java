@@ -3,6 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 
 public class Mammoth extends Enemy {
@@ -27,6 +28,7 @@ public class Mammoth extends Enemy {
         dieSound = sounds.get("mammoth");
         overkillSound = sounds.get("mammothSquash");
         attackSound = sounds.get("biteGrowlSlow");
+        moveSoundLoop = moveSoundLoops.get("bigFootsteps");
         loadStuff();
     }
 }
