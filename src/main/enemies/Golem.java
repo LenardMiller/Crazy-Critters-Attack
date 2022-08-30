@@ -26,8 +26,8 @@ public class Golem extends Enemy {
         corpseSize = new PVector(84,84);
         partSize = new PVector(36,36);
         betweenCorpseFrames = down60ToFramerate(6);
-        dieSound = sounds.get("leaves");
-        overkillSound = sounds.get("leavesImpact");
+        dieSound = sounds.get("gravelDie");
+        overkillSound = sounds.get("gravelExplode");
         attackSound = sounds.get("swooshPunch");
         loadStuff();
     }

@@ -36,6 +36,9 @@ public class SoundLoader {
         sounds.put("mammothSquash", new SoundFile(p, "sounds/enemies/mammothSquash.wav"));
         sounds.put("mudDie", new SoundFile(p, "sounds/enemies/mudDie.wav"));
         sounds.put("mudSquish", new SoundFile(p, "sounds/enemies/mudSquish.wav"));
+        sounds.put("gravelDie", new SoundFile(p, "sounds/enemies/gravelDie.wav"));
+        sounds.put("gravelExplode", new SoundFile(p, "sounds/enemies/gravelExplode.wav"));
+        sounds.put("rocksCrumble", new SoundFile(p, "sounds/enemies/rocksCrumble.wav"));
         //critter attack
         sounds.put("spit", new SoundFile(p, "sounds/enemies/spit.wav"));
         sounds.put("badMagic", new SoundFile(p, "sounds/enemies/badMagic.wav"));
