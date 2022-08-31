@@ -140,5 +140,9 @@ public class SoundLoader {
         moveSoundLoops.put("littleDig", new MoveSoundLoop(p, "littleDig", 10));
         moveSoundLoops.put("bigFootsteps", new MoveSoundLoop(p, "bigFootsteps", 1));
         moveSoundLoops.put("manyFootsteps", new MoveSoundLoop(p, "manyFootsteps", 5));
+        moveSoundLoops.put("stonesMove", new MoveSoundLoop(p, "stonesMove", 10));
+        moveSoundLoops.put("bigStonesMove", new MoveSoundLoop(p, "bigStonesMove", 3));
+        moveSoundLoops.put("snowRunning", new MoveSoundLoop(p, "snowRunning", 10));
+        moveSoundLoops.put("slimeMovement", new MoveSoundLoop(p, "slimeMovement", 5));
     }
 }

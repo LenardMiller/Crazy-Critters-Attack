@@ -37,6 +37,7 @@ public class MudFlinger extends ShootingEnemy {
         partSize = new PVector(25,25);
         overkillSound = sounds.get("mudSquish");
         dieSound = sounds.get("mudDie");
+        moveSoundLoop = moveSoundLoops.get("slimeMovement");
         loadStuff();
     }
 
