@@ -29,7 +29,7 @@ public abstract class Turret extends Tower {
         Close("closest"),
         Far("farthest"),
         Strong("most HP"),
-        Weak("least hp"),
+        Weak("least HP"),
         None("");
 
         public final String text;
@@ -83,7 +83,7 @@ public abstract class Turret extends Tower {
     protected Enemy targetEnemy;
     protected SoundFile fireSound;
 
-    protected ArrayList<Integer> spriteArray;
+    protected ArrayList<Integer> compressedLoadFrames;
 
     protected Turret(PApplet p, Tile tile) {
         super(p, tile);
@@ -94,7 +94,7 @@ public abstract class Turret extends Tower {
         hp = maxHp;
         delay = 4;
         pjSpeed = 500;
-        spriteArray = new ArrayList<>();
+        compressedLoadFrames = new ArrayList<>();
         upgradePrices = new int[6];
         upgradeTitles = new String[6];
         upgradeDescA = new String[6];
@@ -345,17 +345,17 @@ public abstract class Turret extends Tower {
                         if (loadFrames.length > 0) {
                             int oldSize = loadFrames.length;
                             int newSize = secondsToFrames(getDelay());
-                            spriteArray = new ArrayList<>();
+                            compressedLoadFrames = new ArrayList<>();
                             if (oldSize > newSize) { //decreasing size
                                 //creates the new spriteArray
-                                for (int i = 0; i < oldSize; i++) spriteArray.add(i);
+                                for (int i = 0; i < oldSize; i++) compressedLoadFrames.add(i);
                                 //compression
-                                compress = new CompressArray(oldSize, newSize, spriteArray);
+                                compress = new CompressArray(oldSize, newSize, compressedLoadFrames);
                                 compress.main();
                             } else { //increasing size
-                                compress = new CompressArray(oldSize - 1, newSize, spriteArray);
+                                compress = new CompressArray(oldSize - 1, newSize, compressedLoadFrames);
                                 compress.main();
-                                spriteArray = compress.compArray;
+                                compressedLoadFrames = compress.compArray;
                             }
                         }
                         frame = 0;
@@ -364,8 +364,8 @@ public abstract class Turret extends Tower {
                     break;
                 case Load:
                     frame++;
-                    if (frame < spriteArray.size() && spriteArray.get(frame) < loadFrames.length) {
-                        sprite = loadFrames[spriteArray.get(frame)];
+                    if (frame < compressedLoadFrames.size() && compressedLoadFrames.get(frame) < loadFrames.length) {
+                        sprite = loadFrames[compressedLoadFrames.get(frame)];
                     } else { //if time runs out, switch to idle
                         frame = 0;
                         sprite = idleSprite;

@@ -32,24 +32,24 @@ public class MagicMissileer extends Turret {
                 animatedSprites.get("electricMissleerCoreFireTR"),
                 animatedSprites.get("electricMissleerCoreLoadTR"));
 
-        final PImage IDLE;
-        final PImage[] FIRE;
-        final PImage[] LOAD;
+        final PImage idleSprite;
+        final PImage[] fireAnimation;
+        final PImage[] loadAnimation;
 
         ElectricComponent(PImage idle, PImage[] fire, PImage[] load) {
-            IDLE = idle;
-            FIRE = fire;
-            LOAD = load;
+            idleSprite = idle;
+            fireAnimation = fire;
+            loadAnimation = load;
         }
 
-        PImage getSprite(int state, int frame, int compressFrame) {
+        PImage getSprite(Turret.State state, int frame) {
             switch (state) {
-                case 0:
-                    return IDLE;
-                case 1:
-                    return FIRE[frame];
-                case 2:
-                    return LOAD[compressFrame];
+                case Idle:
+                    return idleSprite;
+                case Fire:
+                    return fireAnimation[frame];
+                case Load:
+                    return loadAnimation[frame];
                 default:
                     return null;
             }
@@ -187,14 +187,14 @@ public class MagicMissileer extends Turret {
                 p.popMatrix();
             }
         } else if (name.equals("electricMissleer")) {
-            p.image(ElectricComponent.Core.IDLE, (-size.x/2-offset),-size.y/2-offset);
+            p.image(ElectricComponent.Core.idleSprite, (-size.x/2-offset),-size.y/2-offset);
             p.pushMatrix();
             p.rotate(specialAngle);
-            p.image(ElectricComponent.InnerRing.IDLE, (-size.x/2-offset),-size.y/2-offset);
+            p.image(ElectricComponent.InnerRing.idleSprite, (-size.x/2-offset),-size.y/2-offset);
             p.popMatrix();
             p.pushMatrix();
             p.rotate(-specialAngle);
-            p.image(ElectricComponent.OuterRing.IDLE, (-size.x/2-offset),-size.y/2-offset);
+            p.image(ElectricComponent.OuterRing.idleSprite, (-size.x/2-offset),-size.y/2-offset);
             p.popMatrix();
         } else p.image(fireFrames[5],-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
@@ -211,17 +211,17 @@ public class MagicMissileer extends Turret {
                 p.popMatrix();
             }
         } else if (name.equals("electricMissleer")) {
-            int compressFrame = 0;
-            if (state == State.Fire) compressFrame = spriteArray.get(frame);
+            int frame = this.frame;
+            if (state == State.Load) frame = compressedLoadFrames.get(this.frame);
 
-            p.image(ElectricComponent.Core.getSprite(state.ordinal(), frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
+            p.image(ElectricComponent.Core.getSprite(state, frame), (-size.x/2-offset),-size.y/2-offset);
             p.pushMatrix();
             p.rotate(specialAngle);
-            p.image(ElectricComponent.InnerRing.getSprite(state.ordinal(), frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
+            p.image(ElectricComponent.InnerRing.getSprite(state, frame), (-size.x/2-offset),-size.y/2-offset);
             p.popMatrix();
             p.pushMatrix();
             p.rotate(-specialAngle);
-            p.image(ElectricComponent.OuterRing.getSprite(state.ordinal(), frame, compressFrame), (-size.x/2-offset),-size.y/2-offset);
+            p.image(ElectricComponent.OuterRing.getSprite(state, frame), (-size.x/2-offset),-size.y/2-offset);
             p.popMatrix();
         } else p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
@@ -238,7 +238,8 @@ public class MagicMissileer extends Turret {
                         specialRotationSpeed = 0.03f * (1 - (frame / (float) fireFrames.length));
                         break;
                     case Load:
-                        specialRotationSpeed = 0.03f * (frame / (float) spriteArray.size());
+                        specialRotationSpeed = 0.03f * (frame / (float) compressedLoadFrames.size());
+                        break;
                 }
 
                 if (p.random(25) < 1 && state == State.Idle)
