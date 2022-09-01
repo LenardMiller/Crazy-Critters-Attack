@@ -71,14 +71,12 @@ public abstract class Shockwave {
     protected void damageEnemies() {
         for (int i = 0; i < UNTOUCHED_ENEMIES.size(); i++) {
             Enemy enemy = UNTOUCHED_ENEMIES.get(i);
-            int damage = DAMAGE;
-            if (enemy instanceof FlyingEnemy) damage = 0;
             float a = findAngle(CENTER, enemy.position);
             float angleDif = ANGLE - a;
             float dist = findDistBetween(enemy.position, CENTER);
             if (abs(angleDif) < WIDTH / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
-                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, TURRET,
+                enemy.damageWithBuff(DAMAGE, buff, effectLevel, effectDuration, TURRET,
                         true, damageType, direction, -1);
                 UNTOUCHED_ENEMIES.remove(enemy);
             }

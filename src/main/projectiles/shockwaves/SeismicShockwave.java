@@ -49,7 +49,7 @@ public class SeismicShockwave extends Shockwave {
         for (int i = 0; i < UNTOUCHED_ENEMIES.size(); i++) {
             Enemy enemy = UNTOUCHED_ENEMIES.get(i);
             int damage = DAMAGE;
-            if (enemy instanceof FlyingEnemy) damage = 0;
+            if (enemy instanceof FlyingEnemy) continue;
             float a = findAngle(CENTER, enemy.position);
             float angleDif = ANGLE - a;
             float dist = findDistBetween(enemy.position, CENTER);
