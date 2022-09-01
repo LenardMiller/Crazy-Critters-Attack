@@ -14,8 +14,8 @@ public class Mammoth extends Enemy {
         pfSize = 4;
         radius = 50;
         speed = 30;
-        damage = 80;
-        maxHp = 300000;
+        damage = 50;
+        maxHp = 200000;
         moneyDrop = 2500;
         hitParticle = "redOuch";
         name = "mammoth";

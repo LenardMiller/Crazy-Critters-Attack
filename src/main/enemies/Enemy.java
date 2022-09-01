@@ -610,8 +610,10 @@ public abstract class Enemy {
             case "smallGolem":
                 return new SmallGolem(p, pos.x, pos.y);
             case "midGolem":
+            case "golem":
                 return new Golem(p, pos.x, pos.y);
             case "bigGolem":
+            case "giantGolem":
                 return new GiantGolem(p, pos.x, pos.y);
             case "bat":
                 return new Bat(p, pos.x, pos.y);
@@ -674,6 +676,7 @@ public abstract class Enemy {
             case "twisted":
                 return new Twisted(p, pos.x, pos.y);
             default:
+                System.out.println("Could not get enemy of type: \"" + name + "\"");
                 return null;
         }
     }

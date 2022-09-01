@@ -3,12 +3,13 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
 public class Sidewinder extends Enemy {
 
-    public Sidewinder(PApplet p, float x, float y) { //todo: too small
+    public Sidewinder(PApplet p, float x, float y) {
         super(p,x,y);
         size = new PVector(25,25);
         pfSize = 1;
@@ -29,6 +30,7 @@ public class Sidewinder extends Enemy {
         overkillSound = sounds.get("hissSquish");
         dieSound = sounds.get("hiss");
         attackSound = sounds.get("snakeStrike");
+        moveSoundLoop = moveSoundLoops.get("rattle");
         loadStuff();
     }
 }

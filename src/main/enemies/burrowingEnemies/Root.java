@@ -15,7 +15,7 @@ public class Root extends BurrowingEnemy {
         pfSize = 1;
         radius = 12.5f;
         speed = 40;
-        moneyDrop = 100;
+        moneyDrop = 250;
         damage = 20;
         maxHp = 35000; //Hp
         hp = maxHp;

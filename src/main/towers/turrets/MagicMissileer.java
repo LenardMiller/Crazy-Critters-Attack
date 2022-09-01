@@ -91,15 +91,17 @@ public class MagicMissileer extends Turret {
             loadFrames = animatedSprites.get(name + "CoreLoadTR");
             return;
         }
-        sBase = staticSprites.get(name + "BaseTR");
-        idleSprite = staticSprites.get(name + "IdleTR");
-        fireFrames = animatedSprites.get(name + "FireTR");
-        loadFrames = animatedSprites.get(name + "LoadTR");
-        if (animatedSprites.get(name + "IdleTR") != null) {
-            idleFrames = animatedSprites.get(name + "IdleTR");
+        String tempName = name;
+        if (tempName.equals("magicSwarm")) tempName = "magicMissleer";
+        sBase = staticSprites.get(tempName + "BaseTR");
+        idleSprite = staticSprites.get(tempName + "IdleTR");
+        fireFrames = animatedSprites.get(tempName + "FireTR");
+        loadFrames = animatedSprites.get(tempName + "LoadTR");
+        if (animatedSprites.get(tempName + "IdleTR") != null) {
+            idleFrames = animatedSprites.get(tempName + "IdleTR");
             idleSprite = idleFrames[0];
         }
-        else idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
+        else idleFrames = new PImage[]{staticSprites.get(tempName + "IdleTR")};
     }
 
     @Override
@@ -167,7 +169,7 @@ public class MagicMissileer extends Turret {
     public void displayBase() {
         if (name.equals("electricMissleer")) return;
         p.tint(255, tintColor, tintColor);
-        p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
+        if (sBase != null) p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.tint(255, 255, 255);
     }
 
@@ -203,7 +205,7 @@ public class MagicMissileer extends Turret {
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
         p.tint(255, tintColor, tintColor);
-        if (name.equals("magicSwarm")) {
+        if (name.equals("magicSwarm") && sprite != null) {
             for (int i = 0; i < 3; i++) {
                 p.pushMatrix();
                 p.rotate(specialAngle + (i * (TWO_PI / 3)));
@@ -223,7 +225,7 @@ public class MagicMissileer extends Turret {
             p.rotate(-specialAngle);
             p.image(ElectricComponent.OuterRing.getSprite(state, frame), (-size.x/2-offset),-size.y/2-offset);
             p.popMatrix();
-        } else p.image(sprite,-size.x/2-offset,-size.y/2-offset);
+        } else if (sprite != null) p.image(sprite,-size.x/2-offset,-size.y/2-offset);
         p.popMatrix();
         p.tint(255);
 
@@ -254,16 +256,16 @@ public class MagicMissileer extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 1250;
-        upgradePrices[1] = 2500;
+        upgradePrices[0] = 750;
+        upgradePrices[1] = 1500;
         upgradePrices[2] = 40000;
 
-        upgradePrices[3] = 1500;
-        upgradePrices[4] = 3000;
+        upgradePrices[3] = 1000;
+        upgradePrices[4] = 2000;
         upgradePrices[5] = 25000;
         //titles
-        upgradeTitles[0] = "More range";
-        upgradeTitles[1] = "More magic";
+        upgradeTitles[0] = "More Range";
+        upgradeTitles[1] = "More Magic";
         upgradeTitles[2] = "Electrifying";
 
         upgradeTitles[3] = "Faster Firing";

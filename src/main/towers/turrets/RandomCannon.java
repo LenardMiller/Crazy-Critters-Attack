@@ -69,14 +69,14 @@ public class RandomCannon extends Turret {
         upgradePrices[4] = 125;
         upgradePrices[5] = 500;
         //titles
-        upgradeTitles[0] = "Damage Up";
+        upgradeTitles[0] = "Heavy Luggage";
         upgradeTitles[1] = "Faster Firing";
         upgradeTitles[2] = "Rotating Barrel";
         upgradeTitles[3] = "Longer Range";
         upgradeTitles[4] = "Longest Range";
         upgradeTitles[5] = "Dirty Laundry";
         //description
-        upgradeDescA[0] = "increase";
+        upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "damage";
         upgradeDescC[0] = "";
 

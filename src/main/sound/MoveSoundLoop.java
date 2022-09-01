@@ -3,6 +3,7 @@ package main.sound;
 import processing.core.PApplet;
 
 import static java.lang.Math.min;
+import static java.lang.Math.sqrt;
 
 public class MoveSoundLoop {
 
@@ -17,7 +18,7 @@ public class MoveSoundLoop {
     }
 
     public void main() {
-        loop.setTargetVolume(min(1, count / maxEnemyNum));
+        loop.setTargetVolume((float) min(1, sqrt(count / maxEnemyNum)));
         loop.main();
         count = 0;
     }

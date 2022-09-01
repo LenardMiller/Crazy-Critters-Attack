@@ -178,8 +178,8 @@ public class Wall extends Tower {
         //hp
         UPGRADE_HP[0] = 75;
         UPGRADE_HP[1] = 125;
-        UPGRADE_HP[2] = 250;
-        UPGRADE_HP[3] = 500;
+        UPGRADE_HP[2] = 500;
+        UPGRADE_HP[3] = 1250;
     }
 
     @Override

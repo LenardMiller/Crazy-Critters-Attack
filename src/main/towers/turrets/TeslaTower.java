@@ -112,12 +112,12 @@ public class TeslaTower extends Turret {
     @Override
     protected void setUpgrades(){
         //price
-        upgradePrices[0] = 600;
-        upgradePrices[1] = 700;
+        upgradePrices[0] = 800;
+        upgradePrices[1] = 1000;
         upgradePrices[2] = 10000;
 
-        upgradePrices[3] = 400;
-        upgradePrices[4] = 800;
+        upgradePrices[3] = 600;
+        upgradePrices[4] = 1200;
         upgradePrices[5] = 8000;
         //titles
         upgradeTitles[0] = "Farther Jumping";

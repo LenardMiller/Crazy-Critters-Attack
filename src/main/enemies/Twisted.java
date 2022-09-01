@@ -15,7 +15,7 @@ public class Twisted extends Enemy {
         pfSize = 2; //2
         radius = 25;
         speed = 30;
-        moneyDrop = 500;
+        moneyDrop = 750;
         damage = 40;
         maxHp = 35000; //Hp
         hp = maxHp;

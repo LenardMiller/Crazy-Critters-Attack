@@ -125,24 +125,25 @@ public class SoundLoader {
         //stackables
         stackableSounds.put("beam", new StackableSound(p, "beam", 5));
         //move sounds
-        moveSoundLoops.put("smallBugLoop", new MoveSoundLoop(p, "smallBugLoop", 20));
+        moveSoundLoops.put("smallBugLoop", new MoveSoundLoop(p, "smallBugLoop", 10));
         moveSoundLoops.put("bigBugLoop", new MoveSoundLoop(p, "bigBugLoop", 3));
         moveSoundLoops.put("leafyStepsLoop", new MoveSoundLoop(p, "leafyStepsLoop", 10));
         moveSoundLoops.put("bigLeafyStepsLoop", new MoveSoundLoop(p, "bigLeafyStepsLoop", 3));
-        moveSoundLoops.put("smallWingbeats", new MoveSoundLoop(p, "smallWingbeats", 20));
-        moveSoundLoops.put("wingbeats", new MoveSoundLoop(p, "wingbeats", 10));
+        moveSoundLoops.put("smallWingbeats", new MoveSoundLoop(p, "smallWingbeats", 7));
+        moveSoundLoops.put("wingbeats", new MoveSoundLoop(p, "wingbeats", 5));
         moveSoundLoops.put("bigWingbeats", new MoveSoundLoop(p, "bigWingbeats", 3));
         moveSoundLoops.put("buzz", new MoveSoundLoop(p, "buzz", 3));
         moveSoundLoops.put("crystals", new MoveSoundLoop(p, "crystals", 10));
         moveSoundLoops.put("bigCrystals", new MoveSoundLoop(p, "bigCrystals", 3));
         moveSoundLoops.put("ominousWind", new MoveSoundLoop(p, "ominousWind", 3));
         moveSoundLoops.put("bigDig", new MoveSoundLoop(p, "bigDig", 3));
-        moveSoundLoops.put("littleDig", new MoveSoundLoop(p, "littleDig", 10));
+        moveSoundLoops.put("littleDig", new MoveSoundLoop(p, "littleDig", 5));
         moveSoundLoops.put("bigFootsteps", new MoveSoundLoop(p, "bigFootsteps", 1));
         moveSoundLoops.put("manyFootsteps", new MoveSoundLoop(p, "manyFootsteps", 5));
         moveSoundLoops.put("stonesMove", new MoveSoundLoop(p, "stonesMove", 10));
         moveSoundLoops.put("bigStonesMove", new MoveSoundLoop(p, "bigStonesMove", 3));
-        moveSoundLoops.put("snowRunning", new MoveSoundLoop(p, "snowRunning", 10));
+        moveSoundLoops.put("snowRunning", new MoveSoundLoop(p, "snowRunning", 20));
         moveSoundLoops.put("slimeMovement", new MoveSoundLoop(p, "slimeMovement", 5));
+        moveSoundLoops.put("rattle", new MoveSoundLoop(p, "rattle", 5));
     }
 }

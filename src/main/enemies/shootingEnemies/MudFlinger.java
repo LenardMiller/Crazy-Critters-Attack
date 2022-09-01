@@ -19,7 +19,7 @@ public class MudFlinger extends ShootingEnemy {
         moneyDrop = 500;
         damage = 12;
         shootDamage = 4;
-        maxHp = 20000;
+        maxHp = 15000;
         range = 140;
         barrelLength = 7;
         hp = maxHp;

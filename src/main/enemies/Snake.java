@@ -3,6 +3,7 @@ package main.enemies;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import static main.Main.moveSoundLoops;
 import static main.Main.sounds;
 import static main.misc.Utilities.down60ToFramerate;
 
@@ -29,6 +30,7 @@ public class Snake extends Enemy {
         overkillSound = sounds.get("hissSquish");
         dieSound = sounds.get("hiss");
         attackSound = sounds.get("snakeStrike");
+        moveSoundLoop = moveSoundLoops.get("rattle");
         loadStuff();
     }
 }

@@ -69,11 +69,11 @@ public class Cannon extends Turret {
         upgradeTitles[4] = "Rapid reload";
         upgradeTitles[5] = "Frags";
         //description
-        upgradeDescA[0] = "boost";
+        upgradeDescA[0] = "Boost";
         upgradeDescB[0] = "damage";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "boost";
+        upgradeDescA[1] = "Boost";
         upgradeDescB[1] = "damage";
         upgradeDescC[1] = "some more";
 
@@ -113,7 +113,7 @@ public class Cannon extends Turret {
                     break;
                 case 2:
                     damage += 400;
-                    effectRadius = 60;
+                    effectRadius = 75;
                     pjSpeed = 600;
                     dynamite = true;
                     fireSound = sounds.get("slingshot");
