@@ -682,7 +682,6 @@ public abstract class Enemy {
     }
 
     //pathfinding ------------------------------------------------------------------------------------------------------
-    //todo: place first turnPoint on top of enemy
 
     protected boolean intersectTurnPoint() {
         TurnPoint point = trail.get(trail.size() - 1);
@@ -697,7 +696,6 @@ public abstract class Enemy {
                     && pfPosition.y < p.y + tpSize + (NODE_SIZE / 2f));
     }
 
-    /** wtf, why is this a thing */
     protected boolean intersectCombatPoint() {
         if (trail.size() == 0f) return false;
         TurnPoint point = trail.get(trail.size() - 1);
@@ -726,8 +724,10 @@ public abstract class Enemy {
                     attackCue = true;
                     targetTower = intersectingPoint.tower;
                     targetMachine = intersectingPoint.machine;
-                } else attackCue = false;
-                trail.remove(intersectingPoint);
+                } else {
+                    attackCue = false;
+                    trail.remove(intersectingPoint);
+                }
             }
             if (trail.size() != 0) {
                 PVector pointPosition = trail.get(trail.size() - 1).position;

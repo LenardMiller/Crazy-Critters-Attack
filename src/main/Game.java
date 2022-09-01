@@ -283,7 +283,7 @@ public class Game {
                 nodeGrid[x][y] = new Node(p, new PVector((NODE_SIZE * x)-100, (NODE_SIZE * y)-100));
             }
         }
-        pathFinder = new AStar();
+        pathFinder = new AStar(p);
         openNodes = new HeapNode((int) (sq((float)GRID_WIDTH / NODE_SIZE)));
         //create end nodes
         end = new Node[0];

@@ -127,6 +127,7 @@ public class Node {
         } if (!ended) setNotEnd(tX,tY);
     }
 
+    /** Closes the node, adds turn points */
     void setClose() {
         isClosed = true;
         isOpen = false;
@@ -134,15 +135,18 @@ public class Node {
             pathFinder.done = true;
             Enemy enemy = null;
             if (enemies.size() - 1 > pathFinder.index) enemy = enemies.get(pathFinder.index);
-            if (pathFinder.index != -1 && enemies.size() != 0 && enemy != null) { //points added HERE
+            // Add points to end node
+            if (pathFinder.index != -1 && enemies.size() != 0 && enemy != null) {
                 enemy.trail.add(new Enemy.TurnPoint(P, position, tower));
                 enemy.trail.add(new Enemy.TurnPoint(P, parent.position, tower));
             }
+            // Add other points
             setDone();
         } else updateNode(nodeGrid[(int) ((position.x + 100) / NODE_SIZE)][(int) ((position.y + 100) / NODE_SIZE)], request);
         findGHF();
     }
 
+    /** Add point to enemy trail, set next node done */
     private void setDone() {
         if (pathFinder.index != -1) {
             if (pathFinder.index < enemies.size()) {
