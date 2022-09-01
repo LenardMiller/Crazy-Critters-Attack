@@ -1,6 +1,7 @@
 package main.misc;
 
 import main.Main;
+import main.enemies.burrowingEnemies.*;
 import main.enemies.shootingEnemies.IceEntity;
 import main.enemies.shootingEnemies.IceMonstrosity;
 import main.enemies.shootingEnemies.MudFlinger;
@@ -14,7 +15,6 @@ import main.projectiles.enemyProjeciles.IceCrystal;
 import main.projectiles.enemyProjeciles.Snowball;
 import main.projectiles.homing.MagicMissile;
 import main.enemies.*;
-import main.enemies.burrowingEnemies.Shark;
 import main.enemies.flyingEnemies.Bat;
 import main.enemies.flyingEnemies.Frost;
 import main.levelStructure.Level;
@@ -171,11 +171,11 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1,150, 500));
         if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new SmolBug( p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en2) enemies.add(new BigBug(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en3) enemies.add(new TreeSpirit(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en4) enemies.add(new TreeGiant(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en5) enemies.add(new MudCreature(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en1) enemies.add(new Worm( p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en2) enemies.add(new MidWorm(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en3) enemies.add(new BigWorm(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en5) enemies.add(new Root(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new Frost(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en7) enemies.add(new Bat(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en8) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));

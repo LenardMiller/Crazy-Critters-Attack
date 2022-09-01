@@ -16,41 +16,10 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class BurrowingEnemy extends Enemy {
 
+    private boolean animationReversed;
+
     protected BurrowingEnemy(PApplet p, float x, float y) {
         super(p, x, y);
-    }
-
-    @Override
-    public void main(int i) {
-        boolean dead = false; //if its gotten this far, it must be alive?
-        swapPoints(false);
-
-        if (!paused && !immobilized) {
-            rotation = normalizeAngle(rotation);
-            targetAngle = normalizeAngle(targetAngle);
-            rotation += getAngleDifference(targetAngle, rotation) / 10;
-
-            switch (state) {
-                case Moving:
-                    move();
-                    break;
-                case Attacking:
-                    attack();
-                    break;
-            }
-
-            //prevent wandering
-            if (trail.size() == 0 && state != State.Attacking) pathRequestWaitTimer++;
-            if (pathRequestWaitTimer > FRAMERATE) {
-                requestPath(i);
-                pathRequestWaitTimer = 0;
-            }
-        }
-        if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
-        displayMain();
-        //if health is 0, die
-        if (hp <= 0) dead = true;
-        if (dead) die(i);
     }
 
     @Override
@@ -61,14 +30,22 @@ public abstract class BurrowingEnemy extends Enemy {
             topParticles.add(new Debris(p, particlePosition.x, particlePosition.y, p.random(0, 360), levels[currentLevel].groundType));
         }
         if (p.random(25) < pfSize * pfSize) {
-            PVector particalPosition = randomPosition();
-            bottomParticles.add(new Pile(p, particalPosition.x, particalPosition.y, 0, levels[currentLevel].groundType));
+            PVector particlePosition = randomPosition();
+            bottomParticles.add(new Pile(p, particlePosition.x, particlePosition.y, 0, levels[currentLevel].groundType));
         }
         PVector m = PVector.fromAngle(rotation);
         float pixelsMoved = getActualSpeed() / FRAMERATE;
         m.setMag(pixelsMoved);
         //don't move if no path
         if (trail.size() > 0) position.add(m);
+    }
+
+    @Override
+    protected void animate() {
+        super.animate();
+        if (immobilized) {
+            sprite = attackFrames[0];
+        }
     }
 
     private PVector randomPosition() {
@@ -105,6 +82,4 @@ public abstract class BurrowingEnemy extends Enemy {
 
         enemies.remove(i);
     }
-
-    //todo: reveal animation
 }

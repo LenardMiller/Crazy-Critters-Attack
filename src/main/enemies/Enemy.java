@@ -303,6 +303,7 @@ public abstract class Enemy {
 
     /** Display main sprite */
     public void displayMain() {
+        if (sprite == null) return;
         if (debug) for (int i = trail.size() - 1; i > 0; i--) {
             trail.get(i).display();
         }
@@ -310,7 +311,7 @@ public abstract class Enemy {
         p.translate(position.x, position.y);
         p.rotate(rotation);
         p.tint(currentTintColor.getRGB());
-        if (sprite != null) p.image(sprite, -size.x / 2, -size.y / 2);
+        p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
         if (debug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
@@ -336,7 +337,7 @@ public abstract class Enemy {
      * @param direction determines where parts will be flung, (0, 0) for everywhere
      * @param id id of this enemy, set to -1 if unknown
      */
-    public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, Turret turret,
+    public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, @Nullable Turret turret,
                                boolean displayParticles, String damageType, PVector direction, int id) {
         if (id == -1 && buffName != null) id = getId();
         lastDamageType = damageType;

@@ -27,7 +27,7 @@ public class BigWorm extends BurrowingEnemy {
         partSize = new PVector(31, 31);
         corpseSize = new PVector(50, 50);
         overkillSound = sounds.get("squash");
-        dieSound = sounds.get("bigCrunch");
+        dieSound = sounds.get("bigCrunchRoar");
         attackSound = sounds.get("bugGrowlSlow");
         moveSoundLoop = moveSoundLoops.get("bigDig");
         loadStuff();
