@@ -676,6 +676,9 @@ public abstract class Enemy {
             case "Twisted":
             case "twisted":
                 return new Twisted(p, pos.x, pos.y);
+            case "fae":
+            case "Fae":
+                return new Fae(p, pos.x, pos.y);
             default:
                 System.out.println("Could not get enemy of type: \"" + name + "\"");
                 return null;

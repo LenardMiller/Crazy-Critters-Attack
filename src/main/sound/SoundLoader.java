@@ -39,6 +39,7 @@ public class SoundLoader {
         sounds.put("gravelDie", new SoundFile(p, "sounds/enemies/gravelDie.wav"));
         sounds.put("gravelExplode", new SoundFile(p, "sounds/enemies/gravelExplode.wav"));
         sounds.put("rocksCrumble", new SoundFile(p, "sounds/enemies/rocksCrumble.wav"));
+        sounds.put("faeDie", new SoundFile(p, "sounds/enemies/faeDie.wav"));
         //critter attack
         sounds.put("spit", new SoundFile(p, "sounds/enemies/spit.wav"));
         sounds.put("badMagic", new SoundFile(p, "sounds/enemies/badMagic.wav"));
@@ -57,6 +58,7 @@ public class SoundLoader {
         sounds.put("dogAttack", new SoundFile(p, "sounds/enemies/dogAttack.wav"));
         sounds.put("slime", new SoundFile(p, "sounds/enemies/slime.wav"));
         sounds.put("frostFreeze", new SoundFile(p, "sounds/enemies/frostFreeze.wav"));
+        sounds.put("faeMagic", new SoundFile(p, "sounds/enemies/faeMagic.wav"));
         //misc
         sounds.put("smallExplosion", new SoundFile(p, "sounds/misc/smallExplosion.wav"));
         sounds.put("mediumExplosion", new SoundFile(p, "sounds/misc/mediumExplosion.wav"));
@@ -145,5 +147,6 @@ public class SoundLoader {
         moveSoundLoops.put("snowRunning", new MoveSoundLoop(p, "snowRunning", 20));
         moveSoundLoops.put("slimeMovement", new MoveSoundLoop(p, "slimeMovement", 5));
         moveSoundLoops.put("rattle", new MoveSoundLoop(p, "rattle", 5));
+        moveSoundLoops.put("fae", new MoveSoundLoop(p, "fae", 10));
     }
 }

@@ -2,6 +2,7 @@ package main.misc;
 
 import main.Main;
 import main.enemies.burrowingEnemies.*;
+import main.enemies.flyingEnemies.Fae;
 import main.enemies.shootingEnemies.IceEntity;
 import main.enemies.shootingEnemies.IceMonstrosity;
 import main.enemies.shootingEnemies.MudFlinger;
@@ -176,7 +177,7 @@ public class KeyBinds {
         if (en3) enemies.add(new BigWorm(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en5) enemies.add(new Root(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en6) enemies.add(new Frost(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en6) enemies.add(new Fae(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en7) enemies.add(new Bat(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en8) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en9) enemies.add(new TreeSpirit(p, matrixMousePosition.x, matrixMousePosition.y));

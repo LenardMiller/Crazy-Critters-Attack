@@ -40,12 +40,14 @@ public class SpriteLoader {
         getSprite(p,"blueSmokeMisc","PT","misc/blueSmoke/",8);
         getSprite(p,"blueGreenFireMisc","PT","misc/blueGreenFire/",8);
         getSprite(p,"greenMagicMisc","PT","misc/greenMagic/",8);
+        getSprite(p,"blueMagicMisc","PT","misc/blueMagic/",8);
         getSprite(p,"orangeMagicMisc","PT","misc/orangeMagic/",8);
         getSprite(p,"yellowMagicMisc","PT","misc/yellowMagic/",8);
         getSprite(p,"iceMagicMisc","PT","misc/iceMagic/",8);
         //puffs
         getSprite(p,"greyPuff","PT","puff/grey/",11);
         getSprite(p,"greenPuff","PT","puff/green/",10);
+        getSprite(p,"bluePuff","PT","puff/blue/",10);
         getSprite(p,"yellowPuff","PT","puff/yellow/",10);
         getSprite(p,"poisonPuff","PT","puff/poison/",10);
         getSprite(p,"gluePuff","PT","puff/glue/",10);
@@ -106,6 +108,8 @@ public class SpriteLoader {
         getSprite(p,"frostCloudFloaty","PT","floaty/frostCloud/",10);
         getSprite(p,"smokeCloudFloaty","PT","floaty/smokeCloud/",10);
         getSprite(p,"coinFloaty","PT","floaty/coin/",10);
+        getSprite(p,"greenMagicFloaty","PT","floaty/greenMagic/",5);
+        getSprite(p,"blueMagicFloaty","PT","floaty/blueMagic/",5);
         //static
         staticSprites.put("icePt",p.loadImage("sprites/particles/debris/ice.png"));
         staticSprites.put("crystalPt",p.loadImage("sprites/particles/debris/crystal.png"));
