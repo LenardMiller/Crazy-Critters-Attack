@@ -31,10 +31,10 @@ public class Fae extends Frost {
         pfSize = 2;
         size = new PVector(25, 25);
         radius = 15;
-        speed = 50;
-        moneyDrop = 300;
+        speed = 55;
+        moneyDrop = 200;
         damage = 6;
-        maxHp = 6500;
+        maxHp = 20000;
         hp = maxHp;
         hitParticle = oppositeColor + "Puff";
         name = "fae";

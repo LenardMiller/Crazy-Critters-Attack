@@ -8,7 +8,7 @@ import java.awt.*;
 public class DeepForestWaves {
 
     public static Wave[] genDeepForestWaves(PApplet p) {
-        Wave[] waves = new Wave[40];
+        Wave[] waves = new Wave[42];
 
         String bigBug = "Big Bugs";
         String midBug = "midBug";
@@ -28,6 +28,7 @@ public class DeepForestWaves {
         String root = "Roots";
         String mantoid = "Mantoids";
         String twisted = "Twisted";
+        String fae = "Fae";
 
         waves[0] = wavePreset(p, 80, 40, "Bugs");
         waves[0].polluter = new Polluter(p, 3, "deepForest/yellow");
@@ -191,19 +192,26 @@ public class DeepForestWaves {
         waves[35] = wavePreset(p, 60, 20, twisted);
         waves[35].addSpawns(twisted, 10);
 
-        waves[36] = wavePreset(p, 40, 20, mantoid);
-        waves[36].addSpawns(mantoid, 10);
-        waves[36].addSpawns(roach, 60);
+        //first fae
+        waves[36] = wavePreset(p, 50, 5, fae);
+        waves[36].addSpawns(fae, 20);
 
-        waves[37] = wavePreset(p, 60, 20, twisted);
-        waves[37].addSpawns(twisted, 20);
+        waves[37] = wavePreset(p, 40, 20, mantoid);
+        waves[37].addSpawns(mantoid, 10);
+        waves[37].addSpawns(roach, 60);
 
-        waves[38] = wavePreset(p, 50, 5, root);
-        waves[38].addSpawns(root, 20);
+        waves[38] = wavePreset(p, 60, 20, twisted);
+        waves[38].addSpawns(twisted, 20);
 
-        waves[39] = wavePreset(p, 50, 20, mudCreature);
-        waves[39].addSpawns(mudCreature, 20);
-        waves[39].addSpawns(mudFlinger, 3);
+        waves[39] = wavePreset(p, 50, 5, fae);
+        waves[39].addSpawns(fae, 40);
+
+        waves[40] = wavePreset(p, 50, 5, root);
+        waves[40].addSpawns(root, 20);
+
+        waves[41] = wavePreset(p, 50, 20, mudCreature);
+        waves[41].addSpawns(mudCreature, 20);
+        waves[41].addSpawns(mudFlinger, 3);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -296,6 +304,12 @@ public class DeepForestWaves {
                         new Color(219, 105, 67),
                         new Color(123, 78, 15),
                         new Color(90, 63, 35),
+                        title);
+            case "Fae":
+                return new Wave(p, length, spawnLength,
+                        new Color(100, 207, 124),
+                        new Color(105, 212, 214),
+                        new Color(64, 136, 200),
                         title);
             default:
                 return new Wave(p, length, spawnLength,
