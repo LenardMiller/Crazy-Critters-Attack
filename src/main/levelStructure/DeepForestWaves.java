@@ -8,7 +8,7 @@ import java.awt.*;
 public class DeepForestWaves {
 
     public static Wave[] genDeepForestWaves(PApplet p) {
-        Wave[] waves = new Wave[42];
+        Wave[] waves = new Wave[43];
 
         String bigBug = "Big Bugs";
         String midBug = "midBug";
@@ -29,6 +29,7 @@ public class DeepForestWaves {
         String mantoid = "Mantoids";
         String twisted = "Twisted";
         String fae = "Fae";
+        String mutantBug = "Mutant Bug";
 
         waves[0] = wavePreset(p, 80, 40, "Bugs");
         waves[0].polluter = new Polluter(p, 3, "deepForest/yellow");
@@ -148,6 +149,7 @@ public class DeepForestWaves {
         waves[24].addSpawns(bigWorm, 20);
         waves[24].addSpawns(butterfly, 20);
         waves[24].addSpawns("wtf", 1);
+        waves[24].addSpawns("emperor", 5);
 
         //first mantoid
         waves[25] = wavePreset(p, 50, 1, "Mantoid");
@@ -212,6 +214,10 @@ public class DeepForestWaves {
         waves[41] = wavePreset(p, 50, 20, mudCreature);
         waves[41].addSpawns(mudCreature, 20);
         waves[41].addSpawns(mudFlinger, 3);
+
+        //first mutant bug
+        waves[42] = wavePreset(p, 50, 1, mutantBug);
+        waves[42].addSpawns(mutantBug, 1);
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -310,6 +316,13 @@ public class DeepForestWaves {
                         new Color(100, 207, 124),
                         new Color(105, 212, 214),
                         new Color(64, 136, 200),
+                        title);
+            case "Mutant Bug":
+            case "Mutant Bugs":
+                return new Wave(p, length, spawnLength,
+                        new Color(10, 10, 10),
+                        new Color(0x8dbf00),
+                        new Color(255, 0, 0),
                         title);
             default:
                 return new Wave(p, length, spawnLength,

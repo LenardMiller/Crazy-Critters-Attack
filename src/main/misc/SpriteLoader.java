@@ -366,6 +366,11 @@ public class SpriteLoader {
         getSprite(p,"twistedAttack","EN","twisted/attack/",7);
         getSprite(p,"twistedDie","EN","twisted/die/",3);
         getSprite(p,"twistedParts","EN","twisted/parts/",4);
+        //mutantBug
+        getSprite(p,"mutantBugMove","EN","mutantBug/move/",8);
+        getSprite(p,"mutantBugAttack","EN","mutantBug/attack/",15);
+        getSprite(p,"mutantBugDie","EN","mutantBug/die/",5);
+        getSprite(p,"mutantBugParts","EN","mutantBug/parts/",12);
         //orbits
         staticSprites.put("iceEntityOrbitEn",p.loadImage("sprites/enemies/iceEntity/orbit.png"));
         staticSprites.put("iceMonstrosityOrbitEn",p.loadImage("sprites/enemies/iceMonstrosity/orbit.png"));

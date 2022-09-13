@@ -178,7 +178,7 @@ public class KeyBinds {
         if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en5) enemies.add(new Root(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en6) enemies.add(new Fae(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en7) enemies.add(new Bat(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en7) enemies.add(new MutantBug(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en8) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en9) enemies.add(new TreeSpirit(p, matrixMousePosition.x, matrixMousePosition.y));
         if (en1b) enemies.add(new Dummy(p, matrixMousePosition.x, matrixMousePosition.y));

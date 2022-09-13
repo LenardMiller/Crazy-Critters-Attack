@@ -679,6 +679,9 @@ public abstract class Enemy {
             case "fae":
             case "Fae":
                 return new Fae(p, pos.x, pos.y);
+            case "Mutant Bug":
+            case "Mutant Bugs":
+                return new MutantBug(p, pos.x, pos.y);
             default:
                 System.out.println("Could not get enemy of type: \"" + name + "\"");
                 return null;
