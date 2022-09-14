@@ -368,7 +368,7 @@ public class SpriteLoader {
         getSprite(p,"twistedParts","EN","twisted/parts/",4);
         //mutantBug
         getSprite(p,"mutantBugMove","EN","mutantBug/move/",8);
-        getSprite(p,"mutantBugAttack","EN","mutantBug/attack/",15);
+        getSprite(p,"mutantBugAttack","EN","mutantBug/attack/",21);
         getSprite(p,"mutantBugDie","EN","mutantBug/die/",5);
         getSprite(p,"mutantBugParts","EN","mutantBug/parts/",12);
         //orbits
