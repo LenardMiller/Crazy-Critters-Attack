@@ -8,7 +8,7 @@ import java.awt.*;
 public class DeepForestWaves {
 
     public static Wave[] genDeepForestWaves(PApplet p) {
-        Wave[] waves = new Wave[43];
+        Wave[] waves = new Wave[50];
 
         String bigBug = "Big Bugs";
         String midBug = "midBug";
@@ -195,20 +195,22 @@ public class DeepForestWaves {
         waves[35].addSpawns(twisted, 10);
 
         //first fae
-        waves[36] = wavePreset(p, 50, 5, fae);
-        waves[36].addSpawns(fae, 20);
+        waves[36] = wavePreset(p, 50, 25, fae);
+        waves[36].addSpawns(fae, 15);
 
         waves[37] = wavePreset(p, 40, 20, mantoid);
+        waves[40].setBetweenPollutesAtEnd = 1;
         waves[37].addSpawns(mantoid, 10);
         waves[37].addSpawns(roach, 60);
 
         waves[38] = wavePreset(p, 60, 20, twisted);
         waves[38].addSpawns(twisted, 20);
 
-        waves[39] = wavePreset(p, 50, 5, fae);
-        waves[39].addSpawns(fae, 40);
+        waves[39] = wavePreset(p, 50, 15, fae);
+        waves[39].addSpawns(fae, 25);
 
         waves[40] = wavePreset(p, 50, 5, root);
+        waves[42].polluter = new Polluter(p, 3, "deepForest/dead");
         waves[40].addSpawns(root, 20);
 
         waves[41] = wavePreset(p, 50, 20, mudCreature);
@@ -216,8 +218,46 @@ public class DeepForestWaves {
         waves[41].addSpawns(mudFlinger, 3);
 
         //first mutant bug
-        waves[42] = wavePreset(p, 50, 1, mutantBug);
+        waves[42] = wavePreset(p, 100, 1, mutantBug);
         waves[42].addSpawns(mutantBug, 1);
+
+        waves[43] = wavePreset(p, 50, 20, twisted);
+        waves[43].addSpawns(twisted, 30);
+        waves[43].addSpawns(enragedGiant, 15);
+
+        waves[44] = wavePreset(p, 50, 5, root);
+        waves[44].addSpawns(root, 30);
+        waves[44].addSpawns(mudCreature, 10);
+        waves[44].addSpawns(mudFlinger, 10);
+
+        waves[45] = wavePreset(p, 50, 5, fae);
+        waves[45].addSpawns(fae, 35);
+
+        waves[46] = wavePreset(p, 60, 10, mutantBug);
+        waves[46].addSpawns(mutantBug, 1);
+        waves[46].addSpawns(mantoid, 5);
+        waves[46].addSpawns(bigWorm, 5);
+        waves[46].addSpawns(bigBug, 10);
+        waves[46].addSpawns("emperor", 3);
+        waves[46].addSpawns(roach, 20);
+
+        waves[47] = wavePreset(p, 30, 5, roach);
+        waves[47].addSpawns(roach, 100);
+
+        waves[48] = wavePreset(p, 240, 200, "Decaying Horde");
+        waves[48].addSpawns(roach, 250);
+        waves[48].addSpawns(twisted, 60);
+        waves[48].addSpawns(root, 60);
+        waves[48].addSpawns(fae, 50);
+        waves[48].addSpawns(mantoid, 10);
+        waves[48].addSpawns(mudCreature, 30);
+        waves[48].addSpawns(mudFlinger, 30);
+        waves[48].addSpawns("wtf", 3);
+
+        waves[49] = wavePreset(p, 100, 20, "Mutant Bugs");
+        waves[49].addSpawns(mutantBug, 3);
+
+        //todo: boss
 
         for (Wave wave : waves) wave.load();
         return waves;
@@ -323,6 +363,12 @@ public class DeepForestWaves {
                         new Color(10, 10, 10),
                         new Color(0x8dbf00),
                         new Color(255, 0, 0),
+                        title);
+            case "Decaying Horde":
+                return new Wave(p, length, spawnLength,
+                        new Color(143, 86, 59),
+                        new Color(106, 67, 20),
+                        new Color(139, 117, 83),
                         title);
             default:
                 return new Wave(p, length, spawnLength,

@@ -29,8 +29,8 @@ public class Railgun extends Turret {
         name = "railgun";
         offset = 6;
         hit = false;
-        delay = randomizeDelay(p, 10);
-        damage = 100000;
+        delay = randomizeDelay(p, 12);
+        damage = 50000;
         pjSpeed = -1;
         range = 5000;
         NUM_VAPOR_FRAMES = 15;
@@ -116,12 +116,12 @@ public class Railgun extends Turret {
     @Override
     protected void setUpgrades(){
         //price
-        upgradePrices[0] = 3000;
-        upgradePrices[1] = 5000;
+        upgradePrices[0] = 5000;
+        upgradePrices[1] = 8000;
         upgradePrices[2] = 250000;
 
-        upgradePrices[3] = 4000;
-        upgradePrices[4] = 6000;
+        upgradePrices[3] = 7500;
+        upgradePrices[4] = 10000;
         upgradePrices[5] = 300000;
         //titles
         upgradeTitles[0] = "Heat sinks";
@@ -184,7 +184,7 @@ public class Railgun extends Turret {
             switch (nextLevelB) {
                 case 3:
                 case 4:
-                    damage += 50000;
+                    damage += 25000;
                     break;
                 case 5:
                     damage = 999999;

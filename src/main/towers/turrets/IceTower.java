@@ -305,9 +305,7 @@ public class IceTower extends Turret {
                 case 2:
                     name = "autoIceTower";
                     range = 5000;
-                    delay -= 2;
                     wallTimeUntilDamage = -1;
-                    wallHp *= 2;
                     angle = 0;
                     material = "crystal";
                     placeSound = sounds.get("crystalPlace");
@@ -336,6 +334,7 @@ public class IceTower extends Turret {
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     titleLines = new String[]{"Super Freeze", "Ray"};
+                    wallHp *= 2;
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Encases any enemy", o);
                         iceWallInfo(o, 1);

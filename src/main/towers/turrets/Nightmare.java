@@ -139,7 +139,7 @@ public class Nightmare extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    range += 100;
+                    range += 40;
                     break;
                 case 4:
                     effectDuration += 3;

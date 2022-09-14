@@ -15,10 +15,12 @@ import static processing.core.PConstants.HALF_PI;
 public class MagicMissile extends Projectile {
     
     public Turret.Priority priority;
-    private Enemy targetEnemy;
 
     private final PVector SPAWN_POSITION;
-    
+
+    private float turningFraction = 10;
+    private Enemy targetEnemy;
+
     public MagicMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, Turret.Priority priority, PVector spawnPos) {
         super(p, x, y, angle, turret);
         this.SPAWN_POSITION = spawnPos;
@@ -85,7 +87,8 @@ public class MagicMissile extends Projectile {
     private void aim(PVector target) {
         float targetAngle = normalizeAngle(findAngle(position, target));
         angle = normalizeAngle(angle);
-        angle += getAngleDifference(targetAngle, angle) / 10;
+        angle += getAngleDifference(targetAngle, angle) / turningFraction;
+        turningFraction = Math.max(turningFraction - 0.1f, 0f);
         angleTwo = angle;
         velocity = PVector.fromAngle(angle-HALF_PI);
     }
