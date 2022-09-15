@@ -199,7 +199,7 @@ public class DeepForestWaves {
         waves[36].addSpawns(fae, 15);
 
         waves[37] = wavePreset(p, 40, 20, mantoid);
-        waves[40].setBetweenPollutesAtEnd = 1;
+        waves[37].setBetweenPollutesAtEnd = 1;
         waves[37].addSpawns(mantoid, 10);
         waves[37].addSpawns(roach, 60);
 
@@ -210,7 +210,7 @@ public class DeepForestWaves {
         waves[39].addSpawns(fae, 25);
 
         waves[40] = wavePreset(p, 50, 5, root);
-        waves[42].polluter = new Polluter(p, 3, "deepForest/dead");
+        waves[40].polluter = new Polluter(p, 3, "deepForest/dead");
         waves[40].addSpawns(root, 20);
 
         waves[41] = wavePreset(p, 50, 20, mudCreature);

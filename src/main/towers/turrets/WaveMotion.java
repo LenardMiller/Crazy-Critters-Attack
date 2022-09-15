@@ -19,20 +19,22 @@ public class WaveMotion extends Turret {
     private float beamAngle;
     private int beamLength;
     private PVector beamPartLength;
+    private float widthMultiplier;
 
     private final StackableSound fireSound;
 
     public WaveMotion(PApplet p, Tile tile) {
         super(p,tile);
         name = "waveMotion";
-        delay = randomizeDelay(p, 7);
-        damage = 500;
+        delay = randomizeDelay(p, 10);
+        damage = 300;
         pjSpeed = -1;
         range = 500;
         beam = new PImage[0];
         currentBeamFrame = 19;
         betweenIdleFrames = 3;
         betweenFireFrames = 3;
+        widthMultiplier = 1;
         beam = animatedSprites.get("waveMotionBeamTR");
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");
@@ -132,6 +134,7 @@ public class WaveMotion extends Turret {
                 if (!b) continue;
             } else if (b) continue;
 
+            //get dist from enemy to beam
             float tanAngle = tan(angle2);
             float tanAngleMin90 = tan(angle2 - radians(90));
             float intersectionX = (tanAngleMin90 * enemyXref - enemyYref) / (tanAngle - tanAngleMin90);
@@ -141,41 +144,48 @@ public class WaveMotion extends Turret {
             float distFromEnemyToBeam = sqrt(sq(distToEnemy) - sq(distToIntersection));
             if (Float.isNaN(distFromEnemyToBeam)) distFromEnemyToBeam = 1;
             distFromEnemyToBeam -= enemy.radius / 2;
-            if (distFromEnemyToBeam < 1) distFromEnemyToBeam = 1;
-            if (distFromEnemyToBeam < 10) enemy.damageWithoutBuff(getDamage(), this, "energy", new PVector(0,0), false);
-            else if (distFromEnemyToBeam < 30 && currentBeamFrame % 4 == 0) enemy.damageWithoutBuff(
-              getDamage(), this, "energy", new PVector(0,0), false);
-            else if (distFromEnemyToBeam < 70 && currentBeamFrame % 8 == 0) enemy.damageWithoutBuff(
-              getDamage(), this, "energy", new PVector(0,0), false);
+
+            //skip or apply damage
+            int damageAmount = getDamage();
+            if (distFromEnemyToBeam > 25 * widthMultiplier) {
+                if (distFromEnemyToBeam <= 50 * widthMultiplier) {
+                    damageAmount /= 2;
+                } else if (distFromEnemyToBeam <= 100 * widthMultiplier) {
+                    damageAmount /= 4;
+                } else {
+                    continue;
+                }
+            }
+            enemy.damageWithoutBuff(damageAmount, this, "energy", new PVector(0,0), false);
         }
     }
 
     @Override
     protected void setUpgrades(){
         //price
-        upgradePrices[0] = 50;
-        upgradePrices[1] = 100;
+        upgradePrices[0] = 5000;
+        upgradePrices[1] = 6000;
         upgradePrices[2] = 200;
 
-        upgradePrices[3] = 50;
-        upgradePrices[4] = 100;
+        upgradePrices[3] = 7500;
+        upgradePrices[4] = 10000;
         upgradePrices[5] = 200;
         //titles
-        upgradeTitles[0] = "Further targeting";
-        upgradeTitles[1] = "Faster recharge";
-        upgradeTitles[2] = "sweep";
+        upgradeTitles[0] = "Further Targeting";
+        upgradeTitles[1] = "Wider Beam";
+        upgradeTitles[2] = "pulse";
 
-        upgradeTitles[3] = "Higher energy";
-        upgradeTitles[4] = "Stable beam";
-        upgradeTitles[5] = "organ melting";
+        upgradeTitles[3] = "Higher Energy";
+        upgradeTitles[4] = "Faster Recharge";
+        upgradeTitles[5] = "magic beam";
         //desc line one
         upgradeDescA[0] = "Longer";
         upgradeDescB[0] = "range";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "Faster";
-        upgradeDescB[1] = "firing";
-        upgradeDescC[1] = "";
+        upgradeDescA[1] = "Larger";
+        upgradeDescB[1] = "area of";
+        upgradeDescC[1] = "effect";
 
         upgradeDescA[2] = "swoosh";
         upgradeDescB[2] = "";
@@ -186,9 +196,9 @@ public class WaveMotion extends Turret {
         upgradeDescB[3] = "damage";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "Sustain";
-        upgradeDescB[4] = "beam";
-        upgradeDescC[4] = "for longer";
+        upgradeDescA[4] = "Increase";
+        upgradeDescB[4] = "firerate";
+        upgradeDescC[4] = "";
 
         upgradeDescA[5] = "idk";
         upgradeDescB[5] = "";
@@ -208,10 +218,10 @@ public class WaveMotion extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    range += 200;
+                    range += 100;
                     break;
                 case 1:
-                    delay -= 4;
+                    widthMultiplier = 3;
                     break;
                 case 2:
                     delay = 0;
@@ -220,10 +230,10 @@ public class WaveMotion extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3:
-                    damage += 100;
+                    damage += 200;
                     break;
                 case 4:
-                    betweenFireFrames += 2;
+                    delay -= 3;
                     break;
                 case 5:
                     betweenFireFrames = 10;

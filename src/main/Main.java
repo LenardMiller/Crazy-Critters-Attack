@@ -93,7 +93,7 @@ public class Main extends PApplet {
             won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, useOpenGL, gore, hasVerticalBars;
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
-    public static boolean dev = false;
+    public static boolean dev = true;
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;
@@ -120,9 +120,9 @@ public class Main extends PApplet {
             ICE_TOWER_PRICE =       3000,
             BOOSTER_PRICE =         2500,
 
-            RAILGUN_PRICE =         8000,
+            RAILGUN_PRICE =         12000,
             WAVE_MOTION_PRICE =     10000,
-            NIGHTMARE_PRICE =       9000;
+            NIGHTMARE_PRICE =       13000;
 
     //sprites
     public static HashMap<String, PImage> staticSprites = new HashMap<>();

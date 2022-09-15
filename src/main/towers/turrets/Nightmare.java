@@ -72,12 +72,12 @@ public class Nightmare extends Turret {
     @Override
     protected void setUpgrades(){
         //price
-        upgradePrices[0] = 2500;
-        upgradePrices[1] = 6000;
+        upgradePrices[0] = 5000;
+        upgradePrices[1] = 7500;
         upgradePrices[2] = 100000;
 
-        upgradePrices[3] = 2000;
-        upgradePrices[4] = 8000;
+        upgradePrices[3] = 6000;
+        upgradePrices[4] = 10000;
         upgradePrices[5] = 100000;
         //titles
         upgradeTitles[0] = "Firerate";
