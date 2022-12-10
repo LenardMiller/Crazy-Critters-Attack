@@ -61,6 +61,10 @@ public class Selection {
         }
     }
 
+    /**
+     * Switches what is selected.
+     * @param turret turret to select to
+     */
     public void swapSelected(Turret turret) {
         if (!paused) {
             hand.held = "null";
@@ -112,43 +116,48 @@ public class Selection {
         }
     }
 
+    /**
+     * Displays big circle around selected tower
+     */
     public void turretOverlay() {
-        if (!name.equals("null") && turret != null) {
-            //display range and square
-            P.fill(100, 25);
-            P.stroke(255);
-            float x = turret.tile.position.x - turret.size.x;
-            float y = turret.tile.position.y - turret.size.y;
-            if (turret instanceof Booster) {
-                if (turret.range == 1) {
-                    P.rect(x, y - 50, 50, 150);
-                    P.rect(x - 50, y, 150, 50);
-                } else {
-                    P.rect(x, y, turret.size.y, turret.size.y);
-                    P.rect(x - 50, y - 50, 150, 150);
-                }
-                P.noStroke();
-                return;
-            } if (turret instanceof SeismicTower) {
-                float width = radians(((SeismicTower) turret).shockwaveWidth / 2);
-                if (width < 6) {
-                    float startX = x + turret.size.x / 2;
-                    float startY = y + turret.size.y / 2;
-                    float angleA = turret.angle - HALF_PI + width;
-                    float angleB = turret.angle - HALF_PI - width;
-                    P.arc(startX, startY, turret.range * 2, turret.range * 2, angleB, angleA, PIE);
-                }
-            }
-            P.rect(x, y, turret.size.y, turret.size.y);
-            if (turret.getRange() > 1000) { //prevents lag
-                P.noStroke();
-                P.rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
-                return;
-            }
-            if (turret.boostedRange() > 0) P.stroke(InGameGui.BOOSTED_TEXT_COLOR.getRGB());
-            P.circle(turret.tile.position.x - (turret.size.x / 2), turret.tile.position.y - (turret.size.y / 2), turret.getRange() * 2);
-            P.noStroke();
+        if (name.equals("null") || turret == null) {
+            return;
         }
+        //display range and square
+//        P.fill(100, 25);
+//        P.stroke(255);
+        float x = turret.tile.position.x - turret.size.x;
+        float y = turret.tile.position.y - turret.size.y;
+        if (turret instanceof Booster) {
+            if (turret.range == 1) {
+                P.rect(x, y - 50, 50, 150);
+                P.rect(x - 50, y, 150, 50);
+            } else {
+                P.rect(x, y, turret.size.y, turret.size.y);
+                P.rect(x - 50, y - 50, 150, 150);
+            }
+            P.noStroke();
+            return;
+        }
+        if (turret instanceof SeismicTower) {
+            float width = radians(((SeismicTower) turret).shockwaveWidth / 2);
+            if (width < 6) {
+                float startX = x + turret.size.x / 2;
+                float startY = y + turret.size.y / 2;
+                float angleA = turret.angle - HALF_PI + width;
+                float angleB = turret.angle - HALF_PI - width;
+                P.arc(startX, startY, turret.range * 2, turret.range * 2, angleB, angleA, PIE);
+            }
+        }
+        P.rect(x, y, turret.size.y, turret.size.y);
+        if (turret.getRange() > 1000) { //prevents lag
+            P.noStroke();
+            P.rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+            return;
+        }
+        if (turret.boostedRange() > 0) P.stroke(InGameGui.BOOSTED_TEXT_COLOR.getRGB());
+        P.circle(turret.tile.position.x - (turret.size.x / 2), turret.tile.position.y - (turret.size.y / 2), turret.getRange() * 2);
+        P.noStroke();
     }
 
     private void display() {

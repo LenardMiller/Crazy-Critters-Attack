@@ -33,9 +33,9 @@ public class Flamethrower extends Turret {
         offset = 7;
         pjSpeed = 300;
         range = 200;
-        effectLevel = 6;
+        effectLevel = 10;
         effectDuration = 5;
-        damage = 20;
+        damage = 15;
         delay = 0;
         material = "metal";
         basePrice = FLAMETHROWER_PRICE;
@@ -277,7 +277,7 @@ public class Flamethrower extends Turret {
                     break;
                 case 4:
                     effectDuration += 5;
-                    effectLevel += 10;
+                    effectLevel += 15;
                     break;
                 case 5:
                     name = "magicFlamethrower";

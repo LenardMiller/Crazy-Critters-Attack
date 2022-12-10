@@ -46,7 +46,15 @@ public class InGameGui {
                 break;
             }
         }
+        // Double range ring
+        P.noFill();
+        P.stroke(100, 254);
+        P.strokeWeight(3);
         selection.turretOverlay();
+        P.stroke(255);
+        P.strokeWeight(1);
+        selection.turretOverlay();
+
         P.fill(MAIN_PANEL_COLOR.getRGB()); //big white bg
         P.rect(900,212,200,688);
         levels[currentLevel].display();

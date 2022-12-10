@@ -38,10 +38,14 @@ public class Game {
 
     /** Stuff for the main game screen. */
     public void draw() {
+        //fullscreen stuff
+//        int time = p.millis();
         p.pushMatrix();
         if (hasVerticalBars) p.translate(matrixOffset, 0);
         else p.translate(0, matrixOffset);
         p.scale(matrixScale);
+//        System.out.println("fullscreen: " + (p.millis() - time));
+//        time = p.millis();
         //keys
         if (dev) {
             keyBinds.debugKeys();
@@ -50,6 +54,8 @@ public class Game {
             keyBinds.selectionKeys();
             keyBinds.inGameKeys();
         }
+//        System.out.println("keys: " + (p.millis() - time));
+//        time = p.millis();
         //pathfinding
         if (!pathFinder.requestQueue.isEmpty()) {
             pathFinder.requestQueue.get(0).getPath();
@@ -57,8 +63,12 @@ public class Game {
         }
         maxCost = maxCost();
         minCost = minCost(maxCost);
+//        System.out.println("pathfinding: " + (p.millis() - time));
+//        time = p.millis();
         //objects
         drawObjects();
+//        System.out.println("objects: " + (p.millis() - time));
+//        time = p.millis();
         //hp bars
         for (Enemy enemy : enemies) {
             if (enemy.hp > 0 && !(enemy instanceof BurrowingEnemy && enemy.state == Enemy.State.Moving)) {
@@ -67,8 +77,12 @@ public class Game {
         }
         for (Tower tower : towers) tower.displayHpBar();
         machine.hpBar();
+//        System.out.println("hp bars: " + (p.millis() - time));
+//        time = p.millis();
         //text
         for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).main();
+//        System.out.println("text: " + (p.millis() - time));
+//        time = p.millis();
         //gui stuff
         p.noStroke();
         if (!showSpawn) {
@@ -85,8 +99,11 @@ public class Game {
             else p.fill(0, 0, 0, 50);
             p.rect(0, 0, p.width, p.height);
         }
+//        System.out.println("gui stuff: " + (p.millis() - time));
+//        time = p.millis();
         //levels
         if (playingLevel) levels[currentLevel].main();
+//        System.out.println("levels: " + (p.millis() - time));
         //matrix
         p.popMatrix();
         //pause
