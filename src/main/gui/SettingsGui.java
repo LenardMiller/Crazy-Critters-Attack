@@ -56,10 +56,11 @@ public class SettingsGui {
         });
     }
 
-    public void main() {
+    public void update() {
         if (delay < 0) {
-            display();
             checkInputs();
+            returnButton.update();
+            resetSettings.update();
         }
         delay--;
     }
@@ -71,7 +72,8 @@ public class SettingsGui {
         gore = goreCheck.main(gore);
     }
 
-    private void display() { //todo: keybinds page
+    public void display() { //todo: keybinds page
+        if (delay >= 0) return;
         PVector position = new PVector(P.width / 2f, buffer);
         shadowedText(P, "Settings", position, new Color(255, 255, 255, 254),
           new Color(50, 50, 50, 254), 48, CENTER);
@@ -83,7 +85,7 @@ public class SettingsGui {
           new Color(50, 0, 0, 200), largeFont.getSize(), CENTER);
         P.textFont(mediumFont);
         P.fill(200, 254);
-        returnButton.main();
-        resetSettings.main();
+        returnButton.display();
+        resetSettings.display();
     }
 }

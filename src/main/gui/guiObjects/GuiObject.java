@@ -23,13 +23,8 @@ public class GuiObject {
         sprite = staticSprites.get(type);
     }
 
-    public void main(){
-        if (active){
-            display();
-        }
-    }
-
-    private void display() {
+    public void display() {
+        if (!active) return;
         if (sprite != null) p.image(sprite,position.x-size.x/2,position.y-size.y/2);
     }
 }

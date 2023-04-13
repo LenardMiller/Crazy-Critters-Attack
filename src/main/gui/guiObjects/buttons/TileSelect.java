@@ -40,14 +40,6 @@ public class TileSelect extends Button {
     }
 
     @Override
-    public void main() {
-        if (active){
-            hover();
-            display();
-        }
-    }
-
-    @Override
     public void display() {
         p.image(TILE_SPRITE,position.x-size.x/2,position.y-size.y/2);
         p.image(sprite,position.x-size.x/2,position.y-size.y/2);

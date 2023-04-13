@@ -23,11 +23,10 @@ public class WallBuy extends Button {
     }
 
     @Override
-    public void main(){
+    public void update(){
         timer++;
-        if (active){
+        if (active) {
             hover();
-            display();
         }
     }
 

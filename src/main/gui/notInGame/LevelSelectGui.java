@@ -1,6 +1,5 @@
 package main.gui.notInGame;
 
-import main.Game;
 import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
@@ -45,9 +44,10 @@ public class LevelSelectGui {
         }
     }
 
-    public void main() {
-        display();
+    public void update() {
         checkButtonsPressed();
+        settingsButton.update();
+        goToTitle.update();
     }
 
     private void checkButtonsPressed() {
@@ -61,7 +61,7 @@ public class LevelSelectGui {
         }
     }
 
-    private void display() {
+    public void display() {
         delay--;
         //big text
         P.fill(255, 254);
@@ -75,7 +75,7 @@ public class LevelSelectGui {
             levelSelectButton.display();
             if (delay < 0) levelSelectButton.hover();
         }
-        settingsButton.main();
-        goToTitle.main();
+        settingsButton.display();
+        goToTitle.display();
     }
 }

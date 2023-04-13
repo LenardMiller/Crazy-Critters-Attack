@@ -9,18 +9,18 @@ import static main.sound.SoundUtilities.playSound;
 
 public class TowerBuy extends Button {
 
-    private final String TOWER_TYPE;
+    private final String towerType;
 
     public boolean depressed;
     public int price;
 
-    public TowerBuy(PApplet p, float x, float y, String type, boolean active){ //todo: redo old art
-        super(p,x,y,type,active);
+    public TowerBuy(PApplet p, float x, float y, String type, boolean active) { //todo: redo old art again?
+        super(p, x, y, type, active);
         price = 0;
         position = new PVector(x, y);
         size = new PVector(35, 35);
-        TOWER_TYPE = type;
-        spriteLocation = "sprites/gui/buttons/towerBuy/" + TOWER_TYPE + "/"; //still uses old system because it is only created at beginning of game
+        towerType = type;
+        spriteLocation = "sprites/gui/buttons/towerBuy/" + towerType + "/"; //still uses old system because it is only created at beginning of game
         spriteIdle = p.loadImage(spriteLocation + "000.png");
         spritePressed = p.loadImage(spriteLocation + "001.png");
         spriteHover = p.loadImage(spriteLocation + "002.png");
@@ -77,19 +77,25 @@ public class TowerBuy extends Button {
     }
 
     @Override
-    public void main() {
-        if (active) {
-            if (!TOWER_TYPE.equals("null")) hover();
-            display();
-            if (money < price) {
-                p.tint(255, 0, 0, 200);
-                p.image(sprite, position.x - size.x / 2, position.y - size.y / 2);
-                p.tint(255);
-            }
+    public void display() {
+        if (!active) return;
+        p.image(sprite,position.x-size.x/2,position.y-size.y/2);
+        if (hovered()) displayTurretInfo(p, towerType);
+    }
+
+    @Override
+    public void update() {
+        if (!active) return;
+        if (!towerType.equals("null")) hover();
+        if (money < price) {
+            p.tint(255, 0, 0, 200);
+            p.image(sprite, position.x - size.x / 2, position.y - size.y / 2);
+            p.tint(255);
         }
     }
 
     private boolean hovered() {
+        if (towerType.equals("null")) return false;
         int d = 2;
         boolean matchX = matrixMousePosition.x < (position.x+size.x/2)+d && matrixMousePosition.x > (position.x-size.x/2)-d-1;
         boolean matchY = matrixMousePosition.y < (position.y+size.y/2)+d && matrixMousePosition.y > (position.y-size.y/2)-d-1;
@@ -104,7 +110,6 @@ public class TowerBuy extends Button {
             else sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse && !depressed) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
-            displayTurretInfo(p, TOWER_TYPE);
             if (inputHandler.leftMousePressedPulse && alive && !paused) {
                 pressIn();
                 if (money >= price) sprite = spritePressed;
@@ -119,8 +124,8 @@ public class TowerBuy extends Button {
         if (money < price) depressed = false;
         else depressed = !depressed;
         //if already holding, stop
-        if (hand.held.equals(TOWER_TYPE)) hand.setHeld("null");
+        if (hand.held.equals(towerType)) hand.setHeld("null");
         //if not, do
-        else if (depressed) hand.setHeld(TOWER_TYPE);
+        else if (depressed) hand.setHeld(towerType);
     }
 }

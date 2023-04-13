@@ -46,15 +46,13 @@ public abstract class Button extends GuiObject {
 
     public abstract void pressIn();
 
-    @Override
-    public void main(){
-        if (active){
-            hover();
-            display();
-        }
+    public void update() {
+        if (!active) return;
+        hover();
     }
 
-    public void display(){
+    public void display() {
+        if (!active) return;
         p.image(sprite,position.x-size.x/2,position.y-size.y/2);
     }
 }

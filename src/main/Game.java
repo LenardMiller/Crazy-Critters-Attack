@@ -55,6 +55,7 @@ public class Game {
         maxCost = maxCost();
         minCost = minCost(maxCost);
 
+        machine.update();
         updateParticles();
         updateProjectiles();
         updateEnemies();
@@ -66,11 +67,13 @@ public class Game {
         //turret top
         for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
         for (Tower tower : towers) tower.update();
-        //hand
+
+        //ui
         hand.update();
         for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).update();
         if (playingLevel) levels[currentLevel].update();
-        machine.update();
+        if (paused && !settings) pauseGui.update();
+        if (!showSpawn && !levelBuilder) inGameGui.update();
     }
 
     /** Update everything that has to do with enemies; enemies, corpses, ice checks and buffs **/
@@ -172,7 +175,7 @@ public class Game {
         p.popMatrix();
 
         //pause todo: split
-        if (paused && !settings) pauseGui.main();
+        if (paused && !settings) pauseGui.display();
     }
 
     /** Displays all the UI elements that stick to the screen and scale with window size **/
@@ -183,8 +186,8 @@ public class Game {
             else levelBuilderGui.display();
             hand.displayHeldInfo();
             p.textAlign(LEFT);
-            if (!levelBuilder) inGameGui.drawText(p, 10);
-        } if (dev) inGameGui.drawDebugText(p, 10);
+            if (!levelBuilder) inGameGui.displayText(p, 10);
+        } if (dev) inGameGui.displayDebugText(p, 10);
         if (paused) { //grey stuff
             p.noStroke();
             if (!alive) p.fill(50, 0, 0, 50);

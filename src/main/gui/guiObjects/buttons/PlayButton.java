@@ -26,7 +26,7 @@ public class PlayButton extends Button {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (active && selection.name.equals("null") && hand.held.equals("null")) {
             if (!playingLevel) hover();
             else sprite = SPRITE_GREY;

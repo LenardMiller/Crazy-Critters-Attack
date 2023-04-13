@@ -234,13 +234,20 @@ public class Main extends PApplet {
                 game.display();
                 break;
             case LevelSelect:
-                if (!settings) levelSelectGui.main();
+                if (!settings) {
+                    levelSelectGui.update();
+                    levelSelectGui.display();
+                }
                 break;
             case Loading:
-                loadingGui.main();
+                loadingGui.update();
+                loadingGui.display();
                 break;
             case Title:
-                if (!settings) titleGui.main();
+                if (!settings) {
+                    titleGui.update();
+                    titleGui.display();
+                }
                 break;
 
                 // immediate action branches
@@ -264,7 +271,10 @@ public class Main extends PApplet {
                 }
                 break;
         }
-        if (settings) settingsGui.main();
+        if (settings) {
+            settingsGui.update();
+            settingsGui.display();
+        }
         keyBinds.menuKeys();
         drawTransition();
         //black bars

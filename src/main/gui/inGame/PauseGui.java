@@ -1,6 +1,5 @@
 package main.gui.inGame;
 
-import main.Game;
 import main.gui.notInGame.LevelSelectGui;
 import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
@@ -55,7 +54,15 @@ public class PauseGui {
         });
     }
 
-    public void main() {
+    public void update() {
+        restartButton.update();
+        levelSelectButton.update();
+        settingsMenuButton.update();
+        exitButton.update();
+        resumeButton.update();
+    }
+
+    public void display() {
         //big text
         PVector position = new PVector(P.width / 2f, 300);
         if (!alive) shadowedText(P, "Game Over", position, new Color(255, 0, 0, 254),
@@ -68,13 +75,13 @@ public class PauseGui {
         P.fill(200, 254);
         P.textFont(mediumFont);
         if (alive) {
-            resumeButton.main();
+            resumeButton.display();
             if (won) P.text("Hide Menu [ESC]", resumeButton.position.x, resumeButton.position.y + MenuButton.TEXT_Y_OFFSET);
             else P.text("Resume [ESC]", resumeButton.position.x, resumeButton.position.y + MenuButton.TEXT_Y_OFFSET);
         }
-        restartButton.main();
-        levelSelectButton.main();
-        settingsMenuButton.main();
-        exitButton.main();
+        restartButton.display();
+        levelSelectButton.display();
+        settingsMenuButton.display();
+        exitButton.display();
     }
 }
