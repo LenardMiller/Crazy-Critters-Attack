@@ -156,6 +156,9 @@ public class Main extends PApplet {
 
     public static Random random = new Random();
 
+    private Update update;
+    private Display display;
+
     public static void main(String[] args) {
         loadSettings();
         PApplet.main("main.Main", args);
@@ -207,6 +210,9 @@ public class Main extends PApplet {
             matrixScale = width / (float) BOARD_WIDTH;
             matrixOffset = (height - (BOARD_HEIGHT * matrixScale)) / 2;
         }
+
+        update = new Update(this);
+        display = new Display(this);
     }
 
     /**
@@ -215,116 +221,8 @@ public class Main extends PApplet {
      */
     @Override
     public void draw() {
-        update();
-        display();
-    }
-
-    private void update() {
-        if (hasVerticalBars) {
-            matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
-        } else {
-            matrixMousePosition = new PVector(mouseX / matrixScale, (mouseY - matrixOffset) / matrixScale);
-        }
-        //screens
-        switch (screen) {
-            case InGame:
-                game.update();
-                break;
-            case LevelSelect:
-                if (!settings) levelSelectGui.update();
-                break;
-            case Loading:
-                loadingGui.update();
-                break;
-            case Title:
-                if (!settings) titleGui.update();
-                break;
-
-            // immediate action branches
-            case Exit:
-                exit();
-                break;
-            case Restart:
-                Game.reset(this);
-                paused = false;
-                screen = Screen.InGame;
-                Saver.wipe();
-                break;
-            case PlayOrLevelSelect:
-                try {
-                    Loader.load(this);
-                } catch (RuntimeException ex) {
-                    System.out.println("Could not load from saves because:\n    " +
-                            ex + "\n    " +
-                            Arrays.toString(ex.getStackTrace()));
-                    screen = Screen.LevelSelect;
-                }
-                break;
-        }
-        if (settings) settingsGui.update();
-
-        updateInput();
-        soundStuff();
-    }
-
-    private void soundStuff() {
-        sound.volume(globalVolume);
-        for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
-        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
-        for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.main();
-    }
-
-    private void updateInput() {
-        keyBinds.menuKeys();
-
-        //reset mouse pulses
-        inputHandler.rightMouseReleasedPulse = false;
-        inputHandler.leftMouseReleasedPulse = false;
-        inputHandler.rightMousePressedPulse = false;
-        inputHandler.leftMousePressedPulse = false;
-        for (KeyDS.KeyDSItem key : keysPressed.items) {
-            key.pressedPulse = false;
-            key.releasedPulse = false;
-        }
-    }
-
-    private void display() {
-        if (showSpawn) {
-            scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
-            float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
-            translate(buffer, buffer);
-        }
-        background(50);
-        tint(255);
-        //screens
-        switch (screen) {
-            case InGame:
-                game.display();
-                break;
-            case LevelSelect:
-                if (!settings) levelSelectGui.display();
-                break;
-            case Loading:
-                loadingGui.display();
-                break;
-            case Title:
-                if (!settings) titleGui.display();
-                break;
-        }
-        if (settings) settingsGui.display();
-        drawTransition();
-        //black bars
-        if (!showSpawn) {
-            fill(0);
-            noStroke();
-            if (hasVerticalBars) {
-                rect(0, 0, matrixOffset, height);
-                rect(width - matrixOffset, 0, matrixOffset, height);
-            } else {
-                rect(0, 0, width, matrixOffset);
-                rect(0, height - matrixOffset, width, matrixOffset);
-            }
-        }
+        update.update();
+        display.display();
     }
 
     public static void transition(Screen screen, PVector direction) {
@@ -337,37 +235,163 @@ public class Main extends PApplet {
         targetScreen = screen;
     }
 
-    private void drawTransition() {
-        if (titleGui == null) return;
+    private class Update {
 
-        PVector edge = PVector.add(transCenter, transRotation.copy().setMag(TRANS_SIZE));
-        PVector p1 = PVector.add(edge, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE), 1));
-        PVector p2 = PVector.add(p1, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE * 2), 2));
-        PVector p3 = PVector.add(p2, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE * 2), 3));
-        PVector p4 = PVector.add(p3, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE * 2), 4));
+        private final Main main;
 
-        PShape transBox = createShape();
-        transBox.beginShape();
-        transBox.fill(0);
-        transBox.noStroke();
-        transBox.vertex(p1.x, p1.y);
-        transBox.vertex(p2.x, p2.y);
-        transBox.vertex(p3.x, p3.y);
-        transBox.vertex(p4.x, p4.y);
-        transBox.endShape(PConstants.CLOSE);
+        private Update(Main main) {
+            this.main = main;
+        }
 
-        shape(transBox, 0, 0);
-
-        transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
-
-        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
-                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
-                && targetScreen != screen) {
-            if (targetScreen == Screen.InGame || screen == Screen.InGame) {
-                Game.reset(this);
-                paused = false;
+        private void update() {
+            if (hasVerticalBars) {
+                matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
+            } else {
+                matrixMousePosition = new PVector(mouseX / matrixScale, (mouseY - matrixOffset) / matrixScale);
             }
-            screen = targetScreen;
+            //screens
+            switch (screen) {
+                case InGame:
+                    game.update();
+                    break;
+                case LevelSelect:
+                    if (!settings) levelSelectGui.update();
+                    break;
+                case Loading:
+                    loadingGui.update();
+                    break;
+                case Title:
+                    if (!settings) titleGui.update();
+                    break;
+
+                // immediate action branches
+                case Exit:
+                    exit();
+                    break;
+                case Restart:
+                    Game.reset(main);
+                    paused = false;
+                    screen = Screen.InGame;
+                    Saver.wipe();
+                    break;
+                case PlayOrLevelSelect:
+                    try {
+                        Loader.load(main);
+                    } catch (RuntimeException ex) {
+                        System.out.println("Could not load from saves because:\n    " +
+                                ex + "\n    " +
+                                Arrays.toString(ex.getStackTrace()));
+                        screen = Screen.LevelSelect;
+                    }
+                    break;
+            }
+            if (settings) settingsGui.update();
+
+            updateInput();
+            updateSound();
+        }
+
+        private void updateSound() {
+            sound.volume(globalVolume);
+            for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
+            for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
+            for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.main();
+        }
+
+        private void updateInput() {
+            keyBinds.menuKeys();
+
+            //reset mouse pulses
+            inputHandler.rightMouseReleasedPulse = false;
+            inputHandler.leftMouseReleasedPulse = false;
+            inputHandler.rightMousePressedPulse = false;
+            inputHandler.leftMousePressedPulse = false;
+            for (KeyDS.KeyDSItem key : keysPressed.items) {
+                key.pressedPulse = false;
+                key.releasedPulse = false;
+            }
+        }
+    }
+
+    private class Display {
+
+        private final Main main;
+
+        private Display(Main main) {
+            this.main = main;
+        }
+
+        private void display() {
+            if (showSpawn) {
+                scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
+                float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
+                translate(buffer, buffer);
+            }
+            background(50);
+            tint(255);
+            //screens
+            switch (screen) {
+                case InGame:
+                    game.display();
+                    break;
+                case LevelSelect:
+                    if (!settings) levelSelectGui.display();
+                    break;
+                case Loading:
+                    loadingGui.display();
+                    break;
+                case Title:
+                    if (!settings) titleGui.display();
+                    break;
+            }
+            if (settings) settingsGui.display();
+            displayTransition();
+            //black bars
+            if (!showSpawn) {
+                fill(0);
+                noStroke();
+                if (hasVerticalBars) {
+                    rect(0, 0, matrixOffset, height);
+                    rect(width - matrixOffset, 0, matrixOffset, height);
+                } else {
+                    rect(0, 0, width, matrixOffset);
+                    rect(0, height - matrixOffset, width, matrixOffset);
+                }
+            }
+        }
+
+        private void displayTransition() {
+            if (titleGui == null) return;
+
+            PVector edge = PVector.add(transCenter, transRotation.copy().setMag(TRANS_SIZE));
+            PVector p1 = PVector.add(edge, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE), 1));
+            PVector p2 = PVector.add(p1, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE * 2), 2));
+            PVector p3 = PVector.add(p2, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE * 2), 3));
+            PVector p4 = PVector.add(p3, Utilities.turnRight(transRotation.copy().setMag(TRANS_SIZE * 2), 4));
+
+            PShape transBox = createShape();
+            transBox.beginShape();
+            transBox.fill(0);
+            transBox.noStroke();
+            transBox.vertex(p1.x, p1.y);
+            transBox.vertex(p2.x, p2.y);
+            transBox.vertex(p3.x, p3.y);
+            transBox.vertex(p4.x, p4.y);
+            transBox.endShape(PConstants.CLOSE);
+
+            shape(transBox, 0, 0);
+
+            transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
+
+            if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
+                    && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
+                    && targetScreen != screen) {
+                if (targetScreen == Screen.InGame || screen == Screen.InGame) {
+                    Game.reset(main);
+                    paused = false;
+                }
+                screen = targetScreen;
+            }
         }
     }
 
