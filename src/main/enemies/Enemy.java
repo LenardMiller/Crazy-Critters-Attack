@@ -175,7 +175,7 @@ public abstract class Enemy {
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
 
-        if (gore) goreyDeathEffect(type);
+        if (isGore) goreyDeathEffect(type);
         else cleanDeathEffect();
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
@@ -457,7 +457,7 @@ public abstract class Enemy {
             if (p.random(6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
                     PVector partPos = getParticlePosition();
-                    if (gore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle));
+                    if (isGore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle));
                     else topParticles.add(new MiscParticle(p, partPos.x, partPos.y, p.random(0, 360), "stun"));
                 }
             }

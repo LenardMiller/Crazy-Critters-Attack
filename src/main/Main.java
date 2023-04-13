@@ -90,7 +90,7 @@ public class Main extends PApplet {
     public static float matrixScale, matrixOffset;
     /** initialized to false */
     public static boolean
-            won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, useOpenGL, gore, hasVerticalBars;
+            won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, isFullscreen, isOpenGL, isGore, hasVerticalBars;
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
     public static boolean dev = false;
@@ -168,9 +168,9 @@ public class Main extends PApplet {
      */
     @Override
     public void settings() {
-        if (useOpenGL) size(GRID_WIDTH, BOARD_HEIGHT, P2D);
+        if (isOpenGL) size(GRID_WIDTH, BOARD_HEIGHT, P2D);
         else size(GRID_WIDTH, BOARD_HEIGHT);
-        if (fullscreen) {
+        if (isFullscreen) {
             fullScreen();
             noSmooth();
         }
@@ -215,13 +215,11 @@ public class Main extends PApplet {
      */
     @Override
     public void draw() {
-        if (showSpawn) {
-            scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
-            float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
-            translate(buffer, buffer);
-        }
-        background(50);
-        tint(255);
+        update();
+        display();
+    }
+
+    private void update() {
         if (hasVerticalBars) {
             matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
         } else {
@@ -231,26 +229,18 @@ public class Main extends PApplet {
         switch (screen) {
             case InGame:
                 game.update();
-                game.display();
                 break;
             case LevelSelect:
-                if (!settings) {
-                    levelSelectGui.update();
-                    levelSelectGui.display();
-                }
+                if (!settings) levelSelectGui.update();
                 break;
             case Loading:
                 loadingGui.update();
-                loadingGui.display();
                 break;
             case Title:
-                if (!settings) {
-                    titleGui.update();
-                    titleGui.display();
-                }
+                if (!settings) titleGui.update();
                 break;
 
-                // immediate action branches
+            // immediate action branches
             case Exit:
                 exit();
                 break;
@@ -271,11 +261,57 @@ public class Main extends PApplet {
                 }
                 break;
         }
-        if (settings) {
-            settingsGui.update();
-            settingsGui.display();
-        }
+        if (settings) settingsGui.update();
+
+        updateInput();
+        soundStuff();
+    }
+
+    private void soundStuff() {
+        sound.volume(globalVolume);
+        for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
+        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
+        for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.main();
+    }
+
+    private void updateInput() {
         keyBinds.menuKeys();
+
+        //reset mouse pulses
+        inputHandler.rightMouseReleasedPulse = false;
+        inputHandler.leftMouseReleasedPulse = false;
+        inputHandler.rightMousePressedPulse = false;
+        inputHandler.leftMousePressedPulse = false;
+        for (KeyDS.KeyDSItem key : keysPressed.items) {
+            key.pressedPulse = false;
+            key.releasedPulse = false;
+        }
+    }
+
+    private void display() {
+        if (showSpawn) {
+            scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
+            float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
+            translate(buffer, buffer);
+        }
+        background(50);
+        tint(255);
+        //screens
+        switch (screen) {
+            case InGame:
+                game.display();
+                break;
+            case LevelSelect:
+                if (!settings) levelSelectGui.display();
+                break;
+            case Loading:
+                loadingGui.display();
+                break;
+            case Title:
+                if (!settings) titleGui.display();
+                break;
+        }
+        if (settings) settingsGui.display();
         drawTransition();
         //black bars
         if (!showSpawn) {
@@ -288,20 +324,6 @@ public class Main extends PApplet {
                 rect(0, 0, width, matrixOffset);
                 rect(0, height - matrixOffset, width, matrixOffset);
             }
-        }
-        //sound stuff
-        sound.volume(globalVolume);
-        for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
-        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
-        for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.main();
-        //reset mouse pulses
-        inputHandler.rightMouseReleasedPulse = false;
-        inputHandler.leftMouseReleasedPulse = false;
-        inputHandler.rightMousePressedPulse = false;
-        inputHandler.leftMousePressedPulse = false;
-        for (KeyDS.KeyDSItem key : keysPressed.items) {
-            key.pressedPulse = false;
-            key.releasedPulse = false;
         }
     }
 

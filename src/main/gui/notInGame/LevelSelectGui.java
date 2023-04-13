@@ -46,6 +46,7 @@ public class LevelSelectGui {
 
     public void update() {
         checkButtonsPressed();
+        for (MenuButton levelSelectButton : levelSelectButtons) levelSelectButton.update();
         settingsButton.update();
         goToTitle.update();
     }

@@ -116,7 +116,7 @@ public class InGameGui {
         highlightedText(p, "path requests: " + pathFinder.requestQueue.size(), new PVector(padding, 180), LEFT);
         highlightedText(p, "MX: " + (int) matrixMousePosition.x + ", MY: " + (int) matrixMousePosition.y,
           new PVector(padding, BOARD_HEIGHT - padding - 30), LEFT);
-        if (fullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
+        if (isFullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
           new PVector(padding, BOARD_HEIGHT - padding), LEFT);
         highlightedText(p, round(p.frameRate) + " fps", new PVector(BOARD_WIDTH - padding, 30), RIGHT);
         int percentMemoryUsage = (int) ((Runtime.getRuntime().freeMemory() / (float) Runtime.getRuntime().totalMemory()) * 100);

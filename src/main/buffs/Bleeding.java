@@ -32,7 +32,7 @@ public class Bleeding extends Buff {
 
     @Override
     protected void spawnParticles() { //particles around enemy
-        if (!gore) return;
+        if (!isGore) return;
 
         Enemy enemy = enemies.get(enId);
 

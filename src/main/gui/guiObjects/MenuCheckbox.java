@@ -34,17 +34,21 @@ public class MenuCheckbox {
         P = p;
         POSITION = position;
         NAME = name;
+        borderColor = new Color(100, 100, 100);
     }
 
     /**
      * @param input what value to change
      * @return new value
      */
-    public boolean main(boolean input) {
-        displayText();
+    public boolean update(boolean input) {
         if (clicked()) input = !input;
-        displayBox(input);
         return input;
+    }
+
+    public void display(boolean input) {
+        displayText();
+        displayBox(input);
     }
 
     private boolean clicked() {

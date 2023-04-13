@@ -10,8 +10,6 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.getAngleDifference;
-import static main.misc.Utilities.normalizeAngle;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class BurrowingEnemy extends Enemy {
@@ -66,7 +64,7 @@ public abstract class BurrowingEnemy extends Enemy {
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
         if (state != State.Moving) {
-            if (gore) goreyDeathEffect(type);
+            if (isGore) goreyDeathEffect(type);
             else cleanDeathEffect();
         }
 
