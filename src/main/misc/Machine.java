@@ -82,9 +82,8 @@ public class Machine {
         }
     }
 
-    public void main() {
+    public void update() {
         if (hp <= 0 && !dead) die();
-        display();
     }
 
     public void display() {

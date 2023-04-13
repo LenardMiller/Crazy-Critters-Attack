@@ -60,10 +60,10 @@ public class Flame extends Projectile {
      * no shadow
      */
     @Override
-    public void displayPassA() {}
+    public void displayShadow() {}
 
     @Override
-    public void displayPassB() {
+    public void display() {
         if (!paused) {
             delay++;
             sprite = SPRITES[currentSprite];

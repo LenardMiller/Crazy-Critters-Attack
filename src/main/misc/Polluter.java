@@ -51,7 +51,7 @@ public class Polluter {
         this.betweenPollutes = betweenPollutes;
     }
 
-    public void main() {
+    public void update() {
         polluteTimer++;
         if (polluteTimer > betweenPollutes) {
             pollute();

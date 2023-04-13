@@ -125,7 +125,7 @@ public abstract class Enemy {
         lastDamageType = "normal";
     }
 
-    public void main(int i) {
+    public void update(int i) {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
 
@@ -151,7 +151,6 @@ public abstract class Enemy {
             }
         }
         if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
-        displayMain();
         //if health is 0, die
         if (hp <= 0) dead = true;
         if (dead) die(i);
@@ -302,7 +301,7 @@ public abstract class Enemy {
     }
 
     /** Display main sprite */
-    public void displayMain() {
+    public void display() {
         if (sprite == null) return;
         if (debug) for (int i = trail.size() - 1; i > 0; i--) {
             trail.get(i).display();

@@ -6,7 +6,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.getRandomPointInRange;
 
 public class EnragedGiant extends Enemy {
 
@@ -37,8 +36,8 @@ public class EnragedGiant extends Enemy {
     }
 
     @Override
-    public void displayMain() {
-        super.displayMain();
+    public void display() {
+        super.display();
 
         if (p.random(5) < 1) {
             PVector pos = getParticlePosition();

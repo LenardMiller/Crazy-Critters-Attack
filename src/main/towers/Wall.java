@@ -5,8 +5,6 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import java.util.Arrays;
-
 import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateFlooring;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
@@ -85,7 +83,7 @@ public class Wall extends Tower {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) die(false);
         updateBoosts();
     }

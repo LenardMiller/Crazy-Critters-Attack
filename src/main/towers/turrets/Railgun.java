@@ -72,7 +72,7 @@ public class Railgun extends Turret {
     }
 
     @Override
-    public void displayMain() {
+    public void displayTop() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);

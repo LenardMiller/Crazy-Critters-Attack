@@ -53,7 +53,7 @@ public class Flamethrower extends Turret {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) {
             die(false);
             tile.tower = null;
@@ -122,7 +122,7 @@ public class Flamethrower extends Turret {
         }
     }
 
-    protected void displayMain() {
+    public void displayTop() {
         //shadow
         for (int i = 0; i < count; i++) {
             float rotateAngle = angle + i*(TWO_PI/count);

@@ -174,7 +174,7 @@ public class MagicMissileer extends Turret {
     }
 
     @Override
-    public void displayMain() {
+    public void displayTop() {
         int displacement = 20;
         //shadow
         p.pushMatrix();

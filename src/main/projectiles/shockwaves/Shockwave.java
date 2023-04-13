@@ -1,7 +1,6 @@
 package main.projectiles.shockwaves;
 
 import main.enemies.Enemy;
-import main.enemies.flyingEnemies.FlyingEnemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -49,7 +48,7 @@ public abstract class Shockwave {
         radius = startingRadius;
     }
 
-    public void main() {
+    public void update() {
         if (!paused) {
             radius += SPEED/FRAMERATE;
             spawnParticles();

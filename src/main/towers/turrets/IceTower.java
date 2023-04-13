@@ -55,7 +55,7 @@ public class IceTower extends Turret {
         titleLines = new String[]{"Freeze Ray"};
         infoDisplay = (o) -> {
             selection.setTextPurple("Encases enemies", o);
-            iceWallInfo(o, 1);
+            iceWallInfo(o);
         };
         statsDisplay = (o) -> {
             if (frozenTotal == 1) p.text("1 wall created", 910, 500 + offset);
@@ -70,7 +70,7 @@ public class IceTower extends Turret {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) {
             die(false);
             tile.tower = null;
@@ -195,7 +195,7 @@ public class IceTower extends Turret {
     }
 
     @Override
-    public void displayMain() {
+    public void displayTop() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -314,7 +314,7 @@ public class IceTower extends Turret {
                     titleLines = new String[]{"Ice Defender"};
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Reinforces defences", o);
-                        iceWallInfo(o, 1);
+                        iceWallInfo(o);
                     };
                     loadSprites();
                     break;
@@ -337,7 +337,7 @@ public class IceTower extends Turret {
                     wallHp *= 2;
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Encases any enemy", o);
-                        iceWallInfo(o, 1);
+                        iceWallInfo(o);
                     };
                     loadSprites();
                     break;
@@ -345,11 +345,11 @@ public class IceTower extends Turret {
         }
     }
 
-    private void iceWallInfo(int offset, int purpleCount) {
+    private void iceWallInfo(int offset) {
         p.fill(new Color(100, 150, 255).getRGB(), 254);
-        p.text("Ice HP: " + wallHp, 910, 356 + 20 * purpleCount + offset);
+        p.text("Ice HP: " + wallHp, 910, 356 + 20 + offset);
         float lifespan = (wallTimeUntilDamage / (float) FRAMERATE) * 10;
-        if (wallTimeUntilDamage == -1) p.text("Ice doesn't melt", 910, 376 + 20 * purpleCount + offset);
-        else p.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 * purpleCount + offset);
+        if (wallTimeUntilDamage == -1) p.text("Ice doesn't melt", 910, 376 + 20 + offset);
+        else p.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 + offset);
     }
 }

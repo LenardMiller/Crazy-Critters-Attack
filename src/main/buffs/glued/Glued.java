@@ -69,7 +69,7 @@ public class Glued extends Buff {
     }
 
     @Override
-    protected void update(int i) { //ends if at end of lifespan
+    protected void updateTimer(int i) { //ends if at end of lifespan
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) {
             reset();

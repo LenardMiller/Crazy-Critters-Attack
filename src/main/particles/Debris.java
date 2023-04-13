@@ -9,7 +9,6 @@ import static main.Main.staticSprites;
 import static main.misc.Utilities.secondsToFrames;
 import static processing.core.PApplet.abs;
 import static processing.core.PApplet.radians;
-import static processing.core.PConstants.HALF_PI;
 
 public class Debris extends Particle {
 
@@ -26,7 +25,7 @@ public class Debris extends Particle {
     }
 
     @Override
-    protected void display() {
+    public void display() {
         if (!paused) {
             animation.update();
             displayAngle += radians(secondsToFrames(angularVelocity));

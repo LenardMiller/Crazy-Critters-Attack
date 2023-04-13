@@ -75,7 +75,7 @@ public class Tile {
     }
 
     public void main() {
-        if (tower != null) tower.main();
+        if (tower != null) tower.update();
     }
 
     public void displayDecorationAndFlooring() {

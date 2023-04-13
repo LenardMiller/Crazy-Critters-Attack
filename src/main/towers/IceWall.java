@@ -46,7 +46,7 @@ public class IceWall extends Wall {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) die(false);
         if (!paused && alive) {
             if (TIME_UNTIL_DAMAGE != -1) {

@@ -84,7 +84,7 @@ public class Corpse {
         lifespan = MAX_LIFE;
     }
 
-    public void main(int i) {
+    public void update(int i) {
         if (!paused) {
             move();
             lifespan--;

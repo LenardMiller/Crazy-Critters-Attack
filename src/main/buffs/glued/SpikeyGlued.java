@@ -27,7 +27,7 @@ public class SpikeyGlued extends Glued {
 
     /**particles around enemy*/
     @Override
-    protected void display() {
+    protected void spawnParticles() {
         if (particle != null) {
             Enemy enemy = enemies.get(enId);
             if (p.random(particleChance) < 1) {

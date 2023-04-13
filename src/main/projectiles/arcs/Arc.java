@@ -56,8 +56,7 @@ public class Arc {
         BLACKLISTED_ENEMY = blacklistedEnemy;
     }
 
-    public void main() {
-        if (alpha == 255) zap(BLACKLISTED_ENEMY);
+    public void display() {
         P.stroke(lineColor.getRGB(), alpha);
         P.fill(255);
         P.strokeWeight(weight);
@@ -74,9 +73,15 @@ public class Arc {
             P.line(points[1].x, points[1].y, pointA.x, pointA.y);
         }
         P.strokeWeight(1);
-        if (!paused) alpha -= up60ToFramerate(8);
     }
 
+    public void update(int j) {
+        if (alpha == 255) zap(BLACKLISTED_ENEMY);
+        if (!paused) alpha -= up60ToFramerate(8);
+        if (alpha <= 0) arcs.remove(j);
+    }
+
+    /** Creates points that define effect, damages enemies **/
     private void zap(Enemy blacklistedEnemy) {
         BIG_POINTS.add(new StartEndPoints(P, START_POSITION));
         ArrayList<Enemy> hitEnemies = new ArrayList<>();

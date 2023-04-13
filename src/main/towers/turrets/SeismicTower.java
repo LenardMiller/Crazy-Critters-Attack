@@ -61,7 +61,7 @@ public class SeismicTower extends Turret {
     }
 
     @Override
-    public void displayMain() {
+    public void displayTop() {
         int hammerCount = 6;
         //shadow
         p.pushMatrix();

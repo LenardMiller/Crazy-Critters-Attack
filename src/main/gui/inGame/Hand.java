@@ -47,7 +47,7 @@ public class Hand {
         MIN_ENEMY_DISTANCE = 50;
     }
 
-    public void main() {
+    public void update() {
         if (setHeldNullTimer == 0) {
             setHeldNullTimer = -1;
             setHeld("null");
@@ -63,7 +63,7 @@ public class Hand {
             if (inputHandler.rightMousePressedPulse) remove();
             if ((clickOnSidebar() || rclickNotWall())) clearHand();
             if (inputHandler.leftMousePressedPulse) tryPlace();
-        } displayHeld();
+        }
     }
 
     private void tryPlace() {
@@ -182,7 +182,7 @@ public class Hand {
     }
 
     /** Shows what's held at reduced opacity */
-    private void displayHeld() {
+    public void displayHeld() {
         if (!held.equals("null") && heldSprite != null && alive) {
             //red if implacable
             if (implacable) P.tint(255, 0, 0, 150);

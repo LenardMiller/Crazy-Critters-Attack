@@ -34,7 +34,7 @@ public class Decay extends Buff {
     }
 
     @Override
-    protected void display() {
+    protected void spawnParticles() {
         if (enId < 0) buffs.remove(this);
         else {
             Enemy enemy = enemies.get(enId);

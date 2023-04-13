@@ -2,7 +2,7 @@
   {
     "x": 350,
     "y": 350,
-    "damageTotal": 51221,
+    "damageTotal": 54721,
     "killsTotal": 17,
     "type": "TeslaTower",
     "levelA": 2,
@@ -10,10 +10,10 @@
     "levelB": 2
   },
   {
-    "gluedTotal": 295,
+    "gluedTotal": 308,
     "x": 600,
     "y": 450,
-    "damageTotal": 9148,
+    "damageTotal": 9603,
     "killsTotal": 7,
     "type": "Gluer",
     "levelA": 3,
@@ -23,18 +23,18 @@
   {
     "x": 400,
     "y": 500,
-    "damageTotal": 248959,
-    "killsTotal": 135,
+    "damageTotal": 263459,
+    "killsTotal": 136,
     "type": "EnergyBlaster",
     "levelA": 3,
     "priority": 2,
     "levelB": 2
   },
   {
-    "gluedTotal": 279,
+    "gluedTotal": 291,
     "x": 400,
     "y": 550,
-    "damageTotal": 8717,
+    "damageTotal": 9137,
     "killsTotal": 3,
     "type": "Gluer",
     "levelA": 3,
@@ -44,7 +44,7 @@
   {
     "x": 550,
     "y": 550,
-    "damageTotal": 55408,
+    "damageTotal": 60208,
     "killsTotal": 9,
     "type": "EnergyBlaster",
     "levelA": 2,
@@ -54,8 +54,8 @@
   {
     "x": 350,
     "y": 600,
-    "damageTotal": 156799,
-    "killsTotal": 166,
+    "damageTotal": 173389,
+    "killsTotal": 169,
     "type": "Flamethrower",
     "levelA": 3,
     "priority": 0,
@@ -64,8 +64,8 @@
   {
     "x": 600,
     "y": 600,
-    "damageTotal": 121928,
-    "killsTotal": 58,
+    "damageTotal": 126663,
+    "killsTotal": 59,
     "type": "TeslaTower",
     "levelA": 2,
     "priority": 0,

@@ -31,13 +31,13 @@ public class Frag extends Projectile {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (!paused) {
             lifeTimer++;
             trail();
             move();
         }
-        displayPassB();
+        display();
         checkCollision();
         if (lifeTimer > lifespan) dead = true;
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 ||

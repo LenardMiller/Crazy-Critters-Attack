@@ -22,6 +22,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import static main.Main.*;
 import static main.misc.WallSpecialVisuals.updateTowerArray;
@@ -36,16 +37,8 @@ public class Game {
         this.p = p;
     }
 
-    /** Stuff for the main game screen. */
-    public void draw() {
-        //fullscreen stuff
-//        int time = p.millis();
-        p.pushMatrix();
-        if (hasVerticalBars) p.translate(matrixOffset, 0);
-        else p.translate(0, matrixOffset);
-        p.scale(matrixScale);
-//        System.out.println("fullscreen: " + (p.millis() - time));
-//        time = p.millis();
+    /** Update in game stuff **/
+    public void update() {
         //keys
         if (dev) {
             keyBinds.debugKeys();
@@ -54,8 +47,6 @@ public class Game {
             keyBinds.selectionKeys();
             keyBinds.inGameKeys();
         }
-//        System.out.println("keys: " + (p.millis() - time));
-//        time = p.millis();
         //pathfinding
         if (!pathFinder.requestQueue.isEmpty()) {
             pathFinder.requestQueue.get(0).getPath();
@@ -63,27 +54,129 @@ public class Game {
         }
         maxCost = maxCost();
         minCost = minCost(maxCost);
-//        System.out.println("pathfinding: " + (p.millis() - time));
-//        time = p.millis();
-        //objects
-        drawObjects();
-//        System.out.println("objects: " + (p.millis() - time));
-//        time = p.millis();
-        //hp bars
-        for (Enemy enemy : enemies) {
-            if (enemy.hp > 0 && !(enemy instanceof BurrowingEnemy && enemy.state == Enemy.State.Moving)) {
-                enemy.hpBar();
-            }
+
+        updateParticles();
+        updateProjectiles();
+        updateEnemies();
+        //tiles
+        if (connectWallQueues > 0) {
+            connectWallQueues = 0;
+            updateWallTileConnections();
         }
-        for (Tower tower : towers) tower.displayHpBar();
-        machine.hpBar();
-//        System.out.println("hp bars: " + (p.millis() - time));
-//        time = p.millis();
-        //text
-        for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).main();
-//        System.out.println("text: " + (p.millis() - time));
-//        time = p.millis();
-        //gui stuff
+        //turret top
+        for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
+        for (Tower tower : towers) tower.update();
+        //hand
+        hand.update();
+        for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).update();
+        if (playingLevel) levels[currentLevel].update();
+        machine.update();
+    }
+
+    /** Update everything that has to do with enemies; enemies, corpses, ice checks and buffs **/
+    private void updateEnemies() {
+        //enemies
+        if (enemies.isEmpty()) buffs = new ArrayList<>();
+        for (int i = enemies.size() - 1; i >= 0; i--) {
+            Enemy enemy = enemies.get(i);
+            enemy.update(i);
+        }
+        //corpses
+        for (int i = corpses.size() - 1; i >= 0; i--) {
+            Corpse corpse = corpses.get(i);
+            corpse.update(i);
+        }
+        //reset enemy ice checking
+        for (Enemy enemy : enemies) enemy.intersectingIceCount = 0;
+        //buffs
+        for (int i = buffs.size() - 1; i >= 0; i--) {
+            Buff buff = buffs.get(i);
+            buff.update(i);
+        }
+    }
+
+    /** Updates everything considered a projectile; classical projectiles, arcs and shockwaves **/
+    private void updateProjectiles() {
+        //projectiles
+        for (int i = projectiles.size() - 1; i >= 0; i--) {
+            Projectile projectile = projectiles.get(i);
+            projectile.update();
+        }
+        //arcs
+        for (int i = arcs.size()-1; i >= 0; i--) {
+            Arc arc = arcs.get(i);
+            arc.update(i);
+        }
+        //shockwaves
+        for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).update();
+    }
+
+    /** Updates all the different layers of particles, and handles particle culling **/
+    private void updateParticles() {
+        for (int i = veryBottomParticles.size() - 1; i >= 0; i--) {
+            veryBottomParticles.get(i).update(veryBottomParticles, i);
+        }
+        for (int i = bottomParticles.size()-1; i >= 0; i--) {
+            Particle particle = bottomParticles.get(i);
+            particle.update(bottomParticles, i);
+        }
+        for (int i = midParticles.size()-1; i >= 0; i--) {
+            Particle particle = midParticles.get(i);
+            particle.update(midParticles, i);
+        }
+        for (int i = topParticles.size()-1; i >= 0; i--) {
+            Particle particle = topParticles.get(i);
+            particle.update(topParticles, i);
+        }
+        //particle culling
+        int totalParticles = topParticles.size() + midParticles.size() + bottomParticles.size();
+        int allowedParticles = totalParticles-SOFT_PARTICLE_CAP;
+        if (totalParticles > SOFT_PARTICLE_CAP) {
+            for (int i = veryBottomParticles.size() - 1; i >= 0; i--) {
+                if (p.random(allowedParticles) < 5) {
+                    if (i < veryBottomParticles.size()) veryBottomParticles.remove(i);
+                }
+            } for (int i = topParticles.size() - 1; i >= 0; i--) {
+                if (p.random(allowedParticles) < 5) {
+                    if (i < topParticles.size()) topParticles.remove(i);
+                }
+            } for (int i = bottomParticles.size() - 1; i >= 0; i--) {
+                if (p.random(allowedParticles) < 5) {
+                    if (i < bottomParticles.size()) bottomParticles.remove(i);
+                }
+            } for (int i = midParticles.size() - 1; i >= 0; i--) {
+                if (p.random(allowedParticles) < 5) {
+                    if (i < midParticles.size()) midParticles.remove(i);
+                }
+            }
+        } if (totalParticles > HARD_PARTICLE_CAP) {
+            topParticles = new ArrayList<>();
+            midParticles = new ArrayList<>();
+            bottomParticles = new ArrayList<>();
+        }
+    }
+
+    /** Display in game stuff */
+    public void display() {
+        //fullscreen stuff
+        p.pushMatrix();
+        if (hasVerticalBars) p.translate(matrixOffset, 0);
+        else p.translate(0, matrixOffset);
+        p.scale(matrixScale);
+
+        displayGameObjects();
+        displayHPBars();
+        for (main.gui.guiObjects.PopupText popupText : popupTexts) popupText.display();
+        displayInGameGui();
+
+        p.popMatrix();
+
+        //pause todo: split
+        if (paused && !settings) pauseGui.main();
+    }
+
+    /** Displays all the UI elements that stick to the screen and scale with window size **/
+    private void displayInGameGui() {
         p.noStroke();
         if (!showSpawn) {
             if (!levelBuilder) inGameGui.display();
@@ -92,43 +185,57 @@ public class Game {
             p.textAlign(LEFT);
             if (!levelBuilder) inGameGui.drawText(p, 10);
         } if (dev) inGameGui.drawDebugText(p, 10);
-
         if (paused) { //grey stuff
             p.noStroke();
             if (!alive) p.fill(50, 0, 0, 50);
             else p.fill(0, 0, 0, 50);
             p.rect(0, 0, p.width, p.height);
         }
-//        System.out.println("gui stuff: " + (p.millis() - time));
-//        time = p.millis();
-        //levels
-        if (playingLevel) levels[currentLevel].main();
-//        System.out.println("levels: " + (p.millis() - time));
-        //matrix
-        p.popMatrix();
-        //pause
-        if (paused && !settings) pauseGui.main();
     }
 
-    /** Runs all the in-game stuff. */
-    private void drawObjects() {
-        //tiles
-        if (connectWallQueues > 0) { //else
-            connectWallQueues = 0;
-            updateWallTileConnections();
+    private void displayHPBars() {
+        for (Enemy enemy : enemies) {
+            if (enemy.hp > 0 && !(enemy instanceof BurrowingEnemy && enemy.state == Enemy.State.Moving)) {
+                enemy.hpBar();
+            }
         }
+        for (Tower tower : towers) tower.displayHpBar();
+        machine.hpBar();
+    }
+
+    /** Displays everything that is within the game "window" */
+    private void displayGameObjects() {
+        displayBackgroundTiles();
+        if (debug) displayPathfindingDebug();
+        for (Particle particle : bottomParticles) particle.display();
+        for (Corpse corpse : corpses) corpse.display();
+        machine.display();
+        for (Enemy enemy : enemies) if (!(enemy instanceof FlyingEnemy)) enemy.displayShadow();
+        for (Enemy enemy : enemies) if (!(enemy instanceof FlyingEnemy)) enemy.display();
+        for (Tower tower : towers) if (tower instanceof Turret) tower.displayBase();
+        for (Tower tower : towers) if (tower instanceof Wall) tower.displayBase();
+        for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
+        for (Particle particle : midParticles) particle.display();
+        for (Tower tower : towers) if (tower instanceof Turret) ((Turret) tower).displayTop();
+        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).displayObstacle());
+        for (Projectile projectile : projectiles) projectile.displayShadow();
+        for (Projectile projectile : projectiles) projectile.display();
+        for (Arc arc : arcs) arc.display();
+        for (Enemy enemy1 : enemies) if (enemy1 instanceof FlyingEnemy) enemy1.displayShadow();
+        for (Enemy enemy : enemies) if (enemy instanceof FlyingEnemy) enemy.display();
+        for (Particle particle : topParticles) particle.display();
+        hand.displayHeld();
+    }
+
+    private void displayBackgroundTiles() {
         //main background
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).displayBase();
         }
         //very bottom particles
-        for (int i = veryBottomParticles.size() - 1; i >= 0; i--) {
-            veryBottomParticles.get(i).main(veryBottomParticles, i);
-        }
+        for (Particle veryBottomParticle : veryBottomParticles) veryBottomParticle.display();
         //decoration
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayDecorationAndFlooring();
-        }
+        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).displayDecorationAndFlooring());
         //flooring
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
@@ -161,117 +268,19 @@ public class Game {
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).displayBreakableAndShadow();
         }
-        //pathfinding debug
-        if (debug) {
-            for (Node[] nodes : nodeGrid) {
-                for (Node node : nodes) {
-                    node.display();
-                }
-            }
-            p.fill(0,0,255);
-            p.rect(start.position.x,start.position.y, NODE_SIZE, NODE_SIZE);
-        }
-        //bottom particles
-        for (int i = bottomParticles.size()-1; i >= 0; i--) {
-            Particle particle = bottomParticles.get(i);
-            particle.main(bottomParticles, i);
-        }
-        //corpses
-        for (Corpse corpse : corpses) corpse.display();
-        for (int i = corpses.size() - 1; i >= 0; i--) {
-            Corpse corpse = corpses.get(i);
-            corpse.main(i);
-        }
-        //machine
-        machine.main();
-        //enemies
-        for (Enemy enemy : enemies) if (!(enemy instanceof FlyingEnemy)) enemy.displayShadow();
-        for (int i = enemies.size() - 1; i >= 0; i--) {
-            Enemy enemy = enemies.get(i);
-            if (!(enemy instanceof FlyingEnemy)) enemy.main(i);
-        }
-        if (enemies.isEmpty()) buffs = new ArrayList<>();
-        //turret bases & walls
-        for (Tower tower : towers) if (tower instanceof Turret) tower.displayBase();
-        for (Tower tower : towers) if (tower instanceof Wall) tower.displayBase();
-        for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
-        //mid particles
-        for (int i = midParticles.size()-1; i >= 0; i--) {
-            Particle particle = midParticles.get(i);
-            particle.main(midParticles, i);
-        }
-        //turret top
-        for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
-        for (Tower tower : towers) tower.main();
-        //shockwaves
-        for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).main();
-        //particle culling
-        int totalParticles = topParticles.size() + midParticles.size() + bottomParticles.size();
-        int allowedParticles = totalParticles-SOFT_PARTICLE_CAP;
-        if (totalParticles > SOFT_PARTICLE_CAP) {
-            for (int i = veryBottomParticles.size() - 1; i >= 0; i--) {
-                if (p.random(allowedParticles) < 5) {
-                    if (i < veryBottomParticles.size()) veryBottomParticles.remove(i);
-                }
-            } for (int i = topParticles.size() - 1; i >= 0; i--) {
-                if (p.random(allowedParticles) < 5) {
-                    if (i < topParticles.size()) topParticles.remove(i);
-                }
-            } for (int i = bottomParticles.size() - 1; i >= 0; i--) {
-                if (p.random(allowedParticles) < 5) {
-                    if (i < bottomParticles.size()) bottomParticles.remove(i);
-                }
-            } for (int i = midParticles.size() - 1; i >= 0; i--) {
-                if (p.random(allowedParticles) < 5) {
-                    if (i < midParticles.size()) midParticles.remove(i);
-                }
-            }
-        } if (totalParticles > HARD_PARTICLE_CAP) {
-            topParticles = new ArrayList<>();
-            midParticles = new ArrayList<>();
-            bottomParticles = new ArrayList<>();
-        }
-        //buffs
-        for (int i = buffs.size() - 1; i >= 0; i--) {
-            Buff buff = buffs.get(i);
-            buff.main(i);
-        }
-        //obstacles
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayObstacle();
-        }
-        //projectiles
-        for (Projectile projectile : projectiles) projectile.displayPassA();
-        for (int i = projectiles.size() - 1; i >= 0; i--) {
-            Projectile projectile = projectiles.get(i);
-            projectile.main();
-        }
-        //arcs
-        for (int i = arcs.size()-1; i >= 0; i--) {
-            Arc arc = arcs.get(i);
-            arc.main();
-            if (arc.alpha <= 0) arcs.remove(i);
-        }
-        //flying enemies
-        for (Enemy enemy1 : enemies) {
-            if (enemy1 instanceof FlyingEnemy) enemy1.displayShadow();
-        }
-        for (int i = enemies.size() - 1; i >= 0; i--) {
-            Enemy enemy = enemies.get(i);
-            if (enemy instanceof FlyingEnemy) enemy.main(i);
-        }
-        //top particles
-        for (int i = topParticles.size()-1; i >= 0; i--) {
-            Particle particle = topParticles.get(i);
-            particle.main(topParticles, i);
-        }
-        //currently held
-        hand.main();
-        //reset enemy ice checking
-        for (Enemy enemy : enemies) enemy.intersectingIceCount = 0;
     }
 
-    /** Sets all the in game stuff up. */
+    private void displayPathfindingDebug() {
+        for (Node[] nodes : nodeGrid) {
+            for (Node node : nodes) {
+                node.display();
+            }
+        }
+        p.fill(0,0,255);
+        p.rect(start.position.x,start.position.y, NODE_SIZE, NODE_SIZE);
+    }
+
+    /** Sets all the in game stuff up */
     public static void reset(PApplet p) {
         //creates object data structures
         tiles = new Tile.TileDS();

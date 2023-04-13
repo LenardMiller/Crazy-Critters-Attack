@@ -196,7 +196,6 @@ public class GlacierWaves {
         waves[42] = wavePreset(p, 65, 1, "Mammoth");
         waves[42].addSpawns(mammoth, 1);
 
-        //at this point there should no more mud flingers/creatures???
         waves[43] = wavePreset(p, 55, 25, mudFlinger);
         waves[43].addSpawns(mudFlinger, 25);
 

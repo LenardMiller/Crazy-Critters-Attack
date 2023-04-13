@@ -41,7 +41,7 @@ public abstract class ShootingEnemy extends Enemy {
     }
 
     @Override
-    public void main(int i) {
+    public void update(int i) {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
 
@@ -83,7 +83,6 @@ public abstract class ShootingEnemy extends Enemy {
             }
         }
         if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
-        displayMain();
         //if health is 0, die
         if (hp <= 0) dead = true;
         if (dead) die(i);

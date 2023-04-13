@@ -22,7 +22,7 @@ public class Pile extends Particle {
     }
 
     @Override
-    protected void display() {
+    public void display() {
         if (animation.ended()) {
             dead = true;
             return;

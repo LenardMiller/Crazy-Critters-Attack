@@ -37,15 +37,15 @@ public abstract class Buff {
         this.turret = turret;
     }
 
-    public void main(int i){
-        update(i);
+    public void update(int i){
+        updateTimer(i);
         if (!paused) {
             effectTimer++;
             if (effectTimer > effectDelay){
                 effect();
                 effectTimer = 0;
             }
-            display();
+            spawnParticles();
         }
     }
 
@@ -53,7 +53,7 @@ public abstract class Buff {
      * Ends if at end of lifespan.
      * @param i buff id
      */
-    protected void update(int i) {
+    protected void updateTimer(int i) {
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) buffs.remove(i);
     }
@@ -63,7 +63,7 @@ public abstract class Buff {
     /**
      * Particles around enemy.
      */
-    protected void display() {
+    protected void spawnParticles() {
         if (particle != null) {
             if (enId < 0) buffs.remove(this);
             else {

@@ -80,7 +80,7 @@ public abstract class Tower {
 
     public abstract void placeEffect(boolean quiet);
 
-    public abstract void main();
+    public abstract void update();
 
     public abstract void displayBase();
 

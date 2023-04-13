@@ -272,7 +272,7 @@ public abstract class Turret extends Tower {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) {
             die(false);
             tile.tower = null;
@@ -378,10 +378,9 @@ public abstract class Turret extends Tower {
                 hit = false;
             }
         }
-        displayMain();
     }
 
-    protected void displayMain() {
+    public void displayTop() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);

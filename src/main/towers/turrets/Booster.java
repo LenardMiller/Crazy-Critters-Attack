@@ -88,7 +88,7 @@ public class Booster extends Turret {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) {
             die(false);
             tile.tower = null;

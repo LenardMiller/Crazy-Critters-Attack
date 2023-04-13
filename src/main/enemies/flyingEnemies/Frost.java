@@ -146,7 +146,7 @@ public class Frost extends FlyingEnemy {
 
     /** Displays a bunch of particles. */
     @Override
-    public void displayMain() {
+    public void display() {
         if (debug) for (int i = trail.size() - 1; i > 0; i--) {
             trail.get(i).display();
         }
