@@ -74,10 +74,6 @@ public class Tile {
         return PVector.sub(position, new PVector(TILE_SIZE / 2f, TILE_SIZE / 2f));
     }
 
-    public void update() {
-        if (tower != null) tower.update();
-    }
-
     public void displayDecorationAndFlooring() {
         if (decoration != null) P.image(decoration, position.x, position.y);
         if (flooringEdges != null) connectFlooringEdges();
