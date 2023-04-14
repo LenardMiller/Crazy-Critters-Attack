@@ -180,7 +180,7 @@ public class Machine {
                 }
             }
         }
-        if (deathFrame == secondsToFrames(4)) for (Tile tile : machTiles) tile.setBreakable(debris + "DebrisBr_TL");
+        if (deathFrame == secondsToFrames(4)) for (Tile tile : machTiles) tile.breakableLayer.set(debris + "DebrisBr_TL");
     }
 
     public void damage(int dmg) {

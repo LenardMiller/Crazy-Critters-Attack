@@ -16,7 +16,7 @@ import java.awt.*;
 import static main.Main.*;
 import static main.gui.inGame.TowerInfo.displayTurretInfo;
 import static main.misc.Utilities.*;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.*;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSound;
 
@@ -128,7 +128,7 @@ public class Hand {
             } else return true;
         }
         if (enemyNearby()) return true;
-        if (tileObstacle.obstacle != null || tileObstacle.machine) return true;
+        if (tileObstacle.obstacleLayer.exists() || tileObstacle.machine) return true;
         return price > money;
     }
 
@@ -447,18 +447,18 @@ public class Hand {
             tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
             changeHeld = false;
             String shortName = held.replace("_TL", "");
-            if (shortName.contains("Ba")) tile.setBase(held);
-            else if (shortName.endsWith("De")) tile.setDecoration(held);
-            else if (shortName.endsWith("Fl")) tile.setFlooring(held);
-            else if (shortName.endsWith("Br")) tile.setBreakable(held);
-            else if (shortName.endsWith("Ob")) tile.setObstacle(held);
+            if (shortName.contains("Ba")) tile.baseLayer.set(held);
+            else if (shortName.endsWith("De")) tile.decorationLayer.set(held);
+            else if (shortName.endsWith("Fl")) tile.flooringLayer.set(held);
+            else if (shortName.endsWith("Br")) tile.breakableLayer.set(held);
+            else if (shortName.endsWith("Ob")) tile.obstacleLayer.set(held);
             else if (shortName.endsWith("Ma")) {
                 tile.machine = !tile.machine;
                 machine.updateNodes();
             } else if (held.contains("Na")) {
-                tile.setDecoration(null);
-                tile.setBreakable(null);
-                tile.setObstacle(null);
+                tile.decorationLayer.set(null);
+                tile.breakableLayer.set(null);
+                tile.obstacleLayer.set(null);
             } connectWallQueues++;
         }
         if (!held.equals("null")) money -= price;

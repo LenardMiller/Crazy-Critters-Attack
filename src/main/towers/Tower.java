@@ -23,8 +23,7 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.incrementByTo;
-import static main.misc.WallSpecialVisuals.updateFlooring;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -60,7 +59,7 @@ public abstract class Tower {
         this.p = p;
         this.tile = tile;
         Tile otherTile = tiles.get((int) (tile.position.x / 50) - 1,(int) (tile.position.y / 50) - 1);
-        if (otherTile != null) otherTile.setBreakable(null);
+        if (otherTile != null) otherTile.breakableLayer.set(null);
 
         boosts = new ArrayList<>();
         alive = true;
@@ -139,12 +138,12 @@ public abstract class Tower {
         int moneyGain;
         if (!sold) {
             moneyGain = (int) (getValue() * 0.4);
-            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(material + "DebrisBr_TL");
+            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_TL");
         } else moneyGain = (int) (getValue() * 0.8);
         if (moneyGain > 0) popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
         if (hasBoostedDeathEffect()) boostedDeathEffect();
-        updateFlooring();
+        Tile.updateFlooring();
         updateTowerArray();
         updateCombatPoints();
     }

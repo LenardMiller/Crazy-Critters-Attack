@@ -19,7 +19,7 @@ import processing.data.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static processing.core.PApplet.loadJSONArray;
 import static processing.core.PApplet.loadJSONObject;

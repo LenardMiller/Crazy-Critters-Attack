@@ -25,8 +25,7 @@ import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 import static main.Main.*;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
-import static main.misc.WallSpecialVisuals.updateWallTileConnections;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.*;
 
 public class Game {
@@ -62,7 +61,11 @@ public class Game {
         //tiles
         if (connectWallQueues > 0) {
             connectWallQueues = 0;
-            updateWallTileConnections();
+            Tile.updateWallTileConnections();
+        }
+        //main background
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).baseLayer.update();
         }
         //turret top
         for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
@@ -220,7 +223,7 @@ public class Game {
         for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
         for (Particle particle : midParticles) particle.display();
         for (Tower tower : towers) if (tower instanceof Turret) ((Turret) tower).displayTop();
-        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).displayObstacle());
+        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).obstacleLayer.display());
         for (Projectile projectile : projectiles) projectile.displayShadow();
         for (Projectile projectile : projectiles) projectile.display();
         for (Arc arc : arcs) arc.display();
@@ -233,45 +236,18 @@ public class Game {
     /** Displays tile base, the lowest particle layer, flooring, decorations and obstacle shadows **/
     private void displayBackgroundTiles() {
         //main background
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayBase();
-        }
+        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).baseLayer.display());
         //very bottom particles
         for (Particle veryBottomParticle : veryBottomParticles) veryBottomParticle.display();
         //decoration
-        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).displayDecorationAndFlooring());
+        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).decorationLayer.display());
         //flooring
-        for (int i = 0; i < tiles.size(); i++) {
-            Tile tile = tiles.get(i);
-            if (tile.flooringName != null) {
-                if (tile.flooringName.equals("metalWall")) {
-                    tile.displayFlooringInsideCorners();
-                }
-            }
-            tile.displayFlooringOutsideCorners("metalWall");
-        }
-        for (int i = 0; i < tiles.size(); i++) {
-            Tile tile = tiles.get(i);
-            if (tile.flooringName != null) {
-                if (tile.flooringName.equals("crystalWall")) {
-                    tile.displayFlooringInsideCorners();
-                }
-            }
-            tile.displayFlooringOutsideCorners("crystalWall");
-        }
-        for (int i = 0; i < tiles.size(); i++) {
-            Tile tile = tiles.get(i);
-            if (tile.flooringName != null) {
-                if (tile.flooringName.equals("titaniumWall")) {
-                    tile.displayFlooringInsideCorners();
-                }
-            }
-            tile.displayFlooringOutsideCorners("titaniumWall");
-        }
-        //obstacle shadows, background c
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).displayBreakableAndShadow();
-        }
+        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).flooringLayer.display());
+        Tile.displayAllConcreteFlooring();
+        //breakables
+        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).breakableLayer.display());
+        //obstacle shadows
+        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).obstacleLayer.displayShadow());
     }
 
     /** Displays debug info for pathfinding **/

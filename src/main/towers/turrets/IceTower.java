@@ -16,7 +16,7 @@ import java.util.Collections;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -130,7 +130,7 @@ public class IceTower extends Turret {
         if (tile == null) return false;
         Tile otherTile = tiles.get(tile.getGridPosition().sub(1));
         if (otherTile == null) return tile.tower == null;
-        return !otherTile.machine && otherTile.obstacleName == null && tile.tower == null;
+        return !otherTile.machine && !otherTile.obstacleLayer.exists() && tile.tower == null;
     }
 
     @Override

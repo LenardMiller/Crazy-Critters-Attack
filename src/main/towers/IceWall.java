@@ -7,8 +7,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.WallSpecialVisuals.updateFlooring;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -76,7 +75,7 @@ public class IceWall extends Wall {
         spawnParticles();
         alive = false;
         tile.tower = null;
-        updateFlooring();
+        Tile.updateFlooring();
         updateTowerArray();
         updateCombatPoints();
     }

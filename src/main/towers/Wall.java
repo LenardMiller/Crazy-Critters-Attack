@@ -6,8 +6,8 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.WallSpecialVisuals.updateFlooring;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateFlooring;
+import static main.misc.Tile.updateTowerArray;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Wall extends Tower {
@@ -77,7 +77,7 @@ public class Wall extends Tower {
         }
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setFlooring(name);
+        tiles.get(x-1,y-1).flooringLayer.set(name);
         updateFlooring();
         connectWallQueues++;
     }
@@ -203,7 +203,7 @@ public class Wall extends Tower {
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setFlooring(name);
+        tiles.get(x-1,y-1).flooringLayer.set(name);
         updateFlooring();
     }
 
