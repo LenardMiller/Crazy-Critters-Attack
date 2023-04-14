@@ -174,7 +174,6 @@ public class Game {
 
         p.popMatrix();
 
-        //pause todo: split
         if (paused && !settings) pauseGui.display();
     }
 
@@ -196,6 +195,7 @@ public class Game {
         }
     }
 
+    /** Display enemy, tower and machine health bars **/
     private void displayHPBars() {
         for (Enemy enemy : enemies) {
             if (enemy.hp > 0 && !(enemy instanceof BurrowingEnemy && enemy.state == Enemy.State.Moving)) {
@@ -230,6 +230,7 @@ public class Game {
         hand.displayHeld();
     }
 
+    /** Displays tile base, the lowest particle layer, flooring, decorations and obstacle shadows **/
     private void displayBackgroundTiles() {
         //main background
         for (int i = 0; i < tiles.size(); i++) {
@@ -273,6 +274,7 @@ public class Game {
         }
     }
 
+    /** Displays debug info for pathfinding **/
     private void displayPathfindingDebug() {
         for (Node[] nodes : nodeGrid) {
             for (Node node : nodes) {

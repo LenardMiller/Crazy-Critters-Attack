@@ -211,7 +211,7 @@ public class Main extends PApplet {
 
     /**
      * From Processing.
-     * Everything else, run every frame.
+     * Main loop
      */
     @Override
     public void draw() {
@@ -219,6 +219,7 @@ public class Main extends PApplet {
         display();
     }
 
+    /** Main update loop **/
     private void update() {
         if (hasVerticalBars) {
             matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
@@ -265,16 +266,18 @@ public class Main extends PApplet {
         updateTransition();
 
         updateInput();
-        soundStuff();
+        updateSound();
     }
 
-    private void soundStuff() {
+    /** Updates volume and sound loops **/
+    private void updateSound() {
         sound.volume(globalVolume);
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
         for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
         for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.main();
     }
 
+    /** Updates menu keys input and resets mouse pulses **/
     private void updateInput() {
         keyBinds.menuKeys();
 
@@ -289,6 +292,24 @@ public class Main extends PApplet {
         }
     }
 
+    /** Updates the screen transition animation **/
+    private void updateTransition() {
+        if (titleGui == null) return;
+
+        transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
+
+        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
+                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
+                && targetScreen != screen) {
+            if (targetScreen == Screen.InGame || screen == Screen.InGame) {
+                Game.reset(this);
+                paused = false;
+            }
+            screen = targetScreen;
+        }
+    }
+
+    /** Main display loop **/
     private void display() {
         if (showSpawn) {
             scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
@@ -328,32 +349,7 @@ public class Main extends PApplet {
         }
     }
 
-    public static void transition(Screen screen, PVector direction) {
-        if (targetScreen == screen) return;
-        direction.add(PVector.fromAngle(random.nextFloat() * TWO_PI).setMag(0.2f));
-        transCenter = PVector.add(
-                direction.copy().setMag(TRANS_SIZE * -2),
-                new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f));
-        transRotation = PVector.sub(new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f), transCenter).normalize();
-        targetScreen = screen;
-    }
-
-    private void updateTransition() {
-        if (titleGui == null) return;
-
-        transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
-
-        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
-                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
-                && targetScreen != screen) {
-            if (targetScreen == Screen.InGame || screen == Screen.InGame) {
-                Game.reset(this);
-                paused = false;
-            }
-            screen = targetScreen;
-        }
-    }
-
+    /** Displays the screen transition animation **/
     private void displayTransition() {
         if (titleGui == null) return;
 
@@ -374,6 +370,21 @@ public class Main extends PApplet {
         transBox.endShape(PConstants.CLOSE);
 
         shape(transBox, 0, 0);
+    }
+
+    /**
+     * Transitions from one screen to another with a little sweeping animation.
+     * @param screen screen to transition to
+     * @param direction direction to sweep towards
+     */
+    public static void transition(Screen screen, PVector direction) {
+        if (targetScreen == screen) return;
+        direction.add(PVector.fromAngle(random.nextFloat() * TWO_PI).setMag(0.2f));
+        transCenter = PVector.add(
+                direction.copy().setMag(TRANS_SIZE * -2),
+                new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f));
+        transRotation = PVector.sub(new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f), transCenter).normalize();
+        targetScreen = screen;
     }
 
     /**
