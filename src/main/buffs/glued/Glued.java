@@ -42,7 +42,7 @@ public class Glued extends Buff {
 
             //run expansion algorithm
             compress = new CompressArray(oldSize - 1, newSize, expandedInts);
-            compress.main();
+            compress.update();
             expandedInts = compress.compArray;
 
             //create expanded image array

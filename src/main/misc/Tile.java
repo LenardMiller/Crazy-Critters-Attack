@@ -74,7 +74,7 @@ public class Tile {
         return PVector.sub(position, new PVector(TILE_SIZE / 2f, TILE_SIZE / 2f));
     }
 
-    public void main() {
+    public void update() {
         if (tower != null) tower.update();
     }
 

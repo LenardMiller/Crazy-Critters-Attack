@@ -34,7 +34,7 @@ public class FadeSoundLoop {
         this(p, name, -1);
     }
 
-    public void main() {
+    public void update() {
         volume = incrementByTo(volume, 0.05f, targetVolume);
         soundFile.amp(volume);
         if (timer > minLength && minLength != -1) {

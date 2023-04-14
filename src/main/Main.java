@@ -273,8 +273,8 @@ public class Main extends PApplet {
     private void updateSound() {
         sound.volume(globalVolume);
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
-        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
-        for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.main();
+        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.update();
+        for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.update();
     }
 
     /** Updates menu keys input and resets mouse pulses **/

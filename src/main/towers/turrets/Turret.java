@@ -351,10 +351,10 @@ public abstract class Turret extends Tower {
                                 for (int i = 0; i < oldSize; i++) compressedLoadFrames.add(i);
                                 //compression
                                 compress = new CompressArray(oldSize, newSize, compressedLoadFrames);
-                                compress.main();
+                                compress.update();
                             } else { //increasing size
                                 compress = new CompressArray(oldSize - 1, newSize, compressedLoadFrames);
-                                compress.main();
+                                compress.update();
                                 compressedLoadFrames = compress.compArray;
                             }
                         }

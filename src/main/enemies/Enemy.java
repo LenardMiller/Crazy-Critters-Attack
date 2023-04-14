@@ -442,7 +442,7 @@ public abstract class Enemy {
     /**
      * Display hp bar.
      * Tint.
-     * @param particles whether or not to display hurt particles
+     * @param particles whether to display hurt particles
      */
     protected void damageEffect(boolean particles) {
         if (hp == maxHp) return;

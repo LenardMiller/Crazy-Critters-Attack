@@ -33,7 +33,7 @@ public class CompressArray {
         changed = 0;
     }
 
-    public void main() {
+    public void update() {
         if (FACTOR < 0) { //shrink
             for (int i = 0; i < OLD_SIZE; i++) {
                 if (count >= ceil(PERIOD)) {
@@ -50,7 +50,7 @@ public class CompressArray {
             float overflow = ((float) NEW_SIZE / (float)cels.length) - perCel;
             float counter = 0;
             for (int i = 0; i < cels.length; i++) {
-                counter+=overflow;
+                counter += overflow;
                 if (counter >= 1) {
                     counter -= 1;
                     cels[i]++;

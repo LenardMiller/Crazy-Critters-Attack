@@ -54,6 +54,7 @@ public class InGameGui {
         priorityButton.update();
         upgradeButtonA.update();
         upgradeButtonB.update();
+        if (isTowers) selection.update();
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.update();
         if (!isTowers || selection.name.equals("null")) {
             sellButton.active = false;
@@ -99,7 +100,7 @@ public class InGameGui {
         upgradeButtonB.display();
         upgradeIconA.display();
         upgradeIconB.display();
-        if (isTowers) selection.main();
+        if (isTowers) selection.display();
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.display();
         P.fill(FLASH_COLOR.getRGB(), flashA); //flash
         P.noStroke();
