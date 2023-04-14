@@ -262,6 +262,7 @@ public class Main extends PApplet {
                 break;
         }
         if (settings) settingsGui.update();
+        updateTransition();
 
         updateInput();
         soundStuff();
@@ -312,7 +313,7 @@ public class Main extends PApplet {
                 break;
         }
         if (settings) settingsGui.display();
-        drawTransition();
+        displayTransition();
         //black bars
         if (!showSpawn) {
             fill(0);
@@ -337,7 +338,23 @@ public class Main extends PApplet {
         targetScreen = screen;
     }
 
-    private void drawTransition() {
+    private void updateTransition() {
+        if (titleGui == null) return;
+
+        transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
+
+        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
+                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
+                && targetScreen != screen) {
+            if (targetScreen == Screen.InGame || screen == Screen.InGame) {
+                Game.reset(this);
+                paused = false;
+            }
+            screen = targetScreen;
+        }
+    }
+
+    private void displayTransition() {
         if (titleGui == null) return;
 
         PVector edge = PVector.add(transCenter, transRotation.copy().setMag(TRANS_SIZE));
@@ -357,18 +374,6 @@ public class Main extends PApplet {
         transBox.endShape(PConstants.CLOSE);
 
         shape(transBox, 0, 0);
-
-        transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
-
-        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
-                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
-                && targetScreen != screen) {
-            if (targetScreen == Screen.InGame || screen == Screen.InGame) {
-                Game.reset(this);
-                paused = false;
-            }
-            screen = targetScreen;
-        }
     }
 
     /**
