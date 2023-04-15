@@ -123,7 +123,7 @@ public abstract class Turret extends Tower {
     }
 
     @Override
-    public void placeEffect(boolean quiet) {
+    public void place(boolean quiet) {
         loadSprites();
         setUpgrades();
         if (!quiet) {
@@ -285,7 +285,7 @@ public abstract class Turret extends Tower {
     }
 
     @Override
-    public void die(boolean sold) {
+    public void die(boolean isSold) {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         tile.tower = null;
@@ -297,7 +297,7 @@ public abstract class Turret extends Tower {
         }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;
-        if (!sold) {
+        if (!isSold) {
             moneyGain = (int) (getValue() * 0.4);
             tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_TL");
         } else moneyGain = (int) (getValue() * 0.8);

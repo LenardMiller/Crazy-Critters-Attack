@@ -435,12 +435,12 @@ public class Hand {
                 money += price; //cancel out price change later
             } else tile.tower = new Wall(P, tile);
             changeHeld = false;
-            tile.tower.placeEffect(false);
+            tile.tower.place(false);
         } else {
 //            System.out.println(held.substring(0,1).toUpperCase() + held.substring(1));
             tile.tower = Turret.get(P, held.substring(0,1).toUpperCase() + held.substring(1), tile);
             if (tile.tower != null) {
-                tile.tower.placeEffect(false);
+                tile.tower.place(false);
             }
         }
         if (held.contains("TL")) {

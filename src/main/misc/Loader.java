@@ -94,7 +94,7 @@ public class Loader {
                 wall.upgrade(0, true);
             }
             wall.hp = object.getInt("hp");
-            wall.placeEffect(true);
+            wall.place(true);
             wall.updateSprite();
 
             Main.towers.add(wall);
@@ -159,7 +159,7 @@ public class Loader {
                 turret.damageTotal = object.getInt("damageTotal");
             }
 
-            turret.placeEffect(true);
+            turret.place(true);
             tile.tower = turret;
             updateTowerArray();
         }

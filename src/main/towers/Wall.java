@@ -70,7 +70,7 @@ public class Wall extends Tower {
     }
 
     @Override
-    public void placeEffect(boolean quiet) {
+    public void place(boolean quiet) {
         if (!quiet) {
             playSoundRandomSpeed(p, placeSound, 1);
             spawnParticles();

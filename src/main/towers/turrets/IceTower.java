@@ -184,7 +184,7 @@ public class IceTower extends Turret {
         if (tile.tower == null) {
             tile.tower = new IceWall(p, tile, wallHp, wallTimeUntilDamage);
             Wall wall = (Wall) tile.tower;
-            wall.placeEffect(false);
+            wall.place(false);
             updateCombatPoints();
             updateTowerArray();
             frozenTotal++;

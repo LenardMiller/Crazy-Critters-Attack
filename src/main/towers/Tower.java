@@ -77,7 +77,8 @@ public abstract class Tower {
         updateTowerArray();
     }
 
-    public abstract void placeEffect(boolean quiet);
+    /** Place particles & update stuff */
+    public abstract void place(boolean quiet);
 
     public abstract void update();
 
@@ -85,12 +86,14 @@ public abstract class Tower {
 
     public abstract void controlAnimation();
 
+    /** @return money gained when sold or broken */
     public abstract int getValue();
 
     public PVector getCenter() {
         return new PVector(tile.position.x - (size.x / 2), tile.position.y - (size.y / 2));
     }
 
+    /** Displays the HP bar and makes it fade over time */
     public void displayHpBar() {
         Color barColor = new Color(0, 255, 0);
         if (boostedMaxHp() > 0) barColor = InGameGui.BOOSTED_TEXT_COLOR;
@@ -104,6 +107,7 @@ public abstract class Tower {
         else refreshHpBar();
     }
 
+    /** Sets the bars opacity to max */
     public void refreshHpBar() {
         barAlpha = 255;
     }
@@ -125,7 +129,11 @@ public abstract class Tower {
 
     public abstract void upgrade(int id, boolean quiet);
 
-    public void die(boolean sold) {
+    /**
+     * Plays sound, spawns particles, updates stuff and gives money
+     * @param isSold Give 80% of value if true, 40% otherwise
+     */
+    public void die(boolean isSold) {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         alive = false;
@@ -136,7 +144,7 @@ public abstract class Tower {
         }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;
-        if (!sold) {
+        if (!isSold) {
             moneyGain = (int) (getValue() * 0.4);
             tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_TL");
         } else moneyGain = (int) (getValue() * 0.8);
@@ -148,6 +156,7 @@ public abstract class Tower {
         updateCombatPoints();
     }
 
+    /** Special death effect when boosted by Booster with Unstable upgrade */
     protected void boostedDeathEffect() {
         int radius = getValue() / 10;
         if (radius < 40) radius = 40;
@@ -175,14 +184,22 @@ public abstract class Tower {
         else playSoundRandomSpeed(p, sounds.get("smallExplosion"), 1);
     }
 
-    public void heal(float relativeAmount) {
+    /**
+     * Heals the tower by a proportion & spawns particles
+     * @param proportionHealed amount to heal tower by
+     */
+    public void heal(float proportionHealed) {
         if (hp < getMaxHp()) {
             refreshHpBar();
             for (int i = 0; i < 5; i++) {
-                topParticles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
+                topParticles.add(new Ouch(p,
+                        p.random(tile.position.x - size.x, tile.position.x),
+                        p.random(tile.position.y - size.y, tile.position.y),
+                        p.random(360),
+                        "greenPuff"));
             }
         }
-        hp += relativeAmount * getMaxHp();
+        hp += proportionHealed * getMaxHp();
         if (hp > getMaxHp()) hp = getMaxHp();
     }
 
@@ -204,7 +221,7 @@ public abstract class Tower {
         }
     }
 
-    //boosts
+    //boosts --------------------------------------------------
 
     public void addBoost(Booster.Boost boost) {
         boostTimer = 0;

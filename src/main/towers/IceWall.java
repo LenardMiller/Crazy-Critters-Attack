@@ -39,7 +39,7 @@ public class IceWall extends Wall {
     }
 
     @Override
-    public void placeEffect(boolean quiet) {
+    public void place(boolean quiet) {
         if (!quiet) spawnParticles();
         connectWallQueues++;
     }
@@ -70,7 +70,7 @@ public class IceWall extends Wall {
     }
 
     @Override
-    public void die(boolean sold) {
+    public void die(boolean isSold) {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         alive = false;
