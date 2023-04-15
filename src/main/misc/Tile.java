@@ -113,6 +113,7 @@ public class Tile {
         private PImage[] outsideCorners;
         private String[] outsideCornerNames;
         private PImage[] insideCorners;
+        private boolean drawMain;
 
         public FlooringLayer() {
             edges = new PImage[4];
@@ -504,14 +505,11 @@ public class Tile {
     public int id;
     public PVector position;
     public Tower tower;
-
     public BaseLayer baseLayer;
     public FlooringLayer flooringLayer;
     public DecorationLayer decorationLayer;
     public BreakableLayer breakableLayer;
     public ObstacleLayer obstacleLayer;
-
-    private boolean drawMain;
 
     public Tile(PApplet p, PVector position, int id) {
         this.P = p;
