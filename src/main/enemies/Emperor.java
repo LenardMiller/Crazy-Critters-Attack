@@ -19,7 +19,7 @@ public class Emperor extends Enemy {
         damage = 18;
         maxHp = 3000;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "emperor";
         betweenAttackFrames = down60ToFramerate(10);
         betweenWalkFrames = down60ToFramerate(12);

@@ -19,7 +19,7 @@ public class Twisted extends Enemy {
         damage = 40;
         maxHp = 35000; //Hp
         hp = maxHp;
-        hitParticle = "brownLeafOuch";
+        hitParticle = HitParticle.brownLeafOuch;
         name = "twisted";
         betweenAttackFrames = down60ToFramerate(10);
         betweenWalkFrames = down60ToFramerate(20);

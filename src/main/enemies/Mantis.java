@@ -19,7 +19,7 @@ public class Mantis extends Enemy {
         damage = 12;
         maxHp = 7500;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "mantis";
         betweenWalkFrames = down60ToFramerate(13);
         attackDmgFrames = new int[]{12};

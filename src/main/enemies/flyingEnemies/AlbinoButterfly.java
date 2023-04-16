@@ -19,7 +19,7 @@ public class AlbinoButterfly extends FlyingEnemy {
         damage = 2;
         maxHp = 100; //Hp
         hp = maxHp;
-        hitParticle = "glowOuch";
+        hitParticle = HitParticle.glowOuch;
         name = "albinoButterfly";
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

@@ -19,7 +19,7 @@ public class BigAlbinoBug extends Enemy {
         damage = 15;
         maxHp = 1500;
         hp = maxHp;
-        hitParticle = "glowOuch";
+        hitParticle = HitParticle.glowOuch;
         name = "bigAlbinoBug";
         betweenWalkFrames = down60ToFramerate(13);
         corpseSize = size;

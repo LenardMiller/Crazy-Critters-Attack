@@ -19,7 +19,7 @@ public class Sidewinder extends Enemy {
         damage = 3;
         maxHp = 60; //Hp
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "sidewinder";
         attackDmgFrames = new int[]{4};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

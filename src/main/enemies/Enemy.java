@@ -43,6 +43,28 @@ public abstract class Enemy {
         Special
     }
 
+    public enum HitParticle {
+        //lower case for string reasons
+        glowOuch(new Color(0, 255, 195)),
+        greenOuch(new Color(100, 166, 0)),
+        leafOuch(new Color(19, 183, 25)),
+        lichenOuch(new Color(144, 146, 133)),
+        pinkOuch(new Color(255, 0, 255)),
+        redOuch(new Color(216, 0, 0)),
+        iceOuch(new Color(49, 135, 223)),
+        mudOuch(new Color(111, 58, 0)),
+        sapOuch(new Color(0xb76e09)),
+        brownLeafOuch(new Color(0xBB5E3B)),
+        bluePuff(new Color(84, 180, 246)),
+        greenPuff(new Color(100, 207, 123));
+
+        public final Color tintColor;
+
+        HitParticle(Color color) {
+            this.tintColor = color;
+        }
+    }
+
     /** measured in pixels per second */
     public float speed;
     public float speedModifier;
@@ -60,7 +82,7 @@ public abstract class Enemy {
     public boolean immobilized;
     public ArrayList<TurnPoint> trail;
     public PImage[] attackFrames;
-    public String hitParticle;
+    public HitParticle hitParticle;
     public String lastDamageType;
     public String name;
     public PVector position;
@@ -84,7 +106,6 @@ public abstract class Enemy {
     protected PVector partSize;
     protected PImage[] moveFrames;
     protected PImage sprite;
-    protected Color maxTintColor;
     protected Color currentTintColor;
     protected SoundFile overkillSound;
     protected SoundFile dieSound;
@@ -110,7 +131,7 @@ public abstract class Enemy {
         damage = 1;
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "";
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
@@ -202,13 +223,13 @@ public abstract class Enemy {
             for (int k = 0; k < sq(pfSize); k++) {
                 bottomParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
                   (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
-                  0, hitParticle));
+                  0, hitParticle.name()));
             }
         } else
             corpses.add(new Corpse(p, position, corpseSize,
               rotation + p.random(radians(-5), radians(5)), new PVector(0, 0),
               currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
-              "none", 0, true));
+              null, 0, true));
     }
 
     protected void cleanDeathEffect() {
@@ -457,11 +478,11 @@ public abstract class Enemy {
             if (p.random(6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
                     PVector partPos = getParticlePosition();
-                    if (isGore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle));
+                    if (isGore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle.name()));
                     else topParticles.add(new MiscParticle(p, partPos.x, partPos.y, p.random(0, 360), "stun"));
                 }
             }
-            currentTintColor = new Color(maxTintColor.getRGB());
+            currentTintColor = new Color(hitParticle.tintColor.getRGB());
         }
     }
 
@@ -487,35 +508,7 @@ public abstract class Enemy {
         attackFrames = animatedSprites.get(name + "AttackEN");
         moveFrames = animatedSprites.get(name + "MoveEN");
         sprite = moveFrames[0];
-        maxTintColor = getTintColor();
         currentTintColor = new Color(255, 255, 255);
-    }
-
-    protected Color getTintColor() {
-        switch (hitParticle) {
-            case "glowOuch":
-                return new Color(0, 255, 195);
-            case "greenOuch":
-                return new Color(100, 166, 0);
-            case "leafOuch":
-                return new Color(19, 183, 25);
-            case "lichenOuch":
-                return new Color(144, 146, 133);
-            case "pinkOuch":
-                return new Color(255, 0, 255);
-            case "redOuch":
-                return new Color(216, 0, 0);
-            case "iceOuch":
-                return new Color(49, 135, 223);
-            case "mudOuch":
-                return new Color(111, 58, 0);
-            case "sapOuch":
-                return new Color(0xb76e09);
-            case "brownLeafOuch":
-                return new Color(0xBB5E3B);
-            default:
-                return new Color(255, 0, 0);
-        }
     }
 
     /**

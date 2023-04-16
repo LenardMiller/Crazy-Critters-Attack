@@ -19,7 +19,7 @@ public class MidBug extends Enemy {
         damage = 3;
         maxHp = 40;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "midBug";
         betweenWalkFrames = down60ToFramerate(6);
         betweenAttackFrames = down60ToFramerate(2);

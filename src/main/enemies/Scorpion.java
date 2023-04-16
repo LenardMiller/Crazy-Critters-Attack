@@ -19,7 +19,7 @@ public class Scorpion extends Enemy {
         damage = 4;
         maxHp = 75;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "scorpion";
         attackDmgFrames = new int[]{5};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

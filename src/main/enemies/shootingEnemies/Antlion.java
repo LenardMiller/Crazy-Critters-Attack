@@ -23,7 +23,7 @@ public class Antlion extends ShootingEnemy {
         range = 100;
         barrelLength = 7;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "antlion";
         attackSound = sounds.get("bugGrowlVeryQuick");
         shootSound = sounds.get("spit");

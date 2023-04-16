@@ -19,7 +19,7 @@ public class SmallGolem extends Enemy{
         damage = 5;
         maxHp = 100; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "lichenOuch";
+        hitParticle = HitParticle.lichenOuch;
         name = "smallGolem";
         betweenAttackFrames = down60ToFramerate(2);
         betweenWalkFrames = down60ToFramerate(3);

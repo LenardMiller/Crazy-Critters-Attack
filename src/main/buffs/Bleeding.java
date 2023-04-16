@@ -38,10 +38,10 @@ public class Bleeding extends Buff {
 
         if (p.random(particleChance) < 1) {
             PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
-            topParticles.add(new Ouch(p, pos.x, pos.y, p.random(360), enemy.hitParticle));
+            topParticles.add(new Ouch(p, pos.x, pos.y, p.random(360), enemy.hitParticle.name()));
         } if (p.random(particleChance * 4) < 1) {
             PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.2f);
-            bottomParticles.add(new Pile(p, pos.x, pos.y, 0, enemy.hitParticle));
+            bottomParticles.add(new Pile(p, pos.x, pos.y, 0, enemy.hitParticle.name()));
         }
     }
 }

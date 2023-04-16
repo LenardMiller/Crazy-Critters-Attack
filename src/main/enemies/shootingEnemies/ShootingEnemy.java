@@ -36,7 +36,6 @@ public abstract class ShootingEnemy extends Enemy {
         attackFrames = animatedSprites.get(name + "AttackEN");
         moveFrames = animatedSprites.get(name + "MoveEN");
         shootFrames = animatedSprites.get(name + "ShootEN");
-        maxTintColor = getTintColor();
         currentTintColor = new Color(255, 255, 255);
     }
 

@@ -19,7 +19,7 @@ public class MutantBug extends Enemy {
         damage = 100;
         maxHp = 750000;
         hp = maxHp;
-        hitParticle = "glowOuch";
+        hitParticle = HitParticle.glowOuch;
         name = "mutantBug";
         betweenWalkFrames = down60ToFramerate(20);
         attackDmgFrames = new int[]{15};

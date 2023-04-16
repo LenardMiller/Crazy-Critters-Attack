@@ -19,7 +19,7 @@ public class MidWorm extends BurrowingEnemy {
         damage = 6;
         maxHp = 700; //Hp
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "midWorm";
         attackDmgFrames = new int[]{15};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

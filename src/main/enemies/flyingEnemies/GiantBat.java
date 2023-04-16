@@ -19,7 +19,7 @@ public class GiantBat extends FlyingEnemy {
         damage = 5;
         maxHp = 12500; //Hp
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "giantBat";
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

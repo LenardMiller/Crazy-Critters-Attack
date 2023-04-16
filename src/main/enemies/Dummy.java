@@ -18,7 +18,7 @@ public class Dummy extends Enemy {
         damage = 0;
         maxHp = 500000; //Hp
         hp = maxHp;
-        hitParticle = "leafOuch";
+        hitParticle = HitParticle.leafOuch;
         name = "dummy";
         betweenWalkFrames = down60ToFramerate(1);
         corpseSize = size;

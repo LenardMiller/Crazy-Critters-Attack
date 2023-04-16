@@ -19,7 +19,7 @@ public class Root extends BurrowingEnemy {
         damage = 20;
         maxHp = 35000; //Hp
         hp = maxHp;
-        hitParticle = "sapOuch";
+        hitParticle = HitParticle.sapOuch;
         name = "root";
         attackDmgFrames = new int[]{18};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

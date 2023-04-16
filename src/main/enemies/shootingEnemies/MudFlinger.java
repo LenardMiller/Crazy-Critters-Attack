@@ -23,7 +23,7 @@ public class MudFlinger extends ShootingEnemy {
         range = 140;
         barrelLength = 7;
         hp = maxHp;
-        hitParticle = "mudOuch";
+        hitParticle = HitParticle.mudOuch;
         name = "mudFlinger";
         shootSound = sounds.get("spit");
         attackSound = sounds.get("slime");

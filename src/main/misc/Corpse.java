@@ -1,5 +1,7 @@
 package main.misc;
 
+import com.sun.istack.internal.Nullable;
+import main.enemies.Enemy;
 import main.particles.MiscParticle;
 import main.particles.Ouch;
 import main.particles.Pile;
@@ -22,7 +24,7 @@ public class Corpse {
     private final PVector SIZE;
     private final PVector VELOCITY;
     private final PImage[] SPRITES;
-    private final String BLOOD_PARTICLE;
+    private final Enemy.HitParticle BLOOD_PARTICLE;
     private final PApplet P;
 
     private int betweenTime;
@@ -51,7 +53,7 @@ public class Corpse {
      * @param animated should it be animated
      */
     public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, Color currentTintColor, float angularVelocity,
-                  int betweenFrames, int maxLife, String effectType, String name, String bloodParticle, int frame,
+                  int betweenFrames, int maxLife, String effectType, String name, @Nullable Enemy.HitParticle bloodParticle, int frame,
                   boolean animated) {
         this.P = p;
 
@@ -208,7 +210,7 @@ public class Corpse {
 
     private void bloodParticles() {
         if (!paused) {
-            if (!BLOOD_PARTICLE.equals("none")) {
+            if (BLOOD_PARTICLE != null) {
                 for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
                     float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
                     float chance = sq(1 / (speed + 0.01f));
@@ -216,13 +218,13 @@ public class Corpse {
                     if (!type.equals("burning") && !type.equals("decay")) { //idk
                         if (P.random(chance) < 1) {
                             PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
-                            midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE));
+                            midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
                         }
                     }
                     chance += 10;
                     if (P.random(chance) < 0) {
                         PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.2f);
-                        bottomParticles.add(new Pile(P, pos.x, pos.y, 0, BLOOD_PARTICLE));
+                        bottomParticles.add(new Pile(P, pos.x, pos.y, 0, BLOOD_PARTICLE.name()));
                     }
                 }
             }

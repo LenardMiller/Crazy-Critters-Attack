@@ -19,7 +19,7 @@ public class EnragedGiant extends Enemy {
         damage = 20;
         maxHp = 17000; //Hp
         hp = maxHp;
-        hitParticle = "leafOuch";
+        hitParticle = HitParticle.leafOuch;
         name = "enragedGiant";
         attackDmgFrames = new int[]{28};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

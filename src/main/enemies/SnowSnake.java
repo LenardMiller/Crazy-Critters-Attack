@@ -18,7 +18,7 @@ public class SnowSnake extends Enemy {
         damage = 3;
         maxHp = 60; //Hp
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "snowSnake";
         attackDmgFrames = new int[]{8};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

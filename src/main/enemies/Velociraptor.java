@@ -19,7 +19,7 @@ public class Velociraptor extends Enemy {
         damage = 20;
         maxHp = 4000; //Hp
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "velociraptor";
         attackDmgFrames = new int[]{8};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
