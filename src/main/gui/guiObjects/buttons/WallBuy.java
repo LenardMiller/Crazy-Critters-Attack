@@ -47,7 +47,7 @@ public class WallBuy extends Button {
             }
         }
         else sprite = spriteIdle;
-        if (!hand.displayInfo.equals("null")) sprite = spritePressed;
+        if (hand.displayInfo != null) sprite = spritePressed;
     }
 
     @Override

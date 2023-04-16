@@ -23,8 +23,6 @@ public abstract class Button extends GuiObject {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(25, 25);
-        sprite = spriteIdle;
-        holdable = false;
         clickIn = sounds.get("clickIn");
         clickOut = sounds.get("clickOut");
     }
