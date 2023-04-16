@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.enemies.Enemy;
 import main.misc.Tile;
 import main.particles.RailgunBlast;
 import processing.core.PApplet;
@@ -68,7 +69,7 @@ public class Railgun extends Turret {
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
 
-        targetEnemy.damageWithoutBuff(getDamage(),this, "normal", PVector.fromAngle(vaporAngle - HALF_PI), true);
+        targetEnemy.damageWithoutBuff(getDamage(),this, null, PVector.fromAngle(vaporAngle - HALF_PI), true);
     }
 
     @Override

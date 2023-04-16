@@ -65,6 +65,28 @@ public abstract class Enemy {
         }
     }
 
+    public enum DamageType {
+        burning(new Color(60,60,60), "fire"),
+        blueBurning(new Color(0, 14, 64), "blueGreenFire"),
+        decay(new Color(0,0,0), "decay"),
+        poisoned(new Color(120, 180, 0), "poison"),
+        glued(new Color(234, 229, 203), "glue"),
+        energy(new Color(60, 60, 60), "energy"),
+        electricity(new Color(60, 60, 60), "electricity"),
+        nuclear(new Color(60, 60, 60), "nuclear"),
+        orangeMagic(new Color(60, 60, 60), "orangeMagic"),
+        dark(new Color(79, 0, 128), "dark"),
+        frozen(new Color(150, 225, 255), null);
+
+        public final Color finalTintColor;
+        public final String particle;
+
+        DamageType(@Nullable Color color, @Nullable String particle) {
+            finalTintColor = color;
+            this.particle = particle;
+        }
+    }
+
     /** measured in pixels per second */
     public float speed;
     public float speedModifier;
@@ -83,7 +105,7 @@ public abstract class Enemy {
     public ArrayList<TurnPoint> trail;
     public PImage[] attackFrames;
     public HitParticle hitParticle;
-    public String lastDamageType;
+    public DamageType lastDamageType;
     public String name;
     public PVector position;
     public PVector size;
@@ -143,7 +165,7 @@ public abstract class Enemy {
         partSize = size;
         betweenCorpseFrames = down60ToFramerate(7);
         corpseLifespan = 8;
-        lastDamageType = "normal";
+        lastDamageType = null;
     }
 
     public void update(int i) {
@@ -189,9 +211,9 @@ public abstract class Enemy {
         Main.money += moneyDrop;
         popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
 
-        String type = lastDamageType;
+        DamageType type = lastDamageType;
         for (Buff buff : buffs) {
-            if (buff.enId == i) type = buff.name;
+            if (buff.enId == i) type = DamageType.valueOf(buff.name);
         }
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
@@ -212,7 +234,7 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    protected void goreyDeathEffect(String type) {
+    protected void goreyDeathEffect(DamageType type) {
         if (overkill) {
             for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
                 float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
@@ -358,7 +380,7 @@ public abstract class Enemy {
      * @param id id of this enemy, set to -1 if unknown
      */
     public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, @Nullable Turret turret,
-                               boolean displayParticles, String damageType, PVector direction, int id) {
+                               boolean displayParticles, @Nullable DamageType damageType, PVector direction, int id) {
         if (id == -1 && buffName != null) id = getId();
         lastDamageType = damageType;
         overkill = damage >= maxHp;
@@ -439,7 +461,7 @@ public abstract class Enemy {
      * @param direction where parts will be flung, (0, 0) for everywhere
      * @param displayParticles whether it should spawn particles
      */
-    public void damageWithoutBuff(int damage, @Nullable Turret turret, String damageType, PVector direction, boolean displayParticles) {
+    public void damageWithoutBuff(int damage, @Nullable Turret turret, @Nullable DamageType damageType, PVector direction, boolean displayParticles) {
         lastDamageType = damageType;
         overkill = damage >= maxHp;
         partsDirection = direction;

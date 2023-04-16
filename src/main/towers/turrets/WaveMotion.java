@@ -156,7 +156,7 @@ public class WaveMotion extends Turret {
                     continue;
                 }
             }
-            enemy.damageWithoutBuff(damageAmount, this, "energy", new PVector(0,0), false);
+            enemy.damageWithoutBuff(damageAmount, this, Enemy.DamageType.energy, new PVector(0,0), false);
         }
     }
 

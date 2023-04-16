@@ -57,9 +57,9 @@ public abstract class BurrowingEnemy extends Enemy {
         Main.money += moneyDrop;
         popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
 
-        String type = lastDamageType;
+        DamageType type = lastDamageType;
         for (Buff buff : buffs) {
-            if (buff.enId == i) type = buff.name;
+            if (buff.enId == i) type = DamageType.valueOf(buff.name);
         }
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);

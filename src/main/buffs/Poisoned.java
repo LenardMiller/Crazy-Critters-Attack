@@ -24,6 +24,6 @@ public class Poisoned extends Buff {
     public void effect(){ //a bit of damage a second
         Enemy enemy = enemies.get(enId);
         enemy.showBar = true;
-        enemy.damageWithoutBuff(25,turret, "poison", new PVector(0,0), false);
+        enemy.damageWithoutBuff(25,turret, Enemy.DamageType.poisoned, new PVector(0,0), false);
     }
 }

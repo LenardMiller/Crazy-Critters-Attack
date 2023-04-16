@@ -26,7 +26,7 @@ public class Arc {
     private final Enemy BLACKLISTED_ENEMY;
     public int alpha;
     protected Color lineColor;
-    protected String particleType;
+    protected Enemy.DamageType particleType;
     protected int maxPoints;
     protected int variation;
     protected int weight;
@@ -52,7 +52,7 @@ public class Arc {
         maxPoints = 10;
         weight = 1;
         lineColor = new Color(215, 242, 248);
-        particleType = "electricity";
+        particleType = Enemy.DamageType.electricity;
         BLACKLISTED_ENEMY = blacklistedEnemy;
     }
 
@@ -193,7 +193,7 @@ public class Arc {
                 e.x *= -1;
                 e.y *= -1;
                 points[i] = new PVector(e.x + pointA.x + P.random(-variation, variation), e.y + pointA.y + P.random(-variation, variation));
-                topParticles.add(new MiscParticle(P, points[i].x, points[i].y, P.random(360), particleType));
+                topParticles.add(new MiscParticle(P, points[i].x, points[i].y, P.random(360), particleType.name()));
             }
         }
     }

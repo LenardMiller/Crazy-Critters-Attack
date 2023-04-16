@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.enemies.Enemy;
 import main.projectiles.shockwaves.NuclearShockwave;
 import main.particles.ExplosionDebris;
 import main.towers.turrets.Turret;
@@ -23,7 +24,7 @@ public class NuclearBlast extends Projectile {
         sprite = staticSprites.get("nuclearPj");
         hitSound = sounds.get("hugeExplosion");
         this.effectRadius = effectRadius;
-        type = "nuclear";
+        type = Enemy.DamageType.nuclear;
         trail = "nuclear";
     }
 

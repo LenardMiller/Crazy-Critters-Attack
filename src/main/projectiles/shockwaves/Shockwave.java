@@ -29,7 +29,7 @@ public abstract class Shockwave {
     protected float effectDuration;
     protected float effectLevel;
     protected String buff;
-    protected String damageType;
+    protected Enemy.DamageType damageType;
 
     public Shockwave(PApplet p, float centerX, float centerY, int startingRadius, int maxRadius, float angle,
                      float width, int damage, Turret turret) {

@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.enemies.Enemy;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -43,7 +44,7 @@ public class Flame extends Projectile {
         angularVelocity = 0; //degrees mode
         SPRITES = animatedSprites.get("flamePJ");
         buff = "burning";
-        type = "burning";
+        type = Enemy.DamageType.burning;
         causeEnemyParticles = false;
         fireChance = 8;
         smokeChance = 100;

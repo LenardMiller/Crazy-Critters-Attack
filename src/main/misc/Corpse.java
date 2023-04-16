@@ -32,7 +32,7 @@ public class Corpse {
     private int lifespan;
     private float angularVelocity;
     private float angle;
-    private String type;
+    private Enemy.DamageType type;
     private Color currentTintColor;
 
     /**
@@ -53,7 +53,7 @@ public class Corpse {
      * @param animated should it be animated
      */
     public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, Color currentTintColor, float angularVelocity,
-                  int betweenFrames, int maxLife, String effectType, String name, @Nullable Enemy.HitParticle bloodParticle, int frame,
+                  int betweenFrames, int maxLife, Enemy.DamageType effectType, String name, @Nullable Enemy.HitParticle bloodParticle, int frame,
                   boolean animated) {
         this.P = p;
 
@@ -74,7 +74,7 @@ public class Corpse {
         this.angularVelocity = angularVelocity * 2;
         SPRITES = animatedSprites.get(name + "EN");
         this.type = effectType;
-        if (this.type == null) this.type = "normal";
+        if (this.type == null) this.type = null;
         this.BLOOD_PARTICLE = bloodParticle;
         this.frame = frame;
         this.ANIMATED = animated;
@@ -114,67 +114,20 @@ public class Corpse {
             }
         }
 
-        Color tint;
-        boolean doSpecialEffects = true;
-        Color tintFinal;
-        String part;
-        switch (type) {
-            case "burning":
-                tintFinal = new Color(60,60,60);
-                part = "fire";
-                break;
-            case "blueBurning":
-                tintFinal = new Color(0, 14, 64);
-                part = "blueGreenFire";
-                break;
-            case "decay":
-                tintFinal = new Color(0,0,0);
-                part = "decay";
-                break;
-            case "poisoned":
-                tintFinal = new Color(120, 180, 0);
-                part = "poison";
-                break;
-            case "glued":
-                tintFinal = new Color(234, 229, 203);
-                part = "glue";
-                break;
-            case "energy":
-                tintFinal = new Color(60, 60, 60);
-                part = "energy";
-                break;
-            case "electricity":
-                tintFinal = new Color(60, 60, 60);
-                part = "electricity";
-                break;
-            case "nuclear":
-                tintFinal = new Color(60, 60, 60);
-                part = "nuclear";
-                break;
-            case "dark":
-                tintFinal = new Color(79, 0, 128);
-                part = "dark";
-                break;
-            case "frozen":
-                tintFinal = new Color(150, 225, 255);
-                part = null;
-                break;
-            default:
-                tintFinal = new Color(255,255,255);
-                doSpecialEffects = false;
-                part = null;
-                break;
-        }
-        tint = new Color (
-                getTintChannel(tintFinal.getRed(), lifespan, MAX_LIFE),
-                getTintChannel(tintFinal.getGreen(), lifespan, MAX_LIFE),
-                getTintChannel(tintFinal.getBlue(), lifespan, MAX_LIFE)
-        );
-        if (doSpecialEffects) buffParticles(part);
-
         bloodParticles();
-        PImage st = tinting(sprite, tint, doSpecialEffects);
-        drawSprites(st);
+        if (type != null) {
+            Color tint;
+            tint = new Color (
+                    getTintChannel(type.finalTintColor.getRed(), lifespan, MAX_LIFE),
+                    getTintChannel(type.finalTintColor.getGreen(), lifespan, MAX_LIFE),
+                    getTintChannel(type.finalTintColor.getBlue(), lifespan, MAX_LIFE)
+            );
+            buffParticles(type.particle);
+
+            drawSprites(tinting(sprite, tint));
+        } else {
+            drawSprites(tinting(sprite, null));
+        }
         currentTintColor = incrementColorTo(currentTintColor, up60ToFramerate(20), new Color(255, 255, 255));
     }
 
@@ -193,7 +146,7 @@ public class Corpse {
         }
     }
 
-    private PImage tinting(PImage sprite, Color tint, boolean doTint) {
+    private PImage tinting(PImage sprite, @Nullable Color tintColor) {
         //for memory reasons
         PImage st = P.createImage(sprite.width, sprite.height, ARGB);
         sprite.loadPixels();
@@ -201,9 +154,9 @@ public class Corpse {
 
         //tinting
         float transparency = ((float) lifespan) / ((float) MAX_LIFE);
-        if (doTint) {
+        if (tintColor != null) {
             P.tint(currentTintColor.getRGB());
-            superTint(st, new Color(tint.getRed(), tint.getGreen(), tint.getBlue(), 0), transparency);
+            superTint(st, new Color(tintColor.getRed(), tintColor.getGreen(), tintColor.getBlue(), 0), transparency);
         } else P.tint(currentTintColor.getRGB(), transparency * 255);
         return st;
     }
@@ -215,11 +168,9 @@ public class Corpse {
                     float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
                     float chance = sq(1 / (speed + 0.01f));
                     chance += 16;
-                    if (!type.equals("burning") && !type.equals("decay")) { //idk
-                        if (P.random(chance) < 1) {
-                            PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
-                            midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
-                        }
+                    if (P.random(chance) < 1) {
+                        PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
+                        midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
                     }
                     chance += 10;
                     if (P.random(chance) < 0) {

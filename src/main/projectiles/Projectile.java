@@ -39,7 +39,7 @@ public abstract class Projectile {
     protected PVector velocity;
     protected String trail;
     protected String buff;
-    protected String type;
+    protected Enemy.DamageType type;
     protected ArrayList<Enemy> hitEnemies;
     protected Turret turret;
     protected SoundFile hitSound;

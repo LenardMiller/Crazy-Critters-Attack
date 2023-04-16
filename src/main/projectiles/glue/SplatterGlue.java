@@ -1,5 +1,6 @@
 package main.projectiles.glue;
 
+import main.enemies.Enemy;
 import main.misc.Utilities;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
@@ -23,7 +24,7 @@ public class SplatterGlue extends Glue {
         angularVelocity = 0;
         sprite = staticSprites.get("gluePj");
         trail = "glue";
-        type = "glue";
+        type = Enemy.DamageType.glued;
         effectRadius = 100;
         hitSound = sounds.get("squishImpact");
         buff = "glued";

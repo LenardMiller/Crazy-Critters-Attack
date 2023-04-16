@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.enemies.Enemy;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -39,7 +40,7 @@ public class BlueFlame extends Projectile {
         angularVelocity = 0; //degrees mode
         SPRITES = animatedSprites.get("blueFlamePJ");
         buff = "blueBurning";
-        type = "blueBurning";
+        type = Enemy.DamageType.blueBurning;
         causeEnemyParticles = false;
         fireChance = 8;
         smokeChance = 100;

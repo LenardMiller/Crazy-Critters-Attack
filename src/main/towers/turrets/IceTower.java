@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
 import main.Main;
+import main.enemies.Enemy;
 import main.misc.IntVector;
 import main.misc.Tile;
 import main.towers.IceWall;
@@ -153,7 +154,7 @@ public class IceTower extends Turret {
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
 
-        targetEnemy.damageWithoutBuff(getDamage(), this, "ice", PVector.fromAngle(angle), damage > 0);
+        targetEnemy.damageWithoutBuff(getDamage(), this, Enemy.DamageType.frozen, PVector.fromAngle(angle), damage > 0);
 
         int targetSize = ceil(targetEnemy.pfSize / 2f);
         if (name.equals("superIceTower") && targetSize > 1) {

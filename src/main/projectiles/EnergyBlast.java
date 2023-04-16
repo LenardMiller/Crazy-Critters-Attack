@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.enemies.Enemy;
 import main.misc.Utilities;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
@@ -27,7 +28,7 @@ public class EnergyBlast extends Projectile {
         sprite = staticSprites.get("energyPj");
         hitSound = sounds.get("energyImpact");
         this.effectRadius = effectRadius;
-        type = "energy";
+        type = Enemy.DamageType.energy;
         trail = "energy";
         this.BIG_EXPLOSION = bigExplosion;
     }

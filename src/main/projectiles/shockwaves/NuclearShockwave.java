@@ -1,5 +1,6 @@
 package main.projectiles.shockwaves;
 
+import main.enemies.Enemy;
 import main.particles.*;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -12,7 +13,7 @@ public class NuclearShockwave extends Shockwave {
     public NuclearShockwave(PApplet p, float centerX, float centerY, int maxRadius, int damage, Turret turret) {
         super(p, centerX, centerY, 0, maxRadius, 0, 720, damage, turret);
 
-        damageType = "burning";
+        damageType = Enemy.DamageType.nuclear;
     }
 
     @Override

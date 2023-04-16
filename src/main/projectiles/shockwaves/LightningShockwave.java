@@ -1,5 +1,6 @@
 package main.projectiles.shockwaves;
 
+import main.enemies.Enemy;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
@@ -14,7 +15,7 @@ public class LightningShockwave extends Shockwave {
     public LightningShockwave(PApplet p, float centerX, float centerY, int maxRadius, int damage, Turret turret) {
         super(p, centerX, centerY, 0, maxRadius, 0, 720, damage, turret);
 
-        damageType = "electricity";
+        damageType = Enemy.DamageType.electricity;
     }
 
     @Override

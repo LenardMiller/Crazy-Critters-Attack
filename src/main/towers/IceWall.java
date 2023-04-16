@@ -63,7 +63,7 @@ public class IceWall extends Wall {
                 int targetSize = ceil(enemy.pfSize / 2f);
                 if (enemy.intersectingIceCount >= targetSize) {
                     enemy.damageWithBuff(0, "frozen", 1, 0.2f, null,
-                      false, "frozen", new PVector(0, 0), i);
+                      false, Enemy.DamageType.frozen, new PVector(0, 0), i);
                 }
             }
         }

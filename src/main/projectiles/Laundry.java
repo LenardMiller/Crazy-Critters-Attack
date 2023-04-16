@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.enemies.Enemy;
 import main.misc.Utilities;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
@@ -30,7 +31,7 @@ public class Laundry extends Projectile {
         angularVelocity = down60ToFramerate(p.random(-15, 15)); //degrees mode
         sprite = staticSprites.get("laundryPj");
         trail = "poison";
-        type = "poison";
+        type = Enemy.DamageType.poisoned;
         effectRadius = 60;
         buff = "poisoned";
         hitSound = sounds.get("squishImpact");

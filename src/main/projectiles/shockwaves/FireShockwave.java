@@ -1,5 +1,6 @@
 package main.projectiles.shockwaves;
 
+import main.enemies.Enemy;
 import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
@@ -14,7 +15,7 @@ public class FireShockwave extends Shockwave {
                          Turret turret, float effectLevel, float effectDuration) {
         super(p, centerX, centerY, startingRadius, maxRadius, 0, 720, damage, turret);
 
-        damageType = "burning";
+        damageType = Enemy.DamageType.burning;
         buff = "burning";
         this.effectDuration = effectDuration;
         this.effectLevel = effectLevel;
