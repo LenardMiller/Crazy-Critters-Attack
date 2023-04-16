@@ -35,10 +35,9 @@ public abstract class Particle {
         velocity = PVector.fromAngle(angle - HALF_PI);
     }
 
-    public void main(ArrayList<Particle> particles, int i) {
+    public void update(ArrayList<Particle> particles, int i) {
         if (crossedEdge()) dead = true;
         if (dead) particles.remove(i);
-        display();
         if (!paused) move();
     }
 
@@ -46,7 +45,7 @@ public abstract class Particle {
         return position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100;
     }
 
-    protected void display() {
+    public void display() {
         p.pushMatrix();
         p.translate(position.x, position.y);
         p.rotate(displayAngle);

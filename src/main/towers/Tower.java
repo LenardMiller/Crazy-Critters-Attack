@@ -23,12 +23,23 @@ import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.Utilities.incrementByTo;
-import static main.misc.WallSpecialVisuals.updateFlooring;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Tower {
+
+    public enum Material {
+        //lower case for string reasons
+        wood,
+        darkMetal,
+        gold,
+        stone,
+        metal,
+        crystal,
+        titanium,
+        ice
+    }
 
     public int maxHp;
     public int hp;
@@ -50,7 +61,7 @@ public abstract class Tower {
     protected int tintColor;
     protected int barAlpha;
     protected int boostTimer;
-    protected String material;
+    protected Material material;
     protected SoundFile damageSound;
     protected SoundFile breakSound;
     protected SoundFile placeSound;
@@ -60,7 +71,7 @@ public abstract class Tower {
         this.p = p;
         this.tile = tile;
         Tile otherTile = tiles.get((int) (tile.position.x / 50) - 1,(int) (tile.position.y / 50) - 1);
-        if (otherTile != null) otherTile.setBreakable(null);
+        if (otherTile != null) otherTile.breakableLayer.set(null);
 
         boosts = new ArrayList<>();
         alive = true;
@@ -70,7 +81,7 @@ public abstract class Tower {
         hp = maxHp;
         hit = false;
         tintColor = 255;
-        material = "wood";
+        material = Material.wood;
         visualize = false;
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
@@ -78,20 +89,23 @@ public abstract class Tower {
         updateTowerArray();
     }
 
-    public abstract void placeEffect(boolean quiet);
+    /** Place particles & update stuff */
+    public abstract void place(boolean quiet);
 
-    public abstract void main();
+    public abstract void update();
 
     public abstract void displayBase();
 
     public abstract void controlAnimation();
 
+    /** @return money gained when sold or broken */
     public abstract int getValue();
 
     public PVector getCenter() {
         return new PVector(tile.position.x - (size.x / 2), tile.position.y - (size.y / 2));
     }
 
+    /** Displays the HP bar and makes it fade over time */
     public void displayHpBar() {
         Color barColor = new Color(0, 255, 0);
         if (boostedMaxHp() > 0) barColor = InGameGui.BOOSTED_TEXT_COLOR;
@@ -105,6 +119,7 @@ public abstract class Tower {
         else refreshHpBar();
     }
 
+    /** Sets the bars opacity to max */
     public void refreshHpBar() {
         barAlpha = 255;
     }
@@ -120,13 +135,20 @@ public abstract class Tower {
         playSoundRandomSpeed(p, damageSound, 1);
         int num = (int)(p.random(4,10));
         for (int i = num; i >= 0; i--){ //spray debris
-            topParticles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), material));
+            topParticles.add(new Debris(p,
+                    (tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2),
+                    (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2),
+                    p.random(0,360), material.name()));
         }
     }
 
     public abstract void upgrade(int id, boolean quiet);
 
-    public void die(boolean sold) {
+    /**
+     * Plays sound, spawns particles, updates stuff and gives money
+     * @param isSold Give 80% of value if true, 40% otherwise
+     */
+    public void die(boolean isSold) {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         alive = false;
@@ -137,18 +159,19 @@ public abstract class Tower {
         }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;
-        if (!sold) {
+        if (!isSold) {
             moneyGain = (int) (getValue() * 0.4);
-            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(material + "DebrisBr_TL");
+            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_TL");
         } else moneyGain = (int) (getValue() * 0.8);
         if (moneyGain > 0) popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
         if (hasBoostedDeathEffect()) boostedDeathEffect();
-        updateFlooring();
+        Tile.updateFlooring();
         updateTowerArray();
         updateCombatPoints();
     }
 
+    /** Special death effect when boosted by Booster with Unstable upgrade */
     protected void boostedDeathEffect() {
         int radius = getValue() / 10;
         if (radius < 40) radius = 40;
@@ -176,14 +199,22 @@ public abstract class Tower {
         else playSoundRandomSpeed(p, sounds.get("smallExplosion"), 1);
     }
 
-    public void heal(float relativeAmount) {
+    /**
+     * Heals the tower by a proportion & spawns particles
+     * @param proportionHealed amount to heal tower by
+     */
+    public void heal(float proportionHealed) {
         if (hp < getMaxHp()) {
             refreshHpBar();
             for (int i = 0; i < 5; i++) {
-                topParticles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x), p.random(tile.position.y - size.y, tile.position.y), p.random(0, 360), "greenPuff"));
+                topParticles.add(new Ouch(p,
+                        p.random(tile.position.x - size.x, tile.position.x),
+                        p.random(tile.position.y - size.y, tile.position.y),
+                        p.random(360),
+                        "greenPuff"));
             }
         }
-        hp += relativeAmount * getMaxHp();
+        hp += proportionHealed * getMaxHp();
         if (hp > getMaxHp()) hp = getMaxHp();
     }
 
@@ -195,7 +226,7 @@ public abstract class Tower {
         for (int j = num; j >= 0; j--) {
             PVector deviation = new PVector(p.random(-size.x/2,size.x/2), p.random(-size.y/2,size.y/2));
             PVector spawnPos = PVector.add(center, deviation);
-            topParticles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), material));
+            topParticles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), material.name()));
         }
         num = (int) p.random(6, 12);
         for (int k = num; k >= 0; k--) {
@@ -205,7 +236,7 @@ public abstract class Tower {
         }
     }
 
-    //boosts
+    //boosts --------------------------------------------------
 
     public void addBoost(Booster.Boost boost) {
         boostTimer = 0;

@@ -51,7 +51,7 @@ public class Polluter {
         this.betweenPollutes = betweenPollutes;
     }
 
-    public void main() {
+    public void update() {
         polluteTimer++;
         if (polluteTimer > betweenPollutes) {
             pollute();
@@ -62,10 +62,10 @@ public class Polluter {
     private void pollute() {
         if (CLEAN_TILES.size() == 0) return;
         Tile tile = CLEAN_TILES.get((int) P.random(CLEAN_TILES.size()));
-        String name = tile.obstacleName;
-        if (Tile.containsCorners(tile.obstacleName, "tree") ||
-                Tile.containsCorners(tile.obstacleName, "yellowTree") ||
-                Tile.containsCorners(tile.obstacleName, "brownTree")) {
+        String name = tile.obstacleLayer.name;
+        if (Tile.containsCorners(tile.obstacleLayer.name, "tree") ||
+                Tile.containsCorners(tile.obstacleLayer.name, "yellowTree") ||
+                Tile.containsCorners(tile.obstacleLayer.name, "brownTree")) {
             IntVector tlPos = tile.getGridPosition();
             if (name.contains("TR")) tlPos = new IntVector(tlPos.x - 1, tlPos.y);
             else if (name.contains("BR")) tlPos = new IntVector(tlPos.x - 1, tlPos.y - 1);

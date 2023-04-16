@@ -119,7 +119,7 @@ public class Node {
         Tile obsTile = null;
         if (position.x >= 0 && position.y >= 0) obsTile = tiles.get(tX,tY);
         if (obsTile != null) {
-            isNotTraversable = obsTile.obstacle != null;
+            isNotTraversable = obsTile.obstacleLayer.exists();
             if (obsTile.machine) {
                 setEnd(nX,nY);
                 ended = true;

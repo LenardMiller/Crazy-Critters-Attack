@@ -19,7 +19,7 @@ public class Wolf extends Enemy {
         damage = 8;
         maxHp = 100; //Hp
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "wolf";
         attackDmgFrames = new int[]{8};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

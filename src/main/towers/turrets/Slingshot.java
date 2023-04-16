@@ -26,7 +26,7 @@ public class Slingshot extends Turret {
         breakSound = sounds.get("woodBreak");
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("slingshot");
-        material = "wood";
+        material = Material.wood;
         basePrice = SLINGSHOT_PRICE;
 
         titleLines = new String[]{"Slingshot"};
@@ -126,7 +126,7 @@ public class Slingshot extends Turret {
                     delay -= 0.3f;
                     break;
                 case 5:
-                    material = "stone";
+                    material = Material.stone;
                     damageSound = sounds.get("stoneDamage");
                     breakSound = sounds.get("stoneBreak");
                     placeSound = sounds.get("stonePlace");

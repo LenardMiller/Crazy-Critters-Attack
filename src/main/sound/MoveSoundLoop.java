@@ -17,9 +17,9 @@ public class MoveSoundLoop {
         this.maxEnemyNum = maxEnemyNum;
     }
 
-    public void main() {
+    public void update() {
         loop.setTargetVolume((float) min(1, sqrt(count / maxEnemyNum)));
-        loop.main();
+        loop.update();
         count = 0;
     }
 

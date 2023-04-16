@@ -40,7 +40,7 @@ public class WaveMotion extends Turret {
         breakSound = sounds.get("titaniumBreak");
         damageSound = sounds.get("titaniumDamage");
         fireSound = stackableSounds.get("beam");
-        material = "darkMetal";
+        material = Material.darkMetal;
         basePrice = WAVE_MOTION_PRICE;
         priority = Priority.Far;
         titleLines = new String[]{"Death Beam"};
@@ -73,7 +73,7 @@ public class WaveMotion extends Turret {
     }
 
     @Override
-    public void displayMain() {
+    public void displayTop() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -156,7 +156,7 @@ public class WaveMotion extends Turret {
                     continue;
                 }
             }
-            enemy.damageWithoutBuff(damageAmount, this, "energy", new PVector(0,0), false);
+            enemy.damageWithoutBuff(damageAmount, this, Enemy.DamageType.energy, new PVector(0,0), false);
         }
     }
 

@@ -26,7 +26,7 @@ public class Arc {
     private final Enemy BLACKLISTED_ENEMY;
     public int alpha;
     protected Color lineColor;
-    protected String particleType;
+    protected Enemy.DamageType particleType;
     protected int maxPoints;
     protected int variation;
     protected int weight;
@@ -52,12 +52,11 @@ public class Arc {
         maxPoints = 10;
         weight = 1;
         lineColor = new Color(215, 242, 248);
-        particleType = "electricity";
+        particleType = Enemy.DamageType.electricity;
         BLACKLISTED_ENEMY = blacklistedEnemy;
     }
 
-    public void main() {
-        if (alpha == 255) zap(BLACKLISTED_ENEMY);
+    public void display() {
         P.stroke(lineColor.getRGB(), alpha);
         P.fill(255);
         P.strokeWeight(weight);
@@ -74,9 +73,15 @@ public class Arc {
             P.line(points[1].x, points[1].y, pointA.x, pointA.y);
         }
         P.strokeWeight(1);
-        if (!paused) alpha -= up60ToFramerate(8);
     }
 
+    public void update(int j) {
+        if (alpha == 255) zap(BLACKLISTED_ENEMY);
+        if (!paused) alpha -= up60ToFramerate(8);
+        if (alpha <= 0) arcs.remove(j);
+    }
+
+    /** Creates points that define effect, damages enemies **/
     private void zap(Enemy blacklistedEnemy) {
         BIG_POINTS.add(new StartEndPoints(P, START_POSITION));
         ArrayList<Enemy> hitEnemies = new ArrayList<>();
@@ -188,7 +193,7 @@ public class Arc {
                 e.x *= -1;
                 e.y *= -1;
                 points[i] = new PVector(e.x + pointA.x + P.random(-variation, variation), e.y + pointA.y + P.random(-variation, variation));
-                topParticles.add(new MiscParticle(P, points[i].x, points[i].y, P.random(360), particleType));
+                topParticles.add(new MiscParticle(P, points[i].x, points[i].y, P.random(360), particleType.name()));
             }
         }
     }

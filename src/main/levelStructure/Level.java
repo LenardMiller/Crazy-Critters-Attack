@@ -1,12 +1,10 @@
 package main.levelStructure;
 
-import main.misc.Loader;
 import main.misc.Polluter;
 import main.misc.Saver;
 import main.misc.Utilities;
 import processing.core.PApplet;
 import processing.core.PConstants;
-import processing.core.PShape;
 import processing.core.PVector;
 
 import java.awt.*;
@@ -39,7 +37,7 @@ public class Level {
         startWave = 0;
     }
 
-    public void main() {
+    public void update() {
         if (currentWave < waves.length) {
             Wave wave = waves[currentWave];
             if (wave.polluter != null) {
@@ -50,7 +48,7 @@ public class Level {
             if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
             else if (!paused && alive) {
                 wave.spawnEnemies();
-                if (polluter != null) polluter.main();
+                if (polluter != null) polluter.update();
             }
             if (wave.spawnLengthTimer > wave.SPAWN_LENGTH && enemies.size() == 0 && !paused && alive) {
                 wave.lengthTimer += wave.LENGTH / 500;

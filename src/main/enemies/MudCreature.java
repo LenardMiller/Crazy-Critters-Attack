@@ -19,7 +19,7 @@ public class MudCreature extends Enemy {
         damage = 40;
         maxHp = 15000; //Hp
         hp = maxHp;
-        hitParticle = "mudOuch";
+        hitParticle = HitParticle.mudOuch;
         name = "mudCreature";
         betweenWalkFrames = down60ToFramerate(6);
         betweenAttackFrames = down60ToFramerate(4);

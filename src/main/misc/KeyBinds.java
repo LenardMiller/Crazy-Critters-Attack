@@ -225,13 +225,13 @@ public class KeyBinds {
         } if (killProjectiles) projectiles = new ArrayList<>();
         if (killEnemies) {
             for (Enemy enemy : enemies) {
-                enemy.damageWithoutBuff(enemy.maxHp - 1, null, "none", new PVector(0,0), true);
-                enemy.damageWithoutBuff(1, null, "none", new PVector(0,0), true);
+                enemy.damageWithoutBuff(enemy.maxHp - 1, null, null, new PVector(0,0), true);
+                enemy.damageWithoutBuff(1, null, null, new PVector(0,0), true);
 
             }
         } if (overkillEnemies) {
             for (Enemy enemy : enemies) {
-                enemy.damageWithoutBuff(enemy.maxHp + 1, null, "none", new PVector(0,0), true);
+                enemy.damageWithoutBuff(enemy.maxHp + 1, null, null, new PVector(0,0), true);
             }
         }
         //other stuff

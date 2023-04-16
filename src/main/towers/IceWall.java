@@ -7,8 +7,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.WallSpecialVisuals.updateFlooring;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -28,7 +27,7 @@ public class IceWall extends Wall {
         hp = maxHp;
         TIME_UNTIL_DAMAGE = timeUntilDamage;
         sprite = animatedSprites.get("iceWallTW");
-        material = "ice";
+        material = Material.ice;
         damageSound = sounds.get("iceDamage");
         breakSound = sounds.get("iceBreak");
         basePrice = 0;
@@ -40,13 +39,13 @@ public class IceWall extends Wall {
     }
 
     @Override
-    public void placeEffect(boolean quiet) {
+    public void place(boolean quiet) {
         if (!quiet) spawnParticles();
         connectWallQueues++;
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) die(false);
         if (!paused && alive) {
             if (TIME_UNTIL_DAMAGE != -1) {
@@ -64,19 +63,19 @@ public class IceWall extends Wall {
                 int targetSize = ceil(enemy.pfSize / 2f);
                 if (enemy.intersectingIceCount >= targetSize) {
                     enemy.damageWithBuff(0, "frozen", 1, 0.2f, null,
-                      false, "frozen", new PVector(0, 0), i);
+                      false, Enemy.DamageType.frozen, new PVector(0, 0), i);
                 }
             }
         }
     }
 
     @Override
-    public void die(boolean sold) {
+    public void die(boolean isSold) {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         alive = false;
         tile.tower = null;
-        updateFlooring();
+        Tile.updateFlooring();
         updateTowerArray();
         updateCombatPoints();
     }

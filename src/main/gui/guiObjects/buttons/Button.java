@@ -23,8 +23,6 @@ public abstract class Button extends GuiObject {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(25, 25);
-        sprite = spriteIdle;
-        holdable = false;
         clickIn = sounds.get("clickIn");
         clickOut = sounds.get("clickOut");
     }
@@ -46,15 +44,13 @@ public abstract class Button extends GuiObject {
 
     public abstract void pressIn();
 
-    @Override
-    public void main(){
-        if (active){
-            hover();
-            display();
-        }
+    public void update() {
+        if (!active) return;
+        hover();
     }
 
-    public void display(){
+    public void display() {
+        if (!active) return;
         p.image(sprite,position.x-size.x/2,position.y-size.y/2);
     }
 }

@@ -19,14 +19,6 @@ public class SellTower extends Button {
     }
 
     @Override
-    public void main() {
-        if (active) {
-            hover();
-            display();
-        }
-    }
-
-    @Override
     public void pressIn() { //kills tower and gives value
         active = false;
         selection.sell();

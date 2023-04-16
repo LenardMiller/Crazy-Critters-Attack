@@ -18,8 +18,7 @@ import java.util.function.Consumer;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
-import static main.misc.WallSpecialVisuals.updateFlooring;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -124,7 +123,7 @@ public abstract class Turret extends Tower {
     }
 
     @Override
-    public void placeEffect(boolean quiet) {
+    public void place(boolean quiet) {
         loadSprites();
         setUpgrades();
         if (!quiet) {
@@ -272,7 +271,7 @@ public abstract class Turret extends Tower {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) {
             die(false);
             tile.tower = null;
@@ -286,7 +285,7 @@ public abstract class Turret extends Tower {
     }
 
     @Override
-    public void die(boolean sold) {
+    public void die(boolean isSold) {
         playSoundRandomSpeed(p, breakSound, 1);
         spawnParticles();
         tile.tower = null;
@@ -298,14 +297,14 @@ public abstract class Turret extends Tower {
         }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;
-        if (!sold) {
+        if (!isSold) {
             moneyGain = (int) (getValue() * 0.4);
-            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).setBreakable(material + "DebrisBr_TL");
+            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_TL");
         } else moneyGain = (int) (getValue() * 0.8);
         popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
         if (hasBoostedDeathEffect()) boostedDeathEffect();
-        updateFlooring();
+        Tile.updateFlooring();
         connectWallQueues++;
         updateCombatPoints();
     }
@@ -351,10 +350,10 @@ public abstract class Turret extends Tower {
                                 for (int i = 0; i < oldSize; i++) compressedLoadFrames.add(i);
                                 //compression
                                 compress = new CompressArray(oldSize, newSize, compressedLoadFrames);
-                                compress.main();
+                                compress.update();
                             } else { //increasing size
                                 compress = new CompressArray(oldSize - 1, newSize, compressedLoadFrames);
-                                compress.main();
+                                compress.update();
                                 compressedLoadFrames = compress.compArray;
                             }
                         }
@@ -378,10 +377,9 @@ public abstract class Turret extends Tower {
                 hit = false;
             }
         }
-        displayMain();
     }
 
-    protected void displayMain() {
+    public void displayTop() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);

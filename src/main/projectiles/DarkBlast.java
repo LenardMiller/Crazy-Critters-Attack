@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.enemies.Enemy;
 import main.particles.Vortex;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -21,7 +22,7 @@ public class DarkBlast extends Projectile {
         sprite = staticSprites.get("darkPj");
         hitSound = sounds.get("darkImpact");
         this.effectRadius = effectRadius;
-        type = "dark";
+        type = Enemy.DamageType.dark;
         trail = "dark";
     }
 

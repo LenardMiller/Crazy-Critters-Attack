@@ -19,7 +19,7 @@ public class GiantGolem extends Enemy {
         damage = 18;
         maxHp = 25000; //Hp
         hp = maxHp;
-        hitParticle = "lichenOuch";
+        hitParticle = HitParticle.lichenOuch;
         name = "giantGolem";
         attackDmgFrames = new int[]{28};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

@@ -18,7 +18,7 @@ public class Mantoid extends FlyingEnemy {
         damage = 10;
         maxHp = 30000;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "mantoid";
         attackDmgFrames = new int[]{12};
         betweenWalkFrames = 2;

@@ -19,7 +19,7 @@ import processing.data.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static processing.core.PApplet.loadJSONArray;
 import static processing.core.PApplet.loadJSONObject;
@@ -94,7 +94,7 @@ public class Loader {
                 wall.upgrade(0, true);
             }
             wall.hp = object.getInt("hp");
-            wall.placeEffect(true);
+            wall.place(true);
             wall.updateSprite();
 
             Main.towers.add(wall);
@@ -159,7 +159,7 @@ public class Loader {
                 turret.damageTotal = object.getInt("damageTotal");
             }
 
-            turret.placeEffect(true);
+            turret.place(true);
             tile.tower = turret;
             updateTowerArray();
         }

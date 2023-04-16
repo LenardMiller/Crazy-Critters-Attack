@@ -28,7 +28,7 @@ public class BlueBurning extends Buff {
         else {
             Enemy enemy = enemies.get(enId);
             enemy.showBar = true;
-            enemy.damageWithoutBuff((int) effectLevel, turret, "blueBurning", new PVector(0, 0), false);
+            enemy.damageWithoutBuff((int) effectLevel, turret, Enemy.DamageType.blueBurning, new PVector(0, 0), false);
         }
     }
 }

@@ -19,7 +19,7 @@ public class BigWorm extends BurrowingEnemy {
         damage = 15;
         maxHp = 5000; //Hp
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "bigWorm";
         attackDmgFrames = new int[]{29};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

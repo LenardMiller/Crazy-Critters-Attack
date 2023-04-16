@@ -39,7 +39,7 @@ public abstract class Projectile {
     protected PVector velocity;
     protected String trail;
     protected String buff;
-    protected String type;
+    protected Enemy.DamageType type;
     protected ArrayList<Enemy> hitEnemies;
     protected Turret turret;
     protected SoundFile hitSound;
@@ -68,8 +68,7 @@ public abstract class Projectile {
         effectDuration = 0;
     }
 
-    public void main() {
-        displayPassB();
+    public void update() {
         if (!paused) {
             trail();
             move();
@@ -91,7 +90,7 @@ public abstract class Projectile {
         }
     }
 
-    public void displayPassA() {
+    public void displayShadow() {
         if (!paused) angleTwo += radians(angularVelocity);
         p.pushMatrix();
         p.tint(0,60);
@@ -102,7 +101,7 @@ public abstract class Projectile {
         p.popMatrix();
     }
 
-    public void displayPassB() {
+    public void display() {
         if (!paused) angleTwo += radians(angularVelocity);
         p.pushMatrix();
         p.translate(position.x, position.y);

@@ -9,26 +9,24 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class Ripple extends Particle {
 
-    public Ripple(PApplet p, float x, float y, String type) {
+    public enum Type {
+        water(10),
+        dirtyWater(30),
+        sludge(90);
+
+        final int betweenFrames;
+
+        Type(int betweenFrames) {
+            this.betweenFrames = betweenFrames;
+        }
+    }
+
+    public Ripple(PApplet p, float x, float y, Type type) {
         super(p, x, y, 0);
         size = new PVector(12, 12);
-        int betweenFrames;
-        switch (type) {
-            case "water":
-                betweenFrames = 10;
-                break;
-            case "dirtyWater":
-                betweenFrames = 30;
-                break;
-            case "sludge":
-                betweenFrames = 90;
-                break;
-            default:
-                betweenFrames = 0;
-        }
         animation = new Animator(
                 animatedSprites.get(type + "PT"),
-                down60ToFramerate(betweenFrames),
+                down60ToFramerate(type.betweenFrames),
                 false);
     }
 }

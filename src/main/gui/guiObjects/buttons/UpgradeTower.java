@@ -29,35 +29,32 @@ public class UpgradeTower extends Button {
     }
 
     @Override
-    public void main() {
-        if (active) {
-            if (towers.size() > 0) {
-                Turret turret = selection.turret;
-                int thisNextLevel;
-                int thisMax;
-                int otherNextLevel;
-                int otherMax;
-                if (id == 0) {
-                    thisNextLevel = turret.nextLevelA;
-                    thisMax = turret.upgradeTitles.length / 2;
-                    otherNextLevel = turret.nextLevelB;
-                    otherMax = turret.upgradeTitles.length;
-                } else {
-                    thisNextLevel = turret.nextLevelB;
-                    thisMax = turret.upgradeTitles.length;
-                    otherNextLevel = turret.nextLevelA;
-                    otherMax = turret.upgradeTitles.length / 2;
-                }
-                greyed = false;
-                if (thisNextLevel == thisMax || (otherNextLevel == otherMax && thisNextLevel == thisMax-1)) {
-                    greyed = true;
-                    sprite = SPRITE_GREY;
-                }
-                else if (turret.upgradePrices[thisNextLevel] > money) sprite = SPRITE_RED;
-                else hover();
-                display();
-            } else active = false;
-        }
+    public void update() {
+        if (!active) return;
+        if (towers.size() > 0) {
+            Turret turret = selection.turret;
+            int thisNextLevel;
+            int thisMax;
+            int otherNextLevel;
+            int otherMax;
+            if (id == 0) {
+                thisNextLevel = turret.nextLevelA;
+                thisMax = turret.upgradeTitles.length / 2;
+                otherNextLevel = turret.nextLevelB;
+                otherMax = turret.upgradeTitles.length;
+            } else {
+                thisNextLevel = turret.nextLevelB;
+                thisMax = turret.upgradeTitles.length;
+                otherNextLevel = turret.nextLevelA;
+                otherMax = turret.upgradeTitles.length / 2;
+            }
+            greyed = false;
+            if (thisNextLevel == thisMax || (otherNextLevel == otherMax && thisNextLevel == thisMax - 1)) {
+                greyed = true;
+                sprite = SPRITE_GREY;
+            } else if (turret.upgradePrices[thisNextLevel] > money) sprite = SPRITE_RED;
+            else hover();
+        } else active = false;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class Frost extends FlyingEnemy {
         damage = 4;
         maxHp = 6500;
         hp = maxHp;
-        hitParticle = "iceOuch";
+        hitParticle = HitParticle.iceOuch;
         name = "frost";
         betweenAttackFrames = 8;
         dieSound = sounds.get("frostDie");
@@ -146,7 +146,7 @@ public class Frost extends FlyingEnemy {
 
     /** Displays a bunch of particles. */
     @Override
-    public void displayMain() {
+    public void display() {
         if (debug) for (int i = trail.size() - 1; i > 0; i--) {
             trail.get(i).display();
         }
@@ -179,7 +179,7 @@ public class Frost extends FlyingEnemy {
 
     /**
      * Display hp bar.
-     * @param particles whether or not to display hurt particles
+     * @param particles whether to display hurt particles
      */
     @Override
     protected void damageEffect(boolean particles) {
@@ -189,7 +189,7 @@ public class Frost extends FlyingEnemy {
             int num = (int) p.random(pfSize, pfSize * pfSize);
             for (int j = num; j >= 0; j--) { //sprays ouch
                 topParticles.add(new Ouch(p, position.x + p.random((size.x / 2) * -1, size.x / 2),
-                  position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle));
+                  position.y + p.random((size.y / 2) * -1, size.y / 2), p.random(0, 360), hitParticle.name()));
             }
             hitTimer = 0;
         }

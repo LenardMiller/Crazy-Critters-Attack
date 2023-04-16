@@ -1,6 +1,5 @@
 package main.gui.notInGame;
 
-import main.Main;
 import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
@@ -36,9 +35,15 @@ public class TitleGui {
         });
     }
 
-    public void main() {
-        playButton.main();
-        exitButton.main();
-        settingsButton.main();
+    public void display() {
+        playButton.display();
+        exitButton.display();
+        settingsButton.display();
+    }
+
+    public void update() {
+        playButton.update();
+        exitButton.update();
+        settingsButton.update();
     }
 }

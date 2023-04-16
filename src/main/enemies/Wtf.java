@@ -19,7 +19,7 @@ public class Wtf extends Enemy {
         damage = 40;
         maxHp = 120000;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "wtf";
         betweenWalkFrames = down60ToFramerate(20);
         attackDmgFrames = new int[]{11};

@@ -16,16 +16,22 @@ import java.awt.*;
 import static main.Main.*;
 import static main.gui.inGame.TowerInfo.displayTurretInfo;
 import static main.misc.Utilities.*;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.*;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSound;
 
 public class Hand {
 
+    enum DisplayInfo {
+        UpgradeWall,
+        MaxWallUpgrade,
+        PlaceWall
+    }
+
     public final float MIN_ENEMY_DISTANCE;
 
     public String held;
-    public String displayInfo;
+    public DisplayInfo displayInfo;
     public int price;
 
     private final PApplet P;
@@ -42,12 +48,11 @@ public class Hand {
         offset = new PVector(0, 0);
         price = 0;
         implacable = false;
-        displayInfo = "null";
 
         MIN_ENEMY_DISTANCE = 50;
     }
 
-    public void main() {
+    public void update() {
         if (setHeldNullTimer == 0) {
             setHeldNullTimer = -1;
             setHeld("null");
@@ -63,7 +68,7 @@ public class Hand {
             if (inputHandler.rightMousePressedPulse) remove();
             if ((clickOnSidebar() || rclickNotWall())) clearHand();
             if (inputHandler.leftMousePressedPulse) tryPlace();
-        } displayHeld();
+        }
     }
 
     private void tryPlace() {
@@ -128,7 +133,7 @@ public class Hand {
             } else return true;
         }
         if (enemyNearby()) return true;
-        if (tileObstacle.obstacle != null || tileObstacle.machine) return true;
+        if (tileObstacle.obstacleLayer.exists() || tileObstacle.machine) return true;
         return price > money;
     }
 
@@ -160,43 +165,51 @@ public class Hand {
                 if (upgradable(tile)) {
                     heldSprite = staticSprites.get("upgradeTW");
                     if (money < tile.tower.upgradePrices[tile.tower.nextLevelB]) implacable = true;
-                    displayInfo = "upgradeWall";
+                    displayInfo = DisplayInfo.UpgradeWall;
                 } else {
                     heldSprite = staticSprites.get("placeTW"); //reset wall sprite
                     implacable = true;
-                    displayInfo = "maxWallUpgrade";
+                    displayInfo = DisplayInfo.MaxWallUpgrade;
                 }
             } else {
                 heldSprite = staticSprites.get("placeTW"); //reset wall sprite
-                displayInfo = "placeWall";
+                displayInfo = DisplayInfo.PlaceWall;
             }
         } else {
             setHeld(held); //reset sprite
-            displayInfo = "null";
+            displayInfo = null;
         }
     }
 
     private boolean upgradable(Tile tile) {
-        return tile.tower.nextLevelB < tile.tower.upgradeIcons.length &&
-                tile.tower.nextLevelB < currentLevel;
+        return tile.tower.nextLevelB < tile.tower.upgradeIcons.length && tile.tower.nextLevelB < currentLevel;
     }
 
     /** Shows what's held at reduced opacity */
-    private void displayHeld() {
-        if (!held.equals("null") && heldSprite != null && alive) {
-            //red if implacable
-            if (implacable) P.tint(255, 0, 0, 150);
-            else P.tint(255, 150);
-            P.image(heldSprite, (roundTo(matrixMousePosition.x, 50)) - (25f / 2) - offset.x + 13, roundTo(matrixMousePosition.y, 50) - (25f / 2) - offset.y + 13);
-            P.tint(255);
-        }
+    public void displayHeld() {
+        if (held.equals("null") || heldSprite == null || !alive) return;
+        //red if implacable
+        if (implacable) P.tint(255, 0, 0, 150);
+        else P.tint(255, 150);
+        P.image(heldSprite, (roundTo(matrixMousePosition.x, 50)) - (25f / 2) - offset.x + 13, roundTo(matrixMousePosition.y, 50) - (25f / 2) - offset.y + 13);
+        P.tint(255);
     }
 
     public void displayHeldInfo() {
-        if (displayInfo.equals("placeWall")) placeWallInfo();
-        if (displayInfo.equals("upgradeWall")) upgradeWallInfo();
-        if (displayInfo.equals("maxWallUpgrade")) maxWallUpgradeInfo();
-        if (!displayInfo.equals("null")) universalWallInfo();
+        if (displayInfo != null) {
+            switch (displayInfo) {
+                case PlaceWall:
+                    placeWallInfo();
+                    break;
+                case UpgradeWall:
+                    upgradeWallInfo();
+                    break;
+                case MaxWallUpgrade:
+                    maxWallUpgradeInfo();
+                    break;
+            }
+            universalWallInfo();
+        }
         if (!held.equals("null") && !held.equals("wall") && !held.endsWith("TL")) displayTurretInfo(P, held);
     }
 
@@ -226,53 +239,61 @@ public class Hand {
 
     private void upgradeWallInfo() {
         Wall wall = getWall();
-        if (wall == null) return;
-        if (wall.nextLevelB > wall.upgradeTitles.length - 1) displayInfo = "maxWallUpgrade";
+        if (wall == null) {
+            placeWallInfo();
+            return;
+        }
+        if (wall.nextLevelB > wall.upgradeTitles.length - 1) {
+            displayInfo = DisplayInfo.MaxWallUpgrade;
+            maxWallUpgradeInfo();
+            return;
+        }
+        P.fill(235, 254);
+        P.noStroke();
+        P.rect(900, 212, 200, 707);
+        P.textAlign(CENTER);
+        //tower info
+        P.fill(231, 232, 190, 254);
+        P.rect(905, 247, 190, 119);
+        P.textFont(mediumLargeFont);
+        P.fill(0, 254);
+        P.text("Selected:", 1000, 241);
+        P.textFont(largeFont);
+        if (wall.nextLevelB > 0) {
+            P.text(wall.upgradeTitles[wall.nextLevelB - 1], 1000, 276); //if not base level
+        } else P.text("Wooden", 1000, 276);
+        P.text("Wall", 1000, 301);
+        P.textFont(mediumFont);
+        if (wall.hp > wall.maxHp) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
+        P.text(wall.hp + " hp", 1000, 331);
+        P.fill(0, 254);
+        P.text("Sell for: $" + (int) (0.8f * (float) wall.getValue()), 1000, 356);
+        //upgrade info
+        boolean canAfford = money >= wall.upgradePrices[wall.nextLevelB];
+        if (canAfford) P.fill(195, 232, 188, 254);
+        else P.fill(230, 181, 181, 254);
+        P.rect(905, 401, 190, 119);
+        P.textFont(mediumLargeFont);
+        P.fill(0, 254);
+        P.text("Upgrade:", 1000, 395);
+        P.textFont(largeFont);
+        P.text(wall.upgradeTitles[wall.nextLevelB], 1000, 430);
+        P.text("Wall", 1000, 455);
+        P.textFont(mediumFont);
+        P.text("+" + wall.UPGRADE_HP[wall.nextLevelB] + " HP", 1000, 485);
+        if (canAfford) P.text("$" + wall.upgradePrices[wall.nextLevelB], 1000, 510);
         else {
-            P.fill(235, 254);
-            P.noStroke();
-            P.rect(900, 212, 200, 707);
-            P.textAlign(CENTER);
-            //tower info
-            P.fill(231, 232, 190, 254);
-            P.rect(905, 247, 190, 119);
-            P.textFont(mediumLargeFont);
-            P.fill(0, 254);
-            P.text("Selected:", 1000, 241);
-            P.textFont(largeFont);
-            if (wall.nextLevelB > 0) {
-                P.text(wall.upgradeTitles[wall.nextLevelB - 1], 1000, 276); //if not base level
-            } else P.text("Wooden", 1000, 276);
-            P.text("Wall", 1000, 301);
-            P.textFont(mediumFont);
-            if (wall.hp > wall.maxHp) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
-            P.text(wall.hp + " hp", 1000, 331);
-            P.fill(0, 254);
-            P.text("Sell for: $" + (int) (0.8f * (float) wall.getValue()), 1000, 356);
-            //upgrade info
-            boolean canAfford = money >= wall.upgradePrices[wall.nextLevelB];
-            if (canAfford) P.fill(195, 232, 188, 254);
-            else P.fill(230, 181, 181, 254);
-            P.rect(905, 401, 190, 119);
-            P.textFont(mediumLargeFont);
-            P.fill(0, 254);
-            P.text("Upgrade:", 1000, 395);
-            P.textFont(largeFont);
-            P.text(wall.upgradeTitles[wall.nextLevelB], 1000, 430);
-            P.text("Wall", 1000, 455);
-            P.textFont(mediumFont);
-            P.text("+" + wall.UPGRADE_HP[wall.nextLevelB] + " HP", 1000, 485);
-            if (canAfford) P.text("$" + wall.upgradePrices[wall.nextLevelB], 1000, 510);
-            else {
-                strikethroughText(P, "$" + wall.upgradePrices[wall.nextLevelB], new PVector(1000, 510),
-                  new Color(150, 0, 0, 254), mediumFont.getSize(), CENTER);
-            }
+            strikethroughText(P, "$" + wall.upgradePrices[wall.nextLevelB], new PVector(1000, 510),
+              new Color(150, 0, 0, 254), mediumFont.getSize(), CENTER);
         }
     }
 
     private void maxWallUpgradeInfo() {
         Wall wall = getWall();
-        if (wall == null) return;
+        if (wall == null) {
+            placeWallInfo();
+            return;
+        }
         P.fill(235);
         P.noStroke();
         P.rect(900, 212, 200, 707);
@@ -435,34 +456,35 @@ public class Hand {
                 money += price; //cancel out price change later
             } else tile.tower = new Wall(P, tile);
             changeHeld = false;
-            tile.tower.placeEffect(false);
+            tile.tower.place(false);
         } else {
 //            System.out.println(held.substring(0,1).toUpperCase() + held.substring(1));
             tile.tower = Turret.get(P, held.substring(0,1).toUpperCase() + held.substring(1), tile);
             if (tile.tower != null) {
-                tile.tower.placeEffect(false);
+                tile.tower.place(false);
             }
         }
         if (held.contains("TL")) {
             tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
             changeHeld = false;
             String shortName = held.replace("_TL", "");
-            if (shortName.contains("Ba")) tile.setBase(held);
-            else if (shortName.endsWith("De")) tile.setDecoration(held);
-            else if (shortName.endsWith("Fl")) tile.setFlooring(held);
-            else if (shortName.endsWith("Br")) tile.setBreakable(held);
-            else if (shortName.endsWith("Ob")) tile.setObstacle(held);
+            if (shortName.contains("Ba")) tile.baseLayer.set(held);
+            else if (shortName.endsWith("De")) tile.decorationLayer.set(held);
+            else if (shortName.endsWith("Fl")) tile.flooringLayer.set(held);
+            else if (shortName.endsWith("Br")) tile.breakableLayer.set(held);
+            else if (shortName.endsWith("Ob")) tile.obstacleLayer.set(held);
             else if (shortName.endsWith("Ma")) {
                 tile.machine = !tile.machine;
                 machine.updateNodes();
             } else if (held.contains("Na")) {
-                tile.setDecoration(null);
-                tile.setBreakable(null);
-                tile.setObstacle(null);
+                tile.decorationLayer.set(null);
+                tile.breakableLayer.set(null);
+                tile.obstacleLayer.set(null);
             } connectWallQueues++;
         }
         if (!held.equals("null")) money -= price;
         if (changeHeld) setHeldNullTimer = 1;
+        checkDisplay();
         updateCombatPoints();
         updateTowerArray();
     }

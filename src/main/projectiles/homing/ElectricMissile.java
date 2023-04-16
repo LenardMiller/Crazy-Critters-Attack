@@ -1,5 +1,6 @@
 package main.projectiles.homing;
 
+import main.enemies.Enemy;
 import main.projectiles.arcs.YellowArc;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
@@ -14,7 +15,7 @@ public class ElectricMissile extends MagicMissile {
                            PVector spawnPos, float effectDuration, float effectLevel) {
         super(p, x, y, angle, turret, damage, priority, spawnPos);
         trail = "nuclear";
-        type = "nuclear";
+        type = Enemy.DamageType.nuclear;
         buff = "electrified";
         sprite = staticSprites.get("electricMissilePj");
         this.effectDuration = effectDuration;

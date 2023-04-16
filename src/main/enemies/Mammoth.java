@@ -17,7 +17,7 @@ public class Mammoth extends Enemy {
         damage = 50;
         maxHp = 200000;
         moneyDrop = 2500;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "mammoth";
         attackDmgFrames = new int[]{9};
         betweenWalkFrames = 5;

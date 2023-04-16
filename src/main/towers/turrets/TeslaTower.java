@@ -33,7 +33,7 @@ public class TeslaTower extends Turret {
         pjSpeed = -1;
         range = 225;
         betweenIdleFrames = down60ToFramerate(3);
-        material = "metal";
+        material = Material.metal;
         basePrice = TESLA_TOWER_PRICE;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
@@ -89,7 +89,7 @@ public class TeslaTower extends Turret {
     }
 
     @Override
-    public void displayMain() {
+    public void displayTop() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -176,7 +176,7 @@ public class TeslaTower extends Turret {
                     damage += 1600;
                     delay += 2;
                     lightning = true;
-                    material = "crystal";
+                    material = Material.crystal;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -204,7 +204,7 @@ public class TeslaTower extends Turret {
                     highPower = true;
                     betweenIdleFrames = 3;
                     name = "highPowerTesla";
-                    material = "darkMetal";
+                    material = Material.darkMetal;
                     titleLines = new String[]{"The Demon", "Circuit"};
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Jumping Electricity", o);

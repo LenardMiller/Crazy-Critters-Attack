@@ -42,7 +42,7 @@ public class Glued extends Buff {
 
             //run expansion algorithm
             compress = new CompressArray(oldSize - 1, newSize, expandedInts);
-            compress.main();
+            compress.update();
             expandedInts = compress.compArray;
 
             //create expanded image array
@@ -69,7 +69,7 @@ public class Glued extends Buff {
     }
 
     @Override
-    protected void update(int i) { //ends if at end of lifespan
+    protected void updateTimer(int i) { //ends if at end of lifespan
         if (!paused) lifeTimer++;
         if (lifeTimer > lifeDuration) {
             reset();

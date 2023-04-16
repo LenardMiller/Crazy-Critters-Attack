@@ -6,6 +6,7 @@ import main.particles.LargeExplosion;
 import main.particles.MediumExplosion;
 import main.particles.Ouch;
 import main.sound.StartStopSoundLoop;
+import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -26,7 +27,7 @@ public class Machine {
     public int maxHp;
     public PVector position;
     public String name;
-    public String debris;
+    public Tower.Material material;
     public int betweenFrames;
     private boolean hit;
     private int tintColor;
@@ -54,7 +55,7 @@ public class Machine {
         this.maxHp = maxHp;
         this.position = position;
         this.name = name;
-        this.debris = debris;
+        this.material = Tower.Material.valueOf(debris);
         this.betweenFrames = betweenFrames;
         DAMAGE_SOUND = sounds.get(debris + "Damage");
         BREAK_SOUND = sounds.get(debris + "Break");
@@ -82,9 +83,8 @@ public class Machine {
         }
     }
 
-    public void main() {
+    public void update() {
         if (hp <= 0 && !dead) die();
-        display();
     }
 
     public void display() {
@@ -158,7 +158,7 @@ public class Machine {
                 int x = (int) tile.position.x;
                 int y = (int) tile.position.y;
                 if (up60ToFramerate(p.random(0, 3)) == 0)
-                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), material.name()));
                 if (up60ToFramerate(p.random(0, 6)) == 0) {
                     if ((int) p.random(0, 5) == 0) {
                         playSoundRandomSpeed(p, EXPLODE_SOUND, 1);
@@ -175,13 +175,13 @@ public class Machine {
                 if (up60ToFramerate((int) p.random(0, 2)) == 0)
                     topParticles.add(new MediumExplosion(p, shuffle(x), shuffle(y), p.random(0, 360), "fire"));
                 for (int i = 0; i < up60ToFramerate(3); i++) {
-                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                    topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), material.name()));
                 } if (up60ToFramerate(p.random(0, 8)) == 0) {
                     projectiles.add(new Flame(p, shuffle(x), shuffle(y), p.random(0, 360), null, maxHp * 10, maxHp, 1000, (int) p.random(50, 200), true));
                 }
             }
         }
-        if (deathFrame == secondsToFrames(4)) for (Tile tile : machTiles) tile.setBreakable(debris + "DebrisBr_TL");
+        if (deathFrame == secondsToFrames(4)) for (Tile tile : machTiles) tile.breakableLayer.set(material + "DebrisBr_TL");
     }
 
     public void damage(int dmg) {
@@ -197,7 +197,7 @@ public class Machine {
             int x = (int) tile.position.x;
             int y = (int) tile.position.y;
             for (int i = 0; i < 5; i++) {
-                topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), debris));
+                topParticles.add(new Debris(p, shuffle(x), shuffle(y), p.random(0, 360), material.name()));
             }
             if ((int) p.random(0, 2 * ((float) hp / (float) hpSegment)) == 0) {
                 playSoundRandomSpeed(p, EXPLODE_SOUND, 1);

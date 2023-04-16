@@ -35,13 +35,8 @@ public class Selection {
         CLICK_OUT = sounds.get("clickOut");
     }
 
-    public void main() {
+    public void update() {
         clickOff();
-        //don't display if nothing held
-        if (!name.equals("null") && turret != null) {
-            //keyBinds.selectionKeys();
-            display();
-        }
     }
 
     /**
@@ -160,7 +155,11 @@ public class Selection {
         P.noStroke();
     }
 
-    private void display() {
+    public void display() {
+        if (name.equals("null") || turret == null) {
+            return;
+        }
+
         int speed = turret.pjSpeed;
         int offset;
         purpleCount = 0;

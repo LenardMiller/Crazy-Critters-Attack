@@ -31,8 +31,8 @@ public class SettingsGui {
 
     public SettingsGui(PApplet p) {
         P = p;
-        fullscreenWas = fullscreen;
-        rendererWas = useOpenGL;
+        fullscreenWas = isFullscreen;
+        rendererWas = isOpenGL;
         build();
     }
 
@@ -46,9 +46,9 @@ public class SettingsGui {
 
         resetSettings = new MenuButton(P, P.width/2f, P.height - buffer - 50, "Reset to Defaults", () -> {
             globalVolume = 0.25f;
-            fullscreen = true;
-            useOpenGL = false;
-            gore = true;
+            isFullscreen = true;
+            isOpenGL = false;
+            isGore = true;
         });
         returnButton = new MenuButton(P, P.width/2f, P.height - buffer, "Return [ESC]", () -> {
             if (settings) closeSettingsMenu();
@@ -56,34 +56,42 @@ public class SettingsGui {
         });
     }
 
-    public void main() {
+    public void update() {
         if (delay < 0) {
-            display();
             checkInputs();
+            returnButton.update();
+            resetSettings.update();
         }
         delay--;
     }
 
     private void checkInputs() {
-        globalVolume = volumeSlider.main(globalVolume);
-        fullscreen = fullscreenCheck.main(fullscreen);
-        useOpenGL = rendererCheck.main(useOpenGL);
-        gore = goreCheck.main(gore);
+        globalVolume = volumeSlider.update(globalVolume);
+        isFullscreen = fullscreenCheck.update(isFullscreen);
+        isOpenGL = rendererCheck.update(isOpenGL);
+        isGore = goreCheck.update(isGore);
     }
 
-    private void display() { //todo: keybinds page
+    public void display() { //todo: keybinds page
+        if (delay >= 0) return;
         PVector position = new PVector(P.width / 2f, buffer);
         shadowedText(P, "Settings", position, new Color(255, 255, 255, 254),
           new Color(50, 50, 50, 254), 48, CENTER);
 
         //buttons
         int offsetY = 7;
-        if (fullscreenWas != fullscreen || rendererWas != useOpenGL) highlightedText(P, "Restart required",
+        if (fullscreenWas != isFullscreen || rendererWas != isOpenGL) highlightedText(P, "Restart required",
           new PVector(P.width / 2f, P.height - 250 + offsetY), new Color(255, 0, 0, 254),
           new Color(50, 0, 0, 200), largeFont.getSize(), CENTER);
         P.textFont(mediumFont);
         P.fill(200, 254);
-        returnButton.main();
-        resetSettings.main();
+        returnButton.display();
+        resetSettings.display();
+
+        //other inputs
+        volumeSlider.display();
+        fullscreenCheck.display(isFullscreen);
+        rendererCheck.display(isOpenGL);
+        goreCheck.display(isGore);
     }
 }

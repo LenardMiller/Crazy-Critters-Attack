@@ -90,10 +90,10 @@ public class Main extends PApplet {
     public static float matrixScale, matrixOffset;
     /** initialized to false */
     public static boolean
-            won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, fullscreen, useOpenGL, gore, hasVerticalBars;
+            won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, isFullscreen, isOpenGL, isGore, hasVerticalBars;
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
-    public static boolean dev = true;
+    public static boolean dev = false;
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;
@@ -168,9 +168,9 @@ public class Main extends PApplet {
      */
     @Override
     public void settings() {
-        if (useOpenGL) size(GRID_WIDTH, BOARD_HEIGHT, P2D);
+        if (isOpenGL) size(GRID_WIDTH, BOARD_HEIGHT, P2D);
         else size(GRID_WIDTH, BOARD_HEIGHT);
-        if (fullscreen) {
+        if (isFullscreen) {
             fullScreen();
             noSmooth();
         }
@@ -211,17 +211,16 @@ public class Main extends PApplet {
 
     /**
      * From Processing.
-     * Everything else, run every frame.
+     * Main loop
      */
     @Override
     public void draw() {
-        if (showSpawn) {
-            scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
-            float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
-            translate(buffer, buffer);
-        }
-        background(50);
-        tint(255);
+        update();
+        display();
+    }
+
+    /** Main update loop **/
+    private void update() {
         if (hasVerticalBars) {
             matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
         } else {
@@ -230,19 +229,19 @@ public class Main extends PApplet {
         //screens
         switch (screen) {
             case InGame:
-                game.draw();
+                game.update();
                 break;
             case LevelSelect:
-                if (!settings) levelSelectGui.main();
+                if (!settings) levelSelectGui.update();
                 break;
             case Loading:
-                loadingGui.main();
+                loadingGui.update();
                 break;
             case Title:
-                if (!settings) titleGui.main();
+                if (!settings) titleGui.update();
                 break;
 
-                // immediate action branches
+            // immediate action branches
             case Exit:
                 exit();
                 break;
@@ -263,9 +262,79 @@ public class Main extends PApplet {
                 }
                 break;
         }
-        if (settings) settingsGui.main();
+        if (settings) settingsGui.update();
+        updateTransition();
+
+        updateInput();
+        updateSound();
+    }
+
+    /** Updates volume and sound loops **/
+    private void updateSound() {
+        sound.volume(globalVolume);
+        for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
+        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.update();
+        for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.update();
+    }
+
+    /** Updates menu keys input and resets mouse pulses **/
+    private void updateInput() {
         keyBinds.menuKeys();
-        drawTransition();
+
+        //reset mouse pulses
+        inputHandler.rightMouseReleasedPulse = false;
+        inputHandler.leftMouseReleasedPulse = false;
+        inputHandler.rightMousePressedPulse = false;
+        inputHandler.leftMousePressedPulse = false;
+        for (KeyDS.KeyDSItem key : keysPressed.items) {
+            key.pressedPulse = false;
+            key.releasedPulse = false;
+        }
+    }
+
+    /** Updates the screen transition animation **/
+    private void updateTransition() {
+        if (titleGui == null) return;
+
+        transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
+
+        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
+                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
+                && targetScreen != screen) {
+            if (targetScreen == Screen.InGame || screen == Screen.InGame) {
+                Game.reset(this);
+                paused = false;
+            }
+            screen = targetScreen;
+        }
+    }
+
+    /** Main display loop **/
+    private void display() {
+        if (showSpawn) {
+            scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
+            float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
+            translate(buffer, buffer);
+        }
+        background(50);
+        tint(255);
+        //screens
+        switch (screen) {
+            case InGame:
+                game.display();
+                break;
+            case LevelSelect:
+                if (!settings) levelSelectGui.display();
+                break;
+            case Loading:
+                loadingGui.display();
+                break;
+            case Title:
+                if (!settings) titleGui.display();
+                break;
+        }
+        if (settings) settingsGui.display();
+        displayTransition();
         //black bars
         if (!showSpawn) {
             fill(0);
@@ -278,33 +347,10 @@ public class Main extends PApplet {
                 rect(0, height - matrixOffset, width, matrixOffset);
             }
         }
-        //sound stuff
-        sound.volume(globalVolume);
-        for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
-        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
-        for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.main();
-        //reset mouse pulses
-        inputHandler.rightMouseReleasedPulse = false;
-        inputHandler.leftMouseReleasedPulse = false;
-        inputHandler.rightMousePressedPulse = false;
-        inputHandler.leftMousePressedPulse = false;
-        for (KeyDS.KeyDSItem key : keysPressed.items) {
-            key.pressedPulse = false;
-            key.releasedPulse = false;
-        }
     }
 
-    public static void transition(Screen screen, PVector direction) {
-        if (targetScreen == screen) return;
-        direction.add(PVector.fromAngle(random.nextFloat() * TWO_PI).setMag(0.2f));
-        transCenter = PVector.add(
-                direction.copy().setMag(TRANS_SIZE * -2),
-                new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f));
-        transRotation = PVector.sub(new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f), transCenter).normalize();
-        targetScreen = screen;
-    }
-
-    private void drawTransition() {
+    /** Displays the screen transition animation **/
+    private void displayTransition() {
         if (titleGui == null) return;
 
         PVector edge = PVector.add(transCenter, transRotation.copy().setMag(TRANS_SIZE));
@@ -324,18 +370,21 @@ public class Main extends PApplet {
         transBox.endShape(PConstants.CLOSE);
 
         shape(transBox, 0, 0);
+    }
 
-        transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
-
-        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
-                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
-                && targetScreen != screen) {
-            if (targetScreen == Screen.InGame || screen == Screen.InGame) {
-                Game.reset(this);
-                paused = false;
-            }
-            screen = targetScreen;
-        }
+    /**
+     * Transitions from one screen to another with a little sweeping animation.
+     * @param screen screen to transition to
+     * @param direction direction to sweep towards
+     */
+    public static void transition(Screen screen, PVector direction) {
+        if (targetScreen == screen) return;
+        direction.add(PVector.fromAngle(random.nextFloat() * TWO_PI).setMag(0.2f));
+        transCenter = PVector.add(
+                direction.copy().setMag(TRANS_SIZE * -2),
+                new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f));
+        transRotation = PVector.sub(new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f), transCenter).normalize();
+        targetScreen = screen;
     }
 
     /**

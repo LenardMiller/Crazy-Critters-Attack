@@ -19,14 +19,6 @@ public class TargetPriority extends Button {
     }
 
     @Override
-    public void main() {
-        if (active) {
-            hover();
-            display();
-        }
-    }
-
-    @Override
     public void pressIn() {
         selection.changePriority();
     }

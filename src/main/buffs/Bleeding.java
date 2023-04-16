@@ -27,21 +27,21 @@ public class Bleeding extends Buff {
     public void effect() { //small damage fast
         Enemy enemy = enemies.get(enId);
         enemy.showBar = true;
-        enemy.damageWithoutBuff(15, turret, "none", new PVector(0,0), false);
+        enemy.damageWithoutBuff(15, turret, null, new PVector(0,0), false);
     }
 
     @Override
-    protected void display() { //particles around enemy
-        if (!gore) return;
+    protected void spawnParticles() { //particles around enemy
+        if (!isGore) return;
 
         Enemy enemy = enemies.get(enId);
 
         if (p.random(particleChance) < 1) {
             PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
-            topParticles.add(new Ouch(p, pos.x, pos.y, p.random(360), enemy.hitParticle));
+            topParticles.add(new Ouch(p, pos.x, pos.y, p.random(360), enemy.hitParticle.name()));
         } if (p.random(particleChance * 4) < 1) {
             PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.2f);
-            bottomParticles.add(new Pile(p, pos.x, pos.y, 0, enemy.hitParticle));
+            bottomParticles.add(new Pile(p, pos.x, pos.y, 0, enemy.hitParticle.name()));
         }
     }
 }

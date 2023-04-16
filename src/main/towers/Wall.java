@@ -5,11 +5,9 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import java.util.Arrays;
-
 import static main.Main.*;
-import static main.misc.WallSpecialVisuals.updateFlooring;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateFlooring;
+import static main.misc.Tile.updateTowerArray;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Wall extends Tower {
@@ -47,7 +45,7 @@ public class Wall extends Tower {
         hp = maxHp;
         hit = false;
         sprite = animatedSprites.get("woodWallTW");
-        material = "wood";
+        material = Material.wood;
         damageSound = sounds.get(material + "Damage");
         breakSound = sounds.get(material + "Break");
         placeSound = sounds.get(material + "PlaceShort");
@@ -72,20 +70,20 @@ public class Wall extends Tower {
     }
 
     @Override
-    public void placeEffect(boolean quiet) {
+    public void place(boolean quiet) {
         if (!quiet) {
             playSoundRandomSpeed(p, placeSound, 1);
             spawnParticles();
         }
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setFlooring(name);
+        tiles.get(x-1,y-1).flooringLayer.set(name);
         updateFlooring();
         connectWallQueues++;
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) die(false);
         updateBoosts();
     }
@@ -188,7 +186,7 @@ public class Wall extends Tower {
         int oldMax = maxHp;
         maxHp += UPGRADE_HP[nextLevelB];
         name = UPGRADE_NAMES[nextLevelB] + "Wall";
-        material = UPGRADE_NAMES[nextLevelB];
+        material = Material.valueOf(UPGRADE_NAMES[nextLevelB]);
         hp = (int)(hp/(float)oldMax * maxHp);
 
         damageSound = sounds.get(material + "Damage");
@@ -205,7 +203,7 @@ public class Wall extends Tower {
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
-        tiles.get(x-1,y-1).setFlooring(name);
+        tiles.get(x-1,y-1).flooringLayer.set(name);
         updateFlooring();
     }
 

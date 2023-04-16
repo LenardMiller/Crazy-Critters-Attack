@@ -28,12 +28,7 @@ public class LoadingGui {
         FONT = font;
     }
 
-    public void main() {
-        update();
-        display();
-    }
-
-    private void update() {
+    public void update() {
         switch (progress) {
             case 0:
                 Main.largeFont       = P.createFont("STHeitiSC-Light", 24, true);
@@ -85,7 +80,7 @@ public class LoadingGui {
         if (progress == MAX_PROGRESS) transition(Main.Screen.Title, new PVector(0, -1));
     }
 
-    private void display() {
+    public void display() {
         P.fill(255);
         P.textFont(FONT);
         P.textAlign(PConstants.CENTER);

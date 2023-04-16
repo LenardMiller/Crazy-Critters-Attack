@@ -28,7 +28,7 @@ public class Burning extends Buff {
         else {
             Enemy enemy = enemies.get(enId);
             enemy.showBar = true;
-            enemy.damageWithoutBuff((int) effectLevel, turret, "fire", new PVector(0, 0), false);
+            enemy.damageWithoutBuff((int) effectLevel, turret, Enemy.DamageType.burning, new PVector(0, 0), false);
         }
     }
 }

@@ -58,7 +58,7 @@ public class MenuSlider {
      * @param input what value to change
      * @return new value
      */
-    public float main(float input) {
+    public float update(float input) {
         //braces have to be here, dunno why
         if (input == DEFAULT) {
             progress = MAX_PROGRESS / 2;
@@ -68,8 +68,6 @@ public class MenuSlider {
             progress = (int) PApplet.map(input, DEFAULT, MAX_OUTPUT, MAX_PROGRESS / 2f, MAX_PROGRESS);
         }
 
-        displaySlider();
-        displayText();
         hover();
 
         if (held) {
@@ -77,6 +75,11 @@ public class MenuSlider {
             if (progress < MAX_PROGRESS / 2) return PApplet.map(progress, 0, MAX_PROGRESS / 2f, MIN_OUTPUT, DEFAULT);
             return PApplet.map(progress, MAX_PROGRESS / 2f, MAX_PROGRESS, DEFAULT, MAX_OUTPUT);
         } return input;
+    }
+
+    public void display() {
+        displaySlider();
+        displayText();
     }
 
     private void hover() {

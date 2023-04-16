@@ -1,5 +1,6 @@
 package main.projectiles.arcs;
 
+import main.enemies.Enemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 
@@ -11,7 +12,7 @@ public class OrangeArc extends Arc {
                   Turret.Priority priority, int maxPoints) {
         super(p, startX, startY, turret, damage, maxLength, maxDistance, priority);
         lineColor = new Color(255, 117, 0);
-        particleType = "orangeMagic";
+        particleType = Enemy.DamageType.orangeMagic;
         this.maxPoints = maxPoints;
         variation = 15;
         weight = 3;

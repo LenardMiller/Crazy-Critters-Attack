@@ -1,7 +1,6 @@
 package main.projectiles.shockwaves;
 
 import main.enemies.Enemy;
-import main.enemies.flyingEnemies.FlyingEnemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -30,7 +29,7 @@ public abstract class Shockwave {
     protected float effectDuration;
     protected float effectLevel;
     protected String buff;
-    protected String damageType;
+    protected Enemy.DamageType damageType;
 
     public Shockwave(PApplet p, float centerX, float centerY, int startingRadius, int maxRadius, float angle,
                      float width, int damage, Turret turret) {
@@ -49,7 +48,7 @@ public abstract class Shockwave {
         radius = startingRadius;
     }
 
-    public void main() {
+    public void update() {
         if (!paused) {
             radius += SPEED/FRAMERATE;
             spawnParticles();

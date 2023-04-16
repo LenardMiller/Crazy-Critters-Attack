@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.enemies.Enemy;
 import main.misc.Tile;
 import main.particles.RailgunBlast;
 import processing.core.PApplet;
@@ -42,7 +43,7 @@ public class Railgun extends Turret {
         betweenFireFrames = 3;
         vaporTrail = animatedSprites.get("railgunVaporTrailTR");
         vaporEndSprites = animatedSprites.get("railgunBlastPT");
-        material = "titanium";
+        material = Material.titanium;
         barrelLength = 30;
         basePrice = RAILGUN_PRICE;
         priority = Priority.Strong;
@@ -68,11 +69,11 @@ public class Railgun extends Turret {
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
 
-        targetEnemy.damageWithoutBuff(getDamage(),this, "normal", PVector.fromAngle(vaporAngle - HALF_PI), true);
+        targetEnemy.damageWithoutBuff(getDamage(),this, null, PVector.fromAngle(vaporAngle - HALF_PI), true);
     }
 
     @Override
-    public void displayMain() {
+    public void displayTop() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);

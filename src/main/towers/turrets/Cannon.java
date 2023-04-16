@@ -32,7 +32,7 @@ public class Cannon extends Turret {
         breakSound = sounds.get("stoneBreak");
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("smallExplosion");
-        material = "stone";
+        material = Material.stone;
         basePrice = CANNON_PRICE;
         fireParticle = "smoke";
         barrelLength = 29;
@@ -118,7 +118,7 @@ public class Cannon extends Turret {
                     dynamite = true;
                     fireSound = sounds.get("slingshot");
                     name = "dynamiteLauncher";
-                    material = "wood";
+                    material = Material.wood;
                     fireParticle = null;
                     damageSound = sounds.get("woodDamage");
                     breakSound = sounds.get("woodBreak");
@@ -142,7 +142,7 @@ public class Cannon extends Turret {
                     delay -= 1;
                     frags = true;
                     name = "fragCannon";
-                    material = "metal";
+                    material = Material.metal;
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");

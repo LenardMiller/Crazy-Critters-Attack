@@ -1,6 +1,7 @@
 package main.towers.turrets;
 
 import main.Main;
+import main.enemies.Enemy;
 import main.misc.IntVector;
 import main.misc.Tile;
 import main.towers.IceWall;
@@ -16,7 +17,7 @@ import java.util.Collections;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
-import static main.misc.WallSpecialVisuals.updateTowerArray;
+import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -46,7 +47,7 @@ public class IceTower extends Turret {
         offset = 0;
         wallHp = 40;
         wallTimeUntilDamage = 15;
-        material = "darkMetal";
+        material = Material.darkMetal;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
@@ -55,7 +56,7 @@ public class IceTower extends Turret {
         titleLines = new String[]{"Freeze Ray"};
         infoDisplay = (o) -> {
             selection.setTextPurple("Encases enemies", o);
-            iceWallInfo(o, 1);
+            iceWallInfo(o);
         };
         statsDisplay = (o) -> {
             if (frozenTotal == 1) p.text("1 wall created", 910, 500 + offset);
@@ -70,7 +71,7 @@ public class IceTower extends Turret {
     }
 
     @Override
-    public void main() {
+    public void update() {
         if (hp <= 0) {
             die(false);
             tile.tower = null;
@@ -130,7 +131,7 @@ public class IceTower extends Turret {
         if (tile == null) return false;
         Tile otherTile = tiles.get(tile.getGridPosition().sub(1));
         if (otherTile == null) return tile.tower == null;
-        return !otherTile.machine && otherTile.obstacleName == null && tile.tower == null;
+        return !otherTile.machine && !otherTile.obstacleLayer.exists() && tile.tower == null;
     }
 
     @Override
@@ -153,7 +154,7 @@ public class IceTower extends Turret {
         vaporPartLength = PVector.fromAngle(vaporAngle - radians(90));
         vaporPartLength.setMag(24);
 
-        targetEnemy.damageWithoutBuff(getDamage(), this, "ice", PVector.fromAngle(angle), damage > 0);
+        targetEnemy.damageWithoutBuff(getDamage(), this, Enemy.DamageType.frozen, PVector.fromAngle(angle), damage > 0);
 
         int targetSize = ceil(targetEnemy.pfSize / 2f);
         if (name.equals("superIceTower") && targetSize > 1) {
@@ -184,7 +185,7 @@ public class IceTower extends Turret {
         if (tile.tower == null) {
             tile.tower = new IceWall(p, tile, wallHp, wallTimeUntilDamage);
             Wall wall = (Wall) tile.tower;
-            wall.placeEffect(false);
+            wall.place(false);
             updateCombatPoints();
             updateTowerArray();
             frozenTotal++;
@@ -195,7 +196,7 @@ public class IceTower extends Turret {
     }
 
     @Override
-    public void displayMain() {
+    public void displayTop() {
         //shadow
         p.pushMatrix();
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
@@ -307,14 +308,14 @@ public class IceTower extends Turret {
                     range = 5000;
                     wallTimeUntilDamage = -1;
                     angle = 0;
-                    material = "crystal";
+                    material = Material.crystal;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
                     titleLines = new String[]{"Ice Defender"};
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Reinforces defences", o);
-                        iceWallInfo(o, 1);
+                        iceWallInfo(o);
                     };
                     loadSprites();
                     break;
@@ -329,7 +330,7 @@ public class IceTower extends Turret {
                     break;
                 case 5:
                     name = "superIceTower";
-                    material = "titanium";
+                    material = Material.titanium;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
@@ -337,7 +338,7 @@ public class IceTower extends Turret {
                     wallHp *= 2;
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Encases any enemy", o);
-                        iceWallInfo(o, 1);
+                        iceWallInfo(o);
                     };
                     loadSprites();
                     break;
@@ -345,11 +346,11 @@ public class IceTower extends Turret {
         }
     }
 
-    private void iceWallInfo(int offset, int purpleCount) {
+    private void iceWallInfo(int offset) {
         p.fill(new Color(100, 150, 255).getRGB(), 254);
-        p.text("Ice HP: " + wallHp, 910, 356 + 20 * purpleCount + offset);
+        p.text("Ice HP: " + wallHp, 910, 356 + 20 + offset);
         float lifespan = (wallTimeUntilDamage / (float) FRAMERATE) * 10;
-        if (wallTimeUntilDamage == -1) p.text("Ice doesn't melt", 910, 376 + 20 * purpleCount + offset);
-        else p.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 * purpleCount + offset);
+        if (wallTimeUntilDamage == -1) p.text("Ice doesn't melt", 910, 376 + 20 + offset);
+        else p.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 + offset);
     }
 }

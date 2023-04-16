@@ -19,14 +19,6 @@ public class OpenMenu extends Button {
         sprite = spriteIdle;
     }
 
-    @Override
-    public void main(){
-        if (active){
-            hover();
-            display();
-        }
-    }
-
     /**
      * If mouse over, push in.
      * Works if paused or dead.

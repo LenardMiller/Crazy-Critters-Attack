@@ -30,10 +30,10 @@ public class LayoutLoader extends ClassLoader {
             JSONObject saveObject = new JSONObject();
             saveObject.setString("type", "tile");
             saveObject.setInt("id", i);
-            saveObject.setString("base", tile.baseName);
-            saveObject.setString("decoration", tile.decorationName);
-            saveObject.setString("breakable", tile.breakableName);
-            saveObject.setString("obstacle", tile.obstacleName);
+            saveObject.setString("base", tile.baseLayer.name);
+            saveObject.setString("decoration", tile.decorationLayer.name);
+            saveObject.setString("breakable", tile.breakableLayer.name);
+            saveObject.setString("obstacle", tile.obstacleLayer.name);
             saveObject.setBoolean("machine", tile.machine);
             saveArray.setJSONObject(i, saveObject);
         }
@@ -47,7 +47,7 @@ public class LayoutLoader extends ClassLoader {
         saveObject.setFloat("x", machine.position.x);
         saveObject.setFloat("y", machine.position.y);
         saveObject.setString("name", machine.name);
-        saveObject.setString("debris", machine.debris);
+        saveObject.setString("debris", machine.material.name());
         saveObject.setInt("betweenFrames", machine.betweenFrames);
         saveObject.setFloat("barX", machine.barPosition.x);
         saveObject.setFloat("barY", machine.barPosition.y);
@@ -70,9 +70,9 @@ public class LayoutLoader extends ClassLoader {
     public static void saveSettings() throws IOException {
         JSONObject saveObject = new JSONObject();
         saveObject.setFloat("volume", globalVolume);
-        saveObject.setBoolean("fullscreen", fullscreen);
-        saveObject.setBoolean("useOpenGL", useOpenGL);
-        saveObject.setBoolean("gore", gore);
+        saveObject.setBoolean("fullscreen", isFullscreen);
+        saveObject.setBoolean("useOpenGL", isOpenGL);
+        saveObject.setBoolean("gore", isGore);
 
         String name = "settings";
         new File(filePath() + "/data/saves/" + name + ".json");
@@ -86,9 +86,9 @@ public class LayoutLoader extends ClassLoader {
         JSONObject loadObject = loadJSONObject(loadFile);
 
         globalVolume = loadObject.getFloat("volume");
-        fullscreen = loadObject.getBoolean("fullscreen");
-        useOpenGL = loadObject.getBoolean("useOpenGL");
-        gore = loadObject.getBoolean("gore");
+        isFullscreen = loadObject.getBoolean("fullscreen");
+        isOpenGL = loadObject.getBoolean("useOpenGL");
+        isGore = loadObject.getBoolean("gore");
     }
 
     /**
@@ -111,10 +111,10 @@ public class LayoutLoader extends ClassLoader {
             String breakable = loadedTile.getString("breakable");
             String obstacle = loadedTile.getString("obstacle");
             boolean machine = loadedTile.getBoolean("machine");
-            if (base != null) tile.setBase(base);
-            if (decoration != null) tile.setDecoration(decoration);
-            if (breakable != null) tile.setBreakable(breakable);
-            if (obstacle != null) tile.setObstacle(obstacle);
+            if (base != null) tile.baseLayer.set(base);
+            if (decoration != null) tile.decorationLayer.set(decoration);
+            if (breakable != null) tile.breakableLayer.set(breakable);
+            if (obstacle != null) tile.obstacleLayer.set(obstacle);
             tile.machine = machine;
         }
         int i = tiles.size();
@@ -153,10 +153,10 @@ public class LayoutLoader extends ClassLoader {
         String decoration = loadedTile.getString("decoration");
         String breakable = loadedTile.getString("breakable");
         String obstacle = loadedTile.getString("obstacle");
-        if (base != null) tile.setBase(base);
-        tile.setDecoration(decoration);
-        tile.setBreakable(breakable);
-        tile.setObstacle(obstacle);
+        if (base != null) tile.baseLayer.set(base);
+        tile.decorationLayer.set(decoration);
+        tile.breakableLayer.set(breakable);
+        tile.obstacleLayer.set(obstacle);
         connectWallQueues++;
     }
 }

@@ -35,7 +35,7 @@ public class SeismicTower extends Turret {
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("seismicSlam");
         barrelLength = 29;
-        material = "stone";
+        material = Material.stone;
         basePrice = SEISMIC_PRICE;
         titleLines = new String[]{"Seismic Tower"};
         infoDisplay = (o) -> {
@@ -61,7 +61,7 @@ public class SeismicTower extends Turret {
     }
 
     @Override
-    public void displayMain() {
+    public void displayTop() {
         int hammerCount = 6;
         //shadow
         p.pushMatrix();
@@ -197,7 +197,7 @@ public class SeismicTower extends Turret {
                     shockwaveWidth += 30;
                     break;
                 case 2:
-                    material = "metal";
+                    material = Material.metal;
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
@@ -223,7 +223,7 @@ public class SeismicTower extends Turret {
                     damage += 50;
                     break;
                 case 5:
-                    material = "metal";
+                    material = Material.metal;
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");

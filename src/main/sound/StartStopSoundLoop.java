@@ -28,7 +28,7 @@ public class StartStopSoundLoop {
      * @param p the PApplet
      * @param name identifier
      * @param length how long it is in frames, all files must be this length
-     * @param autoStop whether or not it should end on its own after a while.
+     * @param autoStop whether it should end on its own after a while.
      */
     public StartStopSoundLoop(PApplet p, String name, int length, boolean autoStop) {
         this.P = p;

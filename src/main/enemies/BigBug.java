@@ -19,7 +19,7 @@ public class BigBug extends Enemy {
         damage = 10;
         maxHp = 2500;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "bigBug";
         betweenWalkFrames = down60ToFramerate(13);
         attackDmgFrames = new int[]{9};

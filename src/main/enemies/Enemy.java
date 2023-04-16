@@ -43,6 +43,50 @@ public abstract class Enemy {
         Special
     }
 
+    public enum HitParticle {
+        //lower case for string reasons
+        glowOuch(new Color(0, 255, 195)),
+        greenOuch(new Color(100, 166, 0)),
+        leafOuch(new Color(19, 183, 25)),
+        lichenOuch(new Color(144, 146, 133)),
+        pinkOuch(new Color(255, 0, 255)),
+        redOuch(new Color(216, 0, 0)),
+        iceOuch(new Color(49, 135, 223)),
+        mudOuch(new Color(111, 58, 0)),
+        sapOuch(new Color(0xb76e09)),
+        brownLeafOuch(new Color(0xBB5E3B)),
+        bluePuff(new Color(84, 180, 246)),
+        greenPuff(new Color(100, 207, 123));
+
+        public final Color tintColor;
+
+        HitParticle(Color color) {
+            this.tintColor = color;
+        }
+    }
+
+    public enum DamageType {
+        burning(new Color(60,60,60), "fire"),
+        blueBurning(new Color(0, 14, 64), "blueGreenFire"),
+        decay(new Color(0,0,0), "decay"),
+        poisoned(new Color(120, 180, 0), "poison"),
+        glued(new Color(234, 229, 203), "glue"),
+        energy(new Color(60, 60, 60), "energy"),
+        electricity(new Color(60, 60, 60), "electricity"),
+        nuclear(new Color(60, 60, 60), "nuclear"),
+        orangeMagic(new Color(60, 60, 60), "orangeMagic"),
+        dark(new Color(79, 0, 128), "dark"),
+        frozen(new Color(150, 225, 255), null);
+
+        public final Color finalTintColor;
+        public final String particle;
+
+        DamageType(@Nullable Color color, @Nullable String particle) {
+            finalTintColor = color;
+            this.particle = particle;
+        }
+    }
+
     /** measured in pixels per second */
     public float speed;
     public float speedModifier;
@@ -60,8 +104,8 @@ public abstract class Enemy {
     public boolean immobilized;
     public ArrayList<TurnPoint> trail;
     public PImage[] attackFrames;
-    public String hitParticle;
-    public String lastDamageType;
+    public HitParticle hitParticle;
+    public DamageType lastDamageType;
     public String name;
     public PVector position;
     public PVector size;
@@ -84,7 +128,6 @@ public abstract class Enemy {
     protected PVector partSize;
     protected PImage[] moveFrames;
     protected PImage sprite;
-    protected Color maxTintColor;
     protected Color currentTintColor;
     protected SoundFile overkillSound;
     protected SoundFile dieSound;
@@ -110,7 +153,7 @@ public abstract class Enemy {
         damage = 1;
         maxHp = 20; //Hp <---------------------------
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "";
         betweenWalkFrames = 0;
         attackDmgFrames = new int[]{0};
@@ -122,10 +165,10 @@ public abstract class Enemy {
         partSize = size;
         betweenCorpseFrames = down60ToFramerate(7);
         corpseLifespan = 8;
-        lastDamageType = "normal";
+        lastDamageType = null;
     }
 
-    public void main(int i) {
+    public void update(int i) {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
 
@@ -151,7 +194,6 @@ public abstract class Enemy {
             }
         }
         if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
-        displayMain();
         //if health is 0, die
         if (hp <= 0) dead = true;
         if (dead) die(i);
@@ -169,14 +211,14 @@ public abstract class Enemy {
         Main.money += moneyDrop;
         popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
 
-        String type = lastDamageType;
+        DamageType type = lastDamageType;
         for (Buff buff : buffs) {
-            if (buff.enId == i) type = buff.name;
+            if (buff.enId == i) type = DamageType.valueOf(buff.name);
         }
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
 
-        if (gore) goreyDeathEffect(type);
+        if (isGore) goreyDeathEffect(type);
         else cleanDeathEffect();
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
@@ -192,7 +234,7 @@ public abstract class Enemy {
         enemies.remove(i);
     }
 
-    protected void goreyDeathEffect(String type) {
+    protected void goreyDeathEffect(DamageType type) {
         if (overkill) {
             for (int j = 0; j < animatedSprites.get(name + "PartsEN").length; j++) {
                 float maxRotationSpeed = up60ToFramerate(200f / partSize.x);
@@ -203,13 +245,13 @@ public abstract class Enemy {
             for (int k = 0; k < sq(pfSize); k++) {
                 bottomParticles.add(new Pile(p, (float) (position.x + 2.5 + p.random((size.x / 2) * -1,
                   (size.x / 2))), (float) (position.y + 2.5 + p.random((size.x / 2) * -1, (size.x / 2))),
-                  0, hitParticle));
+                  0, hitParticle.name()));
             }
         } else
             corpses.add(new Corpse(p, position, corpseSize,
               rotation + p.random(radians(-5), radians(5)), new PVector(0, 0),
               currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
-              "none", 0, true));
+              null, 0, true));
     }
 
     protected void cleanDeathEffect() {
@@ -302,7 +344,7 @@ public abstract class Enemy {
     }
 
     /** Display main sprite */
-    public void displayMain() {
+    public void display() {
         if (sprite == null) return;
         if (debug) for (int i = trail.size() - 1; i > 0; i--) {
             trail.get(i).display();
@@ -338,7 +380,7 @@ public abstract class Enemy {
      * @param id id of this enemy, set to -1 if unknown
      */
     public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, @Nullable Turret turret,
-                               boolean displayParticles, String damageType, PVector direction, int id) {
+                               boolean displayParticles, @Nullable DamageType damageType, PVector direction, int id) {
         if (id == -1 && buffName != null) id = getId();
         lastDamageType = damageType;
         overkill = damage >= maxHp;
@@ -419,7 +461,7 @@ public abstract class Enemy {
      * @param direction where parts will be flung, (0, 0) for everywhere
      * @param displayParticles whether it should spawn particles
      */
-    public void damageWithoutBuff(int damage, @Nullable Turret turret, String damageType, PVector direction, boolean displayParticles) {
+    public void damageWithoutBuff(int damage, @Nullable Turret turret, @Nullable DamageType damageType, PVector direction, boolean displayParticles) {
         lastDamageType = damageType;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -443,7 +485,7 @@ public abstract class Enemy {
     /**
      * Display hp bar.
      * Tint.
-     * @param particles whether or not to display hurt particles
+     * @param particles whether to display hurt particles
      */
     protected void damageEffect(boolean particles) {
         if (hp == maxHp) return;
@@ -458,11 +500,11 @@ public abstract class Enemy {
             if (p.random(6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
                     PVector partPos = getParticlePosition();
-                    if (gore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle));
+                    if (isGore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle.name()));
                     else topParticles.add(new MiscParticle(p, partPos.x, partPos.y, p.random(0, 360), "stun"));
                 }
             }
-            currentTintColor = new Color(maxTintColor.getRGB());
+            currentTintColor = new Color(hitParticle.tintColor.getRGB());
         }
     }
 
@@ -488,35 +530,7 @@ public abstract class Enemy {
         attackFrames = animatedSprites.get(name + "AttackEN");
         moveFrames = animatedSprites.get(name + "MoveEN");
         sprite = moveFrames[0];
-        maxTintColor = getTintColor();
         currentTintColor = new Color(255, 255, 255);
-    }
-
-    protected Color getTintColor() {
-        switch (hitParticle) {
-            case "glowOuch":
-                return new Color(0, 255, 195);
-            case "greenOuch":
-                return new Color(100, 166, 0);
-            case "leafOuch":
-                return new Color(19, 183, 25);
-            case "lichenOuch":
-                return new Color(144, 146, 133);
-            case "pinkOuch":
-                return new Color(255, 0, 255);
-            case "redOuch":
-                return new Color(216, 0, 0);
-            case "iceOuch":
-                return new Color(49, 135, 223);
-            case "mudOuch":
-                return new Color(111, 58, 0);
-            case "sapOuch":
-                return new Color(0xb76e09);
-            case "brownLeafOuch":
-                return new Color(0xBB5E3B);
-            default:
-                return new Color(255, 0, 0);
-        }
     }
 
     /**

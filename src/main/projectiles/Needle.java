@@ -29,9 +29,9 @@ public class Needle extends Projectile {
     }
 
     @Override
-    public void main() {
+    public void update() {
         trail();
-        displayPassB();
+        display();
         move();
         checkCollision();
         if (position.y - size.y > BOARD_HEIGHT + 100 || position.x - size.x > BOARD_WIDTH + 100 || position.y + size.y < -100 || position.x + size.x < -100) {

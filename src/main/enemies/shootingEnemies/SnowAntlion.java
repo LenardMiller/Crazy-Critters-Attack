@@ -23,7 +23,7 @@ public class SnowAntlion extends ShootingEnemy {
         range = 110;
         barrelLength = 7;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "snowAntlion";
         shootSound = sounds.get("spit");
         attackSound = sounds.get("bugGrowlVeryQuick");

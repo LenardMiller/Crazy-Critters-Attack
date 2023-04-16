@@ -14,6 +14,13 @@ import static main.misc.Utilities.up60ToFramerate;
 
 public class InGameGui {
 
+    public static final Color FLASH_COLOR = new Color(255, 255, 255);
+    public static final Color MAIN_PANEL_COLOR = new Color(235, 235, 235);
+    public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
+    public static final Color TOWER_BUY_PANEL_COLOR = new Color(130, 130, 130);
+    public static final Color MAIN_TEXT_COLOR = new Color(0);
+    public static final Color BOOSTED_TEXT_COLOR = new Color(255, 132, 0);
+
     private final PApplet P;
 
     public int flashA;
@@ -26,16 +33,38 @@ public class InGameGui {
     public GuiObject upgradeIconA, upgradeIconB;
     public PlayButton playButton;
 
-    public static final Color FLASH_COLOR = new Color(255, 255, 255);
-    public static final Color MAIN_PANEL_COLOR = new Color(235, 235, 235);
-    public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
-    public static final Color TOWER_BUY_PANEL_COLOR = new Color(130, 130, 130);
-    public static final Color MAIN_TEXT_COLOR = new Color(0);
-    public static final Color BOOSTED_TEXT_COLOR = new Color(255, 132, 0);
-
     public InGameGui(PApplet p) {
         this.P = p;
         build();
+    }
+
+    public void update() {
+        boolean isTowers = false;
+        for (int i = 0; i < tiles.size(); i++) {
+            if (tiles.get(i).tower != null) {
+                isTowers = true;
+                break;
+            }
+        }
+
+        openMenuButton.update();
+        wallBuyButton.update();
+        playButton.update();
+        sellButton.update();
+        priorityButton.update();
+        upgradeButtonA.update();
+        upgradeButtonB.update();
+        if (isTowers) selection.update();
+        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.update();
+        if (!isTowers || selection.name.equals("null")) {
+            sellButton.active = false;
+            priorityButton.active = false;
+            upgradeButtonA.active = false;
+            upgradeButtonB.active = false;
+            upgradeIconA.active = false;
+            upgradeIconB.active = false;
+        }
+        if (!paused) flashA -= up60ToFramerate(25);
     }
 
     public void display() {
@@ -54,42 +83,31 @@ public class InGameGui {
         P.stroke(255);
         P.strokeWeight(1);
         selection.turretOverlay();
-
         P.fill(MAIN_PANEL_COLOR.getRGB()); //big white bg
         P.rect(900,212,200,688);
         levels[currentLevel].display();
         P.stroke(0);
         P.fill(MONEY_PANEL_COLOR.getRGB()); //money bg
         P.rect(BOARD_WIDTH, 176, 199, 36);
-        openMenuButton.main();
+        openMenuButton.display();
         P.noStroke();
         P.fill(TOWER_BUY_PANEL_COLOR.getRGB()); //tower buy bg
         P.rect(900,21,200,127);
-        wallBuyButton.main();
-        playButton.main(); //display is in Level
-        if (!isTowers || selection.name.equals("null")) {
-            sellButton.active = false;
-            priorityButton.active = false;
-            upgradeButtonA.active = false;
-            upgradeButtonB.active = false;
-            upgradeIconA.active = false;
-            upgradeIconB.active = false;
-        }
-        sellButton.main();
-        priorityButton.main();
-        upgradeButtonA.main();
-        upgradeButtonB.main();
-        upgradeIconA.main();
-        upgradeIconB.main();
-        if (isTowers) selection.main();
-        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.main();
+        wallBuyButton.display();
+        sellButton.display();
+        priorityButton.display();
+        upgradeButtonA.display();
+        upgradeButtonB.display();
+        upgradeIconA.display();
+        upgradeIconB.display();
+        if (isTowers) selection.display();
+        for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.display();
         P.fill(FLASH_COLOR.getRGB(), flashA); //flash
         P.noStroke();
         P.rect(900,212,200,688);
-        if (!paused) flashA -= up60ToFramerate(25);
     }
 
-    public void drawDebugText(PApplet p, int padding) {
+    public void displayDebugText(PApplet p, int padding) {
         highlightedText(p, "enemies: " + enemies.size(), new PVector(padding, 30), LEFT);
         highlightedText(p, "towers: " + towers.size(), new PVector(padding, 60), LEFT);
         highlightedText(p, "projectiles: " + projectiles.size(), new PVector(padding, 90), LEFT);
@@ -99,14 +117,14 @@ public class InGameGui {
         highlightedText(p, "path requests: " + pathFinder.requestQueue.size(), new PVector(padding, 180), LEFT);
         highlightedText(p, "MX: " + (int) matrixMousePosition.x + ", MY: " + (int) matrixMousePosition.y,
           new PVector(padding, BOARD_HEIGHT - padding - 30), LEFT);
-        if (fullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
+        if (isFullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
           new PVector(padding, BOARD_HEIGHT - padding), LEFT);
         highlightedText(p, round(p.frameRate) + " fps", new PVector(BOARD_WIDTH - padding, 30), RIGHT);
         int percentMemoryUsage = (int) ((Runtime.getRuntime().freeMemory() / (float) Runtime.getRuntime().totalMemory()) * 100);
         highlightedText(p, percentMemoryUsage + "% mem", new PVector(BOARD_WIDTH - padding, 60), RIGHT);
     }
 
-    public void drawText(PApplet p, int x) {
+    public void displayText(PApplet p, int x) {
         p.fill(MAIN_TEXT_COLOR.getRGB());
         p.textFont(largeFont);
         p.textAlign(LEFT);
@@ -170,11 +188,11 @@ public class InGameGui {
         sellButton = new SellTower(P,1000,877.5f,"null",false);
     }
 
-    private float towerBuyY(int column) {
+    private static float towerBuyY(int column) {
         return 45.5f + (40 * column);
     }
 
-    private float towerBuyX(int row) {
+    private static float towerBuyX(int row) {
         return BOARD_WIDTH + 22.5f + (39 * row);
     }
 }

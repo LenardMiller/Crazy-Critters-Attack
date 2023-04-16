@@ -19,7 +19,7 @@ public class Worm extends BurrowingEnemy {
         damage = 3;
         maxHp = 100; //Hp
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "worm";
         attackDmgFrames = new int[]{18};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

@@ -19,7 +19,7 @@ public class TreeGiant extends Enemy {
         damage = 15;
         maxHp = 5000; //Hp
         hp = maxHp;
-        hitParticle = "leafOuch";
+        hitParticle = HitParticle.leafOuch;
         name = "treeGiant";
         attackDmgFrames = new int[]{28};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

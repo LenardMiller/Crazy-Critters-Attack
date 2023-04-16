@@ -58,12 +58,7 @@ public class PopupText {
         this(p, 16, new Color(255, 255, 0, 254), new Color(100, 50, 0, 150), position, "+$" + nfc(amount));
     }
 
-    public void main() {
-        display();
-        if (!paused) update();
-    }
-
-    private void display() {
+    public void display() {
         int a = alpha;
         Color textColor = new Color(TEXT_COLOR.getRed(), TEXT_COLOR.getGreen(), TEXT_COLOR.getBlue(), a);
         if (alpha > HIGHLIGHT_COLOR.getAlpha()) a = HIGHLIGHT_COLOR.getAlpha();
@@ -71,7 +66,8 @@ public class PopupText {
         highlightedText(P, TEXT, new PVector((int) POSITION.x, (int) (POSITION.y - (SIZE / 2f) - displacement)), textColor, highlightColor, SIZE, CENTER);
     }
 
-    private void update() {
+    public void update() {
+        if (paused) return;
         float delta = 0.05f;
         float targetSpeed = -0.25f;
         displacement += movementSpeed;

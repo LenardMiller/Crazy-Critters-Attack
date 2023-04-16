@@ -13,7 +13,7 @@ public class RedArc extends Arc {
                   Turret.Priority priority) {
         super(p, startX, startY, turret, damage, maxLength, maxDistance, priority);
         lineColor = Color.red;
-        particleType = "energy";
+        particleType = Enemy.DamageType.energy;
         maxPoints = 30;
         variation = 15;
         weight = 3;

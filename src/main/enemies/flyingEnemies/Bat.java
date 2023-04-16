@@ -19,7 +19,7 @@ public class Bat extends FlyingEnemy {
         damage = 3;
         maxHp = 750; //Hp
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "bat";
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

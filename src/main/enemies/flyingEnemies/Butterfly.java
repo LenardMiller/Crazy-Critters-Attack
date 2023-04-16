@@ -19,7 +19,7 @@ public class Butterfly extends FlyingEnemy {
         damage = 1;
         maxHp = 60; //Hp
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "butterfly";
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

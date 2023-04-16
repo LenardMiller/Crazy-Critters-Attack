@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.enemies.Enemy;
 import main.misc.Utilities;
 import main.particles.ExplosionDebris;
 import main.particles.LargeExplosion;
@@ -24,7 +25,7 @@ public class Dynamite extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
-        type = "burning";
+        type = Enemy.DamageType.burning;
         sprite = staticSprites.get("dynamitePj");
         hitSound = sounds.get("mediumExplosion");
         this.effectRadius = effectRadius;

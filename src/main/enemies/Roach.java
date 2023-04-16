@@ -19,7 +19,7 @@ public class Roach extends Enemy {
         damage = 10;
         maxHp = 5000;
         hp = maxHp;
-        hitParticle = "greenOuch";
+        hitParticle = HitParticle.greenOuch;
         name = "roach";
         betweenWalkFrames = down60ToFramerate(6);
         betweenAttackFrames = down60ToFramerate(4);

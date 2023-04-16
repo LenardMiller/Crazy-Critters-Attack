@@ -19,7 +19,7 @@ public class Shark extends BurrowingEnemy {
         damage = 8;
         maxHp = 175; //Hp
         hp = maxHp;
-        hitParticle = "redOuch";
+        hitParticle = HitParticle.redOuch;
         name = "shark";
         attackDmgFrames = new int[]{4};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
