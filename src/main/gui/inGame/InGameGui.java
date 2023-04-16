@@ -14,6 +14,13 @@ import static main.misc.Utilities.up60ToFramerate;
 
 public class InGameGui {
 
+    public static final Color FLASH_COLOR = new Color(255, 255, 255);
+    public static final Color MAIN_PANEL_COLOR = new Color(235, 235, 235);
+    public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
+    public static final Color TOWER_BUY_PANEL_COLOR = new Color(130, 130, 130);
+    public static final Color MAIN_TEXT_COLOR = new Color(0);
+    public static final Color BOOSTED_TEXT_COLOR = new Color(255, 132, 0);
+
     private final PApplet P;
 
     public int flashA;
@@ -25,13 +32,6 @@ public class InGameGui {
     public UpgradeTower upgradeButtonA, upgradeButtonB;
     public GuiObject upgradeIconA, upgradeIconB;
     public PlayButton playButton;
-
-    public static final Color FLASH_COLOR = new Color(255, 255, 255);
-    public static final Color MAIN_PANEL_COLOR = new Color(235, 235, 235);
-    public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
-    public static final Color TOWER_BUY_PANEL_COLOR = new Color(130, 130, 130);
-    public static final Color MAIN_TEXT_COLOR = new Color(0);
-    public static final Color BOOSTED_TEXT_COLOR = new Color(255, 132, 0);
 
     public InGameGui(PApplet p) {
         this.P = p;
