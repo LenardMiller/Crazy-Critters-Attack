@@ -46,7 +46,7 @@ public class IceTower extends Turret {
         offset = 0;
         wallHp = 40;
         wallTimeUntilDamage = 15;
-        material = "darkMetal";
+        material = Material.darkMetal;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
@@ -307,7 +307,7 @@ public class IceTower extends Turret {
                     range = 5000;
                     wallTimeUntilDamage = -1;
                     angle = 0;
-                    material = "crystal";
+                    material = Material.crystal;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -329,7 +329,7 @@ public class IceTower extends Turret {
                     break;
                 case 5:
                     name = "superIceTower";
-                    material = "titanium";
+                    material = Material.titanium;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");

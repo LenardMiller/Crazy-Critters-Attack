@@ -35,7 +35,7 @@ public class EnergyBlaster extends Turret{
         fireSound = sounds.get("energyBlasterFire");
         fireParticle = "energy";
         barrelLength = 40;
-        material = "darkMetal";
+        material = Material.darkMetal;
         basePrice = ENERGY_BLASTER_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Energy Blaster"};
@@ -135,7 +135,7 @@ public class EnergyBlaster extends Turret{
                     effectRadius = 250;
                     name = "nuclearBlaster";
                     fireParticle = "nuclear";
-                    material = "metal";
+                    material = Material.metal;
                     nuclear = true;
                     titleLines = new String[]{"Nuclear Blaster"};
                     infoDisplay = (o) -> selection.setTextPurple("Huge splash", o);

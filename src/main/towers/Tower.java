@@ -29,6 +29,18 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class Tower {
 
+    public enum Material {
+        //lower case for string reasons
+        wood,
+        darkMetal,
+        gold,
+        stone,
+        metal,
+        crystal,
+        titanium,
+        ice
+    }
+
     public int maxHp;
     public int hp;
     public int nextLevelA;
@@ -49,7 +61,7 @@ public abstract class Tower {
     protected int tintColor;
     protected int barAlpha;
     protected int boostTimer;
-    protected String material;
+    protected Material material;
     protected SoundFile damageSound;
     protected SoundFile breakSound;
     protected SoundFile placeSound;
@@ -69,7 +81,7 @@ public abstract class Tower {
         hp = maxHp;
         hit = false;
         tintColor = 255;
-        material = "wood";
+        material = Material.wood;
         visualize = false;
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
@@ -123,7 +135,10 @@ public abstract class Tower {
         playSoundRandomSpeed(p, damageSound, 1);
         int num = (int)(p.random(4,10));
         for (int i = num; i >= 0; i--){ //spray debris
-            topParticles.add(new Debris(p,(tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2), (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2), p.random(0,360), material));
+            topParticles.add(new Debris(p,
+                    (tile.position.x-size.x/2)+p.random((size.x/2)*-1,size.x/2),
+                    (tile.position.y-size.y/2)+p.random((size.y/2)*-1,size.y/2),
+                    p.random(0,360), material.name()));
         }
     }
 
@@ -211,7 +226,7 @@ public abstract class Tower {
         for (int j = num; j >= 0; j--) {
             PVector deviation = new PVector(p.random(-size.x/2,size.x/2), p.random(-size.y/2,size.y/2));
             PVector spawnPos = PVector.add(center, deviation);
-            topParticles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), material));
+            topParticles.add(new Debris(p,spawnPos.x, spawnPos.y, p.random(360), material.name()));
         }
         num = (int) p.random(6, 12);
         for (int k = num; k >= 0; k--) {

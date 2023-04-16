@@ -45,7 +45,7 @@ public class Wall extends Tower {
         hp = maxHp;
         hit = false;
         sprite = animatedSprites.get("woodWallTW");
-        material = "wood";
+        material = Material.wood;
         damageSound = sounds.get(material + "Damage");
         breakSound = sounds.get(material + "Break");
         placeSound = sounds.get(material + "PlaceShort");
@@ -186,7 +186,7 @@ public class Wall extends Tower {
         int oldMax = maxHp;
         maxHp += UPGRADE_HP[nextLevelB];
         name = UPGRADE_NAMES[nextLevelB] + "Wall";
-        material = UPGRADE_NAMES[nextLevelB];
+        material = Material.valueOf(UPGRADE_NAMES[nextLevelB]);
         hp = (int)(hp/(float)oldMax * maxHp);
 
         damageSound = sounds.get(material + "Damage");

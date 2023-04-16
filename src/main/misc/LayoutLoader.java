@@ -47,7 +47,7 @@ public class LayoutLoader extends ClassLoader {
         saveObject.setFloat("x", machine.position.x);
         saveObject.setFloat("y", machine.position.y);
         saveObject.setString("name", machine.name);
-        saveObject.setString("debris", machine.debris);
+        saveObject.setString("debris", machine.material.name());
         saveObject.setInt("betweenFrames", machine.betweenFrames);
         saveObject.setFloat("barX", machine.barPosition.x);
         saveObject.setFloat("barY", machine.barPosition.y);
