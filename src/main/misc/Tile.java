@@ -43,9 +43,9 @@ public class Tile {
 
         public void update() {
             if (name == null || paused) return;
-            if (name.equals("water")) spawnRipples("water");
-            if (name.equals("dirtyWater")) spawnRipples("dirtyWater");
-            if (name.equals("sludge")) spawnRipples("sludge");
+            for (Ripple.Type rippleType : Ripple.Type.values()) {
+                if (name.equals(rippleType.name())) spawnRipples(rippleType);
+            }
         }
 
         /**
@@ -527,16 +527,16 @@ public class Tile {
         return PVector.sub(position, new PVector(TILE_SIZE / 2f, TILE_SIZE / 2f));
     }
 
-    private void spawnRipples(String type) {
+    private void spawnRipples(Ripple.Type type) {
         int chance = 60;
-        if (type.equals("sludge")) chance = 180;
+        if (type.equals(Ripple.Type.sludge)) chance = 180;
         if (P.random(chance) < 1) {
             Tile rightTile = tiles.get(getGridPosition().x + 1, getGridPosition().y);
             boolean right = rightTile == null;
-            if (!right && rightTile.baseLayer.name != null) right = !rightTile.baseLayer.name.equals(type);
+            if (!right && rightTile.baseLayer.name != null) right = !rightTile.baseLayer.name.equals(type.name());
             Tile leftTile = tiles.get(getGridPosition().x - 1, getGridPosition().y);
             boolean left = rightTile == null;
-            if (!left && leftTile.baseLayer.name != null) left = !leftTile.baseLayer.name.equals(type);
+            if (!left && leftTile.baseLayer.name != null) left = !leftTile.baseLayer.name.equals(type.name());
             PVector topLeftCorner = new PVector(!left ? position.x : position.x + 20, position.y + 7);
             PVector bottomRightCorner = PVector.add(position, new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
             PVector spawnPos = new PVector(P.random(topLeftCorner.x, bottomRightCorner.x), P.random(topLeftCorner.y, bottomRightCorner.y));
