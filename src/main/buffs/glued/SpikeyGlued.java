@@ -25,6 +25,11 @@ public class SpikeyGlued extends Glued {
         }
     }
 
+    @Override
+    public void display() {
+        for (Spike spike : SPIKES) spike.display(enemies.get(enId).position);
+    }
+
     /**particles around enemy*/
     @Override
     protected void spawnParticles() {

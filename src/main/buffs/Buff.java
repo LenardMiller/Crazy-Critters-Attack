@@ -49,6 +49,8 @@ public abstract class Buff {
         }
     }
 
+    public void display() {}
+
     /**
      * Ends if at end of lifespan.
      * @param i buff id
