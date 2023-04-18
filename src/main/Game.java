@@ -229,6 +229,7 @@ public class Game {
         for (Arc arc : arcs) arc.display();
         for (Enemy enemy1 : enemies) if (enemy1 instanceof FlyingEnemy) enemy1.displayShadow();
         for (Enemy enemy : enemies) if (enemy instanceof FlyingEnemy) enemy.display();
+        for (Buff buff : buffs) buff.display();
         for (Particle particle : topParticles) particle.display();
         hand.displayHeld();
     }
