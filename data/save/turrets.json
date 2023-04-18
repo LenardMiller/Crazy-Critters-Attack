@@ -1,0 +1,124 @@
+[
+  {
+    "x": 400,
+    "y": 400,
+    "damageTotal": 2850,
+    "killsTotal": 14,
+    "type": "SeismicTower",
+    "levelA": 3,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 450,
+    "y": 400,
+    "damageTotal": 13571,
+    "killsTotal": 30,
+    "type": "Cannon",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "x": 500,
+    "y": 400,
+    "damageTotal": 21268,
+    "killsTotal": 118,
+    "type": "Slingshot",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "x": 550,
+    "y": 400,
+    "damageTotal": 51896,
+    "killsTotal": 231,
+    "type": "SeismicTower",
+    "levelA": 3,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 400,
+    "y": 450,
+    "damageTotal": 46856,
+    "killsTotal": 236,
+    "type": "Cannon",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "gluedTotal": 61,
+    "x": 550,
+    "y": 450,
+    "damageTotal": 12080,
+    "killsTotal": 96,
+    "type": "Gluer",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "gluedTotal": 63,
+    "x": 400,
+    "y": 500,
+    "damageTotal": 16288,
+    "killsTotal": 77,
+    "type": "Gluer",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "x": 550,
+    "y": 500,
+    "damageTotal": 55230,
+    "killsTotal": 234,
+    "type": "Cannon",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "x": 400,
+    "y": 550,
+    "damageTotal": 44213,
+    "killsTotal": 209,
+    "type": "SeismicTower",
+    "levelA": 3,
+    "priority": 0,
+    "levelB": 2
+  },
+  {
+    "x": 450,
+    "y": 550,
+    "damageTotal": 18172,
+    "killsTotal": 128,
+    "type": "Slingshot",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "x": 500,
+    "y": 550,
+    "damageTotal": 14859,
+    "killsTotal": 36,
+    "type": "Cannon",
+    "levelA": 2,
+    "priority": 0,
+    "levelB": 3
+  },
+  {
+    "x": 550,
+    "y": 550,
+    "damageTotal": 5172,
+    "killsTotal": 25,
+    "type": "SeismicTower",
+    "levelA": 3,
+    "priority": 0,
+    "levelB": 2
+  }
+]

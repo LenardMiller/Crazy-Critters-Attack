@@ -7,8 +7,6 @@ import java.awt.*;
 
 public class ForestWaves {
 
-    public ForestWaves() {}
-
     public static Wave[] genForestWaves(PApplet p) {
         Wave[] waves = new Wave[30];
 

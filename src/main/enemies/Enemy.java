@@ -76,7 +76,9 @@ public abstract class Enemy {
         nuclear(new Color(60, 60, 60), "nuclear"),
         orangeMagic(new Color(60, 60, 60), "orangeMagic"),
         dark(new Color(79, 0, 128), "dark"),
-        frozen(new Color(150, 225, 255), null);
+        frozen(new Color(150, 225, 255), null),
+        bleeding(null, null),
+        stunned(null, null);
 
         public final Color finalTintColor;
         public final String particle;

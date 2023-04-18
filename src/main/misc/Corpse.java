@@ -115,7 +115,7 @@ public class Corpse {
         }
 
         bloodParticles();
-        if (type != null) {
+        if (type != null && type.finalTintColor != null) {
             Color tint;
             tint = new Color (
                     getTintChannel(type.finalTintColor.getRed(), lifespan, MAX_LIFE),
