@@ -248,8 +248,9 @@ public class Main extends PApplet {
             case Restart:
                 Game.reset(this);
                 paused = false;
-                screen = Screen.InGame;
                 Saver.wipe();
+                screen = Screen.InGame;
+                targetScreen = screen;
                 break;
             case PlayOrLevelSelect:
                 try {
