@@ -13,7 +13,7 @@ import static main.misc.Utilities.*;
 import static processing.core.PConstants.HALF_PI;
 
 public class MagicMissile extends Projectile {
-    
+
     public Turret.Priority priority;
 
     private final PVector SPAWN_POSITION;
@@ -29,6 +29,7 @@ public class MagicMissile extends Projectile {
         radius = 14;
         maxSpeed = 300;
         speed = maxSpeed;
+        type = Enemy.DamageType.greenMagic;
         this.damage = damage;
         this.angle = angle;
         sprite = staticSprites.get("magicMissilePj");
