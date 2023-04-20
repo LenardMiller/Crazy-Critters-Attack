@@ -181,7 +181,8 @@ public class IceTower extends Turret {
         }
     }
 
-    private void placeWall(Tile tile) { //todo: nullpointerexception
+    private void placeWall(Tile tile) {
+        if (tile == null) return;
         if (tile.tower == null) {
             tile.tower = new IceWall(p, tile, wallHp, wallTimeUntilDamage);
             Wall wall = (Wall) tile.tower;
