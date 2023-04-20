@@ -16,8 +16,8 @@ public class Golem extends Enemy {
         radius = 21;
         speed = 24;
         moneyDrop = 60;
-        damage = 8;
-        maxHp = 1000; //Hp <---------------------------
+        damage = 6;
+        maxHp = 500; //Hp <---------------------------
         hp = maxHp;
         hitParticle = HitParticle.lichenOuch;
         name = "golem";

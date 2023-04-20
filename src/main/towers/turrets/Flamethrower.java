@@ -68,12 +68,12 @@ public class Flamethrower extends Turret {
 
     private void rotateWheel() {
         float maxSpeed = 0.3f;
-        float spoolSpeed = 0.005f;
+        float spoolSpeed = 0.001f;
         if (targetEnemy != null && enemies.size() > 0 && alive) {
             rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, maxSpeed);
         } else rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, 0);
         angle += rotationSpeed;
-        delay = 5 * abs(rotationSpeed - maxSpeed);
+        delay = 10 * abs(rotationSpeed - maxSpeed);
     }
 
     protected void checkTarget() {
@@ -197,7 +197,7 @@ public class Flamethrower extends Turret {
         //prices
         upgradePrices[0] = 400;
         upgradePrices[1] = 600;
-        upgradePrices[2] = 6000;
+        upgradePrices[2] = 4000;
 
         upgradePrices[3] = 600;
         upgradePrices[4] = 700;

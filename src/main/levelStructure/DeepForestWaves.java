@@ -90,10 +90,10 @@ public class DeepForestWaves {
         waves[12].addSpawns(midBug, 20);
 
         waves[13] = wavePreset(p, 150, 120, "Horde");
-        waves[13].addSpawns(treeGiant, 5);
+        waves[13].addSpawns(treeGiant, 3);
         waves[13].addSpawns(midTree, 30);
         waves[13].addSpawns(smallTree, 10);
-        waves[13].addSpawns(bigBug, 25);
+        waves[13].addSpawns(bigBug, 20);
         waves[13].addSpawns(midBug, 10);
         waves[13].addSpawns("snake", 20);
         waves[13].addSpawns(smallBug, 10);
@@ -161,8 +161,8 @@ public class DeepForestWaves {
 
         //first mud flinger
         waves[27] = wavePreset(p, 50, 1, mudCreature);
-        waves[27].addSpawns(mudCreature, 5);
-        waves[27].addSpawns(mudFlinger, 1);
+        waves[27].addSpawns(mudCreature, 3);
+        waves[27].addSpawns(mudFlinger, 2);
 
         waves[28] = wavePreset(p, 60, 20, roach);
         waves[28].addSpawns(roach, 50);
@@ -184,8 +184,8 @@ public class DeepForestWaves {
         waves[32].addSpawns(enragedGiant, 10);
 
         waves[33] = wavePreset(p, 50, 10, mudCreature);
-        waves[33].addSpawns(mudCreature, 10);
-        waves[33].addSpawns(mudFlinger, 2);
+        waves[33].addSpawns(mudCreature, 5);
+        waves[33].addSpawns(mudFlinger, 3);
 
         //first root
         waves[34] = wavePreset(p, 50, 5, root);
@@ -214,8 +214,8 @@ public class DeepForestWaves {
         waves[40].addSpawns(root, 20);
 
         waves[41] = wavePreset(p, 50, 20, mudCreature);
-        waves[41].addSpawns(mudCreature, 20);
-        waves[41].addSpawns(mudFlinger, 3);
+        waves[41].addSpawns(mudCreature, 15);
+        waves[41].addSpawns(mudFlinger, 8);
 
         //first mutant bug
         waves[42] = wavePreset(p, 100, 1, mutantBug);
@@ -244,14 +244,14 @@ public class DeepForestWaves {
         waves[47] = wavePreset(p, 30, 5, roach);
         waves[47].addSpawns(roach, 100);
 
-        waves[48] = wavePreset(p, 240, 200, "Decaying Horde");
-        waves[48].addSpawns(roach, 250);
-        waves[48].addSpawns(twisted, 60);
-        waves[48].addSpawns(root, 60);
-        waves[48].addSpawns(fae, 50);
-        waves[48].addSpawns(mantoid, 10);
-        waves[48].addSpawns(mudCreature, 30);
-        waves[48].addSpawns(mudFlinger, 30);
+        waves[48] = wavePreset(p, 120, 100, "Decaying Horde");
+        waves[48].addSpawns(roach, 125);
+        waves[48].addSpawns(twisted, 30);
+        waves[48].addSpawns(root, 30);
+        waves[48].addSpawns(fae, 25);
+        waves[48].addSpawns(mantoid, 5);
+        waves[48].addSpawns(mudCreature, 25);
+        waves[48].addSpawns(mudFlinger, 25);
         waves[48].addSpawns("wtf", 3);
 
         waves[49] = wavePreset(p, 100, 20, "Mutant Bugs");

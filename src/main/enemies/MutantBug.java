@@ -15,7 +15,7 @@ public class MutantBug extends Enemy {
         pfSize = 4;
         radius = 40;
         speed = 25;
-        moneyDrop = 5000;
+        moneyDrop = 10000;
         damage = 100;
         maxHp = 750000;
         hp = maxHp;

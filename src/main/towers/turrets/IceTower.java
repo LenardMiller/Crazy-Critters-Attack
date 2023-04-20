@@ -299,10 +299,10 @@ public class IceTower extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    wallTimeUntilDamage *= 2;
+                    wallTimeUntilDamage += 15;
                     break;
                 case 1:
-                    wallHp *= 2;
+                    wallHp += 40;
                     break;
                 case 2:
                     name = "autoIceTower";
@@ -310,6 +310,7 @@ public class IceTower extends Turret {
                     wallTimeUntilDamage = -1;
                     angle = 0;
                     material = Material.crystal;
+                    hasPriority = false;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -336,7 +337,8 @@ public class IceTower extends Turret {
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     titleLines = new String[]{"Super Freeze", "Ray"};
-                    wallHp *= 2;
+                    wallHp += 170;
+                    wallTimeUntilDamage += 20;
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Encases any enemy", o);
                         iceWallInfo(o);

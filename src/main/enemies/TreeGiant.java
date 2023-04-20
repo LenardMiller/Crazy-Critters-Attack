@@ -17,7 +17,7 @@ public class TreeGiant extends Enemy {
         speed = 18;
         moneyDrop = 250;
         damage = 15;
-        maxHp = 5000; //Hp
+        maxHp = 4000; //Hp
         hp = maxHp;
         hitParticle = HitParticle.leafOuch;
         name = "treeGiant";
