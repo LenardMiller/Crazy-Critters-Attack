@@ -85,11 +85,10 @@ public class CaveWaves {
         waves[16].addSpawns(midGolem, 8);
 
         waves[17] = wavePreset(p, 85, 5, bat);
-        waves[17].addSpawns(smallGolem, 5);
-        waves[17].addSpawns(bat, 5);
+        waves[17].addSpawns(bat, 3);
 
         waves[18] = wavePreset(p, 70, 25, bat);
-        waves[18].addSpawns(bat, 10);
+        waves[18].addSpawns(bat, 5);
         waves[18].addSpawns(albinoButterfly, 10);
 
         waves[19] = wavePreset(p, 65, 30, midGolem);
@@ -101,7 +100,7 @@ public class CaveWaves {
         waves[20].addSpawns(albinoButterfly, 10);
 
         waves[21] = wavePreset(p, 70, 20, bat);
-        waves[21].addSpawns(bat, 15);
+        waves[21].addSpawns(bat, 10);
 
         waves[22] = wavePreset(p, 100, 35, bigAlbinoBug);
         waves[22].addSpawns(bigAlbinoBug, 10);
@@ -126,7 +125,7 @@ public class CaveWaves {
         waves[26].addSpawns(bigAlbinoBug, 20);
 
         waves[27] = wavePreset(p, 80, 15, bat);
-        waves[27].addSpawns(bat, 50);
+        waves[27].addSpawns(bat, 35);
         waves[27].addSpawns(albinoButterfly, 50);
 
         waves[28] = wavePreset(p, 65, 30, midGolem);

@@ -16,6 +16,7 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class Glued extends Buff {
 
+    //todo: fix glue stun locking
     public Glued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;

@@ -17,7 +17,7 @@ public class BigWorm extends BurrowingEnemy {
         speed = 24;
         moneyDrop = 250;
         damage = 15;
-        maxHp = 8000; //Hp
+        maxHp = 10000; //Hp
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "bigWorm";

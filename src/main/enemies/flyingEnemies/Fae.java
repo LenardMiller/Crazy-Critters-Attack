@@ -2,7 +2,6 @@ package main.enemies.flyingEnemies;
 
 import main.Main;
 import main.buffs.Buff;
-import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
 import main.particles.Floaty;
 import main.particles.MiscParticle;
@@ -32,10 +31,10 @@ public class Fae extends Frost {
         pfSize = 2;
         size = new PVector(25, 25);
         radius = 15;
-        speed = 65;
+        speed = 60;
         moneyDrop = 200;
-        damage = 10;
-        maxHp = 25000;
+        damage = 7;
+        maxHp = 22000;
         hp = maxHp;
         hitParticle = HitParticle.valueOf((oppositeColor + "Puff"));
         name = "fae";
