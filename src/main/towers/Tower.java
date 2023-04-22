@@ -163,8 +163,10 @@ public abstract class Tower {
             moneyGain = (int) (getValue() * 0.4);
             tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_TL");
         } else moneyGain = (int) (getValue() * 0.8);
-        if (moneyGain > 0) popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
-        money += moneyGain;
+        if (moneyGain > 0) {
+            popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
+            money += moneyGain;
+        }
         if (hasBoostedDeathEffect()) boostedDeathEffect();
         Tile.updateFlooring();
         updateTowerArray();
