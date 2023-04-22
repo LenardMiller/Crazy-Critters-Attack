@@ -4,11 +4,14 @@ import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.enemies.flyingEnemies.Frost;
+import main.gui.guiObjects.PopupText;
 import main.misc.CompressArray;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.core.PVector;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static main.Main.*;
@@ -16,7 +19,6 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class Glued extends Buff {
 
-    //todo: fix glue stun locking
     public Glued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
@@ -31,8 +33,8 @@ public class Glued extends Buff {
     }
 
     protected void slowAttacking() { //slowing enemy attacking done once
-        reset();
         Enemy enemy = enemies.get(enId);
+        reset();
         float newSpeed = enemy.speed * effectLevel;
         if (enemy.speed > newSpeed) { //prevent speeding up enemy
             //setup
@@ -56,6 +58,7 @@ public class Glued extends Buff {
             for (int i = 0; i < enemy.tempAttackDmgFrames.length; i++) {
                 enemy.tempAttackDmgFrames[i] /= effectLevel;
             }
+            enemy.attackFrame = Math.round((float) enemy.attackFrame * (1 / effectLevel));
             enemy.attackFrames = expandedPImages;
         }
     }
@@ -84,9 +87,11 @@ public class Glued extends Buff {
         if (enemy.speed == newSpeed) { //prevent speeding up enemy
             enemy.speedModifier = 1; //set movement speed back to default
             //set attack speed back to default
+            int old = enemy.attackFrame;
+            float frameProportion = (enemy.attackFrame / (float) enemy.attackFrames.length);
             enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
+            enemy.attackFrame = Math.round(enemy.attackFrames.length * frameProportion);
             if (enemy instanceof Frost) enemy.attackFrames = animatedSprites.get("wolf" + "AttackEN");
-            if (enemy.attackFrame > enemy.attackFrames.length) enemy.attackFrame = 0;
             //set damage frames back to default
             System.arraycopy(enemy.attackDmgFrames, 0,
                     enemy.tempAttackDmgFrames, 0,

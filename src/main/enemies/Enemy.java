@@ -369,6 +369,7 @@ public abstract class Enemy {
             p.stroke(255, 0, 255);
             p.rect(pfPosition.x - 12.5f, pfPosition.y - 12.5f, pfSize * 25, pfSize * 25);
         }
+        p.text(attackFrame, position.x, position.y);
     }
 
     /**
@@ -567,7 +568,7 @@ public abstract class Enemy {
                 //ignored if no assigned attack sound
                 playSoundRandomSpeed(p, attackSound, 1);
             }
-        } else if (!targetMachine) state = State.Moving;
+        } else if (!targetMachine && attackFrame == 0) state = State.Moving;
         if (targetMachine) {
             moveFrame = 0;
             //actually do damage to machines
