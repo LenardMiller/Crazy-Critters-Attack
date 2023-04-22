@@ -738,6 +738,8 @@ public class SpriteLoader {
         //breakables
         staticSprites.put("rockBr_TL",p.loadImage("sprites/tiles/breakables/rock.png"));
         staticSprites.put("smallRockBr_TL",p.loadImage("sprites/tiles/breakables/smallRock.png"));
+        staticSprites.put("sandstoneRockBr_TL",p.loadImage("sprites/tiles/breakables/sandstoneRock.png"));
+        staticSprites.put("smallSandstoneRockBr_TL",p.loadImage("sprites/tiles/breakables/smallSandstoneRock.png"));
         staticSprites.put("leavesBr_TL",p.loadImage("sprites/tiles/breakables/leaves.png"));
         staticSprites.put("yellowLeavesBr_TL",p.loadImage("sprites/tiles/breakables/yellowLeaves.png"));
         staticSprites.put("deadLeavesBr_TL",p.loadImage("sprites/tiles/breakables/veryDeadLeaves.png"));
@@ -770,6 +772,10 @@ public class SpriteLoader {
         staticSprites.put("veryDeadLilyPad0Br_TL",p.loadImage("sprites/tiles/breakables/veryDeadLilyPads/000.png"));
         staticSprites.put("veryDeadLilyPad1Br_TL",p.loadImage("sprites/tiles/breakables/veryDeadLilyPads/001.png"));
         staticSprites.put("veryDeadLilyPad2Br_TL",p.loadImage("sprites/tiles/breakables/veryDeadLilyPads/002.png"));
+        staticSprites.put("orangeFlowersBr_TL",p.loadImage("sprites/tiles/breakables/orangeFlowers.png"));
+        staticSprites.put("blueFlowersBr_TL",p.loadImage("sprites/tiles/breakables/blueFlowers.png"));
+        staticSprites.put("deadOrangeFlowersBr_TL",p.loadImage("sprites/tiles/breakables/deadOrangeFlowers.png"));
+        staticSprites.put("deadBlueFlowersBr_TL",p.loadImage("sprites/tiles/breakables/deadBlueFlowers.png"));
         //obstacles
         staticSprites.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         staticSprites.put("smallYellowTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallYellowTree.png"));
@@ -794,9 +800,17 @@ public class SpriteLoader {
         staticSprites.put("cactus0Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/0.png"));
         staticSprites.put("cactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/1.png"));
         staticSprites.put("cactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/2.png"));
+        staticSprites.put("cactus3Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/3.png"));
+        staticSprites.put("cactus4Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/4.png"));
+        staticSprites.put("cactus5Ob_TL",p.loadImage("sprites/tiles/obstacles/cactus/5.png"));
         staticSprites.put("deadCactus0Ob_TL",p.loadImage("sprites/tiles/obstacles/deadCactus/0.png"));
         staticSprites.put("deadCactus1Ob_TL",p.loadImage("sprites/tiles/obstacles/deadCactus/1.png"));
         staticSprites.put("deadCactus2Ob_TL",p.loadImage("sprites/tiles/obstacles/deadCactus/2.png"));
+        staticSprites.put("deadCactus3Ob_TL",p.loadImage("sprites/tiles/obstacles/deadCactus/3.png"));
+        staticSprites.put("deadCactus4Ob_TL",p.loadImage("sprites/tiles/obstacles/deadCactus/4.png"));
+        staticSprites.put("deadCactus5Ob_TL",p.loadImage("sprites/tiles/obstacles/deadCactus/5.png"));
+        staticSprites.put("bushOb_TL",p.loadImage("sprites/tiles/obstacles/bush.png"));
+        staticSprites.put("deadBushOb_TL",p.loadImage("sprites/tiles/obstacles/deadBush.png"));
         staticSprites.put("caveWallBaseOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/base.png"));
         staticSprites.put("caveWallLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/l.png"));
         staticSprites.put("caveWallROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/r.png"));

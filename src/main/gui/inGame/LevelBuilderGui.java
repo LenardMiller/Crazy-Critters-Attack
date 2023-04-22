@@ -17,37 +17,42 @@ public class LevelBuilderGui {
     public void display() {
         P.fill(InGameGui.MAIN_PANEL_COLOR.getRGB()); //big white bg
         P.rect(900, 0, 200, 900);
+        for (TileSelect tileSelectButton : tileSelectButtons) tileSelectButton.display();
+    }
+
+    public void update() {
         for (TileSelect tileSelectButton : tileSelectButtons) tileSelectButton.update();
     }
 
+
     public void build() {
-        placeButton(0, 0, "dirtBa");
-        placeButton(1, 0, "grassBa");
-        placeButton(2, 0, "grassCornerBR_De");
-        placeButton(3, 0, "grassCornerBL_De");
+        placeButton(0, 0, "sandstoneRockBr");
+        placeButton(1, 0, "smallSandstoneRockBr");
+        placeButton(2, 0, "blueFlowersBr");
+        placeButton(3, 0, "orangeFlowersBr");
 
-        placeButton(0, 1, "dirtPatchDe");
-        placeButton(1, 1, "grassPatchDe");
-        placeButton(2, 1, "grassCornerTR_De");
-        placeButton(3, 1, "grassCornerTL_De");
+        placeButton(0, 1, "cactus0Ob");
+        placeButton(1, 1, "cactus1Ob");
+        placeButton(2, 1, "cactus2Ob");
+        placeButton(3, 1, "cactus3Ob");
 
-        placeButton(0, 2, "rockBr");
-        placeButton(1, 2, "smallRockBr");
-        placeButton(2, 2, "leavesBr");
-        placeButton(3, 2, "dandelionsBr");
+        placeButton(0, 2, "cactus4Ob");
+        placeButton(1, 2, "cactus5Ob");
+        placeButton(2, 2, "bushOb");
+        placeButton(3, 2, "yellowGrassPatchDe");
 
-        placeButton(0, 3, "treeTLOb");
-        placeButton(1, 3, "treeTROb");
-        placeButton(2, 3, "yellowTreeTLOb");
-        placeButton(3, 3, "yellowTreeTROb");
+        placeButton(0, 3, "deadBlueFlowersBr");
+        placeButton(1, 3, "deadDandelionsBr");
+        placeButton(2, 3, "deadOrangeFlowersBr");
+        placeButton(3, 3, "deadCactus0Ob");
 
-        placeButton(0, 4, "treeBLOb");
-        placeButton(1, 4, "treeBROb");
-        placeButton(2, 4, "yellowTreeBLOb");
-        placeButton(3, 4, "yellowTreeBROb");
+        placeButton(0, 4, "deadCactus1Ob");
+        placeButton(1, 4, "deadCactus2Ob");
+        placeButton(2, 4, "deadCactus3Ob");
+        placeButton(3, 4, "deadCactus4Ob");
 
-        placeButton(0, 5, "smallTreeOb");
-        placeButton(1, 5, "smallYellowTreeOb");
+        placeButton(0, 5, "deadCactus5Ob");
+        placeButton(1, 5, "deadBushOb");
         placeButton(2, 5, "yellowLeavesBr");
         placeButton(3, 5, "deadDandelionsBr");
 
