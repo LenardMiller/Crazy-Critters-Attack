@@ -87,11 +87,12 @@ public class Corpse {
     }
 
     public void update(int i) {
-        if (!paused) {
-            move();
-            lifespan--;
-            if (lifespan <= 0) corpses.remove(i);
-        }
+        if (paused) return;
+        move();
+        bloodParticles();
+        if (type != null) buffParticles(type.particle);
+        lifespan--;
+        if (lifespan <= 0) corpses.remove(i);
     }
 
     private void move() {
@@ -114,7 +115,6 @@ public class Corpse {
             }
         }
 
-        bloodParticles();
         if (type != null && type.finalTintColor != null) {
             Color tint;
             tint = new Color (
@@ -122,7 +122,6 @@ public class Corpse {
                     getTintChannel(type.finalTintColor.getGreen(), lifespan, MAX_LIFE),
                     getTintChannel(type.finalTintColor.getBlue(), lifespan, MAX_LIFE)
             );
-            buffParticles(type.particle);
 
             drawSprites(tinting(sprite, tint));
         } else {
@@ -132,17 +131,16 @@ public class Corpse {
     }
 
     private void buffParticles(String part) {
-        if (!paused && part != null) {
-            float chance = 0;
-            //prevent divide by 0
-            if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
-            if (!ANIMATED) chance += 16;
-            int num = (int) (P.random(0, chance));
-            if (num == 0) {
-                midParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
-                        (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
-                        P.random(0, 360), part));
-            }
+        if (paused || part == null) return;
+        float chance = 0;
+        //prevent divide by 0
+        if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
+        if (!ANIMATED) chance += 16;
+        int num = (int) (P.random(0, chance));
+        if (num == 0) {
+            midParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                    (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
+                    P.random(0, 360), part));
         }
     }
 
@@ -162,22 +160,19 @@ public class Corpse {
     }
 
     private void bloodParticles() {
-        if (!paused) {
-            if (BLOOD_PARTICLE != null) {
-                for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
-                    float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
-                    float chance = sq(1 / (speed + 0.01f));
-                    chance += 16;
-                    if (P.random(chance) < 1) {
-                        PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
-                        midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
-                    }
-                    chance += 10;
-                    if (P.random(chance) < 0) {
-                        PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.2f);
-                        bottomParticles.add(new Pile(P, pos.x, pos.y, 0, BLOOD_PARTICLE.name()));
-                    }
-                }
+        if (paused || BLOOD_PARTICLE == null) return;
+        for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
+            float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
+            float chance = sq(1 / (speed + 0.01f));
+            chance += 16;
+            if (P.random(chance) < 1) {
+                PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
+                midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
+            }
+            chance += 10;
+            if (P.random(chance) < 1) {
+                PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.2f);
+                bottomParticles.add(new Pile(P, pos.x, pos.y, 0, BLOOD_PARTICLE.name()));
             }
         }
     }

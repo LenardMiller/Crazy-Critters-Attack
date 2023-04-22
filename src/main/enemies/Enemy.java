@@ -369,7 +369,6 @@ public abstract class Enemy {
             p.stroke(255, 0, 255);
             p.rect(pfPosition.x - 12.5f, pfPosition.y - 12.5f, pfSize * 25, pfSize * 25);
         }
-        p.text(attackFrame, position.x, position.y);
     }
 
     /**

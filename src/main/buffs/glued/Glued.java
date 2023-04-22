@@ -4,14 +4,11 @@ import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.enemies.flyingEnemies.Frost;
-import main.gui.guiObjects.PopupText;
 import main.misc.CompressArray;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.core.PVector;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 import static main.Main.*;
