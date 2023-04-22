@@ -14,8 +14,6 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public abstract class BurrowingEnemy extends Enemy {
 
-    private boolean animationReversed;
-
     protected BurrowingEnemy(PApplet p, float x, float y) {
         super(p, x, y);
     }
@@ -43,6 +41,8 @@ public abstract class BurrowingEnemy extends Enemy {
         super.animate();
         if (immobilized) {
             sprite = attackFrames[0];
+        } else if (state == State.Special) {
+            state = State.Moving;
         }
     }
 
