@@ -255,7 +255,7 @@ public abstract class Enemy {
             corpses.add(new Corpse(p, position, corpseSize,
               rotation + p.random(radians(-5), radians(5)), new PVector(0, 0),
               currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
-              null, 0, true));
+              hitParticle, 0, true));
     }
 
     protected void cleanDeathEffect() {

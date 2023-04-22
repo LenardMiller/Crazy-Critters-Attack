@@ -35,6 +35,7 @@ public class Bleeding extends Buff {
         if (!isGore) return;
 
         Enemy enemy = enemies.get(enId);
+        if (!enemy.hitParticle.name().contains("ouch")) return;
 
         if (p.random(particleChance) < 1) {
             PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
