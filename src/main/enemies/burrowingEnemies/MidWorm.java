@@ -16,8 +16,8 @@ public class MidWorm extends BurrowingEnemy {
         radius = 12.5f;
         speed = 42;
         moneyDrop = 60;
-        damage = 6;
-        maxHp = 700; //Hp
+        damage = 7;
+        maxHp = 1200; //Hp
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "midWorm";

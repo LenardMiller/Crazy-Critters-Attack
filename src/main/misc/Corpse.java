@@ -1,5 +1,6 @@
 package main.misc;
 
+import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 import main.enemies.Enemy;
 import main.particles.MiscParticle;
@@ -53,7 +54,7 @@ public class Corpse {
      * @param animated should it be animated
      */
     public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, Color currentTintColor, float angularVelocity,
-                  int betweenFrames, int maxLife, Enemy.DamageType effectType, String name, @Nullable Enemy.HitParticle bloodParticle, int frame,
+                  int betweenFrames, int maxLife, Enemy.DamageType effectType, String name, @NotNull Enemy.HitParticle bloodParticle, int frame,
                   boolean animated) {
         this.P = p;
 
@@ -87,11 +88,12 @@ public class Corpse {
     }
 
     public void update(int i) {
-        if (!paused) {
-            move();
-            lifespan--;
-            if (lifespan <= 0) corpses.remove(i);
-        }
+        if (paused) return;
+        move();
+        bloodParticles();
+        buffParticles();
+        lifespan--;
+        if (lifespan <= 0) corpses.remove(i);
     }
 
     private void move() {
@@ -114,34 +116,42 @@ public class Corpse {
             }
         }
 
-        bloodParticles();
-        if (type != null) {
-            Color tint;
-            tint = new Color (
-                    getTintChannel(type.finalTintColor.getRed(), lifespan, MAX_LIFE),
-                    getTintChannel(type.finalTintColor.getGreen(), lifespan, MAX_LIFE),
-                    getTintChannel(type.finalTintColor.getBlue(), lifespan, MAX_LIFE)
-            );
-            buffParticles(type.particle);
-
-            drawSprites(tinting(sprite, tint));
+        if (type != null && type.finalTintColor != null) {
+            drawSprites(tinting(sprite, tintedColor(type.finalTintColor)));
+        } else if (type == Enemy.DamageType.bleeding) {
+            drawSprites(tinting(sprite, tintedColor(BLOOD_PARTICLE.tintColor)));
         } else {
             drawSprites(tinting(sprite, null));
         }
         currentTintColor = incrementColorTo(currentTintColor, up60ToFramerate(20), new Color(255, 255, 255));
     }
 
-    private void buffParticles(String part) {
-        if (!paused && part != null) {
-            float chance = 0;
-            //prevent divide by 0
-            if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
-            if (!ANIMATED) chance += 16;
-            int num = (int) (P.random(0, chance));
-            if (num == 0) {
+    private Color tintedColor(Color tint) {
+        return new Color (
+                getTintChannel(tint.getRed(), lifespan, MAX_LIFE),
+                getTintChannel(tint.getGreen(), lifespan, MAX_LIFE),
+                getTintChannel(tint.getBlue(), lifespan, MAX_LIFE)
+        );
+    }
+
+    private void buffParticles() {
+        if (paused || type == null || (type.particle == null && type != Enemy.DamageType.bleeding)) return;
+        float chance = 0;
+        //prevent divide by 0
+        if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
+        if (!ANIMATED) chance += 16;
+        if (type == Enemy.DamageType.bleeding) chance *= 3;
+        int num = (int) (P.random(0, chance));
+        if (num == 0) {
+            if (type == Enemy.DamageType.bleeding) {
+                bottomParticles.add(new Pile(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                        (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
+                        0, BLOOD_PARTICLE.name()));
+            }
+            else {
                 midParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
                         (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
-                        P.random(0, 360), part));
+                        P.random(360), type.particle));
             }
         }
     }
@@ -162,22 +172,19 @@ public class Corpse {
     }
 
     private void bloodParticles() {
-        if (!paused) {
-            if (BLOOD_PARTICLE != null) {
-                for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
-                    float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
-                    float chance = sq(1 / (speed + 0.01f));
-                    chance += 16;
-                    if (P.random(chance) < 1) {
-                        PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
-                        midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
-                    }
-                    chance += 10;
-                    if (P.random(chance) < 0) {
-                        PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.2f);
-                        bottomParticles.add(new Pile(P, pos.x, pos.y, 0, BLOOD_PARTICLE.name()));
-                    }
-                }
+        if (paused || BLOOD_PARTICLE == null) return;
+        for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
+            float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
+            float chance = sq(1 / (speed + 0.01f));
+            chance += 16;
+            if (P.random(chance) < 1) {
+                PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
+                midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
+            }
+            chance += 10;
+            if (P.random(chance) < 1) {
+                PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.2f);
+                bottomParticles.add(new Pile(P, pos.x, pos.y, 0, BLOOD_PARTICLE.name()));
             }
         }
     }

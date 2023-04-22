@@ -147,11 +147,6 @@ public class Hand {
                             roundTo(matrixMousePosition.y, 50) + 25
                     )
             ) < MIN_ENEMY_DISTANCE * enemy.pfSize) {
-                if (!hand.held.equals("null")) {
-                    P.noStroke();
-                    P.fill(255, 0, 0, 100);
-                    P.circle(enemy.position.x, enemy.position.y, (MIN_ENEMY_DISTANCE * enemy.pfSize * 2) - 25);
-                }
                 return true;
             }
         }
@@ -193,6 +188,27 @@ public class Hand {
         else P.tint(255, 150);
         P.image(heldSprite, (roundTo(matrixMousePosition.x, 50)) - (25f / 2) - offset.x + 13, roundTo(matrixMousePosition.y, 50) - (25f / 2) - offset.y + 13);
         P.tint(255);
+        displayCritterCircles();
+    }
+
+    private void displayCritterCircles() {
+        if (enemies.size() == 0) return;
+        for (Enemy enemy : enemies) {
+            if (findDistBetween(
+                    enemy.position,
+                    new PVector(
+                            roundTo(matrixMousePosition.x, 50) + 25,
+                            roundTo(matrixMousePosition.y, 50) + 25
+                    )
+            ) < MIN_ENEMY_DISTANCE * enemy.pfSize) {
+                if (!hand.held.equals("null")) {
+                    P.noStroke();
+                    P.fill(255, 0, 0, 100);
+                    P.circle(enemy.position.x, enemy.position.y, (MIN_ENEMY_DISTANCE * enemy.pfSize * 2) - 25);
+                }
+                return;
+            }
+        }
     }
 
     public void displayHeldInfo() {

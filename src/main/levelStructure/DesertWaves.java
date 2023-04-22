@@ -7,10 +7,8 @@ import java.awt.*;
 
 public class DesertWaves {
 
-    public DesertWaves() {}
-
     public static Wave[] genDesertWaves(PApplet p) {
-        Wave[] waves = new Wave[40];
+        Wave[] waves = new Wave[35];
 
         Color smolBugAccent = new Color(10, 10, 10);
         Color smolBugFill = new Color(255, 100, 100);
@@ -148,7 +146,7 @@ public class DesertWaves {
         waves[24] = new Wave(p, 65, 15, midWormFill, midWormAccent, midWormText, "Sandworms");
         waves[24].addSpawns("midWorm", 5);
         waves[24].addSpawns("scorpion", 10);
-        waves[24].addSpawns("littleWorm", 25);
+        waves[24].addSpawns("littleWorm", 15);
 
         waves[25] = new Wave(p, 85, 35, midWormFill, midWormAccent, midWormText, "Sandworms");
         waves[25].addSpawns("midWorm", 10);
@@ -158,62 +156,38 @@ public class DesertWaves {
         waves[26].addSpawns("emperor", 1);
         waves[26].addSpawns("scorpion", 5);
 
-        waves[27] = new Wave(p, 60, 25, emperorFill, emperorAccent, emperorText, "Emperors");
-        waves[27].addSpawns("emperor", 3);
-        waves[27].addSpawns("midWorm", 5);
+        waves[27] = new Wave(p, 45, 10, sidewinderFill, sidewinderAccent, sidewinderText, "Sidewinders");
+        waves[27].addSpawns("sidewinder", 30);
+        waves[27].addSpawns("scorpion", 3);
 
-        waves[28] = new Wave(p, 45, 10, sidewinderFill, sidewinderAccent, sidewinderText, "Sidewinders");
-        waves[28].addSpawns("sidewinder", 30);
-        waves[28].addSpawns("scorpion", 3);
+        waves[28] = new Wave(p, 60, 25, emperorFill, emperorAccent, emperorText, "Emperors");
+        waves[28].addSpawns("emperor", 5);
+        waves[28].addSpawns("scorpion", 15);
 
-        waves[29] = new Wave(p, 60, 25, emperorFill, emperorAccent, emperorText, "Emperors");
-        waves[29].addSpawns("emperor", 5);
-        waves[29].addSpawns("scorpion", 15);
+        waves[29] = new Wave(p, 65, 25, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
+        waves[29].addSpawns("bigBug", 10);
+        waves[29].addSpawns("midBug", 15);
+        waves[29].addSpawns("smolBug", 15);
 
-        waves[30] = new Wave(p, 65, 25, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
-        waves[30].addSpawns("bigBug", 15);
+        waves[30] = new Wave(p, 65, 15, midWormFill, midWormAccent, midWormText, "Sandworms");
+        waves[30].addSpawns("midWorm", 10);
+        waves[30].addSpawns("bigBug", 5);
+        waves[30].addSpawns("littleWorm", 30);
 
-        waves[31] = new Wave(p, 65, 25, bigBugFill, bigBugAccent, bigBugText, "Big Bugs");
-        waves[31].addSpawns("bigBug", 15);
-        waves[31].addSpawns("midBug", 15);
-        waves[31].addSpawns("smolBug", 15);
+        waves[31] = new Wave(p, 65, 5, bigWormFill, bigWormAccent, bigWormText, "Megaworm");
+        waves[31].addSpawns("bigWorm", 1);
 
-        waves[32] = new Wave(p, 65, 15, midWormFill, midWormAccent, midWormText, "Sandworms");
-        waves[32].addSpawns("midWorm", 10);
+        waves[32] = new Wave(p, 60, 25, emperorFill, emperorAccent, emperorText, "Emperors");
+        waves[32].addSpawns("emperor", 5);
         waves[32].addSpawns("bigBug", 5);
-        waves[32].addSpawns("littleWorm", 30);
 
-        waves[33] = new Wave(p, 65, 20, bigWormFill, bigWormAccent, bigWormText, "Megaworm");
-        waves[33].addSpawns("bigWorm", 1);
+        waves[33] = new Wave(p, 65, 20, bigWormFill, bigWormAccent, bigWormText, "Megaworms");
+        waves[33].addSpawns("bigWorm", 3);
 
-        waves[34] = new Wave(p, 60, 25, emperorFill, emperorAccent, emperorText, "Emperors");
-        waves[34].addSpawns("emperor", 5);
-        waves[34].addSpawns("bigBug", 5);
-
-        waves[35] = new Wave(p, 65, 15, midWormFill, midWormAccent, midWormText, "Sandworms");
-        waves[35].addSpawns("midWorm", 20);
-        waves[35].addSpawns("bigBug", 5);
-        waves[35].addSpawns("scorpion", 10);
-        waves[35].addSpawns("littleWorm", 30);
-
-        waves[36] = new Wave(p, 60, 25, emperorFill, emperorAccent, emperorText, "Emperors");
-        waves[36].addSpawns("emperor", 15);
-
-        waves[37] = new Wave(p, 65, 20, bigWormFill, bigWormAccent, bigWormText, "Megaworms");
-        waves[37].addSpawns("bigWorm", 5);
-
-        waves[38] = new Wave(p, 250, 100, hordeFill, hordeAccent, hordeText, "Horde");
-        waves[38].addSpawns("midBug", 15);
-        waves[38].addSpawns("bigBug", 20);
-        waves[38].addSpawns("emperor", 15);
-        waves[38].addSpawns("sidewinder", 15);
-        waves[38].addSpawns("scorpion", 30);
-        waves[38].addSpawns("antlion", 10);
-
-        waves[39] = new Wave(p, 60, 25, hordeFill, hordeAccent, hordeText, "Mega Horde");
-        waves[39].addSpawns("bigBug", 15);
-        waves[39].addSpawns("emperor", 10);
-        waves[39].addSpawns("bigWorm", 4);
+        waves[34] = new Wave(p, 100, 40, hordeFill, hordeAccent, hordeText, "Mega Horde");
+        waves[34].addSpawns("bigBug", 15);
+        waves[34].addSpawns("emperor", 10);
+        waves[34].addSpawns("bigWorm", 4);
 
         for (Wave wave : waves) wave.load();
         return waves;

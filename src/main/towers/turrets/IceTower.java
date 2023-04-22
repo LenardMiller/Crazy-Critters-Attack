@@ -181,7 +181,8 @@ public class IceTower extends Turret {
         }
     }
 
-    private void placeWall(Tile tile) { //todo: nullpointerexception
+    private void placeWall(Tile tile) {
+        if (tile == null) return;
         if (tile.tower == null) {
             tile.tower = new IceWall(p, tile, wallHp, wallTimeUntilDamage);
             Wall wall = (Wall) tile.tower;
@@ -248,7 +249,7 @@ public class IceTower extends Turret {
 
         upgradePrices[3] = 1000;
         upgradePrices[4] = 1500;
-        upgradePrices[5] = 25000;
+        upgradePrices[5] = 35000;
         //titles
         upgradeTitles[0] = "Longer Lasting";
         upgradeTitles[1] = "Stronger Ice";
@@ -298,10 +299,10 @@ public class IceTower extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0:
-                    wallTimeUntilDamage *= 2;
+                    wallTimeUntilDamage += 15;
                     break;
                 case 1:
-                    wallHp *= 2;
+                    wallHp += 40;
                     break;
                 case 2:
                     name = "autoIceTower";
@@ -309,6 +310,7 @@ public class IceTower extends Turret {
                     wallTimeUntilDamage = -1;
                     angle = 0;
                     material = Material.crystal;
+                    hasPriority = false;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -335,7 +337,8 @@ public class IceTower extends Turret {
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     titleLines = new String[]{"Super Freeze", "Ray"};
-                    wallHp *= 2;
+                    wallHp += 170;
+                    wallTimeUntilDamage += 20;
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Encases any enemy", o);
                         iceWallInfo(o);

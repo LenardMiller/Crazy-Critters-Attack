@@ -64,10 +64,10 @@ public class RandomCannon extends Turret {
         //price
         upgradePrices[0] = 150;
         upgradePrices[1] = 150;
-        upgradePrices[2] = 600;
+        upgradePrices[2] = 500;
         upgradePrices[3] = 75;
         upgradePrices[4] = 125;
-        upgradePrices[5] = 500;
+        upgradePrices[5] = 600;
         //titles
         upgradeTitles[0] = "Heavy Luggage";
         upgradeTitles[1] = "Faster Firing";
@@ -144,7 +144,7 @@ public class RandomCannon extends Turret {
                 case 5:
                     laundry = true;
                     range += 30;
-                    damage += 20;
+                    damage += 10;
                     effectDuration = 6;
                     effectLevel = 25;
                     betweenFireFrames = 1;

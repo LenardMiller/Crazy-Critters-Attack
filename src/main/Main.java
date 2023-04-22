@@ -93,7 +93,7 @@ public class Main extends PApplet {
             won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, isFullscreen, isOpenGL, isGore, hasVerticalBars;
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
-    public static boolean dev = false;
+    public static boolean dev = true;
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;
@@ -248,8 +248,9 @@ public class Main extends PApplet {
             case Restart:
                 Game.reset(this);
                 paused = false;
-                screen = Screen.InGame;
                 Saver.wipe();
+                screen = Screen.InGame;
+                targetScreen = screen;
                 break;
             case PlayOrLevelSelect:
                 try {

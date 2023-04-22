@@ -47,14 +47,18 @@ public class EnergyBlast extends Projectile {
             topParticles.add(new MediumExplosion(p, position.x, position.y, p.random(360), "energy"));
         } else {
             int num = (int) (p.random(16, 42));
+            for (int j = num; j >= 0; j--) {
+                topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(360), "energy", p.random(100,200)));
+            }
             for (int i = 0; i < num; i++) {
                 PVector pos = Utilities.getRandomPointInRange(p, position, effectRadius);
                 topParticles.add(new MiscParticle(p, pos.x, pos.y, p.random(360), "energy"));
             }
-            for (int j = num; j >= 0; j--) {
-                topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(360), "energy", p.random(100,200)));
-            }
             topParticles.add(new LargeExplosion(p, position.x, position.y, p.random(360), "energy"));
+            for (int i = 0; i < (num / 10) + 1; i++) {
+                PVector pos = Utilities.getRandomPointInRange(p, position, effectRadius / 2f);
+                topParticles.add(new MediumExplosion(p, pos.x, pos.y, p.random(360), "energy"));
+            }
         }
         projectiles.remove(this);
     }

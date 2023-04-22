@@ -16,8 +16,8 @@ public class Roach extends Enemy {
         radius = 12;
         speed = 65;
         moneyDrop = 100;
-        damage = 10;
-        maxHp = 5000;
+        damage = 7;
+        maxHp = 3000;
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "roach";

@@ -262,7 +262,7 @@ public class MagicMissileer extends Turret {
 
         upgradePrices[3] = 1000;
         upgradePrices[4] = 2000;
-        upgradePrices[5] = 25000;
+        upgradePrices[5] = 30000;
         //titles
         upgradeTitles[0] = "More Range";
         upgradeTitles[1] = "More Magic";

@@ -17,7 +17,7 @@ public class Bat extends FlyingEnemy {
         speed = 45;
         moneyDrop = 50;
         damage = 3;
-        maxHp = 750; //Hp
+        maxHp = 500; //Hp
         hp = maxHp;
         hitParticle = HitParticle.redOuch;
         name = "bat";

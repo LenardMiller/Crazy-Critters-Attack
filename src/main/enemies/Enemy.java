@@ -74,9 +74,13 @@ public abstract class Enemy {
         energy(new Color(60, 60, 60), "energy"),
         electricity(new Color(60, 60, 60), "electricity"),
         nuclear(new Color(60, 60, 60), "nuclear"),
-        orangeMagic(new Color(60, 60, 60), "orangeMagic"),
+        electrified(new Color(60, 60, 60), "nuclear"),
+        orangeMagic(new Color(232, 99, 17), "orangeMagic"),
+        greenMagic(new Color(54, 211, 104), "greenMagic"),
         dark(new Color(79, 0, 128), "dark"),
-        frozen(new Color(150, 225, 255), null);
+        frozen(new Color(150, 225, 255), null),
+        bleeding(null, null),
+        stunned(null, null);
 
         public final Color finalTintColor;
         public final String particle;
@@ -251,7 +255,7 @@ public abstract class Enemy {
             corpses.add(new Corpse(p, position, corpseSize,
               rotation + p.random(radians(-5), radians(5)), new PVector(0, 0),
               currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
-              null, 0, true));
+              hitParticle, 0, true));
     }
 
     protected void cleanDeathEffect() {
@@ -563,7 +567,7 @@ public abstract class Enemy {
                 //ignored if no assigned attack sound
                 playSoundRandomSpeed(p, attackSound, 1);
             }
-        } else if (!targetMachine) state = State.Moving;
+        } else if (!targetMachine && attackFrame == 0) state = State.Moving;
         if (targetMachine) {
             moveFrame = 0;
             //actually do damage to machines

@@ -26,7 +26,7 @@ public class Stunned extends Buff {
         if (enId > -1 && enId < enemies.size()) {
             Enemy enemy = enemies.get(enId);
             enemy.immobilized = true;
-            if (enemy instanceof BurrowingEnemy) enemy.state = Enemy.State.Attacking;
+            if (enemy instanceof BurrowingEnemy) enemy.state = Enemy.State.Special;
         }
         else buffs.remove(this);
     }

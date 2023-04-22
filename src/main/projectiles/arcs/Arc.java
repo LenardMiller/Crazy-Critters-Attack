@@ -76,6 +76,7 @@ public class Arc {
     }
 
     public void update(int j) {
+        if (paused) return;
         if (alpha == 255) zap(BLACKLISTED_ENEMY);
         if (!paused) alpha -= up60ToFramerate(8);
         if (alpha <= 0) arcs.remove(j);
