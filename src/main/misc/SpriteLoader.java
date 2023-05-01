@@ -706,6 +706,15 @@ public class SpriteLoader {
         staticSprites.put("deadGrassCornerTR_De_TL",p.loadImage("sprites/tiles/decoration/deadGrassCorners/tr.png"));
         staticSprites.put("lichenDe_TL",p.loadImage("sprites/tiles/decoration/lichen.png"));
         staticSprites.put("deadLichenDe_TL",p.loadImage("sprites/tiles/decoration/deadLichen.png"));
+        staticSprites.put("lilyPad0De_TL",p.loadImage("sprites/tiles/decoration/lilyPads/000.png"));
+        staticSprites.put("lilyPad1De_TL",p.loadImage("sprites/tiles/decoration/lilyPads/001.png"));
+        staticSprites.put("lilyPad2De_TL",p.loadImage("sprites/tiles/decoration/lilyPads/002.png"));
+        staticSprites.put("deadLilyPad0De_TL",p.loadImage("sprites/tiles/decoration/deadLilyPads/000.png"));
+        staticSprites.put("deadLilyPad1De_TL",p.loadImage("sprites/tiles/decoration/deadLilyPads/001.png"));
+        staticSprites.put("deadLilyPad2De_TL",p.loadImage("sprites/tiles/decoration/deadLilyPads/002.png"));
+        staticSprites.put("veryDeadLilyPad0De_TL",p.loadImage("sprites/tiles/decoration/veryDeadLilyPads/000.png"));
+        staticSprites.put("veryDeadLilyPad1De_TL",p.loadImage("sprites/tiles/decoration/veryDeadLilyPads/001.png"));
+        staticSprites.put("veryDeadLilyPad2De_TL",p.loadImage("sprites/tiles/decoration/veryDeadLilyPads/002.png"));
         //flooring
         staticSprites.put("woodWallFl_TL",p.loadImage("sprites/tiles/flooring/woodWall/base.png"));
         staticSprites.put("stoneWallFl_TL",p.loadImage("sprites/tiles/flooring/stoneWall/base.png"));
@@ -763,15 +772,6 @@ public class SpriteLoader {
         staticSprites.put("flowerCyanBr_TL",p.loadImage("sprites/tiles/breakables/cyanFlower.png"));
         staticSprites.put("flowerDeadCyanBr_TL",p.loadImage("sprites/tiles/breakables/deadCyanFlower.png"));
         staticSprites.put("flowerVeryDeadCyanBr_TL",p.loadImage("sprites/tiles/breakables/veryDeadCyanFlower.png"));
-        staticSprites.put("lilyPad0Br_TL",p.loadImage("sprites/tiles/breakables/lilyPads/000.png"));
-        staticSprites.put("lilyPad1Br_TL",p.loadImage("sprites/tiles/breakables/lilyPads/001.png"));
-        staticSprites.put("lilyPad2Br_TL",p.loadImage("sprites/tiles/breakables/lilyPads/002.png"));
-        staticSprites.put("deadLilyPad0Br_TL",p.loadImage("sprites/tiles/breakables/deadLilyPads/000.png"));
-        staticSprites.put("deadLilyPad1Br_TL",p.loadImage("sprites/tiles/breakables/deadLilyPads/001.png"));
-        staticSprites.put("deadLilyPad2Br_TL",p.loadImage("sprites/tiles/breakables/deadLilyPads/002.png"));
-        staticSprites.put("veryDeadLilyPad0Br_TL",p.loadImage("sprites/tiles/breakables/veryDeadLilyPads/000.png"));
-        staticSprites.put("veryDeadLilyPad1Br_TL",p.loadImage("sprites/tiles/breakables/veryDeadLilyPads/001.png"));
-        staticSprites.put("veryDeadLilyPad2Br_TL",p.loadImage("sprites/tiles/breakables/veryDeadLilyPads/002.png"));
         staticSprites.put("orangeFlowersBr_TL",p.loadImage("sprites/tiles/breakables/orangeFlowers.png"));
         staticSprites.put("blueFlowersBr_TL",p.loadImage("sprites/tiles/breakables/blueFlowers.png"));
         staticSprites.put("deadOrangeFlowersBr_TL",p.loadImage("sprites/tiles/breakables/deadOrangeFlowers.png"));

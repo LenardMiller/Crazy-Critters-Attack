@@ -1814,7 +1814,7 @@
     "machine": false,
     "id": 281,
     "type": "tile",
-    "breakable": "lilyPad0Br_TL",
+    "decoration": "lilyPad0De_TL",
     "obstacle": "invisibleOb_TL",
     "base": "water"
   },
@@ -1945,7 +1945,6 @@
     "machine": false,
     "id": 300,
     "type": "tile",
-    "breakable": "rockBr_TL",
     "obstacle": "invisibleOb_TL",
     "base": "water"
   },
@@ -2057,7 +2056,6 @@
     "machine": false,
     "id": 317,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
     "obstacle": "invisibleOb_TL",
     "base": "water"
   },
@@ -2065,7 +2063,7 @@
     "machine": false,
     "id": 318,
     "type": "tile",
-    "breakable": "lilyPad2Br_TL",
+    "decoration": "lilyPad2De_TL",
     "obstacle": "invisibleOb_TL",
     "base": "water"
   },
@@ -2080,7 +2078,7 @@
     "machine": false,
     "id": 320,
     "type": "tile",
-    "breakable": "lilyPad1Br_TL",
+    "decoration": "lilyPad1De_TL",
     "obstacle": "invisibleOb_TL",
     "base": "water"
   },

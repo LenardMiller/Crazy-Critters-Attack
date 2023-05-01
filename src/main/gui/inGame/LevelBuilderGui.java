@@ -26,19 +26,19 @@ public class LevelBuilderGui {
 
 
     public void build() {
-        placeButton(0, 0, "sandstoneRockBr");
-        placeButton(1, 0, "smallSandstoneRockBr");
-        placeButton(2, 0, "blueFlowersBr");
+        placeButton(0, 0, "lilyPad0De");
+        placeButton(1, 0, "lilyPad1De");
+        placeButton(2, 0, "lilyPad2De");
         placeButton(3, 0, "orangeFlowersBr");
 
-        placeButton(0, 1, "cactus0Ob");
-        placeButton(1, 1, "cactus1Ob");
-        placeButton(2, 1, "cactus2Ob");
+        placeButton(0, 1, "deadLilyPad0De");
+        placeButton(1, 1, "deadLilyPad1De");
+        placeButton(2, 1, "deadLilyPad2De");
         placeButton(3, 1, "cactus3Ob");
 
-        placeButton(0, 2, "cactus4Ob");
-        placeButton(1, 2, "cactus5Ob");
-        placeButton(2, 2, "bushOb");
+        placeButton(0, 2, "veryDeadLilyPad0De");
+        placeButton(1, 2, "veryDeadLilyPad1De");
+        placeButton(2, 2, "veryDeadLilyPad2De");
         placeButton(3, 2, "yellowGrassPatchDe");
 
         placeButton(0, 3, "deadBlueFlowersBr");
@@ -67,23 +67,23 @@ public class LevelBuilderGui {
         placeButton(3, 7, "yellowGrassCornerTL_De");
 
         placeButton(0, 8, "flowerCyanBr");
-        placeButton(1, 8, "lilyPad0Br");
-        placeButton(2, 8, "lilyPad1Br");
-        placeButton(3, 8, "lilyPad2Br");
+        placeButton(1, 8, "lilyPad0De");
+        placeButton(2, 8, "lilyPad1De");
+        placeButton(3, 8, "lilyPad2De");
 
         placeButton(0, 9, "flowerDeadCyanBr");
-        placeButton(1, 9, "deadLilyPad0Br");
-        placeButton(2, 9, "deadLilyPad1Br");
-        placeButton(3, 9, "deadLilyPad2Br");
+        placeButton(1, 9, "deadLilyPad0De");
+        placeButton(2, 9, "deadLilyPad1De");
+        placeButton(3, 9, "deadLilyPad2De");
 
         placeButton(0, 10, "deadGrassBa");
         placeButton(1, 10, "flowerVeryDeadCyanBr");
         placeButton(2, 10, "veryDeadDandelionsBr");
         placeButton(3, 10, "deadLeavesBr");
 
-        placeButton(0, 11, "veryDeadLilyPad0Br");
-        placeButton(1, 11, "veryDeadLilyPad1Br");
-        placeButton(2, 11, "veryDeadLilyPad2Br");
+        placeButton(0, 11, "veryDeadLilyPad0De");
+        placeButton(1, 11, "veryDeadLilyPad1De");
+        placeButton(2, 11, "veryDeadLilyPad2De");
         placeButton(3, 11, "smallDeadTreeOb");
 
         placeButton(0, 12, "deadGrassCornerBR_De");

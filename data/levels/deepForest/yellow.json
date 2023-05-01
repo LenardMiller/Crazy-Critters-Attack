@@ -1818,7 +1818,7 @@
     "machine": false,
     "id": 281,
     "type": "tile",
-    "breakable": "deadLilyPad0Br_TL",
+    "decoration": "deadLilyPad0De_TL",
     "obstacle": "invisibleOb_TL",
     "base": "dirtyWater"
   },
@@ -1949,7 +1949,6 @@
     "machine": false,
     "id": 300,
     "type": "tile",
-    "breakable": "rockBr_TL",
     "obstacle": "invisibleOb_TL",
     "base": "dirtyWater"
   },
@@ -2061,7 +2060,6 @@
     "machine": false,
     "id": 317,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
     "obstacle": "invisibleOb_TL",
     "base": "dirtyWater"
   },
@@ -2069,7 +2067,7 @@
     "machine": false,
     "id": 318,
     "type": "tile",
-    "breakable": "deadLilyPad2Br_TL",
+    "decoration": "deadLilyPad2De_TL",
     "obstacle": "invisibleOb_TL",
     "base": "dirtyWater"
   },
@@ -2084,7 +2082,7 @@
     "machine": false,
     "id": 320,
     "type": "tile",
-    "breakable": "deadLilyPad1Br_TL",
+    "decoration": "deadLilyPad1De_TL",
     "obstacle": "invisibleOb_TL",
     "base": "dirtyWater"
   },
