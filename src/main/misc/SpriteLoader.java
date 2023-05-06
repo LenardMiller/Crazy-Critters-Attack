@@ -829,6 +829,22 @@ public class SpriteLoader {
         staticSprites.put("caveWallTLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/tld.png"));
         staticSprites.put("caveWallTRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/trd.png"));
         staticSprites.put("caveWallPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/pillar.png"));
+        staticSprites.put("caveWallMossyTBOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/tb.png"));
+        staticSprites.put("caveWallMossyTLBOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/tlb.png"));
+        staticSprites.put("caveWallMossyTLDBOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/tldb.png"));
+        staticSprites.put("caveWallMossyBRDGOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/brdg.png"));
+        staticSprites.put("caveWallMossyRGOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/rg.png"));
+        staticSprites.put("caveWallMossyTGOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/tg.png"));
+        staticSprites.put("caveWallMossyTRGOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/trg.png"));
+        staticSprites.put("caveWallMossyBLDPOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/bldp.png"));
+        staticSprites.put("caveWallMossyBPOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/bp.png"));
+        staticSprites.put("caveWallMossyBRPOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/brp.png"));
+        staticSprites.put("caveWallShroomyTOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/shroomy/t.png"));
+        staticSprites.put("caveWallShroomyT2Ob_TL",p.loadImage("sprites/tiles/obstacles/caveWall/shroomy/t2.png"));
+        staticSprites.put("caveWallShroomyBLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/shroomy/bld.png"));
+        staticSprites.put("caveWallShroomyTRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/shroomy/trd.png"));
+        staticSprites.put("caveWallShroomyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/shroomy/pillar.png"));
+        staticSprites.put("caveWallMossyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/pillar.png"));
         staticSprites.put("invisibleOb_TL",p.loadImage("sprites/tiles/obstacles/invisible.png"));
     }
 

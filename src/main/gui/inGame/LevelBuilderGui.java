@@ -26,28 +26,26 @@ public class LevelBuilderGui {
 
 
     public void build() {
-        placeButton(0, 0, "lilyPad0De");
-        placeButton(1, 0, "lilyPad1De");
-        placeButton(2, 0, "lilyPad2De");
-        placeButton(3, 0, "orangeFlowersBr");
+        placeButton(0, 0, "caveWallMossyTBOb");
+        placeButton(1, 0, "caveWallMossyTLBOb");
+        placeButton(2, 0, "caveWallMossyTLDBOb");
 
-        placeButton(0, 1, "deadLilyPad0De");
-        placeButton(1, 1, "deadLilyPad1De");
-        placeButton(2, 1, "deadLilyPad2De");
-        placeButton(3, 1, "cactus3Ob");
+        placeButton(0, 1, "caveWallMossyBRDGOb");
+        placeButton(1, 1, "caveWallMossyRGOb");
+        placeButton(2, 1, "caveWallMossyTGOb");
+        placeButton(3, 1, "caveWallMossyTRGOb");
 
-        placeButton(0, 2, "veryDeadLilyPad0De");
-        placeButton(1, 2, "veryDeadLilyPad1De");
-        placeButton(2, 2, "veryDeadLilyPad2De");
-        placeButton(3, 2, "yellowGrassPatchDe");
+        placeButton(0, 2, "caveWallMossyBLDPOb");
+        placeButton(1, 2, "caveWallMossyBPOb");
+        placeButton(2, 2, "caveWallMossyBRPOb");
 
-        placeButton(0, 3, "deadBlueFlowersBr");
-        placeButton(1, 3, "deadDandelionsBr");
-        placeButton(2, 3, "deadOrangeFlowersBr");
-        placeButton(3, 3, "deadCactus0Ob");
+        placeButton(0, 3, "caveWallShroomyTOb");
+        placeButton(1, 3, "caveWallShroomyT2Ob");
+        placeButton(2, 3, "caveWallShroomyBLDOb");
+        placeButton(3, 3, "caveWallShroomyTRDOb");
 
-        placeButton(0, 4, "deadCactus1Ob");
-        placeButton(1, 4, "deadCactus2Ob");
+        placeButton(0, 4, "caveWallShroomyPillarOb");
+        placeButton(1, 4, "caveWallMossyPillarOb");
         placeButton(2, 4, "deadCactus3Ob");
         placeButton(3, 4, "deadCactus4Ob");
 

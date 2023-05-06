@@ -160,7 +160,6 @@
     "machine": false,
     "id": 24,
     "type": "tile",
-    "decoration": "lichenDe_TL",
     "base": "stone"
   },
   {
@@ -186,7 +185,7 @@
     "machine": false,
     "id": 28,
     "type": "tile",
-    "obstacle": "caveWallTRDOb_TL",
+    "obstacle": "caveWallShroomyTRDOb_TL",
     "base": "stone"
   },
   {
@@ -221,7 +220,7 @@
     "machine": false,
     "id": 33,
     "type": "tile",
-    "obstacle": "caveWallBLDOb_TL",
+    "obstacle": "caveWallMossyBLDPOb_TL",
     "base": "stone"
   },
   {
@@ -272,7 +271,7 @@
     "machine": false,
     "id": 41,
     "type": "tile",
-    "obstacle": "caveWallTLDOb_TL",
+    "obstacle": "caveWallMossyTLDBOb_TL",
     "base": "stone"
   },
   {
@@ -304,7 +303,6 @@
     "machine": false,
     "id": 46,
     "type": "tile",
-    "breakable": "glowshrooms0Br_TL",
     "base": "stone"
   },
   {
@@ -339,14 +337,14 @@
     "machine": false,
     "id": 51,
     "type": "tile",
-    "obstacle": "caveWallBOb_TL",
+    "obstacle": "caveWallMossyBPOb_TL",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 52,
     "type": "tile",
-    "obstacle": "caveWallBROb_TL",
+    "obstacle": "caveWallMossyBRPOb_TL",
     "base": "stone"
   },
   {
@@ -390,7 +388,6 @@
     "machine": false,
     "id": 59,
     "type": "tile",
-    "breakable": "glowshrooms1Br_TL",
     "base": "stone"
   },
   {
@@ -483,7 +480,6 @@
     "machine": false,
     "id": 74,
     "type": "tile",
-    "breakable": "glowshrooms1Br_TL",
     "base": "stone"
   },
   {
@@ -502,7 +498,7 @@
     "machine": false,
     "id": 77,
     "type": "tile",
-    "obstacle": "caveWallTROb_TL",
+    "obstacle": "caveWallMossyTRGOb_TL",
     "base": "stone"
   },
   {
@@ -552,14 +548,14 @@
     "machine": false,
     "id": 85,
     "type": "tile",
-    "obstacle": "caveWallTLOb_TL",
+    "obstacle": "caveWallMossyTLBOb_TL",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 86,
     "type": "tile",
-    "obstacle": "caveWallTOb_TL",
+    "obstacle": "caveWallMossyTBOb_TL",
     "base": "stone"
   },
   {
@@ -585,7 +581,6 @@
     "machine": false,
     "id": 90,
     "type": "tile",
-    "breakable": "glowshrooms2Br_TL",
     "base": "stone"
   },
   {
@@ -604,7 +599,7 @@
     "machine": false,
     "id": 93,
     "type": "tile",
-    "obstacle": "caveWallBRDOb_TL",
+    "obstacle": "caveWallMossyBRDGOb_TL",
     "base": "stone"
   },
   {
@@ -623,7 +618,7 @@
     "machine": false,
     "id": 96,
     "type": "tile",
-    "obstacle": "caveWallROb_TL",
+    "obstacle": "caveWallMossyRGOb_TL",
     "base": "stone"
   },
   {
@@ -648,7 +643,7 @@
     "machine": false,
     "id": 100,
     "type": "tile",
-    "obstacle": "caveWallPillarOb_TL",
+    "obstacle": "caveWallShroomyPillarOb_TL",
     "base": "stone"
   },
   {
@@ -720,7 +715,7 @@
     "machine": false,
     "id": 111,
     "type": "tile",
-    "obstacle": "caveWallTOb_TL",
+    "obstacle": "caveWallMossyTGOb_TL",
     "base": "stone"
   },
   {
@@ -753,7 +748,6 @@
     "machine": false,
     "id": 116,
     "type": "tile",
-    "decoration": "lichenDe_TL",
     "base": "stone"
   },
   {
@@ -821,7 +815,6 @@
     "machine": false,
     "id": 127,
     "type": "tile",
-    "decoration": "lichenDe_TL",
     "base": "stone"
   },
   {
@@ -951,7 +944,7 @@
     "machine": false,
     "id": 148,
     "type": "tile",
-    "obstacle": "caveWallTRDOb_TL",
+    "obstacle": "caveWallShroomyTRDOb_TL",
     "base": "stone"
   },
   {
@@ -1068,7 +1061,6 @@
     "machine": false,
     "id": 167,
     "type": "tile",
-    "breakable": "glowshrooms2Br_TL",
     "base": "stone"
   },
   {
@@ -1106,7 +1098,6 @@
     "machine": false,
     "id": 173,
     "type": "tile",
-    "breakable": "glowshrooms2Br_TL",
     "base": "stone"
   },
   {
@@ -1200,7 +1191,7 @@
     "machine": false,
     "id": 188,
     "type": "tile",
-    "obstacle": "caveWallBOb_TL",
+    "obstacle": "caveWallMossyBPOb_TL",
     "base": "stone"
   },
   {
@@ -1334,7 +1325,7 @@
     "machine": false,
     "id": 210,
     "type": "tile",
-    "obstacle": "caveWallBLDOb_TL",
+    "obstacle": "caveWallShroomyBLDOb_TL",
     "base": "stone"
   },
   {
@@ -1426,7 +1417,6 @@
     "machine": false,
     "id": 225,
     "type": "tile",
-    "decoration": "lichenDe_TL",
     "base": "stone"
   },
   {
@@ -1477,7 +1467,6 @@
     "machine": false,
     "id": 233,
     "type": "tile",
-    "breakable": "glowshrooms1Br_TL",
     "base": "stone"
   },
   {
@@ -1514,7 +1503,6 @@
     "machine": false,
     "id": 239,
     "type": "tile",
-    "breakable": "glowshrooms1Br_TL",
     "base": "stone"
   },
   {
@@ -1533,15 +1521,14 @@
     "machine": false,
     "id": 242,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
-    "obstacle": "caveWallBRDOb_TL",
+    "obstacle": "caveWallMossyBRDGOb_TL",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 243,
     "type": "tile",
-    "obstacle": "caveWallTOb_TL",
+    "obstacle": "caveWallMossyTGOb_TL",
     "base": "stone"
   },
   {
@@ -1573,7 +1560,7 @@
     "machine": false,
     "id": 248,
     "type": "tile",
-    "obstacle": "caveWallTLDOb_TL",
+    "obstacle": "caveWallMossyTLDBOb_TL",
     "base": "stone"
   },
   {
@@ -1611,14 +1598,13 @@
     "machine": false,
     "id": 254,
     "type": "tile",
-    "breakable": "glowshrooms0Br_TL",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 255,
     "type": "tile",
-    "obstacle": "caveWallPillarOb_TL",
+    "obstacle": "caveWallMossyPillarOb_TL",
     "base": "stone"
   },
   {
@@ -1721,6 +1707,7 @@
     "machine": false,
     "id": 271,
     "type": "tile",
+    "obstacle": "caveWallShroomyT2Ob_TL",
     "base": "stone"
   },
   {
@@ -1814,7 +1801,6 @@
     "machine": false,
     "id": 286,
     "type": "tile",
-    "breakable": "glowshrooms0Br_TL",
     "base": "stone"
   },
   {
@@ -1827,7 +1813,6 @@
     "machine": false,
     "id": 288,
     "type": "tile",
-    "decoration": "lichenDe_TL",
     "base": "stone"
   },
   {
@@ -1841,7 +1826,7 @@
     "machine": false,
     "id": 290,
     "type": "tile",
-    "obstacle": "caveWallTOb_TL",
+    "obstacle": "caveWallShroomyTOb_TL",
     "base": "stone"
   },
   {
@@ -1888,14 +1873,13 @@
     "machine": false,
     "id": 297,
     "type": "tile",
-    "obstacle": "caveWallBLDOb_TL",
+    "obstacle": "caveWallMossyBLDPOb_TL",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 298,
     "type": "tile",
-    "breakable": "glowshrooms3Br_TL",
     "base": "stone"
   },
   {
@@ -1953,7 +1937,7 @@
     "machine": false,
     "id": 307,
     "type": "tile",
-    "obstacle": "caveWallBRDOb_TL",
+    "obstacle": "caveWallMossyBRDGOb_TL",
     "base": "stone"
   },
   {
@@ -1994,8 +1978,7 @@
     "machine": false,
     "id": 313,
     "type": "tile",
-    "decoration": "lichenDe_TL",
-    "obstacle": "caveWallBRDOb_TL",
+    "obstacle": "caveWallMossyBRDGOb_TL",
     "base": "stone"
   },
   {
@@ -2023,14 +2006,13 @@
     "machine": false,
     "id": 317,
     "type": "tile",
-    "obstacle": "caveWallBLDOb_TL",
+    "obstacle": "caveWallMossyBLDPOb_TL",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 318,
     "type": "tile",
-    "breakable": "glowshrooms0Br_TL",
     "base": "stone"
   },
   {
@@ -2075,7 +2057,7 @@
     "machine": false,
     "id": 325,
     "type": "tile",
-    "obstacle": "caveWallBRDOb_TL",
+    "obstacle": "caveWallMossyBRDGOb_TL",
     "base": "stone"
   },
   {
@@ -2281,7 +2263,7 @@
     "type": "tile"
   },
   {
-    "betweenFrames": 4,
+    "betweenFrames": 0,
     "barHorizontal": true,
     "maxHp": 500,
     "hp": 500,
