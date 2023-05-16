@@ -715,6 +715,13 @@ public class SpriteLoader {
         staticSprites.put("veryDeadLilyPad0De_TL",p.loadImage("sprites/tiles/decoration/veryDeadLilyPads/000.png"));
         staticSprites.put("veryDeadLilyPad1De_TL",p.loadImage("sprites/tiles/decoration/veryDeadLilyPads/001.png"));
         staticSprites.put("veryDeadLilyPad2De_TL",p.loadImage("sprites/tiles/decoration/veryDeadLilyPads/002.png"));
+        staticSprites.put("mushroomsBLDDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/Bld.png"));
+        staticSprites.put("mushroomsTRDDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/trd.png"));
+        staticSprites.put("mushroomsTDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/t.png"));
+        staticSprites.put("mushroomsPillarADe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/pillarA.png"));
+        staticSprites.put("mushroomsPillarBDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/pillarB.png"));
+        staticSprites.put("mushroomsPillarCDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/pillarC.png"));
+        staticSprites.put("mushroomsPillarDDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/pillarD.png"));
         //flooring
         staticSprites.put("woodWallFl_TL",p.loadImage("sprites/tiles/flooring/woodWall/base.png"));
         staticSprites.put("stoneWallFl_TL",p.loadImage("sprites/tiles/flooring/stoneWall/base.png"));

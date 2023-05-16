@@ -185,6 +185,7 @@
     "machine": false,
     "id": 28,
     "type": "tile",
+    "decoration": "mushroomsTRDDe_TL",
     "obstacle": "caveWallShroomyTRDOb_TL",
     "base": "stone"
   },
@@ -523,12 +524,14 @@
     "machine": false,
     "id": 81,
     "type": "tile",
+    "decoration": "mushroomsPillarADe_TL",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 82,
     "type": "tile",
+    "decoration": "mushroomsPillarBDe_TL",
     "base": "stone"
   },
   {
@@ -650,6 +653,7 @@
     "machine": false,
     "id": 101,
     "type": "tile",
+    "decoration": "mushroomsPillarCDe_TL",
     "base": "stone"
   },
   {
@@ -766,6 +770,7 @@
     "machine": false,
     "id": 119,
     "type": "tile",
+    "decoration": "mushroomsPillarDDe_TL",
     "base": "stone"
   },
   {
@@ -944,6 +949,7 @@
     "machine": false,
     "id": 148,
     "type": "tile",
+    "decoration": "mushroomsTRDDe_TL",
     "obstacle": "caveWallShroomyTRDOb_TL",
     "base": "stone"
   },
@@ -1325,6 +1331,7 @@
     "machine": false,
     "id": 210,
     "type": "tile",
+    "decoration": "mushroomsBLDDe_TL",
     "obstacle": "caveWallShroomyBLDOb_TL",
     "base": "stone"
   },
@@ -1707,6 +1714,7 @@
     "machine": false,
     "id": 271,
     "type": "tile",
+    "decoration": "mushroomsTDe_TL",
     "obstacle": "caveWallShroomyT2Ob_TL",
     "base": "stone"
   },

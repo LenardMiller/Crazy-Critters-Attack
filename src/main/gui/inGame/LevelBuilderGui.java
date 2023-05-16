@@ -46,18 +46,15 @@ public class LevelBuilderGui {
 
         placeButton(0, 4, "caveWallShroomyPillarOb");
         placeButton(1, 4, "caveWallMossyPillarOb");
-        placeButton(2, 4, "deadCactus3Ob");
-        placeButton(3, 4, "deadCactus4Ob");
 
-        placeButton(0, 5, "deadCactus5Ob");
-        placeButton(1, 5, "deadBushOb");
-        placeButton(2, 5, "yellowLeavesBr");
-        placeButton(3, 5, "deadDandelionsBr");
+        placeButton(0, 5, "mushroomsBLDDe");
+        placeButton(1, 5, "mushroomsTRDDe");
+        placeButton(2, 5, "mushroomsTDe");
 
-        placeButton(0, 6, "waterBa");
-        placeButton(1, 6, "yellowGrassBa");
-        placeButton(2, 6, "yellowGrassCornerBR_De");
-        placeButton(3, 6, "yellowGrassCornerBL_De");
+        placeButton(0, 6, "mushroomsPillarADe");
+        placeButton(1, 6, "mushroomsPillarBDe");
+        placeButton(2, 6, "mushroomsPillarCDe");
+        placeButton(3, 6, "mushroomsPillarDDe");
 
         placeButton(0, 7, "dirtyWaterBa");
         placeButton(1, 7, "yellowGrassPatchDe");
