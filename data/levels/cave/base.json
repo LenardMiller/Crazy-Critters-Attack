@@ -173,6 +173,7 @@
     "machine": false,
     "id": 26,
     "type": "tile",
+    "decoration": "lichenGreenDe_TL",
     "base": "stone"
   },
   {
@@ -545,6 +546,7 @@
     "machine": false,
     "id": 84,
     "type": "tile",
+    "decoration": "lichenBlueDe_TL",
     "base": "stone"
   },
   {
@@ -572,6 +574,7 @@
     "machine": false,
     "id": 88,
     "type": "tile",
+    "decoration": "lichenWhiteDe_TL",
     "base": "stone"
   },
   {
@@ -752,6 +755,7 @@
     "machine": false,
     "id": 116,
     "type": "tile",
+    "decoration": "lichenOrangeDe_TL",
     "base": "stone"
   },
   {
@@ -1382,6 +1386,7 @@
     "machine": false,
     "id": 218,
     "type": "tile",
+    "decoration": "lichenWhiteDe_TL",
     "base": "stone"
   },
   {
@@ -1424,6 +1429,7 @@
     "machine": false,
     "id": 225,
     "type": "tile",
+    "decoration": "lichenGreenDe_TL",
     "base": "stone"
   },
   {
@@ -1516,6 +1522,7 @@
     "machine": false,
     "id": 240,
     "type": "tile",
+    "decoration": "lichenOrangeDe_TL",
     "base": "stone"
   },
   {
@@ -1702,6 +1709,7 @@
     "machine": false,
     "id": 269,
     "type": "tile",
+    "decoration": "lichenBlueDe_TL",
     "base": "stone"
   },
   {

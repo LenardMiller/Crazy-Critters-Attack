@@ -722,6 +722,10 @@ public class SpriteLoader {
         staticSprites.put("mushroomsPillarBDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/pillarB.png"));
         staticSprites.put("mushroomsPillarCDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/pillarC.png"));
         staticSprites.put("mushroomsPillarDDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/pillarD.png"));
+        staticSprites.put("lichenOrangeDe_TL", p.loadImage("sprites/tiles/decoration/lichen/orange.png"));
+        staticSprites.put("lichenGreenDe_TL", p.loadImage("sprites/tiles/decoration/lichen/green.png"));
+        staticSprites.put("lichenBlueDe_TL", p.loadImage("sprites/tiles/decoration/lichen/blue.png"));
+        staticSprites.put("lichenWhiteDe_TL", p.loadImage("sprites/tiles/decoration/lichen/white.png"));
         //flooring
         staticSprites.put("woodWallFl_TL",p.loadImage("sprites/tiles/flooring/woodWall/base.png"));
         staticSprites.put("stoneWallFl_TL",p.loadImage("sprites/tiles/flooring/stoneWall/base.png"));

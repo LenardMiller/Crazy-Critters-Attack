@@ -56,10 +56,10 @@ public class LevelBuilderGui {
         placeButton(2, 6, "mushroomsPillarCDe");
         placeButton(3, 6, "mushroomsPillarDDe");
 
-        placeButton(0, 7, "dirtyWaterBa");
-        placeButton(1, 7, "yellowGrassPatchDe");
-        placeButton(2, 7, "yellowGrassCornerTR_De");
-        placeButton(3, 7, "yellowGrassCornerTL_De");
+        placeButton(0, 7, "lichenOrangeDe");
+        placeButton(1, 7, "lichenBlueDe");
+        placeButton(2, 7, "lichenWhiteDe");
+        placeButton(3, 7, "lichenGreenDe");
 
         placeButton(0, 8, "flowerCyanBr");
         placeButton(1, 8, "lilyPad0De");
