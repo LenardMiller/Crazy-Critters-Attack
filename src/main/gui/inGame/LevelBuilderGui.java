@@ -61,49 +61,40 @@ public class LevelBuilderGui {
         placeButton(2, 7, "lichenWhiteDe");
         placeButton(3, 7, "lichenGreenDe");
 
-        placeButton(0, 8, "flowerCyanBr");
-        placeButton(1, 8, "lilyPad0De");
-        placeButton(2, 8, "lilyPad1De");
-        placeButton(3, 8, "lilyPad2De");
+        placeButton(0, 8, "caveWallDeadMossyTOb");
+        placeButton(1, 8, "caveWallDeadMossyTLOb");
+        placeButton(2, 8, "caveWallDeadMossyTLDOb");
 
-        placeButton(0, 9, "flowerDeadCyanBr");
-        placeButton(1, 9, "deadLilyPad0De");
-        placeButton(2, 9, "deadLilyPad1De");
-        placeButton(3, 9, "deadLilyPad2De");
+        placeButton(0, 9, "caveWallDeadMossyBRDOb");
+        placeButton(1, 9, "caveWallDeadMossyROb");
+        placeButton(2, 9, "caveWallDeadMossyTOb");
+        placeButton(3, 9, "caveWallDeadMossyTROb");
 
-        placeButton(0, 10, "deadGrassBa");
-        placeButton(1, 10, "flowerVeryDeadCyanBr");
-        placeButton(2, 10, "veryDeadDandelionsBr");
-        placeButton(3, 10, "deadLeavesBr");
+        placeButton(0, 10, "caveWallDeadMossyBLDOb");
+        placeButton(1, 10, "caveWallDeadMossyBOb");
+        placeButton(2, 10, "caveWallDeadMossyBROb");
 
-        placeButton(0, 11, "veryDeadLilyPad0De");
-        placeButton(1, 11, "veryDeadLilyPad1De");
-        placeButton(2, 11, "veryDeadLilyPad2De");
-        placeButton(3, 11, "smallDeadTreeOb");
+        placeButton(0, 11, "caveWallDeadShroomyTOb");
+        placeButton(1, 11, "caveWallDeadShroomyT2Ob");
+        placeButton(2, 11, "caveWallDeadShroomyBLDOb");
+        placeButton(3, 11, "caveWallDeadShroomyTRDOb");
 
-        placeButton(0, 12, "deadGrassCornerBR_De");
-        placeButton(1, 12, "deadGrassCornerBL_De");
-        placeButton(2, 12, "deadTreeTLOb");
-        placeButton(3, 12, "deadTreeTROb");
+        placeButton(0, 12, "caveWallDeadShroomyPillarOb");
+        placeButton(1, 12, "caveWallDeadMossyPillarOb");
 
-        placeButton(0, 13, "deadGrassCornerTR_De");
-        placeButton(1, 13, "deadGrassCornerTL_De");
-        placeButton(2, 13, "deadTreeBLOb");
-        placeButton(3, 13, "deadTreeBROb");
+        placeButton(0, 13, "deadMushroomsBLDDe");
+        placeButton(1, 13, "deadMushroomsTRDDe");
+        placeButton(2, 13, "deadMushroomsTDe");
 
-        placeButton(0, 14, "brownGrassCornerBR_De");
-        placeButton(1, 14, "brownGrassCornerBL_De");
-        placeButton(2, 14, "brownTreeTLOb");
-        placeButton(3, 14, "brownTreeTROb");
+        placeButton(0, 14, "deadMushroomsPillarADe");
+        placeButton(1, 14, "deadMushroomsPillarBDe");
+        placeButton(2, 14, "deadMushroomsPillarCDe");
+        placeButton(3, 14, "deadMushroomsPillarDDe");
 
-        placeButton(0, 15, "brownGrassCornerTR_De");
-        placeButton(1, 15, "brownGrassCornerTL_De");
-        placeButton(2, 15, "brownTreeBLOb");
-        placeButton(3, 15, "brownTreeBROb");
-
-        placeButton(0, 16, "brownGrassBa");
-        placeButton(1, 16, "smallBrownTreeOb");
-        placeButton(2, 16, "sludgeBa");
+        placeButton(0, 15, "deadLichenOrangeDe");
+        placeButton(1, 15, "deadLichenBlueDe");
+        placeButton(2, 15, "deadLichenWhiteDe");
+        placeButton(3, 15, "deadLichenGreenDe");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");

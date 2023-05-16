@@ -726,6 +726,17 @@ public class SpriteLoader {
         staticSprites.put("lichenGreenDe_TL", p.loadImage("sprites/tiles/decoration/lichen/green.png"));
         staticSprites.put("lichenBlueDe_TL", p.loadImage("sprites/tiles/decoration/lichen/blue.png"));
         staticSprites.put("lichenWhiteDe_TL", p.loadImage("sprites/tiles/decoration/lichen/white.png"));
+        staticSprites.put("deadMushroomsBLDDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/Bld.png"));
+        staticSprites.put("deadMushroomsTRDDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/trd.png"));
+        staticSprites.put("deadMushroomsTDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/t.png"));
+        staticSprites.put("deadMushroomsPillarADe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/pillarA.png"));
+        staticSprites.put("deadMushroomsPillarBDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/pillarB.png"));
+        staticSprites.put("deadMushroomsPillarCDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/pillarC.png"));
+        staticSprites.put("deadMushroomsPillarDDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/pillarD.png"));
+        staticSprites.put("deadLichenOrangeDe_TL", p.loadImage("sprites/tiles/decoration/deadLichen/orange.png"));
+        staticSprites.put("deadLichenGreenDe_TL", p.loadImage("sprites/tiles/decoration/deadLichen/green.png"));
+        staticSprites.put("deadLichenBlueDe_TL", p.loadImage("sprites/tiles/decoration/deadLichen/blue.png"));
+        staticSprites.put("deadLichenWhiteDe_TL", p.loadImage("sprites/tiles/decoration/deadLichen/white.png"));
         //flooring
         staticSprites.put("woodWallFl_TL",p.loadImage("sprites/tiles/flooring/woodWall/base.png"));
         staticSprites.put("stoneWallFl_TL",p.loadImage("sprites/tiles/flooring/stoneWall/base.png"));
@@ -856,6 +867,21 @@ public class SpriteLoader {
         staticSprites.put("caveWallShroomyTRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/shroomy/trd.png"));
         staticSprites.put("caveWallShroomyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/shroomy/pillar.png"));
         staticSprites.put("caveWallMossyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/mossy/pillar.png"));
+        staticSprites.put("caveWallDeadMossyTOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/t.png"));
+        staticSprites.put("caveWallDeadMossyTLOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/tl.png"));
+        staticSprites.put("caveWallDeadMossyTLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/tld.png"));
+        staticSprites.put("caveWallDeadMossyBRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/brd.png"));
+        staticSprites.put("caveWallDeadMossyROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/r.png"));
+        staticSprites.put("caveWallDeadMossyTROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/tr.png"));
+        staticSprites.put("caveWallDeadMossyBLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/bld.png"));
+        staticSprites.put("caveWallDeadMossyBOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/b.png"));
+        staticSprites.put("caveWallDeadMossyBROb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/br.png"));
+        staticSprites.put("caveWallDeadShroomyTOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadShroomy/t.png"));
+        staticSprites.put("caveWallDeadShroomyT2Ob_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadShroomy/t2.png"));
+        staticSprites.put("caveWallDeadShroomyBLDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadShroomy/bld.png"));
+        staticSprites.put("caveWallDeadShroomyTRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadShroomy/trd.png"));
+        staticSprites.put("caveWallDeadShroomyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadShroomy/pillar.png"));
+        staticSprites.put("caveWallDeadMossyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/pillar.png"));
         staticSprites.put("invisibleOb_TL",p.loadImage("sprites/tiles/obstacles/invisible.png"));
     }
 
