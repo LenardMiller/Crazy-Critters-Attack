@@ -2279,7 +2279,7 @@
     "type": "tile"
   },
   {
-    "betweenFrames": 0,
+    "betweenFrames": 2,
     "barHorizontal": true,
     "maxHp": 500,
     "hp": 500,

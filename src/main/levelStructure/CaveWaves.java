@@ -133,6 +133,7 @@ public class CaveWaves {
         waves[28].addSpawns(smallGolem, 10);
 
         waves[29] = wavePreset(p, 130, 1, "1 bigGolem");
+        waves[29].polluter = new Polluter(p, 3, "cave/polluted");
         waves[29].addSpawns(bigGolem, 1);
 
         waves[30] = wavePreset(p, 50, 15, bigAlbinoBug);
