@@ -646,6 +646,7 @@ public class SpriteLoader {
         staticSprites.put("dirtyWaterBa_TL",p.loadImage("sprites/tiles/base/dirtyWater/base.png"));
         staticSprites.put("brownGrassBa_TL",p.loadImage("sprites/tiles/base/brownGrass/base.png"));
         staticSprites.put("sludgeBa_TL",p.loadImage("sprites/tiles/base/sludge.png"));
+        staticSprites.put("pinkSnowBa_TL",p.loadImage("sprites/tiles/base/pinkSnow.png"));
         for (int i = 0; i < 9; i++) {
             String name;
             switch (i) {
@@ -882,6 +883,7 @@ public class SpriteLoader {
         staticSprites.put("caveWallDeadShroomyTRDOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadShroomy/trd.png"));
         staticSprites.put("caveWallDeadShroomyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadShroomy/pillar.png"));
         staticSprites.put("caveWallDeadMossyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/pillar.png"));
+        staticSprites.put("snowGhostOb_TL",p.loadImage("sprites/tiles/obstacles/snowGhost.png"));
         staticSprites.put("invisibleOb_TL",p.loadImage("sprites/tiles/obstacles/invisible.png"));
     }
 

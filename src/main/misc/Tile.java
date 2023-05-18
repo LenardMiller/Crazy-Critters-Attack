@@ -496,6 +496,7 @@ public class Tile {
             "brownGrass",
             "yellowGrass",
             "grass",
+            "pinkSnow",
             "snow"
     };
 
