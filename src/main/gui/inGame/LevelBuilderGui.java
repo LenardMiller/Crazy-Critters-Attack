@@ -29,9 +29,13 @@ public class LevelBuilderGui {
         placeButton(0, 0, "pinkSnowBa");
         placeButton(1, 0, "snowBa");
         placeButton(2, 0, "snowGhostOb");
+        placeButton(3, 0, "evergreenOb");
 
         placeButton(0, 1, "snowCornersBRDe");
         placeButton(1, 1, "snowCornersBLDe");
+        placeButton(2, 1, "dirtBa");
+        placeButton(3, 1, "stoneBa");
+
         placeButton(0, 2, "snowCornersTRDe");
         placeButton(1, 2, "snowCornersTLDe");
 

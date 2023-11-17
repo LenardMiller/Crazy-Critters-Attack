@@ -646,8 +646,8 @@ public class SpriteLoader {
         staticSprites.put("dirtyWaterBa_TL",p.loadImage("sprites/tiles/base/dirtyWater/base.png"));
         staticSprites.put("brownGrassBa_TL",p.loadImage("sprites/tiles/base/brownGrass/base.png"));
         staticSprites.put("sludgeBa_TL",p.loadImage("sprites/tiles/base/sludge.png"));
-        staticSprites.put("pinkSnowBa_TL",p.loadImage("sprites/tiles/base/pinkSnow.png"));
-        for (int i = 0; i < 9; i++) {
+        staticSprites.put("pinkSnowBa_TL", p.loadImage("sprites/tiles/base/pinkSnow/base.png"));
+        for (int i = 0; i < 10; i++) {
             String name;
             switch (i) {
                 case 0:
@@ -676,6 +676,9 @@ public class SpriteLoader {
                     break;
                 case 8:
                     name = "dirtyWater";
+                    break;
+                case 9:
+                    name = "pinkSnow";
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + i);
@@ -888,6 +891,7 @@ public class SpriteLoader {
         staticSprites.put("caveWallDeadShroomyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadShroomy/pillar.png"));
         staticSprites.put("caveWallDeadMossyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/pillar.png"));
         staticSprites.put("snowGhostOb_TL",p.loadImage("sprites/tiles/obstacles/snowGhost.png"));
+        staticSprites.put("evergreenOb_TL",p.loadImage("sprites/tiles/obstacles/evergreen.png"));
         staticSprites.put("invisibleOb_TL",p.loadImage("sprites/tiles/obstacles/invisible.png"));
     }
 
