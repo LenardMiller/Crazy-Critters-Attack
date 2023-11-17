@@ -147,7 +147,7 @@
     "machine": false,
     "id": 24,
     "type": "tile",
-    "base": "pinkSnow"
+    "base": "snow"
   },
   {
     "machine": false,
@@ -159,13 +159,15 @@
     "machine": false,
     "id": 26,
     "type": "tile",
-    "base": "snow"
+    "decoration": "snowCornersBLDe_TL",
+    "base": "pinkSnow"
   },
   {
     "machine": false,
     "id": 27,
     "type": "tile",
-    "base": "snow"
+    "decoration": "snowCornersTRDe_TL",
+    "base": "pinkSnow"
   },
   {
     "machine": false,
@@ -256,6 +258,7 @@
     "machine": false,
     "id": 42,
     "type": "tile",
+    "decoration": "snowCornersTLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -292,13 +295,14 @@
     "machine": false,
     "id": 48,
     "type": "tile",
+    "decoration": "snowCornersTLDe_TL",
     "base": "pinkSnow"
   },
   {
     "machine": false,
     "id": 49,
     "type": "tile",
-    "base": "snow"
+    "base": "pinkSnow"
   },
   {
     "machine": false,
@@ -310,6 +314,7 @@
     "machine": false,
     "id": 51,
     "type": "tile",
+    "decoration": "snowCornersTRDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -357,6 +362,7 @@
     "machine": false,
     "id": 59,
     "type": "tile",
+    "decoration": "snowCornersTLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -411,6 +417,7 @@
     "machine": false,
     "id": 68,
     "type": "tile",
+    "decoration": "snowCornersBLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -429,6 +436,7 @@
     "machine": false,
     "id": 71,
     "type": "tile",
+    "decoration": "snowCornersTRDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -482,6 +490,7 @@
     "machine": false,
     "id": 80,
     "type": "tile",
+    "decoration": "snowCornersBRDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -585,6 +594,7 @@
     "machine": false,
     "id": 97,
     "type": "tile",
+    "decoration": "snowCornersBLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -645,6 +655,7 @@
     "machine": false,
     "id": 107,
     "type": "tile",
+    "decoration": "snowCornersBLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -663,6 +674,7 @@
     "machine": false,
     "id": 110,
     "type": "tile",
+    "decoration": "snowCornersBRDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -704,6 +716,7 @@
     "machine": false,
     "id": 117,
     "type": "tile",
+    "decoration": "snowCornersBLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -770,6 +783,7 @@
     "machine": false,
     "id": 128,
     "type": "tile",
+    "decoration": "snowCornersBLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -782,7 +796,8 @@
     "machine": false,
     "id": 130,
     "type": "tile",
-    "base": "snow"
+    "decoration": "snowCornersTRDe_TL",
+    "base": "pinkSnow"
   },
   {
     "machine": false,
@@ -895,7 +910,8 @@
     "machine": false,
     "id": 149,
     "type": "tile",
-    "base": "snow"
+    "decoration": "snowCornersBLDe_TL",
+    "base": "pinkSnow"
   },
   {
     "machine": false,
@@ -1037,7 +1053,8 @@
     "machine": false,
     "id": 173,
     "type": "tile",
-    "base": "snow"
+    "decoration": "snowCornersTLDe_TL",
+    "base": "pinkSnow"
   },
   {
     "machine": false,
@@ -1121,7 +1138,8 @@
     "machine": false,
     "id": 187,
     "type": "tile",
-    "base": "snow"
+    "decoration": "snowCornersBRDe_TL",
+    "base": "pinkSnow"
   },
   {
     "machine": false,
@@ -1157,7 +1175,8 @@
     "machine": false,
     "id": 193,
     "type": "tile",
-    "base": "snow"
+    "decoration": "snowCornersBRDe_TL",
+    "base": "pinkSnow"
   },
   {
     "machine": false,
@@ -1384,6 +1403,7 @@
     "machine": false,
     "id": 231,
     "type": "tile",
+    "decoration": "snowCornersTRDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -1456,6 +1476,7 @@
     "machine": false,
     "id": 243,
     "type": "tile",
+    "decoration": "snowCornersTLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -1491,6 +1512,7 @@
     "machine": false,
     "id": 249,
     "type": "tile",
+    "decoration": "snowCornersBLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -1557,6 +1579,7 @@
     "machine": false,
     "id": 260,
     "type": "tile",
+    "decoration": "snowCornersTLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -1610,6 +1633,7 @@
     "machine": false,
     "id": 269,
     "type": "tile",
+    "decoration": "snowCornersBLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -1664,6 +1688,7 @@
     "machine": false,
     "id": 278,
     "type": "tile",
+    "decoration": "snowCornersTLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -1676,6 +1701,7 @@
     "machine": false,
     "id": 280,
     "type": "tile",
+    "decoration": "snowCornersBRDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -1730,6 +1756,7 @@
     "machine": false,
     "id": 289,
     "type": "tile",
+    "decoration": "snowCornersBLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -1748,6 +1775,7 @@
     "machine": false,
     "id": 292,
     "type": "tile",
+    "decoration": "snowCornersTLDe_TL",
     "base": "snow"
   },
   {
@@ -1772,6 +1800,7 @@
     "machine": false,
     "id": 296,
     "type": "tile",
+    "decoration": "snowCornersBLDe_TL",
     "base": "pinkSnow"
   },
   {
@@ -1796,7 +1825,8 @@
     "machine": false,
     "id": 300,
     "type": "tile",
-    "base": "snow"
+    "decoration": "snowCornersBRDe_TL",
+    "base": "pinkSnow"
   },
   {
     "machine": false,
@@ -1862,7 +1892,8 @@
     "machine": false,
     "id": 311,
     "type": "tile",
-    "base": "snow"
+    "decoration": "snowCornersBLDe_TL",
+    "base": "pinkSnow"
   },
   {
     "machine": false,
@@ -1898,6 +1929,7 @@
     "machine": false,
     "id": 317,
     "type": "tile",
+    "decoration": "snowCornersBRDe_TL",
     "base": "pinkSnow"
   },
   {

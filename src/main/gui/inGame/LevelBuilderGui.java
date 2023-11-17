@@ -27,7 +27,13 @@ public class LevelBuilderGui {
 
     public void build() {
         placeButton(0, 0, "pinkSnowBa");
-        placeButton(1, 0, "snowGhostOb");
+        placeButton(1, 0, "snowBa");
+        placeButton(2, 0, "snowGhostOb");
+
+        placeButton(0, 1, "snowCornersBRDe");
+        placeButton(1, 1, "snowCornersBLDe");
+        placeButton(0, 2, "snowCornersTRDe");
+        placeButton(1, 2, "snowCornersTLDe");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");

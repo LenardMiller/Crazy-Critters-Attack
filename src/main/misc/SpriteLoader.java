@@ -738,6 +738,10 @@ public class SpriteLoader {
         staticSprites.put("deadLichenGreenDe_TL", p.loadImage("sprites/tiles/decoration/deadLichen/green.png"));
         staticSprites.put("deadLichenBlueDe_TL", p.loadImage("sprites/tiles/decoration/deadLichen/blue.png"));
         staticSprites.put("deadLichenWhiteDe_TL", p.loadImage("sprites/tiles/decoration/deadLichen/white.png"));
+        staticSprites.put("snowCornersBLDe_TL", p.loadImage("sprites/tiles/decoration/snowCorners/bl.png"));
+        staticSprites.put("snowCornersTLDe_TL", p.loadImage("sprites/tiles/decoration/snowCorners/tl.png"));
+        staticSprites.put("snowCornersBRDe_TL", p.loadImage("sprites/tiles/decoration/snowCorners/br.png"));
+        staticSprites.put("snowCornersTRDe_TL", p.loadImage("sprites/tiles/decoration/snowCorners/tr.png"));
         //flooring
         staticSprites.put("woodWallFl_TL",p.loadImage("sprites/tiles/flooring/woodWall/base.png"));
         staticSprites.put("stoneWallFl_TL",p.loadImage("sprites/tiles/flooring/stoneWall/base.png"));
