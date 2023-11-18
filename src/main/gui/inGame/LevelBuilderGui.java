@@ -39,15 +39,24 @@ public class LevelBuilderGui {
         placeButton(0, 2, "snowCornersTRDe");
         placeButton(1, 2, "snowCornersTLDe");
         placeButton(2, 2, "deadOrangeFlowersBr");
-        placeButton(2, 2, "deadBlueFlowersBr");
+        placeButton(3, 2, "deadBlueFlowersBr");
 
-        placeButton(0, 3, "stoneCornersTRDe");
-        placeButton(1, 3, "stoneCornersTLDe");
+        placeButton(0, 3, "stoneCornersBRDe");
+        placeButton(1, 3, "stoneCornersBLDe");
         placeButton(2, 3, "smallRockBr");
         placeButton(3, 3, "rockBr");
 
-        placeButton(0, 4, "stoneCornersBRDe");
-        placeButton(1, 4, "stoneCornersBLDe");
+        placeButton(0, 4, "stoneCornersTRDe");
+        placeButton(1, 4, "stoneCornersTLDe");
+        placeButton(2, 4, "waterBa");
+        placeButton(3, 4, "everbrownOb");
+
+        placeButton(0, 5, "dirtCornersBRDe");
+        placeButton(1, 5, "dirtCornersBLDe");
+        placeButton(2, 5, "sludgeBa");
+
+        placeButton(0, 6, "dirtCornersTRDe");
+        placeButton(1, 6, "dirtCornersTLDe");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");

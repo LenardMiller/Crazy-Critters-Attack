@@ -459,6 +459,7 @@ public class Hand {
      * Assumes it is possible to do so */
     private void place() {
         Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
+        if (tile == null) return;
         boolean changeHeld = true;
         if (!alive) return;
         if (held.equals("wall")) {
@@ -482,6 +483,7 @@ public class Hand {
         }
         if (held.contains("TL")) {
             tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
+            if (tile == null) return;
             changeHeld = false;
             String shortName = held.replace("_TL", "");
             if (shortName.contains("Ba")) tile.baseLayer.set(held);

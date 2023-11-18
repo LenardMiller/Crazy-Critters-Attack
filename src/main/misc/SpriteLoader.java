@@ -749,6 +749,10 @@ public class SpriteLoader {
         staticSprites.put("stoneCornersTLDe_TL", p.loadImage("sprites/tiles/decoration/stoneCorners/tl.png"));
         staticSprites.put("stoneCornersBRDe_TL", p.loadImage("sprites/tiles/decoration/stoneCorners/br.png"));
         staticSprites.put("stoneCornersTRDe_TL", p.loadImage("sprites/tiles/decoration/stoneCorners/tr.png"));
+        staticSprites.put("dirtCornersBLDe_TL", p.loadImage("sprites/tiles/decoration/dirtCorners/bl.png"));
+        staticSprites.put("dirtCornersTLDe_TL", p.loadImage("sprites/tiles/decoration/dirtCorners/tl.png"));
+        staticSprites.put("dirtCornersBRDe_TL", p.loadImage("sprites/tiles/decoration/dirtCorners/br.png"));
+        staticSprites.put("dirtCornersTRDe_TL", p.loadImage("sprites/tiles/decoration/dirtCorners/tr.png"));
         //flooring
         staticSprites.put("woodWallFl_TL",p.loadImage("sprites/tiles/flooring/woodWall/base.png"));
         staticSprites.put("stoneWallFl_TL",p.loadImage("sprites/tiles/flooring/stoneWall/base.png"));
