@@ -745,6 +745,10 @@ public class SpriteLoader {
         staticSprites.put("snowCornersTLDe_TL", p.loadImage("sprites/tiles/decoration/snowCorners/tl.png"));
         staticSprites.put("snowCornersBRDe_TL", p.loadImage("sprites/tiles/decoration/snowCorners/br.png"));
         staticSprites.put("snowCornersTRDe_TL", p.loadImage("sprites/tiles/decoration/snowCorners/tr.png"));
+        staticSprites.put("stoneCornersBLDe_TL", p.loadImage("sprites/tiles/decoration/stoneCorners/bl.png"));
+        staticSprites.put("stoneCornersTLDe_TL", p.loadImage("sprites/tiles/decoration/stoneCorners/tl.png"));
+        staticSprites.put("stoneCornersBRDe_TL", p.loadImage("sprites/tiles/decoration/stoneCorners/br.png"));
+        staticSprites.put("stoneCornersTRDe_TL", p.loadImage("sprites/tiles/decoration/stoneCorners/tr.png"));
         //flooring
         staticSprites.put("woodWallFl_TL",p.loadImage("sprites/tiles/flooring/woodWall/base.png"));
         staticSprites.put("stoneWallFl_TL",p.loadImage("sprites/tiles/flooring/stoneWall/base.png"));
@@ -807,6 +811,7 @@ public class SpriteLoader {
         staticSprites.put("deadOrangeFlowersBr_TL",p.loadImage("sprites/tiles/breakables/deadOrangeFlowers.png"));
         staticSprites.put("deadBlueFlowersBr_TL",p.loadImage("sprites/tiles/breakables/deadBlueFlowers.png"));
         //obstacles
+        staticSprites.put("invisibleOb_TL",p.loadImage("sprites/tiles/obstacles/invisible.png"));
         staticSprites.put("smallTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallTree.png"));
         staticSprites.put("smallYellowTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallYellowTree.png"));
         staticSprites.put("smallBrownTreeOb_TL",p.loadImage("sprites/tiles/obstacles/smallBrownTree.png"));
@@ -892,7 +897,7 @@ public class SpriteLoader {
         staticSprites.put("caveWallDeadMossyPillarOb_TL",p.loadImage("sprites/tiles/obstacles/caveWall/deadMossy/pillar.png"));
         staticSprites.put("snowGhostOb_TL",p.loadImage("sprites/tiles/obstacles/snowGhost.png"));
         staticSprites.put("evergreenOb_TL",p.loadImage("sprites/tiles/obstacles/evergreen.png"));
-        staticSprites.put("invisibleOb_TL",p.loadImage("sprites/tiles/obstacles/invisible.png"));
+        staticSprites.put("everbrownOb_TL",p.loadImage("sprites/tiles/obstacles/everbrown.png"));
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {
