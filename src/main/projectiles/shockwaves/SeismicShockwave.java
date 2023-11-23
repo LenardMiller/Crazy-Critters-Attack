@@ -33,7 +33,9 @@ public class SeismicShockwave extends Shockwave {
     @Override
     public void display() {
         P.strokeWeight(3);
-        float alpha = PApplet.map(radius, 0, MAX_RADIUS, is360 ? 100 : 255, 0);
+
+        float alval = (float) Math.pow(radius / (float) MAX_RADIUS, 3);
+        float alpha = PApplet.map(alval, 0, 1, is360 ? 100 : 255, 0);
         P.stroke(125, alpha);
         P.noFill();
 
