@@ -1,13 +1,17 @@
 package main.projectiles.shockwaves;
 
 import main.enemies.Enemy;
+import main.misc.Utilities;
 import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.topParticles;
+import static processing.core.PConstants.HALF_PI;
 
 public class FireShockwave extends Shockwave {
 
@@ -19,6 +23,20 @@ public class FireShockwave extends Shockwave {
         buff = "burning";
         this.effectDuration = effectDuration;
         this.effectLevel = effectLevel;
+    }
+
+    public void display() {
+        P.strokeWeight(3);
+        float alval = (float) Math.pow(radius / (float) MAX_RADIUS, 3);
+        float alpha = PApplet.map(alval, 0, 1, 255, 0);
+        Color color = Utilities.mapColor(Color.yellow, Color.red, 0, MAX_RADIUS, radius);
+        P.stroke(color.getRGB(), alpha);
+        P.noFill();
+
+        P.circle(CENTER.x, CENTER.y, radius * 2);
+
+        P.noStroke();
+        P.strokeWeight(1);
     }
 
     @Override

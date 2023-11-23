@@ -15,6 +15,7 @@ import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
+import main.projectiles.shockwaves.Shockwave;
 import main.towers.Tower;
 import main.towers.Wall;
 import main.towers.turrets.Turret;
@@ -232,6 +233,7 @@ public class Game {
         IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).obstacleLayer.display());
         for (Projectile projectile : projectiles) projectile.displayShadow();
         for (Projectile projectile : projectiles) projectile.display();
+        for (Shockwave shockwave : shockwaves) shockwave.display();
         for (Arc arc : arcs) arc.display();
         for (Enemy enemy1 : enemies) if (enemy1 instanceof FlyingEnemy) enemy1.displayShadow();
         for (Enemy enemy : enemies) if (enemy instanceof FlyingEnemy) enemy.display();

@@ -57,6 +57,8 @@ public abstract class Shockwave {
         damageEnemies();
     }
 
+    public abstract void display();
+
     protected abstract void spawnParticles();
 
     protected float randomAngle() {

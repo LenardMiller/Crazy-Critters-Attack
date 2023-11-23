@@ -491,4 +491,21 @@ public class Utilities {
         }
         return vec;
     }
+
+    public static float coerceIn(float value, float low, float high) {
+        return max(min(value, high), low);
+    }
+
+    public static Color mapColor(Color a, Color b, float low, float high, float value) {
+        float r = map(value, low, high, a.getRed(), b.getRed());
+        float g = map(value, low, high, a.getGreen(), b.getGreen());
+        float bl = map(value, low, high, a.getBlue(), b.getBlue());
+
+        // Color expects a range of 0 to 1
+        r = coerceIn(map(r, 0f, 255f, 0f, 1f), 0, 1);
+        g = coerceIn(map(g, 0f, 255f, 0f, 1f), 0f, 1f);
+        bl = coerceIn(map(bl, 0f, 255f, 0f, 1f), 0f, 1f);
+
+        return new Color(r, g, bl);
+    }
 }

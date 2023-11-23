@@ -104,11 +104,12 @@ public class SeismicTower extends Turret {
                 a += TWO_PI / 6;
             }
             shockwaves.add(new SeismicShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
-              (int) barrelLength, getRange(), angle, shockwaveWidth, getDamage(), this));
+              (int) barrelLength, getRange(), angle, shockwaveWidth, getDamage(), this,
+                    false, true));
         } else {
             fireParticles(a);
-            shockwaves.add(new SeismicShockwave(p, position.x, position.y, 0, getRange(), angle, shockwaveWidth,
-              getDamage(), this));
+            shockwaves.add(new SeismicShockwave(p, position.x, position.y, 0,
+                    getRange(), angle, shockwaveWidth, getDamage(), this, seismicSense, false));
         }
     }
 

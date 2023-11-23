@@ -1,12 +1,16 @@
 package main.projectiles.shockwaves;
 
 import main.enemies.Enemy;
+import main.misc.Utilities;
 import main.particles.*;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.topParticles;
+import static processing.core.PConstants.HALF_PI;
 
 public class NuclearShockwave extends Shockwave {
 
@@ -14,6 +18,30 @@ public class NuclearShockwave extends Shockwave {
         super(p, centerX, centerY, 0, maxRadius, 0, 720, damage, turret);
 
         damageType = Enemy.DamageType.nuclear;
+    }
+
+    public void display() {
+        P.strokeWeight(5);
+        float alval = (float) Math.pow(radius / (float) MAX_RADIUS, 3);
+        float alphaCube = PApplet.map(alval, 0, 1, 255, 0);
+        float alphaLinear = PApplet.map(radius, 0, MAX_RADIUS, 255, 0);
+        Color color = Utilities.mapColor(Color.yellow, Color.red, 0, MAX_RADIUS, radius);
+        P.stroke(color.getRGB(), alphaCube);
+        P.noFill();
+        P.circle(CENTER.x, CENTER.y, radius * 2);
+        P.strokeWeight(4);
+        P.circle(CENTER.x, CENTER.y, radius * 1.8f);
+        P.strokeWeight(3);
+        P.circle(CENTER.x, CENTER.y, radius * 1.6f);
+        P.strokeWeight(2);
+        P.stroke(255, alphaLinear * 0.5f);
+        P.circle(CENTER.x, CENTER.y, radius * 4);
+        P.stroke(Color.YELLOW.getRGB(), alphaLinear);
+        P.circle(CENTER.x, CENTER.y, radius * 0.8f);
+        P.circle(CENTER.x, CENTER.y, radius * 0.7f);
+
+        P.noStroke();
+        P.strokeWeight(1);
     }
 
     @Override
