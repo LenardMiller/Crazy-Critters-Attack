@@ -33,9 +33,7 @@ public class FireShockwave extends Shockwave {
         P.stroke(color.getRGB(), alpha);
         P.noFill();
 
-        float angleA = ANGLE - HALF_PI + WIDTH / 2f;
-        float angleB = ANGLE - HALF_PI - WIDTH / 2f;
-        P.arc(CENTER.x, CENTER.y, radius * 2, radius * 2, angleB, angleA);
+        P.circle(CENTER.x, CENTER.y, radius * 2);
 
         P.noStroke();
         P.strokeWeight(1);
