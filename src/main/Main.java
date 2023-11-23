@@ -93,7 +93,7 @@ public class Main extends PApplet {
             won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, isFullscreen, isOpenGL, isGore, hasVerticalBars;
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
-    public static boolean dev = true;
+    public static boolean dev = false;
     public static PVector matrixMousePosition;
 
     public static final int FRAMERATE = 30;
@@ -157,6 +157,8 @@ public class Main extends PApplet {
     public static Random random = new Random();
 
     public static void main(String[] args) {
+        dev = args.length > 0 && args[0].equals("dev");
+
         loadSettings();
         PApplet.main("main.Main", args);
     }

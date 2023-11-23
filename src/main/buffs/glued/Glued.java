@@ -2,6 +2,7 @@ package main.buffs.glued;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
+import main.enemies.flyingEnemies.Fae;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.enemies.flyingEnemies.Frost;
 import main.misc.CompressArray;
@@ -84,11 +85,12 @@ public class Glued extends Buff {
         if (enemy.speed == newSpeed) { //prevent speeding up enemy
             enemy.speedModifier = 1; //set movement speed back to default
             //set attack speed back to default
-            int old = enemy.attackFrame;
             float frameProportion = (enemy.attackFrame / (float) enemy.attackFrames.length);
             enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
+            if (enemy instanceof Frost || enemy instanceof Fae) {
+                enemy.attackFrames = animatedSprites.get("wolf" + "AttackEN");
+            }
             enemy.attackFrame = Math.round(enemy.attackFrames.length * frameProportion);
-            if (enemy instanceof Frost) enemy.attackFrames = animatedSprites.get("wolf" + "AttackEN");
             //set damage frames back to default
             System.arraycopy(enemy.attackDmgFrames, 0,
                     enemy.tempAttackDmgFrames, 0,

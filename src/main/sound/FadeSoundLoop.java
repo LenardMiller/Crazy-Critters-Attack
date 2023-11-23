@@ -8,6 +8,8 @@ import static main.misc.Utilities.incrementByTo;
 
 public class FadeSoundLoop {
 
+    //todo: stop
+
     private final int minLength;
     private final SoundFile soundFile;
 

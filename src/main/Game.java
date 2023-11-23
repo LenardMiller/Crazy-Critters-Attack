@@ -76,7 +76,13 @@ public class Game {
         for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).update();
         if (playingLevel) levels[currentLevel].update();
         if (paused && !settings) pauseGui.update();
-        if (!showSpawn && !levelBuilder) inGameGui.update();
+        if (!showSpawn) {
+            if (!levelBuilder) {
+                inGameGui.update();
+            } else {
+                levelBuilderGui.update();
+            }
+        }
     }
 
     /** Update everything that has to do with enemies; enemies, corpses, ice checks and buffs **/

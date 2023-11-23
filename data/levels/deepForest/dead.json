@@ -1833,7 +1833,7 @@
     "machine": false,
     "id": 281,
     "type": "tile",
-    "breakable": "veryDeadLilyPad0Br_TL",
+    "decoration": "veryDeadLilyPad0De_TL",
     "base": "dirt"
   },
   {
@@ -2078,7 +2078,7 @@
     "machine": false,
     "id": 318,
     "type": "tile",
-    "breakable": "veryDeadLilyPad2Br_TL",
+    "decoration": "veryDeadLilyPad2De_TL",
     "base": "dirt"
   },
   {
@@ -2091,7 +2091,7 @@
     "machine": false,
     "id": 320,
     "type": "tile",
-    "breakable": "veryDeadLilyPad1Br_TL",
+    "decoration": "veryDeadLilyPad1De_TL",
     "base": "dirt"
   },
   {
