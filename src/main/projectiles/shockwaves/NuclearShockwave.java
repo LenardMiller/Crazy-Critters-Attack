@@ -16,6 +16,8 @@ public class NuclearShockwave extends Shockwave {
         damageType = Enemy.DamageType.nuclear;
     }
 
+    public void display() {}
+
     @Override
     protected void spawnParticles() {
         float a = randomAngle();

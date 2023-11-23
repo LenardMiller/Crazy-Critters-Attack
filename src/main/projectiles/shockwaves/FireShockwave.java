@@ -21,6 +21,8 @@ public class FireShockwave extends Shockwave {
         this.effectLevel = effectLevel;
     }
 
+    public void display() {}
+
     @Override
     protected void spawnParticles() {
         if (P.random(3) < 1) {

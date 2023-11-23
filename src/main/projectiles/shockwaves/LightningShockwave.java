@@ -18,6 +18,8 @@ public class LightningShockwave extends Shockwave {
         damageType = Enemy.DamageType.electricity;
     }
 
+    public void display() {}
+
     @Override
     protected void spawnParticles() {
         float a = randomAngle();
