@@ -22,7 +22,7 @@
     "machine": false,
     "id": 3,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -56,7 +56,7 @@
     "machine": false,
     "id": 8,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowWhiteTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -110,14 +110,14 @@
     "machine": false,
     "id": 16,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
     "machine": false,
     "id": 17,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowWhiteTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -196,7 +196,7 @@
     "machine": false,
     "id": 29,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowPinkTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -252,7 +252,7 @@
     "machine": false,
     "id": 38,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowWhiteTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -279,7 +279,7 @@
     "machine": false,
     "id": 42,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowPinkTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -353,7 +353,7 @@
     "machine": false,
     "id": 53,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowPinkTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -384,7 +384,7 @@
     "machine": false,
     "id": 58,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -430,7 +430,7 @@
     "machine": false,
     "id": 65,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -595,7 +595,7 @@
     "machine": false,
     "id": 90,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowWhiteTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -635,7 +635,7 @@
     "machine": false,
     "id": 96,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowWhiteTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -742,7 +742,7 @@
     "machine": false,
     "id": 112,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -878,7 +878,7 @@
     "machine": false,
     "id": 133,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowPinkTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -911,7 +911,7 @@
     "machine": false,
     "id": 138,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -979,7 +979,7 @@
     "machine": false,
     "id": 149,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -1078,7 +1078,7 @@
     "machine": false,
     "id": 165,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowWhiteTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -1444,7 +1444,7 @@
     "machine": false,
     "id": 224,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowPinkTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -1469,7 +1469,7 @@
     "machine": false,
     "id": 228,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -1516,7 +1516,7 @@
     "machine": false,
     "id": 235,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowWhiteTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -1607,7 +1607,7 @@
     "machine": false,
     "id": 249,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -1724,7 +1724,7 @@
     "machine": false,
     "id": 267,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowWhiteTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -1796,7 +1796,7 @@
     "machine": false,
     "id": 278,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowWhiteTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -1900,7 +1900,7 @@
     "machine": false,
     "id": 293,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowPinkTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -1982,7 +1982,7 @@
     "machine": false,
     "id": 305,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowPinkTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -2053,7 +2053,7 @@
     "machine": false,
     "id": 316,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowPinkTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -2090,7 +2090,7 @@
     "machine": false,
     "id": 321,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {
@@ -2136,7 +2136,7 @@
     "machine": false,
     "id": 328,
     "type": "tile",
-    "obstacle": "smallYellowTreeOb_TL",
+    "obstacle": "yellowYellowTreeOb_TL",
     "base": "yellowGrass"
   },
   {

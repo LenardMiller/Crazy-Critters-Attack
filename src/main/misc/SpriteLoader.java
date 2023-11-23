@@ -902,6 +902,12 @@ public class SpriteLoader {
         staticSprites.put("snowGhostOb_TL",p.loadImage("sprites/tiles/obstacles/snowGhost.png"));
         staticSprites.put("evergreenOb_TL",p.loadImage("sprites/tiles/obstacles/evergreen.png"));
         staticSprites.put("everbrownOb_TL",p.loadImage("sprites/tiles/obstacles/everbrown.png"));
+        staticSprites.put("pinkTreeOb_TL",p.loadImage("sprites/tiles/obstacles/pinkTree.png"));
+        staticSprites.put("whiteTreeOb_TL",p.loadImage("sprites/tiles/obstacles/whiteTree.png"));
+        staticSprites.put("yellowTreeOb_TL",p.loadImage("sprites/tiles/obstacles/yellowTree.png"));
+        staticSprites.put("yellowPinkTreeOb_TL",p.loadImage("sprites/tiles/obstacles/yellowPinkTree.png"));
+        staticSprites.put("yellowWhiteTreeOb_TL",p.loadImage("sprites/tiles/obstacles/yellowWhiteTree.png"));
+        staticSprites.put("yellowYellowTreeOb_TL",p.loadImage("sprites/tiles/obstacles/yellowYellowTree.png"));
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {

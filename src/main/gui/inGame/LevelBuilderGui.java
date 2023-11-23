@@ -58,6 +58,16 @@ public class LevelBuilderGui {
         placeButton(0, 6, "dirtCornersTRDe");
         placeButton(1, 6, "dirtCornersTLDe");
 
+        placeButton(0, 7, "pinkTreeOb");
+        placeButton(1, 7, "whiteTreeOb");
+        placeButton(2, 7, "yellowTreeOb");
+        placeButton(3, 7, "smallTreeOb");
+
+        placeButton(0, 8, "yellowPinkTreeOb");
+        placeButton(1, 8, "yellowWhiteTreeOb");
+        placeButton(2, 8, "yellowYellowTreeOb");
+        placeButton(3, 8, "smallYellowTreeOb");
+
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");
         placeButton(2, 17, "invisibleOb");

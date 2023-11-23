@@ -157,6 +157,8 @@ public class Main extends PApplet {
     public static Random random = new Random();
 
     public static void main(String[] args) {
+        dev = args.length > 0 && args[0].equals("dev");
+
         loadSettings();
         PApplet.main("main.Main", args);
     }
