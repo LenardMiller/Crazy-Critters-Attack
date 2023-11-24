@@ -135,7 +135,10 @@ public abstract class Turret extends Tower {
     protected void checkTarget() {
         getTargetEnemy();
         if (targetEnemy != null && state != State.Fire) aim(targetEnemy);
-        if (state == State.Idle && targetEnemy != null && abs(targetAngle - angle) < 0.02) { //if done animating and aimed
+        if (state == State.Idle &&
+                targetEnemy != null &&
+                abs(normalizeAngle(targetAngle) - normalizeAngle(angle)) < 0.02) {
+            //if done animating and aimed
             state = State.Fire;
             frame = 0;
             fire(barrelLength, fireParticle);
