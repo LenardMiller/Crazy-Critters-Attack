@@ -6,18 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="17 (3)" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file:///Applications/Processing 3.app/Contents/Java/core/library" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file:///Applications/Processing 3.app/Contents/Java/core/library" recursive="false" />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -28,5 +18,6 @@
         <jarDirectory url="file://$MODULE_DIR$/../../Processing/libraries/sound/library" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="library" level="project" />
   </component>
 </module>

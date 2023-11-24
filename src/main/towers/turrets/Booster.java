@@ -103,6 +103,12 @@ public class Booster extends Turret {
         }
     }
 
+    @Override
+    public void die(boolean isSold) {
+        super.die(isSold);
+        clearBoost();
+    }
+
     /** Now spawns particles */
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
@@ -276,45 +282,68 @@ public class Booster extends Turret {
         }
     }
 
+    private IntVector check(int i) {
+        int checkX = -1;
+        int checkY = -1;
+
+        switch (i) {
+            case 0:
+                if (range < 2) return null;
+                break;
+            case 1:
+                checkX = 0;
+                break;
+            case 2:
+                if (range < 2) return null;
+                checkX = 1;
+                break;
+            case 3:
+                checkY = 0;
+                break;
+            case 4:
+                checkX = 1;
+                checkY = 0;
+                break;
+            case 5:
+                if (range < 2) return null;
+                checkY = 1;
+                break;
+            case 6:
+                checkX = 0;
+                checkY = 1;
+                break;
+            case 7:
+                if (range < 2) return null;
+                checkX = 1;
+                checkY = 1;
+                break;
+        }
+
+        return new IntVector(checkX, checkY);
+    }
+
+    private void clearBoost() {
+        for (int i = 0; i < 8; i++) {
+            IntVector check = check(i);
+            if (check == null) continue;
+
+            IntVector pos = tile.getGridPosition();
+            int x = pos.x + check.x;
+            int y = pos.y + check.y;
+            Tower tower = tiles.get(x, y).tower;
+            if (tower == null || tower instanceof Booster) continue;
+            tower.removeBoost(boost);
+        }
+    }
+
     private void giveBoost() {
         for (int i = 0; i < 8; i++) {
-            int checkX = -1;
-            int checkY = -1;
-            switch (i) {
-                case 0:
-                    if (range < 2) continue;
-                    break;
-                case 1:
-                    checkX = 0;
-                    break;
-                case 2:
-                    if (range < 2) continue;
-                    checkX = 1;
-                    break;
-                case 3:
-                    checkY = 0;
-                    break;
-                case 4:
-                    checkX = 1;
-                    checkY = 0;
-                    break;
-                case 5:
-                    if (range < 2) continue;
-                    checkY = 1;
-                    break;
-                case 6:
-                    checkX = 0;
-                    checkY = 1;
-                    break;
-                case 7:
-                    if (range < 2) continue;
-                    checkX = 1;
-                    checkY = 1;
-                    break;
-            }
+            IntVector check = check(i);
+            if (check == null) continue;
+
             IntVector pos = tile.getGridPosition();
-            int x = pos.x + checkX;
-            int y = pos.y + checkY;
+            int x = pos.x + check.x;
+            int y = pos.y + check.y;
             Tower tower = tiles.get(x, y).tower;
             if (tower == null || tower instanceof Booster) continue;
             tower.addBoost(boost);

@@ -32,7 +32,6 @@ public class Utilities {
      * @param p2 the second position
      * @return something
      */
-    @Deprecated
     public static float findAngleBetween(PVector p1, PVector p2) {
         float a = atan2((p1.y - p2.y), p1.x - p2.x);
         if (a < 0) a += TWO_PI;

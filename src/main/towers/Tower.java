@@ -60,7 +60,6 @@ public abstract class Tower {
 
     protected int tintColor;
     protected int barAlpha;
-    protected int boostTimer;
     protected Material material;
     protected SoundFile damageSound;
     protected SoundFile breakSound;
@@ -241,28 +240,33 @@ public abstract class Tower {
     //boosts --------------------------------------------------
 
     public void addBoost(Booster.Boost boost) {
-        boostTimer = 0;
         for (Booster.Boost b : boosts) if (b == boost) return;
         boosts.add(boost);
     }
 
-    protected void updateBoosts() {
-        if (!paused) {
-            displayBoost();
-            boostTimer++;
-            if (boostTimer > FRAMERATE / 3) boosts = new ArrayList<>();
+    public void removeBoost(Booster.Boost boost) {
+        for (int i = boosts.size() - 1; i >= 0; i--) {
+            Booster.Boost b = boosts.get(i);
+            if (b == boost) {
+                boosts.remove(i);
+                return;
+            }
         }
+    }
+
+    protected void updateBoosts() {
+        if (paused) return;
+        displayBoost();
     }
 
     protected void displayBoost() {
         if (this instanceof IceWall) return;
-        if (boosts.size() > 0 && p.random(30) < 1) {
+        if (!(boosts.size() > 0 && p.random(30) < 1)) return;
+        topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
+          p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
+        if (hasBoostedDeathEffect()) {
             topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-              p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
-            if (hasBoostedDeathEffect()) {
-                topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
-                  p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
-            }
+              p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
         }
     }
 
