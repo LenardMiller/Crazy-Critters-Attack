@@ -140,8 +140,8 @@ public class SeismicTower extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 200;
-        upgradePrices[1] = 200;
+        upgradePrices[0] = 250;
+        upgradePrices[1] = 250;
         upgradePrices[2] = 1500;
         upgradePrices[3] = 250;
         upgradePrices[4] = 300;
@@ -191,13 +191,9 @@ public class SeismicTower extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    delay -= 1.1f;
-                    break;
-                case 1:
-                    shockwaveWidth += 30;
-                    break;
-                case 2:
+                case 0 -> delay -= 1.1f;
+                case 1 -> shockwaveWidth += 30;
+                case 2 -> {
                     material = Material.metal;
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
@@ -213,17 +209,13 @@ public class SeismicTower extends Turret {
                         selection.setTextPurple("360 degrees", o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    range += 50;
-                    break;
-                case 4:
-                    damage += 50;
-                    break;
-                case 5:
+                case 3 -> range += 50;
+                case 4 -> damage += 50;
+                case 5 -> {
                     material = Material.metal;
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");
@@ -242,7 +234,7 @@ public class SeismicTower extends Turret {
                         selection.setTextPurple("Stuns burrowers", o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         }
     }

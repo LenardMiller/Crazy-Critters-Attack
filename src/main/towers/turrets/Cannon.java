@@ -54,11 +54,11 @@ public class Cannon extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 250;
-        upgradePrices[1] = 400;
+        upgradePrices[0] = 200;
+        upgradePrices[1] = 300;
         upgradePrices[2] = 1000;
         upgradePrices[3] = 150;
-        upgradePrices[4] = 250;
+        upgradePrices[4] = 200;
         upgradePrices[5] = 1500;
         //titles
         upgradeTitles[0] = "Stronger shot";
@@ -105,13 +105,9 @@ public class Cannon extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    damage += 20;
-                    break;
-                case 1:
-                    damage += 40;
-                    break;
-                case 2:
+                case 0 -> damage += 20;
+                case 1 -> damage += 40;
+                case 2 -> {
                     damage += 400;
                     effectRadius = 75;
                     pjSpeed = 600;
@@ -127,17 +123,13 @@ public class Cannon extends Turret {
                     titleLines = new String[]{"Dynamite", "Flinger"};
                     infoDisplay = (o) -> selection.setTextPurple("Large splash", o);
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    range += 35;
-                    break;
-                case 4:
-                    delay -= 0.8f;
-                    break;
-                case 5:
+                case 3 -> range += 35;
+                case 4 -> delay -= 0.8f;
+                case 5 -> {
                     range += 30;
                     delay -= 1;
                     frags = true;
@@ -152,7 +144,7 @@ public class Cannon extends Turret {
                         selection.setTextPurple("Shrapnel", o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         }
     }

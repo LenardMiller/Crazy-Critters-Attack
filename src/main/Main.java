@@ -110,7 +110,7 @@ public class Main extends PApplet {
 
             CANNON_PRICE =          400,
             GLUER_PRICE =           300,
-            SEISMIC_PRICE =         400,
+            SEISMIC_PRICE =         500,
 
             ENERGY_BLASTER_PRICE =  1000,
             FLAMETHROWER_PRICE =    1250,
