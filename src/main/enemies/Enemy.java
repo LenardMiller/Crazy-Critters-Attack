@@ -1,6 +1,5 @@
 package main.enemies;
 
-import com.sun.istack.internal.Nullable;
 import main.Main;
 import main.buffs.*;
 import main.buffs.glued.Glued;
@@ -85,7 +84,7 @@ public abstract class Enemy {
         public final Color finalTintColor;
         public final String particle;
 
-        DamageType(@Nullable Color color, @Nullable String particle) {
+        DamageType(Color color, String particle) {
             finalTintColor = color;
             this.particle = particle;
         }
@@ -384,8 +383,8 @@ public abstract class Enemy {
      * @param direction determines where parts will be flung, (0, 0) for everywhere
      * @param id id of this enemy, set to -1 if unknown
      */
-    public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, @Nullable Turret turret,
-                               boolean displayParticles, @Nullable DamageType damageType, PVector direction, int id) {
+    public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, Turret turret,
+                               boolean displayParticles, DamageType damageType, PVector direction, int id) {
         if (id == -1 && buffName != null) id = getId();
         lastDamageType = damageType;
         overkill = damage >= maxHp;
@@ -466,7 +465,7 @@ public abstract class Enemy {
      * @param direction where parts will be flung, (0, 0) for everywhere
      * @param displayParticles whether it should spawn particles
      */
-    public void damageWithoutBuff(int damage, @Nullable Turret turret, @Nullable DamageType damageType, PVector direction, boolean displayParticles) {
+    public void damageWithoutBuff(int damage, Turret turret, DamageType damageType, PVector direction, boolean displayParticles) {
         lastDamageType = damageType;
         overkill = damage >= maxHp;
         partsDirection = direction;

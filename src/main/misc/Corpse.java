@@ -1,7 +1,5 @@
 package main.misc;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import main.enemies.Enemy;
 import main.particles.MiscParticle;
 import main.particles.Ouch;
@@ -54,7 +52,7 @@ public class Corpse {
      * @param animated should it be animated
      */
     public Corpse(PApplet p, PVector position, PVector size, float angle, PVector velocity, Color currentTintColor, float angularVelocity,
-                  int betweenFrames, int maxLife, Enemy.DamageType effectType, String name, @NotNull Enemy.HitParticle bloodParticle, int frame,
+                  int betweenFrames, int maxLife, Enemy.DamageType effectType, String name, Enemy.HitParticle bloodParticle, int frame,
                   boolean animated) {
         this.P = p;
 
@@ -156,7 +154,7 @@ public class Corpse {
         }
     }
 
-    private PImage tinting(PImage sprite, @Nullable Color tintColor) {
+    private PImage tinting(PImage sprite, Color tintColor) {
         //for memory reasons
         PImage st = P.createImage(sprite.width, sprite.height, ARGB);
         sprite.loadPixels();

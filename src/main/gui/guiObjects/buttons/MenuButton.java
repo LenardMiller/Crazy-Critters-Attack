@@ -1,6 +1,5 @@
 package main.gui.guiObjects.buttons;
 
-import com.sun.istack.internal.Nullable;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -25,7 +24,7 @@ public class MenuButton extends Button {
      * @param text text to display on button, nullable
      * @param action what to do when pressed, optional, may use isPressed instead.
      */
-    public MenuButton(PApplet p, float x, float y, @Nullable String text, Runnable action) {
+    public MenuButton(PApplet p, float x, float y, String text, Runnable action) {
         super(p, x, y, "null", true);
         this.action = action;
         this.text = text;
