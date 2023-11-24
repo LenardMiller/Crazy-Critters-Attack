@@ -358,6 +358,7 @@ public abstract class Enemy {
         p.rotate(rotation);
         p.tint(currentTintColor.getRGB());
         p.image(sprite, -size.x / 2, -size.y / 2);
+        p.tint(255);
         p.popMatrix();
         if (debug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
