@@ -12,7 +12,7 @@ import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static main.misc.Utilities.randomizeDelay;
 
-public class EnergyBlaster extends Turret{
+public class EnergyBlaster extends Turret {
 
     private int effectRadius;
     private boolean bigExplosion;
@@ -122,14 +122,12 @@ public class EnergyBlaster extends Turret{
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    delay -= 1.2f;
-                    break;
-                case 1:
+                case 0 -> delay -= 1.2f;
+                case 1 -> {
                     effectRadius += 50;
                     bigExplosion = true;
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     damage += 800;
                     delay -= 1f;
                     effectRadius = 250;
@@ -140,18 +138,16 @@ public class EnergyBlaster extends Turret{
                     titleLines = new String[]{"Nuclear Blaster"};
                     infoDisplay = (o) -> selection.setTextPurple("Huge splash", o);
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    range += 35;
-                    break;
-                case 4:
+                case 3 -> range += 35;
+                case 4 -> {
                     range += 40;
                     damage += 400;
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     range += 65;
                     damage = 5000;
                     name = "darkBlaster";
@@ -160,7 +156,7 @@ public class EnergyBlaster extends Turret{
                     titleLines = new String[]{"Dark Blaster"};
                     infoDisplay = (o) -> selection.setTextPurple("Splash", o);
                     loadSprites();
-                    break;
+                }
             }
         }
     }

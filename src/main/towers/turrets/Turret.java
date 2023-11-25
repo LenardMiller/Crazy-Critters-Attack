@@ -161,17 +161,17 @@ public abstract class Turret extends Tower {
                 float dist = sqrt(sq(x) + sq(y));
                 if (enemy.onScreen() && dist < getRange()) {
                     switch (priority) {
-                        case Close:
+                        case Close -> {
                             if (dist >= finalDist) break;
                             e = enemy;
                             finalDist = dist;
-                            break;
-                        case Far:
+                        }
+                        case Far -> {
                             if (dist <= finalDist) break;
                             e = enemy;
                             finalDist = dist;
-                            break;
-                        case Strong:
+                        }
+                        case Strong -> {
                             if (enemy.maxHp > maxHp || maxHp == -1) { //strong
                                 e = enemy;
                                 finalDist = dist;
@@ -180,8 +180,8 @@ public abstract class Turret extends Tower {
                                 e = enemy;
                                 finalDist = dist;
                             }
-                            break;
-                        case Weak:
+                        }
+                        case Weak -> {
                             if (enemy.maxHp < maxHp || maxHp == -1) { //weak
                                 e = enemy;
                                 finalDist = dist;
@@ -190,6 +190,7 @@ public abstract class Turret extends Tower {
                                 e = enemy;
                                 finalDist = dist;
                             }
+                        }
                     }
                 }
             }
@@ -321,7 +322,7 @@ public abstract class Turret extends Tower {
             }
             if (tintColor < 255) tintColor += 20;
             switch (state) {
-                case Idle:
+                case Idle -> {
                     sprite = idleSprite;
                     if (idleFrames.length > 1) {
                         if (frame < idleFrames.length) {
@@ -335,8 +336,8 @@ public abstract class Turret extends Tower {
                             sprite = idleFrames[frame];
                         }
                     }
-                    break;
-                case Fire:
+                }
+                case Fire -> {
                     if (frame < fireFrames.length - 1) { //if not done, keep going
                         if (frameTimer >= betweenFireFrames) {
                             frame++;
@@ -363,8 +364,8 @@ public abstract class Turret extends Tower {
                         frame = 0;
                         state = State.Load;
                     }
-                    break;
-                case Load:
+                }
+                case Load -> {
                     frame++;
                     if (frame < compressedLoadFrames.size() && compressedLoadFrames.get(frame) < loadFrames.length) {
                         sprite = loadFrames[compressedLoadFrames.get(frame)];
@@ -373,7 +374,7 @@ public abstract class Turret extends Tower {
                         sprite = idleSprite;
                         state = State.Idle;
                     }
-                    break;
+                }
             }
             if (hit) { //change to red if under attack
                 tintColor = 0;
@@ -494,43 +495,55 @@ public abstract class Turret extends Tower {
 
     public static Turret get(PApplet p, String type, Tile tile) {
         switch (type) {
-            case "Booster":
+            case "Booster" -> {
                 return new Booster(p, tile);
-            case "Cannon":
+            }
+            case "Cannon" -> {
                 return new Cannon(p, tile);
-            case "Crossbow":
+            }
+            case "Crossbow" -> {
                 return new Crossbow(p, tile);
-            case "EnergyBlaster":
+            }
+            case "EnergyBlaster" -> {
                 return new EnergyBlaster(p, tile);
-            case "Flamethrower":
+            }
+            case "Flamethrower" -> {
                 return new Flamethrower(p, tile);
-            case "Gluer":
+            }
+            case "Gluer" -> {
                 return new Gluer(p, tile);
-            case "IceTower":
+            }
+            case "IceTower" -> {
                 return new IceTower(p, tile);
-            case "MagicMissileer":
-            case "MagicMissleer":
+            }
+            case "MagicMissileer", "MagicMissleer" -> {
                 return new MagicMissileer(p, tile);
-            case "Nightmare":
+            }
+            case "Nightmare" -> {
                 return new Nightmare(p, tile);
-            case "Railgun":
+            }
+            case "Railgun" -> {
                 return new Railgun(p, tile);
-            case "RandomCannon":
-            case "MiscCannon":
+            }
+            case "RandomCannon", "MiscCannon" -> {
                 return new RandomCannon(p, tile);
-            case "SeismicTower":
-            case "Seismic":
+            }
+            case "SeismicTower", "Seismic" -> {
                 return new SeismicTower(p, tile);
-            case "Slingshot":
+            }
+            case "Slingshot" -> {
                 return new Slingshot(p, tile);
-            case "TeslaTower":
-            case "Tesla":
+            }
+            case "TeslaTower", "Tesla" -> {
                 return new TeslaTower(p, tile);
-            case "WaveMotion":
+            }
+            case "WaveMotion" -> {
                 return new WaveMotion(p, tile);
-            default:
+            }
+            default -> {
                 System.out.println("Could not get Turret of name:\n    " + type);
                 return null;
+            }
         }
     }
 }

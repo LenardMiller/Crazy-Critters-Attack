@@ -561,9 +561,8 @@ public class SpriteLoader {
         staticSprites.put("autoIceTowerBaseTR",p.loadImage("sprites/towers/turrets/iceTower/auto/base.png"));
         staticSprites.put("autoIceTowerIdleTR",p.loadImage("sprites/towers/turrets/iceTower/auto/idle.png"));
         //death ray
-        getSprite(p,"waveMotionFire","TR","waveMotion/fire/",18);
-        getSprite(p,"waveMotionLoad","TR","waveMotion/load/",80);
-        getSprite(p,"waveMotionIdle","TR","waveMotion/idle/",14);
+        getSprite(p,"waveMotionFire","TR","waveMotion/fire/",11);
+        getSprite(p,"waveMotionLoad","TR","waveMotion/load/",12);
         getSprite(p,"waveMotionBeam","TR","waveMotion/beam/",18);
         staticSprites.put("waveMotionBaseTR",p.loadImage("sprites/towers/turrets/waveMotion/base.png"));
         staticSprites.put("waveMotionFullTR",p.loadImage("sprites/towers/turrets/waveMotion/full.png"));
