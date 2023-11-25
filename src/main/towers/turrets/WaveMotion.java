@@ -1,11 +1,15 @@
 package main.towers.turrets;
 
 import main.enemies.Enemy;
+import main.misc.CompressArray;
 import main.misc.Tile;
 import main.sound.StackableSound;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
@@ -25,6 +29,7 @@ public class WaveMotion extends Turret {
 
     public WaveMotion(PApplet p, Tile tile) {
         super(p,tile);
+        offset = 14;
         name = "waveMotion";
         delay = randomizeDelay(p, 10);
         damage = 300;
@@ -35,7 +40,6 @@ public class WaveMotion extends Turret {
         betweenIdleFrames = 3;
         betweenFireFrames = 3;
         widthMultiplier = 1;
-        beam = animatedSprites.get("waveMotionBeamTR");
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");
         damageSound = sounds.get("titaniumDamage");
@@ -45,6 +49,24 @@ public class WaveMotion extends Turret {
         priority = Priority.Far;
         titleLines = new String[]{"Death Beam"};
         infoDisplay = (o) -> selection.setTextPurple("Piercing", o);
+    }
+
+    @Override
+    protected void loadSprites() {
+        sBase = staticSprites.get(name + "BaseTR");
+        idleSprite = staticSprites.get(name + "IdleTR");
+        beam = animatedSprites.get("waveMotionBeamTR");
+        fireFrames = animatedSprites.get(name + "FireTR");
+        loadFrames = animatedSprites.get(name + "LoadTR");
+        idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
+        sprite = idleFrames[0];
+
+        ArrayList<Integer> compressedFireFrames = new ArrayList<>();
+        CompressArray compress = new CompressArray(fireFrames.length-1, beam.length, compressedFireFrames);
+        compress.update();
+        PImage[] newFireFrames = new PImage[compressedFireFrames.size()];
+        Arrays.setAll(newFireFrames, i -> fireFrames[compressedFireFrames.get(i)]);
+        fireFrames = newFireFrames;
     }
 
     @Override
@@ -217,28 +239,18 @@ public class WaveMotion extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    range += 100;
-                    break;
-                case 1:
-                    widthMultiplier = 3;
-                    break;
-                case 2:
-                    delay = 0;
-                    break;
+                case 0 -> range += 100;
+                case 1 -> widthMultiplier = 3;
+                case 2 -> delay = 0;
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    damage += 200;
-                    break;
-                case 4:
-                    delay -= 3;
-                    break;
-                case 5:
+                case 3 -> damage += 200;
+                case 4 -> delay -= 3;
+                case 5 -> {
                     betweenFireFrames = 10;
                     damage = 1000;
-                    break;
+                }
             }
         }
     }
