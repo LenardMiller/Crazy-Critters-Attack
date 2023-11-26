@@ -72,7 +72,6 @@ public class Level {
     }
 
     public void display() {
-        float playY = 0;
         for (int i = currentWave-3; i <= currentWave+6; i++) {
             if (i < waves.length && i > -1) {
                 Wave wave = waves[i];
@@ -83,24 +82,23 @@ public class Level {
                 if (currentWave < waves.length) y2 = (int) (125*(((current.lengthTimer)+1)/(float)current.LENGTH));
                 if (playingLevel) y -= y2 - 125;
                 else y += 125;
-                wave.display(212 + y, i+1);
-                if (i == startWave) playY = y;
+                wave.display(125 + y, i+1);
             } else if (currentWave == waves.length) {
                 waves[currentWave-1].display(212, currentWave);
             }
         }
-        waveStack.playButton.display((int)playY);
+        waveStack.playButton.display();
         //current line
         P.strokeWeight(10);
         P.stroke(100, 0, 0);
-        P.line(-200, 336, 0, 336);
+        P.line(-200, 250, 0, 250);
         P.strokeWeight(4);
         P.stroke(255, 0, 0);
-        P.line(-200, 336, 0, 336);
+        P.line(-200, 250, 0, 250);
         //skip text, circle
         if (canBeSkipped()) {
             Utilities.highlightedText(P, "[SPACE] to skip",
-                    new PVector(-100, 325),
+                    new PVector(-100, 225),
                     new Color(0xFCFFFFFF, true), new Color(50, 50, 50, 230),
                     mediumFont, PConstants.CENTER);
 //            P.fill(255, 0, 0);

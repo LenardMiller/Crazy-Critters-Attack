@@ -33,12 +33,10 @@ public class PauseGui {
 
     /** Creates buttons */
     private void build() {
-        resumeButton = new MenuButton(P, P.width/2f, (P.height/2f) - 75, () -> {
-            paused = !paused;
-        });
-        restartButton = new MenuButton(P, P.width/2f, P.height/2f - 25, "Restart", () -> {
-            transition(Screen.Restart, new PVector(-1, 0));
-        });
+        resumeButton = new MenuButton(P, P.width/2f, (P.height/2f) - 75, () ->
+                paused = !paused);
+        restartButton = new MenuButton(P, P.width/2f, P.height/2f - 25, "Restart", () ->
+                transition(Screen.Restart, new PVector(-1, 0)));
         levelSelectButton = new MenuButton(P, P.width/2f, (P.height/2f) + 25, "Level Select", () -> {
             alive = true;
             LevelSelectGui.delay = 1;

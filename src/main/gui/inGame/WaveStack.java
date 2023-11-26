@@ -25,11 +25,13 @@ public class WaveStack {
         P.fill(PANEL_COLOR.getRGB());
         P.rect(-199, 0, 199, 36);
         levels[currentLevel].display();
+    }
 
+    public void update() {
         playButton.update();
     }
 
     public void build() {
-        playButton = new PlayButton(P,-100,274.5f,"null",true);
+        playButton = new PlayButton(P,-100,0,"null",true);
     }
 }

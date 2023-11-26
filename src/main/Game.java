@@ -83,6 +83,7 @@ public class Game {
             } else {
                 levelBuilderGui.update();
             }
+            waveStack.update();
         }
     }
 
@@ -207,7 +208,7 @@ public class Game {
             p.noStroke();
             if (!alive) p.fill(50, 0, 0, 50);
             else p.fill(0, 0, 0, 50);
-            p.rect(0, 0, p.width, p.height);
+            p.rect(-200, 0, p.width + 200, p.height);
         }
     }
 

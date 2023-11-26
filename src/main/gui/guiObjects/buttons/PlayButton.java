@@ -17,7 +17,7 @@ public class PlayButton extends Button {
     public PlayButton(PApplet p, float x, float y, String type, boolean active) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
-        size = new PVector(200, 125);
+        size = new PVector(200, 250);
         spritePressed = animatedSprites.get("playBT")[0]; //in
         spriteIdle = animatedSprites.get("playBT")[1]; //out
         spriteHover = animatedSprites.get("playBT")[2]; //hover
@@ -27,21 +27,18 @@ public class PlayButton extends Button {
 
     @Override
     public void update() {
-        if (active && selection.name.equals("null") && hand.held.equals("null")) {
-            if (!playingLevel) hover();
-            else sprite = SPRITE_GREY;
-        } else timer = p.frameCount + 10;
+        if (!playingLevel) hover();
+        else sprite = SPRITE_GREY;
     }
 
-    public void display(int y) {
+    public void display() {
         p.fill(20,20,50, 254);
-        y += (size.x/2) - 12.5;
-        p.image(sprite,position.x-size.x/2,y);
+        p.image(sprite,position.x - size.x / 2,position.y);
         p.textAlign(CENTER);
         p.textFont(largeFont);
-        p.text("Play",-100,y+30);
+        p.text("Play",position.x, position.y + 30);
         p.textFont(mediumFont);
-        p.text("[SPACE]", -100, y + size.y - 12);
+        p.text("[SPACE]", position.x, position.y + size.y / 2f - 12);
     }
 
     @Override
