@@ -177,11 +177,16 @@ public class Game {
         else p.translate(0, matrixOffset);
         p.scale(matrixScale);
 
+        // offset for left in-game-ui
+        p.pushMatrix();
+        p.translate(200, 0);
+
         displayGameObjects();
         displayHPBars();
         for (main.gui.guiObjects.PopupText popupText : popupTexts) popupText.display();
         displayInGameGui();
 
+        p.popMatrix();
         p.popMatrix();
 
         if (paused && !settings) pauseGui.display();
@@ -193,6 +198,7 @@ public class Game {
         if (!showSpawn) {
             if (!levelBuilder) inGameGui.display();
             else levelBuilderGui.display();
+            waveStack.display();
             hand.displayHeldInfo();
             p.textAlign(LEFT);
             if (!levelBuilder) inGameGui.displayText(p, 10);
@@ -327,6 +333,7 @@ public class Game {
         hand = new Hand(p);
         selection = new Selection(p);
         inGameGui = new InGameGui(p);
+        waveStack = new WaveStack(p);
         levelBuilderGui = new LevelBuilderGui(p);
         pauseGui = new PauseGui(p);
         //other

@@ -89,24 +89,24 @@ public class Level {
                 waves[currentWave-1].display(212, currentWave);
             }
         }
-        inGameGui.playButton.display((int)playY);
+        waveStack.playButton.display((int)playY);
         //current line
         P.strokeWeight(10);
         P.stroke(100, 0, 0);
-        P.line(BOARD_WIDTH, 336, BOARD_WIDTH + 200, 336);
+        P.line(-200, 336, 0, 336);
         P.strokeWeight(4);
         P.stroke(255, 0, 0);
-        P.line(BOARD_WIDTH - 7, 336, BOARD_WIDTH + 200, 336);
+        P.line(-200, 336, 0, 336);
         //skip text, circle
         if (canBeSkipped()) {
             Utilities.highlightedText(P, "[SPACE] to skip",
-                    new PVector(BOARD_WIDTH + 100, 325),
+                    new PVector(-100, 325),
                     new Color(0xFCFFFFFF, true), new Color(50, 50, 50, 230),
                     mediumFont, PConstants.CENTER);
-            P.fill(255, 0, 0);
-            P.stroke(100, 0, 0);
-            P.strokeWeight(3);
-            P.triangle(BOARD_WIDTH - 13, 336, BOARD_WIDTH - 20, 331, BOARD_WIDTH - 20, 341);
+//            P.fill(255, 0, 0);
+//            P.stroke(100, 0, 0);
+//            P.strokeWeight(3);
+//            P.triangle(BOARD_WIDTH - 13, 336, BOARD_WIDTH - 20, 331, BOARD_WIDTH - 20, 341);
         }
         P.strokeWeight(1);
         P.noStroke();

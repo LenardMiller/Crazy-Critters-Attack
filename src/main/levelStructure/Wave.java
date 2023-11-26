@@ -133,19 +133,19 @@ public class Wave {
      */
     public void display(int y, int id) {
         P.tint(FILL_COLOR.getRGB());
-        P.image(staticSprites.get("wavePrimaryIc"), 890, y);
+        P.image(staticSprites.get("wavePrimaryIc"), -200, y);
         P.tint(ACCENT_COLOR.getRGB());
-        P.image(staticSprites.get("waveSecondaryIc"), 890, y);
+        P.image(staticSprites.get("waveSecondaryIc"), -200, y);
         P.tint(255);
 
         //title
         P.fill(TEXT_COLOR.getRGB(), 254);
         P.textAlign(CENTER);
         P.textFont(largeFont);
-        P.text(TITLE, 1000, y + 110);
+        P.text(TITLE, -100, y + 110);
         P.textFont(veryLargeFont);
         //number
-        P.text(id, 1000, y + 75);
+        P.text(id, -100, y + 75);
         //enemy types
         int letterCount = 0;
         if (hasBurrowing) letterCount++;
@@ -167,7 +167,7 @@ public class Wave {
             if (letterCount > 1) enemyTypes.append(" & S");
             else enemyTypes.append(" Shooting");
         }
-        P.text(enemyTypes.toString(), 1000, y + 25);
+        P.text(enemyTypes.toString(), -100, y + 25);
     }
 
     private Enemy getEnemy(String name) {

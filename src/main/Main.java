@@ -73,6 +73,7 @@ public class Main extends PApplet {
     public static Hand hand;
     public static Selection selection;
     public static InGameGui inGameGui;
+    public static WaveStack waveStack;
     public static LevelBuilderGui levelBuilderGui;
     public static PauseGui pauseGui;
     public static SettingsGui settingsGui;
@@ -94,13 +95,13 @@ public class Main extends PApplet {
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
     public static boolean dev = false;
-    public static PVector matrixMousePosition;
+    public static PVector boardMousePosition;
 
     public static final int FRAMERATE = 30;
     public static final int SOFT_PARTICLE_CAP = 1500, HARD_PARTICLE_CAP = 3000;
 
-    public static final int BOARD_WIDTH = 900;
-    public static final int BOARD_HEIGHT = 900;
+    public static final int WINDOW_WIDTH = 1300, WINDOW_HEIGHT = 900;
+    public static final int BOARD_WIDTH = 900, BOARD_HEIGHT = 900;
     public static final int TILE_SIZE = 50;
 
     public static final int
@@ -170,8 +171,8 @@ public class Main extends PApplet {
      */
     @Override
     public void settings() {
-        if (isOpenGL) size(GRID_WIDTH, BOARD_HEIGHT, P2D);
-        else size(GRID_WIDTH, BOARD_HEIGHT);
+        if (isOpenGL) size(WINDOW_WIDTH, WINDOW_HEIGHT, P2D);
+        else size(WINDOW_WIDTH, WINDOW_HEIGHT);
         if (isFullscreen) {
             fullScreen();
             noSmooth();
@@ -203,8 +204,8 @@ public class Main extends PApplet {
         float boardRatio = BOARD_WIDTH / (float) BOARD_HEIGHT;
         hasVerticalBars = boardRatio < screenRatio;
         if (hasVerticalBars) {
-            matrixScale = height / (float) BOARD_HEIGHT;
-            matrixOffset = (width - (GRID_WIDTH * matrixScale)) / 2;
+            matrixScale = height / (float) WINDOW_HEIGHT;
+            matrixOffset = (width - (WINDOW_WIDTH * matrixScale)) / 2;
         } else {
             matrixScale = width / (float) BOARD_WIDTH;
             matrixOffset = (height - (BOARD_HEIGHT * matrixScale)) / 2;
@@ -224,37 +225,31 @@ public class Main extends PApplet {
     /** Main update loop **/
     private void update() {
         if (hasVerticalBars) {
-            matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
+            boardMousePosition = new PVector((mouseX - matrixOffset) / matrixScale - 200, mouseY / matrixScale);
         } else {
-            matrixMousePosition = new PVector(mouseX / matrixScale, (mouseY - matrixOffset) / matrixScale);
+            boardMousePosition = new PVector(mouseX / matrixScale - 200, (mouseY - matrixOffset) / matrixScale);
         }
         //screens
         switch (screen) {
-            case InGame:
-                game.update();
-                break;
-            case LevelSelect:
+            case InGame -> game.update();
+            case LevelSelect -> {
                 if (!settings) levelSelectGui.update();
-                break;
-            case Loading:
-                loadingGui.update();
-                break;
-            case Title:
+            }
+            case Loading -> loadingGui.update();
+            case Title -> {
                 if (!settings) titleGui.update();
-                break;
+            }
 
             // immediate action branches
-            case Exit:
-                exit();
-                break;
-            case Restart:
+            case Exit -> exit();
+            case Restart -> {
                 Game.reset(this);
                 paused = false;
                 Saver.wipe();
                 screen = Screen.InGame;
                 targetScreen = screen;
-                break;
-            case PlayOrLevelSelect:
+            }
+            case PlayOrLevelSelect -> {
                 try {
                     Loader.load(this);
                 } catch (RuntimeException ex) {
@@ -263,7 +258,7 @@ public class Main extends PApplet {
                             Arrays.toString(ex.getStackTrace()));
                     screen = Screen.LevelSelect;
                 }
-                break;
+            }
         }
         if (settings) settingsGui.update();
         updateTransition();
@@ -301,8 +296,8 @@ public class Main extends PApplet {
 
         transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
 
-        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
-                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
+        if ((abs((WINDOW_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
+                && abs((WINDOW_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
                 && targetScreen != screen) {
             if (targetScreen == Screen.InGame || screen == Screen.InGame) {
                 Game.reset(this);
@@ -315,26 +310,22 @@ public class Main extends PApplet {
     /** Main display loop **/
     private void display() {
         if (showSpawn) {
-            scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
-            float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
+            scale(BOARD_HEIGHT / (float) WINDOW_HEIGHT);
+            float buffer = (WINDOW_WIDTH - BOARD_HEIGHT) / 2f;
             translate(buffer, buffer);
         }
         background(50);
         tint(255);
         //screens
         switch (screen) {
-            case InGame:
-                game.display();
-                break;
-            case LevelSelect:
+            case InGame -> game.display();
+            case LevelSelect -> {
                 if (!settings) levelSelectGui.display();
-                break;
-            case Loading:
-                loadingGui.display();
-                break;
-            case Title:
+            }
+            case Loading -> loadingGui.display();
+            case Title -> {
                 if (!settings) titleGui.display();
-                break;
+            }
         }
         if (settings) settingsGui.display();
         displayTransition();
@@ -385,8 +376,8 @@ public class Main extends PApplet {
         direction.add(PVector.fromAngle(random.nextFloat() * TWO_PI).setMag(0.2f));
         transCenter = PVector.add(
                 direction.copy().setMag(TRANS_SIZE * -2),
-                new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f));
-        transRotation = PVector.sub(new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f), transCenter).normalize();
+                new PVector(WINDOW_WIDTH / 2f, WINDOW_HEIGHT / 2f));
+        transRotation = PVector.sub(new PVector(WINDOW_WIDTH / 2f, WINDOW_HEIGHT / 2f), transCenter).normalize();
         targetScreen = screen;
     }
 

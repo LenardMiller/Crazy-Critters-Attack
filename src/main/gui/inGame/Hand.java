@@ -83,8 +83,8 @@ public class Hand {
 
     private void displayWhyCantPlace() {
         Tile tileTower = tiles.get(
-                (roundTo(matrixMousePosition.x, 50) / 50) + 1,
-                (roundTo(matrixMousePosition.y, 50) / 50) + 1);
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
         String errorText = "Can't place there!";
         if (price > money || (
                 tileTower != null &&
@@ -102,7 +102,7 @@ public class Hand {
             errorText = "Max level!";
         else if (enemyNearby()) errorText = "Critter blocking placement!";
         popupTexts.add(new PopupText(P, 16, new Color(255, 0, 0, 254),
-                new Color(50, 0, 0, 200), new PVector(matrixMousePosition.x, matrixMousePosition.y),
+                new Color(50, 0, 0, 200), new PVector(boardMousePosition.x, boardMousePosition.y),
                 errorText));
     }
 
@@ -120,12 +120,12 @@ public class Hand {
     }
 
     private boolean clickOnSidebar() {
-        return inputHandler.leftMousePressedPulse && matrixMousePosition.x > BOARD_WIDTH;
+        return inputHandler.leftMousePressedPulse && boardMousePosition.x > BOARD_WIDTH;
     }
 
     private boolean isNotPlaceable() {
-        Tile tileTower = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
-        Tile tileObstacle = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
+        Tile tileTower = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        Tile tileObstacle = tiles.get((roundTo(boardMousePosition.x, 50) / 50), (roundTo(boardMousePosition.y, 50) / 50));
         if (tileObstacle == null) return true;
         if (tileTower != null && tileTower.tower != null) {
             if (held.equals("wall")) {
@@ -143,8 +143,8 @@ public class Hand {
             if (findDistBetween(
                     enemy.position,
                     new PVector(
-                            roundTo(matrixMousePosition.x, 50) + 25,
-                            roundTo(matrixMousePosition.y, 50) + 25
+                            roundTo(boardMousePosition.x, 50) + 25,
+                            roundTo(boardMousePosition.y, 50) + 25
                     )
             ) < MIN_ENEMY_DISTANCE * enemy.pfSize) {
                 return true;
@@ -154,7 +154,7 @@ public class Hand {
     }
 
     private void checkDisplay() {
-        Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
+        Tile tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower instanceof Wall) {
                 if (upgradable(tile)) {
@@ -186,7 +186,7 @@ public class Hand {
         //red if implacable
         if (implacable) P.tint(255, 0, 0, 150);
         else P.tint(255, 150);
-        P.image(heldSprite, (roundTo(matrixMousePosition.x, 50)) - (25f / 2) - offset.x + 13, roundTo(matrixMousePosition.y, 50) - (25f / 2) - offset.y + 13);
+        P.image(heldSprite, (roundTo(boardMousePosition.x, 50)) - (25f / 2) - offset.x + 13, roundTo(boardMousePosition.y, 50) - (25f / 2) - offset.y + 13);
         P.tint(255);
         displayCritterCircles();
     }
@@ -197,8 +197,8 @@ public class Hand {
             if (findDistBetween(
                     enemy.position,
                     new PVector(
-                            roundTo(matrixMousePosition.x, 50) + 25,
-                            roundTo(matrixMousePosition.y, 50) + 25
+                            roundTo(boardMousePosition.x, 50) + 25,
+                            roundTo(boardMousePosition.y, 50) + 25
                     )
             ) < MIN_ENEMY_DISTANCE * enemy.pfSize) {
                 if (!hand.held.equals("null")) {
@@ -331,7 +331,7 @@ public class Hand {
     }
 
     private Wall getWall() {
-        return (Wall) tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1).tower;
+        return (Wall) tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1).tower;
     }
 
     private void universalWallInfo() {
@@ -449,7 +449,7 @@ public class Hand {
     }
 
     private void remove() {
-        Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
+        Tile tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower instanceof Wall) tile.tower.die(true);
         }
@@ -458,7 +458,7 @@ public class Hand {
     /** Puts down tower and subtracts price.
      * Assumes it is possible to do so */
     private void place() {
-        Tile tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50) + 1, (roundTo(matrixMousePosition.y, 50) / 50) + 1);
+        Tile tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
         if (tile == null) return;
         boolean changeHeld = true;
         if (!alive) return;
@@ -482,7 +482,7 @@ public class Hand {
             }
         }
         if (held.contains("TL")) {
-            tile = tiles.get((roundTo(matrixMousePosition.x, 50) / 50), (roundTo(matrixMousePosition.y, 50) / 50));
+            tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50), (roundTo(boardMousePosition.y, 50) / 50));
             if (tile == null) return;
             changeHeld = false;
             String shortName = held.replace("_TL", "");

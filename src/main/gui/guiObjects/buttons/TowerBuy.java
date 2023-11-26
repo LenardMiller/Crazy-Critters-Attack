@@ -97,8 +97,8 @@ public class TowerBuy extends Button {
     private boolean hovered() {
         if (towerType.equals("null")) return false;
         int d = 2;
-        boolean matchX = matrixMousePosition.x < (position.x+size.x/2)+d && matrixMousePosition.x > (position.x-size.x/2)-d-1;
-        boolean matchY = matrixMousePosition.y < (position.y+size.y/2)+d && matrixMousePosition.y > (position.y-size.y/2)-d-1;
+        boolean matchX = boardMousePosition.x < (position.x+size.x/2)+d && boardMousePosition.x > (position.x-size.x/2)-d-1;
+        boolean matchY = boardMousePosition.y < (position.y+size.y/2)+d && boardMousePosition.y > (position.y-size.y/2)-d-1;
         boolean matchPosition = matchX && matchY && active;
         return ((matchPosition && !paused) || depressed) && alive;
     }

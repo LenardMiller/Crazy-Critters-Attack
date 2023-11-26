@@ -39,9 +39,9 @@ public class PlayButton extends Button {
         p.image(sprite,position.x-size.x/2,y);
         p.textAlign(CENTER);
         p.textFont(largeFont);
-        p.text("Play",1000,y+30);
+        p.text("Play",-100,y+30);
         p.textFont(mediumFont);
-        p.text("[SPACE]", 1000, y + size.y - 12);
+        p.text("[SPACE]", -100, y + size.y - 12);
     }
 
     @Override

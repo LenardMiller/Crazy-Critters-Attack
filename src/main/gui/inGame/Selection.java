@@ -92,9 +92,9 @@ public class Selection {
     /** deselect, hide stuff */
     private void clickOff() {
         if (turret != null) {
-            if (inputHandler.leftMousePressedPulse && matrixMousePosition.x < BOARD_WIDTH && (matrixMousePosition.x > turret.tile.position.x ||
-                    matrixMousePosition.x < turret.tile.position.x - turret.size.x || matrixMousePosition.y > turret.tile.position.y ||
-                    matrixMousePosition.y < turret.tile.position.y - turret.size.y) && alive && !paused) {
+            if (inputHandler.leftMousePressedPulse && boardMousePosition.x < BOARD_WIDTH && (boardMousePosition.x > turret.tile.position.x ||
+                    boardMousePosition.x < turret.tile.position.x - turret.size.x || boardMousePosition.y > turret.tile.position.y ||
+                    boardMousePosition.y < turret.tile.position.y - turret.size.y) && alive && !paused) {
                 if (!name.equals("null") && !towerJustPlaced) {
                     inGameGui.flashA = 255;
                     playSound(CLICK_OUT, 1, 1);

@@ -97,8 +97,8 @@ public class Booster extends Turret {
             giveBoost();
             spawnProjectiles(new PVector(tile.position.x - 25, tile.position.y - 25), p.random(360));
         }
-        if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
-          && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
+        if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
+          && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
     }

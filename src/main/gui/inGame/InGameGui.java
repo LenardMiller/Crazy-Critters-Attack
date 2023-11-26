@@ -31,7 +31,6 @@ public class InGameGui {
     public TargetPriority priorityButton;
     public UpgradeTower upgradeButtonA, upgradeButtonB;
     public GuiObject upgradeIconA, upgradeIconB;
-    public PlayButton playButton;
 
     public InGameGui(PApplet p) {
         this.P = p;
@@ -49,7 +48,6 @@ public class InGameGui {
 
         openMenuButton.update();
         wallBuyButton.update();
-        playButton.update();
         sellButton.update();
         priorityButton.update();
         upgradeButtonA.update();
@@ -85,7 +83,6 @@ public class InGameGui {
         selection.turretOverlay();
         P.fill(MAIN_PANEL_COLOR.getRGB()); //big white bg
         P.rect(900,212,200,688);
-        levels[currentLevel].display();
         P.stroke(0);
         P.fill(MONEY_PANEL_COLOR.getRGB()); //money bg
         P.rect(BOARD_WIDTH, 176, 199, 36);
@@ -115,7 +112,7 @@ public class InGameGui {
         highlightedText(p, "particles: " + particleCount, new PVector(padding, 120), LEFT);
         highlightedText(p, "popups: " + popupTexts.size(), new PVector(padding, 150), LEFT);
         highlightedText(p, "path requests: " + pathFinder.requestQueue.size(), new PVector(padding, 180), LEFT);
-        highlightedText(p, "MX: " + (int) matrixMousePosition.x + ", MY: " + (int) matrixMousePosition.y,
+        highlightedText(p, "MX: " + (int) boardMousePosition.x + ", MY: " + (int) boardMousePosition.y,
           new PVector(padding, BOARD_HEIGHT - padding - 30), LEFT);
         if (isFullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
           new PVector(padding, BOARD_HEIGHT - padding), LEFT);
@@ -179,7 +176,6 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(2),"null",true));
         }
         wallBuyButton = new WallBuy(P,BOARD_WIDTH+100,172-12,"null",true);
-        playButton = new PlayButton(P,1000,274.5f,"null",true);
         upgradeButtonA = new UpgradeTower(P,1000,480,"null",false, 0);
         upgradeButtonB = new UpgradeTower(P,1000,630,"null",false, 1);
         upgradeIconA = new UpgradeIcon(P,1030,610,"null",false);
