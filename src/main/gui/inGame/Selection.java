@@ -91,24 +91,31 @@ public class Selection {
 
     /** deselect, hide stuff */
     private void clickOff() {
-        if (turret != null) {
-            if (inputHandler.leftMousePressedPulse && boardMousePosition.x < BOARD_WIDTH && (boardMousePosition.x > turret.tile.position.x ||
-                    boardMousePosition.x < turret.tile.position.x - turret.size.x || boardMousePosition.y > turret.tile.position.y ||
-                    boardMousePosition.y < turret.tile.position.y - turret.size.y) && alive && !paused) {
-                if (!name.equals("null") && !towerJustPlaced) {
-                    inGameGui.flashA = 255;
-                    playSound(CLICK_OUT, 1, 1);
-                }
-                name = "null";
-                inGameGui.sellButton.active = false;
-                inGameGui.priorityButton.active = false;
-                inGameGui.upgradeButtonA.active = false;
-                inGameGui.upgradeButtonB.active = false;
-                inGameGui.upgradeIconA.active = false;
-                inGameGui.upgradeIconB.active = false;
-                turret.visualize = false;
+        if (turret == null) return;
+        if (inputHandler.leftMousePressedPulse &&
+                mouseOnBoard() && alive && !paused) {
+            if (!name.equals("null") && !towerJustPlaced) {
+                inGameGui.flashA = 255;
+                playSound(CLICK_OUT, 1, 1);
             }
+            name = "null";
+            inGameGui.sellButton.active = false;
+            inGameGui.priorityButton.active = false;
+            inGameGui.upgradeButtonA.active = false;
+            inGameGui.upgradeButtonB.active = false;
+            inGameGui.upgradeIconA.active = false;
+            inGameGui.upgradeIconB.active = false;
+            turret.visualize = false;
         }
+    }
+
+    private boolean mouseOnBoard() {
+        boolean inCenter = boardMousePosition.x < BOARD_WIDTH && boardMousePosition.x > 0;
+        boolean onTurret = (boardMousePosition.x > turret.tile.position.x ||
+                        boardMousePosition.x < turret.tile.position.x - turret.size.x ||
+                        boardMousePosition.y > turret.tile.position.y ||
+                        boardMousePosition.y < turret.tile.position.y - turret.size.y);
+        return inCenter && onTurret;
     }
 
     /**
