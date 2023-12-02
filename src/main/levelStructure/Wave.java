@@ -58,7 +58,7 @@ public class Wave {
      * @param textColor color of title and number
      * @param title main enemy of wave
      */
-    public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
+    public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String[] title) {
         this.p = p;
         this.length = secondsToFrames(length);
         this.spawnLength = secondsToFrames(spawnLength);
@@ -70,6 +70,10 @@ public class Wave {
         spawns = new ArrayList<>();
 
         setBetweenPollutesAtEnd = -1;
+    }
+
+    public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
+        this(p, length, spawnLength, fillColor, accentColor, textColor, new String[]{title});
     }
 
     public WaveCard getWaveCard() {

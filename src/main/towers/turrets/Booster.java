@@ -42,7 +42,7 @@ public class Booster extends Turret {
         infoDisplay = (o) -> {
             int x = 910;
             int y = 296;
-            p.textFont(mediumFont);
+            p.textFont(h4);
             p.textAlign(LEFT);
             p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
             p.text("Boosts:", x, y + o);

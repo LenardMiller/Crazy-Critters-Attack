@@ -34,8 +34,9 @@ public class WaveStack {
         P.rect(-199, 0, 199, 36);
 
         int currentWave = levels[currentLevel].currentWave;
-        for (int i = currentWave; i < Math.min(currentWave + 8, levels[currentLevel].waves.length); i++) {
-            waveCards[i].display(125 * (i - currentWave), i);
+        for (int i = currentWave; i < Math.min(currentWave + 8, waveCards.length); i++) {
+            waveCards[i].display((playingLevel ? 125 : 250) + 125 * (i - currentWave),
+                    i + 1, waveCards.length);
         }
         waveStack.playButton.display();
 

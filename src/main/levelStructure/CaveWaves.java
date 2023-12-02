@@ -184,84 +184,98 @@ public class CaveWaves {
     }
 
     private static Wave wavePreset(PApplet p, int length, int spawnLength, String type) {
-        String megaHorde = "megaHorde";
-        String megaHordeTitle = "Mega Horde";
-
-        String horde = "horde";
-        String hordeTitle = "Horde";
-        Color hordeAccent = new Color(187, 189, 177);
-        Color hordeFill = new Color(94, 93, 94);
-        Color hordeText = new Color(40, 39, 40);
-
-        String albinoBug = "albinoBug";
-        String albinoBugTitle = "Bugs";
-        Color albinoBugAccent = new Color(0, 0, 0);
-        Color albinoBugFill = new Color(211, 211, 211);
-        Color albinoBugText = new Color(0, 0, 0);
-
-        String bigAlbinoBug = "bigAlbinoBug";
-        String bigAlbinoBugTitle = "Big Bugs";
-        Color bigAlbinoBugAccent = new Color(211, 211, 211);
-        Color bigAlbinoBugFill = new Color(0, 0, 0);
-        Color bigAlbinoBugText = new Color(211, 211, 211);
-
-        String albinoButterfly = "albinoButterfly";
-        String albinoButterflyTitle = "Moths";
-        Color albinoButterflyAccent = new Color(0, 241, 114);
-        Color albinoButterflyFill = new Color(211, 211, 211);
-        Color albinoButterflyText = new Color(0, 0, 0);
-
-        String smallGolem = "smallGolem";
-        String smallGolemTitle = "Pebble Golems";
-        Color smallGolemAccent = new Color(95, 205, 228);
-        Color smallGolemFill = new Color(121, 129, 141);
-        Color smallGolemText = new Color(206, 209, 198);
-
-        String midGolem = "midGolem";
-        String midGolemTitle = "Rock Golems";
-        Color midGolemAccent = new Color(188, 255, 0);
-        Color midGolemFill = new Color(115, 123, 135);
-        Color midGolemText = new Color(196, 200, 187);
-
-        String bigGolem = "bigGolem";
-        String bigGolemTitle = "Boulder Golems";
-        Color bigGolemAccent = new Color(255, 0, 198);
-        Color bigGolemFill = new Color(105, 112, 124);
-        Color bigGolemText = new Color(187, 191, 177);
-
-        String bat = "bat";
-        String batTitle = "Bats";
-        Color batAccent = new Color(131, 80, 7);
-        Color batFill = new Color(72, 45, 5);
-        Color batText = new Color(255, 161, 0);
-
-        String bigBat = "bigBat";
-        String bigBatTitle = "Giant Bats";
-        Color bigBatAccent = new Color(131, 80, 7);
-        Color bigBatFill = new Color(38, 23, 1);
-        Color bigBatText = new Color(200, 13, 0);
-
-        String wtf = "wtf";
-        String wtfTitle = "Colossal Bugs";
-        Color wtfAccent = new Color(221, 128, 59);
-        Color wtfFill = new Color(91, 110, 225);
-        Color wtfText = new Color(33, 42, 95);
-
-        if (type.equals(horde)) return new Wave(p, length, spawnLength, hordeFill, hordeAccent, hordeText, hordeTitle);
-        if (type.equals(megaHorde)) return new Wave(p, length, spawnLength, hordeFill, hordeAccent, hordeText, megaHordeTitle);
-        if (type.equals(albinoBug)) return new Wave(p, length, spawnLength, albinoBugFill, albinoBugAccent, albinoBugText, albinoBugTitle);
-        if (type.equals(bigAlbinoBug)) return new Wave(p, length, spawnLength, bigAlbinoBugFill, bigAlbinoBugAccent, bigAlbinoBugText, bigAlbinoBugTitle);
-        if (type.equals(albinoButterfly)) return new Wave(p, length, spawnLength, albinoButterflyFill, albinoButterflyAccent, albinoButterflyText, albinoButterflyTitle);
-        if (type.equals(smallGolem)) return new Wave(p, length, spawnLength, smallGolemFill, smallGolemAccent, smallGolemText, smallGolemTitle);
-        if (type.equals(midGolem)) return new Wave(p, length, spawnLength, midGolemFill, midGolemAccent, midGolemText, midGolemTitle);
-        if (type.equals(bigGolem)) return new Wave(p, length, spawnLength, bigGolemFill, bigGolemAccent, bigGolemText, bigGolemTitle);
-        if (type.equals("1 bigGolem")) return new Wave(p, length, spawnLength, bigGolemFill, bigGolemAccent, bigGolemText, "Boulder Golem");
-        if (type.equals(bat)) return new Wave(p, length, spawnLength, batFill, batAccent, batText, batTitle);
-        if (type.equals(bigBat)) return new Wave(p, length, spawnLength, bigBatFill, bigBatAccent, bigBatText, bigBatTitle);
-        if (type.equals("1 bigBat")) return new Wave(p, length, spawnLength, bigBatFill, bigBatAccent, bigBatText, "Giant Bat");
-        if (type.equals(wtf)) return new Wave(p, length, spawnLength, wtfFill, wtfAccent, wtfText, wtfTitle);
-        if (type.equals("1 wtf")) return new Wave(p, length, spawnLength, wtfFill, wtfAccent, wtfText, "Colossal Bug");
-        System.out.println("Invalid wave type!");
-        return new Wave(p, length, spawnLength, wtfFill, wtfAccent, wtfText, wtfTitle);
+        switch (type) {
+            case "horde" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(94, 93, 94),
+                        new Color(187, 189, 177),
+                        new Color(40, 39, 40), "Horde");
+            }
+            case "megaHorde" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(94, 93, 94),
+                        new Color(187, 189, 177),
+                        new Color(40, 39, 40), new String[]{"Mega", "Horde"});
+            }
+            case "albinoBug" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(211, 211, 211),
+                        Color.BLACK,
+                        Color.BLACK, "Bugs");
+            }
+            case "bigAlbinoBug" -> {
+                return new Wave(p, length, spawnLength,
+                        Color.BLACK,
+                        new Color(211, 211, 211),
+                        new Color(211, 211, 211), "Big Bugs");
+            }
+            case "albinoButterfly" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(211, 211, 211),
+                        new Color(0, 241, 114),
+                        Color.BLACK, "Moths");
+            }
+            case "smallGolem" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(121, 129, 141),
+                        new Color(95, 205, 228),
+                        new Color(206, 209, 198), new String[]{"Pebble", "Golems"});
+            }
+            case "midGolem" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(115, 123, 135),
+                        new Color(188, 255, 0),
+                        new Color(196, 200, 187), new String[]{"Rock", "Golems"});
+            }
+            case "bigGolem" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(105, 112, 124),
+                        new Color(255, 0, 198),
+                        new Color(187, 191, 177), new String[]{"Boulder", "Golems"});
+            }
+            case "1 bigGolem" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(105, 112, 124),
+                        new Color(255, 0, 198),
+                        new Color(187, 191, 177), new String[]{"Boulder", "Golem"});
+            }
+            case "bat" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(72, 45, 5),
+                        new Color(131, 80, 7),
+                        new Color(255, 161, 0), "Bats");
+            }
+            case "bigBat" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(38, 23, 1),
+                        new Color(131, 80, 7),
+                        new Color(200, 13, 0), "Giant Bats");
+            }
+            case "1 bigBat" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(38, 23, 1),
+                        new Color(131, 80, 7),
+                        new Color(200, 13, 0), "Giant Bat");
+            }
+            case "wtf" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(91, 110, 225),
+                        new Color(221, 128, 59),
+                        new Color(33, 42, 95), new String[]{"Colossal", "Bugs"});
+            }
+            case "1 wtf" -> {
+                return new Wave(p, length, spawnLength,
+                        new Color(91, 110, 225),
+                        new Color(221, 128, 59),
+                        new Color(33, 42, 95), new String[]{"Colossal", "Bug"});
+            }
+            default -> {
+                System.out.println("Invalid wave type!");
+                return new Wave(p, length, spawnLength,
+                        Color.BLACK,
+                        Color.BLACK,
+                        Color.WHITE, "INVALID");
+            }
+        }
     }
 }

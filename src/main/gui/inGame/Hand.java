@@ -214,15 +214,9 @@ public class Hand {
     public void displayHeldInfo() {
         if (displayInfo != null) {
             switch (displayInfo) {
-                case PlaceWall:
-                    placeWallInfo();
-                    break;
-                case UpgradeWall:
-                    upgradeWallInfo();
-                    break;
-                case MaxWallUpgrade:
-                    maxWallUpgradeInfo();
-                    break;
+                case PlaceWall -> placeWallInfo();
+                case UpgradeWall -> upgradeWallInfo();
+                case MaxWallUpgrade -> maxWallUpgradeInfo();
             }
             universalWallInfo();
         }
@@ -239,17 +233,17 @@ public class Hand {
         P.rect(905, 247, 190, 119);
         P.textAlign(CENTER);
         P.fill(0, 254);
-        P.textFont(mediumLargeFont);
+        P.textFont(h3);
         P.text("Placing:", 1000, 241);
-        P.textFont(largeFont);
+        P.textFont(h2);
         P.text("Wooden", 1000, 276);
         P.text("Wall", 1000, 301);
-        P.textFont(mediumFont);
+        P.textFont(h4);
         P.text("50 HP", 1000, 331);
         if (canAfford) P.text("$" + Wall.BUY_PRICE, 1000, 356);
         else {
             strikethroughText(P, "$" + Wall.BUY_PRICE, new PVector(1000, 356), new Color(150, 0, 0, 254),
-              mediumFont.getSize(), CENTER);
+              h4.getSize(), CENTER);
         }
     }
 
@@ -271,15 +265,15 @@ public class Hand {
         //tower info
         P.fill(231, 232, 190, 254);
         P.rect(905, 247, 190, 119);
-        P.textFont(mediumLargeFont);
+        P.textFont(h3);
         P.fill(0, 254);
         P.text("Selected:", 1000, 241);
-        P.textFont(largeFont);
+        P.textFont(h2);
         if (wall.nextLevelB > 0) {
             P.text(wall.upgradeTitles[wall.nextLevelB - 1], 1000, 276); //if not base level
         } else P.text("Wooden", 1000, 276);
         P.text("Wall", 1000, 301);
-        P.textFont(mediumFont);
+        P.textFont(h4);
         if (wall.hp > wall.maxHp) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
         P.text(wall.hp + " hp", 1000, 331);
         P.fill(0, 254);
@@ -289,18 +283,18 @@ public class Hand {
         if (canAfford) P.fill(195, 232, 188, 254);
         else P.fill(230, 181, 181, 254);
         P.rect(905, 401, 190, 119);
-        P.textFont(mediumLargeFont);
+        P.textFont(h3);
         P.fill(0, 254);
         P.text("Upgrade:", 1000, 395);
-        P.textFont(largeFont);
+        P.textFont(h2);
         P.text(wall.upgradeTitles[wall.nextLevelB], 1000, 430);
         P.text("Wall", 1000, 455);
-        P.textFont(mediumFont);
+        P.textFont(h4);
         P.text("+" + wall.UPGRADE_HP[wall.nextLevelB] + " HP", 1000, 485);
         if (canAfford) P.text("$" + wall.upgradePrices[wall.nextLevelB], 1000, 510);
         else {
             strikethroughText(P, "$" + wall.upgradePrices[wall.nextLevelB], new PVector(1000, 510),
-              new Color(150, 0, 0, 254), mediumFont.getSize(), CENTER);
+              new Color(150, 0, 0, 254), h4.getSize(), CENTER);
         }
     }
 
@@ -317,15 +311,15 @@ public class Hand {
         //tower info
         P.fill(231, 232, 190);
         P.rect(905, 247, 190, 119);
-        P.textFont(mediumLargeFont);
+        P.textFont(h3);
         P.fill(0, 254);
         P.text("Selected:", 1000, 241);
-        P.textFont(largeFont);
+        P.textFont(h2);
         if (currentLevel == 0) P.text("Wooden", 1000, 276);
         else if (wall instanceof IceWall) P.text("Ice", 1000, 276);
         else P.text(wall.upgradeTitles[currentLevel - 1], 1000, 276);
         P.text("Wall", 1000, 301);
-        P.textFont(mediumFont);
+        P.textFont(h4);
         P.text(wall.hp + " hp", 1000, 331);
         P.text("Sell for: $" + (int) (0.8f * (float) wall.getValue()), 1000, 356);
     }
@@ -338,7 +332,7 @@ public class Hand {
         P.fill(200);
         P.rect(905, 700, 190, 195);
         P.fill(0, 254);
-        P.textFont(mediumFont);
+        P.textFont(h4);
         P.textAlign(LEFT);
         P.text("LClick to place", 910, 720);
         P.text("wall", 910, 740);
@@ -356,89 +350,87 @@ public class Hand {
      */
     public void setHeld(String heldSet) {
         switch (heldSet) {
-            case "slingshot":
+            case "slingshot" -> {
                 heldSprite = staticSprites.get("slingshotFullTR");
                 offset = new PVector(0, 0);
                 price = SLINGSHOT_PRICE;
-                break;
-            case "crossbow":
+            }
+            case "crossbow" -> {
                 heldSprite = staticSprites.get("crossbowFullTR");
                 offset = new PVector(2, 2);
                 price = CROSSBOW_PRICE;
-                break;
-            case "miscCannon":
+            }
+            case "miscCannon" -> {
                 heldSprite = staticSprites.get("miscCannonFullTR");
                 offset = new PVector(0, 0);
                 price = RANDOM_CANNON_PRICE;
-                break;
-            case "cannon":
+            }
+            case "cannon" -> {
                 heldSprite = staticSprites.get("cannonFullTR");
                 offset = new PVector(5, 5);
                 price = CANNON_PRICE;
-                break;
-            case "gluer":
+            }
+            case "gluer" -> {
                 heldSprite = staticSprites.get("gluerFullTR");
                 offset = new PVector(0, 0);
                 price = GLUER_PRICE;
-                break;
-            case "seismic":
+            }
+            case "seismic" -> {
                 heldSprite = staticSprites.get("seismicFullTR");
                 offset = new PVector(4, 4);
                 price = SEISMIC_PRICE;
-                break;
-            case "energyBlaster":
+            }
+            case "energyBlaster" -> {
                 heldSprite = staticSprites.get("energyBlasterFullTR");
                 offset = new PVector(13, 13);
                 price = ENERGY_BLASTER_PRICE;
-                break;
-            case "magicMissleer":
+            }
+            case "magicMissleer" -> {
                 heldSprite = staticSprites.get("magicMissleerFullTR");
                 offset = new PVector(0, 0);
                 price = MAGIC_MISSILEER_PRICE;
-                break;
-            case "tesla":
+            }
+            case "tesla" -> {
                 heldSprite = staticSprites.get("teslaFullTR");
                 offset = new PVector(0, 0);
                 price = TESLA_TOWER_PRICE;
-                break;
-            case "nightmare":
+            }
+            case "nightmare" -> {
                 heldSprite = staticSprites.get("nightmareFullTR");
                 offset = new PVector(0, 0);
                 price = NIGHTMARE_PRICE;
-                break;
-            case "flamethrower":
+            }
+            case "flamethrower" -> {
                 heldSprite = staticSprites.get("flamethrowerFullTR");
                 offset = new PVector(7, 7);
                 price = FLAMETHROWER_PRICE;
-                break;
-            case "iceTower":
+            }
+            case "iceTower" -> {
                 heldSprite = staticSprites.get("iceTowerFullTR");
                 offset = new PVector(0, 0);
                 price = ICE_TOWER_PRICE;
-                break;
-            case "booster":
+            }
+            case "booster" -> {
                 heldSprite = staticSprites.get("boosterFullTR");
                 offset = new PVector(0, 0);
                 price = BOOSTER_PRICE;
-                break;
-            case "railgun":
+            }
+            case "railgun" -> {
                 heldSprite = staticSprites.get("railgunFullTR");
                 offset = new PVector(6, 6);
                 price = RAILGUN_PRICE;
-                break;
-            case "waveMotion":
+            }
+            case "waveMotion" -> {
                 heldSprite = staticSprites.get("waveMotionFullTR");
                 offset = new PVector(0, 0);
                 price = WAVE_MOTION_PRICE;
-                break;
-            case "wall":
+            }
+            case "wall" -> {
                 heldSprite = staticSprites.get("woodWallTW");
                 offset = new PVector(0, 0);
                 price = Wall.BUY_PRICE;
-                break;
-            case "null":
-                heldSprite = null;
-                break;
+            }
+            case "null" -> heldSprite = null;
         }
         if (heldSet.contains("TL")) {
             offset = new PVector(0,0);
@@ -463,8 +455,7 @@ public class Hand {
         boolean changeHeld = true;
         if (!alive) return;
         if (held.equals("wall")) {
-            if (tile.tower instanceof Wall) { //upgrade
-                Wall wall = (Wall) tile.tower;
+            if (tile.tower instanceof Wall wall) { //upgrade
                 if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.upgradePrices[wall.nextLevelB]) { //upgrade
                     money -= wall.upgradePrices[wall.nextLevelB];
                     wall.upgrade(0, false);

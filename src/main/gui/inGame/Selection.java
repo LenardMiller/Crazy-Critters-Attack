@@ -202,7 +202,7 @@ public class Selection {
     private int nameAndSpecial() {
         P.textAlign(CENTER);
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
-        P.textFont(largeFont);
+        P.textFont(h2);
 
         int offset = displayTitleAndGetOffset(P, turret.titleLines);
         turret.infoDisplay.accept(offset);
@@ -212,7 +212,7 @@ public class Selection {
 
     private void displayInfo(int offset, int speed) {
         //health
-        P.textFont(mediumFont);
+        P.textFont(h4);
         P.textAlign(LEFT);
         P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         if (turret.boostedMaxHp() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
@@ -271,7 +271,7 @@ public class Selection {
         if (!turret.hasPriority) offset = 45;
         P.fill(STAT_TEXT_COLOR.getRGB(), 254);
         P.textAlign(LEFT);
-        P.textFont(mediumFont);
+        P.textFont(h4);
 
         turret.statsDisplay.accept(offset);
     }
@@ -294,15 +294,15 @@ public class Selection {
             if (canAfford) fillColor = new Color(11, 56, 0, 254);
             else fillColor = new Color(75, 0, 0, 254);
             P.fill(fillColor.getRGB(), fillColor.getAlpha());
-            P.textFont(largeFont);
+            P.textFont(h2);
             P.text(turret.upgradeTitles[nextLevel], 1000, 585 + offsetC);
             P.textAlign(RIGHT);
             if (canAfford) P.text("$" + nfc(turret.upgradePrices[nextLevel]), BOARD_WIDTH + 200 - 20, 693 + offsetC);
             else {
                 strikethroughText(P, "$" + nfc(turret.upgradePrices[nextLevel]), new PVector(BOARD_WIDTH + 200 - 20, 693 + offsetC),
-                        fillColor, largeFont.getSize(), RIGHT);
+                        fillColor, h2.getSize(), RIGHT);
             }
-            P.textFont(mediumFont);
+            P.textFont(h4);
             P.textAlign(LEFT);
             P.text(turret.upgradeDescA[nextLevel], 910, 615 + offsetC);
             P.text(turret.upgradeDescB[nextLevel], 910, 635 + offsetC);
@@ -310,9 +310,9 @@ public class Selection {
         } else {
             fillColor = new Color(15, 15, 15, 254);
             P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getAlpha());
-            P.textFont(largeFont);
+            P.textFont(h2);
             P.text("N/A", 1000, 585 + offsetC);
-            P.textFont(mediumFont);
+            P.textFont(h4);
             P.textAlign(LEFT);
             P.text("No more", 910, 615 + offsetC);
             P.text("upgrades", 910, 635 + offsetC);
@@ -339,7 +339,7 @@ public class Selection {
     }
 
     private void priorityButton() {
-        P.textFont(largeFont);
+        P.textFont(h2);
         P.textAlign(CENTER);
         if (turret.hasPriority) {
             P.fill(75, 45, 0, 254);
@@ -349,13 +349,13 @@ public class Selection {
 
     private void sellButton() {
         P.fill(75, 0, 0, 254);
-        P.textFont(largeFont);
+        P.textFont(h2);
         P.textAlign(CENTER);
         P.text("Sell for: $" + nfc(floor(turret.getValue() * .8f)), 1000, 888);
     }
 
     public void setTextPurple(String s, int offset) {
-        P.textFont(mediumFont);
+        P.textFont(h4);
         P.textAlign(LEFT);
         P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
         P.text(s, 910, 356 + offset + 20 * purpleCount);

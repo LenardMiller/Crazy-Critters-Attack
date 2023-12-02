@@ -123,15 +123,15 @@ public class InGameGui {
 
     public void displayText(PApplet p, int x) {
         p.fill(MAIN_TEXT_COLOR.getRGB());
-        p.textFont(largeFont);
+        p.textFont(h2);
         p.textAlign(LEFT);
         p.fill(200, 254);
-        p.textFont(mediumFont);
+        p.textFont(h4);
         p.textAlign(CENTER);
         p.text("Menu", 1000, 18);
         p.fill(0, 254);
         p.text("Place Walls", 1000, 170);
-        p.textFont(largeFont);
+        p.textFont(h2);
         p.fill(MAIN_TEXT_COLOR.getRGB(), 254);
         p.textAlign(RIGHT);
         p.text("$" + nfc(money), BOARD_WIDTH + 200 - x, 211-5);

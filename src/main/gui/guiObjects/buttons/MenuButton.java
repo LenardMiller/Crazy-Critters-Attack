@@ -107,7 +107,7 @@ public class MenuButton extends Button {
 
         if (text != null) {
             p.textAlign(CENTER);
-            p.textFont(mediumFont);
+            p.textFont(h4);
             p.fill(200, 254);
             p.text(text, position.x, position.y + TEXT_Y_OFFSET);
         }

@@ -82,8 +82,8 @@ public class SettingsGui {
         int offsetY = 7;
         if (fullscreenWas != isFullscreen || rendererWas != isOpenGL) highlightedText(P, "Restart required",
           new PVector(P.width / 2f, P.height - 250 + offsetY), new Color(255, 0, 0, 254),
-          new Color(50, 0, 0, 200), largeFont.getSize(), CENTER);
-        P.textFont(mediumFont);
+          new Color(50, 0, 0, 200), h2.getSize(), CENTER);
+        P.textFont(h4);
         P.fill(200, 254);
         returnButton.display();
         resetSettings.display();

@@ -34,14 +34,14 @@ public class GlacierWaves {
         waves[3] = wavePreset(p, 55, 25, wolf);
         waves[3].addSpawns(wolf, 5);
 
-        waves[4] = wavePreset(p, 65, 30, shark);
+        waves[4] = wavePreset(p, 65, 30, new String[]{"Snow", "Sharks"});
         waves[4].addSpawns(shark, 5);
 
         waves[5] = wavePreset(p, 55, 25, wolf);
         waves[5].addSpawns(wolf, 10);
         waves[5].polluter = new Polluter(p, 5, "glacier/partial");
 
-        waves[6] = wavePreset(p, 65, 30, shark);
+        waves[6] = wavePreset(p, 65, 30, new String[]{"Snow", "Sharks"});
         waves[6].addSpawns(shark, 5);
 
         waves[7] = wavePreset(p, 30, 15, snowAntlion);
@@ -115,7 +115,7 @@ public class GlacierWaves {
         waves[25] = wavePreset(p, 65, 30, velociraptor);
         waves[25].addSpawns(velociraptor, 10);
 
-        waves[26] = wavePreset(p, 50, 5, iceMonstrosity);
+        waves[26] = wavePreset(p, 50, 5, new String[]{"Ice", "Monstrosities"});
         waves[26].addSpawns(iceEntity, 5);
         waves[26].addSpawns(iceMonstrosity, 3);
 
@@ -127,7 +127,7 @@ public class GlacierWaves {
         waves[28].addSpawns(frost, 5);
         waves[28].addSpawns(iceEntity, 5);
 
-        waves[29] = wavePreset(p, 50, 20, iceMonstrosity);
+        waves[29] = wavePreset(p, 50, 20, new String[]{"Ice", "Monstrosities"});
         waves[29].addSpawns(iceMonstrosity, 5);
 
         waves[30] = new Wave(p, 40, 15,
@@ -149,29 +149,29 @@ public class GlacierWaves {
         waves[32].addSpawns(velociraptor, 20);
         waves[32].addSpawns(bigWorm, 5);
 
-        waves[33] = wavePreset(p, 55, 25, mudCreature);
+        waves[33] = wavePreset(p, 55, 25, new String[]{"Mud", "Creatures"});
         waves[33].addSpawns(mudCreature, 3);
 
-        waves[34] = wavePreset(p, 55, 25, mudFlinger);
+        waves[34] = wavePreset(p, 55, 25, new String[]{"Mud", "Flingers"});
         waves[34].addSpawns(mudFlinger, 5);
 
-        waves[35] = wavePreset(p, 55, 25, iceMonstrosity);
+        waves[35] = wavePreset(p, 55, 25, new String[]{"Ice", "Monstrosities"});
         waves[35].addSpawns(frost, 10);
         waves[35].addSpawns(iceMonstrosity, 10);
 
-        waves[36] = wavePreset(p, 55, 25, mudCreature);
+        waves[36] = wavePreset(p, 55, 25, new String[]{"Mud", "Creatures"});
         waves[36].addSpawns(mudCreature, 5);
         waves[36].addSpawns(frost, 5);
 
-        waves[37] = wavePreset(p, 45, 15, iceMonstrosity);
+        waves[37] = wavePreset(p, 45, 15, new String[]{"Ice", "Monstrosities"});
         waves[37].addSpawns(frost, 10);
         waves[37].addSpawns(iceMonstrosity, 10);
 
-        waves[36] = wavePreset(p, 55, 25, mudFlinger);
+        waves[36] = wavePreset(p, 55, 25, new String[]{"Mud", "Flingers"});
         waves[36].addSpawns(mudFlinger, 5);
         waves[36].addSpawns(frost, 5);
 
-        waves[37] = wavePreset(p, 55, 25, iceMonstrosity);
+        waves[37] = wavePreset(p, 55, 25, new String[]{"Ice", "Monstrosities"});
         waves[37].addSpawns(frost, 15);
         waves[37].addSpawns(iceMonstrosity, 10);
         waves[37].addSpawns(iceEntity, 40);
@@ -185,31 +185,31 @@ public class GlacierWaves {
         waves[39] = wavePreset(p, 85, 1, "Mammoth");
         waves[39].addSpawns(mammoth, 1);
 
-        waves[40] = wavePreset(p, 55, 25, mudFlinger);
+        waves[40] = wavePreset(p, 55, 25, new String[]{"Mud", "Flingers"});
         waves[40].addSpawns(mudFlinger, 10);
         waves[40].addSpawns(bigWorm, 5);
 
-        waves[41] = wavePreset(p, 55, 25, mudCreature);
+        waves[41] = wavePreset(p, 55, 25, new String[]{"Mud", "Creatures"});
         waves[41].addSpawns(mudCreature, 10);
         waves[41].addSpawns(bigWorm, 5);
 
         waves[42] = wavePreset(p, 65, 1, "Mammoth");
         waves[42].addSpawns(mammoth, 1);
 
-        waves[43] = wavePreset(p, 55, 25, mudFlinger);
+        waves[43] = wavePreset(p, 55, 25, new String[]{"Mud", "Flingers"});
         waves[43].addSpawns(mudFlinger, 20);
 
-        waves[44] = wavePreset(p, 55, 25, mudCreature);
+        waves[44] = wavePreset(p, 55, 25, new String[]{"Mud", "Creatures"});
         waves[44].addSpawns(mudCreature, 20);
 
         waves[45] = wavePreset(p, 65, 20, mammoth);
         waves[45].addSpawns(mammoth, 3);
         waves[45].addSpawns(bigWorm, 10);
 
-        waves[46] = wavePreset(p, 55, 25, mudFlinger);
+        waves[46] = wavePreset(p, 55, 25, new String[]{"Mud", "Flingers"});
         waves[46].addSpawns(mudFlinger, 35);
 
-        waves[47] = wavePreset(p, 55, 25, mudCreature);
+        waves[47] = wavePreset(p, 55, 25, new String[]{"Mud", "Creatures"});
         waves[47].addSpawns(mudCreature, 35);
 
         waves[48] = wavePreset(p, 65, 20, mammoth);
@@ -227,109 +227,95 @@ public class GlacierWaves {
     }
 
     private static Wave wavePreset(PApplet p, int length, int spawnLength, String title) {
-        switch (title) {
-            case "Antlions":
-                return new Wave(p, length, spawnLength,
-                  new Color(118, 190, 198),
-                  new Color(118, 164, 198),
-                  new Color(44, 80, 95),
-                  title
-                );
-            case "Wolves":
-                return new Wave(p, length, spawnLength,
-                  new Color(171, 170, 165),
-                  new Color(117, 113, 105),
-                  new Color(0),
-                  title
-                );
-            case "Snow Sharks":
-                return new Wave(p, length, spawnLength,
-                  new Color(30, 155, 227),
-                  new Color(0, 255, 224),
-                  new Color(0, 60, 100),
-                  title
-                );
-            case "Velociraptor":
-            case "Velociraptors":
-                return new Wave(p, length, spawnLength,
-                  new Color(116, 156, 160),
-                  new Color(0, 157, 208),
-                  new Color(255, 200, 0),
-                  title
-                );
-            case "Mini Horde":
-            case "Horde":
-                return new Wave(p, length, spawnLength,
-                  new Color(255, 255, 255),
-                  new Color(179, 214, 238),
-                  new Color(0, 113, 189),
-                  title
-                );
-            case "Ice Entities":
-                return new Wave(p, length, spawnLength,
-                  new Color(123, 250, 250),
-                  new Color(40, 139, 243),
-                  new Color(12, 74, 232),
-                  title
-                );
-            case "Ice Monstrosity":
-            case "Ice Monstrosities":
-                return new Wave(p, length, spawnLength,
-                  new Color(12, 74, 232),
-                  new Color(40, 139, 243),
-                  new Color(123, 250, 250),
-                  title
-                );
-            case "Frost":
-                return new Wave(p, length, spawnLength,
-                  new Color(227, 247, 255),
-                  new Color(213, 243, 255),
-                  new Color(141, 235, 255),
-                  title
-                );
-            case "Mammoth":
-            case "Mammoths":
-                return new Wave(p, length, spawnLength,
-                  new Color(64, 39, 15),
-                  new Color(29, 20, 7),
-                  new Color(185, 181, 158),
-                  title
-                );
-            case "Mud Creatures":
-                return new Wave(p, length, spawnLength,
-                  new Color(74, 39, 0),
-                  new Color(188, 186, 130),
-                  new Color(23, 13, 0),
-                  title
-                );
-            case "Mud Flingers":
-                return new Wave(p, length, spawnLength,
-                  new Color(74, 39, 0),
-                  new Color(139, 75, 0),
-                  new Color(23, 13, 0),
-                  title
-                );
-            case "Mud Horde":
-                return new Wave(p, length, spawnLength,
-                  new Color(74, 39, 0),
-                  new Color(0, 155, 255),
-                  new Color(100, 100, 100),
-                  title
-                );
-            case "Megaworms":
-                return new Wave(p, length, spawnLength,
-                  new Color(232, 106, 115),
-                  new Color(255, 255, 255),
-                  new Color(45, 19, 21),
-                  title
-                );
-            default:
-                return new Wave(p, length, spawnLength,
-                  new Color(255, 0, 255),
-                  new Color(0),
-                  new Color(0),
-                  title
-                );
-        }
+        return wavePreset(p, length, spawnLength, new String[]{title});
+    }
+
+    private static Wave wavePreset(PApplet p, int length, int spawnLength, String[] title) {
+        return switch (title[title.length - 1]) {
+            case "Antlions" -> new Wave(p, length, spawnLength,
+                    new Color(118, 190, 198),
+                    new Color(118, 164, 198),
+                    new Color(44, 80, 95),
+                    title
+            );
+            case "Wolves" -> new Wave(p, length, spawnLength,
+                    new Color(171, 170, 165),
+                    new Color(117, 113, 105),
+                    new Color(0),
+                    title
+            );
+            case "Sharks" -> new Wave(p, length, spawnLength,
+                    new Color(30, 155, 227),
+                    new Color(0, 255, 224),
+                    new Color(0, 60, 100),
+                    title
+            );
+            case "Velociraptor", "Velociraptors" -> new Wave(p, length, spawnLength,
+                    new Color(116, 156, 160),
+                    new Color(0, 157, 208),
+                    new Color(255, 200, 0),
+                    title
+            );
+            case "Mini Horde", "Horde" -> new Wave(p, length, spawnLength,
+                    new Color(255, 255, 255),
+                    new Color(179, 214, 238),
+                    new Color(0, 113, 189),
+                    title
+            );
+            case "Ice Entities" -> new Wave(p, length, spawnLength,
+                    new Color(123, 250, 250),
+                    new Color(40, 139, 243),
+                    new Color(12, 74, 232),
+                    title
+            );
+            case "Monstrosity", "Monstrosities" -> new Wave(p, length, spawnLength,
+                    new Color(12, 74, 232),
+                    new Color(40, 139, 243),
+                    new Color(123, 250, 250),
+                    title
+            );
+            case "Frost" -> new Wave(p, length, spawnLength,
+                    new Color(227, 247, 255),
+                    new Color(213, 243, 255),
+                    new Color(141, 235, 255),
+                    title
+            );
+            case "Mammoth", "Mammoths" -> new Wave(p, length, spawnLength,
+                    new Color(64, 39, 15),
+                    new Color(29, 20, 7),
+                    new Color(185, 181, 158),
+                    title
+            );
+            case "Creatures" -> new Wave(p, length, spawnLength,
+                    new Color(74, 39, 0),
+                    new Color(188, 186, 130),
+                    new Color(23, 13, 0),
+                    title
+            );
+            case "Flingers" -> new Wave(p, length, spawnLength,
+                    new Color(74, 39, 0),
+                    new Color(139, 75, 0),
+                    new Color(23, 13, 0),
+                    title
+            );
+            case "Mud Horde" -> new Wave(p, length, spawnLength,
+                    new Color(74, 39, 0),
+                    new Color(0, 155, 255),
+                    new Color(100, 100, 100),
+                    title
+            );
+            case "Megaworms" -> new Wave(p, length, spawnLength,
+                    new Color(232, 106, 115),
+                    new Color(255, 255, 255),
+                    new Color(45, 19, 21),
+                    title
+            );
+            default -> new Wave(p, length, spawnLength,
+                    new Color(255, 0, 255),
+                    new Color(0),
+                    new Color(0),
+                    title
+            );
+        };
     }
 }

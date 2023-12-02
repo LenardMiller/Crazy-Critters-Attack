@@ -66,12 +66,12 @@ public class LevelSelectGui {
         delay--;
         //big text
         P.fill(255, 254);
-        P.textFont(veryLargeFont);
+        P.textFont(title);
         P.textAlign(P.CENTER);
         P.text("Level Select [wip]", P.width/2f, 300);
         //buttons
         P.fill(200, 254);
-        P.textFont(mediumFont);
+        P.textFont(h4);
         for (MenuButton levelSelectButton : levelSelectButtons) {
             levelSelectButton.display();
             if (delay < 0) levelSelectButton.hover();

@@ -35,9 +35,9 @@ public class PlayButton extends Button {
         p.fill(20,20,50, 254);
         p.image(sprite,position.x - size.x / 2,position.y);
         p.textAlign(CENTER);
-        p.textFont(largeFont);
+        p.textFont(h2);
         p.text(playingLevel ? "Skip" : "Play",position.x, position.y + 30);
-        p.textFont(mediumFont);
+        p.textFont(h4);
         if (playingLevel && levels[currentLevel].canBeSkipped())
             p.text("+$" + levels[currentLevel].waves[levels[currentLevel].currentWave].getReward(), position.x, position.y + size.y / 2f - 12);
     }

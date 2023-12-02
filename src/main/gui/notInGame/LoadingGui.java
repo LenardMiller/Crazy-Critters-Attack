@@ -31,10 +31,11 @@ public class LoadingGui {
     public void update() {
         switch (progress) {
             case 0:
-                Main.largeFont       = P.createFont("STHeitiSC-Light", 24, true);
-                Main.mediumLargeFont = P.createFont("STHeitiSC-Light", 21, true);
-                Main.mediumFont      = P.createFont("STHeitiSC-Light", 18, true);
-                Main.smallFont       = P.createFont("STHeitiSC-Light", 12, true);
+                Main.h1 = P.createFont("STHeitiSC-Medium", 30, true);
+                Main.h2 = P.createFont("STHeitiSC-Light", 24, true);
+                Main.h3 = P.createFont("STHeitiSC-Light", 21, true);
+                Main.h4 = P.createFont("STHeitiSC-Light", 18, true);
+                Main.pg = P.createFont("STHeitiSC-Light", 12, true);
                 break;
             case 1:
                 loadGui(P);

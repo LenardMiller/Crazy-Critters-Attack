@@ -101,7 +101,7 @@ public class DeepForestWaves {
         waves[13].addSpawns(butterfly, 20);
 
         //first enraged giant
-        waves[14] = wavePreset(p, 40, 1, "Enraged Giant");
+        waves[14] = wavePreset(p, 40, 1, new String[]{"Enraged", "Giant"});
         waves[14].addSpawns(enragedGiant, 1);
 
         waves[15] = wavePreset(p, 80, 20, mantis);
@@ -130,7 +130,7 @@ public class DeepForestWaves {
         waves[20].addSpawns(midWorm, 20);
         waves[20].addSpawns(bigWorm, 15);
 
-        waves[21] = wavePreset(p, 80, 20, enragedGiant);
+        waves[21] = wavePreset(p, 80, 20, new String[]{"Enraged", "Giants"});
         waves[21].polluter = new Polluter(p, 3, "deepForest/brown");
         waves[21].addSpawns(enragedGiant, 5);
 
@@ -139,7 +139,7 @@ public class DeepForestWaves {
         waves[22].addSpawns(roach, 30);
 
         //first mud creature
-        waves[23] = wavePreset(p, 50, 1, mudCreature);
+        waves[23] = wavePreset(p, 50, 1, new String[]{"Mud", "Creatures"});
         waves[23].addSpawns(mudCreature, 3);
 
         waves[24] = wavePreset(p, 240, 200, "Bug Horde");
@@ -155,12 +155,12 @@ public class DeepForestWaves {
         waves[25] = wavePreset(p, 50, 1, "Mantoid");
         waves[25].addSpawns(mantoid, 1);
 
-        waves[26] = wavePreset(p, 50, 20, enragedGiant);
+        waves[26] = wavePreset(p, 50, 20, new String[]{"Enraged", "Giants"});
         waves[26].addSpawns(enragedGiant, 10);
         waves[26].addSpawns(mantis, 10);
 
         //first mud flinger
-        waves[27] = wavePreset(p, 50, 1, mudCreature);
+        waves[27] = wavePreset(p, 50, 1, new String[]{"Mud", "Creatures"});
         waves[27].addSpawns(mudCreature, 3);
         waves[27].addSpawns(mudFlinger, 2);
 
@@ -180,7 +180,7 @@ public class DeepForestWaves {
         waves[31].addSpawns(mantoid, 5);
         waves[31].addSpawns(enragedGiant, 10);
 
-        waves[32] = wavePreset(p, 50, 10, mudCreature);
+        waves[32] = wavePreset(p, 50, 10, new String[]{"Mud", "Creatures"});
         waves[32].addSpawns(mudCreature, 5);
         waves[32].addSpawns(mudFlinger, 3);
 
@@ -227,7 +227,7 @@ public class DeepForestWaves {
         waves[42].addSpawns("emperor", 3);
         waves[42].addSpawns(roach, 20);
 
-        waves[43] = wavePreset(p, 120, 100, "Decaying Horde");
+        waves[43] = wavePreset(p, 120, 100, new String[]{"Decaying", "Horde"});
         waves[43].addSpawns(roach, 125);
         waves[43].addSpawns(twisted, 30);
         waves[43].addSpawns(root, 30);
@@ -240,125 +240,103 @@ public class DeepForestWaves {
         waves[44] = wavePreset(p, 100, 20, "Mutant Bugs");
         waves[44].addSpawns(mutantBug, 3);
 
-        //todo: boss
-
         for (Wave wave : waves) wave.load();
         return waves;
     }
 
     private static Wave wavePreset(PApplet p, int length, int spawnLength, String title) {
-        switch (title) {
-            case "Bugs":
-                return new Wave(p, length, spawnLength,
-                        new Color(0xAA0000),
-                        new Color(0x0A0A0A),
-                        new Color(0x190000),
-                        title);
-            case "Big Bug":
-            case "Big Bugs":
-                return new Wave(p, length, spawnLength,
-                        new Color(10, 10, 10),
-                        new Color(170, 0, 0),
-                        new Color(255, 0, 0),
-                        title);
-            case "Tree Spirits":
-                return new Wave(p, length, spawnLength,
-                        new Color(20, 183, 83),
-                        new Color(123, 78, 15),
-                        new Color(0, 50, 0),
-                        title);
-            case "Tree Giant":
-            case "Tree Giants":
-                return new Wave(p, length, spawnLength,
-                        new Color(0, 100, 0),
-                        new Color(255, 0, 77),
-                        new Color(32, 255, 32),
-                        title);
-            case "Bug Horde":
-            case "Horde":
-                return new Wave(p, length, spawnLength,
-                        new Color(143, 86, 59),
-                        new Color(20, 160, 46),
-                        new Color(47, 28, 1),
-                         title);
-            case "Worms":
-                return new Wave(p, length, spawnLength,
-                        new Color(232, 106, 115),
-                        new Color(255, 255, 255),
-                        new Color(45, 19, 21),
-                        title);
-            case "Giants":
-            case "Enraged Giant":
-            case "Enraged Giants":
-                return new Wave(p, length, spawnLength,
-                        new Color(0x689A32),
-                        new Color(0x5B4B1C),
-                        new Color(0x6b5823),
-                        title);
-            case "Mantises":
-            case "Mantis":
-                return new Wave(p, length, spawnLength,
-                        new Color(0x82D240),
-                        new Color(0xCAEC43),
-                        new Color(0x407E15),
-                        title);
-            case "Roaches":
-                return new Wave(p, length, spawnLength,
-                        new Color(0x5C241A),
-                        new Color(0x804E2A),
-                        new Color(0x30130E),
-                        title);
-            case "Mud Creature":
-            case "Mud Creatures":
-                return new Wave(p, length, spawnLength,
-                        new Color(74, 39, 0),
-                        new Color(188, 186, 130),
-                        new Color(23, 13, 0),
-                        title);
-            case "Roots":
-                return new Wave(p, length, spawnLength,
-                        new Color(0x714200),
-                        new Color(0xb76e09),
-                        new Color(0x412600),
-                        title);
-            case "Mantoids":
-            case "Mantoid":
-                return new Wave(p, length, spawnLength,
-                        new Color(0xbe3055),
-                        new Color(0xc0ec3d),
-                        new Color(0xfb8e37),
-                        title);
-            case "Twisted":
-                return new Wave(p, length, spawnLength,
-                        new Color(219, 105, 67),
-                        new Color(123, 78, 15),
-                        new Color(90, 63, 35),
-                        title);
-            case "Fae":
-                return new Wave(p, length, spawnLength,
-                        new Color(100, 207, 124),
-                        new Color(105, 212, 214),
-                        new Color(64, 136, 200),
-                        title);
-            case "Mutant Bug":
-            case "Mutant Bugs":
-                return new Wave(p, length, spawnLength,
-                        new Color(10, 10, 10),
-                        new Color(0x8dbf00),
-                        new Color(255, 0, 0),
-                        title);
-            case "Decaying Horde":
-                return new Wave(p, length, spawnLength,
-                        new Color(143, 86, 59),
-                        new Color(106, 67, 20),
-                        new Color(139, 117, 83),
-                        title);
-            default:
-                return new Wave(p, length, spawnLength,
-                        new Color(0),
-                        new Color(255, 0, 255),
-                        new Color(0),
-                        title);
+        return wavePreset(p, length, spawnLength, new String[]{title});
+    }
+
+    private static Wave wavePreset(PApplet p, int length, int spawnLength, String[] title) {
+        if (title[0].equals("Decaying")) {
+            return new Wave(p, length, spawnLength,
+                    new Color(143, 86, 59),
+                    new Color(106, 67, 20),
+                    new Color(139, 117, 83),
+                    title);
         }
+        return switch (title[title.length - 1]) {
+            case "Bugs" -> new Wave(p, length, spawnLength,
+                    new Color(0xAA0000),
+                    new Color(0x0A0A0A),
+                    new Color(0x190000),
+                    title);
+            case "Big Bug", "Big Bugs" -> new Wave(p, length, spawnLength,
+                    new Color(10, 10, 10),
+                    new Color(170, 0, 0),
+                    new Color(255, 0, 0),
+                    title);
+            case "Tree Spirits" -> new Wave(p, length, spawnLength,
+                    new Color(20, 183, 83),
+                    new Color(123, 78, 15),
+                    new Color(0, 50, 0),
+                    title);
+            case "Tree Giant", "Tree Giants" -> new Wave(p, length, spawnLength,
+                    new Color(0, 100, 0),
+                    new Color(255, 0, 77),
+                    new Color(32, 255, 32),
+                    title);
+            case "Bug Horde", "Horde" -> new Wave(p, length, spawnLength,
+                    new Color(143, 86, 59),
+                    new Color(20, 160, 46),
+                    new Color(47, 28, 1),
+                    title);
+            case "Worms" -> new Wave(p, length, spawnLength,
+                    new Color(232, 106, 115),
+                    new Color(255, 255, 255),
+                    new Color(45, 19, 21),
+                    title);
+            case "Giants", "Giant" -> new Wave(p, length, spawnLength,
+                    new Color(0x689A32),
+                    new Color(0x5B4B1C),
+                    new Color(0x6b5823),
+                    title);
+            case "Mantises", "Mantis" -> new Wave(p, length, spawnLength,
+                    new Color(0x82D240),
+                    new Color(0xCAEC43),
+                    new Color(0x407E15),
+                    title);
+            case "Roaches" -> new Wave(p, length, spawnLength,
+                    new Color(0x5C241A),
+                    new Color(0x804E2A),
+                    new Color(0x30130E),
+                    title);
+            case "Creatures" -> new Wave(p, length, spawnLength,
+                    new Color(74, 39, 0),
+                    new Color(188, 186, 130),
+                    new Color(23, 13, 0),
+                    title);
+            case "Roots" -> new Wave(p, length, spawnLength,
+                    new Color(0x714200),
+                    new Color(0xb76e09),
+                    new Color(0x412600),
+                    title);
+            case "Mantoids", "Mantoid" -> new Wave(p, length, spawnLength,
+                    new Color(0xbe3055),
+                    new Color(0xc0ec3d),
+                    new Color(0xfb8e37),
+                    title);
+            case "Twisted" -> new Wave(p, length, spawnLength,
+                    new Color(219, 105, 67),
+                    new Color(123, 78, 15),
+                    new Color(90, 63, 35),
+                    title);
+            case "Fae" -> new Wave(p, length, spawnLength,
+                    new Color(100, 207, 124),
+                    new Color(105, 212, 214),
+                    new Color(64, 136, 200),
+                    title);
+            case "Mutant Bug", "Mutant Bugs" -> new Wave(p, length, spawnLength,
+                    new Color(10, 10, 10),
+                    new Color(0x8dbf00),
+                    new Color(255, 0, 0),
+                    title);
+            default -> new Wave(p, length, spawnLength,
+                    new Color(0),
+                    new Color(255, 0, 255),
+                    new Color(0),
+                    title);
+        };
     }
 }

@@ -16,7 +16,7 @@ public class TowerInfo {
 
     private static int loadStyle(PApplet p) {
         p.textAlign(LEFT);
-        p.textFont(mediumFont);
+        p.textFont(h4);
         p.fill(0, 254);
         return 910;
     }
@@ -27,7 +27,7 @@ public class TowerInfo {
         p.rect(900,212,200,707);
         p.textAlign(CENTER);
         p.fill(0, 254);
-        p.textFont(largeFont); //displays info about tower
+        p.textFont(h2); //displays info about tower
         int x = 1000;
         int offset = 0;
         int price = 0;
@@ -119,10 +119,10 @@ public class TowerInfo {
 
     private static void displayPrice(PApplet p, int price, int offset, int x) {
         p.textAlign(CENTER);
-        p.textFont(mediumFont);
+        p.textFont(h4);
         if (money < price) {
             strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0, 254),
-                    mediumFont.getSize(), CENTER);
+                    h4.getSize(), CENTER);
         }
         else p.text("$" + price, x, 271 + offset);
     }

@@ -174,17 +174,17 @@ public class DesertWaves {
         waves[30].addSpawns("bigBug", 5);
         waves[30].addSpawns("littleWorm", 30);
 
-        waves[31] = new Wave(p, 65, 5, bigWormFill, bigWormAccent, bigWormText, "Megaworm");
+        waves[31] = new Wave(p, 65, 5, bigWormFill, bigWormAccent, bigWormText, new String[]{"Giant", "Sandworm"});
         waves[31].addSpawns("bigWorm", 1);
 
         waves[32] = new Wave(p, 60, 25, emperorFill, emperorAccent, emperorText, "Emperors");
         waves[32].addSpawns("emperor", 5);
         waves[32].addSpawns("bigBug", 5);
 
-        waves[33] = new Wave(p, 65, 20, bigWormFill, bigWormAccent, bigWormText, "Megaworms");
+        waves[33] = new Wave(p, 65, 20, bigWormFill, bigWormAccent, bigWormText, new String[]{"Giant", "Sandworms"});
         waves[33].addSpawns("bigWorm", 3);
 
-        waves[34] = new Wave(p, 100, 40, hordeFill, hordeAccent, hordeText, "Mega Horde");
+        waves[34] = new Wave(p, 100, 40, hordeFill, hordeAccent, hordeText, new String[]{"Mega", "Horde"});
         waves[34].addSpawns("bigBug", 15);
         waves[34].addSpawns("emperor", 10);
         waves[34].addSpawns("bigWorm", 4);

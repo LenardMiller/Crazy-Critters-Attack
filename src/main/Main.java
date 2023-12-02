@@ -82,7 +82,7 @@ public class Main extends PApplet {
     public static LoadingGui loadingGui;
     public static TitleGui titleGui;
 
-    public static PFont veryLargeFont, largeFont, mediumLargeFont, mediumFont, smallFont;
+    public static PFont title, h1, h2, h3, h4, pg;
 
     public static Screen screen = Screen.Loading;
     public static int money = 100;
@@ -190,7 +190,7 @@ public class Main extends PApplet {
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
         //fonts
-        veryLargeFont = createFont("STHeitiSC-Light", 48, true);
+        title = createFont("STHeitiSC-Medium", 48, true);
         //load input
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
@@ -198,7 +198,7 @@ public class Main extends PApplet {
         //set level count, it has to be this way :(
         levels = new Level[5];
         //guis
-        loadingGui = new LoadingGui(this, veryLargeFont);
+        loadingGui = new LoadingGui(this, title);
         //matrix
         float screenRatio = width / (float) height;
         float boardRatio = BOARD_WIDTH / (float) BOARD_HEIGHT;
