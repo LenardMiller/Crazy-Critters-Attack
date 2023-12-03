@@ -23,6 +23,9 @@ public class SpriteLoader {
         staticSprites.put("wavePrimaryIc",p.loadImage("sprites/gui/wavePrimary.png"));
         staticSprites.put("waveSecondaryIc",p.loadImage("sprites/gui/waveSecondary.png"));
         staticSprites.put("currentLineIc",p.loadImage("sprites/gui/currentLine.png"));
+        staticSprites.put("burrowingTypeIc",p.loadImage("sprites/gui/enemyType/burrowing.png"));
+        staticSprites.put("flyingTypeIc",p.loadImage("sprites/gui/enemyType/flying.png"));
+        staticSprites.put("shootingTypeIc",p.loadImage("sprites/gui/enemyType/shooting.png"));
     }
 
     public static void loadParticles(PApplet p) {

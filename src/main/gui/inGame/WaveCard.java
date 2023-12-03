@@ -6,6 +6,7 @@ import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.enemies.shootingEnemies.ShootingEnemy;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import java.awt.*;
 
@@ -17,6 +18,9 @@ public class WaveCard {
     private final PApplet p;
     private final Color fillColor, accentColor, textColor;
     private final String[] title;
+    private final PImage burrowingIcon;
+    private final PImage flyingIcon;
+    private final PImage shootingIcon;
 
     private boolean hasBurrowing;
     private boolean hasFlying;
@@ -28,6 +32,10 @@ public class WaveCard {
         this.accentColor = accentColor;
         this.textColor = textColor;
         this.title = title;
+
+        burrowingIcon = staticSprites.get("burrowingTypeIc");
+        flyingIcon = staticSprites.get("flyingTypeIc");
+        shootingIcon = staticSprites.get("shootingTypeIc");
     }
 
     public void addEnemyType(Enemy enemy) {
@@ -61,6 +69,30 @@ public class WaveCard {
         if (hasBurrowing) typeCount++;
         if (hasFlying) typeCount++;
         if (hasShooting) typeCount++;
+
+        int burrowingPos = switch (typeCount) {
+            case 2 -> -125;
+            case 3 -> -150;
+            default -> -100;
+        };
+
+        int flyingPos = -100;
+        if (hasShooting && !hasBurrowing) flyingPos = -125;
+        else if (!hasShooting && hasBurrowing) flyingPos = -75;
+
+        int shootingPos = switch (typeCount) {
+            case 2 -> -75;
+            case 3 -> -50;
+            default -> -100;
+        };
+
+        p.imageMode(CENTER);
+
+        if (hasBurrowing) p.image(burrowingIcon, burrowingPos, y + 105);
+        if (hasFlying)    p.image(flyingIcon,    flyingPos, y + 105);
+        if (hasShooting)  p.image(shootingIcon,  shootingPos, y + 105);
+
+        p.imageMode(DEFAULT_MODE);
 
 //        p.textFont(mediumLargeFont);
 //        StringBuilder enemyTypes = new StringBuilder();

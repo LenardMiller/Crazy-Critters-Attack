@@ -103,6 +103,7 @@ public class Main extends PApplet {
     public static final int WINDOW_WIDTH = 1300, WINDOW_HEIGHT = 900;
     public static final int BOARD_WIDTH = 900, BOARD_HEIGHT = 900;
     public static final int TILE_SIZE = 50;
+    public static final int DEFAULT_MODE = CORNER;
 
     public static final int
             SLINGSHOT_PRICE =       75,
@@ -189,6 +190,8 @@ public class Main extends PApplet {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
+        imageMode(DEFAULT_MODE);
+        rectMode(DEFAULT_MODE);
         //fonts
         title = createFont("STHeitiSC-Medium", 48, true);
         //load input
