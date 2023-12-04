@@ -70,19 +70,21 @@ public class WaveCard {
         if (hasFlying) typeCount++;
         if (hasShooting) typeCount++;
 
+        int separation = 15;
+
         int burrowingPos = switch (typeCount) {
-            case 2 -> -125;
-            case 3 -> -150;
+            case 2 -> -100 - separation;
+            case 3 -> -100 - separation * 2;
             default -> -100;
         };
 
         int flyingPos = -100;
-        if (hasShooting && !hasBurrowing) flyingPos = -125;
-        else if (!hasShooting && hasBurrowing) flyingPos = -75;
+        if (hasShooting && !hasBurrowing) flyingPos = -100 - separation;
+        else if (!hasShooting && hasBurrowing) flyingPos = -100 + separation;
 
         int shootingPos = switch (typeCount) {
-            case 2 -> -75;
-            case 3 -> -50;
+            case 2 -> -100 + separation;
+            case 3 -> -100 + separation * 2;
             default -> -100;
         };
 
