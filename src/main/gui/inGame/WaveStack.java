@@ -34,9 +34,8 @@ public class WaveStack {
         P.rect(-199, 0, 199, 36);
 
         int currentWave = levels[currentLevel].currentWave;
-        for (int i = currentWave; i < Math.min(currentWave + 8, waveCards.length); i++) {
-            waveCards[i].display((playingLevel ? 125 : 250) + 125 * (i - currentWave),
-                    i + 1, waveCards.length);
+        for (int i = Math.max(currentWave - 1, 0); i < Math.min(currentWave + 8, waveCards.length); i++) {
+            waveCards[i].display(i + 1, waveCards.length);
         }
         waveStack.playButton.display();
 
@@ -53,7 +52,27 @@ public class WaveStack {
     }
 
     public void update() {
+        if (paused) return;
+
         playButton.update();
+
+        int currentWaveNum = levels[currentLevel].currentWave;
+        WaveCard currentWave = waveCards[currentWaveNum];
+        WaveCard lastWave = currentWaveNum > 0 ? waveCards[currentWaveNum - 1] : null;
+
+        //last wave
+        if (lastWave != null)
+            lastWave.position.x = Math.max(lastWave.position.x - 10, -450);
+
+        //current wave
+        if (lastWave == null || lastWave.position.x <= -400) {
+            currentWave.slide(playingLevel ? 125 : 250);
+        }
+
+        //future waves
+        for (int i = currentWaveNum + 1; i < Math.min(currentWaveNum + 8, waveCards.length); i++) {
+            waveCards[i].slide(waveCards[i-1].position.y + 125);
+        }
     }
 
     public void build() {
