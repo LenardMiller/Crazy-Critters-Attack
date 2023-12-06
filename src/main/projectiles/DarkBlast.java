@@ -2,6 +2,7 @@ package main.projectiles;
 
 import main.enemies.Enemy;
 import main.particles.Vortex;
+import main.projectiles.shockwaves.DarkShockwave;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -28,7 +29,7 @@ public class DarkBlast extends Projectile {
 
     @Override
     public void die() {
-        int numRings = effectRadius/5;
+        int numRings = effectRadius / 5;
         for (int i = 0; i < numRings; i++) {
             for (int j = 0; j < p.random(10, 16); j++) {
                 float radius = (effectRadius/ (float) numRings) * i;
@@ -38,6 +39,8 @@ public class DarkBlast extends Projectile {
             }
         }
         projectiles.remove(this);
+        shockwaves.add(new DarkShockwave(p, position.x, position.y, 0,
+                effectRadius, turret));
     }
 }
 

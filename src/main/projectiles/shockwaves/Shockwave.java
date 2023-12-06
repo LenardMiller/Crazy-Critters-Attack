@@ -15,9 +15,9 @@ import static processing.core.PApplet.sin;
 
 public abstract class Shockwave {
 
-    protected final int MAX_RADIUS;
+    protected final int maxRadius;
     protected final int DAMAGE;
-    protected final int SPEED;
+    protected final int speed;
     protected final float ANGLE;
     protected final float WIDTH;
     protected final PVector CENTER;
@@ -36,7 +36,7 @@ public abstract class Shockwave {
         this.P = p;
 
         CENTER = new PVector(centerX, centerY);
-        MAX_RADIUS = maxRadius;
+        this.maxRadius = maxRadius;
         ANGLE = angle;
         WIDTH = radians(width); //from edge to center of AOE
         DAMAGE = damage;
@@ -44,16 +44,15 @@ public abstract class Shockwave {
 
         UNTOUCHED_ENEMIES = new ArrayList<>();
         UNTOUCHED_ENEMIES.addAll(enemies);
-        SPEED = 400;
+        speed = 400;
         radius = startingRadius;
     }
 
     public void update() {
-        if (!paused) {
-            radius += SPEED/FRAMERATE;
-            spawnParticles();
-        }
-        if (radius > MAX_RADIUS) shockwaves.remove(this);
+        if (paused) return;
+        radius += speed /FRAMERATE;
+        spawnParticles();
+        if (radius > maxRadius) shockwaves.remove(this);
         damageEnemies();
     }
 

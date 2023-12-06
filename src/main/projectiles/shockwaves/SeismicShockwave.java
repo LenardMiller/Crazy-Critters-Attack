@@ -11,8 +11,6 @@ import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.awt.*;
-
 import static main.Main.*;
 import static main.misc.Utilities.findAngle;
 import static main.misc.Utilities.findDistBetween;
@@ -34,7 +32,7 @@ public class SeismicShockwave extends Shockwave {
     public void display() {
         P.strokeWeight(3);
 
-        float alval = (float) Math.pow(radius / (float) MAX_RADIUS, 3);
+        float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, is360 ? 100 : 255, 0);
         P.stroke(125, alpha);
         P.noFill();

@@ -10,7 +10,6 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.topParticles;
-import static processing.core.PConstants.HALF_PI;
 
 public class NuclearShockwave extends Shockwave {
 
@@ -22,10 +21,10 @@ public class NuclearShockwave extends Shockwave {
 
     public void display() {
         P.strokeWeight(5);
-        float alval = (float) Math.pow(radius / (float) MAX_RADIUS, 3);
+        float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alphaCube = PApplet.map(alval, 0, 1, 255, 0);
-        float alphaLinear = PApplet.map(radius, 0, MAX_RADIUS, 255, 0);
-        Color color = Utilities.mapColor(Color.yellow, Color.red, 0, MAX_RADIUS, radius);
+        float alphaLinear = PApplet.map(radius, 0, maxRadius, 255, 0);
+        Color color = Utilities.mapColor(Color.yellow, Color.red, 0, maxRadius, radius);
         P.stroke(color.getRGB(), alphaCube);
         P.noFill();
         P.circle(CENTER.x, CENTER.y, radius * 2);
@@ -58,7 +57,7 @@ public class NuclearShockwave extends Shockwave {
         for (int i = 0; i < P.random(2, 5); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            boolean small = radius < MAX_RADIUS / 4 || P.random(4) < 3;
+            boolean small = radius < maxRadius / 4 || P.random(4) < 3;
             if (small) topParticles.add(new LargeExplosion(P, pos.x, pos.y, P.random(0, 360), "fire"));
             else topParticles.add(new MediumExplosion(P, pos.x, pos.y, P.random(0, 360), "fire"));
         }

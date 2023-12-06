@@ -1,7 +1,6 @@
 package main.projectiles.shockwaves;
 
 import main.enemies.Enemy;
-import main.misc.Utilities;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
@@ -23,7 +22,7 @@ public class LightningShockwave extends Shockwave {
 
     public void display() {
         P.strokeWeight(1);
-        float alval = (float) Math.pow(radius / (float) MAX_RADIUS, 3);
+        float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, 255, 0);
         P.stroke(new Color(0xD7F2F8).getRGB(), alpha);
         P.noFill();
