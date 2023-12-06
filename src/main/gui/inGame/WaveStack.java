@@ -80,12 +80,15 @@ public class WaveStack {
 
     public void build() {
         playButton = new PlayButton(P,-100,0,"null",true);
+    }
 
-        if (!isPlaying) return;
+    public void presetWaveCards() {
         int currentWaveNum = levels[currentLevel].currentWave;
-        waveCards[currentWaveNum].position = new PVector(-450, 125);
-        for (int i = currentWaveNum + 1; i < Math.min(currentWaveNum + 8, waveCards.length); i++) {
-            waveCards[i].position = new PVector(-200, 125 * (i - currentWaveNum));
+        System.out.println(currentWaveNum);
+//        waveCards[currentWaveNum].position = new PVector(-450, 125);
+        for (int i = currentWaveNum; i < Math.min(currentWaveNum + 8, waveCards.length); i++) {
+            System.out.println(i);
+            waveCards[i].position = new PVector(-200, 125 + 125 * (i - currentWaveNum));
         }
     }
 }

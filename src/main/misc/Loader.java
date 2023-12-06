@@ -44,6 +44,7 @@ public class Loader {
 
         Main.inGameGui.flashA = 0;
         Main.screen = Main.Screen.InGame;
+        Main.targetScreen = Main.screen;
     }
 
     private static void level(PApplet p) {
@@ -56,6 +57,7 @@ public class Loader {
         Main.machine.hp = object.getInt("hp");
         Main.isPlaying = true;
         Main.paused = true;
+        Main.waveStack.presetWaveCards();
     }
 
     private static void enemies(PApplet p) {

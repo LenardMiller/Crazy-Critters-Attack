@@ -85,6 +85,7 @@ public class Main extends PApplet {
     public static PFont title, h1, h2, h3, h4, pg;
 
     public static Screen screen = Screen.Loading;
+    public static Screen targetScreen;
     public static int money = 100;
     public static int connectWallQueues;
     public static float globalVolume = 0.25f;
@@ -143,7 +144,6 @@ public class Main extends PApplet {
     private static final float TRANS_SPEED = 250;
     private static PVector transCenter;
     private static PVector transRotation;
-    private static Screen targetScreen;
 
     //pathfinding stuff
     public static final int GRID_WIDTH = 1100, GRID_HEIGHT = 1100;
@@ -254,6 +254,7 @@ public class Main extends PApplet {
                 targetScreen = screen;
             }
             case PlayOrLevelSelect -> {
+                //this runs three times
                 try {
                     Loader.load(this);
                 } catch (RuntimeException ex) {
@@ -261,6 +262,7 @@ public class Main extends PApplet {
                             ex + "\n    " +
                             Arrays.toString(ex.getStackTrace()));
                     screen = Screen.LevelSelect;
+                    targetScreen = Screen.LevelSelect;
                 }
             }
         }
@@ -303,6 +305,7 @@ public class Main extends PApplet {
         if ((abs((WINDOW_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
                 && abs((WINDOW_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
                 && targetScreen != screen) {
+            System.out.println(targetScreen + ", " + screen);
             if (targetScreen == Screen.InGame || screen == Screen.InGame) {
                 Game.reset(this);
                 paused = false;
