@@ -55,6 +55,7 @@ public class LevelSelectGui {
         for (int i = 0; i < levelSelectButtons.length; i++) {
             if (levelSelectButtons[i].isPressed()) {
                 currentLevel = i;
+                isPlaying = false;
                 paused = false;
                 alive = true;
                 transition(Screen.InGame, new PVector(1, 0));

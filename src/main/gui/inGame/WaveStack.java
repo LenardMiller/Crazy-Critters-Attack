@@ -57,12 +57,15 @@ public class WaveStack {
         playButton.update();
 
         int currentWaveNum = levels[currentLevel].currentWave;
-        WaveCard currentWave = waveCards[currentWaveNum];
         WaveCard lastWave = currentWaveNum > 0 ? waveCards[currentWaveNum - 1] : null;
 
         //last wave
         if (lastWave != null)
             lastWave.position.x = Math.max(lastWave.position.x - 10, -450);
+
+        if (currentWaveNum > waveCards.length) return;
+
+        WaveCard currentWave = waveCards[currentWaveNum];
 
         //current wave
         if (lastWave == null || lastWave.position.x <= -400) {

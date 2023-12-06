@@ -246,6 +246,7 @@ public class Main extends PApplet {
             // immediate action branches
             case Exit -> exit();
             case Restart -> {
+                isPlaying = false;
                 Game.reset(this);
                 paused = false;
                 Saver.wipe();
