@@ -84,10 +84,7 @@ public class WaveStack {
 
     public void presetWaveCards() {
         int currentWaveNum = levels[currentLevel].currentWave;
-        System.out.println(currentWaveNum);
-//        waveCards[currentWaveNum].position = new PVector(-450, 125);
         for (int i = currentWaveNum; i < Math.min(currentWaveNum + 8, waveCards.length); i++) {
-            System.out.println(i);
             waveCards[i].position = new PVector(-200, 125 + 125 * (i - currentWaveNum));
         }
     }

@@ -305,7 +305,6 @@ public class Main extends PApplet {
         if ((abs((WINDOW_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
                 && abs((WINDOW_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
                 && targetScreen != screen) {
-            System.out.println(targetScreen + ", " + screen);
             if (targetScreen == Screen.InGame || screen == Screen.InGame) {
                 Game.reset(this);
                 paused = false;
