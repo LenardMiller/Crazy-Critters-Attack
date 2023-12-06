@@ -19,7 +19,6 @@ public class WaveCard {
     public static final float MAX_SPEED = 10;
     public static final float ACCELERATION = 1;
 
-    public final PVector position;
 
     private final PApplet p;
     private final Color fillColor, accentColor, textColor;
@@ -29,6 +28,7 @@ public class WaveCard {
     private final PImage shootingIcon;
 
     public float speed;
+    public PVector position;
 
     private boolean hasBurrowing;
     private boolean hasFlying;

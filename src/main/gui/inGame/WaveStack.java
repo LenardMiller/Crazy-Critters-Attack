@@ -1,8 +1,8 @@
 package main.gui.inGame;
 
 import main.gui.guiObjects.buttons.PlayButton;
-import main.levelStructure.Wave;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import java.awt.*;
 
@@ -66,7 +66,7 @@ public class WaveStack {
 
         //current wave
         if (lastWave == null || lastWave.position.x <= -400) {
-            currentWave.slide(playingLevel ? 125 : 250);
+            currentWave.slide(isPlaying ? 125 : 250);
         }
 
         //future waves
@@ -77,5 +77,12 @@ public class WaveStack {
 
     public void build() {
         playButton = new PlayButton(P,-100,0,"null",true);
+
+        if (!isPlaying) return;
+        int currentWaveNum = levels[currentLevel].currentWave;
+        waveCards[currentWaveNum].position = new PVector(-450, 125);
+        for (int i = currentWaveNum + 1; i < Math.min(currentWaveNum + 8, waveCards.length); i++) {
+            waveCards[i].position = new PVector(-200, 125 * (i - currentWaveNum));
+        }
     }
 }

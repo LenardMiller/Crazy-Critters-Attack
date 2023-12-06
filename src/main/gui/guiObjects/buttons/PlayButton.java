@@ -27,18 +27,21 @@ public class PlayButton extends Button {
 
     @Override
     public void update() {
-        if (!playingLevel || levels[currentLevel].canBeSkipped()) hover();
+        if (!isPlaying || levels[currentLevel].canBeSkipped()) hover();
         else sprite = SPRITE_GREY;
     }
 
     public void display() {
+        if (isPlaying && !levels[currentLevel].canBeSkipped()) {
+            sprite = SPRITE_GREY;
+        }
         p.fill(20,20,50, 254);
         p.image(sprite,position.x - size.x / 2,position.y);
         p.textAlign(CENTER);
         p.textFont(h2);
-        p.text(playingLevel ? "Skip" : "Play",position.x, position.y + 30);
+        p.text(isPlaying ? "Skip" : "Play",position.x, position.y + 30);
         p.textFont(h4);
-        if (playingLevel && levels[currentLevel].canBeSkipped())
+        if (isPlaying && levels[currentLevel].canBeSkipped())
             p.text("+$" + levels[currentLevel].waves[levels[currentLevel].currentWave].getReward(), position.x, position.y + size.y / 2f - 12);
     }
 
@@ -46,8 +49,8 @@ public class PlayButton extends Button {
     public void pressIn() {
         if (p.frameCount <= timer) return;
         Level level = levels[currentLevel];
-        if (!playingLevel) {
-            playingLevel = true;
+        if (!isPlaying) {
+            isPlaying = true;
             level.currentWave = 0;
         } else {
             level.advance();

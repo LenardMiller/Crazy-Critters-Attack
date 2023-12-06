@@ -87,8 +87,8 @@ public class KeyBinds {
                 waveMotion =     addHotkey(new char[]{'b', 'B'}, WAVE_MOTION_PRICE);
 
         if (play) {
-            if (!playingLevel) {
-                playingLevel = true;
+            if (!isPlaying) {
+                isPlaying = true;
                 Level level = levels[currentLevel];
                 level.currentWave = 0;
             } else {

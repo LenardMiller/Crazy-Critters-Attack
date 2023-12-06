@@ -75,7 +75,7 @@ public class Game {
         //ui
         hand.update();
         for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).update();
-        if (playingLevel) levels[currentLevel].update();
+        if (isPlaying) levels[currentLevel].update();
         if (paused && !settings) pauseGui.update();
         if (!showSpawn) {
             if (!levelBuilder) {
@@ -316,7 +316,6 @@ public class Game {
         for (Node node : end) node.findGHF();
         updateTowerArray();
         //load level data
-        playingLevel = false;
         levels[0] = new Level(p, ForestWaves.genForestWaves(p),
                 "levels/forest",     125,  50,  "dirt");
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p),

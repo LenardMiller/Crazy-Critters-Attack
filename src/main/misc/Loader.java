@@ -54,7 +54,7 @@ public class Loader {
         Main.levels[Main.currentLevel].currentWave = object.getInt("wave");
         Main.money = object.getInt("money");
         Main.machine.hp = object.getInt("hp");
-        Main.playingLevel = true;
+        Main.isPlaying = true;
         Main.paused = true;
     }
 
