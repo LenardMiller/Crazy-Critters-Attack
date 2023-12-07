@@ -63,7 +63,7 @@ public class WaveStack {
         if (lastWave != null)
             lastWave.position.x = Math.max(lastWave.position.x - 10, -450);
 
-        if (currentWaveNum > waveCards.length) return;
+        if (currentWaveNum >= waveCards.length) return;
 
         WaveCard currentWave = waveCards[currentWaveNum];
 
