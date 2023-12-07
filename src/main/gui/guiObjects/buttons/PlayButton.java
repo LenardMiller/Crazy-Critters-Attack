@@ -1,9 +1,13 @@
 package main.gui.guiObjects.buttons;
 
+import main.Main;
 import main.levelStructure.Level;
+import main.misc.Utilities;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import java.awt.*;
 
 import static main.Main.*;
 import static processing.core.PConstants.CENTER;
@@ -32,17 +36,20 @@ public class PlayButton extends Button {
     }
 
     public void display() {
-        if (isPlaying && !levels[currentLevel].canBeSkipped()) {
+        Level currentLevel = levels[Main.currentLevel];
+
+        if (isPlaying && !currentLevel.canBeSkipped()) {
             sprite = SPRITE_GREY;
         }
-        p.fill(20,20,50, 254);
         p.image(sprite,position.x - size.x / 2,position.y);
         p.textAlign(CENTER);
         p.textFont(h2);
-        p.text(isPlaying ? "Skip" : "Play",position.x, position.y + 30);
+        p.fill(20,20,50, 254);
+        p.text(isPlaying ? "Skip" : "Play",position.x, position.y + 31);
         p.textFont(h4);
-        if (isPlaying && levels[currentLevel].canBeSkipped())
-            p.text("+$" + levels[currentLevel].waves[levels[currentLevel].currentWave].getReward(), position.x, position.y + size.y / 2f - 12);
+        if (isPlaying && currentLevel.canBeSkipped())
+            p.text("+$" + currentLevel.waves[currentLevel.currentWave].getReward(),
+                    position.x, position.y + size.y / 2f - 12);
     }
 
     @Override
