@@ -69,6 +69,6 @@ public class Level {
 
     public boolean canBeSkipped() {
         if (currentWave >= waves.length - 1) return false;
-        return !waves[currentWave].unskippable && waves[currentWave].spawns.size() == 0;
+        return !waves[currentWave].unskippable && waves[currentWave].getProgress() == 1;
     }
 }

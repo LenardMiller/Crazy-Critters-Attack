@@ -62,14 +62,16 @@ public class Wave {
         this.p = p;
         this.length = secondsToFrames(length);
         this.spawnLength = secondsToFrames(spawnLength);
-        if (this.spawnLength >= this.length) {
-            throw new RuntimeException("Wave spawn length should always be shorter than its total length!");
-        }
+        assert(spawnLength <= length);
 
         waveCard = new WaveCard(p, fillColor, accentColor, textColor, title);
         spawns = new ArrayList<>();
 
         setBetweenPollutesAtEnd = -1;
+    }
+
+    public float getProgress() {
+        return Math.min(spawnLengthTimer / (float) spawnLength, 1);
     }
 
     public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
