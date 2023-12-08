@@ -19,7 +19,6 @@ public class WaveCard {
     public static final float MAX_SPEED = 10;
     public static final float ACCELERATION = 1;
 
-
     private final PApplet p;
     private final Color fillColor, accentColor, textColor;
     private final String[] title;
@@ -33,6 +32,10 @@ public class WaveCard {
     private boolean hasBurrowing;
     private boolean hasFlying;
     private boolean hasShooting;
+    private boolean isCurrentWave;
+    private boolean overrideFillAlpha;
+    private int fillAlpha;
+    private int strokeAlpha = 255;
 
     public WaveCard(PApplet p, Color fillColor, Color accentColor, Color textColor, String[] title) {
         this.p = p;
@@ -55,6 +58,13 @@ public class WaveCard {
     }
 
     public void display(int waveNum, int maxWave) {
+        if (waveNum - 1 == levels[currentLevel].currentWave && isPlaying) {
+            if (!isCurrentWave && !overrideFillAlpha) fillAlpha = 255;
+            isCurrentWave = true;
+        } else {
+            if (isCurrentWave && !paused) strokeAlpha = max(strokeAlpha - 10, 0);
+        }
+
         float centerX = position.x + 100;
 
         p.tint(fillColor.getRGB());
@@ -107,6 +117,16 @@ public class WaveCard {
         if (hasShooting)  p.image(shootingIcon,  shootingPos, position.y + 105);
 
         p.imageMode(DEFAULT_MODE);
+
+        if (isCurrentWave) {
+            p.fill(255, fillAlpha);
+            if (!paused) fillAlpha = max(fillAlpha - 10, 0);
+            p.strokeWeight(2);
+            p.stroke(255, strokeAlpha);
+            p.rect(position.x + 1, position.y + 1, 198, 123);
+            p.strokeWeight(1);
+            p.noStroke();
+        }
     }
 
     public void slide(float target) {
@@ -116,5 +136,10 @@ public class WaveCard {
             position.y = target;
         }
         else speed = Math.min(speed + WaveCard.ACCELERATION, WaveCard.MAX_SPEED);
+    }
+
+    public void preset(PVector position, boolean overrideFillAlpha) {
+        this.position = position;
+        this.overrideFillAlpha = overrideFillAlpha;
     }
 }

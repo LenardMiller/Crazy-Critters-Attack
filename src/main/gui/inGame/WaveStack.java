@@ -89,7 +89,7 @@ public class WaveStack {
 
         //current wave
         if (lastWave == null || lastWave.position.x <= -400) {
-            currentWave.slide(isPlaying ? 157 : 282);
+            currentWave.slide(157);
         }
 
         //future waves
@@ -105,7 +105,9 @@ public class WaveStack {
     public void presetWaveCards() {
         int currentWaveNum = levels[currentLevel].currentWave;
         for (int i = currentWaveNum; i < Math.min(currentWaveNum + 8, waveCards.length); i++) {
-            waveCards[i].position = new PVector(-200, 157 + 125 * (i - currentWaveNum));
+            waveCards[i].preset(
+                    new PVector(-200, 157 + 125 * (i - currentWaveNum)),
+                    i == currentWaveNum);
         }
     }
 }
