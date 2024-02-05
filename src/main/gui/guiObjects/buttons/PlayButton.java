@@ -40,11 +40,13 @@ public class PlayButton extends Button {
 
         if (isPlaying && !currentLevel.canBeSkipped()) {
             sprite = SPRITE_GREY;
+            p.fill(100,100,100, 254);
+        } else {
+            p.fill(20,20,50, 254);
         }
         p.image(sprite,position.x - size.x / 2,position.y);
         p.textAlign(CENTER);
         p.textFont(h2);
-        p.fill(20,20,50, 254);
         p.text(isPlaying ? "Send Early" : "Start Waves",position.x, position.y + 31);
         p.textFont(h4);
         if (isPlaying && currentLevel.canBeSkipped())
