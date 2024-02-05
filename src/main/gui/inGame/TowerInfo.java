@@ -32,87 +32,73 @@ public class TowerInfo {
         int offset = 0;
         int price = 0;
         switch (turretType) {
-            case "slingshot":
+            case "slingshot" -> {
                 p.text("Slingshot", 1000, 241);
                 slingshotInfo(p);
                 price = SLINGSHOT_PRICE;
-                break;
-            case "miscCannon":
+            } case "miscCannon" -> {
                 p.text("Luggage", x, 241);
                 p.text("Launcher", x, 266);
                 offset = 25;
                 randomCannonInfo(p);
                 price = RANDOM_CANNON_PRICE;
-                break;
-            case "crossbow":
+            } case "crossbow" -> {
                 p.text("Crossbow", x, 241);
                 crossbowInfo(p);
                 price = CROSSBOW_PRICE;
-                break;
-            case "cannon":
+            } case "cannon" -> {
                 p.text("Cannon", x, 241);
                 cannonInfo(p);
                 price = CANNON_PRICE;
-                break;
-            case "gluer":
+            } case "gluer" -> {
                 p.text("Gluer", x, 241);
                 gluerInfo(p);
                 price = GLUER_PRICE;
-                break;
-            case "seismic":
+            } case "seismic" -> {
                 p.text("Seismic Tower", x, 241);
                 seismicInfo(p);
                 price = SEISMIC_PRICE;
-                break;
-            case "energyBlaster":
+            } case "energyBlaster" -> {
                 p.text("Energy Blaster", x, 241);
                 energyBlasterInfo(p);
                 price = ENERGY_BLASTER_PRICE;
-                break;
-            case "magicMissleer":
+            } case "magicMissleer" -> {
                 p.text("Magic Missile", x, 241);
                 p.text("Launcher", x, 266);
                 offset = 25;
                 magicMissileerInfo(p);
                 price = MAGIC_MISSILEER_PRICE;
-                break;
-            case "tesla":
+            } case "tesla" -> {
                 p.text("Tesla Tower", x, 241);
                 teslaTowerInfo(p);
                 price = TESLA_TOWER_PRICE;
-                break;
-            case "nightmare":
+            } case "nightmare" -> {
                 p.text("Nightmare", x, 241);
                 p.text("Blaster", x, 266);
                 nightmareInfo(p);
                 offset = 25;
                 price = NIGHTMARE_PRICE;
-                break;
-            case "flamethrower":
+            } case "flamethrower" -> {
                 p.text("Flamethrower", x, 241);
                 flamethrowerInfo(p);
                 price = FLAMETHROWER_PRICE;
-                break;
-            case "iceTower":
+            } case "iceTower" -> {
                 p.text("Freeze Ray", x, 241);
                 iceTowerInfo(p);
                 price = ICE_TOWER_PRICE;
-                break;
-            case "booster":
+            } case "booster" -> {
                 p.text("Booster", x, 241);
                 boosterInfo(p);
                 price = BOOSTER_PRICE;
-                break;
-            case "railgun":
+            } case "railgun" -> {
                 p.text("Railgun", x, 241);
                 railgunInfo(p);
                 price = RAILGUN_PRICE;
-                break;
-            case "waveMotion":
+            } case "waveMotion" -> {
                 p.text("Death Beam", x, 241);
                 waveMotionInfo(p);
                 price = WAVE_MOTION_PRICE;
-                break;
+            }
         }
         displayPrice(p, price, offset, x);
     }

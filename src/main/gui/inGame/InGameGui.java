@@ -139,6 +139,12 @@ public class InGameGui {
 
     private void build() {
         openMenuButton = new OpenMenu(P,BOARD_WIDTH+100,12,"null",true);
+//        for (int x = 0; x < 5; x++) {
+//            for (int y = 0; y < 3; y++) {
+//                towerBuyButtons.add(new TowerBuy(P, towerBuyX(x), towerBuyY(y), "slingshot", true));
+//            }
+//        }
+
         towerBuyButtons.add(new TowerBuy(P,towerBuyX(0), towerBuyY(0),"slingshot",true));
         towerBuyButtons.add(new TowerBuy(P,towerBuyX(0), towerBuyY(1),"miscCannon",true));
         towerBuyButtons.add(new TowerBuy(P,towerBuyX(0), towerBuyY(2),"crossbow",true));
