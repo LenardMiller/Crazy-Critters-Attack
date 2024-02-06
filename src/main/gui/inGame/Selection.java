@@ -126,8 +126,6 @@ public class Selection {
             return;
         }
         //display range and square
-//        P.fill(100, 25);
-//        P.stroke(255);
         float x = turret.tile.position.x - turret.size.x;
         float y = turret.tile.position.y - turret.size.y;
         if (turret instanceof Booster) {
@@ -279,61 +277,71 @@ public class Selection {
     private void upgradeIcons() {
         if (!inGameGui.upgradeButtonA.greyed) {
             inGameGui.upgradeIconA.sprite = turret.upgradeIcons[turret.nextLevelA];
-        } else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
+        } else inGameGui.upgradeIconA.sprite = null;
         if (!inGameGui.upgradeButtonB.greyed && turret.nextLevelB < turret.upgradeIcons.length) {
             inGameGui.upgradeIconB.sprite = turret.upgradeIcons[turret.nextLevelB];
-        } else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
+        } else inGameGui.upgradeIconB.sprite = null;
     }
 
-    private void upgradeButton(int offsetC, int nextLevel, UpgradeTower upgradeButton) {
-        Color fillColor;
+    private void upgradeButton(int offset, int nextLevel, UpgradeTower upgradeButton) {
+        Color fillColor = new Color(20, 20, 50, 254);
         P.textAlign(CENTER);
-        if (!turret.hasPriority) offsetC += 45;
+        if (!turret.hasPriority) offset += 45;
         if (!upgradeButton.greyed && nextLevel < turret.upgradePrices.length) {
             boolean canAfford = money >= turret.upgradePrices[nextLevel];
-            if (canAfford) fillColor = new Color(11, 56, 0, 254);
-            else fillColor = new Color(75, 0, 0, 254);
-            P.fill(fillColor.getRGB(), fillColor.getAlpha());
+            if (!canAfford) fillColor = new Color(100, 100, 100, 254);
+            P.fill(fillColor.getRGB());
             P.textFont(h2);
-            P.text(turret.upgradeTitles[nextLevel], 1000, 585 + offsetC);
-            P.textAlign(RIGHT);
-            if (canAfford) P.text("$" + nfc(turret.upgradePrices[nextLevel]), BOARD_WIDTH + 200 - 20, 693 + offsetC);
-            else {
-                strikethroughText(P, "$" + nfc(turret.upgradePrices[nextLevel]), new PVector(BOARD_WIDTH + 200 - 20, 693 + offsetC),
-                        fillColor, h2.getSize(), RIGHT);
-            }
+            P.text(turret.upgradeTitles[nextLevel], 1000, 586 + offset);
             P.textFont(h4);
             P.textAlign(LEFT);
-            P.text(turret.upgradeDescA[nextLevel], 910, 615 + offsetC);
-            P.text(turret.upgradeDescB[nextLevel], 910, 635 + offsetC);
-            P.text(turret.upgradeDescC[nextLevel], 910, 655 + offsetC);
+            P.text(turret.upgradeDescA[nextLevel], 910, 615 + offset);
+            P.text(turret.upgradeDescB[nextLevel], 910, 635 + offset);
+            P.text(turret.upgradeDescC[nextLevel], 910, 655 + offset);
+            P.textAlign(CENTER);
+            P.fill(new Color(20, 20, 50, 254).getRGB());
+            P.text("$" + nfc(turret.upgradePrices[nextLevel]), BOARD_WIDTH + 150, 693 + offset);
         } else {
-            fillColor = new Color(15, 15, 15, 254);
-            P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getAlpha());
+            fillColor = new Color(100, 100, 100, 254);
+            P.fill(fillColor.getRGB());
             P.textFont(h2);
-            P.text("N/A", 1000, 585 + offsetC);
+            P.text("N/A", 1000, 586 + offset);
             P.textFont(h4);
             P.textAlign(LEFT);
-            P.text("No more", 910, 615 + offsetC);
-            P.text("upgrades", 910, 635 + offsetC);
+            P.text("No more", 910, 615 + offset);
+            P.text("upgrades", 910, 635 + offset);
         }
-        P.stroke(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getAlpha());
+        // squares
+        int x = 910;
+        int y = 680;
+        int size = 10;
         if (turret.nextLevelB > 5 || turret.nextLevelA > 2) {
             //little x
-            P.line(950, 685 + offsetC, 960, 685 + offsetC + 10);
-            P.line(960, 685 + offsetC, 950, 685 + offsetC + 10);
+            P.stroke(fillColor.getRGB());
+            P.line(x + 4 * size, y + offset, x + 5 * size, y + offset + size);
+            P.line(x + 5 * size, y + offset, x + 4 * size, y + offset + size);
         }
         if (upgradeButton == inGameGui.upgradeButtonA) { //A
             for (int i = 0; i < 3; i++) {
-                if (nextLevel <= i) P.noFill();
-                else P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getAlpha());
-                P.rect(910 + (20 * i), 685 + offsetC, 10, 10);
+                if (nextLevel <= i) {
+                    P.noFill();
+                    P.stroke(fillColor.getRGB());
+                } else {
+                    P.fill(fillColor.getRGB());
+                    P.noStroke();
+                }
+                P.rect(x + (size * 2 * i), y + offset, size, size);
             }
         } else { //B
             for (int i = 3; i < 6; i++) {
-                if (nextLevel <= i) P.noFill();
-                else P.fill(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getAlpha());
-                P.rect(910 + (20 * (i-3)), 685 + offsetC, 10, 10);
+                if (nextLevel <= i) {
+                    P.noFill();
+                    P.stroke(fillColor.getRGB());
+                } else {
+                    P.fill(fillColor.getRGB());
+                    P.noStroke();
+                }
+                P.rect(x + (size * 2 * (i-3)), y + offset, size, size);
             }
         }
     }
