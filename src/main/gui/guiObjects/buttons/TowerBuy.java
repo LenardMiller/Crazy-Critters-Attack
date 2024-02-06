@@ -1,5 +1,6 @@
 package main.gui.guiObjects.buttons;
 
+import main.misc.IntVector;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -68,9 +69,9 @@ public class TowerBuy extends Button {
 
     private boolean hovered() {
         if (towerType.equals("null")) return false;
-        int d = 2;
-        boolean matchX = boardMousePosition.x < (position.x+size.x/2)+d && boardMousePosition.x > (position.x-size.x/2)-d-1;
-        boolean matchY = boardMousePosition.y < (position.y+size.y/2)+d && boardMousePosition.y > (position.y-size.y/2)-d-1;
+        IntVector d = new IntVector(1, 1);
+        boolean matchX = boardMousePosition.x < (position.x+size.x/2)+d.x && boardMousePosition.x > (position.x-size.x/2)-d.x-1;
+        boolean matchY = boardMousePosition.y < (position.y+size.y/2)+d.y && boardMousePosition.y > (position.y-size.y/2)-d.y-1;
         boolean matchPosition = matchX && matchY && active;
         return ((matchPosition && !paused) || depressed) && alive;
     }
