@@ -48,7 +48,7 @@ public class Slingshot extends Turret {
     }
 
     @Override
-    protected void setUpgrades(){
+    protected void setUpgrades() {
         //price
         upgradePrices[0] = 50;
         upgradePrices[1] = 75;
@@ -58,10 +58,10 @@ public class Slingshot extends Turret {
         upgradePrices[5] = 650;
         //titles
         upgradeTitles[0] = "Long Range";
-        upgradeTitles[1] = "Super Range";
+        upgradeTitles[1] = "Longer Range";
         upgradeTitles[2] = "Gravel Slinger";
-        upgradeTitles[3] = "Damage Up";
-        upgradeTitles[4] = "Faster Firing";
+        upgradeTitles[3] = "Faster Reload";
+        upgradeTitles[4] = "Heavier Rocks";
         upgradeTitles[5] = "Painful Rocks";
         //descriptions
         upgradeDescA[0] = "Increase";
@@ -72,28 +72,28 @@ public class Slingshot extends Turret {
         upgradeDescB[1] = "increase";
         upgradeDescC[1] = "range";
 
-        upgradeDescA[2] = "Shoots";
-        upgradeDescB[2] = "gravel at";
-        upgradeDescC[2] = "critters";
+        upgradeDescA[2] = "Flings";
+        upgradeDescB[2] = "gravel";
+        upgradeDescC[2] = "pellets";
 
 
-        upgradeDescA[3] = "+5";
-        upgradeDescB[3] = "damage";
+        upgradeDescA[3] = "Increase";
+        upgradeDescB[3] = "firerate";
         upgradeDescC[3] = "";
 
         upgradeDescA[4] = "Increase";
-        upgradeDescB[4] = "firerate";
+        upgradeDescB[4] = "damage";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "Inflicts";
-        upgradeDescB[5] = "bleeding,";
-        upgradeDescC[5] = "+30 dmg";
+        upgradeDescA[5] = "Huge rocks";
+        upgradeDescB[5] = "crush";
+        upgradeDescC[5] = "critters";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[5];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[6];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[17];
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[16];
     }
 
@@ -101,13 +101,9 @@ public class Slingshot extends Turret {
     public void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    range += 30;
-                    break;
-                case 1:
-                    range += 40;
-                    break;
-                case 2:
+                case 0 -> range += 30;
+                case 1 -> range += 40;
+                case 2 -> {
                     gravel = true;
                     damage -= 10;
                     range += 50;
@@ -115,17 +111,13 @@ public class Slingshot extends Turret {
                     titleLines = new String[]{"Gravel Slinger"};
                     infoDisplay = (o) -> selection.setTextPurple("8 gravel bits", o);
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    damage += 5;
-                    break;
-                case 4:
-                    delay -= 0.3f;
-                    break;
-                case 5:
+                case 3 -> delay -= 0.3f;
+                case 4 -> damage += 5;
+                case 5 -> {
                     material = Material.stone;
                     damageSound = sounds.get("stoneDamage");
                     breakSound = sounds.get("stoneBreak");
@@ -139,7 +131,7 @@ public class Slingshot extends Turret {
                     titleLines = new String[]{"Heavy Slingshot"};
                     infoDisplay = (o) -> selection.setTextPurple("Bleeding", offset);
                     loadSprites();
-                    break;
+                }
             }
         }
     }

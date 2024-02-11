@@ -2,5 +2,5 @@
   "volume": 0.15640000998973846,
   "fullscreen": true,
   "gore": true,
-  "useOpenGL": false
+  "useOpenGL": true
 }
