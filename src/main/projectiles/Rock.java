@@ -10,12 +10,12 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class Rock extends Projectile {
 
-    public Rock(PApplet p, float x, float y, float angle, Turret turret, int damage) {
+    public Rock(PApplet p, float x, float y, float angle, Turret turret, int damage, int maxSpeed) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(13, 13);
         radius = 6;
-        maxSpeed = 700;
+        this.maxSpeed = maxSpeed;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;

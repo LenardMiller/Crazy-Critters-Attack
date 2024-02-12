@@ -19,7 +19,7 @@ public class Slingshot extends Turret {
         super(p,tile);
         name = "slingshot";
         delay = randomizeDelay(p, 1.6f);
-        pjSpeed = 700;
+        pjSpeed = 600;
         range = 250;
         damage = 15; //15
         damageSound = sounds.get("woodDamage");
@@ -34,17 +34,17 @@ public class Slingshot extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        if (painful) projectiles.add(new Rock(p, position.x, position.y, angle, this, getDamage()));
+        if (painful) projectiles.add(new Rock(p, position.x, position.y, angle, this, getDamage(), pjSpeed));
         if (gravel) {
             float offset = 0.03f;
             int count = 8;
             float a = angle - (floor(count / 2f) * offset);
             for (int i = 0; i < count; i++) {
-                projectiles.add(new Gravel(p, position.x, position.y, a, this, getDamage()));
+                projectiles.add(new Gravel(p, position.x, position.y, a, this, getDamage(), pjSpeed));
                 a += offset;
             }
         }
-        if (!painful && !gravel) projectiles.add(new Pebble(p,position.x, position.y, angle, this, getDamage()));
+        if (!painful && !gravel) projectiles.add(new Pebble(p,position.x, position.y, angle, this, getDamage(), pjSpeed));
     }
 
     @Override
@@ -101,8 +101,14 @@ public class Slingshot extends Turret {
     public void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0 -> range += 30;
-                case 1 -> range += 40;
+                case 0 -> {
+                    range += 30;
+                    pjSpeed += 100;
+                }
+                case 1 -> {
+                    range += 40;
+                    pjSpeed += 100;
+                }
                 case 2 -> {
                     gravel = true;
                     damage -= 10;

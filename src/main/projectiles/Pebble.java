@@ -10,12 +10,12 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class Pebble extends Projectile{
 
-    public Pebble(PApplet p, float x, float y, float angle, Turret turret, int damage) {
+    public Pebble(PApplet p, float x, float y, float angle, Turret turret, int damage, int maxSpeed) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(10, 10);
         radius = 5;
-        maxSpeed = 700;
+        this.maxSpeed = maxSpeed;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
