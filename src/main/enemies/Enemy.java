@@ -413,40 +413,20 @@ public abstract class Enemy {
         if (buffName != null) {
             Buff buff;
             switch (buffName) {
-                case "burning":
-                    buff = new Burning(p, id, effectLevel, effectDuration, turret);
-                    break;
-                case "blueBurning":
-                    buff = new BlueBurning(p, id, effectLevel, effectDuration, turret);
-                    break;
-                case "bleeding":
-                    buff = new Bleeding(p, id, turret);
-                    break;
-                case "poisoned":
-                    buff = new Poisoned(p, id, turret);
-                    break;
-                case "decay":
+                case "burning" -> buff = new Burning(p, id, effectLevel, effectDuration, turret);
+                case "blueBurning" -> buff = new BlueBurning(p, id, effectLevel, effectDuration, turret);
+                case "bleeding" -> buff = new Bleeding(p, id, effectLevel, effectDuration, turret);
+                case "poisoned" -> buff = new Poisoned(p, id, turret);
+                case "decay" -> {
                     if (turret != null) buff = new Decay(p, id, effectLevel, effectDuration, turret);
                     else buff = new Decay(p, id, 1, 120, null);
-                    break;
-                case "glued":
-                    buff = new Glued(p, id, effectLevel, effectDuration, turret);
-                    break;
-                case "spikeyGlued":
-                    buff = new SpikeyGlued(p, id, effectLevel, effectDuration, turret);
-                    break;
-                case "stunned":
-                    buff = new Stunned(p, id, turret);
-                    break;
-                case "frozen":
-                    buff = new Frozen(p, id, turret);
-                    break;
-                case "electrified":
-                    buff = new Electrified(p, id, (int) effectLevel, effectDuration, turret);
-                    break;
-                default:
-                    buff = null;
-                    break;
+                }
+                case "glued" -> buff = new Glued(p, id, effectLevel, effectDuration, turret);
+                case "spikeyGlued" -> buff = new SpikeyGlued(p, id, effectLevel, effectDuration, turret);
+                case "stunned" -> buff = new Stunned(p, id, turret);
+                case "frozen" -> buff = new Frozen(p, id, turret);
+                case "electrified" -> buff = new Electrified(p, id, (int) effectLevel, effectDuration, turret);
+                default -> buff = null;
             }
             if (buff != null) {
                 //in order to prevent resetting timer after buff is reapplied

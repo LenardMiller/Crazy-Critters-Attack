@@ -15,16 +15,17 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class Dynamite extends Projectile {
 
-    public Dynamite(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectRadius) {
+    public Dynamite(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectRadius, int maxSpeed) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(9, 15);
         angularVelocity = down60ToFramerate(p.random(-15, 15)); //degrees mode
         radius = 10;
-        maxSpeed = 600;
+        this.maxSpeed = maxSpeed;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
+        trail = "fire";
         type = Enemy.DamageType.burning;
         sprite = staticSprites.get("dynamitePj");
         hitSound = sounds.get("mediumExplosion");

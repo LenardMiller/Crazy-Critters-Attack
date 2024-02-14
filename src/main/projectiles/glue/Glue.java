@@ -13,14 +13,14 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Glue extends Projectile {
 
-    public Glue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, float effectDuration) {
+    public Glue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, float effectDuration, int maxSpeed) {
         super(p, x, y, angle, turret);
         this.effectLevel = effectLevel;
         this.effectDuration = effectDuration;
         position = new PVector(x, y);
         size = new PVector(10, 23);
         radius = 6;
-        maxSpeed = 400;
+        this.maxSpeed = maxSpeed;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;

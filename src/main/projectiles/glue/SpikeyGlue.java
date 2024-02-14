@@ -9,12 +9,12 @@ import static main.Main.staticSprites;
 
 public class SpikeyGlue extends Glue {
 
-    public SpikeyGlue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, float effectDuration) {
-        super(p, x, y, angle, turret, damage, effectLevel, effectDuration);
+    public SpikeyGlue(PApplet p, float x, float y, float angle, Turret turret, int damage, float effectLevel, float effectDuration, int maxSpeed) {
+        super(p, x, y, angle, turret, damage, effectLevel, effectDuration, maxSpeed);
         position = new PVector(x, y);
         size = new PVector(10, 23);
         radius = 6;
-        maxSpeed = 400;
+        this.maxSpeed = maxSpeed;
         speed = maxSpeed;
         angularVelocity = 0;
         sprite = staticSprites.get("spikeyGluePj");

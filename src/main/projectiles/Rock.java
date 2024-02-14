@@ -10,7 +10,7 @@ import static main.misc.Utilities.down60ToFramerate;
 
 public class Rock extends Projectile {
 
-    public Rock(PApplet p, float x, float y, float angle, Turret turret, int damage, int maxSpeed) {
+    public Rock(PApplet p, float x, float y, float angle, Turret turret, int damage, int maxSpeed, int effectLevel, int effectDuration) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(13, 13);
@@ -19,10 +19,13 @@ public class Rock extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
+        this.effectLevel = effectLevel;
+        this.effectDuration = effectDuration;
         angularVelocity = down60ToFramerate(p.random(-15,15));
         sprite = staticSprites.get("rockPj");
         hitSound = sounds.get("largeImpact");
         buff = "bleeding";
+        trail = "smoke";
     }
 
     @Override

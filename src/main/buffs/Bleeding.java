@@ -13,11 +13,12 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class Bleeding extends Buff {
 
-    public Bleeding(PApplet p, int enId, Turret turret) {
+    public Bleeding(PApplet p, int enId, float damage, float duration, Turret turret) {
         super(p,enId,turret);
         particleChance = 8;
         effectDelay = secondsToFrames(0.2f); //frames
-        lifeDuration = secondsToFrames(6);
+        lifeDuration = secondsToFrames(duration);
+        this.effectLevel = damage;
         particle = null;
         name = "bleeding";
         this.enId = enId;
@@ -27,7 +28,8 @@ public class Bleeding extends Buff {
     public void effect() { //small damage fast
         Enemy enemy = enemies.get(enId);
         enemy.showBar = true;
-        enemy.damageWithoutBuff(15, turret, null, new PVector(0,0), false);
+        enemy.damageWithoutBuff((int) effectLevel, turret, null, new PVector(0,0), false);
+        effectTimer = p.frameCount + effectDelay;
     }
 
     @Override

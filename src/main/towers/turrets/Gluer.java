@@ -25,7 +25,7 @@ public class Gluer extends Turret {
         super(p,tile);
         name = "gluer";
         delay = randomizeDelay(p, 2.5f);
-        pjSpeed = 400;
+        pjSpeed = 350;
         betweenFireFrames = down60ToFramerate(1);
         range = 300;
         effectDuration = 3;
@@ -58,9 +58,9 @@ public class Gluer extends Turret {
             midParticles.add(new MiscParticle(p, position.x, position.y,
               angle + radians(p.random(-45, 45)), "glue"));
         }
-        if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
-        else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
-        else projectiles.add(new Glue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
+        if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration, pjSpeed));
+        else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration, pjSpeed));
+        else projectiles.add(new Glue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration, pjSpeed));
     }
 
     @Override
@@ -81,11 +81,11 @@ public class Gluer extends Turret {
         upgradePrices[5] = 1000;
         //titles
         upgradeTitles[0] = "Long Range";
-        upgradeTitles[1] = "Long Glue";
+        upgradeTitles[1] = "Tough Glue";
         upgradeTitles[2] = "Glue Splash";
 
-        upgradeTitles[3] = "Gluier Glue";
-        upgradeTitles[4] = "Hard Glue";
+        upgradeTitles[3] = "Stickier Glue";
+        upgradeTitles[4] = "Dense Glue";
         upgradeTitles[5] = "Spikey Glue";
         //description
         upgradeDescA[0] = "Increase";
@@ -113,12 +113,12 @@ public class Gluer extends Turret {
         upgradeDescB[5] = "spikes on";
         upgradeDescC[5] = "death";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[50];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[25];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[28];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[27];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[51];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[26];
     }
 
@@ -126,14 +126,13 @@ public class Gluer extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
+                case 0 -> {
                     range += 30;
-                    break;
-                case 1:
+                    pjSpeed += 100;
+                } case 1 -> effectDuration += 2;
+                case 2 -> {
                     effectDuration += 2;
-                    break;
-                case 2:
-                    effectDuration += 2;
+                    pjSpeed += 100;
                     range += 50;
                     delay -= 1;
                     splatter = true;
@@ -144,17 +143,13 @@ public class Gluer extends Turret {
                         selection.setTextPurple("Splatter", o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    effectLevel = 0.6f;
-                    break;
-                case 4:
-                    damage = 35;
-                    break;
-                case 5:
+                case 3 -> effectLevel = 0.6f;
+                case 4 -> damage = 35;
+                case 5 -> {
                     damage += 65;
                     effectLevel = 0.5f;
                     spikey = true;
@@ -169,7 +164,7 @@ public class Gluer extends Turret {
                         selection.setTextPurple("Embeds spikes", o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         }
     }

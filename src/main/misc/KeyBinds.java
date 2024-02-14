@@ -165,7 +165,7 @@ public class KeyBinds {
         if (needle) projectiles.add(new Needle(p, boardMousePosition.x, boardMousePosition.y, 0, null, 5, 1,150, 500));
         if (flame) projectiles.add(new Flame(p, boardMousePosition.x, boardMousePosition.y, 0, null, 5, 1, 300, 5, false));
         //enemies
-        if (en1) enemies.add(new Worm( p, boardMousePosition.x, boardMousePosition.y));
+        if (en1) enemies.add(new BigBug( p, boardMousePosition.x, boardMousePosition.y));
         if (en2) enemies.add(new MidWorm(p, boardMousePosition.x, boardMousePosition.y));
         if (en3) enemies.add(new BigWorm(p, boardMousePosition.x, boardMousePosition.y));
         if (en4) enemies.add(new Shark(p, boardMousePosition.x, boardMousePosition.y));
