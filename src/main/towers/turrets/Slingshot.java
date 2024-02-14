@@ -34,7 +34,8 @@ public class Slingshot extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        if (painful) projectiles.add(new Rock(p, position.x, position.y, angle, this, getDamage(), pjSpeed));
+        if (painful) projectiles.add(new Rock(p, position.x, position.y, angle, this, getDamage(),
+                pjSpeed, (int) effectLevel, (int) effectDuration));
         if (gravel) {
             float offset = 0.03f;
             int count = 8;
