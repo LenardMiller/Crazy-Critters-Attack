@@ -19,7 +19,7 @@ public class Crossbow extends Turret {
         offset = 2;
         name = "crossbow";
         delay = randomizeDelay(p, 4.5f);
-        pjSpeed = 1400;
+        pjSpeed = 1000;
         range = 320;
         damage = 30;
         pierce = 1;
@@ -40,12 +40,12 @@ public class Crossbow extends Turret {
             int count = 7;
             float a = angle - (floor(count / 2f) * offset);
             for (int i = 0; i < count; i++) {
-                projectiles.add(new Bolt(p, position.x, position.y, a, this, getDamage(), pierce));
+                projectiles.add(new Bolt(p, position.x, position.y, a, this, getDamage(), pierce, pjSpeed));
                 a += offset;
             }
         } else {
-            if (reinforced) projectiles.add(new ReinforcedBolt(p,position.x, position.y, angle, this, getDamage(), pierce));
-            else projectiles.add(new Bolt(p,position.x, position.y, angle, this, getDamage(), pierce));
+            if (reinforced) projectiles.add(new ReinforcedBolt(p,position.x, position.y, angle, this, getDamage(), pierce, pjSpeed));
+            else projectiles.add(new Bolt(p,position.x, position.y, angle, this, getDamage(), pierce, pjSpeed));
         }
     }
 
@@ -63,7 +63,7 @@ public class Crossbow extends Turret {
         upgradeTitles[1] = "Sharper";
         upgradeTitles[2] = "Reinforced";
 
-        upgradeTitles[3] = "Increase range";
+        upgradeTitles[3] = "Longer Range";
         upgradeTitles[4] = "Faster Firing";
         upgradeTitles[5] = "Barrage";
         //description
@@ -71,13 +71,14 @@ public class Crossbow extends Turret {
         upgradeDescB[0] = "piercing";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "+20";
+        upgradeDescA[1] = "Increase";
         upgradeDescB[1] = "damage";
         upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "+300";
-        upgradeDescB[2] = "damage,";
-        upgradeDescC[2] = "+piercing";
+        upgradeDescA[2] = "Increase";
+        upgradeDescB[2] = "damage &";
+        upgradeDescC[2] = "piercing";
+
 
         upgradeDescA[3] = "Increase";
         upgradeDescB[3] = "range";
@@ -87,15 +88,15 @@ public class Crossbow extends Turret {
         upgradeDescB[4] = "firerate";
         upgradeDescC[4] = "";
 
-        upgradeDescA[5] = "Fire";
-        upgradeDescB[5] = "multiple";
+        upgradeDescA[5] = "Fire a";
+        upgradeDescB[5] = "spread of";
         upgradeDescC[5] = "bolts";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[9];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[43];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[18];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[44];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[19];
     }
@@ -104,37 +105,32 @@ public class Crossbow extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    pierce += 2;
-                    break;
-                case 1:
-                    damage += 20;
-                    break;
-                case 2:
+                case 0 -> pierce += 2;
+                case 1 -> damage += 20;
+                case 2 -> {
                     damage += 300;
                     pierce += 5;
+                    pjSpeed += 400;
                     reinforced = true;
                     titleLines = new String[]{"Reinforced", "Crossbow"};
                     name = "crossbowReinforced";
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
+                case 3 -> {
                     range += 30;
-                    break;
-                case 4:
-                    delay -= 1.1f;
-                    break;
-                case 5:
+                    pjSpeed += 400;
+                } case 4 -> delay -= 1.1f;
+                case 5 -> {
                     multishot = true;
                     name = "crossbowMultishot";
                     fireSound = sounds.get("shotbow");
                     titleLines = new String[]{"Shotbow"};
                     infoDisplay = (o) -> selection.setTextPurple("Seven bolts", o);
                     loadSprites();
-                    break;
+                }
             }
         }
     }

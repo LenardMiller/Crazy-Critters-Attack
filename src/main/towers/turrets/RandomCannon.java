@@ -17,15 +17,20 @@ public class RandomCannon extends Turret {
     boolean laundry;
     boolean barrel;
 
+    int pjRotationSpeed;
+    int particleCount;
+
     public RandomCannon(PApplet p, Tile tile) {
         super(p,tile);
         name = "miscCannon";
         delay = randomizeDelay(p, 0.4f);
-        pjSpeed = 700;
+        pjSpeed = 400;
         betweenFireFrames = down60ToFramerate(5);
         damage = 10;
         range = 200;
+        particleCount = 3;
         barrelLength = 18;
+        pjRotationSpeed = 10;
         damageSound = sounds.get("woodDamage");
         breakSound = sounds.get("woodBreak");
         placeSound = sounds.get("woodPlace");
@@ -41,15 +46,15 @@ public class RandomCannon extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         if (barrel) angle += p.random(-0.1f, 0.1f);
-        float particleCount = p.random(1,5);
+        float particleCount = p.random(this.particleCount / 3f,this.particleCount);
         if (barrel) particleCount = 1;
         String part = "smoke";
         int spriteType = (int)(p.random(0,5.99f));
         if (laundry && p.random(0,3) < 1) {
-            projectiles.add(new Laundry(p,position.x,position.y, angle, this, getDamage()));
+            projectiles.add(new Laundry(p,position.x,position.y, angle, this, getDamage(), pjSpeed, pjRotationSpeed));
             part = "poison";
         }
-        else projectiles.add(new MiscProjectile(p,position.x,position.y, angle, this, spriteType, getDamage()));
+        else projectiles.add(new MiscProjectile(p,position.x,position.y, angle, this, spriteType, getDamage(), pjSpeed, pjRotationSpeed));
         for (int i = 0; i < particleCount; i++) {
             PVector spa2 = PVector.fromAngle(angle-HALF_PI+radians(p.random(-20,20)));
             spa2.setMag(-5);
@@ -65,13 +70,15 @@ public class RandomCannon extends Turret {
         upgradePrices[0] = 150;
         upgradePrices[1] = 150;
         upgradePrices[2] = 500;
+
         upgradePrices[3] = 75;
         upgradePrices[4] = 125;
         upgradePrices[5] = 600;
         //titles
         upgradeTitles[0] = "Heavy Luggage";
-        upgradeTitles[1] = "Faster Firing";
+        upgradeTitles[1] = "More Luggage";
         upgradeTitles[2] = "Rotating Barrel";
+
         upgradeTitles[3] = "Longer Range";
         upgradeTitles[4] = "Longest Range";
         upgradeTitles[5] = "Dirty Laundry";
@@ -101,11 +108,12 @@ public class RandomCannon extends Turret {
         upgradeDescB[5] = "splatters";
         upgradeDescC[5] = "";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[45];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[10];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[15];
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[6];
+
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[46];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[47];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[12];
     }
 
@@ -113,36 +121,38 @@ public class RandomCannon extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
+                case 0 -> {
                     damage += 10;
-                    break;
-                case 1:
+                    particleCount += 3;
+                } case 1 -> {
                     delay -= 0.15f;
-                    break;
-                case 2:
+                    pjRotationSpeed += 10;
+                } case 2 -> {
                     damageSound = sounds.get("stoneDamage");
                     breakSound = sounds.get("stoneBreak");
                     placeSound = sounds.get("stonePlace");
                     material = Material.stone;
-                    damage += 10;
                     barrel = true;
                     delay = 0;
+                    pjRotationSpeed += 10;
                     barrelLength = 27;
                     name = "miscCannonBarrel";
                     titleLines = new String[]{"Minibarrel"};
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
+                case 3 -> {
                     range += 20;
-                    break;
-                case 4:
+                    pjSpeed += 200;
+                } case 4 -> {
                     range += 30;
-                    break;
-                case 5:
+                    pjSpeed += 200;
+                } case 5 -> {
+                    particleCount += 3;
                     laundry = true;
+                    pjSpeed += 200;
                     range += 30;
                     damage += 10;
                     effectDuration = 6;
@@ -152,7 +162,7 @@ public class RandomCannon extends Turret {
                     titleLines = new String[]{"Dirty Luggage", "Launcher"};
                     infoDisplay = (o) -> selection.setTextPurple("Toxic splatters", o);
                     loadSprites();
-                    break;
+                }
             }
         }
     }

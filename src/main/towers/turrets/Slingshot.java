@@ -19,7 +19,7 @@ public class Slingshot extends Turret {
         super(p,tile);
         name = "slingshot";
         delay = randomizeDelay(p, 1.6f);
-        pjSpeed = 600;
+        pjSpeed = 400;
         range = 250;
         damage = 15; //15
         damageSound = sounds.get("woodDamage");
@@ -92,6 +92,7 @@ public class Slingshot extends Turret {
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[5];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[6];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[17];
+
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[16];
@@ -103,13 +104,11 @@ public class Slingshot extends Turret {
             switch (nextLevelA) {
                 case 0 -> {
                     range += 30;
-                    pjSpeed += 100;
-                }
-                case 1 -> {
+                    pjSpeed += 200;
+                } case 1 -> {
                     range += 40;
-                    pjSpeed += 100;
-                }
-                case 2 -> {
+                    pjSpeed += 200;
+                } case 2 -> {
                     gravel = true;
                     damage -= 10;
                     range += 50;

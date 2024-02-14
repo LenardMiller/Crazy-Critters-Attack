@@ -16,7 +16,7 @@ public class Gravel extends Projectile {
         size = new PVector(5, 5);
         radius = 5;
         this.maxSpeed = maxSpeed + p.random(-150, 15);
-        speed = maxSpeed;
+        speed = this.maxSpeed;
         this.damage = damage;
         this.angle = angle;
         angularVelocity = down60ToFramerate(p.random(-15,15));
