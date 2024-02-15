@@ -25,7 +25,7 @@ public class SeismicTower extends Turret {
         name = "seismic";
         offset = 4;
         delay = randomizeDelay(p, 2.5f);
-        pjSpeed = 400;
+        pjSpeed = 350;
         betweenFireFrames = down60ToFramerate(1);
         damage = 50;
         range = 225;
@@ -105,11 +105,11 @@ public class SeismicTower extends Turret {
             }
             shockwaves.add(new SeismicShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
               (int) barrelLength, getRange(), angle, shockwaveWidth, getDamage(), this,
-                    false, true));
+                    false, true, pjSpeed));
         } else {
             fireParticles(a);
             shockwaves.add(new SeismicShockwave(p, position.x, position.y, 0,
-                    getRange(), angle, shockwaveWidth, getDamage(), this, seismicSense, false));
+                    getRange(), angle, shockwaveWidth, getDamage(), this, seismicSense, false, pjSpeed));
         }
     }
 
@@ -143,15 +143,17 @@ public class SeismicTower extends Turret {
         upgradePrices[0] = 250;
         upgradePrices[1] = 250;
         upgradePrices[2] = 1500;
+
         upgradePrices[3] = 250;
         upgradePrices[4] = 300;
         upgradePrices[5] = 1000;
         //titles
-        upgradeTitles[0] = "Faster Firing";
-        upgradeTitles[1] = "Larger AOE";
-        upgradeTitles[2] = "360 Wave";
-        upgradeTitles[3] = "Longer Range";
-        upgradeTitles[4] = "Damage Boost";
+        upgradeTitles[0] = "Faster Reset";
+        upgradeTitles[1] = "Wider Wave";
+        upgradeTitles[2] = "Omniwave";
+
+        upgradeTitles[3] = "Longer Wave";
+        upgradeTitles[4] = "Forceful Wave";
         upgradeTitles[5] = "Seismic Sense";
         //description
         upgradeDescA[0] = "Increase";
@@ -162,9 +164,9 @@ public class SeismicTower extends Turret {
         upgradeDescB[1] = "area of";
         upgradeDescC[1] = "effect";
 
-        upgradeDescA[2] = "Shockwave";
-        upgradeDescB[2] = "encircles";
-        upgradeDescC[2] = "tower";
+        upgradeDescA[2] = "Full";
+        upgradeDescB[2] = "shockwave";
+        upgradeDescC[2] = "rings";
 
 
         upgradeDescA[3] = "Increase";
@@ -182,8 +184,9 @@ public class SeismicTower extends Turret {
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[20];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[21];
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
+        
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[52];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[53];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[22];
     }
 
@@ -206,15 +209,17 @@ public class SeismicTower extends Turret {
                     titleLines = new String[]{"Seismic", "Slammer"};
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Shockwave", o);
-                        selection.setTextPurple("360 degrees", o);
+                        selection.setTextPurple("Full rings", o);
                     };
                     loadSprites();
                 }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3 -> range += 50;
-                case 4 -> damage += 50;
+                case 3 -> {
+                    range += 50;
+                    pjSpeed += 100;
+                } case 4 -> damage += 50;
                 case 5 -> {
                     material = Material.metal;
                     placeSound = sounds.get("metalPlace");
@@ -224,6 +229,7 @@ public class SeismicTower extends Turret {
                     effectLevel = 0;
                     effectDuration = 2;
                     shockwaveWidth -= 40;
+                    pjSpeed += 100;
                     range += 100;
                     damage += 150;
                     name = "seismicSniper";

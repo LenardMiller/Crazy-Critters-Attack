@@ -17,7 +17,6 @@ public abstract class Shockwave {
 
     protected final int maxRadius;
     protected final int DAMAGE;
-    protected final int speed;
     protected final float ANGLE;
     protected final float WIDTH;
     protected final PVector CENTER;
@@ -26,6 +25,7 @@ public abstract class Shockwave {
     protected final PApplet P;
 
     protected int radius;
+    protected int speed;
     protected float effectDuration;
     protected float effectLevel;
     protected String buff;

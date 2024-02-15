@@ -17,15 +17,16 @@ import static main.misc.Utilities.findDistBetween;
 
 public class SeismicShockwave extends Shockwave {
 
-    private boolean isSeismic;
-    private boolean is360;
+    private final boolean isSeismic;
+    private final boolean is360;
 
     public SeismicShockwave(PApplet p, float centerX, float centerY, int startingRadius, int maxRadius, float angle, float width, int damage,
-                            Turret turret, boolean isSeismic, boolean is360) {
+                            Turret turret, boolean isSeismic, boolean is360, int speed) {
         super(p, centerX, centerY, startingRadius, maxRadius, angle, width, damage, turret);
 
         this.isSeismic = isSeismic;
         this.is360 = is360;
+        this.speed = speed;
     }
 
     @Override
