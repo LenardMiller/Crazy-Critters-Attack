@@ -16,12 +16,12 @@ public class EnergyBlast extends Projectile {
 
     private final boolean BIG_EXPLOSION;
 
-    public EnergyBlast(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectRadius, boolean bigExplosion) {
+    public EnergyBlast(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectRadius, boolean bigExplosion, int maxSpeed) {
         super(p, x, y, angle, turret);
         position = new PVector(x, y);
         size = new PVector(10, 18);
         radius = 22;
-        maxSpeed = 1000;
+        this.maxSpeed = maxSpeed;
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;

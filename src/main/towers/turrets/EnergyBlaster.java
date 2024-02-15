@@ -25,7 +25,7 @@ public class EnergyBlaster extends Turret {
         name = "energyBlaster";
         delay = randomizeDelay(p, 5f);
         damage = 800;
-        pjSpeed = 1000;
+        pjSpeed = 800;
         range = 300;
         betweenFireFrames = down60ToFramerate(2);
         effectRadius = 50;
@@ -45,19 +45,19 @@ public class EnergyBlaster extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         if (nuclear) {
-            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
+            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, pjSpeed));
             for (int i = 0; i < p.random(3, 5); i++) {
                 midParticles.add(new MiscParticle(p, position.x, position.y,
                   angle + radians(p.random(-45, 45)), "nuclear"));
             }
         } else if (dark) {
-            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
+            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, pjSpeed));
             for (int i = 0; i < p.random(3, 5); i++) {
                 midParticles.add(new MiscParticle(p, position.x, position.y,
                   angle + radians(p.random(-45, 45)), "dark"));
             }
         } else {
-            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, bigExplosion));
+            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, bigExplosion, pjSpeed));
             for (int i = 0; i < p.random(3, 5); i++) {
                 midParticles.add(new MiscParticle(p, position.x, position.y,
                   angle + radians(p.random(-45, 45)), "energy"));
@@ -81,7 +81,7 @@ public class EnergyBlaster extends Turret {
         upgradeTitles[2] = "Nuclear Blasts";
 
         upgradeTitles[3] = "Longer Range";
-        upgradeTitles[4] = "Sniping";
+        upgradeTitles[4] = "Rifling";
         upgradeTitles[5] = "Dark Vortex";
         //description
         upgradeDescA[0] = "Increase";
@@ -110,11 +110,11 @@ public class EnergyBlaster extends Turret {
         upgradeDescC[5] = "damage";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[21];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[55];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[29];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[6];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[13];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[54];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[56];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[30];
     }
 
@@ -126,11 +126,10 @@ public class EnergyBlaster extends Turret {
                 case 1 -> {
                     effectRadius += 50;
                     bigExplosion = true;
-                }
-                case 2 -> {
+                } case 2 -> {
                     damage += 800;
                     delay -= 1f;
-                    effectRadius = 250;
+                    effectRadius = 125;
                     name = "nuclearBlaster";
                     fireParticle = "nuclear";
                     material = Material.metal;
@@ -142,13 +141,16 @@ public class EnergyBlaster extends Turret {
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3 -> range += 35;
-                case 4 -> {
+                case 3 -> {
+                    range += 35;
+                    pjSpeed += 200;
+                } case 4 -> {
                     range += 40;
+                    pjSpeed += 200;
                     damage += 400;
-                }
-                case 5 -> {
+                } case 5 -> {
                     range += 65;
+                    pjSpeed += 200;
                     damage = 5000;
                     name = "darkBlaster";
                     fireParticle = "dark";
