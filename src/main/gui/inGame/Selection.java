@@ -93,7 +93,7 @@ public class Selection {
     private void clickOff() {
         if (turret == null) return;
         if (inputHandler.leftMousePressedPulse &&
-                mouseOnBoard() && alive && !paused) {
+                mouseOnBoard() && alive && !paused && !hand.held.equals("wall")) {
             if (!name.equals("null") && !towerJustPlaced) {
                 inGameGui.flashA = 255;
                 playSound(CLICK_OUT, 1, 1);

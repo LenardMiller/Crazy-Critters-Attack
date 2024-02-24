@@ -43,16 +43,11 @@ public class MagicMissileer extends Turret {
         }
 
         PImage getSprite(Turret.State state, int frame) {
-            switch (state) {
-                case Idle:
-                    return idleSprite;
-                case Fire:
-                    return fireAnimation[frame];
-                case Load:
-                    return loadAnimation[frame];
-                default:
-                    return null;
-            }
+            return switch (state) {
+                case Idle -> idleSprite;
+                case Fire -> fireAnimation[frame];
+                case Load -> loadAnimation[frame];
+            };
         }
     }
 
@@ -232,17 +227,11 @@ public class MagicMissileer extends Turret {
         if (!paused) {
             float specialRotationSpeed = 0.01f;
             if (name.equals("electricMissleer")) {
-                switch (state) {
-                    case Idle:
-                        specialRotationSpeed = 0.03f;
-                        break;
-                    case Fire:
-                        specialRotationSpeed = 0.03f * (1 - (frame / (float) fireFrames.length));
-                        break;
-                    case Load:
-                        specialRotationSpeed = 0.03f * (frame / (float) compressedLoadFrames.size());
-                        break;
-                }
+                specialRotationSpeed = switch (state) {
+                    case Idle -> 0.03f;
+                    case Fire -> 0.03f * (1 - (frame / (float) fireFrames.length));
+                    case Load -> 0.03f * (frame / (float) compressedLoadFrames.size());
+                };
 
                 if (p.random(25) < 1 && state == State.Idle)
                     arcs.add(new YellowArc(p, getCenter().x, getCenter().y, this, 0, 0, (int) p.random(20, 100), Priority.None));
@@ -256,12 +245,12 @@ public class MagicMissileer extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 750;
-        upgradePrices[1] = 1500;
+        upgradePrices[0] = 2500;
+        upgradePrices[1] = 5000;
         upgradePrices[2] = 40000;
 
-        upgradePrices[3] = 1000;
-        upgradePrices[4] = 2000;
+        upgradePrices[3] = 4000;
+        upgradePrices[4] = 6000;
         upgradePrices[5] = 30000;
         //titles
         upgradeTitles[0] = "More Range";
@@ -310,13 +299,9 @@ public class MagicMissileer extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    range += 50;
-                    break;
-                case 1:
-                    damage += 400;
-                    break;
-                case 2:
+                case 0 -> range += 50;
+                case 1 -> damage += 400;
+                case 2 -> {
                     effectLevel = 5000;
                     effectDuration = 10;
                     damage *= 5f;
@@ -332,17 +317,13 @@ public class MagicMissileer extends Turret {
                         missileCountInfo(o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    delay -= 1;
-                    break;
-                case 4:
-                    additionalMissile = true;
-                    break;
-                case 5:
+                case 3 -> delay -= 1;
+                case 4 -> additionalMissile = true;
+                case 5 -> {
                     range += 50;
                     delay -= 0.5f;
                     name = "magicSwarm";
@@ -351,7 +332,7 @@ public class MagicMissileer extends Turret {
                         selection.setTextPurple("Homing", o);
                         selection.setTextPurple("Twelve missiles", o);
                     };
-                    break;
+                }
             }
         }
     }

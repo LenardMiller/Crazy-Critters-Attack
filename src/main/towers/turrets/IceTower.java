@@ -243,12 +243,12 @@ public class IceTower extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 750;
-        upgradePrices[1] = 1200;
+        upgradePrices[0] = 2500;
+        upgradePrices[1] = 3500;
         upgradePrices[2] = 30000;
 
-        upgradePrices[3] = 1000;
-        upgradePrices[4] = 1500;
+        upgradePrices[3] = 3000;
+        upgradePrices[4] = 5000;
         upgradePrices[5] = 35000;
         //titles
         upgradeTitles[0] = "Longer Lasting";
@@ -298,13 +298,9 @@ public class IceTower extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    wallTimeUntilDamage += 15;
-                    break;
-                case 1:
-                    wallHp += 40;
-                    break;
-                case 2:
+                case 0 -> wallTimeUntilDamage += 15;
+                case 1 -> wallHp += 40;
+                case 2 -> {
                     name = "autoIceTower";
                     range = 5000;
                     wallTimeUntilDamage = -1;
@@ -320,23 +316,20 @@ public class IceTower extends Turret {
                         iceWallInfo(o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    range += 50;
-                    break;
-                case 4:
-                    delay -= 3;
-                    break;
-                case 5:
+                case 3 -> range += 50;
+                case 4 -> delay -= 3;
+                case 5 -> {
                     name = "superIceTower";
                     material = Material.titanium;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     titleLines = new String[]{"Super Freeze", "Ray"};
+                    range += 50;
                     wallHp += 170;
                     wallTimeUntilDamage += 20;
                     infoDisplay = (o) -> {
@@ -344,7 +337,7 @@ public class IceTower extends Turret {
                         iceWallInfo(o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         }
     }

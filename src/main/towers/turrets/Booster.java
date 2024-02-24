@@ -184,12 +184,12 @@ public class Booster extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 1500;
-        upgradePrices[1] = 2000;
+        upgradePrices[0] = 3000;
+        upgradePrices[1] = 6000;
         upgradePrices[2] = 30000;
 
-        upgradePrices[3] = 2250;
-        upgradePrices[4] = 3000;
+        upgradePrices[3] = 4000;
+        upgradePrices[4] = 5000;
         upgradePrices[5] = 25000;
         //titles
         upgradeTitles[0] = "Boost Range";
@@ -238,15 +238,11 @@ public class Booster extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    boost.range = 0.3f;
-                    break;
-                case 1:
-                    range++;
-                    break;
-                case 2:
+                case 0 -> boost.range = 0.3f;
+                case 1 -> range++;
+                case 2 -> {
                     boost.range = 0.6f;
-                    boost.firerate += 0.3f;
+                    boost.firerate += 0.2f;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -255,29 +251,25 @@ public class Booster extends Turret {
                     betweenIdleFrames = 2;
                     titleLines = new String[]{"Wealth Booster"};
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    boost.damage = 0.5f;
-                    break;
-                case 4:
-                    boost.firerate += 0.3f;
-                    break;
-                case 5:
+                case 3 -> boost.damage = 0.3f;
+                case 4 -> boost.firerate += 0.2f;
+                case 5 -> {
                     boost.deathEffect = true;
                     boost.health = 1;
                     maxHp = 60;
                     hp = maxHp;
-                    boost.damage = 1;
+                    boost.damage = 0.6f;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     name = "explosiveBooster";
                     titleLines = new String[]{"Unstable", "Booster"};
                     loadSprites();
-                    break;
+                }
             }
         }
     }
@@ -287,36 +279,32 @@ public class Booster extends Turret {
         int checkY = -1;
 
         switch (i) {
-            case 0:
+            case 0 -> {
                 if (range < 2) return null;
-                break;
-            case 1:
-                checkX = 0;
-                break;
-            case 2:
+            }
+            case 1 -> checkX = 0;
+            case 2 -> {
                 if (range < 2) return null;
                 checkX = 1;
-                break;
-            case 3:
-                checkY = 0;
-                break;
-            case 4:
+            }
+            case 3 -> checkY = 0;
+            case 4 -> {
                 checkX = 1;
                 checkY = 0;
-                break;
-            case 5:
+            }
+            case 5 -> {
                 if (range < 2) return null;
                 checkY = 1;
-                break;
-            case 6:
+            }
+            case 6 -> {
                 checkX = 0;
                 checkY = 1;
-                break;
-            case 7:
+            }
+            case 7 -> {
                 if (range < 2) return null;
                 checkX = 1;
                 checkY = 1;
-                break;
+            }
         }
 
         return new IntVector(checkX, checkY);

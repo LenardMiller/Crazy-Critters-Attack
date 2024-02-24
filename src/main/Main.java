@@ -119,13 +119,13 @@ public class Main extends PApplet {
             FLAMETHROWER_PRICE =    1250,
             TESLA_TOWER_PRICE =     1500,
 
-            MAGIC_MISSILEER_PRICE = 3500,
-            ICE_TOWER_PRICE =       3000,
-            BOOSTER_PRICE =         2500,
+            MAGIC_MISSILEER_PRICE = 5000,
+            ICE_TOWER_PRICE =       6000,
+            BOOSTER_PRICE =         7000,
 
-            RAILGUN_PRICE =         12000,
-            WAVE_MOTION_PRICE =     10000,
-            NIGHTMARE_PRICE =       13000;
+            RAILGUN_PRICE =         25000,
+            WAVE_MOTION_PRICE =     30000,
+            NIGHTMARE_PRICE =       20000;
 
     //sprites
     public static HashMap<String, PImage> staticSprites = new HashMap<>();

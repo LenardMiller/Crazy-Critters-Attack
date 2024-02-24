@@ -129,7 +129,7 @@ public class TeslaTower extends Turret {
         //price
         upgradePrices[0] = 800;
         upgradePrices[1] = 1000;
-        upgradePrices[2] = 10000;
+        upgradePrices[2] = 15000;
 
         upgradePrices[3] = 600;
         upgradePrices[4] = 1200;
@@ -185,11 +185,9 @@ public class TeslaTower extends Turret {
                     arcLength++;
                     range += 25;
                 } case 2 -> {
-                    // todo: more expensive and attack slower
-                    arcLength += 3;
                     range = 5000;
                     damage += 2500;
-                    delay += 2;
+                    delay += 4;
                     lightning = true;
                     material = Material.crystal;
                     placeSound = sounds.get("crystalPlace");
