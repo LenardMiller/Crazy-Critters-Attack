@@ -248,13 +248,9 @@ public class Flamethrower extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    range += 20;
-                    break;
-                case 1:
-                    range += 30;
-                    break;
-                case 2:
+                case 0 -> range += 20;
+                case 1 -> range += 30;
+                case 2 -> {
                     wheel = true;
                     count = 8;
                     damage *= 10;
@@ -268,18 +264,15 @@ public class Flamethrower extends Turret {
                         selection.setTextPurple("Spools up", o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    damage += damage;
-                    break;
-                case 4:
+                case 3 -> damage += damage;
+                case 4 -> {
                     effectDuration += 5;
                     effectLevel += 15;
-                    break;
-                case 5:
+                } case 5 -> {
                     name = "magicFlamethrower";
                     magic = true;
                     material = Material.darkMetal;
@@ -294,7 +287,7 @@ public class Flamethrower extends Turret {
                         selection.setTextPurple("Piercing", o);
                     };
                     loadSprites();
-                    break;
+                }
             }
         }
     }

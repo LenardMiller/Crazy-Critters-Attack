@@ -15,21 +15,25 @@ import static main.misc.Utilities.up60ToFramerate;
 
 public class Arc {
 
-    private final int DAMAGE;
-    private final int MAX_LENGTH;
-    private final int MAX_DISTANCE;
-    private final Turret.Priority PRIORITY;
-    private final ArrayList<StartEndPoints> BIG_POINTS;
-    private final PApplet P;
-    private final PVector START_POSITION;
-    private final Turret TURRET;
-    private final Enemy BLACKLISTED_ENEMY;
-    public int alpha;
+    protected final int damage;
+    protected final int maxLength;
+    protected final int maxDistance;
+    protected final Turret.Priority priority;
+    protected final ArrayList<StartEndPoints> bigPoints;
+    protected final PApplet p;
+    protected final PVector startPosition;
+    protected final Turret turret;
+
+    protected final Enemy blacklistedEnemy;
+
     protected Color lineColor;
     protected Enemy.DamageType particleType;
     protected int maxPoints;
     protected int variation;
     protected int weight;
+    protected int particleChance;
+
+    public int alpha;
 
     /** Used by Tesla Tower. */
     public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance, Turret.Priority priority) {
@@ -39,78 +43,79 @@ public class Arc {
     /** Used by lightning caller. */
     public Arc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
                Turret.Priority priority, Enemy blacklistedEnemy) {
-        this.P = p;
-        START_POSITION = new PVector(startX, startY);
-        this.TURRET = turret;
-        this.DAMAGE = damage;
-        this.MAX_LENGTH = maxLength;
-        this.MAX_DISTANCE = maxDistance;
-        this.PRIORITY = priority;
-        BIG_POINTS = new ArrayList<>();
+        this.p = p;
+        startPosition = new PVector(startX, startY);
+        this.turret = turret;
+        this.damage = damage;
+        this.maxLength = maxLength;
+        this.maxDistance = maxDistance;
+        this.priority = priority;
+        bigPoints = new ArrayList<>();
         alpha = 255;
         variation = 25;
         maxPoints = 10;
         weight = 1;
+        particleChance = 1;
         lineColor = new Color(215, 242, 248);
         particleType = Enemy.DamageType.electricity;
-        BLACKLISTED_ENEMY = blacklistedEnemy;
+        this.blacklistedEnemy = blacklistedEnemy;
     }
 
     public void display() {
-        P.stroke(lineColor.getRGB(), alpha);
-        P.fill(255);
-        P.strokeWeight(weight);
-        for (int k = 0; k < BIG_POINTS.size() - 1; k++) {
-            PVector pointB = BIG_POINTS.get(k).position;
-            PVector pointA = BIG_POINTS.get(k + 1).position;
-            PVector[] points = BIG_POINTS.get(k).points;
-            if (debug) P.ellipse(points[1].x, points[1].y, 5, 5);
-            P.line(pointB.x, pointB.y, points[points.length - 1].x, points[points.length - 1].y);
+        p.stroke(lineColor.getRGB(), alpha);
+        p.fill(255);
+        p.strokeWeight(weight);
+        for (int k = 0; k < bigPoints.size() - 1; k++) {
+            PVector pointB = bigPoints.get(k).position;
+            PVector pointA = bigPoints.get(k + 1).position;
+            PVector[] points = bigPoints.get(k).points;
+            if (debug) p.ellipse(points[1].x, points[1].y, 5, 5);
+            p.line(pointB.x, pointB.y, points[points.length - 1].x, points[points.length - 1].y);
             for (int i = points.length - 1; i > 1; i--) {
-                P.line(points[i].x, points[i].y, points[i - 1].x, points[i - 1].y);
-                if (debug) P.ellipse(points[i].x, points[i].y, 5, 5);
+                p.line(points[i].x, points[i].y, points[i - 1].x, points[i - 1].y);
+                if (debug) p.ellipse(points[i].x, points[i].y, 5, 5);
             }
-            P.line(points[1].x, points[1].y, pointA.x, pointA.y);
+            p.line(points[1].x, points[1].y, pointA.x, pointA.y);
         }
-        P.strokeWeight(1);
+        p.strokeWeight(1);
     }
 
     public void update(int j) {
         if (paused) return;
-        if (alpha == 255) zap(BLACKLISTED_ENEMY);
+        if (alpha == 255) zap(blacklistedEnemy);
         if (!paused) alpha -= up60ToFramerate(8);
         if (alpha <= 0) arcs.remove(j);
     }
 
     /** Creates points that define effect, damages enemies **/
-    private void zap(Enemy blacklistedEnemy) {
-        BIG_POINTS.add(new StartEndPoints(P, START_POSITION));
+    protected void zap(Enemy blacklistedEnemy) {
+        bigPoints.add(new StartEndPoints(p, startPosition));
         ArrayList<Enemy> hitEnemies = new ArrayList<>();
         if (blacklistedEnemy != null) hitEnemies.add(blacklistedEnemy);
-        Enemy mainEnemy = getTargetEnemy(START_POSITION, PRIORITY, hitEnemies);
+        Enemy mainEnemy = getTargetEnemy(startPosition, priority, hitEnemies);
         if (mainEnemy != null) {
-            damageEnemy(mainEnemy, DAMAGE, TURRET);
+            damageEnemy(mainEnemy, damage, turret);
             hitEnemies.add(mainEnemy);
-            BIG_POINTS.add(new StartEndPoints(P, new PVector(mainEnemy.position.x, mainEnemy.position.y)));
+            bigPoints.add(new StartEndPoints(p, new PVector(mainEnemy.position.x, mainEnemy.position.y)));
             int x = 2; //no clue
-            for (int i = 1; i < MAX_LENGTH; i++) {
-                Enemy jumpEnemy = getTargetEnemy(BIG_POINTS.get(x - 1).position, Turret.Priority.Close, hitEnemies);
+            for (int i = 1; i < maxLength; i++) {
+                Enemy jumpEnemy = getTargetEnemy(bigPoints.get(x - 1).position, Turret.Priority.Close, hitEnemies);
                 if (jumpEnemy != null) {
-                    BIG_POINTS.add(new StartEndPoints(P, jumpEnemy.position));
-                    damageEnemy(jumpEnemy, DAMAGE, TURRET);
+                    bigPoints.add(new StartEndPoints(p, jumpEnemy.position));
+                    damageEnemy(jumpEnemy, damage, turret);
                     hitEnemies.add(jumpEnemy);
                     x++;
                 }
             }
-            for (int i = 0; i < BIG_POINTS.size() - 1; i++) BIG_POINTS.get(i).getPoints(BIG_POINTS.get(i + 1).position);
+            for (int i = 0; i < bigPoints.size() - 1; i++) bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints);
         } else {
-            float angle = P.random(TWO_PI);
-            float mag = P.random(MAX_DISTANCE / 4f, MAX_DISTANCE);
+            float angle = p.random(TWO_PI);
+            float mag = p.random(maxDistance / 4f, maxDistance);
             PVector position = PVector.fromAngle(angle);
             position = position.setMag(mag);
-            position.add(START_POSITION);
-            BIG_POINTS.add(new StartEndPoints(P, new PVector(position.x, position.y)));
-            for (int i = 0; i < BIG_POINTS.size() - 1; i++) BIG_POINTS.get(i).getPoints(BIG_POINTS.get(i + 1).position);
+            position.add(startPosition);
+            bigPoints.add(new StartEndPoints(p, new PVector(position.x, position.y)));
+            for (int i = 0; i < bigPoints.size() - 1; i++) bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints);
         }
     }
 
@@ -118,7 +123,7 @@ public class Arc {
         enemy.damageWithoutBuff(damage, turret, particleType, new PVector(0, 0), true);
     }
 
-    private Enemy getTargetEnemy(PVector position, Turret.Priority targeting, ArrayList<Enemy> enemiesRepeat) {
+    protected Enemy getTargetEnemy(PVector position, Turret.Priority targeting, ArrayList<Enemy> enemiesRepeat) {
         //-1: none
         //0: close
         //1: far
@@ -143,19 +148,17 @@ public class Arc {
                 float x = abs(position.x - enemy.position.x);
                 float y = abs(position.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
-                if (t > MAX_DISTANCE) continue;
-                switch (PRIORITY) {
-                    case Close:
+                if (t > maxDistance) continue;
+                switch (priority) {
+                    case Close -> {
                         if (t >= dist) break;
                         e = enemy;
                         dist = t;
-                        break;
-                    case Far:
+                    } case Far -> {
                         if (t <= dist) break;
                         e = enemy;
                         dist = t;
-                        break;
-                    case Strong:
+                    } case Strong -> {
                         if (enemy.maxHp > maxHp) { //strong
                             e = enemy;
                             maxHp = enemy.maxHp;
@@ -163,28 +166,28 @@ public class Arc {
                             e = enemy;
                             dist = t;
                         }
-                        break;
+                    }
                 }
             }
         }
         return e;
     }
 
-    private class StartEndPoints {
+    protected class StartEndPoints {
 
-        private final PApplet P;
+        private final PApplet p;
 
         PVector position;
         PVector[] points;
 
-        private StartEndPoints(PApplet p, PVector position) {
+        protected StartEndPoints(PApplet p, PVector position) {
             this.position = position;
-            this.P = p;
+            this.p = p;
         }
 
-        private void getPoints(PVector pointA) {
+        protected void getPoints(PVector pointA, int particleChance, int maxPoints) {
             PVector pointB = position;
-            points = new PVector[(int) P.random(3, maxPoints)];
+            points = new PVector[(int) p.random(3, maxPoints)];
             float lineLength = sqrt(sq(pointB.x - pointA.x) + sq(pointB.y - pointA.y));
             float d = lineLength / points.length + 1;
             for (int i = 1; i < points.length; i++) {
@@ -193,8 +196,9 @@ public class Arc {
                 e.setMag(di);
                 e.x *= -1;
                 e.y *= -1;
-                points[i] = new PVector(e.x + pointA.x + P.random(-variation, variation), e.y + pointA.y + P.random(-variation, variation));
-                topParticles.add(new MiscParticle(P, points[i].x, points[i].y, P.random(360), particleType.name()));
+                points[i] = new PVector(e.x + pointA.x + p.random(-variation, variation), e.y + pointA.y + p.random(-variation, variation));
+                if (p.random(particleChance) < 1)
+                    topParticles.add(new MiscParticle(p, points[i].x, points[i].y, p.random(360), particleType.name()));
             }
         }
     }
