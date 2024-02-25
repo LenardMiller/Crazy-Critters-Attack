@@ -29,8 +29,25 @@ public class EnergyBlast extends Projectile {
         hitSound = sounds.get("energyImpact");
         this.effectRadius = effectRadius;
         type = Enemy.DamageType.energy;
-        trail = "energy";
+        particleTrail = "energy";
+        debrisTrail = damage > 800 ? particleTrail : null;
+        trainChance = maxSpeed > 1200 ? 1 : 3;
         this.BIG_EXPLOSION = bigExplosion;
+    }
+
+    @Override
+    protected void trail() { //leaves a trail of particles
+        if (particleTrail != null) {
+            if (p.random(3) > 1) {
+                topParticles.add(new MiscParticle(p, position.x, position.y,
+                        p.random(0, TWO_PI), particleTrail));
+            }
+            if (damage > 800) {
+                topParticles.add(new ExplosionDebris(p, position.x, position.y,
+                        p.random(angle - 0.4f, angle + 0.4f), particleTrail,
+                        p.random( maxSpeed / 2f, maxSpeed)));
+            }
+        }
     }
 
     @Override

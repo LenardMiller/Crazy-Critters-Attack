@@ -18,7 +18,7 @@ public class SpikeyGlue extends Glue {
         speed = maxSpeed;
         angularVelocity = 0;
         sprite = staticSprites.get("spikeyGluePj");
-        trail = "glue";
+        particleTrail = "glue";
         hitSound = sounds.get("squishImpact");
         buff = "spikeyGlued";
     }

@@ -1,6 +1,8 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
+import main.particles.ExplosionDebris;
+import main.particles.MiscParticle;
 import main.particles.Vortex;
 import main.projectiles.shockwaves.DarkShockwave;
 import main.towers.turrets.Turret;
@@ -24,7 +26,19 @@ public class DarkBlast extends Projectile {
         hitSound = sounds.get("darkImpact");
         this.effectRadius = effectRadius;
         type = Enemy.DamageType.dark;
-        trail = "dark";
+        particleTrail = "dark";
+        debrisTrail = damage > 800 ? particleTrail : null;
+        trainChance = maxSpeed > 1200 ? 1 : 3;
+    }
+
+    protected void trail() { //leaves a trail of particles
+//        for (int i = 0; i < p.random(3, 6); i++) {
+            topParticles.add(new MiscParticle(p, position.x, position.y,
+                    p.random(TWO_PI), particleTrail));
+            topParticles.add(new ExplosionDebris(p, position.x, position.y,
+                    p.random(angle - 0.4f, angle + 0.4f), particleTrail,
+                    p.random( maxSpeed / 2f, maxSpeed)));
+//        }
     }
 
     @Override

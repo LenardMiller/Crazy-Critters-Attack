@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.particles.ExplosionDebris;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -25,11 +26,15 @@ public class Rock extends Projectile {
         sprite = staticSprites.get("rockPj");
         hitSound = sounds.get("largeImpact");
         buff = "bleeding";
-        trail = "smoke";
+        particleTrail = "smoke";
     }
 
     @Override
     public void die() {
+        for (int i = 0; i < 8; i++) {
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
+                    "metal", p.random(100, 200)));
+        }
         topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greyPuff"));
         projectiles.remove(this);
     }

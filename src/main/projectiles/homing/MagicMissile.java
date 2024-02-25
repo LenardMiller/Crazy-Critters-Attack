@@ -1,5 +1,6 @@
 package main.projectiles.homing;
 
+import main.particles.ExplosionDebris;
 import main.projectiles.Projectile;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
@@ -33,7 +34,7 @@ public class MagicMissile extends Projectile {
         this.damage = damage;
         this.angle = angle;
         sprite = staticSprites.get("magicMissilePj");
-        trail = "greenMagic";
+        particleTrail = "greenMagic";
         this.priority = priority;
         hitSound = sounds.get("magicImpact");
     }
@@ -59,17 +60,15 @@ public class MagicMissile extends Projectile {
                 float t = sqrt(sq(x) + sq(y));
                 if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900) {
                     switch (priority) {
-                        case Close:
+                        case Close -> {
                             if (t >= dist) break;
                             e = enemy;
                             dist = t;
-                            break;
-                        case Far:
+                        } case Far -> {
                             if (t <= dist) break;
                             e = enemy;
                             dist = t;
-                            break;
-                        case Strong:
+                        } case Strong -> {
                             if (enemy.maxHp > maxHp) { //strong
                                 e = enemy;
                                 maxHp = enemy.maxHp;
@@ -77,7 +76,7 @@ public class MagicMissile extends Projectile {
                                 e = enemy;
                                 dist = t;
                             }
-                            break;
+                        }
                     }
                 }
             }
@@ -103,6 +102,10 @@ public class MagicMissile extends Projectile {
 
     @Override
     public void die() {
+        for (int i = 0; i < 8; i++) {
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
+                    "nuclear", p.random(100, 200)));
+        }
         topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greenPuff"));
         projectiles.remove(this);
     }

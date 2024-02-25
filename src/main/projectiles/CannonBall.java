@@ -23,7 +23,7 @@ public class CannonBall extends Projectile {
         hitSound = sounds.get("largeImpact");
         this.effectRadius = effectRadius;
         if (hasTrail) {
-            trail = "smoke";
+            particleTrail = "smoke";
         }
     }
 

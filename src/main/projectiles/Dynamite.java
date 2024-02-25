@@ -25,7 +25,7 @@ public class Dynamite extends Projectile {
         speed = maxSpeed;
         this.damage = damage;
         this.angle = angle;
-        trail = "fire";
+        particleTrail = "fire";
         type = Enemy.DamageType.burning;
         sprite = staticSprites.get("dynamitePj");
         hitSound = sounds.get("mediumExplosion");

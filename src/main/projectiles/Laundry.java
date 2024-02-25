@@ -30,7 +30,7 @@ public class Laundry extends Projectile {
         angleTwo = angle;
         angularVelocity = down60ToFramerate(p.random(-maxRotation, maxRotation)); //degrees mode
         sprite = staticSprites.get("laundryPj");
-        trail = "poison";
+        particleTrail = "poison";
         type = Enemy.DamageType.poisoned;
         effectRadius = 60;
         buff = "poisoned";

@@ -1,5 +1,7 @@
 package main.projectiles.glue;
 
+import main.particles.ExplosionDebris;
+import main.particles.MiscParticle;
 import main.projectiles.Projectile;
 import main.enemies.Enemy;
 import main.particles.Ouch;
@@ -26,15 +28,22 @@ public class Glue extends Projectile {
         this.angle = angle;
         angularVelocity = 0;
         sprite = staticSprites.get("gluePj");
-        trail = "glue";
+        particleTrail = "glue";
+        debrisTrail = damage > 0 ? particleTrail : null;
         hitSound = sounds.get("squishImpact");
         buff = "glued";
     }
 
     @Override
     public void die() {
-        topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"gluePuff"));
+        topParticles.add(new Ouch(p,position.x,position.y,p.random(TWO_PI),"gluePuff"));
         projectiles.remove(this);
+        if (damage > 0) {
+            for (int i = 0; i < 8; i++) {
+                topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
+                        particleTrail, p.random(100, 200)));
+            }
+        }
     }
 
     @Override

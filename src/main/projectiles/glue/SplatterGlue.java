@@ -20,7 +20,7 @@ public class SplatterGlue extends Glue {
         speed = maxSpeed;
         angularVelocity = 0;
         sprite = staticSprites.get("gluePj");
-        trail = "glue";
+        particleTrail = "glue";
         type = Enemy.DamageType.glued;
         effectRadius = 100;
         hitSound = sounds.get("squishImpact");

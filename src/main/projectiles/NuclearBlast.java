@@ -1,6 +1,7 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
+import main.particles.MiscParticle;
 import main.projectiles.shockwaves.NuclearShockwave;
 import main.particles.ExplosionDebris;
 import main.towers.turrets.Turret;
@@ -10,7 +11,6 @@ import processing.core.PVector;
 import static main.Main.*;
 
 public class NuclearBlast extends Projectile {
-
 
     public NuclearBlast(PApplet p, float x, float y, float angle, Turret turret, int damage, int effectRadius, int maxSpeed) {
         super(p, x, y, angle, turret);
@@ -25,7 +25,9 @@ public class NuclearBlast extends Projectile {
         hitSound = sounds.get("hugeExplosion");
         this.effectRadius = effectRadius;
         type = Enemy.DamageType.nuclear;
-        trail = "nuclear";
+        particleTrail = "nuclear";
+        debrisTrail = damage > 800 ? particleTrail : null;
+        trainChance = maxSpeed > 1200 ? 1 : 3;
     }
 
     @Override

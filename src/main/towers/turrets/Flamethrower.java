@@ -256,7 +256,7 @@ public class Flamethrower extends Turret {
                     damage *= 10;
                     name = "flamewheel";
                     hasPriority = false;
-                    effectLevel += 7;
+                    effectLevel += 5;
                     selection.swapSelected(this);
                     titleLines = new String[]{"Flame Wheel"};
                     infoDisplay = (o) -> {

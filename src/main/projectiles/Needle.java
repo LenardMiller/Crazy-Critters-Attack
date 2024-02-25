@@ -24,7 +24,7 @@ public class Needle extends Projectile {
         this.angle = angle;
         this.range = range;
         sprite = staticSprites.get("needlePj");
-        trail = "decay";
+        particleTrail = "decay";
         buff = "decay";
     }
 
