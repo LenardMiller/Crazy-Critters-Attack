@@ -115,8 +115,8 @@ public class Main extends PApplet {
             GLUER_PRICE =           300,
             SEISMIC_PRICE =         500,
 
-            ENERGY_BLASTER_PRICE =  1000,
-            FLAMETHROWER_PRICE =    1250,
+            ENERGY_BLASTER_PRICE =  1250,
+            FLAMETHROWER_PRICE =    1000,
             TESLA_TOWER_PRICE =     1500,
 
             MAGIC_MISSILEER_PRICE = 5000,

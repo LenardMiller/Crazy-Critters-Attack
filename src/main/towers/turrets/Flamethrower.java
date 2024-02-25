@@ -203,21 +203,21 @@ public class Flamethrower extends Turret {
         upgradePrices[4] = 700;
         upgradePrices[5] = 8000;
         //titles
-        upgradeTitles[0] = "Better range";
-        upgradeTitles[1] = "Betterer Range";
+        upgradeTitles[0] = "Strong Jet";
+        upgradeTitles[1] = "Fierce Jet";
         upgradeTitles[2] = "Flame Wheel";
 
-        upgradeTitles[3] = "More Damage";
-        upgradeTitles[4] = "Fire Strength";
+        upgradeTitles[3] = "Hotter Flames";
+        upgradeTitles[4] = "Sticky Fire";
         upgradeTitles[5] = "Blue Fire";
         //description
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "range";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "Increase";
-        upgradeDescB[1] = "range";
-        upgradeDescC[1] = "again";
+        upgradeDescA[1] = "Further";
+        upgradeDescB[1] = "increase";
+        upgradeDescC[1] = "range";
 
         upgradeDescA[2] = "Waves";
         upgradeDescB[2] = "of fire";
@@ -225,22 +225,22 @@ public class Flamethrower extends Turret {
 
 
         upgradeDescA[3] = "Increase";
-        upgradeDescB[3] = "base";
-        upgradeDescC[3] = "damage";
+        upgradeDescB[3] = "damage";
+        upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "Increase";
-        upgradeDescB[4] = "damage";
-        upgradeDescC[4] = "& duration";
+        upgradeDescA[4] = "Strengthen";
+        upgradeDescB[4] = "burning";
+        upgradeDescC[4] = "effect";
 
         upgradeDescA[5] = "Massive";
         upgradeDescB[5] = "damage";
         upgradeDescC[5] = "increase";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[5];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[57];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[58];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[32];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[59];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[11];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[31];
     }
