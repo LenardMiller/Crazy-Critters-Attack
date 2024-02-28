@@ -32,13 +32,11 @@ public class DarkBlast extends Projectile {
     }
 
     protected void trail() { //leaves a trail of particles
-//        for (int i = 0; i < p.random(3, 6); i++) {
-            topParticles.add(new MiscParticle(p, position.x, position.y,
-                    p.random(TWO_PI), particleTrail));
-            topParticles.add(new ExplosionDebris(p, position.x, position.y,
-                    p.random(angle - 0.4f, angle + 0.4f), particleTrail,
-                    p.random( maxSpeed / 2f, maxSpeed)));
-//        }
+        topParticles.add(new MiscParticle(p, position.x, position.y,
+                p.random(TWO_PI), particleTrail));
+        topParticles.add(new ExplosionDebris(p, position.x, position.y,
+                p.random(angle - 0.4f, angle + 0.4f), particleTrail,
+                p.random( maxSpeed / 2f, maxSpeed)));
     }
 
     @Override

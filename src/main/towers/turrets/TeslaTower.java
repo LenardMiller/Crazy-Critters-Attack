@@ -135,8 +135,8 @@ public class TeslaTower extends Turret {
         upgradePrices[4] = 1200;
         upgradePrices[5] = 8000;
         //titles
-        upgradeTitles[0] = "More Arcs";
-        upgradeTitles[1] = "Even More Arcs";
+        upgradeTitles[0] = "Longer Arcs";
+        upgradeTitles[1] = "Longer Arcs";
         upgradeTitles[2] = "Call Lightning";
 
         upgradeTitles[3] = "Faster Recharge";
@@ -173,8 +173,8 @@ public class TeslaTower extends Turret {
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[33];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[34];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[34];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[59];
     }
 
     @Override
