@@ -27,7 +27,7 @@ public class ElectricMissile extends MagicMissile {
     public void die() {
         for (int i = 0; i < 8; i++) {
             topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
-                    "Nuclear", p.random(100, 200)));
+                    "nuclear", p.random(100, 200)));
         }
         topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"yellowPuff"));
         arcs.add(new YellowArc(p, position.x, position.y, turret, 0, 0, 75, Turret.Priority.None));

@@ -43,11 +43,17 @@ public class MagicMissileer extends Turret {
         }
 
         PImage getSprite(Turret.State state, int frame) {
-            return switch (state) {
-                case Idle -> idleSprite;
-                case Fire -> fireAnimation[frame];
-                case Load -> loadAnimation[frame];
-            };
+           switch (state) {
+               case Fire -> {
+                   frame = min(frame, fireAnimation.length - 1);
+                   return fireAnimation[frame];
+               } case Load -> {
+                    frame = min(frame, loadAnimation.length - 1);
+                    return loadAnimation[frame];
+               } default -> {
+                   return idleSprite;
+               }
+           }
         }
     }
 
@@ -263,7 +269,7 @@ public class MagicMissileer extends Turret {
         upgradeDescB[1] = "damage";
         upgradeDescC[1] = "";
 
-        upgradeDescA[2] = "Electrifies";
+        upgradeDescA[2] = "Electrify";
         upgradeDescB[2] = "critters";
         upgradeDescC[2] = "";
 
@@ -294,7 +300,7 @@ public class MagicMissileer extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0 -> {
-                    range += 75;
+                    range += 50;
                     pjSpeed += 50;
                 } case 1 -> damage += 500;
                 case 2 -> {

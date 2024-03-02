@@ -242,7 +242,7 @@ public class Booster extends Turret {
                 case 1 -> range++;
                 case 2 -> {
                     boost.range = 0.6f;
-                    boost.firerate += 0.2f;
+                    boost.firerate += 0.25f;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -255,8 +255,8 @@ public class Booster extends Turret {
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3 -> boost.damage = 0.3f;
-                case 4 -> boost.firerate += 0.2f;
+                case 3 -> boost.damage = 0.4f;
+                case 4 -> boost.firerate += 0.25f;
                 case 5 -> {
                     boost.deathEffect = true;
                     boost.health = 1;
