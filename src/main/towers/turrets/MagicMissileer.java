@@ -325,7 +325,7 @@ public class MagicMissileer extends Turret {
                     delay -= 0.5f;
                     name = "magicSwarm";
                     additionalMissiles = 9;
-                    titleLines = new String[]{"Miracle Tower"};
+                    titleLines = new String[]{"Mythic Tower"};
                 }
             }
         }
