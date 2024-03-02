@@ -257,7 +257,7 @@ public class MagicMissileer extends Turret {
         upgradeTitles[1] = "More Magic";
         upgradeTitles[2] = "Electrifying";
 
-        upgradeTitles[3] = "Faster Firing";
+        upgradeTitles[3] = "More Firing";
         upgradeTitles[4] = "More Missiles";
         upgradeTitles[5] = "Missile Swarm";
         //descriptions

@@ -129,7 +129,7 @@ public class TeslaTower extends Turret {
         //price
         upgradePrices[0] = 800;
         upgradePrices[1] = 1000;
-        upgradePrices[2] = 15_000;
+        upgradePrices[2] = 12_000;
 
         upgradePrices[3] = 600;
         upgradePrices[4] = 1200;
@@ -188,6 +188,7 @@ public class TeslaTower extends Turret {
                     range = 5000;
                     damage += 2500;
                     delay += 4;
+                    arcLength++;
                     lightning = true;
                     material = Material.crystal;
                     placeSound = sounds.get("crystalPlace");
@@ -212,7 +213,7 @@ public class TeslaTower extends Turret {
                     delay = 0.2f;
                     highPower = true;
                     betweenIdleFrames = 3;
-                    damage /= 5;
+                    damage /= 8;
                     name = "highPowerTesla";
                     material = Material.darkMetal;
                     titleLines = new String[]{"The Demon", "Circuit"};

@@ -255,8 +255,8 @@ public class IceTower extends Turret {
         upgradeTitles[1] = "Stronger Ice";
         upgradeTitles[2] = "Auto Defence";
 
-        upgradeTitles[3] = "Increase Range";
-        upgradeTitles[4] = "Faster Freezing";
+        upgradeTitles[3] = "Longer Beam";
+        upgradeTitles[4] = "Defogging";
         upgradeTitles[5] = "Superfreeze";
         //descriptions
         upgradeDescA[0] = "Ice lasts";
@@ -289,7 +289,7 @@ public class IceTower extends Turret {
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[36];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[42];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[67];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[41];
     }
