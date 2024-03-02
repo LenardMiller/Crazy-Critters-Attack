@@ -17,7 +17,7 @@ public class TowerBuy extends Button {
     public boolean depressed;
     public int price;
 
-    public TowerBuy(PApplet p, float x, float y, String type, boolean active) { //todo: redo old art again?
+    public TowerBuy(PApplet p, float x, float y, String type, boolean active) {
         super(p, x, y, type, active);
         price = 0;
         position = new PVector(x, y);

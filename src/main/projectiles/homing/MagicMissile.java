@@ -22,13 +22,14 @@ public class MagicMissile extends Projectile {
     private float turningFraction = 10;
     private Enemy targetEnemy;
 
-    public MagicMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, Turret.Priority priority, PVector spawnPos) {
+    public MagicMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, Turret.Priority priority,
+                        PVector spawnPos, int maxSpeed) {
         super(p, x, y, angle, turret);
         this.SPAWN_POSITION = spawnPos;
         position = new PVector(x, y);
         size = new PVector(6, 20);
         radius = 14;
-        maxSpeed = 300;
+        this.maxSpeed = maxSpeed;
         speed = maxSpeed;
         type = Enemy.DamageType.greenMagic;
         this.damage = damage;
@@ -102,9 +103,11 @@ public class MagicMissile extends Projectile {
 
     @Override
     public void die() {
-        for (int i = 0; i < 8; i++) {
-            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
-                    "nuclear", p.random(100, 200)));
+        if (damage > 1000) {
+            for (int i = 0; i < 8; i++) {
+                topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
+                        "greenMagic", p.random(100, 200)));
+            }
         }
         topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"greenPuff"));
         projectiles.remove(this);

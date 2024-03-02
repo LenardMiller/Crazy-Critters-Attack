@@ -63,9 +63,7 @@ public class TowerInfo {
                 energyBlasterInfo(p);
                 price = ENERGY_BLASTER_PRICE;
             } case "magicMissleer" -> {
-                p.text("Magic Missile", x, 241);
-                p.text("Launcher", x, 266);
-                offset = 25;
+                p.text("Magic Tower", x, 241);
                 magicMissileerInfo(p);
                 price = MAGIC_MISSILEER_PRICE;
             } case "tesla" -> {

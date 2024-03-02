@@ -14,7 +14,7 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class MagicMissileer extends Turret {
 
-    public boolean additionalMissile;
+    public int additionalMissiles;
 
     private float specialAngle;
 
@@ -57,7 +57,7 @@ public class MagicMissileer extends Turret {
         size = new PVector(50,50);
         hasPriority = false;
         delay = randomizeDelay(p, 3);
-        damage = 600;
+        damage = 1000;
         pjSpeed = 300;
         range = 200;
         betweenIdleFrames = down60ToFramerate(8);
@@ -68,7 +68,7 @@ public class MagicMissileer extends Turret {
         material = Material.crystal;
         basePrice = MAGIC_MISSILEER_PRICE;
         priority = Priority.Strong;
-        titleLines = new String[]{"Magic Missile", "Launcher"};
+        titleLines = new String[]{"Magic Tower"};
         infoDisplay = (o) -> {
             selection.setTextPurple("Homing", o);
             missileCountInfo(o);
@@ -111,41 +111,35 @@ public class MagicMissileer extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        if (name.equals("magicSwarm")) {
-            for (int i = 0; i < 12; i++) {
-                projectiles.add(new MagicMissile(p,p.random(tile.position.x-size.x,tile.position.x),
-                  p.random(tile.position.y-size.y,tile.position.y), p.random(0,TWO_PI), this,
-                  getDamage(), Turret.Priority.values()[(int) p.random(3)], tile.position));
-            }
-        } else if (name.equals("electricMissleer")) {
+       if (name.equals("electricMissleer")) {
             projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), Priority.Close, tile.position, effectDuration, effectLevel));
+              getDamage(), Priority.Close, tile.position, effectDuration, effectLevel, pjSpeed));
             projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), Priority.Far, tile.position, effectDuration, effectLevel));
+              getDamage(), Priority.Far, tile.position, effectDuration, effectLevel, pjSpeed));
             projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), Priority.Strong, tile.position, effectDuration, effectLevel));
-            if (additionalMissile) {
+              getDamage(), Priority.Strong, tile.position, effectDuration, effectLevel, pjSpeed));
+            for (int i = 0; i < additionalMissiles; i++) {
                 projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-                  getDamage(), Turret.Priority.values()[(int) p.random(3)], tile.position, effectDuration, effectLevel));
+                  getDamage(), Turret.Priority.values()[(int) p.random(3)], tile.position, effectDuration, effectLevel, pjSpeed));
             }
         } else {
             projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), Priority.Close, tile.position));
+              getDamage(), Priority.Close, tile.position, pjSpeed));
             projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), Priority.Far, tile.position));
+              getDamage(), Priority.Far, tile.position, pjSpeed));
             projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-              getDamage(), Priority.Strong, tile.position));
-            if (additionalMissile) {
+              getDamage(), Priority.Strong, tile.position, pjSpeed));
+            for (int i = 0; i < additionalMissiles; i++) {
                 projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-                  getDamage(),Turret.Priority.values()[(int) p.random(3)], tile.position));
+                  getDamage(),Turret.Priority.values()[(int) p.random(3)], tile.position, pjSpeed));
             }
         }
     }
@@ -278,16 +272,16 @@ public class MagicMissileer extends Turret {
         upgradeDescB[3] = "firerate";
         upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "Fire an";
-        upgradeDescB[4] = "additional";
-        upgradeDescC[4] = "missile";
+        upgradeDescA[4] = "Fire more";
+        upgradeDescB[4] = "missiles";
+        upgradeDescC[4] = "";
 
         upgradeDescA[5] = "Fire a";
         upgradeDescB[5] = "swarm of";
         upgradeDescC[5] = "missiles";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[60];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[61];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[40];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
@@ -299,8 +293,10 @@ public class MagicMissileer extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0 -> range += 50;
-                case 1 -> damage += 400;
+                case 0 -> {
+                    range += 75;
+                    pjSpeed += 50;
+                } case 1 -> damage += 500;
                 case 2 -> {
                     effectLevel = 5000;
                     effectDuration = 10;
@@ -310,7 +306,7 @@ public class MagicMissileer extends Turret {
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
-                    titleLines = new String[]{"Electrified Missile", "Launcher"};
+                    titleLines = new String[]{"Electrified Tower"};
                     infoDisplay = (o) -> {
                         selection.setTextPurple("Homing", o);
                         selection.setTextPurple("Electrifies critters", o);
@@ -322,23 +318,20 @@ public class MagicMissileer extends Turret {
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3 -> delay -= 1;
-                case 4 -> additionalMissile = true;
+                case 4 -> additionalMissiles = 2;
                 case 5 -> {
+                    pjSpeed += 50;
                     range += 50;
                     delay -= 0.5f;
                     name = "magicSwarm";
-                    titleLines = new String[]{"Magic Missile", "Swarm"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Homing", o);
-                        selection.setTextPurple("Twelve missiles", o);
-                    };
+                    additionalMissiles = 9;
+                    titleLines = new String[]{"Miracle Tower"};
                 }
             }
         }
     }
 
     private void missileCountInfo(int offset) {
-        if (additionalMissile) selection.setTextPurple("Four missiles", offset);
-        else selection.setTextPurple("Three missiles", offset);
+        selection.setTextPurple((3 + additionalMissiles) + " missiles", offset);
     }
 }
