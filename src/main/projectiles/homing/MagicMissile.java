@@ -97,7 +97,7 @@ public class MagicMissile extends Projectile {
     @Override
     public void move() {
         if (enemies.size() > 0) checkTarget();
-        velocity.setMag((speed * turret.boostedRange() > 0 ? 1.2f : 1f) / FRAMERATE);
+        velocity.setMag(getBoostedSpeed());
         position.add(velocity);
     }
 

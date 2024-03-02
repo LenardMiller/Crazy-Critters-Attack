@@ -129,11 +129,11 @@ public class TeslaTower extends Turret {
         //price
         upgradePrices[0] = 800;
         upgradePrices[1] = 1000;
-        upgradePrices[2] = 15000;
+        upgradePrices[2] = 15_000;
 
         upgradePrices[3] = 600;
         upgradePrices[4] = 1200;
-        upgradePrices[5] = 8000;
+        upgradePrices[5] = 10_000;
         //titles
         upgradeTitles[0] = "Longer Arcs";
         upgradeTitles[1] = "Longer Arcs";
@@ -212,7 +212,7 @@ public class TeslaTower extends Turret {
                     delay = 0.2f;
                     highPower = true;
                     betweenIdleFrames = 3;
-                    damage /= 10;
+                    damage /= 5;
                     name = "highPowerTesla";
                     material = Material.darkMetal;
                     titleLines = new String[]{"The Demon", "Circuit"};

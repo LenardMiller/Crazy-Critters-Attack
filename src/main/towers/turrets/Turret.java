@@ -213,7 +213,7 @@ public abstract class Turret extends Tower {
 
         if (pjSpeed > 0) { //shot leading
             float dist = PVector.sub(target, position).mag();
-            float time = dist / pjSpeed;
+            float time = dist / (pjSpeed * (boostedRange() > 0 ? 1.2f : 1f));
             PVector enemyHeading = PVector.fromAngle(enemy.rotation);
             if (enemy.state == Enemy.State.Moving) enemyHeading.setMag(enemy.getActualSpeed() * time); //only lead if enemy moving
             else enemyHeading.setMag(0);
@@ -497,50 +497,35 @@ public abstract class Turret extends Tower {
         switch (type) {
             case "Booster" -> {
                 return new Booster(p, tile);
-            }
-            case "Cannon" -> {
+            } case "Cannon" -> {
                 return new Cannon(p, tile);
-            }
-            case "Crossbow" -> {
+            } case "Crossbow" -> {
                 return new Crossbow(p, tile);
-            }
-            case "EnergyBlaster" -> {
+            } case "EnergyBlaster" -> {
                 return new EnergyBlaster(p, tile);
-            }
-            case "Flamethrower" -> {
+            } case "Flamethrower" -> {
                 return new Flamethrower(p, tile);
-            }
-            case "Gluer" -> {
+            } case "Gluer" -> {
                 return new Gluer(p, tile);
-            }
-            case "IceTower" -> {
+            } case "IceTower" -> {
                 return new IceTower(p, tile);
-            }
-            case "MagicMissileer", "MagicMissleer" -> {
+            } case "MagicMissileer", "MagicMissleer" -> {
                 return new MagicMissileer(p, tile);
-            }
-            case "Nightmare" -> {
+            } case "Nightmare" -> {
                 return new Nightmare(p, tile);
-            }
-            case "Railgun" -> {
+            } case "Railgun" -> {
                 return new Railgun(p, tile);
-            }
-            case "RandomCannon", "MiscCannon" -> {
+            } case "RandomCannon", "MiscCannon" -> {
                 return new RandomCannon(p, tile);
-            }
-            case "SeismicTower", "Seismic" -> {
+            } case "SeismicTower", "Seismic" -> {
                 return new SeismicTower(p, tile);
-            }
-            case "Slingshot" -> {
+            } case "Slingshot" -> {
                 return new Slingshot(p, tile);
-            }
-            case "TeslaTower", "Tesla" -> {
+            } case "TeslaTower", "Tesla" -> {
                 return new TeslaTower(p, tile);
-            }
-            case "WaveMotion" -> {
+            } case "WaveMotion" -> {
                 return new WaveMotion(p, tile);
-            }
-            default -> {
+            } default -> {
                 System.out.println("Could not get Turret of name:\n    " + type);
                 return null;
             }

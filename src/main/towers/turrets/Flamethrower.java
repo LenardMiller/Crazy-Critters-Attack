@@ -98,8 +98,8 @@ public class Flamethrower extends Turret {
 
         if (pjSpeed > 0) { //shot leading
             float dist = PVector.sub(target, position).mag();
-            float time = dist / pjSpeed;
-            if (magic) time = dist / (150 * (range / 200f));
+            float time = dist / (pjSpeed * (boostedRange() > 0 ? 1.2f : 1f));
+            if (magic) time = dist / (150 * (range / 200f) * (boostedRange() > 0 ? 1.2f : 1f));
             PVector enemyHeading = PVector.fromAngle(enemy.rotation);
             if (enemy.state == Enemy.State.Moving) enemyHeading.setMag(enemy.getActualSpeed() * time); //only lead if enemy moving
             else enemyHeading.setMag(0);

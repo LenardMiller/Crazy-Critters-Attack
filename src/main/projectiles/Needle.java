@@ -41,18 +41,13 @@ public class Needle extends Projectile {
         if (range < 0) dead = true;
         if (dead) {
             die();
-            if (turret.boostedDamage() > 0) {
-                for (int i = 0; i < 8; i++) {
-                    topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
-                            "orangeMagic", p.random(100, 200)));
-                }
-            }
+            boostedDieParticles();
         }
     }
 
     @Override
     public void move() {
-        velocity.setMag((speed * (turret.boostedRange() > 0 ? 1.2f : 1f)) / FRAMERATE);
+        velocity.setMag(getBoostedSpeed());
         range -= speed / FRAMERATE;
         position.add(velocity);
     }

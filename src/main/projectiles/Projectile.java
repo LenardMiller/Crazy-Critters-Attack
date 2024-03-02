@@ -83,22 +83,32 @@ public abstract class Projectile {
         }
         if (dead) {
             die();
-            if (turret.boostedDamage() > 0) {
-                for (int i = 0; i < 8; i++) {
-                    topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
-                            "orangeMagic", p.random(100, 200)));
-                }
-            }
+            boostedDieParticles();
         }
+    }
+
+    protected float getBoostedSpeed() {
+        return (speed * (turret.boostedRange() > 0 ? 1.2f : 1f)) / FRAMERATE;
+    }
+
+    protected void boostedDieParticles() {
+        if (turret.boostedDamage() <= 0) return;
+        for (int i = 0; i < 8; i++) {
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
+                    "orangeMagic", p.random(100, 200)));
+        }
+    }
+
+    protected void boostedTrailParticles() {
+        if (turret.boostedDamage() <= 0 || !(p.random(trainChance) > 1)) return;
+        topParticles.add(new MiscParticle(p, position.x, position.y,
+                p.random(TWO_PI), "orangeMagic"));
     }
 
     public abstract void die();
 
     protected void trail() { //leaves a trail of particles
-        if (turret.boostedDamage() > 0 && p.random(trainChance) > 1) {
-            topParticles.add(new MiscParticle(p, position.x, position.y,
-                    p.random(TWO_PI), "orangeMagic"));
-        }
+        boostedTrailParticles();
         if (particleTrail != null && p.random(trainChance) > 1) {
             topParticles.add(new MiscParticle(p, position.x, position.y,
                     p.random(TWO_PI), particleTrail));
@@ -131,7 +141,7 @@ public abstract class Projectile {
     }
 
     public void move() {
-        velocity.setMag((speed * (turret.boostedRange() > 0 ? 1.2f : 1f)) / FRAMERATE);
+        velocity.setMag(getBoostedSpeed());
         position.add(velocity);
     }
 

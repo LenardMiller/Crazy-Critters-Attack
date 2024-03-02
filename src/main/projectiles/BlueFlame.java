@@ -1,6 +1,7 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
+import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -95,5 +96,15 @@ public class BlueFlame extends Projectile {
         p.rotate(angleTwo);
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
+    }
+
+    @Override
+    protected void boostedDieParticles() {}
+
+    @Override
+    protected void boostedTrailParticles() {
+        if (turret.boostedDamage() <= 0 || p.random(trainChance * 5) > 1) return;
+        topParticles.add(new MiscParticle(p, position.x, position.y,
+                p.random(TWO_PI), "orangeMagic"));
     }
 }
