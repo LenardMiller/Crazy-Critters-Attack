@@ -46,7 +46,8 @@ public class DemonArc extends Arc {
                     x++;
                 }
             }
-            for (int i = 0; i < bigPoints.size() - 1; i++) bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints);
+            for (int i = 0; i < bigPoints.size() - 1; i++)
+                bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints, turret.boostedDamage() > 0);
         } else {
             float angle = p.random(TWO_PI);
             float mag = p.random(5, 20);
@@ -54,7 +55,8 @@ public class DemonArc extends Arc {
             position = position.setMag(mag);
             position.add(startPosition);
             bigPoints.add(new StartEndPoints(p, new PVector(position.x, position.y)));
-            for (int i = 0; i < bigPoints.size() - 1; i++) bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, 3);
+            for (int i = 0; i < bigPoints.size() - 1; i++)
+                bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, 3, turret.boostedDamage() > 0);
         }
     }
 

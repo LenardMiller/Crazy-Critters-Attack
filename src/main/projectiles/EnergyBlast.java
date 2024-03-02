@@ -37,6 +37,10 @@ public class EnergyBlast extends Projectile {
 
     @Override
     protected void trail() { //leaves a trail of particles
+        if (turret.boostedDamage() > 0 && p.random(trainChance) > 1) {
+            topParticles.add(new MiscParticle(p, position.x, position.y,
+                    p.random(TWO_PI), "orangeMagic"));
+        }
         if (particleTrail != null) {
             if (p.random(3) > 1) {
                 topParticles.add(new MiscParticle(p, position.x, position.y,

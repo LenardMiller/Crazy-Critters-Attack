@@ -18,7 +18,7 @@ public class SpriteLoader {
         getSprite(p,"play","BT","play/",4);
         getSprite(p, "genericButton", "BT", "genericButton/", 3);
         //icons
-        getSprite(p,"upgrade","IC","upgrades/",62);
+        getSprite(p,"upgrade","IC","upgrades/",66);
         staticSprites.put("moneyIc",p.loadImage("sprites/gui/money.png"));
         staticSprites.put("wavePrimaryIc",p.loadImage("sprites/gui/wavePrimary.png"));
         staticSprites.put("waveSecondaryIc",p.loadImage("sprites/gui/waveSecondary.png"));
@@ -88,6 +88,7 @@ public class SpriteLoader {
         getSprite(p,"electricityExDebris","PT","explosionDebris/electricity/",4);
         getSprite(p,"greenMagicExDebris","PT","explosionDebris/greenMagic/",4);
         getSprite(p,"blueGreenFireExDebris","PT","explosionDebris/blueGreenFire/",4);
+        getSprite(p,"orangeMagicExDebris","PT","explosionDebris/orangeMagic/",4);
         //piles
         getSprite(p,"greenOuchPile","PT", "pile/greenOuch/", 4);
         getSprite(p,"redOuchPile","PT", "pile/redOuch/", 4);
@@ -652,41 +653,19 @@ public class SpriteLoader {
         staticSprites.put("sludgeBa_TL",p.loadImage("sprites/tiles/base/sludge.png"));
         staticSprites.put("pinkSnowBa_TL", p.loadImage("sprites/tiles/base/pinkSnow/base.png"));
         for (int i = 0; i < 10; i++) {
-            String name;
-            switch (i) {
-                case 0:
-                    name = "grass";
-                    break;
-                case 1:
-                    name = "snow";
-                    break;
-                case 2:
-                    name = "dirt";
-                    break;
-                case 3:
-                    name = "stone";
-                    break;
-                case 4:
-                    name = "yellowGrass";
-                    break;
-                case 5:
-                    name = "water";
-                    break;
-                case 6:
-                    name = "deadGrass";
-                    break;
-                case 7:
-                    name = "brownGrass";
-                    break;
-                case 8:
-                    name = "dirtyWater";
-                    break;
-                case 9:
-                    name = "pinkSnow";
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + i);
-            }
+            String name = switch (i) {
+                case 0 -> "grass";
+                case 1 -> "snow";
+                case 2 -> "dirt";
+                case 3 -> "stone";
+                case 4 -> "yellowGrass";
+                case 5 -> "water";
+                case 6 -> "deadGrass";
+                case 7 -> "brownGrass";
+                case 8 -> "dirtyWater";
+                case 9 -> "pinkSnow";
+                default -> throw new IllegalStateException("Unexpected value: " + i);
+            };
             staticSprites.put(name + "Ba_T_TL", p.loadImage("sprites/tiles/base/" + name + "/t.png"));
             staticSprites.put(name + "Ba_R_TL", p.loadImage("sprites/tiles/base/" + name + "/r.png"));
             staticSprites.put(name + "Ba_B_TL", p.loadImage("sprites/tiles/base/" + name + "/b.png"));
@@ -915,30 +894,16 @@ public class SpriteLoader {
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {
-        String mainFolder = "";
-        switch (type) {
-            case "IC":
-                mainFolder = "gui/";
-                break;
-            case "BT":
-                mainFolder = "gui/buttons/";
-                break;
-            case "PT":
-                mainFolder = "particles/";
-                break;
-            case "PJ":
-                mainFolder = "projectiles/";
-                break;
-            case "EN":
-                mainFolder = "enemies/";
-                break;
-            case "TR":
-                mainFolder = "towers/turrets/";
-                break;
-            case "TW":
-                mainFolder = "towers/walls/";
-                break;
-        }
+        String mainFolder = switch (type) {
+            case "IC" -> "gui/";
+            case "BT" -> "gui/buttons/";
+            case "PT" -> "particles/";
+            case "PJ" -> "projectiles/";
+            case "EN" -> "enemies/";
+            case "TR" -> "towers/turrets/";
+            case "TW" -> "towers/walls/";
+            default -> "";
+        };
         String fullName = name+type;
         String path = "sprites/"+mainFolder+folder;
         animatedSprites.put(fullName, new PImage[length]);

@@ -31,77 +31,77 @@ public class SeismicShockwave extends Shockwave {
 
     @Override
     public void display() {
-        P.strokeWeight(3);
+        p.strokeWeight(3);
 
         float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, is360 ? 100 : 255, 0);
-        P.stroke(125, alpha);
-        P.noFill();
+        p.stroke(125, alpha);
+        p.noFill();
 
-        float angleA = ANGLE - HALF_PI + WIDTH / 2f;
-        float angleB = ANGLE - HALF_PI - WIDTH / 2f;
-        P.arc(CENTER.x, CENTER.y, radius * 2, radius * 2, angleB, angleA);
+        float angleA = angle - HALF_PI + width / 2f;
+        float angleB = angle - HALF_PI - width / 2f;
+        p.arc(center.x, center.y, radius * 2, radius * 2, angleB, angleA);
         if (isSeismic) {
-            P.strokeWeight(2.5f);
-            P.arc(CENTER.x, CENTER.y, radius * 1.8f, radius * 1.8f, angleB, angleA);
-            P.strokeWeight(2);
-            P.arc(CENTER.x, CENTER.y, radius * 1.6f, radius * 1.6f, angleB, angleA);
+            p.strokeWeight(2.5f);
+            p.arc(center.x, center.y, radius * 1.8f, radius * 1.8f, angleB, angleA);
+            p.strokeWeight(2);
+            p.arc(center.x, center.y, radius * 1.6f, radius * 1.6f, angleB, angleA);
         }
 
-        P.noStroke();
-        P.strokeWeight(1);
+        p.noStroke();
+        p.strokeWeight(1);
     }
 
     @Override
     protected void spawnParticles() {
         float mult = is360 ? 0.5f : 1f;
 
-        if (P.random(2 * (1 / mult)) < 1f) {
+        if (p.random(2 * (1 / mult)) < 1f) {
             float a = randomAngle();
             PVector pos = randomPosition(a);
-            bottomParticles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));
+            bottomParticles.add(new Ouch(p, pos.x, pos.y, a, "greyPuff"));
         }
-        if (P.random(2 * (1 / mult)) < 1f) {
+        if (p.random(2 * (1 / mult)) < 1f) {
             float a = randomAngle();
             PVector pos = randomPosition(a);
-            bottomParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
+            bottomParticles.add(new MiscParticle(p, pos.x, pos.y, a, "smoke"));
         }
-        if (isSeismic && P.random(4) < 1f) {
+        if (isSeismic && p.random(4) < 1f) {
             float a = randomAngle();
             PVector pos = randomPosition(a);
-            bottomParticles.add(new MiscParticle(P, pos.x, pos.y, a, "stun"));
+            bottomParticles.add(new MiscParticle(p, pos.x, pos.y, a, "stun"));
         }
-        for (int i = 0; i < P.random(5 * mult, 12 * mult); i++) {
+        for (int i = 0; i < p.random(5 * mult, 12 * mult); i++) {
             float a = randomAngle();
             PVector pos = randomPosition(a);
-            bottomParticles.add(new Debris(P, pos.x, pos.y, a, levels[currentLevel].groundType));
+            bottomParticles.add(new Debris(p, pos.x, pos.y, a, levels[currentLevel].groundType));
         }
-        for (int i = 0; i < P.random(3 * mult, 6 * mult); i++) {
+        for (int i = 0; i < p.random(3 * mult, 6 * mult); i++) {
             float a = randomAngle();
             PVector pos = randomPosition(a);
-            bottomParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "metal", P.random(100,200)));
+            bottomParticles.add(new ExplosionDebris(p, pos.x, pos.y, a, "metal", p.random(100,200)));
         }
     }
 
 
     @Override
     protected void damageEnemies() {
-        for (int i = 0; i < UNTOUCHED_ENEMIES.size(); i++) {
-            Enemy enemy = UNTOUCHED_ENEMIES.get(i);
-            int damage = DAMAGE;
+        for (int i = 0; i < untouchedEnemies.size(); i++) {
+            Enemy enemy = untouchedEnemies.get(i);
+            int damage = this.damage;
             if (enemy instanceof FlyingEnemy) continue;
-            float a = findAngle(CENTER, enemy.position);
-            float angleDif = ANGLE - a;
-            float dist = findDistBetween(enemy.position, CENTER);
-            if (abs(angleDif) < WIDTH / 2f && dist < radius) {
+            float a = findAngle(center, enemy.position);
+            float angleDif = angle - a;
+            float dist = findDistBetween(enemy.position, center);
+            if (abs(angleDif) < width / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
-                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, TURRET,
+                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret,
                         true, damageType, direction, -1);
                 if ((enemy.state == Enemy.State.Moving && enemy instanceof BurrowingEnemy)) {
-                    enemy.damageWithBuff(damage, "stunned", 0, 30, TURRET,
+                    enemy.damageWithBuff(damage, "stunned", 0, 30, turret,
                             true, damageType, direction, -1);
                 }
-                UNTOUCHED_ENEMIES.remove(enemy);
+                untouchedEnemies.remove(enemy);
             }
         }
     }

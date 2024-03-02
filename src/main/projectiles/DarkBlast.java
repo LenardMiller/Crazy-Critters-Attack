@@ -32,6 +32,10 @@ public class DarkBlast extends Projectile {
     }
 
     protected void trail() { //leaves a trail of particles
+        if (turret.boostedDamage() > 0 && p.random(trainChance) > 1) {
+            topParticles.add(new MiscParticle(p, position.x, position.y,
+                    p.random(TWO_PI), "orangeMagic"));
+        }
         topParticles.add(new MiscParticle(p, position.x, position.y,
                 p.random(TWO_PI), particleTrail));
         topParticles.add(new ExplosionDebris(p, position.x, position.y,

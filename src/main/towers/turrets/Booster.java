@@ -225,12 +225,12 @@ public class Booster extends Turret {
         upgradeDescB[5] = "towers";
         upgradeDescC[5] = "explode";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[21];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[62];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[65];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[38];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[64];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[63];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[37];
     }
 

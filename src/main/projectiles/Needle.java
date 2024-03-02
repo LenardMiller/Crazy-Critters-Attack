@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.particles.ExplosionDebris;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -38,12 +39,20 @@ public class Needle extends Projectile {
             dead = true;
         }
         if (range < 0) dead = true;
-        if (dead) die();
+        if (dead) {
+            die();
+            if (turret.boostedDamage() > 0) {
+                for (int i = 0; i < 8; i++) {
+                    topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
+                            "orangeMagic", p.random(100, 200)));
+                }
+            }
+        }
     }
 
     @Override
     public void move() {
-        velocity.setMag(speed/FRAMERATE);
+        velocity.setMag((speed * (turret.boostedRange() > 0 ? 1.2f : 1f)) / FRAMERATE);
         range -= speed / FRAMERATE;
         position.add(velocity);
     }

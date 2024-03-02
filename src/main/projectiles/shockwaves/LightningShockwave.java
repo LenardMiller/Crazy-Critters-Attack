@@ -21,35 +21,35 @@ public class LightningShockwave extends Shockwave {
     }
 
     public void display() {
-        P.strokeWeight(1);
+        p.strokeWeight(1);
         float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, 255, 0);
-        P.stroke(new Color(0xD7F2F8).getRGB(), alpha);
-        P.noFill();
+        p.stroke(new Color(0xD7F2F8).getRGB(), alpha);
+        p.noFill();
 
-        P.circle(CENTER.x, CENTER.y, radius * 2);
+        p.circle(center.x, center.y, radius * 2);
 
-        P.noStroke();
-        P.strokeWeight(1);
+        p.noStroke();
+        p.strokeWeight(1);
     }
 
     @Override
     protected void spawnParticles() {
         float a = randomAngle();
         PVector pos = randomPosition(a);
-        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "electricity"));
+        topParticles.add(new MiscParticle(p, pos.x, pos.y, a, "electricity"));
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
-        for (int i = 0; i < P.random(5, 12); i++) {
+        topParticles.add(new MiscParticle(p, pos.x, pos.y, a, "smoke"));
+        for (int i = 0; i < p.random(5, 12); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(new Debris(P, pos.x, pos.y, a, levels[currentLevel].groundType));
+            topParticles.add(new Debris(p, pos.x, pos.y, a, levels[currentLevel].groundType));
         }
-        for (int i = 0; i < P.random(5, 10); i++) {
+        for (int i = 0; i < p.random(5, 10); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "electricity", P.random(100,200)));
+            topParticles.add(new ExplosionDebris(p, pos.x, pos.y, a, "electricity", p.random(100,200)));
         }
     }
 }

@@ -18,18 +18,18 @@ public class DarkShockwave extends Shockwave {
 
     @Override
     public void display() {
-        P.strokeWeight(3);
+        p.strokeWeight(3);
         float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, 255, 0);
         Color color = Utilities.mapColor(new Color(225, 60, 250), new Color(72, 16, 123), 0,
                 maxRadius, radius);
-        P.stroke(color.getRGB(), alpha);
-        P.noFill();
+        p.stroke(color.getRGB(), alpha);
+        p.noFill();
 
-        P.circle(CENTER.x, CENTER.y, radius * 2);
+        p.circle(center.x, center.y, radius * 2);
 
-        P.noStroke();
-        P.strokeWeight(1);
+        p.noStroke();
+        p.strokeWeight(1);
     }
 
     @Override
@@ -37,6 +37,7 @@ public class DarkShockwave extends Shockwave {
         if (paused) return;
         radius -= speed * 0.5f / FRAMERATE;
         spawnParticles();
+        spawnBoostParticles();
         if (radius <= 0) shockwaves.remove(this);
         damageEnemies();
     }

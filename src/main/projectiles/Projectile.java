@@ -81,12 +81,24 @@ public abstract class Projectile {
                 position.y + size.y < -100 || position.x + size.x < -100) {
             projectiles.remove(this);
         }
-        if (dead) die();
+        if (dead) {
+            die();
+            if (turret.boostedDamage() > 0) {
+                for (int i = 0; i < 8; i++) {
+                    topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
+                            "orangeMagic", p.random(100, 200)));
+                }
+            }
+        }
     }
 
     public abstract void die();
 
     protected void trail() { //leaves a trail of particles
+        if (turret.boostedDamage() > 0 && p.random(trainChance) > 1) {
+            topParticles.add(new MiscParticle(p, position.x, position.y,
+                    p.random(TWO_PI), "orangeMagic"));
+        }
         if (particleTrail != null && p.random(trainChance) > 1) {
             topParticles.add(new MiscParticle(p, position.x, position.y,
                     p.random(TWO_PI), particleTrail));
@@ -119,7 +131,7 @@ public abstract class Projectile {
     }
 
     public void move() {
-        velocity.setMag(speed/FRAMERATE);
+        velocity.setMag((speed * (turret.boostedRange() > 0 ? 1.2f : 1f)) / FRAMERATE);
         position.add(velocity);
     }
 

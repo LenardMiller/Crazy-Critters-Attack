@@ -107,7 +107,8 @@ public class Arc {
                     x++;
                 }
             }
-            for (int i = 0; i < bigPoints.size() - 1; i++) bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints);
+            for (int i = 0; i < bigPoints.size() - 1; i++)
+                bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints, turret.boostedDamage() > 0);
         } else {
             float angle = p.random(TWO_PI);
             float mag = p.random(maxDistance / 4f, maxDistance);
@@ -115,7 +116,8 @@ public class Arc {
             position = position.setMag(mag);
             position.add(startPosition);
             bigPoints.add(new StartEndPoints(p, new PVector(position.x, position.y)));
-            for (int i = 0; i < bigPoints.size() - 1; i++) bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints);
+            for (int i = 0; i < bigPoints.size() - 1; i++)
+                bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints, turret.boostedDamage() > 0);
         }
     }
 
@@ -185,7 +187,7 @@ public class Arc {
             this.p = p;
         }
 
-        protected void getPoints(PVector pointA, int particleChance, int maxPoints) {
+        protected void getPoints(PVector pointA, int particleChance, int maxPoints, boolean boosted) {
             PVector pointB = position;
             points = new PVector[(int) p.random(3, maxPoints)];
             float lineLength = sqrt(sq(pointB.x - pointA.x) + sq(pointB.y - pointA.y));
@@ -199,6 +201,8 @@ public class Arc {
                 points[i] = new PVector(e.x + pointA.x + p.random(-variation, variation), e.y + pointA.y + p.random(-variation, variation));
                 if (p.random(particleChance) < 1)
                     topParticles.add(new MiscParticle(p, points[i].x, points[i].y, p.random(360), particleType.name()));
+                if (boosted && p.random(particleChance) < 1)
+                    topParticles.add(new MiscParticle(p, points[i].x, points[i].y, p.random(360), "orangeMagic"));
             }
         }
     }
