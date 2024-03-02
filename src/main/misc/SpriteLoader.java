@@ -18,7 +18,7 @@ public class SpriteLoader {
         getSprite(p,"play","BT","play/",4);
         getSprite(p, "genericButton", "BT", "genericButton/", 3);
         //icons
-        getSprite(p,"upgrade","IC","upgrades/",66);
+        getSprite(p,"upgrade","IC","upgrades/",67);
         staticSprites.put("moneyIc",p.loadImage("sprites/gui/money.png"));
         staticSprites.put("wavePrimaryIc",p.loadImage("sprites/gui/wavePrimary.png"));
         staticSprites.put("waveSecondaryIc",p.loadImage("sprites/gui/waveSecondary.png"));
