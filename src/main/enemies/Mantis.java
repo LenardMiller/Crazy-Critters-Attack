@@ -15,7 +15,7 @@ public class Mantis extends Enemy {
         pfSize = 2; //2
         radius = 25;
         speed = 35;
-        moneyDrop = 300;
+        moneyDrop = 400;
         damage = 12;
         maxHp = 7500;
         hp = maxHp;

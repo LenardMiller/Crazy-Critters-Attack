@@ -106,14 +106,14 @@ public class Flame extends Projectile {
 
     @Override
     protected void boostedDieParticles() {
-        if (turret.boostedDamage() <= 0 || p.random(5) > 1) return;
+        if (turret == null || turret.boostedDamage() <= 0 || p.random(5) > 1) return;
         topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
                 "orangeMagic", p.random(100, 200)));
     }
 
     @Override
     protected void boostedTrailParticles() {
-        if (turret.boostedDamage() <= 0 || p.random(trainChance * 5) > 1) return;
+        if (turret == null || turret.boostedDamage() <= 0 || p.random(trainChance * 5) > 1) return;
         topParticles.add(new MiscParticle(p, position.x, position.y,
                 p.random(TWO_PI), "orangeMagic"));
     }

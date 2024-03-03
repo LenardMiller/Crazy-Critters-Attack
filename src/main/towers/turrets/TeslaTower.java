@@ -28,8 +28,8 @@ public class TeslaTower extends Turret {
     public TeslaTower(PApplet p, Tile tile) {
         super(p,tile);
         name = "tesla";
-        delay = randomizeDelay(p, 3);
-        damage = 300;
+        delay = randomizeDelay(p, 2f);
+        damage = 400;
         arcLength = 3;
         pjSpeed = -1;
         range = 225;

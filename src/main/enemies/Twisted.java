@@ -16,7 +16,7 @@ public class Twisted extends Enemy {
         radius = 25;
         speed = 30;
         moneyDrop = 750;
-        damage = 60;
+        damage = 30;
         maxHp = 45000; //Hp
         hp = maxHp;
         hitParticle = HitParticle.brownLeafOuch;

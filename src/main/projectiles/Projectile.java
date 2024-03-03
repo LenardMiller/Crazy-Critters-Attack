@@ -92,7 +92,7 @@ public abstract class Projectile {
     }
 
     protected void boostedDieParticles() {
-        if (turret.boostedDamage() <= 0) return;
+        if (turret == null || turret.boostedDamage() <= 0) return;
         for (int i = 0; i < 8; i++) {
             topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
                     "orangeMagic", p.random(100, 200)));
@@ -100,7 +100,7 @@ public abstract class Projectile {
     }
 
     protected void boostedTrailParticles() {
-        if (turret.boostedDamage() <= 0 || !(p.random(trainChance) > 1)) return;
+        if (turret == null || turret.boostedDamage() <= 0 || !(p.random(trainChance) > 1)) return;
         topParticles.add(new MiscParticle(p, position.x, position.y,
                 p.random(TWO_PI), "orangeMagic"));
     }

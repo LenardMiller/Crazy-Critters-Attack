@@ -14,9 +14,9 @@ public class Mantoid extends FlyingEnemy {
         pfSize = 2;
         radius = 25;
         speed = 50;
-        moneyDrop = 500;
+        moneyDrop = 1000;
         damage = 10;
-        maxHp = 30000;
+        maxHp = 20000;
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "mantoid";
