@@ -14,13 +14,15 @@ public class Wall extends Tower {
 
     public static final int BUY_PRICE = 25;
 
-    public final int[] UPGRADE_HP;
+    public final int[] upgradeHp;
+    public final PImage[][] upgradeSprites;
+    public final String[] upgradeNames;
 
-    private final CornerSpriteDS WOOD;
-    private final CornerSpriteDS STONE;
-    private final CornerSpriteDS METAL;
-    private final CornerSpriteDS CRYSTAL;
-    private final CornerSpriteDS TITANIUM;
+    private final CornerSpriteDS wood;
+    private final CornerSpriteDS stone;
+    private final CornerSpriteDS metal;
+    private final CornerSpriteDS crystal;
+    private final CornerSpriteDS titanium;
 
     protected PImage tlCSprite;
     protected PImage trCSprite;
@@ -30,9 +32,6 @@ public class Wall extends Tower {
     protected PImage bSSprite;
     protected PImage lSSprite;
     protected PImage rSSprite;
-
-    private final PImage[][] UPGRADE_SPRITES;
-    private final String[] UPGRADE_NAMES;
 
     protected PImage[] sprite;
 
@@ -55,17 +54,17 @@ public class Wall extends Tower {
         upgradePrices = new int[4];
         upgradeTitles = new String[4];
         upgradeIcons = new PImage[4];
-        UPGRADE_SPRITES = new PImage[4][4];
-        UPGRADE_NAMES = new String[4];
-        UPGRADE_HP = new int[4];
+        upgradeSprites = new PImage[4][4];
+        upgradeNames = new String[4];
+        upgradeHp = new int[4];
         setUpgrades();
         updateTowerArray();
 
-        WOOD = new CornerSpriteDS();
-        STONE = new CornerSpriteDS();
-        METAL = new CornerSpriteDS();
-        CRYSTAL = new CornerSpriteDS();
-        TITANIUM = new CornerSpriteDS();
+        wood = new CornerSpriteDS();
+        stone = new CornerSpriteDS();
+        metal = new CornerSpriteDS();
+        crystal = new CornerSpriteDS();
+        titanium = new CornerSpriteDS();
         loadSprites();
     }
 
@@ -164,29 +163,29 @@ public class Wall extends Tower {
         upgradeTitles[2] = "Crystal";
         upgradeTitles[3] = "Titanium";
         //sprites
-        UPGRADE_SPRITES[0] = animatedSprites.get("stoneWallTW");
-        UPGRADE_SPRITES[1] = animatedSprites.get("metalWallTW");
-        UPGRADE_SPRITES[2] = animatedSprites.get("crystalWallTW");
-        UPGRADE_SPRITES[3] = animatedSprites.get("titaniumWallTW");
+        upgradeSprites[0] = animatedSprites.get("stoneWallTW");
+        upgradeSprites[1] = animatedSprites.get("metalWallTW");
+        upgradeSprites[2] = animatedSprites.get("crystalWallTW");
+        upgradeSprites[3] = animatedSprites.get("titaniumWallTW");
         //names
-        UPGRADE_NAMES[0] = "stone";
-        UPGRADE_NAMES[1] = "metal";
-        UPGRADE_NAMES[2] = "crystal";
-        UPGRADE_NAMES[3] = "titanium";
+        upgradeNames[0] = "stone";
+        upgradeNames[1] = "metal";
+        upgradeNames[2] = "crystal";
+        upgradeNames[3] = "titanium";
         //hp
-        UPGRADE_HP[0] = 75;
-        UPGRADE_HP[1] = 125;
-        UPGRADE_HP[2] = 500;
-        UPGRADE_HP[3] = 1250;
+        upgradeHp[0] = 75;
+        upgradeHp[1] = 125;
+        upgradeHp[2] = 500;
+        upgradeHp[3] = 1250;
     }
 
     @Override
     public void upgrade(int id, boolean quiet) {
-        sprite = UPGRADE_SPRITES[nextLevelB];
+        sprite = upgradeSprites[nextLevelB];
         int oldMax = maxHp;
-        maxHp += UPGRADE_HP[nextLevelB];
-        name = UPGRADE_NAMES[nextLevelB] + "Wall";
-        material = Material.valueOf(UPGRADE_NAMES[nextLevelB]);
+        maxHp += upgradeHp[nextLevelB];
+        name = upgradeNames[nextLevelB] + "Wall";
+        material = Material.valueOf(upgradeNames[nextLevelB]);
         hp = (int)(hp/(float)oldMax * maxHp);
 
         damageSound = sounds.get(material + "Damage");
@@ -273,11 +272,11 @@ public class Wall extends Tower {
             brCcv = true;
         } else brC = !(b || r);
 
-        CornerSpriteDS spriteDS = WOOD;
-        if (name.equals("stone") || name.equals("stoneWall")) spriteDS = STONE;
-        if (name.equals("metal") || name.equals("metalWall")) spriteDS = METAL;
-        if (name.equals("crystal") || name.equals("crystalWall")) spriteDS = CRYSTAL;
-        if (name.equals("titanium") || name.equals("titaniumWall")) spriteDS = TITANIUM;
+        CornerSpriteDS spriteDS = wood;
+        if (name.equals("stone") || name.equals("stoneWall")) spriteDS = stone;
+        if (name.equals("metal") || name.equals("metalWall")) spriteDS = metal;
+        if (name.equals("crystal") || name.equals("crystalWall")) spriteDS = crystal;
+        if (name.equals("titanium") || name.equals("titaniumWall")) spriteDS = titanium;
         if (tS) tSSprite = spriteDS.t;
         else tSSprite = null;
         if (bS) bSSprite = spriteDS.b;
@@ -303,26 +302,22 @@ public class Wall extends Tower {
             CornerSpriteDS spriteDS = null;
             String name = "null";
             switch (i) {
-                case 0:
-                    spriteDS = WOOD;
+                case 0 -> {
+                    spriteDS = wood;
                     name = "Wood";
-                    break;
-                case 1:
-                    spriteDS = STONE;
+                } case 1 -> {
+                    spriteDS = stone;
                     name = "Stone";
-                    break;
-                case 2:
-                    spriteDS = METAL;
+                } case 2 -> {
+                    spriteDS = metal;
                     name = "Metal";
-                    break;
-                case 3:
-                    spriteDS = CRYSTAL;
+                } case 3 -> {
+                    spriteDS = crystal;
                     name = "Crystal";
-                    break;
-                case 4:
-                    spriteDS = TITANIUM;
+                } case 4 -> {
+                    spriteDS = titanium;
                     name = "Titanium";
-                    break;
+                }
             }
             String idA = "null";
             String idB = "null";

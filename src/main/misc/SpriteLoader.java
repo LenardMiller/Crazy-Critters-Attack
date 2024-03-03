@@ -26,6 +26,7 @@ public class SpriteLoader {
         staticSprites.put("burrowingTypeIc",p.loadImage("sprites/gui/enemyType/burrowing.png"));
         staticSprites.put("flyingTypeIc",p.loadImage("sprites/gui/enemyType/flying.png"));
         staticSprites.put("shootingTypeIc",p.loadImage("sprites/gui/enemyType/shooting.png"));
+        staticSprites.put("upgradePromptOverlayIc",p.loadImage("sprites/gui/overlays/upgradePrompt.png"));
     }
 
     public static void loadParticles(PApplet p) {
@@ -585,20 +586,17 @@ public class SpriteLoader {
 
     public static void loadWalls(PApplet p) {
         //center
-        getSprite(p,"woodWall","TW","Wood/",4);
-        getSprite(p,"stoneWall","TW","Stone/",4);
-        getSprite(p,"metalWall","TW","Metal/",4);
-        getSprite(p,"crystalWall","TW","Crystal/",4);
-        getSprite(p,"titaniumWall","TW","Titanium/",4);
-        getSprite(p,"ultimateWall","TW","Titanium/",4);
+        getSprite(p,"woodWall","TW","Wood/",5);
+        getSprite(p,"stoneWall","TW","Stone/",5);
+        getSprite(p,"metalWall","TW","Metal/",5);
+        getSprite(p,"crystalWall","TW","Crystal/",5);
+        getSprite(p,"titaniumWall","TW","Titanium/",5);
+        getSprite(p,"ultimateWall","TW","Titanium/",5);
         getSprite(p,"iceWall","TW","Ice/",4);
         //other stuff
         staticSprites.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
         staticSprites.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
         staticSprites.put("shadowTRTW",p.loadImage("sprites/towers/walls/overlays/shadowTR.png"));
-        staticSprites.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
-        staticSprites.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
-        staticSprites.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
         for (int i = 0; i < 6; i++) {
             String name = "null";
             if (i == 0) name = "Wood";

@@ -165,13 +165,11 @@ public abstract class Turret extends Tower {
                             if (dist >= finalDist) break;
                             e = enemy;
                             finalDist = dist;
-                        }
-                        case Far -> {
+                        } case Far -> {
                             if (dist <= finalDist) break;
                             e = enemy;
                             finalDist = dist;
-                        }
-                        case Strong -> {
+                        } case Strong -> {
                             if (enemy.maxHp > maxHp || maxHp == -1) { //strong
                                 e = enemy;
                                 finalDist = dist;
@@ -180,8 +178,7 @@ public abstract class Turret extends Tower {
                                 e = enemy;
                                 finalDist = dist;
                             }
-                        }
-                        case Weak -> {
+                        } case Weak -> {
                             if (enemy.maxHp < maxHp || maxHp == -1) { //weak
                                 e = enemy;
                                 finalDist = dist;
@@ -267,8 +264,7 @@ public abstract class Turret extends Tower {
             idleFrames = animatedSprites.get(name + "IdleTR");
             idleSprite = idleFrames[0];
             sprite = idleSprite;
-        }
-        else {
+        }  else {
             idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
             sprite = idleFrames[0];
         }
@@ -298,8 +294,7 @@ public abstract class Turret extends Tower {
         if (selection.turret == this) {
             selection.name = "null";
             inGameGui.flashA = 255;
-        }
-        else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
+        } else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;
         if (!isSold) {
             moneyGain = (int) (getValue() * 0.4);
@@ -336,8 +331,7 @@ public abstract class Turret extends Tower {
                             sprite = idleFrames[frame];
                         }
                     }
-                }
-                case Fire -> {
+                } case Fire -> {
                     if (frame < fireFrames.length - 1) { //if not done, keep going
                         if (frameTimer >= betweenFireFrames) {
                             frame++;
@@ -364,8 +358,7 @@ public abstract class Turret extends Tower {
                         frame = 0;
                         state = State.Load;
                     }
-                }
-                case Load -> {
+                } case Load -> {
                     frame++;
                     if (frame < compressedLoadFrames.size() && compressedLoadFrames.get(frame) < loadFrames.length) {
                         sprite = loadFrames[compressedLoadFrames.get(frame)];
