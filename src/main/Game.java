@@ -183,6 +183,7 @@ public class Game {
         p.translate(200, 0);
 
         displayGameObjects();
+        displayUpgradePrompts();
         displayHPBars();
         for (main.gui.guiObjects.PopupText popupText : popupTexts) popupText.display();
         displayInGameGui();
@@ -221,6 +222,12 @@ public class Game {
         }
         for (Tower tower : towers) tower.displayHpBar();
         machine.hpBar();
+    }
+
+    private void displayUpgradePrompts() {
+        for (Tower tower : towers) {
+            if (tower instanceof Turret) ((Turret) tower).displayUpgradePrompt();
+        }
     }
 
     /** Displays everything that is within the game "window" */

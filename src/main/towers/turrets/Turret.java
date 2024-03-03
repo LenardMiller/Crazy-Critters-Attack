@@ -376,6 +376,14 @@ public abstract class Turret extends Tower {
         }
     }
 
+    public void displayUpgradePrompt() {
+        if (nextLevelB > 5 && nextLevelA > 1 || nextLevelB > 4 && nextLevelA > 2 ||
+                (money < upgradePrices[nextLevelA] && money < upgradePrices[nextLevelB]))
+            return;
+
+        p.image(staticSprites.get("upgradePromptOverlayIc"), tile.position.x - size.x, tile.position.y - size.y);
+    }
+
     public void displayTop() {
         //shadow
         p.pushMatrix();
