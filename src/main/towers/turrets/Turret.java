@@ -341,7 +341,7 @@ public abstract class Turret extends Tower {
                     } else { //if done, switch to load
                         if (loadFrames.length > 0) {
                             int oldSize = loadFrames.length;
-                            int newSize = secondsToFrames(getDelay());
+                            int newSize = secondsToFrames(randomizeDelay(p, getDelay()));
                             compressedLoadFrames = new ArrayList<>();
                             if (oldSize > newSize) { //decreasing size
                                 //creates the new spriteArray

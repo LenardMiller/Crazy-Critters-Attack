@@ -24,7 +24,7 @@ public class SeismicTower extends Turret {
         super(p,tile);
         name = "seismic";
         offset = 4;
-        delay = randomizeDelay(p, 2.5f);
+        delay = 2.5f;
         pjSpeed = 350;
         betweenFireFrames = down60ToFramerate(1);
         damage = 50;

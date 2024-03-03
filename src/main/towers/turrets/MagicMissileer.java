@@ -62,7 +62,7 @@ public class MagicMissileer extends Turret {
         name = "magicMissleer";
         size = new PVector(50,50);
         hasPriority = false;
-        delay = randomizeDelay(p, 2f);
+        delay = 2f;
         damage = 2000;
         pjSpeed = 300;
         range = 200;

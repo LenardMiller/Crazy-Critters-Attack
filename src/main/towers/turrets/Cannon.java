@@ -23,7 +23,7 @@ public class Cannon extends Turret {
         super(p,tile);
         name = "cannon";
         offset = 5;
-        delay = randomizeDelay(p, 3.2f);
+        delay = 3.2f;
         pjSpeed = 750;
         betweenFireFrames = down60ToFramerate(1);
         damage = 40;

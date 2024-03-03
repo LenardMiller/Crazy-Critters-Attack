@@ -23,8 +23,8 @@ public class RandomCannon extends Turret {
     public RandomCannon(PApplet p, Tile tile) {
         super(p,tile);
         name = "miscCannon";
-        delay = randomizeDelay(p, 0.4f);
-        pjSpeed = 400;
+        delay = 0.4f;
+        pjSpeed = 300;
         betweenFireFrames = down60ToFramerate(5);
         damage = 10;
         range = 200;
@@ -145,14 +145,14 @@ public class RandomCannon extends Turret {
             switch (nextLevelB) {
                 case 3 -> {
                     range += 20;
-                    pjSpeed += 200;
+                    pjSpeed += 100;
                 } case 4 -> {
                     range += 30;
-                    pjSpeed += 200;
+                    pjSpeed += 100;
                 } case 5 -> {
                     particleCount += 3;
                     laundry = true;
-                    pjSpeed += 200;
+                    pjSpeed += 100;
                     range += 30;
                     damage += 10;
                     effectDuration = 6;

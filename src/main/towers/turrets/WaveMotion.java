@@ -31,7 +31,7 @@ public class WaveMotion extends Turret {
         super(p,tile);
         offset = 14;
         name = "waveMotion";
-        delay = randomizeDelay(p, 10);
+        delay = 10;
         damage = 300;
         pjSpeed = -1;
         range = 500;

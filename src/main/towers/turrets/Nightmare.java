@@ -17,7 +17,7 @@ public class Nightmare extends Turret {
     public Nightmare(PApplet p, Tile tile) {
         super(p,tile);
         name = "nightmare";
-        delay = randomizeDelay(p, 3.5f);
+        delay = 3.5f;
         pjSpeed = 1000;
         range = 200;
         damage = 0;

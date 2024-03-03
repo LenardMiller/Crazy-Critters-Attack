@@ -18,7 +18,7 @@ public class Crossbow extends Turret {
         super(p,tile);
         offset = 2;
         name = "crossbow";
-        delay = randomizeDelay(p, 4.5f);
+        delay = 4.5f;
         pjSpeed = 1000;
         range = 320;
         damage = 30;

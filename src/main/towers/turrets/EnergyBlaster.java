@@ -23,7 +23,7 @@ public class EnergyBlaster extends Turret {
         super(p,tile);
         offset = 13;
         name = "energyBlaster";
-        delay = randomizeDelay(p, 5f);
+        delay = 5f;
         damage = 800;
         pjSpeed = 800;
         range = 300;

@@ -24,7 +24,7 @@ public class Gluer extends Turret {
     public Gluer(PApplet p, Tile tile) {
         super(p,tile);
         name = "gluer";
-        delay = randomizeDelay(p, 2.5f);
+        delay = 2.5f;
         pjSpeed = 350;
         betweenFireFrames = down60ToFramerate(1);
         range = 300;

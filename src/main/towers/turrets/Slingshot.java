@@ -18,7 +18,7 @@ public class Slingshot extends Turret {
     public Slingshot(PApplet p, Tile tile) {
         super(p,tile);
         name = "slingshot";
-        delay = randomizeDelay(p, 1.6f);
+        delay = 1.6f;
         pjSpeed = 400;
         range = 250;
         damage = 15; //15

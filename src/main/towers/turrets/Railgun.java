@@ -30,7 +30,7 @@ public class Railgun extends Turret {
         name = "railgun";
         offset = 6;
         hit = false;
-        delay = randomizeDelay(p, 12);
+        delay = 12;
         damage = 50000;
         pjSpeed = -1;
         range = 5000;
