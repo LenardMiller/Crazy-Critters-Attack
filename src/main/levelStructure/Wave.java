@@ -1,9 +1,6 @@
 package main.levelStructure;
 
-import main.enemies.*;
-import main.enemies.burrowingEnemies.*;
-import main.enemies.flyingEnemies.*;
-import main.enemies.shootingEnemies.*;
+import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
 import main.gui.inGame.WaveCard;
 import main.misc.Polluter;
@@ -100,7 +97,9 @@ public class Wave {
     }
 
     public int getReward() {
-        return (int) (levels[currentLevel].reward + levels[currentLevel].reward * 0.2f * enemies.size());
+        float reward = levels[currentLevel].reward;
+        for (Enemy enemy : enemies) reward += max(enemy.moneyDrop * 0.2f, levels[currentLevel].reward * 0.2f);
+        return (int) reward;
     }
 
     /** Calculates the time between spawns. */
