@@ -310,7 +310,7 @@ public class MagicMissileer extends Turret {
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
-                    titleLines = new String[]{"Electrifying Tower"};
+                    titleLines = new String[]{"Electric Tower"};
                     extraInfo.add((arg) -> selection.displayInfoLine(arg, "Electrification:"));
                     extraInfo.add((arg) -> selection.displayInfoLine(
                             arg, "DPS", nfc(((int) (effectLevel / 0.5f))) + ""));

@@ -88,7 +88,8 @@ public abstract class Projectile {
     }
 
     protected float getBoostedSpeed() {
-        return (speed * (turret.boostedRange() > 0 ? 1.2f : 1f)) / FRAMERATE;
+        if (turret == null) return speed / FRAMERATE;
+        else return (speed * (turret.boostedRange() > 0 ? 1.2f : 1f)) / FRAMERATE;
     }
 
     protected void boostedDieParticles() {

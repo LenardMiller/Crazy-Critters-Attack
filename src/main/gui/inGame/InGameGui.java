@@ -165,9 +165,9 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(2), towerBuyY(1),"null",true));
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(2), towerBuyY(2),"null",true));
         } if (currentLevel > 2 || dev) {
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(0),"booster",true));
+            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(0),"magicMissleer",true));
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(1),"iceTower",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(2),"magicMissleer",true));
+            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(2),"booster",true));
         } else {
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(0),"null",true));
             towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(1),"null",true));

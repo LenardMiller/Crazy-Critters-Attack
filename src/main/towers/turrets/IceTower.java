@@ -335,7 +335,8 @@ public class IceTower extends Turret {
                     range += 50;
                     wallHp += 170;
                     wallTimeUntilDamage += 20;
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Encases Large Critters"));
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Encases Large Critters"));
                     loadSprites();
                 }
             }
