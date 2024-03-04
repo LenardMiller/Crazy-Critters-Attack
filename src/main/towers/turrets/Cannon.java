@@ -10,7 +10,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 
 public class Cannon extends Turret {
 
@@ -38,7 +37,6 @@ public class Cannon extends Turret {
         fireParticle = "smoke";
         barrelLength = 29;
         titleLines = new String[]{"Cannon"};
-        infoDisplay = (o) -> selection.setTextPurple("Small splash", o);
     }
 
     @Override
@@ -128,7 +126,7 @@ public class Cannon extends Turret {
                     placeSound = sounds.get("woodPlace");
                     barrelLength = 0;
                     titleLines = new String[]{"Dynamite", "Flinger"};
-                    infoDisplay = (o) -> selection.setTextPurple("Large splash", o);
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Large Explosions"));
                     loadSprites();
                 }
             }
@@ -149,10 +147,7 @@ public class Cannon extends Turret {
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
                     titleLines = new String[]{"Frag Cannon"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Small splash", o);
-                        selection.setTextPurple("Shrapnel", o);
-                    };
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Shrapnel"));
                     loadSprites();
                 }
             }

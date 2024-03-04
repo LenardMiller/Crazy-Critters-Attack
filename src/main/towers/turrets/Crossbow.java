@@ -1,13 +1,12 @@
 package main.towers.turrets;
 
+import main.misc.Tile;
 import main.projectiles.Bolt;
 import main.projectiles.ReinforcedBolt;
-import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.randomizeDelay;
 
 public class Crossbow extends Turret {
 
@@ -31,6 +30,7 @@ public class Crossbow extends Turret {
         basePrice = CROSSBOW_PRICE;
         priority = Priority.Far;
         titleLines = new String[]{"Crossbow"};
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Pierce", "" + pierce));
     }
 
     @Override
@@ -128,7 +128,7 @@ public class Crossbow extends Turret {
                     name = "crossbowMultishot";
                     fireSound = sounds.get("shotbow");
                     titleLines = new String[]{"Shotbow"};
-                    infoDisplay = (o) -> selection.setTextPurple("Seven bolts", o);
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Multiple Bolts"));
                     loadSprites();
                 }
             }

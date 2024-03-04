@@ -39,7 +39,7 @@ public class EnergyBlaster extends Turret {
         basePrice = ENERGY_BLASTER_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Energy Blaster"};
-        infoDisplay = (o) -> selection.setTextPurple("Splash", o);
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Small Explosion"));
     }
 
     @Override
@@ -126,6 +126,8 @@ public class EnergyBlaster extends Turret {
                 case 1 -> {
                     effectRadius += 50;
                     bigExplosion = true;
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Large Explosion"));
                 } case 2 -> {
                     damage += 800;
                     delay -= 1f;
@@ -135,7 +137,8 @@ public class EnergyBlaster extends Turret {
                     material = Material.metal;
                     nuclear = true;
                     titleLines = new String[]{"Nuclear Blaster"};
-                    infoDisplay = (o) -> selection.setTextPurple("Huge splash", o);
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Nuclear Explosion"));
                     loadSprites();
                 }
             }
@@ -156,7 +159,6 @@ public class EnergyBlaster extends Turret {
                     fireParticle = "dark";
                     dark = true;
                     titleLines = new String[]{"Dark Blaster"};
-                    infoDisplay = (o) -> selection.setTextPurple("Splash", o);
                     loadSprites();
                 }
             }

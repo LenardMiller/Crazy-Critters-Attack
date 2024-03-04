@@ -75,10 +75,8 @@ public class MagicMissileer extends Turret {
         basePrice = MAGIC_MISSILEER_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Magic Tower"};
-        infoDisplay = (o) -> {
-            selection.setTextPurple("Homing", o);
-            missileCountInfo(o);
-        };
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Homing"));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Magic Missiles", 3 + additionalMissiles + ""));
     }
 
     @Override
@@ -312,12 +310,12 @@ public class MagicMissileer extends Turret {
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
-                    titleLines = new String[]{"Electrified Tower"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Homing", o);
-                        selection.setTextPurple("Electrifies critters", o);
-                        missileCountInfo(o);
-                    };
+                    titleLines = new String[]{"Electrifying Tower"};
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Electrification:"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, "DPS", nfc(((int) (effectLevel / 0.5f))) + ""));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, "Duration", nf(effectDuration, 1, 1) + "s"));
                     loadSprites();
                 }
             }

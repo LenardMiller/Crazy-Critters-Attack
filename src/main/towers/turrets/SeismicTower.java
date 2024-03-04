@@ -1,16 +1,15 @@
 package main.towers.turrets;
 
-import main.projectiles.shockwaves.SeismicShockwave;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;
 import main.particles.MiscParticle;
+import main.projectiles.shockwaves.SeismicShockwave;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 import static processing.core.PConstants.HALF_PI;
 
 public class SeismicTower extends Turret {
@@ -38,10 +37,8 @@ public class SeismicTower extends Turret {
         material = Material.stone;
         basePrice = SEISMIC_PRICE;
         titleLines = new String[]{"Seismic Tower"};
-        infoDisplay = (o) -> {
-            selection.setTextPurple("Shockwave", o);
-            selection.setTextPurple("Stuns burrowers", o);
-        };
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Shockwave"));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Stuns Burrowers"));
     }
 
     @Override
@@ -207,10 +204,6 @@ public class SeismicTower extends Turret {
                     hasPriority = false;
                     selection.swapSelected(this);
                     titleLines = new String[]{"Seismic", "Slammer"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Shockwave", o);
-                        selection.setTextPurple("Full rings", o);
-                    };
                     loadSprites();
                 }
             }
@@ -234,11 +227,7 @@ public class SeismicTower extends Turret {
                     damage += 150;
                     name = "seismicSniper";
                     titleLines = new String[]{"Seismic Sniper"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Shockwave", o);
-                        selection.setTextPurple("Can track burrowers", o);
-                        selection.setTextPurple("Stuns burrowers", o);
-                    };
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Targets Burrowers"));
                     loadSprites();
                 }
             }

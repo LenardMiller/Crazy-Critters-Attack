@@ -42,10 +42,7 @@ public class TeslaTower extends Turret {
         fireSound = sounds.get("teslaFire");
         thunderSound = soundsWithAlts.get("thunder");
         titleLines = new String[]{"Tesla Tower"};
-        infoDisplay = (o) -> {
-            selection.setTextPurple("Jumping electricity", o);
-            jumpInfo(o, 1);
-        };
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Arc Chain", arcLength + ""));
     }
 
     @Override
@@ -135,8 +132,8 @@ public class TeslaTower extends Turret {
         upgradePrices[4] = 1200;
         upgradePrices[5] = 10_000;
         //titles
-        upgradeTitles[0] = "Longer Arcs";
-        upgradeTitles[1] = "Longer Arcs";
+        upgradeTitles[0] = "Extra Arcing";
+        upgradeTitles[1] = "Powerful Arcing";
         upgradeTitles[2] = "Call Lightning";
 
         upgradeTitles[3] = "Faster Recharge";
@@ -144,12 +141,12 @@ public class TeslaTower extends Turret {
         upgradeTitles[5] = "Perma-arc";
         //description
         upgradeDescA[0] = "Increase";
-        upgradeDescB[0] = "jump";
-        upgradeDescC[0] = "distance";
+        upgradeDescB[0] = "arc chain";
+        upgradeDescC[0] = "& range";
 
         upgradeDescA[1] = "Increase";
-        upgradeDescB[1] = "jump";
-        upgradeDescC[1] = "distance";
+        upgradeDescB[1] = "arc chain";
+        upgradeDescC[1] = "& range";
 
         upgradeDescA[2] = "Calls";
         upgradeDescB[2] = "lightning";
@@ -186,7 +183,7 @@ public class TeslaTower extends Turret {
                     range += 25;
                 } case 2 -> {
                     range = 5000;
-                    damage += 2500;
+                    damage += 2400;
                     delay += 4;
                     arcLength++;
                     lightning = true;
@@ -197,11 +194,7 @@ public class TeslaTower extends Turret {
                     name = "lightning";
                     betweenFireFrames = 2;
                     titleLines = new String[]{"Lightning Caller"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Jumping electricity", o);
-                        selection.setTextPurple("Splash", o);
-                        jumpInfo(o, 2);
-                    };
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Lightning"));
                     loadSprites();
                 }
             }
@@ -210,17 +203,13 @@ public class TeslaTower extends Turret {
                 case 3 -> delay -= 1;
                 case 4 -> damage += 200;
                 case 5 -> {
-                    delay = 0.2f;
+                    delay = 0;
                     highPower = true;
                     betweenIdleFrames = 3;
                     damage /= 8;
                     name = "highPowerTesla";
                     material = Material.darkMetal;
                     titleLines = new String[]{"The Demon", "Circuit"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Jumping Electricity", o);
-                        jumpInfo(o, 1);
-                    };
                     loadSprites();
                 }
             }

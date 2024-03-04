@@ -49,7 +49,11 @@ public class Flamethrower extends Turret {
         count = 1;
         FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
         titleLines = new String[]{"Flamethrower"};
-        infoDisplay = (o) -> selection.setTextPurple("Fire", o);
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Burning:"));
+        extraInfo.add((arg) -> selection.displayInfoLine(
+                arg, "DPS", ((int) (effectLevel / 0.2f)) + ""));
+        extraInfo.add((arg) -> selection.displayInfoLine(
+                arg, "Duration", nf(effectDuration, 1, 1) + "s"));
     }
 
     @Override
@@ -259,10 +263,7 @@ public class Flamethrower extends Turret {
                     effectLevel += 5;
                     selection.swapSelected(this);
                     titleLines = new String[]{"Flame Wheel"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Fire waves", o);
-                        selection.setTextPurple("Spools up", o);
-                    };
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Fire Waves"));
                     loadSprites();
                 }
             }
@@ -282,10 +283,9 @@ public class Flamethrower extends Turret {
                     effectDuration = 25;
                     effectLevel = 250;
                     titleLines = new String[]{"Flame Conjurer"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Blue fire", o);
-                        selection.setTextPurple("Piercing", o);
-                    };
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Piercing"));
+                    extraInfo.add(1, (arg) -> selection.displayInfoLine(arg, "Blue Fire:"));
                     loadSprites();
                 }
             }

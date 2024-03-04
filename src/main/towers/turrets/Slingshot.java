@@ -1,14 +1,13 @@
 package main.towers.turrets;
 
+import main.misc.Tile;
 import main.projectiles.Gravel;
 import main.projectiles.Pebble;
 import main.projectiles.Rock;
-import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.randomizeDelay;
 
 public class Slingshot extends Turret {
 
@@ -115,7 +114,7 @@ public class Slingshot extends Turret {
                     range += 50;
                     name = "slingshotGravel";
                     titleLines = new String[]{"Gravel Slinger"};
-                    infoDisplay = (o) -> selection.setTextPurple("8 gravel bits", o);
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Gravel Chunks"));
                     loadSprites();
                 }
             }
@@ -135,7 +134,11 @@ public class Slingshot extends Turret {
                     effectLevel = 8;
                     name = "slingshotRock";
                     titleLines = new String[]{"Heavy Slingshot"};
-                    infoDisplay = (o) -> selection.setTextPurple("Bleeding", offset);
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Bleeding:"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, "DPS", ((int) (effectLevel / 0.2f)) + ""));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, "Duration", nf(effectDuration, 1, 1) + "s"));
                     loadSprites();
                 }
             }

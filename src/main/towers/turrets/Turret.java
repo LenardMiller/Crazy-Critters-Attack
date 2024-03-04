@@ -61,7 +61,8 @@ public abstract class Turret extends Tower {
     public String[] upgradeDescB;
     public String[] upgradeDescC;
     public String[] titleLines;
-    public Consumer<Integer> infoDisplay;
+//    public Consumer<Integer> infoDisplay;
+    public ArrayList<Consumer<Integer[]>> extraInfo;
     public Consumer<Integer> statsDisplay;
     public Priority priority = Priority.Close;
     public int birthday;
@@ -102,7 +103,7 @@ public abstract class Turret extends Tower {
         upgradeDescC = new String[6];
         upgradeIcons = new PImage[6];
         nextLevelB = upgradeTitles.length / 2;
-        infoDisplay = (ignored) -> {};
+        extraInfo = new ArrayList<>();
         statsDisplay = (o) -> {
             int age = levels[currentLevel].currentWave - birthday;
             if (age != 1) p.text(age + " waves survived", 910, 450 + o);

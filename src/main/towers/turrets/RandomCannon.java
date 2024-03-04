@@ -9,7 +9,6 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 import static processing.core.PConstants.HALF_PI;
 
 public class RandomCannon extends Turret {
@@ -160,7 +159,11 @@ public class RandomCannon extends Turret {
                     betweenFireFrames = 1;
                     name = "miscCannonLaundry";
                     titleLines = new String[]{"Dirty Luggage", "Launcher"};
-                    infoDisplay = (o) -> selection.setTextPurple("Toxic splatters", o);
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Toxic Splatters:"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, "DPS", ((int) effectLevel) + ""));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, "Duration", nf(effectDuration, 1, 1) + "s"));
                     loadSprites();
                 }
             }

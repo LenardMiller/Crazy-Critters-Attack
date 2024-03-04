@@ -1,18 +1,17 @@
 package main.towers.turrets;
 
-import main.projectiles.glue.Glue;
-import main.projectiles.glue.SpikeyGlue;
-import main.projectiles.glue.SplatterGlue;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;
 import main.particles.MiscParticle;
+import main.projectiles.glue.Glue;
+import main.projectiles.glue.SpikeyGlue;
+import main.projectiles.glue.SplatterGlue;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 
 public class Gluer extends Turret {
 
@@ -39,7 +38,11 @@ public class Gluer extends Turret {
         material = Material.stone;
         basePrice = GLUER_PRICE;
         titleLines = new String[]{"Gluer"};
-        infoDisplay = (o) -> selection.setTextPurple("Slows", o);
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Slowing Glue:"));
+        extraInfo.add((arg) -> selection.displayInfoLine(
+                arg, "Slow Level", (ceil((1 - effectLevel) * 10) * 10) + "%"));
+        extraInfo.add((arg) -> selection.displayInfoLine(
+                arg, "Duration", nf(effectDuration, 1, 1) + "s"));
         statsDisplay = (o) -> {
             //glue stuff
             if (gluedTotal == 1) p.text("1 enemy glued", 910, 425 + offset);
@@ -141,10 +144,8 @@ public class Gluer extends Turret {
                     splatter = true;
                     name = "splashGluer";
                     titleLines = new String[]{"Glue Splasher"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Slows", o);
-                        selection.setTextPurple("Splatter", o);
-                    };
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Glue Splatter:"));
                     loadSprites();
                 }
             }
@@ -162,10 +163,8 @@ public class Gluer extends Turret {
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
                     titleLines = new String[]{"Glue Spiker"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Slows", o);
-                        selection.setTextPurple("Embeds spikes", o);
-                    };
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Spikey Glue:"));
                     loadSprites();
                 }
             }

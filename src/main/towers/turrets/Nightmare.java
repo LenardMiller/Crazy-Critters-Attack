@@ -31,10 +31,10 @@ public class Nightmare extends Turret {
         basePrice = NIGHTMARE_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Nightmare", "Shotgun"};
-        infoDisplay = (o) -> {
-            selection.setTextPurple("Decay", o);
-            selection.setTextPurple(numProjectiles + " needles", o);
-        };
+//        infoDisplay = (o) -> {
+//            selection.setTextPurple("Decay", o);
+//            selection.setTextPurple(numProjectiles + " needles", o);
+//        };
 
         placeSound = sounds.get("titaniumPlace");
         breakSound = sounds.get("titaniumBreak");

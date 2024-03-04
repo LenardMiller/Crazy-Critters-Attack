@@ -3,18 +3,17 @@ package main.gui.inGame;
 import main.gui.guiObjects.buttons.UpgradeTower;
 import main.towers.turrets.*;
 import processing.core.PApplet;
-import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import java.awt.*;
+import java.util.function.Consumer;
 
 import static main.Main.*;
-import static main.misc.Utilities.strikethroughText;
 import static main.sound.SoundUtilities.playSound;
 
 public class Selection {
 
-    private final PApplet P;
+    private final PApplet p;
 
     public String name;
     public Turret turret;
@@ -29,7 +28,7 @@ public class Selection {
 
     /** what tower is selected */
     public Selection(PApplet p) {
-        this.P = p;
+        this.p = p;
         name = "null";
         CLICK_IN = sounds.get("clickIn");
         CLICK_OUT = sounds.get("clickOut");
@@ -130,13 +129,13 @@ public class Selection {
         float y = turret.tile.position.y - turret.size.y;
         if (turret instanceof Booster) {
             if (turret.range == 1) {
-                P.rect(x, y - 50, 50, 150);
-                P.rect(x - 50, y, 150, 50);
+                p.rect(x, y - 50, 50, 150);
+                p.rect(x - 50, y, 150, 50);
             } else {
-                P.rect(x, y, turret.size.y, turret.size.y);
-                P.rect(x - 50, y - 50, 150, 150);
+                p.rect(x, y, turret.size.y, turret.size.y);
+                p.rect(x - 50, y - 50, 150, 150);
             }
-            P.noStroke();
+            p.noStroke();
             return;
         }
         if (turret instanceof SeismicTower) {
@@ -146,18 +145,18 @@ public class Selection {
                 float startY = y + turret.size.y / 2;
                 float angleA = turret.angle - HALF_PI + width;
                 float angleB = turret.angle - HALF_PI - width;
-                P.arc(startX, startY, turret.range * 2, turret.range * 2, angleB, angleA, PIE);
+                p.arc(startX, startY, turret.range * 2, turret.range * 2, angleB, angleA, PIE);
             }
         }
-        P.rect(x, y, turret.size.y, turret.size.y);
+        p.rect(x, y, turret.size.y, turret.size.y);
         if (turret.getRange() > 1000) { //prevents lag
-            P.noStroke();
-            P.rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+            p.noStroke();
+            p.rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
             return;
         }
-        if (turret.boostedRange() > 0) P.stroke(InGameGui.BOOSTED_TEXT_COLOR.getRGB());
-        P.circle(turret.tile.position.x - (turret.size.x / 2), turret.tile.position.y - (turret.size.y / 2), turret.getRange() * 2);
-        P.noStroke();
+        if (turret.boostedRange() > 0) p.stroke(InGameGui.BOOSTED_TEXT_COLOR.getRGB());
+        p.circle(turret.tile.position.x - (turret.size.x / 2), turret.tile.position.y - (turret.size.y / 2), turret.getRange() * 2);
+        p.noStroke();
     }
 
     public void display() {
@@ -171,7 +170,7 @@ public class Selection {
 
         background();
         offset = nameAndSpecial();
-        displayInfo(offset, speed);
+        displayInfo(offset);
         displayStats();
         upgradeIcons();
         upgradeButton(-45, turret.nextLevelA, inGameGui.upgradeButtonA);
@@ -182,11 +181,11 @@ public class Selection {
 
     private void background() {
         //bg
-        P.fill(InGameGui.MAIN_PANEL_COLOR.getRGB());
-        P.noStroke();
+        p.fill(InGameGui.MAIN_PANEL_COLOR.getRGB());
+        p.noStroke();
         //different size bg so buttons fit
-        P.rect(900, 212, 200, 299);
-        if (!turret.hasPriority) P.rect(900, 212, 200, 344);
+        p.rect(900, 212, 200, 299);
+        if (!turret.hasPriority) p.rect(900, 212, 200, 344);
     }
 
     public static int displayTitleAndGetOffset(PApplet p, String[] titleLines) {
@@ -198,78 +197,105 @@ public class Selection {
     }
 
     private int nameAndSpecial() {
-        P.textAlign(CENTER);
-        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
-        P.textFont(h2);
+        p.textAlign(CENTER);
+        p.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
+        p.textFont(h2);
 
-        int offset = displayTitleAndGetOffset(P, turret.titleLines);
-        turret.infoDisplay.accept(offset);
+        int offset = displayTitleAndGetOffset(p, turret.titleLines);
+//        turret.infoDisplay.accept(offset);
 
         return offset;
     }
 
-    private void displayInfo(int offset, int speed) {
+    private void displayInfo(int offset) {
         //health
-        P.textFont(h4);
-        P.textAlign(LEFT);
-        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
-        if (turret.boostedMaxHp() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
-        P.text("Health: " + turret.hp + "/" + turret.getMaxHp(), 910, 276 + offset);
-        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
+        p.textFont(h4);
+        p.textAlign(LEFT);
+        displayInfoLine(0, offset,
+                turret.boostedMaxHp() > 0 ?
+                        InGameGui.BOOSTED_TEXT_COLOR :
+                        InGameGui.MAIN_TEXT_COLOR,
+                "Health",
+                turret.hp + "/" + turret.getMaxHp());
 
-        //booster (I can't think of any other way to do this :(
-        if (turret instanceof Booster) return;
+        int nextLine = 1;
 
-        //damage
-        if (turret.boostedDamage() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
-        if (turret.getDamage() <= 0) P.text("No damage", 910, 296 + offset);
-        else P.text("Damage: " + nfc(turret.getDamage()), 910, 296 + offset);
-        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
+        //booster
+        if (!(turret instanceof Booster)) {
+            //damage
+            displayInfoLine(1, offset,
+                    turret.boostedDamage() > 0 ?
+                            InGameGui.BOOSTED_TEXT_COLOR :
+                            InGameGui.MAIN_TEXT_COLOR,
+                    "Damage",
+                    nfc(turret.getDamage())
+            );
 
-        //firerate (delay)
-        if (turret.boostedFirerate() > 0) P.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
-        if (turret.getDelay() <= 0) P.text("Instant reload", 910, 316 + offset);
-        else P.text("Reload time: " + nf(turret.getDelay(), 1, 1) + "s", 910, 316 + offset);
-        P.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
+            //firerate (delay)
+            displayInfoLine(2, offset,
+                    turret.boostedFirerate() > 0 ?
+                            InGameGui.BOOSTED_TEXT_COLOR :
+                            InGameGui.MAIN_TEXT_COLOR,
+                    "Reload Time",
+                    turret.getDelay() <= 0 ?
+                            "0" :
+                            nf(turret.getDelay(), 1, 1) + "s"
+            );
 
-        //velocity
-        if (speed < 0) P.text("Instant travel", 910, 336 + offset);
-        else if (speed < 500) P.text("Low velocity", 910, 336 + offset);
-        else if (speed < 1000) P.text("Medium velocity", 910, 336 + offset);
-        else P.text("High velocity", 910, 336 + offset);
-        if (turret.pierce > 0) {
-            P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
-            P.text("Pierce: " + turret.pierce, 910, 356 + offset + 20 * purpleCount);
-            offset += 20;
+            nextLine = 3;
         }
 
-        //effects
-        if (turret.effectLevel != 0 || turret.effectDuration != 0) {
-            P.fill(EFFECT_TEXT_COLOR.getRGB(), 254);
-            int x = 0;
-            if (turret.effectLevel == 0) x = 20;
-            else {
-                if (turret.effectLevel % 1 == 0) {
-                    P.text("Effect Level: " + (int) turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
-                } else {
-                    P.text("Effect Level: " + turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
-                }
-            }
-            float effectDuration = turret.effectDuration;
-            if (effectDuration % 1 == 0) {
-                P.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
-            } else {
-                P.text("Effect Duration: " + effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
-            }
+        for (Consumer<Integer[]> extraStat : turret.extraInfo) {
+            extraStat.accept(new Integer[]{nextLine, offset});
+            nextLine++;
         }
+
+//        //effects
+//        if (turret.effectLevel != 0 || turret.effectDuration != 0) {
+//            p.fill(EFFECT_TEXT_COLOR.getRGB(), 254);
+//            int x = 0;
+//            if (turret.effectLevel == 0) x = 20;
+//            else {
+//                if (turret.effectLevel % 1 == 0) {
+//                    p.text("Effect Level: " + (int) turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
+//                } else {
+//                    p.text("Effect Level: " + turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
+//                }
+//            }
+//            float effectDuration = turret.effectDuration;
+//            if (effectDuration % 1 == 0) {
+//                p.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
+//            } else {
+//                p.text("Effect Duration: " + effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
+//            }
+//        }
+    }
+
+    public void displayInfoLine(int line, int offset, Color color, String left, String right) {
+        p.textFont(h4);
+        p.fill(color.getRGB(), 254);
+        p.textAlign(LEFT);
+        p.text(left, 905, 276 + offset + (20 * line));
+        if (right != null) {
+            p.textAlign(RIGHT);
+            p.text(right, 1095, 276 + offset + (20 * line));
+        }
+    }
+
+    public void displayInfoLine(Integer[] arg, String left, String right) {
+        displayInfoLine(arg[0], arg[1], InGameGui.MAIN_TEXT_COLOR, left, right);
+    }
+
+    public void displayInfoLine(Integer[] arg, String left) {
+        displayInfoLine(arg[0], arg[1], InGameGui.MAIN_TEXT_COLOR, left, null);
     }
 
     private void displayStats() {
         int offset = 0;
         if (!turret.hasPriority) offset = 45;
-        P.fill(STAT_TEXT_COLOR.getRGB(), 254);
-        P.textAlign(LEFT);
-        P.textFont(h4);
+        p.fill(STAT_TEXT_COLOR.getRGB(), 254);
+        p.textAlign(LEFT);
+        p.textFont(h4);
 
         turret.statsDisplay.accept(offset);
     }
@@ -285,31 +311,31 @@ public class Selection {
 
     private void upgradeButton(int offset, int nextLevel, UpgradeTower upgradeButton) {
         Color fillColor = new Color(20, 20, 50, 254);
-        P.textAlign(CENTER);
+        p.textAlign(CENTER);
         if (!turret.hasPriority) offset += 45;
         if (!upgradeButton.greyed && nextLevel < turret.upgradePrices.length) {
             boolean canAfford = money >= turret.upgradePrices[nextLevel];
             if (!canAfford) fillColor = new Color(100, 100, 100, 254);
-            P.fill(fillColor.getRGB());
-            P.textFont(h2);
-            P.text(turret.upgradeTitles[nextLevel], 1000, 586 + offset);
-            P.textFont(h4);
-            P.textAlign(LEFT);
-            P.text(turret.upgradeDescA[nextLevel], 910, 615 + offset);
-            P.text(turret.upgradeDescB[nextLevel], 910, 635 + offset);
-            P.text(turret.upgradeDescC[nextLevel], 910, 655 + offset);
-            P.textAlign(CENTER);
-            P.fill(new Color(20, 20, 50, 254).getRGB());
-            P.text("$" + nfc(turret.upgradePrices[nextLevel]), BOARD_WIDTH + 150, 693 + offset);
+            p.fill(fillColor.getRGB());
+            p.textFont(h2);
+            p.text(turret.upgradeTitles[nextLevel], 1000, 586 + offset);
+            p.textFont(h4);
+            p.textAlign(LEFT);
+            p.text(turret.upgradeDescA[nextLevel], 910, 615 + offset);
+            p.text(turret.upgradeDescB[nextLevel], 910, 635 + offset);
+            p.text(turret.upgradeDescC[nextLevel], 910, 655 + offset);
+            p.textAlign(CENTER);
+            p.fill(new Color(20, 20, 50, 254).getRGB());
+            p.text("$" + nfc(turret.upgradePrices[nextLevel]), BOARD_WIDTH + 150, 693 + offset);
         } else {
             fillColor = new Color(100, 100, 100, 254);
-            P.fill(fillColor.getRGB());
-            P.textFont(h2);
-            P.text("N/A", 1000, 586 + offset);
-            P.textFont(h4);
-            P.textAlign(LEFT);
-            P.text("No more", 910, 615 + offset);
-            P.text("upgrades", 910, 635 + offset);
+            p.fill(fillColor.getRGB());
+            p.textFont(h2);
+            p.text("N/A", 1000, 586 + offset);
+            p.textFont(h4);
+            p.textAlign(LEFT);
+            p.text("No more", 910, 615 + offset);
+            p.text("upgrades", 910, 635 + offset);
         }
         // squares
         int x = 910;
@@ -317,56 +343,56 @@ public class Selection {
         int size = 10;
         if (turret.nextLevelB > 5 || turret.nextLevelA > 2) {
             //little x
-            P.stroke(fillColor.getRGB());
-            P.line(x + 4 * size, y + offset, x + 5 * size, y + offset + size);
-            P.line(x + 5 * size, y + offset, x + 4 * size, y + offset + size);
+            p.stroke(fillColor.getRGB());
+            p.line(x + 4 * size, y + offset, x + 5 * size, y + offset + size);
+            p.line(x + 5 * size, y + offset, x + 4 * size, y + offset + size);
         }
         if (upgradeButton == inGameGui.upgradeButtonA) { //A
             for (int i = 0; i < 3; i++) {
                 if (nextLevel <= i) {
-                    P.noFill();
-                    P.stroke(fillColor.getRGB());
+                    p.noFill();
+                    p.stroke(fillColor.getRGB());
                 } else {
-                    P.fill(fillColor.getRGB());
-                    P.noStroke();
+                    p.fill(fillColor.getRGB());
+                    p.noStroke();
                 }
-                P.rect(x + (size * 2 * i), y + offset, size, size);
+                p.rect(x + (size * 2 * i), y + offset, size, size);
             }
         } else { //B
             for (int i = 3; i < 6; i++) {
                 if (nextLevel <= i) {
-                    P.noFill();
-                    P.stroke(fillColor.getRGB());
+                    p.noFill();
+                    p.stroke(fillColor.getRGB());
                 } else {
-                    P.fill(fillColor.getRGB());
-                    P.noStroke();
+                    p.fill(fillColor.getRGB());
+                    p.noStroke();
                 }
-                P.rect(x + (size * 2 * (i-3)), y + offset, size, size);
+                p.rect(x + (size * 2 * (i-3)), y + offset, size, size);
             }
         }
     }
 
     private void priorityButton() {
-        P.textFont(h2);
-        P.textAlign(CENTER);
+        p.textFont(h2);
+        p.textAlign(CENTER);
         if (turret.hasPriority) {
-            P.fill(75, 45, 0, 254);
-            P.text("Target: " + turret.priority.text, 1000, 843);
+            p.fill(75, 45, 0, 254);
+            p.text("Target: " + turret.priority.text, 1000, 843);
         }
     }
 
     private void sellButton() {
-        P.fill(75, 0, 0, 254);
-        P.textFont(h2);
-        P.textAlign(CENTER);
-        P.text("Sell for: $" + nfc(floor(turret.getValue() * .8f)), 1000, 888);
+        p.fill(75, 0, 0, 254);
+        p.textFont(h2);
+        p.textAlign(CENTER);
+        p.text("Sell for: $" + nfc(floor(turret.getValue() * .8f)), 1000, 888);
     }
 
     public void setTextPurple(String s, int offset) {
-        P.textFont(h4);
-        P.textAlign(LEFT);
-        P.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
-        P.text(s, 910, 356 + offset + 20 * purpleCount);
+        p.textFont(h4);
+        p.textAlign(LEFT);
+        p.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
+        p.text(s, 910, 356 + offset + 20 * purpleCount);
         purpleCount++;
     }
 

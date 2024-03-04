@@ -54,10 +54,13 @@ public class IceTower extends Turret {
         fireSound = sounds.get("iceFire");
         basePrice = ICE_TOWER_PRICE;
         titleLines = new String[]{"Freeze Ray"};
-        infoDisplay = (o) -> {
-            selection.setTextPurple("Encases enemies", o);
-            iceWallInfo(o);
-        };
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Encases Critters"));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Ice HP", wallHp + ""));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                "Ice Lifespan",
+                wallTimeUntilDamage > 0 ?
+                        nf((wallTimeUntilDamage / (float) FRAMERATE) * 10, 1, 1) + "s" :
+                        "Unlimited"));
         statsDisplay = (o) -> {
             if (frozenTotal == 1) p.text("1 wall created", 910, 475 + o);
             else p.text(nfc(frozenTotal) + " walls created", 910, 475 + o);
@@ -314,10 +317,7 @@ public class IceTower extends Turret {
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
                     titleLines = new String[]{"Ice Defender"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Reinforces defences", o);
-                        iceWallInfo(o);
-                    };
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Reinforces Defences"));
                     loadSprites();
                 }
             }
@@ -335,21 +335,10 @@ public class IceTower extends Turret {
                     range += 50;
                     wallHp += 170;
                     wallTimeUntilDamage += 20;
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Encases any enemy", o);
-                        iceWallInfo(o);
-                    };
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Encases Large Critters"));
                     loadSprites();
                 }
             }
         }
-    }
-
-    private void iceWallInfo(int offset) {
-        p.fill(new Color(100, 150, 255).getRGB(), 254);
-        p.text("Ice HP: " + wallHp, 910, 356 + 20 + offset);
-        float lifespan = (wallTimeUntilDamage / (float) FRAMERATE) * 10;
-        if (wallTimeUntilDamage == -1) p.text("Ice doesn't melt", 910, 376 + 20 + offset);
-        else p.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 + offset);
     }
 }
