@@ -59,8 +59,11 @@ public class IceTower extends Turret {
             iceWallInfo(o);
         };
         statsDisplay = (o) -> {
-            if (frozenTotal == 1) p.text("1 wall created", 910, 500 + offset);
-            else p.text(nfc(frozenTotal) + " walls created", 910, 500 + offset);
+            if (frozenTotal == 1) p.text("1 wall created", 910, 475 + o);
+            else p.text(nfc(frozenTotal) + " walls created", 910, 475 + o);
+            int age = levels[currentLevel].currentWave - birthday;
+            if (age != 1) p.text(age + " waves survived", 910, 500 + o);
+            else p.text("1 wave survived", 910, 500 + o);
         };
 
         BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);

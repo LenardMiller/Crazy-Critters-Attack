@@ -70,8 +70,11 @@ public class Booster extends Turret {
         };
         statsDisplay = (o) -> {
             if (name.equals("moneyBooster")) {
-                p.text("$" + nfc(moneyTotal) + " total", 910, 500 + o);
+                p.text("$" + nfc(moneyTotal) + " total", 910, 475 + o);
             }
+            int age = levels[currentLevel].currentWave - birthday;
+            if (age != 1) p.text(age + " waves survived", 910, 500 + o);
+            else p.text("1 wave survived", 910, 500 + o);
         };
 
         boost = new Boost();

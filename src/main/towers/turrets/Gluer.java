@@ -42,10 +42,13 @@ public class Gluer extends Turret {
         infoDisplay = (o) -> selection.setTextPurple("Slows", o);
         statsDisplay = (o) -> {
             //glue stuff
-            if (gluedTotal == 1) p.text("1 enemy glued", 910, 450 + offset);
-            else p.text(nfc(gluedTotal) + " enemies glued", 910, 450 + offset);
+            if (gluedTotal == 1) p.text("1 enemy glued", 910, 425 + offset);
+            else p.text(nfc(gluedTotal) + " enemies glued", 910, 425 + offset);
 
             //default stuff
+            int age = levels[currentLevel].currentWave - birthday;
+            if (age != 1) p.text(age + " waves survived", 910, 450 + o);
+            else p.text("1 wave survived", 910, 450 + o);
             if (killsTotal != 1) p.text(nfc(killsTotal) + " kills", 910, 475 + o);
             else p.text("1 kill", 910, 475 + o);
             p.text(nfc(damageTotal) + " total dmg", 910, 500 + o);

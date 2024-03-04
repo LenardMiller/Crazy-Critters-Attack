@@ -64,6 +64,7 @@ public abstract class Turret extends Tower {
     public Consumer<Integer> infoDisplay;
     public Consumer<Integer> statsDisplay;
     public Priority priority = Priority.Close;
+    public int birthday;
 
     protected State state = State.Idle;
     protected int offset;
@@ -103,10 +104,14 @@ public abstract class Turret extends Tower {
         nextLevelB = upgradeTitles.length / 2;
         infoDisplay = (ignored) -> {};
         statsDisplay = (o) -> {
+            int age = levels[currentLevel].currentWave - birthday;
+            if (age != 1) p.text(age + " waves survived", 910, 450 + o);
+            else p.text("1 wave survived", 910, 450 + o);
             if (killsTotal != 1) p.text(nfc(killsTotal) + " kills", 910, 475 + o);
             else p.text("1 kill", 910, 475 + o);
             p.text(nfc(damageTotal) + " total dmg", 910, 500 + o);
         };
+        birthday = levels[currentLevel].currentWave;
 
         updateTowerArray();
     }
