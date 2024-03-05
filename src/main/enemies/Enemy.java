@@ -544,7 +544,7 @@ public abstract class Enemy {
                 playSoundRandomSpeed(p, attackSound, 1);
             }
         } else if (!targetMachine && attackFrame == 0) state = State.Moving;
-        if (targetMachine) {
+        else if (targetMachine) {
             moveFrame = 0;
             //actually do damage to machines
             if (dmg) {
