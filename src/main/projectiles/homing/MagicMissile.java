@@ -49,6 +49,15 @@ public class MagicMissile extends Projectile {
         //0: close
         //1: far
         //2: strong
+
+        //target random enemy
+        if (priority.equals(Turret.Priority.None)) {
+            if (targetEnemy == null) {
+                targetEnemy = enemies.get((int) p.random(enemies.size()));
+            }
+            return;
+        }
+
         float dist;
         if (priority == Turret.Priority.Close) dist = 1000000;
         else dist = 0;

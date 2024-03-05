@@ -132,7 +132,7 @@ public class MagicMissileer extends Turret {
             for (int i = 0; i < additionalMissiles; i++) {
                 projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-                  getDamage(), Turret.Priority.values()[(int) p.random(3)], tile.position, effectDuration, effectLevel, pjSpeed));
+                  getDamage(), Priority.None, tile.position, effectDuration, effectLevel, pjSpeed));
             }
         } else {
             projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
@@ -147,7 +147,7 @@ public class MagicMissileer extends Turret {
             for (int i = 0; i < additionalMissiles; i++) {
                 projectiles.add(new MagicMissile(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
-                  getDamage(),Turret.Priority.values()[(int) p.random(3)], tile.position, pjSpeed));
+                  getDamage(),Priority.None, tile.position, pjSpeed));
             }
         }
     }
