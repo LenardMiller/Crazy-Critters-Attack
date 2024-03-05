@@ -10,11 +10,15 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Flamethrower extends Turret {
+
+    private static final Color SPECIAL_COLOR = new Color(0xFA6D4D);
 
     private final FadeSoundLoop FIRE_SOUND_LOOP;
     private final PImage[] CORE_SPRITES;
@@ -49,11 +53,11 @@ public class Flamethrower extends Turret {
         count = 1;
         FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
         titleLines = new String[]{"Flamethrower"};
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Burning:"));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Burning:", null));
         extraInfo.add((arg) -> selection.displayInfoLine(
-                arg, "DPS", ((int) (effectLevel / 0.2f)) + ""));
+                arg, SPECIAL_COLOR, "DPS", ((int) (effectLevel / 0.2f)) + ""));
         extraInfo.add((arg) -> selection.displayInfoLine(
-                arg, "Duration", nf(effectDuration, 1, 1) + "s"));
+                arg, SPECIAL_COLOR, "Duration", nf(effectDuration, 1, 1) + "s"));
     }
 
     @Override
@@ -263,7 +267,9 @@ public class Flamethrower extends Turret {
                     effectLevel += 5;
                     selection.swapSelected(this);
                     titleLines = new String[]{"Flame Wheel"};
-                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Fire Waves"));
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Fire Waves:", null));
                     loadSprites();
                 }
             }
@@ -284,8 +290,14 @@ public class Flamethrower extends Turret {
                     effectLevel = 250;
                     titleLines = new String[]{"Flame Conjurer"};
                     extraInfo.remove(0);
-                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Piercing"));
-                    extraInfo.add(1, (arg) -> selection.displayInfoLine(arg, "Blue Fire:"));
+                    Color specialColor = new Color(0x7DB5FF);
+                    extraInfo.clear();
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, specialColor, "Piercing", null));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, specialColor, "Blue Fire:", null));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, specialColor, "DPS", ((int) (effectLevel / 0.2f)) + ""));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, specialColor, "Duration", nf(effectDuration, 1, 1) + "s"));
                     loadSprites();
                 }
             }

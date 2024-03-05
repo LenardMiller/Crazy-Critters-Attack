@@ -10,10 +10,14 @@ import main.projectiles.glue.SplatterGlue;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 
 public class Gluer extends Turret {
+
+    private static final Color SPECIAL_COLOR = new Color(0xfef3c0);
 
     public int gluedTotal;
 
@@ -38,11 +42,11 @@ public class Gluer extends Turret {
         material = Material.stone;
         basePrice = GLUER_PRICE;
         titleLines = new String[]{"Gluer"};
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Slowing Glue:"));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Slowing Glue:", null));
         extraInfo.add((arg) -> selection.displayInfoLine(
-                arg, "Slow Level", (ceil((1 - effectLevel) * 10) * 10) + "%"));
+                arg, SPECIAL_COLOR, "Slow Level", (ceil((1 - effectLevel) * 10) * 10) + "%"));
         extraInfo.add((arg) -> selection.displayInfoLine(
-                arg, "Duration", nf(effectDuration, 1, 1) + "s"));
+                arg, SPECIAL_COLOR, "Duration", nf(effectDuration, 1, 1) + "s"));
         statsDisplay = (o) -> {
             //glue stuff
             if (gluedTotal == 1) p.text("1 enemy glued", 910, 425 + offset);
@@ -145,7 +149,8 @@ public class Gluer extends Turret {
                     name = "splashGluer";
                     titleLines = new String[]{"Glue Splasher"};
                     extraInfo.remove(0);
-                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Glue Splatter:"));
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Glue Splatter:", null));
                     loadSprites();
                 }
             }
@@ -164,7 +169,8 @@ public class Gluer extends Turret {
                     breakSound = sounds.get("metalBreak");
                     titleLines = new String[]{"Glue Spiker"};
                     extraInfo.remove(0);
-                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Spikey Glue:"));
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Spikey Glue:", null));
                     loadSprites();
                 }
             }

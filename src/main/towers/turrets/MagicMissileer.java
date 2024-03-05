@@ -8,11 +8,15 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class MagicMissileer extends Turret {
+
+    private static final Color SPECIAL_COLOR = new Color(0x93f8b8);
 
     public int additionalMissiles;
 
@@ -75,8 +79,8 @@ public class MagicMissileer extends Turret {
         basePrice = MAGIC_MISSILEER_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Magic Tower"};
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Homing"));
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Magic Missiles", 3 + additionalMissiles + ""));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Homing", null));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Magic Missiles", 3 + additionalMissiles + ""));
     }
 
     @Override
@@ -311,11 +315,19 @@ public class MagicMissileer extends Turret {
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     titleLines = new String[]{"Electric Tower"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Electrification:"));
-                    extraInfo.add((arg) -> selection.displayInfoLine(
-                            arg, "DPS", nfc(((int) (effectLevel / 0.5f))) + ""));
-                    extraInfo.add((arg) -> selection.displayInfoLine(
-                            arg, "Duration", nf(effectDuration, 1, 1) + "s"));
+
+                    Color specialColor = new Color(0xFFFD83);
+                    extraInfo.clear();
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            specialColor, "Homing", null));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            specialColor, "Magic Missiles", 3 + additionalMissiles + ""));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            specialColor, "Electrification:", null));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            specialColor, "DPS", nfc(((int) (effectLevel / 0.5f))) + ""));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            specialColor, "Duration", nf(effectDuration, 1, 1) + "s"));
                     loadSprites();
                 }
             }
@@ -333,9 +345,5 @@ public class MagicMissileer extends Turret {
                 }
             }
         }
-    }
-
-    private void missileCountInfo(int offset) {
-        selection.setTextPurple((3 + additionalMissiles) + " missiles", offset);
     }
 }

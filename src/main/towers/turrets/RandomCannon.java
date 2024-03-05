@@ -7,6 +7,8 @@ import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
@@ -159,11 +161,12 @@ public class RandomCannon extends Turret {
                     betweenFireFrames = 1;
                     name = "miscCannonLaundry";
                     titleLines = new String[]{"Dirty Luggage", "Launcher"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Toxic Splatters:"));
+                    Color specialColor = new Color(0x92E062);
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, specialColor, "Toxic Splatters:", null));
                     extraInfo.add((arg) -> selection.displayInfoLine(
-                            arg, "DPS", ((int) effectLevel) + ""));
+                            arg, specialColor, "DPS", ((int) effectLevel) + ""));
                     extraInfo.add((arg) -> selection.displayInfoLine(
-                            arg, "Duration", nf(effectDuration, 1, 1) + "s"));
+                            arg, specialColor, "Duration", nf(effectDuration, 1, 1) + "s"));
                     loadSprites();
                 }
             }

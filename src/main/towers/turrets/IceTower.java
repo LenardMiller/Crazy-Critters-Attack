@@ -23,6 +23,8 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class IceTower extends Turret {
 
+    private static final Color SPECIAL_COLOR = new Color(0x45e6ff);
+
     public int wallHp;
     public int wallTimeUntilDamage;
 
@@ -54,10 +56,10 @@ public class IceTower extends Turret {
         fireSound = sounds.get("iceFire");
         basePrice = ICE_TOWER_PRICE;
         titleLines = new String[]{"Freeze Ray"};
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Encases Critters"));
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Ice HP", wallHp + ""));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Encases Critters", null));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Ice HP", wallHp + ""));
         extraInfo.add((arg) -> selection.displayInfoLine(arg,
-                "Ice Lifespan",
+                SPECIAL_COLOR, "Ice Lifespan",
                 wallTimeUntilDamage > 0 ?
                         nf((wallTimeUntilDamage / (float) FRAMERATE) * 10, 1, 1) + "s" :
                         "Unlimited"));
@@ -317,7 +319,9 @@ public class IceTower extends Turret {
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
                     titleLines = new String[]{"Ice Defender"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Reinforces Defences"));
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Reinforces Defences", null));
                     loadSprites();
                 }
             }
@@ -336,7 +340,8 @@ public class IceTower extends Turret {
                     wallHp += 170;
                     wallTimeUntilDamage += 20;
                     extraInfo.remove(0);
-                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Encases Large Critters"));
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Encases Large Critters", null));
                     loadSprites();
                 }
             }

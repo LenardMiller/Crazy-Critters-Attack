@@ -6,9 +6,13 @@ import main.projectiles.ReinforcedBolt;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 
 public class Crossbow extends Turret {
+
+    private static final Color SPECIAL_COLOR = new Color(0xDEA674);
 
     private boolean multishot;
     private boolean reinforced;
@@ -30,7 +34,7 @@ public class Crossbow extends Turret {
         basePrice = CROSSBOW_PRICE;
         priority = Priority.Far;
         titleLines = new String[]{"Crossbow"};
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Pierce", "" + pierce));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Pierce", "" + pierce));
     }
 
     @Override
@@ -128,7 +132,7 @@ public class Crossbow extends Turret {
                     name = "crossbowMultishot";
                     fireSound = sounds.get("shotbow");
                     titleLines = new String[]{"Shotbow"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Multiple Bolts"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Multiple Bolts", null));
                     loadSprites();
                 }
             }

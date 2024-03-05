@@ -149,6 +149,7 @@ public class Loader {
                 turret.upgrade(1, true);
             }
             turret.priority = Turret.Priority.values()[object.getInt("priority")];
+            turret.birthday = object.getInt("birthday", Main.levels[Main.currentLevel].currentWave);
             if (turret instanceof IceTower) {
                 ((IceTower) turret).frozenTotal = object.getInt("frozenTotal");
             } else if (turret instanceof Booster) {

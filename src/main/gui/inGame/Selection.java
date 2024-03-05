@@ -18,13 +18,12 @@ public class Selection {
     public String name;
     public Turret turret;
     public boolean towerJustPlaced;
-    private int purpleCount;
     private final SoundFile CLICK_IN;
     private final SoundFile CLICK_OUT;
 
     public static final Color STAT_TEXT_COLOR = new Color(255, 0, 0);
-    public static final Color SPECIAL_TEXT_COLOR = new Color(100, 0, 200);
-    public static final Color EFFECT_TEXT_COLOR = new Color(0, 200, 50);
+    public static final Color BOOSTED_INFO_COLOR = new Color(255, 132, 0);
+    public static final Color NORMAL_INFO_COLOR = Color.WHITE;
 
     /** what tower is selected */
     public Selection(PApplet p) {
@@ -164,13 +163,9 @@ public class Selection {
             return;
         }
 
-        int speed = turret.pjSpeed;
-        int offset;
-        purpleCount = 0;
-
         background();
-        offset = nameAndSpecial();
-        displayInfo(offset);
+        displayTitle(p, turret.titleLines);
+        displayInfo();
         displayStats();
         upgradeIcons();
         upgradeButton(-45, turret.nextLevelA, inGameGui.upgradeButtonA);
@@ -180,41 +175,32 @@ public class Selection {
     }
 
     private void background() {
-        //bg
-        p.fill(InGameGui.MAIN_PANEL_COLOR.getRGB());
-        p.noStroke();
-        //different size bg so buttons fit
-        p.rect(900, 212, 200, 299);
-        if (!turret.hasPriority) p.rect(900, 212, 200, 344);
-    }
-
-    public static int displayTitleAndGetOffset(PApplet p, String[] titleLines) {
-        for (int i = 0; i < titleLines.length; i++) {
-            p.text(titleLines[i], 1000, 241 + 25 * i);
+        if (turret.titleLines.length == 1) {
+            p.image(staticSprites.get("selectionSinglePn"), 900, 212);
+        } else {
+            p.image(staticSprites.get("selectionDoublePn"), 900, 212);
         }
-        if (titleLines.length > 1) return 25;
-        else return 0;
     }
 
-    private int nameAndSpecial() {
+    public void displayTitle(PApplet p, String[] titleLines) {
         p.textAlign(CENTER);
         p.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         p.textFont(h2);
-
-        int offset = displayTitleAndGetOffset(p, turret.titleLines);
-//        turret.infoDisplay.accept(offset);
-
-        return offset;
+        if (titleLines.length == 1) {
+            p.text(titleLines[0], 1000, 237 + 12);
+        } else {
+            p.text(titleLines[0], 1000, 237);
+            p.text(titleLines[1], 1000, 237 + 25);
+        }
     }
 
-    private void displayInfo(int offset) {
+    private void displayInfo() {
         //health
         p.textFont(h4);
         p.textAlign(LEFT);
-        displayInfoLine(0, offset,
-                turret.boostedMaxHp() > 0 ?
-                        InGameGui.BOOSTED_TEXT_COLOR :
-                        InGameGui.MAIN_TEXT_COLOR,
+        displayInfoLine(0, turret.boostedMaxHp() > 0 ?
+                        BOOSTED_INFO_COLOR :
+                        NORMAL_INFO_COLOR,
                 "Health",
                 turret.hp + "/" + turret.getMaxHp());
 
@@ -223,19 +209,17 @@ public class Selection {
         //booster
         if (!(turret instanceof Booster)) {
             //damage
-            displayInfoLine(1, offset,
-                    turret.boostedDamage() > 0 ?
-                            InGameGui.BOOSTED_TEXT_COLOR :
-                            InGameGui.MAIN_TEXT_COLOR,
+            displayInfoLine(1, turret.boostedDamage() > 0 ?
+                            BOOSTED_INFO_COLOR :
+                            NORMAL_INFO_COLOR,
                     "Damage",
                     nfc(turret.getDamage())
             );
 
             //firerate (delay)
-            displayInfoLine(2, offset,
-                    turret.boostedFirerate() > 0 ?
-                            InGameGui.BOOSTED_TEXT_COLOR :
-                            InGameGui.MAIN_TEXT_COLOR,
+            displayInfoLine(2, turret.boostedFirerate() > 0 ?
+                            BOOSTED_INFO_COLOR :
+                            NORMAL_INFO_COLOR,
                     "Reload Time",
                     turret.getDelay() <= 0 ?
                             "0" :
@@ -245,49 +229,32 @@ public class Selection {
             nextLine = 3;
         }
 
-        for (Consumer<Integer[]> extraStat : turret.extraInfo) {
-            extraStat.accept(new Integer[]{nextLine, offset});
+        for (Consumer<Integer> extraStat : turret.extraInfo) {
+            extraStat.accept(nextLine);
             nextLine++;
         }
-
-//        //effects
-//        if (turret.effectLevel != 0 || turret.effectDuration != 0) {
-//            p.fill(EFFECT_TEXT_COLOR.getRGB(), 254);
-//            int x = 0;
-//            if (turret.effectLevel == 0) x = 20;
-//            else {
-//                if (turret.effectLevel % 1 == 0) {
-//                    p.text("Effect Level: " + (int) turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
-//                } else {
-//                    p.text("Effect Level: " + turret.effectLevel, 910, 356 + 20 * purpleCount + offset);
-//                }
-//            }
-//            float effectDuration = turret.effectDuration;
-//            if (effectDuration % 1 == 0) {
-//                p.text("Effect Duration: " + (int) effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
-//            } else {
-//                p.text("Effect Duration: " + effectDuration + "s", 910, 376 - x + 20 * purpleCount + offset);
-//            }
-//        }
     }
 
-    public void displayInfoLine(int line, int offset, Color color, String left, String right) {
+    public void displayInfoLine(int line, Color color, String left, String right) {
         p.textFont(h4);
         p.fill(color.getRGB(), 254);
         p.textAlign(LEFT);
-        p.text(left, 905, 276 + offset + (20 * line));
+        int y = 286 + (20 * line);
+        p.text(left, 905, y);
         if (right != null) {
             p.textAlign(RIGHT);
-            p.text(right, 1095, 276 + offset + (20 * line));
+            p.text(right, 1095, y);
         }
+        p.stroke(255, 75);
+        p.line(905, y + 3, 1095, y + 3);
     }
 
-    public void displayInfoLine(Integer[] arg, String left, String right) {
-        displayInfoLine(arg[0], arg[1], InGameGui.MAIN_TEXT_COLOR, left, right);
+    public void displayInfoLine(int line, String left, String right) {
+        displayInfoLine(line, NORMAL_INFO_COLOR, left, right);
     }
 
-    public void displayInfoLine(Integer[] arg, String left) {
-        displayInfoLine(arg[0], arg[1], InGameGui.MAIN_TEXT_COLOR, left, null);
+    public void displayInfoLine(int line, String left) {
+        displayInfoLine(line, NORMAL_INFO_COLOR, left, null);
     }
 
     private void displayStats() {
@@ -386,14 +353,6 @@ public class Selection {
         p.textFont(h2);
         p.textAlign(CENTER);
         p.text("Sell for: $" + nfc(floor(turret.getValue() * .8f)), 1000, 888);
-    }
-
-    public void setTextPurple(String s, int offset) {
-        p.textFont(h4);
-        p.textAlign(LEFT);
-        p.fill(SPECIAL_TEXT_COLOR.getRGB(), 254);
-        p.text(s, 910, 356 + offset + 20 * purpleCount);
-        purpleCount++;
     }
 
     public void changePriority() {

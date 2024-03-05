@@ -8,6 +8,8 @@ import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 
@@ -126,7 +128,8 @@ public class Cannon extends Turret {
                     placeSound = sounds.get("woodPlace");
                     barrelLength = 0;
                     titleLines = new String[]{"Dynamite", "Flinger"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Large Explosions"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            new Color(0xFFA676), "Large Explosions", null));
                     loadSprites();
                 }
             }
@@ -147,7 +150,8 @@ public class Cannon extends Turret {
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
                     titleLines = new String[]{"Frag Cannon"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Shrapnel"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            new Color(0xBBBBBB), "Shrapnel", null));
                     loadSprites();
                 }
             }

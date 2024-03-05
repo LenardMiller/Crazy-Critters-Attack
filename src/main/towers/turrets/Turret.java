@@ -61,8 +61,7 @@ public abstract class Turret extends Tower {
     public String[] upgradeDescB;
     public String[] upgradeDescC;
     public String[] titleLines;
-//    public Consumer<Integer> infoDisplay;
-    public ArrayList<Consumer<Integer[]>> extraInfo;
+    public ArrayList<Consumer<Integer>> extraInfo;
     public Consumer<Integer> statsDisplay;
     public Priority priority = Priority.Close;
     public int birthday;

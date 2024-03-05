@@ -8,11 +8,15 @@ import main.projectiles.shockwaves.SeismicShockwave;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
 import static processing.core.PConstants.HALF_PI;
 
 public class SeismicTower extends Turret {
+
+    public static final Color SPECIAL_COLOR = new Color(0xBBBBBB);
 
     /** Degrees */
     public float shockwaveWidth;
@@ -37,8 +41,8 @@ public class SeismicTower extends Turret {
         material = Material.stone;
         basePrice = SEISMIC_PRICE;
         titleLines = new String[]{"Seismic Tower"};
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Shockwave"));
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Stuns Burrowers"));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Shockwave", null));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Stuns Burrowers", null));
     }
 
     @Override
@@ -227,7 +231,9 @@ public class SeismicTower extends Turret {
                     damage += 150;
                     name = "seismicSniper";
                     titleLines = new String[]{"Seismic Sniper"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Targets Burrowers"));
+                    extraInfo.remove(1);
+                    extraInfo.add(1, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Targets Burrowers", null));
                     loadSprites();
                 }
             }

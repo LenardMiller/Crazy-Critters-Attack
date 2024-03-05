@@ -12,12 +12,15 @@ import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Booster extends Turret {
 
-    public static final int MONEY_GAIN = 5000;
+    private static final int MONEY_GAIN = 5000;
+    private static final Color SPECIAL_COLOR = Selection.BOOSTED_INFO_COLOR;
 
     public int moneyTotal;
     public Boost boost;
@@ -39,38 +42,11 @@ public class Booster extends Turret {
         hasPriority = false;
         titleLines = new String[]{"Booster"};
 
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Boosts Towers:"));
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Health", "+" + (int) (boost.health * 100) + "%"));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                SPECIAL_COLOR, "Boosts Towers:", null));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                SPECIAL_COLOR, "Health", "+" + (int) (boost.health * 100) + "%"));
 
-//        infoDisplay = (o) -> {
-//            int x = 910;
-//            int y = 296;
-//            p.textFont(h4);
-//            p.textAlign(LEFT);
-//            p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
-//            p.text("Boosts:", x, y + o);
-//            p.fill(0, 254);
-//            o += 20;
-//            if (boost.health > 0) {
-//                p.text("Health: +" + (int) (boost.health * 100) + "%", x, y + o);
-//                o += 20;
-//            } if (boost.range > 0) {
-//                p.text("Range: +" + (int) (boost.range * 100) + "%", x, y + o);
-//                o += 20;
-//            } if (boost.damage > 0) {
-//                p.text("Damage: +" + (int) (boost.damage * 100) + "%", x, y + o);
-//                o += 20;
-//            } if (boost.firerate > 0) {
-//                p.text("Firerate: +" + (int) (boost.firerate * 100) + "%", x, y + o);
-//                o += 20;
-//            } if (boost.deathEffect) {
-//                p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
-//                p.text("Explosive towers", x, y + o);
-//            } if (name.equals("moneyBooster")) {
-//                p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
-//                p.text("+$" + Booster.MONEY_GAIN + " per wave", x, y + o);
-//            }
-//        };
         statsDisplay = (o) -> {
             if (name.equals("moneyBooster")) {
                 p.text("$" + nfc(moneyTotal) + " total", 910, 475 + o);
@@ -246,7 +222,8 @@ public class Booster extends Turret {
             switch (nextLevelA) {
                 case 0 -> {
                     boost.range = 0.3f;
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Range", "+" + (int) (boost.range * 100) + "%"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Range", "+" + (int) (boost.range * 100) + "%"));
                 } case 1 -> range++;
                 case 2 -> {
                     boost.range = 0.6f;
@@ -258,7 +235,8 @@ public class Booster extends Turret {
                     name = "moneyBooster";
                     betweenIdleFrames = 2;
                     titleLines = new String[]{"Wealth Booster"};
-                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Income", "$" + MONEY_GAIN));
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Income", "$" + MONEY_GAIN));
                     loadSprites();
                 }
             }
@@ -266,10 +244,12 @@ public class Booster extends Turret {
             switch (nextLevelB) {
                 case 3 -> {
                     boost.damage = 0.4f;
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Damage", "+" + (int) (boost.damage * 100) + "%"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Damage", "+" + (int) (boost.damage * 100) + "%"));
                 } case 4 -> {
                     boost.firerate += 0.25f;
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Firerate", "+" + (int) (boost.firerate * 100) + "%"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Firerate", "+" + (int) (boost.firerate * 100) + "%"));
                 } case 5 -> {
                     boost.deathEffect = true;
                     boost.health = 1;
@@ -281,7 +261,8 @@ public class Booster extends Turret {
                     damageSound = sounds.get("titaniumDamage");
                     name = "explosiveBooster";
                     titleLines = new String[]{"Unstable", "Booster"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Explosive"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Explosive", null));
                     loadSprites();
                 }
             }

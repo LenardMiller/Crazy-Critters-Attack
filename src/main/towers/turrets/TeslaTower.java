@@ -18,6 +18,8 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class TeslaTower extends Turret {
 
+    private static final Color SPECIAL_COLOR = new Color(0xc0f1fc);
+
     public int arcLength;
 
     private boolean lightning;
@@ -42,7 +44,7 @@ public class TeslaTower extends Turret {
         fireSound = sounds.get("teslaFire");
         thunderSound = soundsWithAlts.get("thunder");
         titleLines = new String[]{"Tesla Tower"};
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Arc Chain", arcLength + ""));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Arc Chain", arcLength + ""));
     }
 
     @Override
@@ -194,7 +196,7 @@ public class TeslaTower extends Turret {
                     name = "lightning";
                     betweenFireFrames = 2;
                     titleLines = new String[]{"Lightning Caller"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Lightning"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Lightning", null));
                     loadSprites();
                 }
             }
@@ -210,14 +212,12 @@ public class TeslaTower extends Turret {
                     name = "highPowerTesla";
                     material = Material.darkMetal;
                     titleLines = new String[]{"The Demon", "Circuit"};
+                    extraInfo.clear();
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            new Color(0xFD5454), "Arc Chain", arcLength + ""));
                     loadSprites();
                 }
             }
         }
-    }
-
-    private void jumpInfo(int offset, int purpleCount) {
-        p.fill(new Color(100, 150, 255).getRGB(), 254);
-        p.text("Jumps: " + arcLength, 910, 356 + 20 * purpleCount + offset);
     }
 }

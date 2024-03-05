@@ -8,11 +8,15 @@ import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 
 public class EnergyBlaster extends Turret {
+
+    private static final Color EXPLOSION_COLOR = new Color(0xff8383);
+    private static final Color VORTEX_COLOR = new Color(0xBA7FF8);
 
     private int effectRadius;
     private boolean bigExplosion;
@@ -39,7 +43,7 @@ public class EnergyBlaster extends Turret {
         basePrice = ENERGY_BLASTER_PRICE;
         priority = Priority.Strong;
         titleLines = new String[]{"Energy Blaster"};
-        extraInfo.add((arg) -> selection.displayInfoLine(arg, "Small Explosion"));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, EXPLOSION_COLOR, "Small Explosion", null));
     }
 
     @Override
@@ -127,7 +131,13 @@ public class EnergyBlaster extends Turret {
                     effectRadius += 50;
                     bigExplosion = true;
                     extraInfo.remove(0);
-                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Large Explosion"));
+                    if (nextLevelB >= 5) {
+                        extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                                VORTEX_COLOR, "Large Vortex", null));
+                    } else {
+                        extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                                EXPLOSION_COLOR, "Large Explosion", null));
+                    }
                 } case 2 -> {
                     damage += 800;
                     delay -= 1f;
@@ -138,7 +148,8 @@ public class EnergyBlaster extends Turret {
                     nuclear = true;
                     titleLines = new String[]{"Nuclear Blaster"};
                     extraInfo.remove(0);
-                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg, "Nuclear Explosion"));
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            new Color(0xFFFD83), "Nuclear Explosion", null));
                     loadSprites();
                 }
             }
@@ -160,6 +171,14 @@ public class EnergyBlaster extends Turret {
                     dark = true;
                     titleLines = new String[]{"Dark Blaster"};
                     loadSprites();
+                    extraInfo.remove(0);
+                    if (nextLevelA <= 1) {
+                        extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                                VORTEX_COLOR, "Small Vortex", null));
+                    } else {
+                        extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                                VORTEX_COLOR, "Large Vortex", null));
+                    }
                 }
             }
         }

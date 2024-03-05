@@ -27,6 +27,9 @@ public class SpriteLoader {
         staticSprites.put("flyingTypeIc",p.loadImage("sprites/gui/enemyType/flying.png"));
         staticSprites.put("shootingTypeIc",p.loadImage("sprites/gui/enemyType/shooting.png"));
         staticSprites.put("upgradePromptOverlayIc",p.loadImage("sprites/gui/overlays/upgradePrompt.png"));
+        //panels
+        staticSprites.put("selectionSinglePn",p.loadImage("sprites/gui/panels/selectionSingle.png"));
+        staticSprites.put("selectionDoublePn",p.loadImage("sprites/gui/panels/selectionDouble.png"));
     }
 
     public static void loadParticles(PApplet p) {

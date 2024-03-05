@@ -7,6 +7,8 @@ import main.projectiles.Rock;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 
 public class Slingshot extends Turret {
@@ -114,7 +116,8 @@ public class Slingshot extends Turret {
                     range += 50;
                     name = "slingshotGravel";
                     titleLines = new String[]{"Gravel Slinger"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Gravel Chunks"));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            new Color(0x9CB1BD), "Gravel Chunks", null));
                     loadSprites();
                 }
             }
@@ -134,11 +137,12 @@ public class Slingshot extends Turret {
                     effectLevel = 8;
                     name = "slingshotRock";
                     titleLines = new String[]{"Heavy Slingshot"};
-                    extraInfo.add((arg) -> selection.displayInfoLine(arg, "Bleeding:"));
+                    Color infoColor = new Color(0xDA8383);
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, infoColor,"Bleeding:", null));
                     extraInfo.add((arg) -> selection.displayInfoLine(
-                            arg, "DPS", ((int) (effectLevel / 0.2f)) + ""));
+                            arg, infoColor, "DPS", ((int) (effectLevel / 0.2f)) + ""));
                     extraInfo.add((arg) -> selection.displayInfoLine(
-                            arg, "Duration", nf(effectDuration, 1, 1) + "s"));
+                            arg, infoColor, "Duration", nf(effectDuration, 1, 1) + "s"));
                     loadSprites();
                 }
             }
