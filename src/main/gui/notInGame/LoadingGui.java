@@ -36,6 +36,8 @@ public class LoadingGui {
                 Main.h3 = P.createFont("STHeitiSC-Light", 21, true);
                 Main.h4 = P.createFont("STHeitiSC-Light", 18, true);
                 Main.pg = P.createFont("STHeitiSC-Light", 12, true);
+                Main.monoLarge = P.createFont("fonts/IBMPlexMono-Medium.ttf", 18, true);
+                Main.monoSmall = P.createFont("fonts/IBMPlexMono-Medium.ttf", 14, true);
                 break;
             case 1:
                 loadGui(P);

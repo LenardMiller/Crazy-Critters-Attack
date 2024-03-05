@@ -62,7 +62,7 @@ public class IceTower extends Turret {
                 SPECIAL_COLOR, "Ice Lifespan",
                 wallTimeUntilDamage > 0 ?
                         nf((wallTimeUntilDamage / (float) FRAMERATE) * 10, 1, 1) + "s" :
-                        "Unlimited"));
+                        "∞"));
         statsDisplay = (o) -> {
             if (frozenTotal == 1) p.text("1 wall created", 910, 475 + o);
             else p.text(nfc(frozenTotal) + " walls created", 910, 475 + o);
@@ -321,7 +321,7 @@ public class IceTower extends Turret {
                     titleLines = new String[]{"Ice Defender"};
                     extraInfo.remove(0);
                     extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
-                            SPECIAL_COLOR, "Reinforces Defences", null));
+                            SPECIAL_COLOR, "Auto Defence", null));
                     loadSprites();
                 }
             }
@@ -341,7 +341,7 @@ public class IceTower extends Turret {
                     wallTimeUntilDamage += 20;
                     extraInfo.remove(0);
                     extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
-                            SPECIAL_COLOR, "Encases Large Critters", null));
+                            SPECIAL_COLOR, "Encases Beasts", null));
                     loadSprites();
                 }
             }

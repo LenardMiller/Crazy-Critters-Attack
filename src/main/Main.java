@@ -82,7 +82,7 @@ public class Main extends PApplet {
     public static LoadingGui loadingGui;
     public static TitleGui titleGui;
 
-    public static PFont title, h1, h2, h3, h4, pg;
+    public static PFont title, h1, h2, h3, h4, pg, monoLarge, monoSmall;
 
     public static Screen screen = Screen.Loading;
     public static Screen targetScreen;

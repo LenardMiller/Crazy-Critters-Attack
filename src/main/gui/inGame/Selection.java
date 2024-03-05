@@ -236,7 +236,7 @@ public class Selection {
     }
 
     public void displayInfoLine(int line, Color color, String left, String right) {
-        p.textFont(h4);
+        p.textFont(monoLarge);
         p.fill(color.getRGB(), 254);
         p.textAlign(LEFT);
         int y = 286 + (20 * line);
@@ -293,7 +293,8 @@ public class Selection {
             p.text(turret.upgradeDescC[nextLevel], 910, 655 + offset);
             p.textAlign(CENTER);
             p.fill(new Color(20, 20, 50, 254).getRGB());
-            p.text("$" + nfc(turret.upgradePrices[nextLevel]), BOARD_WIDTH + 150, 693 + offset);
+            p.textFont(monoSmall);
+            p.text("$" + nfc(turret.upgradePrices[nextLevel]), BOARD_WIDTH + 150, 690 + offset);
         } else {
             fillColor = new Color(100, 100, 100, 254);
             p.fill(fillColor.getRGB());
