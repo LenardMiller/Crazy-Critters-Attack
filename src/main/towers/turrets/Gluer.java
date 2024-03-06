@@ -103,7 +103,7 @@ public class Gluer extends Turret {
 
         upgradeDescA[2] = "Glue";
         upgradeDescB[2] = "splatters";
-        upgradeDescC[2] = "";
+        upgradeDescC[2] = "on critters";
 
 
         upgradeDescA[3] = "Increase";
