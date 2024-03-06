@@ -3,6 +3,7 @@ package main.towers.turrets;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.gui.guiObjects.PopupText;
+import main.gui.inGame.Selection;
 import main.misc.CompressArray;
 import main.misc.Tile;
 import main.particles.MiscParticle;
@@ -62,7 +63,7 @@ public abstract class Turret extends Tower {
     public String[] upgradeDescC;
     public String[] titleLines;
     public ArrayList<Consumer<Integer>> extraInfo;
-    public Consumer<Integer> statsDisplay;
+    public Runnable statsDisplay;
     public Priority priority = Priority.Close;
     public int birthday;
 
@@ -103,13 +104,11 @@ public abstract class Turret extends Tower {
         upgradeIcons = new PImage[6];
         nextLevelB = upgradeTitles.length / 2;
         extraInfo = new ArrayList<>();
-        statsDisplay = (o) -> {
+        statsDisplay = () -> {
             int age = levels[currentLevel].currentWave - birthday;
-            if (age != 1) p.text(age + " waves survived", 910, 450 + o);
-            else p.text("1 wave survived", 910, 450 + o);
-            if (killsTotal != 1) p.text(nfc(killsTotal) + " kills", 910, 475 + o);
-            else p.text("1 kill", 910, 475 + o);
-            p.text(nfc(damageTotal) + " total dmg", 910, 500 + o);
+            selection.displayInfoLine(-3, Selection.STAT_TEXT_COLOR, "Survived", age + "");
+            selection.displayInfoLine(-2, Selection.STAT_TEXT_COLOR, "Kills", killsTotal + "");
+            selection.displayInfoLine(-1, Selection.STAT_TEXT_COLOR, "Damage", nfc(damageTotal));
         };
         birthday = levels[currentLevel].currentWave;
 

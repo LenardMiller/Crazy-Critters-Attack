@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.gui.inGame.Selection;
 import main.misc.Tile;
 import main.particles.MiscParticle;
 import main.projectiles.glue.Glue;
@@ -47,18 +48,12 @@ public class Gluer extends Turret {
                 arg, SPECIAL_COLOR, "Slow Level", (ceil((1 - effectLevel) * 10) * 10) + "%"));
         extraInfo.add((arg) -> selection.displayInfoLine(
                 arg, SPECIAL_COLOR, "Duration", nf(effectDuration, 1, 1) + "s"));
-        statsDisplay = (o) -> {
-            //glue stuff
-            if (gluedTotal == 1) p.text("1 enemy glued", 910, 425 + offset);
-            else p.text(nfc(gluedTotal) + " enemies glued", 910, 425 + offset);
-
-            //default stuff
+        statsDisplay = () -> {
+            selection.displayInfoLine(-4, Selection.STAT_TEXT_COLOR, "Glued", gluedTotal + "");
             int age = levels[currentLevel].currentWave - birthday;
-            if (age != 1) p.text(age + " waves survived", 910, 450 + o);
-            else p.text("1 wave survived", 910, 450 + o);
-            if (killsTotal != 1) p.text(nfc(killsTotal) + " kills", 910, 475 + o);
-            else p.text("1 kill", 910, 475 + o);
-            p.text(nfc(damageTotal) + " total dmg", 910, 500 + o);
+            selection.displayInfoLine(-3, Selection.STAT_TEXT_COLOR, "Survived", age + "");
+            selection.displayInfoLine(-2, Selection.STAT_TEXT_COLOR, "Kills", killsTotal + "");
+            selection.displayInfoLine(-1, Selection.STAT_TEXT_COLOR, "Damage", nfc(damageTotal));
         };
     }
 

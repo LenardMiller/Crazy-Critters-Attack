@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.Main;
 import main.enemies.Enemy;
+import main.gui.inGame.Selection;
 import main.misc.IntVector;
 import main.misc.Tile;
 import main.towers.IceWall;
@@ -63,12 +64,10 @@ public class IceTower extends Turret {
                 wallTimeUntilDamage > 0 ?
                         nf((wallTimeUntilDamage / (float) FRAMERATE) * 10, 1, 1) + "s" :
                         "∞"));
-        statsDisplay = (o) -> {
-            if (frozenTotal == 1) p.text("1 wall created", 910, 475 + o);
-            else p.text(nfc(frozenTotal) + " walls created", 910, 475 + o);
+        statsDisplay = () -> {
+            selection.displayInfoLine(-2, Selection.STAT_TEXT_COLOR, "Frozen", frozenTotal + "");
             int age = levels[currentLevel].currentWave - birthday;
-            if (age != 1) p.text(age + " waves survived", 910, 500 + o);
-            else p.text("1 wave survived", 910, 500 + o);
+            selection.displayInfoLine(-1, Selection.STAT_TEXT_COLOR, "Survived", age + "");
         };
 
         BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);

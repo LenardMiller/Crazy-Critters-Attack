@@ -187,10 +187,10 @@ public class Selection {
         p.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         p.textFont(h2);
         if (titleLines.length == 1) {
-            p.text(titleLines[0], 1000, 236 + 12);
+            p.text(titleLines[0], 1000, 235 + 12);
         } else {
-            p.text(titleLines[0], 1000, 236);
-            p.text(titleLines[1], 1000, 236 + 25);
+            p.text(titleLines[0], 1000, 235);
+            p.text(titleLines[1], 1000, 235 + 25);
         }
     }
 
@@ -220,7 +220,7 @@ public class Selection {
             displayInfoLine(2, turret.boostedFirerate() > 0 ?
                             BOOSTED_INFO_COLOR :
                             NORMAL_INFO_COLOR,
-                    "Reload Time",
+                    "Reload",
                     turret.getDelay() <= 0 ?
                             "0" :
                             nf(turret.getDelay(), 1, 1) + "s"
@@ -237,10 +237,17 @@ public class Selection {
 
     public void displayInfoLine(int line, Color color, String left, String right) {
         int y = 286 + (20 * line);
+        if (line < 0) {
+            y = 520 + (20 * line);
+        }
 
         //line
         p.stroke(255, 75);
-        p.line(905, y + 3, 1095, y + 3);
+        if (line >= 0) {
+            p.line(905, y + 3, 1095, y + 3);
+        } else {
+            p.line(905, y - 17, 1095, y - 17);
+        }
 
         //text
         p.textFont(monoLarge);
@@ -253,22 +260,8 @@ public class Selection {
         }
     }
 
-    public void displayInfoLine(int line, String left, String right) {
-        displayInfoLine(line, NORMAL_INFO_COLOR, left, right);
-    }
-
-    public void displayInfoLine(int line, String left) {
-        displayInfoLine(line, NORMAL_INFO_COLOR, left, null);
-    }
-
     private void displayStats() {
-        int offset = 0;
-        if (!turret.hasPriority) offset = 45;
-        p.fill(STAT_TEXT_COLOR.getRGB(), 254);
-        p.textAlign(LEFT);
-        p.textFont(h4);
-
-        turret.statsDisplay.accept(offset);
+        turret.statsDisplay.run();
     }
 
     private void upgradeIcons() {
@@ -289,7 +282,7 @@ public class Selection {
             if (!canAfford) fillColor = new Color(100, 100, 100, 254);
             p.fill(fillColor.getRGB());
             p.textFont(h2);
-            p.text(turret.upgradeTitles[nextLevel], 1000, 585 + offset);
+            p.text(turret.upgradeTitles[nextLevel], 1000, 584 + offset);
             p.textFont(h4);
             p.textAlign(LEFT);
             p.text(turret.upgradeDescA[nextLevel], 910, 615 + offset);
@@ -303,7 +296,7 @@ public class Selection {
             fillColor = new Color(100, 100, 100, 254);
             p.fill(fillColor.getRGB());
             p.textFont(h2);
-            p.text("N/A", 1000, 586 + offset);
+            p.text("N/A", 1000, 584 + offset);
             p.textFont(h4);
             p.textAlign(LEFT);
             p.text("No more", 910, 615 + offset);

@@ -47,13 +47,12 @@ public class Booster extends Turret {
         extraInfo.add((arg) -> selection.displayInfoLine(arg,
                 SPECIAL_COLOR, "Health", "+" + (int) (boost.health * 100) + "%"));
 
-        statsDisplay = (o) -> {
+        statsDisplay = () -> {
             if (name.equals("moneyBooster")) {
-                p.text("$" + nfc(moneyTotal) + " total", 910, 475 + o);
+                selection.displayInfoLine(-2, Selection.STAT_TEXT_COLOR, "Earned", "$" + nfc(moneyTotal));
             }
             int age = levels[currentLevel].currentWave - birthday;
-            if (age != 1) p.text(age + " waves survived", 910, 500 + o);
-            else p.text("1 wave survived", 910, 500 + o);
+            selection.displayInfoLine(-1, Selection.STAT_TEXT_COLOR, "Survived", age + "");
         };
 
         boost = new Boost();
