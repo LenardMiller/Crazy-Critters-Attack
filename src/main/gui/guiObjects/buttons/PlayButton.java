@@ -47,8 +47,8 @@ public class PlayButton extends Button {
         p.image(sprite,position.x - size.x / 2,position.y);
         p.textAlign(CENTER);
         p.textFont(h2);
-        p.text(isPlaying ? "Send Early" : "Start Waves",position.x, position.y + 31);
-        p.textFont(monoSmall);
+        p.text(isPlaying ? "Send Early" : "Start Waves",position.x, position.y + 30);
+        p.textFont(monoMedium);
         if (isPlaying && currentLevel.canBeSkipped())
             p.text("+$" + nfc(currentLevel.waves[currentLevel.currentWave].getReward()),
                     position.x, position.y + size.y / 2f - 15);

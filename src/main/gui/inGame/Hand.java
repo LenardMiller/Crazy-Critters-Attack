@@ -111,7 +111,7 @@ public class Hand {
                 !upgradable(tileTower))
             errorText = "Max level!";
         else if (enemyNearby()) errorText = "Critter blocking placement!";
-        popupTexts.add(new PopupText(p, 16, new Color(255, 0, 0, 254),
+        popupTexts.add(new PopupText(p, monoMedium, new Color(255, 0, 0, 254),
                 new Color(50, 0, 0, 200), new PVector(boardMousePosition.x, boardMousePosition.y),
                 errorText));
     }

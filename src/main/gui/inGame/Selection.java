@@ -187,10 +187,10 @@ public class Selection {
         p.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
         p.textFont(h2);
         if (titleLines.length == 1) {
-            p.text(titleLines[0], 1000, 237 + 12);
+            p.text(titleLines[0], 1000, 236 + 12);
         } else {
-            p.text(titleLines[0], 1000, 237);
-            p.text(titleLines[1], 1000, 237 + 25);
+            p.text(titleLines[0], 1000, 236);
+            p.text(titleLines[1], 1000, 236 + 25);
         }
     }
 
@@ -236,17 +236,21 @@ public class Selection {
     }
 
     public void displayInfoLine(int line, Color color, String left, String right) {
+        int y = 286 + (20 * line);
+
+        //line
+        p.stroke(255, 75);
+        p.line(905, y + 3, 1095, y + 3);
+
+        //text
         p.textFont(monoLarge);
         p.fill(color.getRGB(), 254);
         p.textAlign(LEFT);
-        int y = 286 + (20 * line);
         p.text(left, 905, y);
         if (right != null) {
             p.textAlign(RIGHT);
             p.text(right, 1095, y);
         }
-        p.stroke(255, 75);
-        p.line(905, y + 3, 1095, y + 3);
     }
 
     public void displayInfoLine(int line, String left, String right) {
@@ -285,7 +289,7 @@ public class Selection {
             if (!canAfford) fillColor = new Color(100, 100, 100, 254);
             p.fill(fillColor.getRGB());
             p.textFont(h2);
-            p.text(turret.upgradeTitles[nextLevel], 1000, 586 + offset);
+            p.text(turret.upgradeTitles[nextLevel], 1000, 585 + offset);
             p.textFont(h4);
             p.textAlign(LEFT);
             p.text(turret.upgradeDescA[nextLevel], 910, 615 + offset);
@@ -293,7 +297,7 @@ public class Selection {
             p.text(turret.upgradeDescC[nextLevel], 910, 655 + offset);
             p.textAlign(CENTER);
             p.fill(new Color(20, 20, 50, 254).getRGB());
-            p.textFont(monoSmall);
+            p.textFont(monoMedium);
             p.text("$" + nfc(turret.upgradePrices[nextLevel]), BOARD_WIDTH + 150, 690 + offset);
         } else {
             fillColor = new Color(100, 100, 100, 254);
