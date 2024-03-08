@@ -30,10 +30,6 @@ public class Hand {
 
     public static final float MIN_ENEMY_DISTANCE = 50;
 
-    private static final float BOB_SPEED = TWO_PI / (30f * 2f);
-    private static final float BOB_MULT_SPEED = 1 / (30f * 2f);
-    private static final float BOB_SCALE = 10;
-
     public String held;
     public DisplayInfo displayInfo;
     public int price;
@@ -44,12 +40,6 @@ public class Hand {
     private PVector offset;
     private boolean implacable;
     private int setHeldNullTimer;
-    private float bobbingCycle;
-    private float bobbingMultCycle;
-    private float bobbingMultX;
-    private float bobbingNextMultX;
-    private float bobbingMultY;
-    private float bobbingNextMultY;
 
     public Hand(PApplet p) {
         this.p = p;
@@ -58,9 +48,6 @@ public class Hand {
         offset = new PVector(0, 0);
         price = 0;
         implacable = false;
-
-        bobbingNextMultX = p.random(1);
-        bobbingNextMultY = p.random(1);
     }
 
     public void update() {
@@ -83,6 +70,7 @@ public class Hand {
     }
 
     private void tryPlace() {
+        if (boardMousePosition.x <= 0) return;
         if (!held.equals("wall") && !held.equals("null")) {
             selection.towerJustPlaced = true; //prevents selection click sounds from playing
             playSound(sounds.get("clickOut"), 1, 1);
@@ -192,36 +180,17 @@ public class Hand {
 
     /** Shows what's held at reduced opacity */
     public void displayHeld() {
-        if (held.equals("null") || heldSprite == null || !alive) return;
+        if (boardMousePosition.x <= 0 || held.equals("null") || heldSprite == null || !alive) return;
         //red if implacable
         if (implacable) p.tint(Color.RED.getRGB(), 180);
         else p.tint(new Color(0xFFDF8D).getRGB(), 180);
         PVector pos = new PVector(
                 (roundTo(boardMousePosition.x, 50)) - (25f / 2) - offset.x + 13,
                 roundTo(boardMousePosition.y, 50) - (25f / 2) - offset.y + 13);
-//        pos.add(bobbing());
         p.image(heldSprite, pos.x, pos.y);
         p.tint(255);
         displayCritterCircles();
     }
-
-    // TODO: shelved, check out later?
-//    private PVector bobbing() {
-//        bobbingCycle += BOB_SPEED;
-//        if (bobbingCycle >= TWO_PI) bobbingCycle = 0;
-//        bobbingMultCycle += BOB_MULT_SPEED;
-//        if (bobbingMultCycle >= 1) {
-//            bobbingMultCycle = 0;
-//            bobbingMultX = bobbingNextMultX;
-//            bobbingNextMultX = p.random(1);
-//            bobbingMultY = bobbingNextMultY;
-//            bobbingNextMultY = p.random(1);
-//        }
-//        return new PVector(
-//                sin(bobbingCycle) * ((bobbingMultCycle * (bobbingMultX + 1 - bobbingMultCycle) * bobbingNextMultX) / 2f),
-//                cos(bobbingCycle) * ((bobbingMultCycle * (bobbingMultY + 1 - bobbingMultCycle) * bobbingNextMultY) / 2f)
-//        ).setMag(BOB_SCALE);
-//    }
 
     private void displayCritterCircles() {
         if (enemies.size() == 0) return;
