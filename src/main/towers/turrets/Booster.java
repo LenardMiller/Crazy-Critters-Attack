@@ -220,13 +220,13 @@ public class Booster extends Turret {
         if (id == 0) {
             switch (nextLevelA) {
                 case 0 -> {
-                    boost.range = 0.3f;
+                    boost.range = 0.2f;
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
                             SPECIAL_COLOR, "Range", "+" + (int) (boost.range * 100) + "%"));
                 } case 1 -> range++;
                 case 2 -> {
-                    boost.range = 0.6f;
-                    boost.firerate += 0.25f;
+                    boost.range = 0.4f;
+                    boost.firerate += 0.15f;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -235,18 +235,18 @@ public class Booster extends Turret {
                     betweenIdleFrames = 2;
                     titleLines = new String[]{"Wealth Booster"};
                     extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
-                            SPECIAL_COLOR, "Income", "$" + MONEY_GAIN));
+                            SPECIAL_COLOR, "Income", "+$" + MONEY_GAIN));
                     loadSprites();
                 }
             }
         } if (id == 1) {
             switch (nextLevelB) {
                 case 3 -> {
-                    boost.damage = 0.4f;
+                    boost.damage = 0.3f;
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
                             SPECIAL_COLOR, "Damage", "+" + (int) (boost.damage * 100) + "%"));
                 } case 4 -> {
-                    boost.firerate += 0.25f;
+                    boost.firerate += 0.15f;
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
                             SPECIAL_COLOR, "Firerate", "+" + (int) (boost.firerate * 100) + "%"));
                 } case 5 -> {
@@ -254,7 +254,7 @@ public class Booster extends Turret {
                     boost.health = 1;
                     maxHp = 60;
                     hp = maxHp;
-                    boost.damage = 0.6f;
+                    boost.damage = 0.5f;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
