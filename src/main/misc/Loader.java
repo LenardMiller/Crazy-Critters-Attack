@@ -42,7 +42,6 @@ public class Loader {
         turrets(p);
         pollution(p);
 
-        Main.inGameGui.flashA = 0;
         Main.screen = Main.Screen.InGame;
         Main.targetScreen = Main.screen;
     }

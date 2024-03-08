@@ -22,8 +22,6 @@ public class InGameGui {
 
     private final PApplet p;
 
-    public int flashA;
-
     public OpenMenu openMenuButton;
     public WallBuy wallBuyButton;
     public SellTower sellButton;
@@ -61,7 +59,6 @@ public class InGameGui {
             upgradeIconA.active = false;
             upgradeIconB.active = false;
         }
-        if (!paused) flashA -= up60ToFramerate(25);
     }
 
     public void display() {
@@ -96,9 +93,6 @@ public class InGameGui {
 
         if (isTowers) selection.display();
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.display();
-        p.fill(FLASH_COLOR.getRGB(), flashA); //flash
-        p.noStroke();
-        p.rect(900,212,200,688);
     }
 
     public void displayDebugText(PApplet p, int padding) {

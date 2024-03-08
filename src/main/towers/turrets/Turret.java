@@ -297,7 +297,6 @@ public abstract class Turret extends Tower {
         updateTowerArray();
         if (selection.turret == this) {
             selection.name = "null";
-            inGameGui.flashA = 255;
         } else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;
         if (!isSold) {
@@ -437,15 +436,18 @@ public abstract class Turret extends Tower {
             if (nextLevelB > 5) return;
             if (nextLevelB == 5 && nextLevelA == 3) return;
         }
-        inGameGui.flashA = 255;
         money -= price;
         upgradeEffect(id);
         if (id == 0) nextLevelA++;
         else if (id == 1) nextLevelB++;
         //icons
-        if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
+        int maxA = upgradeTitles.length / 2;
+        int maxB = upgradeTitles.length;
+        if (nextLevelA < maxA && !(nextLevelB == maxB && nextLevelA == maxA - 1))
+            inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
         else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
-        if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        if (nextLevelB < maxB && !(nextLevelA == maxA && nextLevelB == maxB - 1))
+            inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
 
         if (!quiet) {

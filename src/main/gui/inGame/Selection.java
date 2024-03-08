@@ -47,7 +47,6 @@ public class Selection {
             if (this.turret != turret || name.equals("null")) {
                 if (!towerJustPlaced) {
                     playSound(CLICK_IN, 1, 1);
-                    inGameGui.flashA = 255;
                 } else towerJustPlaced = false;
             }
             swapSelected(turret);
@@ -93,7 +92,6 @@ public class Selection {
         if (inputHandler.leftMousePressedPulse &&
                 mouseOnBoard() && alive && !paused && !hand.held.equals("wall")) {
             if (!name.equals("null") && !towerJustPlaced) {
-                inGameGui.flashA = 255;
                 playSound(CLICK_OUT, 1, 1);
             }
             name = "null";
@@ -277,7 +275,7 @@ public class Selection {
         Color fillColor = new Color(20, 20, 50, 254);
         p.textAlign(CENTER);
         if (!turret.hasPriority) offset += 45;
-        if (!upgradeButton.greyed && nextLevel < turret.upgradePrices.length) {
+        if (!upgradeButton.greyed) {
             boolean canAfford = money >= turret.upgradePrices[nextLevel];
             if (!canAfford) fillColor = new Color(100, 100, 100, 254);
             p.fill(fillColor.getRGB());
@@ -379,6 +377,5 @@ public class Selection {
         inGameGui.upgradeIconA.active = false;
         inGameGui.upgradeIconB.active = false;
         selection.name = "null";
-        inGameGui.flashA = 255;
     }
 }

@@ -147,7 +147,6 @@ public class Booster extends Turret {
             if (nextLevelB == 5 && nextLevelA == 3) return;
             nextLevelB++;
         }
-        inGameGui.flashA = 255;
         money -= price;
         basePrice += price;
         //icons
