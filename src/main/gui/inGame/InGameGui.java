@@ -17,7 +17,6 @@ public class InGameGui {
     public static final Color FLASH_COLOR = new Color(255, 255, 255);
     public static final Color MAIN_PANEL_COLOR = new Color(235, 235, 235);
     public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
-    public static final Color TOWER_BUY_PANEL_COLOR = new Color(130, 130, 130);
     public static final Color MAIN_TEXT_COLOR = new Color(0);
     public static final Color BOOSTED_TEXT_COLOR = new Color(255, 132, 0);
 
@@ -86,9 +85,6 @@ public class InGameGui {
         p.image(staticSprites.get("moneyPn"), BOARD_WIDTH, 176);
 
         openMenuButton.display();
-        p.noStroke();
-        p.fill(TOWER_BUY_PANEL_COLOR.getRGB()); //tower buy bg
-        p.rect(900,21,200,127);
 
         wallBuyButton.display();
         sellButton.display();
