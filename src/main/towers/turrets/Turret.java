@@ -381,12 +381,12 @@ public abstract class Turret extends Tower {
     }
 
     public void displayUpgradePrompt() {
-        if ((nextLevelB <= 5 || nextLevelA <= 1) && (nextLevelB <= 4 || nextLevelA <= 2) &&
-                (money >= upgradePrices[nextLevelA] && money >= upgradePrices[nextLevelB])) {
+        // if A or B is max
+        if (nextLevelB > 5 || nextLevelA > 2) return;
+
+        if (money >= upgradePrices[nextLevelA] && money >= upgradePrices[nextLevelB]) {
             p.image(staticSprites.get("upgradePromptOverlay2Ic"), tile.position.x - size.x, tile.position.y - size.y);
-        }
-        else if ((nextLevelB <= 5 || nextLevelA <= 1) && (nextLevelB <= 4 || nextLevelA <= 2) &&
-                (money >= upgradePrices[nextLevelA] || money >= upgradePrices[nextLevelB])) {
+        } else if (money >= upgradePrices[nextLevelA] || money >= upgradePrices[nextLevelB]) {
             p.image(staticSprites.get("upgradePromptOverlayIc"), tile.position.x - size.x, tile.position.y - size.y);
         }
     }

@@ -36,6 +36,7 @@ public class LoadingGui {
                 Main.h3 = p.createFont("fonts/Rubik-Regular.ttf", 21, true);
                 Main.h4 = p.createFont("fonts/Rubik-Regular.ttf", 18, true);
                 Main.pg = p.createFont("fonts/Rubik-Light.ttf", 12, true);
+                Main.monoHuge = p.createFont("fonts/IBMPlexMono-Medium.ttf", 24, true);
                 Main.monoLarge = p.createFont("fonts/IBMPlexMono-Medium.ttf", 18, true);
                 Main.monoMedium = p.createFont("fonts/IBMPlexMono-Medium.ttf", 16, true);
                 Main.monoSmall = p.createFont("fonts/IBMPlexMono-Medium.ttf", 14, true);

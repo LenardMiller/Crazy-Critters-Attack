@@ -21,7 +21,7 @@ public class InGameGui {
     public static final Color MAIN_TEXT_COLOR = new Color(0);
     public static final Color BOOSTED_TEXT_COLOR = new Color(255, 132, 0);
 
-    private final PApplet P;
+    private final PApplet p;
 
     public int flashA;
 
@@ -33,7 +33,7 @@ public class InGameGui {
     public GuiObject upgradeIconA, upgradeIconB;
 
     public InGameGui(PApplet p) {
-        this.P = p;
+        this.p = p;
         build();
     }
 
@@ -74,22 +74,22 @@ public class InGameGui {
             }
         }
         // Double range ring
-        P.noFill();
-        P.stroke(100, 254);
-        P.strokeWeight(3);
+        p.noFill();
+        p.stroke(100, 254);
+        p.strokeWeight(3);
         selection.turretOverlay();
-        P.stroke(255);
-        P.strokeWeight(1);
+        p.stroke(255);
+        p.strokeWeight(1);
         selection.turretOverlay();
-        P.fill(MAIN_PANEL_COLOR.getRGB()); //big white bg
-        P.rect(900,212,200,688);
-        P.stroke(0);
-        P.fill(MONEY_PANEL_COLOR.getRGB()); //money bg
-        P.rect(BOARD_WIDTH, 176, 199, 36);
+
+        p.fill(MONEY_PANEL_COLOR.getRGB()); //money bg
+        p.image(staticSprites.get("moneyPn"), BOARD_WIDTH, 176);
+
         openMenuButton.display();
-        P.noStroke();
-        P.fill(TOWER_BUY_PANEL_COLOR.getRGB()); //tower buy bg
-        P.rect(900,21,200,127);
+        p.noStroke();
+        p.fill(TOWER_BUY_PANEL_COLOR.getRGB()); //tower buy bg
+        p.rect(900,21,200,127);
+
         wallBuyButton.display();
         sellButton.display();
         priorityButton.display();
@@ -97,11 +97,12 @@ public class InGameGui {
         upgradeButtonB.display();
         upgradeIconA.display();
         upgradeIconB.display();
+
         if (isTowers) selection.display();
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.display();
-        P.fill(FLASH_COLOR.getRGB(), flashA); //flash
-        P.noStroke();
-        P.rect(900,212,200,688);
+        p.fill(FLASH_COLOR.getRGB(), flashA); //flash
+        p.noStroke();
+        p.rect(900,212,200,688);
     }
 
     public void displayDebugText(PApplet p, int padding) {
@@ -131,63 +132,58 @@ public class InGameGui {
         p.text("Menu", 1000, 18);
         p.fill(0, 254);
         p.text("Place Walls", 1000, 170);
-        p.textFont(h2);
+        p.textFont(monoHuge);
         p.fill(MAIN_TEXT_COLOR.getRGB(), 254);
         p.textAlign(RIGHT);
-        p.text("$" + nfc(money), BOARD_WIDTH + 200 - x, 211-5);
+        p.text("$" + nfc(money), BOARD_WIDTH + 200 - x, 211-8);
     }
 
     private void build() {
-        openMenuButton = new OpenMenu(P,BOARD_WIDTH+100,12,"null",true);
-//        for (int x = 0; x < 5; x++) {
-//            for (int y = 0; y < 3; y++) {
-//                towerBuyButtons.add(new TowerBuy(P, towerBuyX(x), towerBuyY(y), "slingshot", true));
-//            }
-//        }
+        openMenuButton = new OpenMenu(p,BOARD_WIDTH+100,12,"null",true);
 
-        towerBuyButtons.add(new TowerBuy(P,towerBuyX(0), towerBuyY(0),"slingshot",true));
-        towerBuyButtons.add(new TowerBuy(P,towerBuyX(0), towerBuyY(1),"miscCannon",true));
-        towerBuyButtons.add(new TowerBuy(P,towerBuyX(0), towerBuyY(2),"crossbow",true));
+        towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(0),"slingshot",true));
+        towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(1),"miscCannon",true));
+        towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(2),"crossbow",true));
         if (currentLevel > 0 || dev) {
-            towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(0), "cannon", true));
-            towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(1), "gluer", true));
-            towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(2), "seismic", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(0), "cannon", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(1), "gluer", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(2), "seismic", true));
         } else {
-            towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(0), "null", true));
-            towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(1), "null", true));
-            towerBuyButtons.add(new TowerBuy(P, towerBuyX(1), towerBuyY(2), "null", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(0), "null", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(1), "null", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(2), "null", true));
         } if (currentLevel > 1 || dev) {
-            towerBuyButtons.add(new TowerBuy(P, towerBuyX(2), towerBuyY(0), "energyBlaster", true));
-            towerBuyButtons.add(new TowerBuy(P, towerBuyX(2), towerBuyY(1), "flamethrower", true));
-            towerBuyButtons.add(new TowerBuy(P, towerBuyX(2), towerBuyY(2), "tesla", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(0), "energyBlaster", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(1), "flamethrower", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(2), "tesla", true));
         } else {
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(2), towerBuyY(0),"null",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(2), towerBuyY(1),"null",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(2), towerBuyY(2),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(0),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(1),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(2),"null",true));
         } if (currentLevel > 2 || dev) {
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(0),"magicMissleer",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(1),"iceTower",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(2),"booster",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(0),"magicMissleer",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(1),"iceTower",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(2),"booster",true));
         } else {
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(0),"null",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(1),"null",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(3), towerBuyY(2),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(0),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(1),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(2),"null",true));
         } if (currentLevel > 3 || dev) {
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(0),"railgun",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(1),"nightmare",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(2),"waveMotion",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(0),"railgun",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(1),"nightmare",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(2),"waveMotion",true));
         } else {
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(0),"null",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(1),"null",true));
-            towerBuyButtons.add(new TowerBuy(P,towerBuyX(4), towerBuyY(2),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(0),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(1),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(2),"null",true));
         }
-        wallBuyButton = new WallBuy(P,BOARD_WIDTH+100,172-12,"null",true);
-        upgradeButtonA = new UpgradeTower(P,1000,480,"null",false, 0);
-        upgradeButtonB = new UpgradeTower(P,1000,630,"null",false, 1);
-        upgradeIconA = new UpgradeIcon(P,1030,610,"null",false);
-        upgradeIconB = new UpgradeIcon(P,1030,610,"null",false);
-        priorityButton = new TargetPriority(P,1000,832.5f,"null",false);
-        sellButton = new SellTower(P,1000,877.5f,"null",false);
+        wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-12,"null",true);
+        upgradeButtonA = new UpgradeTower(p,1000,480,"null",false, 0);
+        upgradeButtonB = new UpgradeTower(p,1000,630,"null",false, 1);
+        upgradeIconA = new UpgradeIcon(p,1030,610,"null",false);
+        upgradeIconB = new UpgradeIcon(p,1030,610,"null",false);
+        priorityButton = new TargetPriority(p,1000,832.5f,"null",false);
+        sellButton = new SellTower(p,1000,877.5f,"null",false);
     }
 
     private static float towerBuyY(int column) {

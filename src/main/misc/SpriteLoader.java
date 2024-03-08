@@ -31,6 +31,7 @@ public class SpriteLoader {
         //panels
         staticSprites.put("selectionSinglePn",p.loadImage("sprites/gui/panels/selectionSingle.png"));
         staticSprites.put("selectionDoublePn",p.loadImage("sprites/gui/panels/selectionDouble.png"));
+        staticSprites.put("moneyPn",p.loadImage("sprites/gui/panels/money.png"));
     }
 
     public static void loadParticles(PApplet p) {

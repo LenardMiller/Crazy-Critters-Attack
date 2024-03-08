@@ -108,7 +108,7 @@ public class DeepForestWaves {
         waves[15] = wavePreset(p, 80, 20, mantis, "Praying", "Mantises");
         waves[15].addSpawns(mantis, 5);
 
-        waves[16] = wavePreset(p, 60, 10, bigWorm, "Mega Worm");
+        waves[16] = wavePreset(p, 60, 10, bigWorm, "Mega Worms");
         waves[16].addSpawns(smallWorm, 20);
         waves[16].addSpawns(midWorm, 10);
         waves[16].addSpawns(bigWorm, 5);
@@ -126,7 +126,7 @@ public class DeepForestWaves {
         waves[19].addSpawns(treeGiant, 3);
         waves[19].addSpawns(bigBug, 3);
 
-        waves[20] = wavePreset(p, 60, 10, bigWorm, "Mega Worm");
+        waves[20] = wavePreset(p, 60, 10, bigWorm, "Mega Worms");
         waves[20].addSpawns(smallWorm, 20);
         waves[20].addSpawns(midWorm, 20);
         waves[20].addSpawns(bigWorm, 15);
