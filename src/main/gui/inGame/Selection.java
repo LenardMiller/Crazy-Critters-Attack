@@ -42,15 +42,14 @@ public class Selection {
      * @param id tower id
      */
     public void swapSelected(int id) {
-        if (!paused) {
-            Turret turret = (Turret) tiles.get(id).tower;
-            if (this.turret != turret || name.equals("null")) {
-                if (!towerJustPlaced) {
-                    playSound(CLICK_IN, 1, 1);
-                } else towerJustPlaced = false;
-            }
-            swapSelected(turret);
+        if (paused) return;
+        Turret turret = (Turret) tiles.get(id).tower;
+        if (this.turret != turret || name.equals("null")) {
+            if (!towerJustPlaced) {
+                playSound(CLICK_IN, 1, 1);
+            } else towerJustPlaced = false;
         }
+        swapSelected(turret);
     }
 
     /**
@@ -58,26 +57,25 @@ public class Selection {
      * @param turret turret to select to
      */
     public void swapSelected(Turret turret) {
-        if (!paused) {
-            hand.held = "null";
-            if (turret != null) {
-                if (this.turret != null) this.turret.visualize = false;
-                this.turret = turret;
-                name = turret.name;
-                turret.visualize = true;
-                inGameGui.sellButton.active = true;
-                inGameGui.upgradeButtonB.active = true;
-                inGameGui.upgradeIconB.active = true;
-                inGameGui.priorityButton.active = true;
-                inGameGui.upgradeButtonA.active = true;
-                inGameGui.upgradeButtonB.position.y = 780;
-                inGameGui.upgradeButtonA.position.y = 630;
-                inGameGui.upgradeIconA.active = true;
-                inGameGui.upgradeIconA.position.y = 610;
-                inGameGui.upgradeIconB.position.y = 760;
-                inGameGui.priorityButton.noTarget = !turret.hasPriority;
-            }
-        }
+        if (paused) return;
+        hand.held = "null";
+        if (turret == null) return;
+        if (this.turret != null) this.turret.visualize = false;
+        this.turret = turret;
+        name = turret.name;
+        turret.visualize = true;
+        inGameGui.sellButton.active = true;
+        inGameGui.upgradeButtonB.active = true;
+        inGameGui.upgradeIconB.active = true;
+        inGameGui.priorityButton.active = true;
+        inGameGui.upgradeButtonA.active = true;
+        inGameGui.upgradeButtonB.position.y = 780;
+        inGameGui.upgradeButtonA.position.y = 630;
+        inGameGui.upgradeIconA.active = true;
+        inGameGui.upgradeIconA.position.y = 610;
+        inGameGui.upgradeIconB.position.y = 760;
+        inGameGui.priorityButton.noTarget = !turret.hasPriority;
+        updateUpgradeIcons();
     }
 
     /** deselect, hide stuff */
@@ -96,6 +94,7 @@ public class Selection {
             inGameGui.upgradeIconA.active = false;
             inGameGui.upgradeIconB.active = false;
             turret.visualize = false;
+            turret = null;
         }
     }
 
@@ -159,7 +158,7 @@ public class Selection {
         displayTitle(p, turret.titleLines);
         displayInfo();
         displayStats();
-        upgradeIcons();
+        updateUpgradeIcons();
         upgradeButton(0, turret.nextLevelA, inGameGui.upgradeButtonA);
         upgradeButton(150, turret.nextLevelB, inGameGui.upgradeButtonB);
         priorityButton();
@@ -256,7 +255,9 @@ public class Selection {
         turret.statsDisplay.run();
     }
 
-    private void upgradeIcons() {
+    private void updateUpgradeIcons() {
+        inGameGui.upgradeButtonA.updateGrey();
+        inGameGui.upgradeButtonB.updateGrey();
         if (!inGameGui.upgradeButtonA.greyed) {
             inGameGui.upgradeIconA.sprite = turret.upgradeIcons[turret.nextLevelA];
         } else inGameGui.upgradeIconA.sprite = null;
