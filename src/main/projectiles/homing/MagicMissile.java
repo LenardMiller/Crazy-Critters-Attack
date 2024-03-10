@@ -17,7 +17,7 @@ public class MagicMissile extends Projectile {
 
     public Turret.Priority priority;
 
-    private final PVector SPAWN_POSITION;
+    private final PVector spawnPosition;
 
     private float turningFraction = 10;
     private Enemy targetEnemy;
@@ -25,7 +25,7 @@ public class MagicMissile extends Projectile {
     public MagicMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, Turret.Priority priority,
                         PVector spawnPos, int maxSpeed) {
         super(p, x, y, angle, turret);
-        this.SPAWN_POSITION = spawnPos;
+        this.spawnPosition = spawnPos;
         position = new PVector(x, y);
         size = new PVector(6, 20);
         radius = 14;
@@ -42,7 +42,10 @@ public class MagicMissile extends Projectile {
 
     private void checkTarget() {
         getTargetEnemy();
-        if (targetEnemy != null) aim(targetEnemy.position);
+        if (targetEnemy != null) {
+            aim(targetEnemy.position);
+            if (targetEnemy.hp <= 0) targetEnemy = null;
+        }
     }
 
     private void getTargetEnemy() {
@@ -65,8 +68,8 @@ public class MagicMissile extends Projectile {
         Enemy e = null;
         for (Enemy enemy : enemies) {
             if (!(enemy.state == Enemy.State.Moving && enemy instanceof BurrowingEnemy)) {
-                float x = abs(SPAWN_POSITION.x - enemy.position.x);
-                float y = abs(SPAWN_POSITION.y - enemy.position.y);
+                float x = abs(spawnPosition.x - enemy.position.x);
+                float y = abs(spawnPosition.y - enemy.position.y);
                 float t = sqrt(sq(x) + sq(y));
                 if (enemy.position.x > 0 && enemy.position.x < 900 && enemy.position.y > 0 && enemy.position.y < 900) {
                     switch (priority) {

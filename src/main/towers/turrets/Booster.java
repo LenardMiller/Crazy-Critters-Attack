@@ -245,7 +245,7 @@ public class Booster extends Turret {
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
                             SPECIAL_COLOR, "Damage", "+" + (int) (boost.damage * 100) + "%"));
                 } case 4 -> {
-                    boost.firerate += 0.15f;
+                    boost.firerate += 0.2f;
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
                             SPECIAL_COLOR, "Firerate", "+" + (int) (boost.firerate * 100) + "%"));
                 } case 5 -> {

@@ -229,7 +229,7 @@ public class Selection {
     public void displayInfoLine(int line, Color color, String left, String right) {
         int y = 286 + (20 * line);
         if (line < 0) {
-            y = 520 + (20 * line);
+            y = 525 + (20 * line);
         }
 
         //line

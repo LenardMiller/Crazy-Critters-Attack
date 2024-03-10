@@ -29,7 +29,6 @@ public abstract class Projectile {
     public PVector size;
 
     protected int pierce;
-    protected int hitTime;
     protected int effectRadius;
     protected int trainChance;
     protected float effectDuration;
@@ -59,7 +58,6 @@ public abstract class Projectile {
         speed = 100;
         damage = 1;
         pierce = 0;
-        hitTime = 0;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
         sprite = staticSprites.get("boltPj");

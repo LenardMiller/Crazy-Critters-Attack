@@ -68,10 +68,6 @@ public class InGameGui {
                 break;
             }
         }
-        // bg
-        p.image(staticSprites.get("bgPn"), -200, 0);
-        p.image(staticSprites.get("bgPn"), 900, 0);
-
         // Double range ring
         p.noFill();
         p.stroke(100, 254);
@@ -80,6 +76,10 @@ public class InGameGui {
         p.stroke(255);
         p.strokeWeight(1);
         selection.turretOverlay();
+
+        // bg
+        p.image(staticSprites.get("bgPn"), -200, 0);
+        p.image(staticSprites.get("bgPn"), 900, 0);
 
         p.fill(MONEY_PANEL_COLOR.getRGB()); //money bg
         p.image(staticSprites.get("moneyPn"), BOARD_WIDTH, 176);
