@@ -14,7 +14,7 @@ public class SpriteLoader {
         getSprite(p,"sellTower","BT","sellTower/",3);
         getSprite(p,"targetPriority","BT","targetPriority/",4);
         getSprite(p,"towerTabSwitch","BT","towerTabSwitch/",3);
-        getSprite(p,"wallBuy","BT","wallBuy/",3);
+        getSprite(p,"wallBuy","BT","wallBuy/",15);
         getSprite(p,"play","BT","play/",4);
         getSprite(p, "genericButton", "BT", "genericButton/", 3);
         //icons

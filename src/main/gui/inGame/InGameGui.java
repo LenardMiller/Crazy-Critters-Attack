@@ -121,6 +121,14 @@ public class InGameGui {
         p.textAlign(CENTER);
         p.text("Menu", 1000, 18);
         p.fill(0, 254);
+        p.textFont(h3);
+        p.fill(switch (currentLevel) {
+            case 0 -> new Color(0xcba47d).getRGB();
+            case 1 -> new Color(0xbcbcbc).getRGB();
+            case 2 -> new Color(0x323232).getRGB();
+            case 3 -> new Color(0x110019).getRGB();
+            default -> new Color(0x000000).getRGB();
+        }, 254);
         p.text("Place Walls", 1000, 170);
         p.textFont(monoHuge);
         p.fill(MAIN_TEXT_COLOR.getRGB(), 254);
