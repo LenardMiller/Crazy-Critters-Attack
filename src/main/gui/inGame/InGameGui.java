@@ -14,7 +14,6 @@ import static main.misc.Utilities.up60ToFramerate;
 
 public class InGameGui {
 
-    public static final Color FLASH_COLOR = new Color(255, 255, 255);
     public static final Color MAIN_PANEL_COLOR = new Color(235, 235, 235);
     public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
     public static final Color MAIN_TEXT_COLOR = new Color(0);
@@ -69,6 +68,10 @@ public class InGameGui {
                 break;
             }
         }
+        // bg
+        p.image(staticSprites.get("bgPn"), -200, 0);
+        p.image(staticSprites.get("bgPn"), 900, 0);
+
         // Double range ring
         p.noFill();
         p.stroke(100, 254);
@@ -119,7 +122,7 @@ public class InGameGui {
         p.fill(200, 254);
         p.textFont(h4);
         p.textAlign(CENTER);
-        p.text("Menu", 1000, 18);
+        p.text("Menu", 1000, 17);
         p.fill(0, 254);
         p.textFont(h3);
         p.fill(switch (currentLevel) {
