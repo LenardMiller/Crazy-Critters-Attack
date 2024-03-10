@@ -70,18 +70,12 @@ public class Selection {
                 inGameGui.upgradeIconB.active = true;
                 inGameGui.priorityButton.active = true;
                 inGameGui.upgradeButtonA.active = true;
-                inGameGui.upgradeButtonB.position.y = 735;
-                inGameGui.upgradeButtonA.position.y = 585;
+                inGameGui.upgradeButtonB.position.y = 780;
+                inGameGui.upgradeButtonA.position.y = 630;
                 inGameGui.upgradeIconA.active = true;
-                inGameGui.upgradeIconA.position.y = 565;
-                inGameGui.upgradeIconB.position.y = 715;
-                if (!turret.hasPriority) {
-                    inGameGui.priorityButton.active = false;
-                    inGameGui.upgradeButtonB.position.y += 45;
-                    inGameGui.upgradeButtonA.position.y += 45;
-                    inGameGui.upgradeIconA.position.y += 45;
-                    inGameGui.upgradeIconB.position.y += 45;
-                }
+                inGameGui.upgradeIconA.position.y = 610;
+                inGameGui.upgradeIconB.position.y = 760;
+                inGameGui.priorityButton.noTarget = !turret.hasPriority;
             }
         }
     }
@@ -166,8 +160,8 @@ public class Selection {
         displayInfo();
         displayStats();
         upgradeIcons();
-        upgradeButton(-45, turret.nextLevelA, inGameGui.upgradeButtonA);
-        upgradeButton(105, turret.nextLevelB, inGameGui.upgradeButtonB);
+        upgradeButton(0, turret.nextLevelA, inGameGui.upgradeButtonA);
+        upgradeButton(150, turret.nextLevelB, inGameGui.upgradeButtonB);
         priorityButton();
         sellButton();
     }
@@ -274,7 +268,6 @@ public class Selection {
     private void upgradeButton(int offset, int nextLevel, UpgradeTower upgradeButton) {
         Color fillColor = new Color(20, 20, 50, 254);
         p.textAlign(CENTER);
-        if (!turret.hasPriority) offset += 45;
         if (!upgradeButton.greyed) {
             boolean canAfford = money >= turret.upgradePrices[nextLevel];
             if (!canAfford) fillColor = new Color(100, 100, 100, 254);
@@ -336,11 +329,11 @@ public class Selection {
     }
 
     private void priorityButton() {
-        p.textFont(h2);
+        p.textFont(monoMedium);
         p.textAlign(CENTER);
         if (turret.hasPriority) {
-            p.fill(75, 45, 0, 254);
-            p.text("Target: " + turret.priority.text, 1000, 843);
+            p.fill(NORMAL_INFO_COLOR.getRGB(), 254);
+            p.text(turret.priority.text, 1000, inGameGui.priorityButton.position.y + 6);
         }
     }
 

@@ -172,7 +172,7 @@ public class InGameGui {
         upgradeButtonB = new UpgradeTower(p,1000,630,"null",false, 1);
         upgradeIconA = new UpgradeIcon(p,1030,610,"null",false);
         upgradeIconB = new UpgradeIcon(p,1030,610,"null",false);
-        priorityButton = new TargetPriority(p,1000,832.5f,"null",false);
+        priorityButton = new TargetPriority(p,1000,535,"null",false);
         sellButton = new SellTower(p,1000,877.5f,"null",false);
     }
 

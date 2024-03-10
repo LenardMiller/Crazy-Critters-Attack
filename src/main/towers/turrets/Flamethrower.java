@@ -18,7 +18,7 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Flamethrower extends Turret {
 
-    private static final Color SPECIAL_COLOR = new Color(0xFA6D4D);
+    private static final Color SPECIAL_COLOR = new Color(0xFA9B4D);
 
     private final FadeSoundLoop FIRE_SOUND_LOOP;
     private final PImage[] CORE_SPRITES;
