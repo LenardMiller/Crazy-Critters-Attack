@@ -339,10 +339,13 @@ public class Selection {
     }
 
     private void sellButton() {
-        p.fill(75, 0, 0, 254);
         p.textFont(h2);
         p.textAlign(CENTER);
-        p.text("Sell for: $" + nfc(floor(turret.getValue() * .8f)), 1000, 888);
+        p.fill(InGameGui.MAIN_TEXT_COLOR.getRGB(), 254);
+        p.text("Sell", 957, 885);
+        p.textFont(monoMedium);
+        p.text("$" + nfc(floor(turret.getValue() * .8f)),
+                900 + 150, inGameGui.sellButton.position.y + 5);
     }
 
     public void changePriority() {
