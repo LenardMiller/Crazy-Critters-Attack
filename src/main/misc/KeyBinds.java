@@ -98,30 +98,67 @@ public class KeyBinds {
         //hotkeys
         if (!dev) {
             String name = "";
-            if (wall)               name = "wall";
-            if (slingshot)          name = "slingshot";
-            if (luggageBlaster)     name = "miscCannon";
-            if (crossbow)           name = "crossbow";
+            Class<?> towerType = null;
+            if (wall) name = "wall";
+            if (slingshot) {
+                name = "slingshot";
+                towerType = Slingshot.class;
+            } if (luggageBlaster) {
+                name = "miscCannon";
+                towerType = RandomCannon.class;
+            } if (crossbow) {
+                name = "crossbow";
+                towerType = Crossbow.class;
+            }
             if (currentLevel > 0) {
-                if (cannon)         name = "cannon";
-                if (gluer)          name = "gluer";
-                if (seismicTower)   name = "seismic";
+                if (cannon) {
+                    name = "cannon";
+                    towerType = Cannon.class;
+                } if (gluer) {
+                    name = "gluer";
+                    towerType = Gluer.class;
+                } if (seismicTower) {
+                    name = "seismic";
+                    towerType = SeismicTower.class;
+                }
             } if (currentLevel > 1) {
-                if (energyBlaster)  name = "energyBlaster";
-                if (flamethrower)   name = "flamethrower";
-                if (teslaTower)     name = "tesla";
+                if (energyBlaster) {
+                    name = "energyBlaster";
+                    towerType = EnergyBlaster.class;
+                } if (flamethrower) {
+                    name = "flamethrower";
+                    towerType = Flamethrower.class;
+                } if (teslaTower) {
+                    name = "tesla";
+                    towerType = TeslaTower.class;
+                }
             } if (currentLevel > 2) {
-                if (booster)        name = "booster";
-                if (iceTower)       name = "iceTower";
-                if (magicMissileer) name = "magicMissleer";
+                if (booster) {
+                    name = "booster";
+                    towerType = Booster.class;
+                } if (iceTower) {
+                    name = "iceTower";
+                    towerType = IceTower.class;
+                } if (magicMissileer) {
+                    name = "magicMissleer";
+                    towerType = MagicMissileer.class;
+                }
             } if (currentLevel > 3) {
-                if (railgun)        name = "railgun";
-                if (nightmare)      name = "nightmare";
-                if (waveMotion)     name = "waveMotion";
+                if (railgun) {
+                    name = "railgun";
+                    towerType = Railgun.class;
+                } if (nightmare) {
+                    name = "nightmare";
+                    towerType = Nightmare.class;
+                } if (waveMotion) {
+                    name = "waveMotion";
+                    towerType = WaveMotion.class;
+                }
             }
             if (!name.isEmpty()) {
                 if (hand.held.equals(name)) hand.setHeld("null");
                 else hand.setHeld(name);
+                hand.heldClass = towerType;
             }
         }
     }

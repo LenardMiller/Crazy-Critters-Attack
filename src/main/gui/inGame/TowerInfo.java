@@ -20,6 +20,8 @@ public class TowerInfo {
     public static void displayTurretInfo(PApplet p, Class<?> turretClass) {
         p.image(staticSprites.get("towerBuyPn"), 900, 212);
 
+        if (turretClass == null) return;
+
         String pid;
         String description;
         char shortcut = '`';
