@@ -26,6 +26,16 @@ public class IceTower extends Turret {
 
     private static final Color SPECIAL_COLOR = new Color(0x45e6ff);
 
+    public static String pid = "C2-350-0-10";
+    public static String description =
+            "Shoots a ray of frost at the nearest critter, freezing it in a block of ice. " +
+                    "Smaller critters become completely immobilized, while larger critters are only slowed. " +
+                    "Extra effective against flying critters.";
+    public static char shortcut = 'F';
+    public static String title1 = "Freeze Ray";
+    public static String title2 = "";
+    public static int price = 6000;
+
     public int wallHp;
     public int wallTimeUntilDamage;
 
@@ -55,7 +65,7 @@ public class IceTower extends Turret {
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("iceFire");
-        basePrice = ICE_TOWER_PRICE;
+        basePrice = price;
         titleLines = new String[]{"Freeze Ray"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Encases Critters", null));
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Ice HP", wallHp + ""));

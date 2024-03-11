@@ -20,6 +20,15 @@ public class Cannon extends Turret {
     private boolean dynamite;
     private boolean hasTrail;
 
+    public static String pid = "S1-250-40-3.2";
+    public static String description =
+            "Fires a cannonball at the nearest critter. " +
+                    "Has decent stats all around.";
+    public static char shortcut = 'W';
+    public static String title1 = "Cannon";
+    public static String title2 = null;
+    public static int price = 400;
+
     public Cannon(PApplet p, Tile tile) {
         super(p,tile);
         name = "cannon";
@@ -35,7 +44,7 @@ public class Cannon extends Turret {
         placeSound = sounds.get("stonePlace");
         fireSound = sounds.get("smallExplosion");
         material = Material.stone;
-        basePrice = CANNON_PRICE;
+        basePrice = price;
         fireParticle = "smoke";
         barrelLength = 29;
         titleLines = new String[]{"Cannon"};

@@ -45,6 +45,13 @@ public abstract class Turret extends Tower {
         Load
     }
 
+    public static String pid;
+    public static String description;
+    public static char shortcut;
+    public static String title1;
+    public static String title2;
+    public static int price;
+
     public boolean hasPriority;
     public int pjSpeed;
     public int range;

@@ -106,27 +106,6 @@ public class Main extends PApplet {
     public static final int TILE_SIZE = 50;
     public static final int DEFAULT_MODE = CORNER;
 
-    public static final int
-            SLINGSHOT_PRICE =       75,
-            RANDOM_CANNON_PRICE =   150,
-            CROSSBOW_PRICE =        200,
-
-            CANNON_PRICE =          400,
-            GLUER_PRICE =           300,
-            SEISMIC_PRICE =         500,
-
-            ENERGY_BLASTER_PRICE =  1250,
-            FLAMETHROWER_PRICE =    1000,
-            TESLA_TOWER_PRICE =     1500,
-
-            MAGIC_MISSILEER_PRICE = 5000,
-            ICE_TOWER_PRICE =       6000,
-            BOOSTER_PRICE =         7000,
-
-            RAILGUN_PRICE =         25000,
-            WAVE_MOTION_PRICE =     30000,
-            NIGHTMARE_PRICE =       20000;
-
     //sprites
     public static HashMap<String, PImage> staticSprites = new HashMap<>();
     public static HashMap<String, PImage[]> animatedSprites = new HashMap<>();

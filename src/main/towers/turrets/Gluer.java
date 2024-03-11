@@ -20,6 +20,16 @@ public class Gluer extends Turret {
 
     private static final Color SPECIAL_COLOR = new Color(0xfef3c0);
 
+    public static String pid = "S2-300-0-2.5";
+    public static String description =
+            "Fires a glob of glue at the nearest unglued critter. " +
+                    "Slows critter movement and attack speed, but does no damage. " +
+                    "Glue more strongly affects flying critters.";
+    public static char shortcut = 'S';
+    public static String title1 = "Gluer";
+    public static String title2 = null;
+    public static int price = 300;
+
     public int gluedTotal;
 
     private boolean spikey;
@@ -41,7 +51,7 @@ public class Gluer extends Turret {
         fireParticle = "glue";
         barrelLength = 28;
         material = Material.stone;
-        basePrice = GLUER_PRICE;
+        basePrice = price;
         titleLines = new String[]{"Gluer"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Slowing Glue:", null));
         extraInfo.add((arg) -> selection.displayInfoLine(

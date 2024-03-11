@@ -16,6 +16,14 @@ public class Slingshot extends Turret {
     boolean painful;
     boolean gravel;
 
+    public static String pid = "W1-250-15-1.6";
+    public static String description = "Fires a single pebble at the nearest critter. " +
+            "Underwhelming, but very cost-efficient.";
+    public static char shortcut = 'Q';
+    public static String title1 = "Slingshot";
+    public static String title2 = null;
+    public static int price = 75;
+
     public Slingshot(PApplet p, Tile tile) {
         super(p,tile);
         name = "slingshot";
@@ -28,7 +36,7 @@ public class Slingshot extends Turret {
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("slingshot");
         material = Material.wood;
-        basePrice = SLINGSHOT_PRICE;
+        basePrice = price;
 
         titleLines = new String[]{"Slingshot"};
     }

@@ -17,6 +17,15 @@ public class Crossbow extends Turret {
     private boolean multishot;
     private boolean reinforced;
 
+    public static String pid = "W3-320-30-4.5";
+    public static String description =
+            "Fires a powerful bolt at the furthest critter from it. " +
+            "Has very high damage, range and piercing but has low rate of fire.";
+    public static char shortcut = 'Z';
+    public static String title1 = "Crossbow";
+    public static String title2 = null;
+    public static int price = 200;
+
     public Crossbow(PApplet p, Tile tile) {
         super(p,tile);
         offset = 2;
@@ -31,7 +40,7 @@ public class Crossbow extends Turret {
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("crossbow");
         material = Material.wood;
-        basePrice = CROSSBOW_PRICE;
+        basePrice = price;
         priority = Priority.Far;
         titleLines = new String[]{"Crossbow"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Pierce", "" + pierce));

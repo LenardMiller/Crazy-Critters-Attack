@@ -1,12 +1,8 @@
 package main.gui.inGame;
 
 import processing.core.PApplet;
-import processing.core.PVector;
-
-import java.awt.*;
 
 import static main.Main.*;
-import static main.misc.Utilities.strikethroughText;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.LEFT;
 
@@ -21,94 +17,81 @@ public class TowerInfo {
         return 910;
     }
 
-    public static void displayTurretInfo(PApplet p, String turretType) {
-        p.fill(235);
-        p.noStroke();
-        p.rect(900,212,200,707);
-        p.textAlign(CENTER);
-        p.fill(0, 254);
-        p.textFont(h2); //displays info about tower
-        int x = 1000;
-        int offset = 0;
-        int price = 0;
-        switch (turretType) {
-            case "slingshot" -> {
-                p.text("Slingshot", 1000, 241);
-                slingshotInfo(p);
-                price = SLINGSHOT_PRICE;
-            } case "miscCannon" -> {
-                p.text("Luggage", x, 241);
-                p.text("Launcher", x, 266);
-                offset = 25;
-                randomCannonInfo(p);
-                price = RANDOM_CANNON_PRICE;
-            } case "crossbow" -> {
-                p.text("Crossbow", x, 241);
-                crossbowInfo(p);
-                price = CROSSBOW_PRICE;
-            } case "cannon" -> {
-                p.text("Cannon", x, 241);
-                cannonInfo(p);
-                price = CANNON_PRICE;
-            } case "gluer" -> {
-                p.text("Gluer", x, 241);
-                gluerInfo(p);
-                price = GLUER_PRICE;
-            } case "seismic" -> {
-                p.text("Seismic Tower", x, 241);
-                seismicInfo(p);
-                price = SEISMIC_PRICE;
-            } case "energyBlaster" -> {
-                p.text("Energy Blaster", x, 241);
-                energyBlasterInfo(p);
-                price = ENERGY_BLASTER_PRICE;
-            } case "magicMissleer" -> {
-                p.text("Magic Tower", x, 241);
-                magicMissileerInfo(p);
-                price = MAGIC_MISSILEER_PRICE;
-            } case "tesla" -> {
-                p.text("Tesla Tower", x, 241);
-                teslaTowerInfo(p);
-                price = TESLA_TOWER_PRICE;
-            } case "nightmare" -> {
-                p.text("Nightmare", x, 241);
-                p.text("Blaster", x, 266);
-                nightmareInfo(p);
-                offset = 25;
-                price = NIGHTMARE_PRICE;
-            } case "flamethrower" -> {
-                p.text("Flamethrower", x, 241);
-                flamethrowerInfo(p);
-                price = FLAMETHROWER_PRICE;
-            } case "iceTower" -> {
-                p.text("Freeze Ray", x, 241);
-                iceTowerInfo(p);
-                price = ICE_TOWER_PRICE;
-            } case "booster" -> {
-                p.text("Booster", x, 241);
-                boosterInfo(p);
-                price = BOOSTER_PRICE;
-            } case "railgun" -> {
-                p.text("Railgun", x, 241);
-                railgunInfo(p);
-                price = RAILGUN_PRICE;
-            } case "waveMotion" -> {
-                p.text("Death Beam", x, 241);
-                waveMotionInfo(p);
-                price = WAVE_MOTION_PRICE;
-            }
-        }
-        displayPrice(p, price, offset, x);
-    }
+    public static void displayTurretInfo(PApplet p, Class<?> turretClass) {
+        p.image(staticSprites.get("towerBuyPn"), 900, 212);
 
-    private static void displayPrice(PApplet p, int price, int offset, int x) {
-        p.textAlign(CENTER);
-        p.textFont(h4);
-        if (money < price) {
-            strikethroughText(p, "$" + price, new PVector(x, 271 + offset), new Color(150, 0, 0, 254),
-                    h4.getSize(), CENTER);
+        String pid;
+        String description;
+        char shortcut = '`';
+        String title1;
+        String title2;
+        int price;
+        try {
+            pid = (String) turretClass.getField("pid").get(null);
+            description = (String) turretClass.getField("description").get(null);
+            shortcut = (char) turretClass.getField("shortcut").get(null);
+            title1 = (String) turretClass.getField("title1").get(null);
+            title2 = (String) turretClass.getField("title2").get(null);
+            price = (int) turretClass.getField("price").get(null);
+        } catch (NoSuchFieldException | IllegalAccessException ex) {
+            System.out.println("Something bad happened in TurretInfo: " + ex);
+            return;
         }
-        else p.text("$" + price, x, 271 + offset);
+        if (pid == null || description == null || shortcut == '`' || title1 == null || price == 0) {
+            return;
+        }
+
+        //pid
+        p.textFont(monoSmall);
+        p.textAlign(LEFT);
+        p.fill(0);
+        p.text(pid, 910, 235);
+
+        //CCA
+        p.textAlign(RIGHT);
+        p.text("CCA", 1080, 235);
+
+        //title
+        p.stroke(0);
+        p.strokeWeight(2);
+        p.line(910, 245, 1080, 245);
+        p.textAlign(CENTER);
+        p.textFont(h2);
+        p.text(title1, 1000, 268);
+        if (title2 != null) {
+            p.text(title2, 1000, 291);
+            p.line(910, 298, 1080, 298);
+        } else {
+            p.line(910, 275, 1080, 275);
+        }
+
+        //price
+        p.textAlign(LEFT);
+        p.textFont(h3);
+        p.text("Price", 910, 320);
+        p.textAlign(RIGHT);
+        p.textFont(monoMedium);
+        p.text("$" + nfc(price), 1080, 320);
+        p.line(910, 325, 1080, 325);
+
+        //shortcut
+        p.textAlign(LEFT);
+        p.textFont(h3);
+        p.text("Shortcut", 910, 345);
+        p.textAlign(RIGHT);
+        p.textFont(monoMedium);
+        p.text(shortcut, 1080, 345);
+        p.line(910, 350, 1080, 350);
+
+        //description
+        p.textAlign(LEFT);
+        p.textFont(h3);
+        p.text("Description", 910, 370);
+        p.line(910, 375, 1080, 375);
+        p.textFont(pg);
+        p.text(description, 910, 380, 170, 500);
+
+        p.strokeWeight(1);
     }
 
     private static int space(int lineNumber) {

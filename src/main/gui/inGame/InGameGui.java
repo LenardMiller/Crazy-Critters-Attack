@@ -3,6 +3,7 @@ package main.gui.inGame;
 import main.gui.guiObjects.GuiObject;
 import main.gui.guiObjects.UpgradeIcon;
 import main.gui.guiObjects.buttons.*;
+import main.towers.turrets.*;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -142,41 +143,41 @@ public class InGameGui {
     private void build() {
         openMenuButton = new OpenMenu(p,BOARD_WIDTH+100,12,"null",true);
 
-        towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(0),"slingshot",true));
-        towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(1),"miscCannon",true));
-        towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(2),"crossbow",true));
+        towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(0),"slingshot", Slingshot.class, true));
+        towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(1),"miscCannon", RandomCannon.class, true));
+        towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(2),"crossbow", Crossbow.class, true));
         if (currentLevel > 0 || dev) {
-            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(0), "cannon", true));
-            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(1), "gluer", true));
-            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(2), "seismic", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(0), "cannon", Cannon.class, true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(1), "gluer", Gluer.class, true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(2), "seismic", SeismicTower.class, true));
         } else {
-            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(0), "null", true));
-            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(1), "null", true));
-            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(2), "null", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(0), "null", null, true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(1), "null", null, true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(2), "null", null, true));
         } if (currentLevel > 1 || dev) {
-            towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(0), "energyBlaster", true));
-            towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(1), "flamethrower", true));
-            towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(2), "tesla", true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(0), "energyBlaster", EnergyBlaster.class, true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(1), "flamethrower", Flamethrower.class, true));
+            towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(2), "tesla", TeslaTower.class, true));
         } else {
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(0),"null",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(1),"null",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(2),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(0),"null", null,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(1),"null", null,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(2),"null", null,true));
         } if (currentLevel > 2 || dev) {
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(0),"magicMissleer",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(1),"iceTower",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(2),"booster",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(0),"magicMissleer", MagicMissileer.class,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(1),"iceTower", IceTower.class,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(2),"booster", Booster.class,true));
         } else {
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(0),"null",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(1),"null",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(2),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(0),"null", null,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(1),"null", null,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(2),"null", null,true));
         } if (currentLevel > 3 || dev) {
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(0),"railgun",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(1),"nightmare",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(2),"waveMotion",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(0),"railgun", Railgun.class,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(1),"nightmare", Nightmare.class,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(2),"waveMotion", WaveMotion.class,true));
         } else {
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(0),"null",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(1),"null",true));
-            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(2),"null",true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(0),"null", null,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(1),"null", null,true));
+            towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(2),"null", null,true));
         }
         wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-12,"null",true);
         upgradeButtonA = new UpgradeTower(p,1000,480,"null",false, 0);

@@ -22,6 +22,16 @@ public class Booster extends Turret {
     private static final int MONEY_GAIN = 5000;
     private static final Color SPECIAL_COLOR = Selection.BOOSTED_INFO_COLOR;
 
+    public static String pid = "C3-1-0-0";
+    public static String description =
+            "Boosts the base stats of adjacent towers and walls. " +
+                    "Boosts tower durability, and can upgrade to boost range, damage, and firerate. " +
+                    "Effect does not stack.";
+    public static char shortcut = 'V';
+    public static String title1 = "Booster";
+    public static String title2 = null;
+    public static int price = 7000;
+
     public int moneyTotal;
     public Boost boost;
 
@@ -38,7 +48,7 @@ public class Booster extends Turret {
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         betweenIdleFrames = 4;
-        basePrice = BOOSTER_PRICE;
+        basePrice = price;
         hasPriority = false;
         titleLines = new String[]{"Booster"};
 

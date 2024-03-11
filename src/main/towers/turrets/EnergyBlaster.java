@@ -18,6 +18,15 @@ public class EnergyBlaster extends Turret {
     private static final Color EXPLOSION_COLOR = new Color(0xff8383);
     private static final Color VORTEX_COLOR = new Color(0xBA7FF8);
 
+    public static String pid = "M1-300-800-5";
+    public static String description =
+            "Fires an explosive energy ball at the toughest critter it can see. " +
+                    "Has long range and high damage, but low rate of fire.";
+    public static char shortcut = 'E';
+    public static String title1 = "Energy Blaster";
+    public static String title2 = null;
+    public static int price = 1250;
+
     private int effectRadius;
     private boolean bigExplosion;
     private boolean nuclear;
@@ -40,7 +49,7 @@ public class EnergyBlaster extends Turret {
         fireParticle = "energy";
         barrelLength = 40;
         material = Material.darkMetal;
-        basePrice = ENERGY_BLASTER_PRICE;
+        basePrice = price;
         priority = Priority.Strong;
         titleLines = new String[]{"Energy Blaster"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, EXPLOSION_COLOR, "Small Explosion", null));

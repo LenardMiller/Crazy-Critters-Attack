@@ -20,6 +20,15 @@ public class Flamethrower extends Turret {
 
     private static final Color SPECIAL_COLOR = new Color(0xFA9B4D);
 
+    public static String pid = "M2-200-15-0";
+    public static String description =
+            "Spews a column of fire at the nearest critter. " +
+                    "Has very short range, but very high damage per second.";
+    public static char shortcut = 'D';
+    public static String title1 = "Flamethrower";
+    public static String title2 = null;
+    public static int price = 1000;
+
     private final FadeSoundLoop FIRE_SOUND_LOOP;
     private final PImage[] CORE_SPRITES;
     private final int BETWEEN_CORE_FRAMES;
@@ -42,7 +51,7 @@ public class Flamethrower extends Turret {
         damage = 15;
         delay = 0;
         material = Material.metal;
-        basePrice = FLAMETHROWER_PRICE;
+        basePrice = price;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");

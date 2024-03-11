@@ -20,6 +20,15 @@ public class TeslaTower extends Turret {
 
     private static final Color SPECIAL_COLOR = new Color(0xc0f1fc);
 
+    public static String pid = "M3-225-400-2";
+    public static String description =
+            "Creates electric arcs that can jump from critter to critter. " +
+                    "Short range, but arcs can chain to many critters.";
+    public static char shortcut = 'C';
+    public static String title1 = "Tesla Tower";
+    public static String title2 = null;
+    public static int price = 1500;
+
     public int arcLength;
 
     private boolean lightning;
@@ -37,7 +46,7 @@ public class TeslaTower extends Turret {
         range = 225;
         betweenIdleFrames = down60ToFramerate(3);
         material = Material.metal;
-        basePrice = TESLA_TOWER_PRICE;
+        basePrice = price;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");

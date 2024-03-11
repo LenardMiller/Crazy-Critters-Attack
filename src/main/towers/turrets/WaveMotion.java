@@ -27,6 +27,14 @@ public class WaveMotion extends Turret {
 
     private final StackableSound fireSound;
 
+    public static String pid = "T3-500-300-10";
+    public static String description =
+            "Creates an enormous beam of energy, cutting through critters.";
+    public static char shortcut = 'B';
+    public static String title1 = "Death Beam";
+    public static String title2 = null;
+    public static int price = 30_000;
+
     public WaveMotion(PApplet p, Tile tile) {
         super(p,tile);
         offset = 14;
@@ -45,10 +53,9 @@ public class WaveMotion extends Turret {
         damageSound = sounds.get("titaniumDamage");
         fireSound = stackableSounds.get("beam");
         material = Material.darkMetal;
-        basePrice = WAVE_MOTION_PRICE;
+        basePrice = price;
         priority = Priority.Far;
         titleLines = new String[]{"Death Beam"};
-//        infoDisplay = (o) -> selection.setTextPurple("Piercing", o);
     }
 
     @Override

@@ -14,6 +14,14 @@ public class Nightmare extends Turret {
 
     private int numProjectiles;
 
+    public static String pid = "T2-200-0-3.5";
+    public static String description =
+            "Unleashes a flurry of cursed needles that turn critters to ash.";
+    public static char shortcut = 'G';
+    public static String title1 = "Nightmare";
+    public static String title2 = "Blaster";
+    public static int price = 20_000;
+
     public Nightmare(PApplet p, Tile tile) {
         super(p,tile);
         name = "nightmare";
@@ -28,9 +36,9 @@ public class Nightmare extends Turret {
         barrelLength = 20;
         loadSprites();
         material = Material.darkMetal;
-        basePrice = NIGHTMARE_PRICE;
+        basePrice = price;
         priority = Priority.Strong;
-        titleLines = new String[]{"Nightmare", "Shotgun"};
+        titleLines = new String[]{"Nightmare", "Blaster"};
 //        infoDisplay = (o) -> {
 //            selection.setTextPurple("Decay", o);
 //            selection.setTextPurple(numProjectiles + " needles", o);

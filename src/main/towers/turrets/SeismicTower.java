@@ -18,6 +18,15 @@ public class SeismicTower extends Turret {
 
     public static final Color SPECIAL_COLOR = new Color(0xBBBBBB);
 
+    public static String pid = "S3-225-50-2.5";
+    public static String description =
+            "Sends a shockwave towards the nearest group of critters. " +
+                    "Shockwaves stun burrowing critters, but can't hit flying critters.";
+    public static char shortcut = 'X';
+    public static String title1 = "Seismic Tower";
+    public static String title2 = null;
+    public static int price = 500;
+
     /** Degrees */
     public float shockwaveWidth;
 
@@ -39,7 +48,7 @@ public class SeismicTower extends Turret {
         fireSound = sounds.get("seismicSlam");
         barrelLength = 29;
         material = Material.stone;
-        basePrice = SEISMIC_PRICE;
+        basePrice = price;
         titleLines = new String[]{"Seismic Tower"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Shockwave", null));
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Stuns Burrowers", null));

@@ -18,6 +18,15 @@ public class MagicMissileer extends Turret {
 
     private static final Color SPECIAL_COLOR = new Color(0x93f8b8);
 
+    public static String pid = "C1-200-2000-2";
+    public static String description =
+            "Fires three magic missiles that home in on different critters. " +
+                    "Short activation range, but missiles can travel very far.";
+    public static char shortcut = 'R';
+    public static String title1 = "Magic Tower";
+    public static String title2 = null;
+    public static int price = 5000;
+
     public int additionalMissiles;
 
     private float specialAngle;
@@ -76,7 +85,7 @@ public class MagicMissileer extends Turret {
         damageSound = sounds.get("crystalDamage");
         breakSound = sounds.get("crystalBreak");
         material = Material.crystal;
-        basePrice = MAGIC_MISSILEER_PRICE;
+        basePrice = price;
         priority = Priority.Strong;
         titleLines = new String[]{"Magic Tower"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Homing", null));

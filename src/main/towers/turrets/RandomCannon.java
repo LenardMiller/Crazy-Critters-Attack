@@ -21,6 +21,15 @@ public class RandomCannon extends Turret {
     int pjRotationSpeed;
     int particleCount;
 
+    public static String pid = "W2-200-10-0.4";
+    public static String description =
+            "Rapidly fires old luggage at the nearest critter. " +
+            "Has high damage per second, but short range.";
+    public static char shortcut = 'A';
+    public static String title1 = "Luggage";
+    public static String title2 = "Launcher";
+    public static int price = 150;
+
     public RandomCannon(PApplet p, Tile tile) {
         super(p,tile);
         name = "miscCannon";
@@ -37,7 +46,7 @@ public class RandomCannon extends Turret {
         placeSound = sounds.get("woodPlace");
         fireSound = sounds.get("luggageBlaster");
         material = Material.wood;
-        basePrice = RANDOM_CANNON_PRICE;
+        basePrice = price;
         titleLines = new String[]{"Luggage", "Launcher"};
     }
 

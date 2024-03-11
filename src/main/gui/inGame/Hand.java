@@ -30,6 +30,7 @@ public class Hand {
 
     public static final float MIN_ENEMY_DISTANCE = 50;
 
+    public Class<?> heldClass;
     public String held;
     public DisplayInfo displayInfo;
     public int price;
@@ -221,7 +222,7 @@ public class Hand {
             }
             universalWallInfo();
         }
-        if (!held.equals("null") && !held.equals("wall") && !held.endsWith("TL")) displayTurretInfo(p, held);
+        if (!held.equals("null") && !held.equals("wall") && !held.endsWith("TL")) displayTurretInfo(p, heldClass);
     }
 
     private void placeWallInfo() {
@@ -354,63 +355,63 @@ public class Hand {
             case "slingshot" -> {
                 heldSprite = staticSprites.get("slingshotFullTR");
                 offset = new PVector(0, 0);
-                price = SLINGSHOT_PRICE;
+                price = Slingshot.price;
             } case "crossbow" -> {
                 heldSprite = staticSprites.get("crossbowFullTR");
                 offset = new PVector(2, 2);
-                price = CROSSBOW_PRICE;
+                price = Crossbow.price;
             } case "miscCannon" -> {
                 heldSprite = staticSprites.get("miscCannonFullTR");
                 offset = new PVector(0, 0);
-                price = RANDOM_CANNON_PRICE;
+                price = RandomCannon.price;
             } case "cannon" -> {
                 heldSprite = staticSprites.get("cannonFullTR");
                 offset = new PVector(5, 5);
-                price = CANNON_PRICE;
+                price = Cannon.price;
             } case "gluer" -> {
                 heldSprite = staticSprites.get("gluerFullTR");
                 offset = new PVector(0, 0);
-                price = GLUER_PRICE;
+                price = Gluer.price;
             } case "seismic" -> {
                 heldSprite = staticSprites.get("seismicFullTR");
                 offset = new PVector(4, 4);
-                price = SEISMIC_PRICE;
+                price = SeismicTower.price;
             } case "energyBlaster" -> {
                 heldSprite = staticSprites.get("energyBlasterFullTR");
                 offset = new PVector(13, 13);
-                price = ENERGY_BLASTER_PRICE;
+                price = EnergyBlaster.price;
             } case "magicMissleer" -> {
                 heldSprite = staticSprites.get("magicMissleerFullTR");
                 offset = new PVector(0, 0);
-                price = MAGIC_MISSILEER_PRICE;
+                price = MagicMissileer.price;
             } case "tesla" -> {
                 heldSprite = staticSprites.get("teslaFullTR");
                 offset = new PVector(0, 0);
-                price = TESLA_TOWER_PRICE;
+                price = TeslaTower.price;
             } case "nightmare" -> {
                 heldSprite = staticSprites.get("nightmareFullTR");
                 offset = new PVector(0, 0);
-                price = NIGHTMARE_PRICE;
+                price = Nightmare.price;
             } case "flamethrower" -> {
                 heldSprite = staticSprites.get("flamethrowerFullTR");
                 offset = new PVector(7, 7);
-                price = FLAMETHROWER_PRICE;
+                price = Flamethrower.price;
             } case "iceTower" -> {
                 heldSprite = staticSprites.get("iceTowerFullTR");
                 offset = new PVector(0, 0);
-                price = ICE_TOWER_PRICE;
+                price = IceTower.price;
             } case "booster" -> {
                 heldSprite = staticSprites.get("boosterFullTR");
                 offset = new PVector(0, 0);
-                price = BOOSTER_PRICE;
+                price = Booster.price;
             } case "railgun" -> {
                 heldSprite = staticSprites.get("railgunFullTR");
                 offset = new PVector(6, 6);
-                price = RAILGUN_PRICE;
+                price = Railgun.price;
             } case "waveMotion" -> {
                 heldSprite = staticSprites.get("waveMotionFullTR");
                 offset = new PVector(14, 14);
-                price = WAVE_MOTION_PRICE;
+                price = WaveMotion.price;
             } case "wall" -> {
                 heldSprite = staticSprites.get("woodWallTW");
                 offset = new PVector(0, 0);

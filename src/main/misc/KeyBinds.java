@@ -14,7 +14,7 @@ import main.projectiles.homing.MagicMissile;
 import main.enemies.*;
 import main.levelStructure.Level;
 import main.towers.Tower;
-import main.towers.turrets.Turret;
+import main.towers.turrets.*;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -39,17 +39,17 @@ public class KeyBinds {
 
         if (pause) {
             switch (screen) {
-                case InGame:
+                case InGame -> {
                     playSound(sounds.get("clickOut"), 1, 1);
                     if (settings) closeSettingsMenu();
                     else paused = !paused;
-                    break;
-                case LevelSelect:
+                }
+                case LevelSelect -> {
                     if (settings) {
                         playSound(sounds.get("clickOut"), 1, 1);
                         settings = false;
                     }
-                    break;
+                }
             }
         }
     }
@@ -70,21 +70,21 @@ public class KeyBinds {
         boolean play = keysPressed.getPressedPulse(' ');
         //hotkeys
         boolean wall =           addHotkey(new char[]{'?'}, 0),
-                slingshot =      addHotkey(new char[]{'q', 'Q'}, SLINGSHOT_PRICE),
-                luggageBlaster = addHotkey(new char[]{'a', 'A'}, RANDOM_CANNON_PRICE),
-                crossbow =       addHotkey(new char[]{'z', 'Z'}, CROSSBOW_PRICE),
-                cannon =         addHotkey(new char[]{'w', 'W'}, CANNON_PRICE),
-                gluer =          addHotkey(new char[]{'s', 'S'}, GLUER_PRICE),
-                seismicTower =   addHotkey(new char[]{'x', 'X'}, SEISMIC_PRICE),
-                energyBlaster =  addHotkey(new char[]{'e', 'E'}, ENERGY_BLASTER_PRICE),
-                flamethrower =   addHotkey(new char[]{'d', 'Q'}, FLAMETHROWER_PRICE),
-                teslaTower =     addHotkey(new char[]{'c', 'C'}, TESLA_TOWER_PRICE),
-                booster =        addHotkey(new char[]{'r', 'R'}, BOOSTER_PRICE),
-                iceTower =       addHotkey(new char[]{'f', 'F'}, ICE_TOWER_PRICE),
-                magicMissileer = addHotkey(new char[]{'v', 'V'}, MAGIC_MISSILEER_PRICE),
-                railgun =        addHotkey(new char[]{'t', 'T'}, RAILGUN_PRICE),
-                nightmare =      addHotkey(new char[]{'g', 'G'}, NIGHTMARE_PRICE),
-                waveMotion =     addHotkey(new char[]{'b', 'B'}, WAVE_MOTION_PRICE);
+                slingshot =      addHotkey(new char[]{'q', 'Q'}, Slingshot.price),
+                luggageBlaster = addHotkey(new char[]{'a', 'A'}, RandomCannon.price),
+                crossbow =       addHotkey(new char[]{'z', 'Z'}, Crossbow.price),
+                cannon =         addHotkey(new char[]{'w', 'W'}, Cannon.price),
+                gluer =          addHotkey(new char[]{'s', 'S'}, Gluer.price),
+                seismicTower =   addHotkey(new char[]{'x', 'X'}, SeismicTower.price),
+                energyBlaster =  addHotkey(new char[]{'e', 'E'}, EnergyBlaster.price),
+                flamethrower =   addHotkey(new char[]{'d', 'Q'}, Flamethrower.price),
+                teslaTower =     addHotkey(new char[]{'c', 'C'}, TeslaTower.price),
+                booster =        addHotkey(new char[]{'v', 'V'}, Booster.price),
+                iceTower =       addHotkey(new char[]{'f', 'F'}, IceTower.price),
+                magicMissileer = addHotkey(new char[]{'r', 'R'}, MagicMissileer.price),
+                railgun =        addHotkey(new char[]{'t', 'T'}, Railgun.price),
+                nightmare =      addHotkey(new char[]{'g', 'G'}, Nightmare.price),
+                waveMotion =     addHotkey(new char[]{'b', 'B'}, WaveMotion.price);
 
         if (play) {
             if (!isPlaying) {
