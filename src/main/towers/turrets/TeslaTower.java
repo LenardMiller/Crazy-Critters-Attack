@@ -41,7 +41,7 @@ public class TeslaTower extends Turret {
         name = "tesla";
         delay = 2f;
         damage = 400;
-        arcLength = 3;
+        arcLength = 2;
         pjSpeed = -1;
         range = 225;
         betweenIdleFrames = down60ToFramerate(3);

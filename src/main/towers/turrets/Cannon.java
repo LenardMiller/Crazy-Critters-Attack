@@ -138,7 +138,7 @@ public class Cannon extends Turret {
                     barrelLength = 0;
                     titleLines = new String[]{"Dynamite", "Flinger"};
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
-                            new Color(0xFFA676), "Large Explosions", null));
+                            new Color(0xFFA676), "Explosions", null));
                     loadSprites();
                 }
             }
