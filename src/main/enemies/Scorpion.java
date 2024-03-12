@@ -15,9 +15,9 @@ public class Scorpion extends Enemy {
         pfSize = 1; //1
         radius = 13;
         speed = 39;
-        moneyDrop = 35;
+        moneyDrop = 25;
         damage = 4;
-        maxHp = 75;
+        maxHp = 125;
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "scorpion";

@@ -16,7 +16,7 @@ public class Sidewinder extends Enemy {
         radius = 12.5f;
         speed = 42;
         moneyDrop = 20;
-        damage = 3;
+        damage = 5;
         maxHp = 60; //Hp
         hp = maxHp;
         hitParticle = HitParticle.redOuch;

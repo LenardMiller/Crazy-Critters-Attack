@@ -99,11 +99,11 @@ public class DesertWaves {
 
         waves[9] = new Wave(p, 60, 10, sidewinderFill, sidewinderAccent, sidewinderText,
                 "Sidewinders");
-        waves[9].addSpawns("sidewinder", 10);
+        waves[9].addSpawns("sidewinder", 15);
 
         waves[10] = new Wave(p, 60, 10, sidewinderFill, sidewinderAccent, sidewinderText,
                 "Sidewinders");
-        waves[10].addSpawns("sidewinder", 15);
+        waves[10].addSpawns("sidewinder", 20);
         waves[10].addSpawns("scorpion", 3);
 
         waves[11] = new Wave(p, 60, 25, scorpionFill, scorpionAccent, scorpionText,
@@ -136,7 +136,7 @@ public class DesertWaves {
         waves[17] = new Wave(p, 65, 25, scorpionFill, scorpionAccent, scorpionText,
                 new String[]{"Scorpions &", "Sidewinders"});
         waves[17].addSpawns("scorpion", 20);
-        waves[17].addSpawns("sidewinder", 5);
+        waves[17].addSpawns("sidewinder", 10);
 
         waves[18] = new Wave(p, 65, 20, wormFill, wormAccent, wormText,
                 "Little Worms");
@@ -220,8 +220,8 @@ public class DesertWaves {
 
         waves[34] = new Wave(p, 100, 40, hordeFill, hordeAccent, hordeText,
                 new String[]{"Mega", "Horde"});
-        waves[34].addSpawns("bigBug", 15);
-        waves[34].addSpawns("emperor", 10);
+        waves[34].addSpawns("bigBug", 10);
+        waves[34].addSpawns("emperor", 6);
         waves[34].addSpawns("bigWorm", 4);
 
         for (Wave wave : waves) wave.load();

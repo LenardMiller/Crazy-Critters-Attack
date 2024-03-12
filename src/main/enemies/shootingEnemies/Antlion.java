@@ -19,7 +19,7 @@ public class Antlion extends ShootingEnemy {
         moneyDrop = 40;
         damage = 2;
         shootDamage = 2;
-        maxHp = 50;
+        maxHp = 200;
         range = 100;
         barrelLength = 7;
         hp = maxHp;
