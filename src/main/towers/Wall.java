@@ -182,11 +182,10 @@ public class Wall extends Tower {
     @Override
     public void upgrade(int id, boolean quiet) {
         sprite = upgradeSprites[nextLevelB];
-        int oldMax = maxHp;
         maxHp += upgradeHp[nextLevelB];
+        hp += upgradeHp[nextLevelB];
         name = upgradeNames[nextLevelB] + "Wall";
         material = Material.valueOf(upgradeNames[nextLevelB]);
-        hp = (int)(hp/(float)oldMax * maxHp);
 
         damageSound = sounds.get(material + "Damage");
         breakSound = sounds.get(material + "Break");

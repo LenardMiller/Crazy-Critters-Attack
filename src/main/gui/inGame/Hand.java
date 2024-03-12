@@ -29,6 +29,8 @@ public class Hand {
     }
 
     public static final float MIN_ENEMY_DISTANCE = 50;
+    public static final int PANEL_WIDTH = 190 - 9;
+    public static final Color CANT_AFFORD_COLOR = new Color(0xAB0000);
 
     public Class<?> heldClass;
     public String held;
@@ -87,6 +89,7 @@ public class Hand {
                 (roundTo(boardMousePosition.y, 50) / 50) + 1);
         String errorText = "Can't place there!";
         if (price > money || (
+                held.equals("wall") &&
                 tileTower != null &&
                 tileTower.tower instanceof Wall &&
                 tileTower.tower.nextLevelB < tileTower.tower.upgradePrices.length &&
@@ -97,7 +100,8 @@ public class Hand {
                 tileTower != null &&
                 tileTower.tower instanceof Wall &&
                 held.equals("wall") &&
-                !upgradable(tileTower))
+                !upgradable(tileTower) &&
+                currentLevel > 0)
             errorText = "Max level!";
         else if (enemyNearby()) errorText = "Blocked!";
         popupTexts.add(new PopupText(p, monoMedium, new Color(255, 0, 0, 254),
@@ -218,7 +222,7 @@ public class Hand {
             switch (displayInfo) {
                 case PlaceWall -> placeWallInfo();
                 case UpgradeWall -> upgradeWallInfo();
-                case MaxWallUpgrade -> maxWallUpgradeInfo();
+                case MaxWallUpgrade -> selectedWallInfo();
             }
             universalWallInfo();
         }
@@ -226,27 +230,42 @@ public class Hand {
     }
 
     private void placeWallInfo() {
-        p.fill(235);
-        p.noStroke();
-        p.rect(900, 212, 200, 707);
+        p.image(staticSprites.get("towerBuyPn"), 900, 212);
         boolean canAfford = money >= Wall.BUY_PRICE;
-        if (canAfford) p.fill(195, 232, 188);
-        else p.fill(230, 181, 181);
-        p.rect(905, 247, 190, 119);
+        if (canAfford) p.fill(0, 20);
+        else p.fill(0, 100);
+        p.strokeWeight(2);
+        p.stroke(0);
+        p.rect(905, 247, PANEL_WIDTH, 90);
         p.textAlign(CENTER);
         p.fill(0, 254);
+
+        //prompt
         p.textFont(h3);
-        p.text("Placing:", 1000, 241);
+        p.text("Placing:", 910, 221, PANEL_WIDTH - 10, 100);
+
+        //title
         p.textFont(h2);
-        p.text("Wooden", 1000, 276);
-        p.text("Wall", 1000, 301);
-        p.textFont(h4);
-        p.text("50 HP", 1000, 331);
-        if (canAfford) p.text("$" + Wall.BUY_PRICE, 1000, 356);
-        else {
-            strikethroughText(p, "$" + Wall.BUY_PRICE, new PVector(1000, 356), new Color(150, 0, 0, 254),
-              h4.getSize(), CENTER);
-        }
+        p.text("Wooden Wall", 910, 256, PANEL_WIDTH - 10, 100);
+        p.line(920, 256 + 25, 910 + PANEL_WIDTH - 20, 256 + 25);
+
+        //health
+        p.textAlign(LEFT);
+        p.textFont(h3);
+        p.text("Health", 910, 291, PANEL_WIDTH - 10, 100);
+        p.textAlign(RIGHT);
+        p.textFont(monoMedium);
+        p.text("50", 910, 291 + 3, PANEL_WIDTH - 10, 100);
+        p.line(910, 291 + 20, 910 + PANEL_WIDTH - 10, 291 + 20);
+
+        //price
+        p.textAlign(LEFT);
+        p.textFont(h3);
+        p.text("Price", 910, 316, PANEL_WIDTH - 10, 100);
+        p.textAlign(RIGHT);
+        p.textFont(monoMedium);
+        if (!canAfford) p.fill(CANT_AFFORD_COLOR.getRGB());
+        p.text("$" + Wall.BUY_PRICE, 910, 316 + 3, PANEL_WIDTH - 10, 100);
     }
 
     private void upgradeWallInfo() {
@@ -255,75 +274,97 @@ public class Hand {
             placeWallInfo();
             return;
         }
+
+        selectedWallInfo();
+
         if (wall.nextLevelB > wall.upgradeTitles.length - 1) {
             displayInfo = DisplayInfo.MaxWallUpgrade;
-            maxWallUpgradeInfo();
             return;
         }
-        p.fill(235, 254);
-        p.noStroke();
-        p.rect(900, 212, 200, 707);
-        p.textAlign(CENTER);
-        //tower info
-        p.fill(231, 232, 190, 254);
-        p.rect(905, 247, 190, 119);
-        p.textFont(h3);
-        p.fill(0, 254);
-        p.text("Selected:", 1000, 241);
-        p.textFont(h2);
-        if (wall.nextLevelB > 0) {
-            p.text(wall.upgradeTitles[wall.nextLevelB - 1], 1000, 276); //if not base level
-        } else p.text("Wooden", 1000, 276);
-        p.text("Wall", 1000, 301);
-        p.textFont(h4);
-        if (wall.hp > wall.maxHp) p.fill(InGameGui.BOOSTED_TEXT_COLOR.getRGB(), 254);
-        p.text(wall.hp + " hp", 1000, 331);
-        p.fill(0, 254);
-        p.text("Sell for: $" + (int) (0.8f * (float) wall.getValue()), 1000, 356);
-        //upgrade info
+
+        int dif = 130;
+
         boolean canAfford = money >= wall.upgradePrices[wall.nextLevelB];
-        if (canAfford) p.fill(195, 232, 188, 254);
-        else p.fill(230, 181, 181, 254);
-        p.rect(905, 401, 190, 119);
-        p.textFont(h3);
+        if (canAfford) p.fill(0, 20);
+        else p.fill(0, 100);
+        p.strokeWeight(2);
+        p.stroke(0);
+        p.rect(905, 247 + dif, PANEL_WIDTH, 90);
+        p.textAlign(CENTER);
         p.fill(0, 254);
-        p.text("Upgrade:", 1000, 395);
+
+        //prompt
+        p.textFont(h3);
+        p.text("Upgrade To:", 910, 221 + dif, PANEL_WIDTH - 10, 100);
+
+        //title
         p.textFont(h2);
-        p.text(wall.upgradeTitles[wall.nextLevelB], 1000, 430);
-        p.text("Wall", 1000, 455);
-        p.textFont(h4);
-        p.text("+" + wall.upgradeHp[wall.nextLevelB] + " HP", 1000, 485);
-        if (canAfford) p.text("$" + wall.upgradePrices[wall.nextLevelB], 1000, 510);
-        else {
-            strikethroughText(p, "$" + wall.upgradePrices[wall.nextLevelB], new PVector(1000, 510),
-              new Color(150, 0, 0, 254), h4.getSize(), CENTER);
-        }
+        p.text(wall.upgradeTitles[wall.nextLevelB] + " Wall", 910, 256 + dif, PANEL_WIDTH - 10, 100);
+        p.line(920, 256 + 25 + dif, 910 + PANEL_WIDTH - 20, 256 + 25 + dif);
+
+        //health
+        p.textAlign(LEFT);
+        p.textFont(h3);
+        p.text("Health", 910, 291 + dif, PANEL_WIDTH - 10, 100);
+        p.textAlign(RIGHT);
+        p.textFont(monoMedium);
+        p.text("+" + wall.upgradeHp[wall.nextLevelB], 910, 291 + 3 + dif, PANEL_WIDTH - 10, 100);
+        p.line(910, 291 + 20 + dif, 910 + PANEL_WIDTH - 10, 291 + 20 + dif);
+
+        //price
+        p.textAlign(LEFT);
+        p.textFont(h3);
+        p.text("Price", 910, 316 + dif, PANEL_WIDTH - 10, 100);
+        p.textAlign(RIGHT);
+        p.textFont(monoMedium);
+        p.text("$" + nfc(wall.upgradePrices[wall.nextLevelB]), 910, 316 + 3 + dif, PANEL_WIDTH - 10, 100);
     }
 
-    private void maxWallUpgradeInfo() {
+    private void selectedWallInfo() {
         Wall wall = getWall();
         if (wall == null) {
             placeWallInfo();
             return;
         }
-        p.fill(235);
-        p.noStroke();
-        p.rect(900, 212, 200, 707);
+        p.image(staticSprites.get("towerBuyPn"), 900, 212);
+        p.fill(0, 20);
+        p.strokeWeight(2);
+        p.stroke(0);
+        p.rect(905, 247, PANEL_WIDTH, 90);
         p.textAlign(CENTER);
-        //tower info
-        p.fill(231, 232, 190);
-        p.rect(905, 247, 190, 119);
-        p.textFont(h3);
         p.fill(0, 254);
-        p.text("Selected:", 1000, 241);
+
+        //prompt
+        p.textFont(h3);
+        p.text("Selected:", 910, 221, PANEL_WIDTH - 10, 100);
+
+        //title
+        String title = "Wooden Wall";
+        if (wall instanceof IceWall) {
+            title = "Ice Wall";
+        } else if (wall.nextLevelB > 0) {
+            title = wall.upgradeTitles[wall.nextLevelB - 1] + " Wall";
+        }
         p.textFont(h2);
-        if (currentLevel == 0) p.text("Wooden", 1000, 276);
-        else if (wall instanceof IceWall) p.text("Ice", 1000, 276);
-        else p.text(wall.upgradeTitles[currentLevel - 1], 1000, 276);
-        p.text("Wall", 1000, 301);
-        p.textFont(h4);
-        p.text(wall.hp + " hp", 1000, 331);
-        p.text("Sell for: $" + (int) (0.8f * (float) wall.getValue()), 1000, 356);
+        p.text(title, 910, 256, PANEL_WIDTH - 10, 100);
+        p.line(920, 256 + 25, 910 + PANEL_WIDTH - 20, 256 + 25);
+
+        //health
+        p.textAlign(LEFT);
+        p.textFont(h3);
+        p.text("Health", 910, 291, PANEL_WIDTH - 10, 100);
+        p.textAlign(RIGHT);
+        p.textFont(monoMedium);
+        p.text(wall.hp + "/" + wall.maxHp, 910, 291 + 3, PANEL_WIDTH - 10, 100);
+        p.line(910, 291 + 20, 910 + PANEL_WIDTH - 10, 291 + 20);
+
+        //sell
+        p.textAlign(LEFT);
+        p.textFont(h3);
+        p.text("Sell For", 910, 316, PANEL_WIDTH - 10, 100);
+        p.textAlign(RIGHT);
+        p.textFont(monoMedium);
+        p.text("$" + nfc((int) (0.8f * (float) wall.getValue())), 910, 316 + 3, PANEL_WIDTH - 10, 100);
     }
 
     private Wall getWall() {
@@ -331,19 +372,19 @@ public class Hand {
     }
 
     private void universalWallInfo() {
-        p.fill(200);
-        p.rect(905, 700, 190, 195);
+        p.fill(0, 20);
+        p.strokeWeight(2);
+        p.stroke(0);
+        p.rect(905, 700, PANEL_WIDTH, 130);
         p.fill(0, 254);
-        p.textFont(h4);
+        p.textFont(pg);
         p.textAlign(LEFT);
-        p.text("LClick to place", 910, 720);
-        p.text("wall", 910, 740);
-        p.text("LClick on wall to", 910, 770);
-        p.text("upgrade", 910, 790);
-        p.text("RClick on wall", 910, 820);
-        p.text("to Sell", 910, 840);
-        p.text("Press tab or click on", 910, 870);
-        p.text("sidebar to deselect", 910, 890);
+        p.text("""
+                        - LClick to place wall
+                        - LClick on wall to upgrade
+                        - RClick on wall to sell
+                        - Press TAB or click sidebar to deselect""",
+                905 + 5, 700 + 5, 190 - 10, 195 - 10 - 9);
     }
 
     /**
