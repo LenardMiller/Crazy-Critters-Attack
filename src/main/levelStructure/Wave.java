@@ -94,6 +94,7 @@ public class Wave {
         money += reward;
         popupTexts.add(new PopupText(p, new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), reward));
         Saver.save();
+        inGameGui.updateSave();
     }
 
     public int getReward() {

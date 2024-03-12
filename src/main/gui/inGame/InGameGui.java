@@ -11,7 +11,6 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.highlightedText;
-import static main.misc.Utilities.up60ToFramerate;
 
 public class InGameGui {
 
@@ -19,6 +18,7 @@ public class InGameGui {
     public static final Color MONEY_PANEL_COLOR = new Color(200, 200, 200);
     public static final Color MAIN_TEXT_COLOR = new Color(0);
     public static final Color BOOSTED_TEXT_COLOR = new Color(255, 132, 0);
+    public static final float SAVING_ALPHA_UPDATE = 0.3f;
 
     private final PApplet p;
 
@@ -28,6 +28,8 @@ public class InGameGui {
     public TargetPriority priorityButton;
     public UpgradeTower upgradeButtonA, upgradeButtonB;
     public GuiObject upgradeIconA, upgradeIconB;
+
+    private float savingAlpha;
 
     public InGameGui(PApplet p) {
         this.p = p;
@@ -59,6 +61,8 @@ public class InGameGui {
             upgradeIconA.active = false;
             upgradeIconB.active = false;
         }
+
+        savingAlpha = (float) Math.max(0, savingAlpha - (Math.pow((0.8 * savingAlpha) - 1, 3) * -SAVING_ALPHA_UPDATE));
     }
 
     public void display() {
@@ -138,6 +142,16 @@ public class InGameGui {
         p.fill(MAIN_TEXT_COLOR.getRGB(), 254);
         p.textAlign(RIGHT);
         p.text("$" + nfc(money), BOARD_WIDTH + 200 - x, 211-8);
+
+        //saving heads-up
+        highlightedText(p, "Progress Saved", new PVector(890, 890),
+                new Color(255, 255, 255, (int) (254f * savingAlpha)),
+                new Color(0, 0, 0, (int) (175f * savingAlpha)),
+                monoMedium, RIGHT);
+    }
+
+    public void updateSave() {
+        savingAlpha = 1;
     }
 
     private void build() {
