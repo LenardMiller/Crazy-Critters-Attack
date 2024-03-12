@@ -195,6 +195,7 @@ public class Hand {
         p.image(heldSprite, pos.x, pos.y);
         p.tint(255);
         displayCritterCircles();
+        if (displayInfo != null) displayWallInfo();
     }
 
     private void displayCritterCircles() {
@@ -218,157 +219,83 @@ public class Hand {
     }
 
     public void displayHeldInfo() {
-        if (displayInfo != null) {
-            switch (displayInfo) {
-                case PlaceWall -> placeWallInfo();
-                case UpgradeWall -> upgradeWallInfo();
-                case MaxWallUpgrade -> selectedWallInfo();
-            }
-            universalWallInfo();
-        }
         if (!held.equals("null") && !held.equals("wall") && !held.endsWith("TL")) displayTurretInfo(p, heldClass);
     }
 
-    private void placeWallInfo() {
-        p.image(staticSprites.get("towerBuyPn"), 900, 212);
-        boolean canAfford = money >= Wall.BUY_PRICE;
-        if (canAfford) p.fill(0, 20);
-        else p.fill(0, 100);
-        p.strokeWeight(2);
-        p.stroke(0);
-        p.rect(905, 247, PANEL_WIDTH, 90);
-        p.textAlign(CENTER);
-        p.fill(0, 254);
-
-        //prompt
-        p.textFont(h3);
-        p.text("Placing:", 910, 221, PANEL_WIDTH - 10, 100);
-
-        //title
-        p.textFont(h2);
-        p.text("Wooden Wall", 910, 256, PANEL_WIDTH - 10, 100);
-        p.line(920, 256 + 25, 910 + PANEL_WIDTH - 20, 256 + 25);
-
-        //health
-        p.textAlign(LEFT);
-        p.textFont(h3);
-        p.text("Health", 910, 291, PANEL_WIDTH - 10, 100);
-        p.textAlign(RIGHT);
-        p.textFont(monoMedium);
-        p.text("50", 910, 291 + 3, PANEL_WIDTH - 10, 100);
-        p.line(910, 291 + 20, 910 + PANEL_WIDTH - 10, 291 + 20);
-
-        //price
-        p.textAlign(LEFT);
-        p.textFont(h3);
-        p.text("Price", 910, 316, PANEL_WIDTH - 10, 100);
-        p.textAlign(RIGHT);
-        p.textFont(monoMedium);
-        if (!canAfford) p.fill(CANT_AFFORD_COLOR.getRGB());
-        p.text("$" + Wall.BUY_PRICE, 910, 316 + 3, PANEL_WIDTH - 10, 100);
-    }
-
-    private void upgradeWallInfo() {
+    private void displayWallInfo() {
         Wall wall = getWall();
-        if (wall == null) {
-            placeWallInfo();
-            return;
+        PVector pos = new PVector(
+                (roundTo(boardMousePosition.x, 50)) - (25f / 2) - offset.x + 13 + 25,
+                roundTo(boardMousePosition.y, 50) - (25f / 2) - offset.y + 13 + 25);
+        // asymmetrical because of edge cases
+        if (pos.x > 900 || boardMousePosition.x < 0) return;
+
+        String priceText = null;
+        String hpGainText = null;
+        int hp = 0;
+        String sellText = null;
+        boolean canAffordTop = false;
+        boolean topEnabled = true;
+        boolean leftEnabled = true;
+        boolean bottomEnabled = true;
+        switch (displayInfo) {
+            case PlaceWall -> {
+                priceText = "$" + Wall.BUY_PRICE;
+                hpGainText = "50 HP";
+                canAffordTop = money >= Wall.BUY_PRICE;
+                leftEnabled = false;
+                bottomEnabled = false;
+            } case UpgradeWall -> {
+                if (wall == null) return;
+                priceText = "$" + nfc(wall.upgradePrices[wall.nextLevelB]);
+                hpGainText = "+" + wall.upgradeHp[wall.nextLevelB] + " HP";
+                canAffordTop = money >= wall.upgradePrices[wall.nextLevelB];
+                hp = wall.hp;
+                sellText = "+$" + nfc((int) (0.8f * (float) wall.getValue()));
+            } case MaxWallUpgrade -> {
+                if (wall == null) return;
+                topEnabled = false;
+                hp = wall.hp;
+                sellText = "+$" + nfc((int) (0.8f * (float) wall.getValue()));
+            }
         }
 
-        selectedWallInfo();
-
-        if (wall.nextLevelB > wall.upgradeTitles.length - 1) {
-            displayInfo = DisplayInfo.MaxWallUpgrade;
-            return;
+        if (topEnabled) {
+            Color textColor = new Color(0xFFC42C);
+            Color highlightColor = new Color(0xBF8B4F00, true);
+            if (!canAffordTop) {
+                textColor = new Color(255, 0, 0, 254);
+                highlightColor = new Color(50, 0, 0, 200);
+            }
+            highlightedText(p, priceText, pos.copy().add(0, -47), textColor, highlightColor,
+                    monoMedium, CENTER);
+            highlightedText(p, hpGainText, pos.copy().add(0, -30), textColor, highlightColor,
+                    monoMedium, CENTER);
         }
-
-        int dif = 130;
-
-        boolean canAfford = money >= wall.upgradePrices[wall.nextLevelB];
-        if (canAfford) p.fill(0, 20);
-        else p.fill(0, 100);
-        p.strokeWeight(2);
-        p.stroke(0);
-        p.rect(905, 247 + dif, PANEL_WIDTH, 90);
-        p.textAlign(CENTER);
-        p.fill(0, 254);
-
-        //prompt
-        p.textFont(h3);
-        p.text("Upgrade To:", 910, 221 + dif, PANEL_WIDTH - 10, 100);
-
-        //title
-        p.textFont(h2);
-        p.text(wall.upgradeTitles[wall.nextLevelB] + " Wall", 910, 256 + dif, PANEL_WIDTH - 10, 100);
-        p.line(920, 256 + 25 + dif, 910 + PANEL_WIDTH - 20, 256 + 25 + dif);
-
-        //health
-        p.textAlign(LEFT);
-        p.textFont(h3);
-        p.text("Health", 910, 291 + dif, PANEL_WIDTH - 10, 100);
-        p.textAlign(RIGHT);
-        p.textFont(monoMedium);
-        p.text("+" + wall.upgradeHp[wall.nextLevelB], 910, 291 + 3 + dif, PANEL_WIDTH - 10, 100);
-        p.line(910, 291 + 20 + dif, 910 + PANEL_WIDTH - 10, 291 + 20 + dif);
-
-        //price
-        p.textAlign(LEFT);
-        p.textFont(h3);
-        p.text("Price", 910, 316 + dif, PANEL_WIDTH - 10, 100);
-        p.textAlign(RIGHT);
-        p.textFont(monoMedium);
-        p.text("$" + nfc(wall.upgradePrices[wall.nextLevelB]), 910, 316 + 3 + dif, PANEL_WIDTH - 10, 100);
-    }
-
-    private void selectedWallInfo() {
-        Wall wall = getWall();
-        if (wall == null) {
-            placeWallInfo();
-            return;
+        if (leftEnabled) {
+            Color textColor = Color.WHITE;
+            Color highlightColor = new Color(0xBF343434, true);
+            highlightedText(p, hp + "", pos.copy().add(-29, -5), textColor, highlightColor,
+                    monoMedium, RIGHT);
+            highlightedText(p, "HP", pos.copy().add(-29, 12), textColor, highlightColor,
+                    monoMedium, RIGHT);
         }
-        p.image(staticSprites.get("towerBuyPn"), 900, 212);
-        p.fill(0, 20);
-        p.strokeWeight(2);
-        p.stroke(0);
-        p.rect(905, 247, PANEL_WIDTH, 90);
-        p.textAlign(CENTER);
-        p.fill(0, 254);
-
-        //prompt
-        p.textFont(h3);
-        p.text("Selected:", 910, 221, PANEL_WIDTH - 10, 100);
-
-        //title
-        String title = "Wooden Wall";
-        if (wall instanceof IceWall) {
-            title = "Ice Wall";
-        } else if (wall.nextLevelB > 0) {
-            title = wall.upgradeTitles[wall.nextLevelB - 1] + " Wall";
+        if (bottomEnabled) {
+            Color textColor = new Color(255, 0, 0, 254);
+            Color highlightColor = new Color(50, 0, 0, 200);
+            highlightedText(p, sellText, pos.copy().add(0, 40), textColor, highlightColor,
+                    monoMedium, CENTER);
         }
-        p.textFont(h2);
-        p.text(title, 910, 256, PANEL_WIDTH - 10, 100);
-        p.line(920, 256 + 25, 910 + PANEL_WIDTH - 20, 256 + 25);
-
-        //health
-        p.textAlign(LEFT);
-        p.textFont(h3);
-        p.text("Health", 910, 291, PANEL_WIDTH - 10, 100);
-        p.textAlign(RIGHT);
-        p.textFont(monoMedium);
-        p.text(wall.hp + "/" + wall.maxHp, 910, 291 + 3, PANEL_WIDTH - 10, 100);
-        p.line(910, 291 + 20, 910 + PANEL_WIDTH - 10, 291 + 20);
-
-        //sell
-        p.textAlign(LEFT);
-        p.textFont(h3);
-        p.text("Sell For", 910, 316, PANEL_WIDTH - 10, 100);
-        p.textAlign(RIGHT);
-        p.textFont(monoMedium);
-        p.text("$" + nfc((int) (0.8f * (float) wall.getValue())), 910, 316 + 3, PANEL_WIDTH - 10, 100);
     }
 
     private Wall getWall() {
-        return (Wall) tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1).tower;
+        Tile tile = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        if (tile == null) return null;
+        if (tile.tower == null) return null;
+        if (!(tile.tower instanceof Wall)) return null;
+        return (Wall) tile.tower;
     }
 
     private void universalWallInfo() {

@@ -33,7 +33,7 @@ public class IceTower extends Turret {
                     "Extra effective against flying critters.";
     public static char shortcut = 'F';
     public static String title1 = "Freeze Ray";
-    public static String title2 = "";
+    public static String title2 = null;
     public static int price = 6000;
 
     public int wallHp;

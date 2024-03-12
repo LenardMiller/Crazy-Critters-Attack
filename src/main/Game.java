@@ -185,6 +185,7 @@ public class Game {
         displayGameObjects();
         displayUpgradePrompts();
         displayHPBars();
+        hand.displayHeld();
         for (main.gui.guiObjects.PopupText popupText : popupTexts) popupText.display();
         displayInGameGui();
 
@@ -252,9 +253,7 @@ public class Game {
         for (Enemy enemy1 : enemies) if (enemy1 instanceof FlyingEnemy) enemy1.displayShadow();
         for (Enemy enemy : enemies) if (enemy instanceof FlyingEnemy) enemy.display();
         for (Buff buff : buffs) buff.display();
-        for (Particle particle : topParticles) particle.display();
-        hand.displayHeld();
-    }
+        for (Particle particle : topParticles) particle.display();}
 
     /** Displays tile base, the lowest particle layer, flooring, decorations and obstacle shadows **/
     private void displayBackgroundTiles() {
