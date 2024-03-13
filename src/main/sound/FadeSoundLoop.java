@@ -8,9 +8,10 @@ import static main.misc.Utilities.incrementByTo;
 
 public class FadeSoundLoop {
 
-    //todo: stop
+    private static final float MINIMUM_VOLUME = 0.01f;
 
     private final int autoStopTime;
+    private final float increment;
     private final SoundFile soundFile;
 
     private int timer;
@@ -24,25 +25,30 @@ public class FadeSoundLoop {
      * @param name identifier
      * @param autoStopTime how long it will run before automatically stopping
      */
-    public FadeSoundLoop(PApplet p, String name, int autoStopTime) {
+    public FadeSoundLoop(PApplet p, String name, int autoStopTime, float increment) {
         soundFile = new SoundFile(p, "sounds/loops/" + name + ".wav");
         this.autoStopTime = autoStopTime;
         soundFile.loop(1, 0.001f);
         targetVolume = 0.001f;
+        this.increment = increment;
         //never goes to 0 because that prints errors for some reason :/
     }
 
+    public FadeSoundLoop(PApplet p, String name, int autoStopTime) {
+        this(p, name, autoStopTime, 0.05f);
+    }
+
     public FadeSoundLoop(PApplet p, String name) {
-        this(p, name, -1);
+        this(p, name, -1, 0.05f);
     }
 
     public void update() {
-        volume = incrementByTo(volume, 0.05f, targetVolume);
-        if (volume > 0.01f && !soundFile.isPlaying()) soundFile.loop(1, volume);
+        volume = incrementByTo(volume, increment, targetVolume);
+        if (volume > MINIMUM_VOLUME && !soundFile.isPlaying()) soundFile.loop(1, volume);
         soundFile.amp(volume);
-        if (timer > autoStopTime && autoStopTime != -1) targetVolume = 0.01f;
+        if (timer > autoStopTime && autoStopTime != -1) targetVolume = MINIMUM_VOLUME;
         timer++;
-        if (volume <= 0.01f) soundFile.stop();
+        if (volume <= MINIMUM_VOLUME) soundFile.stop();
     }
 
     /** @param targetVolume will slowly increment in volume to this */

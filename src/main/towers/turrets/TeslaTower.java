@@ -1,10 +1,10 @@
 package main.towers.turrets;
 
+import main.misc.Tile;
 import main.projectiles.arcs.Arc;
 import main.projectiles.arcs.DemonArc;
-import main.projectiles.arcs.RedArc;
 import main.projectiles.shockwaves.LightningShockwave;
-import main.misc.Tile;
+import main.sound.FadeSoundLoop;
 import main.sound.SoundWithAlts;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -13,7 +13,6 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class TeslaTower extends Turret {
@@ -99,9 +98,11 @@ public class TeslaTower extends Turret {
             tile.tower = null;
         }
         updateBoosts();
-        if (highPower && !paused && alive) {
+        if (highPower && !paused && !machine.dead) {
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
             arcs.add(new DemonArc(p, position.x, position.y, this, getDamage(), arcLength, getRange(), priority));
+            FadeSoundLoop electricity = fadeSoundLoops.get("electricity");
+            if (electricity.targetVolume < 0.2f) electricity.setTargetVolume(0.2f);
         } else {
             if (enemies.size() > 0 && !machine.dead && !paused) checkTarget();
         }

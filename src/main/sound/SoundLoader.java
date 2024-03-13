@@ -122,7 +122,7 @@ public class SoundLoader {
         //loops
         startStopSoundLoops.put("smallExplosion", new StartStopSoundLoop(p, "smallExplosion/", secondsToFrames(1), false));
         fadeSoundLoops.put("flamethrower", new FadeSoundLoop(p, "flamethrower", FRAMERATE/6));
-        fadeSoundLoops.put("electricity", new FadeSoundLoop(p, "electricity", FRAMERATE/6));
+        fadeSoundLoops.put("electricity", new FadeSoundLoop(p, "electricity", FRAMERATE/3, 0.1f));
         //alts
         soundsWithAlts.put("thunder", new SoundWithAlts(p, "thunder", 3));
         //stackables

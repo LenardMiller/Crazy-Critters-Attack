@@ -8,8 +8,7 @@ import processing.core.PVector;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static main.Main.arcs;
-import static main.Main.paused;
+import static main.Main.*;
 import static processing.core.PConstants.TWO_PI;
 
 public class DemonArc extends Arc {
@@ -75,6 +74,7 @@ public class DemonArc extends Arc {
 
     @Override
     protected void damageEnemy(Enemy enemy, int damage, Turret turret) {
+        fadeSoundLoops.get("electricity").setTargetVolume(1);
         enemy.damageWithoutBuff(damage, turret, particleType, new PVector(0,0), false);
     }
 }
