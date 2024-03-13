@@ -10,7 +10,7 @@ public class FadeSoundLoop {
 
     //todo: stop
 
-    private final int minLength;
+    private final int autoStopTime;
     private final SoundFile soundFile;
 
     private int timer;
@@ -22,11 +22,11 @@ public class FadeSoundLoop {
      * A constantly playing loop that fades to audible then back to inaudible.
      * @param p the PApplet
      * @param name identifier
-     * @param minLength how long it will run before automatically stopping
+     * @param autoStopTime how long it will run before automatically stopping
      */
-    public FadeSoundLoop(PApplet p, String name, int minLength) {
+    public FadeSoundLoop(PApplet p, String name, int autoStopTime) {
         soundFile = new SoundFile(p, "sounds/loops/" + name + ".wav");
-        this.minLength = minLength;
+        this.autoStopTime = autoStopTime;
         soundFile.loop(1, 0.001f);
         targetVolume = 0.001f;
         //never goes to 0 because that prints errors for some reason :/
@@ -38,11 +38,11 @@ public class FadeSoundLoop {
 
     public void update() {
         volume = incrementByTo(volume, 0.05f, targetVolume);
+        if (volume > 0.01f && !soundFile.isPlaying()) soundFile.loop(1, volume);
         soundFile.amp(volume);
-        if (timer > minLength && minLength != -1) {
-            targetVolume = 0.01f;
-        }
+        if (timer > autoStopTime && autoStopTime != -1) targetVolume = 0.01f;
         timer++;
+        if (volume <= 0.01f) soundFile.stop();
     }
 
     /** @param targetVolume will slowly increment in volume to this */
