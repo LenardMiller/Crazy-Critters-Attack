@@ -17,6 +17,7 @@ public class OpenMenu extends Button {
         spritePressed = animatedSprites.get("towerTabSwitchBT")[1];
         spriteHover = animatedSprites.get("towerTabSwitchBT")[2];
         sprite = spriteIdle;
+        clickOut = null;
     }
 
     /**
@@ -25,8 +26,8 @@ public class OpenMenu extends Button {
      */
     @Override
     public void hover() {
-        if (matrixMousePosition.x < position.x+size.x/2 && matrixMousePosition.x > position.x-size.x/2 &&
-          matrixMousePosition.y < position.y+size.y/2 && matrixMousePosition.y > position.y-size.y/2 && alive && !paused) {
+        if (boardMousePosition.x < position.x+size.x/2 && boardMousePosition.x > position.x-size.x/2 &&
+                boardMousePosition.y < position.y+size.y/2 && boardMousePosition.y > position.y-size.y/2 && alive && !paused) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;

@@ -75,7 +75,7 @@ public class Game {
         //ui
         hand.update();
         for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).update();
-        if (playingLevel) levels[currentLevel].update();
+        if (isPlaying) levels[currentLevel].update();
         if (paused && !settings) pauseGui.update();
         if (!showSpawn) {
             if (!levelBuilder) {
@@ -83,6 +83,7 @@ public class Game {
             } else {
                 levelBuilderGui.update();
             }
+            waveStack.update();
         }
     }
 
@@ -177,11 +178,18 @@ public class Game {
         else p.translate(0, matrixOffset);
         p.scale(matrixScale);
 
+        // offset for left in-game-ui
+        p.pushMatrix();
+        p.translate(200, 0);
+
         displayGameObjects();
+        displayUpgradePrompts();
         displayHPBars();
+        hand.displayHeld();
         for (main.gui.guiObjects.PopupText popupText : popupTexts) popupText.display();
         displayInGameGui();
 
+        p.popMatrix();
         p.popMatrix();
 
         if (paused && !settings) pauseGui.display();
@@ -193,6 +201,7 @@ public class Game {
         if (!showSpawn) {
             if (!levelBuilder) inGameGui.display();
             else levelBuilderGui.display();
+            waveStack.display();
             hand.displayHeldInfo();
             p.textAlign(LEFT);
             if (!levelBuilder) inGameGui.displayText(p, 10);
@@ -201,7 +210,7 @@ public class Game {
             p.noStroke();
             if (!alive) p.fill(50, 0, 0, 50);
             else p.fill(0, 0, 0, 50);
-            p.rect(0, 0, p.width, p.height);
+            p.rect(-200, 0, p.width + 200, p.height);
         }
     }
 
@@ -214,6 +223,12 @@ public class Game {
         }
         for (Tower tower : towers) tower.displayHpBar();
         machine.hpBar();
+    }
+
+    private void displayUpgradePrompts() {
+        for (Tower tower : towers) {
+            if (tower instanceof Turret) ((Turret) tower).displayUpgradePrompt();
+        }
     }
 
     /** Displays everything that is within the game "window" */
@@ -238,9 +253,7 @@ public class Game {
         for (Enemy enemy1 : enemies) if (enemy1 instanceof FlyingEnemy) enemy1.displayShadow();
         for (Enemy enemy : enemies) if (enemy instanceof FlyingEnemy) enemy.display();
         for (Buff buff : buffs) buff.display();
-        for (Particle particle : topParticles) particle.display();
-        hand.displayHeld();
-    }
+        for (Particle particle : topParticles) particle.display();}
 
     /** Displays tile base, the lowest particle layer, flooring, decorations and obstacle shadows **/
     private void displayBackgroundTiles() {
@@ -309,7 +322,6 @@ public class Game {
         for (Node node : end) node.findGHF();
         updateTowerArray();
         //load level data
-        playingLevel = false;
         levels[0] = new Level(p, ForestWaves.genForestWaves(p),
                 "levels/forest",     125,  50,  "dirt");
         levels[1] = new Level(p, DesertWaves.genDesertWaves(p),
@@ -327,6 +339,7 @@ public class Game {
         hand = new Hand(p);
         selection = new Selection(p);
         inGameGui = new InGameGui(p);
+        waveStack = new WaveStack(p);
         levelBuilderGui = new LevelBuilderGui(p);
         pauseGui = new PauseGui(p);
         //other

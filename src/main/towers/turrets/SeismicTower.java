@@ -1,19 +1,31 @@
 package main.towers.turrets;
 
-import main.projectiles.shockwaves.SeismicShockwave;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.misc.Tile;
 import main.particles.MiscParticle;
+import main.projectiles.shockwaves.SeismicShockwave;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 import static processing.core.PConstants.HALF_PI;
 
 public class SeismicTower extends Turret {
+
+    public static final Color SPECIAL_COLOR = new Color(0xBBBBBB);
+
+    public static String pid = "S3-225-50-2.5";
+    public static String description =
+            "Sends a shockwave towards the nearest group of critters. " +
+                    "Shockwaves stun burrowing critters, but can't hit flying critters.";
+    public static char shortcut = 'X';
+    public static String title1 = "Seismic Tower";
+    public static String title2 = null;
+    public static int price = 500;
 
     /** Degrees */
     public float shockwaveWidth;
@@ -24,8 +36,8 @@ public class SeismicTower extends Turret {
         super(p,tile);
         name = "seismic";
         offset = 4;
-        delay = randomizeDelay(p, 2.5f);
-        pjSpeed = 400;
+        delay = 2.5f;
+        pjSpeed = 350;
         betweenFireFrames = down60ToFramerate(1);
         damage = 50;
         range = 225;
@@ -36,12 +48,10 @@ public class SeismicTower extends Turret {
         fireSound = sounds.get("seismicSlam");
         barrelLength = 29;
         material = Material.stone;
-        basePrice = SEISMIC_PRICE;
+        basePrice = price;
         titleLines = new String[]{"Seismic Tower"};
-        infoDisplay = (o) -> {
-            selection.setTextPurple("Shockwave", o);
-            selection.setTextPurple("Stuns burrowers", o);
-        };
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Shockwave", null));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Stuns Burrowers", null));
     }
 
     @Override
@@ -105,11 +115,11 @@ public class SeismicTower extends Turret {
             }
             shockwaves.add(new SeismicShockwave(p, tile.position.x - size.x / 2, tile.position.y - size.y / 2,
               (int) barrelLength, getRange(), angle, shockwaveWidth, getDamage(), this,
-                    false, true));
+                    false, true, pjSpeed));
         } else {
             fireParticles(a);
             shockwaves.add(new SeismicShockwave(p, position.x, position.y, 0,
-                    getRange(), angle, shockwaveWidth, getDamage(), this, seismicSense, false));
+                    getRange(), angle, shockwaveWidth, getDamage(), this, seismicSense, false, pjSpeed));
         }
     }
 
@@ -143,15 +153,17 @@ public class SeismicTower extends Turret {
         upgradePrices[0] = 250;
         upgradePrices[1] = 250;
         upgradePrices[2] = 1500;
+
         upgradePrices[3] = 250;
         upgradePrices[4] = 300;
         upgradePrices[5] = 1000;
         //titles
-        upgradeTitles[0] = "Faster Firing";
-        upgradeTitles[1] = "Larger AOE";
-        upgradeTitles[2] = "360 Wave";
-        upgradeTitles[3] = "Longer Range";
-        upgradeTitles[4] = "Damage Boost";
+        upgradeTitles[0] = "Faster Reset";
+        upgradeTitles[1] = "Wider Wave";
+        upgradeTitles[2] = "Omniwave";
+
+        upgradeTitles[3] = "Longer Wave";
+        upgradeTitles[4] = "Forceful Wave";
         upgradeTitles[5] = "Seismic Sense";
         //description
         upgradeDescA[0] = "Increase";
@@ -162,9 +174,9 @@ public class SeismicTower extends Turret {
         upgradeDescB[1] = "area of";
         upgradeDescC[1] = "effect";
 
-        upgradeDescA[2] = "Shockwave";
-        upgradeDescB[2] = "encircles";
-        upgradeDescC[2] = "tower";
+        upgradeDescA[2] = "Full";
+        upgradeDescB[2] = "shockwave";
+        upgradeDescC[2] = "rings";
 
 
         upgradeDescA[3] = "Increase";
@@ -182,8 +194,9 @@ public class SeismicTower extends Turret {
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[20];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[21];
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
+        
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[52];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[53];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[22];
     }
 
@@ -204,17 +217,15 @@ public class SeismicTower extends Turret {
                     hasPriority = false;
                     selection.swapSelected(this);
                     titleLines = new String[]{"Seismic", "Slammer"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Shockwave", o);
-                        selection.setTextPurple("360 degrees", o);
-                    };
                     loadSprites();
                 }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3 -> range += 50;
-                case 4 -> damage += 50;
+                case 3 -> {
+                    range += 50;
+                    pjSpeed += 100;
+                } case 4 -> damage += 50;
                 case 5 -> {
                     material = Material.metal;
                     placeSound = sounds.get("metalPlace");
@@ -224,15 +235,14 @@ public class SeismicTower extends Turret {
                     effectLevel = 0;
                     effectDuration = 2;
                     shockwaveWidth -= 40;
+                    pjSpeed += 100;
                     range += 100;
                     damage += 150;
                     name = "seismicSniper";
                     titleLines = new String[]{"Seismic Sniper"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Shockwave", o);
-                        selection.setTextPurple("Can track burrowers", o);
-                        selection.setTextPurple("Stuns burrowers", o);
-                    };
+                    extraInfo.remove(1);
+                    extraInfo.add(1, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Targets Burrowers", null));
                     loadSprites();
                 }
             }

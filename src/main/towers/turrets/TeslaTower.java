@@ -1,9 +1,10 @@
 package main.towers.turrets;
 
-import main.projectiles.arcs.Arc;
-import main.projectiles.arcs.RedArc;
-import main.projectiles.shockwaves.LightningShockwave;
 import main.misc.Tile;
+import main.projectiles.arcs.Arc;
+import main.projectiles.arcs.DemonArc;
+import main.projectiles.shockwaves.LightningShockwave;
+import main.sound.FadeSoundLoop;
 import main.sound.SoundWithAlts;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -12,39 +13,46 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class TeslaTower extends Turret {
+
+    private static final Color SPECIAL_COLOR = new Color(0xc0f1fc);
+
+    public static String pid = "M3-225-400-2";
+    public static String description =
+            "Creates electric arcs that can jump from critter to critter. " +
+                    "Short range, but arcs can chain to many critters.";
+    public static char shortcut = 'C';
+    public static String title1 = "Tesla Tower";
+    public static String title2 = null;
+    public static int price = 1500;
 
     public int arcLength;
 
     private boolean lightning;
     private boolean highPower;
 
-    private final SoundWithAlts THUNDER_SOUND;
+    private final SoundWithAlts thunderSound;
 
     public TeslaTower(PApplet p, Tile tile) {
         super(p,tile);
         name = "tesla";
-        delay = randomizeDelay(p, 3);
-        damage = 300;
-        arcLength = 3;
+        delay = 2f;
+        damage = 400;
+        arcLength = 2;
         pjSpeed = -1;
         range = 225;
         betweenIdleFrames = down60ToFramerate(3);
         material = Material.metal;
-        basePrice = TESLA_TOWER_PRICE;
+        basePrice = price;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("teslaFire");
-        THUNDER_SOUND = soundsWithAlts.get("thunder");
+        thunderSound = soundsWithAlts.get("thunder");
         titleLines = new String[]{"Tesla Tower"};
-        infoDisplay = (o) -> {
-            selection.setTextPurple("Jumping electricity", o);
-            jumpInfo(o, 1);
-        };
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Arc Chain", arcLength + ""));
     }
 
     @Override
@@ -62,7 +70,7 @@ public class TeslaTower extends Turret {
 
     protected void fire() {
         if (lightning) {
-            THUNDER_SOUND.playRandomWithRandomSpeed(1);
+            thunderSound.playRandomWithRandomSpeed(1);
             PVector targetPosition = new PVector(targetEnemy.position.x, targetEnemy.position.y);
             PVector myPosition = new PVector(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
             shockwaves.add(new LightningShockwave(p, targetPosition.x, targetPosition.y, 150, damage, this));
@@ -76,15 +84,31 @@ public class TeslaTower extends Turret {
             for (int i = 0; i < 3; i++) {
                 arcs.add(new Arc(p, myPosition.x, myPosition.y, this, 0, arcLength, 100, Priority.None));
             }
-        } else if (highPower) {
-            playSoundRandomSpeed(p, fireSound, 1);
-            PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
-            arcs.add(new RedArc(p, position.x, position.y, this, getDamage(), arcLength, getRange(), priority));
-        }
-        else {
+        } else if (!highPower) {
             playSoundRandomSpeed(p, fireSound, 1);
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
             arcs.add(new Arc(p, position.x, position.y, this, getDamage(), arcLength, getRange(), priority));
+        }
+    }
+
+    @Override
+    public void update() {
+        if (hp <= 0) {
+            die(false);
+            tile.tower = null;
+        }
+        updateBoosts();
+        if (highPower && !paused && !machine.dead) {
+            PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
+            arcs.add(new DemonArc(p, position.x, position.y, this, getDamage(), arcLength, getRange(), priority));
+            FadeSoundLoop electricity = fadeSoundLoops.get("electricity");
+            if (electricity.targetVolume < 0.2f) electricity.setTargetVolume(0.2f);
+        } else {
+            if (enemies.size() > 0 && !machine.dead && !paused) checkTarget();
+        }
+        if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
+                && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
+            selection.swapSelected(tile.id);
         }
     }
 
@@ -114,27 +138,27 @@ public class TeslaTower extends Turret {
         //price
         upgradePrices[0] = 800;
         upgradePrices[1] = 1000;
-        upgradePrices[2] = 10000;
+        upgradePrices[2] = 12_000;
 
         upgradePrices[3] = 600;
         upgradePrices[4] = 1200;
-        upgradePrices[5] = 8000;
+        upgradePrices[5] = 10_000;
         //titles
-        upgradeTitles[0] = "Farther Jumping";
-        upgradeTitles[1] = "Farther Jumping";
-        upgradeTitles[2] = "Lightning";
+        upgradeTitles[0] = "Extra Arcing";
+        upgradeTitles[1] = "Powerful Arcing";
+        upgradeTitles[2] = "Call Lightning";
 
-        upgradeTitles[3] = "Battery Size";
-        upgradeTitles[4] = "Shocking";
-        upgradeTitles[5] = "High Energy";
+        upgradeTitles[3] = "Faster Recharge";
+        upgradeTitles[4] = "High Voltage";
+        upgradeTitles[5] = "Perma-arc";
         //description
         upgradeDescA[0] = "Increase";
-        upgradeDescB[0] = "jump";
-        upgradeDescC[0] = "distance";
+        upgradeDescB[0] = "arc chain";
+        upgradeDescC[0] = "& range";
 
         upgradeDescA[1] = "Increase";
-        upgradeDescB[1] = "jump";
-        upgradeDescC[1] = "distance";
+        upgradeDescB[1] = "arc chain";
+        upgradeDescC[1] = "& range";
 
         upgradeDescA[2] = "Calls";
         upgradeDescB[2] = "lightning";
@@ -158,24 +182,22 @@ public class TeslaTower extends Turret {
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[33];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[7];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
-        upgradeIcons[5] = animatedSprites.get("upgradeIC")[34];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[34];
+        upgradeIcons[5] = animatedSprites.get("upgradeIC")[59];
     }
 
     @Override
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                case 1:
+                case 0, 1 -> {
                     arcLength++;
                     range += 25;
-                    break;
-                case 2:
-                    arcLength += 3;
+                } case 2 -> {
                     range = 5000;
-                    damage += 2500;
-                    delay += 2;
+                    damage += 2400;
+                    delay += 4;
+                    arcLength++;
                     lightning = true;
                     material = Material.crystal;
                     placeSound = sounds.get("crystalPlace");
@@ -184,41 +206,28 @@ public class TeslaTower extends Turret {
                     name = "lightning";
                     betweenFireFrames = 2;
                     titleLines = new String[]{"Lightning Caller"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Jumping electricity", o);
-                        selection.setTextPurple("Splash", o);
-                        jumpInfo(o, 2);
-                    };
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Lightning", null));
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    delay -= 1;
-                    break;
-                case 4:
-                    damage += 200;
-                    break;
-                case 5:
-                    delay = 0.2f;
+                case 3 -> delay -= 1;
+                case 4 -> damage += 200;
+                case 5 -> {
+                    delay = 0;
                     highPower = true;
                     betweenIdleFrames = 3;
+                    damage /= 8;
                     name = "highPowerTesla";
                     material = Material.darkMetal;
                     titleLines = new String[]{"The Demon", "Circuit"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Jumping Electricity", o);
-                        jumpInfo(o, 1);
-                    };
+                    extraInfo.clear();
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            new Color(0xFD5454), "Arc Chain", arcLength + ""));
                     loadSprites();
-                    break;
+                }
             }
         }
-    }
-
-    private void jumpInfo(int offset, int purpleCount) {
-        p.fill(new Color(100, 150, 255).getRGB(), 254);
-        p.text("Jumps: " + arcLength, 910, 356 + 20 * purpleCount + offset);
     }
 }

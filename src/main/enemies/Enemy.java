@@ -113,8 +113,8 @@ public abstract class Enemy {
     public PVector position;
     public PVector size;
     public State state = State.Moving;
+    public int moneyDrop;
 
-    protected int moneyDrop;
     protected int damage;
     protected int betweenWalkFrames;
     protected int betweenAttackFrames;
@@ -181,12 +181,8 @@ public abstract class Enemy {
             rotation += getAngleDifference(targetAngle, rotation) / 10;
 
             switch (state) {
-                case Moving:
-                    move();
-                    break;
-                case Attacking:
-                    attack();
-                    break;
+                case Moving -> move();
+                case Attacking -> attack();
             }
 
             //prevent wandering
@@ -303,7 +299,7 @@ public abstract class Enemy {
     protected void animate() {
         if (!immobilized) {
             switch (state) {
-                case Attacking:
+                case Attacking -> {
                     if (attackFrame >= attackFrames.length) attackFrame = 0;
                     sprite = attackFrames[attackFrame];
                     idleTime++;
@@ -313,8 +309,7 @@ public abstract class Enemy {
                             idleTime = 0;
                         }
                     } else attackFrame = 0;
-                    break;
-                case Moving:
+                } case Moving -> {
                     idleTime++;
                     if (moveFrame < moveFrames.length - 1) {
                         if (idleTime >= betweenWalkFrames) {
@@ -323,6 +318,7 @@ public abstract class Enemy {
                         }
                     } else moveFrame = 0;
                     sprite = moveFrames[moveFrame];
+                }
             }
         }
         //shift back to normal
@@ -413,40 +409,20 @@ public abstract class Enemy {
         if (buffName != null) {
             Buff buff;
             switch (buffName) {
-                case "burning":
-                    buff = new Burning(p, id, effectLevel, effectDuration, turret);
-                    break;
-                case "blueBurning":
-                    buff = new BlueBurning(p, id, effectLevel, effectDuration, turret);
-                    break;
-                case "bleeding":
-                    buff = new Bleeding(p, id, turret);
-                    break;
-                case "poisoned":
-                    buff = new Poisoned(p, id, turret);
-                    break;
-                case "decay":
+                case "burning" -> buff = new Burning(p, id, effectLevel, effectDuration, turret);
+                case "blueBurning" -> buff = new BlueBurning(p, id, effectLevel, effectDuration, turret);
+                case "bleeding" -> buff = new Bleeding(p, id, effectLevel, effectDuration, turret);
+                case "poisoned" -> buff = new Poisoned(p, id, turret);
+                case "decay" -> {
                     if (turret != null) buff = new Decay(p, id, effectLevel, effectDuration, turret);
                     else buff = new Decay(p, id, 1, 120, null);
-                    break;
-                case "glued":
-                    buff = new Glued(p, id, effectLevel, effectDuration, turret);
-                    break;
-                case "spikeyGlued":
-                    buff = new SpikeyGlued(p, id, effectLevel, effectDuration, turret);
-                    break;
-                case "stunned":
-                    buff = new Stunned(p, id, turret);
-                    break;
-                case "frozen":
-                    buff = new Frozen(p, id, turret);
-                    break;
-                case "electrified":
-                    buff = new Electrified(p, id, (int) effectLevel, effectDuration, turret);
-                    break;
-                default:
-                    buff = null;
-                    break;
+                }
+                case "glued" -> buff = new Glued(p, id, effectLevel, effectDuration, turret);
+                case "spikeyGlued" -> buff = new SpikeyGlued(p, id, effectLevel, effectDuration, turret);
+                case "stunned" -> buff = new Stunned(p, id, turret);
+                case "frozen" -> buff = new Frozen(p, id, turret);
+                case "electrified" -> buff = new Electrified(p, id, (int) effectLevel, effectDuration, turret);
+                default -> buff = null;
             }
             if (buff != null) {
                 //in order to prevent resetting timer after buff is reapplied
@@ -568,7 +544,7 @@ public abstract class Enemy {
                 playSoundRandomSpeed(p, attackSound, 1);
             }
         } else if (!targetMachine && attackFrame == 0) state = State.Moving;
-        if (targetMachine) {
+        else if (targetMachine) {
             moveFrame = 0;
             //actually do damage to machines
             if (dmg) {
@@ -586,123 +562,94 @@ public abstract class Enemy {
 
     public static Enemy get(PApplet p, String name, PVector pos) {
         switch (name) {
-            case "smolBug":
+            case "smolBug" -> {
                 return new SmolBug(p, pos.x, pos.y);
-            case "midBug":
+            } case "midBug" -> {
                 return new MidBug(p, pos.x, pos.y);
-            case "Big Bugs":
-            case "bigBug":
+            } case "Big Bugs", "bigBug" -> {
                 return new BigBug(p, pos.x, pos.y);
-            case "treeSprite":
+            } case "treeSprite" -> {
                 return new TreeSprite(p, pos.x, pos.y);
-            case "Tree Spirits":
-            case "treeSpirit":
+            } case "Tree Spirits", "treeSpirit" -> {
                 return new TreeSpirit(p, pos.x, pos.y);
-            case "Tree Giants":
-            case "treeGiant":
+            } case "Tree Giants", "treeGiant" -> {
                 return new TreeGiant(p, pos.x, pos.y);
-            case "snake":
+            } case "snake" -> {
                 return new Snake(p, pos.x, pos.y);
-            case "littleWorm":
-            case "worm":
+            } case "littleWorm", "worm" -> {
                 return new Worm(p, pos.x, pos.y);
-            case "butterfly":
+            } case "butterfly" -> {
                 return new Butterfly(p, pos.x, pos.y);
-            case "scorpion":
+            } case "scorpion" -> {
                 return new Scorpion(p, pos.x, pos.y);
-            case "sidewinder":
+            } case "sidewinder" -> {
                 return new Sidewinder(p, pos.x, pos.y);
-            case "emperor":
+            } case "emperor" -> {
                 return new Emperor(p, pos.x, pos.y);
-            case "midWorm":
+            } case "midWorm" -> {
                 return new MidWorm(p, pos.x, pos.y);
-            case "Worms":
-            case "Megaworms":
-            case "bigWorm":
+            } case "Worms", "Megaworms", "bigWorm" -> {
                 return new BigWorm(p, pos.x, pos.y);
-            case "albinoBug":
+            } case "albinoBug" -> {
                 return new AlbinoBug(p, pos.x, pos.y);
-            case "bigAlbinoBug":
+            } case "bigAlbinoBug" -> {
                 return new BigAlbinoBug(p, pos.x, pos.y);
-            case "albinoButterfly":
+            } case "albinoButterfly" -> {
                 return new AlbinoButterfly(p, pos.x, pos.y);
-            case "smallGolem":
+            } case "smallGolem" -> {
                 return new SmallGolem(p, pos.x, pos.y);
-            case "midGolem":
-            case "golem":
+            } case "midGolem", "golem" -> {
                 return new Golem(p, pos.x, pos.y);
-            case "bigGolem":
-            case "giantGolem":
+            } case "bigGolem", "giantGolem" -> {
                 return new GiantGolem(p, pos.x, pos.y);
-            case "bat":
+            } case "bat" -> {
                 return new Bat(p, pos.x, pos.y);
-            case "bigBat":
+            } case "bigBat" -> {
                 return new GiantBat(p, pos.x, pos.y);
-            case "wtf":
+            } case "wtf" -> {
                 return new Wtf(p, pos.x, pos.y);
-            case "antlion":
+            } case "antlion" -> {
                 return new Antlion(p, pos.x, pos.y);
-            case "Antlions":
-            case "snowAntlion":
+            } case "Antlions", "snowAntlion" -> {
                 return new SnowAntlion(p, pos.x, pos.y);
-            case "Wolves":
-            case "wolf":
+            } case "Wolves", "wolf" -> {
                 return new Wolf(p, pos.x, pos.y);
-            case "Snow Sharks":
-            case "shark":
+            } case "Snow Sharks", "shark" -> {
                 return new Shark(p, pos.x, pos.y);
-            case "Velociraptors":
-            case "velociraptor":
+            } case "Velociraptors", "velociraptor" -> {
                 return new Velociraptor(p, pos.x, pos.y);
-            case "Ice Entities":
-            case "iceEntity":
+            } case "Ice Entities", "iceEntity" -> {
                 return new IceEntity(p, pos.x, pos.y);
-            case "Ice Monstrosity":
-            case "Ice Monstrosities":
-            case "iceMonstrosity":
+            } case "Ice Monstrosity", "Ice Monstrosities", "iceMonstrosity" -> {
                 return new IceMonstrosity(p, pos.x, pos.y);
-            case "Frost":
-            case "frost":
+            } case "Frost", "frost" -> {
                 return new Frost(p, pos.x, pos.y);
-            case "Mammoth":
-            case "Mammoths":
-            case "mammoth":
+            } case "Mammoth", "Mammoths", "mammoth" -> {
                 return new Mammoth(p, pos.x, pos.y);
-            case "Mud Creatures":
-            case "mudCreature":
+            } case "Mud Creatures", "mudCreature" -> {
                 return new MudCreature(p, pos.x, pos.y);
-            case "Mud Flingers":
-            case "mudFlinger":
+            } case "Mud Flingers", "mudFlinger" -> {
                 return new MudFlinger(p, pos.x, pos.y);
-            case "Enraged Giants":
-            case "Enraged Giant":
-            case "enragedGiant":
+            } case "Enraged Giants", "Enraged Giant", "enragedGiant" -> {
                 return new EnragedGiant(p, pos.x, pos.y);
-            case "Mantises":
-            case "Mantis":
-            case "mantis":
+            } case "Mantises", "Mantis", "mantis" -> {
                 return new Mantis(p, pos.x, pos.y);
-            case "Roaches":
-            case "roach":
+            } case "Roaches", "roach" -> {
                 return new Roach(p, pos.x, pos.y);
-            case "Roots":
-            case "root":
+            } case "Roots", "root" -> {
                 return new Root(p, pos.x, pos.y);
-            case "Mantoids":
-            case "mantoid":
+            } case "Mantoids", "mantoid" -> {
                 return new Mantoid(p, pos.x, pos.y);
-            case "Twisted":
-            case "twisted":
+            } case "Twisted", "twisted" -> {
                 return new Twisted(p, pos.x, pos.y);
-            case "fae":
-            case "Fae":
+            } case "fae", "Fae" -> {
                 return new Fae(p, pos.x, pos.y);
-            case "Mutant Bug":
-            case "Mutant Bugs":
+            } case "Mutant Bug", "Mutant Bugs" -> {
                 return new MutantBug(p, pos.x, pos.y);
-            default:
+            } default -> {
                 System.out.println("Could not get enemy of type: \"" + name + "\"");
                 return null;
+            }
         }
     }
 

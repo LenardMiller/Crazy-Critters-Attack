@@ -2,6 +2,7 @@ package main.towers.turrets;
 
 import main.Main;
 import main.enemies.Enemy;
+import main.gui.inGame.Selection;
 import main.misc.IntVector;
 import main.misc.Tile;
 import main.towers.IceWall;
@@ -23,6 +24,18 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class IceTower extends Turret {
 
+    private static final Color SPECIAL_COLOR = new Color(0x45e6ff);
+
+    public static String pid = "C2-350-0-10";
+    public static String description =
+            "Shoots a ray of frost at the nearest critter, freezing it in a block of ice. " +
+                    "Smaller critters become completely immobilized, while larger critters are only slowed. " +
+                    "Extra effective against flying critters.";
+    public static char shortcut = 'F';
+    public static String title1 = "Freeze Ray";
+    public static String title2 = null;
+    public static int price = 6000;
+
     public int wallHp;
     public int wallTimeUntilDamage;
 
@@ -40,7 +53,7 @@ public class IceTower extends Turret {
     public IceTower(PApplet p, Tile tile) {
         super(p, tile);
         name = "iceTower";
-        delay = randomizeDelay(p, 10);
+        delay = 10;
         pjSpeed = -1;
         range = 350;
         barrelLength = 30;
@@ -52,15 +65,19 @@ public class IceTower extends Turret {
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("iceFire");
-        basePrice = ICE_TOWER_PRICE;
+        basePrice = price;
         titleLines = new String[]{"Freeze Ray"};
-        infoDisplay = (o) -> {
-            selection.setTextPurple("Encases enemies", o);
-            iceWallInfo(o);
-        };
-        statsDisplay = (o) -> {
-            if (frozenTotal == 1) p.text("1 wall created", 910, 500 + offset);
-            else p.text(nfc(frozenTotal) + " walls created", 910, 500 + offset);
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Encases Critters", null));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Ice HP", wallHp + ""));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                SPECIAL_COLOR, "Ice Lifespan",
+                wallTimeUntilDamage > 0 ?
+                        nf((wallTimeUntilDamage / (float) FRAMERATE) * 10, 1, 1) + "s" :
+                        "∞"));
+        statsDisplay = () -> {
+            selection.displayInfoLine(-2, Selection.STAT_TEXT_COLOR, "Frozen", frozenTotal + "");
+            int age = levels[currentLevel].currentWave - birthday;
+            selection.displayInfoLine(-1, Selection.STAT_TEXT_COLOR, "Survived", age + "");
         };
 
         BETWEEN_VAPOR_FRAMES = down60ToFramerate(3);
@@ -78,8 +95,8 @@ public class IceTower extends Turret {
         }
         updateBoosts();
         if ((enemies.size() > 0 && !machine.dead && !paused) || name.equals("autoIceTower")) checkTarget();
-        if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
-                && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
+        if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
+                && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
     }
@@ -243,20 +260,20 @@ public class IceTower extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 750;
-        upgradePrices[1] = 1200;
+        upgradePrices[0] = 2500;
+        upgradePrices[1] = 3500;
         upgradePrices[2] = 30000;
 
-        upgradePrices[3] = 1000;
-        upgradePrices[4] = 1500;
+        upgradePrices[3] = 3000;
+        upgradePrices[4] = 5000;
         upgradePrices[5] = 35000;
         //titles
         upgradeTitles[0] = "Longer Lasting";
         upgradeTitles[1] = "Stronger Ice";
         upgradeTitles[2] = "Auto Defence";
 
-        upgradeTitles[3] = "Increase Range";
-        upgradeTitles[4] = "Faster Freezing";
+        upgradeTitles[3] = "Longer Beam";
+        upgradeTitles[4] = "Defogging";
         upgradeTitles[5] = "Superfreeze";
         //descriptions
         upgradeDescA[0] = "Ice lasts";
@@ -289,7 +306,7 @@ public class IceTower extends Turret {
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[36];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[42];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[5];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[67];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[41];
     }
@@ -298,13 +315,9 @@ public class IceTower extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    wallTimeUntilDamage += 15;
-                    break;
-                case 1:
-                    wallHp += 40;
-                    break;
-                case 2:
+                case 0 -> wallTimeUntilDamage += 15;
+                case 1 -> wallHp += 40;
+                case 2 -> {
                     name = "autoIceTower";
                     range = 5000;
                     wallTimeUntilDamage = -1;
@@ -315,45 +328,32 @@ public class IceTower extends Turret {
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
                     titleLines = new String[]{"Ice Defender"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Reinforces defences", o);
-                        iceWallInfo(o);
-                    };
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Auto Defence", null));
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    range += 50;
-                    break;
-                case 4:
-                    delay -= 3;
-                    break;
-                case 5:
+                case 3 -> range += 50;
+                case 4 -> delay -= 3;
+                case 5 -> {
                     name = "superIceTower";
                     material = Material.titanium;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     titleLines = new String[]{"Super Freeze", "Ray"};
+                    range += 50;
                     wallHp += 170;
                     wallTimeUntilDamage += 20;
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Encases any enemy", o);
-                        iceWallInfo(o);
-                    };
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Encases Beasts", null));
                     loadSprites();
-                    break;
+                }
             }
         }
-    }
-
-    private void iceWallInfo(int offset) {
-        p.fill(new Color(100, 150, 255).getRGB(), 254);
-        p.text("Ice HP: " + wallHp, 910, 356 + 20 + offset);
-        float lifespan = (wallTimeUntilDamage / (float) FRAMERATE) * 10;
-        if (wallTimeUntilDamage == -1) p.text("Ice doesn't melt", 910, 376 + 20 + offset);
-        else p.text("Ice lifespan: " + round(lifespan) + "s", 910, 376 + 20 + offset);
     }
 }

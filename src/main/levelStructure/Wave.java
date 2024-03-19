@@ -1,10 +1,8 @@
 package main.levelStructure;
 
-import main.enemies.*;
-import main.enemies.burrowingEnemies.*;
-import main.enemies.flyingEnemies.*;
-import main.enemies.shootingEnemies.*;
+import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
+import main.gui.inGame.WaveCard;
 import main.misc.Polluter;
 import main.misc.Saver;
 import main.towers.IceWall;
@@ -25,14 +23,12 @@ import static main.sound.SoundUtilities.playSound;
 
 public class Wave {
 
-    private final PApplet P;
-    private final Color FILL_COLOR;
-    private final Color ACCENT_COLOR;
-    private final Color TEXT_COLOR;
-    private final String TITLE;
+    private final WaveCard waveCard;
 
-    final int SPAWN_LENGTH;
-    final int LENGTH;
+    private final PApplet p;
+
+    final int spawnLength;
+    final int length;
 
     public Polluter polluter;
     public String groundType;
@@ -49,10 +45,6 @@ public class Wave {
 
     ArrayList<String> spawns;
 
-    boolean hasFlying;
-    boolean hasBurrowing;
-    boolean hasShooting;
-
     /**
      * A wave of enemies
      * @param p the PApplet
@@ -63,20 +55,28 @@ public class Wave {
      * @param textColor color of title and number
      * @param title main enemy of wave
      */
-    public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
-        P = p;
-        LENGTH = secondsToFrames(length);
-        SPAWN_LENGTH = secondsToFrames(spawnLength);
-        if (SPAWN_LENGTH >= LENGTH) {
-            throw new RuntimeException("Wave spawn length should always be shorter than its total length!");
-        }
-        FILL_COLOR = fillColor;
-        ACCENT_COLOR = accentColor;
-        TEXT_COLOR = textColor;
-        TITLE = title;
+    public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String[] title) {
+        this.p = p;
+        this.length = secondsToFrames(length);
+        this.spawnLength = secondsToFrames(spawnLength);
+        assert(spawnLength <= length);
+
+        waveCard = new WaveCard(p, fillColor, accentColor, textColor, title);
         spawns = new ArrayList<>();
 
         setBetweenPollutesAtEnd = -1;
+    }
+
+    public float getProgress() {
+        return Math.min(spawnLengthTimer / (float) spawnLength, 1);
+    }
+
+    public Wave(PApplet p, int length, int spawnLength, Color fillColor, Color accentColor, Color textColor, String title) {
+        this(p, length, spawnLength, fillColor, accentColor, textColor, new String[]{title});
+    }
+
+    public WaveCard getWaveCard() {
+        return waveCard;
     }
 
     public void end() {
@@ -90,21 +90,26 @@ public class Wave {
             if (tower.name.equals("moneyBooster")) ((Booster) tower).giveMoney();
         }
         playSound(sounds.get("waveEnd"), 1, 1);
-        int reward = (int) (levels[currentLevel].reward + levels[currentLevel].reward * 0.2f * enemies.size());
+        int reward = getReward();
         money += reward;
-        popupTexts.add(new PopupText(P, new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), reward));
+        popupTexts.add(new PopupText(p, new PVector(BOARD_WIDTH / 2f, BOARD_HEIGHT / 2f), reward));
         Saver.save();
+        inGameGui.updateSave();
+    }
+
+    public int getReward() {
+        float reward = levels[currentLevel].reward;
+        for (Enemy enemy : enemies) reward += max(enemy.moneyDrop * 0.2f, levels[currentLevel].reward * 0.2f);
+        return (int) reward;
     }
 
     /** Calculates the time between spawns. */
     void load() {
-        if (spawns.size() > 0) betweenSpawns = SPAWN_LENGTH / spawns.size();
+        if (spawns.size() > 0) betweenSpawns = spawnLength / spawns.size();
     }
 
     void addSpawns(String enemy, int count) {
-        if (getEnemy(enemy) instanceof FlyingEnemy) hasFlying = true;
-        if (getEnemy(enemy) instanceof BurrowingEnemy) hasBurrowing = true;
-        if (getEnemy(enemy) instanceof ShootingEnemy) hasShooting = true;
+        waveCard.addEnemyType(getEnemy(enemy));
         for (int i = 0; i < count; i++) spawns.add(enemy);
         Collections.shuffle(spawns);
     }
@@ -113,64 +118,18 @@ public class Wave {
         betweenSpawnTimer++;
         spawnLengthTimer++;
         lengthTimer++;
-//        System.out.println("spawnSize: " + spawns.size() + ", spawnLengthTimer: " + spawnLengthTimer +
-//                ", betweenSpawnTimer: " + betweenSpawnTimer + ", betweenSpawns: " + betweenSpawns);
-        if (spawns.size() > 0 && betweenSpawnTimer >= betweenSpawns) {
-            betweenSpawnTimer = 0;
-            String s = spawns.get(spawns.size() - 1);
-            spawns.remove(spawns.size() - 1);
-            PVector pos;
-            pos = randomSpawnPosition(P);
-            enemies.add(Enemy.get(P, s, pos));
-            enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
-        }
-    }
+        if (spawns.size() == 0 || betweenSpawnTimer < betweenSpawns) return;
 
-    /**
-     * Draws wave icons.
-     * @param y displacement of icons
-     * @param id current wave id
-     */
-    public void display(int y, int id) {
-        P.tint(FILL_COLOR.getRGB());
-        P.image(staticSprites.get("wavePrimaryIc"), 890, y);
-        P.tint(ACCENT_COLOR.getRGB());
-        P.image(staticSprites.get("waveSecondaryIc"), 890, y);
-        P.tint(255);
-
-        //title
-        P.fill(TEXT_COLOR.getRGB(), 254);
-        P.textAlign(CENTER);
-        P.textFont(largeFont);
-        P.text(TITLE, 1000, y + 110);
-        P.textFont(veryLargeFont);
-        //number
-        P.text(id, 1000, y + 75);
-        //enemy types
-        int letterCount = 0;
-        if (hasBurrowing) letterCount++;
-        if (hasFlying) letterCount++;
-        if (hasShooting) letterCount++;
-
-        P.textFont(mediumLargeFont);
-        StringBuilder enemyTypes = new StringBuilder();
-        if (hasBurrowing) {
-            if (letterCount > 1) enemyTypes.append(" B");
-            else enemyTypes.append(" Burrowing");
-        } if (hasFlying) {
-            if (letterCount > 1) {
-                if (hasBurrowing) enemyTypes.append(" &");
-                enemyTypes.append(" F");
-            }
-            else enemyTypes.append(" Flying");
-        } if (hasShooting) {
-            if (letterCount > 1) enemyTypes.append(" & S");
-            else enemyTypes.append(" Shooting");
-        }
-        P.text(enemyTypes.toString(), 1000, y + 25);
+        betweenSpawnTimer = 0;
+        String s = spawns.get(spawns.size() - 1);
+        spawns.remove(spawns.size() - 1);
+        PVector pos;
+        pos = randomSpawnPosition(p);
+        enemies.add(Enemy.get(p, s, pos));
+        enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 
     private Enemy getEnemy(String name) {
-        return Enemy.get(P, name, new PVector(0,0));
+        return Enemy.get(p, name, new PVector(0,0));
     }
 }

@@ -8,11 +8,24 @@ import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 
 public class EnergyBlaster extends Turret {
+
+    private static final Color EXPLOSION_COLOR = new Color(0xff8383);
+    private static final Color VORTEX_COLOR = new Color(0xBA7FF8);
+
+    public static String pid = "M1-300-800-5";
+    public static String description =
+            "Fires an explosive energy ball at the toughest critter it can see. " +
+                    "Has long range and high damage, but low rate of fire.";
+    public static char shortcut = 'E';
+    public static String title1 = "Energy Blaster";
+    public static String title2 = null;
+    public static int price = 1250;
 
     private int effectRadius;
     private boolean bigExplosion;
@@ -23,9 +36,9 @@ public class EnergyBlaster extends Turret {
         super(p,tile);
         offset = 13;
         name = "energyBlaster";
-        delay = randomizeDelay(p, 5f);
+        delay = 5f;
         damage = 800;
-        pjSpeed = 1000;
+        pjSpeed = 800;
         range = 300;
         betweenFireFrames = down60ToFramerate(2);
         effectRadius = 50;
@@ -36,28 +49,28 @@ public class EnergyBlaster extends Turret {
         fireParticle = "energy";
         barrelLength = 40;
         material = Material.darkMetal;
-        basePrice = ENERGY_BLASTER_PRICE;
+        basePrice = price;
         priority = Priority.Strong;
         titleLines = new String[]{"Energy Blaster"};
-        infoDisplay = (o) -> selection.setTextPurple("Splash", o);
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, EXPLOSION_COLOR, "Small Explosion", null));
     }
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         if (nuclear) {
-            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
+            projectiles.add(new NuclearBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, pjSpeed));
             for (int i = 0; i < p.random(3, 5); i++) {
                 midParticles.add(new MiscParticle(p, position.x, position.y,
                   angle + radians(p.random(-45, 45)), "nuclear"));
             }
         } else if (dark) {
-            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius));
+            projectiles.add(new DarkBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, pjSpeed));
             for (int i = 0; i < p.random(3, 5); i++) {
                 midParticles.add(new MiscParticle(p, position.x, position.y,
                   angle + radians(p.random(-45, 45)), "dark"));
             }
         } else {
-            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, bigExplosion));
+            projectiles.add(new EnergyBlast(p, position.x, position.y, angle, this, getDamage(), effectRadius, bigExplosion, pjSpeed));
             for (int i = 0; i < p.random(3, 5); i++) {
                 midParticles.add(new MiscParticle(p, position.x, position.y,
                   angle + radians(p.random(-45, 45)), "energy"));
@@ -70,18 +83,18 @@ public class EnergyBlaster extends Turret {
         //price
         upgradePrices[0] = 500;
         upgradePrices[1] = 650;
-        upgradePrices[2] = 6000;
+        upgradePrices[2] = 7000;
 
         upgradePrices[3] = 400;
         upgradePrices[4] = 800;
-        upgradePrices[5] = 10000;
+        upgradePrices[5] = 8000;
         //titles
         upgradeTitles[0] = "Faster Reload";
         upgradeTitles[1] = "Big Blasts";
         upgradeTitles[2] = "Nuclear Blasts";
 
         upgradeTitles[3] = "Longer Range";
-        upgradeTitles[4] = "Sniping";
+        upgradeTitles[4] = "Rifling";
         upgradeTitles[5] = "Dark Vortex";
         //description
         upgradeDescA[0] = "Increase";
@@ -110,11 +123,11 @@ public class EnergyBlaster extends Turret {
         upgradeDescC[5] = "damage";
         //icons
         upgradeIcons[0] = animatedSprites.get("upgradeIC")[7];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[21];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[55];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[29];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[6];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[13];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[54];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[56];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[30];
     }
 
@@ -126,36 +139,55 @@ public class EnergyBlaster extends Turret {
                 case 1 -> {
                     effectRadius += 50;
                     bigExplosion = true;
-                }
-                case 2 -> {
+                    extraInfo.remove(0);
+                    if (nextLevelB >= 5) {
+                        extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                                VORTEX_COLOR, "Large Vortex", null));
+                    } else {
+                        extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                                EXPLOSION_COLOR, "Large Explosion", null));
+                    }
+                } case 2 -> {
                     damage += 800;
                     delay -= 1f;
-                    effectRadius = 250;
+                    effectRadius = 125;
                     name = "nuclearBlaster";
                     fireParticle = "nuclear";
                     material = Material.metal;
                     nuclear = true;
                     titleLines = new String[]{"Nuclear Blaster"};
-                    infoDisplay = (o) -> selection.setTextPurple("Huge splash", o);
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            new Color(0xFFFD83), "Nuclear Explosion", null));
                     loadSprites();
                 }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3 -> range += 35;
-                case 4 -> {
+                case 3 -> {
+                    range += 35;
+                    pjSpeed += 200;
+                } case 4 -> {
                     range += 40;
+                    pjSpeed += 200;
                     damage += 400;
-                }
-                case 5 -> {
+                } case 5 -> {
                     range += 65;
+                    pjSpeed += 200;
                     damage = 5000;
                     name = "darkBlaster";
                     fireParticle = "dark";
                     dark = true;
                     titleLines = new String[]{"Dark Blaster"};
-                    infoDisplay = (o) -> selection.setTextPurple("Splash", o);
                     loadSprites();
+                    extraInfo.remove(0);
+                    if (nextLevelA <= 1) {
+                        extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                                VORTEX_COLOR, "Small Vortex", null));
+                    } else {
+                        extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                                VORTEX_COLOR, "Large Vortex", null));
+                    }
                 }
             }
         }

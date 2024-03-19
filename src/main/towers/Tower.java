@@ -154,7 +154,6 @@ public abstract class Tower {
         tile.tower = null;
         if (selection.turret == this) {
             selection.name = "null";
-            inGameGui.flashA = 255;
         }
         else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;

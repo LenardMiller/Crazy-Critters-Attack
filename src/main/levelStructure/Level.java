@@ -2,12 +2,8 @@ package main.levelStructure;
 
 import main.misc.Polluter;
 import main.misc.Saver;
-import main.misc.Utilities;
 import processing.core.PApplet;
-import processing.core.PConstants;
-import processing.core.PVector;
 
-import java.awt.*;
 import java.util.Objects;
 
 import static main.Main.*;
@@ -45,13 +41,13 @@ public class Level {
                 polluter = wave.polluter;
             }
             if (wave.groundType != null) groundType = wave.groundType;
-            if (wave.lengthTimer > wave.LENGTH) setWave(currentWave + 1);
+            if (wave.lengthTimer > wave.length) setWave(currentWave + 1);
             else if (!paused && alive) {
                 wave.spawnEnemies();
                 if (polluter != null) polluter.update();
             }
-            if (wave.spawnLengthTimer > wave.SPAWN_LENGTH && enemies.size() == 0 && !paused && alive) {
-                wave.lengthTimer += wave.LENGTH / 500;
+            if (wave.spawnLengthTimer > wave.spawnLength && enemies.size() == 0 && !paused && alive) {
+                wave.lengthTimer += wave.length / 500;
             }
         } else if (enemies.size() == 0) { //win condition
             if (!won) paused = true; //prevent stuck on pause
@@ -71,50 +67,8 @@ public class Level {
         currentWave = waveNum;
     }
 
-    public void display() {
-        float playY = 0;
-        for (int i = currentWave-3; i <= currentWave+6; i++) {
-            if (i < waves.length && i > -1) {
-                Wave wave = waves[i];
-                Wave current = null;
-                if (currentWave < waves.length) current = waves[currentWave];
-                int y = (125*(i-currentWave));
-                int y2 = 125;
-                if (currentWave < waves.length) y2 = (int) (125*(((current.lengthTimer)+1)/(float)current.LENGTH));
-                if (playingLevel) y -= y2 - 125;
-                else y += 125;
-                wave.display(212 + y, i+1);
-                if (i == startWave) playY = y;
-            } else if (currentWave == waves.length) {
-                waves[currentWave-1].display(212, currentWave);
-            }
-        }
-        inGameGui.playButton.display((int)playY);
-        //current line
-        P.strokeWeight(10);
-        P.stroke(100, 0, 0);
-        P.line(BOARD_WIDTH, 336, BOARD_WIDTH + 200, 336);
-        P.strokeWeight(4);
-        P.stroke(255, 0, 0);
-        P.line(BOARD_WIDTH - 7, 336, BOARD_WIDTH + 200, 336);
-        //skip text, circle
-        if (canBeSkipped()) {
-            Utilities.highlightedText(P, "[SPACE] to skip",
-                    new PVector(BOARD_WIDTH + 100, 325),
-                    new Color(0xFCFFFFFF, true), new Color(50, 50, 50, 230),
-                    mediumFont, PConstants.CENTER);
-            P.fill(255, 0, 0);
-            P.stroke(100, 0, 0);
-            P.strokeWeight(3);
-            P.triangle(BOARD_WIDTH - 13, 336, BOARD_WIDTH - 20, 331, BOARD_WIDTH - 20, 341);
-        }
-        P.strokeWeight(1);
-        P.noStroke();
-    }
-
-    private boolean canBeSkipped() {
+    public boolean canBeSkipped() {
         if (currentWave >= waves.length - 1) return false;
-        Wave cw = waves[currentWave];
-        return !cw.unskippable && cw.spawns.size() == 0;
+        return !waves[currentWave].unskippable && waves[currentWave].getProgress() == 1;
     }
 }

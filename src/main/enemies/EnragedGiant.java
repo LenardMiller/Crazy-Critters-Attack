@@ -15,7 +15,7 @@ public class EnragedGiant extends Enemy {
         pfSize = 3;
         radius = 30;
         speed = 50;
-        moneyDrop = 600;
+        moneyDrop = 750;
         damage = 20;
         maxHp = 17000; //Hp
         hp = maxHp;

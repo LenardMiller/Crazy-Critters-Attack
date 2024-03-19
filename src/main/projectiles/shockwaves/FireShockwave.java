@@ -11,7 +11,6 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.topParticles;
-import static processing.core.PConstants.HALF_PI;
 
 public class FireShockwave extends Shockwave {
 
@@ -26,34 +25,34 @@ public class FireShockwave extends Shockwave {
     }
 
     public void display() {
-        P.strokeWeight(3);
-        float alval = (float) Math.pow(radius / (float) MAX_RADIUS, 3);
+        p.strokeWeight(3);
+        float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, 255, 0);
-        Color color = Utilities.mapColor(Color.yellow, Color.red, 0, MAX_RADIUS, radius);
-        P.stroke(color.getRGB(), alpha);
-        P.noFill();
+        Color color = Utilities.mapColor(Color.yellow, Color.red, 0, maxRadius, radius);
+        p.stroke(color.getRGB(), alpha);
+        p.noFill();
 
-        P.circle(CENTER.x, CENTER.y, radius * 2);
+        p.circle(center.x, center.y, radius * 2);
 
-        P.noStroke();
-        P.strokeWeight(1);
+        p.noStroke();
+        p.strokeWeight(1);
     }
 
     @Override
     protected void spawnParticles() {
-        if (P.random(3) < 1) {
+        if (p.random(3) < 1) {
             float a;
             PVector pos;
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
+            topParticles.add(new MiscParticle(p, pos.x, pos.y, a, "smoke"));
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "fire"));
-            for (int i = 0; i < P.random(5, 10); i++) {
+            topParticles.add(new MiscParticle(p, pos.x, pos.y, a, "fire"));
+            for (int i = 0; i < p.random(5, 10); i++) {
                 a = randomAngle();
                 pos = randomPosition(a);
-                topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "fire", P.random(100, 200)));
+                topParticles.add(new ExplosionDebris(p, pos.x, pos.y, a, "fire", p.random(100, 200)));
             }
         }
     }

@@ -3,6 +3,7 @@ package main.towers.turrets;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.gui.guiObjects.PopupText;
+import main.gui.inGame.Selection;
 import main.misc.CompressArray;
 import main.misc.Tile;
 import main.particles.MiscParticle;
@@ -44,6 +45,13 @@ public abstract class Turret extends Tower {
         Load
     }
 
+    public static String pid;
+    public static String description;
+    public static char shortcut;
+    public static String title1;
+    public static String title2;
+    public static int price;
+
     public boolean hasPriority;
     public int pjSpeed;
     public int range;
@@ -61,9 +69,10 @@ public abstract class Turret extends Tower {
     public String[] upgradeDescB;
     public String[] upgradeDescC;
     public String[] titleLines;
-    public Consumer<Integer> infoDisplay;
-    public Consumer<Integer> statsDisplay;
+    public ArrayList<Consumer<Integer>> extraInfo;
+    public Runnable statsDisplay;
     public Priority priority = Priority.Close;
+    public int birthday;
 
     protected State state = State.Idle;
     protected int offset;
@@ -101,12 +110,14 @@ public abstract class Turret extends Tower {
         upgradeDescC = new String[6];
         upgradeIcons = new PImage[6];
         nextLevelB = upgradeTitles.length / 2;
-        infoDisplay = (ignored) -> {};
-        statsDisplay = (o) -> {
-            if (killsTotal != 1) p.text(nfc(killsTotal) + " kills", 910, 475 + o);
-            else p.text("1 kill", 910, 475 + o);
-            p.text(nfc(damageTotal) + " total dmg", 910, 500 + o);
+        extraInfo = new ArrayList<>();
+        statsDisplay = () -> {
+            int age = levels[currentLevel].currentWave - birthday;
+            selection.displayInfoLine(-3, Selection.STAT_TEXT_COLOR, "Survived", age + "");
+            selection.displayInfoLine(-2, Selection.STAT_TEXT_COLOR, "Kills", killsTotal + "");
+            selection.displayInfoLine(-1, Selection.STAT_TEXT_COLOR, "Damage", nfc(damageTotal));
         };
+        birthday = levels[currentLevel].currentWave;
 
         updateTowerArray();
     }
@@ -165,13 +176,11 @@ public abstract class Turret extends Tower {
                             if (dist >= finalDist) break;
                             e = enemy;
                             finalDist = dist;
-                        }
-                        case Far -> {
+                        } case Far -> {
                             if (dist <= finalDist) break;
                             e = enemy;
                             finalDist = dist;
-                        }
-                        case Strong -> {
+                        } case Strong -> {
                             if (enemy.maxHp > maxHp || maxHp == -1) { //strong
                                 e = enemy;
                                 finalDist = dist;
@@ -180,8 +189,7 @@ public abstract class Turret extends Tower {
                                 e = enemy;
                                 finalDist = dist;
                             }
-                        }
-                        case Weak -> {
+                        } case Weak -> {
                             if (enemy.maxHp < maxHp || maxHp == -1) { //weak
                                 e = enemy;
                                 finalDist = dist;
@@ -213,7 +221,7 @@ public abstract class Turret extends Tower {
 
         if (pjSpeed > 0) { //shot leading
             float dist = PVector.sub(target, position).mag();
-            float time = dist / pjSpeed;
+            float time = dist / (pjSpeed * (boostedRange() > 0 ? 1.2f : 1f));
             PVector enemyHeading = PVector.fromAngle(enemy.rotation);
             if (enemy.state == Enemy.State.Moving) enemyHeading.setMag(enemy.getActualSpeed() * time); //only lead if enemy moving
             else enemyHeading.setMag(0);
@@ -267,8 +275,7 @@ public abstract class Turret extends Tower {
             idleFrames = animatedSprites.get(name + "IdleTR");
             idleSprite = idleFrames[0];
             sprite = idleSprite;
-        }
-        else {
+        }  else {
             idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
             sprite = idleFrames[0];
         }
@@ -282,8 +289,8 @@ public abstract class Turret extends Tower {
         }
         updateBoosts();
         if (enemies.size() > 0 && !machine.dead && !paused) checkTarget();
-        if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
-                && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
+        if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
+                && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
     }
@@ -297,9 +304,7 @@ public abstract class Turret extends Tower {
         updateTowerArray();
         if (selection.turret == this) {
             selection.name = "null";
-            inGameGui.flashA = 255;
-        }
-        else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
+        } else if (!selection.name.equals("null")) selection.swapSelected(selection.turret);
         int moneyGain;
         if (!isSold) {
             moneyGain = (int) (getValue() * 0.4);
@@ -336,8 +341,7 @@ public abstract class Turret extends Tower {
                             sprite = idleFrames[frame];
                         }
                     }
-                }
-                case Fire -> {
+                } case Fire -> {
                     if (frame < fireFrames.length - 1) { //if not done, keep going
                         if (frameTimer >= betweenFireFrames) {
                             frame++;
@@ -347,7 +351,7 @@ public abstract class Turret extends Tower {
                     } else { //if done, switch to load
                         if (loadFrames.length > 0) {
                             int oldSize = loadFrames.length;
-                            int newSize = secondsToFrames(getDelay());
+                            int newSize = secondsToFrames(randomizeDelay(p, getDelay()));
                             compressedLoadFrames = new ArrayList<>();
                             if (oldSize > newSize) { //decreasing size
                                 //creates the new spriteArray
@@ -364,8 +368,7 @@ public abstract class Turret extends Tower {
                         frame = 0;
                         state = State.Load;
                     }
-                }
-                case Load -> {
+                } case Load -> {
                     frame++;
                     if (frame < compressedLoadFrames.size() && compressedLoadFrames.get(frame) < loadFrames.length) {
                         sprite = loadFrames[compressedLoadFrames.get(frame)];
@@ -380,6 +383,17 @@ public abstract class Turret extends Tower {
                 tintColor = 0;
                 hit = false;
             }
+        }
+    }
+
+    public void displayUpgradePrompt() {
+        // if A or B is max
+        if (nextLevelB > 5 || nextLevelA > 2) return;
+
+        if (money >= upgradePrices[nextLevelA] && money >= upgradePrices[nextLevelB]) {
+            p.image(staticSprites.get("upgradePromptOverlay2Ic"), tile.position.x - size.x, tile.position.y - size.y);
+        } else if (money >= upgradePrices[nextLevelA] || money >= upgradePrices[nextLevelB]) {
+            p.image(staticSprites.get("upgradePromptOverlayIc"), tile.position.x - size.x, tile.position.y - size.y);
         }
     }
 
@@ -429,15 +443,18 @@ public abstract class Turret extends Tower {
             if (nextLevelB > 5) return;
             if (nextLevelB == 5 && nextLevelA == 3) return;
         }
-        inGameGui.flashA = 255;
         money -= price;
         upgradeEffect(id);
         if (id == 0) nextLevelA++;
         else if (id == 1) nextLevelB++;
         //icons
-        if (nextLevelA < upgradeTitles.length / 2) inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
+        int maxA = upgradeTitles.length / 2;
+        int maxB = upgradeTitles.length;
+        if (nextLevelA < maxA && !(nextLevelB == maxB && nextLevelA == maxA - 1))
+            inGameGui.upgradeIconA.sprite = upgradeIcons[nextLevelA];
         else inGameGui.upgradeIconA.sprite = animatedSprites.get("upgradeIC")[0];
-        if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
+        if (nextLevelB < maxB && !(nextLevelA == maxA && nextLevelB == maxB - 1))
+            inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
         else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
 
         if (!quiet) {
@@ -497,50 +514,35 @@ public abstract class Turret extends Tower {
         switch (type) {
             case "Booster" -> {
                 return new Booster(p, tile);
-            }
-            case "Cannon" -> {
+            } case "Cannon" -> {
                 return new Cannon(p, tile);
-            }
-            case "Crossbow" -> {
+            } case "Crossbow" -> {
                 return new Crossbow(p, tile);
-            }
-            case "EnergyBlaster" -> {
+            } case "EnergyBlaster" -> {
                 return new EnergyBlaster(p, tile);
-            }
-            case "Flamethrower" -> {
+            } case "Flamethrower" -> {
                 return new Flamethrower(p, tile);
-            }
-            case "Gluer" -> {
+            } case "Gluer" -> {
                 return new Gluer(p, tile);
-            }
-            case "IceTower" -> {
+            } case "IceTower" -> {
                 return new IceTower(p, tile);
-            }
-            case "MagicMissileer", "MagicMissleer" -> {
+            } case "MagicMissileer", "MagicMissleer" -> {
                 return new MagicMissileer(p, tile);
-            }
-            case "Nightmare" -> {
+            } case "Nightmare" -> {
                 return new Nightmare(p, tile);
-            }
-            case "Railgun" -> {
+            } case "Railgun" -> {
                 return new Railgun(p, tile);
-            }
-            case "RandomCannon", "MiscCannon" -> {
+            } case "RandomCannon", "MiscCannon" -> {
                 return new RandomCannon(p, tile);
-            }
-            case "SeismicTower", "Seismic" -> {
+            } case "SeismicTower", "Seismic" -> {
                 return new SeismicTower(p, tile);
-            }
-            case "Slingshot" -> {
+            } case "Slingshot" -> {
                 return new Slingshot(p, tile);
-            }
-            case "TeslaTower", "Tesla" -> {
+            } case "TeslaTower", "Tesla" -> {
                 return new TeslaTower(p, tile);
-            }
-            case "WaveMotion" -> {
+            } case "WaveMotion" -> {
                 return new WaveMotion(p, tile);
-            }
-            default -> {
+            } default -> {
                 System.out.println("Could not get Turret of name:\n    " + type);
                 return null;
             }

@@ -1,20 +1,34 @@
 package main.towers.turrets;
 
+import main.enemies.Enemy;
+import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.gui.inGame.Selection;
+import main.misc.Tile;
+import main.particles.MiscParticle;
 import main.projectiles.glue.Glue;
 import main.projectiles.glue.SpikeyGlue;
 import main.projectiles.glue.SplatterGlue;
-import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
-import main.misc.Tile;
-import main.particles.MiscParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 
 public class Gluer extends Turret {
+
+    private static final Color SPECIAL_COLOR = new Color(0xfef3c0);
+
+    public static String pid = "S2-300-0-2.5";
+    public static String description =
+            "Fires a glob of glue at the nearest unglued critter. " +
+                    "Slows critter movement and attack speed, but does no damage. " +
+                    "Glue more strongly affects flying critters.";
+    public static char shortcut = 'S';
+    public static String title1 = "Gluer";
+    public static String title2 = null;
+    public static int price = 300;
 
     public int gluedTotal;
 
@@ -24,8 +38,8 @@ public class Gluer extends Turret {
     public Gluer(PApplet p, Tile tile) {
         super(p,tile);
         name = "gluer";
-        delay = randomizeDelay(p, 2.5f);
-        pjSpeed = 400;
+        delay = 2.5f;
+        pjSpeed = 350;
         betweenFireFrames = down60ToFramerate(1);
         range = 300;
         effectDuration = 3;
@@ -37,18 +51,19 @@ public class Gluer extends Turret {
         fireParticle = "glue";
         barrelLength = 28;
         material = Material.stone;
-        basePrice = GLUER_PRICE;
+        basePrice = price;
         titleLines = new String[]{"Gluer"};
-        infoDisplay = (o) -> selection.setTextPurple("Slows", o);
-        statsDisplay = (o) -> {
-            //glue stuff
-            if (gluedTotal == 1) p.text("1 enemy glued", 910, 450 + offset);
-            else p.text(nfc(gluedTotal) + " enemies glued", 910, 450 + offset);
-
-            //default stuff
-            if (killsTotal != 1) p.text(nfc(killsTotal) + " kills", 910, 475 + o);
-            else p.text("1 kill", 910, 475 + o);
-            p.text(nfc(damageTotal) + " total dmg", 910, 500 + o);
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Slowing Glue:", null));
+        extraInfo.add((arg) -> selection.displayInfoLine(
+                arg, SPECIAL_COLOR, "Slow Level", (ceil((1 - effectLevel) * 10) * 10) + "%"));
+        extraInfo.add((arg) -> selection.displayInfoLine(
+                arg, SPECIAL_COLOR, "Duration", nf(effectDuration, 1, 1) + "s"));
+        statsDisplay = () -> {
+            selection.displayInfoLine(-4, Selection.STAT_TEXT_COLOR, "Glued", gluedTotal + "");
+            int age = levels[currentLevel].currentWave - birthday;
+            selection.displayInfoLine(-3, Selection.STAT_TEXT_COLOR, "Survived", age + "");
+            selection.displayInfoLine(-2, Selection.STAT_TEXT_COLOR, "Kills", killsTotal + "");
+            selection.displayInfoLine(-1, Selection.STAT_TEXT_COLOR, "Damage", nfc(damageTotal));
         };
     }
 
@@ -58,9 +73,9 @@ public class Gluer extends Turret {
             midParticles.add(new MiscParticle(p, position.x, position.y,
               angle + radians(p.random(-45, 45)), "glue"));
         }
-        if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
-        else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
-        else projectiles.add(new Glue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration));
+        if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration, pjSpeed));
+        else if (splatter) projectiles.add(new SplatterGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration, pjSpeed));
+        else projectiles.add(new Glue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration, pjSpeed));
     }
 
     @Override
@@ -81,11 +96,11 @@ public class Gluer extends Turret {
         upgradePrices[5] = 1000;
         //titles
         upgradeTitles[0] = "Long Range";
-        upgradeTitles[1] = "Long Glue";
+        upgradeTitles[1] = "Tough Glue";
         upgradeTitles[2] = "Glue Splash";
 
-        upgradeTitles[3] = "Gluier Glue";
-        upgradeTitles[4] = "Hard Glue";
+        upgradeTitles[3] = "Stickier Glue";
+        upgradeTitles[4] = "Dense Glue";
         upgradeTitles[5] = "Spikey Glue";
         //description
         upgradeDescA[0] = "Increase";
@@ -98,7 +113,7 @@ public class Gluer extends Turret {
 
         upgradeDescA[2] = "Glue";
         upgradeDescB[2] = "splatters";
-        upgradeDescC[2] = "";
+        upgradeDescC[2] = "on critters";
 
 
         upgradeDescA[3] = "Increase";
@@ -113,12 +128,12 @@ public class Gluer extends Turret {
         upgradeDescB[5] = "spikes on";
         upgradeDescC[5] = "death";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[50];
         upgradeIcons[1] = animatedSprites.get("upgradeIC")[25];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[28];
 
         upgradeIcons[3] = animatedSprites.get("upgradeIC")[27];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[51];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[26];
     }
 
@@ -126,35 +141,29 @@ public class Gluer extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
+                case 0 -> {
                     range += 30;
-                    break;
-                case 1:
+                    pjSpeed += 100;
+                } case 1 -> effectDuration += 2;
+                case 2 -> {
                     effectDuration += 2;
-                    break;
-                case 2:
-                    effectDuration += 2;
+                    pjSpeed += 100;
                     range += 50;
                     delay -= 1;
                     splatter = true;
                     name = "splashGluer";
                     titleLines = new String[]{"Glue Splasher"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Slows", o);
-                        selection.setTextPurple("Splatter", o);
-                    };
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Glue Splatter:", null));
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    effectLevel = 0.6f;
-                    break;
-                case 4:
-                    damage = 35;
-                    break;
-                case 5:
+                case 3 -> effectLevel = 0.6f;
+                case 4 -> damage = 35;
+                case 5 -> {
                     damage += 65;
                     effectLevel = 0.5f;
                     spikey = true;
@@ -164,12 +173,11 @@ public class Gluer extends Turret {
                     damageSound = sounds.get("metalDamage");
                     breakSound = sounds.get("metalBreak");
                     titleLines = new String[]{"Glue Spiker"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Slows", o);
-                        selection.setTextPurple("Embeds spikes", o);
-                    };
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Spikey Glue:", null));
                     loadSprites();
-                    break;
+                }
             }
         }
     }

@@ -18,8 +18,8 @@ public class MenuSlider {
 
     private static final int MAX_PROGRESS = 200;
     private static final int BOX_SIZE = 20;
-    private static final SoundFile CLICK_IN = sounds.get("clickIn");
-    private static final SoundFile CLICK_OUT = sounds.get("clickOut");
+    private static final SoundFile CLICK_IN = sounds.get("littleButtonIn");
+    private static final SoundFile CLICK_OUT = sounds.get("littleButtonOut");
 
     private final PApplet P;
     private final String NAME;

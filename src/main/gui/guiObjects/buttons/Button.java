@@ -23,13 +23,16 @@ public abstract class Button extends GuiObject {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(25, 25);
-        clickIn = sounds.get("clickIn");
-        clickOut = sounds.get("clickOut");
+        clickIn = sounds.get("littleButtonIn");
+        clickOut = sounds.get("littleButtonOut");
     }
 
     public void hover() {
-        if (matrixMousePosition.x < position.x+size.x/2 && matrixMousePosition.x > position.x-size.x/2 &&
-          matrixMousePosition.y < position.y+size.y/2 && matrixMousePosition.y > position.y-size.y/2 && alive && !paused) {
+        if (boardMousePosition.x < position.x+size.x/2 &&
+                boardMousePosition.x > position.x-size.x/2 &&
+                boardMousePosition.y < position.y+size.y/2 &&
+                boardMousePosition.y > position.y-size.y/2 &&
+                alive && !paused) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;

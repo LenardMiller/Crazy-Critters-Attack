@@ -2,6 +2,7 @@ package main.projectiles;
 
 import main.enemies.Enemy;
 import main.misc.Utilities;
+import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -28,8 +29,8 @@ public abstract class Projectile {
     public PVector size;
 
     protected int pierce;
-    protected int hitTime;
     protected int effectRadius;
+    protected int trainChance;
     protected float effectDuration;
     protected float angleTwo;
     protected float angularVelocity;
@@ -37,7 +38,8 @@ public abstract class Projectile {
     protected boolean dead;
     protected boolean causeEnemyParticles;
     protected PVector velocity;
-    protected String trail;
+    protected String particleTrail;
+    protected String debrisTrail;
     protected String buff;
     protected Enemy.DamageType type;
     protected ArrayList<Enemy> hitEnemies;
@@ -56,12 +58,11 @@ public abstract class Projectile {
         speed = 100;
         damage = 1;
         pierce = 0;
-        hitTime = 0;
         angleTwo = angle;
         angularVelocity = 0; //degrees mode
         sprite = staticSprites.get("boltPj");
         velocity = PVector.fromAngle(angle - HALF_PI);
-        trail = null;
+        trainChance = 3;
         buff = "null";
         effectRadius = 0;
         effectLevel = 0;
@@ -78,15 +79,43 @@ public abstract class Projectile {
                 position.y + size.y < -100 || position.x + size.x < -100) {
             projectiles.remove(this);
         }
-        if (dead) die();
+        if (dead) {
+            die();
+            boostedDieParticles();
+        }
+    }
+
+    protected float getBoostedSpeed() {
+        if (turret == null) return speed / FRAMERATE;
+        else return (speed * (turret.boostedRange() > 0 ? 1.2f : 1f)) / FRAMERATE;
+    }
+
+    protected void boostedDieParticles() {
+        if (turret == null || turret.boostedDamage() <= 0) return;
+        for (int i = 0; i < 8; i++) {
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
+                    "orangeMagic", p.random(100, 200)));
+        }
+    }
+
+    protected void boostedTrailParticles() {
+        if (turret == null || turret.boostedDamage() <= 0 || !(p.random(trainChance) > 1)) return;
+        topParticles.add(new MiscParticle(p, position.x, position.y,
+                p.random(TWO_PI), "orangeMagic"));
     }
 
     public abstract void die();
 
     protected void trail() { //leaves a trail of particles
-        if (trail != null) {
-            if (p.random(0, 3) > 1) topParticles.add(new MiscParticle(p, position.x, position.y,
-                    p.random(0, 360), trail));
+        boostedTrailParticles();
+        if (particleTrail != null && p.random(trainChance) > 1) {
+            topParticles.add(new MiscParticle(p, position.x, position.y,
+                    p.random(TWO_PI), particleTrail));
+        }
+        if (debrisTrail != null && p.random(trainChance) > 1) {
+            topParticles.add(new ExplosionDebris(p, position.x, position.y,
+                    p.random(angle - 0.4f, angle + 0.4f), particleTrail,
+                    p.random( maxSpeed / 2f, maxSpeed)));
         }
     }
 
@@ -111,7 +140,7 @@ public abstract class Projectile {
     }
 
     public void move() {
-        velocity.setMag(speed/FRAMERATE);
+        velocity.setMag(getBoostedSpeed());
         position.add(velocity);
     }
 

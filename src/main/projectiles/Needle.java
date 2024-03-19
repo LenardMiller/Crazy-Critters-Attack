@@ -1,5 +1,6 @@
 package main.projectiles;
 
+import main.particles.ExplosionDebris;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -24,7 +25,7 @@ public class Needle extends Projectile {
         this.angle = angle;
         this.range = range;
         sprite = staticSprites.get("needlePj");
-        trail = "decay";
+        particleTrail = "decay";
         buff = "decay";
     }
 
@@ -38,12 +39,15 @@ public class Needle extends Projectile {
             dead = true;
         }
         if (range < 0) dead = true;
-        if (dead) die();
+        if (dead) {
+            die();
+            boostedDieParticles();
+        }
     }
 
     @Override
     public void move() {
-        velocity.setMag(speed/FRAMERATE);
+        velocity.setMag(getBoostedSpeed());
         range -= speed / FRAMERATE;
         position.add(velocity);
     }

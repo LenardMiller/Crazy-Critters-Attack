@@ -1,6 +1,7 @@
 package main.gui.guiObjects.buttons;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -15,9 +16,9 @@ public class WallBuy extends Button {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(200, 24);
-        spriteIdle = animatedSprites.get("wallBuyBT")[0];
-        spritePressed = animatedSprites.get("wallBuyBT")[1];
-        spriteHover = animatedSprites.get("wallBuyBT")[2];
+        spriteIdle = animatedSprites.get("wallBuyBT")[Math.min(currentLevel, 4) * 3];
+        spritePressed = animatedSprites.get("wallBuyBT")[(Math.min(currentLevel, 4) * 3) + 1];
+        spriteHover = animatedSprites.get("wallBuyBT")[(Math.min(currentLevel, 4) * 3) + 2];
         sprite = spriteIdle;
         depressed = false;
     }
@@ -35,8 +36,8 @@ public class WallBuy extends Button {
      */
     @Override
     public void hover() {
-        if (matrixMousePosition.x < position.x+size.x/2 && matrixMousePosition.x > position.x-size.x/2 &&
-          matrixMousePosition.y < position.y+size.y/2 && matrixMousePosition.y > position.y-size.y/2 && alive && !paused) {
+        if (boardMousePosition.x < position.x+size.x/2 && boardMousePosition.x > position.x-size.x/2 &&
+                boardMousePosition.y < position.y+size.y/2 && boardMousePosition.y > position.y-size.y/2 && alive && !paused) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;

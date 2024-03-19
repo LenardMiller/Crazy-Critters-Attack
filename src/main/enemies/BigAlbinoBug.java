@@ -17,7 +17,7 @@ public class BigAlbinoBug extends Enemy {
         speed = 18;
         moneyDrop = 100;
         damage = 15;
-        maxHp = 1500;
+        maxHp = 2000;
         hp = maxHp;
         hitParticle = HitParticle.glowOuch;
         name = "bigAlbinoBug";

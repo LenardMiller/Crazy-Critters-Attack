@@ -10,7 +10,6 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.topParticles;
-import static processing.core.PConstants.HALF_PI;
 
 public class NuclearShockwave extends Shockwave {
 
@@ -21,57 +20,57 @@ public class NuclearShockwave extends Shockwave {
     }
 
     public void display() {
-        P.strokeWeight(5);
-        float alval = (float) Math.pow(radius / (float) MAX_RADIUS, 3);
+        p.strokeWeight(5);
+        float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alphaCube = PApplet.map(alval, 0, 1, 255, 0);
-        float alphaLinear = PApplet.map(radius, 0, MAX_RADIUS, 255, 0);
-        Color color = Utilities.mapColor(Color.yellow, Color.red, 0, MAX_RADIUS, radius);
-        P.stroke(color.getRGB(), alphaCube);
-        P.noFill();
-        P.circle(CENTER.x, CENTER.y, radius * 2);
-        P.strokeWeight(4);
-        P.circle(CENTER.x, CENTER.y, radius * 1.8f);
-        P.strokeWeight(3);
-        P.circle(CENTER.x, CENTER.y, radius * 1.6f);
-        P.strokeWeight(2);
-        P.stroke(255, alphaLinear * 0.5f);
-        P.circle(CENTER.x, CENTER.y, radius * 4);
-        P.stroke(Color.YELLOW.getRGB(), alphaLinear);
-        P.circle(CENTER.x, CENTER.y, radius * 0.8f);
-        P.circle(CENTER.x, CENTER.y, radius * 0.7f);
+        float alphaLinear = PApplet.map(radius, 0, maxRadius, 255, 0);
+        Color color = Utilities.mapColor(Color.yellow, Color.red, 0, maxRadius, radius);
+        p.stroke(color.getRGB(), alphaCube);
+        p.noFill();
+        p.circle(center.x, center.y, radius * 2);
+        p.strokeWeight(4);
+        p.circle(center.x, center.y, radius * 1.8f);
+        p.strokeWeight(3);
+        p.circle(center.x, center.y, radius * 1.6f);
+        p.strokeWeight(2);
+        p.stroke(255, alphaLinear * 0.5f);
+        p.circle(center.x, center.y, radius * 4);
+        p.stroke(Color.YELLOW.getRGB(), alphaLinear);
+        p.circle(center.x, center.y, radius * 0.8f);
+        p.circle(center.x, center.y, radius * 0.7f);
 
-        P.noStroke();
-        P.strokeWeight(1);
+        p.noStroke();
+        p.strokeWeight(1);
     }
 
     @Override
     protected void spawnParticles() {
         float a = randomAngle();
         PVector pos = randomPosition(a);
-        topParticles.add(new Ouch(P, pos.x, pos.y, a, "greyPuff"));
+        topParticles.add(new Ouch(p, pos.x, pos.y, a, "greyPuff"));
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "smoke"));
+        topParticles.add(new MiscParticle(p, pos.x, pos.y, a, "smoke"));
         a = randomAngle();
         pos = randomPosition(a);
-        topParticles.add(new MiscParticle(P, pos.x, pos.y, a, "nuclear"));
-        for (int i = 0; i < P.random(2, 5); i++) {
+        topParticles.add(new MiscParticle(p, pos.x, pos.y, a, "nuclear"));
+        for (int i = 0; i < p.random(2, 5); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            boolean small = radius < MAX_RADIUS / 4 || P.random(4) < 3;
-            if (small) topParticles.add(new LargeExplosion(P, pos.x, pos.y, P.random(0, 360), "fire"));
-            else topParticles.add(new MediumExplosion(P, pos.x, pos.y, P.random(0, 360), "fire"));
+            boolean small = radius < maxRadius / 4 || p.random(4) < 3;
+            if (small) topParticles.add(new LargeExplosion(p, pos.x, pos.y, p.random(0, 360), "fire"));
+            else topParticles.add(new MediumExplosion(p, pos.x, pos.y, p.random(0, 360), "fire"));
         }
-        for (int i = 0; i < P.random(1, 4); i++) {
+        for (int i = 0; i < p.random(1, 4); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "metal", P.random(100,200)));
+            topParticles.add(new ExplosionDebris(p, pos.x, pos.y, a, "metal", p.random(100,200)));
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "nuclear", P.random(100,200)));
+            topParticles.add(new ExplosionDebris(p, pos.x, pos.y, a, "nuclear", p.random(100,200)));
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(new ExplosionDebris(P, pos.x, pos.y, a, "fire", P.random(100,200)));
+            topParticles.add(new ExplosionDebris(p, pos.x, pos.y, a, "fire", p.random(100,200)));
         }
     }
 }

@@ -15,7 +15,7 @@ public class IceCrystal extends EnemyProjectile {
         maxSpeed = 600;
         speed = maxSpeed;
         angularVelocity = 0;
-        trail = "iceMagic";
+        particleTrail = "iceMagic";
         sprite = staticSprites.get("iceCrystalPj");
         hitSound = sounds.get("mediumImpact");
     }

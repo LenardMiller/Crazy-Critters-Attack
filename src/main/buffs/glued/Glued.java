@@ -6,13 +6,17 @@ import main.enemies.flyingEnemies.Fae;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.enemies.flyingEnemies.Frost;
 import main.misc.CompressArray;
+import main.particles.MediumExplosion;
+import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.core.PVector;
 
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.Utilities.getRandomPointInRange;
 import static main.misc.Utilities.secondsToFrames;
 
 public class Glued extends Buff {

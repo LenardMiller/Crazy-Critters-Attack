@@ -42,8 +42,8 @@ public class Loader {
         turrets(p);
         pollution(p);
 
-        Main.inGameGui.flashA = 0;
         Main.screen = Main.Screen.InGame;
+        Main.targetScreen = Main.screen;
     }
 
     private static void level(PApplet p) {
@@ -54,8 +54,9 @@ public class Loader {
         Main.levels[Main.currentLevel].currentWave = object.getInt("wave");
         Main.money = object.getInt("money");
         Main.machine.hp = object.getInt("hp");
-        Main.playingLevel = true;
+        Main.isPlaying = true;
         Main.paused = true;
+        Main.waveStack.presetWaveCards();
     }
 
     private static void enemies(PApplet p) {
@@ -147,6 +148,7 @@ public class Loader {
                 turret.upgrade(1, true);
             }
             turret.priority = Turret.Priority.values()[object.getInt("priority")];
+            turret.birthday = object.getInt("birthday", Main.levels[Main.currentLevel].currentWave);
             if (turret instanceof IceTower) {
                 ((IceTower) turret).frozenTotal = object.getInt("frozenTotal");
             } else if (turret instanceof Booster) {

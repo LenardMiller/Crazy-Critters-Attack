@@ -17,7 +17,7 @@ public class Emperor extends Enemy {
         speed = 27;
         moneyDrop = 200;
         damage = 18;
-        maxHp = 3000;
+        maxHp = 4000;
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "emperor";

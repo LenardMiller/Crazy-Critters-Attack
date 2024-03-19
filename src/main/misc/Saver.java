@@ -137,6 +137,7 @@ public class Saver {
             object.setInt("levelA", turret.nextLevelA);
             object.setInt("levelB", turret.nextLevelB - 3);
             object.setInt("priority", turret.priority.ordinal());
+            object.setInt("birthday", turret.birthday);
             if (turret instanceof IceTower) {
                 object.setInt("frozenTotal", ((IceTower) turret).frozenTotal);
             } else if (turret instanceof Booster) {

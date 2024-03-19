@@ -10,11 +10,24 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Flamethrower extends Turret {
+
+    private static final Color SPECIAL_COLOR = new Color(0xFA9B4D);
+
+    public static String pid = "M2-200-15-0";
+    public static String description =
+            "Spews a column of fire at the nearest critter. " +
+                    "Has very short range, but very high damage per second.";
+    public static char shortcut = 'D';
+    public static String title1 = "Flamethrower";
+    public static String title2 = null;
+    public static int price = 1000;
 
     private final FadeSoundLoop FIRE_SOUND_LOOP;
     private final PImage[] CORE_SPRITES;
@@ -38,7 +51,7 @@ public class Flamethrower extends Turret {
         damage = 15;
         delay = 0;
         material = Material.metal;
-        basePrice = FLAMETHROWER_PRICE;
+        basePrice = price;
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
@@ -49,7 +62,11 @@ public class Flamethrower extends Turret {
         count = 1;
         FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
         titleLines = new String[]{"Flamethrower"};
-        infoDisplay = (o) -> selection.setTextPurple("Fire", o);
+        extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Burning:", null));
+        extraInfo.add((arg) -> selection.displayInfoLine(
+                arg, SPECIAL_COLOR, "DPS", ((int) (effectLevel / 0.2f)) + ""));
+        extraInfo.add((arg) -> selection.displayInfoLine(
+                arg, SPECIAL_COLOR, "Duration", nf(effectDuration, 1, 1) + "s"));
     }
 
     @Override
@@ -60,8 +77,8 @@ public class Flamethrower extends Turret {
         }
         if (enemies.size() > 0 && !machine.dead && !paused) checkTarget();
         if (!paused && wheel) rotateWheel();
-        if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
-          && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
+        if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
+          && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
     }
@@ -98,7 +115,7 @@ public class Flamethrower extends Turret {
 
         if (pjSpeed > 0) { //shot leading
             float dist = PVector.sub(target, position).mag();
-            float time = dist / pjSpeed;
+            float time = dist / (pjSpeed * (boostedRange() > 0 ? 1.2f : 1f));
             if (magic) time = dist / (150 * (range / 200f));
             PVector enemyHeading = PVector.fromAngle(enemy.rotation);
             if (enemy.state == Enemy.State.Moving) enemyHeading.setMag(enemy.getActualSpeed() * time); //only lead if enemy moving
@@ -201,23 +218,23 @@ public class Flamethrower extends Turret {
 
         upgradePrices[3] = 600;
         upgradePrices[4] = 700;
-        upgradePrices[5] = 8000;
+        upgradePrices[5] = 6000;
         //titles
-        upgradeTitles[0] = "Better range";
-        upgradeTitles[1] = "Betterer Range";
+        upgradeTitles[0] = "Strong Jet";
+        upgradeTitles[1] = "Fierce Jet";
         upgradeTitles[2] = "Flame Wheel";
 
-        upgradeTitles[3] = "More Damage";
-        upgradeTitles[4] = "Fire Strength";
+        upgradeTitles[3] = "Hotter Flames";
+        upgradeTitles[4] = "Sticky Fire";
         upgradeTitles[5] = "Blue Fire";
         //description
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "range";
         upgradeDescC[0] = "";
 
-        upgradeDescA[1] = "Increase";
-        upgradeDescB[1] = "range";
-        upgradeDescC[1] = "again";
+        upgradeDescA[1] = "Further";
+        upgradeDescB[1] = "increase";
+        upgradeDescC[1] = "range";
 
         upgradeDescA[2] = "Waves";
         upgradeDescB[2] = "of fire";
@@ -225,22 +242,22 @@ public class Flamethrower extends Turret {
 
 
         upgradeDescA[3] = "Increase";
-        upgradeDescB[3] = "base";
-        upgradeDescC[3] = "damage";
+        upgradeDescB[3] = "damage";
+        upgradeDescC[3] = "";
 
-        upgradeDescA[4] = "Increase";
-        upgradeDescB[4] = "damage";
-        upgradeDescC[4] = "& duration";
+        upgradeDescA[4] = "Strengthen";
+        upgradeDescB[4] = "burning";
+        upgradeDescC[4] = "effect";
 
         upgradeDescA[5] = "Massive";
         upgradeDescB[5] = "damage";
         upgradeDescC[5] = "increase";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[5];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[6];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[57];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[58];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[32];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[66];
         upgradeIcons[4] = animatedSprites.get("upgradeIC")[11];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[31];
     }
@@ -248,38 +265,30 @@ public class Flamethrower extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    range += 20;
-                    break;
-                case 1:
-                    range += 30;
-                    break;
-                case 2:
+                case 0 -> range += 20;
+                case 1 -> range += 30;
+                case 2 -> {
                     wheel = true;
                     count = 8;
                     damage *= 10;
                     name = "flamewheel";
                     hasPriority = false;
-                    effectLevel += 7;
+                    effectLevel += 5;
                     selection.swapSelected(this);
                     titleLines = new String[]{"Flame Wheel"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Fire waves", o);
-                        selection.setTextPurple("Spools up", o);
-                    };
+                    extraInfo.remove(0);
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Fire Waves:", null));
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    damage += damage;
-                    break;
-                case 4:
+                case 3 -> damage += damage;
+                case 4 -> {
                     effectDuration += 5;
                     effectLevel += 15;
-                    break;
-                case 5:
+                } case 5 -> {
                     name = "magicFlamethrower";
                     magic = true;
                     material = Material.darkMetal;
@@ -289,12 +298,17 @@ public class Flamethrower extends Turret {
                     effectDuration = 25;
                     effectLevel = 250;
                     titleLines = new String[]{"Flame Conjurer"};
-                    infoDisplay = (o) -> {
-                        selection.setTextPurple("Blue fire", o);
-                        selection.setTextPurple("Piercing", o);
-                    };
+                    extraInfo.remove(0);
+                    Color specialColor = new Color(0x7DB5FF);
+                    extraInfo.clear();
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, specialColor, "Piercing", null));
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg, specialColor, "Blue Fire:", null));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, specialColor, "DPS", ((int) (effectLevel / 0.2f)) + ""));
+                    extraInfo.add((arg) -> selection.displayInfoLine(
+                            arg, specialColor, "Duration", nf(effectDuration, 1, 1) + "s"));
                     loadSprites();
-                    break;
+                }
             }
         }
     }

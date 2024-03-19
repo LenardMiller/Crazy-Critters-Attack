@@ -7,6 +7,10 @@ import processing.core.PVector;
 
 import java.awt.*;
 
+import static main.Main.arcs;
+import static main.Main.paused;
+import static main.misc.Utilities.up60ToFramerate;
+
 public class RedArc extends Arc {
 
     public RedArc(PApplet p, float startX, float startY, Turret turret, int damage, int maxLength, int maxDistance,
@@ -17,10 +21,5 @@ public class RedArc extends Arc {
         maxPoints = 30;
         variation = 15;
         weight = 3;
-    }
-
-    @Override
-    protected void damageEnemy(Enemy enemy, int damage, Turret turret) {
-        enemy.damageWithoutBuff(damage, turret, particleType, new PVector(0,0), false);
     }
 }

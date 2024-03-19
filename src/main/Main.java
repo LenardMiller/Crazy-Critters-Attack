@@ -73,6 +73,7 @@ public class Main extends PApplet {
     public static Hand hand;
     public static Selection selection;
     public static InGameGui inGameGui;
+    public static WaveStack waveStack;
     public static LevelBuilderGui levelBuilderGui;
     public static PauseGui pauseGui;
     public static SettingsGui settingsGui;
@@ -81,48 +82,29 @@ public class Main extends PApplet {
     public static LoadingGui loadingGui;
     public static TitleGui titleGui;
 
-    public static PFont veryLargeFont, largeFont, mediumLargeFont, mediumFont, smallFont;
+    public static PFont title, h1, h2, h3, h4, pg, monoHuge, monoLarge, monoMedium, monoSmall;
 
     public static Screen screen = Screen.Loading;
+    public static Screen targetScreen;
     public static int money = 100;
     public static int connectWallQueues;
     public static float globalVolume = 0.25f;
     public static float matrixScale, matrixOffset;
     /** initialized to false */
     public static boolean
-            won, debug, showSpawn, playingLevel, levelBuilder, paused, settings, isFullscreen, isOpenGL, isGore, hasVerticalBars;
+            won, debug, showSpawn, isPlaying, levelBuilder, paused, settings, isFullscreen, isOpenGL, isGore, hasVerticalBars;
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
     public static boolean dev = false;
-    public static PVector matrixMousePosition;
+    public static PVector boardMousePosition;
 
     public static final int FRAMERATE = 30;
     public static final int SOFT_PARTICLE_CAP = 1500, HARD_PARTICLE_CAP = 3000;
 
-    public static final int BOARD_WIDTH = 900;
-    public static final int BOARD_HEIGHT = 900;
+    public static final int WINDOW_WIDTH = 1300, WINDOW_HEIGHT = 900;
+    public static final int BOARD_WIDTH = 900, BOARD_HEIGHT = 900;
     public static final int TILE_SIZE = 50;
-
-    public static final int
-            SLINGSHOT_PRICE =       75,
-            RANDOM_CANNON_PRICE =   150,
-            CROSSBOW_PRICE =        200,
-
-            CANNON_PRICE =          400,
-            GLUER_PRICE =           300,
-            SEISMIC_PRICE =         500,
-
-            ENERGY_BLASTER_PRICE =  1000,
-            FLAMETHROWER_PRICE =    1250,
-            TESLA_TOWER_PRICE =     1500,
-
-            MAGIC_MISSILEER_PRICE = 3500,
-            ICE_TOWER_PRICE =       3000,
-            BOOSTER_PRICE =         2500,
-
-            RAILGUN_PRICE =         12000,
-            WAVE_MOTION_PRICE =     10000,
-            NIGHTMARE_PRICE =       13000;
+    public static final int DEFAULT_MODE = CORNER;
 
     //sprites
     public static HashMap<String, PImage> staticSprites = new HashMap<>();
@@ -141,7 +123,6 @@ public class Main extends PApplet {
     private static final float TRANS_SPEED = 250;
     private static PVector transCenter;
     private static PVector transRotation;
-    private static Screen targetScreen;
 
     //pathfinding stuff
     public static final int GRID_WIDTH = 1100, GRID_HEIGHT = 1100;
@@ -170,8 +151,8 @@ public class Main extends PApplet {
      */
     @Override
     public void settings() {
-        if (isOpenGL) size(GRID_WIDTH, BOARD_HEIGHT, P2D);
-        else size(GRID_WIDTH, BOARD_HEIGHT);
+        if (isOpenGL) size(WINDOW_WIDTH, WINDOW_HEIGHT, P2D);
+        else size(WINDOW_WIDTH, WINDOW_HEIGHT);
         if (isFullscreen) {
             fullScreen();
             noSmooth();
@@ -188,8 +169,10 @@ public class Main extends PApplet {
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
+        imageMode(DEFAULT_MODE);
+        rectMode(DEFAULT_MODE);
         //fonts
-        veryLargeFont = createFont("STHeitiSC-Light", 48, true);
+        title = createFont("STHeitiSC-Medium", 48, true);
         //load input
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
@@ -197,14 +180,14 @@ public class Main extends PApplet {
         //set level count, it has to be this way :(
         levels = new Level[5];
         //guis
-        loadingGui = new LoadingGui(this, veryLargeFont);
+        loadingGui = new LoadingGui(this, title);
         //matrix
         float screenRatio = width / (float) height;
         float boardRatio = BOARD_WIDTH / (float) BOARD_HEIGHT;
         hasVerticalBars = boardRatio < screenRatio;
         if (hasVerticalBars) {
-            matrixScale = height / (float) BOARD_HEIGHT;
-            matrixOffset = (width - (GRID_WIDTH * matrixScale)) / 2;
+            matrixScale = height / (float) WINDOW_HEIGHT;
+            matrixOffset = (width - (WINDOW_WIDTH * matrixScale)) / 2;
         } else {
             matrixScale = width / (float) BOARD_WIDTH;
             matrixOffset = (height - (BOARD_HEIGHT * matrixScale)) / 2;
@@ -224,37 +207,33 @@ public class Main extends PApplet {
     /** Main update loop **/
     private void update() {
         if (hasVerticalBars) {
-            matrixMousePosition = new PVector((mouseX - matrixOffset) / matrixScale, mouseY / matrixScale);
+            boardMousePosition = new PVector((mouseX - matrixOffset) / matrixScale - 200, mouseY / matrixScale);
         } else {
-            matrixMousePosition = new PVector(mouseX / matrixScale, (mouseY - matrixOffset) / matrixScale);
+            boardMousePosition = new PVector(mouseX / matrixScale - 200, (mouseY - matrixOffset) / matrixScale);
         }
         //screens
         switch (screen) {
-            case InGame:
-                game.update();
-                break;
-            case LevelSelect:
+            case InGame -> game.update();
+            case LevelSelect -> {
                 if (!settings) levelSelectGui.update();
-                break;
-            case Loading:
-                loadingGui.update();
-                break;
-            case Title:
+            }
+            case Loading -> loadingGui.update();
+            case Title -> {
                 if (!settings) titleGui.update();
-                break;
+            }
 
             // immediate action branches
-            case Exit:
-                exit();
-                break;
-            case Restart:
+            case Exit -> exit();
+            case Restart -> {
+                isPlaying = false;
                 Game.reset(this);
                 paused = false;
                 Saver.wipe();
                 screen = Screen.InGame;
                 targetScreen = screen;
-                break;
-            case PlayOrLevelSelect:
+            }
+            case PlayOrLevelSelect -> {
+                //this runs three times
                 try {
                     Loader.load(this);
                 } catch (RuntimeException ex) {
@@ -262,8 +241,9 @@ public class Main extends PApplet {
                             ex + "\n    " +
                             Arrays.toString(ex.getStackTrace()));
                     screen = Screen.LevelSelect;
+                    targetScreen = Screen.LevelSelect;
                 }
-                break;
+            }
         }
         if (settings) settingsGui.update();
         updateTransition();
@@ -301,8 +281,8 @@ public class Main extends PApplet {
 
         transCenter.add(transRotation.copy().setMag(TRANS_SPEED));
 
-        if ((abs((GRID_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
-                && abs((BOARD_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
+        if ((abs((WINDOW_WIDTH / 2f) - transCenter.x) < TRANS_SPEED
+                && abs((WINDOW_HEIGHT / 2f) - transCenter.y) < TRANS_SPEED)
                 && targetScreen != screen) {
             if (targetScreen == Screen.InGame || screen == Screen.InGame) {
                 Game.reset(this);
@@ -315,26 +295,22 @@ public class Main extends PApplet {
     /** Main display loop **/
     private void display() {
         if (showSpawn) {
-            scale(BOARD_HEIGHT / (float) GRID_HEIGHT);
-            float buffer = (GRID_HEIGHT - BOARD_HEIGHT) / 2f;
+            scale(BOARD_HEIGHT / (float) WINDOW_HEIGHT);
+            float buffer = (WINDOW_WIDTH - BOARD_HEIGHT) / 2f;
             translate(buffer, buffer);
         }
         background(50);
         tint(255);
         //screens
         switch (screen) {
-            case InGame:
-                game.display();
-                break;
-            case LevelSelect:
+            case InGame -> game.display();
+            case LevelSelect -> {
                 if (!settings) levelSelectGui.display();
-                break;
-            case Loading:
-                loadingGui.display();
-                break;
-            case Title:
+            }
+            case Loading -> loadingGui.display();
+            case Title -> {
                 if (!settings) titleGui.display();
-                break;
+            }
         }
         if (settings) settingsGui.display();
         displayTransition();
@@ -385,8 +361,8 @@ public class Main extends PApplet {
         direction.add(PVector.fromAngle(random.nextFloat() * TWO_PI).setMag(0.2f));
         transCenter = PVector.add(
                 direction.copy().setMag(TRANS_SIZE * -2),
-                new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f));
-        transRotation = PVector.sub(new PVector(GRID_WIDTH / 2f, GRID_HEIGHT / 2f), transCenter).normalize();
+                new PVector(WINDOW_WIDTH / 2f, WINDOW_HEIGHT / 2f));
+        transRotation = PVector.sub(new PVector(WINDOW_WIDTH / 2f, WINDOW_HEIGHT / 2f), transCenter).normalize();
         targetScreen = screen;
     }
 

@@ -12,12 +12,25 @@ import main.towers.Tower;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Booster extends Turret {
 
-    public static final int MONEY_GAIN = 5000;
+    private static final int MONEY_GAIN = 5000;
+    private static final Color SPECIAL_COLOR = Selection.BOOSTED_INFO_COLOR;
+
+    public static String pid = "C3-1-0-0";
+    public static String description =
+            "Boosts the base stats of adjacent towers and walls. " +
+                    "Boosts tower durability, and can upgrade to boost range, damage, and firerate. " +
+                    "Effect does not stack.";
+    public static char shortcut = 'V';
+    public static String title1 = "Booster";
+    public static String title2 = null;
+    public static int price = 7000;
 
     public int moneyTotal;
     public Boost boost;
@@ -35,43 +48,21 @@ public class Booster extends Turret {
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
         betweenIdleFrames = 4;
-        basePrice = BOOSTER_PRICE;
+        basePrice = price;
         hasPriority = false;
         titleLines = new String[]{"Booster"};
 
-        infoDisplay = (o) -> {
-            int x = 910;
-            int y = 296;
-            p.textFont(mediumFont);
-            p.textAlign(LEFT);
-            p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
-            p.text("Boosts:", x, y + o);
-            p.fill(0, 254);
-            o += 20;
-            if (boost.health > 0) {
-                p.text("Health: +" + (int) (boost.health * 100) + "%", x, y + o);
-                o += 20;
-            } if (boost.range > 0) {
-                p.text("Range: +" + (int) (boost.range * 100) + "%", x, y + o);
-                o += 20;
-            } if (boost.damage > 0) {
-                p.text("Damage: +" + (int) (boost.damage * 100) + "%", x, y + o);
-                o += 20;
-            } if (boost.firerate > 0) {
-                p.text("Firerate: +" + (int) (boost.firerate * 100) + "%", x, y + o);
-                o += 20;
-            } if (boost.deathEffect) {
-                p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
-                p.text("Explosive towers", x, y + o);
-            } if (name.equals("moneyBooster")) {
-                p.fill(Selection.SPECIAL_TEXT_COLOR.getRGB(), 254);
-                p.text("+$" + Booster.MONEY_GAIN + " per wave", x, y + o);
-            }
-        };
-        statsDisplay = (o) -> {
+        extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                SPECIAL_COLOR, "Boosts Towers:", null));
+        extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                SPECIAL_COLOR, "Health", "+" + (int) (boost.health * 100) + "%"));
+
+        statsDisplay = () -> {
             if (name.equals("moneyBooster")) {
-                p.text("$" + nfc(moneyTotal) + " total", 910, 500 + o);
+                selection.displayInfoLine(-2, Selection.STAT_TEXT_COLOR, "Earned", "$" + nfc(moneyTotal));
             }
+            int age = levels[currentLevel].currentWave - birthday;
+            selection.displayInfoLine(-1, Selection.STAT_TEXT_COLOR, "Survived", age + "");
         };
 
         boost = new Boost();
@@ -97,8 +88,8 @@ public class Booster extends Turret {
             giveBoost();
             spawnProjectiles(new PVector(tile.position.x - 25, tile.position.y - 25), p.random(360));
         }
-        if (p.mousePressed && matrixMousePosition.x < tile.position.x && matrixMousePosition.x > tile.position.x - size.x && matrixMousePosition.y < tile.position.y
-          && matrixMousePosition.y > tile.position.y - size.y && alive && !paused) {
+        if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
+          && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
             selection.swapSelected(tile.id);
         }
     }
@@ -166,7 +157,6 @@ public class Booster extends Turret {
             if (nextLevelB == 5 && nextLevelA == 3) return;
             nextLevelB++;
         }
-        inGameGui.flashA = 255;
         money -= price;
         basePrice += price;
         //icons
@@ -184,12 +174,12 @@ public class Booster extends Turret {
     @Override
     protected void setUpgrades() {
         //price
-        upgradePrices[0] = 1500;
-        upgradePrices[1] = 2000;
+        upgradePrices[0] = 3000;
+        upgradePrices[1] = 6000;
         upgradePrices[2] = 30000;
 
-        upgradePrices[3] = 2250;
-        upgradePrices[4] = 3000;
+        upgradePrices[3] = 4000;
+        upgradePrices[4] = 5000;
         upgradePrices[5] = 25000;
         //titles
         upgradeTitles[0] = "Boost Range";
@@ -225,12 +215,12 @@ public class Booster extends Turret {
         upgradeDescB[5] = "towers";
         upgradeDescC[5] = "explode";
         //icons
-        upgradeIcons[0] = animatedSprites.get("upgradeIC")[6];
-        upgradeIcons[1] = animatedSprites.get("upgradeIC")[21];
+        upgradeIcons[0] = animatedSprites.get("upgradeIC")[62];
+        upgradeIcons[1] = animatedSprites.get("upgradeIC")[65];
         upgradeIcons[2] = animatedSprites.get("upgradeIC")[38];
 
-        upgradeIcons[3] = animatedSprites.get("upgradeIC")[8];
-        upgradeIcons[4] = animatedSprites.get("upgradeIC")[7];
+        upgradeIcons[3] = animatedSprites.get("upgradeIC")[64];
+        upgradeIcons[4] = animatedSprites.get("upgradeIC")[63];
         upgradeIcons[5] = animatedSprites.get("upgradeIC")[37];
     }
 
@@ -238,15 +228,14 @@ public class Booster extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    boost.range = 0.3f;
-                    break;
-                case 1:
-                    range++;
-                    break;
-                case 2:
-                    boost.range = 0.6f;
-                    boost.firerate += 0.3f;
+                case 0 -> {
+                    boost.range = 0.2f;
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Range", "+" + (int) (boost.range * 100) + "%"));
+                } case 1 -> range++;
+                case 2 -> {
+                    boost.range = 0.4f;
+                    boost.firerate += 0.15f;
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
@@ -254,30 +243,36 @@ public class Booster extends Turret {
                     name = "moneyBooster";
                     betweenIdleFrames = 2;
                     titleLines = new String[]{"Wealth Booster"};
+                    extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Income", "+$" + MONEY_GAIN));
                     loadSprites();
-                    break;
+                }
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    boost.damage = 0.5f;
-                    break;
-                case 4:
-                    boost.firerate += 0.3f;
-                    break;
-                case 5:
+                case 3 -> {
+                    boost.damage = 0.3f;
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Damage", "+" + (int) (boost.damage * 100) + "%"));
+                } case 4 -> {
+                    boost.firerate += 0.2f;
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Firerate", "+" + (int) (boost.firerate * 100) + "%"));
+                } case 5 -> {
                     boost.deathEffect = true;
                     boost.health = 1;
                     maxHp = 60;
                     hp = maxHp;
-                    boost.damage = 1;
+                    boost.damage = 0.5f;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     name = "explosiveBooster";
                     titleLines = new String[]{"Unstable", "Booster"};
+                    extraInfo.add((arg) -> selection.displayInfoLine(arg,
+                            SPECIAL_COLOR, "Explosive", null));
                     loadSprites();
-                    break;
+                }
             }
         }
     }
@@ -287,36 +282,32 @@ public class Booster extends Turret {
         int checkY = -1;
 
         switch (i) {
-            case 0:
+            case 0 -> {
                 if (range < 2) return null;
-                break;
-            case 1:
-                checkX = 0;
-                break;
-            case 2:
+            }
+            case 1 -> checkX = 0;
+            case 2 -> {
                 if (range < 2) return null;
                 checkX = 1;
-                break;
-            case 3:
-                checkY = 0;
-                break;
-            case 4:
+            }
+            case 3 -> checkY = 0;
+            case 4 -> {
                 checkX = 1;
                 checkY = 0;
-                break;
-            case 5:
+            }
+            case 5 -> {
                 if (range < 2) return null;
                 checkY = 1;
-                break;
-            case 6:
+            }
+            case 6 -> {
                 checkX = 0;
                 checkY = 1;
-                break;
-            case 7:
+            }
+            case 7 -> {
                 if (range < 2) return null;
                 checkX = 1;
                 checkY = 1;
-                break;
+            }
         }
 
         return new IntVector(checkX, checkY);

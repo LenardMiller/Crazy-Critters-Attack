@@ -18,56 +18,61 @@ public class LoadingGui {
     private static final int MAX_PROGRESS = 11;
     private static final int LINE_EDGE_BUFFER = 400;
 
-    private final PApplet P;
-    private final PFont FONT;
+    private final PApplet p;
+    private final PFont font;
 
     private int progress;
 
     public LoadingGui(PApplet p, PFont font) {
-        P = p;
-        FONT = font;
+        this.p = p;
+        this.font = font;
     }
 
     public void update() {
         switch (progress) {
             case 0:
-                Main.largeFont       = P.createFont("STHeitiSC-Light", 24, true);
-                Main.mediumLargeFont = P.createFont("STHeitiSC-Light", 21, true);
-                Main.mediumFont      = P.createFont("STHeitiSC-Light", 18, true);
-                Main.smallFont       = P.createFont("STHeitiSC-Light", 12, true);
+                Main.h1 = p.createFont("fonts/Rubik-Regular.ttf", 30, true);
+                Main.h2 = p.createFont("fonts/Rubik-Regular.ttf", 24, true);
+                Main.h3 = p.createFont("fonts/Rubik-Regular.ttf", 21, true);
+                Main.h4 = p.createFont("fonts/Rubik-Regular.ttf", 18, true);
+                Main.pg = p.createFont("fonts/Rubik-Light.ttf", 16, true);
+                Main.monoHuge = p.createFont("fonts/IBMPlexMono-Medium.ttf", 24, true);
+                Main.monoLarge = p.createFont("fonts/IBMPlexMono-Medium.ttf", 18, true);
+                Main.monoMedium = p.createFont("fonts/IBMPlexMono-Medium.ttf", 16, true);
+                Main.monoSmall = p.createFont("fonts/IBMPlexMono-Medium.ttf", 14, true);
                 break;
             case 1:
-                loadGui(P);
+                loadGui(p);
                 break;
             case 2:
-                loadEnemies(P);
+                loadEnemies(p);
                 break;
             case 3:
-                loadMachines(P);
+                loadMachines(p);
                 break;
             case 4:
-                loadParticles(P);
+                loadParticles(p);
                 break;
             case 5:
-                loadProjectiles(P);
+                loadProjectiles(p);
                 break;
             case 6:
-                loadTiles(P);
+                loadTiles(p);
                 break;
             case 7:
-                loadTurrets(P);
+                loadTurrets(p);
                 break;
             case 8:
-                loadWalls(P);
+                loadWalls(p);
                 break;
             case 9:
-                loadSounds(P);
+                loadSounds(p);
                 break;
             case 10:
-                Main.levelSelectGui = new LevelSelectGui(P);
-                Main.settingsGui = new SettingsGui(P);
-                Main.titleGui = new TitleGui(P);
-                Main.game = new Game(P);
+                Main.levelSelectGui = new LevelSelectGui(p);
+                Main.settingsGui = new SettingsGui(p);
+                Main.titleGui = new TitleGui(p);
+                Main.game = new Game(p);
                 break;
             case 11:
                 //buffer
@@ -81,17 +86,17 @@ public class LoadingGui {
     }
 
     public void display() {
-        P.fill(255);
-        P.textFont(FONT);
-        P.textAlign(PConstants.CENTER);
-        P.text("Loading...", Utilities.getCenter(P).x, Utilities.getCenter(P).y);
+        p.fill(255);
+        p.textFont(font);
+        p.textAlign(PConstants.CENTER);
+        p.text("Loading...", Utilities.getCenter(p).x, Utilities.getCenter(p).y);
 
-        P.strokeWeight(10);
-        P.stroke(255);
+        p.strokeWeight(10);
+        p.stroke(255);
         float lineEnd = PApplet.map(progress,
                 0, MAX_PROGRESS,
-                LINE_EDGE_BUFFER, P.width - LINE_EDGE_BUFFER);
-        P.line(LINE_EDGE_BUFFER, Utilities.getCenter(P).y + 200, lineEnd, Utilities.getCenter(P).y + 200);
-        P.strokeWeight(1);
+                LINE_EDGE_BUFFER, p.width - LINE_EDGE_BUFFER);
+        p.line(LINE_EDGE_BUFFER, Utilities.getCenter(p).y + 200, lineEnd, Utilities.getCenter(p).y + 200);
+        p.strokeWeight(1);
     }
 }

@@ -1,6 +1,5 @@
 package main.towers.turrets;
 
-import main.enemies.Enemy;
 import main.misc.Tile;
 import main.particles.RailgunBlast;
 import processing.core.PApplet;
@@ -9,10 +8,17 @@ import processing.core.PVector;
 
 import static main.Main.*;
 import static main.misc.Utilities.down60ToFramerate;
-import static main.misc.Utilities.randomizeDelay;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Railgun extends Turret {
+
+    public static String pid = "T1-5000-50000-12";
+    public static String description =
+            "Fires a hypersonic bolt of plasma at the toughest critter onscreen, doing extreme damage.";
+    public static char shortcut = 'T';
+    public static String title1 = "Railgun";
+    public static String title2 = null;
+    public static int price = 25_000;
 
     private PImage[] vaporTrail;
     private PImage[] vaporEndSprites;
@@ -30,7 +36,7 @@ public class Railgun extends Turret {
         name = "railgun";
         offset = 6;
         hit = false;
-        delay = randomizeDelay(p, 12);
+        delay = 12;
         damage = 50000;
         pjSpeed = -1;
         range = 5000;
@@ -45,7 +51,7 @@ public class Railgun extends Turret {
         vaporEndSprites = animatedSprites.get("railgunBlastPT");
         material = Material.titanium;
         barrelLength = 30;
-        basePrice = RAILGUN_PRICE;
+        basePrice = price;
         priority = Priority.Strong;
         titleLines = new String[]{"Railgun"};
 

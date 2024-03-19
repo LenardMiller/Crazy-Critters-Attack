@@ -12,17 +12,28 @@ public class SpriteLoader {
         //buttons
         getSprite(p,"upgrade","BT","upgradeButton/",5);
         getSprite(p,"sellTower","BT","sellTower/",3);
-        getSprite(p,"targetPriority","BT","targetPriority/",3);
+        getSprite(p,"targetPriority","BT","targetPriority/",4);
         getSprite(p,"towerTabSwitch","BT","towerTabSwitch/",3);
-        getSprite(p,"wallBuy","BT","wallBuy/",3);
+        getSprite(p,"wallBuy","BT","wallBuy/",15);
         getSprite(p,"play","BT","play/",4);
         getSprite(p, "genericButton", "BT", "genericButton/", 3);
         //icons
-        getSprite(p,"upgrade","IC","upgrades/",43);
+        getSprite(p,"upgrade","IC","upgrades/",68);
         staticSprites.put("moneyIc",p.loadImage("sprites/gui/money.png"));
         staticSprites.put("wavePrimaryIc",p.loadImage("sprites/gui/wavePrimary.png"));
         staticSprites.put("waveSecondaryIc",p.loadImage("sprites/gui/waveSecondary.png"));
-        staticSprites.put("currentLineIc",p.loadImage("sprites/gui/currentLine.png"));
+        staticSprites.put("waveProgressIc",p.loadImage("sprites/gui/waveProgress.png"));
+        staticSprites.put("burrowingTypeIc",p.loadImage("sprites/gui/enemyType/burrowing.png"));
+        staticSprites.put("flyingTypeIc",p.loadImage("sprites/gui/enemyType/flying.png"));
+        staticSprites.put("shootingTypeIc",p.loadImage("sprites/gui/enemyType/shooting.png"));
+        staticSprites.put("upgradePromptOverlayIc",p.loadImage("sprites/gui/overlays/upgradePrompt.png"));
+        staticSprites.put("upgradePromptOverlay2Ic",p.loadImage("sprites/gui/overlays/upgradePrompt2.png"));
+        //panels
+        staticSprites.put("selectionSinglePn",p.loadImage("sprites/gui/panels/selectionSingle.png"));
+        staticSprites.put("selectionDoublePn",p.loadImage("sprites/gui/panels/selectionDouble.png"));
+        staticSprites.put("moneyPn",p.loadImage("sprites/gui/panels/money.png"));
+        staticSprites.put("bgPn",p.loadImage("sprites/gui/panels/bg.png"));
+        staticSprites.put("towerBuyPn",p.loadImage("sprites/gui/panels/towerBuy.png"));
     }
 
     public static void loadParticles(PApplet p) {
@@ -83,6 +94,9 @@ public class SpriteLoader {
         getSprite(p,"nuclearExDebris","PT","explosionDebris/nuclear/",4);
         getSprite(p,"darkExDebris","PT","explosionDebris/dark/",4);
         getSprite(p,"electricityExDebris","PT","explosionDebris/electricity/",4);
+        getSprite(p,"greenMagicExDebris","PT","explosionDebris/greenMagic/",4);
+        getSprite(p,"blueGreenFireExDebris","PT","explosionDebris/blueGreenFire/",4);
+        getSprite(p,"orangeMagicExDebris","PT","explosionDebris/orangeMagic/",4);
         //piles
         getSprite(p,"greenOuchPile","PT", "pile/greenOuch/", 4);
         getSprite(p,"redOuchPile","PT", "pile/redOuch/", 4);
@@ -579,20 +593,17 @@ public class SpriteLoader {
 
     public static void loadWalls(PApplet p) {
         //center
-        getSprite(p,"woodWall","TW","Wood/",4);
-        getSprite(p,"stoneWall","TW","Stone/",4);
-        getSprite(p,"metalWall","TW","Metal/",4);
-        getSprite(p,"crystalWall","TW","Crystal/",4);
-        getSprite(p,"titaniumWall","TW","Titanium/",4);
-        getSprite(p,"ultimateWall","TW","Titanium/",4);
+        getSprite(p,"woodWall","TW","Wood/",5);
+        getSprite(p,"stoneWall","TW","Stone/",5);
+        getSprite(p,"metalWall","TW","Metal/",5);
+        getSprite(p,"crystalWall","TW","Crystal/",5);
+        getSprite(p,"titaniumWall","TW","Titanium/",5);
+        getSprite(p,"ultimateWall","TW","Titanium/",5);
         getSprite(p,"iceWall","TW","Ice/",4);
         //other stuff
         staticSprites.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
         staticSprites.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
         staticSprites.put("shadowTRTW",p.loadImage("sprites/towers/walls/overlays/shadowTR.png"));
-        staticSprites.put("repairTW",p.loadImage("sprites/towers/walls/overlays/repair.png"));
-        staticSprites.put("upgradeTW",p.loadImage("sprites/towers/walls/overlays/upgrade.png"));
-        staticSprites.put("placeTW",p.loadImage("sprites/towers/walls/overlays/place.png"));
         for (int i = 0; i < 6; i++) {
             String name = "null";
             if (i == 0) name = "Wood";
@@ -647,41 +658,19 @@ public class SpriteLoader {
         staticSprites.put("sludgeBa_TL",p.loadImage("sprites/tiles/base/sludge.png"));
         staticSprites.put("pinkSnowBa_TL", p.loadImage("sprites/tiles/base/pinkSnow/base.png"));
         for (int i = 0; i < 10; i++) {
-            String name;
-            switch (i) {
-                case 0:
-                    name = "grass";
-                    break;
-                case 1:
-                    name = "snow";
-                    break;
-                case 2:
-                    name = "dirt";
-                    break;
-                case 3:
-                    name = "stone";
-                    break;
-                case 4:
-                    name = "yellowGrass";
-                    break;
-                case 5:
-                    name = "water";
-                    break;
-                case 6:
-                    name = "deadGrass";
-                    break;
-                case 7:
-                    name = "brownGrass";
-                    break;
-                case 8:
-                    name = "dirtyWater";
-                    break;
-                case 9:
-                    name = "pinkSnow";
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + i);
-            }
+            String name = switch (i) {
+                case 0 -> "grass";
+                case 1 -> "snow";
+                case 2 -> "dirt";
+                case 3 -> "stone";
+                case 4 -> "yellowGrass";
+                case 5 -> "water";
+                case 6 -> "deadGrass";
+                case 7 -> "brownGrass";
+                case 8 -> "dirtyWater";
+                case 9 -> "pinkSnow";
+                default -> throw new IllegalStateException("Unexpected value: " + i);
+            };
             staticSprites.put(name + "Ba_T_TL", p.loadImage("sprites/tiles/base/" + name + "/t.png"));
             staticSprites.put(name + "Ba_R_TL", p.loadImage("sprites/tiles/base/" + name + "/r.png"));
             staticSprites.put(name + "Ba_B_TL", p.loadImage("sprites/tiles/base/" + name + "/b.png"));
@@ -910,30 +899,16 @@ public class SpriteLoader {
     }
 
     private static void getSprite(PApplet p, String name, String type, String folder, int length) {
-        String mainFolder = "";
-        switch (type) {
-            case "IC":
-                mainFolder = "gui/";
-                break;
-            case "BT":
-                mainFolder = "gui/buttons/";
-                break;
-            case "PT":
-                mainFolder = "particles/";
-                break;
-            case "PJ":
-                mainFolder = "projectiles/";
-                break;
-            case "EN":
-                mainFolder = "enemies/";
-                break;
-            case "TR":
-                mainFolder = "towers/turrets/";
-                break;
-            case "TW":
-                mainFolder = "towers/walls/";
-                break;
-        }
+        String mainFolder = switch (type) {
+            case "IC" -> "gui/";
+            case "BT" -> "gui/buttons/";
+            case "PT" -> "particles/";
+            case "PJ" -> "projectiles/";
+            case "EN" -> "enemies/";
+            case "TR" -> "towers/turrets/";
+            case "TW" -> "towers/walls/";
+            default -> "";
+        };
         String fullName = name+type;
         String path = "sprites/"+mainFolder+folder;
         animatedSprites.put(fullName, new PImage[length]);

@@ -1,6 +1,7 @@
 package main.projectiles.homing;
 
 import main.enemies.Enemy;
+import main.particles.ExplosionDebris;
 import main.projectiles.arcs.YellowArc;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
@@ -12,9 +13,9 @@ import static main.Main.*;
 public class ElectricMissile extends MagicMissile {
 
     public ElectricMissile(PApplet p, float x, float y, float angle, Turret turret, int damage, Turret.Priority priority,
-                           PVector spawnPos, float effectDuration, float effectLevel) {
-        super(p, x, y, angle, turret, damage, priority, spawnPos);
-        trail = "nuclear";
+                           PVector spawnPos, float effectDuration, float effectLevel, int maxSpeed) {
+        super(p, x, y, angle, turret, damage, priority, spawnPos, maxSpeed);
+        particleTrail = "nuclear";
         type = Enemy.DamageType.nuclear;
         buff = "electrified";
         sprite = staticSprites.get("electricMissilePj");
@@ -24,6 +25,10 @@ public class ElectricMissile extends MagicMissile {
 
     @Override
     public void die() {
+        for (int i = 0; i < 8; i++) {
+            topParticles.add(new ExplosionDebris(p, position.x, position.y, p.random(TWO_PI),
+                    "nuclear", p.random(100, 200)));
+        }
         topParticles.add(new Ouch(p,position.x,position.y,p.random(0,360),"yellowPuff"));
         arcs.add(new YellowArc(p, position.x, position.y, turret, 0, 0, 75, Turret.Priority.None));
         projectiles.remove(this);

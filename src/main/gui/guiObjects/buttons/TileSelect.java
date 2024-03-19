@@ -50,8 +50,8 @@ public class TileSelect extends Button {
      */
     @Override
     public void hover() {
-        if (matrixMousePosition.x < position.x+size.x/2 && matrixMousePosition.x > position.x-size.x/2 &&
-          matrixMousePosition.y < position.y+size.y/2 && matrixMousePosition.y > position.y-size.y/2 && alive && active && !paused) {
+        if (boardMousePosition.x < position.x+size.x/2 && boardMousePosition.x > position.x-size.x/2 &&
+                boardMousePosition.y < position.y+size.y/2 && boardMousePosition.y > position.y-size.y/2 && alive && active && !paused) {
             sprite = spritePressed;
             if (inputHandler.leftMousePressedPulse) pressIn();
         }

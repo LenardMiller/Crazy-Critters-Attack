@@ -3,10 +3,6 @@ package main.misc;
 import main.Main;
 import main.enemies.burrowingEnemies.*;
 import main.enemies.flyingEnemies.Fae;
-import main.enemies.shootingEnemies.IceEntity;
-import main.enemies.shootingEnemies.IceMonstrosity;
-import main.enemies.shootingEnemies.MudFlinger;
-import main.enemies.shootingEnemies.SnowAntlion;
 import main.projectiles.arcs.Arc;
 import main.projectiles.EnergyBlast;
 import main.projectiles.Flame;
@@ -16,11 +12,9 @@ import main.projectiles.enemyProjeciles.IceCrystal;
 import main.projectiles.enemyProjeciles.Snowball;
 import main.projectiles.homing.MagicMissile;
 import main.enemies.*;
-import main.enemies.flyingEnemies.Bat;
-import main.enemies.flyingEnemies.Frost;
 import main.levelStructure.Level;
 import main.towers.Tower;
-import main.towers.turrets.Turret;
+import main.towers.turrets.*;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -45,17 +39,22 @@ public class KeyBinds {
 
         if (pause) {
             switch (screen) {
-                case InGame:
-                    playSound(sounds.get("clickOut"), 1, 1);
+                case InGame -> {
+
                     if (settings) closeSettingsMenu();
-                    else paused = !paused;
-                    break;
-                case LevelSelect:
+                    if (paused) {
+                        paused = false;
+                        playSound(sounds.get("littleButtonIn"), 1, 1);
+                    } else {
+                        paused = true;
+                        playSound(sounds.get("littleButtonOut"), 1, 1);
+                    }
+                } case LevelSelect -> {
                     if (settings) {
-                        playSound(sounds.get("clickOut"), 1, 1);
+                        playSound(sounds.get("littleButtonOut"), 1, 1);
                         settings = false;
                     }
-                    break;
+                }
             }
         }
     }
@@ -76,25 +75,25 @@ public class KeyBinds {
         boolean play = keysPressed.getPressedPulse(' ');
         //hotkeys
         boolean wall =           addHotkey(new char[]{'?'}, 0),
-                slingshot =      addHotkey(new char[]{'q', 'Q'}, SLINGSHOT_PRICE),
-                luggageBlaster = addHotkey(new char[]{'a', 'A'}, RANDOM_CANNON_PRICE),
-                crossbow =       addHotkey(new char[]{'z', 'Z'}, CROSSBOW_PRICE),
-                cannon =         addHotkey(new char[]{'w', 'W'}, CANNON_PRICE),
-                gluer =          addHotkey(new char[]{'s', 'S'}, GLUER_PRICE),
-                seismicTower =   addHotkey(new char[]{'x', 'X'}, SEISMIC_PRICE),
-                energyBlaster =  addHotkey(new char[]{'e', 'E'}, ENERGY_BLASTER_PRICE),
-                flamethrower =   addHotkey(new char[]{'d', 'Q'}, FLAMETHROWER_PRICE),
-                teslaTower =     addHotkey(new char[]{'c', 'C'}, TESLA_TOWER_PRICE),
-                booster =        addHotkey(new char[]{'r', 'R'}, BOOSTER_PRICE),
-                iceTower =       addHotkey(new char[]{'f', 'F'}, ICE_TOWER_PRICE),
-                magicMissileer = addHotkey(new char[]{'v', 'V'}, MAGIC_MISSILEER_PRICE),
-                railgun =        addHotkey(new char[]{'t', 'T'}, RAILGUN_PRICE),
-                nightmare =      addHotkey(new char[]{'g', 'G'}, NIGHTMARE_PRICE),
-                waveMotion =     addHotkey(new char[]{'b', 'B'}, WAVE_MOTION_PRICE);
+                slingshot =      addHotkey(new char[]{'q', 'Q'}, Slingshot.price),
+                luggageBlaster = addHotkey(new char[]{'a', 'A'}, RandomCannon.price),
+                crossbow =       addHotkey(new char[]{'z', 'Z'}, Crossbow.price),
+                cannon =         addHotkey(new char[]{'w', 'W'}, Cannon.price),
+                gluer =          addHotkey(new char[]{'s', 'S'}, Gluer.price),
+                seismicTower =   addHotkey(new char[]{'x', 'X'}, SeismicTower.price),
+                energyBlaster =  addHotkey(new char[]{'e', 'E'}, EnergyBlaster.price),
+                flamethrower =   addHotkey(new char[]{'d', 'Q'}, Flamethrower.price),
+                teslaTower =     addHotkey(new char[]{'c', 'C'}, TeslaTower.price),
+                booster =        addHotkey(new char[]{'v', 'V'}, Booster.price),
+                iceTower =       addHotkey(new char[]{'f', 'F'}, IceTower.price),
+                magicMissileer = addHotkey(new char[]{'r', 'R'}, MagicMissileer.price),
+                railgun =        addHotkey(new char[]{'t', 'T'}, Railgun.price),
+                nightmare =      addHotkey(new char[]{'g', 'G'}, Nightmare.price),
+                waveMotion =     addHotkey(new char[]{'b', 'B'}, WaveMotion.price);
 
         if (play) {
-            if (!playingLevel) {
-                playingLevel = true;
+            if (!isPlaying) {
+                isPlaying = true;
                 Level level = levels[currentLevel];
                 level.currentWave = 0;
             } else {
@@ -104,30 +103,67 @@ public class KeyBinds {
         //hotkeys
         if (!dev) {
             String name = "";
-            if (wall)               name = "wall";
-            if (slingshot)          name = "slingshot";
-            if (luggageBlaster)     name = "miscCannon";
-            if (crossbow)           name = "crossbow";
+            Class<?> towerType = null;
+            if (wall) name = "wall";
+            if (slingshot) {
+                name = "slingshot";
+                towerType = Slingshot.class;
+            } if (luggageBlaster) {
+                name = "miscCannon";
+                towerType = RandomCannon.class;
+            } if (crossbow) {
+                name = "crossbow";
+                towerType = Crossbow.class;
+            }
             if (currentLevel > 0) {
-                if (cannon)         name = "cannon";
-                if (gluer)          name = "gluer";
-                if (seismicTower)   name = "seismic";
+                if (cannon) {
+                    name = "cannon";
+                    towerType = Cannon.class;
+                } if (gluer) {
+                    name = "gluer";
+                    towerType = Gluer.class;
+                } if (seismicTower) {
+                    name = "seismic";
+                    towerType = SeismicTower.class;
+                }
             } if (currentLevel > 1) {
-                if (energyBlaster)  name = "energyBlaster";
-                if (flamethrower)   name = "flamethrower";
-                if (teslaTower)     name = "tesla";
+                if (energyBlaster) {
+                    name = "energyBlaster";
+                    towerType = EnergyBlaster.class;
+                } if (flamethrower) {
+                    name = "flamethrower";
+                    towerType = Flamethrower.class;
+                } if (teslaTower) {
+                    name = "tesla";
+                    towerType = TeslaTower.class;
+                }
             } if (currentLevel > 2) {
-                if (booster)        name = "booster";
-                if (iceTower)       name = "iceTower";
-                if (magicMissileer) name = "magicMissleer";
+                if (booster) {
+                    name = "booster";
+                    towerType = Booster.class;
+                } if (iceTower) {
+                    name = "iceTower";
+                    towerType = IceTower.class;
+                } if (magicMissileer) {
+                    name = "magicMissleer";
+                    towerType = MagicMissileer.class;
+                }
             } if (currentLevel > 3) {
-                if (railgun)        name = "railgun";
-                if (nightmare)      name = "nightmare";
-                if (waveMotion)     name = "waveMotion";
+                if (railgun) {
+                    name = "railgun";
+                    towerType = Railgun.class;
+                } if (nightmare) {
+                    name = "nightmare";
+                    towerType = Nightmare.class;
+                } if (waveMotion) {
+                    name = "waveMotion";
+                    towerType = WaveMotion.class;
+                }
             }
             if (!name.isEmpty()) {
                 if (hand.held.equals(name)) hand.setHeld("null");
                 else hand.setHeld(name);
+                hand.heldClass = towerType;
             }
         }
     }
@@ -151,37 +187,27 @@ public class KeyBinds {
         boolean needle = keysPressed.getPressedPulse('u') && alive;
         boolean flame = keysPressed.getPressed('i') && alive;
         //enemies
-        boolean en1 =  keysPressed.getPressedPulse('1') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        boolean en2 =  keysPressed.getPressedPulse('2') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        boolean en3 =  keysPressed.getPressedPulse('3') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        boolean en4 =  keysPressed.getPressedPulse('4') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        boolean en5 =  keysPressed.getPressedPulse('5') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        boolean en6 =  keysPressed.getPressedPulse('6') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        boolean en7 =  keysPressed.getPressedPulse('7') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        boolean en8 =  keysPressed.getPressedPulse('8') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        boolean en9 =  keysPressed.getPressedPulse('9') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        boolean en1b = keysPressed.getPressedPulse('!') && alive && matrixMousePosition.x < BOARD_WIDTH;
-        //projectiles
-        if (pebble) projectiles.add(new Snowball(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0));
-        if (bolt) projectiles.add(new IceCrystal(p, 10, matrixMousePosition.x, matrixMousePosition.y, 0));
-        if (miscProjectile) projectiles.add(new MiscProjectile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, round(p.random(0, 5)), 6));
-        if (smallEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 20, false));
-        if (largeEnergyBlast) projectiles.add(new EnergyBlast(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 20, 30, true));
-        if (magicMissle) projectiles.add(new MagicMissile(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, Turret.Priority.Close, new PVector(matrixMousePosition.x,matrixMousePosition.y)));
-        if (arc) arcs.add(new Arc(p, matrixMousePosition.x, matrixMousePosition.y, null, 35, 5, 500, Turret.Priority.Close));
-        if (needle) projectiles.add(new Needle(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1,150, 500));
-        if (flame) projectiles.add(new Flame(p, matrixMousePosition.x, matrixMousePosition.y, 0, null, 5, 1, 300, 5, false));
+        boolean en1 =  keysPressed.getPressedPulse('1') && alive && boardMousePosition.x < BOARD_WIDTH;
+        boolean en2 =  keysPressed.getPressedPulse('2') && alive && boardMousePosition.x < BOARD_WIDTH;
+        boolean en3 =  keysPressed.getPressedPulse('3') && alive && boardMousePosition.x < BOARD_WIDTH;
+        boolean en4 =  keysPressed.getPressedPulse('4') && alive && boardMousePosition.x < BOARD_WIDTH;
+        boolean en5 =  keysPressed.getPressedPulse('5') && alive && boardMousePosition.x < BOARD_WIDTH;
+        boolean en6 =  keysPressed.getPressedPulse('6') && alive && boardMousePosition.x < BOARD_WIDTH;
+        boolean en7 =  keysPressed.getPressedPulse('7') && alive && boardMousePosition.x < BOARD_WIDTH;
+        boolean en8 =  keysPressed.getPressedPulse('8') && alive && boardMousePosition.x < BOARD_WIDTH;
+        boolean en9 =  keysPressed.getPressedPulse('9') && alive && boardMousePosition.x < BOARD_WIDTH;
+        boolean en1b = keysPressed.getPressedPulse('!') && alive && boardMousePosition.x < BOARD_WIDTH;
         //enemies
-        if (en1) enemies.add(new Worm( p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en2) enemies.add(new MidWorm(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en3) enemies.add(new BigWorm(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en4) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en5) enemies.add(new Root(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en6) enemies.add(new Fae(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en7) enemies.add(new MutantBug(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en8) enemies.add(new Shark(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en9) enemies.add(new TreeSpirit(p, matrixMousePosition.x, matrixMousePosition.y));
-        if (en1b) enemies.add(new Dummy(p, matrixMousePosition.x, matrixMousePosition.y));
+        if (en1) enemies.add(new BigBug( p, boardMousePosition.x, boardMousePosition.y));
+        if (en2) enemies.add(new MidWorm(p, boardMousePosition.x, boardMousePosition.y));
+        if (en3) enemies.add(new BigWorm(p, boardMousePosition.x, boardMousePosition.y));
+        if (en4) enemies.add(new Shark(p, boardMousePosition.x, boardMousePosition.y));
+        if (en5) enemies.add(new Root(p, boardMousePosition.x, boardMousePosition.y));
+        if (en6) enemies.add(new Fae(p, boardMousePosition.x, boardMousePosition.y));
+        if (en7) enemies.add(new MutantBug(p, boardMousePosition.x, boardMousePosition.y));
+        if (en8) enemies.add(new Shark(p, boardMousePosition.x, boardMousePosition.y));
+        if (en9) enemies.add(new TreeSpirit(p, boardMousePosition.x, boardMousePosition.y));
+        if (en1b) enemies.add(new Dummy(p, boardMousePosition.x, boardMousePosition.y));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }
 

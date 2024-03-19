@@ -89,8 +89,11 @@ public class SoundLoader {
         sounds.put("nightmareFire", new SoundFile(p, "sounds/turrets/nightmare.wav"));
         //ui
         sounds.put("waveEnd", new SoundFile(p,"sounds/ui/waveEnd.wav"));
-        sounds.put("clickIn", new SoundFile(p, "sounds/ui/clickIn.wav"));
-        sounds.put("clickOut", new SoundFile(p, "sounds/ui/clickOut.wav"));
+        sounds.put("littleButtonIn", new SoundFile(p, "sounds/ui/littleButtonIn.wav"));
+        sounds.put("littleButtonOut", new SoundFile(p, "sounds/ui/littleButtonOut.wav"));
+        sounds.put("bigButtonIn", new SoundFile(p, "sounds/ui/bigButtonIn.wav"));
+        sounds.put("bigButtonOut", new SoundFile(p, "sounds/ui/bigButtonOut.wav"));
+        sounds.put("uiBonk", new SoundFile(p, "sounds/ui/bonk.wav"));
         //material
         sounds.put("woodDamage", new SoundFile(p, "sounds/material/woodDamage.wav"));
         sounds.put("woodBreak", new SoundFile(p, "sounds/material/woodBreak.wav"));
@@ -122,6 +125,7 @@ public class SoundLoader {
         //loops
         startStopSoundLoops.put("smallExplosion", new StartStopSoundLoop(p, "smallExplosion/", secondsToFrames(1), false));
         fadeSoundLoops.put("flamethrower", new FadeSoundLoop(p, "flamethrower", FRAMERATE/6));
+        fadeSoundLoops.put("electricity", new FadeSoundLoop(p, "electricity", FRAMERATE/3, 0.1f));
         //alts
         soundsWithAlts.put("thunder", new SoundWithAlts(p, "thunder", 3));
         //stackables
