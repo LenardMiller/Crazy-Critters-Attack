@@ -18,8 +18,8 @@ public class Selection {
     public String name;
     public Turret turret;
     public boolean towerJustPlaced;
-    private final SoundFile CLICK_IN;
-    private final SoundFile CLICK_OUT;
+    private final SoundFile clickIn;
+    private final SoundFile clickOut;
 
     public static final Color STAT_TEXT_COLOR = new Color(255, 0, 0);
     public static final Color BOOSTED_INFO_COLOR = new Color(255, 132, 0);
@@ -29,8 +29,8 @@ public class Selection {
     public Selection(PApplet p) {
         this.p = p;
         name = "null";
-        CLICK_IN = sounds.get("clickIn");
-        CLICK_OUT = sounds.get("clickOut");
+        clickIn = sounds.get("littleButtonIn");
+        clickOut = sounds.get("littleButtonOut");
     }
 
     public void update() {
@@ -46,7 +46,7 @@ public class Selection {
         Turret turret = (Turret) tiles.get(id).tower;
         if (this.turret != turret || name.equals("null")) {
             if (!towerJustPlaced) {
-                playSound(CLICK_IN, 1, 1);
+                playSound(clickIn, 1, 1);
             } else towerJustPlaced = false;
         }
         swapSelected(turret);
@@ -84,7 +84,7 @@ public class Selection {
         if (inputHandler.leftMousePressedPulse &&
                 mouseOnBoard() && alive && !paused && !hand.held.equals("wall")) {
             if (!name.equals("null") && !towerJustPlaced) {
-                playSound(CLICK_OUT, 1, 1);
+                playSound(clickOut, 1, 1);
             }
             name = "null";
             inGameGui.sellButton.active = false;
@@ -350,7 +350,6 @@ public class Selection {
 
     public void changePriority() {
         if (name.equals("null") || turret == null) return;
-        playSound(selection.CLICK_OUT, 1, 1);
         if (turret.priority == Turret.Priority.Weak) turret.priority = Turret.Priority.Close;
         else turret.priority = Turret.Priority.values()[turret.priority.ordinal() + 1];
     }

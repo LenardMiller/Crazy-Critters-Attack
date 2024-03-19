@@ -34,6 +34,7 @@ public class MenuButton extends Button {
         spritePressed = animatedSprites.get("genericButtonBT")[1];
         spriteHover = animatedSprites.get("genericButtonBT")[2];
         sprite = spriteIdle;
+        clickOut = null;
     }
 
     /**

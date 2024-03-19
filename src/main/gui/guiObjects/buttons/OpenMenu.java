@@ -17,6 +17,7 @@ public class OpenMenu extends Button {
         spritePressed = animatedSprites.get("towerTabSwitchBT")[1];
         spriteHover = animatedSprites.get("towerTabSwitchBT")[2];
         sprite = spriteIdle;
+        clickOut = null;
     }
 
     /**

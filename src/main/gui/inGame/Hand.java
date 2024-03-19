@@ -76,7 +76,7 @@ public class Hand {
         if (boardMousePosition.x <= 0) return;
         if (!held.equals("wall") && !held.equals("null")) {
             selection.towerJustPlaced = true; //prevents selection click sounds from playing
-            playSound(sounds.get("clickOut"), 1, 1);
+            playSound(sounds.get("littleButtonOut"), 1, 1);
         }
         if (held.equals("null")) return;
         if (!implacable) place();
@@ -112,7 +112,7 @@ public class Hand {
     private void clearHand() {
         if (!held.equals("null")) {
             inGameGui.wallBuyButton.timer = 0;
-            playSound(sounds.get("clickOut"), 1, 1);
+            playSound(sounds.get("littleButtonOut"), 1, 1);
         }
         held = "null";
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;

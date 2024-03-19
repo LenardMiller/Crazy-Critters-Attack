@@ -26,6 +26,8 @@ public class UpgradeTower extends Button {
         SPRITE_GREY = animatedSprites.get("upgradeBT")[4]; //grey
         sprite = spriteIdle;
         this.id = id;
+        clickIn = sounds.get("bigButtonIn");
+        clickOut = sounds.get("bigButtonOut");
     }
 
     @Override

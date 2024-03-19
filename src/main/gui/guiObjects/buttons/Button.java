@@ -23,8 +23,8 @@ public abstract class Button extends GuiObject {
         super(p,x,y,type,active);
         position = new PVector(x, y);
         size = new PVector(25, 25);
-        clickIn = sounds.get("clickIn");
-        clickOut = sounds.get("clickOut");
+        clickIn = sounds.get("littleButtonIn");
+        clickOut = sounds.get("littleButtonOut");
     }
 
     public void hover() {

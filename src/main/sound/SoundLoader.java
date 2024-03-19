@@ -89,8 +89,10 @@ public class SoundLoader {
         sounds.put("nightmareFire", new SoundFile(p, "sounds/turrets/nightmare.wav"));
         //ui
         sounds.put("waveEnd", new SoundFile(p,"sounds/ui/waveEnd.wav"));
-        sounds.put("clickIn", new SoundFile(p, "sounds/ui/clickIn.wav"));
-        sounds.put("clickOut", new SoundFile(p, "sounds/ui/clickOut.wav"));
+        sounds.put("littleButtonIn", new SoundFile(p, "sounds/ui/littleButtonIn.wav"));
+        sounds.put("littleButtonOut", new SoundFile(p, "sounds/ui/littleButtonOut.wav"));
+        sounds.put("bigButtonIn", new SoundFile(p, "sounds/ui/bigButtonIn.wav"));
+        sounds.put("bigButtonOut", new SoundFile(p, "sounds/ui/bigButtonOut.wav"));
         //material
         sounds.put("woodDamage", new SoundFile(p, "sounds/material/woodDamage.wav"));
         sounds.put("woodBreak", new SoundFile(p, "sounds/material/woodBreak.wav"));

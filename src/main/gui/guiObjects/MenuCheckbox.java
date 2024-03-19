@@ -15,8 +15,8 @@ import static processing.core.PConstants.*;
 public class MenuCheckbox {
 
     private static final int BOX_SIZE = 25;
-    private static final SoundFile CLICK_IN = sounds.get("clickIn");
-    private static final SoundFile CLICK_OUT = sounds.get("clickOut");
+    private static final SoundFile CLICK_IN = sounds.get("littleButtonIn");
+    private static final SoundFile CLICK_OUT = sounds.get("littleButtonOut");
 
     private final PApplet P;
     private final PVector POSITION;

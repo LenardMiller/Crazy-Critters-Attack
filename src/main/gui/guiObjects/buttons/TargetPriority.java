@@ -23,6 +23,7 @@ public class TargetPriority extends Button {
         spriteNoTarget = animatedSprites.get("targetPriorityBT")[3];
         sprite = spriteIdle;
         noTarget = false;
+        clickOut = null;
     }
 
     @Override

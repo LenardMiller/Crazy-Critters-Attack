@@ -40,13 +40,18 @@ public class KeyBinds {
         if (pause) {
             switch (screen) {
                 case InGame -> {
-                    playSound(sounds.get("clickOut"), 1, 1);
+
                     if (settings) closeSettingsMenu();
-                    else paused = !paused;
-                }
-                case LevelSelect -> {
+                    if (paused) {
+                        paused = false;
+                        playSound(sounds.get("littleButtonIn"), 1, 1);
+                    } else {
+                        paused = true;
+                        playSound(sounds.get("littleButtonOut"), 1, 1);
+                    }
+                } case LevelSelect -> {
                     if (settings) {
-                        playSound(sounds.get("clickOut"), 1, 1);
+                        playSound(sounds.get("littleButtonOut"), 1, 1);
                         settings = false;
                     }
                 }

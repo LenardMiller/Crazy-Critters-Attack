@@ -27,6 +27,8 @@ public class PlayButton extends Button {
         spriteHover = animatedSprites.get("playBT")[2]; //hover
         SPRITE_GREY = animatedSprites.get("playBT")[3]; //grey
         sprite = spriteIdle;
+        clickIn = sounds.get("bigButtonIn");
+        clickOut = sounds.get("bigButtonOut");
     }
 
     @Override
