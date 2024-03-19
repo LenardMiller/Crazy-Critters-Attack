@@ -93,6 +93,7 @@ public class SoundLoader {
         sounds.put("littleButtonOut", new SoundFile(p, "sounds/ui/littleButtonOut.wav"));
         sounds.put("bigButtonIn", new SoundFile(p, "sounds/ui/bigButtonIn.wav"));
         sounds.put("bigButtonOut", new SoundFile(p, "sounds/ui/bigButtonOut.wav"));
+        sounds.put("uiBonk", new SoundFile(p, "sounds/ui/bonk.wav"));
         //material
         sounds.put("woodDamage", new SoundFile(p, "sounds/material/woodDamage.wav"));
         sounds.put("woodBreak", new SoundFile(p, "sounds/material/woodBreak.wav"));

@@ -5,6 +5,8 @@ import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.enemies.shootingEnemies.ShootingEnemy;
+import main.sound.FadeSoundLoop;
+import main.sound.SoundUtilities;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -132,6 +134,9 @@ public class WaveCard {
     public void slide(float target) {
         position.y -= speed;
         if (position.y <= target) {
+            if (speed > 0) {
+                SoundUtilities.playSound(sounds.get("uiBonk"), 1, globalVolume);
+            }
             speed = 0;
             position.y = target;
         }
