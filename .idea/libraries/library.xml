@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="library">
+    <CLASSES>
+      <root url="file:///Applications/Processing 4.app/Contents/Java/core/library" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file:///Applications/Processing 4.app/Contents/Java/core/library/macos-x86_64" />
+      <root url="file:///Applications/Processing 4.app/Contents/Java/core/library/windows-amd64" />
+    </NATIVE>
+    <SOURCES />
+    <jarDirectory url="file:///Applications/Processing 4.app/Contents/Java/core/library" recursive="false" />
+  </library>
+</component>

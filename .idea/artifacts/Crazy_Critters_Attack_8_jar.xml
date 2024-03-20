@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Crazy-Critters-Attack:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Crazy_Critters_Attack_jar</output-path>
+  <artifact type="jar" name="Crazy-Critters-Attack-8:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Crazy_Critters_Attack_8_jar</output-path>
     <root id="archive" name="Crazy-Critters-Attack.jar">
       <element id="module-output" name="Crazy-Critters-Attack" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../Processing/libraries/sound/library/sound.jar" path-in-jar="/" />
