@@ -11,7 +11,7 @@ To build in debug mode, add argument `dev`.
     - If files can't be loaded, check capitalization
 3. Copy `out/artifacts/Crazy_Critters_Attack_17_jar/Crazy-Critters-Attack.jar` into a directory
 4. Include in the directory the data directory, the JRE, and the system build script.
-5. Compress package as `Crazy-Critters-Attack-[system].zip.
+5. Compress package as `Crazy-Critters-Attack-[system].zip`
 
 ## Releasing
 
