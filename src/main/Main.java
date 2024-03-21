@@ -171,8 +171,6 @@ public class Main extends PApplet {
         sound = new Sound(this);
         imageMode(DEFAULT_MODE);
         rectMode(DEFAULT_MODE);
-        System.out.println(sketchPath(""));
-
         //fonts
         title = createFont("STHeitiSC-Medium", 48, true);
         //load input

@@ -114,7 +114,7 @@ public class Saver {
             object.setInt("hp", iceWall.hp);
             object.setFloat("x", iceWall.tile.position.x);
             object.setFloat("y", iceWall.tile.position.y);
-            object.setInt("timeUntilDamage", iceWall.TIME_UNTIL_DAMAGE);
+            object.setInt("timeUntilDamage", iceWall.timeUntilDamage);
 
             array.setJSONObject(i, object);
         }
@@ -190,6 +190,8 @@ public class Saver {
         String path = filePath() + "/data/save/" + name + ".json";
         File file = new File(path);
 
-        file.delete();
+        if (!file.delete()) {
+            throw new RuntimeException("failed to delete");
+        }
     }
 }

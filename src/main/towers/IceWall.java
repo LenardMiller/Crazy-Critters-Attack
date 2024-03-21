@@ -1,7 +1,6 @@
 package main.towers;
 
 import main.enemies.Enemy;
-import main.misc.CollisionBox;
 import main.misc.Tile;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -13,9 +12,9 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class IceWall extends Wall {
 
-    public final int TIME_UNTIL_DAMAGE;
+    public final int timeUntilDamage;
 
-    private final CornerSpriteDS ICE;
+    private final CornerSpriteDS ice;
 
     private int damageTimer;
 
@@ -25,7 +24,7 @@ public class IceWall extends Wall {
         name = "iceWall";
         this.maxHp = maxHp;
         hp = maxHp;
-        TIME_UNTIL_DAMAGE = timeUntilDamage;
+        this.timeUntilDamage = timeUntilDamage;
         sprite = animatedSprites.get("iceWallTW");
         material = Material.ice;
         damageSound = sounds.get("iceDamage");
@@ -34,7 +33,7 @@ public class IceWall extends Wall {
         nextLevelB = 4;
 
         updateTowerArray();
-        ICE = new CornerSpriteDS();
+        ice = new CornerSpriteDS();
         loadSprites();
     }
 
@@ -48,9 +47,9 @@ public class IceWall extends Wall {
     public void update() {
         if (hp <= 0) die(false);
         if (!paused && alive) {
-            if (TIME_UNTIL_DAMAGE != -1) {
+            if (timeUntilDamage != -1) {
                 damageTimer++;
-                if (damageTimer >= TIME_UNTIL_DAMAGE) {
+                if (damageTimer >= timeUntilDamage) {
                     hp -= maxHp / 10;
                     damageTimer = 0;
                     refreshHpBar();
@@ -58,8 +57,10 @@ public class IceWall extends Wall {
             }
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy enemy = enemies.get(i);
-                CollisionBox enemyCollisionBox = new CollisionBox(p, PVector.div(enemy.size, -2), enemy.size);
-                if (enemyCollisionBox.pointIsInsideBox(enemy.position, tile.getCenter())) enemy.intersectingIceCount++;
+                if (enemy.position.x > tile.position.x - TILE_SIZE && enemy.position.x < tile.position.x
+                    && enemy.position.y > tile.position.y - TILE_SIZE && enemy.position.x < tile.position.y) {
+                    enemy.intersectingIceCount++;
+                }
                 int targetSize = ceil(enemy.pfSize / 2f);
                 if (enemy.intersectingIceCount >= targetSize) {
                     enemy.damageWithBuff(0, "frozen", 1, 0.2f, null,
@@ -178,7 +179,7 @@ public class IceWall extends Wall {
             brCcv = true;
         } else brC = !(b || r);
 
-        CornerSpriteDS spriteDS = ICE;
+        CornerSpriteDS spriteDS = ice;
         if (tS) tSSprite = spriteDS.t;
         else tSSprite = null;
         if (bS) bSSprite = spriteDS.b;
@@ -200,7 +201,7 @@ public class IceWall extends Wall {
     }
 
     private void loadSprites() {
-        CornerSpriteDS spriteDS = ICE;
+        CornerSpriteDS spriteDS = ice;
         String name = "Ice";
         String idA = "null";
         String idB = "null";
