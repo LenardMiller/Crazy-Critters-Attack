@@ -3,9 +3,16 @@ package main.misc;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.io.*;
+import java.net.*;
+
 import static main.Main.animatedSprites;
 import static main.Main.staticSprites;
 
+/**
+ * Loads all sprites and animations.
+ * NOTE: make sure files have correct capitalization, or else they won't be loaded when building as jar.
+ */
 public class SpriteLoader {
 
     public static void loadGui(PApplet p) {
@@ -593,33 +600,33 @@ public class SpriteLoader {
 
     public static void loadWalls(PApplet p) {
         //center
-        getSprite(p,"woodWall","TW","Wood/",5);
-        getSprite(p,"stoneWall","TW","Stone/",5);
-        getSprite(p,"metalWall","TW","Metal/",5);
-        getSprite(p,"crystalWall","TW","Crystal/",5);
-        getSprite(p,"titaniumWall","TW","Titanium/",5);
-        getSprite(p,"ultimateWall","TW","Titanium/",5);
-        getSprite(p,"iceWall","TW","Ice/",4);
+        getSprite(p,"woodWall","TW","wood/",5);
+        getSprite(p,"stoneWall","TW","stone/",5);
+        getSprite(p,"metalWall","TW","metal/",5);
+        getSprite(p,"crystalWall","TW","crystal/",5);
+        getSprite(p,"titaniumWall","TW","titanium/",5);
+        getSprite(p,"ultimateWall","TW","titanium/",5);
+        getSprite(p,"iceWall","TW","ice/",4);
         //other stuff
         staticSprites.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
         staticSprites.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
         staticSprites.put("shadowTRTW",p.loadImage("sprites/towers/walls/overlays/shadowTR.png"));
         for (int i = 0; i < 6; i++) {
             String name = "null";
-            if (i == 0) name = "Wood";
-            if (i == 1) name = "Stone";
-            if (i == 2) name = "Metal";
-            if (i == 3) name = "Crystal";
-            if (i == 4) name = "Titanium";
-            if (i == 5) name = "Ice";
+            if (i == 0) name = "wood";
+            if (i == 1) name = "stone";
+            if (i == 2) name = "metal";
+            if (i == 3) name = "crystal";
+            if (i == 4) name = "titanium";
+            if (i == 5) name = "ice";
             String idA = "null";
             String idB = "null";
             String idC = "null";
             for (int a = 0; a < 2; a++) {
                 for (int b = 0; b < 2; b++) {
                     for (int c = 0; c < 2; c++) {
-                        if (a == 0) idA = "T";
-                        if (a == 1) idA = "B";
+                        if (a == 0) idA = "t";
+                        if (a == 1) idA = "b";
                         if (b == 0) idB = "l";
                         if (b == 1) idB = "r";
                         if (c == 0) idC = "c";
@@ -707,7 +714,7 @@ public class SpriteLoader {
         staticSprites.put("veryDeadLilyPad0De_TL",p.loadImage("sprites/tiles/decoration/veryDeadLilyPads/000.png"));
         staticSprites.put("veryDeadLilyPad1De_TL",p.loadImage("sprites/tiles/decoration/veryDeadLilyPads/001.png"));
         staticSprites.put("veryDeadLilyPad2De_TL",p.loadImage("sprites/tiles/decoration/veryDeadLilyPads/002.png"));
-        staticSprites.put("mushroomsBLDDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/Bld.png"));
+        staticSprites.put("mushroomsBLDDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/bld.png"));
         staticSprites.put("mushroomsTRDDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/trd.png"));
         staticSprites.put("mushroomsTDe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/t.png"));
         staticSprites.put("mushroomsPillarADe_TL", p.loadImage("sprites/tiles/decoration/mushrooms/pillarA.png"));
@@ -718,7 +725,7 @@ public class SpriteLoader {
         staticSprites.put("lichenGreenDe_TL", p.loadImage("sprites/tiles/decoration/lichen/green.png"));
         staticSprites.put("lichenBlueDe_TL", p.loadImage("sprites/tiles/decoration/lichen/blue.png"));
         staticSprites.put("lichenWhiteDe_TL", p.loadImage("sprites/tiles/decoration/lichen/white.png"));
-        staticSprites.put("deadMushroomsBLDDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/Bld.png"));
+        staticSprites.put("deadMushroomsBLDDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/bld.png"));
         staticSprites.put("deadMushroomsTRDDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/trd.png"));
         staticSprites.put("deadMushroomsTDe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/t.png"));
         staticSprites.put("deadMushroomsPillarADe_TL", p.loadImage("sprites/tiles/decoration/deadMushrooms/pillarA.png"));
