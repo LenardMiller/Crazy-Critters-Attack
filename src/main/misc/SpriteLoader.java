@@ -3,9 +3,6 @@ package main.misc;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-import java.io.*;
-import java.net.*;
-
 import static main.Main.animatedSprites;
 import static main.Main.staticSprites;
 
