@@ -1,3 +1,4 @@
-/out/
+/out/production
+/out/artifacts
 /data/save
 .DS_Store
