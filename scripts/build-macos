@@ -1,5 +1,0 @@
-#! /usr/bin/env bash
-
-cd "$(dirname "$0")"
-
-jre-17-0-8/Contents/Home/bin/java -jar Crazy-Critters-Attack.jar
