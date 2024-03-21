@@ -602,23 +602,22 @@ public class SpriteLoader {
         getSprite(p,"metalWall","TW","metal/",5);
         getSprite(p,"crystalWall","TW","crystal/",5);
         getSprite(p,"titaniumWall","TW","titanium/",5);
-        getSprite(p,"ultimateWall","TW","titanium/",5);
         getSprite(p,"iceWall","TW","ice/",4);
         //other stuff
         staticSprites.put("shadowBothTW",p.loadImage("sprites/towers/walls/overlays/shadowBoth.png"));
         staticSprites.put("shadowBLTW",p.loadImage("sprites/towers/walls/overlays/shadowBL.png"));
         staticSprites.put("shadowTRTW",p.loadImage("sprites/towers/walls/overlays/shadowTR.png"));
         for (int i = 0; i < 6; i++) {
-            String name = "null";
+            String name = null;
             if (i == 0) name = "wood";
             if (i == 1) name = "stone";
             if (i == 2) name = "metal";
             if (i == 3) name = "crystal";
             if (i == 4) name = "titanium";
             if (i == 5) name = "ice";
-            String idA = "null";
-            String idB = "null";
-            String idC = "null";
+            String idA = null;
+            String idB = null;
+            String idC = null;
             for (int a = 0; a < 2; a++) {
                 for (int b = 0; b < 2; b++) {
                     for (int c = 0; c < 2; c++) {
@@ -633,10 +632,10 @@ public class SpriteLoader {
                     }
                 }
             }
-            staticSprites.put(name + "TWallTW", p.loadImage("sprites/towers/walls/" + name + "/t.png"));
-            staticSprites.put(name + "BWallTW", p.loadImage("sprites/towers/walls/" + name + "/b.png"));
-            staticSprites.put(name + "LWallTW", p.loadImage("sprites/towers/walls/" + name + "/l.png"));
-            staticSprites.put(name + "RWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
+            staticSprites.put(name + "tWallTW", p.loadImage("sprites/towers/walls/" + name + "/t.png"));
+            staticSprites.put(name + "bWallTW", p.loadImage("sprites/towers/walls/" + name + "/b.png"));
+            staticSprites.put(name + "lWallTW", p.loadImage("sprites/towers/walls/" + name + "/l.png"));
+            staticSprites.put(name + "rWallTW", p.loadImage("sprites/towers/walls/" + name + "/r.png"));
         }
     }
 

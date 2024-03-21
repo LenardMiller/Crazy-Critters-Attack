@@ -299,33 +299,33 @@ public class Wall extends Tower {
     private void loadSprites() {
         for (int i = 0; i < 5; i++) {
             CornerSpriteDS spriteDS = null;
-            String name = "null";
+            String name = null;
             switch (i) {
                 case 0 -> {
                     spriteDS = wood;
-                    name = "Wood";
+                    name = "wood";
                 } case 1 -> {
                     spriteDS = stone;
-                    name = "Stone";
+                    name = "stone";
                 } case 2 -> {
                     spriteDS = metal;
-                    name = "Metal";
+                    name = "metal";
                 } case 3 -> {
                     spriteDS = crystal;
-                    name = "Crystal";
+                    name = "crystal";
                 } case 4 -> {
                     spriteDS = titanium;
-                    name = "Titanium";
+                    name = "titanium";
                 }
             }
-            String idA = "null";
-            String idB = "null";
-            String idC = "null";
+            String idA = null;
+            String idB = null;
+            String idC = null;
             for (int a = 0; a < 2; a++) {
                 for (int b = 0; b < 2; b++) {
                     for (int c = 0; c < 2; c++) {
-                        if (a == 0) idA = "T";
-                        if (a == 1) idA = "B";
+                        if (a == 0) idA = "t";
+                        if (a == 1) idA = "b";
                         if (b == 0) idB = "l";
                         if (b == 1) idB = "r";
                         if (c == 0) idC = "c";
@@ -336,10 +336,10 @@ public class Wall extends Tower {
                     }
                 }
             }
-            spriteDS.t = staticSprites.get(name + "TWallTW");
-            spriteDS.b = staticSprites.get(name + "BWallTW");
-            spriteDS.l = staticSprites.get(name + "LWallTW");
-            spriteDS.r = staticSprites.get(name + "RWallTW");
+            spriteDS.t = staticSprites.get(name + "tWallTW");
+            spriteDS.b = staticSprites.get(name + "bWallTW");
+            spriteDS.l = staticSprites.get(name + "lWallTW");
+            spriteDS.r = staticSprites.get(name + "rWallTW");
         }
     }
 
@@ -367,7 +367,7 @@ public class Wall extends Tower {
             boolean tb;
             boolean lr;
             boolean cv;
-            tb = tbS.equals("T");
+            tb = tbS.equals("t");
             lr = lrS.equals("l");
             cv = cvS.equals("c");
             CornerSpriteDSItem[] newItems = new CornerSpriteDSItem[items.length+1];
