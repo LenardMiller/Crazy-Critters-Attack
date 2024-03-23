@@ -13,22 +13,20 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class Bleeding extends Buff {
 
-    public Bleeding(PApplet p, int enId, float damage, float duration, Turret turret) {
-        super(p,enId,turret);
+    public Bleeding(PApplet p, Enemy target, float damage, float duration, Turret turret) {
+        super(p, target, turret);
         particleChance = 8;
         effectDelay = secondsToFrames(0.2f); //frames
         lifeDuration = secondsToFrames(duration);
         this.effectLevel = damage;
         particle = null;
         name = "bleeding";
-        this.enId = enId;
     }
 
     @Override
     public void effect() { //small damage fast
-        Enemy enemy = enemies.get(enId);
-        enemy.showBar = true;
-        enemy.damageWithoutBuff((int) effectLevel, turret, null, new PVector(0,0), false);
+        target.showBar = true;
+        target.damageWithoutBuff((int) effectLevel, turret, null, new PVector(0,0), false);
         effectTimer = p.frameCount + effectDelay;
     }
 
@@ -36,15 +34,14 @@ public class Bleeding extends Buff {
     protected void spawnParticles() { //particles around enemy
         if (!settings.isHasGore()) return;
 
-        Enemy enemy = enemies.get(enId);
-        if (!enemy.hitParticle.name().contains("ouch")) return;
+        if (!target.hitParticle.name().contains("ouch")) return;
 
         if (p.random(particleChance) < 1) {
-            PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
-            topParticles.add(new Ouch(p, pos.x, pos.y, p.random(360), enemy.hitParticle.name()));
+            PVector pos = getRandomPointInRange(p, target.position, target.size.mag() * 0.4f);
+            topParticles.add(new Ouch(p, pos.x, pos.y, p.random(360), target.hitParticle.name()));
         } if (p.random(particleChance * 4) < 1) {
-            PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.2f);
-            bottomParticles.add(new Pile(p, pos.x, pos.y, 0, enemy.hitParticle.name()));
+            PVector pos = getRandomPointInRange(p, target.position, target.size.mag() * 0.2f);
+            bottomParticles.add(new Pile(p, pos.x, pos.y, 0, target.hitParticle.name()));
         }
     }
 }

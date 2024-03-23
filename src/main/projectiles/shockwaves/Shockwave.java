@@ -89,7 +89,7 @@ public abstract class Shockwave {
             if (abs(angleDif) < width / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
                 enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret,
-                        true, damageType, direction, -1);
+                        true, damageType, direction);
                 untouchedEnemies.remove(enemy);
             }
         }

@@ -14,8 +14,8 @@ public class Electrified extends Buff {
 
     private final SoundFile SOUND;
 
-    public Electrified(PApplet p, int enId, int damage, float duration, Turret turret) {
-        super(p, enId, turret);
+    public Electrified(PApplet p, Enemy target, int damage, float duration, Turret turret) {
+        super(p, target, turret);
         particleChance = 4;
         effectDelay = secondsToFrames(0.5f);
         effectTimer = 0;
@@ -28,12 +28,8 @@ public class Electrified extends Buff {
 
     @Override
     public void effect() {
-        if (enId < 0) buffs.remove(this);
-        else {
-            Enemy enemy = enemies.get(enId);
-            arcs.add(new YellowArc(p, enemy.position.x, enemy.position.y, turret, (int) effectLevel, 4,
-                    150, Turret.Priority.values()[(int) p.random(3)]));
-            playSoundRandomSpeed(p, SOUND, 1);
-        }
+        arcs.add(new YellowArc(p, target.position.x, target.position.y, turret, (int) effectLevel,
+                4, 150, Turret.Priority.values()[(int) p.random(3)]));
+        playSoundRandomSpeed(p, SOUND, 1);
     }
 }

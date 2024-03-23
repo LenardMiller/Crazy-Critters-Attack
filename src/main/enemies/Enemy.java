@@ -118,6 +118,7 @@ public abstract class Enemy {
     public PVector size;
     public State state = State.Moving;
     public int moneyDrop;
+    public ArrayList<Buff> buffs;
 
     protected int damage;
     protected int betweenWalkFrames;
@@ -149,6 +150,7 @@ public abstract class Enemy {
     protected Enemy(PApplet p, float x, float y) {
         this.p = p;
 
+        buffs = new ArrayList<>();
         trail = new ArrayList<>();
         position = new PVector(roundTo(x, 25) + 12.5f, roundTo(y, 25) + 12.5f);
         size = new PVector(20, 20);
@@ -197,9 +199,14 @@ public abstract class Enemy {
             }
         }
         if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
+        //buffs
+        for (int j = buffs.size() - 1; j >= 0; j--) {
+            Buff buff = buffs.get(j);
+            buff.update();
+        }
         //if health is 0, die
         if (hp <= 0) dead = true;
-        if (dead) die(i);
+        if (dead) die();
     }
 
     /**
@@ -208,15 +215,14 @@ public abstract class Enemy {
      * If overkill, fling bits everywhere, else create a corpse.
      * Clear buffs.
      * Remove from array.
-     * @param i id for buff stuff
      */
-    protected void die(int i) {
+    protected void die() {
         Main.money += moneyDrop;
         popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
 
         DamageType type = lastDamageType;
-        for (Buff buff : buffs) {
-            if (buff.enId == i) type = DamageType.valueOf(buff.name);
+        if (!buffs.isEmpty()) {
+            type = DamageType.valueOf(buffs.get((int) p.random(buffs.size() - 1)).name);
         }
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
@@ -224,17 +230,11 @@ public abstract class Enemy {
         if (settings.isHasGore()) goreyDeathEffect(type);
         else cleanDeathEffect();
 
-        for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
-            Buff buff = buffs.get(j);
-            //if attached, remove
-            if (buff.enId == i) {
-                buffs.get(j).dieEffect();
-                buffs.remove(j);
-            } //shift ids to compensate for enemy removal
-            else if (buff.enId > i) buff.enId -= 1;
+        for (Buff buff : buffs) {
+            buff.dieEffect();
         }
 
-        enemies.remove(i);
+        enemies.remove(this);
     }
 
     protected void goreyDeathEffect(DamageType type) {
@@ -369,6 +369,7 @@ public abstract class Enemy {
             p.stroke(255, 0, 255);
             p.rect(pfPosition.x - 12.5f, pfPosition.y - 12.5f, pfSize * 25, pfSize * 25);
         }
+        for (Buff buff : buffs) buff.display();
     }
 
     /**
@@ -381,11 +382,9 @@ public abstract class Enemy {
      * @param displayParticles if it should create particles
      * @param damageType determines what effect to apply to corpse
      * @param direction determines where parts will be flung, (0, 0) for everywhere
-     * @param id id of this enemy, set to -1 if unknown
      */
     public void damageWithBuff(int damage, String buffName, float effectLevel, float effectDuration, Turret turret,
-                               boolean displayParticles, DamageType damageType, PVector direction, int id) {
-        if (id == -1 && buffName != null) id = getId();
+                               boolean displayParticles, DamageType damageType, PVector direction) {
         lastDamageType = damageType;
         overkill = damage >= maxHp;
         partsDirection = direction;
@@ -403,7 +402,7 @@ public abstract class Enemy {
         if (buffs.size() > 0) {
             for (int j = 0; j < buffs.size(); j++) {
                 Buff buff = buffs.get(j);
-                if (buff.enId == id && buff.name.equals(buffName)) {
+                if (buff.matches(this) && buff.name.equals(buffName)) {
                     effectTimer = buff.effectTimer;
                     buffs.remove(j);
                     break;
@@ -413,25 +412,34 @@ public abstract class Enemy {
         if (buffName != null) {
             Buff buff;
             switch (buffName) {
-                case "burning" -> buff = new Burning(p, id, effectLevel, effectDuration, turret);
-                case "blueBurning" -> buff = new BlueBurning(p, id, effectLevel, effectDuration, turret);
-                case "bleeding" -> buff = new Bleeding(p, id, effectLevel, effectDuration, turret);
-                case "poisoned" -> buff = new Poisoned(p, id, turret);
+                case "burning" -> buff = new Burning(p, this, effectLevel, effectDuration, turret);
+                case "blueBurning" -> buff = new BlueBurning(p, this, effectLevel, effectDuration, turret);
+                case "bleeding" -> buff = new Bleeding(p, this, effectLevel, effectDuration, turret);
+                case "poisoned" -> buff = new Poisoned(p, this, turret);
                 case "decay" -> {
-                    if (turret != null) buff = new Decay(p, id, effectLevel, effectDuration, turret);
-                    else buff = new Decay(p, id, 1, 120, null);
+                    if (turret != null) buff = new Decay(p, this, effectLevel, effectDuration, turret);
+                    else buff = new Decay(p, this, 1, 120, null);
                 }
-                case "glued" -> buff = new Glued(p, id, effectLevel, effectDuration, turret);
-                case "spikeyGlued" -> buff = new SpikeyGlued(p, id, effectLevel, effectDuration, turret);
-                case "stunned" -> buff = new Stunned(p, id, turret);
-                case "frozen" -> buff = new Frozen(p, id, turret);
-                case "electrified" -> buff = new Electrified(p, id, (int) effectLevel, effectDuration, turret);
+                case "glued" -> buff = new Glued(p, this, effectLevel, effectDuration, turret);
+                case "spikeyGlued" -> buff = new SpikeyGlued(p, this, effectLevel, effectDuration, turret);
+                case "stunned" -> buff = new Stunned(p, this, turret);
+                case "frozen" -> buff = new Frozen(p, this, turret);
+                case "electrified" -> buff = new Electrified(p, this, (int) effectLevel, effectDuration, turret);
                 default -> buff = null;
             }
             if (buff != null) {
-                //in order to prevent resetting timer after buff is reapplied
-                buff.effectTimer = effectTimer;
-                buffs.add(buff);
+                boolean duplicate = false;
+                for (Buff other : buffs) {
+                    if (buff.name.equals(other.name)) {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate) {
+                    //in order to prevent resetting timer after buff is reapplied
+                    buff.effectTimer = effectTimer;
+                    buffs.add(buff);
+                }
             }
         }
         damageEffect(displayParticles);
@@ -457,13 +465,6 @@ public abstract class Enemy {
             } else turret.damageTotal += damage;
         }
         damageEffect(displayParticles);
-    }
-
-    private int getId() {
-        for (int i = 0; i < enemies.size(); i++) {
-            if (enemies.get(i) == this) return i;
-        }
-        return -1;
     }
 
     /**

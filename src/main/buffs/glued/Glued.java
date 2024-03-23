@@ -16,27 +16,25 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class Glued extends Buff {
 
-    public Glued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
-        super(p,enId,turret);
+    public Glued(PApplet p, Enemy target, float speedMod, float duration, Turret turret) {
+        super(p, target, turret);
         particleChance = 8;
         effectDelay = secondsToFrames(0.2f); //frames
         lifeDuration = secondsToFrames(duration);
-        if (enemies.get(enId) instanceof FlyingEnemy) speedMod /= 2; //more strongly effects flying enemies
+        if (target instanceof FlyingEnemy) speedMod /= 2; //more strongly effects flying enemies
         this.effectLevel = speedMod;
         particle = "glue";
         name = "glued";
-        this.enId = enId;
         slowAttacking();
     }
 
     protected void slowAttacking() { //slowing enemy attacking done once
-        Enemy enemy = enemies.get(enId);
         reset();
-        float newSpeed = enemy.speed * effectLevel;
-        if (enemy.speed > newSpeed) { //prevent speeding up enemy
+        float newSpeed = target.speed * effectLevel;
+        if (target.speed > newSpeed) { //prevent speeding up enemy
             //setup
-            enemy.speedModifier = effectLevel;
-            int oldSize = enemy.attackFrames.length;
+            target.speedModifier = effectLevel;
+            int oldSize = target.attackFrames.length;
             int newSize = (int) (1f / (effectLevel * (1f / (float) oldSize)));
             ArrayList<Integer> expandedInts = new ArrayList<>();
 
@@ -48,52 +46,50 @@ public class Glued extends Buff {
             //create expanded image array
             PImage[] expandedPImages = new PImage[expandedInts.size()];
             for (int i = 0; i < expandedInts.size(); i++) {
-                expandedPImages[i] = enemy.attackFrames[expandedInts.get(i)];
+                expandedPImages[i] = target.attackFrames[expandedInts.get(i)];
             }
 
             //profit
-            for (int i = 0; i < enemy.tempAttackDmgFrames.length; i++) {
-                enemy.tempAttackDmgFrames[i] /= effectLevel;
+            for (int i = 0; i < target.tempAttackDmgFrames.length; i++) {
+                target.tempAttackDmgFrames[i] /= effectLevel;
             }
-            enemy.attackFrame = Math.round((float) enemy.attackFrame * (1 / effectLevel));
-            enemy.attackFrames = expandedPImages;
+            target.attackFrame = Math.round((float) target.attackFrame * (1 / effectLevel));
+            target.attackFrames = expandedPImages;
         }
     }
 
     @Override
     public void effect() { //slowing enemy movement done every frame
-        Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.speed * effectLevel;
-        if (enemy.speed > newSpeed) { //prevent speeding up enemy
-            enemy.speedModifier = effectLevel;
+        float newSpeed = target.speed * effectLevel;
+        if (target.speed > newSpeed) { //prevent speeding up enemy
+            target.speedModifier = effectLevel;
         }
     }
 
     @Override
-    protected void updateTimer(int i) { //ends if at end of lifespan
+    protected void updateTimer() { //ends if at end of lifespan
         if (!isPaused) lifeTimer++;
         if (lifeTimer > lifeDuration) {
             reset();
-            buffs.remove(i);
+            target.buffs.remove(this);
         }
     }
 
     private void reset() {
-        Enemy enemy = enemies.get(enId);
-        float newSpeed = enemy.speed;
-        if (enemy.speed == newSpeed) { //prevent speeding up enemy
-            enemy.speedModifier = 1; //set movement speed back to default
+        float newSpeed = target.speed;
+        if (target.speed == newSpeed) { //prevent speeding up enemy
+            target.speedModifier = 1; //set movement speed back to default
             //set attack speed back to default
-            float frameProportion = (enemy.attackFrame / (float) enemy.attackFrames.length);
-            enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
-            if (enemy instanceof Frost) {
-                enemy.attackFrames = animatedSprites.get("wolf" + "AttackEN");
+            float frameProportion = (target.attackFrame / (float) target.attackFrames.length);
+            target.attackFrames = animatedSprites.get(target.name + "AttackEN");
+            if (target instanceof Frost) {
+                target.attackFrames = animatedSprites.get("wolf" + "AttackEN");
             }
-            enemy.attackFrame = Math.round(enemy.attackFrames.length * frameProportion);
+            target.attackFrame = Math.round(target.attackFrames.length * frameProportion);
             //set damage frames back to default
-            System.arraycopy(enemy.attackDmgFrames, 0,
-                    enemy.tempAttackDmgFrames, 0,
-                    enemy.tempAttackDmgFrames.length);
+            System.arraycopy(target.attackDmgFrames, 0,
+                    target.tempAttackDmgFrames, 0,
+                    target.tempAttackDmgFrames.length);
         }
     }
 }

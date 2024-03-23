@@ -1,11 +1,7 @@
 package main;
 
-import main.buffs.Buff;
-import main.projectiles.arcs.Arc;
-import main.projectiles.Projectile;
-import main.projectiles.shockwaves.Shockwave;
 import main.enemies.Enemy;
-import main.gui.*;
+import main.gui.SettingsGui;
 import main.gui.guiObjects.PopupText;
 import main.gui.guiObjects.buttons.TileSelect;
 import main.gui.guiObjects.buttons.TowerBuy;
@@ -13,12 +9,15 @@ import main.gui.inGame.*;
 import main.gui.notInGame.LevelSelectGui;
 import main.gui.notInGame.LoadingGui;
 import main.gui.notInGame.TitleGui;
-import main.levelStructure.*;
+import main.levelStructure.Level;
 import main.misc.*;
 import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
+import main.projectiles.Projectile;
+import main.projectiles.arcs.Arc;
+import main.projectiles.shockwaves.Shockwave;
 import main.sound.*;
 import main.towers.Tower;
 import processing.core.*;
@@ -61,7 +60,6 @@ public class Main extends PApplet {
     public static ArrayList<Shockwave>  shockwaves;
     public static ArrayList<TowerBuy>   towerBuyButtons;
     public static ArrayList<TileSelect> tileSelectButtons;
-    public static ArrayList<Buff>       buffs;
     public static ArrayList<PopupText>  popupTexts;
 
     public static int currentLevel;

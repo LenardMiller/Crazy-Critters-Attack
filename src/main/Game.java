@@ -1,18 +1,17 @@
 package main;
 
-import main.buffs.Buff;
-import main.misc.*;
-import main.projectiles.arcs.Arc;
-import main.projectiles.Projectile;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.gui.inGame.*;
 import main.levelStructure.*;
+import main.misc.*;
 import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
 import main.pathfinding.Node;
+import main.projectiles.Projectile;
+import main.projectiles.arcs.Arc;
 import main.projectiles.shockwaves.Shockwave;
 import main.towers.Tower;
 import main.towers.Wall;
@@ -23,8 +22,12 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
+import static main.Main.maxCost;
+import static main.Main.minCost;
 import static main.Main.*;
 import static main.misc.Tile.updateTowerArray;
+import static main.pathfinding.PathfindingUtilities.maxCost;
+import static main.pathfinding.PathfindingUtilities.minCost;
 import static main.pathfinding.PathfindingUtilities.*;
 
 public class Game {
@@ -97,7 +100,6 @@ public class Game {
     private void updateEnemies() {
         profiler.startProfiling("updating: enemies", Profiler.PROFILE_TIME);
         //enemies
-        if (enemies.isEmpty()) buffs = new ArrayList<>();
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy enemy = enemies.get(i);
             enemy.update(i);
@@ -110,11 +112,6 @@ public class Game {
         Utilities.capArray(p, Corpse.CAP, corpses);
         //reset enemy ice checking
         for (Enemy enemy : enemies) enemy.intersectingIceCount = 0;
-        //buffs
-        for (int i = buffs.size() - 1; i >= 0; i--) {
-            Buff buff = buffs.get(i);
-            buff.update(i);
-        }
         profiler.finishProfiling("updating: enemies");
     }
 
@@ -268,7 +265,6 @@ public class Game {
         for (Enemy flying : enemies) if (flying instanceof FlyingEnemy) flying.display();
         profiler.finishProfiling("drawing: flying enemies");
 
-        for (Buff buff : buffs) buff.display();
         for (Particle particle : topParticles) particle.display();
 
         profiler.finishProfiling("drawing: game objects");
@@ -337,7 +333,6 @@ public class Game {
         shockwaves = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();
         tileSelectButtons = new ArrayList<>();
-        buffs = new ArrayList<>();
         popupTexts = new ArrayList<>();
         //pathfinding stuff
         nodeGrid = new Node[GRID_WIDTH / NODE_SIZE][GRID_HEIGHT / NODE_SIZE];

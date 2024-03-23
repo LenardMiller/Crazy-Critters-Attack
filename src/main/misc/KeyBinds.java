@@ -225,7 +225,6 @@ public class KeyBinds {
         //entity stuff
         if (deleteEnemies) {
             enemies = new ArrayList<>();
-            buffs = new ArrayList<>();
         } if (killTowers) {
             for (int i = 0; i < tiles.size(); i++) {
                 Tower tower = tiles.get(i).tower;
