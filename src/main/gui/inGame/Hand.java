@@ -15,8 +15,8 @@ import java.awt.*;
 
 import static main.Main.*;
 import static main.gui.inGame.TowerInfo.displayTurretInfo;
+import static main.misc.Tile.updateTowerArray;
 import static main.misc.Utilities.*;
-import static main.misc.Tile.*;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSound;
 
@@ -29,8 +29,6 @@ public class Hand {
     }
 
     public static final float MIN_ENEMY_DISTANCE = 50;
-    public static final int PANEL_WIDTH = 190 - 9;
-    public static final Color CANT_AFFORD_COLOR = new Color(0xAB0000);
 
     public Class<?> heldClass;
     public String held;
@@ -235,16 +233,16 @@ public class Hand {
         int hp = 0;
         String sellText = null;
         boolean canAffordTop = false;
-        boolean topEnabled = true;
-        boolean leftEnabled = true;
-        boolean bottomEnabled = true;
+        boolean upgradeEnabled = true;
+        boolean hpEnabled = true;
+        boolean sellEnabled = true;
         switch (displayInfo) {
             case PlaceWall -> {
                 priceText = "$" + Wall.BUY_PRICE;
                 hpGainText = "50 HP";
                 canAffordTop = money >= Wall.BUY_PRICE;
-                leftEnabled = false;
-                bottomEnabled = false;
+                hpEnabled = false;
+                sellEnabled = false;
             } case UpgradeWall -> {
                 if (wall == null) return;
                 priceText = "$" + nfc(wall.upgradePrices[wall.nextLevelB]);
@@ -254,13 +252,17 @@ public class Hand {
                 sellText = "+$" + nfc((int) (0.8f * (float) wall.getValue()));
             } case MaxWallUpgrade -> {
                 if (wall == null) return;
-                topEnabled = false;
+                upgradeEnabled = false;
                 hp = wall.hp;
                 sellText = "+$" + nfc((int) (0.8f * (float) wall.getValue()));
             }
         }
+        if (wall instanceof IceWall) {
+            upgradeEnabled = false;
+            sellText = "+$0";
+        }
 
-        if (topEnabled) {
+        if (upgradeEnabled) {
             Color textColor = new Color(0xFFC42C);
             Color highlightColor = new Color(0xBF8B4F00, true);
             if (!canAffordTop) {
@@ -272,15 +274,15 @@ public class Hand {
             highlightedText(p, hpGainText, pos.copy().add(0, -30), textColor, highlightColor,
                     monoMedium, CENTER);
         }
-        if (leftEnabled) {
-            Color textColor = Color.WHITE;
+        if (hpEnabled) {
+            Color textColor = wall.boostedMaxHp() > 0 ? Selection.BOOSTED_INFO_COLOR : Color.WHITE;
             Color highlightColor = new Color(0xBF343434, true);
             highlightedText(p, hp + "", pos.copy().add(-29, -5), textColor, highlightColor,
                     monoMedium, RIGHT);
             highlightedText(p, "HP", pos.copy().add(-29, 12), textColor, highlightColor,
                     monoMedium, RIGHT);
         }
-        if (bottomEnabled) {
+        if (sellEnabled) {
             Color textColor = new Color(255, 0, 0, 254);
             Color highlightColor = new Color(50, 0, 0, 200);
             highlightedText(p, sellText, pos.copy().add(0, 40), textColor, highlightColor,
@@ -296,22 +298,6 @@ public class Hand {
         if (tile.tower == null) return null;
         if (!(tile.tower instanceof Wall)) return null;
         return (Wall) tile.tower;
-    }
-
-    private void universalWallInfo() {
-        p.fill(0, 20);
-        p.strokeWeight(2);
-        p.stroke(0);
-        p.rect(905, 700, PANEL_WIDTH, 130);
-        p.fill(0, 254);
-        p.textFont(pg);
-        p.textAlign(LEFT);
-        p.text("""
-                        - LClick to place wall
-                        - LClick on wall to upgrade
-                        - RClick on wall to sell
-                        - Press TAB or click sidebar to deselect""",
-                905 + 5, 700 + 5, 190 - 10, 195 - 10 - 9);
     }
 
     /**
@@ -421,7 +407,6 @@ public class Hand {
             changeHeld = false;
             tile.tower.place(false);
         } else {
-//            System.out.println(held.substring(0,1).toUpperCase() + held.substring(1));
             tile.tower = Turret.get(p, held.substring(0,1).toUpperCase() + held.substring(1), tile);
             if (tile.tower != null) {
                 tile.tower.place(false);

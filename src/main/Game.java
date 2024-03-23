@@ -184,8 +184,8 @@ public class Game {
 
         displayGameObjects();
         displayUpgradePrompts();
-        displayHPBars();
         hand.displayHeld();
+        displayHPBars();
         for (main.gui.guiObjects.PopupText popupText : popupTexts) popupText.display();
         displayInGameGui();
 
