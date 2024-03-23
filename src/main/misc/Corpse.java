@@ -16,6 +16,8 @@ import static processing.core.PApplet.radians;
 
 public class Corpse {
 
+    public static final int CAP = 50;
+
     private final boolean ANIMATED;
     private final int MAX_LIFE;
     private final int BETWEEN_FRAMES;

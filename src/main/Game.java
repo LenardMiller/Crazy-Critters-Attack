@@ -1,7 +1,7 @@
 package main;
 
 import main.buffs.Buff;
-import main.misc.Profiler;
+import main.misc.*;
 import main.projectiles.arcs.Arc;
 import main.projectiles.Projectile;
 import main.enemies.Enemy;
@@ -9,9 +9,6 @@ import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.gui.inGame.*;
 import main.levelStructure.*;
-import main.misc.Corpse;
-import main.misc.LayoutLoader;
-import main.misc.Tile;
 import main.particles.Particle;
 import main.pathfinding.AStar;
 import main.pathfinding.HeapNode;
@@ -110,6 +107,7 @@ public class Game {
             Corpse corpse = corpses.get(i);
             corpse.update(i);
         }
+        Utilities.cap_array(p, Corpse.CAP, corpses);
         //reset enemy ice checking
         for (Enemy enemy : enemies) enemy.intersectingIceCount = 0;
         //buffs
@@ -157,31 +155,10 @@ public class Game {
             particle.update(topParticles, i);
         }
         //particle culling
-        int totalParticles = topParticles.size() + towerParticles.size() + bottomParticles.size();
-        int allowedParticles = totalParticles-SOFT_PARTICLE_CAP;
-        if (totalParticles > SOFT_PARTICLE_CAP) {
-            for (int i = tileParticles.size() - 1; i >= 0; i--) {
-                if (p.random(allowedParticles) < 5) {
-                    if (i < tileParticles.size()) tileParticles.remove(i);
-                }
-            } for (int i = topParticles.size() - 1; i >= 0; i--) {
-                if (p.random(allowedParticles) < 5) {
-                    if (i < topParticles.size()) topParticles.remove(i);
-                }
-            } for (int i = bottomParticles.size() - 1; i >= 0; i--) {
-                if (p.random(allowedParticles) < 5) {
-                    if (i < bottomParticles.size()) bottomParticles.remove(i);
-                }
-            } for (int i = towerParticles.size() - 1; i >= 0; i--) {
-                if (p.random(allowedParticles) < 5) {
-                    if (i < towerParticles.size()) towerParticles.remove(i);
-                }
-            }
-        } if (totalParticles > HARD_PARTICLE_CAP) {
-            topParticles = new ArrayList<>();
-            towerParticles = new ArrayList<>();
-            bottomParticles = new ArrayList<>();
-        }
+        Utilities.cap_array(p, Particle.CAP, tileParticles);
+        Utilities.cap_array(p, Particle.CAP, bottomParticles);
+        Utilities.cap_array(p, Particle.CAP, towerParticles);
+        Utilities.cap_array(p, Particle.CAP, bottomParticles);
         profiler.finishProfiling("updating: particles");
     }
 

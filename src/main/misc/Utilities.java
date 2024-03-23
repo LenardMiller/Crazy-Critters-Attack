@@ -7,6 +7,7 @@ import processing.core.PVector;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.LayoutLoader.saveSettings;
@@ -452,5 +453,11 @@ public class Utilities {
         bl = coerceIn(map(bl, 0f, 255f, 0f, 1f), 0f, 1f);
 
         return new Color(r, g, bl);
+    }
+
+    public static void cap_array(PApplet p, int cap, ArrayList<?> items) {
+        while (items.size() > cap) {
+            items.remove((int) p.random(items.size() - 1));
+        }
     }
 }

@@ -99,7 +99,6 @@ public class Main extends PApplet {
     public static PVector boardMousePosition;
 
     public static final int FRAMERATE = 30;
-    public static final int SOFT_PARTICLE_CAP = 1500, HARD_PARTICLE_CAP = 3000;
 
     public static final int WINDOW_WIDTH = 1300, WINDOW_HEIGHT = 900;
     public static final int BOARD_WIDTH = 900, BOARD_HEIGHT = 900;
