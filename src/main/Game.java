@@ -107,7 +107,7 @@ public class Game {
             Corpse corpse = corpses.get(i);
             corpse.update(i);
         }
-        Utilities.cap_array(p, Corpse.CAP, corpses);
+        Utilities.capArray(p, Corpse.CAP, corpses);
         //reset enemy ice checking
         for (Enemy enemy : enemies) enemy.intersectingIceCount = 0;
         //buffs
@@ -155,10 +155,10 @@ public class Game {
             particle.update(topParticles, i);
         }
         //particle culling
-        Utilities.cap_array(p, Particle.CAP, tileParticles);
-        Utilities.cap_array(p, Particle.CAP, bottomParticles);
-        Utilities.cap_array(p, Particle.CAP, towerParticles);
-        Utilities.cap_array(p, Particle.CAP, bottomParticles);
+        Utilities.capArray(p, Particle.CAP, tileParticles);
+        Utilities.capArray(p, Particle.CAP, bottomParticles);
+        Utilities.capArray(p, Particle.CAP, towerParticles);
+        Utilities.capArray(p, Particle.CAP, bottomParticles);
         profiler.finishProfiling("updating: particles");
     }
 

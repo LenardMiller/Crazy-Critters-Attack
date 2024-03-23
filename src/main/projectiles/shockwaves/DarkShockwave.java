@@ -18,18 +18,11 @@ public class DarkShockwave extends Shockwave {
 
     @Override
     public void display() {
-        p.strokeWeight(3);
         float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, 255, 0);
         Color color = Utilities.mapColor(new Color(225, 60, 250), new Color(72, 16, 123), 0,
                 maxRadius, radius);
-        p.stroke(color.getRGB(), alpha);
-        p.noFill();
-
-        p.circle(center.x, center.y, radius * 2);
-
-        p.noStroke();
-        p.strokeWeight(1);
+        Utilities.fastCircle(p, settings.getRingResolution(), center, radius, 3, color, alpha);
     }
 
     @Override

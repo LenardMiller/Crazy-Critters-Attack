@@ -455,9 +455,30 @@ public class Utilities {
         return new Color(r, g, bl);
     }
 
-    public static void cap_array(PApplet p, int cap, ArrayList<?> items) {
+    public static void capArray(PApplet p, int cap, ArrayList<?> items) {
         while (items.size() > cap) {
             items.remove((int) p.random(items.size() - 1));
         }
+    }
+
+    public static void fastCircle(PApplet p, int resolution, PVector position, int radius, int weight,
+                                  Color color, float alpha) {
+        p.stroke(color.getRGB(), alpha);
+        p.strokeWeight(weight);
+        for (int i = 0; i < resolution; i++) {
+            // AAS Law of Cosines
+            float A = TWO_PI / resolution;
+            float B = (PI - A) / 2;
+            float C = PI - A - B;
+            float b = sin(B) * (radius / sin(C));
+            p.line(
+                    position.x + (sin(HALF_PI - ((i - 1) * A)) * b),
+                    position.y + (cos(HALF_PI - ((i - 1) * A)) * b),
+                    position.x + (sin(HALF_PI - (i * A)) * b),
+                    position.y + (cos(HALF_PI - (i * A)) * b));
+        }
+
+        p.strokeWeight(1);
+        p.noStroke();
     }
 }

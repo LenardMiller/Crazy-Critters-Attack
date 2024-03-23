@@ -7,21 +7,24 @@ public class Settings {
     public boolean restartRequired;
 
     private float volume;
+    private int ringResolution;
     private boolean isFullscreen, hasGore, useOpenGL;
 
-    public Settings(float volume, boolean isFullscreen, boolean hasGore, boolean useOpenGL) {
+    public Settings(float volume, int ringResolution, boolean isFullscreen, boolean hasGore, boolean useOpenGL) {
         this.volume = volume;
         this.isFullscreen = isFullscreen;
         this.hasGore = hasGore;
         this.useOpenGL = useOpenGL;
+        this.ringResolution = ringResolution;
     }
 
     public Settings(JSONObject object) {
         this(
-            object.getFloat("volume"),
-            object.getBoolean("fullscreen"),
-                object.getBoolean("gore"),
-            object.getBoolean("useOpenGL")
+            object.getFloat("volume", 0.25f),
+            object.getInt("ringResolution", 50),
+            object.getBoolean("fullscreen", true),
+            object.getBoolean("gore", true),
+            object.getBoolean("useOpenGL", false)
         );
     }
 
@@ -33,11 +36,12 @@ public class Settings {
     }
 
     public Settings() {
-        this(0.25f, true, true, false);
+        this(0.25f, 30, true, true, false);
     }
 
     public void save(JSONObject object) {
         object.setFloat("volume", volume);
+        object.setInt("ringResolution", ringResolution);
         object.setBoolean("fullscreen", isFullscreen);
         object.setBoolean("gore", hasGore);
         object.setBoolean("useOpenGL", useOpenGL);
@@ -75,5 +79,13 @@ public class Settings {
     public void setUseOpenGL(boolean useOpenGL) {
         if (useOpenGL != this.useOpenGL) restartRequired = true;
         this.useOpenGL = useOpenGL;
+    }
+
+    public int getRingResolution() {
+        return ringResolution;
+    }
+
+    public void setRingResolution(int ringResolution) {
+        this.ringResolution = ringResolution;
     }
 }
