@@ -4,6 +4,7 @@ import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.misc.Tile;
+import main.towers.IceWall;
 import main.towers.Wall;
 import main.towers.turrets.*;
 import processing.core.PApplet;
