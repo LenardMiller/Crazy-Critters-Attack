@@ -140,7 +140,7 @@ public class EnergyBlaster extends Turret {
                     effectRadius += 50;
                     bigExplosion = true;
                     extraInfo.remove(0);
-                    if (nextLevelB >= 5) {
+                    if (nextLevelB > 5) {
                         extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
                                 VORTEX_COLOR, "Large Vortex", null));
                     } else {
