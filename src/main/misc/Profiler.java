@@ -42,7 +42,7 @@ public class Profiler {
         }
     }
 
-    public static final int PROFILE_TIME = 30 * 30;
+    public static final int PROFILE_TIME = 30 * 60 * 5;
 
     private final PApplet p;
     private final HashMap<String, Profile> profiles;

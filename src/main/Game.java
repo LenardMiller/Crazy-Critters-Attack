@@ -300,18 +300,33 @@ public class Game {
     /** Displays tile base, the lowest particle layer, flooring, decorations and obstacle shadows **/
     private void displayBackgroundTiles() {
         //main background
-        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).baseLayer.display());
+        int bound = tiles.size();
+        for (int i1 = 0; i1 < bound; i1++) {
+            tiles.get(i1).baseLayer.display();
+        }
         //very bottom particles
         for (Particle particle : tileParticles) particle.display();
         //decoration
-        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).decorationLayer.display());
+        int bound1 = tiles.size();
+        for (int i1 = 0; i1 < bound1; i1++) {
+            tiles.get(i1).decorationLayer.display();
+        }
         //flooring
-        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).flooringLayer.display());
+        int bound2 = tiles.size();
+        for (int i1 = 0; i1 < bound2; i1++) {
+            tiles.get(i1).flooringLayer.display();
+        }
         Tile.displayAllConcreteFlooring();
         //breakables
-        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).breakableLayer.display());
+        int bound3 = tiles.size();
+        for (int i1 = 0; i1 < bound3; i1++) {
+            tiles.get(i1).breakableLayer.display();
+        }
         //obstacle shadows
-        IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).obstacleLayer.displayShadow());
+        int bound4 = tiles.size();
+        for (int i = 0; i < bound4; i++) {
+            tiles.get(i).obstacleLayer.displayShadow();
+        }
     }
 
     /** Displays debug info for pathfinding **/
