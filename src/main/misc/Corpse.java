@@ -147,7 +147,7 @@ public class Corpse {
                         0, BLOOD_PARTICLE.name()));
             }
             else {
-                midParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                towerParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
                         (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
                         P.random(360), type.particle));
             }
@@ -177,7 +177,7 @@ public class Corpse {
             chance += 16;
             if (P.random(chance) < 1) {
                 PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
-                midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
+                towerParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
             }
             chance += 10;
             if (P.random(chance) < 1) {

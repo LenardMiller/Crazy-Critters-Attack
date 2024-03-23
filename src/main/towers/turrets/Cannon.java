@@ -54,7 +54,7 @@ public class Cannon extends Turret {
     protected void spawnProjectiles(PVector position, float angle) {
         if (!dynamite) {
             for (int i = 0; i < p.random(3, 5); i++) {
-                midParticles.add(new MiscParticle(p, position.x, position.y,
+                towerParticles.add(new MiscParticle(p, position.x, position.y,
                         angle + radians(p.random(-45, 45)), "smoke"));
             }
         }

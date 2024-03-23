@@ -70,7 +70,7 @@ public class Gluer extends Turret {
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
         for (int i = 0; i < p.random(3, 5); i++) {
-            midParticles.add(new MiscParticle(p, position.x, position.y,
+            towerParticles.add(new MiscParticle(p, position.x, position.y,
               angle + radians(p.random(-45, 45)), "glue"));
         }
         if (spikey) projectiles.add(new SpikeyGlue(p,position.x,position.y, angle, this, getDamage(), effectLevel, effectDuration, pjSpeed));

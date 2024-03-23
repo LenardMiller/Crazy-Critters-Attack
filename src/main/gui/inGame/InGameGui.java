@@ -107,7 +107,7 @@ public class InGameGui {
         highlightedText(p, "enemies: " + enemies.size(), new PVector(padding, 30), LEFT);
         highlightedText(p, "towers: " + towers.size(), new PVector(padding, 60), LEFT);
         highlightedText(p, "projectiles: " + projectiles.size(), new PVector(padding, 90), LEFT);
-        int particleCount = topParticles.size() + midParticles.size() + bottomParticles.size() + veryBottomParticles.size();
+        int particleCount = topParticles.size() + towerParticles.size() + bottomParticles.size() + tileParticles.size();
         highlightedText(p, "particles: " + particleCount, new PVector(padding, 120), LEFT);
         highlightedText(p, "popups: " + popupTexts.size(), new PVector(padding, 150), LEFT);
         highlightedText(p, "path requests: " + pathFinder.requestQueue.size(), new PVector(padding, 180), LEFT);

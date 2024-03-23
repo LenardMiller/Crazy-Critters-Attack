@@ -1,6 +1,7 @@
 package main;
 
 import main.buffs.Buff;
+import main.misc.Profiler;
 import main.projectiles.arcs.Arc;
 import main.projectiles.Projectile;
 import main.enemies.Enemy;
@@ -48,17 +49,20 @@ public class Game {
             keyBinds.inGameKeys();
         }
         //pathfinding
+        profiler.startProfiling("pathfinding", Profiler.PROFILE_TIME);
         if (!pathFinder.requestQueue.isEmpty()) {
             pathFinder.requestQueue.get(0).getPath();
             pathFinder.requestQueue.remove(0);
         }
         maxCost = maxCost();
         minCost = minCost(maxCost);
+        profiler.finishProfiling("pathfinding");
 
         machine.update();
         updateParticles();
         updateProjectiles();
         updateEnemies();
+        profiler.startProfiling("updating: tiles", Profiler.PROFILE_TIME);
         //tiles
         if (connectWallQueues > 0) {
             connectWallQueues = 0;
@@ -68,11 +72,15 @@ public class Game {
         for (int i = 0; i < tiles.size(); i++) {
             tiles.get(i).baseLayer.update();
         }
+        profiler.finishProfiling("updating: tiles");
         //turret top
+        profiler.startProfiling("updating: towers", Profiler.PROFILE_TIME);
         for (Tower tower : towers) if (tower instanceof Turret) tower.controlAnimation();
         for (Tower tower : towers) tower.update();
+        profiler.finishProfiling("updating: towers");
 
         //ui
+        profiler.startProfiling("updating: ui", Profiler.PROFILE_TIME);
         hand.update();
         for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).update();
         if (isPlaying) levels[currentLevel].update();
@@ -85,10 +93,12 @@ public class Game {
             }
             waveStack.update();
         }
+        profiler.finishProfiling("updating: ui");
     }
 
     /** Update everything that has to do with enemies; enemies, corpses, ice checks and buffs **/
     private void updateEnemies() {
+        profiler.startProfiling("updating: enemies", Profiler.PROFILE_TIME);
         //enemies
         if (enemies.isEmpty()) buffs = new ArrayList<>();
         for (int i = enemies.size() - 1; i >= 0; i--) {
@@ -107,10 +117,12 @@ public class Game {
             Buff buff = buffs.get(i);
             buff.update(i);
         }
+        profiler.finishProfiling("updating: enemies");
     }
 
     /** Updates everything considered a projectile; classical projectiles, arcs and shockwaves **/
     private void updateProjectiles() {
+        profiler.startProfiling("updating: projectiles", Profiler.PROFILE_TIME);
         //projectiles
         for (int i = projectiles.size() - 1; i >= 0; i--) {
             Projectile projectile = projectiles.get(i);
@@ -123,32 +135,34 @@ public class Game {
         }
         //shockwaves
         for (int i = shockwaves.size()-1; i >= 0; i--) shockwaves.get(i).update();
+        profiler.finishProfiling("updating: projectiles");
     }
 
     /** Updates all the different layers of particles, and handles particle culling **/
     private void updateParticles() {
-        for (int i = veryBottomParticles.size() - 1; i >= 0; i--) {
-            veryBottomParticles.get(i).update(veryBottomParticles, i);
+        profiler.startProfiling("updating: particles", Profiler.PROFILE_TIME);
+        for (int i = tileParticles.size() - 1; i >= 0; i--) {
+            tileParticles.get(i).update(tileParticles, i);
         }
         for (int i = bottomParticles.size()-1; i >= 0; i--) {
             Particle particle = bottomParticles.get(i);
             particle.update(bottomParticles, i);
         }
-        for (int i = midParticles.size()-1; i >= 0; i--) {
-            Particle particle = midParticles.get(i);
-            particle.update(midParticles, i);
+        for (int i = towerParticles.size()-1; i >= 0; i--) {
+            Particle particle = towerParticles.get(i);
+            particle.update(towerParticles, i);
         }
         for (int i = topParticles.size()-1; i >= 0; i--) {
             Particle particle = topParticles.get(i);
             particle.update(topParticles, i);
         }
         //particle culling
-        int totalParticles = topParticles.size() + midParticles.size() + bottomParticles.size();
+        int totalParticles = topParticles.size() + towerParticles.size() + bottomParticles.size();
         int allowedParticles = totalParticles-SOFT_PARTICLE_CAP;
         if (totalParticles > SOFT_PARTICLE_CAP) {
-            for (int i = veryBottomParticles.size() - 1; i >= 0; i--) {
+            for (int i = tileParticles.size() - 1; i >= 0; i--) {
                 if (p.random(allowedParticles) < 5) {
-                    if (i < veryBottomParticles.size()) veryBottomParticles.remove(i);
+                    if (i < tileParticles.size()) tileParticles.remove(i);
                 }
             } for (int i = topParticles.size() - 1; i >= 0; i--) {
                 if (p.random(allowedParticles) < 5) {
@@ -158,16 +172,17 @@ public class Game {
                 if (p.random(allowedParticles) < 5) {
                     if (i < bottomParticles.size()) bottomParticles.remove(i);
                 }
-            } for (int i = midParticles.size() - 1; i >= 0; i--) {
+            } for (int i = towerParticles.size() - 1; i >= 0; i--) {
                 if (p.random(allowedParticles) < 5) {
-                    if (i < midParticles.size()) midParticles.remove(i);
+                    if (i < towerParticles.size()) towerParticles.remove(i);
                 }
             }
         } if (totalParticles > HARD_PARTICLE_CAP) {
             topParticles = new ArrayList<>();
-            midParticles = new ArrayList<>();
+            towerParticles = new ArrayList<>();
             bottomParticles = new ArrayList<>();
         }
+        profiler.finishProfiling("updating: particles");
     }
 
     /** Display in game stuff */
@@ -183,11 +198,13 @@ public class Game {
         p.translate(200, 0);
 
         displayGameObjects();
+        profiler.startProfiling("drawing: ui", Profiler.PROFILE_TIME);
         displayUpgradePrompts();
         displayHPBars();
         hand.displayHeld();
         for (main.gui.guiObjects.PopupText popupText : popupTexts) popupText.display();
         displayInGameGui();
+        profiler.finishProfiling("drawing: ui");
 
         p.popMatrix();
         p.popMatrix();
@@ -233,34 +250,59 @@ public class Game {
 
     /** Displays everything that is within the game "window" */
     private void displayGameObjects() {
+        profiler.startProfiling("drawing: game objects", Profiler.PROFILE_TIME);
+
+        profiler.startProfiling("drawing: background tiles", Profiler.PROFILE_TIME);
         displayBackgroundTiles();
         if (debug) displayPathfindingDebug();
         for (Particle particle : bottomParticles) particle.display();
+        profiler.finishProfiling("drawing: background tiles");
+
+        profiler.startProfiling("drawing: corpses", Profiler.PROFILE_TIME);
         for (Corpse corpse : corpses) corpse.display();
+        profiler.finishProfiling("drawing: corpses");
+
         machine.display();
+
+        profiler.startProfiling("drawing: grounded enemies", Profiler.PROFILE_TIME);
         for (Enemy enemy : enemies) if (!(enemy instanceof FlyingEnemy)) enemy.displayShadow();
         for (Enemy enemy : enemies) if (!(enemy instanceof FlyingEnemy)) enemy.display();
+        profiler.finishProfiling("drawing: grounded enemies");
+
+        profiler.startProfiling("drawing: towers", Profiler.PROFILE_TIME);
         for (Tower tower : towers) if (tower instanceof Turret) tower.displayBase();
         for (Tower tower : towers) if (tower instanceof Wall) tower.displayBase();
         for (Tower tower : towers) if (tower instanceof Wall) tower.controlAnimation();
-        for (Particle particle : midParticles) particle.display();
+        for (Particle particle : towerParticles) particle.display();
         for (Tower tower : towers) if (tower instanceof Turret) ((Turret) tower).displayTop();
+        profiler.finishProfiling("drawing: towers");
+
         IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).obstacleLayer.display());
+
+        profiler.startProfiling("drawing: projectiles", Profiler.PROFILE_TIME);
         for (Projectile projectile : projectiles) projectile.displayShadow();
         for (Projectile projectile : projectiles) projectile.display();
         for (Shockwave shockwave : shockwaves) shockwave.display();
         for (Arc arc : arcs) arc.display();
-        for (Enemy enemy1 : enemies) if (enemy1 instanceof FlyingEnemy) enemy1.displayShadow();
-        for (Enemy enemy : enemies) if (enemy instanceof FlyingEnemy) enemy.display();
+        profiler.finishProfiling("drawing: projectiles");
+
+        profiler.startProfiling("drawing: flying enemies", Profiler.PROFILE_TIME);
+        for (Enemy flying : enemies) if (flying instanceof FlyingEnemy) flying.displayShadow();
+        for (Enemy flying : enemies) if (flying instanceof FlyingEnemy) flying.display();
+        profiler.finishProfiling("drawing: flying enemies");
+
         for (Buff buff : buffs) buff.display();
-        for (Particle particle : topParticles) particle.display();}
+        for (Particle particle : topParticles) particle.display();
+
+        profiler.finishProfiling("drawing: game objects");
+    }
 
     /** Displays tile base, the lowest particle layer, flooring, decorations and obstacle shadows **/
     private void displayBackgroundTiles() {
         //main background
         IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).baseLayer.display());
         //very bottom particles
-        for (Particle veryBottomParticle : veryBottomParticles) veryBottomParticle.display();
+        for (Particle particle : tileParticles) particle.display();
         //decoration
         IntStream.range(0, tiles.size()).forEach(i -> tiles.get(i).decorationLayer.display());
         //flooring
@@ -296,9 +338,9 @@ public class Game {
         projectiles = new ArrayList<>();
         corpses = new ArrayList<>();
         topParticles = new ArrayList<>();
-        midParticles = new ArrayList<>();
+        towerParticles = new ArrayList<>();
         bottomParticles = new ArrayList<>();
-        veryBottomParticles = new ArrayList<>();
+        tileParticles = new ArrayList<>();
         arcs = new ArrayList<>();
         shockwaves = new ArrayList<>();
         towerBuyButtons = new ArrayList<>();

@@ -56,7 +56,7 @@ public class Main extends PApplet {
     public static ArrayList<Enemy>      enemies;
     public static ArrayList<Corpse>     corpses;
     public static ArrayList<Projectile> projectiles;
-    public static ArrayList<Particle>   topParticles, midParticles, bottomParticles, veryBottomParticles;
+    public static ArrayList<Particle>   topParticles, towerParticles, bottomParticles, tileParticles;
     public static ArrayList<Arc>        arcs;
     public static ArrayList<Shockwave>  shockwaves;
     public static ArrayList<TowerBuy>   towerBuyButtons;
@@ -92,10 +92,10 @@ public class Main extends PApplet {
     public static float matrixScale, matrixOffset;
     /** initialized to false */
     public static boolean
-            won, debug, showSpawn, isPlaying, levelBuilder, paused, settings, isFullscreen, isOpenGL, isGore, hasVerticalBars;
+            won, debug, showSpawn, isPlaying, levelBuilder, paused, settings, isFullscreen, isOpenGL, isGore,
+            hasVerticalBars, dev;
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
-    public static boolean dev = false;
     public static PVector boardMousePosition;
 
     public static final int FRAMERATE = 30;
@@ -137,8 +137,15 @@ public class Main extends PApplet {
 
     public static Random random = new Random();
 
+    //profiling
+    public static Profiler profiler;
+    private static boolean profiling;
+
     public static void main(String[] args) {
-        dev = args.length > 0 && args[0].equals("dev");
+        for (String arg : args) {
+            if (arg.equals("dev")) dev = true;
+            if (arg.equals("profiling")) profiling = true;
+        }
 
         loadSettings();
         PApplet.main("main.Main", args);
@@ -166,6 +173,8 @@ public class Main extends PApplet {
      */
     @Override
     public void setup() {
+        profiler = new Profiler(this, profiling);
+        profiler.startProfilingSingle("setup");
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
@@ -192,6 +201,7 @@ public class Main extends PApplet {
             matrixScale = width / (float) BOARD_WIDTH;
             matrixOffset = (height - (BOARD_HEIGHT * matrixScale)) / 2;
         }
+        profiler.finishProfiling("setup");
     }
 
     /**

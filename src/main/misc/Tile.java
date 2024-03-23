@@ -541,7 +541,7 @@ public class Tile {
             PVector topLeftCorner = new PVector(!left ? position.x : position.x + 20, position.y + 7);
             PVector bottomRightCorner = PVector.add(position, new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
             PVector spawnPos = new PVector(P.random(topLeftCorner.x, bottomRightCorner.x), P.random(topLeftCorner.y, bottomRightCorner.y));
-            veryBottomParticles.add(new Ripple(P, spawnPos.x, spawnPos.y, type));
+            tileParticles.add(new Ripple(P, spawnPos.x, spawnPos.y, type));
         }
     }
 

@@ -9,6 +9,7 @@ import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PVector;
 
+import static main.Main.profiler;
 import static main.Main.transition;
 import static main.misc.SpriteLoader.*;
 import static main.sound.SoundLoader.loadSounds;
@@ -31,6 +32,7 @@ public class LoadingGui {
     public void update() {
         switch (progress) {
             case 0:
+                profiler.startProfilingSingle("loading: fonts");
                 Main.h1 = p.createFont("fonts/Rubik-Regular.ttf", 30, true);
                 Main.h2 = p.createFont("fonts/Rubik-Regular.ttf", 24, true);
                 Main.h3 = p.createFont("fonts/Rubik-Regular.ttf", 21, true);
@@ -40,39 +42,60 @@ public class LoadingGui {
                 Main.monoLarge = p.createFont("fonts/IBMPlexMono-Medium.ttf", 18, true);
                 Main.monoMedium = p.createFont("fonts/IBMPlexMono-Medium.ttf", 16, true);
                 Main.monoSmall = p.createFont("fonts/IBMPlexMono-Medium.ttf", 14, true);
+                profiler.finishProfiling("loading: fonts");
                 break;
             case 1:
+                profiler.startProfilingSingle("loading: gui sprites");
                 loadGui(p);
+                profiler.finishProfiling("loading: gui sprites");
                 break;
             case 2:
+                profiler.startProfilingSingle("loading: enemy sprites");
                 loadEnemies(p);
+                profiler.finishProfiling("loading: enemy sprites");
                 break;
             case 3:
+                profiler.startProfilingSingle("loading: machine sprites");
                 loadMachines(p);
+                profiler.finishProfiling("loading: machine sprites");
                 break;
             case 4:
+                profiler.startProfilingSingle("loading: particle sprites");
                 loadParticles(p);
+                profiler.finishProfiling("loading: particle sprites");
                 break;
             case 5:
+                profiler.startProfilingSingle("loading: projectile sprites");
                 loadProjectiles(p);
+                profiler.finishProfiling("loading: projectile sprites");
                 break;
             case 6:
+                profiler.startProfilingSingle("loading: tile sprites");
                 loadTiles(p);
+                profiler.finishProfiling("loading: tile sprites");
                 break;
             case 7:
+                profiler.startProfilingSingle("loading: turret sprites");
                 loadTurrets(p);
+                profiler.finishProfiling("loading: turret sprites");
                 break;
             case 8:
+                profiler.startProfilingSingle("loading: wall sprites");
                 loadWalls(p);
+                profiler.finishProfiling("loading: wall sprites");
                 break;
             case 9:
+                profiler.startProfilingSingle("loading: sounds");
                 loadSounds(p);
+                profiler.finishProfiling("loading: sounds");
                 break;
             case 10:
+                profiler.startProfilingSingle("loading: gui & game");
                 Main.levelSelectGui = new LevelSelectGui(p);
                 Main.settingsGui = new SettingsGui(p);
                 Main.titleGui = new TitleGui(p);
                 Main.game = new Game(p);
+                profiler.finishProfiling("loading: gui & game");
                 break;
             case 11:
                 //buffer
