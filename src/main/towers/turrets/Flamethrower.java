@@ -75,10 +75,10 @@ public class Flamethrower extends Turret {
             die(false);
             tile.tower = null;
         }
-        if (enemies.size() > 0 && !machine.dead && !paused) checkTarget();
-        if (!paused && wheel) rotateWheel();
+        if (enemies.size() > 0 && !machine.dead && !isPaused) checkTarget();
+        if (!isPaused && wheel) rotateWheel();
         if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
-          && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
+          && boardMousePosition.y > tile.position.y - size.y && alive && !isPaused) {
             selection.swapSelected(tile.id);
         }
     }
@@ -129,7 +129,7 @@ public class Flamethrower extends Turret {
 
         if (abs(targetAngle - angle) < 0.05) angle = targetAngle; //snap to prevent getting stuck
 
-        if (visualize && debug) { //cool lines
+        if (visualize && isDebug) { //cool lines
             p.stroke(255);
             p.line(position.x, position.y, target.x, target.y);
             p.stroke(255, 0, 0, 150);
@@ -168,7 +168,7 @@ public class Flamethrower extends Turret {
             p.tint(255, tintColor, tintColor);
             p.image(CORE_SPRITES[coreFrame], tile.position.x + coreOffset, tile.position.y + coreOffset);
             p.tint(255);
-            if (!paused) animateCore();
+            if (!isPaused) animateCore();
         }
     }
 

@@ -3,6 +3,7 @@ package main.projectiles.shockwaves;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
+import main.misc.Utilities;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
@@ -10,6 +11,8 @@ import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PVector;
+
+import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.findAngle;
@@ -35,6 +38,13 @@ public class SeismicShockwave extends Shockwave {
 
         float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, is360 ? 100 : 255, 0);
+
+        if (is360) {
+            Utilities.fastCircle(p, settings.getRingResolution(), center, radius, 3, new Color(0x7D7D7D), alpha);
+            p.strokeWeight(1);
+            return;
+        }
+
         p.stroke(125, alpha);
         p.noFill();
 

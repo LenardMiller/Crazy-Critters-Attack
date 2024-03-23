@@ -94,7 +94,7 @@ public class Machine {
         }
         p.tint(255, tintColor, tintColor);
         p.imageMode(CENTER);
-        if (p.frameCount > frameTimer && !dead && !paused) {
+        if (p.frameCount > frameTimer && !dead && !isPaused) {
             if (currentFrame < sprites.length - 1) currentFrame++;
             else currentFrame = 0;
             frameTimer = p.frameCount + betweenFrames;
@@ -104,12 +104,12 @@ public class Machine {
 //        p.text(damageState, position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
-        if (dead && !paused) deathFrame++;
-        if (!dead && !paused) hurtParticles();
-        else if (deathFrame < secondsToFrames(5) && !paused) deathAnim();
+        if (dead && !isPaused) deathFrame++;
+        if (!dead && !isPaused) hurtParticles();
+        else if (deathFrame < secondsToFrames(5) && !isPaused) deathAnim();
         else EXPLODE_LOOP.stopLoop();
-        if (deathFrame > secondsToFrames(8)) paused = true;
-        if (tintColor < 255 && !paused) tintColor += 20;
+        if (deathFrame > secondsToFrames(8)) isPaused = true;
+        if (tintColor < 255 && !isPaused) tintColor += 20;
     }
 
     public void hpBar() {

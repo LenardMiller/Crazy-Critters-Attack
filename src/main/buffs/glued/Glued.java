@@ -2,21 +2,16 @@ package main.buffs.glued;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.enemies.flyingEnemies.Fae;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.enemies.flyingEnemies.Frost;
 import main.misc.CompressArray;
-import main.particles.MediumExplosion;
-import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.core.PVector;
 
 import java.util.ArrayList;
 
 import static main.Main.*;
-import static main.misc.Utilities.getRandomPointInRange;
 import static main.misc.Utilities.secondsToFrames;
 
 public class Glued extends Buff {
@@ -76,7 +71,7 @@ public class Glued extends Buff {
 
     @Override
     protected void updateTimer(int i) { //ends if at end of lifespan
-        if (!paused) lifeTimer++;
+        if (!isPaused) lifeTimer++;
         if (lifeTimer > lifeDuration) {
             reset();
             buffs.remove(i);
@@ -91,7 +86,7 @@ public class Glued extends Buff {
             //set attack speed back to default
             float frameProportion = (enemy.attackFrame / (float) enemy.attackFrames.length);
             enemy.attackFrames = animatedSprites.get(enemy.name + "AttackEN");
-            if (enemy instanceof Frost || enemy instanceof Fae) {
+            if (enemy instanceof Frost) {
                 enemy.attackFrames = animatedSprites.get("wolf" + "AttackEN");
             }
             enemy.attackFrame = Math.round(enemy.attackFrames.length * frameProportion);

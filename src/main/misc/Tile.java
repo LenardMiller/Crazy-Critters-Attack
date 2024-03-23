@@ -42,7 +42,7 @@ public class Tile {
         }
 
         public void update() {
-            if (name == null || paused) return;
+            if (name == null || isPaused) return;
             for (Ripple.Type rippleType : Ripple.Type.values()) {
                 if (name.equals(rippleType.name())) spawnRipples(rippleType);
             }
@@ -127,9 +127,9 @@ public class Tile {
             if (name == null) return;
             if (edges != null) connectEdges();
             if (!isConcrete(name)) {
-                if (debug) P.tint(255,0,255);
+                if (isDebug) P.tint(255,0,255);
                 P.image(sprite, position.x, position.y);
-                if (debug) P.tint(255);
+                if (isDebug) P.tint(255);
             }
         }
 
@@ -162,7 +162,7 @@ public class Tile {
         }
 
         private void connectEdges() {
-            if (debug) P.tint(0,255,0);
+            if (isDebug) P.tint(0,255,0);
             int x = (int) (position.x / 50);
             int y = (int) (position.y / 50);
             if (y != 0) {
@@ -182,7 +182,7 @@ public class Tile {
                 if (isConnected(1, tile)) P.image(tile.flooringLayer.edges[1], position.x, position.y);
                 if (edges[1] != null && isConcrete(tile.flooringLayer.name)) P.image(edges[1], position.x, position.y);
             }
-            if (debug) P.tint(255);
+            if (isDebug) P.tint(255);
         }
 
         private boolean isConnected(int i, Tile tile) {
@@ -236,9 +236,9 @@ public class Tile {
                 if (drawMain) P.image(sprite, position.x, position.y);
                 for (int i = 0; i < 4; i++) {
                     if (insideCorners[i] != null) {
-                        if (debug) P.tint(255,0,0);
+                        if (isDebug) P.tint(255,0,0);
                         P.image(insideCorners[i], position.x, position.y);
-                        if (debug) P.tint(255);
+                        if (isDebug) P.tint(255);
                     }
                 }
             }
@@ -248,9 +248,9 @@ public class Tile {
             for (int i = 0; i < 4; i++) {
                 if (outsideCorners[i] != null) {
                     if (outsideCornerNames[i].equals(name)) {
-                        if (debug) P.tint(0,0,255);
+                        if (isDebug) P.tint(0,0,255);
                         P.image(outsideCorners[i], position.x, position.y);
-                        if (debug) P.tint(255);
+                        if (isDebug) P.tint(255);
                     }
                 }
             }
@@ -261,7 +261,7 @@ public class Tile {
             outsideCornerNames = new String[4];
             int x = (int) (position.x / 50);
             int y = (int) (position.y / 50);
-            if (debug) P.tint(0,0,255);
+            if (isDebug) P.tint(0,0,255);
             if (x != 18 && y != 0) { //tro
                 String n = doubleDiagonalOut(x,y,1,-1);
                 if (n != null) {
@@ -287,7 +287,7 @@ public class Tile {
                     outsideCornerNames[3] = n;
                 }
             }
-            if (debug) P.tint(255);
+            if (isDebug) P.tint(255);
         }
 
         private String checkMissing(int x, int y, String name) {
@@ -541,7 +541,7 @@ public class Tile {
             PVector topLeftCorner = new PVector(!left ? position.x : position.x + 20, position.y + 7);
             PVector bottomRightCorner = PVector.add(position, new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
             PVector spawnPos = new PVector(P.random(topLeftCorner.x, bottomRightCorner.x), P.random(topLeftCorner.y, bottomRightCorner.y));
-            veryBottomParticles.add(new Ripple(P, spawnPos.x, spawnPos.y, type));
+            tileParticles.add(new Ripple(P, spawnPos.x, spawnPos.y, type));
         }
     }
 

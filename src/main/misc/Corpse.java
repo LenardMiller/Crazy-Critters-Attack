@@ -16,6 +16,8 @@ import static processing.core.PApplet.radians;
 
 public class Corpse {
 
+    public static final int CAP = 50;
+
     private final boolean ANIMATED;
     private final int MAX_LIFE;
     private final int BETWEEN_FRAMES;
@@ -86,7 +88,7 @@ public class Corpse {
     }
 
     public void update(int i) {
-        if (paused) return;
+        if (isPaused) return;
         move();
         bloodParticles();
         buffParticles();
@@ -104,7 +106,7 @@ public class Corpse {
 
     public void display() {
         PImage sprite = SPRITES[frame];
-        if (!paused) {
+        if (!isPaused) {
             if (ANIMATED && frame < SPRITES.length - 1) {
                 betweenTime++;
                 if (betweenTime >= BETWEEN_FRAMES) {
@@ -133,7 +135,7 @@ public class Corpse {
     }
 
     private void buffParticles() {
-        if (paused || type == null || (type.particle == null && type != Enemy.DamageType.bleeding)) return;
+        if (isPaused || type == null || (type.particle == null && type != Enemy.DamageType.bleeding)) return;
         float chance = 0;
         //prevent divide by 0
         if (lifespan > 0) chance = sq(2 * ((float) MAX_LIFE / (float) lifespan));
@@ -147,7 +149,7 @@ public class Corpse {
                         0, BLOOD_PARTICLE.name()));
             }
             else {
-                midParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
+                towerParticles.add(new MiscParticle(P, (float) (POSITION.x + 2.5 + P.random((SIZE.x / 2) * -1,
                         (SIZE.x / 2))), (float) (POSITION.y + 2.5 + P.random((SIZE.x / 2) * -1, (SIZE.x / 2))),
                         P.random(360), type.particle));
             }
@@ -170,14 +172,14 @@ public class Corpse {
     }
 
     private void bloodParticles() {
-        if (paused || BLOOD_PARTICLE == null) return;
+        if (isPaused || BLOOD_PARTICLE == null) return;
         for (int i = (int) ((SIZE.x / 25) * (SIZE.y / 25)) / 25; i >= 0; i--) {
             float speed = sqrt(sq(VELOCITY.x) + sq(VELOCITY.y));
             float chance = sq(1 / (speed + 0.01f));
             chance += 16;
             if (P.random(chance) < 1) {
                 PVector pos = getRandomPointInRange(P, POSITION, SIZE.mag() * 0.4f);
-                midParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
+                towerParticles.add(new Ouch(P, pos.x, pos.y, P.random(360), BLOOD_PARTICLE.name()));
             }
             chance += 10;
             if (P.random(chance) < 1) {

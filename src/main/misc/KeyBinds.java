@@ -3,14 +3,6 @@ package main.misc;
 import main.Main;
 import main.enemies.burrowingEnemies.*;
 import main.enemies.flyingEnemies.Fae;
-import main.projectiles.arcs.Arc;
-import main.projectiles.EnergyBlast;
-import main.projectiles.Flame;
-import main.projectiles.MiscProjectile;
-import main.projectiles.Needle;
-import main.projectiles.enemyProjeciles.IceCrystal;
-import main.projectiles.enemyProjeciles.Snowball;
-import main.projectiles.homing.MagicMissile;
 import main.enemies.*;
 import main.levelStructure.Level;
 import main.towers.Tower;
@@ -41,18 +33,18 @@ public class KeyBinds {
             switch (screen) {
                 case InGame -> {
 
-                    if (settings) closeSettingsMenu();
-                    if (paused) {
-                        paused = false;
+                    if (isSettings) closeSettingsMenu();
+                    if (isPaused) {
+                        isPaused = false;
                         playSound(sounds.get("littleButtonIn"), 1, 1);
                     } else {
-                        paused = true;
+                        isPaused = true;
                         playSound(sounds.get("littleButtonOut"), 1, 1);
                     }
                 } case LevelSelect -> {
-                    if (settings) {
+                    if (isSettings) {
                         playSound(sounds.get("littleButtonOut"), 1, 1);
-                        settings = false;
+                        isSettings = false;
                     }
                 }
             }
@@ -101,7 +93,7 @@ public class KeyBinds {
             }
         }
         //hotkeys
-        if (!dev) {
+        if (!isDev) {
             String name = "";
             Class<?> towerType = null;
             if (wall) name = "wall";
@@ -172,7 +164,7 @@ public class KeyBinds {
         boolean pressed = false;
         //this is important, don't remove it
         for (char key : keys) if (keysPressed.getPressedPulse(key)) pressed = true;
-        return pressed && alive && !paused && money >= price;
+        return pressed && alive && !isPaused && money >= price;
     }
 
     public void spawnKeys() {
@@ -261,12 +253,12 @@ public class KeyBinds {
             }
         }
         //other stuff
-        if (displayDebug) debug = !debug;
-        if (displaySpawnAreas) showSpawn = !showSpawn;
+        if (displayDebug) isDebug = !isDebug;
+        if (displaySpawnAreas) isShowSpawn = !isShowSpawn;
         if (addMoney) money += 1000;
         if (loseMoney) money = 0;
         if (levelBuilder) {
-            Main.levelBuilder = !Main.levelBuilder;
+            Main.isLevelBuilder = !Main.isLevelBuilder;
             hand.setHeld("null");
         } if (saveTiles) {
             try {

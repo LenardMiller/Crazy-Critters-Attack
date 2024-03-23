@@ -34,7 +34,7 @@ public class Bleeding extends Buff {
 
     @Override
     protected void spawnParticles() { //particles around enemy
-        if (!isGore) return;
+        if (!settings.isHasGore()) return;
 
         Enemy enemy = enemies.get(enId);
         if (!enemy.hitParticle.name().contains("ouch")) return;

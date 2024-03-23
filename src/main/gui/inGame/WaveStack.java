@@ -1,7 +1,6 @@
 package main.gui.inGame;
 
 import main.gui.guiObjects.buttons.PlayButton;
-import main.levelStructure.Wave;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -9,7 +8,6 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.*;
-import static main.Main.waveStack;
 
 public class WaveStack {
 
@@ -46,23 +44,23 @@ public class WaveStack {
 
         progressBar(
                 currentWave == levels[currentLevel].waves.length ?
-                        1 : levels[currentLevel].waves[currentWave].getProgress(),
-                -200, 125);
+                        1 : levels[currentLevel].waves[currentWave].getProgress()
+        );
 
         P.strokeWeight(1);
         P.noStroke();
     }
 
-    private void progressBar(float progress, int x, int y) {
-        P.image(progressBar, x, y);
+    private void progressBar(float progress) {
+        P.image(progressBar, -200, 125);
         P.fill(new Color(0x4b5e26).getRGB());
         int width = 188;
         int height = 20;
-        int innerX = x + 6;
-        int innerY = y + 6;
+        int innerX = -200 + 6;
+        int innerY = 125 + 6;
         int sep = 3;
         int count = 6;
-        if (debug) P.text(
+        if (isDebug) P.text(
                 nf(progress, 1, 3) + ", " + nf(((float) count * progress) - 1, 1, 3),
                 innerX + 100, innerY);
         float blockWidth = width / (float) count - sep + sep / (float) count;
@@ -72,7 +70,7 @@ public class WaveStack {
     }
 
     public void update() {
-        if (paused) return;
+        if (isPaused) return;
 
         playButton.update();
 

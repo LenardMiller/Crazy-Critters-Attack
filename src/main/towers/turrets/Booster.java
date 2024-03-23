@@ -84,12 +84,12 @@ public class Booster extends Turret {
             die(false);
             tile.tower = null;
         }
-        if (!paused) {
+        if (!isPaused) {
             giveBoost();
             spawnProjectiles(new PVector(tile.position.x - 25, tile.position.y - 25), p.random(360));
         }
         if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
-          && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
+          && boardMousePosition.y > tile.position.y - size.y && alive && !isPaused) {
             selection.swapSelected(tile.id);
         }
     }
@@ -107,17 +107,17 @@ public class Booster extends Turret {
             float speed = p.random(25, 35);
             if (range > 1) speed = p.random(35, 50);
             if (name.equals("moneyBooster")) {
-                midParticles.add(new Floaty(p, position.x, position.y, speed, "coin"));
+                towerParticles.add(new Floaty(p, position.x, position.y, speed, "coin"));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "yellowMagic"));
             } else if (name.equals("explosiveBooster")) {
-                midParticles.add(new Floaty(p, position.x, position.y, speed, "smokeCloud"));
+                towerParticles.add(new Floaty(p, position.x, position.y, speed, "smokeCloud"));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "fire"));
             } else {
-                midParticles.add(new Floaty(p, position.x, position.y, speed, "orangeBubble"));
+                towerParticles.add(new Floaty(p, position.x, position.y, speed, "orangeBubble"));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
             }

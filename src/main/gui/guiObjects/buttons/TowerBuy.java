@@ -64,7 +64,7 @@ public class TowerBuy extends Button {
         boolean matchX = boardMousePosition.x < (position.x+size.x/2)+d.x && boardMousePosition.x > (position.x-size.x/2)-d.x-1;
         boolean matchY = boardMousePosition.y < (position.y+size.y/2)+d.y && boardMousePosition.y > (position.y-size.y/2)-d.y-1;
         boolean matchPosition = matchX && matchY && active;
-        return ((matchPosition && !paused) || depressed) && alive;
+        return ((matchPosition && !isPaused) || depressed) && alive;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class TowerBuy extends Button {
             else sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse && !depressed) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;
-            if (inputHandler.leftMousePressedPulse && alive && !paused) {
+            if (inputHandler.leftMousePressedPulse && alive && !isPaused) {
                 pressIn();
                 if (money >= price) sprite = spritePressed;
             }

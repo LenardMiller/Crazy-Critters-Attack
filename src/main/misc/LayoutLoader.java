@@ -69,10 +69,8 @@ public class LayoutLoader extends ClassLoader {
      */
     public static void saveSettings() throws IOException {
         JSONObject saveObject = new JSONObject();
-        saveObject.setFloat("volume", globalVolume);
-        saveObject.setBoolean("fullscreen", isFullscreen);
-        saveObject.setBoolean("useOpenGL", isOpenGL);
-        saveObject.setBoolean("gore", isGore);
+
+        settings.save(saveObject);
 
         String name = "settings";
         new File(filePath() + "/data/saves/" + name + ".json");
@@ -85,10 +83,7 @@ public class LayoutLoader extends ClassLoader {
         File loadFile = new File(filePath()+ "/data/settings.json");
         JSONObject loadObject = loadJSONObject(loadFile);
 
-        globalVolume = loadObject.getFloat("volume");
-        isFullscreen = loadObject.getBoolean("fullscreen");
-        isOpenGL = loadObject.getBoolean("useOpenGL");
-        isGore = loadObject.getBoolean("gore");
+        settings = new Settings(loadObject);
     }
 
     /**

@@ -34,7 +34,7 @@ public class PauseGui {
     /** Creates buttons */
     private void build() {
         resumeButton = new MenuButton(P, P.width/2f, (P.height/2f) - 75, () ->
-                paused = !paused);
+                isPaused = !isPaused);
         restartButton = new MenuButton(P, P.width/2f, P.height/2f - 25, "Restart", () ->
                 transition(Screen.Restart, new PVector(-1, 0)));
         levelSelectButton = new MenuButton(P, P.width/2f, (P.height/2f) + 25, "Level Select", () -> {
@@ -44,12 +44,11 @@ public class PauseGui {
         });
         settingsMenuButton = new MenuButton(P, P.width/2f, (P.height/2f) + 75, "Settings", () -> {
             SettingsGui.delay = 1;
-            if (settings) closeSettingsMenu();
-            else settings = true;
+            if (isSettings) closeSettingsMenu();
+            else isSettings = true;
         });
-        exitButton = new MenuButton(P, P.width/2f, (P.height/2f) + 125, "Quit", () -> {
-            transition(Screen.Exit, new PVector(0, 1));
-        });
+        exitButton = new MenuButton(P, P.width/2f, (P.height/2f) + 125, "Quit", () ->
+                transition(Screen.Exit, new PVector(0, 1)));
     }
 
     public void update() {
@@ -65,7 +64,7 @@ public class PauseGui {
         PVector position = new PVector(P.width / 2f, 300);
         if (!alive) shadowedText(P, "Game Over", position, new Color(255, 0, 0, 254),
                 new Color(50, 0, 0, 254), title, CENTER);
-        else if (won) shadowedText(P, "You Win!", position, new Color(255, 255, 0, 254),
+        else if (hasWon) shadowedText(P, "You Win!", position, new Color(255, 255, 0, 254),
                 new Color(125, 50, 0, 254), title, CENTER);
         else shadowedText(P, "Paused", position, new Color(255, 255, 255, 254),
                     new Color(50, 50, 50, 254), title, CENTER);
@@ -74,7 +73,7 @@ public class PauseGui {
         P.textFont(h4);
         if (alive) {
             resumeButton.display();
-            if (won) P.text("Hide Menu [ESC]", resumeButton.position.x, resumeButton.position.y + MenuButton.TEXT_Y_OFFSET);
+            if (hasWon) P.text("Hide Menu [ESC]", resumeButton.position.x, resumeButton.position.y + MenuButton.TEXT_Y_OFFSET);
             else P.text("Resume [ESC]", resumeButton.position.x, resumeButton.position.y + MenuButton.TEXT_Y_OFFSET);
         }
         restartButton.display();

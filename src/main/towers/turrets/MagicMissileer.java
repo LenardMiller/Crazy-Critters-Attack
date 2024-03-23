@@ -235,7 +235,7 @@ public class MagicMissileer extends Turret {
         p.popMatrix();
         p.tint(255);
 
-        if (!paused) {
+        if (!isPaused) {
             float specialRotationSpeed = 0.01f;
             if (name.equals("electricMissleer")) {
                 specialRotationSpeed = switch (state) {

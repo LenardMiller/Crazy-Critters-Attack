@@ -4,7 +4,6 @@ import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.misc.Tile;
-import main.towers.IceWall;
 import main.towers.Wall;
 import main.towers.turrets.*;
 import processing.core.PApplet;
@@ -58,12 +57,12 @@ public class Hand {
         } else if (setHeldNullTimer > 0) {
             setHeldNullTimer--;
         }
-        if (!levelBuilder) {
+        if (!isLevelBuilder) {
             implacable = isNotPlaceable();
             checkDisplay();
         }
         else implacable = false;
-        if (!paused) {
+        if (!isPaused) {
             if (inputHandler.rightMousePressedPulse) remove();
             if ((clickOnSidebar() || rclickNotWall())) clearHand();
             if (inputHandler.leftMousePressedPulse) tryPlace();

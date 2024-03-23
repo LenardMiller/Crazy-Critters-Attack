@@ -13,6 +13,8 @@ import static processing.core.PConstants.HALF_PI;
 
 public abstract class Particle {
 
+    public static final int CAP = 1000;
+
     public float maxSpeed;
     public float speed;
     public float angle;
@@ -38,7 +40,7 @@ public abstract class Particle {
     public void update(ArrayList<Particle> particles, int i) {
         if (crossedEdge()) dead = true;
         if (dead) particles.remove(i);
-        if (!paused) move();
+        if (!isPaused) move();
     }
 
     private boolean crossedEdge() {
@@ -58,7 +60,7 @@ public abstract class Particle {
         if (animation.ended()) dead = true;
         displayAngle += radians(secondsToFrames(angularVelocity));
 
-        velocity.setMag(speed/FRAMERATE);
+        velocity.setMag(speed / FRAMERATE);
         position.add(velocity);
     }
 }

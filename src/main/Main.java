@@ -56,7 +56,7 @@ public class Main extends PApplet {
     public static ArrayList<Enemy>      enemies;
     public static ArrayList<Corpse>     corpses;
     public static ArrayList<Projectile> projectiles;
-    public static ArrayList<Particle>   topParticles, midParticles, bottomParticles, veryBottomParticles;
+    public static ArrayList<Particle>   topParticles, towerParticles, bottomParticles, tileParticles;
     public static ArrayList<Arc>        arcs;
     public static ArrayList<Shockwave>  shockwaves;
     public static ArrayList<TowerBuy>   towerBuyButtons;
@@ -88,18 +88,16 @@ public class Main extends PApplet {
     public static Screen targetScreen;
     public static int money = 100;
     public static int connectWallQueues;
-    public static float globalVolume = 0.25f;
     public static float matrixScale, matrixOffset;
     /** initialized to false */
     public static boolean
-            won, debug, showSpawn, isPlaying, levelBuilder, paused, settings, isFullscreen, isOpenGL, isGore, hasVerticalBars;
+            hasWon, isDebug, isShowSpawn, isPlaying, isLevelBuilder, isPaused, isSettings, hasVerticalBars, isDev;
     public static boolean alive = true;
     /** controls spawning, level building, infinite money etc. */
-    public static boolean dev = false;
     public static PVector boardMousePosition;
+    public static Settings settings;
 
     public static final int FRAMERATE = 30;
-    public static final int SOFT_PARTICLE_CAP = 1500, HARD_PARTICLE_CAP = 3000;
 
     public static final int WINDOW_WIDTH = 1300, WINDOW_HEIGHT = 900;
     public static final int BOARD_WIDTH = 900, BOARD_HEIGHT = 900;
@@ -137,8 +135,15 @@ public class Main extends PApplet {
 
     public static Random random = new Random();
 
+    //profiling
+    public static Profiler profiler;
+    private static boolean profiling;
+
     public static void main(String[] args) {
-        dev = args.length > 0 && args[0].equals("dev");
+        for (String arg : args) {
+            if (arg.equals("dev")) isDev = true;
+            if (arg.equals("profiling")) profiling = true;
+        }
 
         loadSettings();
         PApplet.main("main.Main", args);
@@ -151,9 +156,9 @@ public class Main extends PApplet {
      */
     @Override
     public void settings() {
-        if (isOpenGL) size(WINDOW_WIDTH, WINDOW_HEIGHT, P2D);
+        if (settings.isUseOpenGL()) size(WINDOW_WIDTH, WINDOW_HEIGHT, P2D);
         else size(WINDOW_WIDTH, WINDOW_HEIGHT);
-        if (isFullscreen) {
+        if (settings.isFullscreen()) {
             fullScreen();
             noSmooth();
         }
@@ -166,6 +171,8 @@ public class Main extends PApplet {
      */
     @Override
     public void setup() {
+        profiler = new Profiler(this, profiling);
+        profiler.startProfilingSingle("setup");
         frameRate(FRAMERATE);
         surface.setTitle("Crazy Critters Attack");
         sound = new Sound(this);
@@ -192,6 +199,7 @@ public class Main extends PApplet {
             matrixScale = width / (float) BOARD_WIDTH;
             matrixOffset = (height - (BOARD_HEIGHT * matrixScale)) / 2;
         }
+        profiler.finishProfiling("setup");
     }
 
     /**
@@ -215,11 +223,11 @@ public class Main extends PApplet {
         switch (screen) {
             case InGame -> game.update();
             case LevelSelect -> {
-                if (!settings) levelSelectGui.update();
+                if (!isSettings) levelSelectGui.update();
             }
             case Loading -> loadingGui.update();
             case Title -> {
-                if (!settings) titleGui.update();
+                if (!isSettings) titleGui.update();
             }
 
             // immediate action branches
@@ -227,7 +235,7 @@ public class Main extends PApplet {
             case Restart -> {
                 isPlaying = false;
                 Game.reset(this);
-                paused = false;
+                isPaused = false;
                 Saver.wipe();
                 screen = Screen.InGame;
                 targetScreen = screen;
@@ -245,7 +253,7 @@ public class Main extends PApplet {
                 }
             }
         }
-        if (settings) settingsGui.update();
+        if (isSettings) settingsGui.update();
         updateTransition();
 
         updateInput();
@@ -254,7 +262,7 @@ public class Main extends PApplet {
 
     /** Updates volume and sound loops **/
     private void updateSound() {
-        sound.volume(globalVolume);
+        sound.volume(settings.getVolume());
         for (StartStopSoundLoop startStopSoundLoop : startStopSoundLoops.values()) startStopSoundLoop.continueLoop();
         for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.update();
         for (MoveSoundLoop moveSoundLoop : moveSoundLoops.values()) moveSoundLoop.update();
@@ -286,7 +294,7 @@ public class Main extends PApplet {
                 && targetScreen != screen) {
             if (targetScreen == Screen.InGame || screen == Screen.InGame) {
                 Game.reset(this);
-                paused = false;
+                isPaused = false;
             }
             screen = targetScreen;
         }
@@ -294,7 +302,7 @@ public class Main extends PApplet {
 
     /** Main display loop **/
     private void display() {
-        if (showSpawn) {
+        if (isShowSpawn) {
             scale(BOARD_HEIGHT / (float) WINDOW_HEIGHT);
             float buffer = (WINDOW_WIDTH - BOARD_HEIGHT) / 2f;
             translate(buffer, buffer);
@@ -305,17 +313,17 @@ public class Main extends PApplet {
         switch (screen) {
             case InGame -> game.display();
             case LevelSelect -> {
-                if (!settings) levelSelectGui.display();
+                if (!isSettings) levelSelectGui.display();
             }
             case Loading -> loadingGui.display();
             case Title -> {
-                if (!settings) titleGui.display();
+                if (!isSettings) titleGui.display();
             }
         }
-        if (settings) settingsGui.display();
+        if (isSettings) settingsGui.display();
         displayTransition();
         //black bars
-        if (!showSpawn) {
+        if (!isShowSpawn) {
             fill(0);
             noStroke();
             if (hasVerticalBars) {
@@ -372,7 +380,7 @@ public class Main extends PApplet {
      */
     @Override
     public void keyPressed() {
-        if (!dev) key = toLowerCase(key);
+        if (!isDev) key = toLowerCase(key);
         if (keyCode == 8)  key = '*'; //delete
         if (keyCode == 9)  key = '?'; //tab
         if (keyCode == 27) key = '|'; //esc

@@ -7,7 +7,6 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.misc.Utilities.randomizeDelay;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Nightmare extends Turret {
@@ -73,7 +72,7 @@ public class Nightmare extends Turret {
             spa2.setMag(-2);
             PVector spp2 = new PVector(position.x,position.y);
             spp2.add(spa2);
-            midParticles.add(new MiscParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),"decay"));
+            towerParticles.add(new MiscParticle(p,spp2.x,spp2.y,angle+radians(p.random(-45,45)),"decay"));
         }
     }
 
@@ -134,29 +133,21 @@ public class Nightmare extends Turret {
     protected void upgradeEffect(int id) {
         if (id == 0) {
             switch (nextLevelA) {
-                case 0:
-                    delay -= 1;
-                    break;
-                case 1:
-                    numProjectiles += 3;
-                    break;
-                case 2:
-                    numProjectiles += 10;
-                    break;
+                case 0 -> delay -= 1;
+                case 1 -> numProjectiles += 3;
+                case 2 -> numProjectiles += 10;
             }
         } if (id == 1) {
             switch (nextLevelB) {
-                case 3:
-                    range += 40;
-                    break;
-                case 4:
+                case 3 -> range += 40;
+                case 4 -> {
                     effectDuration += 3;
                     effectLevel += 1000;
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     effectDuration += 5;
                     effectLevel += 1100;
-                    break;
+                }
             }
         }
     }

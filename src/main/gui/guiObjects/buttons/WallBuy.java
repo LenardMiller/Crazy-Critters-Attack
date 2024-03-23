@@ -1,7 +1,6 @@
 package main.gui.guiObjects.buttons;
 
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
@@ -37,7 +36,7 @@ public class WallBuy extends Button {
     @Override
     public void hover() {
         if (boardMousePosition.x < position.x+size.x/2 && boardMousePosition.x > position.x-size.x/2 &&
-                boardMousePosition.y < position.y+size.y/2 && boardMousePosition.y > position.y-size.y/2 && alive && !paused) {
+                boardMousePosition.y < position.y+size.y/2 && boardMousePosition.y > position.y-size.y/2 && alive && !isPaused) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;

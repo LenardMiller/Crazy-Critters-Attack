@@ -7,6 +7,7 @@ import processing.core.PVector;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static main.Main.*;
 import static main.misc.LayoutLoader.saveSettings;
@@ -25,7 +26,7 @@ public class Utilities {
     }
 
     /**
-     * https://forum.processing.org/one/topic/pvector-anglebetween.html <p></p>
+     * <a href="https://forum.processing.org/one/topic/pvector-anglebetween.html">source</a> <p></p>
      * DOES NOT return the angle of a line between two points.
      * idk what this does.
      * @param p1 the first position
@@ -74,35 +75,35 @@ public class Utilities {
     }
 
     /**
-     * Returns the angle of a line between two points om radians.
+     * Returns the angle of a line between two points in radians.
      * Compensates for Processing y being inverted.
      * @param v1 the first position
      * @param v2 the second position
      * @return the angle of a line between the two positions in radians
      */
     public static float findAngle(PVector v1, PVector v2) {
-        float angle = 0;
+        float angle;
         PVector ratio = PVector.sub(v2, v1);
         if (v1.x == v2.x) { //if on the same x
             if (v1.y >= v2.y) { //if below target or on same y, angle right
                 angle = 0;
-            } else if (v1.y < v2.y) { //if above target, angle left
+            } else { //if above target, angle left
                 angle = PI;
             }
         } else if (v1.y == v2.y) { //if on same y
             if (v1.x > v2.x) { //if  right of target, angle down
                 angle = 3 * HALF_PI;
-            } else if (v1.x < v2.x) { //if left of target, angle up
+            } else { //if left of target, angle up
                 angle = HALF_PI;
             }
         } else {
             if (v1.x < v2.x && v1.y > v2.y) { //if to left and below
                 angle = (atan(abs(ratio.x) / abs(ratio.y)));
-            } else if (v1.x < v2.x && v1.y < v2.y) { //if to left and above
+            } else if (v1.x < v2.x) { //if to left and above
                 angle = (atan(abs(ratio.y) / abs(ratio.x))) + HALF_PI;
-            } else if (v1.x > v2.x && v1.y < v2.y) { //if to right and above
+            } else if (v1.y < v2.y) { //if to right and above
                 angle = (atan(abs(ratio.x) / abs(ratio.y))) + PI;
-            } else if (v1.x > v2.x && v1.y > v2.y) { //if to right and below
+            } else { //if to right and below
                 angle = (atan(abs(ratio.y) / abs(ratio.x))) + 3 * HALF_PI;
             }
         }
@@ -146,13 +147,11 @@ public class Utilities {
 
     /**
      * A better tint function that can brighten images.
-     * BEWARE OF SHALLOW COPIES
      * @param image image to be tinted
      * @param tintColor what color it should be tinted
      * @param magnitude how much it should be tinted, 0-1
-     * @return the new tinted image
      */
-    public static PImage superTint(PImage image, Color tintColor, float magnitude) {
+    public static void superTint(PImage image, Color tintColor, float magnitude) {
         image.loadPixels();
         for (int i = 0; i < image.pixels.length; i++) {
             if (image.pixels[i] != 0) {
@@ -167,7 +166,6 @@ public class Utilities {
                 image.pixels[i] = pixel.getRGB();
             }
         }
-        return image;
     }
 
     /**
@@ -274,39 +272,6 @@ public class Utilities {
     }
 
     /**
-     * Displays text with a strikethrough.
-     * @param p the PApplet
-     * @param text text to display
-     * @param position where text is displayed
-     * @param textColor color of text and strikethrough, RGB
-     * @param textSize size of text
-     * @param textAlign what alignment to use, defaults to center
-     */
-    public static void strikethroughText(PApplet p, String text, PVector position, Color textColor, float textSize,
-                                         int textAlign) {
-        if (textAlign != LEFT && textAlign != RIGHT) textAlign = CENTER;
-
-        p.textAlign(textAlign);
-        p.textSize(textSize);
-        p.strokeWeight(textSize/10);
-
-        float textWidth = p.textWidth(text);
-        PVector center = new PVector(position.x, position.y);
-        if (textAlign == LEFT) center = new PVector(position.x + (textWidth/2), position.y);
-        if (textAlign == RIGHT) center = new PVector(position.x - (textWidth/2), position.y);
-        PVector leftPoint = new PVector(center.x - (textWidth/2), center.y - textSize/2);
-        PVector rightPoint = new PVector(center.x + (textWidth/2), center.y - textSize/2);
-
-        p.fill(textColor.getRGB(), textColor.getAlpha());
-        p.stroke(textColor.getRGB(), textColor.getAlpha());
-        p.text(text, position.x, position.y);
-        p.line(leftPoint.x, leftPoint.y, rightPoint.x, rightPoint.y);
-
-        p.strokeWeight(1);
-        p.noStroke();
-    }
-
-    /**
      * Displays text with a slight 3d effect
      * @param p the PApplet
      * @param text text to be displayed
@@ -382,9 +347,8 @@ public class Utilities {
         if (input == target) return target;
         if (input < target) {
             return Math.min(input + by, target);
-        } if (input > target) {
-            return Math.max(input - by, target);
-        } return target;
+        }
+        return Math.max(input - by, target);
     }
 
     /**
@@ -414,7 +378,7 @@ public class Utilities {
     }
 
     public static void closeSettingsMenu() {
-        settings = false;
+        isSettings = false;
         try {
             saveSettings();
         } catch (IOException e) {
@@ -448,24 +412,6 @@ public class Utilities {
     }
 
     /**
-     * @param angle angle to check
-     * @return if angle is facing towards the left
-     */
-    public static boolean angleIsFacingLeftStandard(float angle) {
-        angle = normalizeAngle(angle);
-        return angle < HALF_PI || angle > PI + HALF_PI;
-    }
-
-    /**
-     * @param angle angle to check
-     * @return if angle is facing towards the top of the screen
-     */
-    public static boolean angleIsFacingUpStandard(float angle) {
-        angle = normalizeAngle(angle);
-        return angle < PI;
-    }
-
-    /**
      * Get a point a random distance and range from another point
      * @param p the PApplet
      * @param center point to deflect from
@@ -486,6 +432,7 @@ public class Utilities {
 
     public static PVector turnRight(PVector vec, int times) {
         for (int i = 0; i < times; i++) {
+            //noinspection SuspiciousNameCombination
             vec = new PVector(vec.y, -vec.x);
         }
         return vec;
@@ -506,5 +453,32 @@ public class Utilities {
         bl = coerceIn(map(bl, 0f, 255f, 0f, 1f), 0f, 1f);
 
         return new Color(r, g, bl);
+    }
+
+    public static void capArray(PApplet p, int cap, ArrayList<?> items) {
+        while (items.size() > cap) {
+            items.remove((int) p.random(items.size() - 1));
+        }
+    }
+
+    public static void fastCircle(PApplet p, int resolution, PVector position, int radius, int weight,
+                                  Color color, float alpha) {
+        p.stroke(color.getRGB(), alpha);
+        p.strokeWeight(weight);
+        for (int i = 0; i < resolution; i++) {
+            // AAS Law of Cosines
+            float A = TWO_PI / resolution;
+            float B = (PI - A) / 2;
+            float C = PI - A - B;
+            float b = sin(B) * (radius / sin(C));
+            p.line(
+                    position.x + (sin(HALF_PI - ((i - 1) * A)) * b),
+                    position.y + (cos(HALF_PI - ((i - 1) * A)) * b),
+                    position.x + (sin(HALF_PI - (i * A)) * b),
+                    position.y + (cos(HALF_PI - (i * A)) * b));
+        }
+
+        p.strokeWeight(1);
+        p.noStroke();
     }
 }

@@ -191,7 +191,7 @@ public class Saver {
         File file = new File(path);
 
         if (!file.delete()) {
-            throw new RuntimeException("failed to delete");
+            System.err.println("Failed to delete");
         }
     }
 }

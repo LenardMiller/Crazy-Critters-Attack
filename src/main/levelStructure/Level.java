@@ -2,7 +2,6 @@ package main.levelStructure;
 
 import main.misc.Polluter;
 import main.misc.Saver;
-import processing.core.PApplet;
 
 import java.util.Objects;
 
@@ -20,10 +19,7 @@ public class Level {
     public Polluter polluter;
     public String lastPolluterName;
 
-    private final PApplet P;
-
-    public Level(PApplet p, Wave[] waves, String layout, int startingCash, int reward, String groundType) {
-        this.P = p;
+    public Level(Wave[] waves, String layout, int startingCash, int reward, String groundType) {
         this.waves = waves;
         this.layout = layout;
         this.startingCash = startingCash;
@@ -42,17 +38,17 @@ public class Level {
             }
             if (wave.groundType != null) groundType = wave.groundType;
             if (wave.lengthTimer > wave.length) setWave(currentWave + 1);
-            else if (!paused && alive) {
+            else if (!isPaused && alive) {
                 wave.spawnEnemies();
                 if (polluter != null) polluter.update();
             }
-            if (wave.spawnLengthTimer > wave.spawnLength && enemies.size() == 0 && !paused && alive) {
+            if (wave.spawnLengthTimer > wave.spawnLength && enemies.size() == 0 && !isPaused && alive) {
                 wave.lengthTimer += wave.length / 500;
             }
         } else if (enemies.size() == 0) { //win condition
-            if (!won) paused = true; //prevent stuck on pause
+            if (!hasWon) isPaused = true; //prevent stuck on pause
             Saver.wipe();
-            won = true;
+            hasWon = true;
         }
     }
 

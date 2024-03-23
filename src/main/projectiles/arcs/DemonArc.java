@@ -61,7 +61,7 @@ public class DemonArc extends Arc {
 
     @Override
     public void update(int j) {
-        if (paused) return;
+        if (isPaused) return;
         if (alpha == 255) {
             zap(blacklistedEnemy);
             alpha = 254;

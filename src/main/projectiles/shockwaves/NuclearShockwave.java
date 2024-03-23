@@ -9,6 +9,7 @@ import processing.core.PVector;
 
 import java.awt.*;
 
+import static main.Main.settings;
 import static main.Main.topParticles;
 
 public class NuclearShockwave extends Shockwave {
@@ -20,27 +21,21 @@ public class NuclearShockwave extends Shockwave {
     }
 
     public void display() {
-        p.strokeWeight(5);
         float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alphaCube = PApplet.map(alval, 0, 1, 255, 0);
         float alphaLinear = PApplet.map(radius, 0, maxRadius, 255, 0);
         Color color = Utilities.mapColor(Color.yellow, Color.red, 0, maxRadius, radius);
-        p.stroke(color.getRGB(), alphaCube);
-        p.noFill();
-        p.circle(center.x, center.y, radius * 2);
-        p.strokeWeight(4);
-        p.circle(center.x, center.y, radius * 1.8f);
-        p.strokeWeight(3);
-        p.circle(center.x, center.y, radius * 1.6f);
-        p.strokeWeight(2);
-        p.stroke(255, alphaLinear * 0.5f);
-        p.circle(center.x, center.y, radius * 4);
-        p.stroke(Color.YELLOW.getRGB(), alphaLinear);
-        p.circle(center.x, center.y, radius * 0.8f);
-        p.circle(center.x, center.y, radius * 0.7f);
-
-        p.noStroke();
-        p.strokeWeight(1);
+        Utilities.fastCircle(p, settings.getRingResolution(), center, radius, 5, color, alphaCube);
+        Utilities.fastCircle(p, settings.getRingResolution(), center, (int) (radius * 0.9f), 4,
+                color, alphaCube);
+        Utilities.fastCircle(p, settings.getRingResolution(), center, (int) (radius * 0.8f), 3,
+                color, alphaCube);
+        Utilities.fastCircle(p, settings.getRingResolution(), center, radius * 2, 2,
+                Color.WHITE, alphaLinear * 0.5f);
+        Utilities.fastCircle(p, settings.getRingResolution(), center, (int) (radius * 0.4), 2,
+                Color.YELLOW, alphaLinear * 0.5f);
+        Utilities.fastCircle(p, settings.getRingResolution(), center, (int) (radius * 0.35f), 2,
+                Color.YELLOW, alphaLinear * 0.5f);
     }
 
     @Override

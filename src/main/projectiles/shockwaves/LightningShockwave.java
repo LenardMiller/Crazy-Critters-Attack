@@ -1,6 +1,7 @@
 package main.projectiles.shockwaves;
 
 import main.enemies.Enemy;
+import main.misc.Utilities;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
@@ -21,16 +22,10 @@ public class LightningShockwave extends Shockwave {
     }
 
     public void display() {
-        p.strokeWeight(1);
         float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, 255, 0);
-        p.stroke(new Color(0xD7F2F8).getRGB(), alpha);
-        p.noFill();
-
-        p.circle(center.x, center.y, radius * 2);
-
-        p.noStroke();
-        p.strokeWeight(1);
+        Utilities.fastCircle(p, settings.getRingResolution(), center, radius, 1,
+                new Color(0xD7F2F8), alpha);
     }
 
     @Override
@@ -49,7 +44,8 @@ public class LightningShockwave extends Shockwave {
         for (int i = 0; i < p.random(5, 10); i++) {
             a = randomAngle();
             pos = randomPosition(a);
-            topParticles.add(new ExplosionDebris(p, pos.x, pos.y, a, "electricity", p.random(100,200)));
+            topParticles.add(new ExplosionDebris(p, pos.x, pos.y, a, "electricity",
+                    p.random(100,200)));
         }
     }
 }

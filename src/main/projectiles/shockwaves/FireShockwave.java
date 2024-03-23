@@ -10,6 +10,7 @@ import processing.core.PVector;
 
 import java.awt.*;
 
+import static main.Main.settings;
 import static main.Main.topParticles;
 
 public class FireShockwave extends Shockwave {
@@ -25,17 +26,10 @@ public class FireShockwave extends Shockwave {
     }
 
     public void display() {
-        p.strokeWeight(3);
         float alval = (float) Math.pow(radius / (float) maxRadius, 3);
         float alpha = PApplet.map(alval, 0, 1, 255, 0);
         Color color = Utilities.mapColor(Color.yellow, Color.red, 0, maxRadius, radius);
-        p.stroke(color.getRGB(), alpha);
-        p.noFill();
-
-        p.circle(center.x, center.y, radius * 2);
-
-        p.noStroke();
-        p.strokeWeight(1);
+        Utilities.fastCircle(p, settings.getRingResolution(), center, radius, 3, color, alpha);
     }
 
     @Override

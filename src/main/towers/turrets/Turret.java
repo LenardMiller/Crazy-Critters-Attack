@@ -234,7 +234,7 @@ public abstract class Turret extends Tower {
 
         if (abs(targetAngle - angle) < 0.05) angle = targetAngle; //snap to prevent getting stuck
 
-        if (visualize && debug) { //cool lines
+        if (visualize && isDebug) { //cool lines
             p.stroke(255);
             p.line(position.x, position.y, target.x, target.y);
             p.stroke(255, 0, 0, 150);
@@ -288,9 +288,9 @@ public abstract class Turret extends Tower {
             tile.tower = null;
         }
         updateBoosts();
-        if (enemies.size() > 0 && !machine.dead && !paused) checkTarget();
+        if (enemies.size() > 0 && !machine.dead && !isPaused) checkTarget();
         if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
-                && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
+                && boardMousePosition.y > tile.position.y - size.y && alive && !isPaused) {
             selection.swapSelected(tile.id);
         }
     }
@@ -320,7 +320,7 @@ public abstract class Turret extends Tower {
 
     @Override
     public void controlAnimation() {
-        if (!paused) {
+        if (!isPaused) {
             if (hp < getMaxHp() && p.random(30) < 1) {
                 topParticles.add(new Ouch(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "greyPuff"));

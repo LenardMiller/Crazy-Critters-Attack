@@ -3,13 +3,8 @@ package main.projectiles.arcs;
 import main.enemies.Enemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
-import processing.core.PVector;
 
 import java.awt.*;
-
-import static main.Main.arcs;
-import static main.Main.paused;
-import static main.misc.Utilities.up60ToFramerate;
 
 public class RedArc extends Arc {
 

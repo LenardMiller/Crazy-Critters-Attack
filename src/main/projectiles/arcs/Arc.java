@@ -69,11 +69,11 @@ public class Arc {
             PVector pointB = bigPoints.get(k).position;
             PVector pointA = bigPoints.get(k + 1).position;
             PVector[] points = bigPoints.get(k).points;
-            if (debug) p.ellipse(points[1].x, points[1].y, 5, 5);
+            if (isDebug) p.ellipse(points[1].x, points[1].y, 5, 5);
             p.line(pointB.x, pointB.y, points[points.length - 1].x, points[points.length - 1].y);
             for (int i = points.length - 1; i > 1; i--) {
                 p.line(points[i].x, points[i].y, points[i - 1].x, points[i - 1].y);
-                if (debug) p.ellipse(points[i].x, points[i].y, 5, 5);
+                if (isDebug) p.ellipse(points[i].x, points[i].y, 5, 5);
             }
             p.line(points[1].x, points[1].y, pointA.x, pointA.y);
         }
@@ -81,9 +81,9 @@ public class Arc {
     }
 
     public void update(int j) {
-        if (paused) return;
+        if (isPaused) return;
         if (alpha == 255) zap(blacklistedEnemy);
-        if (!paused) alpha -= up60ToFramerate(8);
+        if (!isPaused) alpha -= up60ToFramerate(8);
         if (alpha <= 0) arcs.remove(j);
     }
 

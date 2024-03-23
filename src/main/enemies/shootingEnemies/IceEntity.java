@@ -61,7 +61,7 @@ public class IceEntity extends ShootingEnemy {
 
     @Override
     public void displayShadow() {
-        if (!paused) {
+        if (!isPaused) {
             animate();
             if (!immobilized) {
                 if (attackFrame == attackDmgFrames[0]) orbitAngleSpeed = orbitAngleTopSpeed;
@@ -84,7 +84,7 @@ public class IceEntity extends ShootingEnemy {
 
     @Override
     public void display() {
-        if (debug) for (int i = trail.size() - 1; i > 0; i--) {
+        if (isDebug) for (int i = trail.size() - 1; i > 0; i--) {
             trail.get(i).display();
         }
         p.pushMatrix();
@@ -95,7 +95,7 @@ public class IceEntity extends ShootingEnemy {
         p.rotate(orbitAngle);
         p.image(orbitSprite, -size.x / 2, -size.y / 2);
         p.popMatrix();
-        if (debug) {
+        if (isDebug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
             p.stroke(0, 0, 255);
             p.line(pfPosition.x - 10, pfPosition.y, pfPosition.x + 10, pfPosition.y);

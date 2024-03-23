@@ -1,5 +1,6 @@
 {
   "volume": 0.25,
+  "ringResolution": 50,
   "fullscreen": true,
   "gore": true,
   "useOpenGL": false

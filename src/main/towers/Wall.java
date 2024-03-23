@@ -120,7 +120,7 @@ public class Wall extends Tower {
 
         p.tint(255,tintColor,tintColor);
         float hpRatio = Math.min(hp / (float) getMaxHp(), 1);
-        if (!debug) {
+        if (!isDebug) {
             int crack = abs(ceil((hpRatio * 4) - 1) - 3);
             if (crack < 4) p.image(sprite[crack],x,y);
             else p.image(sprite[3],x,y);

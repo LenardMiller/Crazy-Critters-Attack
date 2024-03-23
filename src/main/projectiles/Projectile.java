@@ -70,7 +70,7 @@ public abstract class Projectile {
     }
 
     public void update() {
-        if (!paused) {
+        if (!isPaused) {
             trail();
             move();
         }
@@ -120,7 +120,7 @@ public abstract class Projectile {
     }
 
     public void displayShadow() {
-        if (!paused) angleTwo += radians(angularVelocity);
+        if (!isPaused) angleTwo += radians(angularVelocity);
         p.pushMatrix();
         p.tint(0,60);
         p.translate(position.x + 2, position.y + 2);
@@ -131,7 +131,7 @@ public abstract class Projectile {
     }
 
     public void display() {
-        if (!paused) angleTwo += radians(angularVelocity);
+        if (!isPaused) angleTwo += radians(angularVelocity);
         p.pushMatrix();
         p.translate(position.x, position.y);
         p.rotate(angleTwo);

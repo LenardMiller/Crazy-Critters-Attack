@@ -32,7 +32,7 @@ public abstract class Button extends GuiObject {
                 boardMousePosition.x > position.x-size.x/2 &&
                 boardMousePosition.y < position.y+size.y/2 &&
                 boardMousePosition.y > position.y-size.y/2 &&
-                alive && !paused) {
+                alive && !isPaused) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;

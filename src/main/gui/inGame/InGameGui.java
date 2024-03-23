@@ -107,13 +107,14 @@ public class InGameGui {
         highlightedText(p, "enemies: " + enemies.size(), new PVector(padding, 30), LEFT);
         highlightedText(p, "towers: " + towers.size(), new PVector(padding, 60), LEFT);
         highlightedText(p, "projectiles: " + projectiles.size(), new PVector(padding, 90), LEFT);
-        int particleCount = topParticles.size() + midParticles.size() + bottomParticles.size() + veryBottomParticles.size();
+        int particleCount = topParticles.size() + towerParticles.size() + bottomParticles.size() + tileParticles.size();
         highlightedText(p, "particles: " + particleCount, new PVector(padding, 120), LEFT);
         highlightedText(p, "popups: " + popupTexts.size(), new PVector(padding, 150), LEFT);
         highlightedText(p, "path requests: " + pathFinder.requestQueue.size(), new PVector(padding, 180), LEFT);
+        highlightedText(p, "corpses: " + corpses.size(), new PVector(padding, 210), LEFT);
         highlightedText(p, "MX: " + (int) boardMousePosition.x + ", MY: " + (int) boardMousePosition.y,
           new PVector(padding, BOARD_HEIGHT - padding - 30), LEFT);
-        if (isFullscreen) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
+        if (settings.isFullscreen()) highlightedText(p, "X: " + p.mouseX + ", Y: " + p.mouseY,
           new PVector(padding, BOARD_HEIGHT - padding), LEFT);
         highlightedText(p, round(p.frameRate) + " fps", new PVector(BOARD_WIDTH - padding, 30), RIGHT);
         int percentMemoryUsage = (int) ((Runtime.getRuntime().freeMemory() / (float) Runtime.getRuntime().totalMemory()) * 100);
@@ -160,7 +161,7 @@ public class InGameGui {
         towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(0),"slingshot", Slingshot.class, true));
         towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(1),"miscCannon", RandomCannon.class, true));
         towerBuyButtons.add(new TowerBuy(p,towerBuyX(0), towerBuyY(2),"crossbow", Crossbow.class, true));
-        if (currentLevel > 0 || dev) {
+        if (currentLevel > 0 || isDev) {
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(0), "cannon", Cannon.class, true));
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(1), "gluer", Gluer.class, true));
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(2), "seismic", SeismicTower.class, true));
@@ -168,7 +169,7 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(0), "null", null, true));
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(1), "null", null, true));
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(1), towerBuyY(2), "null", null, true));
-        } if (currentLevel > 1 || dev) {
+        } if (currentLevel > 1 || isDev) {
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(0), "energyBlaster", EnergyBlaster.class, true));
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(1), "flamethrower", Flamethrower.class, true));
             towerBuyButtons.add(new TowerBuy(p, towerBuyX(2), towerBuyY(2), "tesla", TeslaTower.class, true));
@@ -176,7 +177,7 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(0),"null", null,true));
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(1),"null", null,true));
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(2), towerBuyY(2),"null", null,true));
-        } if (currentLevel > 2 || dev) {
+        } if (currentLevel > 2 || isDev) {
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(0),"magicMissleer", MagicMissileer.class,true));
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(1),"iceTower", IceTower.class,true));
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(2),"booster", Booster.class,true));
@@ -184,7 +185,7 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(0),"null", null,true));
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(1),"null", null,true));
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(3), towerBuyY(2),"null", null,true));
-        } if (currentLevel > 3 || dev) {
+        } if (currentLevel > 3 || isDev) {
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(0),"railgun", Railgun.class,true));
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(1),"nightmare", Nightmare.class,true));
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(2),"waveMotion", WaveMotion.class,true));

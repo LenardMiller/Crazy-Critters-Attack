@@ -66,7 +66,7 @@ public class Flame extends Projectile {
 
     @Override
     public void display() {
-        if (!paused) {
+        if (!isPaused) {
             delay++;
             sprite = SPRITES[currentSprite];
             //particles

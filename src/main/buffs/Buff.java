@@ -39,7 +39,7 @@ public abstract class Buff {
 
     public void update(int i){
         updateTimer(i);
-        if (!paused) {
+        if (!isPaused) {
             effectTimer++;
             if (effectTimer > effectDelay){
                 effect();
@@ -56,7 +56,7 @@ public abstract class Buff {
      * @param i buff id
      */
     protected void updateTimer(int i) {
-        if (!paused) lifeTimer++;
+        if (!isPaused) lifeTimer++;
         if (lifeTimer > lifeDuration) buffs.remove(i);
     }
 

@@ -5,7 +5,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.animatedSprites;
-import static main.Main.paused;
+import static main.Main.isPaused;
 import static main.misc.Utilities.secondsToFrames;
 import static processing.core.PApplet.radians;
 
@@ -28,7 +28,7 @@ public class Pile extends Particle {
             return;
         }
         p.tint(255,255 * (1 - animation.getBetweenFramesCounter() / (float) animation.getBetweenFrames()));
-        if (!paused) {
+        if (!isPaused) {
             animation.update();
             displayAngle += radians(angularVelocity);
         }

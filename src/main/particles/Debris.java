@@ -4,7 +4,7 @@ import main.misc.Animator;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.paused;
+import static main.Main.isPaused;
 import static main.Main.staticSprites;
 import static main.misc.Utilities.secondsToFrames;
 import static processing.core.PApplet.abs;
@@ -26,7 +26,7 @@ public class Debris extends Particle {
 
     @Override
     public void display() {
-        if (!paused) {
+        if (!isPaused) {
             animation.update();
             displayAngle += radians(secondsToFrames(angularVelocity));
         }

@@ -126,7 +126,7 @@ public class WaveMotion extends Turret {
                 if (i == 0) s = new PVector(x,y);
                 if (i == beamLength) e = new PVector(x,y);
             }
-            if (!paused) {
+            if (!isPaused) {
                 beamDamage(s, e);
                 if (betweenBeamTimer < betweenFireFrames) betweenBeamTimer++;
                 else {
