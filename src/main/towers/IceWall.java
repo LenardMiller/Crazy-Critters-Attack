@@ -46,7 +46,7 @@ public class IceWall extends Wall {
     @Override
     public void update() {
         if (hp <= 0) die(false);
-        if (!paused && alive) {
+        if (!isPaused && alive) {
             if (timeUntilDamage != -1) {
                 damageTimer++;
                 if (damageTimer >= timeUntilDamage) {
@@ -92,7 +92,7 @@ public class IceWall extends Wall {
 
         p.tint(255, tintColor, tintColor, 150);
         float hpRatio = (float)hp/(float)maxHp;
-        if (!debug) {
+        if (!isDebug) {
             int crack = abs(ceil((hpRatio * 4) - 1) - 3);
             if (crack < 4) p.image(sprite[crack],x,y);
             else p.image(sprite[3],x,y);

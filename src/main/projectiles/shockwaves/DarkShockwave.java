@@ -34,7 +34,7 @@ public class DarkShockwave extends Shockwave {
 
     @Override
     public void update() {
-        if (paused) return;
+        if (isPaused) return;
         radius -= speed * 0.5f / FRAMERATE;
         spawnParticles();
         spawnBoostParticles();

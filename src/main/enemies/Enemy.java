@@ -42,6 +42,8 @@ public abstract class Enemy {
         Special
     }
 
+    // used in weird ways, so inspection suppressed
+    @SuppressWarnings("unused")
     public enum HitParticle {
         //lower case for string reasons
         glowOuch(new Color(0, 255, 195)),
@@ -64,6 +66,8 @@ public abstract class Enemy {
         }
     }
 
+    // used in weird ways, so inspection suppressed
+    @SuppressWarnings("unused")
     public enum DamageType {
         burning(new Color(60,60,60), "fire"),
         blueBurning(new Color(0, 14, 64), "blueGreenFire"),
@@ -175,7 +179,7 @@ public abstract class Enemy {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
 
-        if (!paused && !immobilized) {
+        if (!isPaused && !immobilized) {
             rotation = normalizeAngle(rotation);
             targetAngle = normalizeAngle(targetAngle);
             rotation += getAngleDifference(targetAngle, rotation) / 10;
@@ -217,7 +221,7 @@ public abstract class Enemy {
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
 
-        if (isGore) goreyDeathEffect(type);
+        if (settings.isHasGore()) goreyDeathEffect(type);
         else cleanDeathEffect();
 
         for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
@@ -330,7 +334,7 @@ public abstract class Enemy {
      * Calls to animate sprite.
      */
     public void displayShadow() {
-        if (!paused) animate();
+        if (!isPaused) animate();
         p.pushMatrix();
         p.tint(0, 60);
         int x = 1;
@@ -345,7 +349,7 @@ public abstract class Enemy {
     /** Display main sprite */
     public void display() {
         if (sprite == null) return;
-        if (debug) for (int i = trail.size() - 1; i > 0; i--) {
+        if (isDebug) for (int i = trail.size() - 1; i > 0; i--) {
             trail.get(i).display();
         }
         p.pushMatrix();
@@ -355,7 +359,7 @@ public abstract class Enemy {
         p.image(sprite, -size.x / 2, -size.y / 2);
         p.tint(255);
         p.popMatrix();
-        if (debug) {
+        if (isDebug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
             p.stroke(0, 0, 255);
             p.line(pfPosition.x - 10, pfPosition.y, pfPosition.x + 10, pfPosition.y);
@@ -480,8 +484,10 @@ public abstract class Enemy {
             if (p.random(6) > chance) {
                 for (int j = num; j >= 0; j--) { //sprays ouch
                     PVector partPos = getParticlePosition();
-                    if (isGore) topParticles.add(new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle.name()));
-                    else topParticles.add(new MiscParticle(p, partPos.x, partPos.y, p.random(0, 360), "stun"));
+                    if (settings.isHasGore()) topParticles.add(
+                            new Ouch(p, partPos.x, partPos.y, p.random(0, 360), hitParticle.name()));
+                    else topParticles.add(
+                            new MiscParticle(p, partPos.x, partPos.y, p.random(0, 360), "stun"));
                 }
             }
             currentTintColor = new Color(hitParticle.tintColor.getRGB());

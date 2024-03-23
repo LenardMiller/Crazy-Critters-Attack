@@ -254,7 +254,7 @@ public abstract class Tower {
     }
 
     protected void updateBoosts() {
-        if (paused) return;
+        if (isPaused) return;
         displayBoost();
     }
 

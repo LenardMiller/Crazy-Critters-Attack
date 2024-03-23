@@ -55,7 +55,7 @@ public class Loader {
         Main.money = object.getInt("money");
         Main.machine.hp = object.getInt("hp");
         Main.isPlaying = true;
-        Main.paused = true;
+        Main.isPaused = true;
         Main.waveStack.presetWaveCards();
     }
 

@@ -32,12 +32,11 @@ public class LevelSelectGui {
         levelSelectButtons = new MenuButton[levels.length];
         settingsButton = new MenuButton(P, P.width/2f, P.height-100 - 50, "Settings", () -> {
             SettingsGui.delay = 1;
-            if (settings) closeSettingsMenu();
-            else settings = true;
+            if (isSettings) closeSettingsMenu();
+            else isSettings = true;
         });
-        goToTitle = new MenuButton(P, P.width/2f, P.height-100, "Back to Title", () -> {
-            transition(Screen.Title, new PVector(-1, 0));
-        });
+        goToTitle = new MenuButton(P, P.width/2f, P.height-100, "Back to Title", () ->
+                transition(Screen.Title, new PVector(-1, 0)));
         float factor = (levelSelectButtons.length/2f) - 0.5f;
         for (int i = 0; i < levelSelectButtons.length; i++) {
             levelSelectButtons[i] = new MenuButton(P, P.width/2f, P.height/2f + (i-factor)*50, "level " + (i+1));
@@ -56,7 +55,7 @@ public class LevelSelectGui {
             if (levelSelectButtons[i].isPressed()) {
                 currentLevel = i;
                 isPlaying = false;
-                paused = false;
+                isPaused = false;
                 alive = true;
                 transition(Screen.InGame, new PVector(1, 0));
             }

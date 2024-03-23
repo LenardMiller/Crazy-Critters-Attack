@@ -150,16 +150,16 @@ public class Fae extends Frost {
     /** Calls to animate sprite. */
     @Override
     public void displayShadow() {
-        if (!paused) animate();
+        if (!isPaused) animate();
     }
 
     /** Displays a bunch of particles. */
     @Override
     public void display() {
-        if (debug) for (int i = trail.size() - 1; i > 0; i--) {
+        if (isDebug) for (int i = trail.size() - 1; i > 0; i--) {
             trail.get(i).display();
         }
-        if (!paused) {
+        if (!isPaused) {
             if (hitTimer < 10) {
                 for (int i = 0; i < 3; i++) {
                     PVector partPosition = new PVector(position.x, position.y);
@@ -174,7 +174,7 @@ public class Fae extends Frost {
                 topParticles.add(new Floaty(p, position.x, position.y, p.random(25, 35), color + "Magic"));
             }
         }
-        if (debug) {
+        if (isDebug) {
             PVector pfPosition = new PVector(position.x - ((pfSize - 1) * 12.5f), position.y - ((pfSize - 1) * 12.5f));
             p.stroke(0, 0, 255);
             p.line(pfPosition.x - 10, pfPosition.y, pfPosition.x + 10, pfPosition.y);

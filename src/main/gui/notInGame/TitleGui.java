@@ -22,17 +22,15 @@ public class TitleGui {
     }
 
     private void build() {
-        playButton = new MenuButton(p, p.width / 2f, p.height * 0.5f, "Play", () -> {
-            transition(Screen.PlayOrLevelSelect, new PVector(1, 0));
-        });
+        playButton = new MenuButton(p, p.width / 2f, p.height * 0.5f, "Play", () ->
+                transition(Screen.PlayOrLevelSelect, new PVector(1, 0)));
         settingsButton = new MenuButton(p, p.width /2f, p.height * 0.6f, "Settings", () -> {
             SettingsGui.delay = 1;
-            if (settings) closeSettingsMenu();
-            else settings = true;
+            if (isSettings) closeSettingsMenu();
+            else isSettings = true;
         });
-        exitButton = new MenuButton(p, p.width /2f, p.height * 0.7f, "Quit", () -> {
-            transition(Screen.Exit, new PVector(0, 1));
-        });
+        exitButton = new MenuButton(p, p.width /2f, p.height * 0.7f, "Quit", () ->
+                transition(Screen.Exit, new PVector(0, 1)));
     }
 
     public void display() {

@@ -64,7 +64,7 @@ public abstract class BurrowingEnemy extends Enemy {
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
         if (state != State.Moving) {
-            if (isGore) goreyDeathEffect(type);
+            if (settings.isHasGore()) goreyDeathEffect(type);
             else cleanDeathEffect();
         }
 

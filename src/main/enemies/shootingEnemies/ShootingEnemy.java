@@ -44,7 +44,7 @@ public abstract class ShootingEnemy extends Enemy {
         boolean dead = false; //if its gotten this far, it must be alive?
         swapPoints(false);
 
-        if (!paused && !immobilized) {
+        if (!isPaused && !immobilized) {
             if (target == null) {
                 for (Tower tower : towers) {
                     if (tower instanceof Turret) {
@@ -63,15 +63,9 @@ public abstract class ShootingEnemy extends Enemy {
             else if (state == State.Special) state = State.Moving;
 
             switch (state) {
-                case Moving:
-                    move();
-                    break;
-                case Attacking:
-                    attack();
-                    break;
-                case Special:
-                    prepareToFire();
-                    break;
+                case Moving -> move();
+                case Attacking -> attack();
+                case Special -> prepareToFire();
             }
 
             //prevent wandering
@@ -96,7 +90,7 @@ public abstract class ShootingEnemy extends Enemy {
     protected void animate() {
         if (!immobilized) {
             switch (state) {
-                case Attacking:
+                case Attacking -> {
                     if (attackFrame >= attackFrames.length) attackFrame = 0;
                     sprite = attackFrames[attackFrame];
                     idleTime++;
@@ -106,8 +100,7 @@ public abstract class ShootingEnemy extends Enemy {
                             idleTime = 0;
                         }
                     } else attackFrame = 0;
-                    break;
-                case Moving:
+                } case Moving -> {
                     idleTime++;
                     if (moveFrame < moveFrames.length - 1) {
                         if (idleTime >= betweenWalkFrames) {
@@ -116,8 +109,7 @@ public abstract class ShootingEnemy extends Enemy {
                         }
                     } else moveFrame = 0;
                     sprite = moveFrames[moveFrame];
-                    break;
-                case Special:
+                } case Special -> {
                     idleTime++;
                     sprite = shootFrames[shootFrame];
                     if (shootFrame < shootFrames.length - 1) {
@@ -126,6 +118,7 @@ public abstract class ShootingEnemy extends Enemy {
                             idleTime = 0;
                         }
                     } else shootFrame = 0;
+                }
             }
         }
         //shift back to normal

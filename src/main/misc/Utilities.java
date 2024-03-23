@@ -378,7 +378,7 @@ public class Utilities {
     }
 
     public static void closeSettingsMenu() {
-        settings = false;
+        isSettings = false;
         try {
             saveSettings();
         } catch (IOException e) {

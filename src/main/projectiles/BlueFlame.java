@@ -1,7 +1,6 @@
 package main.projectiles;
 
 import main.enemies.Enemy;
-import main.particles.ExplosionDebris;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -62,7 +61,7 @@ public class BlueFlame extends Projectile {
 
     @Override
     public void display() {
-        if (!paused) {
+        if (!isPaused) {
             delay++;
             sprite = SPRITES[currentSprite];
             //particles

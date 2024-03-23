@@ -38,7 +38,7 @@ public class Game {
     /** Update in game stuff **/
     public void update() {
         //keys
-        if (dev) {
+        if (isDev) {
             keyBinds.debugKeys();
             keyBinds.spawnKeys();
         } else {
@@ -81,9 +81,9 @@ public class Game {
         hand.update();
         for (int i = popupTexts.size()-1; i >= 0; i--) popupTexts.get(i).update();
         if (isPlaying) levels[currentLevel].update();
-        if (paused && !settings) pauseGui.update();
-        if (!showSpawn) {
-            if (!levelBuilder) {
+        if (isPaused && !isSettings) pauseGui.update();
+        if (!isShowSpawn) {
+            if (!isLevelBuilder) {
                 inGameGui.update();
             } else {
                 levelBuilderGui.update();
@@ -186,21 +186,21 @@ public class Game {
         p.popMatrix();
         p.popMatrix();
 
-        if (paused && !settings) pauseGui.display();
+        if (isPaused && !isSettings) pauseGui.display();
     }
 
     /** Displays all the UI elements that stick to the screen and scale with window size **/
     private void displayInGameGui() {
         p.noStroke();
-        if (!showSpawn) {
-            if (!levelBuilder) inGameGui.display();
+        if (!isShowSpawn) {
+            if (!isLevelBuilder) inGameGui.display();
             else levelBuilderGui.display();
             waveStack.display();
             hand.displayHeldInfo();
             p.textAlign(LEFT);
-            if (!levelBuilder) inGameGui.displayText(p, 10);
-        } if (dev) inGameGui.displayDebugText(p, 10);
-        if (paused) { //grey stuff
+            if (!isLevelBuilder) inGameGui.displayText(p, 10);
+        } if (isDev) inGameGui.displayDebugText(p, 10);
+        if (isPaused) { //grey stuff
             p.noStroke();
             if (!alive) p.fill(50, 0, 0, 50);
             else p.fill(0, 0, 0, 50);
@@ -231,7 +231,7 @@ public class Game {
 
         profiler.startProfiling("drawing: background tiles", Profiler.PROFILE_TIME);
         displayBackgroundTiles();
-        if (debug) displayPathfindingDebug();
+        if (isDebug) displayPathfindingDebug();
         for (Particle particle : bottomParticles) particle.display();
         profiler.finishProfiling("drawing: background tiles");
 
@@ -356,15 +356,15 @@ public class Game {
         for (Node node : end) node.findGHF();
         updateTowerArray();
         //load level data
-        levels[0] = new Level(p, ForestWaves.genForestWaves(p),
+        levels[0] = new Level(ForestWaves.genForestWaves(p),
                 "levels/forest",     125,  50,  "dirt");
-        levels[1] = new Level(p, DesertWaves.genDesertWaves(p),
+        levels[1] = new Level(DesertWaves.genDesertWaves(p),
                 "levels/desert",     250,  75,  "sand");
-        levels[2] = new Level(p, CaveWaves.genCaveWaves(p),
+        levels[2] = new Level(CaveWaves.genCaveWaves(p),
                 "levels/cave",       500,  100, "stone");
-        levels[3] = new Level(p, GlacierWaves.genGlacierWaves(p),
+        levels[3] = new Level(GlacierWaves.genGlacierWaves(p),
                 "levels/glacier",    1500, 200, "snow");
-        levels[4] = new Level(p, DeepForestWaves.genDeepForestWaves(p),
+        levels[4] = new Level(DeepForestWaves.genDeepForestWaves(p),
                 "levels/deepForest", 2500, 350, "dirt");
         LayoutLoader.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
@@ -377,7 +377,7 @@ public class Game {
         levelBuilderGui = new LevelBuilderGui(p);
         pauseGui = new PauseGui(p);
         //other
-        won = false;
+        hasWon = false;
         connectWallQueues = 0;
     }
 }

@@ -42,7 +42,7 @@ public class Selection {
      * @param id tower id
      */
     public void swapSelected(int id) {
-        if (paused) return;
+        if (isPaused) return;
         Turret turret = (Turret) tiles.get(id).tower;
         if (this.turret != turret || name.equals("null")) {
             if (!towerJustPlaced) {
@@ -57,7 +57,7 @@ public class Selection {
      * @param turret turret to select to
      */
     public void swapSelected(Turret turret) {
-        if (paused) return;
+        if (isPaused) return;
         hand.held = "null";
         if (turret == null) return;
         if (this.turret != null) this.turret.visualize = false;
@@ -82,7 +82,7 @@ public class Selection {
     private void clickOff() {
         if (turret == null) return;
         if (inputHandler.leftMousePressedPulse &&
-                mouseOnBoard() && alive && !paused && !hand.held.equals("wall")) {
+                mouseOnBoard() && alive && !isPaused && !hand.held.equals("wall")) {
             if (!name.equals("null") && !towerJustPlaced) {
                 playSound(clickOut, 1, 1);
             }

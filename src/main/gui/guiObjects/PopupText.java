@@ -73,7 +73,7 @@ public class PopupText {
     }
 
     public void update() {
-        if (paused) return;
+        if (isPaused) return;
         float delta = 0.05f;
         float targetSpeed = -0.25f;
         displacement += movementSpeed;

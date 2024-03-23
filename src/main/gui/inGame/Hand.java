@@ -4,7 +4,6 @@ import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
 import main.gui.guiObjects.buttons.TowerBuy;
 import main.misc.Tile;
-import main.towers.IceWall;
 import main.towers.Wall;
 import main.towers.turrets.*;
 import processing.core.PApplet;
@@ -29,8 +28,6 @@ public class Hand {
     }
 
     public static final float MIN_ENEMY_DISTANCE = 50;
-    public static final int PANEL_WIDTH = 190 - 9;
-    public static final Color CANT_AFFORD_COLOR = new Color(0xAB0000);
 
     public Class<?> heldClass;
     public String held;
@@ -60,12 +57,12 @@ public class Hand {
         } else if (setHeldNullTimer > 0) {
             setHeldNullTimer--;
         }
-        if (!levelBuilder) {
+        if (!isLevelBuilder) {
             implacable = isNotPlaceable();
             checkDisplay();
         }
         else implacable = false;
-        if (!paused) {
+        if (!isPaused) {
             if (inputHandler.rightMousePressedPulse) remove();
             if ((clickOnSidebar() || rclickNotWall())) clearHand();
             if (inputHandler.leftMousePressedPulse) tryPlace();
@@ -296,22 +293,6 @@ public class Hand {
         if (tile.tower == null) return null;
         if (!(tile.tower instanceof Wall)) return null;
         return (Wall) tile.tower;
-    }
-
-    private void universalWallInfo() {
-        p.fill(0, 20);
-        p.strokeWeight(2);
-        p.stroke(0);
-        p.rect(905, 700, PANEL_WIDTH, 130);
-        p.fill(0, 254);
-        p.textFont(pg);
-        p.textAlign(LEFT);
-        p.text("""
-                        - LClick to place wall
-                        - LClick on wall to upgrade
-                        - RClick on wall to sell
-                        - Press TAB or click sidebar to deselect""",
-                905 + 5, 700 + 5, 190 - 10, 195 - 10 - 9);
     }
 
     /**

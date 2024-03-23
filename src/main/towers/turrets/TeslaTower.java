@@ -98,16 +98,16 @@ public class TeslaTower extends Turret {
             tile.tower = null;
         }
         updateBoosts();
-        if (highPower && !paused && !machine.dead) {
+        if (highPower && !isPaused && !machine.dead) {
             PVector position = new PVector(tile.position.x - 25, tile.position.y - 25);
             arcs.add(new DemonArc(p, position.x, position.y, this, getDamage(), arcLength, getRange(), priority));
             FadeSoundLoop electricity = fadeSoundLoops.get("electricity");
             if (electricity.targetVolume < 0.2f) electricity.setTargetVolume(0.2f);
         } else {
-            if (enemies.size() > 0 && !machine.dead && !paused) checkTarget();
+            if (enemies.size() > 0 && !machine.dead && !isPaused) checkTarget();
         }
         if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
-                && boardMousePosition.y > tile.position.y - size.y && alive && !paused) {
+                && boardMousePosition.y > tile.position.y - size.y && alive && !isPaused) {
             selection.swapSelected(tile.id);
         }
     }

@@ -32,7 +32,7 @@ public class Frag extends Projectile {
 
     @Override
     public void update() {
-        if (!paused) {
+        if (!isPaused) {
             lifeTimer++;
             trail();
             move();

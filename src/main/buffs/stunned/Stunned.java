@@ -33,7 +33,7 @@ public class Stunned extends Buff {
 
     @Override
     protected void updateTimer(int i){ //ends if at end of lifespan
-        if (!paused) lifeTimer++;
+        if (!isPaused) lifeTimer++;
         if (lifeTimer > lifeDuration) {
             enemies.get(enId).immobilized = false;
             buffs.remove(i);

@@ -5,7 +5,6 @@ import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.enemies.flyingEnemies.FlyingEnemy;
 import main.enemies.shootingEnemies.ShootingEnemy;
-import main.sound.FadeSoundLoop;
 import main.sound.SoundUtilities;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -64,7 +63,7 @@ public class WaveCard {
             if (!isCurrentWave && !overrideFillAlpha) fillAlpha = 255;
             isCurrentWave = true;
         } else {
-            if (isCurrentWave && !paused) strokeAlpha = max(strokeAlpha - 10, 0);
+            if (isCurrentWave && !isPaused) strokeAlpha = max(strokeAlpha - 10, 0);
         }
 
         float centerX = position.x + 100;
@@ -122,7 +121,7 @@ public class WaveCard {
 
         if (isCurrentWave) {
             p.fill(255, fillAlpha);
-            if (!paused) fillAlpha = max(fillAlpha - 10, 0);
+            if (!isPaused) fillAlpha = max(fillAlpha - 10, 0);
             p.strokeWeight(2);
             p.stroke(255, strokeAlpha);
             p.rect(position.x + 1, position.y + 1, 198, 123);
@@ -135,7 +134,7 @@ public class WaveCard {
         position.y -= speed;
         if (position.y <= target) {
             if (speed > 0) {
-                SoundUtilities.playSound(sounds.get("uiBonk"), 1, globalVolume);
+                SoundUtilities.playSound(sounds.get("uiBonk"), 1, 1);
             }
             speed = 0;
             position.y = target;

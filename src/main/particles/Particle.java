@@ -40,7 +40,7 @@ public abstract class Particle {
     public void update(ArrayList<Particle> particles, int i) {
         if (crossedEdge()) dead = true;
         if (dead) particles.remove(i);
-        if (!paused) move();
+        if (!isPaused) move();
     }
 
     private boolean crossedEdge() {
