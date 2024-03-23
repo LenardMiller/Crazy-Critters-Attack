@@ -58,7 +58,7 @@ public class CompressArray {
             }
             for (int i = 0; i < cels.length; i++) {
                 for (int j = 0; j < cels[i]; j++) {
-                    compArray.add(i); //todo: ran out of memory here!?
+                    compArray.add(i);
                 }
             }
         }

@@ -203,8 +203,6 @@ public class GlacierWaves {
         waves[44] = wavePreset(p, 55, 25, mudCreature, new String[]{"Pool of Mud", "Creatures"});
         waves[44].addSpawns(mudCreature, 20);
 
-        //todo: it should end right here
-
         waves[45] = wavePreset(p, 65, 20, mammoth, "Mammoths");
         waves[45].addSpawns(mammoth, 3);
         waves[45].addSpawns(bigWorm, 10);

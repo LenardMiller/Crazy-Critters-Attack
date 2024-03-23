@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class DeepForestWaves {
 
-    // todo: harder
     public static Wave[] genDeepForestWaves(PApplet p) {
         Wave[] waves = new Wave[45];
 

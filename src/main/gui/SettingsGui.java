@@ -72,7 +72,7 @@ public class SettingsGui {
         isGore = goreCheck.update(isGore);
     }
 
-    public void display() { //todo: keybinds page
+    public void display() {
         if (delay >= 0) return;
         PVector position = new PVector(P.width / 2f, buffer);
         shadowedText(P, "Settings", position, new Color(255, 255, 255, 254),
