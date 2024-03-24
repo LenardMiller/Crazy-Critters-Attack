@@ -12,7 +12,6 @@ import static main.misc.Utilities.secondsToFrames;
 
 public abstract class Buff {
 
-    public int enId;
     public int effectTimer;
     public PApplet p;
     public String particle;
@@ -24,8 +23,9 @@ public abstract class Buff {
     protected int lifeDuration;
     protected int particleChance;
     protected float effectLevel;
+    protected Enemy target;
 
-    protected Buff(PApplet p, int enId, Turret turret){
+    protected Buff(PApplet p, Enemy target, Turret turret){
         this.p = p;
 
         particleChance = 8;
@@ -33,12 +33,12 @@ public abstract class Buff {
         lifeDuration = secondsToFrames(10);
         particle = "null";
         name = "null";
-        this.enId = enId;
         this.turret = turret;
+        this.target = target;
     }
 
-    public void update(int i){
-        updateTimer(i);
+    public void update() {
+        updateTimer();
         if (!isPaused) {
             effectTimer++;
             if (effectTimer > effectDelay){
@@ -53,11 +53,10 @@ public abstract class Buff {
 
     /**
      * Ends if at end of lifespan.
-     * @param i buff id
      */
-    protected void updateTimer(int i) {
+    protected void updateTimer() {
         if (!isPaused) lifeTimer++;
-        if (lifeTimer > lifeDuration) buffs.remove(i);
+        if (lifeTimer > lifeDuration) target.buffs.remove(this);
     }
 
     public abstract void effect();
@@ -67,16 +66,16 @@ public abstract class Buff {
      */
     protected void spawnParticles() {
         if (particle != null) {
-            if (enId < 0) buffs.remove(this);
-            else {
-                Enemy enemy = enemies.get(enId);
-                if (p.random(particleChance) < 1) {
-                    PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
-                    topParticles.add(new MiscParticle(p, pos.x, pos.y, p.random(360), particle));
-                }
+            if (p.random(particleChance) < 1) {
+                PVector pos = getRandomPointInRange(p, target.position, target.size.mag() * 0.4f);
+                topParticles.add(new MiscParticle(p, pos.x, pos.y, p.random(360), particle));
             }
         }
     }
 
     public void dieEffect() {}
+
+    public boolean matches(Enemy other) {
+        return other == target;
+    }
 }

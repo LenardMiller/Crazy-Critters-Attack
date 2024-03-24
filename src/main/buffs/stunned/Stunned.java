@@ -11,32 +11,27 @@ import static main.misc.Utilities.secondsToFrames;
 
 public class Stunned extends Buff {
 
-    public Stunned(PApplet p, int enId, Turret turret) {
-        super(p,enId,turret);
+    public Stunned(PApplet p, Enemy target, Turret turret) {
+        super(p, target, turret);
         particleChance = 8;
         effectDelay = secondsToFrames(0.2f); //frames
         lifeDuration = secondsToFrames(2);
         particle = "stun";
         name = "stunned";
-        this.enId = enId;
     }
 
     @Override
     public void effect() { //slowing enemy movement done every frame
-        if (enId > -1 && enId < enemies.size()) {
-            Enemy enemy = enemies.get(enId);
-            enemy.immobilized = true;
-            if (enemy instanceof BurrowingEnemy) enemy.state = Enemy.State.Special;
-        }
-        else buffs.remove(this);
+        target.immobilized = true;
+        if (target instanceof BurrowingEnemy) target.state = Enemy.State.Special;
     }
 
     @Override
-    protected void updateTimer(int i){ //ends if at end of lifespan
+    protected void updateTimer(){ //ends if at end of lifespan
         if (!isPaused) lifeTimer++;
         if (lifeTimer > lifeDuration) {
-            enemies.get(enId).immobilized = false;
-            buffs.remove(i);
+            target.immobilized = false;
+            target.buffs.remove(this);
         }
     }
 }

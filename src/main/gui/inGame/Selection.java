@@ -350,8 +350,15 @@ public class Selection {
 
     public void changePriority() {
         if (name.equals("null") || turret == null) return;
-        if (turret.priority == Turret.Priority.Weak) turret.priority = Turret.Priority.Close;
-        else turret.priority = Turret.Priority.values()[turret.priority.ordinal() + 1];
+        if (turret.priority == Turret.Priority.Weak) {
+            if (turret.effect != null) {
+                turret.priority = Turret.Priority.Unbuffed;
+            } else {
+                turret.priority = Turret.Priority.Close;
+            }
+        } else if (turret.priority == Turret.Priority.Unbuffed) {
+            turret.priority = Turret.Priority.Close;
+        } else turret.priority = Turret.Priority.values()[turret.priority.ordinal() + 1];
     }
 
     public void upgradeBottom() {

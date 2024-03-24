@@ -11,36 +11,34 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.getRandomPointInRange;
 
-public class SpikeyGlued extends Glued {
+public class SpikyGlued extends Glued {
 
     private final Spike[] SPIKES;
 
-    public SpikeyGlued(PApplet p, int enId, float speedMod, float duration, Turret turret) {
-        super(p,enId,speedMod,duration,turret);
-        SPIKES = new Spike[enemies.get(enId).pfSize * 3];
+    public SpikyGlued(PApplet p, Enemy target, float speedMod, float duration, Turret turret) {
+        super(p, target, speedMod, duration, turret);
+        SPIKES = new Spike[target.pfSize * 3];
         for (int i = 0; i < SPIKES.length; i++) {
-            Enemy enemy = enemies.get(enId);
-            PVector pos = getRandomPointInRange(p, new PVector(), enemy.size.mag() * 0.4f);
+            PVector pos = getRandomPointInRange(p, new PVector(), turret.size.mag() * 0.4f);
             SPIKES[i] = new Spike(pos.x, pos.y, p.random(0,360));
         }
     }
 
     @Override
     public void display() {
-        for (Spike spike : SPIKES) spike.display(enemies.get(enId).position);
+        for (Spike spike : SPIKES) spike.display(target.position);
     }
 
     /**particles around enemy*/
     @Override
     protected void spawnParticles() {
         if (particle != null) {
-            Enemy enemy = enemies.get(enId);
             if (p.random(particleChance) < 1) {
-                PVector pos = getRandomPointInRange(p, enemy.position, enemy.size.mag() * 0.4f);
+                PVector pos = getRandomPointInRange(p, target.position, target.size.mag() * 0.4f);
                 topParticles.add(new MiscParticle(p, pos.x, pos.y, p.random(360), particle));
             }
         }
-        for (Spike spike : SPIKES) spike.display(enemies.get(enId).position);
+        for (Spike spike : SPIKES) spike.display(target.position);
     }
 
     /**shoots a bunch of glue spikes*/
@@ -48,9 +46,9 @@ public class SpikeyGlued extends Glued {
     public void dieEffect() {
         int numSpikes = 24;
         int spikeDamage = 100;
-        Enemy enemy = enemies.get(enId);
         for (int i = 0; i < numSpikes; i++) {
-            projectiles.add(new GlueSpike(p, enemy.position.x, enemy.position.y, p.random(0,360), turret, spikeDamage));
+            projectiles.add(new GlueSpike(p, target.position.x, target.position.y,
+                    p.random(0,360), turret, spikeDamage));
         }
     }
 

@@ -106,10 +106,10 @@ public class SeismicShockwave extends Shockwave {
             if (abs(angleDif) < width / 2f && dist < radius) {
                 PVector direction = PVector.fromAngle(a - HALF_PI);
                 enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret,
-                        true, damageType, direction, -1);
+                        true, damageType, direction);
                 if ((enemy.state == Enemy.State.Moving && enemy instanceof BurrowingEnemy)) {
                     enemy.damageWithBuff(damage, "stunned", 0, 30, turret,
-                            true, damageType, direction, -1);
+                            true, damageType, direction);
                 }
                 untouchedEnemies.remove(enemy);
             }

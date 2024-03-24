@@ -1,7 +1,6 @@
 package main.enemies.flyingEnemies;
 
 import main.Main;
-import main.buffs.Buff;
 import main.gui.guiObjects.PopupText;
 import main.particles.Floaty;
 import main.particles.MiscParticle;
@@ -44,10 +43,9 @@ public class Frost extends FlyingEnemy {
      * Plays death sound.
      * Clear buffs.
      * Remove from array.
-     * @param i id for buff stuff
      */
     @Override
-    protected void die(int i) {
+    protected void die() {
         Main.money += moneyDrop;
         popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
         if (overkill) {
@@ -57,17 +55,8 @@ public class Frost extends FlyingEnemy {
             }
         }
         else playSoundRandomSpeed(p, dieSound, 1);
-        for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
-            Buff buff = buffs.get(j);
-            //if attached, remove
-            if (buff.enId == i) {
-                buffs.get(j).dieEffect();
-                buffs.remove(j);
-            } //shift ids to compensate for enemy removal
-            else if (buff.enId > i) buff.enId -= 1;
-        }
 
-        enemies.remove(i);
+        enemies.remove(this);
     }
 
     /**

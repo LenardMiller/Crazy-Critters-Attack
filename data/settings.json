@@ -3,5 +3,5 @@
   "ringResolution": 50,
   "fullscreen": true,
   "gore": true,
-  "useOpenGL": false
+  "useOpenGL": true
 }

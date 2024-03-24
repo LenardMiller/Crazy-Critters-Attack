@@ -1,5 +1,6 @@
 package main.enemies.shootingEnemies;
 
+import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.towers.Tower;
 import main.towers.turrets.Turret;
@@ -76,9 +77,14 @@ public abstract class ShootingEnemy extends Enemy {
             }
         }
         if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
+        //buffs
+        for (int j = buffs.size() - 1; j >= 0; j--) {
+            Buff buff = buffs.get(j);
+            buff.update();
+        }
         //if health is 0, die
         if (hp <= 0) dead = true;
-        if (dead) die(i);
+        if (dead) die();
     }
 
     private boolean canTargetTurret() {

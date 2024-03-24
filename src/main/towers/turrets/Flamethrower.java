@@ -47,7 +47,7 @@ public class Flamethrower extends Turret {
         pjSpeed = 300;
         range = 200;
         effectLevel = 10;
-        effectDuration = 5;
+        effectDuration = 3.3f;
         damage = 15;
         delay = 0;
         material = Material.metal;
@@ -60,6 +60,8 @@ public class Flamethrower extends Turret {
         fireParticle = null;
         barrelLength = 24;
         count = 1;
+        priority = Priority.Unbuffed;
+        effect = "burning";
         FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
         titleLines = new String[]{"Flamethrower"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Burning:", null));
@@ -273,7 +275,6 @@ public class Flamethrower extends Turret {
                     damage *= 10;
                     name = "flamewheel";
                     hasPriority = false;
-                    effectLevel += 5;
                     selection.swapSelected(this);
                     titleLines = new String[]{"Flame Wheel"};
                     extraInfo.remove(0);
@@ -286,16 +287,17 @@ public class Flamethrower extends Turret {
             switch (nextLevelB) {
                 case 3 -> damage += damage;
                 case 4 -> {
-                    effectDuration += 5;
+                    effectDuration += 3.3f;
                     effectLevel += 15;
                 } case 5 -> {
                     name = "magicFlamethrower";
                     magic = true;
                     material = Material.darkMetal;
+                    effect = "blueBurning";
                     range += 30;
                     pjSpeed = 150;
                     damage = 200;
-                    effectDuration = 25;
+                    effectDuration = 10;
                     effectLevel = 250;
                     titleLines = new String[]{"Flame Conjurer"};
                     extraInfo.remove(0);

@@ -55,16 +55,15 @@ public class IceWall extends Wall {
                     refreshHpBar();
                 }
             }
-            for (int i = 0; i < enemies.size(); i++) {
-                Enemy enemy = enemies.get(i);
+            for (Enemy enemy : enemies) {
                 if (enemy.position.x > tile.position.x - TILE_SIZE && enemy.position.x < tile.position.x
-                    && enemy.position.y > tile.position.y - TILE_SIZE && enemy.position.x < tile.position.y) {
+                        && enemy.position.y > tile.position.y - TILE_SIZE && enemy.position.x < tile.position.y) {
                     enemy.intersectingIceCount++;
                 }
                 int targetSize = ceil(enemy.pfSize / 2f);
                 if (enemy.intersectingIceCount >= targetSize) {
                     enemy.damageWithBuff(0, "frozen", 1, 0.2f, null,
-                      false, Enemy.DamageType.frozen, new PVector(0, 0), i);
+                            false, Enemy.DamageType.frozen, new PVector(0, 0));
                 }
             }
         }

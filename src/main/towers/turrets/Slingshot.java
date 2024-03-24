@@ -143,6 +143,7 @@ public class Slingshot extends Turret {
                     delay += 0.1f;
                     effectDuration = 6;
                     effectLevel = 8;
+                    effect = "bleeding";
                     name = "slingshotRock";
                     titleLines = new String[]{"Heavy Slingshot"};
                     Color infoColor = new Color(0xDA8383);

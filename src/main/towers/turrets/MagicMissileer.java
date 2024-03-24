@@ -324,6 +324,7 @@ public class MagicMissileer extends Turret {
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
                     titleLines = new String[]{"Electric Tower"};
+                    effect = "electrified";
 
                     Color specialColor = new Color(0xFFFD83);
                     extraInfo.clear();

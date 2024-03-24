@@ -152,7 +152,7 @@ public abstract class Projectile {
                 playSoundRandomSpeed(p, hitSound, 1);
                 PVector applyVelocity = velocity;
                 if (effectRadius > 0) applyVelocity = new PVector(0, 0);
-                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, causeEnemyParticles, type, applyVelocity, enemyId);
+                enemy.damageWithBuff(damage, buff, effectLevel, effectDuration, turret, causeEnemyParticles, type, applyVelocity);
                 hitEnemies.add(enemy);
                 pierce--;
                 //splash
@@ -163,7 +163,7 @@ public abstract class Projectile {
                         applyVelocity = fromExplosionCenter(splashEnemy);
                         if (intersectingEnemy(splashEnemy)) applyVelocity = new PVector(0, 0);
                         splashEnemy.damageWithBuff(3 * (damage / 4), buff, effectLevel, effectDuration, turret,
-                                causeEnemyParticles, type, applyVelocity, splashEnemyId);
+                                causeEnemyParticles, type, applyVelocity);
                     }
                 }
             }

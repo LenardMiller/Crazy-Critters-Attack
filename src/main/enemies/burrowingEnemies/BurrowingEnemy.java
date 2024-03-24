@@ -1,7 +1,6 @@
 package main.enemies.burrowingEnemies;
 
 import main.Main;
-import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
 import main.particles.Debris;
@@ -53,13 +52,13 @@ public abstract class BurrowingEnemy extends Enemy {
     }
 
     @Override
-    protected void die(int i) {
+    protected void die() {
         Main.money += moneyDrop;
         popupTexts.add(new PopupText(p, new PVector(position.x, position.y), moneyDrop));
 
         DamageType type = lastDamageType;
-        for (Buff buff : buffs) {
-            if (buff.enId == i) type = DamageType.valueOf(buff.name);
+        if (!buffs.isEmpty()) {
+            type = DamageType.valueOf(buffs.get((int) p.random(buffs.size() - 1)).name);
         }
         if (overkill) playSoundRandomSpeed(p, overkillSound, 1);
         else playSoundRandomSpeed(p, dieSound, 1);
@@ -68,16 +67,6 @@ public abstract class BurrowingEnemy extends Enemy {
             else cleanDeathEffect();
         }
 
-        for (int j = buffs.size() - 1; j >= 0; j--) { //deals with buffs
-            Buff buff = buffs.get(j);
-            //if attached, remove
-            if (buff.enId == i) {
-                buffs.get(j).dieEffect();
-                buffs.remove(j);
-            } //shift ids to compensate for enemy removal
-            else if (buff.enId > i) buff.enId -= 1;
-        }
-
-        enemies.remove(i);
+        enemies.remove(this);
     }
 }
