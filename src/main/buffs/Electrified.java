@@ -12,7 +12,7 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Electrified extends Buff {
 
-    private final SoundFile SOUND;
+    private final SoundFile sound;
 
     public Electrified(PApplet p, Enemy target, int damage, float duration, Turret turret) {
         super(p, target, turret);
@@ -20,7 +20,7 @@ public class Electrified extends Buff {
         effectDelay = secondsToFrames(0.5f);
         effectTimer = 0;
         effectLevel = damage;
-        SOUND = sounds.get("teslaFire");
+        sound = sounds.get("teslaFire");
         lifeDuration = secondsToFrames(duration);
         particle = "nuclear";
         name = "electrified";
@@ -30,6 +30,6 @@ public class Electrified extends Buff {
     public void effect() {
         arcs.add(new YellowArc(p, target.position.x, target.position.y, turret, (int) effectLevel,
                 4, 150, Turret.Priority.values()[(int) p.random(3)]));
-        playSoundRandomSpeed(p, SOUND, 1);
+        playSoundRandomSpeed(p, sound, 1);
     }
 }

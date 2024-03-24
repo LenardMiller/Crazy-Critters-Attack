@@ -60,6 +60,8 @@ public class Flamethrower extends Turret {
         fireParticle = null;
         barrelLength = 24;
         count = 1;
+        priority = Priority.Unbuffed;
+        effect = "burning";
         FIRE_SOUND_LOOP = fadeSoundLoops.get("flamethrower");
         titleLines = new String[]{"Flamethrower"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Burning:", null));
@@ -292,6 +294,7 @@ public class Flamethrower extends Turret {
                     name = "magicFlamethrower";
                     magic = true;
                     material = Material.darkMetal;
+                    effect = "blueBurning";
                     range += 30;
                     pjSpeed = 150;
                     damage = 200;

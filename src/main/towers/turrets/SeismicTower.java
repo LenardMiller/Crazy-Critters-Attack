@@ -238,6 +238,7 @@ public class SeismicTower extends Turret {
                     pjSpeed += 100;
                     range += 100;
                     damage += 150;
+                    effect = "stunned";
                     name = "seismicSniper";
                     titleLines = new String[]{"Seismic Sniper"};
                     extraInfo.remove(1);

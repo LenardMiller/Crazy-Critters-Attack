@@ -52,6 +52,8 @@ public class Gluer extends Turret {
         barrelLength = 28;
         material = Material.stone;
         basePrice = price;
+        priority = Priority.Unbuffed;
+        effect = "glued";
         titleLines = new String[]{"Gluer"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Slowing Glue:", null));
         extraInfo.add((arg) -> selection.displayInfoLine(
@@ -101,7 +103,7 @@ public class Gluer extends Turret {
 
         upgradeTitles[3] = "Stickier Glue";
         upgradeTitles[4] = "Dense Glue";
-        upgradeTitles[5] = "Spikey Glue";
+        upgradeTitles[5] = "Spiky Glue";
         //description
         upgradeDescA[0] = "Increase";
         upgradeDescB[0] = "range";
@@ -164,6 +166,7 @@ public class Gluer extends Turret {
                 case 3 -> effectLevel = 0.6f;
                 case 4 -> damage = 35;
                 case 5 -> {
+                    effect = "spikyGlued";
                     damage += 65;
                     effectLevel = 0.5f;
                     spikey = true;

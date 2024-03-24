@@ -190,8 +190,7 @@ public class Saver {
         String path = filePath() + "/data/save/" + name + ".json";
         File file = new File(path);
 
-        if (!file.delete()) {
-            System.err.println("Failed to delete");
-        }
+        //noinspection ResultOfMethodCallIgnored
+        file.delete();
     }
 }

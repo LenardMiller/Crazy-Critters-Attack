@@ -36,7 +36,8 @@ public class Nightmare extends Turret {
         loadSprites();
         material = Material.darkMetal;
         basePrice = price;
-        priority = Priority.Strong;
+        priority = Priority.Unbuffed;
+        effect = "decay";
         titleLines = new String[]{"Nightmare", "Blaster"};
 //        infoDisplay = (o) -> {
 //            selection.setTextPurple("Decay", o);

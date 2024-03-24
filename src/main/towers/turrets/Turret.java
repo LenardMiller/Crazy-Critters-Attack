@@ -1,5 +1,6 @@
 package main.towers.turrets;
 
+import main.buffs.Buff;
 import main.enemies.Enemy;
 import main.enemies.burrowingEnemies.BurrowingEnemy;
 import main.gui.guiObjects.PopupText;
@@ -30,6 +31,7 @@ public abstract class Turret extends Tower {
         Far("farthest"),
         Strong("most HP"),
         Weak("least HP"),
+        Unbuffed("unbuffed"),
         None("");
 
         public final String text;
@@ -61,6 +63,7 @@ public abstract class Turret extends Tower {
     public int damage;
     public float effectDuration;
     public float effectLevel;
+    public String effect;
     /** Seconds */
     public float delay;
     /** Radians */
@@ -157,53 +160,78 @@ public abstract class Turret extends Tower {
     }
 
     protected void getTargetEnemy() {
-        //0: close
-        //1: far
-        //2: strong
-        float finalDist;
-        if (priority == Priority.Close) finalDist = 1000000;
-        else finalDist = 0;
-        float maxHp = -1;
-        Enemy e = null;
+        float targetDist;
+        if (priority != Priority.Far) targetDist = 1000000;
+        else targetDist = 0;
+        float targetHp = -1;
+        boolean targetBuffed = true;
+        Enemy target = null;
         for (Enemy enemy : enemies) {
-            if (enemyCanBeAttacked(enemy)) {
-                float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
-                float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
-                float dist = sqrt(sq(x) + sq(y));
-                if (enemy.onScreen() && dist < getRange()) {
-                    switch (priority) {
-                        case Close -> {
-                            if (dist >= finalDist) break;
-                            e = enemy;
-                            finalDist = dist;
-                        } case Far -> {
-                            if (dist <= finalDist) break;
-                            e = enemy;
-                            finalDist = dist;
-                        } case Strong -> {
-                            if (enemy.maxHp > maxHp || maxHp == -1) { //strong
-                                e = enemy;
-                                finalDist = dist;
-                                maxHp = enemy.maxHp;
-                            } else if (enemy.maxHp == maxHp && dist < finalDist) { //strong -> close
-                                e = enemy;
-                                finalDist = dist;
+            if (!enemyCanBeAttacked(enemy)) continue;
+            float x = abs(tile.position.x - (size.x / 2) - enemy.position.x);
+            float y = abs(tile.position.y - (size.y / 2) - enemy.position.y);
+            float dist = sqrt(sq(x) + sq(y));
+            if (enemy.onScreen() && dist < getRange()) {
+                switch (priority) {
+                    case Close -> {
+                        if (dist >= targetDist) break;
+                        target = enemy;
+                        targetDist = dist;
+                    } case Far -> {
+                        if (dist <= targetDist) break;
+                        target = enemy;
+                        targetDist = dist;
+                    } case Strong -> {
+                        if (enemy.maxHp > targetHp || targetHp == -1) { //strong
+                            target = enemy;
+                            targetDist = dist;
+                            targetHp = enemy.maxHp;
+                        } else if (enemy.maxHp == targetHp && dist < targetDist) { //strong -> close
+                            target = enemy;
+                            targetDist = dist;
+                        }
+                    } case Weak -> {
+                        if (enemy.maxHp < targetHp || targetHp == -1) { //weak
+                            target = enemy;
+                            targetDist = dist;
+                            targetHp = enemy.maxHp;
+                        } else if (enemy.maxHp == targetHp && dist < targetDist) { //weak -> close
+                            target = enemy;
+                            targetDist = dist;
+                        }
+                    } case Unbuffed -> {
+                        boolean noMatch = true;
+                        for (Buff buff : enemy.buffs) {
+                            if (buff.name.equals(effect)) {
+                                noMatch = false;
+                                break;
                             }
-                        } case Weak -> {
-                            if (enemy.maxHp < maxHp || maxHp == -1) { //weak
-                                e = enemy;
-                                finalDist = dist;
-                                maxHp = enemy.maxHp;
-                            } else if (enemy.maxHp == maxHp && dist < finalDist) { //weak -> close
-                                e = enemy;
-                                finalDist = dist;
+                        }
+                        // if the current target has the buff:
+                        if (targetBuffed) {
+                            // and this enemy doesn't, target it
+                            if (noMatch) {
+                                targetBuffed = false;
+                                target = enemy;
+                                targetDist = dist;
+                            } // otherwise, target the enemy if it is closer
+                            else if (dist < targetDist) {
+                                target = enemy;
+                                targetDist = dist;
+                            }
+                        } // if the current target does not have the buff:
+                        else {
+                            // and this enemy doesn't and is closer, target it
+                            if (noMatch && dist < targetDist) {
+                                target = enemy;
+                                targetDist = dist;
                             }
                         }
                     }
                 }
             }
         }
-        targetEnemy = e;
+        targetEnemy = target;
     }
 
     protected boolean enemyCanBeAttacked(Enemy enemy) {

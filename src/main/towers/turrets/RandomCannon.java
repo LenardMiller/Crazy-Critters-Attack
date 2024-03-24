@@ -168,6 +168,7 @@ public class RandomCannon extends Turret {
                     effectDuration = 6;
                     effectLevel = 25;
                     betweenFireFrames = 1;
+                    effect = "poisoned";
                     name = "miscCannonLaundry";
                     titleLines = new String[]{"Dirty Luggage", "Launcher"};
                     Color specialColor = new Color(0x92E062);

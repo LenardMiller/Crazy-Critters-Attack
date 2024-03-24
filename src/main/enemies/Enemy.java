@@ -3,7 +3,7 @@ package main.enemies;
 import main.Main;
 import main.buffs.*;
 import main.buffs.glued.Glued;
-import main.buffs.glued.SpikeyGlued;
+import main.buffs.glued.SpikyGlued;
 import main.buffs.stunned.Frozen;
 import main.buffs.stunned.Stunned;
 import main.enemies.burrowingEnemies.*;
@@ -421,7 +421,7 @@ public abstract class Enemy {
                     else buff = new Decay(p, this, 1, 120, null);
                 }
                 case "glued" -> buff = new Glued(p, this, effectLevel, effectDuration, turret);
-                case "spikeyGlued" -> buff = new SpikeyGlued(p, this, effectLevel, effectDuration, turret);
+                case "spikeyGlued" -> buff = new SpikyGlued(p, this, effectLevel, effectDuration, turret);
                 case "stunned" -> buff = new Stunned(p, this, turret);
                 case "frozen" -> buff = new Frozen(p, this, turret);
                 case "electrified" -> buff = new Electrified(p, this, (int) effectLevel, effectDuration, turret);

@@ -11,11 +11,11 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.misc.Utilities.getRandomPointInRange;
 
-public class SpikeyGlued extends Glued {
+public class SpikyGlued extends Glued {
 
     private final Spike[] SPIKES;
 
-    public SpikeyGlued(PApplet p, Enemy target, float speedMod, float duration, Turret turret) {
+    public SpikyGlued(PApplet p, Enemy target, float speedMod, float duration, Turret turret) {
         super(p, target, speedMod, duration, turret);
         SPIKES = new Spike[target.pfSize * 3];
         for (int i = 0; i < SPIKES.length; i++) {

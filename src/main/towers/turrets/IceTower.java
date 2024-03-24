@@ -66,6 +66,8 @@ public class IceTower extends Turret {
         placeSound = sounds.get("metalPlace");
         fireSound = sounds.get("iceFire");
         basePrice = price;
+        priority = Priority.Unbuffed;
+        effect = "frozen";
         titleLines = new String[]{"Freeze Ray"};
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Encases Critters", null));
         extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Ice HP", wallHp + ""));
