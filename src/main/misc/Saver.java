@@ -32,12 +32,16 @@ public class Saver {
 
     /** Save at the end of each wave */
     public static void save() {
-        level();
-        enemies();
-        walls();
-        turrets();
-        iceWalls();
-        pollution();
+        JSONObject object = new JSONObject();
+
+        object.setJSONObject("level", level());
+        object.setJSONArray("enemies", enemies());
+        object.setJSONArray("walls", walls());
+        object.setJSONArray("turrets", turrets());
+        object.setJSONArray("iceWalls", iceWalls());
+        object.setJSONObject("pollution", pollution());
+
+        saveObject(object.toString(), "save");
     }
 
     /** Clears all the saves */
@@ -50,7 +54,7 @@ public class Saver {
         deleteFile("pollution");
     }
 
-    private static void level() {
+    private static JSONObject level() {
         JSONObject object = new JSONObject();
 
         object.setInt("level", Main.currentLevel);
@@ -58,10 +62,10 @@ public class Saver {
         object.setInt("money", Main.money);
         object.setInt("hp", Main.machine.hp);
 
-        saveObject(object.toString(), "level");
+        return object;
     }
 
-    private static void enemies() {
+    private static JSONArray enemies() {
         JSONArray array = new JSONArray();
 
         ArrayList<Enemy> enemies = Main.enemies;
@@ -78,10 +82,10 @@ public class Saver {
             array.setJSONObject(i, object);
         }
 
-        saveObject(array.toString(), "enemies");
+        return array;
     }
 
-    private static void walls() {
+    private static JSONArray walls() {
         JSONArray array = new JSONArray();
 
         ArrayList<Tower> walls = new ArrayList<>(Main.towers);
@@ -98,10 +102,10 @@ public class Saver {
             array.setJSONObject(i, object);
         }
 
-        saveObject(array.toString(), "walls");
+        return array;
     }
 
-    private static void iceWalls() {
+    private static JSONArray iceWalls() {
         JSONArray array = new JSONArray();
 
         ArrayList<Tower> iceWalls = new ArrayList<>(Main.towers);
@@ -119,10 +123,10 @@ public class Saver {
             array.setJSONObject(i, object);
         }
 
-        saveObject(array.toString(), "iceWalls");
+        return array;
     }
 
-    private static void turrets() {
+    private static JSONArray turrets() {
         JSONArray array = new JSONArray();
 
         ArrayList<Tower> turrets = new ArrayList<>(Main.towers);
@@ -153,10 +157,10 @@ public class Saver {
             array.setJSONObject(i, object);
         }
 
-        saveObject(array.toString(), "turrets");
+        return array;
     }
 
-    private static void pollution() {
+    private static JSONObject pollution() {
         JSONObject object = new JSONObject();
 
         Level level = Main.levels[Main.currentLevel];
@@ -171,7 +175,7 @@ public class Saver {
             }
         }
 
-        saveObject(object.toString(), "pollution");
+        return object;
     }
 
     private static void saveObject(String object, String name) {
@@ -190,6 +194,7 @@ public class Saver {
         String path = filePath() + "/data/save/" + name + ".json";
         File file = new File(path);
 
+        //do nothing if file doesn't exist
         //noinspection ResultOfMethodCallIgnored
         file.delete();
     }
