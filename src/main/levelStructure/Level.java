@@ -47,7 +47,7 @@ public class Level {
             }
         } else if (enemies.size() == 0) { //win condition
             if (!hasWon) isPaused = true; //prevent stuck on pause
-            Saver.wipe();
+            Saver.wipe(currentLevel);
             hasWon = true;
         }
     }

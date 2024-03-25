@@ -24,12 +24,6 @@ public class Saver {
         return new File("").getAbsolutePath();
     }
 
-    /* Everything I need to save:
-     * How polluted a level is
-     * IceWall position, hp, lifespan
-     * Projectile position, rotation?
-     */
-
     /** Save at the end of each wave */
     public static void save() {
         JSONObject object = new JSONObject();
@@ -41,17 +35,19 @@ public class Saver {
         object.setJSONArray("iceWalls", iceWalls());
         object.setJSONObject("pollution", pollution());
 
-        saveObject(object.toString(), "save");
+        if (!new File(filePath() + "/data/save").mkdir()) {
+            System.err.println("failed to create save directory");
+        }
+        if (!new File(filePath() + "/data/save/" + Main.currentLevel).mkdir()) {
+            System.err.println("failed to create level directory");
+        }
+
+        saveObject(object.toString(), Main.currentLevel + "/save");
     }
 
     /** Clears all the saves */
-    public static void wipe() {
-        deleteFile("level");
-        deleteFile("enemies");
-        deleteFile("walls");
-        deleteFile("turrets");
-        deleteFile("iceWalls");
-        deleteFile("pollution");
+    public static void wipe(int level) {
+        deleteSave(level + "/save");
     }
 
     private static JSONObject level() {
@@ -190,12 +186,12 @@ public class Saver {
         }
     }
 
-    private static void deleteFile(String name) {
+    private static void deleteSave(String name) {
         String path = filePath() + "/data/save/" + name + ".json";
         File file = new File(path);
 
-        //do nothing if file doesn't exist
-        //noinspection ResultOfMethodCallIgnored
-        file.delete();
+        if (!file.delete()) {
+            System.err.println("failed to delete " + path);
+        }
     }
 }

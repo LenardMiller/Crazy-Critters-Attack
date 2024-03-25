@@ -10,7 +10,7 @@ import static main.misc.Utilities.closeSettingsMenu;
 
 public class LevelSelectGui {
 
-    private final PApplet P;
+    private final PApplet p;
 
     private static MenuButton[] levelSelectButtons;
     private static MenuButton settingsButton;
@@ -24,22 +24,22 @@ public class LevelSelectGui {
      * @param p the PApplet
      */
     public LevelSelectGui(PApplet p) {
-        P = p;
+        this.p = p;
         build();
     }
 
     private void build() {
         levelSelectButtons = new MenuButton[levels.length];
-        settingsButton = new MenuButton(P, P.width/2f, P.height-100 - 50, "Settings", () -> {
+        settingsButton = new MenuButton(p, p.width/2f, p.height-100 - 50, "Settings", () -> {
             SettingsGui.delay = 1;
             if (isSettings) closeSettingsMenu();
             else isSettings = true;
         });
-        goToTitle = new MenuButton(P, P.width/2f, P.height-100, "Back to Title", () ->
+        goToTitle = new MenuButton(p, p.width/2f, p.height-100, "Back to Title", () ->
                 transition(Screen.Title, new PVector(-1, 0)));
         float factor = (levelSelectButtons.length/2f) - 0.5f;
         for (int i = 0; i < levelSelectButtons.length; i++) {
-            levelSelectButtons[i] = new MenuButton(P, P.width/2f, P.height/2f + (i-factor)*50, "level " + (i+1));
+            levelSelectButtons[i] = new MenuButton(p, p.width/2f, p.height/2f + (i-factor)*50, "level " + (i+1));
         }
     }
 
@@ -57,7 +57,7 @@ public class LevelSelectGui {
                 isPlaying = false;
                 isPaused = false;
                 alive = true;
-                transition(Screen.InGame, new PVector(1, 0));
+                transition(Screen.LoadGame, new PVector(1, 0));
             }
         }
     }
@@ -65,13 +65,13 @@ public class LevelSelectGui {
     public void display() {
         delay--;
         //big text
-        P.fill(255, 254);
-        P.textFont(title);
-        P.textAlign(P.CENTER);
-        P.text("Level Select [wip]", P.width/2f, 300);
+        p.fill(255, 254);
+        p.textFont(title);
+        p.textAlign(p.CENTER);
+        p.text("Level Select [wip]", p.width/2f, 300);
         //buttons
-        P.fill(200, 254);
-        P.textFont(h4);
+        p.fill(200, 254);
+        p.textFont(h4);
         for (MenuButton levelSelectButton : levelSelectButtons) {
             levelSelectButton.display();
             if (delay < 0) levelSelectButton.hover();

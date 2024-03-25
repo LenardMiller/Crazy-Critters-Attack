@@ -33,8 +33,8 @@ public class Loader {
      * @throws RuntimeException if any of the save files are missing
      * @param p the PApplet
      */
-    public static void load(PApplet p) {
-        JSONObject object = loadJSONObject(new File(filePath() + "/data/save/save.json"));
+    public static void load(PApplet p, int level) {
+        JSONObject object = loadJSONObject(new File(filePath() + "/data/save/" + level + "/save.json"));
 
         level(p, object.getJSONObject("level"));
         enemies(p, object.getJSONArray("enemies"));
@@ -42,9 +42,6 @@ public class Loader {
         iceWalls(p, object.getJSONArray("iceWalls"));
         turrets(p, object.getJSONArray("turrets"));
         pollution(p, object.getJSONObject("pollution"));
-
-        Main.screen = Main.Screen.InGame;
-        Main.targetScreen = Main.screen;
     }
 
     private static void level(PApplet p, JSONObject object) {
