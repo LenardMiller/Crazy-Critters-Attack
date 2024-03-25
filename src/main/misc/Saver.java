@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class Saver {
 
@@ -35,19 +36,25 @@ public class Saver {
         object.setJSONArray("iceWalls", iceWalls());
         object.setJSONObject("pollution", pollution());
 
-        if (!new File(filePath() + "/data/save").mkdir()) {
-            System.err.println("failed to create save directory");
+        if (new File(filePath() + "/data/save").mkdir()) {
+            System.out.println("creating save directory");
         }
-        if (!new File(filePath() + "/data/save/" + Main.currentLevel).mkdir()) {
-            System.err.println("failed to create level directory");
+        if (new File(filePath() + "/data/save/" + Main.currentLevel).mkdir()) {
+            System.out.println("creating level " + Main.currentLevel + " directory");
         }
 
-        saveObject(object.toString(), Main.currentLevel + "/save");
+        saveObject(object.toString(), Main.currentLevel + "/" + Main.levels[Main.currentLevel].currentWave);
     }
 
     /** Clears all the saves */
     public static void wipe(int level) {
-        deleteSave(level + "/save");
+        File[] files = new File(filePath() + "/data/save/" + level).listFiles();
+        if (files == null) return;
+        for (File file : files) {
+            if (!file.delete()) {
+                System.err.println("failed to delete file");
+            }
+        }
     }
 
     private static JSONObject level() {
@@ -183,15 +190,6 @@ public class Saver {
             saveWriter.close();
         } catch (IOException exception) {
             System.out.println("failed to save " + path);
-        }
-    }
-
-    private static void deleteSave(String name) {
-        String path = filePath() + "/data/save/" + name + ".json";
-        File file = new File(path);
-
-        if (!file.delete()) {
-            System.err.println("failed to delete " + path);
         }
     }
 }

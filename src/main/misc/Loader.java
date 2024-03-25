@@ -18,6 +18,7 @@ import processing.data.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
@@ -30,11 +31,40 @@ public class Loader {
     }
 
     /**
+     * Loads the latest wave of a level
      * @throws RuntimeException if any of the save files are missing
      * @param p the PApplet
+     * @param level level number to load (indexed from 0)
      */
     public static void load(PApplet p, int level) {
-        JSONObject object = loadJSONObject(new File(filePath() + "/data/save/" + level + "/save.json"));
+        load(p, level, -1);
+    }
+
+    /**
+     * Loads a specific wave of a level
+     * @throws RuntimeException if any of the save files are missing
+     * @param p the PApplet
+     * @param level level number to load indexed from 0
+     * @param wave wave number to load indexed from 0, -1 to set latest
+     */
+    public static void load(PApplet p, int level, int wave) {
+        JSONObject object;
+        if (wave < 0) {
+            File[] files = new File(filePath() + "/data/save/" + level).listFiles();
+            if (files == null) throw new RuntimeException();
+            //gets the last wave
+            int last = Stream.of(files)
+                    .map(File::getName)
+                    .filter(name -> name.contains(".json"))
+                    .map(name -> name.replace(".json", ""))
+                    .map(Integer::parseInt)
+                    .sorted()
+                    .reduce((first, second) -> second)
+                    .orElseThrow();
+            object = loadJSONObject(new File(filePath() + "/data/save/" + level + "/" + last + ".json"));
+        } else {
+            object = loadJSONObject(new File(filePath() + "/data/save/" + level + "/" + wave + ".json"));
+        }
 
         level(p, object.getJSONObject("level"));
         enemies(p, object.getJSONArray("enemies"));
