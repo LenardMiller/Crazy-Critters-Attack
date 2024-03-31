@@ -240,6 +240,7 @@ public class Main extends PApplet {
                 try {
                     Loader.load(this, currentLevel);
                 } catch (RuntimeException ex) {
+                    System.err.println("load failed: " + ex);
                     Game.reset(this);
                 }
                 screen = Screen.InGame;

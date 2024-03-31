@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 public class Saver {
 
@@ -27,14 +26,14 @@ public class Saver {
 
     /** Save at the end of each wave */
     public static void save() {
-        JSONObject object = new JSONObject();
+        JSONObject wave = new JSONObject();
 
-        object.setJSONObject("level", level());
-        object.setJSONArray("enemies", enemies());
-        object.setJSONArray("walls", walls());
-        object.setJSONArray("turrets", turrets());
-        object.setJSONArray("iceWalls", iceWalls());
-        object.setJSONObject("pollution", pollution());
+        wave.setJSONObject("level", level());
+        wave.setJSONArray("enemies", enemies());
+        wave.setJSONArray("walls", walls());
+        wave.setJSONArray("turrets", turrets());
+        wave.setJSONArray("iceWalls", iceWalls());
+        wave.setJSONObject("pollution", pollution());
 
         if (new File(filePath() + "/data/save").mkdir()) {
             System.out.println("creating save directory");
@@ -43,10 +42,26 @@ public class Saver {
             System.out.println("creating level " + Main.currentLevel + " directory");
         }
 
-        saveObject(object.toString(), Main.currentLevel + "/" + Main.levels[Main.currentLevel].currentWave);
+        saveObject(wave.toString(), Main.currentLevel + "/" + (Main.levels[Main.currentLevel].currentWave + 1));
+
+        updateSave(Main.currentLevel, Main.levels[Main.currentLevel].currentWave + 1);
     }
 
-    /** Clears all the saves */
+    /**
+     * Updates the save file for a level
+     * @param level level to update, indexed at 0
+     * @param wave wave to save, indexed at 0
+     */
+    public static void updateSave(int level, int wave) {
+        JSONObject save = new JSONObject();
+        save.setInt("wave", wave);
+        saveObject(save.toString(), level + "/save");
+    }
+
+    /**
+     * Wipes all data from a level save folder
+     * @param level level number to wipe, indexed at 0
+     */
     public static void wipe(int level) {
         File[] files = new File(filePath() + "/data/save/" + level).listFiles();
         if (files == null) return;

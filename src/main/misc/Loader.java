@@ -31,47 +31,23 @@ public class Loader {
     }
 
     /**
-     * Loads the latest wave of a level
-     * @throws RuntimeException if any of the save files are missing
-     * @param p the PApplet
-     * @param level level number to load (indexed from 0)
-     */
-    public static void load(PApplet p, int level) {
-        load(p, level, -1);
-    }
-
-    /**
-     * Loads a specific wave of a level
+     * Loads the current wave of a level
      * @throws RuntimeException if any of the save files are missing
      * @param p the PApplet
      * @param level level number to load indexed from 0
-     * @param wave wave number to load indexed from 0, -1 to set latest
      */
-    public static void load(PApplet p, int level, int wave) {
-        JSONObject object;
-        if (wave < 0) {
-            File[] files = new File(filePath() + "/data/save/" + level).listFiles();
-            if (files == null) throw new RuntimeException();
-            //gets the last wave
-            int last = Stream.of(files)
-                    .map(File::getName)
-                    .filter(name -> name.contains(".json"))
-                    .map(name -> name.replace(".json", ""))
-                    .map(Integer::parseInt)
-                    .sorted()
-                    .reduce((first, second) -> second)
-                    .orElseThrow();
-            object = loadJSONObject(new File(filePath() + "/data/save/" + level + "/" + last + ".json"));
-        } else {
-            object = loadJSONObject(new File(filePath() + "/data/save/" + level + "/" + wave + ".json"));
-        }
+    public static void load(PApplet p, int level) {
+        JSONObject save = loadJSONObject(new File(filePath() + "/data/save/" + level + "/save.json"));
+        int currentWave = save.getInt("wave");
 
-        level(p, object.getJSONObject("level"));
-        enemies(p, object.getJSONArray("enemies"));
-        walls(p, object.getJSONArray("walls"));
-        iceWalls(p, object.getJSONArray("iceWalls"));
-        turrets(p, object.getJSONArray("turrets"));
-        pollution(p, object.getJSONObject("pollution"));
+        JSONObject wave = loadJSONObject(new File(filePath() + "/data/save/" + level + "/" + currentWave + ".json"));
+
+        level(p, wave.getJSONObject("level"));
+        enemies(p, wave.getJSONArray("enemies"));
+        walls(p, wave.getJSONArray("walls"));
+        iceWalls(p, wave.getJSONArray("iceWalls"));
+        turrets(p, wave.getJSONArray("turrets"));
+        pollution(p, wave.getJSONObject("pollution"));
     }
 
     private static void level(PApplet p, JSONObject object) {
