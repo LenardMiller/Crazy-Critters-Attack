@@ -21,15 +21,17 @@ public class MenuButton extends Button {
      * @param p the PApplet
      * @param x x position
      * @param y y position
+     * @param width display width
+     * @param height display height
      * @param text text to display on button, nullable
      * @param action what to do when pressed, optional, may use isPressed instead.
      */
-    public MenuButton(PApplet p, float x, float y, String text, Runnable action) {
+    public MenuButton(PApplet p, float x, float y, float width, float height, String text, Runnable action) {
         super(p, x, y, "null", true);
         this.action = action;
         this.text = text;
         position = new PVector(x, y);
-        size = new PVector(200, 42);
+        size = new PVector(width, height);
         spriteIdle = animatedSprites.get("genericButtonBT")[0];
         spritePressed = animatedSprites.get("genericButtonBT")[1];
         spriteHover = animatedSprites.get("genericButtonBT")[2];
@@ -42,9 +44,11 @@ public class MenuButton extends Button {
      * @param p the PApplet
      * @param x x position
      * @param y y position
+     * @param text text to display on button, nullable
+     * @param action what to do when pressed, optional, may use isPressed instead.
      */
-    public MenuButton(PApplet p, float x, float y) {
-        this(p, x, y, null, () -> {});
+    public MenuButton(PApplet p, float x, float y, String text, Runnable action) {
+        this(p, x, y, 200, 42, text, action);
     }
 
     /**

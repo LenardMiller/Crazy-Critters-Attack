@@ -194,7 +194,7 @@ public class InGameGui {
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(1),"null", null,true));
             towerBuyButtons.add(new TowerBuy(p,towerBuyX(4), towerBuyY(2),"null", null,true));
         }
-        wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-12,"null",true);
+        wallBuyButton = new WallBuy(p,BOARD_WIDTH+100,172-10,"null",true);
         upgradeButtonA = new UpgradeTower(p,1000,480,"null",false, 0);
         upgradeButtonB = new UpgradeTower(p,1000,630,"null",false, 1);
         upgradeIconA = new UpgradeIcon(p,1030,610,"null",false);

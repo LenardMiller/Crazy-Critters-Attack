@@ -24,33 +24,55 @@ public class Saver {
         return new File("").getAbsolutePath();
     }
 
-    /* Everything I need to save:
-     * How polluted a level is
-     * IceWall position, hp, lifespan
-     * Projectile position, rotation?
-     */
-
     /** Save at the end of each wave */
     public static void save() {
-        level();
-        enemies();
-        walls();
-        turrets();
-        iceWalls();
-        pollution();
+        JSONObject wave = new JSONObject();
+
+        wave.setJSONObject("level", level());
+        wave.setJSONArray("enemies", enemies());
+        wave.setJSONArray("walls", walls());
+        wave.setJSONArray("turrets", turrets());
+        wave.setJSONArray("iceWalls", iceWalls());
+        wave.setJSONObject("pollution", pollution());
+
+        if (new File(filePath() + "/data/save").mkdir()) {
+            System.out.println("creating save directory");
+        }
+        if (new File(filePath() + "/data/save/" + Main.currentLevel).mkdir()) {
+            System.out.println("creating level " + Main.currentLevel + " directory");
+        }
+
+        saveObject(wave.toString(), Main.currentLevel + "/" + (Main.levels[Main.currentLevel].currentWave + 1));
+
+        updateSave(Main.currentLevel, Main.levels[Main.currentLevel].currentWave + 1);
     }
 
-    /** Clears all the saves */
-    public static void wipe() {
-        deleteFile("level");
-        deleteFile("enemies");
-        deleteFile("walls");
-        deleteFile("turrets");
-        deleteFile("iceWalls");
-        deleteFile("pollution");
+    /**
+     * Updates the save file for a level
+     * @param level level to update, indexed at 0
+     * @param wave wave to save, indexed at 0
+     */
+    public static void updateSave(int level, int wave) {
+        JSONObject save = new JSONObject();
+        save.setInt("wave", wave);
+        saveObject(save.toString(), level + "/save");
     }
 
-    private static void level() {
+    /**
+     * Wipes all data from a level save folder
+     * @param level level number to wipe, indexed at 0
+     */
+    public static void wipe(int level) {
+        File[] files = new File(filePath() + "/data/save/" + level).listFiles();
+        if (files == null) return;
+        for (File file : files) {
+            if (!file.delete()) {
+                System.err.println("failed to delete file");
+            }
+        }
+    }
+
+    private static JSONObject level() {
         JSONObject object = new JSONObject();
 
         object.setInt("level", Main.currentLevel);
@@ -58,10 +80,10 @@ public class Saver {
         object.setInt("money", Main.money);
         object.setInt("hp", Main.machine.hp);
 
-        saveObject(object.toString(), "level");
+        return object;
     }
 
-    private static void enemies() {
+    private static JSONArray enemies() {
         JSONArray array = new JSONArray();
 
         ArrayList<Enemy> enemies = Main.enemies;
@@ -78,10 +100,10 @@ public class Saver {
             array.setJSONObject(i, object);
         }
 
-        saveObject(array.toString(), "enemies");
+        return array;
     }
 
-    private static void walls() {
+    private static JSONArray walls() {
         JSONArray array = new JSONArray();
 
         ArrayList<Tower> walls = new ArrayList<>(Main.towers);
@@ -98,10 +120,10 @@ public class Saver {
             array.setJSONObject(i, object);
         }
 
-        saveObject(array.toString(), "walls");
+        return array;
     }
 
-    private static void iceWalls() {
+    private static JSONArray iceWalls() {
         JSONArray array = new JSONArray();
 
         ArrayList<Tower> iceWalls = new ArrayList<>(Main.towers);
@@ -119,10 +141,10 @@ public class Saver {
             array.setJSONObject(i, object);
         }
 
-        saveObject(array.toString(), "iceWalls");
+        return array;
     }
 
-    private static void turrets() {
+    private static JSONArray turrets() {
         JSONArray array = new JSONArray();
 
         ArrayList<Tower> turrets = new ArrayList<>(Main.towers);
@@ -153,10 +175,10 @@ public class Saver {
             array.setJSONObject(i, object);
         }
 
-        saveObject(array.toString(), "turrets");
+        return array;
     }
 
-    private static void pollution() {
+    private static JSONObject pollution() {
         JSONObject object = new JSONObject();
 
         Level level = Main.levels[Main.currentLevel];
@@ -171,7 +193,7 @@ public class Saver {
             }
         }
 
-        saveObject(object.toString(), "pollution");
+        return object;
     }
 
     private static void saveObject(String object, String name) {
@@ -184,13 +206,5 @@ public class Saver {
         } catch (IOException exception) {
             System.out.println("failed to save " + path);
         }
-    }
-
-    private static void deleteFile(String name) {
-        String path = filePath() + "/data/save/" + name + ".json";
-        File file = new File(path);
-
-        //noinspection ResultOfMethodCallIgnored
-        file.delete();
     }
 }

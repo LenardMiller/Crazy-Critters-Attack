@@ -23,7 +23,7 @@ public class TitleGui {
 
     private void build() {
         playButton = new MenuButton(p, p.width / 2f, p.height * 0.5f, "Play", () ->
-                transition(Screen.PlayOrLevelSelect, new PVector(1, 0)));
+                transition(Screen.LevelSelect, new PVector(1, 0)));
         settingsButton = new MenuButton(p, p.width /2f, p.height * 0.6f, "Settings", () -> {
             SettingsGui.delay = 1;
             if (isSettings) closeSettingsMenu();

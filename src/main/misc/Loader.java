@@ -18,10 +18,10 @@ import processing.data.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
-import static processing.core.PApplet.loadJSONArray;
 import static processing.core.PApplet.loadJSONObject;
 
 public class Loader {
@@ -31,24 +31,26 @@ public class Loader {
     }
 
     /**
+     * Loads the current wave of a level
      * @throws RuntimeException if any of the save files are missing
      * @param p the PApplet
+     * @param level level number to load indexed from 0
      */
-    public static void load(PApplet p) {
-        level(p);
-        enemies(p);
-        walls(p);
-        iceWalls(p);
-        turrets(p);
-        pollution(p);
+    public static void load(PApplet p, int level) {
+        JSONObject save = loadJSONObject(new File(filePath() + "/data/save/" + level + "/save.json"));
+        int currentWave = save.getInt("wave");
 
-        Main.screen = Main.Screen.InGame;
-        Main.targetScreen = Main.screen;
+        JSONObject wave = loadJSONObject(new File(filePath() + "/data/save/" + level + "/" + currentWave + ".json"));
+
+        level(p, wave.getJSONObject("level"));
+        enemies(p, wave.getJSONArray("enemies"));
+        walls(p, wave.getJSONArray("walls"));
+        iceWalls(p, wave.getJSONArray("iceWalls"));
+        turrets(p, wave.getJSONArray("turrets"));
+        pollution(p, wave.getJSONObject("pollution"));
     }
 
-    private static void level(PApplet p) {
-        JSONObject object = loadObject("level");
-
+    private static void level(PApplet p, JSONObject object) {
         Main.currentLevel = object.getInt("level");
         Game.reset(p);
         Main.levels[Main.currentLevel].currentWave = object.getInt("wave");
@@ -59,9 +61,7 @@ public class Loader {
         Main.waveStack.presetWaveCards();
     }
 
-    private static void enemies(PApplet p) {
-        JSONArray array = loadArray("enemies");
-
+    private static void enemies(PApplet p, JSONArray array) {
         for (int i = 0; i < array.size(); i++) {
             JSONObject object = array.getJSONObject(i);
             Enemy enemy = Enemy.get(p,
@@ -79,9 +79,7 @@ public class Loader {
         }
     }
 
-    private static void walls(PApplet p) {
-        JSONArray array = loadArray("walls");
-
+    private static void walls(PApplet p, JSONArray array) {
         for (int i = 0; i < array.size(); i++) {
             JSONObject object = array.getJSONObject(i);
             Tile tile = Main.tiles.get(
@@ -107,9 +105,7 @@ public class Loader {
         }
     }
 
-    private static void iceWalls(PApplet p) {
-        JSONArray array = loadArray("iceWalls");
-
+    private static void iceWalls(PApplet p, JSONArray array) {
         for (int i = 0; i < array.size(); i++) {
             JSONObject object = array.getJSONObject(i);
             Tile tile = Main.tiles.get(
@@ -130,9 +126,7 @@ public class Loader {
         }
     }
 
-    private static void turrets(PApplet p) {
-        JSONArray array = loadArray("turrets");
-
+    private static void turrets(PApplet p, JSONArray array) {
         for (int i = 0; i < array.size(); i++) {
             JSONObject object = array.getJSONObject(i);
             Tile tile = Main.tiles.get(
@@ -169,9 +163,7 @@ public class Loader {
         updateCombatPoints();
     }
 
-    private static void pollution(PApplet p) {
-        JSONObject object = loadObject("pollution");
-
+    private static void pollution(PApplet p, JSONObject object) {
         if (object.getBoolean("exists", false)) {
             Level level = Main.levels[Main.currentLevel];
             String lastPolluterName = object.getString("lastPolluterName", null);
@@ -184,13 +176,5 @@ public class Loader {
             level.lastPolluterName = lastPolluterName; //ok if this is null
             level.polluter.setCleanTilesSize(object.getInt("cleanTilesSize"));
         }
-    }
-
-    private static JSONObject loadObject(String name) {
-        return loadJSONObject(new File(filePath() + "/data/save/" + name + ".json"));
-    }
-
-    private static JSONArray loadArray(String name) {
-        return loadJSONArray(new File(filePath() + "/data/save/" + name + ".json"));
     }
 }

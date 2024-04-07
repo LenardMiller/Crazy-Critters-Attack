@@ -25,7 +25,6 @@ import processing.sound.Sound;
 import processing.sound.SoundFile;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -40,8 +39,8 @@ public class Main extends PApplet {
         Loading,
         Title,
         Exit,
-        PlayOrLevelSelect,
-        Restart
+        Restart,
+        LoadGame,
     }
 
     public static Tile.TileDS tiles;
@@ -234,21 +233,18 @@ public class Main extends PApplet {
                 isPlaying = false;
                 Game.reset(this);
                 isPaused = false;
-                Saver.wipe();
+                Saver.wipe(currentLevel);
                 screen = Screen.InGame;
                 targetScreen = screen;
-            }
-            case PlayOrLevelSelect -> {
-                //this runs three times
+            } case LoadGame -> {
                 try {
-                    Loader.load(this);
+                    Loader.load(this, currentLevel);
                 } catch (RuntimeException ex) {
-                    System.out.println("Could not load from saves because:\n    " +
-                            ex + "\n    " +
-                            Arrays.toString(ex.getStackTrace()));
-                    screen = Screen.LevelSelect;
-                    targetScreen = Screen.LevelSelect;
+                    System.err.println("load failed: " + ex);
+                    Game.reset(this);
                 }
+                screen = Screen.InGame;
+                targetScreen = Screen.InGame;
             }
         }
         if (isSettings) settingsGui.update();
