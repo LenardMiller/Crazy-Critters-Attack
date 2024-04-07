@@ -1,9 +1,8 @@
 package main.gui.inGame;
 
-import main.Main;
-import main.gui.notInGame.LevelSelectGui;
 import main.gui.SettingsGui;
 import main.gui.guiObjects.buttons.MenuButton;
+import main.gui.notInGame.LevelSelectGui;
 import main.misc.Saver;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -75,9 +74,11 @@ public class PauseGui {
         settingsMenuButton.update();
         exitButton.update();
         resumeButton.update();
-        goBack1.update();
-        goBack5.update();
-        goBack10.update();
+        if (!hasWon) {
+            goBack1.update();
+            goBack5.update();
+            goBack10.update();
+        }
     }
 
     public void display() {
@@ -101,8 +102,10 @@ public class PauseGui {
         levelSelectButton.display();
         settingsMenuButton.display();
         exitButton.display();
-        goBack1.display();
-        goBack5.display();
-        goBack10.display();
+        if (!hasWon) {
+            goBack1.display();
+            goBack5.display();
+            goBack10.display();
+        }
     }
 }
