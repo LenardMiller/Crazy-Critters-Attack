@@ -143,7 +143,7 @@ public class ForestWaves {
         waves[20] = new Wave(p, 45, 18, bigBugFill, bigBugAccent, bigBugText,
                 new String[]{"Hercules", "Beetles"});
         waves[20].addSpawns("midBug", 7);
-        waves[20].addSpawns("bigBug", 3);
+        waves[20].addSpawns("bigBug", 2);
         waves[20].addSpawns("littleWorm", 5);
 
         waves[21] = new Wave(p, 45, 1, treeGiantFill, treeGiantAccent, treeGiantText,
@@ -152,7 +152,7 @@ public class ForestWaves {
 
         waves[22] = new Wave(p, 70, 40, bigBugFill, bigBugAccent, bigBugText,
                 new String[]{"Beetles &", "Snakes"});
-        waves[22].addSpawns("bigBug", 10);
+        waves[22].addSpawns("bigBug", 5);
         waves[22].addSpawns("snake", 10);
 
         waves[23] = new Wave(p, 65, 20, hordeFill, hordeAccent, hordeText,

@@ -14,7 +14,7 @@ public class WallBuy extends Button {
     public WallBuy(PApplet p, float x, float y, String type, boolean active) {
         super(p,x,y,type,active);
         position = new PVector(x, y);
-        size = new PVector(200, 24);
+        size = new PVector(200, 29);
         spriteIdle = animatedSprites.get("wallBuyBT")[Math.min(currentLevel, 4) * 3];
         spritePressed = animatedSprites.get("wallBuyBT")[(Math.min(currentLevel, 4) * 3) + 1];
         spriteHover = animatedSprites.get("wallBuyBT")[(Math.min(currentLevel, 4) * 3) + 2];

@@ -54,6 +54,6 @@ public abstract class Button extends GuiObject {
 
     public void display() {
         if (!active) return;
-        p.image(sprite,position.x-size.x/2,position.y-size.y/2);
+        p.image(sprite,position.x-size.x/2,position.y-size.y/2, size.x, size.y);
     }
 }
