@@ -3,6 +3,7 @@
     "machine": false,
     "id": 0,
     "type": "tile",
+    "breakable": "smallRockBr_TL",
     "base": "dirt"
   },
   {
@@ -51,6 +52,7 @@
     "machine": false,
     "id": 8,
     "type": "tile",
+    "breakable": "rockBr_TL",
     "base": "dirt"
   },
   {
@@ -69,12 +71,13 @@
     "machine": false,
     "id": 11,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 12,
     "type": "tile",
+    "decoration": "deadGrassCornerBL_De_TL",
     "base": "dirt"
   },
   {
@@ -128,37 +131,39 @@
     "machine": false,
     "id": 21,
     "type": "tile",
+    "decoration": "deadGrassCornerBR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 22,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 23,
     "type": "tile",
+    "decoration": "deadGrassCornerBR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 24,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 25,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 26,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -188,12 +193,14 @@
     "machine": false,
     "id": 31,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "flowerVeryDeadCyanBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 32,
     "type": "tile",
+    "decoration": "deadGrassCornerBL_De_TL",
     "base": "dirt"
   },
   {
@@ -241,36 +248,39 @@
     "machine": false,
     "id": 40,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 41,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "veryDeadDandelionsBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 42,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 43,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 44,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "flowerVeryDeadCyanBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 45,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -295,19 +305,21 @@
     "machine": false,
     "id": 49,
     "type": "tile",
+    "decoration": "deadGrassCornerBR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 50,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 51,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "smallRockBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -325,6 +337,7 @@
     "machine": false,
     "id": 54,
     "type": "tile",
+    "obstacle": "smallDeadTreeOb_TL",
     "base": "dirt"
   },
   {
@@ -360,24 +373,27 @@
     "machine": false,
     "id": 60,
     "type": "tile",
+    "decoration": "deadGrassCornerTR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 61,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "veryDeadDandelionsBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 62,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 63,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -402,24 +418,27 @@
     "machine": false,
     "id": 67,
     "type": "tile",
+    "decoration": "deadGrassCornerBR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 68,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "veryDeadDandelionsBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 69,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 70,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -473,30 +492,32 @@
     "machine": false,
     "id": 79,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 80,
     "type": "tile",
+    "decoration": "deadGrassCornerTR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 81,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 82,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 83,
     "type": "tile",
+    "breakable": "smallRockBr_TL",
     "base": "dirt"
   },
   {
@@ -509,18 +530,19 @@
     "machine": false,
     "id": 85,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 86,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 87,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -533,18 +555,20 @@
     "machine": false,
     "id": 89,
     "type": "tile",
+    "decoration": "deadGrassCornerBR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 90,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 91,
     "type": "tile",
+    "decoration": "deadGrassCornerBL_De_TL",
     "base": "dirt"
   },
   {
@@ -574,6 +598,7 @@
     "machine": false,
     "id": 96,
     "type": "tile",
+    "obstacle": "smallDeadTreeOb_TL",
     "base": "dirt"
   },
   {
@@ -646,24 +671,27 @@
     "machine": false,
     "id": 108,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 109,
     "type": "tile",
+    "breakable": "rockBr_TL",
+    "decoration": "deadGrassCornerTR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 110,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 111,
     "type": "tile",
+    "decoration": "deadGrassCornerBL_De_TL",
     "base": "dirt"
   },
   {
@@ -699,6 +727,7 @@
     "machine": false,
     "id": 117,
     "type": "tile",
+    "breakable": "smallRockBr_TL",
     "base": "dirt"
   },
   {
@@ -771,13 +800,14 @@
     "machine": false,
     "id": 129,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 130,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "flowerVeryDeadCyanBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -800,24 +830,27 @@
     "machine": false,
     "id": 134,
     "type": "tile",
+    "decoration": "deadGrassCornerBR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 135,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 136,
     "type": "tile",
+    "decoration": "deadGrassCornerBL_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 137,
     "type": "tile",
+    "decoration": "deadGrassCornerBL_De_TL",
     "base": "dirt"
   },
   {
@@ -884,13 +917,15 @@
     "machine": false,
     "id": 148,
     "type": "tile",
+    "decoration": "deadGrassCornerTR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 149,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "smallRockBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -913,31 +948,33 @@
     "machine": false,
     "id": 153,
     "type": "tile",
+    "decoration": "deadGrassCornerTR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 154,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "veryDeadDandelionsBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 155,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 156,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 157,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -1003,6 +1040,7 @@
     "machine": false,
     "id": 168,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -1032,24 +1070,26 @@
     "machine": false,
     "id": 173,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 174,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 175,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "flowerVeryDeadCyanBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 176,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -1098,6 +1138,7 @@
     "machine": false,
     "id": 184,
     "type": "tile",
+    "breakable": "smallRockBr_TL",
     "base": "dirt"
   },
   {
@@ -1139,24 +1180,27 @@
     "machine": false,
     "id": 191,
     "type": "tile",
+    "breakable": "rockBr_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 192,
     "type": "tile",
+    "decoration": "deadGrassCornerTR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 193,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 194,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -1264,7 +1308,7 @@
     "machine": false,
     "id": 212,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -1282,6 +1326,7 @@
     "machine": false,
     "id": 215,
     "type": "tile",
+    "breakable": "smallRockBr_TL",
     "base": "dirt"
   },
   {
@@ -1371,13 +1416,14 @@
     "machine": false,
     "id": 230,
     "type": "tile",
+    "decoration": "deadGrassCornerBR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 231,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -1449,6 +1495,7 @@
     "machine": false,
     "id": 243,
     "type": "tile",
+    "obstacle": "smallDeadTreeOb_TL",
     "base": "dirt"
   },
   {
@@ -1478,19 +1525,21 @@
     "machine": false,
     "id": 248,
     "type": "tile",
+    "decoration": "deadGrassCornerTR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 249,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 250,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "veryDeadDandelionsBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -1550,25 +1599,27 @@
     "machine": false,
     "id": 260,
     "type": "tile",
+    "decoration": "deadGrassCornerBR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 261,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 262,
     "type": "tile",
+    "decoration": "deadGrassCornerBL_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 263,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -1597,12 +1648,14 @@
     "machine": false,
     "id": 268,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "flowerVeryDeadCyanBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 269,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -1621,24 +1674,27 @@
     "machine": false,
     "id": 272,
     "type": "tile",
+    "decoration": "deadGrassCornerBR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 273,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "flowerVeryDeadCyanBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 274,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 275,
     "type": "tile",
+    "decoration": "deadGrassCornerBL_De_TL",
     "base": "dirt"
   },
   {
@@ -1663,24 +1719,26 @@
     "machine": false,
     "id": 279,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 280,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "veryDeadDandelionsBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 281,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 282,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -1710,6 +1768,7 @@
     "machine": false,
     "id": 287,
     "type": "tile",
+    "decoration": "deadGrassCornerTR_De_TL",
     "base": "dirt"
   },
   {
@@ -1734,25 +1793,26 @@
     "machine": false,
     "id": 291,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 292,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 293,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 294,
     "type": "tile",
-    "base": "dirt"
+    "breakable": "veryDeadDandelionsBr_TL",
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -1764,6 +1824,7 @@
     "machine": false,
     "id": 296,
     "type": "tile",
+    "breakable": "rockBr_TL",
     "base": "dirt"
   },
   {
@@ -1776,13 +1837,14 @@
     "machine": false,
     "id": 298,
     "type": "tile",
+    "decoration": "deadGrassCornerTR_De_TL",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 299,
     "type": "tile",
-    "obstacle": "invisibleOb_TL",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -1790,7 +1852,7 @@
     "id": 300,
     "type": "tile",
     "obstacle": "invisibleOb_TL",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
@@ -1826,6 +1888,7 @@
     "machine": false,
     "id": 306,
     "type": "tile",
+    "breakable": "smallRockBr_TL",
     "base": "dirt"
   },
   {
@@ -1856,6 +1919,7 @@
     "machine": false,
     "id": 311,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -1868,12 +1932,13 @@
     "machine": false,
     "id": 313,
     "type": "tile",
-    "base": "dirt"
+    "base": "deadGrass"
   },
   {
     "machine": false,
     "id": 314,
     "type": "tile",
+    "decoration": "deadGrassCornerTL_De_TL",
     "base": "dirt"
   },
   {
@@ -1905,6 +1970,7 @@
     "machine": false,
     "id": 319,
     "type": "tile",
+    "decoration": "deadGrassCornerTR_De_TL",
     "obstacle": "invisibleOb_TL",
     "base": "dirt"
   },
@@ -1912,6 +1978,7 @@
     "machine": false,
     "id": 320,
     "type": "tile",
+    "breakable": "smallRockBr_TL",
     "base": "dirt"
   },
   {
@@ -1971,6 +2038,7 @@
     "machine": false,
     "id": 330,
     "type": "tile",
+    "obstacle": "smallDeadTreeOb_TL",
     "base": "dirt"
   },
   {

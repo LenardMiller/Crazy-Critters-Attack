@@ -32,7 +32,7 @@ public class TileSelect extends Button {
             TILE_SPRITE = p.loadImage("sprites/gui/buttons/tileSelect/erase/icon.png");
         }
         else TILE_SPRITE = staticSprites.get(type + "_TL");
-        if (TILE_SPRITE == null) System.out.println(type);
+        if (TILE_SPRITE == null) System.err.println("bad path: " + type);
         spriteLocation = "sprites/gui/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
         spriteIdle = p.loadImage(spriteLocation + "000.png");
         spritePressed = p.loadImage(spriteLocation + "001.png");

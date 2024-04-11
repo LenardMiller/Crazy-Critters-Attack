@@ -26,47 +26,24 @@ public class LevelBuilderGui {
 
 
     public void build() {
-        placeButton(0, 0, "pinkSnowBa");
-        placeButton(1, 0, "snowBa");
-        placeButton(2, 0, "snowGhostOb");
-        placeButton(3, 0, "evergreenOb");
+        placeButton(0, 0, "deadTreeTLOb");
+        placeButton(1, 0, "deadTreeTROb");
+        placeButton(2, 0, "smallDeadTreeOb");
+        placeButton(3, 0, "veryDeadDandelionsBr");
 
-        placeButton(0, 1, "snowCornersBRDe");
-        placeButton(1, 1, "snowCornersBLDe");
-        placeButton(2, 1, "dirtBa");
-        placeButton(3, 1, "stoneBa");
+        placeButton(0, 1, "deadTreeBLOb");
+        placeButton(1, 1, "deadTreeBROb");
+        placeButton(2, 1, "flowerVeryDeadCyanBr");
+        placeButton(3, 1, "rockBr");
 
-        placeButton(0, 2, "snowCornersTRDe");
-        placeButton(1, 2, "snowCornersTLDe");
-        placeButton(2, 2, "deadOrangeFlowersBr");
-        placeButton(3, 2, "deadBlueFlowersBr");
+        placeButton(0, 2, "deadGrassCornerBR_De");
+        placeButton(1, 2, "deadGrassCornerBL_De");
+        placeButton(2, 2, "deadGrassBa");
+        placeButton(3, 2, "smallRockBr");
 
-        placeButton(0, 3, "stoneCornersBRDe");
-        placeButton(1, 3, "stoneCornersBLDe");
-        placeButton(2, 3, "smallRockBr");
-        placeButton(3, 3, "rockBr");
-
-        placeButton(0, 4, "stoneCornersTRDe");
-        placeButton(1, 4, "stoneCornersTLDe");
-        placeButton(2, 4, "waterBa");
-        placeButton(3, 4, "everbrownOb");
-
-        placeButton(0, 5, "dirtCornersBRDe");
-        placeButton(1, 5, "dirtCornersBLDe");
-        placeButton(2, 5, "sludgeBa");
-
-        placeButton(0, 6, "dirtCornersTRDe");
-        placeButton(1, 6, "dirtCornersTLDe");
-
-        placeButton(0, 7, "pinkTreeOb");
-        placeButton(1, 7, "whiteTreeOb");
-        placeButton(2, 7, "yellowTreeOb");
-        placeButton(3, 7, "smallTreeOb");
-
-        placeButton(0, 8, "yellowPinkTreeOb");
-        placeButton(1, 8, "yellowWhiteTreeOb");
-        placeButton(2, 8, "yellowYellowTreeOb");
-        placeButton(3, 8, "smallYellowTreeOb");
+        placeButton(0, 3, "deadGrassCornerTR_De");
+        placeButton(1, 3, "deadGrassCornerTL_De");
+        placeButton(2, 3, "dirtBa");
 
         placeButton(0, 17, "Na");
         placeButton(1, 17, "Ma");
