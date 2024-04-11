@@ -181,8 +181,8 @@ public class Main extends PApplet {
         inputHandler = new InputHandler(this);
         keyBinds = new KeyBinds(this);
         keyBinds.loadKeyBinds();
-        //set level count, it has to be this way :(
-        levels = new Level[5];
+        //set level count
+        levels = new Level[6];
         //guis
         loadingGui = new LoadingGui(this, title);
         //matrix

@@ -58,7 +58,7 @@ public class LayoutLoader extends ClassLoader {
 
         String name = "Save-"+month()+"-"+day()+"-"+year()+"-"+hour() +"-"+minute()+"-"+second();
         new File(filePath() + "/data/" + name + ".json");
-        FileWriter saveWriter = new FileWriter("resources/data/saves/" + name + ".json");
+        FileWriter saveWriter = new FileWriter(filePath() + "/data/save/" + name + ".json");
         saveWriter.write(saveArray.toString());
         saveWriter.close();
     }
