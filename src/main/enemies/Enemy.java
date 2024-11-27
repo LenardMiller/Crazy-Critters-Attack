@@ -55,6 +55,7 @@ public abstract class Enemy {
         iceOuch(new Color(49, 135, 223)),
         mudOuch(new Color(111, 58, 0)),
         sapOuch(new Color(0xb76e09)),
+        oilOuch(new Color(0x2d1a02)),
         brownLeafOuch(new Color(0xBB5E3B)),
         bluePuff(new Color(84, 180, 246)),
         greenPuff(new Color(100, 207, 123));
@@ -192,13 +193,13 @@ public abstract class Enemy {
             }
 
             //prevent wandering
-            if (trail.size() == 0 && state != State.Attacking) pathRequestWaitTimer++;
+            if (trail.isEmpty() && state != State.Attacking) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
             }
         }
-        if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
+        if (!trail.isEmpty() && intersectTurnPoint()) swapPoints(true);
         //buffs
         for (int j = buffs.size() - 1; j >= 0; j--) {
             Buff buff = buffs.get(j);
@@ -290,7 +291,7 @@ public abstract class Enemy {
         float pixelsMoved = getActualSpeed() / FRAMERATE;
         m.setMag(pixelsMoved);
         //don't move if no path
-        if (trail.size() > 0) position.add(m);
+        if (!trail.isEmpty()) position.add(m);
     }
 
     public float getActualSpeed() {
@@ -399,7 +400,7 @@ public abstract class Enemy {
         }
         int effectTimer = p.frameCount + 10;
         //prevent duplicates
-        if (buffs.size() > 0) {
+        if (!buffs.isEmpty()) {
             for (int j = 0; j < buffs.size(); j++) {
                 Buff buff = buffs.get(j);
                 if (buff.matches(this) && buff.name.equals(buffName)) {
@@ -653,6 +654,8 @@ public abstract class Enemy {
                 return new Fae(p, pos.x, pos.y);
             } case "Mutant Bug", "Mutant Bugs" -> {
                 return new MutantBug(p, pos.x, pos.y);
+            } case "Robugs" -> {
+                return new RoboBug(p, pos.x, pos.y);
             } default -> {
                 System.out.println("Could not get enemy of type: \"" + name + "\"");
                 return null;
@@ -695,7 +698,7 @@ public abstract class Enemy {
     }
 
     public void swapPoints(boolean remove) {
-        if (trail.size() != 0) {
+        if (!trail.isEmpty()) {
             TurnPoint intersectingPoint = trail.get(trail.size() - 1);
             if (remove) {
                 if (intersectingPoint.combat) {
@@ -708,7 +711,7 @@ public abstract class Enemy {
                     trail.remove(intersectingPoint);
                 }
             }
-            if (trail.size() != 0) {
+            if (!trail.isEmpty()) {
                 PVector pointPosition = trail.get(trail.size() - 1).position;
                 pointPosition = new PVector(pointPosition.x + 12.5f, pointPosition.y + 12.5f);
                 pointPosition = new PVector(pointPosition.x + ((pfSize - 1) * 12.5f), pointPosition.y + ((pfSize - 1) * 12.5f));
@@ -734,7 +737,7 @@ public abstract class Enemy {
         TurnPoint backPoint = backPoint();
         if (backPoint != null) {
             backPoint.combat = true;
-            if (backPoint.towers != null && backPoint.towers.size() > 0) { //what the hell is this for??
+            if (backPoint.towers != null && !backPoint.towers.isEmpty()) { //what the hell is this for??
                 backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
             } else backPoint.tower = null;
         }
@@ -803,7 +806,7 @@ public abstract class Enemy {
     private TurnPoint backPoint() {
         TurnPoint bp = null;
         for (int i = trail.size() - 1; i >= 0; i--) {
-            if (trail.get(i).towers != null && trail.get(i).towers.size() > 0 || trail.get(i).machine) {
+            if (trail.get(i).towers != null && !trail.get(i).towers.isEmpty() || trail.get(i).machine) {
                 trail.get(i).combat = true;
                 if (i < trail.size() - 1) bp = trail.get(i + 1);
                 else bp = trail.get(i);

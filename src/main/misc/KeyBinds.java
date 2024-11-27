@@ -175,7 +175,7 @@ public class KeyBinds {
         boolean smallEnergyBlast = keysPressed.getPressedPulse('r') && alive;
         boolean largeEnergyBlast = keysPressed.getPressedPulse('R') && alive;
         boolean magicMissle = keysPressed.getPressedPulse('t') && alive;
-        boolean arc = keysPressed.getPressedPulse('y') && alive && enemies.size() != 0;
+        boolean arc = keysPressed.getPressedPulse('y') && alive && !enemies.isEmpty();
         boolean needle = keysPressed.getPressedPulse('u') && alive;
         boolean flame = keysPressed.getPressed('i') && alive;
         //enemies
@@ -190,8 +190,8 @@ public class KeyBinds {
         boolean en9 =  keysPressed.getPressedPulse('9') && alive && boardMousePosition.x < BOARD_WIDTH;
         boolean en1b = keysPressed.getPressedPulse('!') && alive && boardMousePosition.x < BOARD_WIDTH;
         //enemies
-        if (en1) enemies.add(new BigBug( p, boardMousePosition.x, boardMousePosition.y));
-        if (en2) enemies.add(new MidWorm(p, boardMousePosition.x, boardMousePosition.y));
+        if (en1) enemies.add(new MidBug( p, boardMousePosition.x, boardMousePosition.y));
+        if (en2) enemies.add(new RoboBug(p, boardMousePosition.x, boardMousePosition.y));
         if (en3) enemies.add(new BigWorm(p, boardMousePosition.x, boardMousePosition.y));
         if (en4) enemies.add(new Shark(p, boardMousePosition.x, boardMousePosition.y));
         if (en5) enemies.add(new Root(p, boardMousePosition.x, boardMousePosition.y));
