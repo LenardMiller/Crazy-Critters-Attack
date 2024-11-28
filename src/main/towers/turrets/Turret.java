@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.enemies.BurrowingEnemy;
 import main.gui.guiObjects.PopupText;
 import main.gui.inGame.Selection;
 import main.misc.CompressArray;
@@ -316,7 +316,7 @@ public abstract class Turret extends Tower {
             tile.tower = null;
         }
         updateBoosts();
-        if (enemies.size() > 0 && !machine.dead && !isPaused) checkTarget();
+        if (!enemies.isEmpty() && !machine.dead && !isPaused) checkTarget();
         if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
                 && boardMousePosition.y > tile.position.y - size.y && alive && !isPaused) {
             selection.swapSelected(tile.id);

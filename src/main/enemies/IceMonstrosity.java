@@ -1,4 +1,4 @@
-package main.enemies.shootingEnemies;
+package main.enemies;
 
 import main.projectiles.enemyProjeciles.IceCrystal;
 import processing.core.PApplet;

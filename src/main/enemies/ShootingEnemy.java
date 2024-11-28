@@ -1,7 +1,6 @@
-package main.enemies.shootingEnemies;
+package main.enemies;
 
 import main.buffs.Buff;
-import main.enemies.Enemy;
 import main.towers.Tower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -10,15 +9,16 @@ import processing.core.PVector;
 import processing.sound.SoundFile;
 
 import java.awt.*;
+import java.util.function.BiConsumer;
 
 import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
-public abstract class ShootingEnemy extends Enemy {
+public class ShootingEnemy extends Enemy {
 
     protected int range;
-    protected int betweenShootFrames;
+    protected int shootDelay;
     protected int shootFireFrame;
     protected int barrelLength;
     protected int shootDamage;
@@ -27,9 +27,52 @@ public abstract class ShootingEnemy extends Enemy {
     protected PImage[] shootFrames;
 
     private int shootFrame;
+    private BiConsumer<Float, PVector> fireFun;
 
     protected ShootingEnemy(PApplet p, float x, float y) {
         super(p, x, y);
+    }
+
+    ShootingEnemy(PApplet p, float x, float y,
+           String name,
+           PVector size,
+           int pfSize,
+           int radius,
+           int speed,
+           int moneyDrop,
+           int damage,
+           int hp,
+
+           int range,
+           int barrelLength,
+           int shootDelay,
+           int shootFireFrame,
+
+           int[] attackDmgFrames,
+           int walkDelay,
+           int attackDelay,
+           PVector corpseSize,
+           PVector partSize,
+           int corpseLifespan,
+           int corpseDelay,
+           HitParticle hitParticle,
+           String dieSound,
+           String overkillSound,
+           String attackSound,
+           String moveSoundLoop,
+
+           String shootSound,
+           BiConsumer<Float, PVector> fireFun
+    ) {
+        super(p, x, y, name, size, pfSize, radius, speed, moneyDrop, damage, hp, attackDmgFrames, walkDelay,
+                attackDelay, corpseSize, partSize, corpseLifespan, corpseDelay, hitParticle, dieSound, overkillSound, attackSound,
+                moveSoundLoop);
+        this.range = range;
+        this.barrelLength = barrelLength;
+        this.shootDelay = shootDelay;
+        this.shootFireFrame = shootFireFrame;
+        this.shootSound = sounds.get(shootSound);
+        this.fireFun = fireFun;
     }
 
     @Override
@@ -70,13 +113,13 @@ public abstract class ShootingEnemy extends Enemy {
             }
 
             //prevent wandering
-            if (trail.size() == 0 && state != State.Attacking) pathRequestWaitTimer++;
+            if (trail.isEmpty() && state != State.Attacking) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
             }
         }
-        if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
+        if (!trail.isEmpty() && intersectTurnPoint()) swapPoints(true);
         //buffs
         for (int j = buffs.size() - 1; j >= 0; j--) {
             Buff buff = buffs.get(j);
@@ -119,7 +162,7 @@ public abstract class ShootingEnemy extends Enemy {
                     idleTime++;
                     sprite = shootFrames[shootFrame];
                     if (shootFrame < shootFrames.length - 1) {
-                        if (idleTime >= betweenShootFrames) {
+                        if (idleTime >= shootDelay) {
                             shootFrame++;
                             idleTime = 0;
                         }
@@ -144,5 +187,7 @@ public abstract class ShootingEnemy extends Enemy {
         fire(projectileAngle, projectilePosition);
     }
 
-    protected abstract void fire(float projectileAngle, PVector projectilePosition);
+    protected void fire(float projectileAngle, PVector projectilePosition) {
+        fireFun.accept(projectileAngle, projectilePosition);
+    }
 }

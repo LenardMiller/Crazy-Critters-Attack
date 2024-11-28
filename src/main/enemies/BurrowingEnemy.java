@@ -1,7 +1,6 @@
-package main.enemies.burrowingEnemies;
+package main.enemies;
 
 import main.Main;
-import main.enemies.Enemy;
 import main.gui.guiObjects.PopupText;
 import main.particles.Debris;
 import main.particles.Pile;
@@ -11,10 +10,37 @@ import processing.core.PVector;
 import static main.Main.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
-public abstract class BurrowingEnemy extends Enemy {
+public class BurrowingEnemy extends Enemy {
 
     protected BurrowingEnemy(PApplet p, float x, float y) {
         super(p, x, y);
+    }
+
+    BurrowingEnemy(PApplet p, float x, float y,
+          String name,
+          PVector size,
+          int pfSize,
+          int radius,
+          int speed,
+          int moneyDrop,
+          int damage,
+          int hp,
+          int[] attackDmgFrames,
+          int walkDelay,
+          int attackDelay,
+          PVector corpseSize,
+          PVector partSize,
+          int corpseLifespan,
+          int corpseDelay,
+          HitParticle hitParticle,
+          String dieSound,
+          String overkillSound,
+          String attackSound,
+          String moveSoundLoop
+    ) {
+        super(p, x, y, name, size, pfSize, radius, speed, moneyDrop, damage, hp, attackDmgFrames, walkDelay,
+                attackDelay, corpseSize, partSize, corpseLifespan, corpseDelay, hitParticle, dieSound, overkillSound, attackSound,
+                moveSoundLoop);
     }
 
     @Override
@@ -32,7 +58,7 @@ public abstract class BurrowingEnemy extends Enemy {
         float pixelsMoved = getActualSpeed() / FRAMERATE;
         m.setMag(pixelsMoved);
         //don't move if no path
-        if (trail.size() > 0) position.add(m);
+        if (!trail.isEmpty()) position.add(m);
     }
 
     @Override

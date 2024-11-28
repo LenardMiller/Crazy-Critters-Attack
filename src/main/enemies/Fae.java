@@ -1,4 +1,4 @@
-package main.enemies.flyingEnemies;
+package main.enemies;
 
 import main.Main;
 import main.gui.guiObjects.PopupText;
@@ -12,30 +12,39 @@ import static main.Main.*;
 import static main.misc.Utilities.findAngleBetween;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
-public class Frost extends FlyingEnemy {
+public class Fae extends Frost {
 
     private int hitTimer;
+    private final String color;
 
-    public Frost(PApplet p, float x, float y) {
+    public Fae(PApplet p, float x, float y) {
         super(p, x, y);
+        String oppositeColor;
+        if ((int) p.random(2) == 1) {
+            color = "green";
+            oppositeColor = "blue";
+        } else {
+            color = "blue";
+            oppositeColor = "green";
+        }
         pfSize = 2;
-        size = new PVector(50, 50);
-        radius = 25;
-        speed = 30;
-        moneyDrop = 300;
-        damage = 4;
-        maxHp = 6500;
+        size = new PVector(25, 25);
+        radius = 15;
+        speed = 60;
+        moneyDrop = 200;
+        damage = 7;
+        maxHp = 22000;
         hp = maxHp;
-        hitParticle = HitParticle.iceOuch;
-        name = "frost";
+        hitParticle = HitParticle.valueOf((oppositeColor + "Puff"));
+        name = "fae";
         attackDelay = 8;
-        dieSound = sounds.get("frostDie");
-        overkillSound = sounds.get("frostDie");
+        dieSound = sounds.get("faeDie");
+        overkillSound = sounds.get("faeDie");
         attackFrames = animatedSprites.get("wolf" + "AttackEN"); //these exist solely because of glue
         moveFrames = animatedSprites.get("wolf" + "MoveEN");
         attackDmgFrames = new int[]{attackFrames.length - 1};
-        attackSound = sounds.get("frostFreeze");
-        moveSoundLoop = moveSoundLoops.get("ominousWind");
+        attackSound = sounds.get("faeMagic");
+        moveSoundLoop = moveSoundLoops.get("fae");
     }
 
     /**
@@ -51,7 +60,7 @@ public class Frost extends FlyingEnemy {
         if (overkill) {
             playSoundRandomSpeed(p, overkillSound, 1);
             for (int j = 0; j < 25; j++) {
-                topParticles.add(new Floaty(p, position.x, position.y, p.random(100, 250), "frostCloud"));
+                topParticles.add(new Floaty(p, position.x, position.y, p.random(100, 250), color + "Magic"));
             }
         }
         else playSoundRandomSpeed(p, dieSound, 1);
@@ -105,7 +114,7 @@ public class Frost extends FlyingEnemy {
         for (int i = 0; i < 20; i++) {
             PVector partPosition = new PVector(position.x, position.y);
             partPosition.add(PVector.fromAngle(p.random(TWO_PI)).setMag(p.random(radius)));
-            topParticles.add(new MiscParticle(p, partPosition.x, partPosition.y, p.random(360), "iceMagic"));
+            topParticles.add(new MiscParticle(p, partPosition.x, partPosition.y, p.random(360), "blueGreenFire"));
         }
     }
 
@@ -144,14 +153,14 @@ public class Frost extends FlyingEnemy {
                 for (int i = 0; i < 3; i++) {
                     PVector partPosition = new PVector(position.x, position.y);
                     partPosition.add(PVector.fromAngle(p.random(TWO_PI)).setMag(p.random(radius * 2)));
-                    topParticles.add(new Ouch(p, partPosition.x, partPosition.y, p.random(360), "snowPuff"));
-                    topParticles.add(new Floaty(p, position.x, position.y, p.random(40, 70), "frostCloud"));
+                    topParticles.add(new MiscParticle(p, partPosition.x, partPosition.y, p.random(360), color + "Magic"));
+                    topParticles.add(new Floaty(p, position.x, position.y, p.random(40, 70), color + "Magic"));
                 }
             } else {
                 PVector partPosition = new PVector(position.x, position.y);
                 partPosition.add(PVector.fromAngle(p.random(TWO_PI)).setMag(p.random(radius)));
-                topParticles.add(new Ouch(p, partPosition.x, partPosition.y, p.random(360), "snowPuff"));
-                topParticles.add(new Floaty(p, position.x, position.y, p.random(25, 35), "frostCloud"));
+                topParticles.add(new MiscParticle(p, partPosition.x, partPosition.y, p.random(360), color + "Magic"));
+                topParticles.add(new Floaty(p, position.x, position.y, p.random(25, 35), color + "Magic"));
             }
         }
         if (isDebug) {

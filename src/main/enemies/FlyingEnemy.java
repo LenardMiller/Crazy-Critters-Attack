@@ -1,17 +1,44 @@
-package main.enemies.flyingEnemies;
+package main.enemies;
 
-import main.enemies.Enemy;
 import main.pathfinding.Node;
 import main.towers.Tower;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static main.Main.nodeGrid;
 
-public abstract class FlyingEnemy extends Enemy {
+public class FlyingEnemy extends Enemy {
+
+    FlyingEnemy(PApplet p, float x, float y,
+            String name,
+            PVector size,
+            int pfSize,
+            int radius,
+            int speed,
+            int moneyDrop,
+            int damage,
+            int hp,
+            int[] attackDmgFrames,
+            int walkDelay,
+            int attackDelay,
+            PVector corpseSize,
+            PVector partSize,
+            int corpseLifespan,
+            int corpseDelay,
+            HitParticle hitParticle,
+            String dieSound,
+            String overkillSound,
+            String attackSound,
+            String moveSoundLoop
+    ) {
+        super(p, x, y, name, size, pfSize, radius, speed, moneyDrop, damage, hp, attackDmgFrames, walkDelay,
+                attackDelay, corpseSize, partSize, corpseLifespan, corpseDelay, hitParticle, dieSound, overkillSound, attackSound,
+                moveSoundLoop);
+    }
 
     protected FlyingEnemy(PApplet p, float x, float y) {
         super(p, x, y);

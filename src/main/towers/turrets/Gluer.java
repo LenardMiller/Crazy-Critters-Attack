@@ -1,7 +1,7 @@
 package main.towers.turrets;
 
 import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.enemies.BurrowingEnemy;
 import main.gui.inGame.Selection;
 import main.misc.Tile;
 import main.particles.MiscParticle;

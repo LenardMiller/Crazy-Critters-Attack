@@ -1,7 +1,7 @@
 package main.projectiles.arcs;
 
 import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.enemies.BurrowingEnemy;
 import main.particles.MiscParticle;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;

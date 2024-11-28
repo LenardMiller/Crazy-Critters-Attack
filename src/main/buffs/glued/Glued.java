@@ -2,8 +2,8 @@ package main.buffs.glued;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.enemies.flyingEnemies.FlyingEnemy;
-import main.enemies.flyingEnemies.Frost;
+import main.enemies.FlyingEnemy;
+import main.enemies.Frost;
 import main.misc.CompressArray;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -51,7 +51,7 @@ public class Glued extends Buff {
 
             //profit
             for (int i = 0; i < target.tempAttackDmgFrames.length; i++) {
-                target.tempAttackDmgFrames[i] /= effectLevel;
+                target.tempAttackDmgFrames[i] /= (int) effectLevel;
             }
             target.attackFrame = Math.round((float) target.attackFrame * (1 / effectLevel));
             target.attackFrames = expandedPImages;

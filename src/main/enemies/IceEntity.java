@@ -1,4 +1,4 @@
-package main.enemies.shootingEnemies;
+package main.enemies;
 
 import main.projectiles.enemyProjeciles.IceCrystal;
 import processing.core.PApplet;
@@ -39,7 +39,7 @@ public class IceEntity extends ShootingEnemy {
         orbitAngleSpeedChange = 0.02f;
         walkDelay = down60ToFramerate(10);
         attackDelay = down60ToFramerate(6);
-        betweenShootFrames = down60ToFramerate(6);
+        shootDelay = down60ToFramerate(6);
         attackDmgFrames = new int[]{1};
         shootFireFrame = 1;
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);

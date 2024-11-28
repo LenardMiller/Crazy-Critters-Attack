@@ -1,8 +1,6 @@
 package main.misc;
 
 import main.Main;
-import main.enemies.burrowingEnemies.*;
-import main.enemies.flyingEnemies.Fae;
 import main.enemies.*;
 import main.levelStructure.Level;
 import main.towers.Tower;
@@ -175,7 +173,7 @@ public class KeyBinds {
         boolean smallEnergyBlast = keysPressed.getPressedPulse('r') && alive;
         boolean largeEnergyBlast = keysPressed.getPressedPulse('R') && alive;
         boolean magicMissle = keysPressed.getPressedPulse('t') && alive;
-        boolean arc = keysPressed.getPressedPulse('y') && alive && enemies.size() != 0;
+        boolean arc = keysPressed.getPressedPulse('y') && alive && !enemies.isEmpty();
         boolean needle = keysPressed.getPressedPulse('u') && alive;
         boolean flame = keysPressed.getPressed('i') && alive;
         //enemies
@@ -190,15 +188,15 @@ public class KeyBinds {
         boolean en9 =  keysPressed.getPressedPulse('9') && alive && boardMousePosition.x < BOARD_WIDTH;
         boolean en1b = keysPressed.getPressedPulse('!') && alive && boardMousePosition.x < BOARD_WIDTH;
         //enemies
-        if (en1) enemies.add(new BigBug( p, boardMousePosition.x, boardMousePosition.y));
-        if (en2) enemies.add(new MidWorm(p, boardMousePosition.x, boardMousePosition.y));
-        if (en3) enemies.add(new BigWorm(p, boardMousePosition.x, boardMousePosition.y));
-        if (en4) enemies.add(new Shark(p, boardMousePosition.x, boardMousePosition.y));
-        if (en5) enemies.add(new Root(p, boardMousePosition.x, boardMousePosition.y));
-        if (en6) enemies.add(new Fae(p, boardMousePosition.x, boardMousePosition.y));
-        if (en7) enemies.add(new MutantBug(p, boardMousePosition.x, boardMousePosition.y));
-        if (en8) enemies.add(new Shark(p, boardMousePosition.x, boardMousePosition.y));
-        if (en9) enemies.add(new TreeSpirit(p, boardMousePosition.x, boardMousePosition.y));
+        if (en1) enemies.add(Enemy.get(p, "smolBug", new PVector(boardMousePosition.x, boardMousePosition.y)));
+        if (en2) enemies.add(Enemy.get(p, "midBug", new PVector(boardMousePosition.x, boardMousePosition.y)));
+        if (en3) enemies.add(Enemy.get(p, "bigBug", new PVector(boardMousePosition.x, boardMousePosition.y)));
+        if (en4) enemies.add(Enemy.get(p, "smolBug", new PVector(boardMousePosition.x, boardMousePosition.y)));
+        if (en5) enemies.add(Enemy.get(p, "smolBug", new PVector(boardMousePosition.x, boardMousePosition.y)));
+        if (en6) enemies.add(Enemy.get(p, "smolBug", new PVector(boardMousePosition.x, boardMousePosition.y)));
+        if (en7) enemies.add(Enemy.get(p, "smolBug", new PVector(boardMousePosition.x, boardMousePosition.y)));
+        if (en8) enemies.add(Enemy.get(p, "smolBug", new PVector(boardMousePosition.x, boardMousePosition.y)));
+        if (en9) enemies.add(Enemy.get(p, "smolBug", new PVector(boardMousePosition.x, boardMousePosition.y)));
         if (en1b) enemies.add(new Dummy(p, boardMousePosition.x, boardMousePosition.y));
         if (en1 || en2 || en3 || en4 || en5 || en6 || en8 || en7 || en9 || en1b) enemies.get(enemies.size() - 1).requestPath(enemies.size() - 1);
     }

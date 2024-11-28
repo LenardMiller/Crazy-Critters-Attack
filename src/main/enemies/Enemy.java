@@ -6,9 +6,6 @@ import main.buffs.glued.Glued;
 import main.buffs.glued.SpikyGlued;
 import main.buffs.stunned.Frozen;
 import main.buffs.stunned.Stunned;
-import main.enemies.burrowingEnemies.*;
-import main.enemies.flyingEnemies.*;
-import main.enemies.shootingEnemies.*;
 import main.gui.guiObjects.PopupText;
 import main.misc.Corpse;
 import main.misc.Tile;
@@ -123,7 +120,7 @@ public class Enemy {
     protected int damage;
     protected int walkDelay;
     protected int attackDelay;
-    protected int betweenCorpseFrames;
+    protected int corpseDelay;
     protected int corpseLifespan;
     protected int pathRequestWaitTimer;
     protected int moveFrame;
@@ -172,31 +169,32 @@ public class Enemy {
         attackCount = 0;
         corpseSize = size;
         partSize = size;
-        betweenCorpseFrames = down60ToFramerate(7);
+        corpseDelay = down60ToFramerate(7);
         corpseLifespan = 8;
         lastDamageType = null;
     }
 
-    Enemy(PApplet p, float x, float y,
-          String name,
-          PVector size,
-          int pfSize,
-          int radius,
-          int speed,
-          int moneyDrop,
-          int damage,
-          int hp,
-          int[] attackDmgFrames,
-          int walkDelay,
-          int attackDelay,
-          PVector corpseSize,
-          int corpseLifespan,
-          PVector partSize,
-          HitParticle hitParticle,
-          String overkillSound,
-          String dieSound,
-          String attackSound,
-          String moveSoundLoop
+    protected Enemy(PApplet p, float x, float y,
+            String name,
+            PVector size,
+            int pfSize,
+            int radius,
+            int speed,
+            int moneyDrop,
+            int damage,
+            int hp,
+            int[] attackDmgFrames,
+            int walkDelay,
+            int attackDelay,
+            PVector corpseSize,
+            PVector partSize,
+            int corpseLifespan,
+            int corpseDelay,
+            HitParticle hitParticle,
+            String dieSound,
+            String overkillSound,
+            String attackSound,
+            String moveSoundLoop
     ) {
         this.p = p;
 
@@ -222,10 +220,11 @@ public class Enemy {
         this.attackDelay = attackDelay;
         this.corpseSize = corpseSize;
         this.corpseLifespan = corpseLifespan;
+        this.corpseDelay = corpseDelay;
         this.partSize = partSize;
         this.hitParticle = hitParticle;
-        this.overkillSound = sounds.get(overkillSound);
         this.dieSound = sounds.get(dieSound);
+        this.overkillSound = sounds.get(overkillSound);
         this.attackSound = sounds.get(attackSound);
         this.moveSoundLoop = moveSoundLoops.get(moveSoundLoop);
 
@@ -309,7 +308,7 @@ public class Enemy {
         } else
             corpses.add(new Corpse(p, position, corpseSize,
               rotation + p.random(radians(-5), radians(5)), new PVector(0, 0),
-              currentTintColor, 0, betweenCorpseFrames, corpseLifespan, type, name + "Die",
+              currentTintColor, 0, corpseDelay, corpseLifespan, type, name + "Die",
               hitParticle, 0, true));
     }
 
