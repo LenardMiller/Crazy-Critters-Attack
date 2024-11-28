@@ -23,7 +23,7 @@ public class Root extends BurrowingEnemy {
         name = "root";
         attackDmgFrames = new int[]{18};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(2);
+        attackDelay = down60ToFramerate(2);
         partSize = new PVector(8, 8);
         corpseSize = new PVector(25,25);
         overkillSound = sounds.get("squish");

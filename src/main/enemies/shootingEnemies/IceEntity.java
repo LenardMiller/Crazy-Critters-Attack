@@ -37,8 +37,8 @@ public class IceEntity extends ShootingEnemy {
         orbitAngleSpeed = orbitAngleMinSpeed;
         orbitAngleTopSpeed = 1;
         orbitAngleSpeedChange = 0.02f;
-        betweenWalkFrames = down60ToFramerate(10);
-        betweenAttackFrames = down60ToFramerate(6);
+        walkDelay = down60ToFramerate(10);
+        attackDelay = down60ToFramerate(6);
         betweenShootFrames = down60ToFramerate(6);
         attackDmgFrames = new int[]{1};
         shootFireFrame = 1;

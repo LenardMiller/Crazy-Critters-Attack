@@ -37,7 +37,7 @@ public class Fae extends Frost {
         hp = maxHp;
         hitParticle = HitParticle.valueOf((oppositeColor + "Puff"));
         name = "fae";
-        betweenAttackFrames = 8;
+        attackDelay = 8;
         dieSound = sounds.get("faeDie");
         overkillSound = sounds.get("faeDie");
         attackFrames = animatedSprites.get("wolf" + "AttackEN"); //these exist solely because of glue
@@ -79,7 +79,7 @@ public class Fae extends Frost {
         boolean dmg = false;
         for (int frame : tempAttackDmgFrames) {
             if (attackFrame == frame) {
-                if (betweenAttackFrames > 1) attackCount++;
+                if (attackDelay > 1) attackCount++;
                 dmg = true;
                 break;
             }
@@ -126,7 +126,7 @@ public class Fae extends Frost {
                 if (attackFrame >= attackFrames.length) attackFrame = 0;
                 idleTime++;
                 if (attackFrame < attackFrames.length - 1) {
-                    if (idleTime >= betweenAttackFrames) {
+                    if (idleTime >= attackDelay) {
                         attackFrame += 1;
                         idleTime = 0;
                     }

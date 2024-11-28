@@ -23,7 +23,7 @@ public class Butterfly extends FlyingEnemy {
         name = "butterfly";
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(5);
+        attackDelay = down60ToFramerate(5);
         corpseSize = new PVector(25,25);
         partSize = new PVector(18,18);
         betweenCorpseFrames = down60ToFramerate(4);

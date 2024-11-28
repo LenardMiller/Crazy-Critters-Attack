@@ -20,8 +20,8 @@ public class Mammoth extends Enemy {
         hitParticle = HitParticle.redOuch;
         name = "mammoth";
         attackDmgFrames = new int[]{9};
-        betweenWalkFrames = 5;
-        betweenAttackFrames = 5;
+        walkDelay = 5;
+        attackDelay = 5;
         corpseSize = size;
         corpseLifespan = 12;
         partSize = new PVector(56, 56);

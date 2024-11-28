@@ -21,10 +21,10 @@ public class MutantBug extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.glowOuch;
         name = "mutantBug";
-        betweenWalkFrames = down60ToFramerate(20);
+        walkDelay = down60ToFramerate(20);
         attackDmgFrames = new int[]{15};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(4);
+        attackDelay = down60ToFramerate(4);
         betweenCorpseFrames = 5;
         corpseLifespan = 12;
         corpseSize = size;

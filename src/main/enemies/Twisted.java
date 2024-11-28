@@ -21,8 +21,8 @@ public class Twisted extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.brownLeafOuch;
         name = "twisted";
-        betweenAttackFrames = down60ToFramerate(10);
-        betweenWalkFrames = down60ToFramerate(20);
+        attackDelay = down60ToFramerate(10);
+        walkDelay = down60ToFramerate(20);
         attackDmgFrames = new int[]{4};
         corpseSize = new PVector(50,50);
         partSize = new PVector(26,26);

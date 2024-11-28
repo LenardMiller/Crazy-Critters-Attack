@@ -23,8 +23,8 @@ public class Scorpion extends Enemy {
         name = "scorpion";
         attackDmgFrames = new int[]{5};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenWalkFrames = down60ToFramerate(8);
-        betweenAttackFrames = down60ToFramerate(6);
+        walkDelay = down60ToFramerate(8);
+        attackDelay = down60ToFramerate(6);
         corpseSize = size;
         partSize = new PVector(13,13);
         overkillSound = sounds.get("squish");

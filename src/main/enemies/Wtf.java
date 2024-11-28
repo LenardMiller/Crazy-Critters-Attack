@@ -21,10 +21,10 @@ public class Wtf extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "wtf";
-        betweenWalkFrames = down60ToFramerate(20);
+        walkDelay = down60ToFramerate(20);
         attackDmgFrames = new int[]{11};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(8);
+        attackDelay = down60ToFramerate(8);
         corpseLifespan = 12;
         corpseSize = size;
         partSize = new PVector(100,100);

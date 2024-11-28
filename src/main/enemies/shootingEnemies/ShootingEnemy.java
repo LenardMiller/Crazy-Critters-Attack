@@ -101,7 +101,7 @@ public abstract class ShootingEnemy extends Enemy {
                     sprite = attackFrames[attackFrame];
                     idleTime++;
                     if (attackFrame < attackFrames.length - 1) {
-                        if (idleTime >= betweenAttackFrames) {
+                        if (idleTime >= attackDelay) {
                             attackFrame += 1;
                             idleTime = 0;
                         }
@@ -109,7 +109,7 @@ public abstract class ShootingEnemy extends Enemy {
                 } case Moving -> {
                     idleTime++;
                     if (moveFrame < moveFrames.length - 1) {
-                        if (idleTime >= betweenWalkFrames) {
+                        if (idleTime >= walkDelay) {
                             moveFrame++;
                             idleTime = 0;
                         }

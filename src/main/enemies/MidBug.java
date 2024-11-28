@@ -21,8 +21,8 @@ public class MidBug extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "midBug";
-        betweenWalkFrames = down60ToFramerate(6);
-        betweenAttackFrames = down60ToFramerate(2);
+        walkDelay = down60ToFramerate(6);
+        attackDelay = down60ToFramerate(2);
         attackDmgFrames = new int[]{7};
         corpseSize = size;
         partSize = new PVector(14,14);

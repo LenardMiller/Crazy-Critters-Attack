@@ -34,7 +34,7 @@ import static main.Main.*;
 import static main.misc.Utilities.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
-public abstract class Enemy {
+public class Enemy {
 
     public enum State {
         Moving,
@@ -121,8 +121,8 @@ public abstract class Enemy {
     public ArrayList<Buff> buffs;
 
     protected int damage;
-    protected int betweenWalkFrames;
-    protected int betweenAttackFrames;
+    protected int walkDelay;
+    protected int attackDelay;
     protected int betweenCorpseFrames;
     protected int corpseLifespan;
     protected int pathRequestWaitTimer;
@@ -164,7 +164,7 @@ public abstract class Enemy {
         hp = maxHp;
         hitParticle = HitParticle.redOuch;
         name = "";
-        betweenWalkFrames = 0;
+        walkDelay = 0;
         attackDmgFrames = new int[]{0};
         tempAttackDmgFrames = new int[attackDmgFrames.length];
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
@@ -175,6 +175,62 @@ public abstract class Enemy {
         betweenCorpseFrames = down60ToFramerate(7);
         corpseLifespan = 8;
         lastDamageType = null;
+    }
+
+    Enemy(PApplet p, float x, float y,
+          String name,
+          PVector size,
+          int pfSize,
+          int radius,
+          int speed,
+          int moneyDrop,
+          int damage,
+          int hp,
+          int[] attackDmgFrames,
+          int walkDelay,
+          int attackDelay,
+          PVector corpseSize,
+          int corpseLifespan,
+          PVector partSize,
+          HitParticle hitParticle,
+          String overkillSound,
+          String dieSound,
+          String attackSound,
+          String moveSoundLoop
+    ) {
+        this.p = p;
+
+        buffs = new ArrayList<>();
+        trail = new ArrayList<>();
+        position = new PVector(roundTo(x, 25) + 12.5f, roundTo(y, 25) + 12.5f);
+        tempAttackDmgFrames = new int[attackDmgFrames.length];
+        rotation = PI + HALF_PI;
+        speedModifier = 1;
+        attackCount = 0;
+
+        this.name = name;
+        this.size = size;
+        this.pfSize = pfSize;
+        this.radius = radius;
+        this.speed = speed;
+        this.moneyDrop = moneyDrop;
+        this.damage = damage;
+        this.maxHp = hp;
+        this.hp = maxHp;
+        this.attackDmgFrames = attackDmgFrames;
+        this.walkDelay = walkDelay;
+        this.attackDelay = attackDelay;
+        this.corpseSize = corpseSize;
+        this.corpseLifespan = corpseLifespan;
+        this.partSize = partSize;
+        this.hitParticle = hitParticle;
+        this.overkillSound = sounds.get(overkillSound);
+        this.dieSound = sounds.get(dieSound);
+        this.attackSound = sounds.get(attackSound);
+        this.moveSoundLoop = moveSoundLoops.get(moveSoundLoop);
+
+        System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
+        loadStuff();
     }
 
     public void update(int i) {
@@ -192,13 +248,13 @@ public abstract class Enemy {
             }
 
             //prevent wandering
-            if (trail.size() == 0 && state != State.Attacking) pathRequestWaitTimer++;
+            if (trail.isEmpty() && state != State.Attacking) pathRequestWaitTimer++;
             if (pathRequestWaitTimer > FRAMERATE) {
                 requestPath(i);
                 pathRequestWaitTimer = 0;
             }
         }
-        if (trail.size() != 0 && intersectTurnPoint()) swapPoints(true);
+        if (!trail.isEmpty() && intersectTurnPoint()) swapPoints(true);
         //buffs
         for (int j = buffs.size() - 1; j >= 0; j--) {
             Buff buff = buffs.get(j);
@@ -290,7 +346,7 @@ public abstract class Enemy {
         float pixelsMoved = getActualSpeed() / FRAMERATE;
         m.setMag(pixelsMoved);
         //don't move if no path
-        if (trail.size() > 0) position.add(m);
+        if (!trail.isEmpty()) position.add(m);
     }
 
     public float getActualSpeed() {
@@ -308,7 +364,7 @@ public abstract class Enemy {
                     sprite = attackFrames[attackFrame];
                     idleTime++;
                     if (attackFrame < attackFrames.length - 1) {
-                        if (idleTime >= betweenAttackFrames) {
+                        if (idleTime >= attackDelay) {
                             attackFrame += 1;
                             idleTime = 0;
                         }
@@ -316,7 +372,7 @@ public abstract class Enemy {
                 } case Moving -> {
                     idleTime++;
                     if (moveFrame < moveFrames.length - 1) {
-                        if (idleTime >= betweenWalkFrames) {
+                        if (idleTime >= walkDelay) {
                             moveFrame++;
                             idleTime = 0;
                         }
@@ -399,7 +455,7 @@ public abstract class Enemy {
         }
         int effectTimer = p.frameCount + 10;
         //prevent duplicates
-        if (buffs.size() > 0) {
+        if (!buffs.isEmpty()) {
             for (int j = 0; j < buffs.size(); j++) {
                 Buff buff = buffs.get(j);
                 if (buff.matches(this) && buff.name.equals(buffName)) {
@@ -530,7 +586,7 @@ public abstract class Enemy {
         boolean dmg = false;
         for (int frame : tempAttackDmgFrames) {
             if (attackFrame == frame) {
-                if (betweenAttackFrames > 1) attackCount++;
+                if (attackDelay > 1) attackCount++;
                 dmg = true;
                 break;
             }
@@ -568,96 +624,7 @@ public abstract class Enemy {
     }
 
     public static Enemy get(PApplet p, String name, PVector pos) {
-        switch (name) {
-            case "smolBug" -> {
-                return new SmolBug(p, pos.x, pos.y);
-            } case "midBug" -> {
-                return new MidBug(p, pos.x, pos.y);
-            } case "Big Bugs", "bigBug" -> {
-                return new BigBug(p, pos.x, pos.y);
-            } case "treeSprite" -> {
-                return new TreeSprite(p, pos.x, pos.y);
-            } case "Tree Spirits", "treeSpirit" -> {
-                return new TreeSpirit(p, pos.x, pos.y);
-            } case "Tree Giants", "treeGiant" -> {
-                return new TreeGiant(p, pos.x, pos.y);
-            } case "snake" -> {
-                return new Snake(p, pos.x, pos.y);
-            } case "littleWorm", "worm" -> {
-                return new Worm(p, pos.x, pos.y);
-            } case "butterfly" -> {
-                return new Butterfly(p, pos.x, pos.y);
-            } case "scorpion" -> {
-                return new Scorpion(p, pos.x, pos.y);
-            } case "sidewinder" -> {
-                return new Sidewinder(p, pos.x, pos.y);
-            } case "emperor" -> {
-                return new Emperor(p, pos.x, pos.y);
-            } case "midWorm" -> {
-                return new MidWorm(p, pos.x, pos.y);
-            } case "Worms", "Megaworms", "bigWorm" -> {
-                return new BigWorm(p, pos.x, pos.y);
-            } case "albinoBug" -> {
-                return new AlbinoBug(p, pos.x, pos.y);
-            } case "bigAlbinoBug" -> {
-                return new BigAlbinoBug(p, pos.x, pos.y);
-            } case "albinoButterfly" -> {
-                return new AlbinoButterfly(p, pos.x, pos.y);
-            } case "smallGolem" -> {
-                return new SmallGolem(p, pos.x, pos.y);
-            } case "midGolem", "golem" -> {
-                return new Golem(p, pos.x, pos.y);
-            } case "bigGolem", "giantGolem" -> {
-                return new GiantGolem(p, pos.x, pos.y);
-            } case "bat" -> {
-                return new Bat(p, pos.x, pos.y);
-            } case "bigBat" -> {
-                return new GiantBat(p, pos.x, pos.y);
-            } case "wtf" -> {
-                return new Wtf(p, pos.x, pos.y);
-            } case "antlion" -> {
-                return new Antlion(p, pos.x, pos.y);
-            } case "Antlions", "snowAntlion" -> {
-                return new SnowAntlion(p, pos.x, pos.y);
-            } case "Wolves", "wolf" -> {
-                return new Wolf(p, pos.x, pos.y);
-            } case "Snow Sharks", "shark" -> {
-                return new Shark(p, pos.x, pos.y);
-            } case "Velociraptors", "velociraptor" -> {
-                return new Velociraptor(p, pos.x, pos.y);
-            } case "Ice Entities", "iceEntity" -> {
-                return new IceEntity(p, pos.x, pos.y);
-            } case "Ice Monstrosity", "Ice Monstrosities", "iceMonstrosity" -> {
-                return new IceMonstrosity(p, pos.x, pos.y);
-            } case "Frost", "frost" -> {
-                return new Frost(p, pos.x, pos.y);
-            } case "Mammoth", "Mammoths", "mammoth" -> {
-                return new Mammoth(p, pos.x, pos.y);
-            } case "Mud Creatures", "mudCreature" -> {
-                return new MudCreature(p, pos.x, pos.y);
-            } case "Mud Flingers", "mudFlinger" -> {
-                return new MudFlinger(p, pos.x, pos.y);
-            } case "Enraged Giants", "Enraged Giant", "enragedGiant" -> {
-                return new EnragedGiant(p, pos.x, pos.y);
-            } case "Mantises", "Mantis", "mantis" -> {
-                return new Mantis(p, pos.x, pos.y);
-            } case "Roaches", "roach" -> {
-                return new Roach(p, pos.x, pos.y);
-            } case "Roots", "root" -> {
-                return new Root(p, pos.x, pos.y);
-            } case "Mantoids", "mantoid" -> {
-                return new Mantoid(p, pos.x, pos.y);
-            } case "Twisted", "twisted" -> {
-                return new Twisted(p, pos.x, pos.y);
-            } case "fae", "Fae" -> {
-                return new Fae(p, pos.x, pos.y);
-            } case "Mutant Bug", "Mutant Bugs" -> {
-                return new MutantBug(p, pos.x, pos.y);
-            } default -> {
-                System.out.println("Could not get enemy of type: \"" + name + "\"");
-                return null;
-            }
-        }
+        return EnemyFactory.get(p, name, pos);
     }
 
     //pathfinding ------------------------------------------------------------------------------------------------------
@@ -695,7 +662,7 @@ public abstract class Enemy {
     }
 
     public void swapPoints(boolean remove) {
-        if (trail.size() != 0) {
+        if (!trail.isEmpty()) {
             TurnPoint intersectingPoint = trail.get(trail.size() - 1);
             if (remove) {
                 if (intersectingPoint.combat) {
@@ -708,7 +675,7 @@ public abstract class Enemy {
                     trail.remove(intersectingPoint);
                 }
             }
-            if (trail.size() != 0) {
+            if (!trail.isEmpty()) {
                 PVector pointPosition = trail.get(trail.size() - 1).position;
                 pointPosition = new PVector(pointPosition.x + 12.5f, pointPosition.y + 12.5f);
                 pointPosition = new PVector(pointPosition.x + ((pfSize - 1) * 12.5f), pointPosition.y + ((pfSize - 1) * 12.5f));
@@ -734,7 +701,7 @@ public abstract class Enemy {
         TurnPoint backPoint = backPoint();
         if (backPoint != null) {
             backPoint.combat = true;
-            if (backPoint.towers != null && backPoint.towers.size() > 0) { //what the hell is this for??
+            if (backPoint.towers != null && !backPoint.towers.isEmpty()) { //what the hell is this for??
                 backPoint.tower = backPoint.towers.get(floor(backPoint.towers.size() / 2f));
             } else backPoint.tower = null;
         }
@@ -803,7 +770,7 @@ public abstract class Enemy {
     private TurnPoint backPoint() {
         TurnPoint bp = null;
         for (int i = trail.size() - 1; i >= 0; i--) {
-            if (trail.get(i).towers != null && trail.get(i).towers.size() > 0 || trail.get(i).machine) {
+            if (trail.get(i).towers != null && !trail.get(i).towers.isEmpty() || trail.get(i).machine) {
                 trail.get(i).combat = true;
                 if (i < trail.size() - 1) bp = trail.get(i + 1);
                 else bp = trail.get(i);

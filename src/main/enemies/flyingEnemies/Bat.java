@@ -23,10 +23,10 @@ public class Bat extends FlyingEnemy {
         name = "bat";
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(10);
+        attackDelay = down60ToFramerate(10);
         corpseSize = new PVector(50,50);
         partSize = new PVector(23, 23);
-        betweenWalkFrames = down60ToFramerate(7);
+        walkDelay = down60ToFramerate(7);
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("squeakSquish");
         dieSound = sounds.get("squeak");

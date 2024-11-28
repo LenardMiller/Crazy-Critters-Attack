@@ -21,8 +21,8 @@ public class Mantoid extends FlyingEnemy {
         hitParticle = HitParticle.greenOuch;
         name = "mantoid";
         attackDmgFrames = new int[]{12};
-        betweenWalkFrames = 2;
-        betweenAttackFrames = 2;
+        walkDelay = 2;
+        attackDelay = 2;
         corpseSize = size.copy();
         partSize = new PVector(38, 38);
         dieSound = sounds.get("bigCrunch");

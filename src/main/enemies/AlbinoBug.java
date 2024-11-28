@@ -21,8 +21,8 @@ public class AlbinoBug extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.glowOuch;
         name = "albinoBug";
-        betweenWalkFrames = down60ToFramerate(6);
-        betweenAttackFrames = down60ToFramerate(2);
+        walkDelay = down60ToFramerate(6);
+        attackDelay = down60ToFramerate(2);
         attackDmgFrames = new int[]{9};
         corpseSize = size;
         partSize = new PVector(14,14);

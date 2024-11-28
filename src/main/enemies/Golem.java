@@ -21,8 +21,8 @@ public class Golem extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.lichenOuch;
         name = "golem";
-        betweenAttackFrames = down60ToFramerate(2);
-        betweenWalkFrames = down60ToFramerate(3);
+        attackDelay = down60ToFramerate(2);
+        walkDelay = down60ToFramerate(3);
         attackDmgFrames = new int[]{22};
         corpseSize = new PVector(84,84);
         partSize = new PVector(36,36);

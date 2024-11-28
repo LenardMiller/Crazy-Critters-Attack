@@ -23,8 +23,8 @@ public class TreeGiant extends Enemy {
         name = "treeGiant";
         attackDmgFrames = new int[]{28};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(4);
-        betweenWalkFrames = down60ToFramerate(3);
+        attackDelay = down60ToFramerate(4);
+        walkDelay = down60ToFramerate(3);
         corpseSize = new PVector(152,152);
         partSize = new PVector(68,68);
         corpseLifespan = 12;

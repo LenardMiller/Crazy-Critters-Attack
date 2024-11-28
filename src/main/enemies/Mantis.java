@@ -21,9 +21,9 @@ public class Mantis extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "mantis";
-        betweenWalkFrames = down60ToFramerate(13);
+        walkDelay = down60ToFramerate(13);
         attackDmgFrames = new int[]{12};
-        betweenAttackFrames = 1;
+        attackDelay = 1;
         corpseSize = size;
         partSize = new PVector(30,30);
         dieSound = sounds.get("bigCrunch");

@@ -27,8 +27,8 @@ public class Antlion extends ShootingEnemy {
         name = "antlion";
         attackSound = sounds.get("bugGrowlVeryQuick");
         shootSound = sounds.get("spit");
-        betweenWalkFrames = down60ToFramerate(10);
-        betweenAttackFrames = down60ToFramerate(12);
+        walkDelay = down60ToFramerate(10);
+        attackDelay = down60ToFramerate(12);
         betweenShootFrames = down60ToFramerate(12);
         attackDmgFrames = new int[]{6};
         shootFireFrame = 6;

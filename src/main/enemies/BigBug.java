@@ -21,7 +21,7 @@ public class BigBug extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "bigBug";
-        betweenWalkFrames = down60ToFramerate(13);
+        walkDelay = down60ToFramerate(13);
         attackDmgFrames = new int[]{9};
         corpseSize = size;
         partSize = new PVector(32,32);

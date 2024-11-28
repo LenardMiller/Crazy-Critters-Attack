@@ -27,8 +27,8 @@ public class MudFlinger extends ShootingEnemy {
         name = "mudFlinger";
         shootSound = sounds.get("spit");
         attackSound = sounds.get("slime");
-        betweenWalkFrames = down60ToFramerate(10);
-        betweenAttackFrames = down60ToFramerate(8);
+        walkDelay = down60ToFramerate(10);
+        attackDelay = down60ToFramerate(8);
         betweenShootFrames = down60ToFramerate(8);
         attackDmgFrames = new int[]{9};
         shootFireFrame = 9;

@@ -27,8 +27,8 @@ public class SnowAntlion extends ShootingEnemy {
         name = "snowAntlion";
         shootSound = sounds.get("spit");
         attackSound = sounds.get("bugGrowlVeryQuick");
-        betweenWalkFrames = down60ToFramerate(10);
-        betweenAttackFrames = down60ToFramerate(12);
+        walkDelay = down60ToFramerate(10);
+        attackDelay = down60ToFramerate(12);
         betweenShootFrames = down60ToFramerate(12);
         attackDmgFrames = new int[]{6};
         shootFireFrame = 6;

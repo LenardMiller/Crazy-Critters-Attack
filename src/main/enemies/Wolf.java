@@ -23,8 +23,8 @@ public class Wolf extends Enemy {
         name = "wolf";
         attackDmgFrames = new int[]{8};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(5);
-        betweenWalkFrames = down60ToFramerate(10);
+        attackDelay = down60ToFramerate(5);
+        walkDelay = down60ToFramerate(10);
         corpseSize = size;
         partSize = new PVector(25,25);
         overkillSound = sounds.get("barkSquish");

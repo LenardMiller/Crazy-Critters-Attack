@@ -23,7 +23,7 @@ public class BigWorm extends BurrowingEnemy {
         name = "bigWorm";
         attackDmgFrames = new int[]{29};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(4);
+        attackDelay = down60ToFramerate(4);
         partSize = new PVector(31, 31);
         corpseSize = new PVector(50, 50);
         overkillSound = sounds.get("squash");

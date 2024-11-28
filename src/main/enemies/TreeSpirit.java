@@ -21,8 +21,8 @@ public class TreeSpirit extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.leafOuch;
         name = "treeSpirit";
-        betweenAttackFrames = down60ToFramerate(2);
-        betweenWalkFrames = down60ToFramerate(3);
+        attackDelay = down60ToFramerate(2);
+        walkDelay = down60ToFramerate(3);
         attackDmgFrames = new int[]{22};
         corpseSize = new PVector(84,84);
         partSize = new PVector(38,38);

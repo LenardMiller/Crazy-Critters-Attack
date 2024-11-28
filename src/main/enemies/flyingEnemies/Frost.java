@@ -28,7 +28,7 @@ public class Frost extends FlyingEnemy {
         hp = maxHp;
         hitParticle = HitParticle.iceOuch;
         name = "frost";
-        betweenAttackFrames = 8;
+        attackDelay = 8;
         dieSound = sounds.get("frostDie");
         overkillSound = sounds.get("frostDie");
         attackFrames = animatedSprites.get("wolf" + "AttackEN"); //these exist solely because of glue
@@ -70,7 +70,7 @@ public class Frost extends FlyingEnemy {
         boolean dmg = false;
         for (int frame : tempAttackDmgFrames) {
             if (attackFrame == frame) {
-                if (betweenAttackFrames > 1) attackCount++;
+                if (attackDelay > 1) attackCount++;
                 dmg = true;
                 break;
             }
@@ -117,7 +117,7 @@ public class Frost extends FlyingEnemy {
                 if (attackFrame >= attackFrames.length) attackFrame = 0;
                 idleTime++;
                 if (attackFrame < attackFrames.length - 1) {
-                    if (idleTime >= betweenAttackFrames) {
+                    if (idleTime >= attackDelay) {
                         attackFrame += 1;
                         idleTime = 0;
                     }

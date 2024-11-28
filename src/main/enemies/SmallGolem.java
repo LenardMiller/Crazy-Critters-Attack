@@ -21,8 +21,8 @@ public class SmallGolem extends Enemy{
         hp = maxHp;
         hitParticle = HitParticle.lichenOuch;
         name = "smallGolem";
-        betweenAttackFrames = down60ToFramerate(2);
-        betweenWalkFrames = down60ToFramerate(3);
+        attackDelay = down60ToFramerate(2);
+        walkDelay = down60ToFramerate(3);
         attackDmgFrames = new int[]{12};
         corpseSize = new PVector(50,50);
         partSize = new PVector(24,24);

@@ -23,10 +23,10 @@ public class GiantBat extends FlyingEnemy {
         name = "giantBat";
         attackDmgFrames = new int[]{3};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(12);
+        attackDelay = down60ToFramerate(12);
         corpseSize = new PVector(100,100);
         partSize = new PVector(50, 50);
-        betweenWalkFrames = down60ToFramerate(11);
+        walkDelay = down60ToFramerate(11);
         betweenCorpseFrames = down60ToFramerate(4);
         overkillSound = sounds.get("bigSqueakSquash");
         dieSound = sounds.get("bigSqueak");

@@ -21,8 +21,8 @@ public class Emperor extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.greenOuch;
         name = "emperor";
-        betweenAttackFrames = down60ToFramerate(10);
-        betweenWalkFrames = down60ToFramerate(12);
+        attackDelay = down60ToFramerate(10);
+        walkDelay = down60ToFramerate(12);
         attackDmgFrames = new int[]{7};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
         corpseSize = size;
