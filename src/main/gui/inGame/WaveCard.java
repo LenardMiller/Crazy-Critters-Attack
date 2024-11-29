@@ -45,9 +45,9 @@ public class WaveCard {
         this.textColor = textColor;
         this.title = title;
 
-        burrowingIcon = staticSprites.get("burrowingTypeIc");
-        flyingIcon = staticSprites.get("flyingTypeIc");
-        shootingIcon = staticSprites.get("shootingTypeIc");
+        burrowingIcon = staticSprites.get("burrowingIc");
+        flyingIcon = staticSprites.get("flyingIc");
+        shootingIcon = staticSprites.get("shootingIc");
 
         position = new PVector(-200, WINDOW_HEIGHT);
     }

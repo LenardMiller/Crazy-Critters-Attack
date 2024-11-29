@@ -51,7 +51,7 @@ public class Glued extends Buff {
 
             //profit
             for (int i = 0; i < target.tempAttackDmgFrames.length; i++) {
-                target.tempAttackDmgFrames[i] /= (int) effectLevel;
+                target.tempAttackDmgFrames[i] /= effectLevel;
             }
             target.attackFrame = Math.round((float) target.attackFrame * (1 / effectLevel));
             target.attackFrames = expandedPImages;

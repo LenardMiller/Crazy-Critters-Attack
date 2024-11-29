@@ -65,6 +65,7 @@ public class Main extends PApplet {
     public static Level[] levels;
 
     public static CompressArray compress;
+    public static ResourceLoader resourceLoader;
 
     public static Game game;
     public static Hand hand;
@@ -175,6 +176,7 @@ public class Main extends PApplet {
         sound = new Sound(this);
         imageMode(DEFAULT_MODE);
         rectMode(DEFAULT_MODE);
+        resourceLoader = new ResourceLoader(this);
         //fonts
         title = createFont("STHeitiSC-Medium", 48, true);
         //load input

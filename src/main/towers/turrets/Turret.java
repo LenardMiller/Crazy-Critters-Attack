@@ -419,9 +419,9 @@ public abstract class Turret extends Tower {
         if (nextLevelB > 5 || nextLevelA > 2) return;
 
         if (money >= upgradePrices[nextLevelA] && money >= upgradePrices[nextLevelB]) {
-            p.image(staticSprites.get("upgradePromptOverlay2Ic"), tile.position.x - size.x, tile.position.y - size.y);
+            p.image(staticSprites.get("upgradePrompt2Ic"), tile.position.x - size.x, tile.position.y - size.y);
         } else if (money >= upgradePrices[nextLevelA] || money >= upgradePrices[nextLevelB]) {
-            p.image(staticSprites.get("upgradePromptOverlayIc"), tile.position.x - size.x, tile.position.y - size.y);
+            p.image(staticSprites.get("upgradePromptIc"), tile.position.x - size.x, tile.position.y - size.y);
         }
     }
 

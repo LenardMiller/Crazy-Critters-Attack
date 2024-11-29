@@ -9,8 +9,7 @@ import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PVector;
 
-import static main.Main.profiler;
-import static main.Main.transition;
+import static main.Main.*;
 import static main.misc.SpriteLoader.*;
 import static main.sound.SoundLoader.loadSounds;
 
@@ -43,26 +42,29 @@ public class LoadingGui {
                 Main.monoMedium = p.createFont("fonts/IBMPlexMono-Medium.ttf", 16, true);
                 Main.monoSmall = p.createFont("fonts/IBMPlexMono-Medium.ttf", 14, true);
                 profiler.finishProfiling("loading: fonts");
+
+                //TEMP
+                resourceLoader.loadSprites();
                 break;
             case 1:
-                profiler.startProfilingSingle("loading: gui sprites");
-                loadGui(p);
-                profiler.finishProfiling("loading: gui sprites");
+//                profiler.startProfilingSingle("loading: gui sprites");
+//                loadGui(p);
+//                profiler.finishProfiling("loading: gui sprites");
                 break;
             case 2:
-                profiler.startProfilingSingle("loading: enemy sprites");
-                loadEnemies(p);
-                profiler.finishProfiling("loading: enemy sprites");
+//                profiler.startProfilingSingle("loading: enemy sprites");
+//                loadEnemies(p);
+//                profiler.finishProfiling("loading: enemy sprites");
                 break;
             case 3:
-                profiler.startProfilingSingle("loading: machine sprites");
-                loadMachines(p);
-                profiler.finishProfiling("loading: machine sprites");
+//                profiler.startProfilingSingle("loading: machine sprites");
+//                loadMachines(p);
+//                profiler.finishProfiling("loading: machine sprites");
                 break;
             case 4:
-                profiler.startProfilingSingle("loading: particle sprites");
-                loadParticles(p);
-                profiler.finishProfiling("loading: particle sprites");
+//                profiler.startProfilingSingle("loading: particle sprites");
+//                loadParticles(p);
+//                profiler.finishProfiling("loading: particle sprites");
                 break;
             case 5:
                 profiler.startProfilingSingle("loading: projectile sprites");
