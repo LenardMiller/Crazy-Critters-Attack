@@ -214,7 +214,7 @@ public abstract class Tower {
                         "greenPuff"));
             }
         }
-        hp += proportionHealed * getMaxHp();
+        hp += (int) (proportionHealed * getMaxHp());
         if (hp > getMaxHp()) hp = getMaxHp();
     }
 
@@ -260,7 +260,7 @@ public abstract class Tower {
 
     protected void displayBoost() {
         if (this instanceof IceWall) return;
-        if (!(boosts.size() > 0 && p.random(30) < 1)) return;
+        if (!(!boosts.isEmpty() && p.random(30) < 1)) return;
         topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
           p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
         if (hasBoostedDeathEffect()) {
@@ -285,7 +285,7 @@ public abstract class Tower {
     }
 
     public boolean hasBoostedDeathEffect() {
-        if (name.equals("explosiveBooster")) return true;
+        if (name.equals("boosterExplosive")) return true;
         for (Booster.Boost boost : boosts) {
             if (boost.deathEffect) return true;
         }

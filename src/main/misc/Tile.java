@@ -11,6 +11,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Utilities.roundTo;
 import static main.pathfinding.PathfindingUtilities.updateAll;
 
@@ -24,15 +25,7 @@ public class Tile {
         public abstract void display();
         public abstract void set(String name);
     }
-
-    private static PImage getSprite(String key) {
-        PImage v = staticSprites.get(key);
-        if (v == null) {
-            System.out.println("tile sprite missing: " + key);
-        }
-        return v;
-    }
-
+    
     public class BaseLayer extends Layer {
 
         PImage[] spill;
@@ -63,7 +56,7 @@ public class Tile {
         public void set(String name) {
             name = name.replace("Ba_Tl", "");
             this.name = name;
-            sprite = getSprite(name + "Ba_Tl");
+            sprite = getResource(name + "Ba_Tl", staticSprites);
             // nullable, don't flood output
             spill[0] = staticSprites.get(name + "Ba_T_Tl");
             spill[1] = staticSprites.get(name + "Ba_R_Tl");
@@ -158,13 +151,13 @@ public class Tile {
                 name = name.replace("Fl_Tl", "");
                 name = name.replace("ultimate", "titanium");
                 this.name = name;
-                if (getSprite(name + "Fl_Tl") != sprite) {
-                    sprite = getSprite(name + "Fl_Tl");
+                if (getResource(name + "Fl_Tl", staticSprites) != sprite) {
+                    sprite = getResource(name + "Fl_Tl", staticSprites);
                     if (name.contains("woodWall") || name.contains("stoneWall")) {
-                        edges[0] = getSprite(name + "Fl_T_Tl");
-                        edges[1] = getSprite(name + "Fl_R_Tl");
-                        edges[2] = getSprite(name + "Fl_B_Tl");
-                        edges[3] = getSprite(name + "Fl_L_Tl");
+                        edges[0] = getResource(name + "Fl_T_Tl", staticSprites);
+                        edges[1] = getResource(name + "Fl_R_Tl", staticSprites);
+                        edges[2] = getResource(name + "Fl_B_Tl", staticSprites);
+                        edges[3] = getResource(name + "Fl_L_Tl", staticSprites);
                     }
                 }
             }
@@ -209,22 +202,22 @@ public class Tile {
             drawMain = true;
             if (x != 18 && y != 0) {
                 if (doubleDiagonalIn(x, y, 1, -1, name)) { //tri
-                    insideCorners[0] = getSprite(name + "Fl_TRI_Tl");
+                    insideCorners[0] = getResource(name + "Fl_TRI_Tl", staticSprites);
                     drawMain = false;
                 }
             } if (x != 18 && y != 18) {
                 if (doubleDiagonalIn(x, y, 1, 1, name)) { //bri
-                    insideCorners[1] = getSprite(name + "Fl_BRI_Tl");
+                    insideCorners[1] = getResource(name + "Fl_BRI_Tl", staticSprites);
                     drawMain = false;
                 }
             } if (x != 0 && y != 18) {
                 if (doubleDiagonalIn(x, y, -1, 1, name)) { //bli
-                    insideCorners[2] = getSprite(name + "Fl_BLI_Tl");
+                    insideCorners[2] = getResource(name + "Fl_BLI_Tl", staticSprites);
                     drawMain = false;
                 }
             } if (x != 0 && y != 0) {
                 if (doubleDiagonalIn(x, y, -1, -1, name)) { //tli
-                    insideCorners[3] = getSprite(name + "Fl_TLI_Tl");
+                    insideCorners[3] = getResource(name + "Fl_TLI_Tl", staticSprites);
                     drawMain = false;
                 }
             }
@@ -234,7 +227,7 @@ public class Tile {
                 if (s.equals("BRI")) i = 1;
                 if (s.equals("BLI")) i = 2;
                 if (s.equals("TLI")) i = 3;
-                insideCorners[i] = getSprite(name + "Fl_" + s + "_Tl");
+                insideCorners[i] = getResource(name + "Fl_" + s + "_Tl", staticSprites);
                 drawMain = false;
             }
             if (countTouchingVN(x,y) > 2) drawMain = true;
@@ -274,25 +267,25 @@ public class Tile {
             if (x != 18 && y != 0) { //tro
                 String n = doubleDiagonalOut(x,y,1,-1);
                 if (n != null) {
-                    outsideCorners[0] = getSprite(n + "Fl_TRO_Tl");
+                    outsideCorners[0] = getResource(n + "Fl_TRO_Tl", staticSprites);
                     outsideCornerNames[0] = n;
                 }
             } if (x != 18 && y != 18) { //bro
                 String n = doubleDiagonalOut(x,y,1,1);
                 if (n != null) {
-                    outsideCorners[1] = getSprite(n + "Fl_BRO_Tl");
+                    outsideCorners[1] = getResource(n + "Fl_BRO_Tl", staticSprites);
                     outsideCornerNames[1] = n;
                 }
             } if (x != 0 && y != 18) { //blo
                 String n = doubleDiagonalOut(x,y,-1,1);
                 if (n != null) {
-                    outsideCorners[2] = getSprite(n + "Fl_BLO_Tl");
+                    outsideCorners[2] = getResource(n + "Fl_BLO_Tl", staticSprites);
                     outsideCornerNames[2] = n;
                 }
             } if (x != 0 && y != 0) { //tlo
                 String n = doubleDiagonalOut(x,y,-1,-1);
                 if (n != null) {
-                    outsideCorners[3] = getSprite(n + "Fl_TLO_Tl");
+                    outsideCorners[3] = getResource(n + "Fl_TLO_Tl", staticSprites);
                     outsideCornerNames[3] = n;
                 }
             }
@@ -411,7 +404,7 @@ public class Tile {
                 sprite = null;
                 this.name = null;
             } else {
-                sprite = getSprite(name);
+                sprite = getResource(name, staticSprites);
                 this.name = name;
             }
         }
@@ -432,7 +425,7 @@ public class Tile {
                 sprite = null;
                 this.name = null;
             } else {
-                sprite = getSprite(name);
+                sprite = getResource(name, staticSprites);
                 this.name = name;
             }
         }
@@ -468,7 +461,7 @@ public class Tile {
                 flooringLayer.set(null);
                 breakableLayer.set(null);
                 if (this.name == null) updateAll();
-                sprite = getSprite(name);
+                sprite = getResource(name, staticSprites);
                 this.name = name;
                 if (name.contains("smallTree")) obstacleShadowLength = 3;
                 if (name.contains("smallYellowTree")) obstacleShadowLength = 3;

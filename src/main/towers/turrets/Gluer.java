@@ -153,7 +153,7 @@ public class Gluer extends Turret {
                     range += 50;
                     delay -= 1;
                     splatter = true;
-                    name = "splashGluer";
+                    name = "gluerSplasher";
                     titleLines = new String[]{"Glue Splasher"};
                     extraInfo.remove(0);
                     extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
@@ -170,7 +170,7 @@ public class Gluer extends Turret {
                     damage += 65;
                     effectLevel = 0.5f;
                     spikey = true;
-                    name = "shatterGluer";
+                    name = "gluerSpiker";
                     material = Material.metal;
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");

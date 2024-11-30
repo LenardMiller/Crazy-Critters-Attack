@@ -22,7 +22,7 @@ import static main.sound.SoundUtilities.playSound;
 
 public class Hand {
 
-    enum DisplayInfo {
+    public enum DisplayInfo {
         UpgradeWall,
         MaxWallUpgrade,
         PlaceWall
@@ -65,7 +65,7 @@ public class Hand {
         else implacable = false;
         if (!isPaused) {
             if (inputHandler.rightMousePressedPulse) remove();
-            if ((clickOnSidebar() || rclickNotWall())) clearHand();
+            if ((clickOnSidebar() || rClickNotWall())) clearHand();
             if (inputHandler.leftMousePressedPulse) tryPlace();
         }
     }
@@ -116,7 +116,7 @@ public class Hand {
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;
     }
 
-    private boolean rclickNotWall() {
+    private boolean rClickNotWall() {
         return inputHandler.rightMousePressedPulse && !held.equals("wall");
     }
 
@@ -139,7 +139,7 @@ public class Hand {
     }
 
     private boolean enemyNearby() {
-        if (enemies.size() == 0) return false;
+        if (enemies.isEmpty()) return false;
         for (Enemy enemy : enemies) {
             if (findDistBetween(
                     enemy.position,
@@ -197,7 +197,7 @@ public class Hand {
     }
 
     private void displayCritterCircles() {
-        if (enemies.size() == 0) return;
+        if (enemies.isEmpty()) return;
         for (Enemy enemy : enemies) {
             if (findDistBetween(
                     enemy.position,
@@ -307,63 +307,63 @@ public class Hand {
     public void setHeld(String heldSet) {
         switch (heldSet) {
             case "slingshot" -> {
-                heldSprite = staticSprites.get("slingshotFullTR");
+                heldSprite = staticSprites.get("slingshotFullTr");
                 offset = new PVector(0, 0);
                 price = Slingshot.price;
             } case "crossbow" -> {
-                heldSprite = staticSprites.get("crossbowFullTR");
+                heldSprite = staticSprites.get("crossbowFullTr");
                 offset = new PVector(2, 2);
                 price = Crossbow.price;
             } case "miscCannon" -> {
-                heldSprite = staticSprites.get("miscCannonFullTR");
+                heldSprite = staticSprites.get("miscCannonFullTr");
                 offset = new PVector(0, 0);
                 price = RandomCannon.price;
             } case "cannon" -> {
-                heldSprite = staticSprites.get("cannonFullTR");
+                heldSprite = staticSprites.get("cannonFullTr");
                 offset = new PVector(5, 5);
                 price = Cannon.price;
             } case "gluer" -> {
-                heldSprite = staticSprites.get("gluerFullTR");
+                heldSprite = staticSprites.get("gluerFullTr");
                 offset = new PVector(0, 0);
                 price = Gluer.price;
             } case "seismic" -> {
-                heldSprite = staticSprites.get("seismicFullTR");
+                heldSprite = staticSprites.get("seismicFullTr");
                 offset = new PVector(4, 4);
                 price = SeismicTower.price;
             } case "energyBlaster" -> {
-                heldSprite = staticSprites.get("energyBlasterFullTR");
+                heldSprite = staticSprites.get("energyBlasterFullTr");
                 offset = new PVector(13, 13);
                 price = EnergyBlaster.price;
             } case "magicMissleer" -> {
-                heldSprite = staticSprites.get("magicMissleerFullTR");
+                heldSprite = staticSprites.get("magicMissleerFullTr");
                 offset = new PVector(0, 0);
                 price = MagicMissileer.price;
             } case "tesla" -> {
-                heldSprite = staticSprites.get("teslaFullTR");
+                heldSprite = staticSprites.get("teslaFullTr");
                 offset = new PVector(0, 0);
                 price = TeslaTower.price;
             } case "nightmare" -> {
-                heldSprite = staticSprites.get("nightmareFullTR");
+                heldSprite = staticSprites.get("nightmareFullTr");
                 offset = new PVector(0, 0);
                 price = Nightmare.price;
             } case "flamethrower" -> {
-                heldSprite = staticSprites.get("flamethrowerFullTR");
+                heldSprite = staticSprites.get("flamethrowerFullTr");
                 offset = new PVector(7, 7);
                 price = Flamethrower.price;
             } case "iceTower" -> {
-                heldSprite = staticSprites.get("iceTowerFullTR");
+                heldSprite = staticSprites.get("iceTowerFullTr");
                 offset = new PVector(0, 0);
                 price = IceTower.price;
             } case "booster" -> {
-                heldSprite = staticSprites.get("boosterFullTR");
+                heldSprite = staticSprites.get("boosterFullTr");
                 offset = new PVector(0, 0);
                 price = Booster.price;
             } case "railgun" -> {
-                heldSprite = staticSprites.get("railgunFullTR");
+                heldSprite = staticSprites.get("railgunFullTr");
                 offset = new PVector(6, 6);
                 price = Railgun.price;
             } case "waveMotion" -> {
-                heldSprite = staticSprites.get("waveMotionFullTR");
+                heldSprite = staticSprites.get("waveMotionFullTr");
                 offset = new PVector(14, 14);
                 price = WaveMotion.price;
             } case "wall" -> {

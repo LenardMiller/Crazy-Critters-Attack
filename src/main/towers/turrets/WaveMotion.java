@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Utilities.*;
 
 public class WaveMotion extends Turret {
@@ -60,12 +61,12 @@ public class WaveMotion extends Turret {
 
     @Override
     protected void loadSprites() {
-        sBase = staticSprites.get(name + "BaseTR");
-        idleSprite = staticSprites.get(name + "IdleTR");
-        beam = animatedSprites.get("waveMotionBeamTR");
-        fireFrames = animatedSprites.get(name + "FireTR");
-        loadFrames = animatedSprites.get(name + "LoadTR");
-        idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
+        sBase = getResource(name + "BaseTr", staticSprites);
+        idleSprite = getResource(name + "IdleTr", staticSprites);
+        beam = getResource("waveMotionBeamTR", animatedSprites);
+        fireFrames = getResource(name + "FireTR", animatedSprites);
+        loadFrames = getResource(name + "LoadTR", animatedSprites);
+        idleFrames = new PImage[]{idleSprite};
         sprite = idleFrames[0];
 
         ArrayList<Integer> compressedFireFrames = new ArrayList<>();

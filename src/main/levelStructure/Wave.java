@@ -87,7 +87,7 @@ public class Wave {
         }
         machine.heal(0.05f);
         for (Tower tower : towers) {
-            if (tower.name.equals("moneyBooster")) ((Booster) tower).giveMoney();
+            if (tower.name.equals("booosterMoney")) ((Booster) tower).giveMoney();
         }
         playSound(sounds.get("waveEnd"), 1, 1);
         int reward = getReward();
@@ -105,7 +105,7 @@ public class Wave {
 
     /** Calculates the time between spawns. */
     void load() {
-        if (spawns.size() > 0) betweenSpawns = spawnLength / spawns.size();
+        if (!spawns.isEmpty()) betweenSpawns = spawnLength / spawns.size();
     }
 
     void addSpawns(String enemy, int count) {
@@ -118,7 +118,7 @@ public class Wave {
         betweenSpawnTimer++;
         spawnLengthTimer++;
         lengthTimer++;
-        if (spawns.size() == 0 || betweenSpawnTimer < betweenSpawns) return;
+        if (spawns.isEmpty() || betweenSpawnTimer < betweenSpawns) return;
 
         betweenSpawnTimer = 0;
         String s = spawns.get(spawns.size() - 1);

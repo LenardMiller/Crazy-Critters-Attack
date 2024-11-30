@@ -96,7 +96,7 @@ public class IceTower extends Turret {
             tile.tower = null;
         }
         updateBoosts();
-        if ((enemies.size() > 0 && !machine.dead && !isPaused) || name.equals("autoIceTower")) checkTarget();
+        if ((!enemies.isEmpty() && !machine.dead && !isPaused) || name.equals("iceTowerAuto")) checkTarget();
         if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
                 && boardMousePosition.y > tile.position.y - size.y && alive && !isPaused) {
             selection.swapSelected(tile.id);
@@ -105,7 +105,7 @@ public class IceTower extends Turret {
 
     @Override
     protected void checkTarget() {
-        if (name.equals("autoIceTower")) {
+        if (name.equals("iceTowerAuto")) {
             if (state == State.Idle) {
                 state = State.Fire;
                 frame = 0;
@@ -155,7 +155,7 @@ public class IceTower extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-        if (name.equals("autoIceTower")) {
+        if (name.equals("iceTowerAuto")) {
             Tile targetTile = selectTargetTile();
             if (targetTile != null) {
                 placeWall(targetTile);
@@ -176,7 +176,7 @@ public class IceTower extends Turret {
         targetEnemy.damageWithoutBuff(getDamage(), this, Enemy.DamageType.frozen, PVector.fromAngle(angle), damage > 0);
 
         int targetSize = ceil(targetEnemy.pfSize / 2f);
-        if (name.equals("superIceTower") && targetSize > 1) {
+        if (name.equals("iceTowerSuper") && targetSize > 1) {
             IntVector targetTopLeft = worldPositionToTowerGridPosition(
                     PVector.add(
                             PVector.sub(
@@ -320,7 +320,7 @@ public class IceTower extends Turret {
                 case 0 -> wallTimeUntilDamage += 15;
                 case 1 -> wallHp += 40;
                 case 2 -> {
-                    name = "autoIceTower";
+                    name = "iceTowerAuto";
                     range = 5000;
                     wallTimeUntilDamage = -1;
                     angle = 0;
@@ -341,7 +341,7 @@ public class IceTower extends Turret {
                 case 3 -> range += 50;
                 case 4 -> delay -= 3;
                 case 5 -> {
-                    name = "superIceTower";
+                    name = "iceTowerSuper";
                     material = Material.titanium;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");

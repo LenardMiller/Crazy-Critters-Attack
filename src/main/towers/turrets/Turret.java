@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Utilities.*;
 import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
@@ -295,16 +296,16 @@ public abstract class Turret extends Tower {
     protected abstract void spawnProjectiles(PVector position, float angle);
 
     protected void loadSprites() {
-        sBase = staticSprites.get(name + "BaseTR");
-        idleSprite = staticSprites.get(name + "IdleTR");
-        fireFrames = animatedSprites.get(name + "FireTR");
-        loadFrames = animatedSprites.get(name + "LoadTR");
-        if (animatedSprites.get(name + "IdleTR") != null) {
-            idleFrames = animatedSprites.get(name + "IdleTR");
+        sBase = getResource(name + "BaseTr", staticSprites);
+        fireFrames = getResource(name + "FireTR", animatedSprites);
+        loadFrames = getResource(name + "LoadTR", animatedSprites);
+        if (animatedSprites.containsKey(name + "IdleTR")) {
+            idleFrames = getResource(name + "IdleTR", animatedSprites);
             idleSprite = idleFrames[0];
             sprite = idleSprite;
-        }  else {
-            idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
+        } else {
+            idleSprite = getResource(name + "IdleTr", staticSprites);
+            idleFrames = new PImage[]{idleSprite};
             sprite = idleFrames[0];
         }
     }

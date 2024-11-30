@@ -7,6 +7,7 @@ import processing.core.PImage;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
@@ -18,77 +19,85 @@ public class ResourceLoader {
         this.p = p;
     }
 
+    public static <T> T getResource(String key, HashMap<String, T> map) {
+        T r = map.get(key);
+        if (r == null) {
+            System.err.println("Failed to get resource '" + key + "'");
+        }
+        return r;
+    }
+
     public void loadSprites() {
         new Walker(
                 "sprites",
                 ".png",
                 /* Trying to wrangle my horrible and inconsistent naming conventions */
-                (path, names) -> {
+                (path, files) -> {
                     PImage image = p.loadImage(path);
                     StringBuilder key = new StringBuilder();
-                    String suffix;
-                    switch (names[0]) {
+                    String suffix = "";
+                    switch (files[0]) {
                         case "enemies" -> {
-                            key = new StringBuilder(names[1] + Utilities.capitalize(names[2]));
+                            key = new StringBuilder(files[1] + Utilities.capitalize(files[2]));
                             suffix = "EN";
                         } case "gui" -> {
-                            if (Objects.equals(names[1], "buttons")) {
-                                key = new StringBuilder(names[2]);
+                            if (Objects.equals(files[1], "buttons")) {
+                                key = new StringBuilder(files[2]);
                                 suffix = "BT";
-                            } else if (Objects.equals(names[1], "panels")) {
-                                key = new StringBuilder(names[2]);
+                            } else if (Objects.equals(files[1], "panels")) {
+                                key = new StringBuilder(files[2]);
                                 suffix = "PN";
                             } else {
-                                if (names[names.length-1].matches("[0-9][0-9][0-9]")) {
-                                    key = new StringBuilder(names[names.length - 2]);
+                                if (files[files.length-1].matches("[0-9][0-9][0-9]")) {
+                                    key = new StringBuilder(files[files.length - 2]);
                                 } else {
-                                    key = new StringBuilder(names[names.length - 1]);
+                                    key = new StringBuilder(files[files.length - 1]);
                                 }
                                 suffix = "IC";
                             }
                         } case "machines" -> {
-                            if (Objects.equals(names[2], "base")) {
-                                key = new StringBuilder(names[1]);
+                            if (Objects.equals(files[2], "base")) {
+                                key = new StringBuilder(files[1]);
                             } else {
-                                key = new StringBuilder(names[1] + names[2]);
+                                key = new StringBuilder(files[1] + files[2]);
                             }
                             suffix = "MA";
                         } case "particles" -> {
-                            if (names.length == 4) {
-                                key = new StringBuilder(names[2] + Utilities.capitalize(names[1]));
+                            if (files.length == 4) {
+                                key = new StringBuilder(files[2] + Utilities.capitalize(files[1]));
                             } else {
-                                if (Objects.equals(names[1], "debris")) {
-                                    key = new StringBuilder(names[2]);
+                                if (Objects.equals(files[1], "debris")) {
+                                    key = new StringBuilder(files[2]);
                                 } else {
-                                    key = new StringBuilder(names[1]);
+                                    key = new StringBuilder(files[1]);
                                 }
                             }
                             suffix = "PT";
                         } case "projectiles" -> {
-                            key = new StringBuilder(names[1]);
+                            key = new StringBuilder(files[1]);
                             suffix = "PJ";
                         } case "tiles" -> {
-                            switch (names[1]) {
+                            switch (files[1]) {
                                 case "base" -> {
-                                    key = new StringBuilder(names[2] + "Ba_");
-                                    if (names.length == 4 && !Objects.equals(names[names.length - 1], "base")) {
-                                        key.append(names[names.length - 1].toUpperCase()).append("_");
+                                    key = new StringBuilder(files[2] + "Ba_");
+                                    if (files.length == 4 && !Objects.equals(files[files.length - 1], "base")) {
+                                        key.append(files[files.length - 1].toUpperCase()).append("_");
                                     }
                                 } case "breakables" -> {
-                                    if (names.length == 4) {
-                                        if (names[names.length-1].matches("[0-9]")) {
-                                            key = new StringBuilder(names[2] + names[3]);
+                                    if (files.length == 4) {
+                                        if (files[files.length-1].matches("[0-9]")) {
+                                            key = new StringBuilder(files[2] + files[3]);
                                         } else {
-                                            key = new StringBuilder(names[3] + Utilities.capitalize(names[2]));
+                                            key = new StringBuilder(files[3] + Utilities.capitalize(files[2]));
                                         }
                                     } else {
-                                        key = new StringBuilder(names[2]);
+                                        key = new StringBuilder(files[2]);
                                     }
                                     key.append("Br_");
                                 } case "decoration" -> {
-                                    key = new StringBuilder(names[2]);
-                                    if (names.length == 4) {
-                                        String k = names[3];
+                                    key = new StringBuilder(files[2]);
+                                    if (files.length == 4) {
+                                        String k = files[3];
                                         if (k.matches("[tb][lr]d?")) {
                                             k = k.toUpperCase();
                                         } else {
@@ -98,15 +107,15 @@ public class ResourceLoader {
                                     }
                                     key.append("De_");
                                 } case "flooring" -> {
-                                    key = new StringBuilder(names[2] + "Fl_");
-                                    if (!Objects.equals(names[3], "base")) {
-                                        key.append(names[3].toUpperCase()).append("_");
+                                    key = new StringBuilder(files[2] + "Fl_");
+                                    if (!Objects.equals(files[3], "base")) {
+                                        key.append(files[3].toUpperCase()).append("_");
                                     }
                                 }
                                 case "obstacles" -> {
-                                    key = new StringBuilder(names[2]);
-                                    for (int i = 3; i < names.length; i++) {
-                                        String k = names[i];
+                                    key = new StringBuilder(files[2]);
+                                    for (int i = 3; i < files.length; i++) {
+                                        String k = files[i];
                                         /* (left/right or (top/bottom and maybe left/right))
                                            and maybe diagonal/corner and maybe color */
                                         if (k.matches("([lr]|([tb][lr]?))[dc]?[pgb]?")) {
@@ -121,7 +130,20 @@ public class ResourceLoader {
                                 }
                             }
                             suffix = "TL";
-                            System.out.println(path + " -> " + key + suffix);
+                        } case "towers" -> {
+                            if (Objects.equals(files[1], "turrets")) {
+                                for (int i = 2; i < files.length; i++) {
+                                    String k = files[i];
+                                    if (i > 2) k = Utilities.capitalize(k);
+                                    if (!k.matches("[0-9][0-9][0-9]")) {
+                                        key.append(k);
+                                    }
+                                }
+                                suffix = "TR";
+                                System.out.println(path + " -> " + key + suffix);
+                            } else if (Objects.equals(files[1], "walls")) {
+                                suffix = "TW";
+                            }
                         }
                         default -> {
 //                            System.out.println("Invalid parent directory");
@@ -129,9 +151,9 @@ public class ResourceLoader {
                         }
                     }
                     // is animation
-                    if (names[names.length-1].matches("[0-9][0-9][0-9]")) {
+                    if (files[files.length-1].matches("[0-9][0-9][0-9]")) {
                         suffix = suffix.toUpperCase();
-                        int idx = Integer.parseInt(names[names.length-1]);
+                        int idx = Integer.parseInt(files[files.length-1]);
                         PImage[] o = Main.animatedSprites.get(key + suffix);
                         if (o == null) o = new PImage[0];
                         PImage[] n = new PImage[PApplet.max(o.length, idx+1)];
