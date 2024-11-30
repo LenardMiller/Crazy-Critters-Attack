@@ -18,13 +18,12 @@ import processing.data.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static processing.core.PApplet.loadJSONObject;
 
-public class Loader {
+public class SaveLoader {
 
     public static String filePath() {
         return new File("").getAbsolutePath();

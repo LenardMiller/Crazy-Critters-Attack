@@ -1,7 +1,7 @@
 {
-  "volume": 0.009999999776482582,
+  "volume": 0.2428000122308731,
   "ringResolution": 50,
   "fullscreen": true,
   "gore": true,
-  "useOpenGL": true
+  "useOpenGL": false
 }

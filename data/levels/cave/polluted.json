@@ -3,21 +3,21 @@
     "machine": false,
     "id": 0,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 1,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 2,
     "type": "tile",
-    "obstacle": "caveWallROb_TL",
+    "obstacle": "caveWallROb_Tl",
     "base": "stone"
   },
   {
@@ -60,35 +60,35 @@
     "machine": false,
     "id": 9,
     "type": "tile",
-    "obstacle": "caveWallLOb_TL",
+    "obstacle": "caveWallLOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 10,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 11,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 12,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 13,
     "type": "tile",
-    "obstacle": "caveWallROb_TL",
+    "obstacle": "caveWallROb_Tl",
     "base": "stone"
   },
   {
@@ -101,14 +101,14 @@
     "machine": false,
     "id": 15,
     "type": "tile",
-    "obstacle": "caveWallBLOb_TL",
+    "obstacle": "caveWallBLOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 16,
     "type": "tile",
-    "obstacle": "caveWallTLDOb_TL",
+    "obstacle": "caveWallTLDOb_Tl",
     "base": "stone"
   },
   {
@@ -126,28 +126,28 @@
     "machine": false,
     "id": 19,
     "type": "tile",
-    "obstacle": "caveWallBOb_TL",
+    "obstacle": "caveWallBOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 20,
     "type": "tile",
-    "obstacle": "caveWallBLCOb_TL",
+    "obstacle": "caveWallBLCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 21,
     "type": "tile",
-    "obstacle": "caveWallTRCOb_TL",
+    "obstacle": "caveWallTRCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 22,
     "type": "tile",
-    "obstacle": "caveWallBLDOb_TL",
+    "obstacle": "caveWallBLDOb_Tl",
     "base": "stone"
   },
   {
@@ -166,14 +166,14 @@
     "machine": false,
     "id": 25,
     "type": "tile",
-    "obstacle": "caveWallPillarOb_TL",
+    "obstacle": "caveWallPillarOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 26,
     "type": "tile",
-    "decoration": "deadLichenGreenDe_TL",
+    "decoration": "deadLichenGreenDe_Tl",
     "base": "stone"
   },
   {
@@ -186,43 +186,43 @@
     "machine": false,
     "id": 28,
     "type": "tile",
-    "decoration": "deadMushroomsTRDDe_TL",
-    "obstacle": "caveWallDeadShroomyTRDOb_TL",
+    "decoration": "deadMushroomsTRDDe_Tl",
+    "obstacle": "caveWallDeadShroomyTRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 29,
     "type": "tile",
-    "obstacle": "caveWallBOb_TL",
+    "obstacle": "caveWallBOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 30,
     "type": "tile",
-    "obstacle": "caveWallBLCOb_TL",
+    "obstacle": "caveWallBLCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 31,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 32,
     "type": "tile",
-    "obstacle": "caveWallTRCOb_TL",
+    "obstacle": "caveWallTRCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 33,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBLDOb_TL",
+    "obstacle": "caveWallDeadMossyBLDOb_Tl",
     "base": "stone"
   },
   {
@@ -252,28 +252,28 @@
     "machine": false,
     "id": 38,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 39,
     "type": "tile",
-    "obstacle": "caveWallTRDOb_TL",
+    "obstacle": "caveWallTRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 40,
     "type": "tile",
-    "obstacle": "caveWallBOb_TL",
+    "obstacle": "caveWallBOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 41,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyTLDOb_TL",
+    "obstacle": "caveWallDeadMossyTlDOb_Tl",
     "base": "stone"
   },
   {
@@ -286,7 +286,7 @@
     "machine": false,
     "id": 43,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "stone"
   },
   {
@@ -311,42 +311,41 @@
     "machine": false,
     "id": 47,
     "type": "tile",
-    "breakable": "glowshrooms3Br_TL",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 48,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 49,
     "type": "tile",
-    "obstacle": "caveWallTRDOb_TL",
+    "obstacle": "caveWallTRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 50,
     "type": "tile",
-    "obstacle": "caveWallBOb_TL",
+    "obstacle": "caveWallBOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 51,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBOb_TL",
+    "obstacle": "caveWallDeadMossyBOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 52,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBROb_TL",
+    "obstacle": "caveWallDeadMossyBROb_Tl",
     "base": "stone"
   },
   {
@@ -359,7 +358,7 @@
     "machine": false,
     "id": 54,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "stone"
   },
   {
@@ -377,7 +376,7 @@
     "machine": false,
     "id": 57,
     "type": "tile",
-    "obstacle": "caveWallBLDOb_TL",
+    "obstacle": "caveWallBLDOb_Tl",
     "base": "stone"
   },
   {
@@ -402,7 +401,7 @@
     "machine": false,
     "id": 61,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
@@ -463,7 +462,7 @@
     "machine": false,
     "id": 71,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
@@ -493,14 +492,14 @@
     "machine": false,
     "id": 76,
     "type": "tile",
-    "obstacle": "caveWallTRCOb_TL",
+    "obstacle": "caveWallTRCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 77,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyTROb_TL",
+    "obstacle": "caveWallDeadMossyTROb_Tl",
     "base": "stone"
   },
   {
@@ -525,56 +524,55 @@
     "machine": false,
     "id": 81,
     "type": "tile",
-    "decoration": "deadMushroomsPillarADe_TL",
+    "decoration": "deadMushroomsPillarADe_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 82,
     "type": "tile",
-    "decoration": "deadMushroomsPillarBDe_TL",
+    "decoration": "deadMushroomsPillarBDe_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 83,
     "type": "tile",
-    "breakable": "glowshrooms3Br_TL",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 84,
     "type": "tile",
-    "decoration": "deadLichenBlueDe_TL",
+    "decoration": "deadLichenBlueDe_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 85,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyTLOb_TL",
+    "obstacle": "caveWallDeadMossyTlOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 86,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyTOb_TL",
+    "obstacle": "caveWallDeadMossyTOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 87,
     "type": "tile",
-    "obstacle": "caveWallBLDOb_TL",
+    "obstacle": "caveWallBLDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 88,
     "type": "tile",
-    "decoration": "deadLichenWhiteDe_TL",
+    "decoration": "deadLichenWhiteDe_Tl",
     "base": "stone"
   },
   {
@@ -605,7 +603,7 @@
     "machine": false,
     "id": 93,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBRDOb_TL",
+    "obstacle": "caveWallDeadMossyBRDOb_Tl",
     "base": "stone"
   },
   {
@@ -617,14 +615,14 @@
     "machine": false,
     "id": 95,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 96,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyROb_TL",
+    "obstacle": "caveWallDeadMossyROb_Tl",
     "base": "stone"
   },
   {
@@ -649,14 +647,14 @@
     "machine": false,
     "id": 100,
     "type": "tile",
-    "obstacle": "caveWallDeadShroomyPillarOb_TL",
+    "obstacle": "caveWallDeadShroomyPillarOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 101,
     "type": "tile",
-    "decoration": "deadMushroomsPillarCDe_TL",
+    "decoration": "deadMushroomsPillarCDe_Tl",
     "base": "stone"
   },
   {
@@ -675,21 +673,21 @@
     "machine": false,
     "id": 104,
     "type": "tile",
-    "obstacle": "caveWallTRDOb_TL",
+    "obstacle": "caveWallTRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 105,
     "type": "tile",
-    "obstacle": "caveWallBOb_TL",
+    "obstacle": "caveWallBOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 106,
     "type": "tile",
-    "obstacle": "caveWallBROb_TL",
+    "obstacle": "caveWallBROb_Tl",
     "base": "stone"
   },
   {
@@ -708,28 +706,28 @@
     "machine": false,
     "id": 109,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 110,
     "type": "tile",
-    "obstacle": "caveWallBRDOb_TL",
+    "obstacle": "caveWallBRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 111,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyTOb_TL",
+    "obstacle": "caveWallDeadMossyTOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 112,
     "type": "tile",
-    "obstacle": "caveWallTLCOb_TL",
+    "obstacle": "caveWallTLCOb_Tl",
     "base": "stone"
   },
   {
@@ -741,21 +739,21 @@
     "machine": false,
     "id": 114,
     "type": "tile",
-    "obstacle": "caveWallBOb_TL",
+    "obstacle": "caveWallBOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 115,
     "type": "tile",
-    "obstacle": "caveWallTLDOb_TL",
+    "obstacle": "caveWallTLDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 116,
     "type": "tile",
-    "decoration": "deadLichenOrangeDe_TL",
+    "decoration": "deadLichenOrangeDe_Tl",
     "base": "stone"
   },
   {
@@ -774,14 +772,14 @@
     "machine": false,
     "id": 119,
     "type": "tile",
-    "decoration": "deadMushroomsPillarDDe_TL",
+    "decoration": "deadMushroomsPillarDDe_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 120,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "stone"
   },
   {
@@ -836,21 +834,21 @@
     "machine": false,
     "id": 129,
     "type": "tile",
-    "obstacle": "caveWallLOb_TL",
+    "obstacle": "caveWallLOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 130,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 131,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
@@ -868,7 +866,7 @@
     "machine": false,
     "id": 134,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
@@ -953,22 +951,22 @@
     "machine": false,
     "id": 148,
     "type": "tile",
-    "decoration": "deadMushroomsTRDDe_TL",
-    "obstacle": "caveWallDeadShroomyTRDOb_TL",
+    "decoration": "deadMushroomsTRDDe_Tl",
+    "obstacle": "caveWallDeadShroomyTRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 149,
     "type": "tile",
-    "obstacle": "caveWallBLCOb_TL",
+    "obstacle": "caveWallBLCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 150,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
@@ -1052,7 +1050,7 @@
     "machine": false,
     "id": 164,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
@@ -1077,14 +1075,14 @@
     "machine": false,
     "id": 168,
     "type": "tile",
-    "obstacle": "caveWallLOb_TL",
+    "obstacle": "caveWallLOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 169,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
@@ -1120,14 +1118,14 @@
     "machine": false,
     "id": 175,
     "type": "tile",
-    "obstacle": "caveWallPillarOb_TL",
+    "obstacle": "caveWallPillarOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 176,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
@@ -1194,14 +1192,14 @@
     "machine": false,
     "id": 187,
     "type": "tile",
-    "obstacle": "caveWallTRDOb_TL",
+    "obstacle": "caveWallTRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 188,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBOb_TL",
+    "obstacle": "caveWallDeadMossyBOb_Tl",
     "base": "stone"
   },
   {
@@ -1213,7 +1211,7 @@
     "machine": false,
     "id": 190,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "stone"
   },
   {
@@ -1292,7 +1290,7 @@
     "machine": false,
     "id": 203,
     "type": "tile",
-    "obstacle": "caveWallPillarOb_TL",
+    "obstacle": "caveWallPillarOb_Tl",
     "base": "stone"
   },
   {
@@ -1328,15 +1326,15 @@
     "machine": false,
     "id": 209,
     "type": "tile",
-    "obstacle": "caveWallTOb_TL",
+    "obstacle": "caveWallTOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 210,
     "type": "tile",
-    "decoration": "deadMushroomsBLDDe_TL",
-    "obstacle": "caveWallDeadShroomyBLDOb_TL",
+    "decoration": "deadMushroomsBLDDe_Tl",
+    "obstacle": "caveWallDeadShroomyBLDOb_Tl",
     "base": "stone"
   },
   {
@@ -1349,7 +1347,7 @@
     "machine": false,
     "id": 212,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "stone"
   },
   {
@@ -1386,7 +1384,7 @@
     "machine": false,
     "id": 218,
     "type": "tile",
-    "decoration": "deadLichenWhiteDe_TL",
+    "decoration": "deadLichenWhiteDe_Tl",
     "base": "stone"
   },
   {
@@ -1429,7 +1427,7 @@
     "machine": false,
     "id": 225,
     "type": "tile",
-    "decoration": "deadLichenGreenDe_TL",
+    "decoration": "deadLichenGreenDe_Tl",
     "base": "stone"
   },
   {
@@ -1447,14 +1445,14 @@
     "machine": false,
     "id": 228,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 229,
     "type": "tile",
-    "obstacle": "caveWallROb_TL",
+    "obstacle": "caveWallROb_Tl",
     "base": "stone"
   },
   {
@@ -1473,7 +1471,7 @@
     "machine": false,
     "id": 232,
     "type": "tile",
-    "obstacle": "caveWallPillarOb_TL",
+    "obstacle": "caveWallPillarOb_Tl",
     "base": "stone"
   },
   {
@@ -1522,7 +1520,7 @@
     "machine": false,
     "id": 240,
     "type": "tile",
-    "decoration": "deadLichenOrangeDe_TL",
+    "decoration": "deadLichenOrangeDe_Tl",
     "base": "stone"
   },
   {
@@ -1535,21 +1533,21 @@
     "machine": false,
     "id": 242,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBRDOb_TL",
+    "obstacle": "caveWallDeadMossyBRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 243,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyTOb_TL",
+    "obstacle": "caveWallDeadMossyTOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 244,
     "type": "tile",
-    "obstacle": "caveWallBLDOb_TL",
+    "obstacle": "caveWallBLDOb_Tl",
     "base": "stone"
   },
   {
@@ -1567,14 +1565,14 @@
     "machine": false,
     "id": 247,
     "type": "tile",
-    "obstacle": "caveWallBRCOb_TL",
+    "obstacle": "caveWallBRCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 248,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyTLDOb_TL",
+    "obstacle": "caveWallDeadMossyTlDOb_Tl",
     "base": "stone"
   },
   {
@@ -1605,7 +1603,7 @@
     "machine": false,
     "id": 253,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
@@ -1618,7 +1616,7 @@
     "machine": false,
     "id": 255,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyPillarOb_TL",
+    "obstacle": "caveWallDeadMossyPillarOb_Tl",
     "base": "stone"
   },
   {
@@ -1631,7 +1629,7 @@
     "machine": false,
     "id": 257,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "stone"
   },
   {
@@ -1656,28 +1654,28 @@
     "machine": false,
     "id": 261,
     "type": "tile",
-    "obstacle": "caveWallLOb_TL",
+    "obstacle": "caveWallLOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 262,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 263,
     "type": "tile",
-    "obstacle": "caveWallTRCOb_TL",
+    "obstacle": "caveWallTRCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 264,
     "type": "tile",
-    "obstacle": "caveWallTOb_TL",
+    "obstacle": "caveWallTOb_Tl",
     "base": "stone"
   },
   {
@@ -1689,14 +1687,14 @@
     "machine": false,
     "id": 266,
     "type": "tile",
-    "obstacle": "caveWallTLDOb_TL",
+    "obstacle": "caveWallTLDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 267,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
@@ -1709,7 +1707,7 @@
     "machine": false,
     "id": 269,
     "type": "tile",
-    "decoration": "deadLichenBlueDe_TL",
+    "decoration": "deadLichenBlueDe_Tl",
     "base": "stone"
   },
   {
@@ -1722,8 +1720,8 @@
     "machine": false,
     "id": 271,
     "type": "tile",
-    "decoration": "deadMushroomsTDe_TL",
-    "obstacle": "caveWallDeadShroomyT2Ob_TL",
+    "decoration": "deadMushroomsTDe_Tl",
+    "obstacle": "caveWallDeadShroomyT2Ob_Tl",
     "base": "stone"
   },
   {
@@ -1778,28 +1776,28 @@
     "machine": false,
     "id": 280,
     "type": "tile",
-    "obstacle": "caveWallTRDOb_TL",
+    "obstacle": "caveWallTRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 281,
     "type": "tile",
-    "obstacle": "caveWallBLCOb_TL",
+    "obstacle": "caveWallBLCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 282,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 283,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
@@ -1835,28 +1833,28 @@
     "machine": false,
     "id": 289,
     "type": "tile",
-    "obstacle": "caveWallBRDOb_TL",
+    "obstacle": "caveWallBRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 290,
     "type": "tile",
-    "obstacle": "caveWallDeadShroomyTOb_TL",
+    "obstacle": "caveWallDeadShroomyTOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 291,
     "type": "tile",
-    "obstacle": "caveWallTOb_TL",
+    "obstacle": "caveWallTOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 292,
     "type": "tile",
-    "obstacle": "caveWallBLDOb_TL",
+    "obstacle": "caveWallBLDOb_Tl",
     "base": "stone"
   },
   {
@@ -1875,21 +1873,21 @@
     "machine": false,
     "id": 295,
     "type": "tile",
-    "obstacle": "caveWallBRDOb_TL",
+    "obstacle": "caveWallBRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 296,
     "type": "tile",
-    "obstacle": "caveWallTOb_TL",
+    "obstacle": "caveWallTOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 297,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBLDOb_TL",
+    "obstacle": "caveWallDeadMossyBLDOb_Tl",
     "base": "stone"
   },
   {
@@ -1908,21 +1906,21 @@
     "machine": false,
     "id": 300,
     "type": "tile",
-    "obstacle": "caveWallTRDOb_TL",
+    "obstacle": "caveWallTRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 301,
     "type": "tile",
-    "obstacle": "caveWallBLCOb_TL",
+    "obstacle": "caveWallBLCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 302,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
@@ -1934,7 +1932,7 @@
     "machine": false,
     "id": 304,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "stone"
   },
   {
@@ -1953,35 +1951,35 @@
     "machine": false,
     "id": 307,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBRDOb_TL",
+    "obstacle": "caveWallDeadMossyBRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 308,
     "type": "tile",
-    "obstacle": "caveWallTLCOb_TL",
+    "obstacle": "caveWallTLCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 309,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 310,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 311,
     "type": "tile",
-    "obstacle": "caveWallROb_TL",
+    "obstacle": "caveWallROb_Tl",
     "base": "stone"
   },
   {
@@ -1994,35 +1992,35 @@
     "machine": false,
     "id": 313,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBRDOb_TL",
+    "obstacle": "caveWallDeadMossyBRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 314,
     "type": "tile",
-    "obstacle": "caveWallTLCOb_TL",
+    "obstacle": "caveWallTLCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 315,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 316,
     "type": "tile",
-    "obstacle": "caveWallTRCOb_TL",
+    "obstacle": "caveWallTRCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 317,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBLDOb_TL",
+    "obstacle": "caveWallDeadMossyBLDOb_Tl",
     "base": "stone"
   },
   {
@@ -2035,21 +2033,21 @@
     "machine": false,
     "id": 319,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 320,
     "type": "tile",
-    "obstacle": "caveWallLOb_TL",
+    "obstacle": "caveWallLOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 321,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
@@ -2073,42 +2071,42 @@
     "machine": false,
     "id": 325,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyBRDOb_TL",
+    "obstacle": "caveWallDeadMossyBRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 326,
     "type": "tile",
-    "obstacle": "caveWallTLCOb_TL",
+    "obstacle": "caveWallTLCOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 327,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 328,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 329,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 330,
     "type": "tile",
-    "obstacle": "caveWallROb_TL",
+    "obstacle": "caveWallROb_Tl",
     "base": "stone"
   },
   {
@@ -2121,35 +2119,35 @@
     "machine": false,
     "id": 332,
     "type": "tile",
-    "obstacle": "caveWallLOb_TL",
+    "obstacle": "caveWallLOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 333,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 334,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 335,
     "type": "tile",
-    "obstacle": "caveWallBaseOb_TL",
+    "obstacle": "caveWallBaseOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 336,
     "type": "tile",
-    "obstacle": "caveWallROb_TL",
+    "obstacle": "caveWallROb_Tl",
     "base": "stone"
   },
   {
@@ -2168,14 +2166,14 @@
     "machine": false,
     "id": 339,
     "type": "tile",
-    "obstacle": "caveWallTRDOb_TL",
+    "obstacle": "caveWallTRDOb_Tl",
     "base": "stone"
   },
   {
     "machine": false,
     "id": 340,
     "type": "tile",
-    "obstacle": "caveWallBLCOb_TL",
+    "obstacle": "caveWallBLCOb_Tl",
     "base": "stone"
   },
   {

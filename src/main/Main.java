@@ -240,7 +240,7 @@ public class Main extends PApplet {
                 targetScreen = screen;
             } case LoadGame -> {
                 try {
-                    Loader.load(this, currentLevel);
+                    SaveLoader.load(this, currentLevel);
                 } catch (RuntimeException ex) {
                     System.err.println("load failed: " + ex);
                     Game.reset(this);

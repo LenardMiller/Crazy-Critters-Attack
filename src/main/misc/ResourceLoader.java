@@ -22,47 +22,105 @@ public class ResourceLoader {
         new Walker(
                 "sprites",
                 ".png",
+                /* Trying to wrangle my horrible and inconsistent naming conventions */
                 (path, names) -> {
                     PImage image = p.loadImage(path);
-                    String key = "";
-                    String suffix = "";
+                    StringBuilder key = new StringBuilder();
+                    String suffix;
                     switch (names[0]) {
                         case "enemies" -> {
-                            key = names[1] + Utilities.capitalize(names[2]);
+                            key = new StringBuilder(names[1] + Utilities.capitalize(names[2]));
                             suffix = "EN";
                         } case "gui" -> {
                             if (Objects.equals(names[1], "buttons")) {
-                                key = names[2];
+                                key = new StringBuilder(names[2]);
                                 suffix = "BT";
                             } else if (Objects.equals(names[1], "panels")) {
-                                key = names[2];
+                                key = new StringBuilder(names[2]);
                                 suffix = "PN";
                             } else {
                                 if (names[names.length-1].matches("[0-9][0-9][0-9]")) {
-                                    key = names[names.length-2];
+                                    key = new StringBuilder(names[names.length - 2]);
                                 } else {
-                                    key = names[names.length-1];
+                                    key = new StringBuilder(names[names.length - 1]);
                                 }
                                 suffix = "IC";
                             }
                         } case "machines" -> {
                             if (Objects.equals(names[2], "base")) {
-                                key = names[1];
+                                key = new StringBuilder(names[1]);
                             } else {
-                                key = names[1] + names[2];
+                                key = new StringBuilder(names[1] + names[2]);
                             }
                             suffix = "MA";
                         } case "particles" -> {
                             if (names.length == 4) {
-                                key = names[2] + Utilities.capitalize(names[1]);
+                                key = new StringBuilder(names[2] + Utilities.capitalize(names[1]));
                             } else {
                                 if (Objects.equals(names[1], "debris")) {
-                                    key = names[2];
+                                    key = new StringBuilder(names[2]);
                                 } else {
-                                    key = names[1];
+                                    key = new StringBuilder(names[1]);
                                 }
                             }
                             suffix = "PT";
+                        } case "projectiles" -> {
+                            key = new StringBuilder(names[1]);
+                            suffix = "PJ";
+                        } case "tiles" -> {
+                            switch (names[1]) {
+                                case "base" -> {
+                                    key = new StringBuilder(names[2] + "Ba_");
+                                    if (names.length == 4 && !Objects.equals(names[names.length - 1], "base")) {
+                                        key.append(names[names.length - 1].toUpperCase()).append("_");
+                                    }
+                                } case "breakables" -> {
+                                    if (names.length == 4) {
+                                        if (names[names.length-1].matches("[0-9]")) {
+                                            key = new StringBuilder(names[2] + names[3]);
+                                        } else {
+                                            key = new StringBuilder(names[3] + Utilities.capitalize(names[2]));
+                                        }
+                                    } else {
+                                        key = new StringBuilder(names[2]);
+                                    }
+                                    key.append("Br_");
+                                } case "decoration" -> {
+                                    key = new StringBuilder(names[2]);
+                                    if (names.length == 4) {
+                                        String k = names[3];
+                                        if (k.matches("[tb][lr]d?")) {
+                                            k = k.toUpperCase();
+                                        } else {
+                                            k = Utilities.capitalize(k);
+                                        }
+                                        key.append(k);
+                                    }
+                                    key.append("De_");
+                                } case "flooring" -> {
+                                    key = new StringBuilder(names[2] + "Fl_");
+                                    if (!Objects.equals(names[3], "base")) {
+                                        key.append(names[3].toUpperCase()).append("_");
+                                    }
+                                }
+                                case "obstacles" -> {
+                                    key = new StringBuilder(names[2]);
+                                    for (int i = 3; i < names.length; i++) {
+                                        String k = names[i];
+                                        /* (left/right or (top/bottom and maybe left/right))
+                                           and maybe diagonal/corner and maybe color */
+                                        if (k.matches("([lr]|([tb][lr]?))[dc]?[pgb]?")) {
+                                            k = k.toUpperCase();
+                                        } else {
+                                            // also matches "T2", but thats fine
+                                            k = Utilities.capitalize(k);
+                                        }
+                                        key.append(k);
+                                    }
+                                    key.append("Ob_");
+                                }
+                            }
+                            suffix = "TL";
                             System.out.println(path + " -> " + key + suffix);
                         }
                         default -> {

@@ -67,14 +67,14 @@ public class LoadingGui {
 //                profiler.finishProfiling("loading: particle sprites");
                 break;
             case 5:
-                profiler.startProfilingSingle("loading: projectile sprites");
-                loadProjectiles(p);
-                profiler.finishProfiling("loading: projectile sprites");
+//                profiler.startProfilingSingle("loading: projectile sprites");
+//                loadProjectiles(p);
+//                profiler.finishProfiling("loading: projectile sprites");
                 break;
             case 6:
-                profiler.startProfilingSingle("loading: tile sprites");
-                loadTiles(p);
-                profiler.finishProfiling("loading: tile sprites");
+//                profiler.startProfilingSingle("loading: tile sprites");
+//                loadTiles(p);
+//                profiler.finishProfiling("loading: tile sprites");
                 break;
             case 7:
                 profiler.startProfilingSingle("loading: turret sprites");
