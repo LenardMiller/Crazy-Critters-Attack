@@ -87,7 +87,7 @@ public class Wave {
         }
         machine.heal(0.05f);
         for (Tower tower : towers) {
-            if (tower.name.equals("booosterMoney")) ((Booster) tower).giveMoney();
+            if (tower.name.equals("boosterMoney")) ((Booster) tower).giveMoney();
         }
         playSound(sounds.get("waveEnd"), 1, 1);
         int reward = getReward();
