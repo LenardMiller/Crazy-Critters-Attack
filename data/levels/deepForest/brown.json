@@ -49,7 +49,7 @@
     "machine": false,
     "id": 7,
     "type": "tile",
-    "breakable": "flowerVeryDeadCyanBr_Tl",
+    "breakable": "veryDeadCyanFlowerBr_Tl",
     "decoration": "deadCyanFlowerBr_Tl",
     "base": "brownGrass"
   },
@@ -589,7 +589,7 @@
     "machine": false,
     "id": 89,
     "type": "tile",
-    "breakable": "flowerVeryDeadCyanBr_Tl",
+    "breakable": "veryDeadCyanFlowerBr_Tl",
     "decoration": "deadCyanFlowerBr_Tl",
     "base": "brownGrass"
   },
@@ -756,7 +756,7 @@
     "machine": false,
     "id": 114,
     "type": "tile",
-    "breakable": "flowerVeryDeadCyanBr_Tl",
+    "breakable": "veryDeadCyanFlowerBr_Tl",
     "decoration": "deadCyanFlowerBr_Tl",
     "base": "brownGrass"
   },
@@ -1498,7 +1498,7 @@
     "machine": false,
     "id": 232,
     "type": "tile",
-    "breakable": "flowerVeryDeadCyanBr_Tl",
+    "breakable": "veryDeadCyanFlowerBr_Tl",
     "decoration": "deadCyanFlowerBr_Tl",
     "base": "brownGrass"
   },
@@ -1837,7 +1837,7 @@
     "machine": false,
     "id": 283,
     "type": "tile",
-    "breakable": "flowerVeryDeadCyanBr_Tl",
+    "breakable": "veryDeadCyanFlowerBr_Tl",
     "decoration": "deadCyanFlowerBr_Tl",
     "base": "brownGrass"
   },

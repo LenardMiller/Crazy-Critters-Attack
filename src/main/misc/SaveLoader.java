@@ -19,6 +19,7 @@ import processing.data.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 
+import static main.Main.machine;
 import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static processing.core.PApplet.loadJSONObject;
@@ -55,6 +56,7 @@ public class SaveLoader {
         Main.levels[Main.currentLevel].currentWave = object.getInt("wave");
         Main.money = object.getInt("money");
         Main.machine.hp = object.getInt("hp");
+        machine.updateSprite();
         Main.isPlaying = true;
         Main.isPaused = true;
         Main.waveStack.presetWaveCards();

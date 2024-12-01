@@ -129,6 +129,7 @@ public class LayoutLoader extends ClassLoader {
         boolean barHorizontal = loadObject.getBoolean("barHorizontal");
         machine = new Machine(p,new PVector(x,y), machineName, debris, betweenFrames, maxHp);
         machine.hp = hp;
+        machine.updateSprite();
         machine.barPosition = new PVector(barX, barY);
         machine.barSize = new PVector(barSizeX, barSizeY);
         machine.barHorizontal = barHorizontal;

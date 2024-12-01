@@ -452,11 +452,11 @@ public class EnemyFactory {
                         "swooshPunch", "leafyStepsLoop");
             } case "fae", "Fae" -> {
                 return new Fae(p, pos.x, pos.y);
-            } case "Mutant Bug", "Mutant Bugs" -> {
+            } case "Mutant Bug", "Mutant Bugs", "mutantBug" -> {
                 return new Enemy(p, pos.x, pos.y,
                         "mutantBug",
                         new PVector(100, 100),
-                        14, 40, 25, 10_000, 75, 750_000,
+                        4, 40, 25, 10_000, 75, 750_000,
                         new int[]{15}, 10, 2,
                         new PVector(100, 100), new PVector(45, 45),
                         12, CORPSE_DELAY,
@@ -464,7 +464,7 @@ public class EnemyFactory {
                         "bigCrunchRoar", "squashRoar",
                         "whipCrack", "bigBugLoop");
             } default -> {
-                System.out.println("Could not get enemy of type: \"" + name + "\"");
+                System.err.println("Could not get enemy of type: \"" + name + "\"");
                 return null;
             }
         }

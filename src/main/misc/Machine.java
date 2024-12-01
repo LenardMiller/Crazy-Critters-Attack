@@ -15,6 +15,7 @@ import processing.sound.SoundFile;
 import java.awt.*;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Utilities.secondsToFrames;
 import static main.misc.Utilities.up60ToFramerate;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
@@ -61,7 +62,7 @@ public class Machine {
         BREAK_SOUND = sounds.get(debris + "Break");
         EXPLODE_SOUND = sounds.get("smallExplosion");
         EXPLODE_LOOP = startStopSoundLoops.get("smallExplosion");
-        sprites = animatedSprites.get(name);
+        sprites = getResource(name, animatedSprites);
         tintColor = 255;
         updateNodes();
     }
@@ -100,8 +101,8 @@ public class Machine {
             frameTimer = p.frameCount + betweenFrames;
         }
         if (currentFrame >= sprites.length) currentFrame = 0;
-        if (deathFrame < secondsToFrames(4)) p.image(sprites[currentFrame], position.x, position.y);
-//        p.text(damageState, position.x, position.y);
+        if (deathFrame < secondsToFrames(4))
+            p.image(sprites[currentFrame], position.x, position.y);
         p.imageMode(CORNER);
         p.tint(255);
         if (dead && !isPaused) deathFrame++;
@@ -184,17 +185,22 @@ public class Machine {
         if (deathFrame == secondsToFrames(4)) for (Tile tile : machTiles) tile.breakableLayer.set(material + "DebrisBr_TL");
     }
 
-    public void damage(int dmg) {
-        hp -= dmg;
-        hit = true;
+    public void updateSprite() {
         int hpSegment = maxHp / 4;
         if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
         else if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
         else if (hp <= hpSegment) damageState = 3;
         if (damageState > 0) {
             String key = name.substring(0, name.length() - 2) + "d" + damageState + "MA";
-            sprites = animatedSprites.get(key);
-        }
+            sprites = getResource(key, animatedSprites);
+        } else sprites = getResource(name, animatedSprites);
+    }
+
+    public void damage(int dmg) {
+        hp -= dmg;
+        int hpSegment = maxHp / 4;
+        hit = true;
+        updateSprite();
         playSoundRandomSpeed(p, DAMAGE_SOUND, 1);
         for (Tile tile : machTiles) {
             int x = (int) tile.position.x;
@@ -225,13 +231,7 @@ public class Machine {
             }
         }
         hp += (int) (amount * maxHp);
-        int hpSegment = maxHp / 4;
-        if (hp > hpSegment * 3) damageState = 0;
-        else if (hp <= hpSegment * 3 && hp > hpSegment * 2) damageState = 1;
-        else if (hp <= hpSegment * 2 && hp > hpSegment) damageState = 2;
-        else if (hp <= hpSegment) damageState = 3;
-        if (damageState > 0) sprites = animatedSprites.get(name + "d" + damageState);
-        else sprites = animatedSprites.get(name);
+        updateSprite();
         if (hp > maxHp) hp = maxHp;
     }
 }
