@@ -170,20 +170,28 @@ public class Tile {
             int y = (int) (position.y / 50);
             if (y != 0) {
                 Tile tile = tiles.get(x, y - 1);
-                if (isConnected(0, tile)) p.image(tile.flooringLayer.edges[0], position.x, position.y);
-                if (edges[0] != null && isConcrete(tile.flooringLayer.name)) p.image(edges[0], position.x, position.y);
+                if (isConnected(0, tile))
+                    p.image(tile.flooringLayer.edges[0], position.x, position.y);
+                if (edges[0] != null && isConcrete(tile.flooringLayer.name))
+                    p.image(edges[0], position.x, position.y);
             } if (x != 0) {
                 Tile tile = tiles.get(x - 1, y);
-                if (isConnected(3, tile)) p.image(tile.flooringLayer.edges[3], position.x, position.y);
-                if (edges[3] != null && isConcrete(tile.flooringLayer.name)) p.image(edges[3], position.x, position.y);
+                if (isConnected(3, tile))
+                    p.image(tile.flooringLayer.edges[3], position.x, position.y);
+                if (edges[3] != null && isConcrete(tile.flooringLayer.name))
+                    p.image(edges[3], position.x, position.y);
             } if (y != 18) {
                 Tile tile = tiles.get(x, y + 1);
-                if (isConnected(2, tile)) p.image(tile.flooringLayer.edges[2], position.x, position.y);
-                if (edges[2] != null && isConcrete(tile.flooringLayer.name)) p.image(edges[2], position.x, position.y);
+                if (isConnected(2, tile))
+                    p.image(tile.flooringLayer.edges[2], position.x, position.y);
+                if (edges[2] != null && isConcrete(tile.flooringLayer.name))
+                    p.image(edges[2], position.x, position.y);
             } if (x != 18) {
                 Tile tile = tiles.get(x + 1, y);
-                if (isConnected(1, tile)) p.image(tile.flooringLayer.edges[1], position.x, position.y);
-                if (edges[1] != null && isConcrete(tile.flooringLayer.name)) p.image(edges[1], position.x, position.y);
+                if (isConnected(1, tile))
+                    p.image(tile.flooringLayer.edges[1], position.x, position.y);
+                if (edges[1] != null && isConcrete(tile.flooringLayer.name))
+                    p.image(edges[1], position.x, position.y);
             }
             if (isDebug) p.tint(255);
         }
@@ -382,7 +390,9 @@ public class Tile {
          * @return if there wasn't a wall on top
          */
         public boolean update(String name) {
-            Tower tower = tiles.get((roundTo(position.x, 50)/50) + 1, (roundTo(position.y, 50)/50) + 1).tower;
+            Tower tower = tiles.get(
+                    (roundTo(position.x, 50)/50) + 1,
+                    (roundTo(position.y, 50)/50) + 1).tower;
             if (name.equals(this.name)) return false;
             if (tower instanceof IceWall) return true;
             if (obstacleLayer.name != null) return false;
@@ -549,8 +559,12 @@ public class Tile {
             boolean left = rightTile == null;
             if (!left && leftTile.baseLayer.name != null) left = !leftTile.baseLayer.name.equals(type.name());
             PVector topLeftCorner = new PVector(!left ? position.x : position.x + 20, position.y + 7);
-            PVector bottomRightCorner = PVector.add(position, new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
-            PVector spawnPos = new PVector(p.random(topLeftCorner.x, bottomRightCorner.x), p.random(topLeftCorner.y, bottomRightCorner.y));
+            PVector bottomRightCorner = PVector.add(
+                    position,
+                    new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
+            PVector spawnPos = new PVector(
+                    p.random(topLeftCorner.x, bottomRightCorner.x),
+                    p.random(topLeftCorner.y, bottomRightCorner.y));
             tileParticles.add(new Ripple(p, spawnPos.x, spawnPos.y, type));
         }
     }
@@ -617,8 +631,10 @@ public class Tile {
                     Tile tile = tiles.get(x, y);
                     int[] typesTouching = getTypesTouching(typeGrid, x, y);
                     int numFlooringTilesTouching = 0;
-                    for (int numOfType : typesTouching) numFlooringTilesTouching += numOfType;
-                    if (numFlooringTilesTouching >= 4) didSomething = tile.flooringLayer.update(getMostCommonType(typesTouching));
+                    for (int numOfType : typesTouching)
+                        numFlooringTilesTouching += numOfType;
+                    if (numFlooringTilesTouching >= 4)
+                        didSomething = tile.flooringLayer.update(getMostCommonType(typesTouching));
                 }
             }
         } while (didSomething);
@@ -711,7 +727,9 @@ public class Tile {
     public static void updateWallTileConnections() {
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            if (tile.flooringLayer.name != null && !tile.flooringLayer.name.equals("stoneWall") && !tile.flooringLayer.name.equals("woodWall")) {
+            if (tile.flooringLayer.name != null &&
+                    !tile.flooringLayer.name.equals("stoneWall") &&
+                    !tile.flooringLayer.name.equals("woodWall")) {
                 tile.flooringLayer.connectInsideCorners();
             }
             tile.flooringLayer.connectOutsideCorners();
