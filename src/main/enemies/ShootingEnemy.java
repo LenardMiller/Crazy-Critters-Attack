@@ -12,6 +12,7 @@ import java.awt.*;
 import java.util.function.BiConsumer;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Utilities.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -77,9 +78,9 @@ public class ShootingEnemy extends Enemy {
 
     @Override
     protected void loadStuff() {
-        attackFrames = animatedSprites.get(name + "AttackEN");
-        moveFrames = animatedSprites.get(name + "MoveEN");
-        shootFrames = animatedSprites.get(name + "ShootEN");
+        attackFrames = getResource(name + "AttackEN", animatedSprites);
+        moveFrames = getResource(name + "MoveEN", animatedSprites);
+        shootFrames = getResource(name + "ShootEN", animatedSprites);
         currentTintColor = new Color(255, 255, 255);
     }
 

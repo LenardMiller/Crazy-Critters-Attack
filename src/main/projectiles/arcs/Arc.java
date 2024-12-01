@@ -108,7 +108,10 @@ public class Arc {
                 }
             }
             for (int i = 0; i < bigPoints.size() - 1; i++)
-                bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints, turret.boostedDamage() > 0);
+                bigPoints.get(i).getPoints(
+                        bigPoints.get(i + 1).position,
+                        particleChance, maxPoints,
+                        turret != null && turret.boostedDamage() > 0);
         } else {
             float angle = p.random(TWO_PI);
             float mag = p.random(maxDistance / 4f, maxDistance);
@@ -117,7 +120,10 @@ public class Arc {
             position.add(startPosition);
             bigPoints.add(new StartEndPoints(p, new PVector(position.x, position.y)));
             for (int i = 0; i < bigPoints.size() - 1; i++)
-                bigPoints.get(i).getPoints(bigPoints.get(i + 1).position, particleChance, maxPoints, turret.boostedDamage() > 0);
+                bigPoints.get(i).getPoints(
+                        bigPoints.get(i + 1).position,
+                        particleChance, maxPoints,
+                        turret != null && turret.boostedDamage() > 0);
         }
     }
 

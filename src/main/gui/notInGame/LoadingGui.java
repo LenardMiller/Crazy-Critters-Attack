@@ -10,7 +10,6 @@ import processing.core.PFont;
 import processing.core.PVector;
 
 import static main.Main.*;
-import static main.sound.SoundLoader.loadSounds;
 
 public class LoadingGui {
 
@@ -49,7 +48,7 @@ public class LoadingGui {
                 break;
             case 3:
                 profiler.startProfilingSingle("loading: sounds");
-                loadSounds(p);
+                resourceLoader.loadSounds();
                 profiler.finishProfiling("loading: sounds");
                 break;
             case 4:

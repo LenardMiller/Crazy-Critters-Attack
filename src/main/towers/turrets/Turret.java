@@ -337,7 +337,8 @@ public abstract class Turret extends Tower {
         int moneyGain;
         if (!isSold) {
             moneyGain = (int) (getValue() * 0.4);
-            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_TL");
+            tiles.get(((int)tile.position.x/50) - 1,
+                    ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_Tl");
         } else moneyGain = (int) (getValue() * 0.8);
         popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;

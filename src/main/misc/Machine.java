@@ -182,7 +182,9 @@ public class Machine {
                 }
             }
         }
-        if (deathFrame == secondsToFrames(4)) for (Tile tile : machTiles) tile.breakableLayer.set(material + "DebrisBr_TL");
+        if (deathFrame == secondsToFrames(4))
+            for (Tile tile : machTiles)
+                tile.breakableLayer.set(material + "DebrisBr_Tl");
     }
 
     public void updateSprite() {
