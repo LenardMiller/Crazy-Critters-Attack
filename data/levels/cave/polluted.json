@@ -551,7 +551,7 @@
     "machine": false,
     "id": 85,
     "type": "tile",
-    "obstacle": "caveWallDeadMossyTlOb_Tl",
+    "obstacle": "caveWallDeadMossyTLOb_Tl",
     "base": "stone"
   },
   {
