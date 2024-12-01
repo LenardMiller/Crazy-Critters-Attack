@@ -20,7 +20,7 @@ public class Dummy extends Enemy {
         hp = maxHp;
         hitParticle = HitParticle.leafOuch;
         name = "dummy";
-        betweenWalkFrames = down60ToFramerate(1);
+        walkDelay = down60ToFramerate(1);
         corpseSize = size;
         dieSound = sounds.get("woodBreak");
         overkillSound = sounds.get("wodBreak");

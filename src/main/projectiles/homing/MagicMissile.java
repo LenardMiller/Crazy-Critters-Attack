@@ -3,7 +3,7 @@ package main.projectiles.homing;
 import main.particles.ExplosionDebris;
 import main.projectiles.Projectile;
 import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.enemies.BurrowingEnemy;
 import main.particles.Ouch;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
@@ -108,7 +108,7 @@ public class MagicMissile extends Projectile {
 
     @Override
     public void move() {
-        if (enemies.size() > 0) checkTarget();
+        if (!enemies.isEmpty()) checkTarget();
         else die();
         velocity.setMag(getBoostedSpeed());
         position.add(velocity);

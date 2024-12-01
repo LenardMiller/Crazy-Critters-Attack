@@ -13,5 +13,7 @@
     <inspection_tool class="JsonSchemaDeprecation" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="JsonSchemaRefReference" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JsonStandardCompliance" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="LongLine" enabled="true" level="WEAK WARNING" enabled_by_default="true" editorAttributes="INFO_ATTRIBUTES" />
+    <inspection_tool class="RegExpRedundantEscape" enabled="false" level="WARNING" enabled_by_default="false" />
   </profile>
 </component>

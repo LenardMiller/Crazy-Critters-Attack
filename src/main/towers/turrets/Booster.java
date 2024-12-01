@@ -15,6 +15,7 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Booster extends Turret {
@@ -58,7 +59,7 @@ public class Booster extends Turret {
                 SPECIAL_COLOR, "Health", "+" + (int) (boost.health * 100) + "%"));
 
         statsDisplay = () -> {
-            if (name.equals("moneyBooster")) {
+            if (name.equals("boosterMoney")) {
                 selection.displayInfoLine(-2, Selection.STAT_TEXT_COLOR, "Earned", "$" + nfc(moneyTotal));
             }
             int age = levels[currentLevel].currentWave - birthday;
@@ -71,9 +72,8 @@ public class Booster extends Turret {
 
     @Override
     protected void loadSprites() {
-        sBase = staticSprites.get(name + "BaseTR");
-        idleSprite = staticSprites.get(name + "IdleTR");
-        idleFrames = animatedSprites.get(name + "IdleTR");
+        sBase = getResource(name + "BaseTr", staticSprites);
+        idleFrames = getResource(name + "IdleTR", animatedSprites);
         idleSprite = idleFrames[0];
         sprite = idleSprite;
     }
@@ -106,11 +106,11 @@ public class Booster extends Turret {
         if (p.random(15) < 1) {
             float speed = p.random(25, 35);
             if (range > 1) speed = p.random(35, 50);
-            if (name.equals("moneyBooster")) {
+            if (name.equals("boosterMoney")) {
                 towerParticles.add(new Floaty(p, position.x, position.y, speed, "coin"));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "yellowMagic"));
-            } else if (name.equals("explosiveBooster")) {
+            } else if (name.equals("boosterExplosive")) {
                 towerParticles.add(new Floaty(p, position.x, position.y, speed, "smokeCloud"));
                 topParticles.add(new MiscParticle(p, p.random(tile.position.x - size.x, tile.position.x),
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
@@ -122,7 +122,7 @@ public class Booster extends Turret {
                   p.random(tile.position.y - size.y, tile.position.y), p.random(360), "orangeMagic"));
             }
         }
-        if (p.random(30) < 1 && name.equals("explosiveBooster")) {
+        if (p.random(30) < 1 && name.equals("boosterExplosive")) {
             if (p.random(10) < 1) {
                 arcs.add(new RedArc(p, tile.position.x - (size.x / 2), tile.position.y - (size.y / 2),
                   this, 0, 1, (int) p.random(20, 100), Priority.None));
@@ -240,7 +240,7 @@ public class Booster extends Turret {
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
                     material = Material.gold;
-                    name = "moneyBooster";
+                    name = "boosterMoney";
                     betweenIdleFrames = 2;
                     titleLines = new String[]{"Wealth Booster"};
                     extraInfo.add(0, (arg) -> selection.displayInfoLine(arg,
@@ -267,7 +267,7 @@ public class Booster extends Turret {
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
                     damageSound = sounds.get("titaniumDamage");
-                    name = "explosiveBooster";
+                    name = "boosterExplosive";
                     titleLines = new String[]{"Unstable", "Booster"};
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
                             SPECIAL_COLOR, "Explosive", null));

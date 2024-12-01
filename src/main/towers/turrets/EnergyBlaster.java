@@ -151,7 +151,7 @@ public class EnergyBlaster extends Turret {
                     damage += 800;
                     delay -= 1f;
                     effectRadius = 125;
-                    name = "nuclearBlaster";
+                    name = "energyBlasterNuclear";
                     fireParticle = "nuclear";
                     material = Material.metal;
                     nuclear = true;
@@ -175,7 +175,7 @@ public class EnergyBlaster extends Turret {
                     range += 65;
                     pjSpeed += 200;
                     damage = 5000;
-                    name = "darkBlaster";
+                    name = "energyBlasterDark";
                     fireParticle = "dark";
                     dark = true;
                     titleLines = new String[]{"Dark Blaster"};
@@ -192,6 +192,4 @@ public class EnergyBlaster extends Turret {
             }
         }
     }
-
-    public void updateSprite() {}
 }

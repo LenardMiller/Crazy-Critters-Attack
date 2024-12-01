@@ -140,7 +140,7 @@
     "machine": false,
     "id": 23,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {
@@ -159,14 +159,14 @@
     "machine": false,
     "id": 26,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
     "machine": false,
     "id": 27,
     "type": "tile",
-    "decoration": "snowCornersTRDe_TL",
+    "decoration": "snowCornersTRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -203,7 +203,7 @@
     "machine": false,
     "id": 33,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {
@@ -245,7 +245,7 @@
     "machine": false,
     "id": 40,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {
@@ -258,7 +258,7 @@
     "machine": false,
     "id": 42,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -295,7 +295,7 @@
     "machine": false,
     "id": 48,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -314,7 +314,7 @@
     "machine": false,
     "id": 51,
     "type": "tile",
-    "decoration": "snowCornersTRDe_TL",
+    "decoration": "snowCornersTRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -362,7 +362,7 @@
     "machine": false,
     "id": 59,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -417,7 +417,7 @@
     "machine": false,
     "id": 68,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -436,7 +436,7 @@
     "machine": false,
     "id": 71,
     "type": "tile",
-    "decoration": "snowCornersTRDe_TL",
+    "decoration": "snowCornersTRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -490,7 +490,7 @@
     "machine": false,
     "id": 80,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -563,7 +563,7 @@
     "machine": false,
     "id": 92,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {
@@ -587,14 +587,14 @@
     "machine": false,
     "id": 96,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {
     "machine": false,
     "id": 97,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -655,7 +655,7 @@
     "machine": false,
     "id": 107,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -674,7 +674,7 @@
     "machine": false,
     "id": 110,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -716,7 +716,7 @@
     "machine": false,
     "id": 117,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -783,7 +783,7 @@
     "machine": false,
     "id": 128,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -796,7 +796,7 @@
     "machine": false,
     "id": 130,
     "type": "tile",
-    "decoration": "snowCornersTRDe_TL",
+    "decoration": "snowCornersTRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -910,7 +910,7 @@
     "machine": false,
     "id": 149,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1053,7 +1053,7 @@
     "machine": false,
     "id": 173,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1138,7 +1138,7 @@
     "machine": false,
     "id": 187,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1156,7 +1156,7 @@
     "machine": false,
     "id": 190,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {
@@ -1175,7 +1175,7 @@
     "machine": false,
     "id": 193,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1248,7 +1248,7 @@
     "machine": false,
     "id": 205,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {
@@ -1403,7 +1403,7 @@
     "machine": false,
     "id": 231,
     "type": "tile",
-    "decoration": "snowCornersTRDe_TL",
+    "decoration": "snowCornersTRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1476,7 +1476,7 @@
     "machine": false,
     "id": 243,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1512,7 +1512,7 @@
     "machine": false,
     "id": 249,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1579,7 +1579,7 @@
     "machine": false,
     "id": 260,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1633,7 +1633,7 @@
     "machine": false,
     "id": 269,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1688,7 +1688,7 @@
     "machine": false,
     "id": 278,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1701,7 +1701,7 @@
     "machine": false,
     "id": 280,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1737,7 +1737,7 @@
     "machine": false,
     "id": 286,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {
@@ -1756,7 +1756,7 @@
     "machine": false,
     "id": 289,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1775,7 +1775,7 @@
     "machine": false,
     "id": 292,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "snow"
   },
   {
@@ -1800,7 +1800,7 @@
     "machine": false,
     "id": 296,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1825,7 +1825,7 @@
     "machine": false,
     "id": 300,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1838,7 +1838,7 @@
     "machine": false,
     "id": 302,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {
@@ -1892,7 +1892,7 @@
     "machine": false,
     "id": 311,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1929,7 +1929,7 @@
     "machine": false,
     "id": 317,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -2043,7 +2043,7 @@
     "machine": false,
     "id": 336,
     "type": "tile",
-    "obstacle": "snowGhostOb_TL",
+    "obstacle": "snowGhostOb_Tl",
     "base": "snow"
   },
   {

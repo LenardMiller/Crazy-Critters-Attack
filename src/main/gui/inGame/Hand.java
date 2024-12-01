@@ -22,7 +22,7 @@ import static main.sound.SoundUtilities.playSound;
 
 public class Hand {
 
-    enum DisplayInfo {
+    public enum DisplayInfo {
         UpgradeWall,
         MaxWallUpgrade,
         PlaceWall
@@ -65,7 +65,7 @@ public class Hand {
         else implacable = false;
         if (!isPaused) {
             if (inputHandler.rightMousePressedPulse) remove();
-            if ((clickOnSidebar() || rclickNotWall())) clearHand();
+            if ((clickOnSidebar() || rClickNotWall())) clearHand();
             if (inputHandler.leftMousePressedPulse) tryPlace();
         }
     }
@@ -103,7 +103,8 @@ public class Hand {
             errorText = "Max level!";
         else if (enemyNearby()) errorText = "Blocked!";
         popupTexts.add(new PopupText(p, monoMedium, new Color(255, 0, 0, 254),
-                new Color(50, 0, 0, 200), new PVector(boardMousePosition.x, boardMousePosition.y),
+                new Color(50, 0, 0, 200),
+                new PVector(boardMousePosition.x, boardMousePosition.y),
                 errorText));
     }
 
@@ -116,7 +117,7 @@ public class Hand {
         for (TowerBuy towerBuyButton : towerBuyButtons) towerBuyButton.depressed = false;
     }
 
-    private boolean rclickNotWall() {
+    private boolean rClickNotWall() {
         return inputHandler.rightMousePressedPulse && !held.equals("wall");
     }
 
@@ -125,8 +126,12 @@ public class Hand {
     }
 
     private boolean isNotPlaceable() {
-        Tile tileTower = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
-        Tile tileObstacle = tiles.get((roundTo(boardMousePosition.x, 50) / 50), (roundTo(boardMousePosition.y, 50) / 50));
+        Tile tileTower = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        Tile tileObstacle = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50),
+                (roundTo(boardMousePosition.y, 50) / 50));
         if (tileObstacle == null) return true;
         if (tileTower != null && tileTower.tower != null) {
             if (held.equals("wall")) {
@@ -139,7 +144,7 @@ public class Hand {
     }
 
     private boolean enemyNearby() {
-        if (enemies.size() == 0) return false;
+        if (enemies.isEmpty()) return false;
         for (Enemy enemy : enemies) {
             if (findDistBetween(
                     enemy.position,
@@ -155,7 +160,9 @@ public class Hand {
     }
 
     private void checkDisplay() {
-        Tile tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        Tile tile = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower instanceof Wall) {
                 if (upgradable(tile)) {
@@ -183,7 +190,8 @@ public class Hand {
 
     /** Shows what's held at reduced opacity */
     public void displayHeld() {
-        if (boardMousePosition.x <= 0 || held.equals("null") || heldSprite == null || !alive) return;
+        if (boardMousePosition.x <= 0 || held.equals("null") || heldSprite == null || !alive)
+            return;
         //red if implacable
         if (implacable) p.tint(Color.RED.getRGB(), 180);
         else p.tint(new Color(0xFFDF8D).getRGB(), 180);
@@ -197,7 +205,7 @@ public class Hand {
     }
 
     private void displayCritterCircles() {
-        if (enemies.size() == 0) return;
+        if (enemies.isEmpty()) return;
         for (Enemy enemy : enemies) {
             if (findDistBetween(
                     enemy.position,
@@ -209,7 +217,8 @@ public class Hand {
                 if (!hand.held.equals("null")) {
                     p.noStroke();
                     p.fill(255, 0, 0, 100);
-                    p.circle(enemy.position.x, enemy.position.y, (MIN_ENEMY_DISTANCE * enemy.pfSize * 2) - 25);
+                    p.circle(enemy.position.x, enemy.position.y,
+                            (MIN_ENEMY_DISTANCE * enemy.pfSize * 2) - 25);
                 }
                 return;
             }
@@ -217,7 +226,8 @@ public class Hand {
     }
 
     public void displayHeldInfo() {
-        if (!held.equals("null") && !held.equals("wall") && !held.endsWith("TL")) displayTurretInfo(p, heldClass);
+        if (!held.equals("null") && !held.equals("wall") && !held.endsWith("Tl"))
+            displayTurretInfo(p, heldClass);
     }
 
     private void displayWallInfo() {
@@ -307,63 +317,63 @@ public class Hand {
     public void setHeld(String heldSet) {
         switch (heldSet) {
             case "slingshot" -> {
-                heldSprite = staticSprites.get("slingshotFullTR");
+                heldSprite = staticSprites.get("slingshotFullTr");
                 offset = new PVector(0, 0);
                 price = Slingshot.price;
             } case "crossbow" -> {
-                heldSprite = staticSprites.get("crossbowFullTR");
+                heldSprite = staticSprites.get("crossbowFullTr");
                 offset = new PVector(2, 2);
                 price = Crossbow.price;
             } case "miscCannon" -> {
-                heldSprite = staticSprites.get("miscCannonFullTR");
+                heldSprite = staticSprites.get("miscCannonFullTr");
                 offset = new PVector(0, 0);
                 price = RandomCannon.price;
             } case "cannon" -> {
-                heldSprite = staticSprites.get("cannonFullTR");
+                heldSprite = staticSprites.get("cannonFullTr");
                 offset = new PVector(5, 5);
                 price = Cannon.price;
             } case "gluer" -> {
-                heldSprite = staticSprites.get("gluerFullTR");
+                heldSprite = staticSprites.get("gluerFullTr");
                 offset = new PVector(0, 0);
                 price = Gluer.price;
             } case "seismic" -> {
-                heldSprite = staticSprites.get("seismicFullTR");
+                heldSprite = staticSprites.get("seismicFullTr");
                 offset = new PVector(4, 4);
                 price = SeismicTower.price;
             } case "energyBlaster" -> {
-                heldSprite = staticSprites.get("energyBlasterFullTR");
+                heldSprite = staticSprites.get("energyBlasterFullTr");
                 offset = new PVector(13, 13);
                 price = EnergyBlaster.price;
             } case "magicMissleer" -> {
-                heldSprite = staticSprites.get("magicMissleerFullTR");
+                heldSprite = staticSprites.get("magicMissleerFullTr");
                 offset = new PVector(0, 0);
                 price = MagicMissileer.price;
             } case "tesla" -> {
-                heldSprite = staticSprites.get("teslaFullTR");
+                heldSprite = staticSprites.get("teslaFullTr");
                 offset = new PVector(0, 0);
                 price = TeslaTower.price;
             } case "nightmare" -> {
-                heldSprite = staticSprites.get("nightmareFullTR");
+                heldSprite = staticSprites.get("nightmareFullTr");
                 offset = new PVector(0, 0);
                 price = Nightmare.price;
             } case "flamethrower" -> {
-                heldSprite = staticSprites.get("flamethrowerFullTR");
+                heldSprite = staticSprites.get("flamethrowerFullTr");
                 offset = new PVector(7, 7);
                 price = Flamethrower.price;
             } case "iceTower" -> {
-                heldSprite = staticSprites.get("iceTowerFullTR");
+                heldSprite = staticSprites.get("iceTowerFullTr");
                 offset = new PVector(0, 0);
                 price = IceTower.price;
             } case "booster" -> {
-                heldSprite = staticSprites.get("boosterFullTR");
+                heldSprite = staticSprites.get("boosterFullTr");
                 offset = new PVector(0, 0);
                 price = Booster.price;
             } case "railgun" -> {
-                heldSprite = staticSprites.get("railgunFullTR");
+                heldSprite = staticSprites.get("railgunFullTr");
                 offset = new PVector(6, 6);
                 price = Railgun.price;
             } case "waveMotion" -> {
-                heldSprite = staticSprites.get("waveMotionFullTR");
+                heldSprite = staticSprites.get("waveMotionFullTr");
                 offset = new PVector(14, 14);
                 price = WaveMotion.price;
             } case "wall" -> {
@@ -382,7 +392,9 @@ public class Hand {
     }
 
     private void remove() {
-        Tile tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        Tile tile = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower instanceof Wall) tile.tower.die(true);
         }
@@ -391,13 +403,16 @@ public class Hand {
     /** Puts down tower and subtracts price.
      * Assumes it is possible to do so */
     private void place() {
-        Tile tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        Tile tile = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
         if (tile == null) return;
         boolean changeHeld = true;
         if (!alive) return;
         if (held.equals("wall")) {
             if (tile.tower instanceof Wall wall) { //upgrade
-                if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.upgradePrices[wall.nextLevelB]) { //upgrade
+                //upgrade
+                if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.upgradePrices[wall.nextLevelB]) {
                     money -= wall.upgradePrices[wall.nextLevelB];
                     wall.upgrade(0, false);
                     connectWallQueues++;
@@ -406,17 +421,13 @@ public class Hand {
             } else tile.tower = new Wall(p, tile);
             changeHeld = false;
             tile.tower.place(false);
-        } else {
-            tile.tower = Turret.get(p, held.substring(0,1).toUpperCase() + held.substring(1), tile);
-            if (tile.tower != null) {
-                tile.tower.place(false);
-            }
-        }
-        if (held.contains("TL")) {
-            tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50), (roundTo(boardMousePosition.y, 50) / 50));
+        } else if (held.contains("Tl")) {
+            tile = tiles.get(
+                    (roundTo(boardMousePosition.x, 50) / 50),
+                    (roundTo(boardMousePosition.y, 50) / 50));
             if (tile == null) return;
             changeHeld = false;
-            String shortName = held.replace("_TL", "");
+            String shortName = held.replace("_Tl", "");
             if (shortName.contains("Ba")) tile.baseLayer.set(held);
             else if (shortName.endsWith("De")) tile.decorationLayer.set(held);
             else if (shortName.endsWith("Fl")) tile.flooringLayer.set(held);
@@ -430,6 +441,11 @@ public class Hand {
                 tile.breakableLayer.set(null);
                 tile.obstacleLayer.set(null);
             } connectWallQueues++;
+        } else {
+            tile.tower = Turret.get(p, held.substring(0,1).toUpperCase() + held.substring(1), tile);
+            if (tile.tower != null) {
+                tile.tower.place(false);
+            }
         }
         if (!held.equals("null")) money -= price;
         if (changeHeld) setHeldNullTimer = 1;

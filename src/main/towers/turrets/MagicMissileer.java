@@ -11,6 +11,7 @@ import processing.core.PVector;
 import java.awt.*;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Utilities.*;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
@@ -33,17 +34,17 @@ public class MagicMissileer extends Turret {
 
     private enum ElectricComponent {
         OuterRing(
-                staticSprites.get("electricMissleerOuterRingIdleTR"),
-                animatedSprites.get("electricMissleerOuterRingFireTR"),
-                animatedSprites.get("electricMissleerOuterRingLoadTR")),
+                getResource("magicMissleerElectricOuterRingIdleTr", staticSprites),
+                getResource("magicMissleerElectricOuterRingFireTR", animatedSprites),
+                getResource("magicMissleerElectricOuterRingLoadTR", animatedSprites)),
         InnerRing(
-                staticSprites.get("electricMissleerInnerRingIdleTR"),
-                animatedSprites.get("electricMissleerInnerRingFireTR"),
-                animatedSprites.get("electricMissleerInnerRingLoadTR")),
+                getResource("magicMissleerElectricInnerRingIdleTr", staticSprites),
+                getResource("magicMissleerElectricInnerRingFireTR", animatedSprites),
+                getResource("magicMissleerElectricInnerRingLoadTR", animatedSprites)),
         Core(
-                staticSprites.get("electricMissleerCoreIdleTR"),
-                animatedSprites.get("electricMissleerCoreFireTR"),
-                animatedSprites.get("electricMissleerCoreLoadTR"));
+                getResource("magicMissleerElectricCoreIdleTr", staticSprites),
+                getResource("magicMissleerElectricCoreFireTR", animatedSprites),
+                getResource("magicMissleerElectricCoreLoadTR", animatedSprites));
 
         final PImage idleSprite;
         final PImage[] fireAnimation;
@@ -94,7 +95,7 @@ public class MagicMissileer extends Turret {
 
     @Override
     protected void loadSprites() {
-        if (name.equals("electricMissleer")) {
+        if (name.equals("magicMissleerElectric")) {
             sBase = staticSprites.get("magicMissleerBaseTR");
             idleSprite = staticSprites.get(name + "IdleTR");
             idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
@@ -104,16 +105,18 @@ public class MagicMissileer extends Turret {
             return;
         }
         String tempName = name;
-        if (tempName.equals("magicSwarm")) tempName = "magicMissleer";
-        sBase = staticSprites.get(tempName + "BaseTR");
-        idleSprite = staticSprites.get(tempName + "IdleTR");
+        if (tempName.equals("magicMissleerSwarm")) tempName = "magicMissleer";
+        sBase = staticSprites.get(tempName + "BaseTr");
         fireFrames = animatedSprites.get(tempName + "FireTR");
         loadFrames = animatedSprites.get(tempName + "LoadTR");
-        if (animatedSprites.get(tempName + "IdleTR") != null) {
+        if (animatedSprites.containsKey(tempName + "IdleTR")) {
             idleFrames = animatedSprites.get(tempName + "IdleTR");
             idleSprite = idleFrames[0];
         }
-        else idleFrames = new PImage[]{staticSprites.get(tempName + "IdleTR")};
+        else {
+            idleSprite = staticSprites.get(tempName + "IdleTr");
+            idleFrames = new PImage[]{idleSprite};
+        }
     }
 
     @Override
@@ -128,7 +131,7 @@ public class MagicMissileer extends Turret {
 
     @Override
     protected void spawnProjectiles(PVector position, float angle) {
-       if (name.equals("electricMissleer")) {
+       if (name.equals("magicMissleerElectric")) {
             projectiles.add(new ElectricMissile(p, p.random(tile.position.x - size.x, tile.position.x),
               p.random(tile.position.y - size.y, tile.position.y), p.random(0, TWO_PI), this,
               getDamage(), Priority.Close, tile.position, effectDuration, effectLevel, pjSpeed));
@@ -164,16 +167,21 @@ public class MagicMissileer extends Turret {
     private void fire() {
         playSoundRandomSpeed(p, fireSound, 1);
         spawnProjectiles(new PVector(0,0), angle);
-        if (name.equals("electricMissleer")) {
+        if (name.equals("magicMissleerElectric")) {
             for (int i = 0; i < 3; i++) {
-                arcs.add(new YellowArc(p, getCenter().x, getCenter().y, this, 0, 0, (int) p.random(20, 100), Priority.None));
+                arcs.add(new YellowArc(p,
+                        getCenter().x,
+                        getCenter().y,
+                        this, 0, 0,
+                        (int) p.random(20, 100),
+                        Priority.None));
             }
         }
     }
 
     @Override
     public void displayBase() {
-        if (name.equals("electricMissleer")) return;
+        if (name.equals("magicMissleerElectric")) return;
         p.tint(255, tintColor, tintColor);
         if (sBase != null) p.image(sBase, tile.position.x - size.x, tile.position.y - size.y);
         p.tint(255, 255, 255);
@@ -187,14 +195,14 @@ public class MagicMissileer extends Turret {
         p.translate(tile.position.x - size.x / 2 + 2, tile.position.y - size.y / 2 + 2);
         p.rotate(angle);
         p.tint(0,60);
-        if (name.equals("magicSwarm")) {
+        if (name.equals("magicMissleerSwarm")) {
             for (int i = 0; i < 3; i++) {
                 p.pushMatrix();
                 p.rotate(specialAngle + (i * (TWO_PI / 3)));
                 p.image(fireFrames[5],(-size.x/2-offset) + displacement,-size.y/2-offset);
                 p.popMatrix();
             }
-        } else if (name.equals("electricMissleer")) {
+        } else if (name.equals("magicMissleerElectric")) {
             p.image(ElectricComponent.Core.idleSprite, (-size.x/2-offset),-size.y/2-offset);
             p.pushMatrix();
             p.rotate(specialAngle);
@@ -211,14 +219,14 @@ public class MagicMissileer extends Turret {
         p.translate(tile.position.x - size.x / 2, tile.position.y - size.y / 2);
         p.rotate(angle);
         p.tint(255, tintColor, tintColor);
-        if (name.equals("magicSwarm") && sprite != null) {
+        if (name.equals("magicMissleerSwarm") && sprite != null) {
             for (int i = 0; i < 3; i++) {
                 p.pushMatrix();
                 p.rotate(specialAngle + (i * (TWO_PI / 3)));
                 p.image(sprite,(-size.x/2-offset) + displacement,-size.y/2-offset);
                 p.popMatrix();
             }
-        } else if (name.equals("electricMissleer")) {
+        } else if (name.equals("magicMissleerElectric")) {
             int frame = this.frame;
             if (state == State.Load) frame = compressedLoadFrames.get(this.frame);
 
@@ -237,7 +245,7 @@ public class MagicMissileer extends Turret {
 
         if (!isPaused) {
             float specialRotationSpeed = 0.01f;
-            if (name.equals("electricMissleer")) {
+            if (name.equals("magicMissleerElectric")) {
                 specialRotationSpeed = switch (state) {
                     case Idle -> 0.03f;
                     case Fire -> 0.03f * (1 - (frame / (float) fireFrames.length));
@@ -317,8 +325,8 @@ public class MagicMissileer extends Turret {
                 case 2 -> {
                     effectLevel = 5000;
                     effectDuration = 10;
-                    damage *= 5f;
-                    name = "electricMissleer";
+                    damage *= 5;
+                    name = "magicMissleerElectric";
                     material = Material.darkMetal;
                     placeSound = sounds.get("titaniumPlace");
                     breakSound = sounds.get("titaniumBreak");
@@ -335,7 +343,7 @@ public class MagicMissileer extends Turret {
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
                             specialColor, "Electrification:", null));
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
-                            specialColor, "DPS", nfc(((int) (effectLevel / 0.5f))) + ""));
+                            specialColor, "DPS", nfc(((int) (effectLevel / 0.5f)))));
                     extraInfo.add((arg) -> selection.displayInfoLine(arg,
                             specialColor, "Duration", nf(effectDuration, 1, 1) + "s"));
                     loadSprites();
@@ -348,7 +356,7 @@ public class MagicMissileer extends Turret {
                 case 5 -> {
                     pjSpeed += 50;
                     range += 50;
-                    name = "magicSwarm";
+                    name = "magicMissleerSwarm";
                     additionalMissiles = 9;
                     titleLines = new String[]{"Mythic Tower"};
                 }

@@ -2,7 +2,7 @@ package main.buffs.stunned;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.enemies.BurrowingEnemy;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;
 

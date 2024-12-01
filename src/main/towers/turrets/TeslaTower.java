@@ -104,7 +104,7 @@ public class TeslaTower extends Turret {
             FadeSoundLoop electricity = fadeSoundLoops.get("electricity");
             if (electricity.targetVolume < 0.2f) electricity.setTargetVolume(0.2f);
         } else {
-            if (enemies.size() > 0 && !machine.dead && !isPaused) checkTarget();
+            if (!enemies.isEmpty() && !machine.dead && !isPaused) checkTarget();
         }
         if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
                 && boardMousePosition.y > tile.position.y - size.y && alive && !isPaused) {
@@ -203,7 +203,7 @@ public class TeslaTower extends Turret {
                     placeSound = sounds.get("crystalPlace");
                     damageSound = sounds.get("crystalDamage");
                     breakSound = sounds.get("crystalBreak");
-                    name = "lightning";
+                    name = "teslaLightning";
                     betweenFireFrames = 2;
                     titleLines = new String[]{"Lightning Caller"};
                     extraInfo.add((arg) -> selection.displayInfoLine(arg, SPECIAL_COLOR, "Lightning", null));
@@ -219,7 +219,7 @@ public class TeslaTower extends Turret {
                     highPower = true;
                     betweenIdleFrames = 3;
                     damage /= 8;
-                    name = "highPowerTesla";
+                    name = "teslaHighPower";
                     material = Material.darkMetal;
                     titleLines = new String[]{"The Demon", "Circuit"};
                     extraInfo.clear();

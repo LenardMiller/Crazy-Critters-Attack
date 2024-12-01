@@ -23,8 +23,8 @@ public class EnragedGiant extends Enemy {
         name = "enragedGiant";
         attackDmgFrames = new int[]{28};
         System.arraycopy(attackDmgFrames, 0, tempAttackDmgFrames, 0, tempAttackDmgFrames.length);
-        betweenAttackFrames = down60ToFramerate(1);
-        betweenWalkFrames = down60ToFramerate(1);
+        attackDelay = down60ToFramerate(1);
+        walkDelay = down60ToFramerate(1);
         corpseSize = new PVector(152,152);
         partSize = new PVector(68,68);
         corpseLifespan = 12;
