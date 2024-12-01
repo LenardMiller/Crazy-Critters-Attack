@@ -152,11 +152,10 @@ public class ResourceLoader {
                                     }
                                 }
                                 suffix = "TW";
-                                System.out.println(path + " -> " + key + suffix);
                             }
                         }
                         default -> {
-//                            System.err.println("Invalid parent directory");
+                            System.err.println("Invalid parent directory: " + files[0]);
                             return;
                         }
                     }

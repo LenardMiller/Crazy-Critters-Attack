@@ -183,7 +183,8 @@ public class Hand {
 
     /** Shows what's held at reduced opacity */
     public void displayHeld() {
-        if (boardMousePosition.x <= 0 || held.equals("null") || heldSprite == null || !alive) return;
+        if (boardMousePosition.x <= 0 || held.equals("null") || heldSprite == null || !alive)
+            return;
         //red if implacable
         if (implacable) p.tint(Color.RED.getRGB(), 180);
         else p.tint(new Color(0xFFDF8D).getRGB(), 180);
@@ -217,7 +218,8 @@ public class Hand {
     }
 
     public void displayHeldInfo() {
-        if (!held.equals("null") && !held.equals("wall") && !held.endsWith("TL")) displayTurretInfo(p, heldClass);
+        if (!held.equals("null") && !held.equals("wall") && !held.endsWith("Tl"))
+            displayTurretInfo(p, heldClass);
     }
 
     private void displayWallInfo() {
@@ -391,7 +393,9 @@ public class Hand {
     /** Puts down tower and subtracts price.
      * Assumes it is possible to do so */
     private void place() {
-        Tile tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        Tile tile = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
         if (tile == null) return;
         boolean changeHeld = true;
         if (!alive) return;
@@ -406,17 +410,11 @@ public class Hand {
             } else tile.tower = new Wall(p, tile);
             changeHeld = false;
             tile.tower.place(false);
-        } else {
-            tile.tower = Turret.get(p, held.substring(0,1).toUpperCase() + held.substring(1), tile);
-            if (tile.tower != null) {
-                tile.tower.place(false);
-            }
-        }
-        if (held.contains("TL")) {
+        } else if (held.contains("Tl")) {
             tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50), (roundTo(boardMousePosition.y, 50) / 50));
             if (tile == null) return;
             changeHeld = false;
-            String shortName = held.replace("_TL", "");
+            String shortName = held.replace("_Tl", "");
             if (shortName.contains("Ba")) tile.baseLayer.set(held);
             else if (shortName.endsWith("De")) tile.decorationLayer.set(held);
             else if (shortName.endsWith("Fl")) tile.flooringLayer.set(held);
@@ -430,6 +428,11 @@ public class Hand {
                 tile.breakableLayer.set(null);
                 tile.obstacleLayer.set(null);
             } connectWallQueues++;
+        } else {
+            tile.tower = Turret.get(p, held.substring(0,1).toUpperCase() + held.substring(1), tile);
+            if (tile.tower != null) {
+                tile.tower.place(false);
+            }
         }
         if (!held.equals("null")) money -= price;
         if (changeHeld) setHeldNullTimer = 1;

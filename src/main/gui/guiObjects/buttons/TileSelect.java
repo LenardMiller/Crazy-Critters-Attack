@@ -31,9 +31,10 @@ public class TileSelect extends Button {
         } else if (type.contains("invisible")){
             tileSprite = p.loadImage("sprites/gui/buttons/tileSelect/erase/icon.png");
         }
-        else tileSprite = staticSprites.get(type + "_TL");
+        else tileSprite = staticSprites.get(type + "_Tl");
         if (tileSprite == null) System.err.println("tile icon missing: " + type);
-        spriteLocation = "sprites/gui/buttons/tileSelect/" + sl + "/"; //still uses old system because it is only created at beginning of game
+        //still uses old system because it is only created at beginning of game
+        spriteLocation = "sprites/gui/buttons/tileSelect/" + sl + "/";
         spriteIdle = p.loadImage(spriteLocation + "000.png");
         spritePressed = p.loadImage(spriteLocation + "001.png");
         sprite = spriteIdle;
@@ -61,6 +62,6 @@ public class TileSelect extends Button {
     @Override
     public void pressIn() {
         if (hand.held.equals(type)) hand.setHeld("null");
-        hand.setHeld(type + "_TL");
+        hand.setHeld(type + "_Tl");
     }
 }
