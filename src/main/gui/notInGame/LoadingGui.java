@@ -82,9 +82,9 @@ public class LoadingGui {
 //                profiler.finishProfiling("loading: turret sprites");
                 break;
             case 8:
-                profiler.startProfilingSingle("loading: wall sprites");
-                loadWalls(p);
-                profiler.finishProfiling("loading: wall sprites");
+//                profiler.startProfilingSingle("loading: wall sprites");
+//                loadWalls(p);
+//                profiler.finishProfiling("loading: wall sprites");
                 break;
             case 9:
                 profiler.startProfilingSingle("loading: sounds");
@@ -103,7 +103,7 @@ public class LoadingGui {
                 //buffer
                 break;
             default:
-                System.out.println("MAX_PROGRESS is too large");
+                System.err.println("MAX_PROGRESS is too large");
         }
 
         progress = Math.min(progress + 1, MAX_PROGRESS);

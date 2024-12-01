@@ -6,6 +6,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
@@ -25,7 +26,7 @@ public class IceWall extends Wall {
         this.maxHp = maxHp;
         hp = maxHp;
         this.timeUntilDamage = timeUntilDamage;
-        sprite = animatedSprites.get("iceWallTW");
+        sprite = getResource("iceWallTW", animatedSprites);
         material = Material.ice;
         damageSound = sounds.get("iceDamage");
         breakSound = sounds.get("iceBreak");
@@ -215,13 +216,13 @@ public class IceWall extends Wall {
                     if (c == 0) idC = "c";
                     if (c == 1) idC = "v";
                     String id = idA+idB+idC;
-                    spriteDS.add(staticSprites.get(name + id + "WallTW"),idA,idB,idC);
+                    spriteDS.add(getResource(name + id + "WallTw", staticSprites),idA,idB,idC);
                 }
             }
         }
-        spriteDS.t = staticSprites.get(name + "tWallTW");
-        spriteDS.b = staticSprites.get(name + "bWallTW");
-        spriteDS.l = staticSprites.get(name + "lWallTW");
-        spriteDS.r = staticSprites.get(name + "rWallTW");
+        spriteDS.t = getResource(name + "tWallTw", staticSprites);
+        spriteDS.b = getResource(name + "bWallTw", staticSprites);
+        spriteDS.l = getResource(name + "lWallTw", staticSprites);
+        spriteDS.r = getResource(name + "rWallTw", staticSprites);
     }
 }

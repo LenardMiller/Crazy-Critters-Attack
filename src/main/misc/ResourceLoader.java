@@ -140,13 +140,23 @@ public class ResourceLoader {
                                     }
                                 }
                                 suffix = "TR";
-                                System.out.println(path + " -> " + key + suffix);
                             } else if (Objects.equals(files[1], "walls")) {
+                                if (files.length == 3) {
+                                    key.append(files[2]);
+                                } else {
+                                    // is center
+                                    if (files[3].matches("[0-9][0-9][0-9]")) {
+                                        key.append(files[2]).append("Wall");
+                                    } else {
+                                        key.append(files[2]).append(files[3]).append("Wall");
+                                    }
+                                }
                                 suffix = "TW";
+                                System.out.println(path + " -> " + key + suffix);
                             }
                         }
                         default -> {
-//                            System.out.println("Invalid parent directory");
+//                            System.err.println("Invalid parent directory");
                             return;
                         }
                     }
