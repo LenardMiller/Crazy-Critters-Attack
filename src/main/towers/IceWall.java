@@ -58,7 +58,7 @@ public class IceWall extends Wall {
             }
             for (Enemy enemy : enemies) {
                 if (enemy.position.x > tile.position.x - TILE_SIZE && enemy.position.x < tile.position.x
-                        && enemy.position.y > tile.position.y - TILE_SIZE && enemy.position.x < tile.position.y) {
+                        && enemy.position.y > tile.position.y - TILE_SIZE && enemy.position.y < tile.position.y) {
                     enemy.intersectingIceCount++;
                 }
                 int targetSize = ceil(enemy.pfSize / 2f);

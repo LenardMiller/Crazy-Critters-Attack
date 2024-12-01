@@ -8,6 +8,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static main.Main.*;
@@ -38,7 +39,7 @@ public class Tile {
         @Override
         public void display() {
             if (sprite == null) return;
-            P.image(sprite, position.x, position.y);
+            p.image(sprite, position.x, position.y);
             spillEdges();
         }
 
@@ -92,19 +93,19 @@ public class Tile {
             int y = (int) (position.y / 50);
             if (y != 0) {
                 Tile tile = tiles.get(x, y - 1);
-                if (canSpill(0, tile)) P.image(tile.baseLayer.spill[0], position.x, position.y);
+                if (canSpill(0, tile)) p.image(tile.baseLayer.spill[0], position.x, position.y);
             }
             if (x != 0) {
                 Tile tile = tiles.get(x - 1, y);
-                if (canSpill(3, tile)) P.image(tile.baseLayer.spill[3], position.x, position.y);
+                if (canSpill(3, tile)) p.image(tile.baseLayer.spill[3], position.x, position.y);
             }
             if (y != 18) {
                 Tile tile = tiles.get(x, y + 1);
-                if (canSpill(2, tile)) P.image(tile.baseLayer.spill[2], position.x, position.y);
+                if (canSpill(2, tile)) p.image(tile.baseLayer.spill[2], position.x, position.y);
             }
             if (x != 18) {
                 Tile tile = tiles.get(x + 1, y);
-                if (canSpill(1, tile)) P.image(tile.baseLayer.spill[1], position.x, position.y);
+                if (canSpill(1, tile)) p.image(tile.baseLayer.spill[1], position.x, position.y);
             }
         }
     }
@@ -129,9 +130,9 @@ public class Tile {
             if (name == null) return;
             if (edges != null) connectEdges();
             if (!isConcrete(name)) {
-                if (isDebug) P.tint(255,0,255);
-                P.image(sprite, position.x, position.y);
-                if (isDebug) P.tint(255);
+                if (isDebug) p.tint(255,0,255);
+                p.image(sprite, position.x, position.y);
+                if (isDebug) p.tint(255);
             }
         }
 
@@ -164,27 +165,27 @@ public class Tile {
         }
 
         private void connectEdges() {
-            if (isDebug) P.tint(0,255,0);
+            if (isDebug) p.tint(0,255,0);
             int x = (int) (position.x / 50);
             int y = (int) (position.y / 50);
             if (y != 0) {
                 Tile tile = tiles.get(x, y - 1);
-                if (isConnected(0, tile)) P.image(tile.flooringLayer.edges[0], position.x, position.y);
-                if (edges[0] != null && isConcrete(tile.flooringLayer.name)) P.image(edges[0], position.x, position.y);
+                if (isConnected(0, tile)) p.image(tile.flooringLayer.edges[0], position.x, position.y);
+                if (edges[0] != null && isConcrete(tile.flooringLayer.name)) p.image(edges[0], position.x, position.y);
             } if (x != 0) {
                 Tile tile = tiles.get(x - 1, y);
-                if (isConnected(3, tile)) P.image(tile.flooringLayer.edges[3], position.x, position.y);
-                if (edges[3] != null && isConcrete(tile.flooringLayer.name)) P.image(edges[3], position.x, position.y);
+                if (isConnected(3, tile)) p.image(tile.flooringLayer.edges[3], position.x, position.y);
+                if (edges[3] != null && isConcrete(tile.flooringLayer.name)) p.image(edges[3], position.x, position.y);
             } if (y != 18) {
                 Tile tile = tiles.get(x, y + 1);
-                if (isConnected(2, tile)) P.image(tile.flooringLayer.edges[2], position.x, position.y);
-                if (edges[2] != null && isConcrete(tile.flooringLayer.name)) P.image(edges[2], position.x, position.y);
+                if (isConnected(2, tile)) p.image(tile.flooringLayer.edges[2], position.x, position.y);
+                if (edges[2] != null && isConcrete(tile.flooringLayer.name)) p.image(edges[2], position.x, position.y);
             } if (x != 18) {
                 Tile tile = tiles.get(x + 1, y);
-                if (isConnected(1, tile)) P.image(tile.flooringLayer.edges[1], position.x, position.y);
-                if (edges[1] != null && isConcrete(tile.flooringLayer.name)) P.image(edges[1], position.x, position.y);
+                if (isConnected(1, tile)) p.image(tile.flooringLayer.edges[1], position.x, position.y);
+                if (edges[1] != null && isConcrete(tile.flooringLayer.name)) p.image(edges[1], position.x, position.y);
             }
-            if (isDebug) P.tint(255);
+            if (isDebug) p.tint(255);
         }
 
         private boolean isConnected(int i, Tile tile) {
@@ -235,12 +236,12 @@ public class Tile {
 
         public void displayInsideCorners() {
             if (isConcrete(name)) {
-                if (drawMain) P.image(sprite, position.x, position.y);
+                if (drawMain) p.image(sprite, position.x, position.y);
                 for (int i = 0; i < 4; i++) {
                     if (insideCorners[i] != null) {
-                        if (isDebug) P.tint(255,0,0);
-                        P.image(insideCorners[i], position.x, position.y);
-                        if (isDebug) P.tint(255);
+                        if (isDebug) p.tint(255,0,0);
+                        p.image(insideCorners[i], position.x, position.y);
+                        if (isDebug) p.tint(255);
                     }
                 }
             }
@@ -250,9 +251,9 @@ public class Tile {
             for (int i = 0; i < 4; i++) {
                 if (outsideCorners[i] != null) {
                     if (outsideCornerNames[i].equals(name)) {
-                        if (isDebug) P.tint(0,0,255);
-                        P.image(outsideCorners[i], position.x, position.y);
-                        if (isDebug) P.tint(255);
+                        if (isDebug) p.tint(0,0,255);
+                        p.image(outsideCorners[i], position.x, position.y);
+                        if (isDebug) p.tint(255);
                     }
                 }
             }
@@ -263,7 +264,7 @@ public class Tile {
             outsideCornerNames = new String[4];
             int x = (int) (position.x / 50);
             int y = (int) (position.y / 50);
-            if (isDebug) P.tint(0,0,255);
+            if (isDebug) p.tint(0,0,255);
             if (x != 18 && y != 0) { //tro
                 String n = doubleDiagonalOut(x,y,1,-1);
                 if (n != null) {
@@ -289,7 +290,7 @@ public class Tile {
                     outsideCornerNames[3] = n;
                 }
             }
-            if (isDebug) P.tint(255);
+            if (isDebug) p.tint(255);
         }
 
         private String checkMissing(int x, int y, String name) {
@@ -360,7 +361,10 @@ public class Tile {
             if (tileA.flooringLayer.name == null) return false;
             if (tileB.flooringLayer.name == null) return false;
             if (!tileA.flooringLayer.name.equals(name)) return false;
-            if (tileC != null && tileC.flooringLayer.name != null && tileC.flooringLayer.name.equals(tileA.flooringLayer.name)) return false;
+            if (tileC != null &&
+                    tileC.flooringLayer.name != null &&
+                    tileC.flooringLayer.name.equals(tileA.flooringLayer.name))
+                return false;
             return tileB.flooringLayer.name.equals(name);
         }
 
@@ -395,7 +399,7 @@ public class Tile {
         @Override
         public void display() {
             if (sprite == null) return;
-            P.image(sprite, position.x, position.y);
+            p.image(sprite, position.x, position.y);
         }
 
         @Override
@@ -415,7 +419,7 @@ public class Tile {
         @Override
         public void display() {
             if (sprite == null) return;
-            P.image(sprite, position.x, position.y);
+            p.image(sprite, position.x, position.y);
         }
 
         @Override
@@ -441,9 +445,13 @@ public class Tile {
 
         @Override
         public void display() {
-            P.tint(255);
+            p.tint(255);
             if (sprite == null) return;
-            P.image(sprite, position.x, position.y);
+            p.image(sprite, position.x, position.y);
+            if (isDebug) {
+                p.fill(Color.RED.getRGB());
+                p.circle(position.x, position.y, 5);
+            }
         }
 
         @Override
@@ -476,9 +484,9 @@ public class Tile {
 
         public void displayShadow() {
             if (sprite == null) return;
-            P.tint(0, 60);
-            P.image(sprite, position.x + obstacleShadowLength, position.y + obstacleShadowLength);
-            P.tint(255);
+            p.tint(0, 60);
+            p.image(sprite, position.x + obstacleShadowLength, position.y + obstacleShadowLength);
+            p.tint(255);
         }
 
         public boolean exists() {
@@ -502,7 +510,7 @@ public class Tile {
             "snow"
     };
 
-    private final PApplet P;
+    private final PApplet p;
 
     public boolean machine;
     public int id;
@@ -515,7 +523,7 @@ public class Tile {
     public ObstacleLayer obstacleLayer;
 
     public Tile(PApplet p, PVector position, int id) {
-        this.P = p;
+        this.p = p;
 
         this.position = position;
         this.id = id;
@@ -533,7 +541,7 @@ public class Tile {
     private void spawnRipples(Ripple.Type type) {
         int chance = 60;
         if (type.equals(Ripple.Type.sludge)) chance = 180;
-        if (P.random(chance) < 1) {
+        if (p.random(chance) < 1) {
             Tile rightTile = tiles.get(getGridPosition().x + 1, getGridPosition().y);
             boolean right = rightTile == null;
             if (!right && rightTile.baseLayer.name != null) right = !rightTile.baseLayer.name.equals(type.name());
@@ -542,8 +550,8 @@ public class Tile {
             if (!left && leftTile.baseLayer.name != null) left = !leftTile.baseLayer.name.equals(type.name());
             PVector topLeftCorner = new PVector(!left ? position.x : position.x + 20, position.y + 7);
             PVector bottomRightCorner = PVector.add(position, new PVector(!right ? TILE_SIZE : TILE_SIZE - 20, TILE_SIZE - 7));
-            PVector spawnPos = new PVector(P.random(topLeftCorner.x, bottomRightCorner.x), P.random(topLeftCorner.y, bottomRightCorner.y));
-            tileParticles.add(new Ripple(P, spawnPos.x, spawnPos.y, type));
+            PVector spawnPos = new PVector(p.random(topLeftCorner.x, bottomRightCorner.x), p.random(topLeftCorner.y, bottomRightCorner.y));
+            tileParticles.add(new Ripple(p, spawnPos.x, spawnPos.y, type));
         }
     }
 
