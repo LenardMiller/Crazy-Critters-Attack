@@ -103,7 +103,8 @@ public class Hand {
             errorText = "Max level!";
         else if (enemyNearby()) errorText = "Blocked!";
         popupTexts.add(new PopupText(p, monoMedium, new Color(255, 0, 0, 254),
-                new Color(50, 0, 0, 200), new PVector(boardMousePosition.x, boardMousePosition.y),
+                new Color(50, 0, 0, 200),
+                new PVector(boardMousePosition.x, boardMousePosition.y),
                 errorText));
     }
 
@@ -125,8 +126,12 @@ public class Hand {
     }
 
     private boolean isNotPlaceable() {
-        Tile tileTower = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
-        Tile tileObstacle = tiles.get((roundTo(boardMousePosition.x, 50) / 50), (roundTo(boardMousePosition.y, 50) / 50));
+        Tile tileTower = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        Tile tileObstacle = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50),
+                (roundTo(boardMousePosition.y, 50) / 50));
         if (tileObstacle == null) return true;
         if (tileTower != null && tileTower.tower != null) {
             if (held.equals("wall")) {
@@ -155,7 +160,9 @@ public class Hand {
     }
 
     private void checkDisplay() {
-        Tile tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        Tile tile = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower instanceof Wall) {
                 if (upgradable(tile)) {
@@ -210,7 +217,8 @@ public class Hand {
                 if (!hand.held.equals("null")) {
                     p.noStroke();
                     p.fill(255, 0, 0, 100);
-                    p.circle(enemy.position.x, enemy.position.y, (MIN_ENEMY_DISTANCE * enemy.pfSize * 2) - 25);
+                    p.circle(enemy.position.x, enemy.position.y,
+                            (MIN_ENEMY_DISTANCE * enemy.pfSize * 2) - 25);
                 }
                 return;
             }
@@ -384,7 +392,9 @@ public class Hand {
     }
 
     private void remove() {
-        Tile tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50) + 1, (roundTo(boardMousePosition.y, 50) / 50) + 1);
+        Tile tile = tiles.get(
+                (roundTo(boardMousePosition.x, 50) / 50) + 1,
+                (roundTo(boardMousePosition.y, 50) / 50) + 1);
         if (held.equals("wall")) {
             if (tile != null && tile.tower instanceof Wall) tile.tower.die(true);
         }
@@ -401,7 +411,8 @@ public class Hand {
         if (!alive) return;
         if (held.equals("wall")) {
             if (tile.tower instanceof Wall wall) { //upgrade
-                if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.upgradePrices[wall.nextLevelB]) { //upgrade
+                //upgrade
+                if (wall.nextLevelB < wall.upgradeIcons.length && money >= wall.upgradePrices[wall.nextLevelB]) {
                     money -= wall.upgradePrices[wall.nextLevelB];
                     wall.upgrade(0, false);
                     connectWallQueues++;
@@ -411,7 +422,9 @@ public class Hand {
             changeHeld = false;
             tile.tower.place(false);
         } else if (held.contains("Tl")) {
-            tile = tiles.get((roundTo(boardMousePosition.x, 50) / 50), (roundTo(boardMousePosition.y, 50) / 50));
+            tile = tiles.get(
+                    (roundTo(boardMousePosition.x, 50) / 50),
+                    (roundTo(boardMousePosition.y, 50) / 50));
             if (tile == null) return;
             changeHeld = false;
             String shortName = held.replace("_Tl", "");
