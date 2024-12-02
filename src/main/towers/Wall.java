@@ -6,6 +6,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Tile.updateFlooring;
 import static main.misc.Tile.updateTowerArray;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
@@ -43,7 +44,7 @@ public class Wall extends Tower {
         maxHp = 50;
         hp = maxHp;
         hit = false;
-        sprite = animatedSprites.get("woodWallTW");
+        sprite = getResource("woodWallTW", animatedSprites);
         material = Material.wood;
         damageSound = sounds.get(material + "Damage");
         breakSound = sounds.get(material + "Break");
@@ -93,14 +94,14 @@ public class Wall extends Tower {
         float y = tile.position.y-size.y;
         p.tint(0,60);
         String sT = shadowType();
-        if (sT != null) p.image(staticSprites.get("shadow" + sT + "TW"), x, y);
+        if (sT != null) p.image(getResource("shadow" + sT + "Tw", staticSprites), x, y);
         else p.image(sprite[0],x+5,y+5);
         p.tint(255);
     }
 
     private String shadowType() {
-        int x = (int)tile.position.x/50;
-        int y = (int)tile.position.y/50;
+        int x = (int) tile.position.x/50;
+        int y = (int) tile.position.y/50;
         boolean t = y > 0 && tiles.get(x,y-1).tower != null && tiles.get(x,y-1).tower instanceof Wall;
         boolean l = x > 0 && tiles.get(x-1,y).tower != null && tiles.get(x-1,y).tower instanceof Wall;
         if (!t && !l) return "Both";
@@ -147,7 +148,7 @@ public class Wall extends Tower {
             value += upgradePrices[i];
         }
         // account for damage to wall
-        value *= hp / (float) getMaxHp();
+        value *= (int) (hp / (float) getMaxHp());
         return value;
     }
 
@@ -163,10 +164,10 @@ public class Wall extends Tower {
         upgradeTitles[2] = "Crystal";
         upgradeTitles[3] = "Titanium";
         //sprites
-        upgradeSprites[0] = animatedSprites.get("stoneWallTW");
-        upgradeSprites[1] = animatedSprites.get("metalWallTW");
-        upgradeSprites[2] = animatedSprites.get("crystalWallTW");
-        upgradeSprites[3] = animatedSprites.get("titaniumWallTW");
+        upgradeSprites[0] = getResource("stoneWallTW", animatedSprites);
+        upgradeSprites[1] = getResource("metalWallTW", animatedSprites);
+        upgradeSprites[2] = getResource("crystalWallTW", animatedSprites);
+        upgradeSprites[3] = getResource("titaniumWallTW", animatedSprites);
         //names
         upgradeNames[0] = "stone";
         upgradeNames[1] = "metal";
@@ -198,7 +199,7 @@ public class Wall extends Tower {
 
         nextLevelB++;
         if (nextLevelB < upgradeTitles.length) inGameGui.upgradeIconB.sprite = upgradeIcons[nextLevelB];
-        else inGameGui.upgradeIconB.sprite = animatedSprites.get("upgradeIC")[0];
+        else inGameGui.upgradeIconB.sprite = getResource("upgradeIC", animatedSprites)[0];
         int x = (int)(tile.position.x / 50);
         int y = (int)(tile.position.y / 50);
         tiles.get(x-1,y-1).flooringLayer.set(name);
@@ -331,15 +332,15 @@ public class Wall extends Tower {
                         if (c == 0) idC = "c";
                         if (c == 1) idC = "v";
                         String id = idA+idB+idC;
-                        String fullName = name + id + "WallTW";
-                        spriteDS.add(staticSprites.get(fullName),idA,idB,idC);
+                        String fullName = name + id + "WallTw";
+                        spriteDS.add(getResource(fullName, staticSprites),idA,idB,idC);
                     }
                 }
             }
-            spriteDS.t = staticSprites.get(name + "tWallTW");
-            spriteDS.b = staticSprites.get(name + "bWallTW");
-            spriteDS.l = staticSprites.get(name + "lWallTW");
-            spriteDS.r = staticSprites.get(name + "rWallTW");
+            spriteDS.t = getResource(name + "tWallTw", staticSprites);
+            spriteDS.b = getResource(name + "bWallTw", staticSprites);
+            spriteDS.l = getResource(name + "lWallTw", staticSprites);
+            spriteDS.r = getResource(name + "rWallTw", staticSprites);
         }
     }
 

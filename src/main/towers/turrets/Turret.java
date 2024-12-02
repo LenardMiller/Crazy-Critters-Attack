@@ -2,7 +2,7 @@ package main.towers.turrets;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
+import main.enemies.BurrowingEnemy;
 import main.gui.guiObjects.PopupText;
 import main.gui.inGame.Selection;
 import main.misc.CompressArray;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import static main.Main.*;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Utilities.*;
 import static main.misc.Tile.updateTowerArray;
 import static main.pathfinding.PathfindingUtilities.updateCombatPoints;
@@ -295,16 +296,16 @@ public abstract class Turret extends Tower {
     protected abstract void spawnProjectiles(PVector position, float angle);
 
     protected void loadSprites() {
-        sBase = staticSprites.get(name + "BaseTR");
-        idleSprite = staticSprites.get(name + "IdleTR");
-        fireFrames = animatedSprites.get(name + "FireTR");
-        loadFrames = animatedSprites.get(name + "LoadTR");
-        if (animatedSprites.get(name + "IdleTR") != null) {
-            idleFrames = animatedSprites.get(name + "IdleTR");
+        sBase = getResource(name + "BaseTr", staticSprites);
+        fireFrames = getResource(name + "FireTR", animatedSprites);
+        loadFrames = getResource(name + "LoadTR", animatedSprites);
+        if (animatedSprites.containsKey(name + "IdleTR")) {
+            idleFrames = getResource(name + "IdleTR", animatedSprites);
             idleSprite = idleFrames[0];
             sprite = idleSprite;
-        }  else {
-            idleFrames = new PImage[]{staticSprites.get(name + "IdleTR")};
+        } else {
+            idleSprite = getResource(name + "IdleTr", staticSprites);
+            idleFrames = new PImage[]{idleSprite};
             sprite = idleFrames[0];
         }
     }
@@ -316,7 +317,7 @@ public abstract class Turret extends Tower {
             tile.tower = null;
         }
         updateBoosts();
-        if (enemies.size() > 0 && !machine.dead && !isPaused) checkTarget();
+        if (!enemies.isEmpty() && !machine.dead && !isPaused) checkTarget();
         if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
                 && boardMousePosition.y > tile.position.y - size.y && alive && !isPaused) {
             selection.swapSelected(tile.id);
@@ -336,7 +337,8 @@ public abstract class Turret extends Tower {
         int moneyGain;
         if (!isSold) {
             moneyGain = (int) (getValue() * 0.4);
-            tiles.get(((int)tile.position.x/50) - 1, ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_TL");
+            tiles.get(((int)tile.position.x/50) - 1,
+                    ((int)tile.position.y/50) - 1).breakableLayer.set(material + "DebrisBr_Tl");
         } else moneyGain = (int) (getValue() * 0.8);
         popupTexts.add(new PopupText(p, new PVector(tile.position.x - 25, tile.position.y - 25), moneyGain));
         money += moneyGain;
@@ -419,9 +421,9 @@ public abstract class Turret extends Tower {
         if (nextLevelB > 5 || nextLevelA > 2) return;
 
         if (money >= upgradePrices[nextLevelA] && money >= upgradePrices[nextLevelB]) {
-            p.image(staticSprites.get("upgradePromptOverlay2Ic"), tile.position.x - size.x, tile.position.y - size.y);
+            p.image(staticSprites.get("upgradePrompt2Ic"), tile.position.x - size.x, tile.position.y - size.y);
         } else if (money >= upgradePrices[nextLevelA] || money >= upgradePrices[nextLevelB]) {
-            p.image(staticSprites.get("upgradePromptOverlayIc"), tile.position.x - size.x, tile.position.y - size.y);
+            p.image(staticSprites.get("upgradePromptIc"), tile.position.x - size.x, tile.position.y - size.y);
         }
     }
 

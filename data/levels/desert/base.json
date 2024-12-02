@@ -33,7 +33,7 @@
     "machine": false,
     "id": 5,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -58,7 +58,7 @@
     "machine": false,
     "id": 9,
     "type": "tile",
-    "obstacle": "cactus5Ob_TL",
+    "obstacle": "cactus5Ob_Tl",
     "base": "sand"
   },
   {
@@ -71,7 +71,7 @@
     "machine": false,
     "id": 11,
     "type": "tile",
-    "breakable": "blueFlowersBr_TL",
+    "breakable": "blueFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -84,7 +84,7 @@
     "machine": false,
     "id": 13,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -138,14 +138,14 @@
     "machine": false,
     "id": 22,
     "type": "tile",
-    "breakable": "sandstoneRockBr_TL",
+    "breakable": "sandstoneRockBr_Tl",
     "base": "sand"
   },
   {
     "machine": false,
     "id": 23,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -158,7 +158,7 @@
     "machine": false,
     "id": 25,
     "type": "tile",
-    "obstacle": "cactus4Ob_TL",
+    "obstacle": "cactus4Ob_Tl",
     "base": "sand"
   },
   {
@@ -171,7 +171,7 @@
     "machine": false,
     "id": 27,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -184,7 +184,7 @@
     "machine": false,
     "id": 29,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "sand"
   },
   {
@@ -197,7 +197,7 @@
     "machine": false,
     "id": 31,
     "type": "tile",
-    "obstacle": "cactus0Ob_TL",
+    "obstacle": "cactus0Ob_Tl",
     "base": "sand"
   },
   {
@@ -210,7 +210,7 @@
     "machine": false,
     "id": 33,
     "type": "tile",
-    "breakable": "orangeFlowersBr_TL",
+    "breakable": "orangeFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -223,7 +223,7 @@
     "machine": false,
     "id": 35,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -247,7 +247,7 @@
     "machine": false,
     "id": 39,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "sand"
   },
   {
@@ -272,7 +272,7 @@
     "machine": false,
     "id": 43,
     "type": "tile",
-    "breakable": "orangeFlowersBr_TL",
+    "breakable": "orangeFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -291,7 +291,7 @@
     "machine": false,
     "id": 46,
     "type": "tile",
-    "obstacle": "cactus0Ob_TL",
+    "obstacle": "cactus0Ob_Tl",
     "base": "sand"
   },
   {
@@ -310,7 +310,7 @@
     "machine": false,
     "id": 49,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -382,7 +382,7 @@
     "machine": false,
     "id": 61,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -395,7 +395,7 @@
     "machine": false,
     "id": 63,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -420,7 +420,7 @@
     "machine": false,
     "id": 67,
     "type": "tile",
-    "breakable": "blueFlowersBr_TL",
+    "breakable": "blueFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -486,7 +486,7 @@
     "machine": false,
     "id": 78,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -559,7 +559,7 @@
     "machine": false,
     "id": 90,
     "type": "tile",
-    "breakable": "sandstoneRockBr_TL",
+    "breakable": "sandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -637,7 +637,7 @@
     "machine": false,
     "id": 103,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -882,7 +882,7 @@
     "machine": false,
     "id": 144,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "sand"
   },
   {
@@ -954,7 +954,7 @@
     "machine": false,
     "id": 156,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "sand"
   },
   {
@@ -1009,7 +1009,7 @@
     "machine": false,
     "id": 165,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -1022,7 +1022,7 @@
     "machine": false,
     "id": 167,
     "type": "tile",
-    "breakable": "blueFlowersBr_TL",
+    "breakable": "blueFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -1046,7 +1046,7 @@
     "machine": false,
     "id": 171,
     "type": "tile",
-    "breakable": "orangeFlowersBr_TL",
+    "breakable": "orangeFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -1256,7 +1256,7 @@
     "machine": false,
     "id": 206,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -1280,7 +1280,7 @@
     "machine": false,
     "id": 210,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "sand"
   },
   {
@@ -1371,7 +1371,7 @@
     "machine": false,
     "id": 225,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -1395,7 +1395,7 @@
     "machine": false,
     "id": 229,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -1438,7 +1438,7 @@
     "machine": false,
     "id": 236,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -1469,7 +1469,7 @@
     "machine": false,
     "id": 241,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -1482,14 +1482,14 @@
     "machine": false,
     "id": 243,
     "type": "tile",
-    "obstacle": "cactus5Ob_TL",
+    "obstacle": "cactus5Ob_Tl",
     "base": "sand"
   },
   {
     "machine": false,
     "id": 244,
     "type": "tile",
-    "breakable": "orangeFlowersBr_TL",
+    "breakable": "orangeFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -1507,14 +1507,14 @@
     "machine": false,
     "id": 247,
     "type": "tile",
-    "obstacle": "cactus3Ob_TL",
+    "obstacle": "cactus3Ob_Tl",
     "base": "sand"
   },
   {
     "machine": false,
     "id": 248,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -1527,7 +1527,7 @@
     "machine": false,
     "id": 250,
     "type": "tile",
-    "obstacle": "cactus5Ob_TL",
+    "obstacle": "cactus5Ob_Tl",
     "base": "sand"
   },
   {
@@ -1588,7 +1588,7 @@
     "machine": false,
     "id": 260,
     "type": "tile",
-    "obstacle": "cactus1Ob_TL",
+    "obstacle": "cactus1Ob_Tl",
     "base": "sand"
   },
   {
@@ -1601,7 +1601,7 @@
     "machine": false,
     "id": 262,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "sand"
   },
   {
@@ -1625,14 +1625,14 @@
     "machine": false,
     "id": 266,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "sand"
   },
   {
     "machine": false,
     "id": 267,
     "type": "tile",
-    "breakable": "orangeFlowersBr_TL",
+    "breakable": "orangeFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -1657,14 +1657,14 @@
     "machine": false,
     "id": 271,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
     "machine": false,
     "id": 272,
     "type": "tile",
-    "breakable": "blueFlowersBr_TL",
+    "breakable": "blueFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -1701,7 +1701,7 @@
     "machine": false,
     "id": 278,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -1714,7 +1714,7 @@
     "machine": false,
     "id": 280,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -1750,21 +1750,21 @@
     "machine": false,
     "id": 286,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
     "machine": false,
     "id": 287,
     "type": "tile",
-    "obstacle": "cactus0Ob_TL",
+    "obstacle": "cactus0Ob_Tl",
     "base": "sand"
   },
   {
     "machine": false,
     "id": 288,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -1825,7 +1825,7 @@
     "machine": false,
     "id": 298,
     "type": "tile",
-    "breakable": "blueFlowersBr_TL",
+    "breakable": "blueFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -1844,7 +1844,7 @@
     "machine": false,
     "id": 301,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "sand"
   },
   {
@@ -1868,7 +1868,7 @@
     "machine": false,
     "id": 305,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "sand"
   },
   {
@@ -1887,7 +1887,7 @@
     "machine": false,
     "id": 308,
     "type": "tile",
-    "obstacle": "cactus1Ob_TL",
+    "obstacle": "cactus1Ob_Tl",
     "base": "sand"
   },
   {
@@ -1900,7 +1900,7 @@
     "machine": false,
     "id": 310,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "sand"
   },
   {
@@ -1931,7 +1931,7 @@
     "machine": false,
     "id": 315,
     "type": "tile",
-    "breakable": "sandstoneRockBr_TL",
+    "breakable": "sandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -1950,7 +1950,7 @@
     "machine": false,
     "id": 318,
     "type": "tile",
-    "breakable": "smallSandstoneRockBr_TL",
+    "breakable": "smallSandstoneRockBr_Tl",
     "base": "sand"
   },
   {
@@ -1998,7 +1998,7 @@
     "machine": false,
     "id": 326,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "sand"
   },
   {
@@ -2011,7 +2011,7 @@
     "machine": false,
     "id": 328,
     "type": "tile",
-    "obstacle": "bushOb_TL",
+    "obstacle": "bushOb_Tl",
     "base": "sand"
   },
   {
@@ -2024,7 +2024,7 @@
     "machine": false,
     "id": 330,
     "type": "tile",
-    "breakable": "orangeFlowersBr_TL",
+    "breakable": "orangeFlowersBr_Tl",
     "base": "sand"
   },
   {
@@ -2055,7 +2055,7 @@
     "machine": false,
     "id": 335,
     "type": "tile",
-    "breakable": "orangeFlowersBr_TL",
+    "breakable": "orangeFlowersBr_Tl",
     "base": "sand"
   },
   {

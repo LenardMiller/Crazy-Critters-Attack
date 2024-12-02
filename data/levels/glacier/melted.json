@@ -39,7 +39,7 @@
     "machine": false,
     "id": 6,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
@@ -59,14 +59,14 @@
     "id": 9,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL",
+"obstacle": "invisibleOb_Tl",
   },
   {
     "machine": false,
     "id": 10,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -96,14 +96,14 @@
     "machine": false,
     "id": 15,
     "type": "tile",
-    "breakable": "deadOrangeFlowersBr_TL",
+    "breakable": "deadOrangeFlowersBr_Tl",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 16,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
@@ -139,14 +139,14 @@
     "machine": false,
     "id": 22,
     "type": "tile",
-    "breakable": "deadOrangeFlowersBr_TL",
+    "breakable": "deadOrangeFlowersBr_Tl",
     "base": "snow"
   },
   {
     "machine": false,
     "id": 23,
     "type": "tile",
-    "obstacle": "evergreenOb_TL",
+    "obstacle": "evergreenOb_Tl",
     "base": "snow"
   },
   {
@@ -165,7 +165,7 @@
     "machine": false,
     "id": 26,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -179,14 +179,14 @@
     "id": 28,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 29,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -204,14 +204,14 @@
     "machine": false,
     "id": 32,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
     "machine": false,
     "id": 33,
     "type": "tile",
-    "obstacle": "evergreenOb_TL",
+    "obstacle": "evergreenOb_Tl",
     "base": "snow"
   },
   {
@@ -253,21 +253,21 @@
     "machine": false,
     "id": 40,
     "type": "tile",
-    "obstacle": "everbrownOb_TL",
+    "obstacle": "everbrownOb_Tl",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 41,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 42,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -299,14 +299,14 @@
     "id": 47,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 48,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -324,7 +324,7 @@
     "machine": false,
     "id": 51,
     "type": "tile",
-    "decoration": "snowCornersTRDe_TL",
+    "decoration": "snowCornersTRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -332,21 +332,21 @@
     "id": 52,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 53,
     "type": "tile",
-    "decoration": "dirtCornersTRDe_TL",
+    "decoration": "dirtCornersTRDe_Tl",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 54,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "dirt"
   },
   {
@@ -376,7 +376,7 @@
     "machine": false,
     "id": 59,
     "type": "tile",
-    "decoration": "snowCornersTLDe_TL",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -395,7 +395,7 @@
     "machine": false,
     "id": 62,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "dirt"
   },
   {
@@ -414,23 +414,23 @@
     "machine": false,
     "id": 65,
     "type": "tile",
-    "decoration": "stoneCornersTLDe_TL",
+    "decoration": "stoneCornersTLDe_Tl",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 66,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 67,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -442,7 +442,7 @@
     "machine": false,
     "id": 69,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "pinkSnow"
   },
   {
@@ -455,23 +455,23 @@
     "machine": false,
     "id": 71,
     "type": "tile",
-    "decoration": "dirtCornersBLDe_TL",
+    "decoration": "dirtCornersBLDe_Tl",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 72,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 73,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -537,22 +537,22 @@
     "id": 84,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 85,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 86,
     "type": "tile",
-    "decoration": "stoneCornersBRDe_TL",
+    "decoration": "stoneCornersBRDe_Tl",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -588,7 +588,7 @@
     "machine": false,
     "id": 92,
     "type": "tile",
-    "obstacle": "everbrownOb_TL",
+    "obstacle": "everbrownOb_Tl",
     "base": "dirt"
   },
   {
@@ -612,28 +612,28 @@
     "machine": false,
     "id": 96,
     "type": "tile",
-    "obstacle": "evergreenOb_TL",
+    "obstacle": "evergreenOb_Tl",
     "base": "snow"
   },
   {
     "machine": false,
     "id": 97,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
     "machine": false,
     "id": 98,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "pinkSnow"
   },
   {
     "machine": false,
     "id": 99,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "snow"
   },
   {
@@ -659,14 +659,14 @@
     "id": 103,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 104,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -684,8 +684,8 @@
     "machine": false,
     "id": 107,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
-    "decoration": "snowCornersBLDe_TL",
+    "breakable": "smallRockBr_Tl",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -704,7 +704,7 @@
     "machine": false,
     "id": 110,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -728,7 +728,7 @@
     "machine": false,
     "id": 114,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
@@ -742,13 +742,13 @@
     "id": 116,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 117,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -780,14 +780,14 @@
     "id": 122,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 123,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -817,28 +817,28 @@
     "machine": false,
     "id": 128,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
     "machine": false,
     "id": 129,
     "type": "tile",
-    "breakable": "deadOrangeFlowersBr_TL",
+    "breakable": "deadOrangeFlowersBr_Tl",
     "base": "snow"
   },
   {
     "machine": false,
     "id": 130,
     "type": "tile",
-    "decoration": "snowCornersTRDe_TL",
+    "decoration": "snowCornersTRDe_Tl",
     "base": "pinkSnow"
   },
   {
     "machine": false,
     "id": 131,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
@@ -863,7 +863,7 @@
     "id": 135,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -970,7 +970,7 @@
     "machine": false,
     "id": 153,
     "type": "tile",
-    "breakable": "deadBlueFlowersBr_TL",
+    "breakable": "deadBlueFlowersBr_Tl",
     "base": "dirt"
   },
   {
@@ -995,7 +995,7 @@
     "machine": false,
     "id": 157,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
@@ -1056,7 +1056,7 @@
     "machine": false,
     "id": 167,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "dirt"
   },
   {
@@ -1123,7 +1123,7 @@
     "id": 178,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": true,
@@ -1194,14 +1194,14 @@
     "machine": false,
     "id": 190,
     "type": "tile",
-    "obstacle": "evergreenOb_TL",
+    "obstacle": "evergreenOb_Tl",
     "base": "snow"
   },
   {
     "machine": false,
     "id": 191,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "snow"
   },
   {
@@ -1239,7 +1239,7 @@
     "id": 197,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": true,
@@ -1287,7 +1287,7 @@
     "machine": false,
     "id": 205,
     "type": "tile",
-    "obstacle": "evergreenOb_TL",
+    "obstacle": "evergreenOb_Tl",
     "base": "snow"
   },
   {
@@ -1335,7 +1335,7 @@
     "machine": false,
     "id": 213,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "snow"
   },
   {
@@ -1355,14 +1355,14 @@
     "id": 216,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 217,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": true,
@@ -1374,7 +1374,7 @@
     "machine": false,
     "id": 219,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
@@ -1387,7 +1387,7 @@
     "machine": false,
     "id": 221,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "snow"
   },
   {
@@ -1418,7 +1418,7 @@
     "machine": false,
     "id": 226,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "snow"
   },
   {
@@ -1442,14 +1442,14 @@
     "machine": false,
     "id": 230,
     "type": "tile",
-    "breakable": "deadOrangeFlowersBr_TL",
+    "breakable": "deadOrangeFlowersBr_Tl",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 231,
     "type": "tile",
-    "decoration": "snowCornersTRDe_TL",
+    "decoration": "snowCornersTRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1468,7 +1468,7 @@
     "machine": false,
     "id": 234,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "stone"
   },
   {
@@ -1476,14 +1476,14 @@
     "id": 235,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 236,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -1531,7 +1531,7 @@
     "machine": false,
     "id": 244,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
@@ -1549,7 +1549,7 @@
     "machine": false,
     "id": 247,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
@@ -1563,15 +1563,15 @@
     "id": 249,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 250,
     "type": "tile",
-    "decoration": "dirtCornersTRDe_TL",
+    "decoration": "dirtCornersTRDe_Tl",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -1596,14 +1596,14 @@
     "id": 254,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 255,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -1652,13 +1652,13 @@
     "id": 263,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 264,
     "type": "tile",
-    "breakable": "deadOrangeFlowersBr_TL",
+    "breakable": "deadOrangeFlowersBr_Tl",
     "base": "dirt"
   },
   {
@@ -1683,14 +1683,14 @@
     "id": 268,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 269,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -1715,14 +1715,14 @@
     "id": 273,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 274,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -1746,8 +1746,8 @@
     "machine": false,
     "id": 278,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
-    "decoration": "snowCornersTLDe_TL",
+    "breakable": "smallRockBr_Tl",
+    "decoration": "snowCornersTLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1760,7 +1760,7 @@
     "machine": false,
     "id": 280,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1768,15 +1768,15 @@
     "id": 281,
     "type": "tile",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 282,
     "type": "tile",
-    "decoration": "dirtCornersBRDe_TL",
+    "decoration": "dirtCornersBRDe_Tl",
     "base": "sludge",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -1799,7 +1799,7 @@
     "machine": false,
     "id": 286,
     "type": "tile",
-    "obstacle": "everbrownOb_TL",
+    "obstacle": "everbrownOb_Tl",
     "base": "dirt"
   },
   {
@@ -1812,14 +1812,14 @@
     "machine": false,
     "id": 288,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "snow"
   },
   {
     "machine": false,
     "id": 289,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1839,21 +1839,21 @@
     "id": 292,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 293,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 294,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -1865,7 +1865,7 @@
     "machine": false,
     "id": 296,
     "type": "tile",
-    "decoration": "snowCornersBLDe_TL",
+    "decoration": "snowCornersBLDe_Tl",
     "base": "pinkSnow"
   },
   {
@@ -1902,7 +1902,7 @@
     "machine": false,
     "id": 302,
     "type": "tile",
-    "obstacle": "evergreenOb_TL",
+    "obstacle": "evergreenOb_Tl",
     "base": "snow"
   },
   {
@@ -1920,7 +1920,7 @@
     "machine": false,
     "id": 305,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "snow"
   },
   {
@@ -1933,7 +1933,7 @@
     "machine": false,
     "id": 307,
     "type": "tile",
-    "breakable": "deadOrangeFlowersBr_TL",
+    "breakable": "deadOrangeFlowersBr_Tl",
     "base": "dirt"
   },
   {
@@ -1952,7 +1952,7 @@
     "machine": false,
     "id": 310,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "stone"
   },
   {
@@ -1960,21 +1960,21 @@
     "id": 311,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 312,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 313,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -1998,14 +1998,14 @@
     "machine": false,
     "id": 317,
     "type": "tile",
-    "decoration": "snowCornersBRDe_TL",
+    "decoration": "snowCornersBRDe_Tl",
     "base": "pinkSnow"
   },
   {
     "machine": false,
     "id": 318,
     "type": "tile",
-    "breakable": "deadOrangeFlowersBr_TL",
+    "breakable": "deadOrangeFlowersBr_Tl",
     "base": "snow"
   },
   {
@@ -2071,30 +2071,30 @@
     "machine": false,
     "id": 329,
     "type": "tile",
-    "decoration": "stoneCornersTLDe_TL",
+    "decoration": "stoneCornersTLDe_Tl",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 330,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 331,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
     "id": 332,
     "type": "tile",
     "base": "water",
-"obstacle": "invisibleOb_TL"
+"obstacle": "invisibleOb_Tl"
   },
   {
     "machine": false,
@@ -2118,7 +2118,7 @@
     "machine": false,
     "id": 336,
     "type": "tile",
-    "obstacle": "evergreenOb_TL",
+    "obstacle": "evergreenOb_Tl",
     "base": "snow"
   },
   {
@@ -2131,7 +2131,7 @@
     "machine": false,
     "id": 338,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "snow"
   },
   {

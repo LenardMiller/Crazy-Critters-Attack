@@ -1,8 +1,8 @@
 package main;
 
 import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
-import main.enemies.flyingEnemies.FlyingEnemy;
+import main.enemies.BurrowingEnemy;
+import main.enemies.FlyingEnemy;
 import main.gui.inGame.*;
 import main.levelStructure.*;
 import main.misc.*;

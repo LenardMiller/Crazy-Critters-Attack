@@ -9,35 +9,35 @@
     "machine": false,
     "id": 1,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 2,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 3,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 4,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 5,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -74,49 +74,49 @@
     "machine": false,
     "id": 11,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 12,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 13,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 14,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 15,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 16,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 17,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -128,14 +128,14 @@
     "machine": false,
     "id": 19,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 20,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -154,7 +154,7 @@
     "machine": false,
     "id": 23,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -167,14 +167,14 @@
     "machine": false,
     "id": 25,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 26,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
@@ -199,14 +199,14 @@
     "machine": false,
     "id": 30,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 31,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -219,28 +219,28 @@
     "machine": false,
     "id": 33,
     "type": "tile",
-    "obstacle": "treeTLOb_TL",
+    "obstacle": "treeTLOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 34,
     "type": "tile",
-    "obstacle": "treeTROb_TL",
+    "obstacle": "treeTROb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 35,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 36,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -258,28 +258,28 @@
     "machine": false,
     "id": 39,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 40,
     "type": "tile",
-    "obstacle": "treeTLOb_TL",
+    "obstacle": "treeTLOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 41,
     "type": "tile",
-    "obstacle": "treeTROb_TL",
+    "obstacle": "treeTROb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 42,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -304,7 +304,7 @@
     "machine": false,
     "id": 46,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "grass"
   },
   {
@@ -329,28 +329,28 @@
     "machine": false,
     "id": 50,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 51,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 52,
     "type": "tile",
-    "obstacle": "treeBLOb_TL",
+    "obstacle": "treeBLOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 53,
     "type": "tile",
-    "obstacle": "treeBROb_TL",
+    "obstacle": "treeBROb_Tl",
     "base": "grass"
   },
   {
@@ -363,7 +363,7 @@
     "machine": false,
     "id": 55,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -375,35 +375,35 @@
     "machine": false,
     "id": 57,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 58,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 59,
     "type": "tile",
-    "obstacle": "treeBLOb_TL",
+    "obstacle": "treeBLOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 60,
     "type": "tile",
-    "obstacle": "treeBROb_TL",
+    "obstacle": "treeBROb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 61,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "grass"
   },
   {
@@ -416,7 +416,7 @@
     "machine": false,
     "id": 63,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "grass"
   },
   {
@@ -435,7 +435,7 @@
     "machine": false,
     "id": 66,
     "type": "tile",
-    "decoration": "dirtPatchDe_TL",
+    "decoration": "dirtPatchDe_Tl",
     "base": "grass"
   },
   {
@@ -472,22 +472,22 @@
     "machine": false,
     "id": 72,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 73,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 74,
     "type": "tile",
-    "breakable": "leavesBr_TL",
-    "obstacle": "smallTreeOb_TL",
+    "breakable": "leavesBr_Tl",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -499,7 +499,7 @@
     "machine": false,
     "id": 76,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -512,7 +512,7 @@
     "machine": false,
     "id": 78,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -579,7 +579,7 @@
     "machine": false,
     "id": 89,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "grass"
   },
   {
@@ -604,8 +604,8 @@
     "machine": false,
     "id": 93,
     "type": "tile",
-    "breakable": "leavesBr_TL",
-    "obstacle": "smallTreeOb_TL",
+    "breakable": "leavesBr_Tl",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -617,21 +617,21 @@
     "machine": false,
     "id": 95,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 96,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 97,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -644,7 +644,7 @@
     "machine": false,
     "id": 99,
     "type": "tile",
-    "decoration": "dirtPatchDe_TL",
+    "decoration": "dirtPatchDe_Tl",
     "base": "grass"
   },
   {
@@ -657,7 +657,7 @@
     "machine": false,
     "id": 101,
     "type": "tile",
-    "decoration": "grassCornerTL_De_TL",
+    "decoration": "grassCornerTLDe_Tl",
     "base": "dirt"
   },
   {
@@ -688,7 +688,7 @@
     "machine": false,
     "id": 106,
     "type": "tile",
-    "decoration": "grassCornerTR_De_TL",
+    "decoration": "grassCornerTRDe_Tl",
     "base": "dirt"
   },
   {
@@ -719,8 +719,8 @@
     "machine": false,
     "id": 111,
     "type": "tile",
-    "breakable": "leavesBr_TL",
-    "obstacle": "smallTreeOb_TL",
+    "breakable": "leavesBr_Tl",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -768,14 +768,14 @@
     "machine": false,
     "id": 119,
     "type": "tile",
-    "decoration": "grassCornerTL_De_TL",
+    "decoration": "grassCornerTLDe_Tl",
     "base": "dirt"
   },
   {
     "machine": false,
     "id": 120,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "dirt"
   },
   {
@@ -794,7 +794,7 @@
     "machine": false,
     "id": 123,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "dirt"
   },
   {
@@ -813,7 +813,7 @@
     "machine": false,
     "id": 126,
     "type": "tile",
-    "decoration": "grassCornerTR_De_TL",
+    "decoration": "grassCornerTRDe_Tl",
     "base": "dirt"
   },
   {
@@ -855,14 +855,14 @@
     "machine": false,
     "id": 133,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 134,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -875,7 +875,7 @@
     "machine": false,
     "id": 136,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "grass"
   },
   {
@@ -924,7 +924,7 @@
     "machine": false,
     "id": 144,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "dirt"
   },
   {
@@ -949,7 +949,7 @@
     "machine": false,
     "id": 148,
     "type": "tile",
-    "decoration": "dirtPatchDe_TL",
+    "decoration": "dirtPatchDe_Tl",
     "base": "grass"
   },
   {
@@ -1003,7 +1003,7 @@
     "machine": false,
     "id": 157,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "dirt"
   },
   {
@@ -1099,7 +1099,7 @@
     "machine": false,
     "id": 173,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
@@ -1172,7 +1172,7 @@
     "machine": false,
     "id": 185,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
@@ -1238,7 +1238,7 @@
     "machine": false,
     "id": 196,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "dirt"
   },
   {
@@ -1269,7 +1269,7 @@
     "machine": false,
     "id": 201,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "dirt"
   },
   {
@@ -1300,7 +1300,7 @@
     "machine": false,
     "id": 206,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "grass"
   },
   {
@@ -1318,7 +1318,7 @@
     "machine": false,
     "id": 209,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -1349,7 +1349,7 @@
     "machine": false,
     "id": 214,
     "type": "tile",
-    "decoration": "grassCornerBL_De_TL",
+    "decoration": "grassCornerBLDe_Tl",
     "base": "dirt"
   },
   {
@@ -1368,7 +1368,7 @@
     "machine": false,
     "id": 217,
     "type": "tile",
-    "decoration": "grassPatchDe_TL",
+    "decoration": "grassPatchDe_Tl",
     "base": "dirt"
   },
   {
@@ -1381,7 +1381,7 @@
     "machine": false,
     "id": 219,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "dirt"
   },
   {
@@ -1394,7 +1394,7 @@
     "machine": false,
     "id": 221,
     "type": "tile",
-    "decoration": "grassCornerBR_De_TL",
+    "decoration": "grassCornerBRDe_Tl",
     "base": "dirt"
   },
   {
@@ -1413,7 +1413,7 @@
     "machine": false,
     "id": 224,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
@@ -1426,7 +1426,7 @@
     "machine": false,
     "id": 226,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -1438,7 +1438,7 @@
     "machine": false,
     "id": 228,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -1475,7 +1475,7 @@
     "machine": false,
     "id": 234,
     "type": "tile",
-    "decoration": "grassCornerBL_De_TL",
+    "decoration": "grassCornerBLDe_Tl",
     "base": "dirt"
   },
   {
@@ -1506,7 +1506,7 @@
     "machine": false,
     "id": 239,
     "type": "tile",
-    "decoration": "grassCornerBR_De_TL",
+    "decoration": "grassCornerBRDe_Tl",
     "base": "dirt"
   },
   {
@@ -1543,7 +1543,7 @@
     "machine": false,
     "id": 245,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -1555,14 +1555,14 @@
     "machine": false,
     "id": 247,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 248,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "grass"
   },
   {
@@ -1581,7 +1581,7 @@
     "machine": false,
     "id": 251,
     "type": "tile",
-    "decoration": "dirtPatchDe_TL",
+    "decoration": "dirtPatchDe_Tl",
     "base": "grass"
   },
   {
@@ -1654,14 +1654,14 @@
     "machine": false,
     "id": 263,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 264,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -1673,21 +1673,21 @@
     "machine": false,
     "id": 266,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 267,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 268,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "grass"
   },
   {
@@ -1706,7 +1706,7 @@
     "machine": false,
     "id": 271,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -1725,7 +1725,7 @@
     "machine": false,
     "id": 274,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
@@ -1738,7 +1738,7 @@
     "machine": false,
     "id": 276,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "grass"
   },
   {
@@ -1769,7 +1769,7 @@
     "machine": false,
     "id": 281,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -1782,7 +1782,7 @@
     "machine": false,
     "id": 283,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -1794,21 +1794,21 @@
     "machine": false,
     "id": 285,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 286,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 287,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -1821,21 +1821,21 @@
     "machine": false,
     "id": 289,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 290,
     "type": "tile",
-    "obstacle": "treeTLOb_TL",
+    "obstacle": "treeTLOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 291,
     "type": "tile",
-    "obstacle": "treeTROb_TL",
+    "obstacle": "treeTROb_Tl",
     "base": "grass"
   },
   {
@@ -1884,7 +1884,7 @@
     "machine": false,
     "id": 299,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
@@ -1903,7 +1903,7 @@
     "machine": false,
     "id": 302,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -1915,7 +1915,7 @@
     "machine": false,
     "id": 304,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -1928,42 +1928,42 @@
     "machine": false,
     "id": 306,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 307,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 308,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 309,
     "type": "tile",
-    "obstacle": "treeBLOb_TL",
+    "obstacle": "treeBLOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 310,
     "type": "tile",
-    "obstacle": "treeBROb_TL",
+    "obstacle": "treeBROb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 311,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -1982,7 +1982,7 @@
     "machine": false,
     "id": 314,
     "type": "tile",
-    "breakable": "rockBr_TL",
+    "breakable": "rockBr_Tl",
     "base": "grass"
   },
   {
@@ -1995,7 +1995,7 @@
     "machine": false,
     "id": 316,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
@@ -2008,7 +2008,7 @@
     "machine": false,
     "id": 318,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -2021,7 +2021,7 @@
     "machine": false,
     "id": 320,
     "type": "tile",
-    "breakable": "dandelionsBr_TL",
+    "breakable": "dandelionsBr_Tl",
     "base": "grass"
   },
   {
@@ -2039,21 +2039,21 @@
     "machine": false,
     "id": 323,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 324,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 325,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -2066,21 +2066,21 @@
     "machine": false,
     "id": 327,
     "type": "tile",
-    "breakable": "smallRockBr_TL",
+    "breakable": "smallRockBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 328,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 329,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -2093,7 +2093,7 @@
     "machine": false,
     "id": 331,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
@@ -2118,28 +2118,28 @@
     "machine": false,
     "id": 335,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 336,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 337,
     "type": "tile",
-    "obstacle": "smallTreeOb_TL",
+    "obstacle": "smallTreeOb_Tl",
     "base": "grass"
   },
   {
     "machine": false,
     "id": 338,
     "type": "tile",
-    "breakable": "leavesBr_TL",
+    "breakable": "leavesBr_Tl",
     "base": "grass"
   },
   {

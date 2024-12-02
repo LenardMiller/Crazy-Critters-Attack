@@ -26,7 +26,7 @@ public class FadeSoundLoop {
      * @param autoStopTime how long it will run before automatically stopping
      */
     public FadeSoundLoop(PApplet p, String name, int autoStopTime, float increment) {
-        soundFile = new SoundFile(p, "sounds/loops/" + name + ".wav");
+        soundFile = new SoundFile(p, "sounds/loops/fade/" + name + ".wav");
         this.autoStopTime = autoStopTime;
         soundFile.loop(1, 0.001f);
         targetVolume = 0.001f;
@@ -38,8 +38,12 @@ public class FadeSoundLoop {
         this(p, name, autoStopTime, 0.05f);
     }
 
-    public FadeSoundLoop(PApplet p, String name) {
-        this(p, name, -1, 0.05f);
+    public FadeSoundLoop(SoundFile soundFile) {
+        this.soundFile = soundFile;
+        autoStopTime = -1;
+        soundFile.loop(1, 0.001f);
+        targetVolume = 0.001f;
+        increment = 0.05f;
     }
 
     public void update() {

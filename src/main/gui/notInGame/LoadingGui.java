@@ -9,14 +9,11 @@ import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PVector;
 
-import static main.Main.profiler;
-import static main.Main.transition;
-import static main.misc.SpriteLoader.*;
-import static main.sound.SoundLoader.loadSounds;
+import static main.Main.*;
 
 public class LoadingGui {
 
-    private static final int MAX_PROGRESS = 11;
+    private static final int MAX_PROGRESS = 5;
     private static final int LINE_EDGE_BUFFER = 400;
 
     private final PApplet p;
@@ -31,7 +28,7 @@ public class LoadingGui {
 
     public void update() {
         switch (progress) {
-            case 0:
+            case 1:
                 profiler.startProfilingSingle("loading: fonts");
                 Main.h1 = p.createFont("fonts/Rubik-Regular.ttf", 30, true);
                 Main.h2 = p.createFont("fonts/Rubik-Regular.ttf", 24, true);
@@ -44,52 +41,17 @@ public class LoadingGui {
                 Main.monoSmall = p.createFont("fonts/IBMPlexMono-Medium.ttf", 14, true);
                 profiler.finishProfiling("loading: fonts");
                 break;
-            case 1:
-                profiler.startProfilingSingle("loading: gui sprites");
-                loadGui(p);
-                profiler.finishProfiling("loading: gui sprites");
-                break;
             case 2:
-                profiler.startProfilingSingle("loading: enemy sprites");
-                loadEnemies(p);
-                profiler.finishProfiling("loading: enemy sprites");
+                profiler.startProfilingSingle("loading: sprites");
+                resourceLoader.loadSprites();
+                profiler.finishProfiling("loading: sprites");
                 break;
             case 3:
-                profiler.startProfilingSingle("loading: machine sprites");
-                loadMachines(p);
-                profiler.finishProfiling("loading: machine sprites");
-                break;
-            case 4:
-                profiler.startProfilingSingle("loading: particle sprites");
-                loadParticles(p);
-                profiler.finishProfiling("loading: particle sprites");
-                break;
-            case 5:
-                profiler.startProfilingSingle("loading: projectile sprites");
-                loadProjectiles(p);
-                profiler.finishProfiling("loading: projectile sprites");
-                break;
-            case 6:
-                profiler.startProfilingSingle("loading: tile sprites");
-                loadTiles(p);
-                profiler.finishProfiling("loading: tile sprites");
-                break;
-            case 7:
-                profiler.startProfilingSingle("loading: turret sprites");
-                loadTurrets(p);
-                profiler.finishProfiling("loading: turret sprites");
-                break;
-            case 8:
-                profiler.startProfilingSingle("loading: wall sprites");
-                loadWalls(p);
-                profiler.finishProfiling("loading: wall sprites");
-                break;
-            case 9:
                 profiler.startProfilingSingle("loading: sounds");
-                loadSounds(p);
+                resourceLoader.loadSounds();
                 profiler.finishProfiling("loading: sounds");
                 break;
-            case 10:
+            case 4:
                 profiler.startProfilingSingle("loading: gui & game");
                 Main.levelSelectGui = new LevelSelectGui(p);
                 Main.settingsGui = new SettingsGui(p);
@@ -97,11 +59,11 @@ public class LoadingGui {
                 Main.game = new Game(p);
                 profiler.finishProfiling("loading: gui & game");
                 break;
-            case 11:
-                //buffer
+            case 0, 5:
+                // buffer
                 break;
             default:
-                System.out.println("MAX_PROGRESS is too large");
+                System.err.println("MAX_PROGRESS is too large");
         }
 
         progress = Math.min(progress + 1, MAX_PROGRESS);
@@ -119,7 +81,8 @@ public class LoadingGui {
         float lineEnd = PApplet.map(progress,
                 0, MAX_PROGRESS,
                 LINE_EDGE_BUFFER, p.width - LINE_EDGE_BUFFER);
-        p.line(LINE_EDGE_BUFFER, Utilities.getCenter(p).y + 200, lineEnd, Utilities.getCenter(p).y + 200);
+        p.line(LINE_EDGE_BUFFER, Utilities.getCenter(p).y + 200,
+                lineEnd, Utilities.getCenter(p).y + 200);
         p.strokeWeight(1);
     }
 }

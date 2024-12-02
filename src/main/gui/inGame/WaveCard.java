@@ -2,9 +2,9 @@ package main.gui.inGame;
 
 import main.Main;
 import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
-import main.enemies.flyingEnemies.FlyingEnemy;
-import main.enemies.shootingEnemies.ShootingEnemy;
+import main.enemies.BurrowingEnemy;
+import main.enemies.FlyingEnemy;
+import main.enemies.ShootingEnemy;
 import main.sound.SoundUtilities;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -45,9 +45,9 @@ public class WaveCard {
         this.textColor = textColor;
         this.title = title;
 
-        burrowingIcon = staticSprites.get("burrowingTypeIc");
-        flyingIcon = staticSprites.get("flyingTypeIc");
-        shootingIcon = staticSprites.get("shootingTypeIc");
+        burrowingIcon = staticSprites.get("burrowingIc");
+        flyingIcon = staticSprites.get("flyingIc");
+        shootingIcon = staticSprites.get("shootingIc");
 
         position = new PVector(-200, WINDOW_HEIGHT);
     }

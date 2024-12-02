@@ -1,6 +1,7 @@
 package main.sound;
 
 import processing.core.PApplet;
+import processing.sound.SoundFile;
 
 import static java.lang.Math.min;
 import static java.lang.Math.sqrt;
@@ -13,7 +14,9 @@ public class MoveSoundLoop {
     private int count;
 
     public MoveSoundLoop(PApplet p, String name, float maxEnemyNum) {
-        loop = new FadeSoundLoop(p, name);
+        loop = new FadeSoundLoop(new SoundFile(
+                p, "sounds/loops/move/" + name + ".wav"
+        ));
         this.maxEnemyNum = maxEnemyNum;
     }
 

@@ -129,7 +129,7 @@ public class Cannon extends Turret {
                     pjSpeed -= 250;
                     dynamite = true;
                     fireSound = sounds.get("slingshot");
-                    name = "dynamiteLauncher";
+                    name = "cannonDynamite";
                     material = Material.wood;
                     fireParticle = null;
                     damageSound = sounds.get("woodDamage");
@@ -153,7 +153,7 @@ public class Cannon extends Turret {
                     pjSpeed += 200;
                     delay -= 1;
                     frags = true;
-                    name = "fragCannon";
+                    name = "cannonFrag";
                     material = Material.metal;
                     placeSound = sounds.get("metalPlace");
                     damageSound = sounds.get("metalDamage");

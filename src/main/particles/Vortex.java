@@ -6,6 +6,7 @@ import processing.core.PVector;
 
 import static main.Main.FRAMERATE;
 import static main.Main.animatedSprites;
+import static main.misc.ResourceLoader.getResource;
 import static main.misc.Utilities.findAngle;
 import static main.misc.Utilities.randomizeBy;
 import static processing.core.PConstants.HALF_PI;
@@ -22,7 +23,7 @@ public class Vortex extends Particle {
         speed = maxSpeed;
         displayAngle = angle;
         animation = new Animator(
-                animatedSprites.get("darkExDebrisPT"),
+                getResource("darkExDebrisPT", animatedSprites),
                 (int) randomizeBy(p, radius / 5, 0.5f),
                 false);
         angularVelocity = (speed / FRAMERATE) / radius;

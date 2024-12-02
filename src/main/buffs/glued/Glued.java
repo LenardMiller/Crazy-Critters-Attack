@@ -2,8 +2,8 @@ package main.buffs.glued;
 
 import main.buffs.Buff;
 import main.enemies.Enemy;
-import main.enemies.flyingEnemies.FlyingEnemy;
-import main.enemies.flyingEnemies.Frost;
+import main.enemies.FlyingEnemy;
+import main.enemies.Frost;
 import main.misc.CompressArray;
 import main.towers.turrets.Turret;
 import processing.core.PApplet;

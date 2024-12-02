@@ -1,8 +1,8 @@
 package main.projectiles.shockwaves;
 
 import main.enemies.Enemy;
-import main.enemies.burrowingEnemies.BurrowingEnemy;
-import main.enemies.flyingEnemies.FlyingEnemy;
+import main.enemies.BurrowingEnemy;
+import main.enemies.FlyingEnemy;
 import main.misc.Utilities;
 import main.particles.Debris;
 import main.particles.ExplosionDebris;

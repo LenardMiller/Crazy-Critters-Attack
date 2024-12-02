@@ -11,12 +11,12 @@ public class StartStopSoundLoop {
     private float volume;
     private int endTime;
 
-    private final int LENGTH;
-    private final SoundFile START;
-    private final SoundFile LOOP;
-    private final SoundFile END;
+    private final int length;
+    private final SoundFile start;
+    private final SoundFile loop;
+    private final SoundFile end;
 
-    public final boolean AUTO_STOP;
+    public final boolean autoStop;
 
     /**
      * not playing, starting, looping, ending
@@ -33,19 +33,19 @@ public class StartStopSoundLoop {
     public StartStopSoundLoop(PApplet p, String name, int length, boolean autoStop) {
         this.P = p;
 
-        START = new SoundFile(p, "sounds/loops/" + name + "start.wav");
-        LOOP = new SoundFile(p, "sounds/loops/" + name + "loop.wav");
-        END = new SoundFile(p, "sounds/loops/" + name + "end.wav");
-        LENGTH = length;
-        AUTO_STOP = autoStop;
+        start = new SoundFile(p, "sounds/loops/startstop/" + name + "start.wav");
+        loop = new SoundFile(p, "sounds/loops/startstop/" + name + "loop.wav");
+        end = new SoundFile(p, "sounds/loops/startstop/" + name + "end.wav");
+        this.length = length;
+        this.autoStop = autoStop;
 
         state = 0;
     }
 
     private void reset() {
-        START.stop();
-        LOOP.stop();
-        END.stop();
+        start.stop();
+        loop.stop();
+        end.stop();
     }
 
     public void startLoop(float speed, float volume) {
@@ -54,20 +54,20 @@ public class StartStopSoundLoop {
             this.volume = volume;
             reset();
             state = 1;
-            endTime = P.frameCount + LENGTH;
-            START.play(speed, volume);
+            endTime = P.frameCount + length;
+            start.play(speed, volume);
         }
     }
 
     private void midLoop() {
         reset();
         state = 2;
-        LOOP.loop(speed, volume);
+        loop.loop(speed, volume);
     }
 
     public void continueLoop() {
         if (state == 1 && P.frameCount >= endTime) midLoop();
-        if (state == 2 && P.frameCount >= endTime && AUTO_STOP) state = 3;
+        if (state == 2 && P.frameCount >= endTime && autoStop) state = 3;
         if (state == 3 && P.frameCount >= endTime) endLoop();
     }
 
@@ -77,7 +77,7 @@ public class StartStopSoundLoop {
 
     private void endLoop() {
         reset();
-        END.play(speed, volume);
+        end.play(speed, volume);
         state = 0;
     }
 }

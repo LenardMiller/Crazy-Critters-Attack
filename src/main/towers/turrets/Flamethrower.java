@@ -30,7 +30,7 @@ public class Flamethrower extends Turret {
     public static int price = 1000;
 
     private final FadeSoundLoop FIRE_SOUND_LOOP;
-    private final PImage[] CORE_SPRITES;
+    private final PImage[] coreSprites;
     private final int BETWEEN_CORE_FRAMES;
 
     private float rotationSpeed;
@@ -55,7 +55,7 @@ public class Flamethrower extends Turret {
         damageSound = sounds.get("metalDamage");
         breakSound = sounds.get("metalBreak");
         placeSound = sounds.get("metalPlace");
-        CORE_SPRITES = animatedSprites.get("flamewheelCoreTR");
+        coreSprites = animatedSprites.get("flamethrowerWheelCoreTR");
         BETWEEN_CORE_FRAMES = 4;
         fireParticle = null;
         barrelLength = 24;
@@ -77,7 +77,7 @@ public class Flamethrower extends Turret {
             die(false);
             tile.tower = null;
         }
-        if (enemies.size() > 0 && !machine.dead && !isPaused) checkTarget();
+        if (!enemies.isEmpty() && !machine.dead && !isPaused) checkTarget();
         if (!isPaused && wheel) rotateWheel();
         if (p.mousePressed && boardMousePosition.x < tile.position.x && boardMousePosition.x > tile.position.x - size.x && boardMousePosition.y < tile.position.y
           && boardMousePosition.y > tile.position.y - size.y && alive && !isPaused) {
@@ -88,7 +88,7 @@ public class Flamethrower extends Turret {
     private void rotateWheel() {
         float maxSpeed = 0.3f;
         float spoolSpeed = 0.001f;
-        if (targetEnemy != null && enemies.size() > 0 && alive) {
+        if (targetEnemy != null && !enemies.isEmpty() && alive) {
             rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, maxSpeed);
         } else rotationSpeed = incrementByTo(rotationSpeed, spoolSpeed, 0);
         angle += rotationSpeed;
@@ -166,9 +166,9 @@ public class Flamethrower extends Turret {
         if (wheel) {
             int coreOffset = -57;
             p.tint(0, 60);
-            p.image(CORE_SPRITES[coreFrame], tile.position.x + 2 + coreOffset, tile.position.y + 2 + coreOffset);
+            p.image(coreSprites[coreFrame], tile.position.x + 2 + coreOffset, tile.position.y + 2 + coreOffset);
             p.tint(255, tintColor, tintColor);
-            p.image(CORE_SPRITES[coreFrame], tile.position.x + coreOffset, tile.position.y + coreOffset);
+            p.image(coreSprites[coreFrame], tile.position.x + coreOffset, tile.position.y + coreOffset);
             p.tint(255);
             if (!isPaused) animateCore();
         }
@@ -178,7 +178,7 @@ public class Flamethrower extends Turret {
         coreFrameTimer++;
         if (coreFrameTimer >= BETWEEN_CORE_FRAMES) {
             coreFrameTimer = 0;
-            if (coreFrame < CORE_SPRITES.length-1) coreFrame++;
+            if (coreFrame < coreSprites.length-1) coreFrame++;
             else coreFrame = 0;
         }
     }
@@ -273,7 +273,7 @@ public class Flamethrower extends Turret {
                     wheel = true;
                     count = 8;
                     damage *= 10;
-                    name = "flamewheel";
+                    name = "flamethrowerWheel";
                     hasPriority = false;
                     selection.swapSelected(this);
                     titleLines = new String[]{"Flame Wheel"};
@@ -290,7 +290,7 @@ public class Flamethrower extends Turret {
                     effectDuration += 3.3f;
                     effectLevel += 15;
                 } case 5 -> {
-                    name = "magicFlamethrower";
+                    name = "flamethrowerMagic";
                     magic = true;
                     material = Material.darkMetal;
                     effect = "blueBurning";
@@ -313,8 +313,5 @@ public class Flamethrower extends Turret {
                 }
             }
         }
-    }
-
-    public void updateSprite() {
     }
 }
