@@ -52,6 +52,7 @@ public class Enemy {
         iceOuch(new Color(49, 135, 223)),
         mudOuch(new Color(111, 58, 0)),
         sapOuch(new Color(0xb76e09)),
+        oilOuch(new Color(0x2d1a02)),
         brownLeafOuch(new Color(0xBB5E3B)),
         bluePuff(new Color(84, 180, 246)),
         greenPuff(new Color(100, 207, 123));

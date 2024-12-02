@@ -361,6 +361,8 @@ public class Game {
                 "levels/glacier",    1500, 200, "snow");
         levels[4] = new Level(DeepForestWaves.genDeepForestWaves(p),
                 "levels/deepForest", 2500, 350, "dirt");
+        levels[5] = new Level(WasteWaves.genWasteWaves(p),
+                "levels/waste", 2000, 500, "dirt");
         LayoutLoader.loadLayout(p, levels[currentLevel].layout);
         money = levels[currentLevel].startingCash;
         updateAll();
