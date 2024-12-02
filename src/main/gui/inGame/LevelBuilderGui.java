@@ -33,16 +33,16 @@ public class LevelBuilderGui {
 
         placeButton(0, 1, "deadTreeBLOb");
         placeButton(1, 1, "deadTreeBROb");
-        placeButton(2, 1, "flowerVeryDeadCyanBr");
+        placeButton(2, 1, "veryDeadCyanFlowerBr");
         placeButton(3, 1, "rockBr");
 
-        placeButton(0, 2, "deadGrassCornerBR_De");
-        placeButton(1, 2, "deadGrassCornerBL_De");
+        placeButton(0, 2, "deadGrassCornerBRDe");
+        placeButton(1, 2, "deadGrassCornerBLDe");
         placeButton(2, 2, "deadGrassBa");
         placeButton(3, 2, "smallRockBr");
 
-        placeButton(0, 3, "deadGrassCornerTR_De");
-        placeButton(1, 3, "deadGrassCornerTL_De");
+        placeButton(0, 3, "deadGrassCornerTRDe");
+        placeButton(1, 3, "deadGrassCornerTLDe");
         placeButton(2, 3, "dirtBa");
 
         placeButton(0, 17, "Na");

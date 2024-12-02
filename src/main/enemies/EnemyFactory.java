@@ -463,9 +463,20 @@ public class EnemyFactory {
                         Enemy.HitParticle.glowOuch,
                         "bigCrunchRoar", "squashRoar",
                         "whipCrack", "bigBugLoop");
+            } case "Robugs" -> {
+                return new Enemy(p, pos.x, pos.y,
+                        "roboBug",
+                        new PVector(25, 25),
+                        1, 13, 30, 100, 10, 600,
+                        new int[]{11}, 3, 2,
+                        new PVector(25, 25), new PVector(25, 25),
+                        CORPSE_LIFESPAN, CORPSE_DELAY,
+                        Enemy.HitParticle.oilOuch,
+                        "crunch", "squish", //TODO
+                        "bugGrowlVeryQuick", "smallBugLoop");
             } default -> {
-                System.err.println("Could not get enemy of type: \"" + name + "\"");
-                return null;
+                    System.err.println("Could not get enemy of type: \"" + name + "\"");
+                    return null;
             }
         }
     }
