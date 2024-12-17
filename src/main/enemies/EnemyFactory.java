@@ -1,14 +1,15 @@
 package main.enemies;
 
 import main.particles.Debris;
+import main.particles.ExplosionDebris;
+import main.projectiles.enemyProjeciles.Laser;
 import main.projectiles.enemyProjeciles.MudBall;
 import main.projectiles.enemyProjeciles.Sandball;
 import main.projectiles.enemyProjeciles.Snowball;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static main.Main.projectiles;
-import static main.Main.towerParticles;
+import static main.Main.*;
 import static processing.core.PApplet.radians;
 
 public class EnemyFactory {
@@ -463,17 +464,38 @@ public class EnemyFactory {
                         Enemy.HitParticle.glowOuch,
                         "bigCrunchRoar", "squashRoar",
                         "whipCrack", "bigBugLoop");
-            } case "Robugs" -> {
+            } case "Robugs", "roboBug" -> {
                 return new Enemy(p, pos.x, pos.y,
                         "roboBug",
                         new PVector(25, 25),
-                        1, 13, 30, 100, 10, 600,
+                        1, 13, 30, 100, 10, 400,
                         new int[]{11}, 3, 2,
-                        new PVector(25, 25), new PVector(25, 25),
+                        new PVector(15, 15), new PVector(25, 25),
                         CORPSE_LIFESPAN, CORPSE_DELAY,
                         Enemy.HitParticle.oilOuch,
                         "crunch", "squish", //TODO
                         "bugGrowlVeryQuick", "smallBugLoop");
+            } case "Cybugs" -> {
+                return new ShootingEnemy(p, pos.x, pos.y,
+                        "cybug",
+                        new PVector(53, 53),
+                        2, 26, 18, 500, 10, 5000,
+                        100, 25, 6, 1,
+                        new int[]{2}, 6, 4,
+                        new PVector(53, 53), new PVector(32, 32),
+                        10, CORPSE_DELAY,
+                        Enemy.HitParticle.oilOuch,
+                        "bigCrunch", "squash", //TODO
+                        "bugGrownQuick", "bigBugLoop", "spit",
+                        (angle, position) -> {
+                            projectiles.add(new Laser(p, 2, position.x, position.y, angle));
+                            for (int i = 0; i < 6; i++) {
+                                towerParticles.add(new ExplosionDebris(p,
+                                        position.x, position.y, p.random(360),
+                                        "energy", p.random(5)));
+                            }
+                        }
+                );
             } default -> {
                     System.err.println("Could not get enemy of type: \"" + name + "\"");
                     return null;
