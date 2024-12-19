@@ -473,8 +473,8 @@ public class EnemyFactory {
                         new PVector(15, 15), new PVector(25, 25),
                         CORPSE_LIFESPAN, CORPSE_DELAY,
                         Enemy.HitParticle.oilOuch,
-                        "crunch", "squish", //TODO
-                        "bugGrowlVeryQuick", "smallBugLoop");
+                        "robugCrunch", "robugSquish",
+                        "robugGrowlVeryQuick", "smallBugLoop");
             } case "Cybugs" -> {
                 return new ShootingEnemy(p, pos.x, pos.y,
                         "cybug",
@@ -485,8 +485,8 @@ public class EnemyFactory {
                         new PVector(53, 53), new PVector(32, 32),
                         10, CORPSE_DELAY,
                         Enemy.HitParticle.oilOuch,
-                        "bigCrunch", "squash", //TODO
-                        "bugGrownQuick", "bigBugLoop", "spit",
+                        "robugBigCrunch", "robugSquash",
+                        "robugGrowlQuick", "bigBugLoop", "robugGrowlQuick",
                         (angle, position) -> {
                             projectiles.add(new Laser(p, 2, position.x, position.y, angle));
                             for (int i = 0; i < 6; i++) {
